@@ -17,7 +17,7 @@
         $nuDB = new PDO("mysql:host=$host;dbname=$db;charset=utf8", $user, $password, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
         $nuDB->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     } catch (Exception $e) {
-        header("Location: nuerror.php?error=pdodbconnect");
+        header("Location: nuerror.php?error=pdodbconnect&msg=".$e->getMessage());
     }
 
     function nuRunQuery($sql){
@@ -47,7 +47,7 @@
                 $trace  .= $array[$i]['file'] . ' - line ' . $array[$i]['line'] . ' (' . $array[$i]['function'] . ")\n\n";
             }
 
-            $error       = "PDO MESSAGE: $message, SQL: $sql, BACK TRACE: $trace";
+            $error       = "PDO MESSAGE: $message, SQL: ".addslashes($sql).", BACK TRACE: $trace";
             nuError($error);
 
             return false;
