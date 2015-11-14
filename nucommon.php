@@ -1,7 +1,6 @@
 <?php
 
     require_once('nudatabase.php');
-    require('nusession.php');
 
     function nuError($errorMsg){
         nuRunQuery("INSERT INTO zzzzsys_error (zzzzsys_error_id, err_message, err_added) VALUES('".nuID()."','".addslashes($errorMsg)."',NOW()) ");
