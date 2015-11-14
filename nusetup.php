@@ -92,7 +92,7 @@
 
     $installOperationHTML = '';
     if(count($errors) === 0){
-        $installOperationHTML = '<a id="install" href="#" onclick="installnuBuilder();">Install nuBuilder</a>';
+        $installOperationHTML = '<a id="install" href="#" onclick="installnuBuilder();">Install / Update nuBuilder</a>';
     }
 
 ?>
@@ -114,7 +114,7 @@
                     }
                 }
                 if(errors.length == 0)
-                    errorHTML = '<h3>No Errors!</h3>';
+                    $('#installheading').html('Quick Install');
                 $('div#error').html(errorHTML);
                 if($('a#install').length == 1)
                     $('a#installtables').hide();
@@ -126,7 +126,7 @@
                     dataType: "json",
                     success: function(data){
                         if(data.success){
-                            alert('Successfully added tables!');
+                            alert('Successfully created tables!');
                             window.location.reload();
                         } else {
                             alert('Could not update database: Database error, check zzzzsys_error table.');
@@ -166,7 +166,7 @@
                     dataType: "json",
                     success: function(data){
                         if(data.success){
-                            alert('Successfully installed nuBuilder!');
+                            alert('Successfully installed / updated nuBuilder!');
                             window.location.assign('./');
                         } else {
                             alert('Could not update database: Database error, check zzzzsys_error table.');
@@ -192,8 +192,8 @@
             Password: <?php echo $nuConfigDBPassword; ?></p>
         </div>
         <div id="installs">
-            <h1>Quick Install</h1>
-            <a id="installtables" href="#" onclick="addSysTablesIfNotExist();">Add nuBuilder system tables</a>
+            <h1 id="installheading">Setup Database</h1>
+            <a id="installtables" href="#" onclick="addSysTablesIfNotExist();">Create nuBuilder system tables</a>
             <?php print $installOperationHTML; ?>
         </div>
         <div id="error"></div>

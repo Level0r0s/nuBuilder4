@@ -18,10 +18,10 @@
             $createTableSQL = "CREATE TABLE IF NOT EXISTS $table ( ";
             foreach($fields as $fieldname => $props){
                 $createTableSQL .= " $fieldname ";
+                $typeSQL = '';
+                $nullSQL = '';
+                $defaultSQL = '';
                 foreach($props as $prop => $value){
-                    $typeSQL = '';
-                    $nullSQL = '';
-                    $defaultSQL = '';
                     if($prop == 'null'){
                         if($value){
                             $nullSQL = " NULL ";
