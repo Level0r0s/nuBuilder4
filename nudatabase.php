@@ -20,7 +20,7 @@
         header("Location: nuerror.php?error=pdodbconnect&msg=".$e->getMessage());
     }
 
-    function nuRunQuery($sql){
+    function nuRunQuery($sql, $replaceInSQLArray = array()){
 
         global $nuDB;
 
@@ -30,13 +30,7 @@
         $query = $nuDB->prepare($sql);
 
         try {
-
-            global $host;
-            global $db;
-            global $user;
-            global $password;
-            $query->execute(array($host,$db,$user,$password));
-
+            $query->execute($replaceInSQLArray);
         } catch(PDOException $ex){
 
             $message     = $ex->getMessage();
@@ -102,6 +96,8 @@
     }
 
     function db_num_rows($o) {
+        if($o == false)
+            return false;
         return $o->rowCount();
     }
 

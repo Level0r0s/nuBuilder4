@@ -2,6 +2,7 @@
 
     require_once('nudatabase.php');
     require_once('nuschema.php');
+    require_once('nucommon.php');
 
     global $nuSchema;
 
@@ -13,27 +14,34 @@
 
     if($op == 'addtables'){
         foreach($nuSchema as $table => $fields){
+            $primaryKeySQL = '';
             $createTableSQL = "CREATE TABLE IF NOT EXISTS $table ( ";
             foreach($fields as $fieldname => $props){
                 $createTableSQL .= " $fieldname ";
                 foreach($props as $prop => $value){
+                    $typeSQL = '';
+                    $nullSQL = '';
+                    $defaultSQL = '';
                     if($prop == 'null'){
                         if($value){
-                            $createTableSQL .= " NULL ";
+                            $nullSQL = " NULL ";
                         } else {
-                            $createTableSQL .= " NOT NULL ";
+                            $nullSQL = " NOT NULL ";
                         }
                     }
                     if($prop == 'type'){
-                        $createTableSQL .= " $value ";
+                        $typeSQL = " $value ";
                     }
                     if($prop == 'default'){
-                        $createTableSQL .= " DEFAULT '$value' ";
+                        $defaultSQL = " DEFAULT '$value' ";
+                    }
+                    if($prop == 'pk'){
+                        $primaryKeySQL = " , PRIMARY KEY($fieldname) ";
                     }
                 }
-                $createTableSQL .= ",";
+                $createTableSQL .= $typeSQL.$nullSQL.$defaultSQL.",";
             }
-            $createTableSQL = substr($createTableSQL,0,strlen($createTableSQL)-1)." ) ";
+            $createTableSQL = substr($createTableSQL,0,strlen($createTableSQL)-1).$primaryKeySQL." ) ";
             if(!nuRunQuery($createTableSQL)){
                 $response['success'] = false;
                 die(json_encode($response));
@@ -44,8 +52,30 @@
             $response['success'] = false;
             die(json_encode($response));
         }
+    } else if($op == 'insertdata'){
+        global $nuDB;
+        if(!exec_sql_from_file('nusetup.sql', $nuDB)){
+            $response['success'] = false;
+            die(json_encode($response));
+        }
     }
 
     die(json_encode($response));
+
+    function exec_sql_from_file($path, PDO $pdo) {
+        if (! preg_match_all("/('(\\\\.|.)*?'|[^;])+/s", file_get_contents($path), $m))
+            return;
+        foreach ($m[0] as $sql) {
+            if (strlen(trim($sql))){
+                try {
+                    $pdo->exec($sql);
+                } catch(Exception $e){
+                    nuError("Error installing nuBuilder. SQL = ".$sql);
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 
 ?>

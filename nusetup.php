@@ -28,30 +28,40 @@
         }
         foreach($fields as $fieldname => $fieldproperties){
             $addFieldIfNeededSQL = "ALTER TABLE $table ADD $fieldname ";
+            $typeSQL = '';
+            $nullSQL = '';
+            $defaultSQL = '';
+            $primaryKeySQL = '';
             $checkNull = '';
             $checkType = '';
             $checkDefault = '';
+            $checkPK = '';
             foreach($fieldproperties as $prop => $value){
                 if($prop == 'null'){
                     if($value){
-                        $addFieldIfNeededSQL .= " NULL ";
+                        $nullSQL = " NULL ";
                         $checkNull = " AND IS_NULLABLE = 'YES' ";
                     } else {
-                        $addFieldIfNeededSQL .= " NOT NULL ";
+                        $nullSQL = " NOT NULL ";
                         $checkNull = " AND IS_NULLABLE = 'NO' ";
                     }
                 }
                 if($prop == 'type'){
-                    $addFieldIfNeededSQL .= " $value ";
+                    $typeSQL = " $value ";
                     preg_match('/([A-Za-z])+/',$value,$matches,PREG_OFFSET_CAPTURE);
                     $checkType = " AND DATA_TYPE = '".strtolower($matches[0][0])."' ";
                 }
                 if($prop == 'default'){
-                    $addFieldIfNeededSQL .= " DEFAULT '$value' ";
+                    $defaultSQL = " DEFAULT '$value' ";
                     $checkDefault = " AND COLUMN_DEFAULT = '$value' ";
                 }
+                if($prop == 'pk'){
+                    $primaryKeySQL = " , ADD PRIMARY KEY ($fieldname) ";
+                    $checkPK = " AND COLUMN_KEY = 'PRI' ";
+                }
             }
-            $columnChecks = $checkNull.$checkType.$checkDefault;
+            $addFieldIfNeededSQL .= $typeSQL.$nullSQL.$defaultSQL.$primaryKeySQL;
+            $columnChecks = $checkNull.$checkType.$checkDefault.$checkPK;
             $checkFieldExistsQRY = nuRunQuery("
                 SELECT * 
                 FROM information_schema.COLUMNS
@@ -80,6 +90,11 @@
         }
     }
 
+    $installOperationHTML = '';
+    if(count($errors) === 0){
+        $installOperationHTML = '<a id="install" href="#" onclick="installnuBuilder();">Install nuBuilder</a>';
+    }
+
 ?>
 
 <html>
@@ -101,6 +116,8 @@
                 if(errors.length == 0)
                     errorHTML = '<h3>No Errors!</h3>';
                 $('div#error').html(errorHTML);
+                if($('a#install').length == 1)
+                    $('a#installtables').hide();
             });
 
             function addSysTablesIfNotExist(){
@@ -109,13 +126,16 @@
                     dataType: "json",
                     success: function(data){
                         if(data.success){
-                            alert('Successfully added tables!\nRefresh page to see updated database status.');
+                            alert('Successfully added tables!');
+                            window.location.reload();
                         } else {
-                            alert('Could not update database: Database error, please refresh the page and check zzzzsys_error table.');
+                            alert('Could not update database: Database error, check zzzzsys_error table.');
+                            window.location.reload();
                         }
                     },
-                    fail: function(){
-                        alert('Could not update database: Network error, please refresh the page.');
+                    error: function(){
+                        alert('Could not update database: Network error.');
+                        window.location.reload();
                     }
                 });
             }
@@ -126,13 +146,36 @@
                     dataType: "json",
                     success: function(data){
                         if(data.success){
-                            alert('Successfully added column!\nRefresh page to see updated database status.');
+                            alert('Successfully added column!');
+                            window.location.reload();
                         } else {
-                            alert('Could not update database: Database error, please refresh the page and check zzzzsys_error table.');
+                            alert('Could not update database: Database error, check zzzzsys_error table.');
+                            window.location.reload();
                         }
                     },
-                    fail: function(){
-                        alert('Could not update database: Network error, please refresh the page.');
+                    error: function(){
+                        alert('Could not update database: Network error.');
+                        window.location.reload();
+                    }
+                });
+            }
+
+            function installnuBuilder(){
+                $.ajax({
+                    url: "nusetupoperations.php?op=insertdata",
+                    dataType: "json",
+                    success: function(data){
+                        if(data.success){
+                            alert('Successfully installed nuBuilder!');
+                            window.location.assign('./');
+                        } else {
+                            alert('Could not update database: Database error, check zzzzsys_error table.');
+                            window.location.reload();
+                        }
+                    },
+                    error: function(){
+                        alert('Could not update database: Network error.');
+                        window.location.reload();
                     }
                 });
             }
@@ -150,7 +193,8 @@
         </div>
         <div id="installs">
             <h1>Quick Install</h1>
-            <a href="#" onclick="addSysTablesIfNotExist();">Add nuBuilder system tables</a>
+            <a id="installtables" href="#" onclick="addSysTablesIfNotExist();">Add nuBuilder system tables</a>
+            <?php print $installOperationHTML; ?>
         </div>
         <div id="error"></div>
     </body>
