@@ -10,8 +10,8 @@
     }
 
     if($loggedIn){
-        require_once('nueditform.php');
-        nuLoadEditForm($_REQUEST);
+        require_once('nuform.php');
+        nuLoadForm($_REQUEST);
     } else {
         require_once('nuloginform.php');
         nuLoadLoginForm();
