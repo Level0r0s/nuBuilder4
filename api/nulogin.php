@@ -4,12 +4,10 @@
     require_once('../nuconfig.php');
     require_once('../nucommon.php');
 
-    global $nuConfigDBGlobeadminPassword;
-
     $response = array();
     $response['success'] = false;
 
-    if($_REQUEST['username'] == 'globeadmin' && $_REQUEST['password'] == $nuConfigDBGlobeadminPassword){
+    if($_REQUEST['username'] == 'globeadmin' && $_REQUEST['password'] == $GLOBALS['nuConfigDBGlobeadminPassword']){
         $response['success'] = true;
         logUserIn('globeadmin');
         die(json_encode($response));
@@ -30,6 +28,7 @@
         
         global $response;
         $response['session_id'] = nuID();
+        $response['user_id'] = $userID;
 
         require_once('../nusession.php');
         nuCreateSession($userID, $response['session_id']);

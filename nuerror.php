@@ -7,7 +7,8 @@
     $errorMsg = '';
 
     $nuErrorList = array(
-        "pdodbconnect" => "Cannot connect to the nuBuilder MySQL database using PDO with details from nuconfig.php<br><br>Host: ".$nuConfigDBHost."<br>Database: ".$nuConfigDBName."<br>Username: ".$nuConfigDBUser. "<br>Password: ".$nuConfigDBPassword."<br><br>Message: ".$errorMessage."<br><br><a href=\"./\">Refresh</a>"
+        "pdodbconnect" => "Cannot connect to the nuBuilder MySQL database using PDO with details from nuconfig.php<br><br>Host: ".$GLOBALS['nuConfigDBHost']."<br>Database: ".$GLOBALS['nuConfigDBName']."<br>Username: ".$nuConfigDBUser. "<br>Password: ".$nuConfigDBPassword."<br><br>Message: ".$errorMessage."<br><br><a href=\"./\">Refresh</a>",
+        "errortable" => "Cannot find nuBuilder error table in database."
     );
 
     if(array_key_exists($errorCode, $nuErrorList)){

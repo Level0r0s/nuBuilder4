@@ -3,16 +3,21 @@
     require_once('nudatabase.php');
     require_once('nuschema.php');
     require_once('nucommon.php');
+    require_once('nuconfig.php');
 
+    global $nuConfigDBName;
     global $nuSchema;
 
     $op = $_REQUEST['op'];
-    $q = $_REQUEST['q'];
+    $q = '';
+    if(array_key_exists('q', $_REQUEST))
+        $q = $_REQUEST['q'];
 
     $response = array();
     $response['success'] = true;
 
     if($op == 'addtables'){
+        nuRunQuery("ALTER DATABASE $nuConfigDBName CHARACTER SET utf8 COLLATE utf8_general_ci ");
         foreach($nuSchema as $table => $fields){
             $primaryKeySQL = '';
             $createTableSQL = "CREATE TABLE IF NOT EXISTS $table ( ";

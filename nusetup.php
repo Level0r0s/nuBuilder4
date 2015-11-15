@@ -13,11 +13,9 @@
     $errors = array();
     $nuBuilderTablesMissing = false;
 
-    $nuBuilderCollation = 'utf8_general_ci';
-
-    $checkDBCollationQRY = nuRunQuery("SELECT * FROM information_schema.SCHEMATA WHERE schema_name = '$nuConfigDBName' AND default_collation_name = '$nuBuilderCollation' ");
+    $checkDBCollationQRY = nuRunQuery("SELECT * FROM information_schema.SCHEMATA WHERE schema_name = '$nuConfigDBName' AND default_collation_name = 'utf8_general_ci' ");
     if(db_num_rows($checkDBCollationQRY) == 0)
-        $errors[] = "Database's collation is not '$nuBuilderCollation'";
+        $errors[] = "Database's collation is not 'utf8_general_ci'";
 
     foreach($nuSchema as $table => $fields){
         $foundTable = true;
@@ -114,7 +112,7 @@
                     }
                 }
                 if(errors.length == 0)
-                    $('#installheading').html('Quick Install');
+                    $('#installheading').html('Step 2 - Install nuBuilder');
                 $('div#error').html(errorHTML);
                 if($('a#install').length == 1)
                     $('a#installtables').hide();
@@ -192,7 +190,7 @@
             Password: <?php echo $nuConfigDBPassword; ?></p>
         </div>
         <div id="installs">
-            <h1 id="installheading">Setup Database</h1>
+            <h1 id="installheading">Step 1 - Setup Database</h1>
             <a id="installtables" href="#" onclick="addSysTablesIfNotExist();">Create nuBuilder system tables</a>
             <?php print $installOperationHTML; ?>
         </div>

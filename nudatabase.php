@@ -1,31 +1,25 @@
 <?php
 
-    require_once('nuconfig.php');
     require_once('nucommon.php');
 
-    global $nuConfigDBHost;
-    global $nuConfigDBName;
-    global $nuConfigDBUser;
-    global $nuConfigDBPassword;
-
     try{
-        $nuDB = new PDO("mysql:host=$nuConfigDBHost;dbname=$nuConfigDBName;charset=utf8", $nuConfigDBUser, $nuConfigDBPassword, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
-        $nuDB->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        require_once('nuconfig.php');
+        $GLOBALS['nuDB'] = new PDO("mysql:host=".$GLOBALS['nuConfigDBHost'].";dbname=".$GLOBALS['nuConfigDBName'].";charset=utf8", $GLOBALS['nuConfigDBUser'], $GLOBALS['nuConfigDBPassword'], array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+        $GLOBALS['nuDB']->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     } catch (Exception $e) {
         header("Location: nuerror.php?error=pdodbconnect&msg=".$e->getMessage());
     }
 
-    function nuRunQuery($sql, $replaceInSQLArray = array()){
+    function nuRunQuery($sql){
 
-        global $nuDB;
-
-        if(!$nuDB)
+        if(!$GLOBALS['nuDB']){
             return false;
+        }
 
-        $query = $nuDB->prepare($sql);
+        $query = $GLOBALS['nuDB']->prepare($sql);
 
         try {
-            $query->execute($replaceInSQLArray);
+            $query->execute();
         } catch(PDOException $ex){
 
             $message     = $ex->getMessage();
@@ -37,6 +31,13 @@
             }
 
             $error       = "PDO MESSAGE: $message, SQL: ".addslashes($sql).", BACK TRACE: $trace";
+            try{
+                $errorTableCheckQRY = $GLOBALS['nuDB']->prepare("SHOW TABLES LIKE 'zzzzsys_error' ");
+                $errorTableCheckQRY->execute();
+            } catch(Exception $e){
+                header("Location: nuerror.php?error=errortable&msg=".$e->getMessage());
+                return false;
+            }
             nuError($error);
 
             return false;
@@ -79,9 +80,9 @@
     }
 
     function db_columns($n){
-        global $nuConfigDBName;
+        require_once('nuconfig.php');
         $a       = array();
-        $d       = $nuConfigDBName;
+        $d       = $GLOBALS['nuConfigDBName'];
         $s       = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = '$d' AND TABLE_NAME = '$n' ORDER BY ORDINAL_POSITION ";
         $t       = nuRunQuery($s);
         while($r = db_fetch_object($t)){
