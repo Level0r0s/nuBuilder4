@@ -15,7 +15,7 @@
             SELECT * FROM zzzzsys_session 
             WHERE zzzzsys_session_id = '$sessionID' 
             AND ses_zzzzsys_user_id = '$userID' 
-            AND NOW() BETWEEN ses_last_activity AND DATE_ADD(ses_last_activity, INTERVAL $timeout SECONDS)
+            AND NOW() BETWEEN ses_last_activity AND DATE_ADD(ses_last_activity, INTERVAL $timeout SECOND)
         ");
         if(db_num_rows($checkIfLoggedInQRY) == 0)
             return false;

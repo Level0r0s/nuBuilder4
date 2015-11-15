@@ -4,3 +4,5 @@ SELECT * FROM (SELECT '1', 'Demo', 3600) AS tmp
 WHERE NOT EXISTS (
     SELECT zzzzsys_setup_id FROM zzzzsys_setup WHERE zzzzsys_setup_id = '1'
 ) LIMIT 1;
+
+REPLACE INTO zzzzsys_form (zzzzsys_form_id, frm_code, frm_title) VALUES ('globeadminhome','GAHOME', 'globeadmin HOME');

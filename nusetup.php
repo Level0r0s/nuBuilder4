@@ -79,7 +79,7 @@
                     $errors[] = "Field '$fieldname' for table '$table' was found, but properties must be like COLUMN_NAME = '$fieldname' ".$columnChecks;
                 } else {
                     if($foundTable){
-                        $errors[] = "Field '$fieldname' for table '$table' ".$columnChecks." was not found. <a href=\"#\" onclick=\"addColumn('".$addFieldIfNeededSQL."');\">Add column to table?</a>";
+                        $errors[] = "Field '$fieldname' for table '$table' ".$columnChecks." was not found. <a href=\"#\" onclick=\"addColumn('".addslashes($addFieldIfNeededSQL)."');\">Add column to table?</a>";
                     } else {
                         $errors[] = "Field '$fieldname' for table '$table' ".$columnChecks." was not found.";
                     }

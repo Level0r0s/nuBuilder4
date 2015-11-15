@@ -31,6 +31,21 @@
                 "null" => false
             ),
         ),
+        "zzzzsys_form" => array(
+            "zzzzsys_form_id" => array(
+                "type" => "VARCHAR(25)",
+                "null" => false,
+                "pk" => true
+            ),
+            "frm_code" => array(
+                "type" => "VARCHAR(50)",
+                "null" => false
+            ),
+            "frm_title" => array(
+                "type" => "VARCHAR(50)",
+                "null" => false
+            )
+        ),
         "zzzzsys_setup" => array(
             "zzzzsys_setup_id" => array(
                 "type" => "VARCHAR(25)",
@@ -60,7 +75,26 @@
                 "type" => "VARCHAR(50)",
                 "null" => false
             ),
+            "sus_zzzzsys_user_group_id" => array(
+                "type" => "VARCHAR(25)",
+                "null" => false
+            ),
             "sus_password" => array(
+                "type" => "VARCHAR(50)",
+                "null" => false
+            )
+        ),
+        "zzzzsys_user_group" => array(
+            "zzzzsys_user_group_id" => array(
+                "type" => "VARCHAR(25)",
+                "null" => false,
+                "pk" => true
+            ),
+            "sug_zzzzsys_access_level_id" => array(
+                "type" => "VARCHAR(25)",
+                "null" => false
+            ),
+            "sug_name" => array(
                 "type" => "VARCHAR(50)",
                 "null" => false
             )
@@ -82,6 +116,11 @@
             "ses_last_activity" => array(
                 "type" => "DATETIME",
                 "null" => false
+            ),
+            "ses_logged_out" => array(
+                "type" => "INT",
+                "null" => false,
+                "default" => 0
             )
         )
     );

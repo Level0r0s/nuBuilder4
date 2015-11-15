@@ -17,6 +17,7 @@
                 <head>
                     <script src="lib/jquery-2.1.4.js"></script>
                     <script src="lib/spin.min.js"></script>
+                    <script src="nucommon.js"></script>
                     <script type="text/javascript">
 
                         $(document).ready(function(){
@@ -63,7 +64,11 @@
                             }).done(function(data){
                                 $('.spinner').remove();
                                 if(data.success){
-                                    alert('LOGGED IN');
+                                    nuPostRedirect('./', {
+                                        user_id: data.user_id,
+                                        session_id: data.session_id,
+                                        call_type: 'home'
+                                    });
                                 } else {
                                     $('#loader').html('Incorrect username / password.');
                                 }
