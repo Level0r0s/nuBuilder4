@@ -98,6 +98,8 @@
 <html>
     <head>
         <script src="lib/jquery-2.1.4.js"></script>
+        <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <script src="lib/bootstrap/js/bootstrap.min.js"></script>
         <script type="text/javascript">
             
             window.errors = <?php echo json_encode($errors); ?>;
@@ -119,10 +121,12 @@
             });
 
             function addSysTablesIfNotExist(){
+                $(document.body).append('<div id="backdrop" class="modal-backdrop fade in"></div>');
                 $.ajax({
                     url: "nusetupoperations.php?op=addtables",
                     dataType: "json",
                     success: function(data){
+                        $('#backdrop').remove();
                         if(data.success){
                             alert('Successfully created tables!');
                             window.location.reload();
@@ -132,6 +136,7 @@
                         }
                     },
                     error: function(){
+                        $('#backdrop').remove();
                         alert('Could not update database: Network error.');
                         window.location.reload();
                     }
@@ -139,10 +144,12 @@
             }
 
             function addColumn(query){
+                $(document.body).append('<div id="backdrop" class="modal-backdrop fade in"></div>');
                 $.ajax({
                     url: "nusetupoperations.php?op=addcolumn&q="+query,
                     dataType: "json",
                     success: function(data){
+                        $('#backdrop').remove();
                         if(data.success){
                             alert('Successfully added column!');
                             window.location.reload();
@@ -152,6 +159,7 @@
                         }
                     },
                     error: function(){
+                        $('#backdrop').remove();
                         alert('Could not update database: Network error.');
                         window.location.reload();
                     }
@@ -159,10 +167,12 @@
             }
 
             function installnuBuilder(){
+                $(document.body).append('<div id="backdrop" class="modal-backdrop fade in"></div>');
                 $.ajax({
                     url: "nusetupoperations.php?op=insertdata",
                     dataType: "json",
                     success: function(data){
+                        $('#backdrop').remove();
                         if(data.success){
                             alert('Successfully installed / updated nuBuilder!');
                             window.location.assign('./');
@@ -172,6 +182,7 @@
                         }
                     },
                     error: function(){
+                        $('#backdrop').remove();
                         alert('Could not update database: Network error.');
                         window.location.reload();
                     }
@@ -181,19 +192,21 @@
         </script>
     </head>
     <body>
-        <img src="img/logo.png" />
-        <div id="config">
-            <h3>Config</h1>
-            <p>Host: <?php echo $nuConfigDBHost; ?><br>
-            Database: <?php echo $nuConfigDBName; ?><br>
-            Username: <?php echo $nuConfigDBUser; ?><br>
-            Password: <?php echo $nuConfigDBPassword; ?></p>
+        <div style="margin:10px;">
+            <img src="img/logo.png" style="margin-bottom:10px;" />
+            <div id="installs" class="panel panel-default" style="padding:10px;">
+                <h1 id="installheading">Step 1 - Setup Database</h1>
+                <a id="installtables" href="#" onclick="addSysTablesIfNotExist();">Create nuBuilder system tables</a>
+                <?php print $installOperationHTML; ?>
+            </div>
+            <div id="config" class="panel panel-default" style="padding:10px;">
+                <h3>Config</h1>
+                <p>Host: <?php echo $nuConfigDBHost; ?><br>
+                Database: <?php echo $nuConfigDBName; ?><br>
+                Username: <?php echo $nuConfigDBUser; ?><br>
+                Password: <?php echo $nuConfigDBPassword; ?></p>
+            </div>
+            <div id="error" class="panel panel-default" style="padding:10px;"></div>
         </div>
-        <div id="installs">
-            <h1 id="installheading">Step 1 - Setup Database</h1>
-            <a id="installtables" href="#" onclick="addSysTablesIfNotExist();">Create nuBuilder system tables</a>
-            <?php print $installOperationHTML; ?>
-        </div>
-        <div id="error"></div>
     </body>
 </html>

@@ -22,9 +22,17 @@
 ?>
 
 <html>
+    <head>
+        <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+    </head>
     <body>
-        <img src="img/logo.png" />
-        <p><?php echo $errorMsg; ?></p>
-        <br><br><a href="./">Back to login</a>
+        <div style="margin-left:10px;margin-right:10px;">
+            <img src="img/logo.png" style="margin-top:10px;margin-bottom:10px;" />
+            <div class="panel panel-default" style="padding:10px;">
+                <p><?php echo $errorMsg; ?></p>
+                <br><br><a href="./">Back to login</a>
+            </div>
+        </div>
     </body>
 </html>
