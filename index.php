@@ -9,12 +9,12 @@
         }
     }
 
-    if($loggedIn){
-        require_once('nuform.php');
-        nuLoadForm($_REQUEST);
-    } else {
+    if(!$loggedIn){
         require_once('nuloginform.php');
         nuLoadLoginForm();
+    } else {
+        require_once('nubase.php');
+        nuLoadBase($_REQUEST);
     }
 
 ?>
