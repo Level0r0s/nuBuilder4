@@ -1,6 +1,7 @@
 //-- object for dragging divs --//
 
 window.nuBACKUP                = [];
+window.nuLastClick             = [];
 window.nuID                    = 1000;
 window.nuDIALOG                = {};
 window.nuDIALOG.groupNumber    = '0';
@@ -8,7 +9,6 @@ window.nuDIALOG.sectionNumber  = '0';
 window.nuDIALOG.dialog         = '';
 window.nuDIALOG.dialogX        = 0;
 window.nuDIALOG.dialogY        = 0;
-
 function nuCreateDrag(){
 
 	this.left        = 0;
@@ -57,7 +57,7 @@ function nuCreateDrag(){
 
 
 	this.down = function(event) {
-console.log(event.type);
+		
 		var c = event.target.className;
 		
 		if(event.ctrlKey){

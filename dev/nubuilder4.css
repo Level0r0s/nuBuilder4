@@ -1,99 +1,170 @@
-div                          {padding:0px;margin:0px}
-img                          {padding:0px;margin:0px}
-ul                           {padding:0px;margin:0px}
-li                           {padding:0px;margin:0px;display:inline}
-iframe                       {padding:0px;margin:0px;border:0px}
-select                       {padding:0px;margin:0px;font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;}
-textarea                     {padding:0px;margin:0px;font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;}
-body                         {padding:20px;margin:0px;font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;font-size: 13px;line-height: 18px;color: #202020;background-color: ##f4f4f4;}
-
-.nuActionHolder {
-	width:100%;
-	height:50px;
-	text-align:center;
+div {
+  padding: 0px;
+  margin: 0px
 }
 
+img {
+  padding: 0px;
+  margin: 0px
+}
+
+ul {
+  padding: 0px;
+  margin: 0px
+}
+
+li {
+  padding: 0px;
+  margin: 0px;
+  display: inline
+}
+
+iframe {
+  padding: 0px;
+  margin: 0px;
+  border: 0px
+}
+
+select {
+  padding: 0px;
+  margin: 0px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+textarea {
+  padding: 0px;
+  margin: 0px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+body {
+  padding: 0px;
+  margin: 0px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+  color: #202020;
+  background-color: #f4f4f4;
+}
+
+.nuActionHolder {
+  background-color: white;
+  width: 100%;
+  height: 40px;
+  text-align: center;
+}
 
 .nuBreadcrumbHolder {
-	color:orange;
-	width:100%;
+  padding: 5px 0px 0px 0px;
+  background-color: white;
+  color: orange;
+  width: 100%;
+  font-size: 16px;
 }
 
 .nuBreadcrumb {
-	color:orange;
-	display:inline-block;
-	text-decoration:underline;
+  color: orange;
+  display: inline-block;
+  text-decoration: underline;
 }
 
 .nuBreadcrumb:hover {
-	cursor:pointer;
+  cursor: pointer;
 }
 
 .nuNotBreadcrumb {
-	color:orange;
-	display:inline-block;
+  color: orange;
+  display: inline-block;
 }
 
+.nuFormHolder {
+  display: inline;
+  margin: 0px 5px;
+  position:relative;
+}
 
 .nuTabHolder {
-	height:17px;
-	width:100%;
-	border-style: solid;
-	border-width: 0px 0px 2px 0px;
-	padding:10px 0px 0px 0px;
+  background-color: white;
+  height: 25px;
+  width: 100%;
+  border-style: solid;
+  border-width: 0px 0px 1px 0px;
+  border-color: silver;
+  padding: 15px 0px 0px 2px;
 }
 
 .nuTab {
-	display:inline;
-	border-style:solid;
-	border-width:1px;
-	font-size:16px;
-	padding:0px 5px 0px 5px;
+  display: inline;
+  border-style: solid;
+  border-width: 0px;
+  border-color: silver;
+  font-size: 16px;
+  padding: 8px 10px 8px 10px;
 }
 
 .nuTabSelected {
-	display:inline;
-	font-size:16px;
-	padding:0px 5px 0px 5px;
+  background-color: #f4f4f4;
+  display: inline;
+  border-style: solid;
+  border-width: 1px;
+  border-color: silver silver white silver;
+  font-size: 16px;
+  padding: 8px 5px 8px 5px;
+  -webkit-border-radius: 5px 5px 0px 0px;
+  -moz-border-radius: 5px 5px 0px 0px;
+  border-radius: 5px 5px 0px 0px;
 }
 
-
-.nuBodyHolder {
-}
-
+.nuBodyHolder {}
 
 .nuStatusHolder {
+  color: silver;
+  padding: 0px 0px 0px 0px;
+  background-color: white;
+  bottom: 10px;
+  width: 100%;
+  height: 20px;
 }
 
-
-.nuBrowseCell {
-}
-
+.nuBrowseCell {}
 
 .nuButton {
-	color:white;
-	background-color:#5BCAF5;
-	border:none;
-	height:40px;
-	font-size:13px;
+  color: white;
+  background-color: #00ADEF;
+  border: none;
+  height: 40px;
+  font-size: 13px;
+  display: inline;
+  border-style: solid;
+  border-width: 1px;
+  border-color: silver;
+  font-size: 16px;
+  padding: 8px 5px 8px 5px;
+  -webkit-border-radius: 5px 5px 5px 5px;
+  -moz-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
 }
 
+.nuLabel {}
 
-.nuLabel {
+.nuText {}
+
+.nuLookup {}
+
+.nuReadonly {background-color:lightgrey;border-style:none}
+
+.nuSearch {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: #abd886;
+  padding: 6px;
+  margin-bottom: 0;
+  font-size: 13px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  text-align: left;
+  white-space: nowrap;
+  vertical-align: middle;
+  color: #666666;
+  border: 1px solid transparent;
+  height: 25px;
 }
-
-
-.nuText {
-}
-
-
-.nuLookup {
-}
-
-
-.nuReadonly {
-}
-
-
-
-

@@ -33,12 +33,12 @@ function nuLoadReport(b){
 	$('body').off('mouseup');
 	$('body').off('mousemove');
 	
+	$('body').on('mousedown.nudrag', function(event){nuDrag.down(event);});
 	$('body').on('keydown.nudrag',   function(event){nuDrag.move(event);});
 	$('body').on('keyup.nudrag',     function(event){nuDrag.up(event);});
-	$('body').on('mousedown.nudrag', function(event){nuDrag.down(event);});
 	$('body').on('mouseup.nudrag',   function(event){nuDrag.up(event);});
 	$('body').on('mousemove.nudrag', function(event){nuDrag.move(event);});
-
+	
 	$('body').on('keydown.nureport',   function(event){nuDragR.move(event);});
 	$('body').on('mousedown.nureport', function(event){nuDragR.down(event);});
 	$('body').on('mouseup.nureport',   function(event){nuDragR.up(event);});
@@ -276,6 +276,7 @@ function nuDragReport(){
 						'z-index':o.zIndex, 
 						'border-color':o.borderColor,
 						'border-width':o.borderWidth,
+						'border-style':'solid',
 						'font-family':o.fontFamily,
 						'font-weight':w[o.fontWeight],
 						'text-align':o.textAlign,
@@ -430,6 +431,7 @@ function nuDragReport(){
 
 
 
+
 	this.move = function(event) {
 
 		if($('#nuDragLine').length == 1){
@@ -490,6 +492,20 @@ function nuDragReport(){
 	}
 
 	this.down = function(event) {
+
+		var lc = window.nuLastClick[event.target.id];
+		
+		if(lc == undefined){
+			window.nuLastClick[event.target.id] = Date.now();
+		}else{
+			if((Date.now() - lc) > 300){
+				window.nuLastClick[event.target.id] = Date.now();
+			}else{
+				nuObjectDialog();
+				return;
+			}
+		}
+		
 
 		if(event.buttons == 1 && (String(event.target.className).split(' ')[1]) == 'nuDragSelected'){
 			
@@ -1021,39 +1037,7 @@ function nuObjectDialog(){
 	
 	if(S.length == 0){return;}
 	
-	var D = nuDragR.getObject(S[0].id);
-/*
-	var A = Object.keys(D);
-	var r = ['group','section','selected','name'];
-	
-	for(var s = 0 ; s < S.length ; s++){
-		
-		var O = nuDragR.getObject(S[s].id);
-		
-		for(var a = 0 ; a < A.length ; a++){
-			
-			if(D[A[a]] != O[A[a]]){
-			
-				r[r.length] = A[a];
-				
-			}
-			
-			if(O['objectType'] == 'field'){;r.splice(0,0,'image');}
-			if(O['objectType'] == 'label'){;r.splice(0,0,'minRows','maxRows','image','format');}
-			if(O['objectType'] == 'image'){;r.splice(0,0,'backgroundColor','borderColor','borderWidth','fieldName','minRows','maxRows','fontColor','fontFamily','fontSize','fontWeight','format','textAlign');}
-
-		}
-		
-	}
-	
-	for(var i = 0 ; i < r.length ; i++){
-		
-		if(A.indexOf(r[i]) != -1){
-			A.splice(A.indexOf(r[i]), 1);
-		}
-	}
-*/	
-
+	var D   = nuDragR.getObject(S[0].id);
 	var top = 60;
 	var fun = 'nuUpdateProperties';
 	var f   = [['0','10000'],['1','10000.0'],['2','10000.00'],['3','10000.000'],['4','10000.0000'],['5','10000.00000'],['6','13-Jan-2007'],['7','13-01-2007'],['8','Jan-13-2007'],['9','01-13-2007'],['10','13-Jan-07'],['11','13-01-07'],['12','Jan-13-07'],['13','01-13-07'],['14','10,000'],['15','10,000.0'],['16','10,000.00'],['17','10,000.000'],['18','10,000.0000'],['19','10,000.00000'],['20','10000'],['21','10000,0'],['22','10000,00'],['23','10000,000'],['24','10000,0000'],['25','10000,00000'],['26','10.000'],['27','10.000,0'],['28','10.000,00'],['29','10.000,000']];
@@ -1066,7 +1050,8 @@ function nuObjectDialog(){
 	top = nuDialogInput('Height', 'height', top, 200, D, fun);
 	top = nuDialogInput('Width', 'width', top, 200, D, fun);
 	top = nuDialogInput('Background Color', 'backgroundColor', top, 200, D, fun);
-	top = nuDialogInput('Background Width', 'backgroundWidth', top, 200, D, fun);
+	top = nuDialogInput('Border Color', 'borderColor', top, 200, D, fun);
+	top = nuDialogInput('Border Width', 'borderWidth', top, 200, D, fun);
 	top = nuDialogInput('Field Name', 'fieldName', top, 200, D, fun);
 	top = nuDialogInput('Font Color', 'fontColor', top, 200, D, fun);
 	top = nuDialogInput('Font Family', 'fontFamily', top, 200, D, fun, [['Helvetica','Helvetica'],['Arial','Arial'],['Courier','Courier'],['Times','Times'],['Symbol','Symbol']]);
@@ -1142,21 +1127,21 @@ function nuGroupDialog(){
 	$('#sortField').attr({'id' : 'sortField2', 'readonly' : true, 'data-group' : 2}).css('background-color','#DFDFDF').click(function(){nuClickGroup(this);});
 	top = nuDialogInput('', 'sortField', top, left, nuREPORT.groups[3], 'nuDoNothing');
 	$('#sortField').attr({'id' : 'sortField3', 'data-group' : 3}).click(function(){nuClickGroup(this);});
-	top = nuDialogInput('', 'sortField', top, left, nuREPORT.groups[4], 'nuDoNothing');
+	top = nuDialogInput('', 'sortField', top, left, nuREPORT.groups[4], fun);
 	$('#sortField').attr({'id' : 'sortField4', 'data-group' : 4}).click(function(){nuClickGroup(this);});
-	top = nuDialogInput('', 'sortField', top, left, nuREPORT.groups[5], 'nuDoNothing');
+	top = nuDialogInput('', 'sortField', top, left, nuREPORT.groups[5], fun);
 	$('#sortField').attr({'id' : 'sortField5', 'data-group' : 5}).click(function(){nuClickGroup(this);});
-	top = nuDialogInput('', 'sortField', top, left, nuREPORT.groups[6], 'nuDoNothing');
+	top = nuDialogInput('', 'sortField', top, left, nuREPORT.groups[6], fun);
 	$('#sortField').attr({'id' : 'sortField6', 'data-group' : 6}).click(function(){nuClickGroup(this);});
-	top = nuDialogInput('', 'sortField', top, left, nuREPORT.groups[7], 'nuDoNothing');
+	top = nuDialogInput('', 'sortField', top, left, nuREPORT.groups[7], fun);
 	$('#sortField').attr({'id' : 'sortField7', 'data-group' : 7}).click(function(){nuClickGroup(this);});
-	top = nuDialogInput('', 'sortField', top, left, nuREPORT.groups[8], 'nuDoNothing');
+	top = nuDialogInput('', 'sortField', top, left, nuREPORT.groups[8], fun);
 	$('#sortField').attr({'id' : 'sortField8', 'data-group' : 8}).click(function(){nuClickGroup(this);});
-	top = nuDialogInput('', 'sortField', top, left, nuREPORT.groups[9], 'nuDoNothing');
+	top = nuDialogInput('', 'sortField', top, left, nuREPORT.groups[9], fun);
 	$('#sortField').attr({'id' : 'sortField9', 'data-group' : 9}).click(function(){nuClickGroup(this);});
-	top = nuDialogInput('', 'sortField', top, left, nuREPORT.groups[10], 'nuDoNothing');
+	top = nuDialogInput('', 'sortField', top, left, nuREPORT.groups[10], fun);
 	$('#sortField').attr({'id' : 'sortField10', 'data-group' : 10}).click(function(){nuClickGroup(this);});
-	top = nuDialogInput('', 'sortField', top, left, nuREPORT.groups[0], 'nuDoNothing');
+	top = nuDialogInput('', 'sortField', top, left, nuREPORT.groups[0], fun);
 	$('#sortField').attr({'id' : 'sortField0', 'readonly' : true, 'data-group' : 0}).css('background-color','#DFDFDF').click(function(){nuClickGroup(this);});
 
 	var top = 120;
@@ -1205,9 +1190,30 @@ function nuGroupDialog(){
 		$('#page_break').attr({'id' : 'page_break0', 'data-property' : 'page_break', 'data-section' : '1'});
 		
 	}
-	
+	nuMoveGroup();
 	$('#nuDragDialog').css('height', top + 20);
 	
+}
+
+
+
+
+function nuMoveGroup(){
+
+		var e = document.createElement('button');  
+		e.setAttribute('id', 'grpup');
+		$('#nuDragDialog').append(e);
+		
+		$('#' + e.id).css({'position':'absolute','left':20,'top':150,'width':70,'height':30}).html('Move Up');
+		$('#' + e.id).click(function(){	nuMoveReportGroup(nuDIALOG.groupNumber, -1, event);});
+
+		var e = document.createElement('button');  
+		e.setAttribute('id', 'grpdn');
+		$('#nuDragDialog').append(e);
+		
+		$('#' + e.id).css({'position':'absolute','left':20,'top':200,'width':50,'height':25}).html('Move Down');
+		$('#' + e.id).click(function(){	nuMoveReportGroup(nuDIALOG.groupNumber, 1, event);});
+
 }
 
 
@@ -1251,7 +1257,7 @@ function nuDialogInput(cap, id, top, left, val, fun, sel){
 					});
 					
     $('#' + e.id).change(function(){
-
+		
 		window[fun](this);
 
 	});
@@ -1272,6 +1278,35 @@ function nuDialogInput(cap, id, top, left, val, fun, sel){
     
 }
 
+function nuUpdateGroup(t){
+	
+		var g = $('#' + t.id).attr('data-group');
+		var G = nuREPORT.groups[g];
+		var s = nuREPORT.groups[g].sections.length
+		
+		G.groupBy                  = $('#sortBy'     + g).val();
+		G.sortField                = $('#sortField'  + g).val();
+		
+		for(var i = 0 ; i < s.length ; i++){
+			G.sections[i].color        = $('#height' + i).val();
+			G.sections[i].height       = $('#color' + i).val();
+			G.sections[i].label        = 'Header ' + $('#label' + i).val();
+			G.sections[i].page_break   = $('#page_break' + i).val();
+			
+			if(g == 0){G.sections[i].label  = 'Detail';}
+			if(g == 1 && s == 0){G.sections[i].label  = $('#label' + i).val() + ' Header';}
+			if(s == 1){G.sections[i].label  = $('#label' + i).val() + ' Footer';}
+			
+		}
+		
+	nuREPORT.setFocus = t.id;
+	
+	nuLoadReport();
+
+	
+}
+
+	
 function nuUpdateProperties(t){
 
 	var sel = document.getElementsByClassName('nuDragSelected');
@@ -1383,4 +1418,22 @@ function nuUpdateSectionProperty(t){
 	nuLoadReport();
 
 }
+
+
+
+function nuMoveReportGroup(ele, dir, event) {
+
+	console.log(ele , dir, x.length);
+
+    var x = nuREPORT.splice(ele,1);
+    nuREPORT.splice(ele + dir, 0, x);
+
+    console.log(nuREPORT);
+
+	nuREPORT.setFocus = event.target.id;
+	
+	nuLoadReport();
+
+}
+
 
