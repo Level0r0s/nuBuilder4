@@ -13,7 +13,7 @@
         require_once('nuloginform.php');
         nuLoadLoginForm();
     } else {
-        require_once('nubase.php');
+        require_once('nuopen.php');
         nuLoadBase($_REQUEST);
     }
 
