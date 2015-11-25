@@ -47,6 +47,9 @@ body {
   background-color: #f4f4f4;
 }
 
+input {border: 1px solid #e1e8ea;}
+
+
 .nuActionHolder {
   background-color: white;
   width: 99.9%;
@@ -149,7 +152,7 @@ body {
 
 .nuText {}
 
-.nuLookup {}
+.nuLookup {border:1px solid #e1e8ea}
 
 .nuReadonly {background-color:lightgrey;border-style:none}
 
