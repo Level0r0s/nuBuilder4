@@ -1,20 +1,22 @@
+<?php require_once('nucommon.php'); ?>
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
 <?php
-
-    $loggedIn = false;
-
-    if(array_key_exists('user_id', $_REQUEST) && array_key_exists('session_id', $_REQUEST)){
-        require_once('nusession.php');
-        if(nuIsLoggedIn($_REQUEST['user_id'],$_REQUEST['session_id'])){
-            $loggedIn = true;
-        }
-    }
-
-    if(!$loggedIn){
-        require_once('nuloginform.php');
-        nuLoadLoginForm();
-    } else {
-        require_once('nuopen.php');
-        nuLoadBase($_REQUEST);
-    }
-
+cssinclude('nubuilder4.css');
+jsinclude('nueditform.js');
+jsinclude('nucommon.js');
 ?>
+
+</head>
+
+<body onload="nuBuildForm()" >
+
+</body>
+
+</html>
+

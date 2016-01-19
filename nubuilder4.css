@@ -19,6 +19,11 @@ li {
   display: inline
 }
 
+label {
+  text-align: right; 
+  position: absolute
+}
+
 iframe {
   padding: 0px;
   margin: 0px;
@@ -47,9 +52,12 @@ body {
   background-color: #f4f4f4;
 }
 
+input {border: 1px solid #e1e8ea;}
+
+
 .nuActionHolder {
   background-color: white;
-  width: 100%;
+  width: 99.9%;
   height: 40px;
   text-align: center;
 }
@@ -58,7 +66,7 @@ body {
   padding: 5px 0px 0px 0px;
   background-color: white;
   color: orange;
-  width: 100%;
+  width: 99.9%;
   font-size: 16px;
 }
 
@@ -86,7 +94,7 @@ body {
 .nuTabHolder {
   background-color: white;
   height: 25px;
-  width: 100%;
+  width: 99.9%;
   border-style: solid;
   border-width: 0px 0px 1px 0px;
   border-color: silver;
@@ -122,7 +130,7 @@ body {
   padding: 0px 0px 0px 0px;
   background-color: white;
   bottom: 10px;
-  width: 100%;
+  width: 99.9%;
   height: 20px;
 }
 
@@ -149,7 +157,7 @@ body {
 
 .nuText {}
 
-.nuLookup {}
+.nuLookup {border:1px solid #e1e8ea}
 
 .nuReadonly {background-color:lightgrey;border-style:none}
 
