@@ -76,6 +76,12 @@ input {border: 1px solid #e1e8ea;}
   text-decoration: underline;
 }
 
+.nuBreadcrumbArrow {
+  color: orange;
+  display: inline-block;
+  font-size:12px;
+}
+
 .nuBreadcrumb:hover {
   cursor: pointer;
 }

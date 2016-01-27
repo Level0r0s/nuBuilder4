@@ -1,4 +1,5 @@
-<?php require_once('nucommon.php'); ?>
+<?php 
+require_once('nucommon.php'); ?>
 <!DOCTYPE html>
 <html>
 
@@ -14,7 +15,7 @@ jsinclude('nucommon.js');
 
 </head>
 
-<body onload="nuBuildForm()" >
+<body onload="nuGetForm('nuhome','-1')" >
 
 </body>
 

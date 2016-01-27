@@ -90,7 +90,7 @@ $trace
 //	if(nuV('nu_user_name') == 'globeadmin'){
             $GLOBALS['ERRORS'][] = $debug;
 //        }else{
-            $GLOBALS['ERRORS'][] = "There has been an error on this page.\n Please contact your system administrator and quote the following number: $id ";
+//            $GLOBALS['ERRORS'][] = "There has been an error on this page.\n Please contact your system administrator and quote the following number: $id ";
 //        }
         
         return -1;
