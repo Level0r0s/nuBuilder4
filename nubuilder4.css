@@ -49,21 +49,30 @@ body {
   font-size: 13px;
   line-height: 18px;
   color: #202020;
-  background-color: #f4f4f4;
 }
+
 
 input {border: 1px solid #e1e8ea;}
 
 
+.nuBrowseBody {
+  background-color: white;
+}
+
+.nuEditBody {
+  background-color: #EFEFEF;
+}
+
 .nuActionHolder {
+  padding: 5px 0px 0px 0px;
   background-color: white;
   width: 99.9%;
   height: 40px;
-  text-align: center;
+  text-align: left;
 }
 
 .nuBreadcrumbHolder {
-  padding: 5px 0px 0px 0px;
+  padding: 5px 0px 5px 0px;
   background-color: white;
   color: orange;
   width: 99.9%;
@@ -98,41 +107,70 @@ input {border: 1px solid #e1e8ea;}
 }
 
 .nuTabHolder {
-  background-color: white;
-  height: 25px;
+  background-color: #CCCCCC;
+  height: 24px;
   width: 99.9%;
   border-style: solid;
-  border-width: 0px 0px 1px 0px;
-  border-color: silver;
-  padding: 15px 0px 0px 2px;
+  border-width: 0px 0px 0px 0px;
+  border-color: #CCCCCC;
+  padding: 15px 0px 0px 0px;
+}
+
+.nuBrowseTitle {
+  background-color: #CCCCCC;
+  height: 70px;
+  border-style: solid;
+  border-color: #CCCCCC;
+  border-width: 1px;
+  position:absolute;
+  top:75px;
+  font-size:12px;
+}
+
+.nuBrowseTable {
+  background-color: #DFDFDF;
+  height: 70px;
+  border-style: solid;
+  border-color: #CCCCCC;
+  border-width: 1px;
+  padding: 3px;
+  position:absolute;
+  top:75px;
+  font-size:12px;	
+}
+
+
+.nuSelectBrowse {
+  background-color: #93C8F9;
+}
+
+.nuBrowsePage:hover{
+  cursor: pointer;
+  color: red;
 }
 
 .nuTab {
   display: inline;
   border-style: solid;
   border-width: 0px;
-  border-color: silver;
+  border-color: #CCCCCC;
   font-size: 16px;
   padding: 8px 10px 8px 10px;
+  height: 24px;
 }
 
 .nuTabSelected {
-  background-color: #f4f4f4;
+  background-color: #EFEFEF;
   display: inline;
   border-style: solid;
-  border-width: 1px;
-  border-color: silver silver white silver;
+  border-width: 0px;
+  border-color: #DFDFDF;
   font-size: 16px;
   padding: 8px 5px 8px 5px;
-  -webkit-border-radius: 5px 5px 0px 0px;
-  -moz-border-radius: 5px 5px 0px 0px;
-  border-radius: 5px 5px 0px 0px;
 }
 
-.nuBodyHolder {}
-
 .nuStatusHolder {
-  color: silver;
+  color: #CCCCCC;
   padding: 0px 0px 0px 0px;
   background-color: white;
   bottom: 10px;
@@ -140,23 +178,16 @@ input {border: 1px solid #e1e8ea;}
   height: 20px;
 }
 
-.nuBrowseCell {}
-
 .nuButton {
   color: white;
   background-color: #00ADEF;
   border: none;
-  height: 40px;
   font-size: 13px;
   display: inline;
-  border-style: solid;
-  border-width: 1px;
-  border-color: silver;
+  border-style: none;
   font-size: 16px;
-  padding: 8px 5px 8px 5px;
-  -webkit-border-radius: 5px 5px 5px 5px;
-  -moz-border-radius: 5px 5px 5px 5px;
-  border-radius: 5px 5px 5px 5px;
+  height: 40px;
+  padding: 6px;
 }
 
 .nuLabel {}
@@ -170,15 +201,11 @@ input {border: 1px solid #e1e8ea;}
 .nuSearch {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   background-color: #abd886;
-  padding: 6px;
-  margin-bottom: 0;
-  font-size: 13px;
-  font-weight: normal;
-  line-height: 1.42857143;
   text-align: left;
-  white-space: nowrap;
   vertical-align: middle;
   color: #666666;
-  border: 1px solid transparent;
-  height: 25px;
+  border: none;
+  font-size: 13px;
+  height: 27px;
+  padding: 6px;
 }

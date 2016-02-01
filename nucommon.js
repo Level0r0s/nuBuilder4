@@ -1,32 +1,33 @@
-window.nuBreadcrumbs 		= [];
-//window.nuBreadcrumbs[0] 	= new nuFormState();
+window.nuBC 		= [];
 
 function nuFormState(){
 
 	this.call_type        = '';
-	this.form_id          = '';
-	this.record_id        = '';
-	this.tab_start      	= [];
-	this.search           = '';
-	this.search_columns   = '';
-	this.sort             = '0';
-	this.sort_direction   = 'asc';
 	this.filter           = '';
-	this.page_number      = '1';
+	this.form_id          = '';
+	this.forms        	= [];
+	this.iframe       	= 0;
 	this.lookup_id        = '';
 	this.object_id        = '1';
-	this.username         = '';
+	this.page_number      = 0;
 	this.password     	= '';
-	this.iframe       	= 0;
-	this.forms        	= [];
+	this.record_id        = '';
+	this.rows        		= 25;
+	this.row_height		= 25;
+	this.search           = '';
+	this.nosearch_columns = [];
+	this.sort             = '-1';
+	this.sort_direction   = 'asc';
+	this.tab_start      	= [];
+	this.username         = '';
 	
 }
 
 function nuGetBreadcrumb(b){
 
-	window.nuBreadcrumbs 	= window.nuBreadcrumbs.slice(0, b + 1);
+	window.nuBC 	= window.nuBC.slice(0, b + 1);
 
-	nuGetForm(window.nuBreadcrumbs[b].form_id, window.nuBreadcrumbs[b].record_id, 0);
+	nuGetForm(window.nuBC[b].form_id, window.nuBC[b].record_id, 0);
 	
 }
 
@@ -34,14 +35,15 @@ function nuGetForm(f, r, n){
 
 	if(arguments.length != 3){   //-- add a new breadcrumb
 		
-		window.nuBreadcrumbs.push(new nuFormState());
+		window.nuBC.push(new nuFormState());
 		
 	}
-
+	
 	var w 		= nuGetFormState();
+	w.call_type	= 'getform';
 	w.form_id	= f;
 	w.record_id	= arguments.length == 1 ? '' : r;
-	
+
 	var request 	= $.ajax({
 		url      : "nuapi.php",
 		type     : "POST",
@@ -61,9 +63,10 @@ function nuGetForm(f, r, n){
 
 function nuGetFormState(){
 
-	var l = window.nuBreadcrumbs.length;
-	var o = window.nuBreadcrumbs[l-1];
+	var l = window.nuBC.length;
+	var o = window.nuBC[l-1];
 	var j = JSON.stringify(o);
+	
 	return  JSON.parse(j);
 	
 }
@@ -71,8 +74,8 @@ function nuGetFormState(){
 
 function nuSetFormState(){
 
-	var l = window.nuBreadcrumbs.length;
-	var o = window.nuBreadcrumbs[l];
+	var l = window.nuBC.length;
+	var o = window.nuBC[l];
 	var j = JSON.stringify(o);
 	return  JSON.parse(j);
 	
@@ -96,4 +99,10 @@ function nuFormatAjaxErrorMessage(jqXHR, exception) {
         return ('Uncaught Error.\n' + jqXHR.responseText);
     }
 }
+
+String.prototype.replaceAll = function(str1, str2, ignore){
+
+   return this.replace(new RegExp(str1.replace(/([\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g, function(c){return "\\" + c;}), "g"+(ignore?"i":"")), str2);
+
+};
 

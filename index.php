@@ -9,7 +9,7 @@ require_once('nucommon.php'); ?>
 
 <?php
 cssinclude('nubuilder4.css');
-jsinclude('nueditform.js');
+jsinclude('nuform.js');
 jsinclude('nucommon.js');
 ?>
 
