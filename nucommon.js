@@ -17,7 +17,7 @@ function nuFormState(){
 	this.search           = '';
 	this.nosearch_columns = [];
 	this.sort             = '-1';
-	this.sort_direction   = 'asc';
+	this.sort_direction   = 'desc';
 	this.tab_start      	= [];
 	this.username         = '';
 	

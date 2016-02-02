@@ -416,10 +416,14 @@ function nuBrowseRows($f){
 		$S->addField($f->browse_columns[$i]->display);
 	}
 	
-	$w	= nuBrowseWhereClause($S->fields, $search);
+	$w	= nuBrowseWhereClause(array_slice($S->fields, 1), $search);
 	
 	if(trim($w) != '()'){
 		$S->setWhere(' WHERE ' . $w);
+	}
+	
+	if($P['sort'] != '-1'){
+		$S->setOrderBy(' ORDER BY ' . $S->fields[$P['sort'] + 1] . ' ' . $P['sort_direction']);
 	}
 	
 	$a	= array();
