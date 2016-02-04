@@ -654,8 +654,9 @@ function nuFormDimensions($f){
 		
 	}
 	
-	$d[]	= $w + 70;             //-- edit width
-	$d[]	= $h + 70;             //-- edit height
+	$d[]	= $h + 200;             //-- edit height
+	$d[]	= $w + 20;             //-- edit width
+
 	return $d;
 	
 }

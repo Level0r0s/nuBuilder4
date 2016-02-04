@@ -54,28 +54,40 @@ function nuBuildForm(f){
 }
 
 function nuResizeiFrame(d, r){
-	
+	console.log(d);
 	if(window.nuTYPE != 'lookup'){return;}
 
 	if(r == ''){
-		var h		= Number(d[0]);
-		var w		= Number(d[1]);
+		var h			= Number(d[0]);
+		var w			= Number(d[1]);
+
+		$('#nuDragDialog', window.parent.document).
+		css({'height'		:	(h - 0) + 'px',
+			'width' 		:	(w - 0) + 'px',
+			'visibility' 	:	'visible'
+		});
+
+		$('#nuIframe', window.parent.document).
+		css({'height'		:	(h - 40) + 'px',
+			'width' 		:	(w - 10) + 'px'
+		});
+			
 	}else{
-		var h		= Number(d[2]);
-		var w		= Number(d[3]);
-	}
-
-	$('#nuDragDialog', window.parent.document).
-	css({'height'		:	(h - 0) + 'px',
-		'width' 		:	(w - 0) + 'px',
-		'visibility' 	:	'visible'
-	});
-
-	$('#nuIframe', window.parent.document).
-	css({'height'		:	(h - 40) + 'px',
-		'width' 		:	(w - 10) + 'px'
-	});
+		var h			= Number(d[2]);
+		var w			= Number(d[3]);
 		
+		$('#nuDragDialog', window.parent.document).
+		css({'height'		:	(h - 0) + 'px',
+			'width' 		:	(w - 0) + 'px',
+			'visibility' 	:	'visible'
+		});
+
+		$('#nuIframe', window.parent.document).
+		css({'height'		:	(h - 40) + 'px',
+			'width' 		:	(w - 10) + 'px'
+		});
+			
+	}
 }
 
 
@@ -94,7 +106,7 @@ function nuAddActionButtons(f){
 
 	for(var i = 0 ; i < b.length ; i++){
 		
-		$('#nuActionHolder').append("<input id='nu" + b[i][1] + "Button' type='button' class='nuButton' value='" + b[i][0] + "' onclick='nu" + b[i][1] + "Action'>&nbsp;");
+		$('#nuActionHolder').append("<input id='nu" + b[i][1] + "Button' type='button' class='nuButton' value='" + b[i][0] + "' onclick='nu" + b[i][1] + "Action()'>&nbsp;");
 		
 	}
 	
@@ -963,6 +975,14 @@ function nuSetSearch(t){
 function nuSearchAction(){
 
 	nuGetBreadcrumb(nuBC.length - 1);
+	
+}
+
+
+function nuAddAction(){
+
+	var bc	= nuBC[nuBC.length - 1];
+	nuGetForm(bc.form_id, '-1');
 	
 }
 
