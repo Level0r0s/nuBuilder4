@@ -76,12 +76,13 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 
         if($r->sob_all_type == 'subform'){
         
-			$r->subform_fk      = $R;
-			$o->subform_type    = $r->sob_subform_type;
-			$o->delete          = $r->sob_subform_delete;
-			$o->add             = $r->sob_subform_add;
-			$o->forms           = nuGetSubformRecords($r, $o->add);
-			$o->browse_columns  = array();
+			$r->subform_fk      	= $R;
+			$o->subform_type    	= $r->sob_subform_type;
+			$o->delete          	= $r->sob_subform_delete;
+			$o->add             	= $r->sob_subform_add;
+			$o->dimensions		= nuFormDimensions($r->sob_subform_zzzzsys_form_id);
+			$o->forms           	= nuGetSubformRecords($r, $o->add);
+			$o->browse_columns  	= array();
 
         }
         
@@ -111,6 +112,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
     $f->objects 			= $a;
 
     $O 					= new stdClass();
+
     $O->forms[] 			= $f;
 
     return $O->forms[0];
@@ -434,7 +436,7 @@ function nuBrowseRows($f){
 	$a	= array();
 	
 	$s		= $S->SQL;
-	nudebug($s);
+
 	$t 		= nuRunQuery($s);
 	$rows	= db_num_rows($t);
 
@@ -599,7 +601,8 @@ function nuCheckSession(){
 	}
 	
 	$c->dimensions	= nuFormDimensions($c->form_id);
-	
+		nudebug($gh . '==----');
+
 	return $c;
 	
 }
@@ -623,7 +626,8 @@ function nuFormDimensions($f){
 	
 	$rh	= intval($r->sfo_row_height)    == 0 ? 25 : $r->sfo_row_height;
 	$rs	= intval($r->sfo_rows_per_page) == 0 ? 25 : $r->sfo_rows_per_page;
-	$d[]	= ($rs * $rh) + 225;    //-- browse height
+	
+	$d[]	= ($rs * $rh) + 225;    //-- lookup browse height
 	
 	$t	= nuRunQuery("SELECT * FROM zzzzsys_browse WHERE sbr_zzzzsys_form_id = '$f'");
 	$w	= 0;
@@ -632,30 +636,41 @@ function nuFormDimensions($f){
 		$w = $w + $r->sbr_width;
 	}
 	
-	$d[]	= $w + 40;             //-- browse width
+	$d[]	= $w + 40;             //-- lookup browse width
 	
 	$t	= nuRunQuery("SELECT * FROM zzzzsys_object WHERE sob_all_zzzzsys_form_id = '$f'");
 	$h	= 0;
 	$w	= 0;
+	$gh	= 0;
+	$gw	= 0;
 	
 	while($r	= db_fetch_object($t)){
 		
 		if($r->sob_all_type == 'lookup'){
-			$w = max($w, $r->sob_all_left + $r->sob_all_width + $r->sob_lookup_description_width + 40);
+			$w 	= max($w, $r->sob_all_left + $r->sob_all_width + $r->sob_lookup_description_width + 40);
+			$gw	= $gw + $r->sob_all_left + $r->sob_all_width + $r->sob_lookup_description_width + 40;
 		}else{
-			$w = max($w, $r->sob_all_left + $r->sob_all_width + 40);
+			$w 	= max($w, $r->sob_all_left + $r->sob_all_width + 40);
+			$gw 	= $gw + $r->sob_all_width;
 		}
 
-		if($r->sob_all_type == 'text'){
-			$h = max($h, $r->sob_all_top + $r->sob_all_height);
+		if($r->sob_all_type == 'input'){
+			$h 	= max($h, $r->sob_all_top + 25);
+			$gh 	= max($gh, 25);
 		}else{
-			$h = max($h, $r->sob_all_top + $r->sob_all_height);
+			$h	= max($h, $r->sob_all_top + $r->sob_all_height);
+			$gh 	= max($gh, $r->sob_all_height);
 		}
-		
+		nudebug($gw);
 	}
+		nudebug($gw . '====');
 	
-	$d[]	= $h + 200;             //-- edit height
-	$d[]	= $w + 20;             //-- edit width
+	$d[]	= $h  + 200;			//-- lookup form height
+	$d[]	= $w  + 20;			//-- lookup form width
+	$d[]	= $h  + 25;			//-- form height
+	$d[]	= $w  + 50;			//-- form width
+	$d[]	= $gh;				//-- grid height
+	$d[]	= $gw + 50;			//-- grid width
 
 	return $d;
 	

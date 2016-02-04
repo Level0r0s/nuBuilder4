@@ -58,7 +58,12 @@ function nuClientTimeZone(){
 
 
 function nuDebug($t){
+	
     global $nuDB;
+	
+	if(is_object($t)){
+		$t = print_r($t,1);
+	}
 
     $i = nuID();
     $d = date('Y-m-d H:i:s');

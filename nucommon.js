@@ -1,8 +1,8 @@
-window.nuDialog 	= new nuCreateDialog('');
-window.nuBC 		= [];
-window.nuOPENER	= [];
-window.nuSESSION	= '';
-window.nuTYPE 	= ''
+window.nuDialog 			= new nuCreateDialog('');
+window.nuBC 				= [];
+window.nuOPENER			= [];
+window.nuSESSION			= '';
+window.nuTYPE 			= 'default';
 
 function nuOpener(f, r){
 
@@ -190,7 +190,7 @@ function nuPopupiFrame(f, r){
 	window.nuOPENER.push(new nuOpener(f, r));
 	var l = window.nuOPENER.length -1;
 	
-	window.nuDialog.createDialog(200, window.scrollY + 150, 700, 600, '');
+	window.nuDialog.createDialog(50, 50, 700, 600, '');
 	$('#nuDragDialog')
 	.css('visibility', 'hidden')
 	.append('<iframe style="left:5px;top:35px;width:400px;height:400px;position:absolute" id="nuIframe" src="index.php?bc=' + l + '"></iframe>');

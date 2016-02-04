@@ -227,6 +227,14 @@ input {border: 0px;}
   height: 20px;
 }
 
+.nuSubform {
+  border-width: 1px;
+  border-style: solid;
+  border-color: lightgrey;
+  position: absolute;
+  background-color: white;
+}
+
 .nuButton {
   color: white;
   background-color: #00ADEF;

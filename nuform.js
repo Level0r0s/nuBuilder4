@@ -54,7 +54,7 @@ function nuBuildForm(f){
 }
 
 function nuResizeiFrame(d, r){
-	console.log(d);
+
 	if(window.nuTYPE != 'lookup'){return;}
 
 	if(r == ''){
@@ -110,8 +110,10 @@ function nuAddActionButtons(f){
 		
 	}
 	
-	if(window.nuTYPE 	== ''){
+	if(window.nuTYPE 	== 'default'){
+		
 		$('#nuActionHolder').append("<img id='thelogo' src='logo.png' style='position:absolute;right:20px'>");
+		
 	}
 	
 }
@@ -172,13 +174,14 @@ function nuSubformProperties(w, i, l, p){
 	$('#' + ef).append(inp);
 	$('#' + ef).append(chk);
 	
-	$('#' + pk).css({'visibility' : 'hidden'}
-	).val(w.record_id
-	).attr('data-nuform', p);
+	$('#' + pk).css({'visibility' : 'hidden'})
+	.val(w.record_id)
+	.attr('data-nufield','true')
+	.attr('data-nuform', p);
 	
-	$('#' + de).css({'top': 3, 'left' : Number(l) + 3, 'position' : 'absolute'}
-	).prop('checked', w.record_id == -1
-	).attr('data-nuform', p);
+	$('#' + de).css({'top': 3, 'left' : Number(l) + 3, 'position' : 'absolute'})
+	.prop('checked', w.record_id == -1)
+	.attr('data-nuform', p);
 
 }
 
@@ -210,7 +213,10 @@ function nuINPUT(w, i, l, p, prop){
 					'width'		: Number(prop.objects[i].width),
 					'text-align'	: prop.objects[i].align,
 					'position'	: 'absolute'
-	}).val(w.objects[i].V);
+	})
+	.val(w.objects[i].V)
+	.attr('data-nufield', 'true')
+	.attr('data-nuprefix', p);
 
 	if(prop.objects[i].type == 'display'){
 		
@@ -403,9 +409,9 @@ function nuSELECT(w, i, l, p, prop){
 					'left'     : Number(prop.objects[i].left),
 					'width'    : Number(prop.objects[i].width),
 					'position' : 'absolute'
-	});
-
-
+	})
+	.attr('data-nufield', 'true')
+	.attr('data-nuprefix', p);
 
 	if(prop.objects[i].multiple == 1){
 	    
@@ -455,23 +461,41 @@ function nuSUBFORM(w, i, l, p, prop){
 
 	$('#' + ef).append(inp);
 	nuAddDataTab(id, prop.objects[i].tab, p);
-	$('#' + id).css({'top'          : Number(SF.top),
-					'left'          : Number(SF.left),
-					'width'         : Number(SF.width),
-					'height'        : Number(SF.height),
-					'border-width'  : Number(1),
-					'border-style'  : 'solid',
-					'overflow-x'    : 'hidden',
-					'overflow-y'    : 'hidden',
-					'position'      : 'absolute'
-	});
+	$('#' + id).css({'top'         : Number(SF.top),
+					'left'       	: Number(SF.left),
+					'width'      	: Number(SF.width),
+					'height'		: Number(SF.height) + 2,
+					'overflow-x'	: 'hidden',
+					'overflow-y'	: 'h)idden'
+	})
+	.attr('data-subform', 'true')
+	.addClass('nuSubform');
 
-	var rowSize     = nuGetSubformRowSize(SF.forms[0].objects, SF, id);
-	var rowWidth    = rowSize[0];
-	var rowHeight   = rowSize[1];
-	var rowTop      = rowSize[2];
+	nuGetSubformRowSize(SF.forms[0].objects, SF, id);
 
-	if(SF.subform_type != 'g'){
+	if(SF.subform_type == 'f'){
+		var rowHeight   	= Number(SF.dimensions[4]);
+		var rowWidth    	= Number(SF.dimensions[5]);
+	}else{
+		var rowHeight   	= Number(SF.dimensions[6]);
+		var rowWidth    	= Number(SF.dimensions[7]);
+	}
+	
+
+    if(SF.delete == '1'){
+		
+        nuBuildSubformDeleteTitle(rowWidth - 40, id);
+        rowWidth 			= rowWidth - 3;
+		
+    }else{
+		
+        rowWidth 			= rowWidth;
+		
+    }
+
+	var rowTop      = 50;
+
+	if(SF.subform_type == 'f'){
         
 		var tabId  = id + 'nuTabHolder';
 		var tabDiv = document.createElement('div');
@@ -479,7 +503,7 @@ function nuSUBFORM(w, i, l, p, prop){
 		$('#' + id).append(tabDiv);
 		$('#' + tabId).css({'top'      : 0,
 						'left'       	: 0,
-						'width'      	: rowWidth - 50,
+						'width'      	: rowWidth - 45,
 						'height'     	: 23,
 						'overflow-x'	: 'hidden',
 						'overflow-y'	: 'hidden',
@@ -496,16 +520,16 @@ function nuSUBFORM(w, i, l, p, prop){
 	var scrDiv	= document.createElement('div');
 	scrDiv.setAttribute('id', scrId);
 	$('#' + id).append(scrDiv);
-	$('#' + scrId).css({'top'       : Number(rowTop),
-					'left'          : 0,
-					'width'         : Number(rowWidth),
-					'height'        : Number(SF.height) - rowTop,
-					'border-width'  : Number(1),
-					'border-style'  : 'none solid solid solid',
-					'border-color'  : '#B0B0B0',
-					'overflow-x'    : 'hidden',
-					'overflow-y'    : 'scroll',
-					'position'      : 'absolute'
+	$('#' + scrId).css({'top'       	: rowTop,
+					'left'        	: 0,
+					'width'       	: Number(rowWidth),
+					'height'      	: Number(SF.height) - rowTop,
+					'border-width'	: 1,
+					'border-style'	: 'none solid solid solid',
+					'border-color'	: '#B0B0B0',
+					'overflow-x'  	: 'hidden',
+					'overflow-y'  	: 'scroll',
+					'position'		: 'absolute'
 	});
 
 	if(rowWidth > Number(SF.width)){
@@ -597,18 +621,14 @@ function nuGetSubformRowSize(o, SF, id){
 
     var l = 0;
     var w = 0;
-    var h = 0;
-    var a = Array();
 
     for(var i = 0 ; i < o.length ; i++){
 
         var d = Number(o[i].description_width);
-        var H = Number(o[i].height) 	== 0        ? 25    : Number(o[i].height);
         var T = SF.subform_type 		== 'g'      ? 0     : Number(o[i].top);
         var B = o[i].type          		== 'lookup' ? 30    : 0;                    //-- lookup button
         var D = o[i].type          		== 'lookup' ? d     : 0;                    //-- lookup description
         
-        h = Math.max(h, H + T);
         w = 2 + Number(o[i].width) + B + D;
         
         
@@ -617,27 +637,10 @@ function nuGetSubformRowSize(o, SF, id){
             nuBuildSubformTitle(o[i], l, w, id);
             l = l + w;
             
-        }else{
-            
-            l = Math.max(l, w + Number(o[i].left));
-
         }
         
     }
 
-    if(SF.delete == '1'){
-        nuBuildSubformDeleteTitle(l, id);
-        l = l + 40;
-    }else{
-        l = l + 20;
-    }
-    
-    a.push(l);
-    a.push(h + 3);
-    a.push(50);
-    
-    return a;
-    
 }
 
 function nuBuildSubformTitle(o, l, w, id){
@@ -653,7 +656,9 @@ function nuBuildSubformTitle(o, l, w, id){
     					'height'        	: 50,
     					'text-align'    	: 'center',
     					'position'      	: 'absolute'
-    	}).html(o.label);
+    	})
+	.html(o.label)
+	.addClass('nuTabHolder');
 
 }
 
@@ -899,7 +904,6 @@ function nuBrowseTable(){
 				
 				$('#' + id)
 				.html(row[r][c+1])
-				.attr('data-primaryKey', row[r][0])
 				.attr('data-primaryKey', row[r][0])
 				.hover(
 					function() {
