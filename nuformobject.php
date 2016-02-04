@@ -5,11 +5,12 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
     $tabs = nuBuildTabList($F);
     
     $f              = nuGetEditForm($F);
+
     $f->form_id     = $F;
     $f->record_id   = $R;
     
 
-    $s = "SELECT * FROM `$f->table` WHERE `$f->primary_key` = '$R'";
+    $s = "Select * From `$f->table` Where `$f->primary_key` = '$R'";
     $t = nuRunQuery($s);
     $A = db_fetch_array($t);
 
@@ -407,6 +408,10 @@ function nuBrowseRows($f){
 	$t 			= nuRunQuery($s);
 	$r 			= db_fetch_object($t);
 	
+	if(trim($r->sfo_browse_sql) == ''){
+		return array(array(), 0);
+	}
+	
 	
     $S = new nuSqlString($r->sfo_browse_sql);
 	
@@ -427,11 +432,14 @@ function nuBrowseRows($f){
 	}
 	
 	$a	= array();
-	$s	= $S->SQL . " LIMIT $start, $rows";
-	nudebug($s);
-	$t 	= nuRunQuery($s);
 	
+	$s		= $S->SQL;
+	nudebug($s);
+	$t 		= nuRunQuery($s);
 	$rows	= db_num_rows($t);
+
+	$s		= $S->SQL . " LIMIT $start, $rows";
+	$t 		= nuRunQuery($s);
 	
 	while($r = db_fetch_row($t)){
 	
@@ -539,5 +547,117 @@ function nuBrowseWhereClause($searchFields, $searchString, $returnArray = false)
 }
 
 
+function nuCheckSession(){
+	
+	$u				= $_POST['nuSTATE']['username'];
+	$p				= $_POST['nuSTATE']['password'];
+	$s				= $_POST['nuSTATE']['session_id'];
+	$c				= new stdClass;
+	$c->session_id	= '';
+	$c->form_id		= '';
+	$c->record_id		= '-1';
+	
+	if($s == ''){
+		
+		if($u == $_SESSION['DBGlobeadminUsername']){
+			
+			if($p == $_SESSION['DBGlobeadminPassword']){
+				
+				$c->session_id	= nuSetSession($u);
+				$c->form_id		= 'nuhome';
+				$c->record_id		= '-1';
+				
+			}
+
+		}else{
+		
+			$t				= nuRunQuery("SELECT * FROM zzzzsys_user WHERE sus_login_name = ? AND sus_login_password = ?", array($u, $p));
+				
+			if(db_num_rows($t) > 0){
+
+				$r 				= db_fetch_object($t);
+				$c->session_id	= nuSetSession($u);
+				$c->form_id		= 'nuhome';
+				$c->record_id		= '-1';
+				
+			}
+			
+		}
+			
+	}else{
+		
+		$t		= nuRunQuery("SELECT * FROM zzzzsys_session WHERE zzzzsys_session_id = ?", array($s));
+				
+		if(db_num_rows($t) > 0){
+
+			$c->session_id	= $s;
+			$c->form_id		= $_POST['nuSTATE']['form_id'];
+			$c->record_id		= $_POST['nuSTATE']['record_id'];
+			
+		}
+
+	}
+	
+	$c->dimensions	= nuFormDimensions($c->form_id);
+	
+	return $c;
+	
+}
+
+
+function nuSetSession($u){
+
+	$i	= nuID();
+	
+	nuRunQuery("INSERT INTO zzzzsys_session (zzzzsys_session_id, sss_zzzzsys_user_id) VALUES ('$i', '$u')");
+	
+	return $i;
+	
+}
+
+function nuFormDimensions($f){
+
+	$d	= array();
+	$t	= nuRunQuery("SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$f'");
+	$r	= db_fetch_object($t);
+	
+	$rh	= intval($r->sfo_row_height)    == 0 ? 25 : $r->sfo_row_height;
+	$rs	= intval($r->sfo_rows_per_page) == 0 ? 25 : $r->sfo_rows_per_page;
+	$d[]	= ($rs * $rh) + 225;    //-- browse height
+	
+	$t	= nuRunQuery("SELECT * FROM zzzzsys_browse WHERE sbr_zzzzsys_form_id = '$f'");
+	$w	= 0;
+	
+	while($r	= db_fetch_object($t)){
+		$w = $w + $r->sbr_width;
+	}
+	
+	$d[]	= $w + 40;             //-- browse width
+	
+	$t	= nuRunQuery("SELECT * FROM zzzzsys_object WHERE sob_all_zzzzsys_form_id = '$f'");
+	$h	= 0;
+	$w	= 0;
+	
+	while($r	= db_fetch_object($t)){
+		
+		if($r->sob_all_type == 'lookup'){
+			$w = max($w, $r->sob_all_left + $r->sob_all_width + $r->sob_lookup_description_width + 40);
+		}else{
+			$w = max($w, $r->sob_all_left + $r->sob_all_width + 40);
+		}
+
+		if($r->sob_all_type == 'text'){
+			$h = max($h, $r->sob_all_top + $r->sob_all_height);
+		}else{
+			$h = max($h, $r->sob_all_top + $r->sob_all_height);
+		}
+		
+	}
+	
+	$d[]	= $w + 70;             //-- edit width
+	$d[]	= $h + 70;             //-- edit height
+	return $d;
+	
+}
 
 ?>

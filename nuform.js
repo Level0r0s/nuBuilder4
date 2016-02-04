@@ -1,6 +1,15 @@
 
 function nuBuildForm(f){
+	
+	if(f.form_id == ''){
+		console.log(f);
+		alert('Unable to login..');
+		nuLogin();
+		return;
+	}
 
+	window.nuSESSION	= f.session_id;
+	
 	$('body').html('');
 	$('body').removeClass('nuBrowseBody').removeClass('nuEditBody');
 	
@@ -10,19 +19,23 @@ function nuBuildForm(f){
 		$('body').addClass('nuEditBody');
 	}
 	
-	var b 								= window.nuBC.length-1;
+	var b 						= window.nuBC.length-1;
 	
 	window.nuBC[b].form_id 		= f.form_id;
 	window.nuBC[b].record_id 		= f.record_id;
+	window.nuBC[b].session_id 		= f.session_id;
 	window.nuBC[b].title 			= f.title;
 	window.nuBC[b].row_height		= f.row_height;
 	window.nuBC[b].rows 			= f.rows;
 	window.nuBC[b].browse_columns	= f.browse_columns;
 	window.nuBC[b].browse_rows		= f.browse_rows;
 	window.nuBC[b].pages			= f.pages;
+	
+	nuResizeiFrame(f.dimensions, f.record_id);
+
+	
 
 	nuAddHolder('nuActionHolder');
-//	nuAddHolder('nuStatusHolder');
 	nuAddHolder('nuBreadcrumbHolder');
 	if(f.record_id == ''){
 	}else{
@@ -36,11 +49,35 @@ function nuBuildForm(f){
 	nuAddActionButtons(f);
 	nuBuildEditObjects(f, '', '', f);
 	
-	//$('#nuStatusHolder').append(f.user + ' :: Powered By nuBuilder');
-	
 	nuGetStartingTab();
 	
 }
+
+function nuResizeiFrame(d, r){
+	
+	if(window.nuTYPE != 'lookup'){return;}
+
+	if(r == ''){
+		var h		= Number(d[0]);
+		var w		= Number(d[1]);
+	}else{
+		var h		= Number(d[2]);
+		var w		= Number(d[3]);
+	}
+
+	$('#nuDragDialog', window.parent.document).
+	css({'height'		:	(h - 0) + 'px',
+		'width' 		:	(w - 0) + 'px',
+		'visibility' 	:	'visible'
+	});
+
+	$('#nuIframe', window.parent.document).
+	css({'height'		:	(h - 40) + 'px',
+		'width' 		:	(w - 10) + 'px'
+	});
+		
+}
+
 
 function nuAddActionButtons(f){
 
@@ -48,9 +85,8 @@ function nuAddActionButtons(f){
 	
 	if(f.record_id == ''){
 	
-//		var v = String(window.nuBC[window.nuBC.length-1].search).replaceAll("'","\'", true);
 		var v = window.nuBC[window.nuBC.length-1].search;
-		console.log(v);
+
 		$('#nuActionHolder').append("<input id='nuSearchField' type='text' class='nuSearch' onchange='nuSetSearch(this)' value='" + v + "'>&nbsp;");
 		$('#nuActionHolder').append("<input id='nuSearchButton' type='button' class='nuButton' value='Search' onclick='nuSearchAction()'>&nbsp;");
 		
@@ -62,7 +98,9 @@ function nuAddActionButtons(f){
 		
 	}
 	
-	$('#nuActionHolder').append("<img id='thelogo' src='logo.png' style='position:absolute;right:20px'>");
+	if(window.nuTYPE 	== ''){
+		$('#nuActionHolder').append("<img id='thelogo' src='logo.png' style='position:absolute;right:20px'>");
+	}
 	
 }
 
@@ -200,7 +238,8 @@ function nuINPUT(w, i, l, p, prop){
 		.val('b')
 		.attr('type','button')
 		.addClass('nuLookupButton')
-		.html('<img border="0" src="lookup.png" width="10" height="10">');
+		.html('<img border="0" src="lookup.png" width="10" height="10">')
+		.attr('onclick',"nuPopupiFrame('" + w.objects[i].form_id + "','')");
 
 		id = p + prop.objects[i].id + 'description';
 		var inp = document.createElement('input');
@@ -868,11 +907,11 @@ function nuBrowseTable(){
 		
 	}
 	
-	var la	= '<span id="nuLast" class="nuBrowsePage">&#9668;</span>';
+	var la	= '<span id="nuLast" onclick="nuGetPage(' + (bc.page_number) + ')" class="nuBrowsePage">&#9668;</span>';
 	var pg	= '&nbsp;Page&nbsp;';
-	var cu	= '<input id="browsePage" style="text-align:center;margin:3px 0px 0px 0px;width:40px" value="' + (bc.page_number + 1) + '" class="browsePage"/>';
+	var cu	= '<input id="browsePage" style="text-align:center;margin:3px 0px 0px 0px;width:40px" onchange="nuGetPage(this.value)" value="' + (bc.page_number + 1) + '" class="browsePage"/>';
 	var of	= '&nbsp;/&nbsp;' + bc.pages + '&nbsp;';
-	var ra	= '<span id="nuLast" class="nuBrowsePage">&#9658;</span>';
+	var ne	= '<span id="nuNext" onclick="nuGetPage(' + (bc.page_number + 2) + ')" class="nuBrowsePage">&#9658;</span>';
 	
 	var id	= 'nuBrowseFooter';
 	var div  = document.createElement('div');
@@ -881,7 +920,7 @@ function nuBrowseTable(){
 	$('body').append(div);
 	$('#' + id)
 	.addClass('nuBrowseTitle')
-	.html(la+pg+cu+of+ra)
+	.html(la+pg+cu+of+ne)
 	.css({	'text-align'	: 'center',
 			'width'		: l - 13,
 			'top'		: t + h,
@@ -916,7 +955,7 @@ function nuSetSearchColumn(){
 
 function nuSetSearch(t){
 	
-	window.nuBC[window.nuBC.length-1].search = String(t.value).replaceAll("'","&#39;", true);
+	window.nuBC[window.nuBC.length-1].search 		= String(t.value).replaceAll("'","&#39;", true);
 	window.nuBC[window.nuBC.length-1].page_number	= 0;
 	
 }
@@ -943,3 +982,17 @@ function nuSortBrowse(c){
 	
 }
 
+function nuGetPage(p){
+
+	var P = parseInt('00' + p);
+	var B = nuBC[nuBC.length - 1];
+	
+	if(P == 0){P = 1;}
+	if(P > B.pages){P = B.pages;}
+	
+	nuBC[nuBC.length - 1]. page_number = P - 1;
+	
+	nuSearchAction();
+	
+	
+}
