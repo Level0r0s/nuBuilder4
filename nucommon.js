@@ -2,7 +2,7 @@ window.nuDialog 			= new nuCreateDialog('');
 window.nuBC 				= [];
 window.nuOPENER			= [];
 window.nuSESSION			= '';
-window.nuTYPE 			= 'default';
+window.nuTYPE 			= 'browse';
 
 function nuOpener(f, r){
 
@@ -68,6 +68,11 @@ function nuCheckPassword(){
 		}).done(function(data){
 			
 			var fm 	= data.forms[0];
+			console.log(fm);
+			if(nuErrorMessages(fm.errors)){
+				nuLogin();
+				return;
+			}
 			
 			nuBuildForm(fm);
 
@@ -75,6 +80,25 @@ function nuCheckPassword(){
 			alert(nuFormatAjaxErrorMessage(xhr,err));
 	});
 
+}
+
+
+
+
+function nuErrorMessages(e){
+
+	var m	= '';
+	
+	for(var i = 0 ; i < e.length ; i++){
+		m += e[i] + '\r';
+	}
+
+	if(e.length > 0){
+		alert(m);
+	}
+	
+	return e.length > 0;
+	
 }
 
 
@@ -185,15 +209,20 @@ function nuLogin(){
 }
 
 
-function nuPopupiFrame(f, r){
+function nuLookupId(t){
 
-	window.nuOPENER.push(new nuOpener(f, r));
-	var l = window.nuOPENER.length -1;
+	var f	= $('#' + t.id).attr('data-form-id');
+	var tar	= $('#' + t.id).attr('data-target');
 	
-	window.nuDialog.createDialog(50, 50, 700, 600, '');
+	window.nuOPENER.push(new nuOpener(f, ''));
+	
+	var l 	= window.nuOPENER.length -1;
+	
+	window.nuDialog.createDialog(50, 50, 50, 50, '');
+	
 	$('#nuDragDialog')
 	.css('visibility', 'hidden')
-	.append('<iframe style="left:5px;top:35px;width:400px;height:400px;position:absolute" id="nuIframe" src="index.php?bc=' + l + '"></iframe>');
+	.append('<iframe style="left:5px;top:35px;width:400px;height:400px;position:absolute" id="nuLookup" src="index.php?opener=' + l + '&target=' + tar + '&type=lookup"></iframe>');
 
 }
 

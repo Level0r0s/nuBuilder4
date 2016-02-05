@@ -12,17 +12,20 @@ require_once('nucommon.php'); ?>
 
 <?php
 
-	$bc	= $_GET['bc'];
+	$opener	= $_GET['opener'];
+	$target	= $_GET['target'];
+	$type	= $_GET['type'];
 	
-	if($bc != ''){
+	if($type == 'lookup'){
 		
 		print "
 		
 		function nuLoad(){
 			
-			window.nuTYPE		= 'lookup';
+			window.nuTYPE		= '$type';
+			window.nuTARGET	= '$target';
 			window.nuSESSION	= parent.nuSESSION;
-			var p			= parent.nuOPENER[$bc];
+			var p			= parent.nuOPENER[$opener];
 
 			nuGetForm(p.form_id, p.record_id);
 
@@ -30,13 +33,14 @@ require_once('nucommon.php'); ?>
 		
 		";
 		
-	}else{
+	}
+
+	if($type == ''){
 		
 		print "
 		
 		function nuLoad(){
 
-			window.nuTYPE		= 'default';
 			nuLogin();
 		
 		}

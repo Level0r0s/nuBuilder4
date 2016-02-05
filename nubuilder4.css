@@ -190,14 +190,6 @@ input {border: 0px;}
   color: red;
 }
 
-.nuSubform0 {
-  background-color: #EFEFEF;
-}
-
-.nuSubform1 {
-  background-color: #D8D8D8;
-}
-
 .nuTab {
   display: inline;
   border-style: solid;
@@ -233,6 +225,14 @@ input {border: 0px;}
   border-color: lightgrey;
   position: absolute;
   background-color: white;
+}
+
+.nuSubform0 {
+  background-color: #EFEFEF;
+}
+
+.nuSubform1 {
+  background-color: #E0E0E0;
 }
 
 .nuButton {

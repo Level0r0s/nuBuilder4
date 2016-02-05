@@ -558,6 +558,8 @@ function nuCheckSession(){
 	$c->session_id	= '';
 	$c->form_id		= '';
 	$c->record_id		= '-1';
+	$c->errors		= array();
+	
 	
 	if($s == ''){
 		
@@ -565,43 +567,48 @@ function nuCheckSession(){
 			
 			if($p == $_SESSION['DBGlobeadminPassword']){
 				
-				$c->session_id	= nuSetSession($u);
-				$c->form_id		= 'nuhome';
-				$c->record_id		= '-1';
+				$c->session_id		= nuSetSession($u);
+				$c->form_id			= 'nuhome';
+				$c->record_id			= '-1';
 				
+			}else{
+				$c->errors[]			= 'Invalid Login';
 			}
 
 		}else{
 		
-			$t				= nuRunQuery("SELECT * FROM zzzzsys_user WHERE sus_login_name = ? AND sus_login_password = ?", array($u, $p));
+			$t						= nuRunQuery("SELECT * FROM zzzzsys_user WHERE sus_login_name = ? AND sus_login_password = ?", array($u, $p));
 				
 			if(db_num_rows($t) > 0){
 
-				$r 				= db_fetch_object($t);
-				$c->session_id	= nuSetSession($u);
-				$c->form_id		= 'nuhome';
-				$c->record_id		= '-1';
+				$r 					= db_fetch_object($t);
+				$c->session_id		= nuSetSession($u);
+				$c->form_id			= 'nuhome';
+				$c->record_id			= '-1';
 				
+			}else{
+				$c->errors[]			= 'Invalid Login';
 			}
 			
 		}
 			
 	}else{
 		
-		$t		= nuRunQuery("SELECT * FROM zzzzsys_session WHERE zzzzsys_session_id = ?", array($s));
+		$t							= nuRunQuery("SELECT * FROM zzzzsys_session WHERE zzzzsys_session_id = ?", array($s));
 				
 		if(db_num_rows($t) > 0){
 
-			$c->session_id	= $s;
-			$c->form_id		= $_POST['nuSTATE']['form_id'];
-			$c->record_id		= $_POST['nuSTATE']['record_id'];
-			
-		}
+			$c->session_id			= $s;
+			$c->form_id				= $_POST['nuSTATE']['form_id'];
+			$c->record_id				= $_POST['nuSTATE']['record_id'];
+				
+			}else{
+				$_POST['nuErrors'][]	= 'Timeout';
+			}
 
 	}
 	
 	$c->dimensions	= nuFormDimensions($c->form_id);
-		nudebug($gh . '==----');
 
 	return $c;
 	
@@ -661,9 +668,8 @@ function nuFormDimensions($f){
 			$h	= max($h, $r->sob_all_top + $r->sob_all_height);
 			$gh 	= max($gh, $r->sob_all_height);
 		}
-		nudebug($gw);
+
 	}
-		nudebug($gw . '====');
 	
 	$d[]	= $h  + 200;			//-- lookup form height
 	$d[]	= $w  + 20;			//-- lookup form width
