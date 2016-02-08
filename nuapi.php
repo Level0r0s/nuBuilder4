@@ -4,35 +4,39 @@
 	require_once('nucommon.php');
 	require_once('nuformobject.php');
 
-	$s							= nuCheckSession();
 	$_POST['nuErrors']			= array();
+	$s							= nuCheckSession();
 	
 	if(count($_POST['nuErrors']) > 0){
 		
-		$f						= new stdClass;
 		$f->forms[]				= new stdClass;
 		$f->forms[0]->errors		= $_POST['nuErrors'];
-		$j						= json_encode($f);
-		print $j;
-		return;
 		
 	}else{
+		
+		$P						= $_POST['nuSTATE'];
+		$f						= new stdClass;
+		
+		if($P['call_type'] == 'getlookup'){
+			
+			$f->forms[]				= nuGetLookupValues();
+		
+		}
 	
-	$P							= $_POST['nuSTATE'];
-	$P['form_id']					= $s->form_id;
-	$P['record_id']				= $s->record_id;
-	$P['session_id']				= $s->session_id;
+		if($P['call_type'] == 'getform'){
+			
+			$f->forms[]				= nuGetFormObject($s->form_id, $s->record_id, 0, $P);
+			$f->forms[0]->dimensions	= $s->dimensions;
+			
+		}
 
-	$f							= new stdClass;
-	$f->forms[]					= nuGetFormObject($P['form_id'], $P['record_id'], 0, $P);
-	$f->forms[0]->session_id		= $s->session_id;
-	$f->forms[0]->dimensions		= $s->dimensions;
-	$f->forms[0]->errors			= $_POST['nuErrors'];
-	
-	$j							= json_encode($f);
-	
-	print $j;
-	
+		$f->forms[0]->session_id		= $s->session_id;
+		$f->forms[0]->errors			= $_POST['nuErrors'];
+		$f->forms[0]->log_again		= $_POST['nuLogAgain'];
+		$j							= json_encode($f);
+		
+		print $j;
+		
 	}
 
 ?>

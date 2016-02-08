@@ -28,12 +28,12 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
     
     while($r = db_fetch_object($t)){
 
-        $o = nuDefaultObject($r, $tabs);
+        $o 					= nuDefaultObject($r, $tabs);
 
         if($R == '-1'){
-            $o->V   = nuGetSQLValue($r->sob_all_default_value_sql);
+            $o->value			= nuGetSQLValue($r->sob_all_default_value_sql);
         }else{
-            $o->V   = $A[$r->sob_all_id];
+            $o->value			= $A[$r->sob_all_id];
         }
 
         if($r->sob_all_type == 'input' || $r->sob_all_type == 'display'){$o->align = $r->sob_all_align;}
@@ -63,44 +63,47 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 		}
 	
 		
-        if($r->sob_all_type == 'lookup'){
-        
-            $o->description_width   = $r->sob_lookup_description_width;
-            $o->auto_complete       = $r->sob_lookup_autocomplete;
-            $o->form_id             = $r->sob_lookup_zzzzsys_form_id;
-            $l                      = nuGetLookupValues($r, $o);
-            $o->code                = $l[0];
-            $o->description         = $l[1];
+	if($r->sob_all_type == 'lookup'){
 
-        }
-
-        if($r->sob_all_type == 'subform'){
-        
-			$r->subform_fk      	= $R;
-			$o->subform_type    	= $r->sob_subform_type;
-			$o->delete          	= $r->sob_subform_delete;
-			$o->add             	= $r->sob_subform_add;
-			$o->dimensions		= nuFormDimensions($r->sob_subform_zzzzsys_form_id);
-			$o->forms           	= nuGetSubformRecords($r, $o->add);
-			$o->browse_columns  	= array();
-
-        }
-        
-		if($OBJS > 0){
-
-			unset($o->type);
-			unset($o->id);
-			unset($o->label);
-			unset($o->top);
-			unset($o->left);
-			unset($o->width);
-			unset($o->height);
-			unset($o->align);
-			
-		}
-
-        $a[]    			= $o;
+		$o->description_width   = $r->sob_lookup_description_width;
+		$o->auto_complete       = $r->sob_lookup_autocomplete;
+		$o->form_id             = $r->sob_lookup_zzzzsys_form_id;
+		$l                      = nuGetLookupValues($r, $o);
 		
+		$o->values				= array();
+		$o->values[]				= array($o->id, $l[0]);
+		$o->values[]				= array($o->id . 'code', $l[1]);
+		$o->values[]				= array($o->id . 'description', $l[2]);
+
+	}
+
+	if($r->sob_all_type == 'subform'){
+
+		$r->subform_fk      	= $R;
+		$o->subform_type    	= $r->sob_subform_type;
+		$o->delete          	= $r->sob_subform_delete;
+		$o->add             	= $r->sob_subform_add;
+		$o->dimensions		= nuFormDimensions($r->sob_subform_zzzzsys_form_id);
+		$o->forms           	= nuGetSubformRecords($r, $o->add);
+		$o->browse_columns  	= array();
+
+	}
+
+	if($OBJS > 0){
+
+		unset($o->type);
+		unset($o->id);
+		unset($o->label);
+		unset($o->top);
+		unset($o->left);
+		unset($o->width);
+		unset($o->height);
+		unset($o->align);
+		
+	}
+
+	$a[]    			= $o;
+
     }
     
     $f->buttons			= nuButtonList($f);
@@ -173,6 +176,11 @@ function nuDefaultObject($r, $t){
     $o      = new stdClass();
 
     $o->type   	= $r->sob_all_type;
+	
+	if($o->type == 'lookup'){
+		$o->object_id		= $r->zzzzsys_object_id;
+	}
+	
     $o->id   		= $r->sob_all_id;
     $o->label   	= $r->sob_all_label;
     $o->top   	= $r->sob_all_top;
@@ -230,16 +238,17 @@ function nuGetLookupValues($R, $O){
     $r = db_fetch_object($t);
     
     $s = "
-        SELECT 
-        $R->sob_lookup_code AS code,
-        $R->sob_lookup_description AS description
-        FROM `$r->sfo_table` 
-        WHERE `$r->sfo_primary_key` = '$O->value'
+		SELECT 
+		$r->sfo_primary_key AS id,
+		$R->sob_lookup_code AS code,
+		$R->sob_lookup_description AS description
+		FROM `$r->sfo_table` 
+		WHERE `$r->sfo_primary_key` = '$O->value'
         
     ";
-
+	
     $t = nuRunQuery($s);
-    
+
     return db_fetch_row($t);
     
 }
@@ -433,20 +442,15 @@ function nuBrowseRows($f){
 		$S->setOrderBy(' ORDER BY ' . $S->fields[$P['sort'] + 1] . ' ' . $P['sort_direction']);
 	}
 	
-	$a	= array();
-	
+	$a		= array();
 	$s		= $S->SQL;
-
 	$t 		= nuRunQuery($s);
 	$rows	= db_num_rows($t);
-
 	$s		= $S->SQL . " LIMIT $start, $rows";
 	$t 		= nuRunQuery($s);
 	
 	while($r = db_fetch_row($t)){
-	
 		$a[] = $r;
-		
 	}
 	
 	return array($a, $rows);
@@ -549,16 +553,50 @@ function nuBrowseWhereClause($searchFields, $searchString, $returnArray = false)
 }
 
 
+function nuGetOtherLookupValues(){
+	
+	$v					= $_POST['nuSTATE']['value'];
+	//$					= $_POST['nuSTATE']['object_id'];
+
+
+    $s = "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$O->form_id'";
+    $t = nuRunQuery($s);
+    $r = db_fetch_object($t);
+    
+    $s = "
+        SELECT 
+        $R->sob_lookup_code AS code,
+        $R->sob_lookup_description AS description
+        FROM `$r->sfo_table` 
+        WHERE `$r->sfo_primary_key` = '$O->value'
+        
+    ";
+
+    $t = nuRunQuery($s);
+    
+    return db_fetch_row($t);
+    
+	
+	
+	$c					= new stdClass;
+	$c->session_id		= '';
+	$c->form_id			= '';
+	$c->record_id			= '-1';
+	$c->errors			= array();
+
+}
+
 function nuCheckSession(){
 	
-	$u				= $_POST['nuSTATE']['username'];
-	$p				= $_POST['nuSTATE']['password'];
-	$s				= $_POST['nuSTATE']['session_id'];
-	$c				= new stdClass;
-	$c->session_id	= '';
-	$c->form_id		= '';
-	$c->record_id		= '-1';
-	$c->errors		= array();
+	$u					= $_POST['nuSTATE']['username'];
+	$p					= $_POST['nuSTATE']['password'];
+	$s					= $_POST['nuSTATE']['session_id'];
+	$_POST['nuLogAgain']	= 0;
+	$c					= new stdClass;
+	$c->session_id		= '';
+	$c->form_id			= '';
+	$c->record_id			= '-1';
+	$c->errors			= array();
 	
 	
 	if($s == ''){
@@ -566,50 +604,43 @@ function nuCheckSession(){
 		if($u == $_SESSION['DBGlobeadminUsername']){
 			
 			if($p == $_SESSION['DBGlobeadminPassword']){
-				
 				$c->session_id		= nuSetSession($u);
 				$c->form_id			= 'nuhome';
 				$c->record_id			= '-1';
-				
 			}else{
-				$c->errors[]			= 'Invalid Login';
+				$_POST['nuErrors'][]	= 'Invalid Login';
+				$_POST['nuLogAgain']	= 1;
 			}
 
 		}else{
-		
+			
 			$t						= nuRunQuery("SELECT * FROM zzzzsys_user WHERE sus_login_name = ? AND sus_login_password = ?", array($u, $p));
-				
 			if(db_num_rows($t) > 0){
-
 				$r 					= db_fetch_object($t);
 				$c->session_id		= nuSetSession($u);
 				$c->form_id			= 'nuhome';
 				$c->record_id			= '-1';
-				
 			}else{
-				$c->errors[]			= 'Invalid Login';
+				$_POST['nuErrors'][]	= 'Invalid Login';
+				$_POST['nuLogAgain']	= 1;
 			}
 			
 		}
 			
 	}else{
-		
 		$t							= nuRunQuery("SELECT * FROM zzzzsys_session WHERE zzzzsys_session_id = ?", array($s));
-				
 		if(db_num_rows($t) > 0){
-
 			$c->session_id			= $s;
 			$c->form_id				= $_POST['nuSTATE']['form_id'];
 			$c->record_id				= $_POST['nuSTATE']['record_id'];
-				
-			}else{
-				$_POST['nuErrors'][]	= 'Timeout';
-			}
-
+		}else{
+			$_POST['nuErrors'][]		= 'Timeout';
+			$_POST['nuLogAgain']		= 1;
+		}
 	}
 	
-	$c->dimensions	= nuFormDimensions($c->form_id);
-
+	$c->dimensions					= nuFormDimensions($c->form_id);
+nudebug(print_r($_POST['nuErrors'],1));
 	return $c;
 	
 }

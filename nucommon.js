@@ -44,21 +44,29 @@ function nuGetBreadcrumb(b){
 	
 }
 
-function nuCheckPassword(){
-	
-	var u = $('#nuusername').val();
-	var p = $('#nupassword').val();
-	
-	$('body').html('');
 
-	window.nuBC	= [];
-	
-	window.nuBC.push(new nuFormState());
+function nuGetForm(f, r, n){
+
+	var u 	= '';
+	var p 	= '';
+
+	if($('#nuusername').length == 1){
+		u 			= $('#nuusername').val();
+		p	 		= $('#nupassword').val();
+		window.nuBC	= [];
+		window.nuBC.push(new nuFormState());
+	}else{
+		if(arguments.length != 3){   //-- add a new breadcrumb
+			window.nuBC.push(new nuFormState());
+		}
+	}
 	
 	var w 		= nuGetFormState();
-	w.call_type	= 'login';
 	w.username	= u;
 	w.password	= p;
+	w.call_type	= 'getform';
+	w.form_id	= f;
+	w.record_id	= arguments.length == 1 ? '' : r;
 
 	var request 	= $.ajax({
 		url      : "nuapi.php",
@@ -68,22 +76,47 @@ function nuCheckPassword(){
 		}).done(function(data){
 			
 			var fm 	= data.forms[0];
-			console.log(fm);
+			
 			if(nuErrorMessages(fm.errors)){
-				nuLogin();
-				return;
+				if(fm.log_again == 1){nuLogin();}
+			}else{
+				nuBuildForm(fm);
 			}
 			
-			nuBuildForm(fm);
-
 		}).fail(function(xhr, err){
-			alert(nuFormatAjaxErrorMessage(xhr,err));
+			alert(nuFormatAjaxErrorMessage(xhr, err));
 	});
 
 }
 
 
+function nuGetLookupId(inputValue, objectId, inputId){
 
+	var w 		= nuGetFormState();
+	w.call_type	= 'getlookup';
+	w.input_value	= inputValue;
+	w.object_id	= objectId;
+	w.input_id	= inputId;
+
+	var request 	= $.ajax({
+		url      : "nuapi.php",
+		type     : "POST",
+		data     : {nuSTATE : w},
+		dataType : "json"
+		}).done(function(data){
+			
+			var fm 	= data.forms[0];
+			
+			if(nuErrorMessages(fm.errors)){
+			}else{
+				nuPopulateLookup(fm);
+			}
+			
+		}).fail(function(xhr, err){
+			alert(nuFormatAjaxErrorMessage(xhr, err));
+	});
+
+}
 
 function nuErrorMessages(e){
 
@@ -99,37 +132,6 @@ function nuErrorMessages(e){
 	
 	return e.length > 0;
 	
-}
-
-
-function nuGetForm(f, r, n){
-
-	if(arguments.length != 3){   //-- add a new breadcrumb
-		
-		window.nuBC.push(new nuFormState());
-		
-	}
-	
-	var w 		= nuGetFormState();
-	w.call_type	= 'getform';
-	w.form_id	= f;
-	w.record_id	= arguments.length == 1 ? '' : r;
-
-	var request 	= $.ajax({
-		url      : "nuapi.php",
-		type     : "POST",
-		data     : {nuSTATE : w},
-		dataType : "json"
-		}).done(function(data){
-			
-			var fm 	= data.forms[0];
-			
-			nuBuildForm(fm);
-
-		}).fail(function(xhr, err){
-			alert(nuFormatAjaxErrorMessage(xhr,err));
-	});
-
 }
 
 function nuGetFormState(){
@@ -189,6 +191,7 @@ function nuLogin(){
 	var u 	= '<br><br>Username <input id="nuusername"/>';
 	var p 	= '<br><br>Password <input id="nupassword" type="password"/>';
 	var s 	= '<br><br><input id="submit" type="button" onclick="nuCheckPassword()" value="Submit"/>';
+	var s 	= '<br><br><input id="submit" type="button" onclick="nuGetForm()" value="Submit"/>';
 	var l2	= '<br><br></div>';
 	
 	var e = document.createElement('div');
@@ -209,10 +212,10 @@ function nuLogin(){
 }
 
 
-function nuLookupId(t){
+function nuBuildLookup(t){
 
-	var f	= $('#' + t.id).attr('data-form-id');
-	var tar	= $('#' + t.id).attr('data-target');
+	var f	= $('#' + t.id).attr('data-nu-form-id');
+	var tar	= $('#' + t.id).attr('data-nu-target');
 	
 	window.nuOPENER.push(new nuOpener(f, ''));
 	

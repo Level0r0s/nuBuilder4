@@ -200,6 +200,10 @@ input {border: 0px;}
   height: 24px;
 }
 
+.nuTab:hover{
+  cursor: pointer;
+}
+
 .nuTabSelected {
   background-color: #EFEFEF;
   display: inline;
