@@ -109,7 +109,7 @@ function nuAddActionButtons(f){
 		
 	}
 	
-	if(window.nuTYPE 	== 'default'){
+	if(window.nuTYPE 	== 'browse'){
 		
 		$('#nuActionHolder').append("<img id='thelogo' src='logo.png' style='position:absolute;right:20px'>");
 		
@@ -216,21 +216,15 @@ function nuINPUT(w, i, l, p, prop){
 	$('#' + id).css({'top'       	: Number(prop.objects[i].top),
 					'left'		: Number(prop.objects[i].left),
 					'width'		: Number(prop.objects[i].width),
+					'height'		: Number(prop.objects[i].height),
 					'text-align'	: prop.objects[i].align,
 					'position'	: 'absolute'
 	})
 	.val(w.objects[i].value)
 	.attr('data-nu-field', 'true')
-	.attr('data-nu-prefix', p)
-	.attr('data-nu-object-id', p);
+	.attr('data-nu-object-id', w.objects[i].object_id)
+	.attr('data-nu-prefix', p);
 
-	if(prop.objects[i].height != 0){
-		
-		$('#' + id).css({'height'	: Number(prop.objects[i].height)});
-		
-	}
-	
-	
 	if(prop.objects[i].type == 'display'){
 		
 		$('#' + id).addClass('nuReadonly');
@@ -250,13 +244,15 @@ function nuINPUT(w, i, l, p, prop){
 		
 		$('#' + ef).append(inp);
 		nuAddDataTab(id, prop.objects[i].tab, p);
-		$('#' + id).css({'top'           : Number(prop.objects[i].top),
-		    			'left'              : Number(prop.objects[i].left),
-			    		'width'             : Number(prop.objects[i].width)
+		$('#' + id).css({'top'	: Number(prop.objects[i].top),
+		    			'left'		: Number(prop.objects[i].left),
+			    		'width'		: Number(prop.objects[i].width),
+					'height'		: Number(prop.objects[i].height)
 		})
 		.attr('data-nu-form-id', w.objects[i].form_id)
 		.attr('data-nu-object-id', w.objects[i].object_id)
 		.attr('data-nu-target', target)
+		.attr('onkeyup', 'nuGetLookupCode(this)')
 		.addClass('nuLookupCode');
 
 		id 			= target + 'button';
@@ -268,8 +264,8 @@ function nuINPUT(w, i, l, p, prop){
 		nuAddDataTab(id, prop.objects[i].tab, p);
 		$('#' + id).css({'top'      	: Number(prop.objects[i].top),
 						'left'      	: Number(prop.objects[i].left) + Number(prop.objects[i].width) + 2,
-						'width'     	: 15,
-						'height'     	: 15
+						'width'		: 15,
+						'height'		: Number(prop.objects[i].height)
 		})
 		.attr('type','button')
 		.attr('data-nu-form-id', w.objects[i].form_id)
@@ -285,15 +281,16 @@ function nuINPUT(w, i, l, p, prop){
 		
 		$('#' + ef).append(inp);
 		nuAddDataTab(id, prop.objects[i].tab, p);
-		$('#' + id).css({'top'      : Number(prop.objects[i].top),
-						'left'      : Number(prop.objects[i].left) + Number(prop.objects[i].width) + 21,
-						'width'     : prop.objects[i].description_width
+		$('#' + id).css({'top'		: Number(prop.objects[i].top),
+						'left'		: Number(prop.objects[i].left) + Number(prop.objects[i].width) + 21,
+						'width'		: prop.objects[i].description_width,
+						'height'		: Number(prop.objects[i].height)
 		})
 		.addClass('nuLookupDescription')
 		.addClass('nuReadonly')
 		.prop('readonly', true);
 		
-		nuPopulateLookup(w.objects[i].values);
+		nuPopulateLookup3(w.objects[i].values);
 
 		return Number(prop.objects[i].width) + Number(prop.objects[i].description_width) + 30;
 		
@@ -431,6 +428,7 @@ function nuSELECT(w, i, l, p, prop){
 					'position' : 'absolute'
 	})
 	.attr('data-nu-field', 'true')
+	.attr('data-nu-object-id', w.objects[i].object_id)
 	.attr('data-nu-prefix', p);
 
 	if(prop.objects[i].multiple == 1){
@@ -614,7 +612,7 @@ function nuLabel(w, i, p, prop){
 }
 
 
-function nuPopulateLookup(v){
+function nuPopulateLookup3(v){
 	
 		for(var i = 0 ; i < v.length ; i++){
 			$('#' + v[i][0]).val(v[i][1]);
@@ -1065,11 +1063,25 @@ function nuSelectBrowse(t){
 		
 	}else if(type == 'lookup'){
 		
-		var pk	= $('#' + t.id).attr('data-nu-primary-key');
-		console.log(pk, nuTARGET);
-		//nuGetLookupId(inputValue, objectId, inputId);
+		nuGetLookupId(t.getAttribute('data-nu-primary-key'));
+		
 	}else{
 		window[type](t);
 	}
 	
+}
+
+
+function nuPopulateLookup(fm, target){
+
+	var p 	= $('#' + target).attr('data-nu-prefix');
+	var f	= fm.lookup_values;
+	
+	for(var i = 0 ; i < f.length ; i++){
+		console.log(f[i][0], f[i][1]);
+		$('#' + f[i][0]).val(f[i][1]);
+	}
+	
+	$('#dialogClose').click();
+
 }
