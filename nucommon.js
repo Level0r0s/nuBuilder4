@@ -90,13 +90,16 @@ function nuGetForm(f, r, n){
 }
 
 
-function nuGetLookupId(pk){
+function nuGetLookupId(pk, id){
 
+	$('#nuLookupList').remove();
+	
 	var w 		= nuGetFormState();
-	var l		= $('#' + window.nuTARGET, window.parent.document);
+	var l		= $('#' + id);
 
 	w.call_type	= 'getlookupid';
 	w.object_id	= l.attr('data-nu-object-id');
+	w.target		= l.attr('data-nu-target');
 	w.primary_key	= pk;
 
 	var request 	= $.ajax({
@@ -109,6 +112,7 @@ function nuGetLookupId(pk){
 			var fm 	= data.forms[0];
 			if(nuErrorMessages(fm.errors)){
 			}else{
+				console.log(fm.lookup_values);
 				window.parent.nuPopulateLookup(fm);
 			}
 			
@@ -119,15 +123,18 @@ function nuGetLookupId(pk){
 }
 
 
-function nuGetLookupCode(t){
-console.log(t.value);
-	if(t.value.length < 3){return;}
+function nuGetLookupCode(e){
+
+	if(e.keyCode == 40 || e.keyCode == 38 || e.keyCode == 7){return;}
+
+	if(e.target.length < 4){return;}
 	
 	var w 		= nuGetFormState();
 
 	w.call_type	= 'getlookupcode';
-	w.object_id	= $('#' + t.id).attr('data-nu-object-id');
-	w.code		= $('#' + t.id).val();
+	w.object_id	= e.target.getAttribute('data-nu-object-id');
+	w.target		= e.target.getAttribute('data-nu-target');
+	w.code		= e.target.value;
 
 	var request 	= $.ajax({
 		url      : "nuapi.php",
@@ -139,7 +146,8 @@ console.log(t.value);
 			var fm 	= data.forms[0];
 			if(nuErrorMessages(fm.errors)){
 			}else{
-				console.log(fm);
+				$('#nuLookupList').remove();
+				nuBuildLookupList(fm);
 			}
 			
 		}).fail(function(xhr, err){
@@ -336,4 +344,5 @@ function nuCreateDialog(t){
 	}
 	
 }
+
 

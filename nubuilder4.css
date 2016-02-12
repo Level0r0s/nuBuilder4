@@ -142,6 +142,27 @@ input {border: 0px;}
   position: absolute;
 }
 
+.nuLookupListContainer {
+  overflow: hidden;
+  border-style: solid;
+  border-width: 1px;
+  border-color: lightgray;
+}
+
+.nuLookupList {
+  background-color: #ADD8E6;
+  overflow: hidden;
+}
+
+
+.nuLookupListMatch {
+  color: red;
+}
+
+.nuLookupListSelect {
+  background-color: #8DC9DC;
+}
+
 .nuSort:hover {
   color: red;	
   cursor: pointer;

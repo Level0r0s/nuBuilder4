@@ -796,9 +796,9 @@ function nuGetAllLookupList(){
 				$SQL->from
 				WHERE $code LIKE '%$C%'
 				ORDER BY $code
+				LIMIT 0 , 10
 				";
-				
-nuDebug($s);
+
 	$t			= nuRunQuery($s);
 	$a			= array();
 	
