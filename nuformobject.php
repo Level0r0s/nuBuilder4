@@ -744,7 +744,7 @@ function nuFormDimensions($f){
 	$d[]	= $w  + 20;			//-- lookup form width
 	$d[]	= $h  + 25;			//-- form height
 	$d[]	= $w  + 50;			//-- form width
-	$d[]	= $gh;				//-- grid height
+	$d[]	= $gh + 0;			//-- grid height
 	$d[]	= $gw + 50;			//-- grid width
 
 	return $d;
@@ -758,6 +758,7 @@ function nuGetAllLookupValues(){
 	$OID						= $_POST['nuSTATE']['object_id'];
 	$PK						= $_POST['nuSTATE']['primary_key'];
 	$s						= "SELECT * FROM zzzzsys_object WHERE zzzzsys_object_id = '$OID'";
+	nudebug(print_r($_POST['nuSTATE'],1));
 	$t						= nuRunQuery($s);
 	$r						= db_fetch_object($t);
 	$o						= nuDefaultObject($r, array());

@@ -18,21 +18,22 @@ require_once('nucommon.php'); ?>
 	
 	if($type == 'lookup'){
 		
-		print "
+		$h	= "
 		
 		function nuLoad(){
-			
+
 			window.nuTYPE		= '$type';
 			window.nuTARGET	= '$target';
 			window.nuSESSION	= parent.nuSESSION;
 			var p			= parent.nuOPENER[$opener];
-
+console.log(p);
 			nuGetForm(p.form_id, p.record_id);
 
 		}
 		
 		";
-		
+		print $h;
+//nudebug($h);		
 	}
 
 	if($type == ''){
@@ -56,6 +57,8 @@ require_once('nucommon.php'); ?>
 cssinclude('nubuilder4.css');
 jsinclude('nuform.js');
 jsinclude('nucommon.js');
+nudebug("$opener	$target	$type");
+	
 ?>
 
 </head>

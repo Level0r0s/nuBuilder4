@@ -8,12 +8,14 @@ function nuOpener(f, r){
 
 	this.form_id          = f;
 	this.record_id        = r;
+	this.search			= '';
 	
 }
 
 
-function nuFormState(){
+function nuFormState(p){
 
+	this.param	        = p;
 	this.call_type        = '';
 	this.filter           = '';
 	this.form_id          = '';
@@ -27,6 +29,13 @@ function nuFormState(){
 	this.rows        		= 25;
 	this.row_height		= 25;
 	this.search           = '';
+
+	if(window.parent != null){
+		if(window.parent.nuOPENER.length > 0){
+			this.search		= window.parent.nuOPENER[window.parent.nuOPENER.length-1].search
+		}
+	}
+	
 	this.session_id		= window.nuSESSION;
 	this.nosearch_columns = [];
 	this.sort             = '-1';
@@ -49,18 +58,18 @@ function nuGetForm(f, r, n){
 
 	var u 	= '';
 	var p 	= '';
-
+	
 	if($('#nuusername').length == 1){
 		u 			= $('#nuusername').val();
 		p	 		= $('#nupassword').val();
 		window.nuBC	= [];
-		window.nuBC.push(new nuFormState());
+		window.nuBC.push(new nuFormState(1));
 	}else{
 		if(arguments.length != 3){   //-- add a new breadcrumb
-			window.nuBC.push(new nuFormState());
+			window.nuBC.push(new nuFormState(2));
 		}
 	}
-	
+
 	var w 		= nuGetFormState();
 	w.username	= u;
 	w.password	= p;
@@ -101,7 +110,7 @@ function nuGetLookupId(pk, id){
 	w.object_id	= l.attr('data-nu-object-id');
 	w.target		= l.attr('data-nu-target');
 	w.primary_key	= pk;
-
+	
 	var request 	= $.ajax({
 		url      : "nuapi.php",
 		type     : "POST",
@@ -112,7 +121,6 @@ function nuGetLookupId(pk, id){
 			var fm 	= data.forms[0];
 			if(nuErrorMessages(fm.errors)){
 			}else{
-				console.log(fm.lookup_values);
 				window.parent.nuPopulateLookup(fm);
 			}
 			
@@ -123,12 +131,8 @@ function nuGetLookupId(pk, id){
 }
 
 
-function nuGetLookupCode(e){
+function nuGetLookupCode(e, buildLookupList){
 
-	if(e.keyCode == 40 || e.keyCode == 38 || e.keyCode == 7){return;}
-
-	if(e.target.length < 4){return;}
-	
 	var w 		= nuGetFormState();
 
 	w.call_type	= 'getlookupcode';
@@ -146,8 +150,15 @@ function nuGetLookupCode(e){
 			var fm 	= data.forms[0];
 			if(nuErrorMessages(fm.errors)){
 			}else{
+				
 				$('#nuLookupList').remove();
-				nuBuildLookupList(fm);
+	
+				if(buildLookupList){
+					nuBuildLookupList(fm);
+				}else{
+					nuChooseOneLookupRecord(e, fm);
+				}
+				
 			}
 			
 		}).fail(function(xhr, err){
@@ -250,7 +261,7 @@ function nuLogin(){
 }
 
 
-function nuBuildLookup(t){
+function nuBuildLookup(t, p){
 
 	var f	= $('#' + t.id).attr('data-nu-form-id');
 	var tar	= $('#' + t.id).attr('data-nu-target');
@@ -258,6 +269,12 @@ function nuBuildLookup(t){
 	window.nuOPENER.push(new nuOpener(f, ''));
 	
 	var l 	= window.nuOPENER.length -1;
+	
+	for(var i = 0 ; i < p.length ; i++){
+		
+		window.nuOPENER[l][p[i][0]]	= p[i][1];
+	
+	}
 	
 	window.nuDialog.createDialog(50, 50, 50, 50, '');
 	
