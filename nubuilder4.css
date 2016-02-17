@@ -201,6 +201,11 @@ input {border: 0px;}
 }
 
 
+.nuBrowseSearch {
+  color: red;
+}
+
+
 .nuSelectBrowse {
   background-color: #93C8F9;
 }

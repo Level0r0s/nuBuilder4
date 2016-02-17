@@ -503,7 +503,20 @@ function nuBrowseRows($f){
 		$S->addField($f->browse_columns[$i]->display);
 	}
 	
-	$w	= nuBrowseWhereClause(array_slice($S->fields, 1), $search);
+	$flds 	= array();
+	$fields 	= array_slice($S->fields,1);
+
+	if(count($_POST['nuSTATE']['nosearch_columns']) == 0){
+		$_POST['nuSTATE']['nosearch_columns']	= array();
+	}
+	
+	for($i = 0 ; $i < count($fields) ; $i++){
+		if(!in_array($i, $_POST['nuSTATE']['nosearch_columns'])){
+			$flds[]	= $fields[$i];
+		}
+	}
+
+	$w	= nuBrowseWhereClause($flds, $search);
 	
 	if(trim($w) != '()'){
 		$S->setWhere(' WHERE ' . $w);
@@ -519,7 +532,7 @@ function nuBrowseRows($f){
 	$rows	= db_num_rows($t);
 	$s		= $S->SQL . " LIMIT $start, $rows";
 	$t 		= nuRunQuery($s);
-	
+
 	while($r = db_fetch_row($t)){
 		$a[] = $r;
 	}

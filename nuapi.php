@@ -21,7 +21,7 @@
 	$f->forms[0]->target					= $P['target'];
 	$j									= json_encode($f);
 	
-	nudebug($P['call_type'].$j);
+	nudebug(count($P['nosearch_columns']) . ' -------------------- ' . $j);
 	print $j;
 /*		
 	w.call_type	= 'getlookupcode';

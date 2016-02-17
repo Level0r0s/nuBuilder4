@@ -89,7 +89,6 @@ function nuResizeiFrame(d, r){
 	}
 }
 
-
 function nuAddActionButtons(f){
 
 	var b = f.buttons;
@@ -116,9 +115,6 @@ function nuAddActionButtons(f){
 	}
 	
 }
-
-
-
 
 function nuBuildEditObjects(f, p, o, prop){
 	
@@ -156,8 +152,6 @@ function nuBuildEditObjects(f, p, o, prop){
 	
 }
 
-
-
 function nuSubformProperties(w, i, l, p){
 
 	var pk    = p + 'nuPrimaryKey';
@@ -183,8 +177,6 @@ function nuSubformProperties(w, i, l, p){
 	.attr('data-nu-form', p);
 
 }
-
-
 
 function nuINPUT(w, i, l, p, prop){
 
@@ -277,7 +269,7 @@ function nuINPUT(w, i, l, p, prop){
 		.attr('data-nu-target', target)
 		.addClass('nuLookupButton')
 		.html('<img border="0" src="lookup.png" width="10" height="10">')
-		.attr('onclick', 'nuBuildLookup(this)');
+		.attr('onclick', 'nuBuildLookup(this,[])');
 
 		id = p + prop.objects[i].id + 'description';
 		var inp = document.createElement('input');
@@ -306,8 +298,6 @@ function nuINPUT(w, i, l, p, prop){
 	}
 	
 }
-
-
 
 function nuHTML(w, i, l, p, prop){
 
@@ -340,8 +330,6 @@ function nuHTML(w, i, l, p, prop){
 	return Number(prop.objects[i].width);
 
 }
-
-
 
 function nuRUN(w, i, l, p, prop){
 
@@ -403,9 +391,6 @@ function nuRUN(w, i, l, p, prop){
 	
 }
 
-
-
-
 function nuSELECT(w, i, l, p, prop){
 
 	var id  = p + prop.objects[i].id;
@@ -459,8 +444,6 @@ function nuSELECT(w, i, l, p, prop){
 	return Number(prop.objects[i].width);
 	
 }
-
-
 
 function nuSUBFORM(w, i, l, p, prop){
 
@@ -594,7 +577,6 @@ function nuSUBFORM(w, i, l, p, prop){
 
 }
 
-
 function nuLabel(w, i, p, prop){
 
 	if(prop.objects[i].label == ''){return;}
@@ -617,7 +599,6 @@ function nuLabel(w, i, p, prop){
 
 }
 
-
 function nuPopulateLookup3(v){
 	
 		for(var i = 0 ; i < v.length ; i++){
@@ -625,7 +606,6 @@ function nuPopulateLookup3(v){
 		}
 		
 }
-
 
 function nuAddHolder(t){
 
@@ -635,8 +615,6 @@ function nuAddHolder(t){
 	$('#' + t).addClass(t).html('&nbsp;&nbsp;&nbsp;');
 	
 }
-
-
 
 function nuGetWordWidth(w){
 	
@@ -648,7 +626,6 @@ function nuGetWordWidth(w){
 	return l + 5;
 	
 }	
-
 
 function nuGetSubformRowSize(o, SF, id){
 
@@ -695,7 +672,6 @@ function nuBuildSubformTitle(o, l, w, id){
 
 }
 
-
 function nuBuildSubformDeleteTitle(l, id){
     
 	var titleId  = id + 'DeleteSF';
@@ -716,7 +692,6 @@ function nuBuildSubformDeleteTitle(l, id){
 
 }
 
-
 function nuAddBreadcrumbs(){
 
 	var b 							= window.nuBC.length;
@@ -728,7 +703,6 @@ function nuAddBreadcrumbs(){
     }
     
 }
-
 
 function nuAddEditTabs(p, w){
 
@@ -753,8 +727,6 @@ function nuAddEditTabs(p, w){
 	}
     
 }
-
-
 
 function nuSetStartingTab(p){
 
@@ -783,14 +755,12 @@ function nuGetStartingTab(){
 	
 }
 
-
 function nuStartingTab(p){
 
 		this.prefix 		= p;
 		this.tabNumber 	= 0;
 		
 }
-
 
 function nuAddBreadcrumb(i, l){
 
@@ -818,10 +788,7 @@ function nuAddBreadcrumb(i, l){
 		
 	}
 	
-	
-
 }
-
 
 function nuEditTab(p, t, i){
 
@@ -840,8 +807,6 @@ function nuEditTab(p, t, i){
 
 }
 
-
-
 function nuSelectTab(tab){
 
     var n = String(tab.id).substr(5);
@@ -857,7 +822,6 @@ function nuSelectTab(tab){
     $('#' + tab.id).addClass('nuTabSelected');
 
 }
-
 
 function nuAddDataTab(i, t, p){
 
@@ -894,8 +858,6 @@ function nuBrowseTitle(b, i, l){
 	return l + w;
 	
 }
-
-
 
 function nuBrowseTable(){
 
@@ -978,9 +940,10 @@ function nuBrowseTable(){
 			'height'		: 25,
 			'position'	: 'absolute'
 	});
+	
+	nuHighlightSearch();
 
 }
-
 
 function nuAlign(a){
 
@@ -1255,7 +1218,6 @@ function nuLookupKeyUp(e){
 
 }
 
-
 function nuLookupFocus(e){
 
 	if(window.nuChangeLookup || window.nuChangeLookup === undefined){
@@ -1265,7 +1227,6 @@ function nuLookupFocus(e){
 	window.nuChangeLookup		= true;
 	
 }
-
 
 function nuChooseOneLookupRecord(e, fm){
 	
@@ -1315,7 +1276,6 @@ function nuLookupObject(id, set, value){
 	
 }
 
-
 function nuValidLookupId(id, fld){
 	
 	var i	= String(id);
@@ -1338,3 +1298,37 @@ function nuValidLookupId(id, fld){
 	return i;
 	
 }
+
+function nuHighlightSearch(){
+
+	var bc		= nuBC[nuBC.length - 1];
+	var exclude	= bc.nosearch_columns;
+	var search	= bc.search.split(' ')
+	.filter(function(a) {return (a != '' && a.substr(0,1) != '-')})
+	.sort(function(a,b) {return (a.length > b.length)});
+
+	$('.nuBrowseTable').each(function(index){
+		
+		var col	= Number(String($(this).attr('id')).substr(11));
+		
+		if(exclude.indexOf(col) == -1){
+			
+			console.log( Number(String($(this).attr('id')).substr(11)) + ": " + $(this).html() );
+			
+			var h	= String($(this).html());
+			
+			for(var i = 0 ; i < search.length ; i++){
+				h	= h.replace(search[i],'`````' + search[i] + '````', true);
+			}
+
+			h 		= h.replaceAll('`````', '<span class="nuBrowseSearch">', true);
+			h 		= h.replaceAll('````', '</span>', true);
+			
+			$(this).html(h);
+			
+		}
+		
+	});
+	
+}
+
