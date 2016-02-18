@@ -44,6 +44,8 @@ function nuBuildForm(f){
 	nuAddBreadcrumbs();
 	nuAddEditTabs('', f);
 	nuAddActionButtons(f);
+
+	nuMainRecordProperties(f);
 	nuBuildEditObjects(f, '', '', f);
 	
 	nuGetStartingTab();
@@ -118,7 +120,7 @@ function nuAddActionButtons(f){
 
 function nuBuildEditObjects(f, p, o, prop){
 	
-	var l = 0;
+	var l = 3;
 	
 	for(var i = 0 ; i < f.objects.length  ; i++){
 
@@ -144,6 +146,7 @@ function nuBuildEditObjects(f, p, o, prop){
 		}else if(t == 'subform'){
 
 			l = l + nuSUBFORM(f, i, l, p, prop);
+			
 		}
 		
 		l = l + 2;
@@ -152,7 +155,34 @@ function nuBuildEditObjects(f, p, o, prop){
 	
 }
 
-function nuSubformProperties(w, i, l, p){
+function nuMainRecordProperties(w){
+
+	var pk    = 'nuPrimaryKey';
+	var de    = 'nuDelete';
+	var ef    = 'nuFormHolder';                       //-- Edit Form Id
+	var inp   = document.createElement('input');
+	var chk   = document.createElement('input');
+
+	inp.setAttribute('id', pk);
+	chk.setAttribute('id', de);
+	chk.setAttribute('type', 'checkbox');
+	
+	$('#' + ef).append(inp);
+	$('#' + ef).append(chk);
+	$('#' + pk).css({'visibility' : 'hidden'})
+	.val(w.record_id)
+	.attr('data-nu-field','true')
+	.attr('data-nu-form', '');
+	
+	$('#' + de).css('visibility', 'hidden')
+	.prop('checked', w.record_id == -1)
+	.attr('data-nu-field','true')
+	.attr('data-nu-form', '');
+
+}
+
+
+function nuSubformRecordProperties(w, l, p){
 
 	var pk    = p + 'nuPrimaryKey';
 	var de    = p + 'nuDelete';
@@ -166,14 +196,17 @@ function nuSubformProperties(w, i, l, p){
 	
 	$('#' + ef).append(inp);
 	$('#' + ef).append(chk);
-	
 	$('#' + pk).css({'visibility' : 'hidden'})
 	.val(w.record_id)
 	.attr('data-nu-field','true')
 	.attr('data-nu-form', p);
 	
-	$('#' + de).css({'top': 3, 'left' : Number(l) + 3, 'position' : 'absolute'})
+	$('#' + de).css({'top'		: 3, 
+					'left'		: Number(l) + 3, 
+					'position' 	: 'absolute', 
+					'visibility'	: 'visible'})
 	.prop('checked', w.record_id == -1)
+	.attr('data-nu-field','true')
 	.attr('data-nu-form', p);
 
 }
@@ -447,12 +480,13 @@ function nuSELECT(w, i, l, p, prop){
 
 function nuSUBFORM(w, i, l, p, prop){
 
-    var SF  = prop.objects[i];
+    var SF  = prop.objects[i];							//-- first row
+    var SFR = w.objects[i];							//-- all rows
 	var id  = p + SF.id;
 	var ef  = p + 'nuFormHolder';                       //-- Edit Form Id
 	var inp = document.createElement('div');
-	var fms = SF.forms;
-	
+	var fms = SFR.forms;
+
 	inp.setAttribute('id', id);
 	
 	if(SF.parent_type == 'g'){
@@ -548,7 +582,7 @@ function nuSUBFORM(w, i, l, p, prop){
 	
 	rowTop 	= 0;
 	var even	= 0;
-	
+
 	for(var c = 0 ; c < fms.length ; c++){
 
 		var prefix = id + String('00' + c).substr(-3);
@@ -564,9 +598,9 @@ function nuSUBFORM(w, i, l, p, prop){
 		})
 		.addClass('nuSubform' + even);
 
-		nuBuildEditObjects(SF.forms[c], prefix, SF, SF.forms[0]);
+		nuBuildEditObjects(SFR.forms[c], prefix, SF, SF.forms[0]);
 
-		nuSubformProperties(SF.forms[c], c, rowWidth - 40, prefix);
+		nuSubformRecordProperties(SF.forms[c], rowWidth - 40, prefix);
 
 		rowTop 	= Number(rowTop) + Number(rowHeight);
 		even		= even == '0' ? '1' : '0'
@@ -1046,30 +1080,33 @@ function nuPopulateLookup(fm, target){
 	var f	= fm.lookup_values;
 	
 	for(var i = 0 ; i < f.length ; i++){
-		$('#' + f[i][0]).val(f[i][1]);
+		$('#' + p + f[i][0]).val(f[i][1]);
 	}
 	
 	$('#dialogClose').click();
 
 }
 
-function nuBuildLookupList(fm){
+function nuBuildLookupList(fm, e){
 
 	var i	= fm.target;
 	$('#nuLookupList').remove();
 	
 	var v	= fm.lookup_values;
 	var tar	= $('#' + i);
+	var off	= $('#' + i).offset();
+	console.log(i);
 	var p	= $('#' + i).parent().attr('id')
 	var d	= parseInt($('#' + i + 'description').css('width'));
-	var t	= parseInt(tar.css('top'));
-	var l	= parseInt(tar.css('left'));
+	var t	= off.top;//parseInt(tar.css('top'));
+	var l	= off.left; //parseInt(tar.css('left'));
 	var h	= parseInt(tar.css('height'));
 	var w	= parseInt(tar.css('width'));
 	var div 	= document.createElement('div');
 	div.setAttribute('id', 'nuLookupList');
-	
-	$('#' +p).append(div);
+
+//	$('#' +p).append(div);
+	$('body').append(div);
 	
 	$('#nuLookupList').css({'top'		: t + h + 2,
 						'left'       	: l,

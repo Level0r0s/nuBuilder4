@@ -121,7 +121,7 @@ function nuGetLookupId(pk, id){
 			var fm 	= data.forms[0];
 			if(nuErrorMessages(fm.errors)){
 			}else{
-				window.parent.nuPopulateLookup(fm);
+				window.parent.nuPopulateLookup(fm, id);
 			}
 			
 		}).fail(function(xhr, err){
@@ -154,7 +154,7 @@ function nuGetLookupCode(e, buildLookupList){
 				$('#nuLookupList').remove();
 	
 				if(buildLookupList){
-					nuBuildLookupList(fm);
+					nuBuildLookupList(fm, e);
 				}else{
 					nuChooseOneLookupRecord(e, fm);
 				}

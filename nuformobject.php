@@ -376,7 +376,7 @@ function nuGetSubformRecords($R, $A){
         $a[] = $o;
         
     }
-    
+	
     return $a;
 
 }
