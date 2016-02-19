@@ -194,8 +194,11 @@ function nuSubformRecordProperties(w, l, p){
 	chk.setAttribute('id', de);
 	chk.setAttribute('type', 'checkbox');
 	
-	$('#' + ef).append(inp);
-	$('#' + ef).append(chk);
+	$('#' + ef)
+	.append(inp)
+	.append(chk)
+	.attr('data-nu-form', p);
+	
 	$('#' + pk).css({'visibility' : 'hidden'})
 	.val(w.record_id)
 	.attr('data-nu-field','true')
@@ -585,7 +588,7 @@ function nuSUBFORM(w, i, l, p, prop){
 
 	for(var c = 0 ; c < fms.length ; c++){
 
-		var prefix = id + String('00' + c).substr(-3);
+		var prefix = id + nuPad3(c);
 		var frmId  = prefix + 'nuFormHolder';
 		var frmDiv = document.createElement('div');
 		frmDiv.setAttribute('id', frmId);
@@ -596,6 +599,7 @@ function nuSUBFORM(w, i, l, p, prop){
 						'height'        : Number(rowHeight),
 						'position'      : 'absolute'
 		})
+		.attr('onclick', 'nuAddSubformRow(this, event)')
 		.addClass('nuSubform' + even);
 
 		nuBuildEditObjects(SFR.forms[c], prefix, SF, SF.forms[0]);
@@ -607,9 +611,62 @@ function nuSUBFORM(w, i, l, p, prop){
 
 	}
 	
+	if(SF.add == 1){
+		nuNewRowObject(String(prefix));
+	}
+	
 	return Number(SF.width);
 
 }
+
+function nuNewRowObject(p){
+
+	var o	= $('#' + p + 'nuFormHolder');
+	var sf	= p.substr(0, p.length - 3);
+	var h	= String(o[o.length-1].outerHTML);
+	window.nuSUBFORMROW[sf]	= h
+	.replaceAll(p, '#nuSubformRowNumber#', true)
+	.replaceAll('"nuSubform0"', '"nuSubform2"', true)
+	.replaceAll('"nuSubform1"', '"nuSubform2"', true);
+
+	console.log(p, sf);
+
+}
+
+function nuAddSubformRow(t, e){
+	
+	e.stopPropagation();
+	var sf	= t.id.substr(0, t.id.length-15);
+	
+	if(window.nuSUBFORMROW[sf] === undefined){
+		nuNewRowObject(sf + '000');
+	}
+	
+	var o	= $('#' + t.id);
+	var l	= o.parent().children().length;
+	var r	= parseInt(t.id.substr(t.id.length-15, 3));
+
+	var top	= parseInt(o.css('height')) * l;
+
+	if(l-1 != r){return;}
+	
+	var h	= String(window.nuSUBFORMROW[sf]);
+	h		= h.replaceAll('#nuSubformRowNumber#', sf + nuPad3(l));
+	o.parent().append(h);
+	$('#' + sf + nuPad3(l) + 'nuFormHolder').css('top', top);
+
+	console.log(window.nuSUBFORMROW[sf]);
+	console.log(l,r,t.id, sf, sf + nuPad3(l));
+	
+}
+
+
+function nuPad3(i){
+	
+	return String('00' + Number(i)).substr(-3);
+
+}
+
 
 function nuLabel(w, i, p, prop){
 
@@ -1095,7 +1152,6 @@ function nuBuildLookupList(fm, e){
 	var v	= fm.lookup_values;
 	var tar	= $('#' + i);
 	var off	= $('#' + i).offset();
-	console.log(i);
 	var p	= $('#' + i).parent().attr('id')
 	var d	= parseInt($('#' + i + 'description').css('width'));
 	var t	= off.top;//parseInt(tar.css('top'));
@@ -1170,7 +1226,7 @@ function nuSelectLookupList(t){
 
 function nuLookupKeyDown(e){
 
-	var c	= event.target.id;
+	var c	= e.target.id;
 	var i	= c.substr(0, c.length - 4);
 	var d	= i + 'description';
 	var next	= '';
@@ -1349,8 +1405,6 @@ function nuHighlightSearch(){
 		var col	= Number(String($(this).attr('id')).substr(11));
 		
 		if(exclude.indexOf(col) == -1){
-			
-			console.log( Number(String($(this).attr('id')).substr(11)) + ": " + $(this).html() );
 			
 			var h	= String($(this).html());
 			

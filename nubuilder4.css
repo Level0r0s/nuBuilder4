@@ -168,15 +168,6 @@ input {border: 0px;}
   cursor: pointer;
 }
 
-.nuTabHolder {
-  background-color: #CCCCCC;
-  width: 99.9%;
-  border-style: solid;
-  border-width: 0px 0px 0px 0px;
-  border-color: #CCCCCC;
-  padding: 15px 0px 0px 0px;
-}
-
 .nuBrowseTitle {
   background-color: #CCCCCC;
   height: 70px;
@@ -239,6 +230,15 @@ input {border: 0px;}
   padding: 8px 5px 8px 5px;
 }
 
+.nuTabHolder {
+  background-color: #CCCCCC;
+  width: 99.9%;
+  border-style: solid;
+  border-width: 0px 0px 0px 0px;
+  border-color: #CCCCCC;
+  padding: 15px 0px 0px 0px;
+}
+
 .nuStatusHolder {
   color: #CCCCCC;
   padding: 0px 0px 0px 0px;
@@ -262,6 +262,10 @@ input {border: 0px;}
 
 .nuSubform1 {
   background-color: #E0E0E0;
+}
+
+.nuSubform2 {
+  background-color: #C7C7C7;
 }
 
 .nuButton {
