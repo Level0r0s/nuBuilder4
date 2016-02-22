@@ -2,6 +2,7 @@ window.nuDialog 			= new nuCreateDialog('');
 window.nuBC 				= [];
 window.nuOPENER			= [];
 window.nuSUBFORMROW		= [];
+window.nuFIELD			= [];
 window.nuSESSION			= '';
 window.nuTYPE 			= 'browse';
 

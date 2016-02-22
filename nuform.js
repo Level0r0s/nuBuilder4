@@ -6,7 +6,9 @@ function nuBuildForm(f){
 		return;
 	}
 
-	window.nuSESSION	= f.session_id;
+	window.nuSESSION		= f.session_id;
+	window.nuFIELD		= [];
+	window.nuSUBFORMROW	= [];
 	
 	$('body').html('');
 	$('body').removeClass('nuBrowseBody').removeClass('nuEditBody');
@@ -159,7 +161,7 @@ function nuMainRecordProperties(w){
 
 	var pk    = 'nuPrimaryKey';
 	var de    = 'nuDelete';
-	var ef    = 'nuFormHolder';                       //-- Edit Form Id
+	var fh    = 'nuFormHolder';                       //-- Edit Form Id
 	var inp   = document.createElement('input');
 	var chk   = document.createElement('input');
 
@@ -167,16 +169,16 @@ function nuMainRecordProperties(w){
 	chk.setAttribute('id', de);
 	chk.setAttribute('type', 'checkbox');
 	
-	$('#' + ef).append(inp);
-	$('#' + ef).append(chk);
+	$('#' + fh).append(inp)
+	.append(chk)
+	.attr('data-nu-parent', '');
+
 	$('#' + pk).css({'visibility' : 'hidden'})
 	.val(w.record_id)
-	.attr('data-nu-field','true')
 	.attr('data-nu-form', '');
 	
 	$('#' + de).css('visibility', 'hidden')
 	.prop('checked', w.record_id == -1)
-	.attr('data-nu-field','true')
 	.attr('data-nu-form', '');
 
 }
@@ -186,7 +188,7 @@ function nuSubformRecordProperties(w, l, p){
 
 	var pk    = p + 'nuPrimaryKey';
 	var de    = p + 'nuDelete';
-	var ef    = p + 'nuFormHolder';                       //-- Edit Form Id
+	var fh    = p + 'nuFormHolder';                       //-- Edit Form Id
 	var inp   = document.createElement('input');
 	var chk   = document.createElement('input');
 
@@ -194,14 +196,14 @@ function nuSubformRecordProperties(w, l, p){
 	chk.setAttribute('id', de);
 	chk.setAttribute('type', 'checkbox');
 	
-	$('#' + ef)
+	$('#' + fh)
 	.append(inp)
 	.append(chk)
+	.attr('data-nu-parent', p)
 	.attr('data-nu-form', p);
 	
 	$('#' + pk).css({'visibility' : 'hidden'})
 	.val(w.record_id)
-	.attr('data-nu-field','true')
 	.attr('data-nu-form', p);
 	
 	$('#' + de).css({'top'		: 3, 
@@ -209,7 +211,6 @@ function nuSubformRecordProperties(w, l, p){
 					'position' 	: 'absolute', 
 					'visibility'	: 'visible'})
 	.prop('checked', w.record_id == -1)
-	.attr('data-nu-field','true')
 	.attr('data-nu-form', p);
 
 }
@@ -249,9 +250,11 @@ function nuINPUT(w, i, l, p, prop){
 					'position'	: 'absolute'
 	})
 	.val(w.objects[i].value)
-	.attr('data-nu-field', 'true')
+	.attr('data-nu-field', prop.objects[i].id)
 	.attr('data-nu-object-id', w.objects[i].object_id)
 	.attr('data-nu-prefix', p);
+	
+	window.nuFIELD[id]	= w.objects[i].value;
 
 	if(prop.objects[i].type == 'display'){
 		
@@ -454,9 +457,11 @@ function nuSELECT(w, i, l, p, prop){
 					'width'    : Number(prop.objects[i].width),
 					'position' : 'absolute'
 	})
-	.attr('data-nu-field', 'true')
+	.attr('data-nu-field', prop.objects[i].id)
 	.attr('data-nu-object-id', w.objects[i].object_id)
 	.attr('data-nu-prefix', p);
+
+	window.nuFIELD[id]	= w.objects[i].value;
 
 	if(prop.objects[i].multiple == 1){
 	    
@@ -566,8 +571,8 @@ function nuSUBFORM(w, i, l, p, prop){
 	$('#' + id).append(scrDiv);
 	$('#' + scrId).css({'top'       	: rowTop,
 					'left'        	: 0,
-					'width'       	: Number(rowWidth),
-					'height'      	: Number(SF.height) - rowTop,
+					'width'       	: Number(rowWidth) + 1,
+					'height'      	: Number(SF.height) - rowTop + 1,
 					'border-width'	: 1,
 					'border-style'	: 'none solid solid solid',
 					'border-color'	: '#B0B0B0',
@@ -599,7 +604,7 @@ function nuSUBFORM(w, i, l, p, prop){
 						'height'        : Number(rowHeight),
 						'position'      : 'absolute'
 		})
-		.attr('onclick', 'nuAddSubformRow(this, event)')
+		.attr('onkeydown', 'nuAddSubformRow(this, event)')
 		.addClass('nuSubform' + even);
 
 		nuBuildEditObjects(SFR.forms[c], prefix, SF, SF.forms[0]);
@@ -624,12 +629,7 @@ function nuNewRowObject(p){
 	var o	= $('#' + p + 'nuFormHolder');
 	var sf	= p.substr(0, p.length - 3);
 	var h	= String(o[o.length-1].outerHTML);
-	window.nuSUBFORMROW[sf]	= h
-	.replaceAll(p, '#nuSubformRowNumber#', true)
-	.replaceAll('"nuSubform0"', '"nuSubform2"', true)
-	.replaceAll('"nuSubform1"', '"nuSubform2"', true);
-
-	console.log(p, sf);
+	window.nuSUBFORMROW[sf]	= h.replaceAll(p, '#nuSubformRowNumber#', true);
 
 }
 
@@ -651,12 +651,28 @@ function nuAddSubformRow(t, e){
 	if(l-1 != r){return;}
 	
 	var h	= String(window.nuSUBFORMROW[sf]);
+	var c	= l/2 == parseInt(l/2) ? '0' : '1';
 	h		= h.replaceAll('#nuSubformRowNumber#', sf + nuPad3(l));
+	h 		= h.replaceAll('"nuSubform0"', '"nuSubform1"', true);
+	h 		= h.replaceAll('"nuSubform1"', '"nuSubform'+c+'"', true);
+	
 	o.parent().append(h);
+	
 	$('#' + sf + nuPad3(l) + 'nuFormHolder').css('top', top);
-
-	console.log(window.nuSUBFORMROW[sf]);
-	console.log(l,r,t.id, sf, sf + nuPad3(l));
+	$('#' + sf + nuPad3(l) + 'nuDelete').prop('checked', true);
+	$('#' + sf + nuPad3(l-1) + 'nuDelete').prop('checked', false);
+	
+	var ps	= $('#' + t.id).parent().parent().parent().attr('data-nu-form');
+	
+	if($('#' + ps + 'nuDelete').length != 0){
+		
+		var ths	= document.getElementById(ps + 'nuFormHolder');
+		
+		nuAddSubformRow(ths, e);
+		
+	}
+	
+	$('.nuTabSelected').click();
 	
 }
 
@@ -1420,6 +1436,70 @@ function nuHighlightSearch(){
 		}
 		
 	});
+	
+}
+
+function nuGetFormData(frm){
+
+	var a	= [];
+	var s	= '';
+	var f	= $("[id$='nuFormHolder']");
+	
+	f.each(function(index){
+	
+		var	s	= String($(this).attr('id'));
+		
+		a.push(s.substr(0, s.length - 12));
+		
+	});
+	
+	var b		= a.sort();
+	var r		= [];
+	
+	for(var i = 0 ; i < b.length ; i++){
+
+		var rw	= new nuFormClass(b[i]);
+		
+		if(rw.d == true || rw.p == '-1' || rw.f.length != 0){
+			
+			r.push(rw);
+			
+		}
+		
+	}
+	
+	console.log(JSON.stringify(r));
+	
+}
+
+
+function nuFormClass(frm){
+	
+	var primary_key	= $('#' + frm + 'nuPrimaryKey').val();
+	primary_key 		= primary_key == '' ? '-1' : primary_key;
+	var deleted		= $('#' + frm + 'nuDelete').is(":checked");
+	var fields		= [];
+	var values		= [];
+	var o			= $("[data-nu-prefix='" + frm + "'][data-nu-field]");
+	
+	o.each(function(index){
+
+		var f		= $(this).attr('data-nu-field');
+		var v		= $(this).val();
+
+		if(window.nuFIELD[frm + f] != v || primary_key == '-1'){
+		
+			fields.push(f);
+			values.push(v);
+		
+		}
+		
+	});
+	
+	this.p	= primary_key;
+	this.d	= deleted;
+	this.f	= fields;
+	this.v	= values;
 	
 }
 
