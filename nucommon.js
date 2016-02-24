@@ -3,6 +3,7 @@ window.nuBC 				= [];
 window.nuOPENER			= [];
 window.nuSUBFORMROW		= [];
 window.nuFIELD			= [];
+window.nuFORM				= [];
 window.nuSESSION			= '';
 window.nuTYPE 			= 'browse';
 
@@ -86,7 +87,7 @@ function nuGetForm(f, r, n){
 		dataType : "json"
 		}).done(function(data){
 			
-			var fm 	= data.forms[0];
+			var fm 	= data;
 			
 			if(nuErrorMessages(fm.errors)){
 				if(fm.log_again == 1){nuLogin();}
@@ -120,7 +121,7 @@ function nuGetLookupId(pk, id){
 		dataType : "json"
 		}).done(function(data){
 			
-			var fm 	= data.forms[0];
+			var fm 	= data;
 			if(nuErrorMessages(fm.errors)){
 			}else{
 				window.parent.nuPopulateLookup(fm, id);
@@ -149,7 +150,7 @@ function nuGetLookupCode(e, buildLookupList){
 		dataType : "json"
 		}).done(function(data){
 			
-			var fm 	= data.forms[0];
+			var fm 	= data;
 			if(nuErrorMessages(fm.errors)){
 			}else{
 				

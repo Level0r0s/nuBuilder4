@@ -3,7 +3,6 @@
 function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 
     $tabs = nuBuildTabList($F);
-    
     $f              = nuGetEditForm($F);
 
     $f->form_id     = $F;
@@ -13,7 +12,6 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
     $s = "Select * From `$f->table` Where `$f->primary_key` = '$R'";
     $t = nuRunQuery($s);
     $A = db_fetch_array($t);
-
     $s = "
     
     SELECT * 
@@ -236,18 +234,18 @@ function nuGetLookupValues($R, $O){
 		$R->sob_lookup_code,
 		$R->sob_lookup_description
 		$S->from 
-		WHERE `$r->sfo_primary_key` = '$O->value'
+		WHERe `$r->sfo_primary_key` = '$O->value'
         
     ";
-	
+
     $t = nuRunQuery($s);
 
     $l = db_fetch_row($t);
 	
 	$v		= array();
-	$v[]		= array($O->id, $l[0]);
-	$v[]		= array($O->id . 'code', $l[1]);
-	$v[]		= array($O->id . 'description', $l[2]);
+	$v[]		= array($O->id, isset($l[0]) ? $l[0] : '');
+	$v[]		= array($O->id . 'code', isset($l[1]) ? $l[1] : '');
+	$v[]		= array($O->id . 'description', isset($l[2]) ? $l[2] : '');
 
 	return $v;
 	
@@ -771,16 +769,13 @@ function nuGetAllLookupValues(){
 	$OID						= $_POST['nuSTATE']['object_id'];
 	$PK						= $_POST['nuSTATE']['primary_key'];
 	$s						= "SELECT * FROM zzzzsys_object WHERE zzzzsys_object_id = '$OID'";
-	nudebug(print_r($_POST['nuSTATE'],1));
 	$t						= nuRunQuery($s);
 	$r						= db_fetch_object($t);
 	$o						= nuDefaultObject($r, array());
-	
 	$o->description_width		= $r->sob_lookup_description_width;
 	$o->auto_complete			= $r->sob_lookup_autocomplete;
 	$o->form_id				= $r->sob_lookup_zzzzsys_form_id;
 	$o->value				= $PK;
-	
 	$l						= nuGetLookupValues($r, $o);
 	$e						= nuGetOtherLookupValues($o);
 

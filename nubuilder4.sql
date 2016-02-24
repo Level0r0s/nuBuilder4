@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 22, 2016 at 04:46 PM
+-- Generation Time: Feb 24, 2016 at 11:04 AM
 -- Server version: 5.5.9
 -- PHP Version: 5.3.5
 
@@ -159,7 +159,7 @@ CREATE TABLE IF NOT EXISTS `employee` (
 --
 
 INSERT INTO `employee` (`employee_id`, `emp_company_id`, `emp_name`, `emp_mobile`, `emp_business_id`) VALUES
-('5678d416056e635', '5678d262e048faa', 'Max', '777777', ''),
+('5678d416056e635', '5678d262e048faa', 'Max', '777777', '568a00f3e57f096'),
 ('5678d41605e4dda', '5678d262e048faa', 'Steven', '', ''),
 ('5678d41606549b9', '5678d262e048faa', 'Jimmy', '', ''),
 ('56931da24560e11', '5678d262e048faa', 'Tim', '', ''),
@@ -1353,7 +1353,7 @@ CREATE TABLE IF NOT EXISTS `zzzsys_session` (
 --
 
 INSERT INTO `zzzsys_session` (`zzzsys_session_id`, `sss_zzzsys_user_id`, `sss_timeout`, `zzzsys_session_log_added_at`, `zzzsys_session_log_added_by`, `zzzsys_session_log_changed_at`, `zzzsys_session_log_changed_by`, `zzzsys_session_log_viewed_at`, `zzzsys_session_log_viewed_by`) VALUES
-('56ca846980cbf64', 'globeadmin', 1456112755, '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '');
+('56ccd932d7aaa33', 'globeadmin', 1456273881, '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '');
 
 -- --------------------------------------------------------
 
@@ -2509,7 +2509,10 @@ INSERT INTO `zzzsys_user_log` (`zzzsys_user_log_id`, `sul_zzzsys_user_id`, `sul_
 ('56c644c7cfda628', 'globeadmin', '127.0.0.1', '2016-02-19 08:55:11', '2016-02-19 13:45:41', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', ''),
 ('56c688e2adac14a', 'globeadmin', '127.0.0.1', '2016-02-19 13:45:46', '2016-02-19 13:54:40', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', ''),
 ('56c697b959fba9d', 'globeadmin', '127.0.0.1', '2016-02-19 14:49:05', '2016-02-19 14:49:05', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', ''),
-('56ca846980cbf64', 'globeadmin', '127.0.0.1', '2016-02-22 14:15:45', '2016-02-22 14:15:55', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '');
+('56ca846980cbf64', 'globeadmin', '127.0.0.1', '2016-02-22 14:15:45', '2016-02-22 14:15:55', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', ''),
+('56cb7ff718b78d3', 'globeadmin', '127.0.0.1', '2016-02-23 08:09:03', '2016-02-23 09:59:37', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', ''),
+('56cbfafe7814878', 'globeadmin', '127.0.0.1', '2016-02-23 16:53:58', '2016-02-24 08:41:56', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', ''),
+('56ccd932d7aaa33', 'globeadmin', '127.0.0.1', '2016-02-24 08:42:02', '2016-02-24 11:01:21', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '');
 
 -- --------------------------------------------------------
 
@@ -2618,7 +2621,7 @@ CREATE TABLE IF NOT EXISTS `zzzzsys_form` (
 
 INSERT INTO `zzzzsys_form` (`zzzzsys_form_id`, `sfo_type`, `sfo_code`, `sfo_description`, `sfo_table`, `sfo_primary_key`, `sfo_breadcrumb_title`, `sfo_redirect_form_id`, `sfo_row_height`, `sfo_rows_per_page`, `sfo_before_browse_php`, `sfo_browse_sql`, `sfo_add_button`, `sfo_add_title`, `sfo_add_display_condition`, `sfo_new_button`, `sfo_new_title`, `sfo_new_display_condition`, `sfo_save_button`, `sfo_save_title`, `sfo_save_display_condition`, `sfo_delete_button`, `sfo_delete_title`, `sfo_delete_display_condition`, `sfo_clone_button`, `sfo_clone_title`, `sfo_clone_display_condition`, `sfo_print_button`, `sfo_print_title`, `sfo_print_display_condition`, `sfo_report_sql`, `sfo_report_library_zzzzsys_form_id`, `sfo_report_criteria_zzzzsys_form_id`, `sfo_report_layout`, `sfo_library_php`) VALUES
 ('56773cb405f4913', 'browseedit', 'COM', 'Company', 'company', 'company_id', '', '', '', '', '', 'SELECT * FROM company\nINNER JOIN business ON business_id = com_business_id', '1', '', '', '', '', '', '1', 'Save Me', '', '1', '', '', '1', '', '', '', '', '', '', '', '', '', ''),
-('5678ab2c48c5c41', 'browseedit', 'EMP', 'Employee Subform', 'employee', 'employee_id', '', '', '', '', '', 'SELECT * FROM employee', '1', '', '', '0', '', '', '1', '', '', '1', '', '', '1', '', '', '', '', '', '', '', '', '', ''),
+('5678ab2c48c5c41', 'browseedit', 'EMP', 'Employee Subform', 'employee', 'employee_id', '', '', '', '', '', 'SELECT * FROM employee\nWHERE employee_id = ''5678d416056e635''', '1', '', '', '0', '', '', '1', '', '', '1', '', '', '1', '', '', '', '', '', '', '', '', '', ''),
 ('568b508eec00d80', 'browseedit', 'BUS', 'Business', 'business', 'business_id', '', '', '', '4', '', 'SELECT * FROM business', '1', '', '', '', '', '', '1', '', '', '', '', '', '1', '', '', '1', '', '', '', '', '', '', ''),
 ('nuhome', 'criteria', 'HOME', 'Home', '', '', '', '', '', '', '', '', '', '', '', '0', '', '', '0', '', '', '0', '', '', '0', '', '', '', '', '', '', '', '', '', ''),
 ('56c513162acd102', 'browseedit', 'CHI', 'Children', 'children', 'children_id', '', '', '', '', '', 'SELECT * FROM employee', '1', '', '', '0', '', '', '1', '', '', '1', '', '', '1', '', '', '', '', '', '', '', '', '', '');
@@ -2743,7 +2746,7 @@ INSERT INTO `zzzzsys_object` (`zzzzsys_object_id`, `sob_all_zzzzsys_form_id`, `s
 ('56b2b1c7939942e', '568b508eec00d80', 'input', 'bus_check', 'Check', '568b508eecf5dee', 100, 50, 30, 16, '1', '', 'noblanks', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('56b2b61749821eb', '56773cb405f4913', 'lookup', 'com_company_id', 'Parent Company', '56777715b87666e', 200, 200, 60, 30, '1', '', 'noblanks', '0', '', '', '', '', '', '', '', '', '', 'com_code', 'com_name', '200', '0', '56773cb405f4913', '', 'function mannn(){\n\n   return ''it works'';\n\n}', '', '', '', '', '', '', '', ''),
 ('56b7e275560be71', '56773cb405f4913', 'textarea', 'com_notes', 'Notes', '56777715b87666e', 250, 100, 150, 77, '1', '', 'noblanks', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-('56c0fd692478b9e', '5678ab2c48c5c41', 'lookup', 'com_business_id', 'Business Type', '5678ab2c49bd810', 40, 100, 60, 16, '1', '', 'noblanks', '0', '', '', '', '', '', '', '', '', '', 'bus_code', 'bus_description', '200', '0', '568b508eec00d80', '', '', '', '', '', '', '', '', '', ''),
+('56c0fd692478b9e', '5678ab2c48c5c41', 'lookup', 'emp_business_id', 'Business Type', '5678ab2c49bd810', 40, 100, 60, 16, '1', '', 'noblanks', '0', '', '', '', '', '', '', '', '', '', 'bus_code', 'bus_description', '200', '0', '568b508eec00d80', '', '', '', '', '', '', '', '', '', ''),
 ('56c51374a77bac9', '5678ab2c48c5c41', 'subform', 'chi_subform', 'Name', '56c5145674c17a1', 10, 100, 200, 200, '1', 'right', 'noblanks', '0', '', '', '568b508eec00d80', '', 'i', '', '', '', '', '', '', '', '', '', '', '', '56c513162acd102', 'chi_employee_id', '1', '1', 'g', '', '', '<div style=\\"top:0px;left:0px;width:200px;height:200px;background-color:tan;\\">Hello World</div>'),
 ('56c513a59ae1da4', '56c513162acd102', 'input', 'chi_name', 'Name', '56c5131630c0b35', 10, 50, 150, 16, '1', '', 'noblanks', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
 
@@ -2967,7 +2970,83 @@ INSERT INTO `zzzzsys_session` (`zzzzsys_session_id`, `sss_zzzzsys_user_id`, `sss
 ('56caa3d1a0ea57a', 'globeadmin', 0, ''),
 ('56caa6dd5508403', 'globeadmin', 0, ''),
 ('56caa715d333ff1', 'globeadmin', 0, ''),
-('56caa7709395051', 'globeadmin', 0, '');
+('56caa7709395051', 'globeadmin', 0, ''),
+('56cb83f983f268d', 'globeadmin', 0, ''),
+('56cb8431de67af5', 'globeadmin', 0, ''),
+('56cb8856de06b24', 'globeadmin', 0, ''),
+('56cb8859e68f336', 'globeadmin', 0, ''),
+('56cb88772b0e91d', 'globeadmin', 0, ''),
+('56cb93146bb9415', 'globeadmin', 0, ''),
+('56cb9403b80ea2f', 'globeadmin', 0, ''),
+('56cb94ea574e165', 'globeadmin', 0, ''),
+('56cb95b0e12124c', 'globeadmin', 0, ''),
+('56cb96803682419', 'globeadmin', 0, ''),
+('56cb96b190d03f3', 'globeadmin', 0, ''),
+('56cb96cda729c3d', 'globeadmin', 0, ''),
+('56cbafa3375526e', 'globeadmin', 0, ''),
+('56cbb0d84a576da', 'globeadmin', 0, ''),
+('56cbb1edccf24bf', 'globeadmin', 0, ''),
+('56cbb21488721ec', 'globeadmin', 0, ''),
+('56cbb98292e5110', 'globeadmin', 0, ''),
+('56cbb9c56f13898', 'globeadmin', 0, ''),
+('56cbba0056c6a16', 'globeadmin', 0, ''),
+('56cbba80e31242f', 'globeadmin', 0, ''),
+('56cbbd3e22591b2', 'globeadmin', 0, ''),
+('56cbbf22d632f62', 'globeadmin', 0, ''),
+('56cbc02e01aae76', 'globeadmin', 0, ''),
+('56cbc0a906851e3', 'globeadmin', 0, ''),
+('56cbc6f33c0dd2a', 'globeadmin', 0, ''),
+('56cbc72992baa9b', 'globeadmin', 0, ''),
+('56cbcf533e9a341', 'globeadmin', 0, ''),
+('56cbd78ccf0dd57', 'globeadmin', 0, ''),
+('56cbd7b4cef56b9', 'globeadmin', 0, ''),
+('56cbdbf345fc145', 'globeadmin', 0, ''),
+('56cbdd90939c81e', 'globeadmin', 0, ''),
+('56cbdda6dfc5756', 'globeadmin', 0, ''),
+('56cbde4b3e73a34', 'globeadmin', 0, ''),
+('56cbde7a446878a', 'globeadmin', 0, ''),
+('56cbdf44380e1bd', 'globeadmin', 0, ''),
+('56cbeadb9d1c7dc', 'globeadmin', 0, ''),
+('56cbeba737e7993', 'globeadmin', 0, ''),
+('56cbebb7d220bdf', 'globeadmin', 0, ''),
+('56cbec1d9b2563a', 'globeadmin', 0, ''),
+('56cbecca40711e6', 'globeadmin', 0, ''),
+('56cbed02caf9672', 'globeadmin', 0, ''),
+('56cbed2f57b29de', 'globeadmin', 0, ''),
+('56cbed6d2fc5d4c', 'globeadmin', 0, ''),
+('56cbee92ed39f4b', 'globeadmin', 0, ''),
+('56cbefea6d82e43', 'globeadmin', 0, ''),
+('56cbf0babbf7601', 'globeadmin', 0, ''),
+('56cbf0e42e7885c', 'globeadmin', 0, ''),
+('56cbf2558293772', 'globeadmin', 0, ''),
+('56cbf2fb6c31e72', 'globeadmin', 0, ''),
+('56cbf3ac9b4cb91', 'globeadmin', 0, ''),
+('56cbf3eb30e9fd2', 'globeadmin', 0, ''),
+('56cbf51f1cc31f6', 'globeadmin', 0, ''),
+('56cbf553e0a05e7', 'globeadmin', 0, ''),
+('56cbf7823381096', 'globeadmin', 0, ''),
+('56cbfa6ecad013c', 'globeadmin', 0, ''),
+('56cbfa9f8b4e6d9', 'globeadmin', 0, ''),
+('56cbfc64bafb3c0', 'globeadmin', 0, ''),
+('56cbfd444da8587', 'globeadmin', 0, ''),
+('56cbfd7bbfdad51', 'globeadmin', 0, ''),
+('56cbfdc5ee0b86a', 'globeadmin', 0, ''),
+('56cbfe51c5c3f36', 'globeadmin', 0, ''),
+('56cbfe6f2d8dab5', 'globeadmin', 0, ''),
+('56ccce3404483a7', 'globeadmin', 0, ''),
+('56ccce713169837', 'globeadmin', 0, ''),
+('56ccce83a69d4f0', 'globeadmin', 0, ''),
+('56cccf42ce79ab5', 'globeadmin', 0, ''),
+('56cccf7e63b6c9c', 'globeadmin', 0, ''),
+('56ccd00d407da7d', 'globeadmin', 0, ''),
+('56ccd04665ee4d5', 'globeadmin', 0, ''),
+('56ccd0666a462e2', 'globeadmin', 0, ''),
+('56ccd0817cec8e9', 'globeadmin', 0, ''),
+('56ccd139e905153', 'globeadmin', 0, ''),
+('56ccd18d9a0789f', 'globeadmin', 0, ''),
+('56ccd31dcbbdd6c', 'globeadmin', 0, ''),
+('56ccd57f69db301', 'globeadmin', 0, ''),
+('56ccfa492e88def', 'globeadmin', 0, '');
 
 -- --------------------------------------------------------
 
