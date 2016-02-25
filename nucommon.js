@@ -124,6 +124,7 @@ function nuGetLookupId(pk, id){
 			var fm 	= data;
 			if(nuErrorMessages(fm.errors)){
 			}else{
+				$('#' + id).change();
 				window.parent.nuPopulateLookup(fm, id);
 			}
 			

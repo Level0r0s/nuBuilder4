@@ -9,7 +9,6 @@ function nuBuildForm(f){
 	}
 
 	window.nuSESSION		= f.session_id;
-	window.nuFIELD		= [];
 	window.nuSUBFORMROW	= [];
 	
 	$('body').html('');
@@ -41,7 +40,6 @@ function nuBuildForm(f){
 	if(f.record_id == ''){
 	}else{
 		nuAddHolder('nuTabHolder');
-		nuAddHolder('nuFormsHolder');
 		nuAddHolder('nuFormHolder');
 	}
 	
@@ -49,7 +47,7 @@ function nuBuildForm(f){
 	nuAddEditTabs('', f);
 	nuAddActionButtons(f);
 
-	nuMainRecordProperties(f);
+	nuRecordProperties(f, '');
 	nuBuildEditObjects(f, '', '', f);
 	
 	nuGetStartingTab();
@@ -159,65 +157,36 @@ function nuBuildEditObjects(f, p, o, prop){
 	
 }
 
-function nuMainRecordProperties(w){
+function nuRecordProperties(w, p, l){
 
-	var pk    = 'nuPrimaryKey';
-	var de    = 'nuDelete';
-	var fh    = 'nuFormHolder';                       //-- Edit Form Id
-	var inp   = document.createElement('input');
-	var chk   = document.createElement('input');
-
-	inp.setAttribute('id', pk);
-	chk.setAttribute('id', de);
-	chk.setAttribute('type', 'checkbox');
-	
-	$('#' + fh).append(inp)
-	.append(chk)
-	.addClass('nuSection')
-	.attr('data-nu-edit-form-id', w.id)
-	.attr('data-nu-parent', '');
-
-	$('#' + pk).css({'visibility' : 'hidden'})
-	.val(w.record_id)
-	.attr('data-nu-form', '');
-	
-	$('#' + de).css('visibility', 'hidden')
-	.prop('checked', w.record_id == -1)
-	.attr('data-nu-form', '');
-
-}
-
-
-function nuSubformRecordProperties(w, l, p){
-
-	var pk    = p + 'nuPrimaryKey';
 	var de    = p + 'nuDelete';
 	var fh    = p + 'nuFormHolder';                       //-- Edit Form Id
-	var inp   = document.createElement('input');
 	var chk   = document.createElement('input');
 
-	inp.setAttribute('id', pk);
 	chk.setAttribute('id', de);
 	chk.setAttribute('type', 'checkbox');
 	$('#' + fh)
-	.append(inp)
 	.append(chk)
 	.addClass('nuSection')
 	.attr('data-nu-edit-form-id', w.id)
-	.attr('data-nu-parent', p)
-	.attr('data-nu-form', p);
+	.attr('data-nu-primary-key', w.record_id)
+	.attr('data-nu-foreign-key', w.foreign_key)
 	
-	$('#' + pk).css({'visibility' : 'hidden'})
-	.val(w.record_id)
-	.attr('data-nu-form', p);
+	if(arguments.length == 3){
+		
+		$('#' + de).css({'top'		: 3, 
+						'left'		: Number(l) + 3, 
+						'position' 	: 'absolute', 
+						'visibility'	: 'visible'})
+		.prop('checked', w.record_id == -1);
+		
+	}else{
+		
+		$('#' + de).css('visibility', 'hidden')
+		.prop('checked', false);
+		
+	}
 	
-	$('#' + de).css({'top'		: 3, 
-					'left'		: Number(l) + 3, 
-					'position' 	: 'absolute', 
-					'visibility'	: 'visible'})
-	.prop('checked', w.record_id == -1)
-	.attr('data-nu-form', p);
-
 }
 
 function nuINPUT(w, i, l, p, prop){
@@ -255,10 +224,10 @@ function nuINPUT(w, i, l, p, prop){
 					'position'	: 'absolute'
 	})
 	.val(w.objects[i].value)
+	.attr('onchange', 'nuOnChange(this)')
 	.attr('data-nu-field', prop.objects[i].id)
 	.attr('data-nu-object-id', w.objects[i].object_id)
 	.attr('data-nu-prefix', p);
-	window.nuFIELD[id]	= w.objects[i].value;
 
 
 	if(prop.objects[i].type == 'display'){
@@ -272,7 +241,6 @@ function nuINPUT(w, i, l, p, prop){
 		
 		$('#' + id).hide();
 		
-		window.nuFIELD[id]	= w.objects[i].values[0][1];
 		$('#' + id).val(w.objects[i].values[0][1]);
 
 		var target			= id;
@@ -420,8 +388,7 @@ function nuRUN(w, i, l, p, prop){
 					'width'    	: Number(prop.objects[i].width),
 					'height'   	: Number(prop.objects[i].height),
 					'position' 	: 'absolute'
-	})
-	.attr('data-nu-index', i);
+	});
 
 	if(prop.objects[i].run_method == 'b'){
 	
@@ -471,12 +438,10 @@ function nuSELECT(w, i, l, p, prop){
 					'width'    : Number(prop.objects[i].width),
 					'position' : 'absolute'
 	})
-	.attr('data-nu-index', i)
+	.attr('onchange', 'nuOnChange(this)')
 	.attr('data-nu-field', prop.objects[i].id)
 	.attr('data-nu-object-id', w.objects[i].object_id)
 	.attr('data-nu-prefix', p);
-
-	window.nuFIELD[id]	= w.objects[i].value;
 
 	if(prop.objects[i].multiple == 1){
 	    
@@ -532,7 +497,7 @@ function nuSUBFORM(w, i, l, p, prop){
 					'overflow-x'	: 'hidden',
 					'overflow-y'	: 'h)idden'
 	})
-	.attr('data-nu-index', i)
+	.attr('data-nu-subform-parent', p)
 	.attr('data-nu-subform', 'true')
 	.addClass('nuSubform');
 
@@ -625,7 +590,7 @@ function nuSUBFORM(w, i, l, p, prop){
 
 		nuBuildEditObjects(SFR.forms[c], prefix, SF, SF.forms[0]);
 
-		nuSubformRecordProperties(SF.forms[c], rowWidth - 40, prefix);
+		nuRecordProperties(SF.forms[c], prefix, rowWidth - 40);
 
 		rowTop 	= Number(rowTop) + Number(rowHeight);
 		even		= even == '0' ? '1' : '0'
@@ -675,7 +640,7 @@ function nuAddSubformRow(t, e){
 	o.parent().append(h);
 	
 	$('#' + sf + nuPad3(l) + 'nuFormHolder').css('top', top);
-	$('#' + sf + nuPad3(l) + 'nuPrimaryKey').val('-1');
+	$('#' + sf + nuPad3(l)).attr('data-nu-primary-key', '-1');
 	$('#' + sf + nuPad3(l) + 'nuDelete').prop('checked', true);
 	$('#' + sf + nuPad3(l-1) + 'nuDelete').prop('checked', false);
 	
@@ -938,7 +903,7 @@ function nuSelectTab(tab){
     var f = $('#' + tab.id).attr('data-nu-form-filter');
 
     $("[data-nu-form='" + f + "']").hide();
-    $("[data-nu-tab='"  + t + "'][data-nu-form='" + f + "']").show();
+    $("[data-nu-form='" + f + "'][data-nu-tab='"  + t + "']").show();
 
     $("[data-nu-form-filter='" + f + "']").removeClass('nuTabSelected');
     $("[data-nu-form-filter='" + f + "'][data-nu-tab-filter='"  + t + "']").show();
@@ -1485,44 +1450,82 @@ function nuGetFormData(){
 
 		var rw	= new nuFormClass(b[i]);
 		
-		if(rw.d == true || rw.p == '-1' || rw.f.length != 0){
+		if(rw.d == true || rw.p == '-1' || rw.f.length > 0){
 			
 			r.push(rw);
 			
 		}
 		
 	}
+
+	var st	= r.sort(nuSortRecords);
+	var c	= 0;
 	
-	console.log(JSON.stringify(r));
+
+	for(var c = 0 ; c < st.length ; c++){
+	
+		var H	= st[c].h;
+		st[c].h	= c;
+		
+		for(var C = 0 ; C < st.length ; C++){
+		
+			if(H == st[C].p){
+				st[C].p = st[c].h;
+			}
+			
+		}
+		
+	}
+
+	
+	
+	console.log(JSON.stringify(st));
+	return st;
+
+}
+
+function nuSortRecords(a, b) {
+	
+	a	= String(a.h);
+	b	= String(b.h);
+	
+	if(a.length < b.length){
+		return -1;
+	}else if(a > b){
+		return 1;
+	}else{
+		return -0;
+	}
 	
 }
 
-
 function nuFormClass(frm){
-	
-	var primary_key	= $('#' + frm + 'nuPrimaryKey').val();
-	var form_id	= $('#' + frm + 'nuFormHolder').attr('data-nu-edit-form-id');
-	var deleted		= $('#' + frm + 'nuDelete').is(":checked");
 
+	var fh			= '#' + frm + 'nuFormHolder';
+	var holder		= $(fh).attr('id');
+	var parent		= $(fh).parent().parent().parent().attr('id');
+	var foreign_key	= $(fh).attr('data-nu-foreign-key');
+	var primary_key	= $(fh).attr('data-nu-primary-key');
+	var form_id		= $(fh).attr('data-nu-edit-form-id');
+	var deleted		= $('#' + frm + 'nuDelete').is(":checked");
 	var fields		= [];
 	var values		= [];
-	var o			= $("[data-nu-prefix='" + frm + "'][data-nu-field]");
+	var o			= $("[data-nu-prefix='" + frm + "'][data-nu-field][data-nu-changed]");
 
 	o.each(function(index){
 
 		var f		= $(this).attr('data-nu-field');
 		var v		= $(this).val();
 
-		if(window.nuFIELD[frm + f] != v || primary_key == '-1'){
-		
-			fields.push(f);
-			values.push(v);
-		
-		}
+		fields.push(f);
+		values.push(v);
 		
 	});
 	
-	this.p	= primary_key;
+	this.pk	= primary_key;
+	this.fk	= parent === foreign_key ? '' : foreign_key;
+	this.h	= holder;
+	this.p	= parent === undefined ? '' : parent;
 	this.i	= form_id;
 	this.d	= deleted;
 	this.f	= fields;
@@ -1549,4 +1552,13 @@ function nuSetFORM(F){
 		
 	}
 	
+}
+
+function nuOnChange(t){
+
+	var p	= $('#' + t.id).attr('data-nu-prefix');
+	$('#' + p + 'nuDelete').prop('checked', false);
+	$('#' + t.id).attr('data-nu-changed', '1');
+	$('#nuSaveButton').css('background-color', 'red');
+
 }

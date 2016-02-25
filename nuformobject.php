@@ -26,7 +26,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
     
     while($r = db_fetch_object($t)){
 
-        $o 					= nuDefaultObject($r, $tabs);
+		$o 					= nuDefaultObject($r, $tabs);
 
         if($R == '-1'){
             $o->value			= nuGetSQLValue($r->sob_all_default_value_sql);
@@ -364,6 +364,7 @@ function nuGetSubformRecords($R, $A){
     while($r = db_fetch_row($t)){
         
         $o   = nuGetFormObject($R->sob_subform_zzzzsys_form_id, $r[0], count($a));
+        $o->foreign_key	= $R->subform_fk;
         $a[] = $o;
 
     }
@@ -371,6 +372,7 @@ function nuGetSubformRecords($R, $A){
     if($A == 1){  //-- add blank record
     
         $o   = nuGetFormObject($R->sob_subform_zzzzsys_form_id, -1, count($a));
+        $o->foreign_key	= $R->subform_fk;
         $a[] = $o;
         
     }
