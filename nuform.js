@@ -1,7 +1,5 @@
 
 function nuBuildForm(f){
-
-	window.nuFORM[0]	= f;
 	
 	if(f.form_id == ''){
 		nuLogin();

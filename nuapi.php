@@ -2,17 +2,18 @@
 	header("Content-Type: application/json");
 	header("Cache-Control: no-cache, must-revalidate");
 	require_once('nucommon.php');
-	require_once('nuformobject.php');
+	require_once('nuform.php');
+	require_once('nudata.php');
 
 	$_POST['nuErrors']					= array();
 	$f->forms[0]							= new stdClass;
 	$s									= nuCheckSession();
-	
 	$P									= $_POST['nuSTATE'];
 		
 	if($P['call_type'] == 'getlookupid')	{$f->forms[0]->lookup_values 	= nuGetAllLookupValues();}
 	if($P['call_type'] == 'getlookupcode')	{$f->forms[0]->lookup_values 	= nuGetAllLookupList();}
 	if($P['call_type'] == 'getform')		{$f->forms[0] 				= nuGetFormObject($s->form_id, $s->record_id, 0, $P);}
+	if($P['call_type'] == 'update')		{$f->forms[0] 				= nuUpdateData();}
 
 	$f->forms[0]->dimensions				= $s->dimensions;
 	$f->forms[0]->session_id				= $s->session_id;
@@ -22,9 +23,5 @@
 	$j									= json_encode($f->forms[0]);
 	
 	print $j;
-/*		
-	w.call_type	= 'getlookupcode';
-	w.object_id	= t.attr('data-nu-object-id');
-	w.code		= t.value;
-*/
+
 ?>

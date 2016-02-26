@@ -171,6 +171,38 @@ function nuGetLookupCode(e, buildLookupList){
 
 }
 
+function nuUpdateData(f, r){
+
+	var w 		= nuGetFormState();
+	w.call_type	= 'update';
+	w.data		= nuGetFormData();
+	
+	if(arguments.length == 0){
+	
+		f		= w.form_id;
+		r		= w.record_id;
+	
+	}
+	
+	var request 	= $.ajax({
+		url      : "nuapi.php",
+		type     : "POST",
+		data     : {nuSTATE : w},
+		dataType : "json"
+		}).done(function(data){
+			
+			var fm 	= data;
+			if(nuErrorMessages(fm.errors)){
+			}else{
+				nuGetForm(f, r);
+			}
+			
+		}).fail(function(xhr, err){
+			alert(nuFormatAjaxErrorMessage(xhr, err));
+	});
+
+}
+
 function nuErrorMessages(e){
 
 	var m	= '';
