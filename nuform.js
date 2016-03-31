@@ -38,7 +38,7 @@ function nuBuildForm(f){
 	if(f.record_id == ''){
 	}else{
 		nuAddHolder('nuTabHolder');
-		nuAddHolder('nuFormHolder');
+		nuAddHolder('nuRecordHolder');
 	}
 	
 	nuAddBreadcrumbs();
@@ -143,7 +143,7 @@ function nuBuildEditObjects(f, p, o, prop){
 			
 			l = l + nuSELECT(f, i, l, p, prop);
 			
-		}else if(t == 'subform'){
+		}else if(t == 'subform' && p == ''){
 
 			l = l + nuSUBFORM(f, i, l, p, prop);
 			
@@ -158,7 +158,7 @@ function nuBuildEditObjects(f, p, o, prop){
 function nuRecordProperties(w, p, l){
 
 	var de    = p + 'nuDelete';
-	var fh    = p + 'nuFormHolder';                       //-- Edit Form Id
+	var fh    = p + 'nuRecordHolder';                       //-- Edit Form Id
 	var chk   = document.createElement('input');
 
 	chk.setAttribute('id', de);
@@ -190,7 +190,7 @@ function nuRecordProperties(w, p, l){
 function nuINPUT(w, i, l, p, prop){
 	
 	var id   = p + prop.objects[i].id;
-	var ef   = p + 'nuFormHolder';                       //-- Edit Form Id
+	var ef   = p + 'nuRecordHolder';                       //-- Edit Form Id
 	var ty	= 'textarea';
 	
 	if(prop.objects[i].type != 'textarea'){         		//-- Input Object
@@ -319,7 +319,7 @@ function nuINPUT(w, i, l, p, prop){
 function nuHTML(w, i, l, p, prop){
 
 	var id  = p + prop.objects[i].id;
-	var ef  = p + 'nuFormHolder';                       //-- Edit Form Id
+	var ef  = p + 'nuRecordHolder';                       //-- Edit Form Id
 	var inp = document.createElement('div');
 	
 	inp.setAttribute('id', id);
@@ -352,7 +352,7 @@ function nuHTML(w, i, l, p, prop){
 function nuRUN(w, i, l, p, prop){
 
 	var id  = p + prop.objects[i].id;
-	var ef  = p + 'nuFormHolder';                       //-- Edit Form Id
+	var ef  = p + 'nuRecordHolder';                       //-- Edit Form Id
 	var ele = 'input';
 	
 	if(prop.objects[i].parent_type == 'g'){
@@ -412,7 +412,7 @@ function nuRUN(w, i, l, p, prop){
 function nuSELECT(w, i, l, p, prop){
 
 	var id  = p + prop.objects[i].id;
-	var ef  = p + 'nuFormHolder';                       //-- Edit Form Id
+	var ef  = p + 'nuRecordHolder';                       //-- Edit Form Id
 	
 	if(prop.objects[i].parent_type == 'g'){
 		
@@ -469,7 +469,7 @@ function nuSUBFORM(w, i, l, p, prop){
     var SF  = prop.objects[i];							//-- first row
     var SFR = w.objects[i];							//-- all rows
 	var id  = p + SF.id;
-	var ef  = p + 'nuFormHolder';                       //-- Edit Form Id
+	var ef  = p + 'nuRecordHolder';                       //-- Edit Form Id
 	var inp = document.createElement('div');
 	var fms = SFR.forms;
 
@@ -573,7 +573,7 @@ function nuSUBFORM(w, i, l, p, prop){
 	for(var c = 0 ; c < fms.length ; c++){
 
 		var prefix = id + nuPad3(c);
-		var frmId  = prefix + 'nuFormHolder';
+		var frmId  = prefix + 'nuRecordHolder';
 		var frmDiv = document.createElement('div');
 		frmDiv.setAttribute('id', frmId);
 		$('#' + scrId).append(frmDiv);
@@ -583,7 +583,6 @@ function nuSUBFORM(w, i, l, p, prop){
 						'height'        : Number(rowHeight),
 						'position'      : 'absolute'
 		})
-		.attr('onkeydown', 'nuAddSubformRow(this, event)')
 		.addClass('nuSubform' + even);
 
 		nuBuildEditObjects(SFR.forms[c], prefix, SF, SF.forms[0]);
@@ -605,52 +604,65 @@ function nuSUBFORM(w, i, l, p, prop){
 
 function nuNewRowObject(p){
 
-	var o	= $('#' + p + 'nuFormHolder');
 	var sf	= p.substr(0, p.length - 3);
-	var h	= String(o[o.length-1].outerHTML);
-	window.nuSUBFORMROW[sf]	= h.replaceAll(p, '#nuSubformRowNumber#', true);
+	var h	= document.getElementById(p + 'nuRecordHolder').outerHTML;
+	window.nuSUBFORMROW[sf]	= String(h.replaceAll(p, '#nuSubformRowNumber#', true));
+	
+}
 
+
+function nuSubformLastRow(t){
+
+	var i					= String($('#' + t.id).parent().attr('id'));
+	var p					= i.substr(0, i.length - 17);
+	var s					= parseInt(i.substr(11,3)) + 1;
+	var n					= $('#' + p + nuPad3(s) + 'nuRecordHolder').length;
+
+	return n == 0;
+	
+}
+
+
+function nuRecordHolderObject(t){
+	
+	var h		= 'nuRecordHolder';
+	var p		= $('#' + t.id).parent();
+	var i		= String(p.attr('id'));
+	var c		= 0;
+
+	this.form	= i.substr(0, i.length - 3 - h.length);
+	this.strNo	= i.substr(this.form.length, 3);
+	this.intNo	= Number(this.strNo);
+		
+	while ($('#' + this.form + nuPad3(this.intNo + c) + h).length != 0){c++;}
+	
+	this.rows	= this.intNo + c;
+	this.top		= parseInt(p.css('height')) * this.rows;
+	var s		= this.form  + nuPad3(this.intNo + 1) + h;
+	this.last	= $('#' + s).length == 0;
+	var s		= this.form  + nuPad3(this.rows - 1);
+	this.html	= window.nuSUBFORMROW[s];
+	this.even	= parseInt(this.rows/2) == this.rows/2 ? '0' : '1';
+	
 }
 
 function nuAddSubformRow(t, e){
 	
 	e.stopPropagation();
-	var sf	= t.id.substr(0, t.id.length-15);
-	
-	if(window.nuSUBFORMROW[sf] === undefined){
-		nuNewRowObject(sf + '000');
-	}
-	
-	var o	= $('#' + t.id);
-	var l	= o.parent().children().length;
-	var r	= parseInt(t.id.substr(t.id.length-15, 3));
 
-	var top	= parseInt(o.css('height')) * l;
-
-	if(l-1 != r){return;}
+	var o = new nuRecordHolderObject(t);
 	
-	var h	= String(window.nuSUBFORMROW[sf]);
-	var c	= l/2 == parseInt(l/2) ? '0' : '1';
-	h		= h.replaceAll('#nuSubformRowNumber#', sf + nuPad3(l));
-	h 		= h.replaceAll('"nuSubform0"', '"nuSubform1"', true);
-	h 		= h.replaceAll('"nuSubform1"', '"nuSubform'+c+'"', true);
+	if(!o.last){return;}
 	
-	o.parent().append(h);
+	var h	= window.nuSUBFORMROW[o.form].replaceAll('#nuSubformRowNumber#', o.form + nuPad3(o.rows), true);
 	
-	$('#' + sf + nuPad3(l) + 'nuFormHolder').css('top', top);
-	$('#' + sf + nuPad3(l)).attr('data-nu-primary-key', '-1');
-	$('#' + sf + nuPad3(l) + 'nuDelete').prop('checked', true);
-	$('#' + sf + nuPad3(l-1) + 'nuDelete').prop('checked', false);
+	$('#' + o.form + 'scrollDiv').append(h);
 	
-	var ps	= $('#' + t.id).parent().parent().parent().attr('data-nu-form');
-	
-	if($('#' + ps + 'nuDelete').length != 0){
-		
-		var ths	= document.getElementById(ps + 'nuFormHolder');
-		
-		nuAddSubformRow(ths, e);
-		
-	}
+	$('#' + o.form + nuPad3(o.rows) + 'nuRecordHolder').addClass('nuSubform'+ o.even);
+	$('#' + o.form + nuPad3(o.rows) + 'nuRecordHolder').css('top', o.top);
+	$('#' + o.form + nuPad3(o.rows)).attr('data-nu-primary-key', '-1');
+	$('#' + o.form + nuPad3(o.rows) + 'nuDelete').prop('checked', true);
+	$('#' + o.form + nuPad3(o.rows-1) + 'nuDelete').prop('checked', false);
 	
 	$('.nuTabSelected').click();
 	
@@ -669,7 +681,7 @@ function nuLabel(w, i, p, prop){
 	if(prop.objects[i].label == ''){return;}
 	
 	var id     = 'label_' + p + prop.objects[i].id;
-	var ef     = p + 'nuFormHolder';                       //-- Edit Form Id
+	var ef     = p + 'nuRecordHolder';                       //-- Edit Form Id
 	var lab    = document.createElement('label');
 	var lwidth = nuGetWordWidth(prop.objects[i].label);
 	
@@ -1431,7 +1443,7 @@ function nuGetFormData(){
 
 	var a	= [];
 	var s	= '';
-	var f	= $("[id$='nuFormHolder']");
+	var f	= $("[id$='nuRecordHolder']");
 	
 	f.each(function(index){
 	
@@ -1499,7 +1511,7 @@ function nuSortRecords(a, b) {
 
 function nuFormClass(frm){
 
-	var fh			= '#' + frm + 'nuFormHolder';
+	var fh			= '#' + frm + 'nuRecordHolder';
 	var holder		= $(fh).attr('id');
 	var parent		= $(fh).parent().parent().parent().attr('id');
 	var foreign_key	= $(fh).attr('data-nu-foreign-key');
@@ -1558,5 +1570,6 @@ function nuOnChange(t){
 	$('#' + p + 'nuDelete').prop('checked', false);
 	$('#' + t.id).attr('data-nu-changed', '1');
 	$('#nuSaveButton').css('background-color', 'red');
-
+	nuAddSubformRow(t, event);
+	
 }
