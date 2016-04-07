@@ -75,6 +75,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 		$r->subform_fk      	= $R;
 		$o->subform_type    	= $r->sob_subform_type;
 		$o->delete          	= $r->sob_subform_delete;
+		$f->foreign_key_name 	= $r->sob_subform_foreign_key;
 		$o->add             	= $r->sob_subform_add;
 		$o->dimensions		= nuFormDimensions($r->sob_subform_zzzzsys_form_id);
 		$o->forms           	= nuGetSubformRecords($r, $o->add);
@@ -360,20 +361,22 @@ function nuGetSubformRecords($R, $A){
     $s = "SELECT `$f->primary_key` FROM `$f->table` WHERE `$R->sob_subform_foreign_key` = '$R->subform_fk'";
     $t = nuRunQuery($s);
     $a = array();
-    
+
     while($r = db_fetch_row($t)){
-        
-        $o   = nuGetFormObject($R->sob_subform_zzzzsys_form_id, $r[0], count($a));
-        $o->foreign_key	= $R->subform_fk;
-        $a[] = $o;
+
+		$o					= nuGetFormObject($R->sob_subform_zzzzsys_form_id, $r[0], count($a));
+		$o->foreign_key		= $R->subform_fk;
+		$o->foreign_key_name	= $R->sob_subform_foreign_key;
+		$a[] 				= $o;
 
     }
 
     if($A == 1){  //-- add blank record
     
-        $o   = nuGetFormObject($R->sob_subform_zzzzsys_form_id, -1, count($a));
-        $o->foreign_key	= $R->subform_fk;
-        $a[] = $o;
+        $o					= nuGetFormObject($R->sob_subform_zzzzsys_form_id, -1, count($a));
+        $o->foreign_key		= $R->subform_fk;
+        $o->foreign_key_name	= $R->sob_subform_foreign_key;
+        $a[] 					= $o;
         
     }
 	

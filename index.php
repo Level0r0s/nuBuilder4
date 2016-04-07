@@ -58,7 +58,6 @@ require_once('nucommon.php'); ?>
 cssinclude('nubuilder4.css');
 jsinclude('nuform.js');
 jsinclude('nucommon.js');
-nudebug("$opener	$target	$type");
 	
 ?>
 

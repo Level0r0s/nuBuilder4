@@ -279,6 +279,298 @@ class nuSqlString{
 }
 
 
+function nuTextFormats(){
+
+//-----number formats
+	$format = array();
+	
+ 	for ($i = 0; $i < 33; $i++) {
+		$format[$i] 	= new stdClass;
+	}
+	
+	$format[0]->type         = 'number';
+	$format[0]->format       = '0';
+	$format[0]->decimal      = '.';
+	$format[0]->separator    = '';
+	$format[0]->sample       = '10000';
+	$format[0]->phpdate      = '';
+	$format[0]->sql          = 'REPLACE(FORMAT(??,0), ",", "")';
+
+	$format[1]->type         = 'number';
+	$format[1]->format       = '1';
+	$format[1]->decimal      = '.';
+	$format[1]->separator    = '';
+	$format[1]->sample       = '10000.0';
+	$format[1]->phpdate      = '';
+	$format[1]->sql          = 'REPLACE(FORMAT(??,1), ",", "")';
+
+	$format[2]->type         = 'number';
+	$format[2]->format       = '2';
+	$format[2]->decimal      = '.';
+	$format[2]->separator    = '';
+	$format[2]->sample       = '10000.00';
+	$format[2]->phpdate      = '';
+	$format[2]->sql          = 'REPLACE(FORMAT(??,2), ",", "")';
+
+	$format[3]->type         = 'number';
+	$format[3]->format       = '3';
+	$format[3]->decimal      = '.';
+	$format[3]->separator    = '';
+	$format[3]->sample       = '10000.000';
+	$format[3]->phpdate      = '';
+	$format[3]->sql          = 'REPLACE(FORMAT(??,3), ",", "")';
+
+	$format[4]->type         = 'number';
+	$format[4]->format       = '4';
+	$format[4]->decimal      = '.';
+	$format[4]->separator    = '';
+	$format[4]->sample       = '10000.0000';
+	$format[4]->phpdate      = '';
+	$format[4]->sql          = 'REPLACE(FORMAT(??,4), ",", "")';
+
+	$format[5]->type         = 'number';
+	$format[5]->format       = '5';
+	$format[5]->decimal      = '.';
+	$format[5]->separator    = '';
+	$format[5]->sample       = '10000.00000';
+	$format[5]->phpdate      = '';
+	$format[5]->sql          = 'REPLACE(FORMAT(??,5), ",", "")';
+
+//-----date formats
+
+	$format[6]->type         = 'date';
+	$format[6]->format       = 'dd-mmm-yyyy';
+	$format[6]->decimal      = '.';
+	$format[6]->separator    = '';
+	$format[6]->sample       = '13-Jan-2007';
+	$format[6]->phpdate      = 'd-M-Y';
+	$format[6]->sql          = 'DATE_FORMAT(??,"%d-%b-%Y")';
+	$format[6]->jquery       = 'dd-M-yy';
+
+	$format[7]->type         = 'date';
+	$format[7]->format       = 'dd-mm-yyyy';
+	$format[7]->decimal      = '.';
+	$format[7]->separator    = '';
+	$format[7]->sample       = '13-01-2007';
+	$format[7]->phpdate      = 'd-m-Y';
+	$format[7]->sql          = 'DATE_FORMAT(??,"%d-%m-%Y")';
+	$format[7]->jquery       = 'dd-mm-yy';
+
+	$format[8]->type         = 'date';
+	$format[8]->format       = 'mmm-dd-yyyy';
+	$format[8]->decimal      = '.';
+	$format[8]->separator    = '';
+	$format[8]->sample       = 'Jan-13-2007';
+	$format[8]->phpdate      = 'M-d-Y';
+	$format[8]->sql          = 'DATE_FORMAT(??,"%b-%d-%Y")';
+	$format[8]->jquery       = 'M-dd-yy';
+
+	$format[9]->type         = 'date';
+	$format[9]->format       = 'mm-dd-yyyy';
+	$format[9]->decimal      = '.';
+	$format[9]->separator    = '';
+	$format[9]->sample       = '01-13-2007';
+	$format[9]->phpdate      = 'm-d-Y';
+	$format[9]->sql          = 'DATE_FORMAT(??,"%m-%d-%Y")';
+	$format[9]->jquery       = 'mm-dd-yy';
+
+	$format[10]->type        = 'date';
+	$format[10]->format      = 'dd-mmm-yy';
+	$format[10]->decimal     = '.';
+	$format[10]->separator   = '';
+	$format[10]->sample      = '13-Jan-07';
+	$format[10]->phpdate     = 'd-M-y';
+	$format[10]->sql         = 'DATE_FORMAT(??,"%d-%b-%y")';
+	$format[10]->jquery       = 'dd-M-y';
+
+	$format[11]->type        = 'date';
+	$format[11]->format      = 'dd-mm-yy';
+	$format[11]->decimal     = '.';
+	$format[11]->separator   = '';
+	$format[11]->sample      = '13-01-07';
+	$format[11]->phpdate     = 'd-m-y';
+	$format[11]->sql         = 'DATE_FORMAT(??,"%d-%m-%y")';
+	$format[11]->jquery       = 'dd-mm-y';
+
+	$format[12]->type        = 'date';
+	$format[12]->format      = 'mmm-dd-yy';
+	$format[12]->decimal     = '.';
+	$format[12]->separator   = '';
+	$format[12]->sample      = 'Jan-13-07';
+	$format[12]->phpdate     = 'M-d-y';
+	$format[12]->sql         = 'DATE_FORMAT(??,"%b-%d-%y")';
+	$format[12]->jquery       = 'M-dd-y';
+
+	$format[13]->type        = 'date';
+	$format[13]->format      = 'mm-dd-yy';
+	$format[13]->decimal     = '.';
+	$format[13]->separator   = '';
+	$format[13]->sample      = '01-13-07';
+	$format[13]->phpdate     = 'm-d-y';
+	$format[13]->sql         = 'DATE_FORMAT(??,"%m-%d-%y")';
+	$format[13]->jquery       = 'mm-dd-y';
+
+//-----number formats
+
+	$format[14]->type        = 'number';
+	$format[14]->format      = '0';
+	$format[14]->decimal     = '.';
+	$format[14]->separator   = ',';
+	$format[14]->sample      = '10,000';
+	$format[14]->phpdate     = '';
+	$format[14]->sql         = 'FORMAT(??,0)';
+
+	$format[15]->type        = 'number';
+	$format[15]->format      = '1';
+	$format[15]->decimal     = '.';
+	$format[15]->separator   = ',';
+	$format[15]->sample      = '10,000.0';
+	$format[15]->phpdate     = '';
+	$format[15]->sql         = 'FORMAT(??,1)';
+
+	$format[16]->type        = 'number';
+	$format[16]->format      = '2';
+	$format[16]->decimal     = '.';
+	$format[16]->separator   = ',';
+	$format[16]->sample      = '10,000.00';
+	$format[16]->phpdate     = '';
+	$format[16]->sql         = 'FORMAT(??,2)';
+
+	$format[17]->type        = 'number';
+	$format[17]->format      = '3';
+	$format[17]->decimal     = '.';
+	$format[17]->separator   = ',';
+	$format[17]->sample      = '10,000.000';
+	$format[17]->phpdate     = '';
+	$format[17]->sql         = 'FORMAT(??,3)';
+
+	$format[18]->type        = 'number';
+	$format[18]->format      = '4';
+	$format[18]->decimal     = '.';
+	$format[18]->separator   = ',';
+	$format[18]->sample      = '10,000.0000';
+	$format[18]->phpdate     = '';
+	$format[18]->sql         = 'FORMAT(??,4)';
+
+	$format[19]->type        = 'number';
+	$format[19]->format      = '5';
+	$format[19]->decimal     = '.';
+	$format[19]->separator   = ',';
+	$format[19]->sample      = '10,000.00000';
+	$format[19]->phpdate     = '';
+	$format[19]->sql         = 'FORMAT(??,5)';
+
+//-----euro number formats
+
+	$format[20]->type        = 'number';
+	$format[20]->format      = '0';
+	$format[20]->decimal     = ',';
+	$format[20]->separator   = '';
+	$format[20]->sample      = '10000';
+	$format[20]->phpdate     = '';
+	$format[20]->sql         = 'FORMAT(??,0)';
+
+	$format[21]->type        = 'number';
+	$format[21]->format      = '1';
+	$format[21]->decimal     = ',';
+	$format[21]->separator   = '';
+	$format[21]->sample      = '10000,0';
+	$format[21]->phpdate     = '';
+	$format[21]->sql         = 'FORMAT(??,1)';
+
+	$format[22]->type        = 'number';
+	$format[22]->format      = '2';
+	$format[22]->decimal     = ',';
+	$format[22]->separator   = '';
+	$format[22]->sample      = '10000,00';
+	$format[22]->phpdate     = '';
+	$format[22]->sql         = 'FORMAT(??,2)';
+
+	$format[23]->type        = 'number';
+	$format[23]->format      = '3';
+	$format[23]->decimal     = ',';
+	$format[23]->separator   = '';
+	$format[23]->sample      = '10000,000';
+	$format[23]->phpdate     = '';
+	$format[23]->sql         = 'FORMAT(??,3)';
+
+	$format[24]->type        = 'number';
+	$format[24]->format      = '4';
+	$format[24]->decimal     = ',';
+	$format[24]->separator   = '';
+	$format[24]->sample      = '10000,0000';
+	$format[24]->phpdate     = '';
+	$format[24]->sql         = 'FORMAT(??,4)';
+
+	$format[25]->type        = 'number';
+	$format[25]->format      = '5';
+	$format[25]->decimal     = ',';
+	$format[25]->separator   = '';
+	$format[25]->sample      = '10000,00000';
+	$format[25]->phpdate     = '';
+	$format[25]->sql         = 'FORMAT(??,5)';
+
+	$format[26]->type        = 'number';
+	$format[26]->format      = '0';
+	$format[26]->decimal     = ',';
+	$format[26]->separator   = '.';
+	$format[26]->sample      = '10.000';
+	$format[26]->phpdate     = '';
+	$format[26]->sql         = 'FORMAT(??,0)';
+
+	$format[27]->type        = 'number';
+	$format[27]->format      = '1';
+	$format[27]->decimal     = ',';
+	$format[27]->separator   = '.';
+	$format[27]->sample      = '10.000,0';
+	$format[27]->phpdate     = '';
+	$format[27]->sql         = 'FORMAT(??,1)';
+
+	$format[28]->type        = 'number';
+	$format[28]->format      = '2';
+	$format[28]->decimal     = ',';
+	$format[28]->separator   = '.';
+	$format[28]->sample      = '10.000,00';
+	$format[28]->phpdate     = '';
+	$format[28]->sql         = 'FORMAT(??,2)';
+
+	$format[29]->type        = 'number';
+	$format[29]->format      = '3';
+	$format[29]->decimal     = ',';
+	$format[29]->separator   = '.';
+	$format[29]->sample      = '10.000,000';
+	$format[29]->phpdate     = '';
+	$format[29]->sql         = 'FORMAT(??,3)';
+
+	$format[30]->type        = 'number';
+	$format[30]->format      = '4';
+	$format[30]->decimal     = ',';
+	$format[30]->separator   = '.';
+	$format[30]->sample      = '10.000,0000';
+	$format[30]->phpdate     = '';
+	$format[30]->sql         = 'FORMAT(??,4)';
+
+	$format[31]->type        = 'number';
+	$format[31]->format      = '5';
+	$format[31]->decimal     = ',';
+	$format[31]->separator   = '.';
+	$format[31]->sample      = '10.000,00000';
+	$format[31]->phpdate     = '';
+	$format[31]->sql         = 'FORMAT(??,5)';
+
+	$format[32]->type         = 'date';
+	$format[32]->format       = 'yyyy-mm-dd';
+	$format[32]->decimal      = '.';
+	$format[32]->separator    = '';
+	$format[32]->sample       = '2007-01-13';
+	$format[32]->phpdate      = 'Y-m-d';
+	$format[32]->sql          = 'DATE_FORMAT(??,"%Y-%m-%d")';
+
+	return $format;
+
+}
+
+
 
 
 ?>

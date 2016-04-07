@@ -176,7 +176,7 @@ function nuUpdateData(f, r){
 	var w 		= nuGetFormState();
 	w.call_type	= 'update';
 	w.data		= nuGetFormData();
-	
+
 	if(arguments.length == 0){
 	
 		f		= w.form_id;
@@ -194,7 +194,7 @@ function nuUpdateData(f, r){
 			var fm 	= data;
 			if(nuErrorMessages(fm.errors)){
 			}else{
-				nuGetForm(f, r);
+				nuGetForm(f, r, 1);
 			}
 			
 		}).fail(function(xhr, err){
