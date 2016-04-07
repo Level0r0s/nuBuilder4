@@ -77,8 +77,6 @@ function nuUpdateRow($r, $p, $row){
 
 function nuFormatValue($r, $row, $i){
 	
-//	nudebug(print_r($row,1));
-	
 	$form_id		= $row['fm'];
 	$field		= $row['f'][$i];
 	
