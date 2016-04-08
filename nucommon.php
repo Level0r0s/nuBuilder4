@@ -279,10 +279,11 @@ class nuSqlString{
 }
 
 
-function nuTextFormats(){
+function nuTextFormats($dropdownList = false){
 
 //-----number formats
-	$format = array();
+	$format	= array();
+	$ddl		= array();
 	
  	for ($i = 0; $i < 33; $i++) {
 		$format[$i] 	= new stdClass;
@@ -565,8 +566,18 @@ function nuTextFormats(){
 	$format[32]->sample       = '2007-01-13';
 	$format[32]->phpdate      = 'Y-m-d';
 	$format[32]->sql          = 'DATE_FORMAT(??,"%Y-%m-%d")';
+	
+	
+ 	for ($i = 0; $i < 33; $i++) {
+		$ddl[$i]		= $format[$i]->sample;
+	}
 
-	return $format;
+
+	if($dropdownList){
+		return $format;
+	}else{
+		return $ddl;
+	}
 
 }
 

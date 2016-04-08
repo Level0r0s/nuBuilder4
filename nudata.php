@@ -18,6 +18,9 @@ function nuUpdateData(){
 	}
 	
 	
+nudebug(print_r(nuTextFormats(),1));
+nudebug(print_r(nuTextFormats(true),1));
+
 	for($i = 0 ; $i < count($d) ; $i++){
 
 		$pk		= $d[$i]['pk'];
@@ -36,7 +39,7 @@ function nuUpdateData(){
 }
 
 function nuDeleteRow($r, $p){
-	
+
 	nuRunQuery("DELETE FROM `$r->sfo_table` WHERE `$r->sfo_primary_key` = ? ", array($p));
 	
 }
@@ -65,24 +68,31 @@ function nuUpdateRow($r, $p, $row){
 	
 	for($i = 0 ; $i < count($row['f']) ; $i++){
 		
-		$set[] 	= $row['f'][$i] . ' = "' . nuFormatValue($r, $row, $i) . '"';
+		$set[] 	= $row['f'][$i] . ' = "' . nuFormatValue($row, $i) . '"';
 		
 	}
 	
 	$s	= "UPDATE `$r->sfo_table` SET " . implode(', ', $set) . " WHERE `$r->sfo_primary_key` = ? ";
-	
+
 	nuRunQuery($s, array($p));
 	
 }
 
-function nuFormatValue($r, $row, $i){
+function nuFormatValue($row, $i){
 	
-	$form_id		= $row['fm'];
-	$field		= $row['f'][$i];
+	$form_id	= $row['fm'];
+	$field	= $row['f'][$i];
 	
-	$s	= "SELECT * FROM zzzzsys_object WHERE sob_all_zzzzsys_form_id = '$form_id' AND sob_all_id = '$field'";
-	nudebug($s);
+	$s		= "SELECT * FROM zzzzsys_object WHERE sob_all_zzzzsys_form_id = ? AND sob_all_id = ? ";
+	$t		= nuRunQuery($s, array($form_id, $field));
+	$r		= db_fetch_object($t);
 	
+	if($r->sob_all_type == 'select'){
+		return implode('#nuSep#', $row['v'][$i]);
+	}else{
+		return $row['v'][$i];
+	}
+
 }
 
 

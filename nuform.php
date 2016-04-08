@@ -2,11 +2,11 @@
 
 function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 
-    $tabs = nuBuildTabList($F);
-    $f              = nuGetEditForm($F);
+    $tabs 			= nuBuildTabList($F);
+    $f				= nuGetEditForm($F);
 
-    $f->form_id     = $F;
-    $f->record_id   = $R;
+    $f->form_id		= $F;
+    $f->record_id		= $R;
     
 
     $s = "Select * From `$f->table` Where `$f->primary_key` = '$R'";
@@ -496,7 +496,6 @@ function nuBrowseRows($f){
 	if(trim($r->sfo_browse_sql) == ''){
 		return array(array(), 0);
 	}
-	
 	
     $S = new nuSqlString($r->sfo_browse_sql);
 	
