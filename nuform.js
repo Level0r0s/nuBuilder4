@@ -784,8 +784,8 @@ function nuBuildSubformDeleteTitle(l, id){
     	$('#' + id).append(div);
     	
     	$('#' + titleId).css({'top'     	: 0,
-    					'left'          	: Number(l)-10,
-    					'width'         	: 50,
+    					'left'          	: Number(l)-12,
+    					'width'         	: 52,
     					'height'        	: 50,
     					'text-align'    	: 'center',
     					'font-size'     	: 10,
