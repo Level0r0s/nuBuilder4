@@ -175,7 +175,7 @@ function nuRecordProperties(w, p, l){
 	if(arguments.length == 3){
 		
 		$('#' + de).css({'top'		: 3, 
-						'left'		: Number(l) + 3, 
+						'left'		: Number(l) + 5, 
 						'position' 	: 'absolute', 
 						'visibility'	: 'visible'})
 		.prop('checked', w.record_id == -1);

@@ -760,7 +760,7 @@ function nuFormDimensions($f){
 	$d[]	= $h  + 25;			//-- form height
 	$d[]	= $w  + 50;			//-- form width
 	$d[]	= $gh + 0;			//-- grid height
-	$d[]	= $gw + 50;			//-- grid width
+	$d[]	= $gw + 55;			//-- grid width
 
 	return $d;
 	
