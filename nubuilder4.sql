@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 11, 2016 at 06:54 AM
+-- Generation Time: Apr 12, 2016 at 12:40 AM
 -- Server version: 5.5.9
 -- PHP Version: 5.3.5
 
@@ -1218,9 +1218,9 @@ INSERT INTO `zzzsys_object` (`zzzsys_object_id`, `sob_zzzsys_form_id`, `sob_all_
 ('567214bd67e9241', '56721452bb4c57d', NULL, NULL, '1', 10, NULL, 'syt_order', 20, 10, 'Main', 'Order', 'text', 0, 0, 40, 0, 'r', '0', '0', '', '0', NULL, NULL, NULL, NULL, NULL, '', '', NULL, NULL, NULL, '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, '0', '', NULL, '', 0, 0, '2015-12-17 12:19:49', 'globeadmin', '2015-12-17 12:21:33', 'globeadmin', '2015-12-17 12:24:43', 'globeadmin'),
 ('567214dc786a388', '56721452bb4c57d', NULL, NULL, '1', 10, NULL, 'syt_title', 10, 10, 'Main', 'Title', 'text', 0, 0, 150, 0, 'l', '0', '0', '', '0', NULL, NULL, NULL, NULL, NULL, '', '', NULL, NULL, NULL, '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '', NULL, '', 0, 0, '2015-12-17 12:20:20', 'globeadmin', '2015-12-17 12:20:46', 'globeadmin', '2016-04-11 15:02:42', 'globeadmin'),
 ('5672161ea9935a3', '566f2a3edfff6fb', NULL, NULL, '1', 10, NULL, 'sfproc', 10, 8, 'Include Procedures', 'Procedures', 'subform', 80, 274, 260, 200, 'l', '0', '0', '', '0', NULL, NULL, NULL, NULL, NULL, '', '', NULL, '0|No|1|Yes', NULL, '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, 30, '1', '1', 'sli_zzzzsys_form_id', 'zzzzsys_library_id', 'SELECT * \nFROM zzzzsys_library \nWHERE sli_zzzzsys_form_id = ''#RECORD_ID#'' ', 'zzzzsys_library', NULL, '', NULL, 'g', 0, 0, '2015-12-17 12:25:42', 'globeadmin', '2015-12-21 10:05:02', 'globeadmin', '2016-02-16 08:15:27', 'globeadmin'),
-('567347be4786b6b', '5672161ea9935a3', NULL, NULL, '1', 10, NULL, 'sli_library_zzzzsys_form_id', 10, 3, 'Browse', 'Library', 'dropdown', 0, 0, 200, 0, 'l', '0', '0', '', '0', NULL, NULL, NULL, NULL, NULL, '', '', NULL, 'SELECT zzzzsys_form_id, CONCAT(sfo_code, '' - '', sfo_description)\nFROM zzzzsys_form\nORDER BY sfo_code', NULL, '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '', NULL, '', 0, 0, '2015-12-18 10:09:42', 'globeadmin', '2015-12-21 10:04:25', 'globeadmin', '2015-12-21 10:05:02', 'globeadmin'),
+('567347be4786b6b', '5672161ea9935a3', NULL, NULL, '1', 10, NULL, 'sli_library_zzzzsys_form_id', 10, 3, 'Browse', 'Library', 'dropdown', 0, 0, 200, 0, 'l', '0', '0', '', '0', NULL, NULL, NULL, NULL, NULL, '', '', NULL, 'SELECT zzzzsys_form_id, CONCAT(sfo_code, '' - '', sfo_description)\nFROM zzzzsys_form\nORDER BY sfo_code', NULL, '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '', NULL, '', 0, 0, '2015-12-18 10:09:42', 'globeadmin', '2015-12-21 10:04:25', 'globeadmin', '2016-04-12 09:51:48', 'globeadmin'),
 ('5673669e979ab0b', '566f2a3edfff6fb', NULL, NULL, '1', 10, NULL, 'sfo_report_sql', 105, 5, 'Report', 'SQL SELECT Used To Create #TABLE_ID#', 'textarea', 0, 0, 200, 200, 'l', '0', '0', '', '0', NULL, NULL, NULL, NULL, NULL, '', '', NULL, NULL, NULL, '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '', NULL, '', 0, 0, '2015-12-18 12:21:26', 'globeadmin', '2015-12-18 13:05:23', 'globeadmin', '2016-02-16 08:15:27', 'globeadmin'),
-('567366f78a79a7b', '566f2a3edfff6fb', NULL, NULL, '1', 10, NULL, 'sfo_report_library_zzzzsys_form_id', 105, 5, 'Report', 'PHP Used To Create #TABLE_ID#', 'dropdown', 0, 0, 200, 0, 'l', '0', '0', '', '0', NULL, NULL, NULL, NULL, NULL, '', '', NULL, 'SELECT zzzzsys_form_id, CONCAT(sfo_code, '' - '', sfo_description)\nFROM zzzzsys_form\nORDER BY sfo_code', NULL, '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '', NULL, '', 0, 0, '2015-12-18 12:22:55', 'globeadmin', '2015-12-21 10:02:55', 'globeadmin', '2016-02-16 08:15:27', 'globeadmin'),
+('567366f78a79a7b', '566f2a3edfff6fb', NULL, NULL, '1', 10, NULL, 'sfo_report_library_zzzzsys_form_id', 105, 5, 'Report', 'PHP Used To Create #TABLE_ID#', 'dropdown', 0, 0, 200, 0, 'l', '0', '0', '', '0', NULL, NULL, NULL, NULL, NULL, '', '', NULL, 'SELECT zzzzsys_form_id, CONCAT(sfo_code, '' - '', sfo_description)\nFROM zzzzsys_form\nORDER BY sfo_code', NULL, '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '', NULL, '', 0, 0, '2015-12-18 12:22:55', 'globeadmin', '2015-12-21 10:02:55', 'globeadmin', '2016-04-12 09:41:56', 'globeadmin'),
 ('56736718c58bd4f', '566f2a3edfff6fb', NULL, NULL, '1', 10, NULL, 'sfo_report_criteria_zzzzsys_form_id', 105, 5, 'Report', 'Criteria Form', 'dropdown', 0, 0, 200, 0, 'l', '0', '0', '', '0', NULL, NULL, NULL, NULL, NULL, '', '', NULL, 'SELECT zzzzsys_form_id, CONCAT(sfo_code, '' - '', sfo_description)\nFROM zzzzsys_form\nORDER BY sfo_code', NULL, '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '', NULL, '', 0, 0, '2015-12-18 12:23:28', 'globeadmin', '2015-12-21 10:03:31', 'globeadmin', '2016-02-16 08:15:27', 'globeadmin'),
 ('567367410962a64', '566f2a3edfff6fb', NULL, NULL, '1', 10, NULL, 'sfo_report_layout', 105, 5, 'Report', 'Layout', 'textarea', 0, 0, 200, 200, 'l', '0', '0', '', '0', NULL, NULL, NULL, NULL, NULL, '', '', NULL, NULL, NULL, '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '', NULL, '', 0, 0, '2015-12-18 12:24:09', 'globeadmin', '2015-12-18 13:04:16', 'globeadmin', '2016-02-16 08:15:27', 'globeadmin'),
 ('5673678529b0a01', '566f2a3edfff6fb', NULL, NULL, '1', 10, NULL, 'sfo_library_php', 105, 6, 'Procedure', 'PHP', 'textarea', 0, 0, 200, 200, 'l', '0', '0', '', '0', NULL, NULL, NULL, NULL, NULL, '', '', NULL, NULL, NULL, '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '', NULL, '', 0, 0, '2015-12-18 12:25:17', 'globeadmin', '2015-12-21 10:04:02', 'globeadmin', '2016-02-16 08:15:27', 'globeadmin'),
@@ -1361,7 +1361,7 @@ CREATE TABLE IF NOT EXISTS `zzzsys_session` (
 --
 
 INSERT INTO `zzzsys_session` (`zzzsys_session_id`, `sss_zzzsys_user_id`, `sss_timeout`, `zzzsys_session_log_added_at`, `zzzsys_session_log_added_by`, `zzzsys_session_log_changed_at`, `zzzsys_session_log_changed_by`, `zzzsys_session_log_viewed_at`, `zzzsys_session_log_viewed_by`) VALUES
-('570aff089d7ece0', 'globeadmin', 1460357612, '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '');
+('570c3a04107fdac', 'globeadmin', 1460421219, '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '');
 
 -- --------------------------------------------------------
 
@@ -2546,7 +2546,8 @@ INSERT INTO `zzzsys_user_log` (`zzzsys_user_log_id`, `sul_zzzsys_user_id`, `sul_
 ('5707255794a0503', 'globeadmin', '127.0.0.1', '2016-04-08 12:58:23', '2016-04-08 13:00:56', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', ''),
 ('570725f615eb020', 'globeadmin', '127.0.0.1', '2016-04-08 13:01:02', '2016-04-08 13:01:59', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', ''),
 ('57072636a80e7d7', 'globeadmin', '127.0.0.1', '2016-04-08 13:02:06', '2016-04-08 15:26:04', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', ''),
-('570aff089d7ece0', 'globeadmin', '127.0.0.1', '2016-04-11 11:04:00', '2016-04-11 16:23:32', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '');
+('570aff089d7ece0', 'globeadmin', '127.0.0.1', '2016-04-11 11:04:00', '2016-04-12 09:27:49', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', ''),
+('570c3a04107fdac', 'globeadmin', '127.0.0.1', '2016-04-12 09:27:56', '2016-04-12 10:03:39', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '');
 
 -- --------------------------------------------------------
 
@@ -2665,7 +2666,8 @@ INSERT INTO `zzzzsys_form` (`zzzzsys_form_id`, `sfo_type`, `sfo_code`, `sfo_desc
 ('56c513162acd102', 'browseedit', 'CHI', 'Children', 'children', 'children_id', '', '', '', '', '', 'SELECT * FROM employee', '1', '', '', '0', '', '', '1', '', '', '1', '', '', '1', '', '', '', '', '', '', '', '', '', ''),
 ('nuform', 'browseedit', 'FORM', 'nuBuilder Form', 'zzzzsys_form', 'zzzzsys_form_id', '', '', '', '', '', 'SELECT * FROM zzzzsys_form\nORDER BY sfo_code', '1', '', '', '', '', '', '1', '', '', '1', '', '', '1', '', '', '1', '', '', '', '', '', '', ''),
 ('570b19bf4e6ec1a', 'edit', 'FRMBR', 'Form Browse Subform', 'zzzzsys_browse', 'zzzzsys_browse_id', '', '', '', '', '', 'SELECT * FROM company\nINNER JOIN business ON business_id = com_business_id', '1', '', '', '', '', '', '1', 'Save Me', '', '1', '', '', '1', '', '', '', '', '', '', '', '', '', ''),
-('570b37f0777aa8d', 'edit', 'TABS', 'Form Tabs', 'zzzzsys_tab', 'zzzzsys_tab_id', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
+('570b37f0777aa8d', 'edit', 'TABS', 'Form Tabs', 'zzzzsys_tab', 'zzzzsys_tab_id', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+('570c3f3ed9de708', 'edit', 'LIB', 'Include PHP Library', 'zzzzsys_library', 'zzzzsys_library_id', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -2835,7 +2837,15 @@ INSERT INTO `zzzzsys_object` (`zzzzsys_object_id`, `sob_all_zzzzsys_form_id`, `s
 ('570b49216a5ecb5', 'nuform', 'textarea', 'sfo_before_save_php', 'Before Save', '5707303145b7760', 0, 350, 180, 600, 50, '1', 'right', 'noblanks', '0', '', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('570b498bb3ec197', 'nuform', 'textarea', 'sfo_after_save_php', 'After Save', '5707303145b7760', 0, 420, 180, 600, 50, '1', 'right', 'noblanks', '0', '', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('570b49c90719215', 'nuform', 'textarea', 'sfo_before_delete_php', 'Before Delete', '5707303145b7760', 0, 490, 180, 600, 50, '1', 'right', 'noblanks', '0', '', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-('570b49ec1a3d1a1', 'nuform', 'textarea', 'sfo_after_delete_php', 'After Delete', '5707303145b7760', 0, 560, 180, 600, 50, '1', 'right', 'noblanks', '0', '', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
+('570b49ec1a3d1a1', 'nuform', 'textarea', 'sfo_after_delete_php', 'After Delete', '5707303145b7760', 0, 560, 180, 600, 50, '1', 'right', 'noblanks', '0', '', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+('570c3b2a66d2d26', 'nuform', 'textarea', 'sfo_report_sql', 'SQL SELECT Used To Create #TABLE_ID#', '57073031498ed17', 0, 10, 250, 300, 200, '1', 'right', '', '0', '', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+('570c3b5d641d514', 'nuform', 'textarea', 'sfo_report_layout', 'Layout', '57073031498ed17', 0, 300, 250, 300, 200, '1', 'right', '', '1', '', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+('570c3c3f099494a', 'nuform', 'select', 'sfo_report_library_zzzzsys_form_id', 'PHP Used To Create #TABLE_ID#', '57073031498ed17', 0, 230, 250, 300, 16, '1', 'right', '', '0', '', '', '', '', '', '', '', '0', 'SELECT zzzzsys_form_id, CONCAT(sfo_code, '' - '', sfo_description)\nFROM zzzzsys_form\nORDER BY sfo_code', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+('570c3dc9d502522', 'nuform', 'select', 'sfo_report_criteria_zzzzsys_form_id', 'Criteria Form', '57073031498ed17', 0, 260, 250, 300, 16, '1', 'right', '', '0', '', '', '', '', '', '', '', '0', 'SELECT zzzzsys_form_id, CONCAT(sfo_code, '' - '', sfo_description)\nFROM zzzzsys_form\nORDER BY sfo_code', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+('570c3e2d5107e52', 'nuform', 'textarea', 'sfo_library_php', 'PHP', '570730314d34260', 0, 10, 250, 300, 200, '1', 'right', '', '1', '', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+('570c3e6e67c39cb', 'nuform', 'textarea', 'sfo_javascript', 'Javascript', '570730315113e7e', 0, 10, 250, 300, 200, '1', 'right', '', '1', '', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+('570c3fce5be3355', '570c3f3ed9de708', 'select', 'sli_library_zzzzsys_form_id', 'Procedures', '570c3f3edfc8a56', 0, 10, 250, 200, 30, '1', 'right', '', '0', '', '', '', '', '', '', '', '0', 'SELECT zzzzsys_form_id, CONCAT(sfo_code, '' - '', sfo_description)\nFROM zzzzsys_form\nORDER BY sfo_code', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+('570c3ffee2e6ad4', 'nuform', 'subform', 'library_sf', 'PHP Library', '57073031543c8f8', 0, 10, 800, 254, 200, '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '570c3f3ed9de708', 'sli_zzzzsys_form_id', '1', '1', 'g', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -3634,7 +3644,13 @@ INSERT INTO `zzzzsys_session` (`zzzzsys_session_id`, `sss_zzzzsys_user_id`, `sss
 ('570b3bb4175926f', 'globeadmin', 0, ''),
 ('570b3bd135172cd', 'globeadmin', 0, ''),
 ('570b3bfbe1cb349', 'globeadmin', 0, ''),
-('570b3c14bea9d25', 'globeadmin', 0, '');
+('570b3c14bea9d25', 'globeadmin', 0, ''),
+('570c39d71149af0', 'globeadmin', 0, ''),
+('570c411a02ea7f1', 'globeadmin', 0, ''),
+('570c412f04918f1', 'globeadmin', 0, ''),
+('570c41cd3a3da25', 'globeadmin', 0, ''),
+('570c4232890238f', 'globeadmin', 0, ''),
+('570c42670af9634', 'globeadmin', 0, '');
 
 -- --------------------------------------------------------
 
@@ -3711,7 +3727,8 @@ INSERT INTO `zzzzsys_tab` (`zzzzsys_tab_id`, `syt_zzzzsys_form_id`, `syt_title`,
 ('56777715b87666e', '56773cb405f4913', 'Main', 2),
 ('570730315113e7e', 'nuform', 'Javascript', 60),
 ('57073031543c8f8', 'nuform', 'Include', 70),
-('570b19bf5981983', '570b19bf4e6ec1a', 'Browse', 10);
+('570b19bf5981983', '570b19bf4e6ec1a', 'Browse', 10),
+('570c3f3edfc8a56', '570c3f3ed9de708', 'Include', 10);
 
 -- --------------------------------------------------------
 
