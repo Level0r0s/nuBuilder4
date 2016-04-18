@@ -45,11 +45,11 @@ function nuBuildForm(f){
 	nuAddBreadcrumbs();
 	nuAddEditTabs('', f);
 	nuAddActionButtons(f);
-
 	nuRecordProperties(f, '');
 	nuBuildEditObjects(f, '', '', f);
-	
 	nuGetStartingTab();
+	nuAddJavascript(f);
+	$('#nuSearchField').focus();
 	
 }
 
@@ -92,6 +92,8 @@ function nuResizeiFrame(d, r){
 	}
 }
 
+
+
 function nuAddActionButtons(f){
 
 	var b = f.buttons;
@@ -100,7 +102,7 @@ function nuAddActionButtons(f){
 	
 		var v = window.nuBC[window.nuBC.length-1].search;
 
-		$('#nuActionHolder').append("<input id='nuSearchField' type='text' class='nuSearch' onchange='nuSetSearch(this)' value='" + v + "'>&nbsp;");
+		$('#nuActionHolder').append("<input id='nuSearchField' type='text' class='nuSearch' onkeypress='nuSearchPressed(event)' value='" + v + "'>&nbsp;");
 		$('#nuActionHolder').append("<input id='nuSearchButton' type='button' class='nuButton' value='Search' onclick='nuSearchAction()'>&nbsp;");
 		
 	}
@@ -170,7 +172,7 @@ function nuRecordProperties(w, p, l){
 	.attr('data-nu-form-id', w.id)
 	.attr('data-nu-primary-key', w.record_id)
 	.attr('data-nu-foreign-key', w.foreign_key)
-	.attr('data-nu-foreign-field', w.foreign_key_name)
+	.attr('data-nu-foreign-field', p == '' ? '' : w.foreign_key_name)
 	
 	if(arguments.length == 3){
 		
@@ -1070,15 +1072,19 @@ function nuSetSearchColumn(){
 	
 }
 
-function nuSetSearch(t){
-	
-	window.nuBC[window.nuBC.length-1].search 		= String(t.value).replaceAll("'","&#39;", true);
-	window.nuBC[window.nuBC.length-1].page_number	= 0;
-	
+function nuSearchPressed(e){
+
+    if(!e){e=window.event;}
+
+    if(e.keyCode == 13){                    //-- enter key
+        $('#nuSearchButton').click();
+    }
+    
 }
 
 function nuSearchAction(){
 
+	window.nuBC[window.nuBC.length-1].search	= String($('#nuSearchField').val()).replaceAll("'","&#39;", true);
 	nuGetBreadcrumb(nuBC.length - 1);
 	
 }
@@ -1417,7 +1423,7 @@ function nuHighlightSearch(){
 
 	var bc		= nuBC[nuBC.length - 1];
 	var exclude	= bc.nosearch_columns;
-	var search	= bc.search.split(' ')
+	var search	= bc.search.toLowerCase().split(' ')
 	.filter(function(a) {return (a != '' && a.substr(0,1) != '-')})
 	.sort(function(a,b) {return (a.length > b.length)});
 
@@ -1427,7 +1433,7 @@ function nuHighlightSearch(){
 		
 		if(exclude.indexOf(col) == -1){
 			
-			var h	= String($(this).html());
+			var h	= String($(this).html()).toLowerCase();
 			
 			for(var i = 0 ; i < search.length ; i++){
 				h	= h.replace(search[i],'`````' + search[i] + '````', true);
@@ -1474,7 +1480,7 @@ function nuGetFormData(){
 	}
 
 	var c	= 0;
-	
+console.log(r);	
 	return r;
 
 }
@@ -1485,7 +1491,7 @@ function nuFormClass(frm){
 	var foreign_key	= $(fh).attr('data-nu-foreign-key');
 	var primary_key	= $(fh).attr('data-nu-primary-key');
 	var form_id		= $(fh).attr('data-nu-form-id');
-	var form_foreign	= $(fh).attr('data-nu-foreign-field');
+	var foreign_field	= $(fh).attr('data-nu-foreign-field');
 	
 	var deleted		= $('#' + frm + 'nuDelete').is(":checked") ? '1' : '0';
 	var fields		= [];
@@ -1505,7 +1511,7 @@ function nuFormClass(frm){
 	this.pk	= primary_key;
 	this.fk	= foreign_key;
 	this.fm	= form_id;
-	this.ff	= form_foreign;
+	this.ff	= foreign_field;
 	this.d	= deleted;
 	this.f	= fields;
 	this.v	= values;
@@ -1527,8 +1533,6 @@ function nuSetFORM(F){
 			
 		}
 		
-//		console.log(F.objects[o]);
-		
 	}
 	
 }
@@ -1546,8 +1550,32 @@ function nuOnChange(t){
 	
 }
 
+function nuDeleteAction(){
+	
+	$('#nuDelete').prop('checked', true);
+	nuUpdateData();
+	
+}
+
 function nuSaveAction(){
 	
 	nuUpdateData();
+	
+}
+
+function nuAddJavascript(f){
+	
+	nuLoadEdit	= null;
+	nuLoadBrowse	= null;
+	
+	var s = document.createElement('script');
+	s.innerHTML = "\n" + f.javascript + "\n\n";
+	$('body').append(s);
+	
+	if(f.record_id == ''){
+		if(nuLoadBrowse != null){nuLoadBrowse();}
+	}else{
+		if(nuLoadEdit != null){nuLoadEdit();}
+	}
 	
 }

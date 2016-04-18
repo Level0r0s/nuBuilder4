@@ -92,6 +92,7 @@ function nuGetForm(f, r, n){
 			if(nuErrorMessages(fm.errors)){
 				if(fm.log_again == 1){nuLogin();}
 			}else{
+				nuBC[nuBC.length-1].record_id	= fm.record_id;
 				nuBuildForm(fm);
 			}
 			
@@ -194,7 +195,14 @@ function nuUpdateData(f, r){
 			var fm 	= data;
 			if(nuErrorMessages(fm.errors)){
 			}else{
-				nuGetForm(f, r, 1);
+				
+				if($('#nuDelete').prop('checked')){
+					nuBC.pop();//r = '';  						//-- return to browse
+					nuGetBreadcrumb(nuBC.length - 1);
+				}else{
+					nuGetForm(f, r, 1);
+				}
+
 			}
 			
 		}).fail(function(xhr, err){

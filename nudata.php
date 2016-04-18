@@ -3,24 +3,28 @@
 function nuUpdateData(){
 	
 	$d	= $_POST['nuSTATE']['data'];
-	
+	$ID	= $_POST['nuSTATE']['record_id'];
+
 	for($i = 0 ; $i < count($d) ; $i++){
+		
 		if($d[$i]['pk'] == '-1'){
+			
 			$d[$i]['pk']	= nuID();
+			
+			if($d[$i]['fk'] == ''){
+nudebug('gh '.$ID. '  ' . $d[$i]['pk']);				
+				$ID	= $d[$i]['pk'];
+			}
+			
 		}
 	}
 	
-	
 	for($i = 0 ; $i < count($d) ; $i++){
-		if($d[$i]['fk'] == ''){
+		if($d[$i]['fk'] == '-1'){
 			$d[$i]['fk']	= $d[0]['pk'];
 		}
 	}
 	
-	
-nudebug(print_r(nuTextFormats(),1));
-nudebug(print_r(nuTextFormats(true),1));
-
 	for($i = 0 ; $i < count($d) ; $i++){
 
 		$pk		= $d[$i]['pk'];
@@ -31,10 +35,12 @@ nudebug(print_r(nuTextFormats(true),1));
 			nuDeleteRow($r, $pk);
 		}else{
 			nuInsertRow($r, $pk);
-			nuUpdateRow($r, $pk, $d[$i]);
+			nuUpdateRow($r, $pk, $d[$i], $d[0]['d']);
 		}
 		
 	}
+	
+	return $ID;
 	
 }
 
@@ -55,13 +61,13 @@ function nuInsertRow($r, $p){
 
 }
 
-function nuUpdateRow($r, $p, $row){
+function nuUpdateRow($r, $p, $row, $fkey){
 	
-	if($row['fk'] != $row['pk']){		//-- (if == it's the parent record)
+	if($row['fk'] != ''){		//-- (if == it's not the parent record)
 	
 		$row['f'][]	= $row['ff'];
 		$row['v'][]	= $row['fk'];
-	
+		
 	}
 	
 	$set		= array();
@@ -88,6 +94,7 @@ function nuFormatValue($row, $i){
 	$r		= db_fetch_object($t);
 	
 	if($r->sob_all_type == 'select'){
+		nudebug('777  '.$row['v'][$i]. '  ' . print_r($r,1));
 		return implode('#nuSep#', $row['v'][$i]);
 	}else{
 		return $row['v'][$i];
