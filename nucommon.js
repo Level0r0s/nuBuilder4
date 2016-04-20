@@ -16,9 +16,8 @@ function nuOpener(f, r){
 }
 
 
-function nuFormState(p){
+function nuFormState(){
 
-	this.param	        = p;
 	this.call_type        = '';
 	this.filter           = '';
 	this.form_id          = '';
@@ -66,10 +65,10 @@ function nuGetForm(f, r, n){
 		u 			= $('#nuusername').val();
 		p	 		= $('#nupassword').val();
 		window.nuBC	= [];
-		window.nuBC.push(new nuFormState(1));
+		window.nuBC.push(new nuFormState());
 	}else{
 		if(arguments.length != 3){   //-- add a new breadcrumb
-			window.nuBC.push(new nuFormState(2));
+			window.nuBC.push(new nuFormState());
 		}
 	}
 
@@ -78,7 +77,7 @@ function nuGetForm(f, r, n){
 	w.password	= p;
 	w.call_type	= 'getform';
 	w.form_id	= f;
-	w.record_id	= arguments.length == 1 ? '' : r;
+	w.record_id	= r;
 
 	var request 	= $.ajax({
 		url      : "nuapi.php",
@@ -172,18 +171,13 @@ function nuGetLookupCode(e, buildLookupList){
 
 }
 
-function nuUpdateData(f, r){
+function nuUpdateData(){
 
 	var w 		= nuGetFormState();
 	w.call_type	= 'update';
 	w.data		= nuGetFormData();
-
-	if(arguments.length == 0){
-	
-		f		= w.form_id;
-		r		= w.record_id;
-	
-	}
+	f			= w.form_id;
+	r			= w.record_id;
 	
 	var request 	= $.ajax({
 		url      : "nuapi.php",
@@ -197,10 +191,10 @@ function nuUpdateData(f, r){
 			}else{
 				
 				if($('#nuDelete').prop('checked')){
-					nuBC.pop();//r = '';  						//-- return to browse
+					nuBC.pop();  						//-- return to browse
 					nuGetBreadcrumb(nuBC.length - 1);
 				}else{
-					nuGetForm(f, r, 1);
+					nuGetForm(f, fm.record_id, 1);		//-- go to saved or created record
 				}
 
 			}
@@ -283,8 +277,7 @@ function nuLogin(){
 	var i 	= '<br><img id="thelogo" src="logo.png">';
 	var u 	= '<br><br>Username <input id="nuusername"/>';
 	var p 	= '<br><br>Password <input id="nupassword" type="password"/>';
-	var s 	= '<br><br><input id="submit" type="button" onclick="nuCheckPassword()" value="Submit"/>';
-	var s 	= '<br><br><input id="submit" type="button" onclick="nuGetForm()" value="Submit"/>';
+	var s 	= '<br><br><input id="submit" type="button" onclick="nuGetForm()" value="Log in"/>';
 	var l2	= '<br><br></div>';
 	
 	var e = document.createElement('div');

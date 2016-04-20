@@ -1470,8 +1470,8 @@ function nuGetFormData(){
 	for(var i = 0 ; i < b.length ; i++){
 
 		var rw	= new nuFormClass(b[i]);
-	
-		if(rw.d == '1' || rw.p == '-1' || rw.f.length > 0){
+
+		if(rw.d == '1' || rw.pk == '-1' || rw.f.length > 0){
 			
 			r.push(rw);
 			
@@ -1480,7 +1480,7 @@ function nuGetFormData(){
 	}
 
 	var c	= 0;
-console.log(r);	
+
 	return r;
 
 }
@@ -1554,6 +1554,21 @@ function nuDeleteAction(){
 	
 	$('#nuDelete').prop('checked', true);
 	nuUpdateData();
+	
+}
+
+function nuCloneAction(){
+	
+	$('[data-nu-primary-key]').each(function(index){
+			$(this).attr('data-nu-primary-key','-1');
+	});
+	$('[data-nu-field]').each(function(index){
+			$(this).attr('data-nu-changed','1');
+	});
+	
+	nuBC[nuBC.length-1].record_id	= '-1';
+
+	$('#nuSaveButton').css('background-color', 'red');
 	
 }
 

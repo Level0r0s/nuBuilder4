@@ -11,8 +11,7 @@ function nuUpdateData(){
 			
 			$d[$i]['pk']	= nuID();
 			
-			if($d[$i]['fk'] == ''){
-nudebug('gh '.$ID. '  ' . $d[$i]['pk']);				
+			if($d[$i]['fk'] == ''){				//-- main Edit For record
 				$ID	= $d[$i]['pk'];
 			}
 			
@@ -35,7 +34,7 @@ nudebug('gh '.$ID. '  ' . $d[$i]['pk']);
 			nuDeleteRow($r, $pk);
 		}else{
 			nuInsertRow($r, $pk);
-			nuUpdateRow($r, $pk, $d[$i], $d[0]['d']);
+			nuUpdateRow($r, $pk, $d[$i], $ID);
 		}
 		
 	}
@@ -61,12 +60,13 @@ function nuInsertRow($r, $p){
 
 }
 
-function nuUpdateRow($r, $p, $row, $fkey){
+function nuUpdateRow($r, $p, $row, $FK){
 	
-	if($row['fk'] != ''){		//-- (if == it's not the parent record)
+	if($row['fk'] != ''){		//-- (if == it's not the parent record add foreign key)
 	
 		$row['f'][]	= $row['ff'];
-		$row['v'][]	= $row['fk'];
+//		$row['v'][]	= $row['fk'];
+		$row['v'][]	= $FK;
 		
 	}
 	
@@ -81,6 +81,7 @@ function nuUpdateRow($r, $p, $row, $fkey){
 	$s	= "UPDATE `$r->sfo_table` SET " . implode(', ', $set) . " WHERE `$r->sfo_primary_key` = ? ";
 
 	nuRunQuery($s, array($p));
+nudebug("$s -=- $p");
 	
 }
 
@@ -93,8 +94,7 @@ function nuFormatValue($row, $i){
 	$t		= nuRunQuery($s, array($form_id, $field));
 	$r		= db_fetch_object($t);
 	
-	if($r->sob_all_type == 'select'){
-		nudebug('777  '.$row['v'][$i]. '  ' . print_r($r,1));
+	if($r->sob_all_type == 'select' and $r->sob_select_multiple == '1' and $row['v'][$i] != ''){
 		return implode('#nuSep#', $row['v'][$i]);
 	}else{
 		return $row['v'][$i];

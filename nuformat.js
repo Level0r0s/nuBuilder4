@@ -1,5 +1,5 @@
 window.nuBreadcrumbs 		= [];
-window.nuBreadcrumbs[0] 	= new nuFormState(3);
+window.nuBreadcrumbs[0] 	= new nuFormState();
 
 function nuFormState(){
 
