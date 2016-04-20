@@ -56,6 +56,7 @@ function nuInsertRow($r, $p){
 	
 	if($R[0] == 0){
 		nuRunQuery("INSERT INTO `$r->sfo_table` (`$r->sfo_primary_key`) VALUES (?) ", array($p));
+		nudebug("INSERT INTO `$r->sfo_table` (`$r->sfo_primary_key`) VALUES (?) ", array($p));
 	}
 
 }

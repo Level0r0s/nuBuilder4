@@ -1552,7 +1552,8 @@ function nuOnChange(t){
 
 function nuDeleteAction(){
 	
-	$('#nuDelete').prop('checked', true);
+	$("[id$='nuDelete']").prop('checked', true);
+	
 	nuUpdateData();
 	
 }
@@ -1594,3 +1595,4 @@ function nuAddJavascript(f){
 	}
 	
 }
+
