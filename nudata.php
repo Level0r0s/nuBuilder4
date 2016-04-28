@@ -38,7 +38,7 @@ function nuUpdateData(){
 		}
 		
 	}
-	
+
 	return $ID;
 	
 }
@@ -66,7 +66,6 @@ function nuUpdateRow($r, $p, $row, $FK){
 	if($row['fk'] != ''){		//-- (if == it's not the parent record add foreign key)
 	
 		$row['f'][]	= $row['ff'];
-//		$row['v'][]	= $row['fk'];
 		$row['v'][]	= $FK;
 		
 	}
@@ -82,7 +81,6 @@ function nuUpdateRow($r, $p, $row, $FK){
 	$s	= "UPDATE `$r->sfo_table` SET " . implode(', ', $set) . " WHERE `$r->sfo_primary_key` = ? ";
 
 	nuRunQuery($s, array($p));
-nudebug("$s -=- $p");
 	
 }
 

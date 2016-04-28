@@ -15,7 +15,6 @@ function nuOpener(f, r){
 	
 }
 
-
 function nuFormState(){
 
 	this.call_type        = '';
@@ -85,7 +84,7 @@ function nuGetForm(f, r, n){
 		data     : {nuSTATE : w},
 		dataType : "json"
 		}).done(function(data){
-			
+
 			var fm 	= data;
 			
 			if(nuErrorMessages(fm.errors)){
@@ -321,7 +320,32 @@ function nuBuildLookup(t, p){
 
 }
 
+/*
+function nuBuildNewWindow(f, r){
 
+	window.nuOPENER.push(new nuOpener(f, r));
+	
+	var l 	= window.nuOPENER.length -1;
+	
+	window.nuDialog.createDialog(50, 50, 50, 50, '');
+	window.open('index.php?opener=' + l  + '&type=edit');
+
+}
+*/
+
+function nuBuildPopup(f, r){
+
+	window.nuOPENER.push(new nuOpener(f, r));
+	
+	var l 	= window.nuOPENER.length -1;
+
+	window.nuDialog.createDialog(50, 50, 50, 50, '');
+	
+	$('#nuDragDialog')
+	.css('visibility', 'hidden')
+	.append('<iframe style="left:5px;top:35px;width:400px;height:400px;position:absolute" id="nuLookup" src="index.php?opener=' + l + '&type=edit"></iframe>');
+
+}
 
 //-- object for dragging dialog --//
 

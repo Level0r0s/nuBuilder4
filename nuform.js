@@ -55,7 +55,7 @@ function nuBuildForm(f){
 
 function nuResizeiFrame(d, r){
 
-	if(window.nuTYPE != 'lookup'){return;}
+	//if(window.nuTYPE != 'lookup'){return;}
 
 	if(r == ''){
 		
@@ -454,6 +454,10 @@ function nuSELECT(w, i, l, p, prop){
 	
 	var values = String(w.objects[i].value).split('#nuSep#');
 
+	if(prop.objects[i].multiple == '0'){
+		$('#' + id).append('<option  value=""></option>');		//-- add a blank option at the top
+	}
+	
 	for(var n = 0 ; n < prop.objects[i].options.length ; n++){
 
 		if(values.indexOf(prop.objects[i].options[n][0]) == -1){
@@ -701,7 +705,8 @@ function nuLabel(w, i, p, prop){
 		              'left'          : Number(prop.objects[i].left) - lwidth - 7,
 		              'width'         : Number(lwidth)
 	})
-	.html(prop.objects[i].label);
+	.html(prop.objects[i].label)
+	.attr('ondblclick','nuBuildPopup("nuobject", "' + prop.objects[i].object_id + '")');
 
 }
 
@@ -793,14 +798,14 @@ function nuBuildSubformDeleteTitle(l, id){
     					'font-size'     	: 10,
     					'padding'     	: 0,
     					'position'      	: 'absolute'
-    	}).html('<br>Delete')
+    	}).html('<img id="nuMoveable" src="numove_black.png" style="padding:8px;width:12px;height:12px;" onclick="alert(99);" title="Arrange Objects"><br>Delete')
 	.addClass('nuTabHolder');
 
 }
 
 function nuAddBreadcrumbs(){
 
-	var b 							= window.nuBC.length;
+	var b	= window.nuBC.length;
 	
     for(var i = 0 ; i < b ; i++){
         
@@ -819,6 +824,8 @@ function nuAddEditTabs(p, w){
         nuEditTab(p, w.tabs[i], i);
 
     }
+	
+	nuArrangeTab(p);
 	
 	var l = 13;
 	
@@ -913,6 +920,22 @@ function nuEditTab(p, t, i){
 
 }
 
+function nuArrangeTab(p){
+
+    var tabId  = p + 'nuArrange';
+	var img    = document.createElement('div');
+	img.setAttribute('id', tabId);
+	
+	$('#' + p + 'nuTabHolder').append(img);
+	pic = p != '' ? '' : '<img id="nuMoveable" src="numove_black.png" style="width:12px;height:12px;" onclick="alert(99);" title="Arrange Objects">';
+	$('#' + tabId)
+	.html(pic)
+	.addClass('nuTab')
+	.attr('onclick','nuArrangeForm(this)');
+	
+
+}
+
 function nuSelectTab(tab){
 
     var n = String(tab.id).substr(5);
@@ -939,13 +962,23 @@ function nuAddDataTab(i, t, p){
 
 function nuBrowseTitle(b, i, l){
 
-	var un	= window.nuBC[window.nuBC.length-1].nosearch_columns.indexOf(i);
+	var bc	= nuBC[nuBC.length-1];
+	var un	= bc.nosearch_columns.indexOf(i);
 	var id  	= 'nuBrowseTitle' + i;
 	var w 	= Number(b.width);
 	var div  = document.createElement('div');
 	div.setAttribute('id', id);
 
 	var cb	= '<input id="nusearch_' + i + '" type="checkbox" class="nuSearchColumn" checked="checked" onclick="nuSetSearchColumn()">';
+	
+	if(bc.sort == i){
+		if(bc.sort_direction == 'asc'){
+			cb	= cb + '<span id="sort_direction">&#x25BC;</span>';
+		}else{
+			cb	= cb + '<span id="sort_direction">&#x25B2;</span>';
+		}
+	}
+		
 	var br	= '<br>';
 	var sp	= '<span style="font-size:16px" id="nusort_' + i + '" class="nuSort" onclick="nuSortBrowse(' + i + ')"> ' + b.title + ' </span>'
 	

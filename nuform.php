@@ -13,7 +13,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
     $t = nuRunQuery($s);
     $A = db_fetch_array($t);
     $s = "
-    
+ 
     SELECT * 
     FROM zzzzsys_form
     INNER JOIN zzzzsys_object ON sob_all_zzzzsys_form_id = zzzzsys_form_id
@@ -111,7 +111,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
     $O 					= new stdClass();
 
     $O->forms[] 			= $f;
-
+	
     return $O->forms[0];
 
 }

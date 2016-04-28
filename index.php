@@ -11,18 +11,31 @@ require_once('nucommon.php'); ?>
 <script>
 
 
+
+
 <?php
 
 	$opener	= $_GET['opener'];
 	$target	= $_GET['target'];
 	$type	= $_GET['type'];
-	
-	if($type == 'lookup'){
+
+	if($type == ''){			//-- login screen
+		
+		print "
+		
+		function nuLoad(){
+			nuLogin();
+		
+		}
+		
+		";
+		
+	}else{
 		
 		$h	= "
 		
 		function nuLoad(){
-
+			
 			window.nuTYPE		= '$type';
 			window.nuTARGET	= '$target';
 			window.nuSESSION	= parent.nuSESSION;
@@ -36,20 +49,7 @@ require_once('nucommon.php'); ?>
 		print $h;
 
 	}
-
-	if($type == ''){
-		
-		print "
-		
-		function nuLoad(){
-
-			nuLogin();
-		
-		}
-		
-		";
-		
-	}
+	
 ?>
 
 </script>

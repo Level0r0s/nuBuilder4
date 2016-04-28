@@ -9,7 +9,7 @@
 	$f->forms[0]							= new stdClass;
 	$s									= nuCheckSession();
 	$P									= $_POST['nuSTATE'];
-		
+
 	if($P['call_type'] == 'getlookupid')	{$f->forms[0]->lookup_values 	= nuGetAllLookupValues();}
 	if($P['call_type'] == 'getlookupcode')	{$f->forms[0]->lookup_values 	= nuGetAllLookupList();}
 	if($P['call_type'] == 'getform')		{$f->forms[0] 				= nuGetFormObject($s->form_id, $s->record_id, 0, $P);}
@@ -21,7 +21,8 @@
 	$f->forms[0]->log_again				= $_POST['nuLogAgain'];
 	$f->forms[0]->target					= $P['target'];
 	$j									= json_encode($f->forms[0]);
-	
+	 nudebug('2 '.$j);
+
 	print $j;
 
 ?>
