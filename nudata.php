@@ -1,10 +1,10 @@
 <?php
 
 function nuUpdateData(){
-	
+
 	$d	= $_POST['nuSTATE']['data'];
 	$ID	= $_POST['nuSTATE']['record_id'];
-
+	$DEL	= $_POST['nuSTATE']['deleteAll'];	
 	for($i = 0 ; $i < count($d) ; $i++){
 		
 		if($d[$i]['pk'] == '-1'){
@@ -23,15 +23,18 @@ function nuUpdateData(){
 			$d[$i]['fk']	= $d[0]['pk'];
 		}
 	}
+nudebug(print_r($d,1));
 	
 	for($i = 0 ; $i < count($d) ; $i++){
 
 		$pk		= $d[$i]['pk'];
 		$t		= nuRunQuery("SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = ? ", array($d[$i]['fm']));
 		$r		= db_fetch_object($t);
-		
-		if($d[$i]['d']	== '1' or $d[0]['d'] == '1' ){
-			nuDeleteRow($r, $pk);
+		$del		= $d[$i]['d'];
+nudebug("$del == 'Yes' or $DEL == 'Yes'");		
+		if($del == 'Yes' or $DEL == 'Yes'){
+nudebug('ddddddd');
+		nuDeleteRow($r, $pk);
 		}else{
 			nuInsertRow($r, $pk);
 			nuUpdateRow($r, $pk, $d[$i], $ID);
@@ -46,6 +49,7 @@ function nuUpdateData(){
 function nuDeleteRow($r, $p){
 
 	nuRunQuery("DELETE FROM `$r->sfo_table` WHERE `$r->sfo_primary_key` = ? ", array($p));
+	nudebug("DELETE FROM `$r->sfo_table` WHERE `$r->sfo_primary_key` = '$p'");
 	
 }
 
@@ -56,7 +60,6 @@ function nuInsertRow($r, $p){
 	
 	if($R[0] == 0){
 		nuRunQuery("INSERT INTO `$r->sfo_table` (`$r->sfo_primary_key`) VALUES (?) ", array($p));
-		nudebug("INSERT INTO `$r->sfo_table` (`$r->sfo_primary_key`) VALUES (?) ", array($p));
 	}
 
 }

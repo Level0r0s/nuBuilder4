@@ -1,7 +1,7 @@
 
 
 function nuBuildForm(f){
-	
+
 	if(f.form_id == ''){
 		nuLogin();
 		return;
@@ -501,7 +501,7 @@ function nuSUBFORM(w, i, l, p, prop){
 					'width'      	: Number(SF.width),
 					'height'		: Number(SF.height) + 2,
 					'overflow-x'	: 'hidden',
-					'overflow-y'	: 'h)idden'
+					'overflow-y'	: 'hidden'
 	})
 	.attr('data-nu-subform-parent', p)
 	.attr('data-nu-subform', 'true')
@@ -1488,7 +1488,7 @@ function nuGetFormData(){
 	var a	= [];
 	var s	= '';
 	var f	= $("[id$='nuRecordHolder']");
-	
+
 	f.each(function(index){
 	
 		var	s	= String($(this).attr('id'));
@@ -1504,7 +1504,7 @@ function nuGetFormData(){
 
 		var rw	= new nuFormClass(b[i]);
 
-		if(rw.d == '1' || rw.pk == '-1' || rw.f.length > 0){
+		if(rw.d == 'Yes' || rw.pk == '-1' || rw.f.length > 0){
 			
 			r.push(rw);
 			
@@ -1518,6 +1518,7 @@ function nuGetFormData(){
 
 }
 
+
 function nuFormClass(frm){
 
 	var fh			= '#' + frm + 'nuRecordHolder';
@@ -1526,7 +1527,7 @@ function nuFormClass(frm){
 	var form_id		= $(fh).attr('data-nu-form-id');
 	var foreign_field	= $(fh).attr('data-nu-foreign-field');
 	
-	var deleted		= $('#' + frm + 'nuDelete').is(":checked") ? '1' : '0';
+	var deleted		= $('#' + frm + 'nuDelete').is(":checked") ? 'Yes' : 'No';
 	var fields		= [];
 	var values		= [];
 	var o			= $("[data-nu-prefix='" + frm + "'][data-nu-field][data-nu-changed]");
@@ -1585,9 +1586,13 @@ function nuOnChange(t){
 
 function nuDeleteAction(){
 	
-	$("[id$='nuDelete']").prop('checked', true);
-	
-	nuUpdateData();
+    if (confirm("Delete This Record?")) {
+
+		$("[id$='nuDelete']").prop('checked', true);
+		
+		nuUpdateData();
+		
+    }
 	
 }
 
@@ -1609,6 +1614,7 @@ function nuCloneAction(){
 function nuSaveAction(){
 	
 	nuUpdateData();
+	
 	
 }
 

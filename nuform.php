@@ -20,14 +20,13 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
     WHERE zzzzsys_form_id = '$F'
     
     ";
-    
+
     $t = nuRunQuery($s);
     $a = array();
     
     while($r = db_fetch_object($t)){
 
 		$o 					= nuDefaultObject($r, $tabs);
-
         if($R == '-1'){
             $o->value			= nuGetSQLValue($r->sob_all_default_value_sql);
         }else{

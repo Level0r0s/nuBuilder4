@@ -172,12 +172,14 @@ function nuGetLookupCode(e, buildLookupList){
 
 function nuUpdateData(){
 
+
 	var w 		= nuGetFormState();
 	w.call_type	= 'update';
 	w.data		= nuGetFormData();
 	f			= w.form_id;
 	r			= w.record_id;
-	
+	w.deleteAll	= $('#nuDelete').is(":checked") ? 'Yes' : 'No';
+
 	var request 	= $.ajax({
 		url      : "nuapi.php",
 		type     : "POST",

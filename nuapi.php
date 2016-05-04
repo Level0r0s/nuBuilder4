@@ -21,7 +21,6 @@
 	$f->forms[0]->log_again				= $_POST['nuLogAgain'];
 	$f->forms[0]->target					= $P['target'];
 	$j									= json_encode($f->forms[0]);
-	 nudebug('2 '.$j);
 
 	print $j;
 
