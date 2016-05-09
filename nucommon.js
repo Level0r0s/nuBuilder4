@@ -425,4 +425,108 @@ function nuCreateDialog(t){
 	
 }
 
+function nuReformat(t){
 
+	var o	= $('#' + t.id);
+	var f	= o.attr('data-nu-format');
+	var v	= String(o.val());
+	
+	if(f == '' || v == ''){return v;}
+	
+	var F		= nuFormats[f];
+	
+	if(F.type == 'number'){
+		var n	= v.split(F.decimal);
+		n[1]		= n.length == 1 ? '0' : n[1];
+		n[0] 	= String(Number(String(n[0]).replaceAll(',', '', true).replaceAll('.', '', true)));
+		n[1]		= String(n[1] + '0000000').substr(0, F.format);
+		
+		if(isNaN(n[0] + F.decimal + n[1])){
+			alert("Invalid Number");
+			o.val('');
+			return;
+		}
+
+		n[0] = n[0].replace(/\B(?=(\d{3})+(?!\d))/g, F.separator);
+		
+		if(F.format == 0){
+			o.val(n[0]);
+		}else{
+			if(n[0] == ''){
+				o.val('0' + F.decimal + n[1]);
+			}else{
+				o.val(n[0] + F.decimal + n[1]);
+			}
+		}
+		
+	}else if(F.type == 'date'){
+
+		var d	= v.split('-');
+		var msk	= F.format.split('-');
+		var s	= [];
+		
+		if(msk[0] == 'mm' || msk[0] == 'mmm'){s[0] = d[0];}
+		if(msk[1] == 'mm' || msk[1] == 'mmm'){s[0] = d[1];}
+		if(msk[2] == 'mm' || msk[2] == 'mmm'){s[0] = d[2];}
+		
+		if(msk[0] == 'dd'){s[1] = d[0];}
+		if(msk[1] == 'dd'){s[1] = d[1];}
+		if(msk[2] == 'dd'){s[1] = d[2];}
+		
+		if(msk[0] == 'yy' || msk[0] == 'yyyy'){s[2] = d[0];}
+		if(msk[1] == 'yy' || msk[1] == 'yyyy'){s[2] = d[1];}
+		if(msk[2] == 'yy' || msk[2] == 'yyyy'){s[2] = d[2];}
+
+		var vd	= new Date(s[0] + '-' + s[1] + '-' + s[2]);
+console.log(s[0] + '-' + s[1] + '-' + s[2]);
+		if(vd == 'Invalid Date'){
+			alert("Invalid Format (expecting '" + F.sample + "')");
+			o.val('');
+			return;
+		}
+
+		var nd		= String(F.format);
+		var full		= String(vd).split(' ');
+		var mthno	= ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+		
+		nd	= nd.replace('yyyy', full[3])
+		nd	= nd.replace('yy', String(full[3]).substr(-2))
+		nd	= nd.replace('mmm', full[1])
+		nd	= nd.replace('mm', mthno[full[1]])
+		nd	= nd.replace('dd', String('0' + '' + vd.getDate()).substr(-2))
+		
+		o.val(nd);
+		
+	}
+	
+}
+
+function nuJavascriptDate(t){
+
+	var o	= $('#' + t.id);
+	var f	= o.attr('data-nu-format');
+	var v	= String(o.val());
+	
+	if(v == ''){return v;}
+	
+	var F		= nuFormats[f];
+
+	var d	= v.split('-');
+	var msk	= F.format.split('-');
+	var s	= [];
+	
+	if(msk[0] == 'mm' || msk[0] == 'mmm'){s[0] = d[0];}
+	if(msk[1] == 'mm' || msk[1] == 'mmm'){s[0] = d[1];}
+	if(msk[2] == 'mm' || msk[2] == 'mmm'){s[0] = d[2];}
+	
+	if(msk[0] == 'dd'){s[1] = d[0];}
+	if(msk[1] == 'dd'){s[1] = d[1];}
+	if(msk[2] == 'dd'){s[1] = d[2];}
+	
+	if(msk[0] == 'yy' || msk[0] == 'yyyy'){s[2] = d[0];}
+	if(msk[1] == 'yy' || msk[1] == 'yyyy'){s[2] = d[1];}
+	if(msk[2] == 'yy' || msk[2] == 'yyyy'){s[2] = d[2];}
+
+	return new Date(s[0] + '-' + s[1] + '-' + s[2]);
+
+}

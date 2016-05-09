@@ -15,10 +15,16 @@ require_once('nucommon.php'); ?>
 
 <?php
 
-	$opener	= $_GET['opener'];
-	$target	= $_GET['target'];
-	$type	= $_GET['type'];
+	$opener		= $_GET['opener'];
+	$target		= $_GET['target'];
+	$type		= $_GET['type'];
 
+	$nuFormats	= json_encode(nuTextFormats(true));
+		
+	print "
+	window.nuFormats	=	$nuFormats;
+	";
+		
 	if($type == ''){			//-- login screen
 		
 		print "
@@ -57,6 +63,7 @@ require_once('nucommon.php'); ?>
 <?php
 cssinclude('nubuilder4.css');
 jsinclude('nuform.js');
+jsinclude('nucalendar.js');
 jsinclude('nucommon.js');
 	
 ?>

@@ -572,7 +572,6 @@ function nuTextFormats($dropdownList = false){
 		$ddl[$i]		= $format[$i]->sample;
 	}
 
-
 	if($dropdownList){
 		return $format;
 	}else{

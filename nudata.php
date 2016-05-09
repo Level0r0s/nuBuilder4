@@ -23,7 +23,6 @@ function nuUpdateData(){
 			$d[$i]['fk']	= $d[0]['pk'];
 		}
 	}
-nudebug(print_r($d,1));
 	
 	for($i = 0 ; $i < count($d) ; $i++){
 
@@ -31,10 +30,9 @@ nudebug(print_r($d,1));
 		$t		= nuRunQuery("SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = ? ", array($d[$i]['fm']));
 		$r		= db_fetch_object($t);
 		$del		= $d[$i]['d'];
-nudebug("$del == 'Yes' or $DEL == 'Yes'");		
+
 		if($del == 'Yes' or $DEL == 'Yes'){
-nudebug('ddddddd');
-		nuDeleteRow($r, $pk);
+			nuDeleteRow($r, $pk);
 		}else{
 			nuInsertRow($r, $pk);
 			nuUpdateRow($r, $pk, $d[$i], $ID);

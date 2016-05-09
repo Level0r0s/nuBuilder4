@@ -27,19 +27,23 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
     while($r = db_fetch_object($t)){
 
 		$o 					= nuDefaultObject($r, $tabs);
-        if($R == '-1'){
-            $o->value			= nuGetSQLValue($r->sob_all_default_value_sql);
-        }else{
-            $o->value			= $A[$r->sob_all_id];
-        }
+		
+		if($R == '-1'){
+			$o->value		= nuGetSQLValue($r->sob_all_default_value_sql);
+		}else{
+			$o->value		= $A[$r->sob_all_id];
+		}
 
-        if($r->sob_all_type == 'input' || $r->sob_all_type == 'display'){$o->align = $r->sob_all_align;}
+        if($r->sob_all_type == 'input' || $r->sob_all_type == 'display'){
+			$o->align 	= $r->sob_all_align;
+			$o->format 	= $r->sob_input_format;
+		}
         if($r->sob_all_type == 'html'){$o->html = $r->sob_html_code;}
 
         if($r->sob_all_type == 'select'){
 
-            $o->multiple    = $r->sob_select_multiple;
-            $o->options     = nuSelectOptions($r->sob_select_sql);
+            $o->multiple	= $r->sob_select_multiple;
+            $o->options	= nuSelectOptions($r->sob_select_sql);
 
         }
 
@@ -176,6 +180,7 @@ function nuDefaultObject($r, $t){
 	$o->left			= $r->sob_all_left;
 	$o->width   		= $r->sob_all_width;
 	$o->height		= $r->sob_all_height;
+	$o->format		= '';
 
 	for($i = 0 ; $i < count($t) ; $i++){
 

@@ -229,8 +229,16 @@ function nuINPUT(w, i, l, p, prop){
 	.attr('onchange', 'nuOnChange(this)')
 	.attr('data-nu-field', prop.objects[i].id)
 	.attr('data-nu-object-id', w.objects[i].object_id)
+	.attr('data-nu-format', w.objects[i].format)
 	.attr('data-nu-prefix', p);
-
+	if(w.objects[i].format != ''){
+//debugger;
+		
+		if(nuFormats[w.objects[i].format].type == 'date'){
+			$('#' + id).attr('onclick', 'nuPopupCalendar(this);');
+		}
+		
+	}
 
 	if(prop.objects[i].type == 'display'){
 		
@@ -443,6 +451,7 @@ function nuSELECT(w, i, l, p, prop){
 	.attr('onchange', 'nuOnChange(this)')
 	.attr('data-nu-field', prop.objects[i].id)
 	.attr('data-nu-object-id', w.objects[i].object_id)
+	.attr('data-nu-format', '')
 	.attr('data-nu-prefix', p);
 
 	if(prop.objects[i].multiple == 1){
@@ -683,6 +692,13 @@ function nuAddSubformRow(t, e){
 function nuPad3(i){
 	
 	return String('00' + Number(i)).substr(-3);
+
+}
+
+
+function nuPad2(i){
+	
+	return String('0' + Number(i)).substr(-2);
 
 }
 
@@ -1204,7 +1220,7 @@ function nuBuildLookupList(fm, e){
 	var v	= fm.lookup_values;
 	var tar	= $('#' + i);
 	var off	= $('#' + i).offset();
-	var p	= $('#' + i).parent().attr('id')
+//	var p	= $('#' + i).parent().attr('id')
 	var d	= parseInt($('#' + i + 'description').css('width'));
 	var t	= off.top;//parseInt(tar.css('top'));
 	var l	= off.left; //parseInt(tar.css('left'));
@@ -1571,13 +1587,31 @@ function nuSetFORM(F){
 	
 }
 
+
+function nuFormatObject(t){
+	
+	var f	= $('#' + t.id).attr('data-nu-format');
+	
+	if(f == ''){return;}
+	
+}
+
+
 function nuOnChange(t){
 
+	var f	= $('#' + t.id).attr('data-nu-format');
+	
+	if(f != ''){
+		nuReformat(t)
+	}
+	
 	var p	= $('#' + t.id).attr('data-nu-prefix');
 	$('#' + p + 'nuDelete').prop('checked', false);
 	$('#' + t.id).attr('data-nu-changed', '1');
 	$('#nuSaveButton').css('background-color', 'red');
 	
+	$('#nuCalendar').remove();
+
 	if(p == ''){return;}
 	
 	nuAddSubformRow(t, event);
