@@ -151,11 +151,34 @@ function nuBuildEditObjects(f, p, o, prop){
 			l = l + nuSUBFORM(f, i, l, p, prop);
 			
 		}
+
+		nuAddJSObjectEvents(p + prop.objects[i].id, prop.objects[i].js);
 		
 		l = l + 2;
 		
 	}
 	
+}
+
+function nuAddJSObjectEvents(i, j){
+
+	var o		= document.getElementById(i);
+	var on		= ['onclick','onfocus','onblur','onchange'];
+
+	for(var J = 0 ; J < j.length ; J++){
+
+		var pos	= on.indexOf(j[J].event);
+
+		if(pos != -1){
+
+			var code = o.getAttribute(j[J].event);
+			code		= code === null ? '' : code;
+			o.setAttribute(j[J].event, code + ';' + j[J].js);
+
+		}
+
+	}
+
 }
 
 function nuRecordProperties(w, p, l){
@@ -232,7 +255,6 @@ function nuINPUT(w, i, l, p, prop){
 	.attr('data-nu-format', w.objects[i].format)
 	.attr('data-nu-prefix', p);
 	if(w.objects[i].format != ''){
-//debugger;
 		
 		if(nuFormats[w.objects[i].format].type == 'date'){
 			$('#' + id).attr('onclick', 'nuPopupCalendar(this);');
@@ -1612,8 +1634,8 @@ function nuOnChange(t){
 	
 	$('#nuCalendar').remove();
 
-	if(p == ''){return;}
 	
+	if(p == ''){return;}
 	nuAddSubformRow(t, event);
 	
 }

@@ -405,6 +405,8 @@ function nu2Month(n){
 
 function nuCalChoice(t){
 
+	if(t.innerHTML == ''){return;}
+
 	var o	= $('#' + window.nuCalendarCaller);
 	var f	= o.attr('data-nu-format');
 	var d	= nuPad2('0' + t.innerHTML);
@@ -426,9 +428,9 @@ function nuCalChoice(t){
 	
 	o.val(v);
 
+	o.change();
+	o.focus();
 	$('#nuCalendar').remove();
-	$('#' + o.id).change();
-	$('#' + o.id).focus();
 
 }
 

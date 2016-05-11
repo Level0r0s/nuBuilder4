@@ -86,6 +86,8 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 
 	}
 
+	$o->js					= nuObjectEvents($r->zzzzsys_object_id);
+
 	if($OBJS > 0){
 
 		unset($o->type);
@@ -99,7 +101,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 		
 	}
 
-	$a[]    			= $o;
+	$a[]    				= $o;
 
     }
     
@@ -114,10 +116,25 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
     $O 					= new stdClass();
 
     $O->forms[] 			= $f;
-	
+
     return $O->forms[0];
 
 }
+
+
+function nuObjectEvents($i){
+
+	$a	= array();
+	$s	= "SELECT sev_event AS event, sev_javascript AS js FROM zzzzsys_event WHERE sev_zzzzsys_object_id = '$i'";
+	$t	= nuRunQuery($s);
+	while($r = db_fetch_object($t)){
+		$a[]	= $r;
+	}
+
+	return $a;
+
+}
+
 
 
 function nuButtonList($f){
