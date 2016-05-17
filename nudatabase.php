@@ -121,7 +121,7 @@ function db_is_auto_id($t, $p){
 function db_fetch_array($o){
 
 	if (is_object($o)) {
-		return $o->fetch(PDO::FETCH_BOTH);
+		return $o->fetch(PDO::FETCH_ASSOC);
 	} else {
 		return array();
 	}

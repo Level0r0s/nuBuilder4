@@ -77,7 +77,7 @@ function nuGetForm(f, r, n){
 	w.call_type	= 'getform';
 	w.form_id	= f;
 	w.record_id	= r;
-
+	w.hash		= parent.nuHashFromEditForm();
 	var request 	= $.ajax({
 		url      : "nuapi.php",
 		type     : "POST",
@@ -301,6 +301,8 @@ function nuLogin(){
 
 function nuBuildLookup(t, p){
 
+//	nuHashFromEditForm();
+
 	var f	= $('#' + t.id).attr('data-nu-form-id');
 	var tar	= $('#' + t.id).attr('data-nu-target');
 	
@@ -322,18 +324,6 @@ function nuBuildLookup(t, p){
 
 }
 
-/*
-function nuBuildNewWindow(f, r){
-
-	window.nuOPENER.push(new nuOpener(f, r));
-	
-	var l 	= window.nuOPENER.length -1;
-	
-	window.nuDialog.createDialog(50, 50, 50, 50, '');
-	window.open('index.php?opener=' + l  + '&type=edit');
-
-}
-*/
 
 function nuBuildPopup(f, r){
 

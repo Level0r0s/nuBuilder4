@@ -36,8 +36,7 @@ function nuBuildForm(f){
 	nuAddHolder('nuActionHolder');
 	nuAddHolder('nuBreadcrumbHolder');
 	
-	if(f.record_id == ''){
-	}else{
+	if(f.record_id != ''){
 		nuAddHolder('nuTabHolder');
 		nuAddHolder('nuRecordHolder');
 	}
@@ -46,7 +45,9 @@ function nuBuildForm(f){
 	nuAddEditTabs('', f);
 	nuAddActionButtons(f);
 	nuRecordProperties(f, '');
-	nuBuildEditObjects(f, '', '', f);
+	if(f.record_id != ''){
+		nuBuildEditObjects(f, '', '', f);
+	}
 	nuGetStartingTab();
 	nuAddJavascript(f);
 	$('#nuSearchField').focus();
@@ -254,6 +255,7 @@ function nuINPUT(w, i, l, p, prop){
 	.attr('data-nu-object-id', w.objects[i].object_id)
 	.attr('data-nu-format', w.objects[i].format)
 	.attr('data-nu-prefix', p);
+
 	if(w.objects[i].format != ''){
 		
 		if(nuFormats[w.objects[i].format].type == 'date'){
@@ -1494,7 +1496,7 @@ function nuHighlightSearch(){
 
 	var bc		= nuBC[nuBC.length - 1];
 	var exclude	= bc.nosearch_columns;
-	var search	= bc.search.toLowerCase().split(' ')
+	var search	= bc.search.split(' ')
 	.filter(function(a) {return (a != '' && a.substr(0,1) != '-')})
 	.sort(function(a,b) {return (a.length > b.length)});
 
@@ -1504,10 +1506,10 @@ function nuHighlightSearch(){
 		
 		if(exclude.indexOf(col) == -1){
 			
-			var h	= String($(this).html()).toLowerCase();
+			var h	= String($(this).html());//.toLowerCase();
 			
 			for(var i = 0 ; i < search.length ; i++){
-				h	= h.replace(search[i],'`````' + search[i] + '````', true);
+				h	= h.replaceAll(search[i],'`````' + search[i] + '````', true);
 			}
 
 			h 		= h.replaceAll('`````', '<span class="nuBrowseSearch">', true);
@@ -1691,3 +1693,23 @@ function nuAddJavascript(f){
 	
 }
 
+function nuHashFromEditForm(){
+
+	var a	= [];
+	var b	= nuBC[nuBC.length-1];
+
+	a.push([b.form_id, b.record_id]);		//-- first element is Form and Record ID
+
+	$("[data-nu-field][data-nu-changed][data-nu-prefix='']").each(function( index ) {
+
+		if($('#' + this.id).attr('multiple') == 'multiple'){
+			a.push([this.id, $('#' + this.id).val().join('#nuSep#')]);
+		}else{
+			a.push([this.id, $('#' + this.id).val()]);
+		}
+
+	});
+
+	return a;
+
+}

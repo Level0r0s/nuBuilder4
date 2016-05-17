@@ -47,7 +47,6 @@ function nuUpdateData(){
 function nuDeleteRow($r, $p){
 
 	nuRunQuery("DELETE FROM `$r->sfo_table` WHERE `$r->sfo_primary_key` = ? ", array($p));
-	nudebug("DELETE FROM `$r->sfo_table` WHERE `$r->sfo_primary_key` = '$p'");
 	
 }
 

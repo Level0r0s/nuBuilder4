@@ -46,6 +46,7 @@ require_once('nucommon.php'); ?>
 			window.nuTARGET	= '$target';
 			window.nuSESSION	= parent.nuSESSION;
 			var p			= parent.nuOPENER[$opener];
+			var p			= parent.nuOPENER[$opener];
 
 			nuGetForm(p.form_id, p.record_id);
 

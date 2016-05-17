@@ -44,7 +44,6 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 
             $o->multiple	= $r->sob_select_multiple;
             $o->options	= nuSelectOptions($r->sob_select_sql);
-
         }
 
 		if($r->sob_all_type == 'run'){
@@ -351,7 +350,9 @@ function nuSelectOptions($sql) {
     $a = array();
 
     if (substr(strtoupper(trim($sql)), 0, 6) == 'SELECT') {                      //-- sql statement
+
         $t = nuRunQuery($sql);
+
         if (nuErrorFound()) {
             return;
         }
@@ -359,7 +360,9 @@ function nuSelectOptions($sql) {
         while ($r = db_fetch_row($t)) {
             $a[] = $r;
         }
+
     } else {                                                                     //-- comma delimited string
+
         $t = explode('|', $sql);
 
         for ($i = 0; $i < count($t); $i++) {
@@ -369,7 +372,9 @@ function nuSelectOptions($sql) {
             $r[1] = $t[$i + 1];
             $a[]  = $r;
             $i++;
+
         }
+
     }
 
     return $a;

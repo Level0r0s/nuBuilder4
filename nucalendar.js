@@ -427,7 +427,6 @@ function nuCalChoice(t){
 	if(f == 32){v 	= Y + '-' + m + '-' + d;}
 	
 	o.val(v);
-
 	o.change();
 	o.focus();
 	$('#nuCalendar').remove();
