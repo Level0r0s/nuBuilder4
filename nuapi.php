@@ -9,7 +9,7 @@
 	$f->forms[0]							= new stdClass;
 	$s									= nuCheckSession();
 	$P									= $_POST['nuSTATE'];
-	$_POST['hash']						= nuSetHashList($P['hash']);
+	$_POST['nuHash']						= nuSetHashList($P['hash']);
 
 	if($P['call_type'] == 'getlookupid')	{$f->forms[0]->lookup_values 	= nuGetAllLookupValues();}
 	if($P['call_type'] == 'getlookupcode')	{$f->forms[0]->lookup_values 	= nuGetAllLookupList();}

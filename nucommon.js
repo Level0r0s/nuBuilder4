@@ -179,6 +179,7 @@ function nuUpdateData(){
 	f			= w.form_id;
 	r			= w.record_id;
 	w.deleteAll	= $('#nuDelete').is(":checked") ? 'Yes' : 'No';
+	w.hash		= nuHashFromEditForm();
 
 	var request 	= $.ajax({
 		url      : "nuapi.php",
@@ -300,8 +301,6 @@ function nuLogin(){
 
 
 function nuBuildLookup(t, p){
-
-//	nuHashFromEditForm();
 
 	var f	= $('#' + t.id).attr('data-nu-form-id');
 	var tar	= $('#' + t.id).attr('data-nu-target');

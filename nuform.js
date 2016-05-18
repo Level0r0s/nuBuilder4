@@ -1697,15 +1697,35 @@ function nuHashFromEditForm(){
 
 	var a	= [];
 	var b	= nuBC[nuBC.length-1];
+	var o 	= {};
 
 	a.push([b.form_id, b.record_id]);		//-- first element is Form and Record ID
 
 	$("[data-nu-field][data-nu-changed][data-nu-prefix='']").each(function( index ) {
 
-		if($('#' + this.id).attr('multiple') == 'multiple'){
-			a.push([this.id, $('#' + this.id).val().join('#nuSep#')]);
+		o 	= $('#' + this.id);
+
+		if(o.attr('multiple') == 'multiple'){
+
+			a.push([this.id, o.val().join('#nuSep#')]);
+
 		}else{
-			a.push([this.id, $('#' + this.id).val()]);
+
+			var format	= o.attr('data-nu-format');
+			var F		= nuFormats[format == '' ? '0' : format];
+
+			if(F.type == 'date' && o.val() != ''){
+
+				var d	= new Date(o.val());
+				var f	= d.getFullYear() + '-' + nuPad2('00' + Number(Number(d.getMonth())+Number(1))) + '-' + nuPad2('00' + d.getDate());
+				a.push([this.id, f]);
+
+			}else{
+
+				a.push([this.id, o.val()]);
+
+			}
+
 		}
 
 	});

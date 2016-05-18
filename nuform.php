@@ -61,46 +61,46 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 			$o->run_method  	= $r->sob_run_method;
 
 		}
-	
 		
-	if($r->sob_all_type == 'lookup'){
+			
+		if($r->sob_all_type == 'lookup'){
 
-		$o->description_width		= $r->sob_lookup_description_width;
-		$o->auto_complete			= $r->sob_lookup_autocomplete;
-		$o->form_id				= $r->sob_lookup_zzzzsys_form_id;
-		$o->values				= nuGetLookupValues($r, $o);
-		
-	}
+			$o->description_width		= $r->sob_lookup_description_width;
+			$o->auto_complete			= $r->sob_lookup_autocomplete;
+			$o->form_id				= $r->sob_lookup_zzzzsys_form_id;
+			$o->values				= nuGetLookupValues($r, $o);
+			
+		}
 
-	if($r->sob_all_type == 'subform'){
+		if($r->sob_all_type == 'subform'){
 
-		$r->subform_fk      	= $R;
-		$o->subform_type    	= $r->sob_subform_type;
-		$o->delete          	= $r->sob_subform_delete;
-		$f->foreign_key_name 	= $r->sob_subform_foreign_key;
-		$o->add             	= $r->sob_subform_add;
-		$o->dimensions		= nuFormDimensions($r->sob_subform_zzzzsys_form_id);
-		$o->forms           	= nuGetSubformRecords($r, $o->add);
-		$o->browse_columns  	= array();
+			$r->subform_fk      	= $R;
+			$o->subform_type    	= $r->sob_subform_type;
+			$o->delete          	= $r->sob_subform_delete;
+			$f->foreign_key_name 	= $r->sob_subform_foreign_key;
+			$o->add             	= $r->sob_subform_add;
+			$o->dimensions		= nuFormDimensions($r->sob_subform_zzzzsys_form_id);
+			$o->forms           	= nuGetSubformRecords($r, $o->add);
+			$o->browse_columns  	= array();
 
-	}
+		}
 
-	$o->js					= nuObjectEvents($r->zzzzsys_object_id);
+		$o->js					= nuObjectEvents($r->zzzzsys_object_id);
 
-	if($OBJS > 0){
+		if($OBJS > 0){
 
-		unset($o->type);
-		unset($o->id);
-		unset($o->label);
-		unset($o->top);
-		unset($o->left);
-		unset($o->width);
-		unset($o->height);
-		unset($o->align);
-		
-	}
+			unset($o->type);
+			unset($o->id);
+			unset($o->label);
+			unset($o->top);
+			unset($o->left);
+			unset($o->width);
+			unset($o->height);
+			unset($o->align);
+			
+		}
 
-	$a[]    				= $o;
+		$a[]    				= $o;
 
     }
     

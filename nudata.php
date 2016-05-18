@@ -2,9 +2,26 @@
 
 function nuUpdateData(){
 
-	$d	= $_POST['nuSTATE']['data'];
-	$ID	= $_POST['nuSTATE']['record_id'];
-	$DEL	= $_POST['nuSTATE']['deleteAll'];	
+	$d		= $_POST['nuSTATE']['data'];
+	$ID		= $_POST['nuSTATE']['record_id'];
+	$DEL		= $_POST['nuSTATE']['deleteAll'];	
+	$fid		= $_POST['nuSTATE']['form_id'];
+	$s		= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$fid'";
+	$t		= nuRunQuery($s);
+	$FORM	= db_fetch_object($t);
+
+	if($DEL == 'Yes'){
+		$before	= nuReplaceHashVariables(trim($FORM->sfo_before_delete_php));
+		$after	= nuReplaceHashVariables(trim($FORM->sfo_after_delete_php));
+	}else{
+		$before	= nuReplaceHashVariables(trim($FORM->sfo_before_save_php));
+		$after	= nuReplaceHashVariables(trim($FORM->sfo_after_save_php));
+	}
+
+	eval($before);
+
+	if(count($_POST['nuErrors']) > 0){return;}
+
 	for($i = 0 ; $i < count($d) ; $i++){
 		
 		if($d[$i]['pk'] == '-1'){
@@ -39,6 +56,8 @@ function nuUpdateData(){
 		}
 		
 	}
+
+	eval($after);
 
 	return $ID;
 	
@@ -98,6 +117,25 @@ function nuFormatValue($row, $i){
 	}else{
 		return $row['v'][$i];
 	}
+
+}
+
+function nuReplaceHashVariables($s){
+
+	$a		= $_POST['nuHash'];
+
+	foreach ($a as $k => $v) {
+		$s	= str_replace ('#' . $k . '#', $v, $s);
+	}
+
+	return $s;
+
+}
+
+
+function nuErrorMessage($m){
+
+	$_POST['nuErrors'][]	= $m;
 
 }
 

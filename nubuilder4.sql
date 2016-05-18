@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 17, 2016 at 03:20 AM
+-- Generation Time: May 18, 2016 at 04:08 AM
 -- Server version: 5.5.9
 -- PHP Version: 5.3.5
 
@@ -137,11 +137,11 @@ CREATE TABLE IF NOT EXISTS `company` (
 --
 
 INSERT INTO `company` (`company_id`, `com_code`, `com_name`, `com_business_id`, `com_company_id`, `com_address`, `com_suburb`, `com_phone`, `com_map_coordinates`, `com_sex`, `com_color_id`, `com_age`, `com_notes`) VALUES
-('5678d262e048faa', '0007', 'Terry White', '', '', '5 Trent Grv', 'Fiord', '05645333222', '11 44', 'f', '568ef920846a089#nuSep#568ef59c1bd769c#nuSep#568ef931d196b3e#nuSep#568ef5a6968322b#nuSep#568ef58fe48207a', 50, 'hello worldsssst'),
-('5729572e6331281', '', 'Mrs Compute', '', '', '43 Allen St', 'Grazewood', '0423345544', '', '', '568ef59c1bd769c#nuSep#568ef931d196b3e', 0, '13132'),
+('5678d262e048faa', '0007', 'Terry White', '568a00c77f8f709', '', '5 Trent Grv', 'Fiord', '18-May-2016', '11 44', 'f', '568ef931d196b3e#nuSep#568ef58fe48207a', 50, 'hello worldsssstff'),
+('5729572e6331281', '', 'Mrs Computer1234444', '568a00e25b8d271', '', '43 Allen St', 'Grazewood', '0423345544', '', '', '568ef59c1bd769c#nuSep#568ef931d196b3e', 0, '13132'),
 ('57295aa5660f48b', '', 'Mrs Computer1234', '', '', '43 Allen St', 'Grazewood', '0423345544', '', '', '568ef920846a089', 0, '13132'),
 ('57295c4c33cddd6', '', 'PCP2000', '568a00e25b8d271', '', '108 KWS', 'Bute', '18-May-2016', '', '', '568ef931d196b3e', 0, 'blah'),
-('57295ed9e996db0', '', 'OPSM', '568a00e25b8d271', '', '', '', '13-May-2016', '', '', '568ef920846a089', 0, ''),
+('57295ed9e996db0', '', 'OPSM', '568a00c77f8f709', '', '', '', '20-May-2016', '', '', '568ef920846a089#nuSep#568ef59c1bd769c#nuSep#568ef931d196b3e', 0, 'oooo12'),
 ('5716c7137efb0c5', '', 'Mr Computer12', '', '', '43 Allen St', 'Grazewood', '0423345544', '', 'm', '568ef59c1bd769c#nuSep#568ef931d196b3e', 0, '13132');
 
 -- --------------------------------------------------------
@@ -1387,8 +1387,7 @@ CREATE TABLE IF NOT EXISTS `zzzsys_session` (
 --
 
 INSERT INTO `zzzsys_session` (`zzzsys_session_id`, `sss_zzzsys_user_id`, `sss_timeout`, `zzzsys_session_log_added_at`, `zzzsys_session_log_added_by`, `zzzsys_session_log_changed_at`, `zzzsys_session_log_changed_by`, `zzzsys_session_log_viewed_at`, `zzzsys_session_log_viewed_by`) VALUES
-('573a8337ed3b866', 'globeadmin', 1463454370, '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', ''),
-('573a633b2ced6c3', 'globeadmin', 1463452075, '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '');
+('573bc1732e2f837', 'globeadmin', 1463544439, '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '');
 
 -- --------------------------------------------------------
 
@@ -2617,7 +2616,8 @@ INSERT INTO `zzzsys_user_log` (`zzzsys_user_log_id`, `sul_zzzsys_user_id`, `sul_
 ('5739114ab62260b', 'globeadmin', '127.0.0.1', '2016-05-16 09:46:10', '2016-05-16 13:11:34', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', ''),
 ('57394172daf7629', 'globeadmin', '127.0.0.1', '2016-05-16 13:11:38', '2016-05-16 16:58:34', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', ''),
 ('573a633b2ced6c3', 'globeadmin', '127.0.0.1', '2016-05-17 09:48:03', '2016-05-17 11:57:55', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', ''),
-('573a8337ed3b866', 'globeadmin', '127.0.0.1', '2016-05-17 12:04:31', '2016-05-17 12:36:10', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '');
+('573a8337ed3b866', 'globeadmin', '127.0.0.1', '2016-05-17 12:04:31', '2016-05-18 10:42:15', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', ''),
+('573bc1732e2f837', 'globeadmin', '127.0.0.1', '2016-05-18 10:42:19', '2016-05-18 13:37:19', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '');
 
 -- --------------------------------------------------------
 
@@ -2729,7 +2729,12 @@ CREATE TABLE IF NOT EXISTS `zzzzsys_form` (
   `sfo_redirect_form_id` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
   `sfo_row_height` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
   `sfo_rows_per_page` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
-  `sfo_before_browse_php` text COLLATE utf8_unicode_ci NOT NULL,
+  `sfo_before_browse_php` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `sfo_before_open_php` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `sfo_before_save_php` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `sfo_after_save_php` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `sfo_before_delete_php` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `sfo_after_delete_php` longtext COLLATE utf8_unicode_ci NOT NULL,
   `sfo_browse_sql` text COLLATE utf8_unicode_ci NOT NULL,
   `sfo_add_button` varchar(1) COLLATE utf8_unicode_ci NOT NULL,
   `sfo_add_title` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
@@ -2762,19 +2767,19 @@ CREATE TABLE IF NOT EXISTS `zzzzsys_form` (
 -- Dumping data for table `zzzzsys_form`
 --
 
-INSERT INTO `zzzzsys_form` (`zzzzsys_form_id`, `sfo_type`, `sfo_code`, `sfo_description`, `sfo_table`, `sfo_primary_key`, `sfo_breadcrumb_title`, `sfo_redirect_form_id`, `sfo_row_height`, `sfo_rows_per_page`, `sfo_before_browse_php`, `sfo_browse_sql`, `sfo_add_button`, `sfo_add_title`, `sfo_add_display_condition`, `sfo_new_button`, `sfo_new_title`, `sfo_new_display_condition`, `sfo_save_button`, `sfo_save_title`, `sfo_save_display_condition`, `sfo_delete_button`, `sfo_delete_title`, `sfo_delete_display_condition`, `sfo_clone_button`, `sfo_clone_title`, `sfo_clone_display_condition`, `sfo_print_button`, `sfo_print_title`, `sfo_print_display_condition`, `sfo_report_sql`, `sfo_report_library_zzzzsys_form_id`, `sfo_report_criteria_zzzzsys_form_id`, `sfo_report_layout`, `sfo_library_php`, `sfo_javascript`) VALUES
-('56773cb405f4913', 'browseedit', 'COM', 'Company', 'company', 'company_id', '', '', '', '', '', 'SELECT * FROM company\r\nLEFT JOIN business ON business_id = com_business_id', '1', '', '', '', '', '', '1', 'Save Me', '', '1', '', '', '1', '', '', '', '', '', '', '', '', '', '', ''),
-('5678ab2c48c5c41', 'browseedit', 'EMP', 'Employee Subform', 'employee', 'employee_id', '', '', '', '', '', 'SELECT * FROM employee\nWHERE employee_id = ''5678d416056e635''', '1', '', '', '0', '', '', '1', '', '', '1', '', '', '1', '', '', '', '', '', '', '', '', '', '', ''),
-('568b508eec00d80', 'browseedit', 'BUS', 'Business', 'business', 'business_id', '', '', '', '4', '', 'SELECT * FROM business', '1', '', '', '', '', '', '1', '', '', '', '', '', '1', '', '', '1', '', '', '', '', '', '', '', ''),
-('nuhome', 'criteria', 'HOME', 'Home', '', '', '', '', '', '', '', '', '', '', '', '0', '', '', '0', '', '', '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', ''),
-('56c513162acd102', 'browseedit', 'CHI', 'Children', 'children', 'children_id', '', '', '', '', '', 'SELECT * FROM employee', '1', '', '', '0', '', '', '1', '', '', '1', '', '', '1', '', '', '', '', '', '', '', '', '', '', ''),
-('nuform', 'browseedit', 'FORM', 'nuBuilder Form', 'zzzzsys_form', 'zzzzsys_form_id', '', '', '', '', '', 'SELECT * FROM zzzzsys_form\nORDER BY sfo_code', '1', '', '', '', '', '', '1', '', '', '1', '', '', '1', '', '', '1', '', '', '', '', '', '', '', ''),
-('570b19bf4e6ec1a', 'edit', 'FRMBR', 'Form Browse Subform', 'zzzzsys_browse', 'zzzzsys_browse_id', '', '', '', '', '', 'SELECT * FROM company\nINNER JOIN business ON business_id = com_business_id', '1', '', '', '', '', '', '1', 'Save Me', '', '1', '', '', '1', '', '', '', '', '', '', '', '', '', '', ''),
-('570b37f0777aa8d', 'edit', 'TAB', 'Form Tab', 'zzzzsys_tab', 'zzzzsys_tab_id', '', '', '', '', '', 'SELECT * FROM zzzzsys_tab\nJOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id\n', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '0', '', '', '', '', '', '', '', ''),
-('570c3f3ed9de708', 'edit', 'LIB', 'Include PHP Library', 'zzzzsys_library', 'zzzzsys_library_id', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-('nuobject', 'browseedit', 'OBJ', 'Object', 'zzzzsys_object', 'zzzzsys_object_id', '', '', '', '', '', 'SELECT * FROM zzzzsys_object\nJOIN zzzzsys_tab ON zzzzsys_tab_id = sob_all_zzzzsys_tab_id\nJOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id\n', '1', '', '', '', '', '', '1', '', '', '1', '', '', '1', '', '', '0', '', '', '', '', '', '', '', ''),
-('570daea96b33df9', 'edit', 'LOOK', 'Lookup Objects to populate', 'zzzzsys_lookup', 'zzzzsys_lookup_id', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-('5726afd46e9fd7e', 'edit', 'EVE', 'Object Events', 'zzzzsys_event', 'zzzzsys_event_id', '', '', '', '', '', 'SELECT * FROM zzzzsys_event', '', '', '', '', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `zzzzsys_form` (`zzzzsys_form_id`, `sfo_type`, `sfo_code`, `sfo_description`, `sfo_table`, `sfo_primary_key`, `sfo_breadcrumb_title`, `sfo_redirect_form_id`, `sfo_row_height`, `sfo_rows_per_page`, `sfo_before_browse_php`, `sfo_before_open_php`, `sfo_before_save_php`, `sfo_after_save_php`, `sfo_before_delete_php`, `sfo_after_delete_php`, `sfo_browse_sql`, `sfo_add_button`, `sfo_add_title`, `sfo_add_display_condition`, `sfo_new_button`, `sfo_new_title`, `sfo_new_display_condition`, `sfo_save_button`, `sfo_save_title`, `sfo_save_display_condition`, `sfo_delete_button`, `sfo_delete_title`, `sfo_delete_display_condition`, `sfo_clone_button`, `sfo_clone_title`, `sfo_clone_display_condition`, `sfo_print_button`, `sfo_print_title`, `sfo_print_display_condition`, `sfo_report_sql`, `sfo_report_library_zzzzsys_form_id`, `sfo_report_criteria_zzzzsys_form_id`, `sfo_report_layout`, `sfo_library_php`, `sfo_javascript`) VALUES
+('56773cb405f4913', 'browseedit', 'COM', 'Company', 'company', 'company_id', '', '', '', '', '', '', 'nuErrorMessage(''hello #com_name#'');', '', 'nuErrorMessage(''stop #com_name#'');', '', 'SELECT * FROM company\r\nLEFT JOIN business ON business_id = com_business_id', '1', '', '', '', '', '', '1', 'Save Me', '', '1', '', '', '1', '', '', '', '', '', '', '', '', '', '', ''),
+('5678ab2c48c5c41', 'browseedit', 'EMP', 'Employee Subform', 'employee', 'employee_id', '', '', '', '', '', '', '', '', '', '', 'SELECT * FROM employee\nWHERE employee_id = ''5678d416056e635''', '1', '', '', '0', '', '', '1', '', '', '1', '', '', '1', '', '', '', '', '', '', '', '', '', '', ''),
+('568b508eec00d80', 'browseedit', 'BUS', 'Business', 'business', 'business_id', '', '', '', '4', '', '', '', '', '', '', 'SELECT * FROM business', '1', '', '', '', '', '', '1', '', '', '', '', '', '1', '', '', '1', '', '', '', '', '', '', '', ''),
+('nuhome', 'criteria', 'HOME', 'Home', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '0', '', '', '0', '', '', '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', ''),
+('56c513162acd102', 'browseedit', 'CHI', 'Children', 'children', 'children_id', '', '', '', '', '', '', '', '', '', '', 'SELECT * FROM employee', '1', '', '', '0', '', '', '1', '', '', '1', '', '', '1', '', '', '', '', '', '', '', '', '', '', ''),
+('nuform', 'browseedit', 'FORM', 'nuBuilder Form', 'zzzzsys_form', 'zzzzsys_form_id', '', '', '', '', '', '', '', '', '', '', 'SELECT * FROM zzzzsys_form\nORDER BY sfo_code', '1', '', '', '', '', '', '1', '', '', '1', '', '', '1', '', '', '1', '', '', '', '', '', '', '', ''),
+('570b19bf4e6ec1a', 'edit', 'FRMBR', 'Form Browse Subform', 'zzzzsys_browse', 'zzzzsys_browse_id', '', '', '', '', '', '', '', '', '', '', 'SELECT * FROM company\nINNER JOIN business ON business_id = com_business_id', '1', '', '', '', '', '', '1', 'Save Me', '', '1', '', '', '1', '', '', '', '', '', '', '', '', '', '', ''),
+('570b37f0777aa8d', 'edit', 'TAB', 'Form Tab', 'zzzzsys_tab', 'zzzzsys_tab_id', '', '', '', '', '', '', '', '', '', '', 'SELECT * FROM zzzzsys_tab\nJOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id\n', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '0', '', '', '', '', '', '', '', ''),
+('570c3f3ed9de708', 'edit', 'LIB', 'Include PHP Library', 'zzzzsys_library', 'zzzzsys_library_id', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+('nuobject', 'browseedit', 'OBJ', 'Object', 'zzzzsys_object', 'zzzzsys_object_id', '', '', '', '', '', '', '', '', '', '', 'SELECT * FROM zzzzsys_object\nJOIN zzzzsys_tab ON zzzzsys_tab_id = sob_all_zzzzsys_tab_id\nJOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id\n', '1', '', '', '', '', '', '1', '', '', '1', '', '', '1', '', '', '0', '', '', '', '', '', '', '', ''),
+('570daea96b33df9', 'edit', 'LOOK', 'Lookup Objects to populate', 'zzzzsys_lookup', 'zzzzsys_lookup_id', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+('5726afd46e9fd7e', 'edit', 'EVE', 'Object Events', 'zzzzsys_event', 'zzzzsys_event_id', '', '', '', '', '', '', '', '', '', '', 'SELECT * FROM zzzzsys_event', '', '', '', '', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -2885,7 +2890,7 @@ INSERT INTO `zzzzsys_object` (`zzzzsys_object_id`, `sob_all_zzzzsys_form_id`, `s
 ('567742c772b9642', '56773cb405f4913', 'input', 'com_name', 'Company Name', '56777715b87666e', 0, 10, 200, 100, 16, '1', '', 'noblanks', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('56789912d6d9ddb', '56773cb405f4913', 'input', 'com_address', 'Address', '567898dbc543710', 0, 200, 150, 200, 16, '1', '', 'noblanks', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'text', ''),
 ('5678992c5432850', '56773cb405f4913', 'input', 'com_suburb', 'Suburb', '567898dbc543710', 0, 300, 100, 70, 16, '1', '', 'noblanks', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'text', ''),
-('5678a9474a323f5', '56773cb405f4913', 'input', 'com_phone', 'Phone', '56777715b87666e', 5, 400, 100, 111, 16, '1', 'l', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '6', '', ''),
+('5678a9474a323f5', '56773cb405f4913', 'input', 'com_phone', 'Phone Date', '56777715b87666e', 5, 400, 100, 111, 16, '1', 'l', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '6', '', ''),
 ('5678ac0f8f3d3b8', '5678ab2c48c5c41', 'input', 'emp_name', 'Name', '5678ab2c49bd810', 0, 20, 100, 200, 16, '1', '', 'noblanks', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('5679d499ad76e9f', '5678ab2c48c5c41', 'input', 'emp_mobile', 'Mobile', '569c44dd2339963', 0, 45, 100, 100, 16, '1', '', 'noblanks', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '8', 'text', ''),
 ('5689fdaf9babfb9', '56773cb405f4913', 'select', 'com_color_id', 'Color', '56777715b87666e', 0, 120, 400, 70, 50, '1', '', 'noblanks', '0', '', '', '', '', '', '', '', '1', 'SELECT \ncolor_id,\ncol_description\nFROM color\nORDER BY col_description', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
@@ -3449,7 +3454,10 @@ INSERT INTO `zzzzsys_session` (`zzzzsys_session_id`, `sss_zzzzsys_user_id`, `sss
 ('573a74aedf915e3', 'globeadmin', 0, ''),
 ('573a773855a9f93', 'globeadmin', 0, ''),
 ('573a77d85a0b16b', 'globeadmin', 0, ''),
-('573a7ec70988465', 'globeadmin', 0, '');
+('573a7ec70988465', 'globeadmin', 0, ''),
+('573bccee5a5c9a4', 'globeadmin', 0, ''),
+('573bd85c6399488', 'globeadmin', 0, ''),
+('573bddea26d14b0', 'globeadmin', 0, '');
 
 -- --------------------------------------------------------
 
