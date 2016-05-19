@@ -224,11 +224,16 @@ function nuINPUT(w, i, l, p, prop){
 	if(prop.objects[i].type != 'textarea'){         		//-- Input Object
 		
 		ty	= 'input';
+
 	}
 
-	var inp  = document.createElement(ty);
+	var inp  		= document.createElement(ty);
+	var input_type	= prop.objects[i].input;
+
 	inp.setAttribute('id', id);
-	
+
+	$('#' + ef).append(inp);
+
 	if(prop.objects[i].parent_type == 'g'){        		//--  in a grid subform
 		
 		prop.objects[i].left = l;
@@ -236,12 +241,24 @@ function nuINPUT(w, i, l, p, prop){
 		
 	}else{
 		
-		nuLabel(w, i, p, prop);
+		if(input_type != 'button'){	//-- Input Object
+			nuLabel(w, i, p, prop);
+		}
 		
 	}
 
-	$('#' + ef).append(inp);
+	if(ty == 'input'){	//-- Input Object
+
+		inp.setAttribute('type', prop.objects[i].input);
+
+		if(input_type == 'button'){
+			$('#' + id).addClass('nuButton');
+		}
+
+	}
+	
 	nuAddDataTab(id, prop.objects[i].tab, p);
+
 	$('#' + id).css({'top'       	: Number(prop.objects[i].top),
 					'left'		: Number(prop.objects[i].left),
 					'width'		: Number(prop.objects[i].width),
@@ -1700,6 +1717,8 @@ function nuHashFromEditForm(){
 	var o 	= {};
 
 	a.push([b.form_id, b.record_id]);		//-- first element is Form and Record ID
+	a.push(['FORM_ID', b.form_id]);
+	a.push(['RECORD_ID', b.record_id]);
 
 	$("[data-nu-field][data-nu-changed][data-nu-prefix='']").each(function( index ) {
 

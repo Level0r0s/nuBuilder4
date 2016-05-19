@@ -8,7 +8,6 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
     $f->form_id		= $F;
     $f->record_id		= $R;
     
-
     $s = "Select * From `$f->table` Where `$f->primary_key` = '$R'";
     $t = nuRunQuery($s);
     $A = db_fetch_array($t);
@@ -34,10 +33,18 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 			$o->value		= $A[$r->sob_all_id];
 		}
 
-        if($r->sob_all_type == 'input' || $r->sob_all_type == 'display'){
+		if($r->sob_all_type == 'input' || $r->sob_all_type == 'display'){
+
 			$o->align 	= $r->sob_all_align;
 			$o->format 	= $r->sob_input_format;
+			$o->input 	= $r->sob_input_type;
+
+			if($r->sob_input_type == 'button'){
+				$o->value= $r->sob_all_label;
+			}
+
 		}
+
         if($r->sob_all_type == 'html'){$o->html = $r->sob_html_code;}
 
         if($r->sob_all_type == 'select'){

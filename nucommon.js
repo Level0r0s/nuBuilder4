@@ -467,7 +467,7 @@ function nuReformat(t){
 		if(msk[2] == 'yy' || msk[2] == 'yyyy'){s[2] = d[2];}
 
 		var vd	= new Date(s[0] + '-' + s[1] + '-' + s[2]);
-console.log(s[0] + '-' + s[1] + '-' + s[2]);
+
 		if(vd == 'Invalid Date'){
 			alert("Invalid Format (expecting '" + F.sample + "')");
 			o.val('');
