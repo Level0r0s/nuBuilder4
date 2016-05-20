@@ -1,36 +1,52 @@
 window.addEventListener("mousemove", function(e) {
 	if(nuFORM.nuDrag) {
-		if(e.buttons) {
-			dragBox();
-		} else {
-			removeBox();
-		}
+		if(e.stopPropagation) e.stopPropagation();
+		if(e.preventDefault) e.preventDefault();
+		e.cancelBubble=true;
+		e.returnValue=false;
+
+		dragBox();
 	}
 }, false);
 
+window.addEventListener("mousedown", function(e) {
+	if(nuFORM.nuDrag) {
+		createBox();
+	}
+}, false);
+
+window.addEventListener("mouseup", function(e) {
+	if(nuFORM.nuDrag) {
+		removeBox(event.ctrlKey);
+	}
+}, false);
+
+function createBox(){
+	
+	var e = document.createElement('div');
+	e.setAttribute('id', 'nuSelectBox');
+	$('body').append(e);
+	$('#' + e.id).css({
+		'width'            : 1,
+		'height'           : 1,
+		'top'              : event.clientY + window.scrollY,
+		'left'             : event.clientX,
+		'position'         : 'absolute',
+		'border-style'     : 'dashed',
+		'border-width'     : 1,
+		'border-color'     : 'red',
+		'z-index'          : '4000',
+		'background-color' : 'transparent'
+	});
+	
+	window.startX = event.clientX + window.scrollX;
+	window.startY = event.clientY + window.scrollY;
+	window.moveX = 0;
+	window.moveY = 0;
+}
+
 function dragBox() {
-	if($('#nuSelectBox').length == 0){
-		var e = document.createElement('div');
-		e.setAttribute('id', 'nuSelectBox');
-		$('body').append(e);
-		$('#' + e.id).css({
-			'width'            : 1,
-			'height'           : 1,
-			'top'              : event.clientY + window.scrollY,
-			'left'             : event.clientX,
-			'position'         : 'absolute',
-			'border-style'     : 'dashed',
-			'border-width'     : 1,
-			'border-color'     : 'red',
-			'z-index'          : '4000',
-			'background-color' : 'transparent'
-		});
-		
-		window.startX = event.clientX + window.scrollX;
-		window.startY = event.clientY + window.scrollY;
-		window.moveX = 0;
-		window.moveY = 0;
-	} else {   
+	if($('#nuSelectBox').length > 0){   
 		window.lastMoveX = window.moveX;
 		window.lastMoveY = window.moveY;
 		window.moveX = event.clientX - window.startX;
@@ -72,18 +88,19 @@ function resizeDrag() {
 	}
 }
 
-function removeBox() {
-
-	//var L = parseInt($('#nuSelectBox').css('left')) - this.areaLeft() ;
-	//var T = parseInt($('#nuSelectBox').css('top')) - this.areaTop() ;
+function removeBox(ctrlKey) {
+	
 	var L = parseInt($('#nuSelectBox').css('left'));
-	var T = parseInt($('#nuSelectBox').css('top'));
+	var T = parseInt($('#nuSelectBox').css('top')) - getTopArea();
 	var B = T + parseInt($('#nuSelectBox').css('height'));
 	var R = L + parseInt($('#nuSelectBox').css('width'));
-
 	$('#nuSelectBox').remove();
+		
+	var o = $('[data-drag]');
 	
-	var o = $('[data-nu-object-id]');
+	if(!ctrlKey) {
+		$('.nuDragSelected').removeClass('nuDragSelected');
+	}
 
 	o.each(function(index) {
 	
@@ -122,6 +139,9 @@ function removeBox() {
 	
 }
 
+function getTopArea() {
+	return 115; //need to do this more accurately
+}
 
 function nuBuildForm(f){
 
@@ -232,9 +252,9 @@ function nuAddActionButtons(f){
 	}
 
 	for(var i = 0 ; i < b.length ; i++){
-		
-		$('#nuActionHolder').append("<input id='nu" + b[i][1] + "Button' type='button' class='nuButton' value='" + b[i][0] + "' onclick='nu" + b[i][1] + "Action()'>&nbsp;");
-		
+		if(!nuFORM.nuDrag) {
+			$('#nuActionHolder').append("<input id='nu" + b[i][1] + "Button' type='button' class='nuButton' value='" + b[i][0] + "' onclick='nu" + b[i][1] + "Action()'>&nbsp;");
+		}
 	}
 	
 	if(window.nuTYPE 	== 'browse'){
@@ -251,35 +271,39 @@ function nuBuildEditObjects(f, p, o, prop){
 	var draggable = nuFORM.nuDrag;
 	
 	for(var i = 0 ; i < f.objects.length  ; i++){
+		if(!draggable) {
+			var t                       = prop.objects[i].type;
+			f.objects[i].parent_type    = o.subform_type;
 
-		var t                       = prop.objects[i].type;
-		f.objects[i].parent_type    = o.subform_type;
+			if(t == 'input' || t == 'display' || t == 'lookup' || t == 'textarea'){
+				
+				l = l + nuINPUT(f, i, l, p, prop);
+				
+			}else if(t == 'run'){
+				
+				l = l + nuRUN(f, i, l, p, prop);
+				
+			}else if(t == 'html'){
+				
+				l = l + nuHTML(f, i, l, p, prop);
+				
+			}else if(t == 'select'){
+				
+				l = l + nuSELECT(f, i, l, p, prop);
+				
+			}else if(t == 'subform' && p == ''){
+				
+				l = l + nuSUBFORM(f, i, l, p, prop);
+				
+			}
 
-		if(t == 'input' || t == 'display' || t == 'lookup' || t == 'textarea'){
+			nuAddJSObjectEvents(p + prop.objects[i].id, prop.objects[i].js);
 			
-			l = l + nuINPUT(f, i, l, p, prop, draggable);
-			
-		}else if(t == 'run'){
-			
-			l = l + nuRUN(f, i, l, p, prop, draggable);
-			
-		}else if(t == 'html'){
-			
-			l = l + nuHTML(f, i, l, p, prop, draggable);
-			
-		}else if(t == 'select'){
-			
-			l = l + nuSELECT(f, i, l, p, prop, draggable);
-			
-		}else if(t == 'subform' && p == ''){
-			
-			l = l + nuSUBFORM(f, i, l, p, prop, draggable);
-			
-		}
-
-		nuAddJSObjectEvents(p + prop.objects[i].id, prop.objects[i].js);
+			l = l + 2;
 		
-		l = l + 2;
+		} else {
+			l = l + nuDRAG(f, i, l, p, prop);
+		}
 		
 	}
 	
@@ -339,7 +363,32 @@ function nuRecordProperties(w, p, l){
 	
 }
 
-function nuINPUT(w, i, l, p, prop, draggable){
+function nuDRAG(w, i, l, p, prop){
+	
+	var id   = p + prop.objects[i].id;
+	var ef   = p + 'nuRecordHolder';
+	var drg 		= document.createElement('div');
+	drg.setAttribute('id', id);
+	
+	$('#' + ef).append(drg);
+	
+	$('#' + id).css({'top'       	: Number(prop.objects[i].top),
+					'left'		: Number(prop.objects[i].left),
+					'width'		: Number(prop.objects[i].width),
+					'height'		: Number(prop.objects[i].height),
+					'text-align'	: prop.objects[i].align,
+					'position'	: 'absolute',
+					'background': 'white',
+					'overflow': 'hidden'
+	});
+	
+	$('#' + id).text(id);
+	$('#' + id).attr('data-drag',1);
+		
+	return Number(prop.objects[i].width);
+}
+
+function nuINPUT(w, i, l, p, prop){
 	
 	var id   = p + prop.objects[i].id;
 	var ef   = p + 'nuRecordHolder';                       //-- Edit Form Id
@@ -349,7 +398,7 @@ function nuINPUT(w, i, l, p, prop, draggable){
 		
 		ty	= 'input';
 
-	}
+	}$().add
 
 	var inp  		= document.createElement(ty);
 	var input_type	= prop.objects[i].input;
@@ -365,7 +414,7 @@ function nuINPUT(w, i, l, p, prop, draggable){
 		
 	}else{
 		
-		if(input_type != 'button' && !draggable){	//-- Input Object
+		if(input_type != 'button'){	//-- Input Object
 			nuLabel(w, i, p, prop);
 		}
 		
@@ -397,11 +446,7 @@ function nuINPUT(w, i, l, p, prop, draggable){
 	.attr('data-nu-format', w.objects[i].format)
 	.attr('data-nu-prefix', p);
 	
-	if(!draggable) {
-		$('#' + id).val(w.objects[i].value);
-	} else {
-		$('#' + id).attr('title',id);
-	}
+	$('#' + id).val(w.objects[i].value);
 
 	if(w.objects[i].format != ''){
 		
@@ -446,53 +491,47 @@ function nuINPUT(w, i, l, p, prop, draggable){
 		.attr('onfocus', 'nuLookupFocus(event)')
 		.addClass('nuLookupCode');
 		
-		if(draggable) {
-			$('#' + id).attr('title',id);
-		}
-
 		w.objects[i].values[0][0]	= p + w.objects[i].values[0][0];
 		w.objects[i].values[1][0]	= p + w.objects[i].values[1][0];
 		w.objects[i].values[2][0]	= p + w.objects[i].values[2][0];
 		
-		if(!draggable) {
-			id 			= target + 'button';
-			var inp 		= document.createElement('div');
-			
-			inp.setAttribute('id', id);
-			
-			$('#' + ef).append(inp);
-			nuAddDataTab(id, prop.objects[i].tab, p);
-			$('#' + id).css({'top'      	: Number(prop.objects[i].top),
-							'left'      	: Number(prop.objects[i].left) + Number(prop.objects[i].width) + 2,
-							'width'		: 15,
-							'height'		: Number(prop.objects[i].height)
-			})
-			.attr('type','button')
-			.attr('data-nu-form-id', w.objects[i].form_id)
-			.attr('data-nu-object-id', w.objects[i].object_id)
-			.attr('data-nu-target', target)
-			.addClass('nuLookupButton')
-			.html('<img border="0" src="lookup.png" width="10" height="10">')
-			.attr('onclick', 'nuBuildLookup(this,[])');
+		id 			= target + 'button';
+		var inp 		= document.createElement('div');
+		
+		inp.setAttribute('id', id);
+		
+		$('#' + ef).append(inp);
+		nuAddDataTab(id, prop.objects[i].tab, p);
+		$('#' + id).css({'top'      	: Number(prop.objects[i].top),
+						'left'      	: Number(prop.objects[i].left) + Number(prop.objects[i].width) + 2,
+						'width'		: 15,
+						'height'		: Number(prop.objects[i].height)
+		})
+		.attr('type','button')
+		.attr('data-nu-form-id', w.objects[i].form_id)
+		.attr('data-nu-object-id', w.objects[i].object_id)
+		.attr('data-nu-target', target)
+		.addClass('nuLookupButton')
+		.html('<img border="0" src="lookup.png" width="10" height="10">')
+		.attr('onclick', 'nuBuildLookup(this,[])');
 
-			id = p + prop.objects[i].id + 'description';
-			var inp = document.createElement('input');
-			inp.setAttribute('id', id);
-			
-			$('#' + ef).append(inp);
-			nuAddDataTab(id, prop.objects[i].tab, p);
-			$('#' + id).css({'top'		: Number(prop.objects[i].top),
-							'left'		: Number(prop.objects[i].left) + Number(prop.objects[i].width) + 21,
-							'width'		: prop.objects[i].description_width,
-							'height'		: Number(prop.objects[i].height)
-			})
-			.attr('tabindex','-1')
-			.addClass('nuLookupDescription')
-			.addClass('nuReadonly')
-			.prop('readonly', true);
-			
-			nuPopulateLookup3(w.objects[i].values);
-		}
+		id = p + prop.objects[i].id + 'description';
+		var inp = document.createElement('input');
+		inp.setAttribute('id', id);
+		
+		$('#' + ef).append(inp);
+		nuAddDataTab(id, prop.objects[i].tab, p);
+		$('#' + id).css({'top'		: Number(prop.objects[i].top),
+						'left'		: Number(prop.objects[i].left) + Number(prop.objects[i].width) + 21,
+						'width'		: prop.objects[i].description_width,
+						'height'		: Number(prop.objects[i].height)
+		})
+		.attr('tabindex','-1')
+		.addClass('nuLookupDescription')
+		.addClass('nuReadonly')
+		.prop('readonly', true);
+		
+		nuPopulateLookup3(w.objects[i].values);
 		
 		return Number(prop.objects[i].width) + Number(prop.objects[i].description_width) + 30;
 		
@@ -504,7 +543,7 @@ function nuINPUT(w, i, l, p, prop, draggable){
 	
 }
 
-function nuHTML(w, i, l, p, prop, draggable){
+function nuHTML(w, i, l, p, prop){
 
 	var id  = p + prop.objects[i].id;
 	var ef  = p + 'nuRecordHolder';                       //-- Edit Form Id
@@ -537,7 +576,7 @@ function nuHTML(w, i, l, p, prop, draggable){
 
 }
 
-function nuRUN(w, i, l, p, prop, draggable){
+function nuRUN(w, i, l, p, prop){
 
 	var id  = p + prop.objects[i].id;
 	var ef  = p + 'nuRecordHolder';                       //-- Edit Form Id
@@ -576,9 +615,8 @@ function nuRUN(w, i, l, p, prop, draggable){
 					'position' 	: 'absolute'
 	});
 
-	if(draggable) {
-		$('#' + id).attr('title',id);
-	}
+	$('#' + id).attr('title',id);
+		
 	if(prop.objects[i].run_method == 'b'){
 	
 		$('#' + id).attr({
@@ -600,7 +638,7 @@ function nuRUN(w, i, l, p, prop, draggable){
 	
 }
 
-function nuSELECT(w, i, l, p, prop, draggable){
+function nuSELECT(w, i, l, p, prop){
 
 	var id  = p + prop.objects[i].id;
 	var ef  = p + 'nuRecordHolder';                       //-- Edit Form Id
@@ -611,9 +649,7 @@ function nuSELECT(w, i, l, p, prop, draggable){
 		prop.objects[i].top = 3;
 		
 	}else{
-		if(!draggable) {
-			nuLabel(w, i, p, prop);
-		}
+		nuLabel(w, i, p, prop);
 	}
 
 	var sel = document.createElement('select');
@@ -662,7 +698,7 @@ function nuSELECT(w, i, l, p, prop, draggable){
 	
 }
 
-function nuSUBFORM(w, i, l, p, prop, draggable){
+function nuSUBFORM(w, i, l, p, prop){
 
     var SF  = prop.objects[i];							//-- first row
     var SFR = w.objects[i];							//-- all rows
@@ -678,12 +714,8 @@ function nuSUBFORM(w, i, l, p, prop, draggable){
 		SF.left = l;
 		SF.top = 3;
 		
-	}else{
-		if(!draggable) {
-		
-			nuLabel(w, i, p, prop);
-		}
-		
+	}else{		
+			nuLabel(w, i, p, prop);	
 	}
 
 	$('#' + ef).append(inp);
@@ -698,10 +730,6 @@ function nuSUBFORM(w, i, l, p, prop, draggable){
 	.attr('data-nu-subform-parent', p)
 	.attr('data-nu-subform', 'true')
 	.addClass('nuSubform');
-
-	if(draggable) {
-		$('#' + id).attr('title',id);
-	}
 	
 	nuGetSubformRowSize(SF.forms[0].objects, SF, id);
 
