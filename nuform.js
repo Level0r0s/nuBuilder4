@@ -642,7 +642,7 @@ function nuSELECT(w, i, l, p, prop, draggable){
 	
 	var values = String(w.objects[i].value).split('#nuSep#');
 
-	if(prop.objects[i].multiple == '0' || draggable){
+	if(values.length == '0'){
 		$('#' + id).append('<option  value=""></option>');		//-- add a blank option at the top
 		$('#' + id).attr('title',id);
 	} else {
