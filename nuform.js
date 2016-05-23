@@ -441,7 +441,7 @@ function nuINPUT(w, i, l, p, prop){
 	})
 	
 	.attr('onchange', 'nuOnChange(this)')
-	.attr('data-nu-field', prop.objects[i].id)
+	.attr('data-nu-field', input_type == 'button' ? null :prop.objects[i].id)
 	.attr('data-nu-object-id', w.objects[i].object_id)
 	.attr('data-nu-format', w.objects[i].format)
 	.attr('data-nu-prefix', p);
