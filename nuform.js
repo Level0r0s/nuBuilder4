@@ -1185,7 +1185,8 @@ function nuArrangeTab(p){
 	$('#' + tabId)
 	.html(pic)
 	.addClass('nuTab')
-	.attr('onclick','nuFORM.nuDrag = 1; var w = nuGetFormState(); nuGetForm(w.form_id, w.record_id);');
+	.attr('onclick','nuFORM.nuDrag = 1; nuBuildPopup(nuBC[nuBC.length -1].form_id, "-2");');
+	//.attr('onclick','nuFORM.nuDrag = 1; var w = nuGetFormState(); nuGetForm(w.form_id, w.record_id);');
 }
 
 function nuSelectTab(tab){
