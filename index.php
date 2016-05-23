@@ -63,6 +63,7 @@ require_once('nucommon.php'); ?>
 <?php
 cssinclude('nubuilder4.css');
 jsinclude('nuform.js');
+jsinclude('nuformdrag.js');
 jsinclude('nucalendar.js');
 jsinclude('nucommon.js');
 	
