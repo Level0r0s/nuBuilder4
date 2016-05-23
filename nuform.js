@@ -290,7 +290,11 @@ function nuAddActionButtons(f){
 function nuBuildEditObjects(f, p, o, prop){
 	
 	var l = 3;
-	var draggable = nuFORM.nuDrag;
+	var draggable = 0;
+	if(window.nuBC[window.nuBC.length-1].record_id == '-2') {
+		draggable = 1;
+	}
+	
 	
 	for(var i = 0 ; i < f.objects.length  ; i++){
 		if(!draggable) {
