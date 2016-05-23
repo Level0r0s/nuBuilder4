@@ -54,6 +54,10 @@ function dragBox() {
 		
 		resizeDrag();
 	}
+	
+	if(event.buttons) {
+		moveSelected();
+	}
 }
 
 function resizeDrag() {
@@ -137,6 +141,24 @@ function removeBox(ctrlKey) {
 		}
 	});
 	
+}
+
+function moveSelected() {
+	var s = document.getElementsByClassName('nuDragSelected');
+	var l = 0;
+	var t = 0;
+	var o = {};
+
+	for(var i = 0 ; i < s.length ; i ++){
+
+		o       = s[i].style;
+		l       = parseInt(o.left) + (window.moveX - window.lastMoveX);
+		t       = parseInt(o.top)  + (window.moveY - window.lastMoveY);
+		o.left  = l + 'px';
+		o.top   = t + 'px';
+
+	}
+	//this.setSelectedCoordinates();
 }
 
 function getTopArea() {
@@ -682,7 +704,7 @@ function nuSELECT(w, i, l, p, prop){
 		$('#' + id).append('<option  value=""></option>');		//-- add a blank option at the top
 		$('#' + id).attr('title',id);
 	} else {
-		
+		$('#' + id).append('<option  value=""></option>');
 		for(var n = 0 ; n < prop.objects[i].options.length ; n++){
 
 			if(values.indexOf(prop.objects[i].options[n][0]) == -1){
