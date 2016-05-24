@@ -1,66 +1,71 @@
-window.addEventListener("mousemove", function(e) {
-	var draggable = 0;
-	if(window.nuBC.length > 0) {
-		if(window.nuBC[window.nuBC.length-1].record_id == '-2') {
-			draggable = 1;
-		}
-	}
-
-	if(draggable) {
-		if(e.stopPropagation) e.stopPropagation();
-		if(e.preventDefault) e.preventDefault();
-		e.cancelBubble=true;
-		e.returnValue=false;
-
-		if(e.buttons) {
-			dragBox(e.target.id);
-		}
-	}
-}, false);
-
-window.addEventListener("mousedown", function(e) {
-	var draggable = 0;
-	if(window.nuBC.length > 0) {
-		if(window.nuBC[window.nuBC.length-1].record_id == '-2') {
-			draggable = 1;
-		}
-	}
-
-	if(draggable) {
-			
-		if(e.target.id == '') {
-			
-			if(!e.ctrlKey) {
-				$('.nuDragSelected').removeClass('nuDragSelected');
+function bindDragEvents(){
+    $('body').on('mousemove.nuformdrag', function(e) {
+        var draggable = 0;
+		if(window.nuBC.length > 0) {
+			if(window.nuBC[window.nuBC.length-1].record_id == '-2') {
+				draggable = 1;
 			}
-			
-			createBox();
-		} else {
+		}
+console.log(draggable);
+		if(draggable) {
+			if(e.stopPropagation) e.stopPropagation();
+			if(e.preventDefault) e.preventDefault();
+			e.cancelBubble=true;
+			e.returnValue=false;
 
-			if(!e.ctrlKey && !$('#'+e.target.id).hasClass('nuDragSelected')) {
-				$('.nuDragSelected').removeClass('nuDragSelected');
+			if(e.buttons) {
+				dragBox(e.target.id);
 			}
-			
-			$('#'+e.target.id).addClass('nuDragSelected');	
 		}
-	}
-}, false);
+    });
+	
+    $('body').on('mousedown.nuformdrag', function(e) {
+        var draggable = 0;
+		if(window.nuBC.length > 0) {
+			if(window.nuBC[window.nuBC.length-1].record_id == '-2') {
+				draggable = 1;
+			}
+		}
 
-window.addEventListener("mouseup", function(e) {
-	
-	var draggable = 0;
-	if(window.nuBC.length > 0) {	
-		if(window.nuBC[window.nuBC.length-1].record_id == '-2') {
-			draggable = 1;
+		if(draggable) {
+				
+			if(e.target.id == '') {
+				
+				if(!e.ctrlKey) {
+					$('.nuDragSelected').removeClass('nuDragSelected');
+				}
+				
+				createBox();
+			} else {
+
+				if(!e.ctrlKey && !$('#'+e.target.id).hasClass('nuDragSelected')) {
+					$('.nuDragSelected').removeClass('nuDragSelected');
+				}
+				
+				$('#'+e.target.id).addClass('nuDragSelected');	
+			}
 		}
-	}
+    });
 	
-	if(draggable) {
-		if($('#nuSelectBox').length > 0) {
-			removeBox(event.ctrlKey);
+    $('body').on('mouseup.nuformdrag', function(e) {
+       var draggable = 0;
+		if(window.nuBC.length > 0) {	
+			if(window.nuBC[window.nuBC.length-1].record_id == '-2') {
+				draggable = 1;
+			}
 		}
-	}
-}, false);
+		
+		if(draggable) {
+			if($('#nuSelectBox').length > 0) {
+				removeBox(event.ctrlKey);
+			}
+		}
+    });
+}
+
+function unbindDragEvents(){
+    $('body').off('.nuformdrag');
+}
 
 function createBox(){
 	
