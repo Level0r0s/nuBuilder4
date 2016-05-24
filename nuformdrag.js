@@ -1,40 +1,44 @@
-window.addEventListener("mousemove", function(e) {
-	var draggable = 0;
-	if(window.nuBC[window.nuBC.length-1].record_id == '-2') {
-		draggable = 1;
-	}
+function bindDragEvents(){
+    $('body').on('mousemove.nuformdrag', function(e) {
+        var draggable = 0;
+        if(window.nuBC[window.nuBC.length-1].record_id == '-2') {
+            draggable = 1;
+        }
 
-	if(draggable) {
-		if(e.stopPropagation) e.stopPropagation();
-		if(e.preventDefault) e.preventDefault();
-		e.cancelBubble=true;
-		e.returnValue=false;
+        if(draggable) {
+            if(e.stopPropagation) e.stopPropagation();
+            if(e.preventDefault) e.preventDefault();
+            e.cancelBubble=true;
+            e.returnValue=false;
 
-		dragBox();
-	}
-}, false);
+            dragBox();
+        }
+    });
+    $('body').on('mousedown.nuformdrag', function(e) {
+        var draggable = 0;
+        if(window.nuBC[window.nuBC.length-1].record_id == '-2') {
+            draggable = 1;
+        }
+        
+        if(draggable) {
+            createBox();
+        }
+    });
+    $('body').on('mouseup.nuformdrag', function(e) {
+        var draggable = 0;
+        if(window.nuBC[window.nuBC.length-1].record_id == '-2') {
+            draggable = 1;
+        }
+        
+        if(draggable) {
+            removeBox(e.ctrlKey);
+        }
+    });
+}
 
-window.addEventListener("mousedown", function(e) {
-	var draggable = 0;
-	if(window.nuBC[window.nuBC.length-1].record_id == '-2') {
-		draggable = 1;
-	}
-	
-	if(draggable) {
-		createBox();
-	}
-}, false);
-
-window.addEventListener("mouseup", function(e) {
-	var draggable = 0;
-	if(window.nuBC[window.nuBC.length-1].record_id == '-2') {
-		draggable = 1;
-	}
-	
-	if(draggable) {
-		removeBox(event.ctrlKey);
-	}
-}, false);
+function unbindDragEvents(){
+    $('body').off('.nuformdrag');
+}
 
 function createBox(){
 	
