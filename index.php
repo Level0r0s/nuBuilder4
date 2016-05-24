@@ -49,6 +49,9 @@ require_once('nucommon.php'); ?>
 
 			nuGetForm(p.form_id, p.record_id);
 
+            if(p.record_id == '-2')
+                bindDragEvents();
+
 		}
 		
 		";

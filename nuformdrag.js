@@ -1,40 +1,71 @@
-window.addEventListener("mousemove", function(e) {
-	var draggable = 0;
-	if(window.nuBC[window.nuBC.length-1].record_id == '-2') {
-		draggable = 1;
-	}
+function bindDragEvents(){
+    $(document).on('mousemove.nuformdrag', function(e) {
+        var draggable = 0;
+		if(window.nuBC.length > 0) {
+			if(window.nuBC[window.nuBC.length-1].record_id == '-2') {
+				draggable = 1;
+			}
+		}
 
-	if(draggable) {
-		if(e.stopPropagation) e.stopPropagation();
-		if(e.preventDefault) e.preventDefault();
-		e.cancelBubble=true;
-		e.returnValue=false;
+		if(draggable) {
+			if(e.stopPropagation) e.stopPropagation();
+			if(e.preventDefault) e.preventDefault();
+			e.cancelBubble=true;
+			e.returnValue=false;
 
-		dragBox();
-	}
-}, false);
-
-window.addEventListener("mousedown", function(e) {
-	var draggable = 0;
-	if(window.nuBC[window.nuBC.length-1].record_id == '-2') {
-		draggable = 1;
-	}
+			if(e.buttons) {
+				dragBox(e.target.id);
+			}
+		}
+    });
 	
-	if(draggable) {
-		createBox();
-	}
-}, false);
+    $(document).on('mousedown.nuformdrag', function(e) {
+        var draggable = 0;
+		if(window.nuBC.length > 0) {
+			if(window.nuBC[window.nuBC.length-1].record_id == '-2') {
+				draggable = 1;
+			}
+		}
 
-window.addEventListener("mouseup", function(e) {
-	var draggable = 0;
-	if(window.nuBC[window.nuBC.length-1].record_id == '-2') {
-		draggable = 1;
-	}
+		if(draggable) {
+				
+			if(e.target.id == '') {
+				
+				if(!e.ctrlKey) {
+					$('.nuDragSelected').removeClass('nuDragSelected');
+				}
+				
+				createBox();
+			} else {
+
+				if(!e.ctrlKey && !$('#'+e.target.id).hasClass('nuDragSelected')) {
+					$('.nuDragSelected').removeClass('nuDragSelected');
+				}
+				
+				$('#'+e.target.id).addClass('nuDragSelected');	
+			}
+		}
+    });
 	
-	if(draggable) {
-		removeBox(event.ctrlKey);
-	}
-}, false);
+    $(document).on('mouseup.nuformdrag', function(e) {
+       var draggable = 0;
+		if(window.nuBC.length > 0) {	
+			if(window.nuBC[window.nuBC.length-1].record_id == '-2') {
+				draggable = 1;
+			}
+		}
+		
+		if(draggable) {
+			if($('#nuSelectBox').length > 0) {
+				removeBox(event.ctrlKey);
+			}
+		}
+    });
+}
+
+function unbindDragEvents(){
+    $(document).off('.nuformdrag');
+}
 
 function createBox(){
 	
@@ -60,22 +91,24 @@ function createBox(){
 	window.moveY = 0;
 }
 
-function dragBox() {
-	if($('#nuSelectBox').length > 0){   
-		window.lastMoveX = window.moveX;
-		window.lastMoveY = window.moveY;
-		window.moveX = event.clientX - window.startX;
-		window.moveY = event.clientY - window.startY;
-		
+function dragBox(dragTarget) {	
+
+	window.lastMoveX = window.moveX;
+	window.lastMoveY = window.moveY;
+	window.moveX = event.clientX - window.startX;
+	window.moveY = event.clientY - window.startY;
+
+	if($('#nuSelectBox').length > 0) {
 		resizeDrag();
-	}
-	
-	if(event.buttons) {
-		moveSelected();
+	} else {
+		if($('#nuSelectBox').length == 0){  
+			moveSelected();
+		}
 	}
 }
 
 function resizeDrag() {
+
 	var x = parseInt($('#nuSelectBox').css('left'));
 	var y = parseInt($('#nuSelectBox').css('top'));
 	var w = parseInt($('#nuSelectBox').css('width'));
@@ -159,6 +192,7 @@ function removeBox(ctrlKey) {
 }
 
 function moveSelected() {
+
 	var s = document.getElementsByClassName('nuDragSelected');
 	var l = 0;
 	var t = 0;
