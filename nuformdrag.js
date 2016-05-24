@@ -20,6 +20,12 @@ function bindDragEvents(){
     });
 	
     $(document).on('mousedown.nuformdrag', function(e) {
+		
+		window.startX = event.clientX + window.scrollX;
+		window.startY = event.clientY + window.scrollY;
+		window.moveX = 0;
+		window.moveY = 0;
+		
         var draggable = 0;
 		if(window.nuBC.length > 0) {
 			if(window.nuBC[window.nuBC.length-1].record_id == '-2') {
@@ -84,11 +90,6 @@ function createBox(){
 		'z-index'          : '4000',
 		'background-color' : 'transparent'
 	});
-	
-	window.startX = event.clientX + window.scrollX;
-	window.startY = event.clientY + window.scrollY;
-	window.moveX = 0;
-	window.moveY = 0;
 }
 
 function dragBox(dragTarget) {	
@@ -97,11 +98,11 @@ function dragBox(dragTarget) {
 	window.lastMoveY = window.moveY;
 	window.moveX = event.clientX - window.startX;
 	window.moveY = event.clientY - window.startY;
-
+	
 	if($('#nuSelectBox').length > 0) {
 		resizeDrag();
 	} else {
-		if($('#nuSelectBox').length == 0){  
+		if($('#nuSelectBox').length == 0 && canMove()){ 
 			moveSelected();
 		}
 	}
@@ -207,7 +208,18 @@ function moveSelected() {
 		o.top   = t + 'px';
 
 	}
-	//this.setSelectedCoordinates();
+}
+
+function canMove() {
+	
+	/*if(this.left + (this.moveX-this.lastMoveX) + this.areaLeft() < this.areaLeft())  {return false;}
+	if(this.right + (this.moveX-this.lastMoveX) > this.areaWidth())                  {return false;}
+	if(this.top + (this.moveY - this.lastMoveY) + this.areaTop() < this.areaTop())   {return false;}
+	if(this.isReport)                                               				 {return true;}
+	if(this.bottom + (this.moveY - this.lastMoveY) > this.areaHeight())              {return false;}*/
+
+	return true;
+
 }
 
 function getTopArea() {

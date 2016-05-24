@@ -477,8 +477,6 @@ function nuRUN(w, i, l, p, prop){
 					'height'   	: Number(prop.objects[i].height),
 					'position' 	: 'absolute'
 	});
-
-	$('#' + id).attr('title',id);
 		
 	if(prop.objects[i].run_method == 'b'){
 	
@@ -543,7 +541,6 @@ function nuSELECT(w, i, l, p, prop){
 
 	if(values.length == '0'){
 		$('#' + id).append('<option  value=""></option>');		//-- add a blank option at the top
-		$('#' + id).attr('title',id);
 	} else {
 		$('#' + id).append('<option  value=""></option>');
 		for(var n = 0 ; n < prop.objects[i].options.length ; n++){
