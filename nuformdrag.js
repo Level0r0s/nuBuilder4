@@ -1,12 +1,12 @@
 function bindDragEvents(){
-    $('body').on('mousemove.nuformdrag', function(e) {
+    $(document).on('mousemove.nuformdrag', function(e) {
         var draggable = 0;
 		if(window.nuBC.length > 0) {
 			if(window.nuBC[window.nuBC.length-1].record_id == '-2') {
 				draggable = 1;
 			}
 		}
-console.log(draggable);
+
 		if(draggable) {
 			if(e.stopPropagation) e.stopPropagation();
 			if(e.preventDefault) e.preventDefault();
@@ -19,7 +19,7 @@ console.log(draggable);
 		}
     });
 	
-    $('body').on('mousedown.nuformdrag', function(e) {
+    $(document).on('mousedown.nuformdrag', function(e) {
         var draggable = 0;
 		if(window.nuBC.length > 0) {
 			if(window.nuBC[window.nuBC.length-1].record_id == '-2') {
@@ -47,7 +47,7 @@ console.log(draggable);
 		}
     });
 	
-    $('body').on('mouseup.nuformdrag', function(e) {
+    $(document).on('mouseup.nuformdrag', function(e) {
        var draggable = 0;
 		if(window.nuBC.length > 0) {	
 			if(window.nuBC[window.nuBC.length-1].record_id == '-2') {
@@ -64,7 +64,7 @@ console.log(draggable);
 }
 
 function unbindDragEvents(){
-    $('body').off('.nuformdrag');
+    $(document).off('.nuformdrag');
 }
 
 function createBox(){
