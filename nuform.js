@@ -261,7 +261,7 @@ function nuINPUT(w, i, l, p, prop){
 		
 		ty	= 'input';
 
-	}$().add
+	}
 
 	var inp  		= document.createElement(ty);
 	var input_type	= prop.objects[i].input;
@@ -329,7 +329,7 @@ function nuINPUT(w, i, l, p, prop){
 	if(prop.objects[i].type == 'lookup'){
 		
 		$('#' + id).hide();
-		
+		$('#' + id).attr('data-nu-lookup-id','');
 		$('#' + id).val(w.objects[i].values[0][1]);
 
 		var target			= id;
@@ -1039,7 +1039,7 @@ function nuSelectTab(tab){
     var f = $('#' + tab.id).attr('data-nu-form-filter');
 
     $("[data-nu-form='" + f + "']").hide();
-    $("[data-nu-form='" + f + "'][data-nu-tab='"  + t + "']").show();
+    $("[data-nu-form='" + f + "'][data-nu-tab='"  + t + "']:not([data-nu-lookup-id])").show();
 
     $("[data-nu-form-filter='" + f + "']").removeClass('nuTabSelected');
     $("[data-nu-form-filter='" + f + "'][data-nu-tab-filter='"  + t + "']").show();
