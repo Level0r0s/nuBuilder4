@@ -1,7 +1,9 @@
 window.addEventListener("mousemove", function(e) {
 	var draggable = 0;
-	if(window.nuBC[window.nuBC.length-1].record_id == '-2') {
-		draggable = 1;
+	if(window.nuBC.length > 0) {
+		if(window.nuBC[window.nuBC.length-1].record_id == '-2') {
+			draggable = 1;
+		}
 	}
 
 	if(draggable) {
@@ -10,29 +12,53 @@ window.addEventListener("mousemove", function(e) {
 		e.cancelBubble=true;
 		e.returnValue=false;
 
-		dragBox();
+		if(e.buttons) {
+			dragBox(e.target.id);
+		}
 	}
 }, false);
 
 window.addEventListener("mousedown", function(e) {
 	var draggable = 0;
-	if(window.nuBC[window.nuBC.length-1].record_id == '-2') {
-		draggable = 1;
+	if(window.nuBC.length > 0) {
+		if(window.nuBC[window.nuBC.length-1].record_id == '-2') {
+			draggable = 1;
+		}
 	}
-	
+
 	if(draggable) {
-		createBox();
+			
+		if(e.target.id == '') {
+			
+			if(!e.ctrlKey) {
+				$('.nuDragSelected').removeClass('nuDragSelected');
+			}
+			
+			createBox();
+		} else {
+
+			if(!e.ctrlKey && !$('#'+e.target.id).hasClass('nuDragSelected')) {
+				$('.nuDragSelected').removeClass('nuDragSelected');
+			}
+			
+			$('#'+e.target.id).addClass('nuDragSelected');	
+		}
 	}
 }, false);
 
 window.addEventListener("mouseup", function(e) {
+	
 	var draggable = 0;
-	if(window.nuBC[window.nuBC.length-1].record_id == '-2') {
-		draggable = 1;
+	if(window.nuBC.length > 0) {	
+		if(window.nuBC[window.nuBC.length-1].record_id == '-2') {
+			draggable = 1;
+		}
 	}
 	
 	if(draggable) {
-		removeBox(event.ctrlKey);
+		if($('#nuSelectBox').length > 0) {
+			removeBox(event.ctrlKey);
+		}
 	}
 }, false);
 
@@ -60,22 +86,24 @@ function createBox(){
 	window.moveY = 0;
 }
 
-function dragBox() {
-	if($('#nuSelectBox').length > 0){   
-		window.lastMoveX = window.moveX;
-		window.lastMoveY = window.moveY;
-		window.moveX = event.clientX - window.startX;
-		window.moveY = event.clientY - window.startY;
-		
+function dragBox(dragTarget) {	
+
+	window.lastMoveX = window.moveX;
+	window.lastMoveY = window.moveY;
+	window.moveX = event.clientX - window.startX;
+	window.moveY = event.clientY - window.startY;
+
+	if($('#nuSelectBox').length > 0) {
 		resizeDrag();
-	}
-	
-	if(event.buttons) {
-		moveSelected();
+	} else {
+		if($('#nuSelectBox').length == 0){  
+			moveSelected();
+		}
 	}
 }
 
 function resizeDrag() {
+
 	var x = parseInt($('#nuSelectBox').css('left'));
 	var y = parseInt($('#nuSelectBox').css('top'));
 	var w = parseInt($('#nuSelectBox').css('width'));
@@ -159,6 +187,7 @@ function removeBox(ctrlKey) {
 }
 
 function moveSelected() {
+
 	var s = document.getElementsByClassName('nuDragSelected');
 	var l = 0;
 	var t = 0;
