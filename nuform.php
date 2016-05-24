@@ -92,6 +92,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 
 		}
 
+		$o->display				= nuDisplay($r->sob_all_display_condition);
 		$o->js					= nuObjectEvents($r->zzzzsys_object_id);
 
 		if($OBJS > 0){
@@ -127,6 +128,25 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 
 }
 
+
+function nuDisplay($s){
+
+	if(trim($s) == ''){
+		return 1;
+	}else{
+		
+		$t	= nuRunQuery($s);
+		$r	= db_fetch_row($t);
+		
+		if($r[0] == '0'){
+			return 0;
+		}else{
+			return 1;
+		}
+
+	}
+	
+}
 
 function nuObjectEvents($i){
 

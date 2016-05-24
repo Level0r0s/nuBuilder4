@@ -134,7 +134,9 @@ function nuBuildEditObjects(f, p, o, prop){
 	}
 	
 	for(var i = 0 ; i < f.objects.length  ; i++){
+		
 		if(!draggable) {
+			
 			var t                       = prop.objects[i].type;
 			f.objects[i].parent_type    = o.subform_type;
 
@@ -159,8 +161,7 @@ function nuBuildEditObjects(f, p, o, prop){
 				l = l + nuSUBFORM(f, i, l, p, prop);
 				
 			}
-
-			nuAddJSObjectEvents(p + prop.objects[i].id, prop.objects[i].js);
+			if(prop.objects[i].display == 0){$('#' + p + prop.objects[i].id).css('visibility', 'hidden');}
 			
 			l = l + 2;
 		
@@ -261,7 +262,7 @@ function nuINPUT(w, i, l, p, prop){
 		
 		ty	= 'input';
 
-	}$().add
+	}
 
 	var inp  		= document.createElement(ty);
 	var input_type	= prop.objects[i].input;
@@ -304,7 +305,7 @@ function nuINPUT(w, i, l, p, prop){
 	})
 	
 	.attr('onchange', 'nuOnChange(this)')
-	.attr('data-nu-field', prop.objects[i].id)
+	.attr('data-nu-field', input_type == 'button' ? null :prop.objects[i].id)
 	.attr('data-nu-object-id', w.objects[i].object_id)
 	.attr('data-nu-format', w.objects[i].format)
 	.attr('data-nu-prefix', p);
@@ -329,7 +330,7 @@ function nuINPUT(w, i, l, p, prop){
 	if(prop.objects[i].type == 'lookup'){
 		
 		$('#' + id).hide();
-		
+		$('#' + id).attr('data-nu-lookup-id','');
 		$('#' + id).val(w.objects[i].values[0][1]);
 
 		var target			= id;
@@ -780,7 +781,7 @@ function nuPad2(i){
 
 function nuLabel(w, i, p, prop){
 
-	if(prop.objects[i].label == ''){return;}
+	if(prop.objects[i].label == '' || prop.objects[i].display == 0){return;}
 	
 	var id     = 'label_' + p + prop.objects[i].id;
 	var ef     = p + 'nuRecordHolder';                       //-- Edit Form Id
@@ -1036,7 +1037,7 @@ function nuSelectTab(tab){
     var f = $('#' + tab.id).attr('data-nu-form-filter');
 
     $("[data-nu-form='" + f + "']").hide();
-    $("[data-nu-form='" + f + "'][data-nu-tab='"  + t + "']").show();
+    $("[data-nu-form='" + f + "'][data-nu-tab='"  + t + "']:not([data-nu-lookup-id])").show();
 
     $("[data-nu-form-filter='" + f + "']").removeClass('nuTabSelected');
     $("[data-nu-form-filter='" + f + "'][data-nu-tab-filter='"  + t + "']").show();
@@ -1282,7 +1283,7 @@ function nuPopulateLookup(fm, target){
 	var f	= fm.lookup_values;
 	
 	for(var i = 0 ; i < f.length ; i++){
-		$('#' + p + f[i][0]).val(f[i][1]);
+		$('#' + p + f[i][0]).val(f[i][1]).attr('data-nu-changed','1');
 	}
 	
 	$('#dialogClose').click();
@@ -1718,7 +1719,12 @@ function nuCloneAction(){
 	
 	nuBC[nuBC.length-1].record_id	= '-1';
 
-	$('#nuSaveButton').css('background-color', 'red');
+	$('#nuCloneButton').css('visibility','hidden');
+	$('#nuDeleteButton').css('visibility','hidden');
+	
+	$('#nuSaveButton')
+	.css('background-color', 'red')
+	.css('visibility','visible');
 	
 }
 

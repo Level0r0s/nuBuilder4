@@ -40,7 +40,7 @@ function nuUpdateData(){
 			$d[$i]['fk']	= $d[0]['pk'];
 		}
 	}
-	
+
 	for($i = 0 ; $i < count($d) ; $i++){
 
 		$pk		= $d[$i]['pk'];
