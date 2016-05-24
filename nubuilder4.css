@@ -54,7 +54,10 @@ body {
 }
 
 
-input {border: 0px;}
+input {
+  border: 0px;
+  padding: 0px;
+}
 
 
 .nuBrowseBody {
