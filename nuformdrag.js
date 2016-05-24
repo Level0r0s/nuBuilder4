@@ -212,14 +212,46 @@ function moveSelected() {
 
 function canMove() {
 	
-	/*if(this.left + (this.moveX-this.lastMoveX) + this.areaLeft() < this.areaLeft())  {return false;}
-	if(this.right + (this.moveX-this.lastMoveX) > this.areaWidth())                  {return false;}
-	if(this.top + (this.moveY - this.lastMoveY) + this.areaTop() < this.areaTop())   {return false;}
-	if(this.isReport)                                               				 {return true;}
-	if(this.bottom + (this.moveY - this.lastMoveY) > this.areaHeight())              {return false;}*/
+	var s = document.getElementsByClassName('nuDragSelected');
+	var l = 0;
+	var t = 0;
+	var o = {};
+
+	for(var i = 0 ; i < s.length ; i ++){
+
+		o       = s[i].style;
+		l       = parseInt(o.left) + (window.moveX - window.lastMoveX);
+		r       = l + parseInt(o.width);
+		t       = parseInt(o.top)  + (window.moveY - window.lastMoveY);
+		b       = t + parseInt(o.height);
+console.log(l+' '+r+' '+t+' '+b+' '+$(document).width()+' '+getFormHeight());
+		if(l < 0) {
+			return false;
+		}
+		
+		if(r > getFormWidth()) {
+			return false;
+		}
+		
+		if(t < 0) {
+			return false;
+		}
+		
+		if(b > getFormHeight()) {
+			return false;
+		}
+	}
 
 	return true;
 
+}
+
+function getFormWidth() {
+	return $(document).width() - 7; //need to do this more accurately
+}
+
+function getFormHeight() {
+	return $(document).height() - getTopArea(); //need to do this more accurately
 }
 
 function getTopArea() {
