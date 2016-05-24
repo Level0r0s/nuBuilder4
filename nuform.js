@@ -536,11 +536,12 @@ function nuSELECT(w, i, l, p, prop){
 	if(prop.objects[i].multiple == 1){
 	    
 		$('#' + id).attr('multiple', 'multiple');
-		$('#' + id).css('height', Number(prop.objects[i].height));
     	
 	}
 	
-	var values = String(w.objects[i].value).split('#nuSep#');
+	$('#' + id).css('height', Number(prop.objects[i].height));
+
+		var values = String(w.objects[i].value).split('#nuSep#');
 
 	if(values.length == '0'){
 		$('#' + id).append('<option  value=""></option>');		//-- add a blank option at the top
