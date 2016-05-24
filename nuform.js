@@ -159,8 +159,7 @@ function nuBuildEditObjects(f, p, o, prop){
 				l = l + nuSUBFORM(f, i, l, p, prop);
 				
 			}
-
-			nuAddJSObjectEvents(p + prop.objects[i].id, prop.objects[i].js);
+			if(prop.objects[i].display == 0){$('#' + p + prop.objects[i].id).css('visibility', 'hidden');}
 			
 			l = l + 2;
 		
@@ -783,7 +782,7 @@ function nuPad2(i){
 
 function nuLabel(w, i, p, prop){
 
-	if(prop.objects[i].label == ''){return;}
+	if(prop.objects[i].label == '' || prop.objects[i].display == 0){return;}
 	
 	var id     = 'label_' + p + prop.objects[i].id;
 	var ef     = p + 'nuRecordHolder';                       //-- Edit Form Id
