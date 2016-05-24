@@ -134,7 +134,9 @@ function nuBuildEditObjects(f, p, o, prop){
 	}
 	
 	for(var i = 0 ; i < f.objects.length  ; i++){
+		
 		if(!draggable) {
+			
 			var t                       = prop.objects[i].type;
 			f.objects[i].parent_type    = o.subform_type;
 
@@ -1284,7 +1286,7 @@ function nuPopulateLookup(fm, target){
 	var f	= fm.lookup_values;
 	
 	for(var i = 0 ; i < f.length ; i++){
-		$('#' + p + f[i][0]).val(f[i][1]);
+		$('#' + p + f[i][0]).val(f[i][1]).attr('data-nu-changed','1');
 	}
 	
 	$('#dialogClose').click();
@@ -1720,7 +1722,12 @@ function nuCloneAction(){
 	
 	nuBC[nuBC.length-1].record_id	= '-1';
 
-	$('#nuSaveButton').css('background-color', 'red');
+	$('#nuCloneButton').css('visibility','hidden');
+	$('#nuDeleteButton').css('visibility','hidden');
+	
+	$('#nuSaveButton')
+	.css('background-color', 'red')
+	.css('visibility','visible');
 	
 }
 
