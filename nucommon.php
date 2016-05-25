@@ -586,15 +586,10 @@ function nuSetHashList($H){
 
 	$F		= $H[0][0];
 	$R		= $H[0][1];
-	$hash	= Array();
-
-
 	$hash	= $_POST['hash'];
-
 	$s 		= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$F'";
 	$t 		= nuRunQuery($s);
 	$r 		= db_fetch_object($t);
-
 	$table	= $r->sfo_table;
 	$primary	= $r->sfo_primary_key;
 	$a		= array();

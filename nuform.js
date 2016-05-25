@@ -54,8 +54,6 @@ function nuBuildForm(f){
 
 function nuResizeiFrame(d, r){
 
-	//if(window.nuTYPE != 'lookup'){return;}
-
 	if(r == ''){
 		
 		var h			= Number(d[0]);
@@ -304,11 +302,12 @@ function nuINPUT(w, i, l, p, prop){
 					'position'	: 'absolute'
 	})
 	
-	.attr('onchange', 'nuOnChange(this)')
+	.attr('onchange', 'nuOnChange(this,event)')
 	.attr('data-nu-field', input_type == 'button' ? null :prop.objects[i].id)
 	.attr('data-nu-object-id', w.objects[i].object_id)
 	.attr('data-nu-format', w.objects[i].format)
-	.attr('data-nu-prefix', p);
+	.attr('data-nu-prefix', p)
+	.prop('readonly', prop.objects[i].read == '1' ? 'readonly' : '');
 	
 	$('#' + id).val(w.objects[i].value);
 
@@ -525,7 +524,7 @@ function nuSELECT(w, i, l, p, prop){
 					'width'    : Number(prop.objects[i].width),
 					'position' : 'absolute'
 	})
-	.attr('onchange', 'nuOnChange(this)')
+	.attr('onchange', 'nuOnChange(this,event)')
 	.attr('data-nu-field', prop.objects[i].id)
 	.attr('data-nu-object-id', w.objects[i].object_id)
 	.attr('data-nu-format', '')
@@ -606,7 +605,7 @@ function nuSUBFORM(w, i, l, p, prop){
 
     if(SF.delete == '1'){
 		
-        nuBuildSubformDeleteTitle(rowWidth - 40, id);
+        nuBuildSubformDeleteTitle(rowWidth - 40, id, fms[0].form_id);
         rowWidth 			= rowWidth - 3;
 		
     }else{
@@ -641,6 +640,7 @@ function nuSUBFORM(w, i, l, p, prop){
     var scrId		= id + 'scrollDiv';
 	var scrDiv	= document.createElement('div');
 	scrDiv.setAttribute('id', scrId);
+    scrDiv.setAttribute('class', 'nuSubformScrollDiv');
 	$('#' + id).append(scrDiv);
 	$('#' + scrId).css({'top'       	: rowTop,
 					'left'        	: 0,
@@ -648,7 +648,7 @@ function nuSUBFORM(w, i, l, p, prop){
 					'height'      	: Number(SF.height) - rowTop + 1,
 					'border-width'	: 1,
 					'border-style'	: 'none solid solid solid',
-					'border-color'	: '#B0B0B0',
+					'border-color'	: '#C1C1C1',
 					'overflow-x'  	: 'hidden',
 					'overflow-y'  	: 'scroll',
 					'position'		: 'absolute'
@@ -876,7 +876,7 @@ function nuBuildSubformTitle(o, l, w, id){
 
 }
 
-function nuBuildSubformDeleteTitle(l, id){
+function nuBuildSubformDeleteTitle(l, id, subform_id){
     
 	var titleId  = id + 'DeleteSF';
     	var div = document.createElement('div');
@@ -893,7 +893,7 @@ function nuBuildSubformDeleteTitle(l, id){
     					'position'      	: 'absolute'
     	}).html('<img id="nuMoveable" src="numove_black.png" style="padding:8px;width:12px;height:12px;" title="Arrange Objects"><br>Delete')
 	.addClass('nuTabHolder')
-	.attr('onclick','nuBuildPopup(nuBC[nuBC.length -1].form_id, "-2");');
+	.attr('onclick','nuBuildPopup("'+subform_id+'", "-2");');
 
 }
 
@@ -1298,7 +1298,7 @@ function nuBuildLookupList(fm, e){
 	
 	var v	= fm.lookup_values;
 	var tar	= $('#' + i);
-	var off	= $('#' + i).offset();
+	var off	= $('#' + i + 'code').offset();
 //	var p	= $('#' + i).parent().attr('id')
 	var d	= parseInt($('#' + i + 'description').css('width'));
 	var t	= off.top;//parseInt(tar.css('top'));
@@ -1353,7 +1353,7 @@ function nuLookupListItems(fm, h, w, d){
 		ht 	+= 'onclick="nuSelectLookupList(this)" ';
 		ht 	+= 'class="nuLookupList" ';
 		ht 	+= 'style="width:' + (w + d + 3) + 'px;height:' + h + 'px">';
-		ht 	+= '<div style="width:' + (w + 20) + 'px;display:inline-block">' + String(v[i][1]).replace(srch, repl, true) + '</div>';
+		ht 	+= '<div style="width:' + (w + 20) + 'px;display:inline-block">' + String(v[i][1]).replace(srch, repl) + '</div>';
 		ht 	+= v[i][2];
 		ht 	+= '<input id="nuListFocus' + i + '" class="nuLookupList" style="width:0px;display:inline-block;visibility:hidden"/>';
 		ht 	+= '</div>';
@@ -1676,7 +1676,7 @@ function nuFormatObject(t){
 }
 
 
-function nuOnChange(t){
+function nuOnChange(t,event){
 
 	var f	= $('#' + t.id).attr('data-nu-format');
 	
@@ -1687,7 +1687,7 @@ function nuOnChange(t){
 	var p	= $('#' + t.id).attr('data-nu-prefix');
 	$('#' + p + 'nuDelete').prop('checked', false);
 	$('#' + t.id).attr('data-nu-changed', '1');
-	$('#nuSaveButton').css('background-color', 'red');
+	$('#nuSaveButton').addClass('nuSaveButtonEdited');
 	
 	$('#nuCalendar').remove();
 

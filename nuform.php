@@ -8,10 +8,16 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
     $f->form_id		= $F;
     $f->record_id		= $R;
     
-    $s = "Select * From `$f->table` Where `$f->primary_key` = '$R'";
-    $t = nuRunQuery($s);
-    $A = db_fetch_array($t);
-    $s = "
+	if($f->table == ''){
+		$A			= array();
+	}else{
+		
+		$s 			= "Select * From `$f->table` Where `$f->primary_key` = '$R'";
+		$t 			= nuRunQuery($s);
+		$A 			= db_fetch_array($t);
+	}
+	
+	$s 				= "
  
     SELECT * 
     FROM zzzzsys_form
@@ -38,6 +44,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 			$o->align 	= $r->sob_all_align;
 			$o->format 	= $r->sob_input_format;
 			$o->input 	= $r->sob_input_type;
+			$o->read 	= $r->sob_all_readonly;
 
 			if($r->sob_input_type == 'button'){
 				$o->value= $r->sob_all_label;

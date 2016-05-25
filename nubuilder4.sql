@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 24, 2016 at 04:45 AM
+-- Generation Time: May 25, 2016 at 05:52 AM
 -- Server version: 5.5.9
 -- PHP Version: 5.3.5
 
@@ -26,12 +26,12 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 
 CREATE TABLE IF NOT EXISTS `business` (
-  `business_id` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
-  `bus_code` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
-  `bus_description` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
-  `bus_check` varchar(1) COLLATE utf8_unicode_ci NOT NULL,
+  `business_id` varchar(25) NOT NULL,
+  `bus_code` varchar(300) NOT NULL,
+  `bus_description` varchar(300) NOT NULL,
+  `bus_check` varchar(1) NOT NULL,
   PRIMARY KEY (`business_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `business`
@@ -92,11 +92,11 @@ INSERT INTO `children` (`children_id`, `chi_name`, `chi_dob`, `chi_employee_id`)
 --
 
 CREATE TABLE IF NOT EXISTS `color` (
-  `color_id` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
-  `col_code` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
-  `col_description` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
+  `color_id` varchar(25) NOT NULL,
+  `col_code` varchar(300) NOT NULL,
+  `col_description` varchar(300) NOT NULL,
   PRIMARY KEY (`color_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `color`
@@ -116,21 +116,21 @@ INSERT INTO `color` (`color_id`, `col_code`, `col_description`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `company` (
-  `company_id` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
-  `com_code` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `com_name` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
-  `com_business_id` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
-  `com_company_id` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
-  `com_address` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
-  `com_suburb` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
-  `com_phone` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `com_map_coordinates` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
-  `com_sex` varchar(1) COLLATE utf8_unicode_ci NOT NULL,
-  `com_color_id` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+  `company_id` varchar(25) NOT NULL,
+  `com_code` varchar(50) NOT NULL,
+  `com_name` varchar(500) NOT NULL,
+  `com_business_id` varchar(25) NOT NULL,
+  `com_company_id` varchar(25) NOT NULL,
+  `com_address` varchar(500) NOT NULL,
+  `com_suburb` varchar(200) NOT NULL,
+  `com_phone` varchar(50) NOT NULL,
+  `com_map_coordinates` varchar(300) NOT NULL,
+  `com_sex` varchar(1) NOT NULL,
+  `com_color_id` varchar(250) NOT NULL,
   `com_age` int(11) NOT NULL,
-  `com_notes` text COLLATE utf8_unicode_ci NOT NULL,
+  `com_notes` text NOT NULL,
   PRIMARY KEY (`company_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `company`
@@ -151,13 +151,13 @@ INSERT INTO `company` (`company_id`, `com_code`, `com_name`, `com_business_id`, 
 --
 
 CREATE TABLE IF NOT EXISTS `employee` (
-  `employee_id` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
-  `emp_company_id` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
-  `emp_name` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
-  `emp_mobile` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `emp_business_id` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
+  `employee_id` varchar(25) NOT NULL,
+  `emp_company_id` varchar(25) NOT NULL,
+  `emp_name` varchar(300) NOT NULL,
+  `emp_mobile` varchar(50) NOT NULL,
+  `emp_business_id` varchar(25) NOT NULL,
   PRIMARY KEY (`employee_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `employee`
@@ -209,14 +209,14 @@ INSERT INTO `employee` (`employee_id`, `emp_company_id`, `emp_name`, `emp_mobile
 --
 
 CREATE TABLE IF NOT EXISTS `test_table` (
-  `test_table_id` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
-  `tet_code` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
-  `tet_description` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
-  `tet_sex` varchar(1) COLLATE utf8_unicode_ci NOT NULL,
-  `tet_notes` text COLLATE utf8_unicode_ci NOT NULL,
-  `id` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
+  `test_table_id` varchar(25) NOT NULL,
+  `tet_code` varchar(10) NOT NULL,
+  `tet_description` varchar(300) NOT NULL,
+  `tet_sex` varchar(1) NOT NULL,
+  `tet_notes` text NOT NULL,
+  `id` varchar(25) NOT NULL,
   PRIMARY KEY (`test_table_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `test_table`
@@ -471,50 +471,6 @@ CREATE TABLE IF NOT EXISTS `zzzsys_debug` (
 -- Dumping data for table `zzzsys_debug`
 --
 
-INSERT INTO `zzzsys_debug` (`zzzsys_debug_id`, `deb_message`, `deb_added`) VALUES
-('5743d918b03edd7', '\r\n===USER==========\r\n\r\nglobeadmin\r\n\r\n===PDO MESSAGE=== \r\n\r\nSQLSTATE[42000]: Syntax error or access violation: 1103 Incorrect table name ''''\r\n\r\n===SQL=========== \r\n\r\nSelect * From `` Where `` = ''-1''\r\n\r\n===BACK TRACE====\r\n\r\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuform.php - line 12 (nuRunQuery)\n\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuapi.php - line 16 (nuGetFormObject)\n\n\r\n\r\n', '2016-05-24 14:01:20'),
-('5743d96659e55d3', '\r\n===USER==========\r\n\r\nglobeadmin\r\n\r\n===PDO MESSAGE=== \r\n\r\nSQLSTATE[42000]: Syntax error or access violation: 1103 Incorrect table name ''''\r\n\r\n===SQL=========== \r\n\r\nSELECT * FROM `` WHERE `` = ''-1''\r\n\r\n===BACK TRACE====\r\n\r\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nucommon.php - line 602 (nuRunQuery)\n\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuapi.php - line 12 (nuSetHashList)\n\n\r\n\r\n', '2016-05-24 14:02:38'),
-('5743d9665c631ab', '\r\n===USER==========\r\n\r\nglobeadmin\r\n\r\n===PDO MESSAGE=== \r\n\r\nSQLSTATE[42000]: Syntax error or access violation: 1103 Incorrect table name ''''\r\n\r\n===SQL=========== \r\n\r\nSelect * From `` Where `` = ''-1''\r\n\r\n===BACK TRACE====\r\n\r\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuform.php - line 12 (nuRunQuery)\n\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuapi.php - line 16 (nuGetFormObject)\n\n\r\n\r\n', '2016-05-24 14:02:38'),
-('5743d97b3151f37', '\r\n===USER==========\r\n\r\nglobeadmin\r\n\r\n===PDO MESSAGE=== \r\n\r\nSQLSTATE[42000]: Syntax error or access violation: 1103 Incorrect table name ''''\r\n\r\n===SQL=========== \r\n\r\nSELECT * FROM `` WHERE `` = ''-1''\r\n\r\n===BACK TRACE====\r\n\r\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nucommon.php - line 602 (nuRunQuery)\n\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuapi.php - line 12 (nuSetHashList)\n\n\r\n\r\n', '2016-05-24 14:02:59'),
-('5743d97b37b1c89', '\r\n===USER==========\r\n\r\nglobeadmin\r\n\r\n===PDO MESSAGE=== \r\n\r\nSQLSTATE[42000]: Syntax error or access violation: 1103 Incorrect table name ''''\r\n\r\n===SQL=========== \r\n\r\nSelect * From `` Where `` = ''-1''\r\n\r\n===BACK TRACE====\r\n\r\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuform.php - line 12 (nuRunQuery)\n\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuapi.php - line 16 (nuGetFormObject)\n\n\r\n\r\n', '2016-05-24 14:02:59'),
-('5743d98b3f67ec0', '\r\n===USER==========\r\n\r\nglobeadmin\r\n\r\n===PDO MESSAGE=== \r\n\r\nSQLSTATE[42000]: Syntax error or access violation: 1103 Incorrect table name ''''\r\n\r\n===SQL=========== \r\n\r\nSELECT * FROM `` WHERE `` = ''-1''\r\n\r\n===BACK TRACE====\r\n\r\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nucommon.php - line 602 (nuRunQuery)\n\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuapi.php - line 12 (nuSetHashList)\n\n\r\n\r\n', '2016-05-24 14:03:15'),
-('5743d98b45c8845', '\r\n===USER==========\r\n\r\nglobeadmin\r\n\r\n===PDO MESSAGE=== \r\n\r\nSQLSTATE[42000]: Syntax error or access violation: 1103 Incorrect table name ''''\r\n\r\n===SQL=========== \r\n\r\nSelect * From `` Where `` = ''-1''\r\n\r\n===BACK TRACE====\r\n\r\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuform.php - line 12 (nuRunQuery)\n\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuapi.php - line 16 (nuGetFormObject)\n\n\r\n\r\n', '2016-05-24 14:03:15'),
-('5743d998f100f7f', '\r\n===USER==========\r\n\r\nglobeadmin\r\n\r\n===PDO MESSAGE=== \r\n\r\nSQLSTATE[42000]: Syntax error or access violation: 1103 Incorrect table name ''''\r\n\r\n===SQL=========== \r\n\r\nSELECT * FROM `` WHERE `` = ''-1''\r\n\r\n===BACK TRACE====\r\n\r\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nucommon.php - line 602 (nuRunQuery)\n\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuapi.php - line 12 (nuSetHashList)\n\n\r\n\r\n', '2016-05-24 14:03:28'),
-('5743d998f3072ab', '\r\n===USER==========\r\n\r\nglobeadmin\r\n\r\n===PDO MESSAGE=== \r\n\r\nSQLSTATE[42000]: Syntax error or access violation: 1103 Incorrect table name ''''\r\n\r\n===SQL=========== \r\n\r\nSelect * From `` Where `` = ''-1''\r\n\r\n===BACK TRACE====\r\n\r\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuform.php - line 12 (nuRunQuery)\n\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuapi.php - line 16 (nuGetFormObject)\n\n\r\n\r\n', '2016-05-24 14:03:28'),
-('5743d9bd634d8e0', '\r\n===USER==========\r\n\r\nglobeadmin\r\n\r\n===PDO MESSAGE=== \r\n\r\nSQLSTATE[42000]: Syntax error or access violation: 1103 Incorrect table name ''''\r\n\r\n===SQL=========== \r\n\r\nSELECT * FROM `` WHERE `` = ''-1''\r\n\r\n===BACK TRACE====\r\n\r\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nucommon.php - line 602 (nuRunQuery)\n\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuapi.php - line 12 (nuSetHashList)\n\n\r\n\r\n', '2016-05-24 14:04:05'),
-('5743d9bd659ddb8', '\r\n===USER==========\r\n\r\nglobeadmin\r\n\r\n===PDO MESSAGE=== \r\n\r\nSQLSTATE[42000]: Syntax error or access violation: 1103 Incorrect table name ''''\r\n\r\n===SQL=========== \r\n\r\nSelect * From `` Where `` = ''-1''\r\n\r\n===BACK TRACE====\r\n\r\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuform.php - line 12 (nuRunQuery)\n\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuapi.php - line 16 (nuGetFormObject)\n\n\r\n\r\n', '2016-05-24 14:04:05'),
-('5743d9f3c05fb3f', '\r\n===USER==========\r\n\r\nglobeadmin\r\n\r\n===PDO MESSAGE=== \r\n\r\nSQLSTATE[42000]: Syntax error or access violation: 1103 Incorrect table name ''''\r\n\r\n===SQL=========== \r\n\r\nSELECT * FROM `` WHERE `` = ''-1''\r\n\r\n===BACK TRACE====\r\n\r\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nucommon.php - line 602 (nuRunQuery)\n\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuapi.php - line 12 (nuSetHashList)\n\n\r\n\r\n', '2016-05-24 14:04:59'),
-('5743d9f3c353d1b', '\r\n===USER==========\r\n\r\nglobeadmin\r\n\r\n===PDO MESSAGE=== \r\n\r\nSQLSTATE[42000]: Syntax error or access violation: 1103 Incorrect table name ''''\r\n\r\n===SQL=========== \r\n\r\nSelect * From `` Where `` = ''-1''\r\n\r\n===BACK TRACE====\r\n\r\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuform.php - line 12 (nuRunQuery)\n\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuapi.php - line 16 (nuGetFormObject)\n\n\r\n\r\n', '2016-05-24 14:04:59'),
-('5743da0265001d4', '\r\n===USER==========\r\n\r\nglobeadmin\r\n\r\n===PDO MESSAGE=== \r\n\r\nSQLSTATE[42000]: Syntax error or access violation: 1103 Incorrect table name ''''\r\n\r\n===SQL=========== \r\n\r\nSELECT * FROM `` WHERE `` = ''-1''\r\n\r\n===BACK TRACE====\r\n\r\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nucommon.php - line 602 (nuRunQuery)\n\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuapi.php - line 12 (nuSetHashList)\n\n\r\n\r\n', '2016-05-24 14:05:14'),
-('5743da0266fad34', '\r\n===USER==========\r\n\r\nglobeadmin\r\n\r\n===PDO MESSAGE=== \r\n\r\nSQLSTATE[42000]: Syntax error or access violation: 1103 Incorrect table name ''''\r\n\r\n===SQL=========== \r\n\r\nSelect * From `` Where `` = ''-1''\r\n\r\n===BACK TRACE====\r\n\r\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuform.php - line 12 (nuRunQuery)\n\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuapi.php - line 16 (nuGetFormObject)\n\n\r\n\r\n', '2016-05-24 14:05:14'),
-('5743da6b879ccf1', '\r\n===USER==========\r\n\r\nglobeadmin\r\n\r\n===PDO MESSAGE=== \r\n\r\nSQLSTATE[42000]: Syntax error or access violation: 1103 Incorrect table name ''''\r\n\r\n===SQL=========== \r\n\r\nSELECT * FROM `` WHERE `` = ''-1''\r\n\r\n===BACK TRACE====\r\n\r\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nucommon.php - line 602 (nuRunQuery)\n\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuapi.php - line 12 (nuSetHashList)\n\n\r\n\r\n', '2016-05-24 14:06:59'),
-('5743da6b8a09a16', '\r\n===USER==========\r\n\r\nglobeadmin\r\n\r\n===PDO MESSAGE=== \r\n\r\nSQLSTATE[42000]: Syntax error or access violation: 1103 Incorrect table name ''''\r\n\r\n===SQL=========== \r\n\r\nSelect * From `` Where `` = ''-1''\r\n\r\n===BACK TRACE====\r\n\r\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuform.php - line 12 (nuRunQuery)\n\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuapi.php - line 16 (nuGetFormObject)\n\n\r\n\r\n', '2016-05-24 14:06:59'),
-('5743dabc1363582', '\r\n===USER==========\r\n\r\nglobeadmin\r\n\r\n===PDO MESSAGE=== \r\n\r\nSQLSTATE[42000]: Syntax error or access violation: 1103 Incorrect table name ''''\r\n\r\n===SQL=========== \r\n\r\nSELECT * FROM `` WHERE `` = ''-1''\r\n\r\n===BACK TRACE====\r\n\r\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nucommon.php - line 602 (nuRunQuery)\n\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuapi.php - line 12 (nuSetHashList)\n\n\r\n\r\n', '2016-05-24 14:08:20'),
-('5743dabc1dda1bf', '\r\n===USER==========\r\n\r\nglobeadmin\r\n\r\n===PDO MESSAGE=== \r\n\r\nSQLSTATE[42000]: Syntax error or access violation: 1103 Incorrect table name ''''\r\n\r\n===SQL=========== \r\n\r\nSelect * From `` Where `` = ''-1''\r\n\r\n===BACK TRACE====\r\n\r\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuform.php - line 12 (nuRunQuery)\n\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuapi.php - line 16 (nuGetFormObject)\n\n\r\n\r\n', '2016-05-24 14:08:20'),
-('5743dadc9218e66', '\r\n===USER==========\r\n\r\nglobeadmin\r\n\r\n===PDO MESSAGE=== \r\n\r\nSQLSTATE[42000]: Syntax error or access violation: 1103 Incorrect table name ''''\r\n\r\n===SQL=========== \r\n\r\nSELECT * FROM `` WHERE `` = ''-1''\r\n\r\n===BACK TRACE====\r\n\r\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nucommon.php - line 602 (nuRunQuery)\n\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuapi.php - line 12 (nuSetHashList)\n\n\r\n\r\n', '2016-05-24 14:08:52'),
-('5743dadc948dd2c', '\r\n===USER==========\r\n\r\nglobeadmin\r\n\r\n===PDO MESSAGE=== \r\n\r\nSQLSTATE[42000]: Syntax error or access violation: 1103 Incorrect table name ''''\r\n\r\n===SQL=========== \r\n\r\nSelect * From `` Where `` = ''-1''\r\n\r\n===BACK TRACE====\r\n\r\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuform.php - line 12 (nuRunQuery)\n\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuapi.php - line 16 (nuGetFormObject)\n\n\r\n\r\n', '2016-05-24 14:08:52'),
-('5743daef1263b6c', '\r\n===USER==========\r\n\r\nglobeadmin\r\n\r\n===PDO MESSAGE=== \r\n\r\nSQLSTATE[42000]: Syntax error or access violation: 1103 Incorrect table name ''''\r\n\r\n===SQL=========== \r\n\r\nSELECT * FROM `` WHERE `` = ''-1''\r\n\r\n===BACK TRACE====\r\n\r\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nucommon.php - line 602 (nuRunQuery)\n\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuapi.php - line 12 (nuSetHashList)\n\n\r\n\r\n', '2016-05-24 14:09:11'),
-('5743daef148253c', '\r\n===USER==========\r\n\r\nglobeadmin\r\n\r\n===PDO MESSAGE=== \r\n\r\nSQLSTATE[42000]: Syntax error or access violation: 1103 Incorrect table name ''''\r\n\r\n===SQL=========== \r\n\r\nSelect * From `` Where `` = ''-1''\r\n\r\n===BACK TRACE====\r\n\r\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuform.php - line 12 (nuRunQuery)\n\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuapi.php - line 16 (nuGetFormObject)\n\n\r\n\r\n', '2016-05-24 14:09:11'),
-('5743db392b15d61', '\r\n===USER==========\r\n\r\nglobeadmin\r\n\r\n===PDO MESSAGE=== \r\n\r\nSQLSTATE[42000]: Syntax error or access violation: 1103 Incorrect table name ''''\r\n\r\n===SQL=========== \r\n\r\nSELECT * FROM `` WHERE `` = ''-1''\r\n\r\n===BACK TRACE====\r\n\r\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nucommon.php - line 602 (nuRunQuery)\n\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuapi.php - line 12 (nuSetHashList)\n\n\r\n\r\n', '2016-05-24 14:10:25'),
-('5743db392d46bc6', '\r\n===USER==========\r\n\r\nglobeadmin\r\n\r\n===PDO MESSAGE=== \r\n\r\nSQLSTATE[42000]: Syntax error or access violation: 1103 Incorrect table name ''''\r\n\r\n===SQL=========== \r\n\r\nSelect * From `` Where `` = ''-1''\r\n\r\n===BACK TRACE====\r\n\r\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuform.php - line 12 (nuRunQuery)\n\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuapi.php - line 16 (nuGetFormObject)\n\n\r\n\r\n', '2016-05-24 14:10:25'),
-('5743dc3eb112406', '\r\n===USER==========\r\n\r\nglobeadmin\r\n\r\n===PDO MESSAGE=== \r\n\r\nSQLSTATE[42000]: Syntax error or access violation: 1103 Incorrect table name ''''\r\n\r\n===SQL=========== \r\n\r\nSelect * From `` Where `` = ''-1''\r\n\r\n===BACK TRACE====\r\n\r\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuform.php - line 12 (nuRunQuery)\n\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuapi.php - line 16 (nuGetFormObject)\n\n\r\n\r\n', '2016-05-24 14:14:46'),
-('5743d918ae47651', '\r\n===USER==========\r\n\r\nglobeadmin\r\n\r\n===PDO MESSAGE=== \r\n\r\nSQLSTATE[42000]: Syntax error or access violation: 1103 Incorrect table name ''''\r\n\r\n===SQL=========== \r\n\r\nSELECT * FROM `` WHERE `` = ''-1''\r\n\r\n===BACK TRACE====\r\n\r\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nucommon.php - line 602 (nuRunQuery)\n\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuapi.php - line 12 (nuSetHashList)\n\n\r\n\r\n', '2016-05-24 14:01:20'),
-('5743d8fa3bea348', '\r\n===USER==========\r\n\r\nglobeadmin\r\n\r\n===PDO MESSAGE=== \r\n\r\nSQLSTATE[42000]: Syntax error or access violation: 1103 Incorrect table name ''''\r\n\r\n===SQL=========== \r\n\r\nSelect * From `` Where `` = ''-1''\r\n\r\n===BACK TRACE====\r\n\r\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuform.php - line 12 (nuRunQuery)\n\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuapi.php - line 16 (nuGetFormObject)\n\n\r\n\r\n', '2016-05-24 14:00:50'),
-('5743d8ee94b1421', '\r\n===USER==========\r\n\r\nglobeadmin\r\n\r\n===PDO MESSAGE=== \r\n\r\nSQLSTATE[42000]: Syntax error or access violation: 1103 Incorrect table name ''''\r\n\r\n===SQL=========== \r\n\r\nSelect * From `` Where `` = ''-1''\r\n\r\n===BACK TRACE====\r\n\r\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuform.php - line 12 (nuRunQuery)\n\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuapi.php - line 16 (nuGetFormObject)\n\n\r\n\r\n', '2016-05-24 14:00:38'),
-('5743d8fa39dbfcd', '\r\n===USER==========\r\n\r\nglobeadmin\r\n\r\n===PDO MESSAGE=== \r\n\r\nSQLSTATE[42000]: Syntax error or access violation: 1103 Incorrect table name ''''\r\n\r\n===SQL=========== \r\n\r\nSELECT * FROM `` WHERE `` = ''-1''\r\n\r\n===BACK TRACE====\r\n\r\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nucommon.php - line 602 (nuRunQuery)\n\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuapi.php - line 12 (nuSetHashList)\n\n\r\n\r\n', '2016-05-24 14:00:50'),
-('5743d8ee917451d', '\r\n===USER==========\r\n\r\nglobeadmin\r\n\r\n===PDO MESSAGE=== \r\n\r\nSQLSTATE[42000]: Syntax error or access violation: 1103 Incorrect table name ''''\r\n\r\n===SQL=========== \r\n\r\nSELECT * FROM `` WHERE `` = ''-1''\r\n\r\n===BACK TRACE====\r\n\r\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nucommon.php - line 602 (nuRunQuery)\n\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuapi.php - line 12 (nuSetHashList)\n\n\r\n\r\n', '2016-05-24 14:00:38'),
-('5743d8acb794e8a', '\r\n===USER==========\r\n\r\nglobeadmin\r\n\r\n===PDO MESSAGE=== \r\n\r\nSQLSTATE[42000]: Syntax error or access violation: 1103 Incorrect table name ''''\r\n\r\n===SQL=========== \r\n\r\nSelect * From `` Where `` = ''-1''\r\n\r\n===BACK TRACE====\r\n\r\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuform.php - line 12 (nuRunQuery)\n\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuapi.php - line 16 (nuGetFormObject)\n\n\r\n\r\n', '2016-05-24 13:59:32'),
-('5743d8acb558a57', '\r\n===USER==========\r\n\r\nglobeadmin\r\n\r\n===PDO MESSAGE=== \r\n\r\nSQLSTATE[42000]: Syntax error or access violation: 1103 Incorrect table name ''''\r\n\r\n===SQL=========== \r\n\r\nSELECT * FROM `` WHERE `` = ''-1''\r\n\r\n===BACK TRACE====\r\n\r\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nucommon.php - line 602 (nuRunQuery)\n\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuapi.php - line 12 (nuSetHashList)\n\n\r\n\r\n', '2016-05-24 13:59:32'),
-('5743d7dbebfe237', '\r\n===USER==========\r\n\r\nglobeadmin\r\n\r\n===PDO MESSAGE=== \r\n\r\nSQLSTATE[42000]: Syntax error or access violation: 1103 Incorrect table name ''''\r\n\r\n===SQL=========== \r\n\r\nSelect * From `` Where `` = ''-1''\r\n\r\n===BACK TRACE====\r\n\r\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuform.php - line 12 (nuRunQuery)\n\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuapi.php - line 16 (nuGetFormObject)\n\n\r\n\r\n', '2016-05-24 13:56:03'),
-('5743d7dbe9eda63', '\r\n===USER==========\r\n\r\nglobeadmin\r\n\r\n===PDO MESSAGE=== \r\n\r\nSQLSTATE[42000]: Syntax error or access violation: 1103 Incorrect table name ''''\r\n\r\n===SQL=========== \r\n\r\nSELECT * FROM `` WHERE `` = ''-1''\r\n\r\n===BACK TRACE====\r\n\r\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nucommon.php - line 602 (nuRunQuery)\n\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuapi.php - line 12 (nuSetHashList)\n\n\r\n\r\n', '2016-05-24 13:56:03'),
-('5743d728682b397', '\r\n===USER==========\r\n\r\nglobeadmin\r\n\r\n===PDO MESSAGE=== \r\n\r\nSQLSTATE[42000]: Syntax error or access violation: 1103 Incorrect table name ''''\r\n\r\n===SQL=========== \r\n\r\nSelect * From `` Where `` = ''-1''\r\n\r\n===BACK TRACE====\r\n\r\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuform.php - line 12 (nuRunQuery)\n\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuapi.php - line 16 (nuGetFormObject)\n\n\r\n\r\n', '2016-05-24 13:53:04'),
-('5743d72865d6cb1', '\r\n===USER==========\r\n\r\nglobeadmin\r\n\r\n===PDO MESSAGE=== \r\n\r\nSQLSTATE[42000]: Syntax error or access violation: 1103 Incorrect table name ''''\r\n\r\n===SQL=========== \r\n\r\nSELECT * FROM `` WHERE `` = ''-1''\r\n\r\n===BACK TRACE====\r\n\r\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nucommon.php - line 602 (nuRunQuery)\n\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuapi.php - line 12 (nuSetHashList)\n\n\r\n\r\n', '2016-05-24 13:53:04'),
-('5743d6bc77eabf0', '\r\n===USER==========\r\n\r\nglobeadmin\r\n\r\n===PDO MESSAGE=== \r\n\r\nSQLSTATE[42000]: Syntax error or access violation: 1103 Incorrect table name ''''\r\n\r\n===SQL=========== \r\n\r\nSelect * From `` Where `` = ''-1''\r\n\r\n===BACK TRACE====\r\n\r\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuform.php - line 12 (nuRunQuery)\n\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuapi.php - line 16 (nuGetFormObject)\n\n\r\n\r\n', '2016-05-24 13:51:16'),
-('5743d6bc7533816', '\r\n===USER==========\r\n\r\nglobeadmin\r\n\r\n===PDO MESSAGE=== \r\n\r\nSQLSTATE[42000]: Syntax error or access violation: 1103 Incorrect table name ''''\r\n\r\n===SQL=========== \r\n\r\nSELECT * FROM `` WHERE `` = ''-1''\r\n\r\n===BACK TRACE====\r\n\r\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nucommon.php - line 602 (nuRunQuery)\n\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuapi.php - line 12 (nuSetHashList)\n\n\r\n\r\n', '2016-05-24 13:51:16'),
-('5743d50c2fdd6cd', '\r\n===USER==========\r\n\r\nglobeadmin\r\n\r\n===PDO MESSAGE=== \r\n\r\nSQLSTATE[42000]: Syntax error or access violation: 1103 Incorrect table name ''''\r\n\r\n===SQL=========== \r\n\r\nSelect * From `` Where `` = ''-1''\r\n\r\n===BACK TRACE====\r\n\r\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuform.php - line 12 (nuRunQuery)\n\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuapi.php - line 16 (nuGetFormObject)\n\n\r\n\r\n', '2016-05-24 13:44:04'),
-('5743d50c2c6510c', '\r\n===USER==========\r\n\r\nglobeadmin\r\n\r\n===PDO MESSAGE=== \r\n\r\nSQLSTATE[42000]: Syntax error or access violation: 1103 Incorrect table name ''''\r\n\r\n===SQL=========== \r\n\r\nSELECT * FROM `` WHERE `` = ''-1''\r\n\r\n===BACK TRACE====\r\n\r\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nucommon.php - line 602 (nuRunQuery)\n\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuapi.php - line 12 (nuSetHashList)\n\n\r\n\r\n', '2016-05-24 13:44:04'),
-('5743d4b795ac6bb', '\r\n===USER==========\r\n\r\nglobeadmin\r\n\r\n===PDO MESSAGE=== \r\n\r\nSQLSTATE[42000]: Syntax error or access violation: 1103 Incorrect table name ''''\r\n\r\n===SQL=========== \r\n\r\nSelect * From `` Where `` = ''-1''\r\n\r\n===BACK TRACE====\r\n\r\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuform.php - line 12 (nuRunQuery)\n\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuapi.php - line 16 (nuGetFormObject)\n\n\r\n\r\n', '2016-05-24 13:42:39'),
-('5743d4b79330964', '\r\n===USER==========\r\n\r\nglobeadmin\r\n\r\n===PDO MESSAGE=== \r\n\r\nSQLSTATE[42000]: Syntax error or access violation: 1103 Incorrect table name ''''\r\n\r\n===SQL=========== \r\n\r\nSELECT * FROM `` WHERE `` = ''-1''\r\n\r\n===BACK TRACE====\r\n\r\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nucommon.php - line 602 (nuRunQuery)\n\nC:\\nuBuilderPro\\UwAmp\\www\\nuBuilder4\\nuapi.php - line 12 (nuSetHashList)\n\n\r\n\r\n', '2016-05-24 13:42:39');
 
 -- --------------------------------------------------------
 
@@ -1295,9 +1251,9 @@ INSERT INTO `zzzsys_object` (`zzzsys_object_id`, `sob_zzzsys_form_id`, `sob_all_
 ('568ef56c7a9309b', '568ef56c7991aa8', NULL, NULL, '1', 10, NULL, 'Code', 100, 10, 'Main', 'col_code', 'text', 0, 0, 200, 0, 'l', '0', '0', '', '1', NULL, NULL, NULL, NULL, NULL, '', '', NULL, NULL, NULL, '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, '6', '', NULL, '', 0, 0, '2016-01-08 10:01:56', 'globeadmin', '2016-05-05 15:02:33', 'globeadmin', '2016-05-05 15:02:33', 'globeadmin'),
 ('568ef56c7b9dee3', '568ef56c7991aa8', NULL, NULL, '1', 10, NULL, 'col_description', 101, 10, 'Main', 'col_description', 'text', 0, 0, 200, 0, 'l', '0', '0', '', '0', NULL, NULL, NULL, NULL, NULL, '', '', NULL, NULL, NULL, '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '', NULL, '', 0, 0, '2016-01-08 10:01:56', 'globeadmin', '2016-01-08 10:01:56', 'globeadmin', '2016-02-12 11:24:11', 'globeadmin'),
 ('568ef56c7eb3e77', 'nuhome', NULL, NULL, '1', 10, NULL, 'btncolor', 10, 10, 'Home', 'color', 'button', 0, 0, 200, 30, 'l', '0', '0', '', '0', NULL, NULL, NULL, '568ef56c7991aa8', NULL, '', '', NULL, NULL, NULL, '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '', NULL, '', 0, 0, '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', ''),
-('56b8263f0761943', '566f0fe58dc76f9', '', NULL, '1', 10, NULL, 'zzzzsys_lookup_subform', 30, 6, 'Lookup', 'zzzzsys_lookup_subform', 'subform', 174, 249, 700, 150, 'l', '0', '0', '', '0', NULL, NULL, NULL, NULL, NULL, '', '', NULL, NULL, NULL, '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, 20, '1', '1', 'slo_zzzzsys_object_id', 'zzzzsys_lookup_id', 'SELECT * FROM zzzzsys_lookup WHERE slo_zzzzsys_object_id = ''#RECORD_ID#''', 'zzzzsys_lookup', NULL, '', NULL, 'g', 0, 0, '0000-00-00 00:00:00', '', '2016-02-08 15:56:21', 'globeadmin', '2016-04-08 13:24:47', 'globeadmin'),
-('56b8263f0b48046', '56b8263f0761943', NULL, NULL, '1', 10, NULL, 'zzzzsys_slo_object_name', 10, 10, 'Details', 'Object Name', 'text', 0, 0, 300, 0, 'l', '0', '0', '', '0', NULL, NULL, NULL, NULL, NULL, '', '', NULL, NULL, NULL, '', '', NULL, '', NULL, '', NULL, '', '', NULL, '', NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, '', '', NULL, '', 100, 250, '0000-00-00 00:00:00', '', '2016-02-08 15:55:33', 'globeadmin', '2016-04-13 12:01:46', 'globeadmin'),
-('56b8263f0b4a1e1', '56b8263f0761943', NULL, NULL, '1', 10, NULL, 'zzzzsys_slo_field_function_name', 20, 10, 'Details', 'Field / Function Name', 'text', 0, 0, 300, 0, 'l', '0', '0', '', '0', NULL, NULL, NULL, NULL, NULL, '', '', NULL, NULL, NULL, '', '', NULL, '', NULL, '', NULL, '', '', NULL, '', NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, '', '', NULL, '', 100, 250, '0000-00-00 00:00:00', '', '2016-02-08 15:55:50', 'globeadmin', '2016-04-13 12:04:20', 'globeadmin'),
+('56b8263f0761943', '566f0fe58dc76f9', '', NULL, '1', 10, NULL, 'zzzzsys_lookup_subform', 30, 6, 'Lookup', 'zzzzsys_lookup_subform', 'subform', 174, 249, 700, 150, 'l', '0', '0', '', '0', NULL, NULL, NULL, NULL, NULL, '', '', NULL, NULL, NULL, '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, 20, '1', '1', 'slo_zzzzsys_object_id', 'zzzzsys_lookup_id', 'SELECT * FROM zzzzsys_lookup WHERE slo_zzzzsys_object_id = ''#RECORD_ID#''', 'zzzzsys_lookup', NULL, '', NULL, 'g', 0, 0, '0000-00-00 00:00:00', '', '2016-02-08 15:56:21', 'globeadmin', '2016-05-24 16:41:59', 'globeadmin'),
+('56b8263f0b48046', '56b8263f0761943', NULL, NULL, '1', 10, NULL, 'zzzzsys_slo_object_name', 10, 10, 'Details', 'Object Name', 'text', 0, 0, 300, 0, 'l', '0', '0', '', '0', NULL, NULL, NULL, NULL, NULL, '', '', NULL, NULL, NULL, '', '', NULL, '', NULL, '', NULL, '', '', NULL, '', NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, '', '', NULL, '', 100, 250, '0000-00-00 00:00:00', '', '2016-02-08 15:55:33', 'globeadmin', '2016-05-24 16:42:00', 'globeadmin'),
+('56b8263f0b4a1e1', '56b8263f0761943', NULL, NULL, '1', 10, NULL, 'zzzzsys_slo_field_function_name', 20, 10, 'Details', 'Field / Function Name', 'text', 0, 0, 300, 0, 'l', '0', '0', '', '0', NULL, NULL, NULL, NULL, NULL, '', '', NULL, NULL, NULL, '', '', NULL, '', NULL, '', NULL, '', '', NULL, '', NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, '', '', NULL, '', 100, 250, '0000-00-00 00:00:00', '', '2016-02-08 15:55:50', 'globeadmin', '2016-05-24 16:42:00', 'globeadmin'),
 ('56c512a8d7cddde', '56c512a8d3781fd', NULL, NULL, '1', 10, NULL, 'chi_name', 100, 10, 'Main', 'chi_names', 'text', 0, 0, 200, 0, 'l', '0', '0', '', '0', NULL, NULL, NULL, NULL, NULL, '', '', NULL, NULL, NULL, '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '', NULL, '', 0, 0, '2016-02-18 11:09:04', 'globeadmin', '2016-04-21 13:24:42', 'globeadmin', '2016-05-13 09:55:51', 'globeadmin'),
 ('56c512a8dd77884', '56c512a8d3781fd', NULL, NULL, '1', 10, NULL, 'chi_dob', 20, 10, 'Main', 'chi_dob', 'text', 224, 686, 90, 0, 'l', '0', '0', '', '0', NULL, NULL, NULL, NULL, NULL, '', '', NULL, NULL, NULL, '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, '6', '', NULL, '', 0, 0, '2016-02-18 11:09:04', 'globeadmin', '2016-02-18 11:09:04', 'globeadmin', '2016-05-13 09:55:51', 'globeadmin'),
 ('56c512a8e1c4557', '56c512a8d3781fd', NULL, NULL, '1', 10, 'SELECT 0', 'chi_employee_id', 102, 10, 'Main', 'chi_employee_id', 'text', 0, 0, 0, 0, 'l', '0', '0', '', '0', NULL, NULL, NULL, NULL, NULL, '', '', NULL, NULL, NULL, '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '', NULL, '', 0, 0, '2016-02-18 11:09:04', 'globeadmin', '2016-02-18 11:09:04', 'globeadmin', '2016-05-13 09:55:51', 'globeadmin'),
@@ -1376,6 +1332,8 @@ INSERT INTO `zzzsys_php` (`zzzsys_php_id`, `slp_code`, `slp_description`, `slp_g
 ('569c1cba98c2625', 'IND4 bu5', 'index.html 4 bu5', 'dev', '$t                  = nuRunQuery("SELECT * FROM zzzsys_form WHERE sfo_name = ''JSCSS''");\n$r                  = db_fetch_object($t);\n$f                  = new stdClass();\n$f->forms[]         = nuGetEditObject(''56773cb405f4913'', ''5678d262e048faa'');\n$j                  = json_encode($f);\n\n\n$html = "\n\n\n<!DOCTYPE html>\n<html>\n\n<head>\n\n  <script src=\\"https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js\\"></script>\n  \n  <script>                                     //-- js code saved here\n  \n  var json = JSON.parse(''$j'');\n  \n  \n  $r->sfo_custom_code_run_javascript\n  </script>\n\n  \n  <style>                                     //-- css code saved here\n  $r->sfo_custom_code_run_before_open                \n  </style>\n\n</head>\n\n<body onload=\\"nuBuildEditForm(json.forms[0], '''')\\">\n\n\n</body>\n\n</html>\n\n";\n\nprint $html;\n\n\nfunction nuGetEditObject($F, $R){\n\n    $tabs = nuBuildTabList($F);\n    \n    $f = nuGetEditForm($F);\n    \n\n    $s = "SELECT * FROM `$f->table` WHERE `$f->primary_key` = ''$R''";\n    $t = nuRunQuery($s);\n    $A = db_fetch_array($t);\n\n    $s = "\n    \n    SELECT * \n    FROM zzzzsys_form\n    INNER JOIN zzzzsys_object ON sob_all_zzzzsys_form_id = zzzzsys_form_id\n    WHERE zzzzsys_form_id = ''$F''\n    \n    ";\n    \n    $t = nuRunQuery($s);\n    $a = array();\n    \n    while($r = db_fetch_object($t)){\n\n        $o = nuDefaultObject($r, $tabs);\n\n        if($R == ''-1''){\n            $o->V   = nuGetDefaultValue($r->sob_all_id);\n        }else{\n            $o->V   = $A[$r->sob_all_id];\n        }\n\n        if($r->sob_all_type == ''input'' || $r->sob_all_type == ''display''){$o->align = $r->sob_all_align;}\n        if($r->sob_all_type == ''run''){$o->run_method  = $r->sob_run_method;}\n        if($r->sob_all_type == ''html''){$o->html = $r->sob_html_code;}\n\n        if($r->sob_all_type == ''select''){\n\n            $o->multiple    = $r->sob_select_multiple;\n            $o->options     = nuSelectOptions($r->sob_select_sql);\n\n        }\n\n        if($r->sob_all_type == ''lookup''){\n        \n            $o->description_width   = $r->sob_lookup_description_width;\n            $o->auto_complete       = $r->sob_lookup_autocomplete;\n            $o->form_id             = $r->sob_lookup_zzzzsys_form_id;\n            $l                      = nuGetLookupValues($r, $o);\n            $o->code                = $l[0];\n            $o->description         = $l[1];\n\n        }\n\n        if($r->sob_all_type == ''subform''){\n        \n            $r->subform_fk      = $R;\n            $o->subform_type    = $r->sob_subform_type;\n            $o->delete          = $r->sob_subform_delete;\n            $o->add             = $r->sob_subform_add;\n            $o->forms           = nuGetSubformRecords($r);\n\n        }\n        \n        \n        $a[]    = $o;\n\n    }\n    \n    $f->tabs = nuRefineTabList($tabs);\n    $f->objects = $a;\n\n    $O = new stdClass();\n    $O->forms[] = $f;\n    \n    return $O->forms[0];\n\n}\n\nfunction nuDefaultObject($r, $t){\n    \n    $o      = new stdClass();\n    $o->Y   = $r->sob_all_type;\n    $o->I   = $r->sob_all_id;\n    $o->B   = $r->sob_all_label;\n    $o->T   = $r->sob_all_top;\n    $o->L   = $r->sob_all_left;\n    $o->W   = $r->sob_all_width;\n    $o->H   = $r->sob_all_height;\n    \n    for($i = 0 ; $i < count($t) ; $i++){\n\n        if($r->sob_all_zzzzsys_tab_id == $t[$i]->zzzzsys_tab_id){\n            $o->A     = $t[$i]->number;\n        }\n    \n    }\n    \n    return $o;\n    \n}\n\n\nfunction nuGetEditForm($F){\n\n    $s = "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = ''$F''";\n    $t = nuRunQuery($s);\n    $r = db_fetch_object($t);\n    \n    $f              = new stdClass();\n    $f->id          = $r->zzzzsys_form_id;\n    $f->type        = $r->sfo_type;\n    $f->table       = $r->sfo_table;\n    $f->primary_key = $r->sfo_primary_key;\n\n    return $f;\n    \n}\n\nfunction nuGetLookupValues($R, $O){\n\n    $s = "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = ''$O->form_id''";\n    $t = nuRunQuery($s);\n    $r = db_fetch_object($t);\n    \n    $s = "\n        SELECT \n        $R->sob_lookup_code AS code,\n        $R->sob_lookup_description AS description\n        FROM `$r->sfo_table` \n        WHERE `$r->sfo_primary_key` = ''$O->value''\n        \n    ";\n\n    $t = nuRunQuery($s);\n    \n    return db_fetch_row($t);\n    \n}\n\n\nfunction nuSelectOptions($sql) {\n\n    $a = array();\n\n    if (substr(strtoupper(trim($sql)), 0, 6) == ''SELECT'') {                      //-- sql statement\n        $t = nuRunQuery($sql);\n        if (nuErrorFound()) {\n            return;\n        }\n\n        while ($r = db_fetch_row($t)) {\n            $a[] = $r;\n        }\n    } else {                                                                     //-- comma delimited string\n        $t = explode(''|'', $sql);\n\n        for ($i = 0; $i < count($t); $i++) {\n\n            $r    = array();\n            $r[0] = $t[$i];\n            $r[1] = $t[$i + 1];\n            $a[]  = $r;\n            $i++;\n        }\n    }\n\n    return $a;\n}\n\n\n\nfunction nuGetSubformRecords($R){\n\n    $f = nuGetEditForm($R->sob_subform_zzzzsys_form_id);\n    $s = "SELECT `$f->primary_key` FROM `$f->table` WHERE `$R->sob_subform_foreign_key` = ''$R->subform_fk''";\n    $t = nuRunQuery($s);\n    $a = array();\n    \n    while($r = db_fetch_row($t)){\n        \n        $o   = nuGetEditObject($R->sob_subform_zzzzsys_form_id, $r[0]);\n        $a[] = $o;\nnudebug(print_r($o,1));\n        \n    }\n    \n    return $a;\n\n}\n\nfunction nuBuildTabList($i){\n    \n    $o = 0;\n    $a = array();\n    $s = "\n    \n        SELECT zzzzsys_tab.* \n        FROM zzzzsys_tab \n        INNER JOIN zzzzsys_object ON sob_all_zzzzsys_form_id = syt_zzzzsys_form_id\n        WHERE syt_zzzzsys_form_id = ''$i''\n        GROUP BY syt_zzzzsys_form_id,syt_title\n        ORDER BY syt_order\n    \n    ";\n    \n    $t = nuRunQuery($s);\n\n    while($r = db_fetch_object($t)){\n        \n        $r->number = $o;\n        $o++;\n        $a[] = $r;\n        \n    }\n    \n    return $a;\n    \n}\n\n\nfunction nuRefineTabList($t){\n\n    $a = array();\n\n    for($i = 0 ; $i < count($t) ; $i++){\n        \n        $t[$i]->title = $t[$i]->syt_title;\n        unset($t[$i]->syt_zzzzsys_form_id, $t[$i]->syt_title, $t[$i]->syt_order, $t[$i]->zzzzsys_tab_id);\n        \n    }\n\n    return $t;\n   \n}\n\n\nfunction nuGetDefaultValue($s){\n    \n    if(trim($s) == ''''){\n        return '''';\n    }else{\n    \n        $t = nuRunQuery($s);\n        $r = db_fetch_row($t);\n        return $r[0];\n        \n    }\n    \n}\n\n\n\n', '5678d4be8468121', '0', '1', '2016-01-18 09:29:06', 'globeadmin', '2016-01-18 09:29:06', 'globeadmin', '2016-01-18 09:29:06', 'globeadmin'),
 ('569c6ec90acb94b', 'IND4 bu6', 'index.html 4 bu6', 'dev', '$t                  = nuRunQuery("SELECT * FROM zzzsys_form WHERE sfo_name = ''JSCSS''");\n$r                  = db_fetch_object($t);\n$f                  = new stdClass();\n$f->forms[]         = nuGetEditObject(''56773cb405f4913'', ''5678d262e048faa'');\n$j                  = json_encode($f);\n\n\n$html = "\n\n\n<!DOCTYPE html>\n<html>\n\n<head>\n\n  <script src=\\"https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js\\"></script>\n  \n  <script>                                     //-- js code saved here\n  \n  var json = JSON.parse(''$j'');\n  \n  \n  $r->sfo_custom_code_run_javascript\n  </script>\n\n  \n  <style>                                     //-- css code saved here\n  $r->sfo_custom_code_run_before_open                \n  </style>\n\n</head>\n\n<body onload=\\"nuBuildEditForm(json.forms[0], '''')\\">\n\n\n</body>\n\n</html>\n\n";\n\nprint $html;\n\n\nfunction nuGetEditObject($F, $R){\n\n    $tabs = nuBuildTabList($F);\n    \n    $f              = nuGetEditForm($F);\n    $f->form_id     = $F;\n    $f->record_id   = $R;\n    \n\n    $s = "SELECT * FROM `$f->table` WHERE `$f->primary_key` = ''$R''";\n    $t = nuRunQuery($s);\n    $A = db_fetch_array($t);\n\n    $s = "\n    \n    SELECT * \n    FROM zzzzsys_form\n    INNER JOIN zzzzsys_object ON sob_all_zzzzsys_form_id = zzzzsys_form_id\n    WHERE zzzzsys_form_id = ''$F''\n    \n    ";\n    \n    $t = nuRunQuery($s);\n    $a = array();\n    \n    while($r = db_fetch_object($t)){\n\n        $o = nuDefaultObject($r, $tabs);\n\n        if($R == ''-1''){\n            $o->V   = nuGetDefaultValue($r->sob_all_id);\n        }else{\n            $o->V   = $A[$r->sob_all_id];\n        }\n\n        if($r->sob_all_type == ''input'' || $r->sob_all_type == ''display''){$o->align = $r->sob_all_align;}\n        if($r->sob_all_type == ''run''){$o->run_method  = $r->sob_run_method;}\n        if($r->sob_all_type == ''html''){$o->html = $r->sob_html_code;}\n\n        if($r->sob_all_type == ''select''){\n\n            $o->multiple    = $r->sob_select_multiple;\n            $o->options     = nuSelectOptions($r->sob_select_sql);\n\n        }\n\n        if($r->sob_all_type == ''lookup''){\n        \n            $o->description_width   = $r->sob_lookup_description_width;\n            $o->auto_complete       = $r->sob_lookup_autocomplete;\n            $o->form_id             = $r->sob_lookup_zzzzsys_form_id;\n            $l                      = nuGetLookupValues($r, $o);\n            $o->code                = $l[0];\n            $o->description         = $l[1];\n\n        }\n\n        if($r->sob_all_type == ''subform''){\n        \n            $r->subform_fk      = $R;\n            $o->subform_type    = $r->sob_subform_type;\n            $o->delete          = $r->sob_subform_delete;\n            $o->add             = $r->sob_subform_add;\n            $o->forms           = nuGetSubformRecords($r, $o->add);\n\n        }\n        \n        \n        $a[]    = $o;\n\n    }\n    \n    $f->tabs = nuRefineTabList($tabs);\n    $f->objects = $a;\n\n    $O = new stdClass();\n    $O->forms[] = $f;\n    \n    return $O->forms[0];\n\n}\n\nfunction nuDefaultObject($r, $t){\n    \n    $o      = new stdClass();\n    $o->Y   = $r->sob_all_type;\n    $o->I   = $r->sob_all_id;\n    $o->B   = $r->sob_all_label;\n    $o->T   = $r->sob_all_top;\n    $o->L   = $r->sob_all_left;\n    $o->W   = $r->sob_all_width;\n    $o->H   = $r->sob_all_height;\n    \n    for($i = 0 ; $i < count($t) ; $i++){\n\n        if($r->sob_all_zzzzsys_tab_id == $t[$i]->zzzzsys_tab_id){\n            $o->A     = $t[$i]->number;\n        }\n    \n    }\n    \n    return $o;\n    \n}\n\n\nfunction nuGetEditForm($F){\n\n    $s = "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = ''$F''";\n    $t = nuRunQuery($s);\n    $r = db_fetch_object($t);\n    \n    $f              = new stdClass();\n    $f->id          = $r->zzzzsys_form_id;\n    $f->type        = $r->sfo_type;\n    $f->table       = $r->sfo_table;\n    $f->primary_key = $r->sfo_primary_key;\n\n    return $f;\n    \n}\n\nfunction nuGetLookupValues($R, $O){\n\n    $s = "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = ''$O->form_id''";\n    $t = nuRunQuery($s);\n    $r = db_fetch_object($t);\n    \n    $s = "\n        SELECT \n        $R->sob_lookup_code AS code,\n        $R->sob_lookup_description AS description\n        FROM `$r->sfo_table` \n        WHERE `$r->sfo_primary_key` = ''$O->value''\n        \n    ";\n\n    $t = nuRunQuery($s);\n    \n    return db_fetch_row($t);\n    \n}\n\n\nfunction nuSelectOptions($sql) {\n\n    $a = array();\n\n    if (substr(strtoupper(trim($sql)), 0, 6) == ''SELECT'') {                      //-- sql statement\n        $t = nuRunQuery($sql);\n        if (nuErrorFound()) {\n            return;\n        }\n\n        while ($r = db_fetch_row($t)) {\n            $a[] = $r;\n        }\n    } else {                                                                     //-- comma delimited string\n        $t = explode(''|'', $sql);\n\n        for ($i = 0; $i < count($t); $i++) {\n\n            $r    = array();\n            $r[0] = $t[$i];\n            $r[1] = $t[$i + 1];\n            $a[]  = $r;\n            $i++;\n        }\n    }\n\n    return $a;\n}\n\n\n\nfunction nuGetSubformRecords($R, $A){\n\n    $f = nuGetEditForm($R->sob_subform_zzzzsys_form_id);\n    $s = "SELECT `$f->primary_key` FROM `$f->table` WHERE `$R->sob_subform_foreign_key` = ''$R->subform_fk''";\n    $t = nuRunQuery($s);\n    $a = array();\n    \n    while($r = db_fetch_row($t)){\n        \n        $o   = nuGetEditObject($R->sob_subform_zzzzsys_form_id, $r[0]);\n        $a[] = $o;\n\n    }\n\n    if($A == 1){  //-- add blank record\n    \n        $o   = nuGetEditObject($R->sob_subform_zzzzsys_form_id, -1);\n        $a[] = $o;\n        \n    }\n    \n    return $a;\n\n}\n\nfunction nuBuildTabList($i){\n    \n    $o = 0;\n    $a = array();\n    $s = "\n    \n        SELECT zzzzsys_tab.* \n        FROM zzzzsys_tab \n        INNER JOIN zzzzsys_object ON sob_all_zzzzsys_form_id = syt_zzzzsys_form_id\n        WHERE syt_zzzzsys_form_id = ''$i''\n        GROUP BY syt_zzzzsys_form_id,syt_title\n        ORDER BY syt_order\n    \n    ";\n    \n    $t = nuRunQuery($s);\n\n    while($r = db_fetch_object($t)){\n        \n        $r->number = $o;\n        $o++;\n        $a[] = $r;\n        \n    }\n    \n    return $a;\n    \n}\n\n\nfunction nuRefineTabList($t){\n\n    $a = array();\n\n    for($i = 0 ; $i < count($t) ; $i++){\n        \n        $t[$i]->title = $t[$i]->syt_title;\n        unset($t[$i]->syt_zzzzsys_form_id, $t[$i]->syt_title, $t[$i]->syt_order, $t[$i]->zzzzsys_tab_id);\n        \n    }\n\n    return $t;\n   \n}\n\n\nfunction nuGetDefaultValue($s){\n    \n    if(trim($s) == ''''){\n        return '''';\n    }else{\n    \n        $t = nuRunQuery($s);\n        $r = db_fetch_row($t);\n        return $r[0];\n        \n    }\n    \n}\n\n\n\n', '5678d4be8468121', '0', '1', '2016-01-18 15:19:13', 'globeadmin', '2016-01-18 15:19:13', 'globeadmin', '2016-01-18 15:19:13', 'globeadmin'),
 ('56ea1ed41bdc577', 'a', 'a', 'a', 'print "fxfgdd t h sh  str s ///";', '5678d4be8468121', '0', '1', '2016-03-17 13:34:52', 'globeadmin', '2016-03-17 13:34:52', 'globeadmin', '2016-03-17 13:34:52', 'globeadmin');
+INSERT INTO `zzzsys_php` (`zzzsys_php_id`, `slp_code`, `slp_description`, `slp_group`, `slp_php`, `slp_zzzsys_form_id`, `slp_nonsecure`, `slp_list`, `zzzsys_php_log_added_at`, `zzzsys_php_log_added_by`, `zzzsys_php_log_changed_at`, `zzzsys_php_log_changed_by`, `zzzsys_php_log_viewed_at`, `zzzsys_php_log_viewed_by`) VALUES
+('5744fec4db6c964', '4', '4', '4', '\n\nnu(''570b37f0777aa8d'',''nutab'');\nnu(''570daea96b33df9'',''nulookup'');\nnu(''570c3f3ed9de708'',''nulibrary'');\nnu(''574277f47e2a858'',''nunonsystemform'');\nnu(''5726afd46e9fd7e'',''nuevent'');\nnu(''570b19bf4e6ec1a'',''nubrowse'');\nnu(''5743f74438030f0'',''nuaccessforms'');\n\n\nfunction nu($i, $n){\n\n    $s  = "UPDATE zzzzsys_form SET zzzzsys_form_id = ''$n'' WHERE zzzzsys_form_id = ''$i''";\n    $t  = nuRunQuery($s);\n\n    $s  = "UPDATE zzzzsys_browse SET sbr_zzzzsys_form_id = ''$n'' WHERE sbr_zzzzsys_form_id = ''$i''";\n    $t  = nuRunQuery($s);\n\n    $s  = "UPDATE zzzzsys_tab SET syt_zzzzsys_form_id = ''$n'' WHERE syt_zzzzsys_form_id = ''$i''";\n    $t  = nuRunQuery($s);\n\n    $s  = "UPDATE zzzzsys_library SET sli_zzzzsys_form_id = ''$n'' WHERE sli_zzzzsys_form_id = ''$i''";\n    $t  = nuRunQuery($s);\n\n\n    $s  = "UPDATE zzzzsys_object SET sob_all_zzzzsys_form_id = ''$n'' WHERE sob_all_zzzzsys_form_id = ''$i''";\n    $t  = nuRunQuery($s);\n\n    $s  = "UPDATE zzzzsys_object SET sob_run_zzzzsys_form_id = ''$n'' WHERE sob_run_zzzzsys_form_id = ''$i''";\n    $t  = nuRunQuery($s);\n\n    $s  = "UPDATE zzzzsys_object SET sob_lookup_zzzzsys_form_id = ''$n'' WHERE sob_lookup_zzzzsys_form_id = ''$i''";\n    $t  = nuRunQuery($s);\n\n    $s  = "UPDATE zzzzsys_object SET sob_subform_zzzzsys_form_id = ''$n'' WHERE sob_subform_zzzzsys_form_id = ''$i''";\n    $t  = nuRunQuery($s);\n\n}\n\n\nprint ''done!'';\n', '5678d4be8468121', '0', '1', '2016-05-25 10:54:20', 'globeadmin', '2016-05-25 13:09:13', 'globeadmin', '2016-05-25 13:09:13', 'globeadmin');
 
 -- --------------------------------------------------------
 
@@ -1435,7 +1393,7 @@ CREATE TABLE IF NOT EXISTS `zzzsys_session` (
 --
 
 INSERT INTO `zzzsys_session` (`zzzsys_session_id`, `sss_zzzsys_user_id`, `sss_timeout`, `zzzsys_session_log_added_at`, `zzzsys_session_log_added_by`, `zzzsys_session_log_changed_at`, `zzzsys_session_log_changed_by`, `zzzsys_session_log_viewed_at`, `zzzsys_session_log_viewed_by`) VALUES
-('5743cd57802f1cb', 'globeadmin', 1464063095, '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '');
+('57451e57dac8032', 'globeadmin', 1464152381, '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '');
 
 -- --------------------------------------------------------
 
@@ -2805,7 +2763,10 @@ INSERT INTO `zzzsys_user_log` (`zzzsys_user_log_id`, `sul_zzzsys_user_id`, `sul_
 ('5742aad06828beb', 'globeadmin', '127.0.0.1', '2016-05-23 16:31:36', '2016-05-23 16:31:36', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', ''),
 ('5742ac36212fc19', 'globeadmin', '127.0.0.1', '2016-05-23 16:37:34', '2016-05-23 16:37:57', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', ''),
 ('57439e0c4a118d3', 'globeadmin', '127.0.0.1', '2016-05-24 09:49:24', '2016-05-24 13:11:06', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', ''),
-('5743cd57802f1cb', 'globeadmin', '127.0.0.1', '2016-05-24 13:11:11', '2016-05-24 13:41:35', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '');
+('5743cd57802f1cb', 'globeadmin', '127.0.0.1', '2016-05-24 13:11:11', '2016-05-24 16:10:57', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', ''),
+('5743f8072f4035d', 'globeadmin', '127.0.0.1', '2016-05-24 16:13:19', '2016-05-24 16:41:59', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', ''),
+('5744f213e141d39', 'globeadmin', '127.0.0.1', '2016-05-25 10:00:11', '2016-05-25 10:54:20', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', ''),
+('57451e57dac8032', 'globeadmin', '127.0.0.1', '2016-05-25 13:09:03', '2016-05-25 14:29:41', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '');
 
 -- --------------------------------------------------------
 
@@ -2894,23 +2855,23 @@ INSERT INTO `zzzzsys_browse` (`zzzzsys_browse_id`, `sbr_zzzzsys_form_id`, `sbr_t
 ('56c5131637d6f7f', '56c513162acd102', 'Name', 'chi_name', 'l', NULL, 'chi_name', 10, 200),
 ('5707303158d2308', 'nuform', 'Code', 'sfo_code', 'l', NULL, 'sfo_code', 10, 70),
 ('570730315e6abb7', 'nuform', 'Description', 'sfo_description', 'l', NULL, 'sfo_description', 20, 250),
-('570b3863e50cb98', '570b37f0777aa8d', 'Form', 'sfo_description', 'l', NULL, 'sfo_description', 10, 150),
-('570b3863e80f09c', '570b37f0777aa8d', 'Tab', 'syt_title', 'l', NULL, 'syt_title', 20, 100),
+('570b3863e50cb98', 'nutab', 'Form', 'sfo_description', 'l', NULL, 'sfo_description', 10, 150),
+('570b3863e80f09c', 'nutab', 'Tab', 'syt_title', 'l', NULL, 'syt_title', 20, 100),
 ('570c8e1adb04ffc', 'nuobject', 'Form', 'sfo_description', 'l', NULL, 'sfo_description', 10, 200),
 ('570c8e1adeae32a', 'nuobject', 'Tab', 'syt_title', 'l', NULL, 'syt_title', 20, 100),
 ('570c8e1ae1b33cb', 'nuobject', 'Object', 'sob_all_id', 'l', NULL, 'sob_all_id', 30, 250),
 ('570db5ea2aa8afe', 'nuobject', 'Type', 'sob_all_type', 'l', NULL, 'sob_all_type', 40, 100),
 ('5710406a290c874', 'nuobject', 'Label', 'sob_all_label', NULL, NULL, 'sob_all_label', 25, 150),
-('57143e81f2bdabf', '570b37f0777aa8d', 'Type', 'sfo_type', NULL, NULL, 'sfo_type', 5, 100),
+('57143e81f2bdabf', 'nutab', 'Type', 'sfo_type', NULL, NULL, 'sfo_type', 5, 100),
 ('57143f25ded40bb', 'nuform', 'Type', 'sfo_type', NULL, NULL, 'sfo_type', 5, 100),
 ('57426b4c86ffc81', '57426b4c86fede1', 'Code', 'sfo_code', 'l', 'date', 'sfo_code', 10, 70),
 ('57426b4c8700731', '57426b4c86fede1', 'Description', 'sfo_description', 'l', 'date', 'sfo_description', 20, 250),
 ('57426b4c87011a9', '57426b4c86fede1', 'Type', 'sfo_type', 'l', 'date', 'sfo_type', 5, 100),
 ('574290680092fa8', 'nuaccess', 'Description', 'sal_description', 'l', NULL, 'sal_description', 20, 300),
 ('57428fe73028089', 'nuaccess', 'Code', 'sal_code', NULL, NULL, 'sal_code', 10, 100),
-('574277f47e2b8d7', '574277f47e2a858', 'Code', 'sfo_code', 'l', 'date', 'sfo_code', 10, 70),
-('574277f47e2c2b7', '574277f47e2a858', 'Description', 'sfo_description', 'l', 'date', 'sfo_description', 20, 250),
-('574277f47e2cd55', '574277f47e2a858', 'Type', 'sfo_type', 'l', 'date', 'sfo_type', 5, 100);
+('574277f47e2b8d7', 'nunonsystemform', 'Code', 'sfo_code', 'l', 'date', 'sfo_code', 10, 70),
+('574277f47e2c2b7', 'nunonsystemform', 'Description', 'sfo_description', 'l', 'date', 'sfo_description', 20, 250),
+('574277f47e2cd55', 'nunonsystemform', 'Type', 'sfo_type', 'l', 'date', 'sfo_type', 5, 100);
 
 -- --------------------------------------------------------
 
@@ -2965,69 +2926,71 @@ INSERT INTO `zzzzsys_event` (`zzzzsys_event_id`, `sev_zzzzsys_object_id`, `sev_e
 --
 
 CREATE TABLE IF NOT EXISTS `zzzzsys_form` (
-  `zzzzsys_form_id` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
-  `sfo_type` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
-  `sfo_code` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
-  `sfo_description` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
-  `sfo_table` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
-  `sfo_primary_key` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
-  `sfo_breadcrumb_title` text COLLATE utf8_unicode_ci NOT NULL,
-  `sfo_redirect_form_id` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
-  `sfo_row_height` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
-  `sfo_rows_per_page` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
-  `sfo_before_browse_php` longtext COLLATE utf8_unicode_ci NOT NULL,
-  `sfo_before_open_php` longtext COLLATE utf8_unicode_ci NOT NULL,
-  `sfo_before_save_php` longtext COLLATE utf8_unicode_ci NOT NULL,
-  `sfo_after_save_php` longtext COLLATE utf8_unicode_ci NOT NULL,
-  `sfo_before_delete_php` longtext COLLATE utf8_unicode_ci NOT NULL,
-  `sfo_after_delete_php` longtext COLLATE utf8_unicode_ci NOT NULL,
-  `sfo_browse_sql` text COLLATE utf8_unicode_ci NOT NULL,
-  `sfo_add_button` varchar(1) COLLATE utf8_unicode_ci NOT NULL,
-  `sfo_add_title` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `sfo_add_display_condition` text COLLATE utf8_unicode_ci NOT NULL,
-  `sfo_new_button` varchar(1) COLLATE utf8_unicode_ci NOT NULL,
-  `sfo_new_title` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `sfo_new_display_condition` text COLLATE utf8_unicode_ci NOT NULL,
-  `sfo_save_button` varchar(1) COLLATE utf8_unicode_ci NOT NULL,
-  `sfo_save_title` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `sfo_save_display_condition` text COLLATE utf8_unicode_ci NOT NULL,
-  `sfo_delete_button` varchar(1) COLLATE utf8_unicode_ci NOT NULL,
-  `sfo_delete_title` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `sfo_delete_display_condition` text COLLATE utf8_unicode_ci NOT NULL,
-  `sfo_clone_button` varchar(1) COLLATE utf8_unicode_ci NOT NULL,
-  `sfo_clone_title` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `sfo_clone_display_condition` text COLLATE utf8_unicode_ci NOT NULL,
-  `sfo_print_button` varchar(1) COLLATE utf8_unicode_ci NOT NULL,
-  `sfo_print_title` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `sfo_print_display_condition` text COLLATE utf8_unicode_ci NOT NULL,
-  `sfo_report_sql` text COLLATE utf8_unicode_ci NOT NULL,
-  `sfo_report_library_zzzzsys_form_id` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
-  `sfo_report_criteria_zzzzsys_form_id` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
-  `sfo_report_layout` longtext COLLATE utf8_unicode_ci NOT NULL,
-  `sfo_library_php` longtext COLLATE utf8_unicode_ci NOT NULL,
-  `sfo_javascript` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `sys` int(11) NOT NULL,
+  `zzzzsys_form_id` varchar(25) NOT NULL,
+  `sfo_type` varchar(300) NOT NULL,
+  `sfo_code` varchar(300) NOT NULL,
+  `sfo_description` varchar(300) NOT NULL,
+  `sfo_table` varchar(300) NOT NULL,
+  `sfo_primary_key` varchar(300) NOT NULL,
+  `sfo_breadcrumb_title` text NOT NULL,
+  `sfo_redirect_form_id` varchar(300) NOT NULL,
+  `sfo_row_height` varchar(300) NOT NULL,
+  `sfo_rows_per_page` varchar(300) NOT NULL,
+  `sfo_before_browse_php` longtext NOT NULL,
+  `sfo_before_open_php` longtext NOT NULL,
+  `sfo_before_save_php` longtext NOT NULL,
+  `sfo_after_save_php` longtext NOT NULL,
+  `sfo_before_delete_php` longtext NOT NULL,
+  `sfo_after_delete_php` longtext NOT NULL,
+  `sfo_browse_sql` text NOT NULL,
+  `sfo_add_button` varchar(1) NOT NULL,
+  `sfo_add_title` varchar(50) NOT NULL,
+  `sfo_add_display_condition` text NOT NULL,
+  `sfo_new_button` varchar(1) NOT NULL,
+  `sfo_new_title` varchar(50) NOT NULL,
+  `sfo_new_display_condition` text NOT NULL,
+  `sfo_save_button` varchar(1) NOT NULL,
+  `sfo_save_title` varchar(50) NOT NULL,
+  `sfo_save_display_condition` text NOT NULL,
+  `sfo_delete_button` varchar(1) NOT NULL,
+  `sfo_delete_title` varchar(50) NOT NULL,
+  `sfo_delete_display_condition` text NOT NULL,
+  `sfo_clone_button` varchar(1) NOT NULL,
+  `sfo_clone_title` varchar(50) NOT NULL,
+  `sfo_clone_display_condition` text NOT NULL,
+  `sfo_print_button` varchar(1) NOT NULL,
+  `sfo_print_title` varchar(50) NOT NULL,
+  `sfo_print_display_condition` text NOT NULL,
+  `sfo_report_sql` text NOT NULL,
+  `sfo_report_library_zzzzsys_form_id` varchar(25) NOT NULL,
+  `sfo_report_criteria_zzzzsys_form_id` varchar(25) NOT NULL,
+  `sfo_report_layout` longtext NOT NULL,
+  `sfo_library_php` longtext NOT NULL,
+  `sfo_javascript` longtext NOT NULL,
   PRIMARY KEY (`zzzzsys_form_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `zzzzsys_form`
 --
 
-INSERT INTO `zzzzsys_form` (`zzzzsys_form_id`, `sfo_type`, `sfo_code`, `sfo_description`, `sfo_table`, `sfo_primary_key`, `sfo_breadcrumb_title`, `sfo_redirect_form_id`, `sfo_row_height`, `sfo_rows_per_page`, `sfo_before_browse_php`, `sfo_before_open_php`, `sfo_before_save_php`, `sfo_after_save_php`, `sfo_before_delete_php`, `sfo_after_delete_php`, `sfo_browse_sql`, `sfo_add_button`, `sfo_add_title`, `sfo_add_display_condition`, `sfo_new_button`, `sfo_new_title`, `sfo_new_display_condition`, `sfo_save_button`, `sfo_save_title`, `sfo_save_display_condition`, `sfo_delete_button`, `sfo_delete_title`, `sfo_delete_display_condition`, `sfo_clone_button`, `sfo_clone_title`, `sfo_clone_display_condition`, `sfo_print_button`, `sfo_print_title`, `sfo_print_display_condition`, `sfo_report_sql`, `sfo_report_library_zzzzsys_form_id`, `sfo_report_criteria_zzzzsys_form_id`, `sfo_report_layout`, `sfo_library_php`, `sfo_javascript`) VALUES
-('56773cb405f4913', 'browseedit', 'COM', 'Company', 'company', 'company_id', '', '', '', '', '', '', '', '', '', '', 'SELECT * FROM company\r\nLEFT JOIN business ON business_id = com_business_id', '1', '', '', '', '', '', '1', 'Save Me', '', '1', '', '', '1', '', '', '', '', '', '', '', '', '', '', ''),
-('5678ab2c48c5c41', 'browseedit', 'EMP', 'Employee Subform', 'employee', 'employee_id', '', '', '', '', '', '', '', '', '', '', 'SELECT * FROM employee\nWHERE employee_id = ''5678d416056e635''', '1', '', '', '0', '', '', '1', '', '', '1', '', '', '1', '', '', '', '', '', '', '', '', '', '', ''),
-('568b508eec00d80', 'browseedit', 'BUS', 'Business', 'business', 'business_id', '', '', '', '4', '', '', '', '', '', '', 'SELECT * FROM business', '1', '', '', '', '', '', '1', '', '', '', '', '', '1', '', '', '1', '', '', '', '', '', '', '', ''),
-('nuhome', 'criteria', 'HOME', 'Home', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '0', '', '', '0', '', '', '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', ''),
-('56c513162acd102', 'browseedit', 'CHI', 'Children', 'children', 'children_id', '', '', '', '', '', '', '', '', '', '', 'SELECT * FROM employee', '1', '', '', '0', '', '', '1', '', '', '1', '', '', '1', '', '', '', '', '', '', '', '', '', '', ''),
-('nuform', 'browseedit', 'FORM', 'nuBuilder Form', 'zzzzsys_form', 'zzzzsys_form_id', '', '', '', '', '', '', '', '', '', '', 'SELECT * FROM zzzzsys_form\nORDER BY sfo_code', '1', '', '', '', '', '', '1', '', '', '1', '', '', '1', '', '', '1', '', '', '', '', '', '', '', ''),
-('570b19bf4e6ec1a', 'edit', 'FRMBR', 'Form Browse Subform', 'zzzzsys_browse', 'zzzzsys_browse_id', '', '', '', '', '', '', '', '', '', '', 'SELECT * FROM company\nINNER JOIN business ON business_id = com_business_id', '1', '', '', '', '', '', '1', 'Save Me', '', '1', '', '', '1', '', '', '', '', '', '', '', '', '', '', ''),
-('570b37f0777aa8d', 'edit', 'TAB', 'Form Tab', 'zzzzsys_tab', 'zzzzsys_tab_id', '', '', '', '', '', '', '', '', '', '', 'SELECT * FROM zzzzsys_tab\nJOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id\n', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '0', '', '', '', '', '', '', '', ''),
-('570c3f3ed9de708', 'edit', 'LIB', 'Include PHP Library', 'zzzzsys_library', 'zzzzsys_library_id', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-('nuobject', 'browseedit', 'OBJ', 'Object', 'zzzzsys_object', 'zzzzsys_object_id', '', '', '', '', '', '', '', '', '', '', 'SELECT * FROM zzzzsys_object\nJOIN zzzzsys_tab ON zzzzsys_tab_id = sob_all_zzzzsys_tab_id\nJOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id\n', '1', '', '', '', '', '', '1', '', '', '1', '', '', '1', '', '', '0', '', '', '', '', '', '', '', ''),
-('570daea96b33df9', 'edit', 'LOOK', 'Lookup Objects to populate', 'zzzzsys_lookup', 'zzzzsys_lookup_id', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-('5726afd46e9fd7e', 'edit', 'EVE', 'Object Events', 'zzzzsys_event', 'zzzzsys_event_id', '', '', '', '', '', '', '', '', '', '', 'SELECT * FROM zzzzsys_event', '', '', '', '', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-('nuaccess', 'browseedit', 'ACC', 'Access Levels', 'zzzzsys_access_level', 'zzzzsys_access_level_id', '', '', '', '', '', '', '', '', '', '', 'SELECT * FROM zzzzsys_access_level\nORDER BY sal_code', '1', '', '', '', '', '', '1', '', '', '1', '', '', '1', '', '', '1', '', '', '', '', '', '', '', ''),
-('574277f47e2a858', 'browseedit', 'ZFORM', 'nuBuilder System Form', 'zzzzsys_form', 'zzzzsys_form_id', '', '', '', '', '', '', '', '', '', '', 'SELECT * FROM zzzzsys_form\nORDER BY sfo_code', '1', '', '', '0', '', '', '1', '', '', '1', '', '', '1', '', '', '1', '', '', '', '574275d543536ba', '574275d543536ba', '', '', '');
+INSERT INTO `zzzzsys_form` (`sys`, `zzzzsys_form_id`, `sfo_type`, `sfo_code`, `sfo_description`, `sfo_table`, `sfo_primary_key`, `sfo_breadcrumb_title`, `sfo_redirect_form_id`, `sfo_row_height`, `sfo_rows_per_page`, `sfo_before_browse_php`, `sfo_before_open_php`, `sfo_before_save_php`, `sfo_after_save_php`, `sfo_before_delete_php`, `sfo_after_delete_php`, `sfo_browse_sql`, `sfo_add_button`, `sfo_add_title`, `sfo_add_display_condition`, `sfo_new_button`, `sfo_new_title`, `sfo_new_display_condition`, `sfo_save_button`, `sfo_save_title`, `sfo_save_display_condition`, `sfo_delete_button`, `sfo_delete_title`, `sfo_delete_display_condition`, `sfo_clone_button`, `sfo_clone_title`, `sfo_clone_display_condition`, `sfo_print_button`, `sfo_print_title`, `sfo_print_display_condition`, `sfo_report_sql`, `sfo_report_library_zzzzsys_form_id`, `sfo_report_criteria_zzzzsys_form_id`, `sfo_report_layout`, `sfo_library_php`, `sfo_javascript`) VALUES
+(0, '56773cb405f4913', 'browseedit', 'COM', 'Company', 'company', 'company_id', '', '', '', '', '', '', '', '', '', '', 'SELECT * FROM company\r\nLEFT JOIN business ON business_id = com_business_id', '1', '', '', '', '', '', '1', 'Save Me', '', '1', '', '', '1', '', '', '', '', '', '', '', '', '', '', ''),
+(0, '5678ab2c48c5c41', 'edit', 'EMP', 'Employee Subform', 'employee', 'employee_id', '', '', '', '', '', '', '', '', '', '', 'SELECT * FROM employee\nWHERE employee_id = ''5678d416056e635''', '1', '', '', '0', '', '', '1', '', '', '1', '', '', '1', '', '', '', '', '', '', '', '', '', '', ''),
+(0, '568b508eec00d80', 'browseedit', 'BUS', 'Business', 'business', 'business_id', '', '', '', '4', '', '', '', '', '', '', 'SELECT * FROM business', '1', '', '', '', '', '', '1', '', '', '', '', '', '1', '', '', '1', '', '', '', '', '', '', '', ''),
+(0, 'nuhome', 'criteria', 'HOME', 'Home', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '0', '', '', '0', '', '', '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', ''),
+(0, '56c513162acd102', 'edit', 'CHI', 'Children', 'children', 'children_id', '', '', '', '', '', '', '', '', '', '', 'SELECT * FROM employee', '1', '', '', '0', '', '', '1', '', '', '1', '', '', '1', '', '', '', '', '', '', '', '', '', '', ''),
+(0, 'nuform', 'browseedit', 'FORM', 'nuBuilder Form', 'zzzzsys_form', 'zzzzsys_form_id', '', '', '', '', '', '', '', '', '', '', 'SELECT * FROM zzzzsys_form\nORDER BY sfo_code', '1', '', '', '', '', '', '1', '', '', '1', '', '', '1', '', '', '1', '', '', '', '', '', '', '', ''),
+(0, 'nubrowse', 'edit', 'FRMBR', 'Form Browse Subform', 'zzzzsys_browse', 'zzzzsys_browse_id', '', '', '', '', '', '', '', '', '', '', 'SELECT * FROM company\nINNER JOIN business ON business_id = com_business_id', '1', '', '', '', '', '', '1', 'Save Me', '', '1', '', '', '1', '', '', '', '', '', '', '', '', '', '', ''),
+(0, 'nutab', 'edit', 'TAB', 'Form Tab', 'zzzzsys_tab', 'zzzzsys_tab_id', '', '', '', '', '', '', '', '', '', '', 'SELECT * FROM zzzzsys_tab\nJOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id\n', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '0', '', '', '', '', '', '', '', ''),
+(0, 'nulibrary', 'edit', 'LIB', 'Include PHP Library', 'zzzzsys_library', 'zzzzsys_library_id', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(0, 'nuobject', 'browseedit', 'OBJECT', 'Object', 'zzzzsys_object', 'zzzzsys_object_id', '', '', '', '', '', '', '', '', '', '', 'SELECT * FROM zzzzsys_object\nJOIN zzzzsys_tab ON zzzzsys_tab_id = sob_all_zzzzsys_tab_id\nJOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id\n', '1', '', '', '', '', '', '1', '', '', '1', '', '', '1', '', '', '0', '', '', '', '', '', '', '', ''),
+(0, 'nulookup', 'edit', 'LOOK', 'Lookup Objects to populate', 'zzzzsys_lookup', 'zzzzsys_lookup_id', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(0, 'nuevent', 'edit', 'EVE', 'Object Events', 'zzzzsys_event', 'zzzzsys_event_id', '', '', '', '', '', '', '', '', '', '', 'SELECT * FROM zzzzsys_event', '', '', '', '', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(0, 'nuaccess', 'browseedit', 'ACC', 'Access Levels', 'zzzzsys_access_level', 'zzzzsys_access_level_id', '', '', '', '', '', '', '', '', '', '', 'SELECT * FROM zzzzsys_access_level\nORDER BY sal_code', '1', '', '', '', '', '', '1', '', '', '1', '', '', '1', '', '', '1', '', '', '', '', '', '', '', ''),
+(0, 'nunonsystemform', 'edit', 'FORMZ', 'nuBuilder non-System Form', 'zzzzsys_form', 'zzzzsys_form_id', '', '', '', '', '', '', '', '', '', '', 'SELECT * FROM zzzzsys_form\nORDER BY sfo_code', '1', '', '', '0', '', '', '1', '', '', '1', '', '', '1', '', '', '1', '', '', '', '574275d543536ba', '574275d543536ba', '', '', ''),
+(0, 'nuaccessforms', 'edit', 'ACCFRM', 'Accessible Forms', 'zzzzsys_access_level_form', 'zzzzsys_access_level_form_id', '', '', '', '', '', '', '', '', '', '', 'SELECT * FROM zzzzsys_access_level_form\nINNER JOIN zzzzsys_form ON zzzzsys_form_id = slf_zzzzsys_form_id\nORDER BY sfo_code\n', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -3036,11 +2999,11 @@ INSERT INTO `zzzzsys_form` (`zzzzsys_form_id`, `sfo_type`, `sfo_code`, `sfo_desc
 --
 
 CREATE TABLE IF NOT EXISTS `zzzzsys_library` (
-  `zzzzsys_library_id` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
-  `sli_zzzzsys_form_id` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
-  `sli_library_zzzzsys_form_id` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
+  `zzzzsys_library_id` varchar(25) NOT NULL,
+  `sli_zzzzsys_form_id` varchar(25) NOT NULL,
+  `sli_library_zzzzsys_form_id` varchar(25) NOT NULL,
   PRIMARY KEY (`zzzzsys_library_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `zzzzsys_library`
@@ -3089,47 +3052,47 @@ INSERT INTO `zzzzsys_lookup` (`zzzzsys_lookup_id`, `slo_zzzzsys_object_id`, `zzz
 --
 
 CREATE TABLE IF NOT EXISTS `zzzzsys_object` (
-  `zzzzsys_object_id` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
-  `sob_all_zzzzsys_form_id` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
-  `sob_all_type` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
-  `sob_all_id` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
-  `sob_all_label` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
-  `sob_all_zzzzsys_tab_id` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
+  `zzzzsys_object_id` varchar(25) NOT NULL,
+  `sob_all_zzzzsys_form_id` varchar(300) NOT NULL,
+  `sob_all_type` varchar(300) NOT NULL,
+  `sob_all_id` varchar(300) NOT NULL,
+  `sob_all_label` varchar(300) NOT NULL,
+  `sob_all_zzzzsys_tab_id` varchar(300) NOT NULL,
   `sob_all_order` int(11) NOT NULL,
   `sob_all_top` int(11) NOT NULL,
   `sob_all_left` int(11) NOT NULL,
   `sob_all_width` int(11) NOT NULL,
   `sob_all_height` int(11) NOT NULL,
-  `sob_all_cloneable` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
-  `sob_all_align` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
-  `sob_all_validate` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
-  `sob_all_readonly` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
-  `sob_all_display_condition` text COLLATE utf8_unicode_ci NOT NULL,
-  `sob_all_default_value_sql` text COLLATE utf8_unicode_ci NOT NULL,
-  `sob_run_zzzzsys_form_id` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
-  `sob_run_filter` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
-  `sob_run_method` varchar(1) COLLATE utf8_unicode_ci NOT NULL,
-  `sob_run_id` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
-  `sob_display_sql` text COLLATE utf8_unicode_ci NOT NULL,
-  `sob_select_multiple` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
-  `sob_select_sql` text COLLATE utf8_unicode_ci NOT NULL,
-  `sob_lookup_code` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
-  `sob_lookup_description` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
-  `sob_lookup_description_width` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
-  `sob_lookup_autocomplete` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
-  `sob_lookup_zzzzsys_form_id` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
-  `sob_lookup_javascript` text COLLATE utf8_unicode_ci NOT NULL,
-  `sob_lookup_php` text COLLATE utf8_unicode_ci NOT NULL,
-  `sob_subform_zzzzsys_form_id` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
-  `sob_subform_foreign_key` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
-  `sob_subform_add` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
-  `sob_subform_delete` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
-  `sob_subform_type` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
-  `sob_input_format` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
-  `sob_input_type` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
-  `sob_html_code` text COLLATE utf8_unicode_ci NOT NULL,
+  `sob_all_cloneable` varchar(300) NOT NULL,
+  `sob_all_align` varchar(10) NOT NULL,
+  `sob_all_validate` varchar(300) NOT NULL,
+  `sob_all_readonly` varchar(300) NOT NULL,
+  `sob_all_display_condition` text NOT NULL,
+  `sob_all_default_value_sql` text NOT NULL,
+  `sob_run_zzzzsys_form_id` varchar(300) NOT NULL,
+  `sob_run_filter` varchar(300) NOT NULL,
+  `sob_run_method` varchar(1) NOT NULL,
+  `sob_run_id` varchar(300) NOT NULL,
+  `sob_display_sql` text NOT NULL,
+  `sob_select_multiple` varchar(300) NOT NULL,
+  `sob_select_sql` text NOT NULL,
+  `sob_lookup_code` varchar(300) NOT NULL,
+  `sob_lookup_description` varchar(300) NOT NULL,
+  `sob_lookup_description_width` varchar(300) NOT NULL,
+  `sob_lookup_autocomplete` varchar(300) NOT NULL,
+  `sob_lookup_zzzzsys_form_id` varchar(300) NOT NULL,
+  `sob_lookup_javascript` text NOT NULL,
+  `sob_lookup_php` text NOT NULL,
+  `sob_subform_zzzzsys_form_id` varchar(300) NOT NULL,
+  `sob_subform_foreign_key` varchar(300) NOT NULL,
+  `sob_subform_add` varchar(300) NOT NULL,
+  `sob_subform_delete` varchar(300) NOT NULL,
+  `sob_subform_type` varchar(300) NOT NULL,
+  `sob_input_format` varchar(300) NOT NULL,
+  `sob_input_type` varchar(300) NOT NULL,
+  `sob_html_code` text NOT NULL,
   PRIMARY KEY (`zzzzsys_object_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `zzzzsys_object`
@@ -3151,7 +3114,7 @@ INSERT INTO `zzzzsys_object` (`zzzzsys_object_id`, `sob_all_zzzzsys_form_id`, `s
 ('56b2b18903c9991', '568b508eec00d80', 'input', 'bus_code', 'Code', '568b508eecf5dee', 0, 10, 50, 100, 16, '1', '', 'noblanks', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('56b2b1afab7397e', '568b508eec00d80', 'input', 'bus_description', 'Description', '568b508eecf5dee', 0, 40, 100, 100, 16, '1', '', 'noblanks', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('56b2b1c7939942e', '568b508eec00d80', 'input', 'bus_check', 'Check', '568b508eecf5dee', 0, 100, 50, 30, 16, '1', '', 'noblanks', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-('5716e2428f5e8fb', 'nuobject', 'subform', 'sob_all_event_subform', 'Javascript', '570d90df5ce8e1a', 1, 300, 500, 355, 110, '1', 'l', 'noblanks', '0', '', '', '', '', 'b', '', '', '0', '0|No|1|Yes', 'syt_title', 'sfo_description', '200', '0', '570b37f0777aa8d', '', '', '5726afd46e9fd7e', 'sev_zzzzsys_object_id', '1', '1', 'g', '0', 'text', ''),
+('5716e2428f5e8fb', 'nuobject', 'subform', 'sob_all_event_subform', 'Javascript', '570d90df5ce8e1a', 1, 300, 500, 355, 110, '1', 'l', 'noblanks', '0', '', '', '', '', 'b', '', '', '0', '0|No|1|Yes', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', 'nuevent', 'sev_zzzzsys_object_id', '1', '1', 'g', '0', 'text', ''),
 ('56b7e275560be71', '56773cb405f4913', 'textarea', 'com_notes', 'Notes', '56777715b87666e', 0, 250, 50, 150, 77, '1', '', 'noblanks', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('56c0fd692478b9e', '5678ab2c48c5c41', 'lookup', 'emp_business_id', 'Business Type', '5678ab2c49bd810', 0, 70, 100, 60, 16, '1', '', 'noblanks', '0', '', '', '', '', '', '', '', '', '', 'bus_code', 'bus_description', '150', '0', '568b508eec00d80', '', '', '', '', '', '', '', '', '', ''),
 ('nuaccess', 'nuhome', 'run', 'run_access', 'Access Levels', '569dc4ed270f08a', 0, 250, 100, 150, 30, '1', '', 'noblanks', '0', '', '', 'nuaccess', '', 'b', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
@@ -3173,17 +3136,17 @@ INSERT INTO `zzzzsys_object` (`zzzzsys_object_id`, `sob_all_zzzzsys_form_id`, `s
 ('570b165f71f99da', 'nuform', 'textarea', 'sfo_print_display_condition', 'Display Condition', '5707303141ab448', 0, 100, 550, 200, 50, '1', 'right', 'noblanks', '0', '', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('570b17d7e20474b', 'nuform', 'textarea', 'sfo_before_browse_php', 'sfo_before_browse_php', '5707303141ab448', 0, 170, 150, 400, 100, '1', 'right', '', '0', '', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('570b1883bbeec99', 'nuform', 'textarea', 'sfo_browse_sql', 'sfo_browse_sql', '5707303141ab448', 0, 500, 150, 400, 100, '1', 'right', '', '0', '', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-('570b192e68d97ac', 'nuform', 'subform', 'browse_sf', 'Browse', '5707303141ab448', 0, 300, 150, 745, 150, '1', 'right', '', '0', '', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '570b19bf4e6ec1a', 'sbr_zzzzsys_form_id', '1', '1', 'g', '', '', ''),
-('570b1a86d41a62c', '570b19bf4e6ec1a', 'input', 'sbr_title', 'Title', '570b19bf5981983', 0, 10, 10, 150, 16, '1', 'left', 'noblanks', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-('570b1abae987b02', '570b19bf4e6ec1a', 'input', 'sbr_display', 'Display', '570b19bf5981983', 0, 10, 10, 150, 16, '1', 'left', 'noblanks', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'text', ''),
-('570b1ad216682ef', '570b19bf4e6ec1a', 'input', 'sbr_sort', 'Sort', '570b19bf5981983', 0, 10, 10, 150, 16, '1', 'left', 'noblanks', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'text', ''),
-('570b2330ea5f52a', '570b19bf4e6ec1a', 'select', 'sbr_align', 'Align', '570b19bf5981983', 0, 10, 10, 60, 16, '1', 'left', 'noblanks', '0', '', '', '', '', '', '', '', '0', 'l|Left|r|Right|c|Center', '', '', '', '', '', '', '', '', '', '', '', '', '', 'text', ''),
-('570b23a2439a04c', '570b19bf4e6ec1a', 'select', 'sbr_format', 'Format', '570b19bf5981983', 0, 10, 10, 80, 16, '1', 'left', 'noblanks', '0', '', '', '', '', '', '', '', '0', 'date|Date|number|Number', '', '', '', '', '', '', '', '', '', '', '', '', '', 'text', ''),
-('570b242a368005e', '570b19bf4e6ec1a', 'input', 'sbr_width', 'Width', '570b19bf5981983', 0, 10, 10, 50, 16, '1', 'right', 'noblanks', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'text', ''),
-('570b24bfbf54a99', '570b19bf4e6ec1a', 'input', 'sbr_order', 'Order', '570b19bf5981983', 0, 10, 10, 50, 16, '1', 'right', 'noblanks', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'text', ''),
-('570b3915874d635', 'nuform', 'subform', 'tab_sf', 'Tabs', '5707303145b7760', 0, 10, 800, 254, 200, '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '570b37f0777aa8d', 'syt_zzzzsys_form_id', '1', '1', 'g', '', '', ''),
-('570b39cc123601d', '570b37f0777aa8d', 'input', 'syt_title', 'Title', '570b19bf5981983', 0, 10, 100, 150, 16, '1', 'left', 'noblanks', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-('570b39f046ded37', '570b37f0777aa8d', 'input', 'syt_order', 'Order', '570b19bf5981983', 0, 40, 100, 50, 16, '1', 'right', 'noblanks', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+('570b192e68d97ac', 'nuform', 'subform', 'browse_sf', 'Browse', '5707303141ab448', 0, 300, 150, 745, 150, '1', 'right', '', '0', '', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', 'nubrowse', 'sbr_zzzzsys_form_id', '1', '1', 'g', '', '', ''),
+('570b1a86d41a62c', 'nubrowse', 'input', 'sbr_title', 'Title', '570b19bf5981983', 0, 10, 10, 150, 16, '1', 'left', 'noblanks', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+('570b1abae987b02', 'nubrowse', 'input', 'sbr_display', 'Display', '570b19bf5981983', 0, 10, 10, 150, 16, '1', 'left', 'noblanks', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'text', ''),
+('570b1ad216682ef', 'nubrowse', 'input', 'sbr_sort', 'Sort', '570b19bf5981983', 0, 10, 10, 150, 16, '1', 'left', 'noblanks', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'text', ''),
+('570b2330ea5f52a', 'nubrowse', 'select', 'sbr_align', 'Align', '570b19bf5981983', 0, 10, 10, 60, 16, '1', 'left', 'noblanks', '0', '', '', '', '', '', '', '', '0', 'l|Left|r|Right|c|Center', '', '', '', '', '', '', '', '', '', '', '', '', '', 'text', ''),
+('570b23a2439a04c', 'nubrowse', 'select', 'sbr_format', 'Format', '570b19bf5981983', 0, 10, 10, 80, 16, '1', 'left', 'noblanks', '0', '', '', '', '', '', '', '', '0', 'date|Date|number|Number', '', '', '', '', '', '', '', '', '', '', '', '', '', 'text', ''),
+('570b242a368005e', 'nubrowse', 'input', 'sbr_width', 'Width', '570b19bf5981983', 0, 10, 10, 50, 16, '1', 'right', 'noblanks', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'text', ''),
+('570b24bfbf54a99', 'nubrowse', 'input', 'sbr_order', 'Order', '570b19bf5981983', 0, 10, 10, 50, 16, '1', 'right', 'noblanks', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'text', ''),
+('570b3915874d635', 'nuform', 'subform', 'tab_sf', 'Tabs', '5707303145b7760', 0, 10, 800, 254, 200, '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'nutab', 'syt_zzzzsys_form_id', '1', '1', 'g', '', '', ''),
+('570b39cc123601d', 'nutab', 'input', 'syt_title', 'Title', '570b19bf5981983', 0, 10, 100, 150, 16, '1', 'left', 'noblanks', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+('570b39f046ded37', 'nutab', 'input', 'syt_order', 'Order', '570b19bf5981983', 0, 40, 100, 50, 16, '1', 'right', 'noblanks', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('570b427781e5e78', 'nuform', 'input', 'sfo_save_title', 'save title', '5707303145b7760', 0, 50, 180, 200, 16, '1', 'left', 'noblanks', '0', '', '', '', '', '', '', '', '0', 'SELECT zzzzsys_form_id, CONCAT(sfo_code, '' - '', sfo_description)\nFROM zzzzsys_form\nORDER BY sfo_code', '', '', '', '', '', '', '', '', '', '', '', '', '', 'text', ''),
 ('570b429d2588a7a', 'nuform', 'select', 'sfo_save_button', 'Save', '5707303145b7760', 0, 50, 60, 50, 16, '1', 'right', 'noblanks', '0', '', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('570b4310d967879', 'nuform', 'select', 'sfo_clone_button', 'Clone', '5707303145b7760', 0, 50, 460, 50, 16, '1', 'right', 'noblanks', '0', '', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
@@ -3207,57 +3170,59 @@ INSERT INTO `zzzzsys_object` (`zzzzsys_object_id`, `sob_all_zzzzsys_form_id`, `s
 ('570c3dc9d502522', 'nuform', 'select', 'sfo_report_criteria_zzzzsys_form_id', 'Criteria Form', '57073031498ed17', 0, 60, 250, 300, 16, '1', 'right', '', '0', '', '', '', '', '', '', '', '0', 'SELECT zzzzsys_form_id, CONCAT(sfo_code, '' - '', sfo_description)\nFROM zzzzsys_form\nORDER BY sfo_code', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('570c3e2d5107e52', 'nuform', 'textarea', 'sfo_library_php', 'PHP', '570730314d34260', 0, 10, 250, 300, 200, '1', 'right', '', '1', '', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('570c3e6e67c39cb', 'nuform', 'textarea', 'sfo_javascript', 'Javascript', '570730315113e7e', 0, 10, 250, 300, 200, '1', 'right', '', '1', '', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-('570c3fce5be3355', '570c3f3ed9de708', 'select', 'sli_library_zzzzsys_form_id', 'Procedures', '570c3f3edfc8a56', 0, 10, 250, 200, 30, '1', 'right', '', '0', '', '', '', '', '', '', '', '0', 'SELECT zzzzsys_form_id, CONCAT(sfo_code, '' - '', sfo_description)\nFROM zzzzsys_form\nORDER BY sfo_code', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-('570c3ffee2e6ad4', 'nuform', 'subform', 'library_sf', 'PHP Library', '57073031543c8f8', 0, 10, 800, 254, 200, '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '570c3f3ed9de708', 'sli_zzzzsys_form_id', '1', '1', 'g', '', '', ''),
+('570c3fce5be3355', 'nulibrary', 'select', 'sli_library_zzzzsys_form_id', 'Procedures', '570c3f3edfc8a56', 0, 10, 250, 200, 30, '1', 'right', '', '0', '', '', '', '', '', '', '', '0', 'SELECT zzzzsys_form_id, CONCAT(sfo_code, '' - '', sfo_description)\nFROM zzzzsys_form\nORDER BY sfo_code', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+('570c3ffee2e6ad4', 'nuform', 'subform', 'library_sf', 'PHP Library', '57073031543c8f8', 0, 10, 800, 254, 200, '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'nulibrary', 'sli_zzzzsys_form_id', '1', '1', 'g', '', '', ''),
 ('570c8e4ef085ed5', 'nuhome', 'run', 'object_button', 'Objects', '569dc4ed270f08a', 0, 100, 50, 100, 30, '1', 'right', 'noblanks', '0', '', '', 'nuobject', '', 'b', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-('570d8e3374d55fd', '56773cb405f4913', 'run', 'tab_button', 'TAB', '56777715b87666e', 0, 200, 1000, 100, 30, '1', 'right', 'noblanks', '0', '', '', '570b37f0777aa8d', '', 'b', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-('570d9046964038e', 'nuobject', 'lookup', 'sob_all_zzzzsys_tab_id', 'Form - Tab', '570d90df5ce8e1a', 0, 20, 100, 100, 16, '1', '', 'noblanks', '0', '', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '0', '570b37f0777aa8d', '', '', '', '', '', '', '', '', '', ''),
-('570d98b34bf37c9', 'nuobject', 'select', 'sob_all_type', 'Type', '570d90df5ce8e1a', 0, 50, 100, 80, 16, '1', '', 'noblanks', '0', '', '', '', '', '', '', '', '0', 'run|Run|display|Display|select|Select|lookup|Lookup|subform|Subform|textarea|Textarea|input|Input|html|HTML', 'syt_title', 'sfo_description', '200', '0', '570b37f0777aa8d', '', '', '', '', '', '', '', '', '', ''),
-('570d9938ebe4428', 'nuobject', 'input', 'sob_all_id', 'ID', '570d90df5ce8e1a', 0, 80, 100, 200, 16, '1', '', 'noblanks', '0', '', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '0', '570b37f0777aa8d', '', '', '', '', '', '', '', '', 'text', ''),
-('570d998aea50861', 'nuobject', 'input', 'sob_all_label', 'Label', '570d90df5ce8e1a', 0, 110, 100, 200, 16, '1', '', 'noblanks', '0', '', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '0', '570b37f0777aa8d', '', '', '', '', '', '', '', '', 'text', ''),
-('570d9a2e76e6a8c', 'nuobject', 'input', 'sob_all_order', 'Tabbing Order', '570d90df5ce8e1a', 0, 140, 100, 50, 16, '1', 'right', 'noblanks', '0', '', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '0', '570b37f0777aa8d', '', '', '', '', '', '', '', '', 'text', ''),
-('570d9a5d4c69587', 'nuobject', 'input', 'sob_all_top', 'Top', '570d90df5ce8e1a', 0, 170, 100, 50, 16, '1', 'right', 'noblanks', '0', '', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '0', '570b37f0777aa8d', '', '', '', '', '', '', '', '', 'text', ''),
-('570d9a7237fd2fc', 'nuobject', 'input', 'sob_all_left', 'Left', '570d90df5ce8e1a', 0, 200, 100, 50, 16, '1', 'right', 'noblanks', '0', '', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '0', '570b37f0777aa8d', '', '', '', '', '', '', '', '', 'text', ''),
-('570d9a8847feae7', 'nuobject', 'input', 'sob_all_width', 'Width', '570d90df5ce8e1a', 0, 230, 100, 50, 16, '1', 'right', 'noblanks', '0', '', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '0', '570b37f0777aa8d', '', '', '', '', '', '', '', '', 'text', ''),
-('570d9a9a6b24446', 'nuobject', 'input', 'sob_all_height', 'Height', '570d90df5ce8e1a', 0, 260, 100, 50, 16, '1', 'right', 'noblanks', '0', '', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '0', '570b37f0777aa8d', '', '', '', '', '', '', '', '', 'text', ''),
-('570d9cb9d004579', 'nuobject', 'select', 'sob_all_cloneable', 'Cloneable', '570d90df5ce8e1a', 0, 290, 100, 50, 16, '1', 'right', 'noblanks', '0', '', '', '', '', '', '', '', '0', '0|No|1|Yes', 'syt_title', 'sfo_description', '200', '0', '570b37f0777aa8d', '', '', '', '', '', '', '', '', 'text', ''),
-('570d9d0a39b227c', 'nuobject', 'select', 'sob_all_align', 'Align', '570d90df5ce8e1a', 0, 320, 100, 70, 16, '1', 'right', 'noblanks', '0', '', '', '', '', '', '', '', '0', 'l|Left|r|Right|c|Center', 'syt_title', 'sfo_description', '200', '0', '570b37f0777aa8d', '', '', '', '', '', '', '', '', 'text', ''),
-('570d9dd38561e81', 'nuobject', 'select', 'sob_all_validate', 'Validation', '570d90df5ce8e1a', 0, 350, 100, 100, 16, '1', 'left', '', '0', '', '', '', '', '', '', '', '0', 'noblanks|No Blanks|noduplicates|No Duplicates', 'syt_title', 'sfo_description', '200', '0', '570b37f0777aa8d', '', '', '', '', '', '', '', '', 'text', ''),
-('570d9e1c5a6bcfd', 'nuobject', 'select', 'sob_all_readonly', 'Read Only', '570d90df5ce8e1a', 0, 380, 100, 50, 16, '1', 'right', 'noblanks', '0', '', '', '', '', '', '', '', '0', '0|No|1|Yes', 'syt_title', 'sfo_description', '200', '0', '570b37f0777aa8d', '', '', '', '', '', '', '', '', 'text', ''),
-('570d9e6b7f6353a', 'nuobject', 'textarea', 'sob_all_display_condition', 'Display Condition', '570d90df5ce8e1a', 0, 20, 600, 250, 100, '1', 'left', '', '0', '', '', '', '', '', '', '', '0', '0|No|1|Yes', 'syt_title', 'sfo_description', '200', '0', '570b37f0777aa8d', '', '', '', '', '', '', '', '', 'text', ''),
-('570d9f1b9e51828', 'nuobject', 'textarea', 'sob_all_default_value_sql', 'Default Value', '570d90df5ce8e1a', 0, 150, 600, 250, 100, '1', 'left', '', '0', '', '', '', '', '', '', '', '0', '0|No|1|Yes', 'syt_title', 'sfo_description', '200', '0', '570b37f0777aa8d', '', '', '', '', '', '', '', '', 'text', ''),
-('570d9f7b580e04a', 'nuobject', 'textarea', 'sob_html_code', 'HTML', '570d90df73d3a2a', 0, 20, 200, 200, 150, '1', 'left', '', '0', '', '', '', '', '', '', '', '0', '0|No|1|Yes', 'syt_title', 'sfo_description', '200', '0', '570b37f0777aa8d', '', '', '', '', '', '', '', '', 'text', ''),
-('570d9fa3e7160c2', 'nuobject', 'textarea', 'sob_display_sql', 'Display', '570d90df63e6972', 0, 20, 200, 200, 150, '1', 'left', '', '0', '', '', '', '', '', '', '', '0', '0|No|1|Yes', 'syt_title', 'sfo_description', '200', '0', '570b37f0777aa8d', '', '', '', '', '', '', '', '', 'text', ''),
-('570d9ffcd716321', 'nuobject', 'textarea', 'sob_select_sql', 'SQL/List', '570d90df670db61', 0, 50, 200, 500, 150, '1', 'left', '', '0', '', '', '', '', '', '', '', '0', '0|No|1|Yes', 'syt_title', 'sfo_description', '200', '0', '570b37f0777aa8d', '', '', '', '', '', '', '', '', 'text', ''),
-('570da046d5f9f4c', 'nuobject', 'select', 'sob_select_multiple', 'Multiple', '570d90df670db61', 0, 20, 200, 50, 16, '1', 'left', 'noblanks', '0', '', '', '', '', '', '', '', '0', '0|No|1|Yes', 'syt_title', 'sfo_description', '200', '0', '570b37f0777aa8d', '', '', '', '', '', '', '', '', 'text', ''),
-('570da149b76e0e6', 'nuobject', 'select', 'sob_input_type', 'Input Type', '570d90df707867b', 0, 50, 100, 80, 16, '1', 'left', 'noblanks', '0', '', '', '', '', '', '', '', '0', 'text|Text|checkbox|Checkbox|button|Button|password|Password', 'syt_title', 'sfo_description', '200', '0', '570b37f0777aa8d', '', '', '', '', '', '', '', '', 'text', ''),
-('570da31addae07f', 'nuobject', 'select', 'sob_input_format', 'Format', '570d90df707867b', 0, 20, 100, 120, 16, '1', 'right', '', '0', '', '', '', '', '', '', '', '0', '0|10000|1|10000.0|2|10000.00|3|10000.000|4|10000.0000|5|10000.00000|6|13-Jan-2007|7|13-01-2007|8|Jan-13-2007|9|01-13-2007|10|13-Jan-07|11|13-01-07|12|Jan-13-07|13|01-13-07|14|10,000|15|10,000.0|16|10,000.00|17|10,000.000|18|10,000.0000|19|10,000.00000|20|10000|21|10000,0|22|10000,00|23|10000,000|24|10000,0000|25|10000,00000|26|10.000|27|10.000,0|28|10.000,00|29|10.000,000|30|10.000,0000|31|10.000,00000|32|2007-01-13', 'syt_title', 'sfo_description', '200', '0', '570b37f0777aa8d', '', '', '', '', '', '', '', '', 'text', ''),
+('570d8e3374d55fd', '56773cb405f4913', 'run', 'tab_button', 'TAB', '56777715b87666e', 0, 200, 1000, 100, 30, '1', 'right', 'noblanks', '0', '', '', 'nutab', '', 'b', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+('570d9046964038e', 'nuobject', 'lookup', 'sob_all_zzzzsys_tab_id', 'Tab - Form', '570d90df5ce8e1a', 0, 20, 100, 100, 16, '1', '', 'noblanks', '0', '', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', '', '', '', '', '', '', '', ''),
+('570d98b34bf37c9', 'nuobject', 'select', 'sob_all_type', 'Type', '570d90df5ce8e1a', 0, 50, 100, 80, 16, '1', '', 'noblanks', '0', '', '', '', '', '', '', '', '0', 'run|Run|display|Display|select|Select|lookup|Lookup|subform|Subform|textarea|Textarea|input|Input|html|HTML', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', '', '', '', '', '', '', '', ''),
+('570d9938ebe4428', 'nuobject', 'input', 'sob_all_id', 'ID', '570d90df5ce8e1a', 0, 80, 100, 200, 16, '1', '', 'noblanks', '0', '', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', '', '', '', '', '', '', 'text', ''),
+('570d998aea50861', 'nuobject', 'input', 'sob_all_label', 'Label', '570d90df5ce8e1a', 0, 110, 100, 200, 16, '1', '', 'noblanks', '0', '', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', '', '', '', '', '', '', 'text', ''),
+('570d9a2e76e6a8c', 'nuobject', 'input', 'sob_all_order', 'Tabbing Order', '570d90df5ce8e1a', 0, 140, 100, 50, 16, '1', 'right', 'noblanks', '0', '', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', '', '', '', '', '', '', 'text', ''),
+('570d9a5d4c69587', 'nuobject', 'input', 'sob_all_top', 'Top', '570d90df5ce8e1a', 0, 170, 100, 50, 16, '1', 'right', 'noblanks', '0', '', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', '', '', '', '', '', '', 'text', ''),
+('570d9a7237fd2fc', 'nuobject', 'input', 'sob_all_left', 'Left', '570d90df5ce8e1a', 0, 200, 100, 50, 16, '1', 'right', 'noblanks', '0', '', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', '', '', '', '', '', '', 'text', ''),
+('570d9a8847feae7', 'nuobject', 'input', 'sob_all_width', 'Width', '570d90df5ce8e1a', 0, 230, 100, 50, 16, '1', 'right', 'noblanks', '0', '', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', '', '', '', '', '', '', 'text', ''),
+('570d9a9a6b24446', 'nuobject', 'input', 'sob_all_height', 'Height', '570d90df5ce8e1a', 0, 260, 100, 50, 16, '1', 'right', 'noblanks', '0', '', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', '', '', '', '', '', '', 'text', ''),
+('570d9cb9d004579', 'nuobject', 'select', 'sob_all_cloneable', 'Cloneable', '570d90df5ce8e1a', 0, 290, 100, 50, 16, '1', 'right', 'noblanks', '0', '', '', '', '', '', '', '', '0', '0|No|1|Yes', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', '', '', '', '', '', '', 'text', ''),
+('570d9d0a39b227c', 'nuobject', 'select', 'sob_all_align', 'Align', '570d90df5ce8e1a', 0, 320, 100, 70, 16, '1', 'right', 'noblanks', '0', '', '', '', '', '', '', '', '0', 'l|Left|r|Right|c|Center', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', '', '', '', '', '', '', 'text', ''),
+('570d9dd38561e81', 'nuobject', 'select', 'sob_all_validate', 'Validation', '570d90df5ce8e1a', 0, 350, 100, 100, 16, '1', 'left', '', '0', '', '', '', '', '', '', '', '0', 'noblanks|No Blanks|noduplicates|No Duplicates', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', '', '', '', '', '', '', 'text', ''),
+('570d9e1c5a6bcfd', 'nuobject', 'select', 'sob_all_readonly', 'Read Only', '570d90df5ce8e1a', 0, 380, 100, 50, 16, '1', 'right', 'noblanks', '0', '', '', '', '', '', '', '', '0', '0|No|1|Yes', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', '', '', '', '', '', '', 'text', ''),
+('570d9e6b7f6353a', 'nuobject', 'textarea', 'sob_all_display_condition', 'Display Condition', '570d90df5ce8e1a', 0, 20, 600, 250, 100, '1', 'left', '', '0', '', '', '', '', '', '', '', '0', '0|No|1|Yes', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', '', '', '', '', '', '', 'text', ''),
+('570d9f1b9e51828', 'nuobject', 'textarea', 'sob_all_default_value_sql', 'Default Value', '570d90df5ce8e1a', 0, 150, 600, 250, 100, '1', 'left', '', '0', '', '', '', '', '', '', '', '0', '0|No|1|Yes', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', '', '', '', '', '', '', 'text', ''),
+('570d9f7b580e04a', 'nuobject', 'textarea', 'sob_html_code', 'HTML', '570d90df73d3a2a', 0, 20, 200, 200, 150, '1', 'left', '', '0', '', '', '', '', '', '', '', '0', '0|No|1|Yes', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', '', '', '', '', '', '', 'text', ''),
+('570d9fa3e7160c2', 'nuobject', 'textarea', 'sob_display_sql', 'Display', '570d90df63e6972', 0, 20, 200, 200, 150, '1', 'left', '', '0', '', '', '', '', '', '', '', '0', '0|No|1|Yes', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', '', '', '', '', '', '', 'text', ''),
+('570d9ffcd716321', 'nuobject', 'textarea', 'sob_select_sql', 'SQL/List', '570d90df670db61', 0, 50, 200, 500, 150, '1', 'left', '', '0', '', '', '', '', '', '', '', '0', '0|No|1|Yes', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', '', '', '', '', '', '', 'text', ''),
+('570da046d5f9f4c', 'nuobject', 'select', 'sob_select_multiple', 'Multiple', '570d90df670db61', 0, 20, 200, 50, 16, '1', 'left', 'noblanks', '0', '', '', '', '', '', '', '', '0', '0|No|1|Yes', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', '', '', '', '', '', '', 'text', ''),
+('570da149b76e0e6', 'nuobject', 'select', 'sob_input_type', 'Input Type', '570d90df707867b', 0, 50, 100, 80, 16, '1', 'left', 'noblanks', '0', '', '', '', '', '', '', '', '0', 'text|Text|checkbox|Checkbox|button|Button|password|Password', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', '', '', '', '', '', '', 'text', ''),
+('570da31addae07f', 'nuobject', 'select', 'sob_input_format', 'Format', '570d90df707867b', 0, 20, 100, 120, 16, '1', 'right', '', '0', '', '', '', '', '', '', '', '0', '0|10000|1|10000.0|2|10000.00|3|10000.000|4|10000.0000|5|10000.00000|6|13-Jan-2007|7|13-01-2007|8|Jan-13-2007|9|01-13-2007|10|13-Jan-07|11|13-01-07|12|Jan-13-07|13|01-13-07|14|10,000|15|10,000.0|16|10,000.00|17|10,000.000|18|10,000.0000|19|10,000.00000|20|10000|21|10000,0|22|10000,00|23|10000,000|24|10000,0000|25|10000,00000|26|10.000|27|10.000,0|28|10.000,00|29|10.000,000|30|10.000,0000|31|10.000,00000|32|2007-01-13', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', '', '', '', '', '', '', 'text', ''),
 ('570da52f2828508', 'nuobject', 'lookup', 'sob_subform_zzzzsys_form_id', 'Form', '570d90df6d35fde', 0, 20, 200, 100, 16, '1', 'right', 'noblanks', '0', '', '', '', '', '', '', '', '0', 'SELECT zzzzsys_form_id, CONCAT(sfo_code, '' - '', sfo_description)\nFROM zzzzsys_form\nORDER BY sfo_code', 'sfo_code', 'sfo_description', '200', '', 'nuform', '', '', 'nuform', '', '1', '', '', '', '', ''),
-('570da72cb4282e3', 'nuobject', 'input', 'sob_subform_foreign_key', 'Foreign Key', '570d90df6d35fde', 0, 50, 200, 200, 16, '1', 'left', 'noblanks', '0', '', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '0', '570b37f0777aa8d', '', '', '', '', '', '', '', '', 'text', ''),
-('570da7b07ce4d7a', 'nuobject', 'select', 'sob_subform_add', 'Addable', '570d90df6d35fde', 0, 80, 200, 50, 16, '1', 'left', '', '0', '', '', '', '', '', '', '', '0', '0|No|1|Yes', 'syt_title', 'sfo_description', '200', '0', '570b37f0777aa8d', '', '', '', '', '', '', '', '', 'text', ''),
-('570da7d7d12aea2', 'nuobject', 'select', 'sob_subform_delete', 'Deleteable', '570d90df6d35fde', 0, 110, 200, 50, 16, '1', 'left', '', '0', '', '', '', '', '', '', '', '0', '0|No|1|Yes', 'syt_title', 'sfo_description', '200', '0', '570b37f0777aa8d', '', '', '', '', '', '', '', '', 'text', ''),
-('570da861e15f8f6', 'nuobject', 'select', 'sob_subform_type', 'Type', '570d90df6d35fde', 0, 140, 200, 80, 16, '1', 'left', '', '0', '', '', '', '', '', '', '', '0', 'g|Grid|f|Form', 'syt_title', 'sfo_description', '200', '0', '570b37f0777aa8d', '', '', '', '', '', '', '', '', 'text', ''),
+('570da72cb4282e3', 'nuobject', 'input', 'sob_subform_foreign_key', 'Foreign Key', '570d90df6d35fde', 0, 50, 200, 200, 16, '1', 'left', 'noblanks', '0', '', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', '', '', '', '', '', '', 'text', ''),
+('570da7b07ce4d7a', 'nuobject', 'select', 'sob_subform_add', 'Addable', '570d90df6d35fde', 0, 80, 200, 50, 16, '1', 'left', '', '0', '', '', '', '', '', '', '', '0', '0|No|1|Yes', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', '', '', '', '', '', '', 'text', ''),
+('570da7d7d12aea2', 'nuobject', 'select', 'sob_subform_delete', 'Deleteable', '570d90df6d35fde', 0, 110, 200, 50, 16, '1', 'left', '', '0', '', '', '', '', '', '', '', '0', '0|No|1|Yes', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', '', '', '', '', '', '', 'text', ''),
+('570da861e15f8f6', 'nuobject', 'select', 'sob_subform_type', 'Type', '570d90df6d35fde', 0, 140, 200, 80, 16, '1', 'left', '', '0', '', '', '', '', '', '', '', '0', 'g|Grid|f|Form', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', '', '', '', '', '', '', 'text', ''),
 ('570da8ac71acec7', 'nuobject', 'lookup', 'sob_run_zzzzsys_form_id', 'Run', '570d90df60880c2', 0, 20, 200, 100, 16, '1', 'right', 'noblanks', '0', '', '', '', '', '', '', '', '0', 'SELECT zzzzsys_form_id, CONCAT(sfo_code, '' - '', sfo_description)\nFROM zzzzsys_form\nORDER BY sfo_code', 'sfo_code', 'sfo_description', '200', '', 'nuform', '', '', '', '', '', '', '', '', '', ''),
-('570da93be3f323f', 'nuobject', 'input', 'sob_run_filter', 'Filter', '570d90df60880c2', 0, 50, 200, 200, 16, '1', 'left', 'noblanks', '0', '', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '0', '570b37f0777aa8d', '', '', '', '', '', '', '', '', 'text', ''),
-('570da986cb6807a', 'nuobject', 'input', 'sob_run_id', 'Record ID', '570d90df60880c2', 0, 80, 200, 200, 16, '1', 'left', 'noblanks', '0', '', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '0', '570b37f0777aa8d', '', '', '', '', '', '', '', '', 'text', ''),
-('570daa6277a97e1', 'nuobject', 'select', 'sob_run_method', 'Method', '570d90df60880c2', 0, 110, 200, 80, 16, '1', 'left', '', '0', '', '', '', '', '', '', '', '0', 'b|Button|i|iFrame', 'syt_title', 'sfo_description', '200', '0', '570b37f0777aa8d', '', '', '', '', '', '', '', '', 'text', ''),
+('570da93be3f323f', 'nuobject', 'input', 'sob_run_filter', 'Filter', '570d90df60880c2', 0, 50, 200, 200, 16, '1', 'left', 'noblanks', '0', '', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', '', '', '', '', '', '', 'text', ''),
+('570da986cb6807a', 'nuobject', 'input', 'sob_run_id', 'Record ID', '570d90df60880c2', 0, 80, 200, 200, 16, '1', 'left', 'noblanks', '0', '', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', '', '', '', '', '', '', 'text', ''),
+('570daa6277a97e1', 'nuobject', 'select', 'sob_run_method', 'Method', '570d90df60880c2', 0, 110, 200, 80, 16, '1', 'left', '', '0', '', '', '', '', '', '', '', '0', 'b|Button|i|iFrame', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', '', '', '', '', '', '', 'text', ''),
 ('570dab25164b394', 'nuobject', 'lookup', 'sob_lookup_zzzzsys_form_id', 'Form', '570d90df6a2c12a', 0, 20, 100, 100, 16, '1', 'right', 'noblanks', '0', '', '', '', '', '', '', '', '0', 'SELECT zzzzsys_form_id, CONCAT(sfo_code, '' - '', sfo_description)\nFROM zzzzsys_form\nORDER BY sfo_code', 'sfo_code', 'sfo_description', '200', '', 'nuform', '', '', 'nuform', '', '1', '', '', '', '', ''),
-('570dabca9be44fd', 'nuobject', 'input', 'sob_lookup_code', 'Code', '570d90df6a2c12a', 0, 20, 500, 200, 16, '1', 'left', '', '0', '', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '0', '570b37f0777aa8d', '', '', '', '', '', '', '', '', 'text', ''),
-('570dabf5a2e2b8f', 'nuobject', 'input', 'sob_lookup_description', 'Description', '570d90df6a2c12a', 0, 50, 500, 200, 16, '1', 'left', '', '0', '', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '0', '570b37f0777aa8d', '', '', '', '', '', '', '', '', 'text', ''),
-('570dac54b62da77', 'nuobject', 'input', 'sob_lookup_description_width', 'Width', '570d90df6a2c12a', 0, 50, 750, 50, 16, '1', 'right', '', '0', '', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '0', '570b37f0777aa8d', '', '', '', '', '', '', '', '', 'text', ''),
-('570dacd92d0ffd2', 'nuobject', 'select', 'sob_lookup_autocomplete', 'Autocomplete', '570d90df6a2c12a', 0, 50, 100, 50, 16, '1', 'left', '', '0', '', '', '', '', '', '', '', '0', '0|No|1|Yes', 'syt_title', 'sfo_description', '200', '0', '570b37f0777aa8d', '', '', '', '', '', '', '', '', 'text', ''),
-('570dad510d0e7f5', 'nuobject', 'textarea', 'sob_lookup_php', 'PHP run before populating Objects', '570d90df6a2c12a', 0, 80, 200, 600, 100, '1', 'left', '', '0', '', '', '', '', '', '', '', '0', '0|No|1|Yes', 'syt_title', 'sfo_description', '200', '0', '570b37f0777aa8d', '', '', '', '', '', '', '', '', 'text', ''),
-('570dadc061c6ef5', 'nuobject', 'textarea', 'sob_lookup_javascript', 'Javascript run after populating fields', '570d90df6a2c12a', 0, 400, 200, 600, 100, '1', 'left', '', '0', '', '', '', '', '', '', '', '0', '0|No|1|Yes', 'syt_title', 'sfo_description', '200', '0', '570b37f0777aa8d', '', '', '', '', '', '', '', '', 'text', ''),
-('570daf3d2c9acb4', 'nuobject', 'subform', 'lookup_sf', 'PHP Library', '570d90df6a2c12a', 0, 200, 200, 600, 180, '1', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '570daea96b33df9', 'slo_zzzzsys_object_id', '1', '1', 'g', '', '', ''),
-('570db01f6dd4d3d', '570daea96b33df9', 'input', 'zzzzsys_slo_object_name', 'Object Name', '570dafc86862c1b', 0, 20, 200, 274, 16, '1', 'left', 'noblanks', '0', '', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '0', '570b37f0777aa8d', '', '', '', '', '', '', '', '', 'text', ''),
-('570db0522404442', '570daea96b33df9', 'input', 'zzzzsys_slo_field_function_name', 'Field / Function Name', '570dafc86862c1b', 0, 40, 200, 270, 16, '1', 'left', 'noblanks', '0', '', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '0', '570b37f0777aa8d', '', '', '', '', '', '', '', '', 'text', ''),
+('570dabca9be44fd', 'nuobject', 'input', 'sob_lookup_code', 'Code', '570d90df6a2c12a', 0, 20, 500, 200, 16, '1', 'left', '', '0', '', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', '', '', '', '', '', '', 'text', ''),
+('570dabf5a2e2b8f', 'nuobject', 'input', 'sob_lookup_description', 'Description', '570d90df6a2c12a', 0, 50, 500, 200, 16, '1', 'left', '', '0', '', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', '', '', '', '', '', '', 'text', ''),
+('570dac54b62da77', 'nuobject', 'input', 'sob_lookup_description_width', 'Width', '570d90df6a2c12a', 0, 50, 750, 50, 16, '1', 'right', '', '0', '', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', '', '', '', '', '', '', 'text', ''),
+('570dacd92d0ffd2', 'nuobject', 'select', 'sob_lookup_autocomplete', 'Autocomplete', '570d90df6a2c12a', 0, 50, 100, 50, 16, '1', 'left', '', '0', '', '', '', '', '', '', '', '0', '0|No|1|Yes', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', '', '', '', '', '', '', 'text', ''),
+('570dad510d0e7f5', 'nuobject', 'textarea', 'sob_lookup_php', 'PHP run before populating Objects', '570d90df6a2c12a', 0, 80, 200, 600, 100, '1', 'left', '', '0', '', '', '', '', '', '', '', '0', '0|No|1|Yes', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', '', '', '', '', '', '', 'text', ''),
+('570dadc061c6ef5', 'nuobject', 'textarea', 'sob_lookup_javascript', 'Javascript run after populating fields', '570d90df6a2c12a', 0, 400, 200, 600, 100, '1', 'left', '', '0', '', '', '', '', '', '', '', '0', '0|No|1|Yes', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', '', '', '', '', '', '', 'text', ''),
+('570daf3d2c9acb4', 'nuobject', 'subform', 'lookup_sf', 'PHP Library', '570d90df6a2c12a', 0, 200, 200, 600, 180, '1', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'nulookup', 'slo_zzzzsys_object_id', '1', '1', 'g', '', '', ''),
+('570db01f6dd4d3d', 'nulookup', 'input', 'zzzzsys_slo_object_name', 'Object Name', '570dafc86862c1b', 0, 20, 200, 274, 16, '1', 'left', 'noblanks', '0', '', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', '', '', '', '', '', '', 'text', ''),
+('570db0522404442', 'nulookup', 'input', 'zzzzsys_slo_field_function_name', 'Field / Function Name', '570dafc86862c1b', 0, 40, 200, 270, 16, '1', 'left', 'noblanks', '0', '', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', '', '', '', '', '', '', 'text', ''),
 ('570db786c678c27', 'nuhome', 'run', 'form_button', 'Forms', '569dc4ed270f08a', 0, 50, 50, 100, 30, '1', 'right', 'noblanks', '0', '', '', 'nuform', '', 'b', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-('5726daf4237eb57', '5726afd46e9fd7e', 'input', 'sev_javascript', 'Javascript Function', '5726b139a7e27c2', 0, 1, 255, 150, 16, '1', 'l', 'noblanks', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'sev_zzzsys_object_id', '1', '1', 'g', '', 'text', ''),
-('5726cca96d51595', '5726afd46e9fd7e', 'select', 'sev_event', 'Event', '5726b139a7e27c2', 0, 1, 55, 150, 16, '1', 'l', 'noblanks', '0', '', '', '', '', '', '', '', '0', 'onclick|onclick|onblur|onblur|onchange|onchange|onfocus|onfocus', '', '', '', '', '', '', '', '', 'sev_zzzsys_object_id', '1', '1', 'g', '', 'text', ''),
+('5726daf4237eb57', 'nuevent', 'input', 'sev_javascript', 'Javascript Function', '5726b139a7e27c2', 0, 1, 255, 150, 16, '1', 'l', 'noblanks', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'sev_zzzsys_object_id', '1', '1', 'g', '', 'text', ''),
+('5726cca96d51595', 'nuevent', 'select', 'sev_event', 'Event', '5726b139a7e27c2', 0, 1, 55, 150, 16, '1', 'l', 'noblanks', '0', '', '', '', '', '', '', '', '0', 'onclick|onclick|onblur|onblur|onchange|onchange|onfocus|onfocus', '', '', '', '', '', '', '', '', 'sev_zzzsys_object_id', '1', '1', 'g', '', 'text', ''),
 ('5743da507326181', 'nuaccess', 'input', 'sal_description', 'Description', '5743d509312c4bc', 0, 80, 100, 200, 16, '1', '', 'noblanks', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-('5743d964cbef2e1', 'nuaccess', 'lookup', 'sal_zzzzsys_form_id', 'Home', '5743d509312c4bc', 0, 20, 100, 100, 16, '1', '', 'noblanks', '0', '', '', '', '', '', '', '', '0', 'SELECT zzzzsys_form_id, CONCAT(sfo_code, '' - '', sfo_description)\nFROM zzzzsys_form\nORDER BY sfo_code', 'sfo_code', 'sfo_description', '200', '', 'nuform', '', '', 'nuform', '', '1', '', '', '', '', ''),
-('5742b06d956c254', 'nuobject', 'input', 'sob_all_zzzzsys_form_id', 'Form ID', '570d90df5ce8e1a', 0, 50, 320, 100, 16, '1', '', 'noblanks', '0', 'SELECT ''1''', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '0', '570b37f0777aa8d', '', '', '', '', '', '', '', '', '', ''),
-('5743da6ab90d89b', 'nuaccess', 'input', 'sal_code', 'Code', '5743d509312c4bc', 0, 50, 100, 100, 16, '1', '', 'noblanks', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
+('5743d964cbef2e1', 'nuaccess', 'lookup', 'sal_zzzzsys_form_id', 'Home', '5743d509312c4bc', 0, 20, 100, 100, 16, '1', '', 'noblanks', '0', '', '', '', '', '', '', '', '0', 'SELECT zzzzsys_form_id, CONCAT(sfo_code, '' - '', sfo_description)\nFROM zzzzsys_form\nORDER BY sfo_code', 'sfo_code', 'sfo_description', '200', '', 'nunonsystemform', '', '', 'nuform', '', '1', '', '', '', '', ''),
+('5742b06d956c254', 'nuobject', 'input', 'sob_all_zzzzsys_form_id', 'Form ID', '570d90df5ce8e1a', 0, 50, 320, 100, 16, '1', '', 'noblanks', '1', 'SELECT ''0''', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', '', '', '', '', '', '', '', ''),
+('5743da6ab90d89b', 'nuaccess', 'input', 'sal_code', 'Code', '5743d509312c4bc', 0, 50, 100, 100, 16, '1', '', 'noblanks', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+('57452c417370475', 'nunonsystemform', 'lookup', 'sal_zzzzsys_form_id', 'Home', '574277f47e2ea8a', 0, 20, 100, 100, 16, '1', '', 'noblanks', '0', '', '', '', '', '', '', '', '0', 'SELECT zzzzsys_form_id, CONCAT(sfo_code, '' - '', sfo_description)\nFROM zzzzsys_form\nORDER BY sfo_code', 'sfo_code', 'sfo_description', '200', '', 'nuform', '', '', 'nuform', '', '1', '', '', '', '', ''),
+('57452d00100e37b', 'nuaccess', 'subform', 'accfrm_sf', '', '5743d509312ce9c', 0, 50, 50, 700, 400, '1', 'l', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'nunonsystemform', 'slf_zzzzsys_form_id', '1', '1', 'g', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -3278,44 +3243,12 @@ CREATE TABLE IF NOT EXISTS `zzzzsys_session` (
 --
 
 INSERT INTO `zzzzsys_session` (`zzzzsys_session_id`, `sss_zzzzsys_user_id`, `sss_timeout`, `sss_access`) VALUES
-('573bef378116ef9', 'globeadmin', 0, ''),
-('573bf0c5446e071', 'globeadmin', 0, ''),
-('573d1a235401f3d', 'globeadmin', 0, ''),
-('573d1a3104e912e', 'globeadmin', 0, ''),
-('573d1a7fa62907d', 'globeadmin', 0, ''),
-('573d1aee622b4c0', 'globeadmin', 0, ''),
-('573d1bbd4fac348', 'globeadmin', 0, ''),
-('573d1cda34d6b47', 'globeadmin', 0, ''),
-('573d1d5a7fb6fa9', 'globeadmin', 0, ''),
-('573d1e3f7ea9eff', 'globeadmin', 0, ''),
-('573d1eefa311a71', 'globeadmin', 0, ''),
-('573d2a87e0baad1', 'globeadmin', 0, ''),
-('573d2b590540508', 'globeadmin', 0, ''),
-('573d2b7ebf45c3a', 'globeadmin', 0, ''),
-('573d2bdba244b87', 'globeadmin', 0, ''),
-('573d32c1b4828dc', 'globeadmin', 0, ''),
-('573d3345d7519fd', 'globeadmin', 0, ''),
-('573d338001c5f84', 'globeadmin', 0, ''),
-('573d4a14efb5f47', 'globeadmin', 0, ''),
-('573d4a3306c0b31', 'globeadmin', 0, ''),
-('573d4a46563cdfa', 'globeadmin', 0, ''),
-('573d5299aa9398c', 'globeadmin', 0, ''),
-('573d5b9856e803a', 'globeadmin', 0, ''),
-('573d62fe183055f', 'globeadmin', 0, ''),
-('573d65145d607d0', 'globeadmin', 0, ''),
-('57426a103be3e21', 'globeadmin', 0, ''),
-('574273a60cb0ff1', 'globeadmin', 0, ''),
-('57427750d2d88cd', 'globeadmin', 0, ''),
-('574277e50a6cf44', 'globeadmin', 0, ''),
-('5742901fbef56fe', 'globeadmin', 0, ''),
-('57429190f0b2ff0', 'globeadmin', 0, ''),
-('5742ae5935345ea', 'globeadmin', 0, ''),
-('5743ca03a50f2a9', 'globeadmin', 0, ''),
-('5743ca4430a25df', 'globeadmin', 0, ''),
-('5743cc481e05913', 'globeadmin', 0, ''),
-('5743ce91ab90f16', 'globeadmin', 0, ''),
-('5743d3fba7e208c', 'globeadmin', 0, ''),
-('5743dc3eaeb5a4a', 'globeadmin', 0, '');
+('57451f921a0e345', 'globeadmin', 0, ''),
+('574524088389a93', 'globeadmin', 0, ''),
+('5745260f93c402c', 'globeadmin', 0, ''),
+('574526a55ebf447', 'globeadmin', 0, ''),
+('57452d9870b97dd', 'globeadmin', 0, ''),
+('57453133e24f1ba', 'globeadmin', 0, '');
 
 -- --------------------------------------------------------
 
@@ -3365,12 +3298,12 @@ INSERT INTO `zzzzsys_setup` (`zzzzsys_setup_id`, `set_title`, `set_time_out_minu
 --
 
 CREATE TABLE IF NOT EXISTS `zzzzsys_tab` (
-  `zzzzsys_tab_id` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
-  `syt_zzzzsys_form_id` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
-  `syt_title` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+  `zzzzsys_tab_id` varchar(25) NOT NULL,
+  `syt_zzzzsys_form_id` varchar(25) NOT NULL,
+  `syt_title` varchar(250) NOT NULL,
   `syt_order` int(11) NOT NULL,
   PRIMARY KEY (`zzzzsys_tab_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `zzzzsys_tab`
@@ -3392,8 +3325,8 @@ INSERT INTO `zzzzsys_tab` (`zzzzsys_tab_id`, `syt_zzzzsys_form_id`, `syt_title`,
 ('56777715b87666e', '56773cb405f4913', 'Main', 2),
 ('570730315113e7e', 'nuform', 'Javascript', 60),
 ('57073031543c8f8', 'nuform', 'Include', 70),
-('570b19bf5981983', '570b19bf4e6ec1a', 'Browse', 10),
-('570c3f3edfc8a56', '570c3f3ed9de708', 'Include', 10),
+('570b19bf5981983', 'nubrowse', 'Browse', 10),
+('570c3f3edfc8a56', 'nulibrary', 'Include', 10),
 ('570d90df5ce8e1a', 'nuobject', 'All', 10),
 ('570d90df60880c2', 'nuobject', 'Run', 20),
 ('570d90df63e6972', 'nuobject', 'Display', 30),
@@ -3402,8 +3335,8 @@ INSERT INTO `zzzzsys_tab` (`zzzzsys_tab_id`, `syt_zzzzsys_form_id`, `syt_title`,
 ('570d90df6d35fde', 'nuobject', 'Subform', 60),
 ('570d90df707867b', 'nuobject', 'Input', 70),
 ('570d90df73d3a2a', 'nuobject', 'HTML', 80),
-('570dafc86862c1b', '570daea96b33df9', 'Lookup Objects', 10),
-('5726b139a7e27c2', '5726afd46e9fd7e', 'Event', 10),
+('570dafc86862c1b', 'nulookup', 'Lookup Objects', 10),
+('5726b139a7e27c2', 'nuevent', 'Event', 10),
 ('57426b4c8702eb0', '57426b4c86fede1', 'Procedure', 50),
 ('57426b4c8703bfe', '57426b4c86fede1', 'Report', 40),
 ('57426b4c87046d2', '57426b4c86fede1', 'Edit', 30),
@@ -3413,13 +3346,7 @@ INSERT INTO `zzzzsys_tab` (`zzzzsys_tab_id`, `syt_zzzzsys_form_id`, `syt_title`,
 ('57426b4c8706d91', '57426b4c86fede1', 'Include', 70),
 ('5743d509312c4bc', 'nuaccess', 'User', 10),
 ('5743d509312ce9c', 'nuaccess', 'Forms', 20),
-('574277f47e2ea8a', '574277f47e2a858', 'Procedure', 50),
-('574277f47e2f46e', '574277f47e2a858', 'Report', 40),
-('574277f47e2fe88', '574277f47e2a858', 'Edit', 30),
-('574277f47e30783', '574277f47e2a858', 'Browse', 20),
-('574277f47e31186', '574277f47e2a858', 'Main', 10),
-('574277f47e31b5e', '574277f47e2a858', 'Javascript', 60),
-('574277f47e3247e', '574277f47e2a858', 'Include', 70);
+('574277f47e2ea8a', 'nunonsystemform', 'Forms', 10);
 
 -- --------------------------------------------------------
 
