@@ -648,7 +648,7 @@ function nuSUBFORM(w, i, l, p, prop){
 					'height'      	: Number(SF.height) - rowTop + 1,
 					'border-width'	: 1,
 					'border-style'	: 'none solid solid solid',
-					'border-color'	: '#B0B0B0',
+					'border-color'	: '#C1C1C1',
 					'overflow-x'  	: 'hidden',
 					'overflow-y'  	: 'scroll',
 					'position'		: 'absolute'

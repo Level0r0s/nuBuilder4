@@ -34,14 +34,14 @@ select {
   padding: 0px;
   margin: 0px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  border: 0px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 textarea {
   padding: 0px;
   margin: 0px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  border: 0px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
   font-size: 13.3333px;
 }
 
@@ -56,7 +56,7 @@ body {
 
 
 input {
-  border: 0px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
   padding: 0px;
 }
 
@@ -126,7 +126,7 @@ input {
 
 .nuLookupCode {
   background-color: lightblue;
-  border-style: none;
+  border: 1px solid rgba(0, 0, 0, 0.05);
   text-align: left;
   position: absolute;
 }
@@ -140,6 +140,7 @@ input {
   text-align: center;
   position: absolute;
   border-radius: 3px;
+  margin-left: 1px;
 }
 
 .nuLookupButton:hover {
@@ -236,8 +237,10 @@ input {
   border-style: solid;
   border-width: 0px;
   border-color: #DFDFDF;
-  font-size: 14px;
+  font-size: 13.3333px;
   padding: 8px 5px 8px 5px;
+  margin-left: 1px;
+  border-radius: 3px 3px 0px 0px;
 }
 
 .nuTabHolder {
@@ -267,14 +270,29 @@ input {
 
 .nuSubform0 {
   background-color: #DEDEDE;
+  z-index: 100 !important;
+  border-style: solid !important;
+  border-width: 0px 0px 1px 0px !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  box-sizing: border-box !important;
 }
 
 .nuSubform1 {
   background-color: #E0E0E0;
+  z-index: 100 !important;
+  border-style: solid !important;
+  border-width: 0px 0px 1px 0px !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  box-sizing: border-box !important;
 }
 
 .nuSubform2 {
   background-color: #C7C7C7;
+  z-index: 100 !important;
+  border-style: solid !important;
+  border-width: 0px 0px 1px 0px !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  box-sizing: border-box !important;
 }
 
 .nuSubformScrollDiv {
@@ -290,7 +308,7 @@ input {
   border-style: none;
   font-size: 16px;
   height: 40px;
-  padding: 6px;
+  padding: 0px 6px 0px 6px;
 }
 
 .nuLabel {}
@@ -299,17 +317,20 @@ input {
 
 .nuLookup {border:1px solid #e1e8ea}
 
-.nuReadonly {background-color:lightgrey;border-style:none}
+.nuReadonly {
+  background-color:lightgrey;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
 
 .nuSearch {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   background-color: #abd886;
   text-align: left;
-  vertical-align: middle;
+  vertical-align: top;
   color: #666666;
   border: none;
   font-size: 13px;
-  height: 27px;
+  height: 28px;
   padding: 6px;
 }
 

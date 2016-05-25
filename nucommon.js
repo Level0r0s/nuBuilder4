@@ -279,7 +279,7 @@ function nuLogin(){
 	var i 	= '<br><img id="thelogo" src="logo.png">';
 	var u 	= '<br><br><span style="width:90px;display:inline-block;">Username</span><input id="nuusername"/>';
 	var p 	= '<br><br><span style="width:90px;display:inline-block;">Password</span><input id="nupassword" type="password"/>';
-	var s 	= '<br><br><input id="submit" type="button" onclick="nuGetForm()" value="Log in"/>';
+	var s 	= '<br><br><input id="submit" type="button" class="nuButton" style="height:30px;" onclick="nuGetForm()" value="Log in"/>';
 	var l2	= '<br><br></div>';
 	
 	var e = document.createElement('div');
