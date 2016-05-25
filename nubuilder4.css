@@ -34,14 +34,14 @@ select {
   padding: 0px;
   margin: 0px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  border: 0px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 textarea {
   padding: 0px;
   margin: 0px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  border: 0px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
   font-size: 13.3333px;
 }
 
@@ -56,7 +56,7 @@ body {
 
 
 input {
-  border: 0px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
   padding: 0px;
 }
 
@@ -126,7 +126,7 @@ input {
 
 .nuLookupCode {
   background-color: lightblue;
-  border-style: none;
+  border: 1px solid rgba(0, 0, 0, 0.05);
   text-align: left;
   position: absolute;
 }
@@ -140,6 +140,7 @@ input {
   text-align: center;
   position: absolute;
   border-radius: 3px;
+  margin-left: 1px;
 }
 
 .nuLookupButton:hover {
@@ -292,7 +293,7 @@ input {
   border-style: none;
   font-size: 16px;
   height: 40px;
-  padding: 6px;
+  padding: 0px 6px 0px 6px;
 }
 
 .nuLabel {}
@@ -301,7 +302,10 @@ input {
 
 .nuLookup {border:1px solid #e1e8ea}
 
-.nuReadonly {background-color:lightgrey;border-style:none}
+.nuReadonly {
+  background-color:lightgrey;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
 
 .nuSearch {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
