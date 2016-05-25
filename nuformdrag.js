@@ -14,15 +14,15 @@ function bindDragEvents(){
 			e.returnValue=false;
 
 			if(e.buttons) {
-				dragBox(e.target.id);
+				dragBox(e);
 			}
 		}
     });
 	
     $(document).on('mousedown.nuformdrag', function(e) {
 		
-		window.startX = event.clientX + window.scrollX;
-		window.startY = event.clientY + window.scrollY;
+		window.startX = e.clientX + window.scrollX;
+		window.startY = e.clientY + window.scrollY;
 		window.moveX = 0;
 		window.moveY = 0;
 		
@@ -41,14 +41,16 @@ function bindDragEvents(){
 					$('.nuDragSelected').removeClass('nuDragSelected');
 				}
 				
-				createBox();
+				createBox(e);
 			} else {
 
 				if(!e.ctrlKey && !$('#'+e.target.id).hasClass('nuDragSelected')) {
 					$('.nuDragSelected').removeClass('nuDragSelected');
 				}
 				
-				$('#'+e.target.id).addClass('nuDragSelected');	
+				if($('#'+e.target.id).attr('data-drag')) {
+					$('#'+e.target.id).addClass('nuDragSelected');
+				}
 			}
 		}
     });
@@ -63,7 +65,7 @@ function bindDragEvents(){
 		
 		if(draggable) {
 			if($('#nuSelectBox').length > 0) {
-				removeBox(event.ctrlKey);
+				removeBox(e.ctrlKey);
 			}
 		}
     });
@@ -73,7 +75,7 @@ function unbindDragEvents(){
     $(document).off('.nuformdrag');
 }
 
-function createBox(){
+function createBox(event){
 	
 	var e = document.createElement('div');
 	e.setAttribute('id', 'nuSelectBox');
@@ -92,7 +94,7 @@ function createBox(){
 	});
 }
 
-function dragBox(dragTarget) {	
+function dragBox(event) {	
 
 	window.lastMoveX = window.moveX;
 	window.lastMoveY = window.moveY;
@@ -100,7 +102,7 @@ function dragBox(dragTarget) {
 	window.moveY = event.clientY - window.startY;
 	
 	if($('#nuSelectBox').length > 0) {
-		resizeDrag();
+		resizeDrag(event);
 	} else {
 		if($('#nuSelectBox').length == 0 && canMove()){ 
 			moveSelected();
@@ -108,7 +110,7 @@ function dragBox(dragTarget) {
 	}
 }
 
-function resizeDrag() {
+function resizeDrag(event) {
 
 	var x = parseInt($('#nuSelectBox').css('left'));
 	var y = parseInt($('#nuSelectBox').css('top'));
@@ -224,12 +226,8 @@ function canMove() {
 		r       = l + parseInt(o.width);
 		t       = parseInt(o.top)  + (window.moveY - window.lastMoveY);
 		b       = t + parseInt(o.height);
-console.log(l+' '+r+' '+t+' '+b+' '+$(document).width()+' '+getFormHeight());
+
 		if(l < 0) {
-			return false;
-		}
-		
-		if(r > getFormWidth()) {
 			return false;
 		}
 		
@@ -237,21 +235,10 @@ console.log(l+' '+r+' '+t+' '+b+' '+$(document).width()+' '+getFormHeight());
 			return false;
 		}
 		
-		if(b > getFormHeight()) {
-			return false;
-		}
 	}
 
 	return true;
 
-}
-
-function getFormWidth() {
-	return $(document).width() - 7; //need to do this more accurately
-}
-
-function getFormHeight() {
-	return $(document).height() - getTopArea(); //need to do this more accurately
 }
 
 function getTopArea() {
