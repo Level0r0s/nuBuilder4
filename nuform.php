@@ -38,6 +38,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 			$o->align 	= $r->sob_all_align;
 			$o->format 	= $r->sob_input_format;
 			$o->input 	= $r->sob_input_type;
+			$o->read 	= $r->sob_all_readonly;
 
 			if($r->sob_input_type == 'button'){
 				$o->value= $r->sob_all_label;

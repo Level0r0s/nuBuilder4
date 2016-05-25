@@ -54,8 +54,6 @@ function nuBuildForm(f){
 
 function nuResizeiFrame(d, r){
 
-	//if(window.nuTYPE != 'lookup'){return;}
-
 	if(r == ''){
 		
 		var h			= Number(d[0]);
@@ -308,7 +306,8 @@ function nuINPUT(w, i, l, p, prop){
 	.attr('data-nu-field', input_type == 'button' ? null :prop.objects[i].id)
 	.attr('data-nu-object-id', w.objects[i].object_id)
 	.attr('data-nu-format', w.objects[i].format)
-	.attr('data-nu-prefix', p);
+	.attr('data-nu-prefix', p)
+	.prop('readonly', prop.objects[i].read == '1' ? 'readonly' : '');
 	
 	$('#' + id).val(w.objects[i].value);
 
