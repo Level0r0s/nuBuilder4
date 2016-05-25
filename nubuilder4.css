@@ -270,14 +270,29 @@ input {
 
 .nuSubform0 {
   background-color: #DEDEDE;
+  z-index: 100 !important;
+  border-style: solid !important;
+  border-width: 0px 0px 1px 0px !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  box-sizing: border-box !important;
 }
 
 .nuSubform1 {
   background-color: #E0E0E0;
+  z-index: 100 !important;
+  border-style: solid !important;
+  border-width: 0px 0px 1px 0px !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  box-sizing: border-box !important;
 }
 
 .nuSubform2 {
   background-color: #C7C7C7;
+  z-index: 100 !important;
+  border-style: solid !important;
+  border-width: 0px 0px 1px 0px !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  box-sizing: border-box !important;
 }
 
 .nuSubformScrollDiv {
