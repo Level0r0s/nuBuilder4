@@ -42,6 +42,7 @@ textarea {
   margin: 0px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   border: 0px;
+  font-size: 13.3333px;
 }
 
 body {
@@ -261,7 +262,7 @@ input {
   border-style: solid;
   border-color: lightgrey;
   position: absolute;
-  background-color: white;
+  background-color: #C1C1C1;
 }
 
 .nuSubform0 {
@@ -274,6 +275,10 @@ input {
 
 .nuSubform2 {
   background-color: #C7C7C7;
+}
+
+.nuSubformScrollDiv {
+  background-color: #DEDEDE;
 }
 
 .nuButton {
