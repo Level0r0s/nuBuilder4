@@ -311,11 +311,11 @@ input {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   background-color: #abd886;
   text-align: left;
-  vertical-align: middle;
+  vertical-align: top;
   color: #666666;
   border: none;
   font-size: 13px;
-  height: 27px;
+  height: 28px;
   padding: 6px;
 }
 
