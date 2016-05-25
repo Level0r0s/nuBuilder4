@@ -606,7 +606,7 @@ function nuSUBFORM(w, i, l, p, prop){
 
     if(SF.delete == '1'){
 		
-        nuBuildSubformDeleteTitle(rowWidth - 40, id);
+        nuBuildSubformDeleteTitle(rowWidth - 40, id, fms[0].form_id);
         rowWidth 			= rowWidth - 3;
 		
     }else{
@@ -641,6 +641,7 @@ function nuSUBFORM(w, i, l, p, prop){
     var scrId		= id + 'scrollDiv';
 	var scrDiv	= document.createElement('div');
 	scrDiv.setAttribute('id', scrId);
+    scrDiv.setAttribute('class', 'nuSubformScrollDiv');
 	$('#' + id).append(scrDiv);
 	$('#' + scrId).css({'top'       	: rowTop,
 					'left'        	: 0,
@@ -876,7 +877,7 @@ function nuBuildSubformTitle(o, l, w, id){
 
 }
 
-function nuBuildSubformDeleteTitle(l, id){
+function nuBuildSubformDeleteTitle(l, id, subform_id){
     
 	var titleId  = id + 'DeleteSF';
     	var div = document.createElement('div');
@@ -893,7 +894,7 @@ function nuBuildSubformDeleteTitle(l, id){
     					'position'      	: 'absolute'
     	}).html('<img id="nuMoveable" src="numove_black.png" style="padding:8px;width:12px;height:12px;" title="Arrange Objects"><br>Delete')
 	.addClass('nuTabHolder')
-	.attr('onclick','nuBuildPopup(nuBC[nuBC.length -1].form_id, "-2");');
+	.attr('onclick','nuBuildPopup("'+subform_id+'", "-2");');
 
 }
 
