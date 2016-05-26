@@ -268,6 +268,10 @@ String.prototype.replaceAll = function(str1, str2, ignore){
 
 };
 
+function loginInputKeyup(event){
+    if(event.keyCode == 13)
+        $('input#submit').click();
+}
 
 function nuLogin(){
 	
@@ -275,10 +279,10 @@ function nuLogin(){
 
 	
 	
-	var l1	= '<div id="login" class="nuLogin">';
+	var l1	= '<div id="login" class="nuLogin" style="  border-style: solid;border-width: 1px;border-color: rgba(0, 0, 0, 0.08);">';
 	var i 	= '<br><img id="thelogo" src="logo.png">';
-	var u 	= '<br><br><span style="width:90px;display:inline-block;">Username</span><input id="nuusername"/>';
-	var p 	= '<br><br><span style="width:90px;display:inline-block;">Password</span><input id="nupassword" type="password"/>';
+	var u 	= '<br><br><span style="width:90px;display:inline-block;">Username</span><input id="nuusername" onkeyup="loginInputKeyup(event);" style="padding: 2px;" />';
+	var p 	= '<br><br><span style="width:90px;display:inline-block;">Password</span><input id="nupassword" onkeyup="loginInputKeyup(event);" style="padding: 2px;" type="password"/>';
 	var s 	= '<br><br><input id="submit" type="button" class="nuButton" style="height:30px;" onclick="nuGetForm()" value="Log in"/>';
 	var l2	= '<br><br></div>';
 	

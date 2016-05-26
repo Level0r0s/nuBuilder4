@@ -1687,7 +1687,7 @@ function nuOnChange(t,event){
 	var p	= $('#' + t.id).attr('data-nu-prefix');
 	$('#' + p + 'nuDelete').prop('checked', false);
 	$('#' + t.id).attr('data-nu-changed', '1');
-	$('#nuSaveButton').css('background-color', 'red');
+	$('#nuSaveButton').addClass('nuSaveButtonEdited');
 	
 	$('#nuCalendar').remove();
 
