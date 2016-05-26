@@ -127,7 +127,7 @@ function nuAddActionButtons(f){
 }
 
 function nuBuildEditObjects(f, p, o, prop){
-	
+
 	var l = 3;
 	var draggable = 0;
 	if(window.nuBC[window.nuBC.length-1].record_id == '-2') {
@@ -229,7 +229,7 @@ function nuRecordProperties(w, p, l){
 }
 
 function nuDRAG(w, i, l, p, prop){
-	
+
 	var id   = p + prop.objects[i].id;
 	var ef   = p + 'nuRecordHolder';
 	var drg 		= document.createElement('div');
@@ -249,6 +249,8 @@ function nuDRAG(w, i, l, p, prop){
 	
 	$('#' + id).text(id);
 	$('#' + id).attr('data-drag',1);
+		
+	nuAddDataTab(id, prop.objects[i].tab, p);
 		
 	return Number(prop.objects[i].width);
 }

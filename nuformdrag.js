@@ -157,38 +157,41 @@ function removeBox(ctrlKey) {
 		$('.nuDragSelected').removeClass('nuDragSelected');
 	}
 
-	o.each(function(index) {
+	var selectedTab = $('.nuTabSelected')[0].id.substring(5);
 	
-		var l =     parseInt($(this).css('left'));
-		var t =     parseInt($(this).css('top'));
-		var b = t + parseInt($(this).css('height'));
-		var r = l + parseInt($(this).css('width'));
-		
-		//drag around selected objects points
-		if(l >= L && l <= R && t >= T && t <= B) {
-			$(this).addClass('nuDragSelected');
-		} else if(r >= L && r <= R && t >= T && t <= B) {
-			$(this).addClass('nuDragSelected');
-		} else if(l >= L && l <= R && b >= T && b <= B) {
-			$(this).addClass('nuDragSelected');
-		} else if(r >= L && r <= R && b >= T && b <= B) {
-			$(this).addClass('nuDragSelected');
-		}
-		
-		//drag within selected objects points
-		if(L >= l && L <= r && T >= t && T <= b) {
-			$(this).addClass('nuDragSelected');
-		} else if(R >= l && R <= r && T >= t && T <= b) {
-			$(this).addClass('nuDragSelected');
-		} else if(L >= l && L <= r && B >= t && B <= b) {
-			$(this).addClass('nuDragSelected');
-		} else if(R >= l && R <= r && B >= t && B <= b) {
-			$(this).addClass('nuDragSelected');
-		}
-		
-		//drag through object but not through any points
-		if(L >= l && L <= r && T <= t && B >= b) {
-			$(this).addClass('nuDragSelected');
+	o.each(function(index) {
+		if($(this).attr('data-nu-tab') == selectedTab) {
+			var l =     parseInt($(this).css('left'));
+			var t =     parseInt($(this).css('top'));
+			var b = t + parseInt($(this).css('height'));
+			var r = l + parseInt($(this).css('width'));
+			
+			//drag around selected objects points
+			if(l >= L && l <= R && t >= T && t <= B) {
+				$(this).addClass('nuDragSelected');
+			} else if(r >= L && r <= R && t >= T && t <= B) {
+				$(this).addClass('nuDragSelected');
+			} else if(l >= L && l <= R && b >= T && b <= B) {
+				$(this).addClass('nuDragSelected');
+			} else if(r >= L && r <= R && b >= T && b <= B) {
+				$(this).addClass('nuDragSelected');
+			}
+			
+			//drag within selected objects points
+			if(L >= l && L <= r && T >= t && T <= b) {
+				$(this).addClass('nuDragSelected');
+			} else if(R >= l && R <= r && T >= t && T <= b) {
+				$(this).addClass('nuDragSelected');
+			} else if(L >= l && L <= r && B >= t && B <= b) {
+				$(this).addClass('nuDragSelected');
+			} else if(R >= l && R <= r && B >= t && B <= b) {
+				$(this).addClass('nuDragSelected');
+			}
+			
+			//drag through object but not through any points
+			if(L >= l && L <= r && T <= t && B >= b) {
+				$(this).addClass('nuDragSelected');
+			}
 		}
 	});
 	
