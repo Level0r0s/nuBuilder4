@@ -469,9 +469,12 @@ input {
     z-index: -1;
 }
 
+.nuDragOptionsBoxContainer {
+    padding-left: 15px;
+}
+
 .nuDragOptionsBoxTitle {
     margin-top: 40px;
     font-weight: bold;
     font-size: 14px;
-    margin-left: 15px;
 }
