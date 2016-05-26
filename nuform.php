@@ -806,13 +806,8 @@ function nuFormDimensions($f){
 			$gw 	= $gw + $r->sob_all_width;
 		}
 
-		if($r->sob_all_type == 'input'){
-			$h 	= max($h, $r->sob_all_top + 25);
-			$gh 	= max($gh, 25);
-		}else{
-			$h	= max($h, $r->sob_all_top + $r->sob_all_height);
-			$gh 	= max($gh, $r->sob_all_height);
-		}
+		$h	= max($h, $r->sob_all_top + $r->sob_all_height);
+		$gh 	= max($r->sob_all_height, 25);
 
 	}
 	
