@@ -458,3 +458,20 @@ input {
    white-space: -o-pre-wrap;   /* Opera 7 */    
    word-wrap: break-word;      /* IE */
 }
+
+.nuDragOptionsBox {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    border-width: 0px 0px 0px 1px;
+    border-style: solid;
+    background-color: #c1c1c1;
+    z-index: -1;
+}
+
+.nuDragOptionsBoxTitle {
+    margin-top: 40px;
+    font-weight: bold;
+    font-size: 14px;
+    margin-left: 15px;
+}

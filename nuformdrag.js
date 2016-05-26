@@ -194,6 +194,16 @@ function removeBox(ctrlKey) {
 	
 }
 
+function createDragOptionsBox(){
+    var dragOptionsBoxWidth = 300;
+    $('#nuDragDialog',window.parent.document.body).css('width',$('#nuDragDialog',window.parent.document.body).width()+dragOptionsBoxWidth);
+    $('#nuDragDialog',window.parent.document.body).append('<div id="nuDragOptionsBox" class="nuDragOptionsBox" style="width:'+dragOptionsBoxWidth+'px;height:'+$('#nuDragDialog',window.parent.document.body).height()+'px;">'+
+        '<div id="dragOptionsTitle" class="nuDragOptionsBoxTitle">Options</div>'+
+    '</div>'
+    );
+
+}
+
 function moveSelected() {
 
 	var s = document.getElementsByClassName('nuDragSelected');
