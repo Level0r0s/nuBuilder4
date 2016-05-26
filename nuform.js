@@ -49,6 +49,9 @@ function nuBuildForm(f){
 	nuGetStartingTab();
 	nuAddJavascript(f);
 	$('#nuSearchField').focus();
+
+    if(f.record_id == '-2')
+        createDragOptionsBox();
 	
 }
 
