@@ -127,7 +127,7 @@ function nuAddActionButtons(f){
 }
 
 function nuBuildEditObjects(f, p, o, prop){
-	console.log(p);
+
 	var l = 3;
 	var draggable = 0;
 	if(window.nuBC[window.nuBC.length-1].record_id == '-2') {
