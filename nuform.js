@@ -51,7 +51,7 @@ function nuBuildForm(f){
 	$('#nuSearchField').focus();
 
     if(f.record_id == '-2')
-        createDragOptionsBox();
+        createDragOptionsBox(f);
 	
 }
 
