@@ -167,6 +167,7 @@ function nuBuildEditObjects(f, p, o, prop){
 			l = l + 2;
 		
 		} else {
+			$("body").css("overflow", "hidden");
 			l = l + nuDRAG(f, i, l, p, prop);
 		}
 		

@@ -1,5 +1,7 @@
 function bindDragEvents(){
+	
     $(document).on('mousemove.nuformdrag', function(e) {
+		
         var draggable = 0;
 		if(window.nuBC.length > 0) {
 			if(window.nuBC[window.nuBC.length-1].record_id == '-2') {
@@ -19,8 +21,8 @@ function bindDragEvents(){
 		}
     });
 	
-    $(document).on('mousedown.nuformdrag', function(e) {
-		
+    $(document).on('mousedown.nuformdrag', function(e) {	
+	
 		window.startX = e.clientX + window.scrollX;
 		window.startY = e.clientY + window.scrollY;
 		window.moveX = 0;
