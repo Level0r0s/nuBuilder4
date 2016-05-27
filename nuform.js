@@ -1767,6 +1767,7 @@ function nuHashFromEditForm(){
 
 	a.push([b.form_id, b.record_id]);		//-- first element is Form and Record ID
 	a.push(['FORM_ID', b.form_id]);
+	a.push(['PREVIOUS_RECORD_ID', b.record_id]);
 	a.push(['RECORD_ID', b.record_id]);
 
 	$("[data-nu-field][data-nu-changed][data-nu-prefix='']").each(function( index ) {
