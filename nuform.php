@@ -800,7 +800,7 @@ function nuFormDimensions($f){
 		
 		if($r->sob_all_type == 'lookup'){
 			$w 	= max($w, $r->sob_all_left + $r->sob_all_width + $r->sob_lookup_description_width + 40);
-			$gw	= $gw + $r->sob_all_left + $r->sob_all_width + $r->sob_lookup_description_width + 40;
+			$gw	= $gw + $r->sob_all_width + $r->sob_lookup_description_width + 40;
 		}else{
 			$w 	= max($w, $r->sob_all_left + $r->sob_all_width + 40);
 			$gw 	= $gw + $r->sob_all_width;

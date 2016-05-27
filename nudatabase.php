@@ -153,12 +153,11 @@ function db_fetch_row($o){
 function db_columns($n){
     
     $a       = array();
-    $d       = $_SESSION['DBName'];
-    $s       = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = '$d' AND TABLE_NAME = '$n' ORDER BY ORDINAL_POSITION";
+    $s       = "DESCRIBE $n";
     $t       = nuRunQuery($s);
 
-    while($r = db_fetch_object($t)){
-        $a[] = $r->COLUMN_NAME;
+    while($r = db_fetch_row($t)){
+        $a[] = $r[0];
     }
     
     return $a;

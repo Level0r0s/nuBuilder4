@@ -590,12 +590,21 @@ function nuSetHashList($H){
 	$s 		= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$F'";
 	$t 		= nuRunQuery($s);
 	$r 		= db_fetch_object($t);
-	$table	= $r->sfo_table;
-	$primary	= $r->sfo_primary_key;
-	$a		= array();
-	$s 		= "SELECT * FROM `$table` WHERE `$primary` = '$R'";
-	$t 		= nuRunQuery($s);
-	$r		= db_fetch_array($t);
+	
+	if($r->sfo_table == ''){
+		
+		$r	= array();
+		
+	}else{
+	
+		$table	= $r->sfo_table;
+		$primary	= $r->sfo_primary_key;
+		$a		= array();
+		$s 		= "SELECT * FROM `$table` WHERE `$primary` = '$R'";
+		$t 		= nuRunQuery($s);
+		$r		= db_fetch_array($t);
+		
+	}
 
 	for($i = 1 ; $i < count($H) ; $i++){
 		$r[$H[$i][0]]	= $H[$i][1];

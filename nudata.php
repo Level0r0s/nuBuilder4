@@ -19,7 +19,7 @@ function nuUpdateData(){
 	}
 
 	eval($before);
-
+	
 	if(count($_POST['nuErrors']) > 0){return;}
 
 	for($i = 0 ; $i < count($d) ; $i++){
@@ -90,10 +90,14 @@ function nuUpdateRow($r, $p, $row, $FK){
 	}
 	
 	$set		= array();
+	$columns	= db_columns($r->sfo_table);
+	$objects	= nuEditObjects($r->zzzzsys_form_id);
 	
 	for($i = 0 ; $i < count($row['f']) ; $i++){
 		
-		$set[] 	= $row['f'][$i] . ' = "' . nuFormatValue($row, $i) . '"';
+		if(array_search($row['f'][$i], $columns) !== false){
+			$set[] 	= $row['f'][$i] . ' = "' . nuFormatValue($row, $i) . '"';
+		}
 		
 	}
 	
@@ -102,6 +106,23 @@ function nuUpdateRow($r, $p, $row, $FK){
 	nuRunQuery($s, array($p));
 	
 }
+
+
+function nuEditObjects($id){
+
+	$a	= array();
+	$s	= "SELECT sob_all_id FROM zzzzsys_object WHERE sob_zzzzsys_form_id = '$id'";
+	$t	= nuRunQuery($s);
+	
+	while($r = db_fetch_object($t)){
+	
+		$a[]	= $r->sob_all_id;
+	
+	}
+	
+	return $a;
+}
+
 
 function nuFormatValue($row, $i){
 	
@@ -130,6 +151,12 @@ function nuReplaceHashVariables($s){
 
 	return $s;
 
+}
+
+function nuChangeHashVariable($h, $v){
+	
+	$_POST['nuHash']['#' . $h . '#'] = $v;
+	
 }
 
 
