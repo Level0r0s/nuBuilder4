@@ -49,6 +49,9 @@ function nuBuildForm(f){
 	nuGetStartingTab();
 	nuAddJavascript(f);
 	$('#nuSearchField').focus();
+
+    if(f.record_id == '-2')
+        createDragOptionsBox(f);
 	
 }
 
@@ -124,7 +127,7 @@ function nuAddActionButtons(f){
 }
 
 function nuBuildEditObjects(f, p, o, prop){
-	
+
 	var l = 3;
 	var draggable = 0;
 	if(window.nuBC[window.nuBC.length-1].record_id == '-2') {
@@ -164,6 +167,7 @@ function nuBuildEditObjects(f, p, o, prop){
 			l = l + 2;
 		
 		} else {
+			$("body").css("overflow", "hidden");
 			l = l + nuDRAG(f, i, l, p, prop);
 		}
 		
@@ -226,7 +230,7 @@ function nuRecordProperties(w, p, l){
 }
 
 function nuDRAG(w, i, l, p, prop){
-	
+
 	var id   = p + prop.objects[i].id;
 	var ef   = p + 'nuRecordHolder';
 	var drg 		= document.createElement('div');
@@ -246,6 +250,8 @@ function nuDRAG(w, i, l, p, prop){
 	
 	$('#' + id).text(id);
 	$('#' + id).attr('data-drag',1);
+		
+	nuAddDataTab(id, prop.objects[i].tab, p);
 		
 	return Number(prop.objects[i].width);
 }

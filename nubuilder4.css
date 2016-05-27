@@ -458,3 +458,43 @@ input {
    white-space: -o-pre-wrap;   /* Opera 7 */    
    word-wrap: break-word;      /* IE */
 }
+
+.nuDragOptionsBox {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    border-width: 0px 0px 0px 1px;
+    border-style: solid;
+    background-color: #c1c1c1;
+    z-index: -1;
+    min-height: 440px;
+}
+
+.nuDragOptionsBoxContainer {
+    padding-left: 15px;
+}
+
+.nuDragOptionsBoxTitle {
+    margin-top: 40px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.nuDragOptionsFieldsLabel {
+    display: block;
+    position: relative;
+    text-align: left;
+    margin-top: 15px;
+}
+
+.nuDragOptionsFields {
+    display: block;
+    width: 260px;
+    height: 200px;
+}
+
+.nuDragOptionsButton {
+    display: block;
+    height: 25px;
+    width: 100%;
+}
