@@ -23,7 +23,8 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
     FROM zzzzsys_form
     INNER JOIN zzzzsys_object ON sob_all_zzzzsys_form_id = zzzzsys_form_id
     WHERE zzzzsys_form_id = '$F'
-    
+    ORDER BY sob_all_order    
+
     ";
 
     $t = nuRunQuery($s);
