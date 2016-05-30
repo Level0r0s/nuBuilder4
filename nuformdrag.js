@@ -308,7 +308,7 @@ function createDragOptionsBox(form){
                 '<table>'+
                     '<tbody>'+
                         '<tr>'+
-                            '<td><button class="nuDragOptionsButton nuButton">Space Vertically</button></td>'+
+                            '<td><button class="nuDragOptionsButton nuButton" onclick="spaceVertically();">Space Vertically</button></td>'+
                             '<td><button class="nuDragOptionsButton nuButton" onclick="alignLeft();">Align To Left</button></td>'+
                         '</tr>'+
                         '<tr>'+
@@ -345,6 +345,55 @@ function createDragOptionsBox(form){
         checkIfMovingTabOrderAllowed($('#nuDragOptionsFields',window.parent.document.body));
     });
     checkIfMovingTabOrderAllowed($('#nuDragOptionsFields'));
+}
+
+function sortAsc(a,b) {
+    return a - b;
+}
+
+function spaceVertically(){
+    // i set highest to 1000000 for the min max check, and lowest to 0 vice versa
+    var highestTop = 1000000;
+    var lowestTop = 0;
+    var amount = 0;
+    var fieldHeightsToSort = [];
+    $('div.nuDragSelected',$('#nuDragDialog iframe').contents()).each(function(){
+        amount += 1;
+        if($(this).position().top < highestTop)
+            highestTop = $(this).position().top;
+        if($(this).position().top > lowestTop)
+            lowestTop = $(this).position().top;
+        fieldHeightsToSort.push($(this).position().top);
+    });
+    fieldHeightsToSort.sort(sortAsc);
+    // if the distance between the lowest and highest is 0, skip
+    if(fieldHeightsToSort[(fieldHeightsToSort.length-1)] - fieldHeightsToSort[0] == 0){
+        return false;
+    }
+    var fieldsThatHaveBeenChanged = [];
+    var fieldsNewTop = 0;
+    var firstFoundAlready = false;
+    var lastFoundAlready = false;
+    for(var i=0; i<fieldHeightsToSort.length; i++){
+        $('div.nuDragSelected',$('#nuDragDialog iframe').contents()).each(function(){
+            if($(this).position().top == fieldHeightsToSort[0] && !firstFoundAlready){// || $(this).position().top == fieldHeightsToSort[(fieldHeightsToSort.length-1)]){
+                firstFoundAlready = true;
+                fieldsThatHaveBeenChanged.push($(this).prop('id'));
+                return false;
+            } else if($(this).position().top == fieldHeightsToSort[(fieldHeightsToSort.length-1)] && !lastFoundAlready){
+                lastFoundAlready = true;
+                fieldsThatHaveBeenChanged.push($(this).prop('id'));
+                return false;
+            } else {
+                if($(this).position().top == fieldHeightsToSort[i] && fieldsThatHaveBeenChanged.indexOf($(this).prop('id')) == -1){
+                    fieldsNewTop = fieldHeightsToSort[0]+(((fieldHeightsToSort[(fieldHeightsToSort.length-1)] - fieldHeightsToSort[0])/(amount-1))*(fieldsThatHaveBeenChanged.length));
+                    $(this).css('top',Math.round(fieldsNewTop)+'px');
+                    fieldsThatHaveBeenChanged.push($(this).prop('id'));
+                    return false;
+                }
+            }
+        });
+    }
 }
 
 function alignRight(){
