@@ -21,7 +21,7 @@
             die(json_encode(array('success'=>false, 'error'=>'Could not save. Session expired.')));
         die(json_encode(nuDragSave($P)));
     }
-//nudebug(print_r($s->dimensions,1));
+
 	$f->forms[0]->dimensions				= $s->dimensions;
 	$f->forms[0]->session_id				= $s->session_id;
 	$f->forms[0]->errors					= $_POST['nuErrors'];
