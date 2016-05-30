@@ -309,19 +309,19 @@ function createDragOptionsBox(form){
                     '<tbody>'+
                         '<tr>'+
                             '<td><button class="nuDragOptionsButton nuButton">Space Vertically</button></td>'+
-                            '<td><button class="nuDragOptionsButton nuButton">Align To Left</button></td>'+
+                            '<td><button class="nuDragOptionsButton nuButton" onclick="alignLeft();">Align To Left</button></td>'+
                         '</tr>'+
                         '<tr>'+
                             '<td><button class="nuDragOptionsButton nuButton">Space Horizontally</button></td>'+
-                            '<td><button class="nuDragOptionsButton nuButton">Align To Right</button></td>'+
+                            '<td><button class="nuDragOptionsButton nuButton" onclick="alignRight();">Align To Right</button></td>'+
                         '</tr>'+
                         '<tr>'+
                             '<td></td>'+
-                            '<td><button class="nuDragOptionsButton nuButton">Align To Top</button></td>'+
+                            '<td><button class="nuDragOptionsButton nuButton" onclick="alignTop();">Align To Top</button></td>'+
                         '</tr>'+
                         '<tr>'+
                             '<td><button id="move_up_btn" class="nuDragOptionsButton nuButton" onclick="moveUpOrder();">Move Up Order</button></td>'+
-                            '<td><button class="nuDragOptionsButton nuButton">Align To Bottom</button></td>'+
+                            '<td><button class="nuDragOptionsButton nuButton" onclick="alignBottom();">Align To Bottom</button></td>'+
                         '</tr>'+
                         '<tr>'+
                             '<td><button id="move_down_btn" class="nuDragOptionsButton nuButton" onclick="moveDownOrder();">Move Down Order</button></td>'+
@@ -345,6 +345,63 @@ function createDragOptionsBox(form){
         checkIfMovingTabOrderAllowed($('#nuDragOptionsFields',window.parent.document.body));
     });
     checkIfMovingTabOrderAllowed($('#nuDragOptionsFields'));
+}
+
+function alignRight(){
+    var rightestFieldID = '';
+    var rightestPoint = 0;
+    $('div.nuDragSelected',$('#nuDragDialog iframe').contents()).each(function(){
+        if($(this).position().left+$(this).width() > rightestPoint){
+            rightestFieldID = $(this).prop('id');
+            rightestPoint = $(this).position().left+$(this).width();
+        }
+    });
+    $('div.nuDragSelected',$('#nuDragDialog iframe').contents()).each(function(){
+        $(this).css('left',(rightestPoint-$(this).width())+'px');
+    });
+}
+
+function alignLeft(){
+    var leftestFieldID = '';
+    var leftestPoint = 1000000;
+    $('div.nuDragSelected',$('#nuDragDialog iframe').contents()).each(function(){
+        if($(this).position().left < leftestPoint){
+            leftestFieldID = $(this).prop('id');
+            leftestPoint = $(this).position().left;
+        }
+    });
+    $('div.nuDragSelected',$('#nuDragDialog iframe').contents()).each(function(){
+        $(this).css('left',leftestPoint+'px');
+    });
+}
+
+function alignTop(){
+    var highestFieldID = '';
+    var highestPoint = 1000000;
+    $('div.nuDragSelected',$('#nuDragDialog iframe').contents()).each(function(){
+        if($(this).position().top < highestPoint){
+            highestFieldID = $(this).prop('id');
+            highestPoint = $(this).position().top;
+        }
+    });
+    $('div.nuDragSelected',$('#nuDragDialog iframe').contents()).each(function(){
+        $(this).css('top',highestPoint+'px');
+    });
+}
+
+function alignBottom(){
+    var lowestFieldID = '';
+    // its 0 here because technically top: 0px is the highest...
+    var lowestPoint = 0;
+    $('div.nuDragSelected',$('#nuDragDialog iframe').contents()).each(function(){
+        if($(this).position().top + $(this).height() > lowestPoint){
+            lowestFieldID = $(this).prop('id');
+            lowestPoint = $(this).position().top + $(this).height();
+        }
+    });
+    $('div.nuDragSelected',$('#nuDragDialog iframe').contents()).each(function(){
+        $(this).css('top',(lowestPoint-$(this).height())+'px');
+    });
 }
 
 function saveNuDrag(){
