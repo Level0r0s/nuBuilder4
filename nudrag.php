@@ -2,7 +2,6 @@
 
 function nuDragSave($data){
     $response = array('success' => false, 'error' => 'Could not save. Error updating fields in the database.');
-    $response['testdragdata'] = $data;
     
     // check that fields are safe to update
     $fieldCheck = true;
@@ -14,18 +13,30 @@ function nuDragSave($data){
     foreach($data['nuDragState']['tabs'] as $tab){
         foreach($tab['objects'] as $field){
             $checkFieldExistsQRY = nuRunQuery("SELECT * FROM zzzzsys_object WHERE sob_all_zzzzsys_form_id = '".$data['form_id']."' AND sob_all_id = '".str_replace("'","\n",$field['id'])."' ");
-            if(db_num_rows($checkFieldExistsQRY) != 1)
+            if(db_num_rows($checkFieldExistsQRY) != 1){
                 $fieldCheck = false;
-            if(!is_numeric($field['tab_order']))
+                $response['error_details'] = 'FormID='.$data['form_id'].' Field='.print_r($field,1);
+            }
+            if(!is_numeric($field['tab_order'])){
                 $tabOrderCheck = false;
-            if(!is_numeric($field['left']))
+                $response['error_details'] = 'FormID='.$data['form_id'].' Field='.print_r($field,1);
+            }
+            if(!is_numeric($field['left'])){
                 $leftCheck = false;
-            if(!is_numeric($field['top']))
+                $response['error_details'] = 'FormID='.$data['form_id'].' Field='.print_r($field,1);
+            }
+            if(!is_numeric($field['top'])){
                 $topCheck = false;
-            if(!is_numeric($field['width']))
+                $response['error_details'] = 'FormID='.$data['form_id'].' Field='.print_r($field,1);
+            }
+            if(!is_numeric($field['width'])){
                 $widthCheck = false;
-            if(!is_numeric($field['height']))
+                $response['error_details'] = 'FormID='.$data['form_id'].' Field='.print_r($field,1);
+            }
+            if(!is_numeric($field['height'])){
                 $heightCheck = false;
+                $response['error_details'] = 'FormID='.$data['form_id'].' Field='.print_r($field,1);
+            }
         }
     }
     if(!$fieldCheck){

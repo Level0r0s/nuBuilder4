@@ -84,6 +84,7 @@ function updateDragFieldsListbox(){
     $('.nuDragSelected').each(function(){
         $('#nuDragOptionsFields option[id="drag_'+$(this).prop('id')+'"]',window.parent.document.body).prop('selected','selected');
     });
+    checkIfMovingTabOrderAllowed($('#nuDragOptionsFields',window.parent.document.body));
 }
 
 function createBox(event){
@@ -348,8 +349,10 @@ function createDragOptionsBox(form){
 
 function saveNuDrag(){
     $("body").append('<div id="overlay" style="background-color:grey;position:absolute;top:0;left:0;height:100%;width:100%;z-index:999;"></div>');
-    var w       = nuGetFormState();
+    var w       = $('#nuDragDialog iframe')[0].contentWindow.nuGetFormState();
     w.call_type = 'nudragsave';
+    if(!putFieldDimensionsIntoState())
+        return;
     w.nuDragState = $('#nuDragDialog iframe')[0].contentWindow.nuDragOptionsState;
     $.ajax({
         url      : "nuapi.php",
@@ -367,6 +370,26 @@ function saveNuDrag(){
             $("#overlay").remove();
             alert(nuFormatAjaxErrorMessage(xhr, err));
         });
+}
+
+function putFieldDimensionsIntoState(){
+    for(var tabNo=0; tabNo<$('#nuDragDialog iframe')[0].contentWindow.nuDragOptionsState.tabs.length; tabNo++){
+        for(var fieldNo=0; fieldNo<$('#nuDragDialog iframe')[0].contentWindow.nuDragOptionsState.tabs[tabNo].objects.length; fieldNo++){
+            var field = $('#nuDragDialog iframe')[0].contentWindow.nuDragOptionsState.tabs[tabNo].objects[fieldNo];
+            if($('div#'+field.id,$('#nuDragDialog iframe').contents()).length == 1){
+                $('div#'+field.id,$('#nuDragDialog iframe').contents()).show();
+                field.left = $('div#'+field.id,$('#nuDragDialog iframe').contents()).position().left;
+                field.top = $('div#'+field.id,$('#nuDragDialog iframe').contents()).position().top;
+                field.width = $('div#'+field.id,$('#nuDragDialog iframe').contents()).width();
+                field.height = $('div#'+field.id,$('#nuDragDialog iframe').contents()).height();
+                $('div#'+field.id,$('#nuDragDialog iframe').contents()).hide();
+            } else {
+                alert('Error putting field dimensions into state with id: '+field.id);
+                return false;
+            }
+        }
+    }
+    return true;
 }
 
 function updateDragSelections(fieldsSelectBox){
