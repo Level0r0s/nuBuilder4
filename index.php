@@ -47,10 +47,11 @@ require_once('nucommon.php'); ?>
 			window.nuSESSION	= parent.nuSESSION;
 			var p			= parent.nuOPENER[$opener];
 
-			nuGetForm(p.form_id, p.record_id);
+			nuGetForm(p.form_id, p.record_id, p.filter);
 
-            if(p.record_id == '-2')
+			if(p.record_id == '-2'){
                 bindDragEvents();
+			}
 
 		}
 		

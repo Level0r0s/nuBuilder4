@@ -7,18 +7,23 @@ window.nuFORM				= [];
 window.nuSESSION			= '';
 window.nuTYPE 			= 'browse';
 
-function nuOpener(f, r){
+function nuOpener(f, r, s){
 
 	this.form_id          = f;
 	this.record_id        = r;
-	this.search			= '';
+	
+	if(arguments.length = 3){
+		this.search		= s;
+	}else{
+		this.search		= '';
+	}
 	
 }
 
 function nuFormState(){
 
 	this.call_type        = '';
-	this.filter           = '';
+	this.filter           = window.nuBC.length == 0 ? '' : window.nuBC[nuBC.length-1].filter;
 	this.form_id          = '';
 	this.forms        	= [];
 	this.iframe       	= 0;
@@ -49,26 +54,30 @@ function nuFormState(){
 function nuGetBreadcrumb(b){
 
 	window.nuBC 	= window.nuBC.slice(0, b + 1);
-
-	nuGetForm(window.nuBC[b].form_id, window.nuBC[b].record_id, 0);
+	nuGetForm(window.nuBC[b].form_id, window.nuBC[b].record_id, '', 1);
 	
 }
 
 
-function nuGetForm(f, r, n){
+function nuGetForm(f, r, s, n){
 
 	var u 	= '';
 	var p 	= '';
+	s		= (s === undefined ? s = '' : s);
 	
 	if($('#nuusername').length == 1){
+		
 		u 			= $('#nuusername').val();
 		p	 		= $('#nupassword').val();
 		window.nuBC	= [];
 		window.nuBC.push(new nuFormState());
+		
 	}else{
-		if(arguments.length != 3){   //-- add a new breadcrumb
+		
+		if(arguments.length != 4){   //-- add a new breadcrumb
 			window.nuBC.push(new nuFormState());
 		}
+		
 	}
 
 	var w 		= nuGetFormState();
@@ -77,7 +86,10 @@ function nuGetForm(f, r, n){
 	w.call_type	= 'getform';
 	w.form_id	= f;
 	w.record_id	= r;
+	w.filter		= s;
+	nuBC[nuBC.length - 1].filter = s;	
 	w.hash		= parent.nuHashFromEditForm();
+	
 	var request 	= $.ajax({
 		url      : "nuapi.php",
 		type     : "POST",
@@ -86,7 +98,7 @@ function nuGetForm(f, r, n){
 		}).done(function(data){
 
 			var fm 	= data;
-			
+
 			if(nuErrorMessages(fm.errors)){
 				if(fm.log_again == 1){nuLogin();}
 			}else{
@@ -196,7 +208,7 @@ function nuUpdateData(){
 					nuBC.pop();  						//-- return to browse
 					nuGetBreadcrumb(nuBC.length - 1);
 				}else{
-					nuGetForm(f, fm.record_id, 1);		//-- go to saved or created record
+					nuGetForm(f, fm.record_id, '', 1);		//-- go to saved or created record
 				}
 
 			}

@@ -104,10 +104,12 @@ function nuAddActionButtons(f){
 	var b = f.buttons;
 	
 	if(f.record_id == ''){
-	
+
 		var v = window.nuBC[window.nuBC.length-1].search;
+		var f = window.nuBC[window.nuBC.length-1].filter;
 
 		$('#nuActionHolder').append("<input id='nuSearchField' type='text' class='nuSearch' onkeypress='nuSearchPressed(event)' value='" + v + "'>&nbsp;");
+		$('#nuActionHolder').append("<input id='nuFilter' style='visibility:hidden;width:0px' value='" + v + "'>");
 		$('#nuActionHolder').append("<input id='nuSearchButton' type='button' class='nuButton' value='Search' onclick='nuSearchAction()'>&nbsp;");
 		
 	}
@@ -483,7 +485,6 @@ function nuRUN(w, i, l, p, prop){
 					'height'   	: Number(prop.objects[i].height),
 					'position' 	: 'absolute'
 	});
-		
 	if(prop.objects[i].run_method == 'b'){
 	
 		$('#' + id).attr({
@@ -897,7 +898,7 @@ function nuBuildSubformDeleteTitle(l, id, subform_id){
     					'font-size'     	: 10,
     					'padding'     	: 0,
     					'position'      	: 'absolute'
-    	}).html('<img id="nuMoveable" src="numove_black.png" style="padding:8px;width:12px;height:12px;" title="Arrange Objects"><br>Delete')
+    	}).html('<img id="nuMoveable" src="numove.png" style="padding:8px;width:12px;height:12px;" title="Arrange Objects"><br>Delete')
 	.addClass('nuTabHolder')
 	.attr('onclick','nuBuildPopup("'+subform_id+'", "-2");');
 
@@ -1021,18 +1022,35 @@ function nuEditTab(p, t, i){
 }
 
 function nuArrangeTab(p){
-
+	
 	if(window.nuBC[window.nuBC.length-1].record_id != '-2') {
-		 var tabId  = p + 'nuArrange';
-		var img    = document.createElement('div');
-		img.setAttribute('id', tabId);
+
+		var FID	= nuBC[nuBC.length -1].form_id;
+		var PNG	= ['numove.png','nuform.png','nuobjects.png'];
+		var CLK	= Array();
+		
+		CLK.push('nuBuildPopup("' + FID + '", "-2");');
+		CLK.push('nuBuildPopup("nuform", "' + FID + '");');
+		CLK.push('nuBuildPopup("nuobject", "", "' + FID + '");');
+
+
+		for(var i = 0 ; i < PNG.length ; i++){
+				
+			var imgId  = p + 'nuArrange' + i;
+			var img    = document.createElement('img');
+			img.setAttribute('id', imgId);
+			$('#' + p + 'nuTabHolder').append(img);
+			$('#' + imgId)
+			.attr('src', PNG[i])
+			.attr('onclick', CLK[i])
+			.css({'width'		: 12, 
+			'height' 		: 12, 
+			'margin' 		: '0px 0px 0px 6px', 
+			'border-style' 	: 'none'})
+			.addClass('nuTabHolder');
 			
-		$('#' + p + 'nuTabHolder').append(img);
-		pic = p != '' ? '' : '<img id="nuMoveable" src="numove_black.png" style="width:12px;height:12px;" title="Arrange Objects">';
-		$('#' + tabId)
-		.html(pic)
-		.addClass('nuTab')
-		.attr('onclick','nuBuildPopup(nuBC[nuBC.length -1].form_id, "-2");');
+		}
+		
 	}
    
 }
@@ -1218,8 +1236,11 @@ function nuSearchPressed(e){
 
 function nuSearchAction(){
 
+	var f	= window.nuBC[window.nuBC.length-1].filter;
 	window.nuBC[window.nuBC.length-1].search	= String($('#nuSearchField').val()).replaceAll("'","&#39;", true);
+	window.nuBC[window.nuBC.length-1].filter	= String(f).replaceAll("'","&#39;", true);
 	nuGetBreadcrumb(nuBC.length - 1);
+	window.nuBC[window.nuBC.length-1].filter	= f
 	
 }
 
@@ -1235,7 +1256,7 @@ function nuSortBrowse(c){
 	
 	var l	= nuBC.length - 1;
 	var B 	= nuBC[l];
-	
+console.log(nuBC[nuBC.length - 1].filter, 1234);	
 	if(c == B.sort){
 		nuBC[l].sort_direction 	= (B.sort_direction == 'asc' ? 'desc' : 'asc');
 	}else{
@@ -1243,6 +1264,7 @@ function nuSortBrowse(c){
 		nuBC[l].sort_direction	= 'asc';
 	}
 	
+console.log(nuBC[nuBC.length - 1].filter,888);	
 	nuSearchAction();
 	
 }

@@ -67,6 +67,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 			$run				= db_fetch_object($form);
 			$o->run_type		= $run->sfo_type;
 			$o->record_id		= -1;
+			$o->filter		= $r->sob_run_filter;
 			
 			if($o->run_type	== 'browse' || $o->run_type	== 'edit' || $o->run_type	== 'browseedit'){$o->record_id	= $r->sob_run_id;}
 			if($o->run_type	== 'procedure'){$o->record_id	= $r->sob_run_id;}
@@ -549,7 +550,7 @@ function nuBrowseRows($f){
 	$page_number	= $P['page_number'];
 	$start		= $page_number * $rows;
 	$search		= str_replace('&#39;', "'", $P['search']);
-	
+	$filter		= str_replace('&#39;', "'", $P['filter']);
 	$s 			= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$f->id'";
 	$t 			= nuRunQuery($s);
 	$r 			= db_fetch_object($t);
@@ -579,8 +580,10 @@ function nuBrowseRows($f){
 		}
 	}
 
-	$w	= nuBrowseWhereClause($flds, $search);
+	$w	= nuBrowseWhereClause($flds, $filter . ' ' . $search);
 	
+nudebug("$filter   $search " . print_r($P,1));
+
 	if(trim($w) != '()'){
 		$S->setWhere(' WHERE ' . $w);
 	}
@@ -710,6 +713,7 @@ function nuCheckSession(){
 	$c->session_id		= '';
 	$c->form_id			= '';
 	$c->record_id			= '-1';
+	$c->filter			= $_POST['nuFilter'];
 	$c->errors			= array();
 	
 	
