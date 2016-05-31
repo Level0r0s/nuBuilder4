@@ -1027,6 +1027,7 @@ function nuArrangeTab(p){
 
 		var FID	= nuBC[nuBC.length -1].form_id;
 		var PNG	= ['numove.png','nuform.png','nuobjects.png'];
+		var TIT	= ['Move Objects','Form Properties','List Objects on Form'];
 		var CLK	= Array();
 		
 		CLK.push('nuBuildPopup("' + FID + '", "-2");');
@@ -1047,6 +1048,7 @@ function nuArrangeTab(p){
 			'height' 		: 12, 
 			'margin' 		: '0px 0px 0px 6px', 
 			'border-style' 	: 'none'})
+			.attr('title', TIT[i])
 			.addClass('nuTabHolder');
 			
 		}
@@ -1236,7 +1238,7 @@ function nuSearchPressed(e){
 
 function nuSearchAction(){
 
-	var f	= window.nuBC[window.nuBC.length-1].filter;
+	var f									= window.nuBC[window.nuBC.length-1].filter;
 	window.nuBC[window.nuBC.length-1].search	= String($('#nuSearchField').val()).replaceAll("'","&#39;", true);
 	window.nuBC[window.nuBC.length-1].filter	= String(f).replaceAll("'","&#39;", true);
 	nuGetBreadcrumb(nuBC.length - 1);

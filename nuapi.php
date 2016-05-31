@@ -15,11 +15,15 @@
 	if($P['call_type'] == 'getlookupcode')	{$f->forms[0]->lookup_values 	= nuGetAllLookupList();}
 	if($P['call_type'] == 'getform')		{$f->forms[0] 				= nuGetFormObject($s->form_id, $s->record_id, 0, $P);}
 	if($P['call_type'] == 'update')		{$f->forms[0]->record_id		= nuUpdateData();}
-    if($P['call_type'] == 'nudragsave'){
-        if(count($_POST['nuErrors']) != 0)
-            die(json_encode(array('success'=>false, 'error'=>'Could not save. Session expired.')));
-        die(json_encode(nuDragSave($P)));
-    }
+    if($P['call_type'] == 'nudragsave')		{
+		
+		if(count($_POST['nuErrors']) == 0){
+			die(json_encode(nuDragSave($P)));
+				
+		}else{
+			die(json_encode(array('success'=>false, 'error'=>'Could not save. Session expired.')));
+		}
+	}
 
 	$f->forms[0]->dimensions				= $s->dimensions;
 	$f->forms[0]->session_id				= $s->session_id;

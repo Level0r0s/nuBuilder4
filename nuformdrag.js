@@ -456,8 +456,11 @@ function saveNuDrag(){
     $("body").append('<div id="overlay" style="background-color:grey;position:absolute;top:0;left:0;height:100%;width:100%;z-index:999;"></div>');
     var w       = $('#nuDragDialog iframe')[0].contentWindow.nuGetFormState();
     w.call_type = 'nudragsave';
-    if(!putFieldDimensionsIntoState())
+	
+    if(!putFieldDimensionsIntoState()){
         return;
+	}
+	
     w.nuDragState = $('#nuDragDialog iframe')[0].contentWindow.nuDragOptionsState;
     $.ajax({
         url      : "nuapi.php",
