@@ -300,8 +300,9 @@ function nuFindFieldInState(tabNo, fieldID){
 
 function nuCreateDragOptionsBox(form){
     var dragOptionsBoxWidth = 330;
+    var dragOptionsBoxHeight = 480;
     $('#nuDragDialog',window.parent.document.body).css('width',$('#nuDragDialog',window.parent.document.body).width()+dragOptionsBoxWidth);
-    var optionsBoxHTML = '<div id="nuDragOptionsBox" class="nuDragOptionsBox" style="width:'+dragOptionsBoxWidth+'px;height:'+$('#nuDragDialog',window.parent.document.body).height()+'px;">'+
+    var optionsBoxHTML = '<div id="nuDragOptionsBox" class="nuDragOptionsBox" style="width:'+dragOptionsBoxWidth+'px;height:'+dragOptionsBoxHeight+'px;">'+
         '<div class="nuDragOptionsBoxContainer">'+
             '<div id="dragOptionsTitle" class="nuDragOptionsBoxTitle">Options</div>'+
             '<label for="nuDragOptionsFields" class="nuDragOptionsFieldsLabel">Fields In Tab-order</label>'+
@@ -317,15 +318,19 @@ function nuCreateDragOptionsBox(form){
                             '<td><button class="nuDragOptionsButton nuButton" onclick="nuAlignRight();">Align To Right</button></td>'+
                         '</tr>'+
                         '<tr>'+
-                            '<td></td>'+
+                            '<td><button id="move_up_btn" class="nuDragOptionsButton nuButton" onclick="nuMoveUpOrder();">Move Up Order</button></td>'+
                             '<td><button class="nuDragOptionsButton nuButton" onclick="nuAlignTop();">Align To Top</button></td>'+
                         '</tr>'+
                         '<tr>'+
-                            '<td><button id="move_up_btn" class="nuDragOptionsButton nuButton" onclick="nuMoveUpOrder();">Move Up Order</button></td>'+
+                            '<td><button id="move_down_btn" class="nuDragOptionsButton nuButton" onclick="nuMoveDownOrder();">Move Down Order</button></td>'+
                             '<td><button class="nuDragOptionsButton nuButton" onclick="nuAlignBottom();">Align To Bottom</button></td>'+
                         '</tr>'+
                         '<tr>'+
-                            '<td><button id="move_down_btn" class="nuDragOptionsButton nuButton" onclick="nuMoveDownOrder();">Move Down Order</button></td>'+
+                            '<td><button class="nuDragOptionsButton nuButton" onclick="nuResizeToHighest();">Resize To Highest</button></td>'+
+                            '<td><button class="nuDragOptionsButton nuButton" onclick="nuResizeToWidest();">Resize To Widest</button></td>'+
+                        '</tr>'+
+                        '<tr>'+
+                            '<td></td>'+
                             '<td><button class="nuDragOptionsButton nuButton" style="font-weight: bold;" onclick="nuSaveNuDrag();">Save</button></td>'+
                         '</tr>'+
                     '</tbody>'+
@@ -346,6 +351,30 @@ function nuCreateDragOptionsBox(form){
         nuCheckIfMovingTabOrderAllowed($('#nuDragOptionsFields',window.parent.document.body));
     });
     nuCheckIfMovingTabOrderAllowed($('#nuDragOptionsFields'));
+}
+
+function nuResizeToHighest(){
+    var highest = 0;
+    $('div.nuDragSelected',$('#nuDragDialog iframe').contents()).each(function(){
+        if($(this).height() > highest){
+            highest = $(this).height();
+        }
+    });
+    $('div.nuDragSelected',$('#nuDragDialog iframe').contents()).each(function(){
+        $(this).css('height',highest+'px');
+    });
+}
+
+function nuResizeToWidest(){
+    var widest = 0;
+    $('div.nuDragSelected',$('#nuDragDialog iframe').contents()).each(function(){
+        if($(this).width() > widest){
+            widest = $(this).width();
+        }
+    });
+    $('div.nuDragSelected',$('#nuDragDialog iframe').contents()).each(function(){
+        $(this).css('width',widest+'px');
+    });
 }
 
 function nuSortAsc(a,b) {
