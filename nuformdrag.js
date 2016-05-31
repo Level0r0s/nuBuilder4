@@ -76,17 +76,17 @@ function nuBindDragEvents(){
 
     $(document).on('keydown.nuformdrag', function(e){
         var keyDirection = '';
-        // if shift-left
-        if(e.shiftKey && e.keyCode == 37){
+        // if left
+        if(e.keyCode == 37){
             keyDirection = 'left';
-        // if shift-right
-        } else if(e.shiftKey && e.keyCode == 39){
+        // if right
+        } else if(e.keyCode == 39){
             keyDirection = 'right';
-        // if shift-up
-        } else if(e.shiftKey && e.keyCode == 38){
+        // if up
+        } else if(e.keyCode == 38){
             keyDirection = 'up';
-        // if shift-down
-        } else if(e.shiftKey && e.keyCode == 40){
+        // if down
+        } else if(e.keyCode == 40){
             keyDirection = 'down';
         }
         if(keyDirection != ''){
@@ -94,17 +94,37 @@ function nuBindDragEvents(){
                 var prop = '';
                 var val = '';
                 if(keyDirection == 'left'){
-                    prop = 'width';
-                    val  = $(this).width() - 1;
+                    if(e.shiftKey){
+                        prop = 'width';
+                        val  = $(this).width() - 1;
+                    } else {
+                        prop = 'left';
+                        val  = $(this).position().left - 1;
+                    }
                 } else if(keyDirection == 'right'){
-                    prop = 'width';
-                    val  = $(this).width() + 1;
+                    if(e.shiftKey){
+                        prop = 'width';
+                        val  = $(this).width() + 1;
+                    } else {
+                        prop = 'left';
+                        val  = $(this).position().left + 1;
+                    }
                 } else if(keyDirection == 'up'){
-                    prop = 'height';
-                    val  = $(this).height() - 1;
+                    if(e.shiftKey){
+                        prop = 'height';
+                        val  = $(this).height() - 1;
+                    } else {
+                        prop = 'top';
+                        val  = $(this).position().top - 1;
+                    }
                 } else if(keyDirection == 'down'){
-                    prop = 'height';
-                    val  = $(this).height() + 1;
+                    if(e.shiftKey){
+                        prop = 'height';
+                        val  = $(this).height() + 1;
+                    } else {
+                        prop = 'top';
+                        val  = $(this).position().top + 1;
+                    }
                 }
                 $(this).css(prop,val+'px');
             });
@@ -338,7 +358,7 @@ function nuFindFieldInState(tabNo, fieldID){
 
 function nuCreateDragOptionsBox(form){
     var dragOptionsBoxWidth = 330;
-    var dragOptionsBoxHeight = 480;
+    var dragOptionsBoxHeight = 500;
     $('#nuDragDialog',window.parent.document.body).css('width',$('#nuDragDialog',window.parent.document.body).width()+dragOptionsBoxWidth);
     var optionsBoxHTML = '<div id="nuDragOptionsBox" class="nuDragOptionsBox" style="width:'+dragOptionsBoxWidth+'px;height:'+dragOptionsBoxHeight+'px;">'+
         '<div class="nuDragOptionsBoxContainer">'+
@@ -362,6 +382,10 @@ function nuCreateDragOptionsBox(form){
                         '<tr>'+
                             '<td><button id="move_down_btn" class="nuDragOptionsButton nuButton" onclick="nuMoveDownOrder();">Move Down Order</button></td>'+
                             '<td><button class="nuDragOptionsButton nuButton" onclick="nuAlignBottom();">Align To Bottom</button></td>'+
+                        '</tr>'+
+                        '<tr>'+
+                            '<td><button class="nuDragOptionsButton nuButton" onclick="nuResizeToLowest();">Resize To Lowest</button></td>'+
+                            '<td><button class="nuDragOptionsButton nuButton" onclick="nuResizeToThinnest();">Resize To Thinnest</button></td>'+
                         '</tr>'+
                         '<tr>'+
                             '<td><button class="nuDragOptionsButton nuButton" onclick="nuResizeToHighest();">Resize To Highest</button></td>'+
@@ -389,6 +413,30 @@ function nuCreateDragOptionsBox(form){
         nuCheckIfMovingTabOrderAllowed($('#nuDragOptionsFields',window.parent.document.body));
     });
     nuCheckIfMovingTabOrderAllowed($('#nuDragOptionsFields'));
+}
+
+function nuResizeToLowest(){
+    var lowest = 1000000;
+    $('div.nuDragSelected',$('#nuDragDialog iframe').contents()).each(function(){
+        if($(this).height() < lowest){
+            lowest = $(this).height();
+        }
+    });
+    $('div.nuDragSelected',$('#nuDragDialog iframe').contents()).each(function(){
+        $(this).css('height',lowest+'px');
+    });
+}
+
+function nuResizeToThinnest(){
+    var thinnest = 1000000;
+    $('div.nuDragSelected',$('#nuDragDialog iframe').contents()).each(function(){
+        if($(this).width() < thinnest){
+            thinnest = $(this).width();
+        }
+    });
+    $('div.nuDragSelected',$('#nuDragDialog iframe').contents()).each(function(){
+        $(this).css('width',thinnest+'px');
+    });
 }
 
 function nuResizeToHighest(){
