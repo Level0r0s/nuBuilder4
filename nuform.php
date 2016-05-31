@@ -97,6 +97,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 			$o->add             	= $r->sob_subform_add;
 			$o->dimensions		= nuFormDimensions($r->sob_subform_zzzzsys_form_id);
 			$o->forms           	= nuGetSubformRecords($r, $o->add);
+			$o->form				= $r->sob_subform_zzzzsys_form_id;
 			$o->browse_columns  	= array();
 
 		}
