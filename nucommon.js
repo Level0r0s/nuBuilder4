@@ -7,15 +7,15 @@ window.nuFORM				= [];
 window.nuSESSION			= '';
 window.nuTYPE 			= 'browse';
 
-function nuOpener(f, r, s){
+function nuOpener(f, r, filter){
 
 	this.form_id          = f;
 	this.record_id        = r;
 	
 	if(arguments.length = 3){
-		this.search		= s;
+		this.filter		= filter;
 	}else{
-		this.search		= '';
+		this.filter		= '';
 	}
 	
 }
@@ -59,11 +59,11 @@ function nuGetBreadcrumb(b){
 }
 
 
-function nuGetForm(f, r, s, n){
+function nuGetForm(f, r, filter, n){
 
 	var u 	= '';
 	var p 	= '';
-	s		= (s === undefined ? s = '' : s);
+	filter		= (filter === undefined ? filter = '' : filter);
 	
 	if($('#nuusername').length == 1){
 		
@@ -86,8 +86,8 @@ function nuGetForm(f, r, s, n){
 	w.call_type	= 'getform';
 	w.form_id	= f;
 	w.record_id	= r;
-	w.filter		= s;
-	nuBC[nuBC.length - 1].filter = s;	
+	w.filter		= filter;
+	nuBC[nuBC.length - 1].filter = filter;	
 	w.hash		= parent.nuHashFromEditForm();
 	
 	var request 	= $.ajax({
@@ -339,9 +339,9 @@ function nuBuildLookup(t, p){
 }
 
 
-function nuBuildPopup(f, r){
+function nuBuildPopup(f, r, filter){
 
-	window.nuOPENER.push(new nuOpener(f, r));
+	window.nuOPENER.push(new nuOpener(f, r, filter));
 	
 	var l 	= window.nuOPENER.length -1;
 

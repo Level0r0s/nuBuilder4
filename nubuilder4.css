@@ -111,6 +111,11 @@ input {
   display: inline-block;
 }
 
+
+.nuIcon:hover {
+  background-color: grey;
+}
+
 .nuRecordHolder {
   display: inline;
   margin: 0px 5px;
