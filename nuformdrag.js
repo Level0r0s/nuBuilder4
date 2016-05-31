@@ -73,6 +73,44 @@ function nuBindDragEvents(){
 		}
         nuUpdateDragFieldsListbox();
     });
+
+    $(document).on('keydown.nuformdrag', function(e){
+        var keyDirection = '';
+        // if shift-left
+        if(e.shiftKey && e.keyCode == 37){
+            keyDirection = 'left';
+        // if shift-right
+        } else if(e.shiftKey && e.keyCode == 39){
+            keyDirection = 'right';
+        // if shift-up
+        } else if(e.shiftKey && e.keyCode == 38){
+            keyDirection = 'up';
+        // if shift-down
+        } else if(e.shiftKey && e.keyCode == 40){
+            keyDirection = 'down';
+        }
+        if(keyDirection != ''){
+            $('div.nuDragSelected').each(function(){
+                var prop = '';
+                var val = '';
+                if(keyDirection == 'left'){
+                    prop = 'width';
+                    val  = $(this).width() - 1;
+                } else if(keyDirection == 'right'){
+                    prop = 'width';
+                    val  = $(this).width() + 1;
+                } else if(keyDirection == 'up'){
+                    prop = 'height';
+                    val  = $(this).height() - 1;
+                } else if(keyDirection == 'down'){
+                    prop = 'height';
+                    val  = $(this).height() + 1;
+                }
+                $(this).css(prop,val+'px');
+            });
+        }
+    });
+
 }
 
 function nuUnbindDragEvents(){
