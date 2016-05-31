@@ -312,7 +312,7 @@ function createDragOptionsBox(form){
                             '<td><button class="nuDragOptionsButton nuButton" onclick="alignLeft();">Align To Left</button></td>'+
                         '</tr>'+
                         '<tr>'+
-                            '<td><button class="nuDragOptionsButton nuButton">Space Horizontally</button></td>'+
+                            '<td><button class="nuDragOptionsButton nuButton" onclick="spaceHorizontally();">Space Horizontally</button></td>'+
                             '<td><button class="nuDragOptionsButton nuButton" onclick="alignRight();">Align To Right</button></td>'+
                         '</tr>'+
                         '<tr>'+
@@ -351,46 +351,45 @@ function sortAsc(a,b) {
     return a - b;
 }
 
-function spaceVertically(){
-    // i set highest to 1000000 for the min max check, and lowest to 0 vice versa
-    var highestTop = 1000000;
-    var lowestTop = 0;
-    var amount = 0;
-    var fieldHeightsToSort = [];
+function spaceHorizontally(){
+    var fieldLeftsToSort = [];
+    var fieldsToChange = [];
     $('div.nuDragSelected',$('#nuDragDialog iframe').contents()).each(function(){
-        amount += 1;
-        if($(this).position().top < highestTop)
-            highestTop = $(this).position().top;
-        if($(this).position().top > lowestTop)
-            lowestTop = $(this).position().top;
+        fieldLeftsToSort.push($(this).position().left);
+        fieldsToChange.push($(this).prop('id'));
+    });
+    fieldLeftsToSort.sort(sortAsc);
+    var difference = fieldLeftsToSort[(fieldLeftsToSort.length-1)] - fieldLeftsToSort[0];
+    if(difference == 0)
+        return false;
+    for(var i=1; i<fieldLeftsToSort.length; i++){
+        $('div.nuDragSelected',$('#nuDragDialog iframe').contents()).each(function(){
+            if($(this).position().left == fieldLeftsToSort[i] && fieldsToChange.indexOf($(this).prop('id')) != -1){
+                $(this).css('left',Math.round(fieldLeftsToSort[0]+(difference/(fieldLeftsToSort.length-1))*i)+'px');
+                fieldsToChange.splice(fieldsToChange.indexOf($(this).prop('id')),1);
+                return false;
+            }
+        });
+    }
+}
+
+function spaceVertically(){
+    var fieldHeightsToSort = [];
+    var fieldsToChange = [];
+    $('div.nuDragSelected',$('#nuDragDialog iframe').contents()).each(function(){
         fieldHeightsToSort.push($(this).position().top);
+        fieldsToChange.push($(this).prop('id'));
     });
     fieldHeightsToSort.sort(sortAsc);
-    // if the distance between the lowest and highest is 0, skip
-    if(fieldHeightsToSort[(fieldHeightsToSort.length-1)] - fieldHeightsToSort[0] == 0){
+    var difference = fieldHeightsToSort[(fieldHeightsToSort.length-1)] - fieldHeightsToSort[0];
+    if(difference == 0)
         return false;
-    }
-    var fieldsThatHaveBeenChanged = [];
-    var fieldsNewTop = 0;
-    var firstFoundAlready = false;
-    var lastFoundAlready = false;
-    for(var i=0; i<fieldHeightsToSort.length; i++){
+    for(var i=1; i<fieldHeightsToSort.length; i++){
         $('div.nuDragSelected',$('#nuDragDialog iframe').contents()).each(function(){
-            if($(this).position().top == fieldHeightsToSort[0] && !firstFoundAlready){// || $(this).position().top == fieldHeightsToSort[(fieldHeightsToSort.length-1)]){
-                firstFoundAlready = true;
-                fieldsThatHaveBeenChanged.push($(this).prop('id'));
+            if($(this).position().top == fieldHeightsToSort[i] && fieldsToChange.indexOf($(this).prop('id')) != -1){
+                $(this).css('top',Math.round(fieldHeightsToSort[0]+(difference/(fieldHeightsToSort.length-1))*i)+'px');
+                fieldsToChange.splice(fieldsToChange.indexOf($(this).prop('id')),1);
                 return false;
-            } else if($(this).position().top == fieldHeightsToSort[(fieldHeightsToSort.length-1)] && !lastFoundAlready){
-                lastFoundAlready = true;
-                fieldsThatHaveBeenChanged.push($(this).prop('id'));
-                return false;
-            } else {
-                if($(this).position().top == fieldHeightsToSort[i] && fieldsThatHaveBeenChanged.indexOf($(this).prop('id')) == -1){
-                    fieldsNewTop = fieldHeightsToSort[0]+(((fieldHeightsToSort[(fieldHeightsToSort.length-1)] - fieldHeightsToSort[0])/(amount-1))*(fieldsThatHaveBeenChanged.length));
-                    $(this).css('top',Math.round(fieldsNewTop)+'px');
-                    fieldsThatHaveBeenChanged.push($(this).prop('id'));
-                    return false;
-                }
             }
         });
     }
