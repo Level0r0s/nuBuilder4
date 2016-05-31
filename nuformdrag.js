@@ -1,4 +1,4 @@
-function bindDragEvents(){
+function nuBindDragEvents(){
 	
     $(document).on('mousemove.nuformdrag', function(e) {
 		
@@ -16,7 +16,7 @@ function bindDragEvents(){
 			e.returnValue=false;
 
 			if(e.buttons) {
-				dragBox(e);
+				nuDragBox(e);
 			}
 		}
     });
@@ -43,7 +43,7 @@ function bindDragEvents(){
 					$('.nuDragSelected').removeClass('nuDragSelected');
 				}
 				
-				createBox(e);
+				nuCreateBox(e);
 			} else {
 
 				if(!e.ctrlKey && !$('#'+e.target.id).hasClass('nuDragSelected')) {
@@ -55,7 +55,7 @@ function bindDragEvents(){
 				}
 			}
 		}
-        updateDragFieldsListbox();
+        nuUpdateDragFieldsListbox();
     });
 	
     $(document).on('mouseup.nuformdrag', function(e) {
@@ -68,26 +68,26 @@ function bindDragEvents(){
 		
 		if(draggable) {
 			if($('#nuSelectBox').length > 0) {
-				removeBox(e.ctrlKey);
+				nuRemoveBox(e.ctrlKey);
 			}
 		}
-        updateDragFieldsListbox();
+        nuUpdateDragFieldsListbox();
     });
 }
 
-function unbindDragEvents(){
+function nuUnbindDragEvents(){
     $(document).off('.nuformdrag');
 }
 
-function updateDragFieldsListbox(){
+function nuUpdateDragFieldsListbox(){
     $('#nuDragOptionsFields option:selected',window.parent.document.body).removeAttr('selected');
     $('.nuDragSelected').each(function(){
         $('#nuDragOptionsFields option[id="drag_'+$(this).prop('id')+'"]',window.parent.document.body).prop('selected','selected');
     });
-    checkIfMovingTabOrderAllowed($('#nuDragOptionsFields',window.parent.document.body));
+    nuCheckIfMovingTabOrderAllowed($('#nuDragOptionsFields',window.parent.document.body));
 }
 
-function createBox(event){
+function nuCreateBox(event){
 	
 	var e = document.createElement('div');
 	e.setAttribute('id', 'nuSelectBox');
@@ -106,7 +106,7 @@ function createBox(event){
 	});
 }
 
-function dragBox(event) {	
+function nuDragBox(event) {	
 
 	window.lastMoveX = window.moveX;
 	window.lastMoveY = window.moveY;
@@ -114,15 +114,15 @@ function dragBox(event) {
 	window.moveY = event.clientY - window.startY;
 	
 	if($('#nuSelectBox').length > 0) {
-		resizeDrag(event);
+		nuResizeDrag(event);
 	} else {
-		if($('#nuSelectBox').length == 0 && canMove()){ 
-			moveSelected();
+		if($('#nuSelectBox').length == 0 && nuCanMove()){ 
+			nuMoveSelected();
 		}
 	}
 }
 
-function resizeDrag(event) {
+function nuResizeDrag(event) {
 
 	var x = parseInt($('#nuSelectBox').css('left'));
 	var y = parseInt($('#nuSelectBox').css('top'));
@@ -155,10 +155,10 @@ function resizeDrag(event) {
 	}
 }
 
-function removeBox(ctrlKey) {
+function nuRemoveBox(ctrlKey) {
 	
 	var L = parseInt($('#nuSelectBox').css('left'));
-	var T = parseInt($('#nuSelectBox').css('top')) - getTopArea();
+	var T = parseInt($('#nuSelectBox').css('top')) - nuGetTopArea();
 	var B = T + parseInt($('#nuSelectBox').css('height'));
 	var R = L + parseInt($('#nuSelectBox').css('width'));
 	$('#nuSelectBox').remove();
@@ -209,7 +209,7 @@ function removeBox(ctrlKey) {
 	
 }
 
-function initialiseDragState(){
+function nuInitialiseDragState(){
     window.nuDragOptionsState = {
         'tabs': []
     };
@@ -235,7 +235,7 @@ function initialiseDragState(){
     });
 }
 
-function setTabOrderDataAttrs(){
+function nuSetTabOrderDataAttrs(){
     var currentTabNo = $('div.nuTabSelected[id^="nuTab"]').attr('data-nu-tab-filter');
     for(var i=0; i<window.nuDragOptionsState.tabs[currentTabNo].objects.length; i++){
         var field = window.nuDragOptionsState.tabs[currentTabNo].objects[i];
@@ -243,7 +243,7 @@ function setTabOrderDataAttrs(){
     }
 }
 
-function moveUpOrder(){
+function nuMoveUpOrder(){
     var currentTabNo = $('div.nuTabSelected[id^="nuTab"]', $('#nuDragDialog iframe').contents()).attr('data-nu-tab-filter');
     var currentSelectedFieldOption = $('select#nuDragOptionsFields option:selected');
     for(var i=0; i<$('#nuDragDialog iframe')[0].contentWindow.nuDragOptionsState.tabs[currentTabNo].objects.length; i++){
@@ -253,7 +253,7 @@ function moveUpOrder(){
             if(field.id == $('select#nuDragOptionsFields option')[0].id.replace('drag_',''))
                 return;
             var previousFieldDOM = $('select#nuDragOptionsFields option[data-nu-tab-order="'+(Number(currentSelectedFieldOption.attr('data-nu-tab-order'))-10)+'"]');
-            var previousFieldSTATE = findFieldInState(currentTabNo, previousFieldDOM.prop('id').replace('drag_',''));
+            var previousFieldSTATE = nuFindFieldInState(currentTabNo, previousFieldDOM.prop('id').replace('drag_',''));
             field.tab_order = Number(previousFieldDOM.attr('data-nu-tab-order'));
             previousFieldSTATE.tab_order = field.tab_order + 10;
             $('option#drag_'+field.id).attr('data-nu-tab-order',field.tab_order);
@@ -266,7 +266,7 @@ function moveUpOrder(){
     }
 }
 
-function moveDownOrder(){
+function nuMoveDownOrder(){
     var currentTabNo = $('div.nuTabSelected[id^="nuTab"]', $('#nuDragDialog iframe').contents()).attr('data-nu-tab-filter');
     var currentSelectedFieldOption = $('select#nuDragOptionsFields option:selected');
     for(var i=0; i<$('#nuDragDialog iframe')[0].contentWindow.nuDragOptionsState.tabs[currentTabNo].objects.length; i++){
@@ -276,7 +276,7 @@ function moveDownOrder(){
             if(field.id == $('select#nuDragOptionsFields option')[($('select#nuDragOptionsFields option').length-1)].id.replace('drag_',''))
                 return;
             var nextFieldDOM = $('select#nuDragOptionsFields option[data-nu-tab-order="'+(Number(currentSelectedFieldOption.attr('data-nu-tab-order'))+10)+'"]');
-            var nextFieldSTATE = findFieldInState(currentTabNo, nextFieldDOM.prop('id').replace('drag_',''));
+            var nextFieldSTATE = nuFindFieldInState(currentTabNo, nextFieldDOM.prop('id').replace('drag_',''));
             field.tab_order = Number(nextFieldDOM.attr('data-nu-tab-order'));
             nextFieldSTATE.tab_order = field.tab_order - 10;
             $('option#drag_'+field.id).attr('data-nu-tab-order',field.tab_order);
@@ -289,7 +289,7 @@ function moveDownOrder(){
     }
 }
 
-function findFieldInState(tabNo, fieldID){
+function nuFindFieldInState(tabNo, fieldID){
     for(var i=0; i<$('#nuDragDialog iframe')[0].contentWindow.nuDragOptionsState.tabs[tabNo].objects.length; i++){
         if($('#nuDragDialog iframe')[0].contentWindow.nuDragOptionsState.tabs[tabNo].objects[i].id == fieldID)
             return $('#nuDragDialog iframe')[0].contentWindow.nuDragOptionsState.tabs[tabNo].objects[i];
@@ -297,68 +297,68 @@ function findFieldInState(tabNo, fieldID){
     return null;
 }
 
-function createDragOptionsBox(form){
+function nuCreateDragOptionsBox(form){
     var dragOptionsBoxWidth = 330;
     $('#nuDragDialog',window.parent.document.body).css('width',$('#nuDragDialog',window.parent.document.body).width()+dragOptionsBoxWidth);
     var optionsBoxHTML = '<div id="nuDragOptionsBox" class="nuDragOptionsBox" style="width:'+dragOptionsBoxWidth+'px;height:'+$('#nuDragDialog',window.parent.document.body).height()+'px;">'+
         '<div class="nuDragOptionsBoxContainer">'+
             '<div id="dragOptionsTitle" class="nuDragOptionsBoxTitle">Options</div>'+
             '<label for="nuDragOptionsFields" class="nuDragOptionsFieldsLabel">Fields In Tab-order</label>'+
-            '<select multiple id="nuDragOptionsFields" class="nuDragOptionsFields" onchange="updateDragSelections(this);"></select>'+
+            '<select multiple id="nuDragOptionsFields" class="nuDragOptionsFields" onchange="nuUpdateDragSelections(this);"></select>'+
                 '<table>'+
                     '<tbody>'+
                         '<tr>'+
-                            '<td><button class="nuDragOptionsButton nuButton" onclick="spaceVertically();">Space Vertically</button></td>'+
-                            '<td><button class="nuDragOptionsButton nuButton" onclick="alignLeft();">Align To Left</button></td>'+
+                            '<td><button class="nuDragOptionsButton nuButton" onclick="nuSpaceVertically();">Space Vertically</button></td>'+
+                            '<td><button class="nuDragOptionsButton nuButton" onclick="nuAlignLeft();">Align To Left</button></td>'+
                         '</tr>'+
                         '<tr>'+
-                            '<td><button class="nuDragOptionsButton nuButton" onclick="spaceHorizontally();">Space Horizontally</button></td>'+
-                            '<td><button class="nuDragOptionsButton nuButton" onclick="alignRight();">Align To Right</button></td>'+
+                            '<td><button class="nuDragOptionsButton nuButton" onclick="nuSpaceHorizontally();">Space Horizontally</button></td>'+
+                            '<td><button class="nuDragOptionsButton nuButton" onclick="nuAlignRight();">Align To Right</button></td>'+
                         '</tr>'+
                         '<tr>'+
                             '<td></td>'+
-                            '<td><button class="nuDragOptionsButton nuButton" onclick="alignTop();">Align To Top</button></td>'+
+                            '<td><button class="nuDragOptionsButton nuButton" onclick="nuAlignTop();">Align To Top</button></td>'+
                         '</tr>'+
                         '<tr>'+
-                            '<td><button id="move_up_btn" class="nuDragOptionsButton nuButton" onclick="moveUpOrder();">Move Up Order</button></td>'+
-                            '<td><button class="nuDragOptionsButton nuButton" onclick="alignBottom();">Align To Bottom</button></td>'+
+                            '<td><button id="move_up_btn" class="nuDragOptionsButton nuButton" onclick="nuMoveUpOrder();">Move Up Order</button></td>'+
+                            '<td><button class="nuDragOptionsButton nuButton" onclick="nuAlignBottom();">Align To Bottom</button></td>'+
                         '</tr>'+
                         '<tr>'+
-                            '<td><button id="move_down_btn" class="nuDragOptionsButton nuButton" onclick="moveDownOrder();">Move Down Order</button></td>'+
-                            '<td><button class="nuDragOptionsButton nuButton" style="font-weight: bold;" onclick="saveNuDrag();">Save</button></td>'+
+                            '<td><button id="move_down_btn" class="nuDragOptionsButton nuButton" onclick="nuMoveDownOrder();">Move Down Order</button></td>'+
+                            '<td><button class="nuDragOptionsButton nuButton" style="font-weight: bold;" onclick="nuSaveNuDrag();">Save</button></td>'+
                         '</tr>'+
                     '</tbody>'+
                 '</table>'+
         '</div>'+
     '</div>';
     $('#nuDragDialog',window.parent.document.body).append(optionsBoxHTML);
-    initialiseDragState();
-    populateFieldsList(0);
+    nuInitialiseDragState();
+    nuPopulateFieldsList(0);
     $('.nuTab[id^="nuTab"]').prop('onclick','');
     $('.nuTab[id^="nuTab"]').click(function(){
         if($(this).hasClass('nuTabSelected'))
             return;
-        clearFieldsList();
-        unselectAllDragObjects();
+        nuClearFieldsList();
+        nuUnselectAllDragObjects();
         nuSelectTab(this);
-        populateFieldsList(Number($(this).attr('data-nu-tab-filter')));
-        checkIfMovingTabOrderAllowed($('#nuDragOptionsFields',window.parent.document.body));
+        nuPopulateFieldsList(Number($(this).attr('data-nu-tab-filter')));
+        nuCheckIfMovingTabOrderAllowed($('#nuDragOptionsFields',window.parent.document.body));
     });
-    checkIfMovingTabOrderAllowed($('#nuDragOptionsFields'));
+    nuCheckIfMovingTabOrderAllowed($('#nuDragOptionsFields'));
 }
 
-function sortAsc(a,b) {
+function nuSortAsc(a,b) {
     return a - b;
 }
 
-function spaceHorizontally(){
+function nuSpaceHorizontally(){
     var fieldLeftsToSort = [];
     var fieldsToChange = [];
     $('div.nuDragSelected',$('#nuDragDialog iframe').contents()).each(function(){
         fieldLeftsToSort.push($(this).position().left);
         fieldsToChange.push($(this).prop('id'));
     });
-    fieldLeftsToSort.sort(sortAsc);
+    fieldLeftsToSort.sort(nuSortAsc);
     var difference = fieldLeftsToSort[(fieldLeftsToSort.length-1)] - fieldLeftsToSort[0];
     if(difference == 0)
         return false;
@@ -373,14 +373,14 @@ function spaceHorizontally(){
     }
 }
 
-function spaceVertically(){
+function nuSpaceVertically(){
     var fieldHeightsToSort = [];
     var fieldsToChange = [];
     $('div.nuDragSelected',$('#nuDragDialog iframe').contents()).each(function(){
         fieldHeightsToSort.push($(this).position().top);
         fieldsToChange.push($(this).prop('id'));
     });
-    fieldHeightsToSort.sort(sortAsc);
+    fieldHeightsToSort.sort(nuSortAsc);
     var difference = fieldHeightsToSort[(fieldHeightsToSort.length-1)] - fieldHeightsToSort[0];
     if(difference == 0)
         return false;
@@ -395,7 +395,7 @@ function spaceVertically(){
     }
 }
 
-function alignRight(){
+function nuAlignRight(){
     var rightestFieldID = '';
     var rightestPoint = 0;
     $('div.nuDragSelected',$('#nuDragDialog iframe').contents()).each(function(){
@@ -409,7 +409,7 @@ function alignRight(){
     });
 }
 
-function alignLeft(){
+function nuAlignLeft(){
     var leftestFieldID = '';
     var leftestPoint = 1000000;
     $('div.nuDragSelected',$('#nuDragDialog iframe').contents()).each(function(){
@@ -423,7 +423,7 @@ function alignLeft(){
     });
 }
 
-function alignTop(){
+function nuAlignTop(){
     var highestFieldID = '';
     var highestPoint = 1000000;
     $('div.nuDragSelected',$('#nuDragDialog iframe').contents()).each(function(){
@@ -437,7 +437,7 @@ function alignTop(){
     });
 }
 
-function alignBottom(){
+function nuAlignBottom(){
     var lowestFieldID = '';
     // its 0 here because technically top: 0px is the highest...
     var lowestPoint = 0;
@@ -452,12 +452,11 @@ function alignBottom(){
     });
 }
 
-function saveNuDrag(){
+function nuSaveNuDrag(){
     $("body").append('<div id="overlay" style="background-color:grey;position:absolute;top:0;left:0;height:100%;width:100%;z-index:999;"></div>');
     var w       = $('#nuDragDialog iframe')[0].contentWindow.nuGetFormState();
     w.call_type = 'nudragsave';
-	
-    if(!putFieldDimensionsIntoState()){
+    if(!nuPutFieldDimensionsIntoState()){
         return;
 	}
 	
@@ -469,10 +468,10 @@ function saveNuDrag(){
         dataType : "json"
         }).done(function(data){
             $("#overlay").remove();
-            if(data.success){
-                $('div#nuDragDialog div#dialogTitle img#dialogClose').click();
+            if(nuErrorMessages(data.errors)){
+                alert(data.errors[0]);
             } else {
-                alert(data.error);
+                $('div#nuDragDialog div#dialogTitle img#dialogClose').click();
             }
         }).fail(function(xhr, err){
             $("#overlay").remove();
@@ -480,7 +479,7 @@ function saveNuDrag(){
         });
 }
 
-function putFieldDimensionsIntoState(){
+function nuPutFieldDimensionsIntoState(){
     for(var tabNo=0; tabNo<$('#nuDragDialog iframe')[0].contentWindow.nuDragOptionsState.tabs.length; tabNo++){
         for(var fieldNo=0; fieldNo<$('#nuDragDialog iframe')[0].contentWindow.nuDragOptionsState.tabs[tabNo].objects.length; fieldNo++){
             var field = $('#nuDragDialog iframe')[0].contentWindow.nuDragOptionsState.tabs[tabNo].objects[fieldNo];
@@ -500,15 +499,15 @@ function putFieldDimensionsIntoState(){
     return true;
 }
 
-function updateDragSelections(fieldsSelectBox){
-    unselectAllDragObjects();
-    checkIfMovingTabOrderAllowed(fieldsSelectBox);
+function nuUpdateDragSelections(fieldsSelectBox){
+    nuUnselectAllDragObjects();
+    nuCheckIfMovingTabOrderAllowed(fieldsSelectBox);
     $('option:selected', fieldsSelectBox).each(function(){
         $('#'+$(this).prop('id').replace('drag_',''),$('#nuDragDialog iframe').contents()).addClass('nuDragSelected');
     });
 }
 
-function checkIfMovingTabOrderAllowed(fieldsSelectBox){
+function nuCheckIfMovingTabOrderAllowed(fieldsSelectBox){
     if($('option:selected', fieldsSelectBox).length == 1){
         $('#move_down_btn, #move_up_btn').removeAttr('disabled');
         $('#move_down_btn, #move_up_btn').removeClass('nuDragOptionsButtonDisabled');
@@ -522,7 +521,7 @@ function checkIfMovingTabOrderAllowed(fieldsSelectBox){
     }
 }
 
-function unselectAllDragObjects(){
+function nuUnselectAllDragObjects(){
     $('.nuDragSelected').each(function(){
         $(this).removeClass('nuDragSelected');
     });
@@ -531,12 +530,12 @@ function unselectAllDragObjects(){
     });
 }
 
-function clearFieldsList(){
+function nuClearFieldsList(){
     $('#nuDragOptionsFields',window.parent.document.body).html('');
 }
 
-function populateFieldsList(currentlySelectedTabNo){
-    var tabOrderSearch = getMinTabOrderInTab(currentlySelectedTabNo);
+function nuPopulateFieldsList(currentlySelectedTabNo){
+    var tabOrderSearch = nuGetMinTabOrderInTab(currentlySelectedTabNo);
     var field = null;
     for(var i=0; i<window.nuDragOptionsState.tabs[currentlySelectedTabNo].objects.length; i++){
         for(var j=0; j<window.nuDragOptionsState.tabs[currentlySelectedTabNo].objects.length; j++){
@@ -546,10 +545,10 @@ function populateFieldsList(currentlySelectedTabNo){
         }
         tabOrderSearch = tabOrderSearch + 10;
     }
-    setTabOrderDataAttrs();
+    nuSetTabOrderDataAttrs();
 }
 
-function getMinTabOrderInTab(currentTabNo){
+function nuGetMinTabOrderInTab(currentTabNo){
     var minTabOrder = 1000000;
     for(var i=0; i<window.nuDragOptionsState.tabs[currentTabNo].objects.length; i++){
         if(window.nuDragOptionsState.tabs[currentTabNo].objects[i].tab_order < minTabOrder)
@@ -560,7 +559,7 @@ function getMinTabOrderInTab(currentTabNo){
     return minTabOrder;
 }
 
-function moveSelected() {
+function nuMoveSelected() {
 
 	var s = document.getElementsByClassName('nuDragSelected');
 	var l = 0;
@@ -578,7 +577,7 @@ function moveSelected() {
 	}
 }
 
-function canMove() {
+function nuCanMove() {
 	
 	var s = document.getElementsByClassName('nuDragSelected');
 	var l = 0;
@@ -607,6 +606,6 @@ function canMove() {
 
 }
 
-function getTopArea() {
+function nuGetTopArea() {
 	return 115; //need to do this more accurately
 }

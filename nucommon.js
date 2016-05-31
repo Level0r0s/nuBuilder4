@@ -54,7 +54,7 @@ function nuFormState(){
 function nuGetBreadcrumb(b){
 
 	window.nuBC 	= window.nuBC.slice(0, b + 1);
-	nuGetForm(window.nuBC[b].form_id, window.nuBC[b].record_id, '', 1);
+	nuGetForm(window.nuBC[b].form_id, window.nuBC[b].record_id, window.nuBC[b].filter,  1);
 	
 }
 

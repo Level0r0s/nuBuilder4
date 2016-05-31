@@ -583,8 +583,6 @@ function nuBrowseRows($f){
 
 	$w	= nuBrowseWhereClause($flds, $filter . ' ' . $search);
 	
-nudebug("$filter   $search " . print_r($P,1));
-
 	if(trim($w) != '()'){
 		$S->setWhere(' WHERE ' . $w);
 	}

@@ -51,7 +51,7 @@ function nuBuildForm(f){
 	$('#nuSearchField').focus();
 
     if(f.record_id == '-2')
-        createDragOptionsBox(f);
+        nuCreateDragOptionsBox(f);
 	
 }
 
@@ -107,9 +107,9 @@ function nuAddActionButtons(f){
 
 		var v = window.nuBC[window.nuBC.length-1].search;
 		var f = window.nuBC[window.nuBC.length-1].filter;
-
+console.log('f',f);
 		$('#nuActionHolder').append("<input id='nuSearchField' type='text' class='nuSearch' onkeypress='nuSearchPressed(event)' value='" + v + "'>&nbsp;");
-		$('#nuActionHolder').append("<input id='nuFilter' style='visibility:hidden;width:0px' value='" + v + "'>");
+		$('#nuActionHolder').append("<input id='nuFilter' style='visibility:hidden;width:0px' value='" + f + "'>");
 		$('#nuActionHolder').append("<input id='nuSearchButton' type='button' class='nuButton' value='Search' onclick='nuSearchAction()'>&nbsp;");
 		
 	}
@@ -1238,11 +1238,9 @@ function nuSearchPressed(e){
 
 function nuSearchAction(){
 
-	var f									= window.nuBC[window.nuBC.length-1].filter;
 	window.nuBC[window.nuBC.length-1].search	= String($('#nuSearchField').val()).replaceAll("'","&#39;", true);
-	window.nuBC[window.nuBC.length-1].filter	= String(f).replaceAll("'","&#39;", true);
+	window.nuBC[window.nuBC.length-1].filter	= String($('#nuFilter').val()).replaceAll("'","&#39;", true);
 	nuGetBreadcrumb(nuBC.length - 1);
-	window.nuBC[window.nuBC.length-1].filter	= f
 	
 }
 
@@ -1256,17 +1254,17 @@ function nuAddAction(){
 
 function nuSortBrowse(c){
 	
-	var l	= nuBC.length - 1;
-	var B 	= nuBC[l];
-console.log(nuBC[nuBC.length - 1].filter, 1234);	
+	var l			= nuBC.length - 1;
+	var B 			= nuBC[l];
+	nuBC[l].filter	= $('#nuFilter').val();
+	
 	if(c == B.sort){
 		nuBC[l].sort_direction 	= (B.sort_direction == 'asc' ? 'desc' : 'asc');
 	}else{
 		nuBC[l].sort 				= c;
 		nuBC[l].sort_direction	= 'asc';
 	}
-	
-console.log(nuBC[nuBC.length - 1].filter,888);	
+
 	nuSearchAction();
 	
 }
