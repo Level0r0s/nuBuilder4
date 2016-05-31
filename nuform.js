@@ -252,6 +252,7 @@ function nuDRAG(w, i, l, p, prop){
 	
 	$('#' + id).text(id);
 	$('#' + id).attr('data-drag',1);
+    $('#' + id).attr('data-nu-object-id', prop.objects[i].object_id)
 		
 	nuAddDataTab(id, prop.objects[i].tab, p);
 		

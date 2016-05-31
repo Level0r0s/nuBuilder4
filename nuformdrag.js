@@ -221,6 +221,7 @@ function nuInitialiseDragState(){
         $('div#nuRecordHolder div[data-nu-tab="'+$(this).prop('id').replace('nuTab','')+'"]').each(function(){
             var objectPosition = $(this).position();
             var objectProperties = {
+                'object_id': $(this).attr('data-nu-object-id'),
                 'id': $(this).prop('id'),
                 'left': objectPosition.left,
                 'top': objectPosition.top,
