@@ -136,7 +136,8 @@ function nuGetLookupId(pk, id){
 			if(nuErrorMessages(fm.errors)){
 			}else{
 				$('#' + id).change();
-				window.parent.nuPopulateLookup(fm, id);
+                window.nuPopulateLookup(fm, id);
+                //window.parent.nuPopulateLookup(fm, id);
 			}
 			
 		}).fail(function(xhr, err){
