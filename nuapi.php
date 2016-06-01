@@ -17,8 +17,6 @@
 	if($P['call_type'] == 'update')		{$f->forms[0]->record_id		= nuUpdateData();}
     if($P['call_type'] == 'nudragsave')		{$f->forms[0]					= nuDragSave($P);}
 	
-nudebug('api ' . print_r($f->forms[0],1));
-
 	$f->forms[0]->dimensions				= $s->dimensions;
 	$f->forms[0]->session_id				= $s->session_id;
 	$f->forms[0]->errors					= $_POST['nuErrors'];

@@ -1075,7 +1075,7 @@ function nuOptionsList(f, t, p){
 	
 	for(var i = 0 ; i < list.length ; i++){
 		
-		ul += '<p><li class=&quot;nuOptions&quot; onclick="$(\'#nuOptionsList\').remove();' + list[i][1] + '">' + list[i][0] + '</li>';
+		ul += '<p><li class="nuOptions" onclick="$(\'#nuOptionsList\').remove();' + list[i][1] + '">' + list[i][0] + '</li>';
 		
 	}
 	
@@ -1095,48 +1095,12 @@ function nuOptionsList(f, t, p){
 	'top' 				: p == 'nuTabHolder' ? null : 50, 
 	'position' 			: 'absolute', 
 	'text-align' 			: 'center', 
+	'padding' 			: '5px 0px 5px', 
 	'border-style' 		: 'none'
 	})
-	.addClass('nuOptionList')
+	.addClass('nuOptionsList')
 	.html(ul);
 	
-}
-
-
-function nuArrangeTab(p, f){
-
-	if(window.nuBC[window.nuBC.length-1].record_id != '-2') {
-
-		var FID	= nuBC[nuBC.length -1].form_id;
-		var PNG	= ['numove.png','nuform.png','nuobjects.png'];
-		var TIT	= ['Move Objects','Form Properties','List Objects on Form'];
-		var CLK	= Array();
-		
-		CLK.push('nuBuildPopup("' + f + '", "-2");');
-		CLK.push('nuBuildPopup("nuform", "' + f + '");');
-		CLK.push('nuBuildPopup("nuobject", "", "' + f + '");');
-
-
-		for(var i = 0 ; i < PNG.length ; i++){
-				
-			var imgId  = p + 'nuArrange' + i;
-			var img    = document.createElement('img');
-			img.setAttribute('id', imgId);
-			$('#' + p + 'nuTabHolder').append(img);
-			$('#' + imgId)
-			.attr('src', PNG[i])
-			.attr('onclick', CLK[i])
-			.css({'width'		: 12, 
-			'height' 		: 12, 
-			'margin' 		: '0px 0px 0px 6px', 
-			'border-style' 	: 'none'})
-			.attr('title', TIT[i])
-			.addClass('nuIcon');
-			
-		}
-		
-	}
-   
 }
 
 function nuSelectTab(tab){
@@ -1372,7 +1336,7 @@ function nuSelectBrowse(t){
 	var i 	= window.nuTARGET;
 	var p	= $('#' + t.id).attr('data-nu-primary-key');
 	var f	= nuBC[nuBC.length - 1].form_id;
-	
+	console.log(y);
 	if(y == 'browse'){
 		
 		nuGetForm(f, p);
