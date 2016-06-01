@@ -1460,7 +1460,7 @@ function nuLookupListItems(fm, h, w, d){
 		ht 	+= 'data-nu-id="' 		+ v[i][0] + '" ';
 		ht 	+= 'data-nu-code="' 		+ v[i][1] + '" ';
 		ht 	+= 'data-nu-description="' + v[i][2] + '" ';
-		ht 	+= 'onclick="nuSelectLookupList(this)" ';
+		ht 	+= 'onmousedown="nuSelectLookupList(this,event)" ';
 		ht 	+= 'class="nuLookupList" ';
 		ht 	+= 'style="width:' + (w + d + 3) + 'px;height:' + h + 'px">';
 		ht 	+= '<div style="width:' + (w + 20) + 'px;display:inline-block">' + String(v[i][1]).replace(srch, repl) + '</div>';
@@ -1472,13 +1472,11 @@ function nuLookupListItems(fm, h, w, d){
 	return ht;
 }
 
-function nuSelectLookupList(t){
-	
+function nuSelectLookupList(t, e){
+	e.preventDefault();
 	var p = $('#' + t.id).attr('data-nu-id');
 	var i = $('#' + t.id).attr('data-nu-target');
-
 	nuGetLookupId(p, i);
-	
 }
 
 function nuLookupKeyDown(e){
@@ -1549,7 +1547,6 @@ function nuLookupKeyDown(e){
 }
 
 function nuLookupBlur(e){
-
 	if(window.nuLookupWas != e.target.value && window.nuChangeLookup){
 	
 		if($('.nuLookupListSelect').length == 0){				//-- nothing selected from Lookup List
