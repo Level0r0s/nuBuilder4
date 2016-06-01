@@ -634,6 +634,8 @@ function nuSUBFORM(w, i, l, p, prop){
 
 	if(SF.subform_type == 'f'){
         
+        rowTop = 33;
+
 		var tabId  = id + 'nuTabHolder';
 		var tabDiv = document.createElement('div');
 		tabDiv.setAttribute('id', tabId);
@@ -641,11 +643,11 @@ function nuSUBFORM(w, i, l, p, prop){
 		$('#' + tabId).css({'top'      : 0,
 						'left'       	: 0,
 						'width'      	: rowWidth - 45,
-						'height'     	: 33,
+						'height'     	: rowTop,
 						'overflow-x'	: 'hidden',
 						'overflow-y'	: 'hidden',
 						'position'	: 'absolute',
-						'padding'	: '16px 0px 0px 0px'
+						'padding'	: '12px 0px 0px 0px'
 		}).addClass('nuTabHolder');
 
 		nuAddEditTabs(id, SF.forms[0]);
