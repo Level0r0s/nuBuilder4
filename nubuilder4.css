@@ -111,9 +111,23 @@ input {
   display: inline-block;
 }
 
+.nuOptionsList {
+	
+   background-color: green;
+   -webkit-box-shadow: 5px 5px 5px 0px rgba(150,147,150,1);
+   -moz-box-shadow: 5px 5px 5px 0px rgba(150,147,150,1);
+   box-shadow: 5px 5px 5px 0px rgba(150,147,150,1);
+   margin: 5px 0px;
+   font-size:12px;
+}
 
-.nuIcon:hover {
-  background-color: grey;
+.nuOptions {
+   background-color: orange
+}
+
+.nuOptions:hover {
+  cursor: pointer;
+   background-color: green
 }
 
 .nuRecordHolder {

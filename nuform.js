@@ -41,6 +41,7 @@ function nuBuildForm(f){
 	
 	nuAddBreadcrumbs();
 	nuAddEditTabs('', f);
+	nuOptions('nuTabHolder', f.form_id);
 	nuAddActionButtons(f);
 	nuRecordProperties(f, '');
 	if(f.record_id != ''){
@@ -170,7 +171,7 @@ function nuBuildEditObjects(f, p, o, prop){
 				
 			}else if(t == 'subform' && p == ''){
 				
-				l = l + nuSUBFORM(f, i, l, p, prop);
+				l = l + nuSUBFORM(f, i, l, p, prop, o.subform_fk);
 				
 			}
 			if(prop.objects[i].display == 0){$('#' + p + prop.objects[i].id).css('visibility', 'hidden');}
@@ -620,8 +621,8 @@ function nuSUBFORM(w, i, l, p, prop){
 	}
 	
     if(SF.delete == '1'){
-//        nuBuildSubformDeleteTitle(rowWidth - 40, id, fms[0].form_id);
-        rowWidth 			= rowWidth - 3;
+
+		rowWidth 		= rowWidth - 3;
 		
     }else{
 		
@@ -649,10 +650,9 @@ function nuSUBFORM(w, i, l, p, prop){
 
 		nuAddEditTabs(id, SF.forms[0]);
 		
-    }else{
-//		nuArrangeTab(p, SF.form);
 	}
 
+	nuOptions(id, SF.sf_form_id);
 	
     var scrId		= id + 'scrollDiv';
 	var scrDiv	= document.createElement('div');
@@ -943,9 +943,7 @@ function nuAddEditTabs(p, w){
         l = nuBrowseTitle(w.browse_columns[i], i, l);
 
     }
-	
-	nuArrangeTab(p, w.form_id);
-	
+
 	if(w.browse_columns.length > 0){
 		nuBrowseTable();
 	}
@@ -1030,6 +1028,80 @@ function nuEditTab(p, t, i){
 	
 
 }
+
+function nuOptions(p, f){
+
+	if(window.nuBC[window.nuBC.length-1].record_id != '-2') {
+
+		var imgId  = p + 'nuOptions';
+		var img    = document.createElement('img');
+		
+		img.setAttribute('id', imgId);
+		$('#' + p).append(img);
+		$('#' + imgId)
+		.attr('src', 'nuoptions.png')
+		.attr('onclick', 'nuOptionsList("' + f + '", this, "' + p + '")')
+		.css({'width'		: 12, 
+		'height' 		: 12, 
+		'right' 			: 10, 
+		'position' 		: 'absolute', 
+		'border-style' 	: 'none'})
+		.attr('title', 'Options')
+		.addClass('nuIcon')
+		.hover(function() {
+			$( this ).attr('src', 'nuoptions_red.png');
+		}, function() {
+			$( this ).attr('src', 'nuoptions.png');
+		});
+		
+		if(p == 'nuTabHolder'){
+			$('#' + imgId).css('margin', '-5px 0px 0px 0px');
+		}else{
+			$('#' + imgId).css('top', 10);
+		}
+		
+	}
+   
+}
+
+
+function nuOptionsList(f, t, p){
+
+	var list	= [];
+	var ul	= '<ul>';
+	list.push(['Arrange Objects', 'nuBuildPopup(&quot;' + f + '&quot;, &quot;-2&quot;)']);
+	list.push(['Form Properties', 'nuBuildPopup(&quot;nuform&quot;, &quot;' + f + '&quot;)']);
+	list.push(['Form Object List', 'nuBuildPopup(&quot;nuobject&quot;, &quot;&quot;, &quot;' + f + '&quot;)']);
+	
+	for(var i = 0 ; i < list.length ; i++){
+		
+		ul += '<p><li class=&quot;nuOptions&quot; onclick="$(\'#nuOptionsList\').remove();' + list[i][1] + '">' + list[i][0] + '</li>';
+		
+	}
+	
+	ul += '</ul>';
+
+
+	$('#nuOptionsList').remove();
+	var divId  = 'nuOptionsList';
+	var div    = document.createElement('div');
+	div.setAttribute('id', divId);
+	$('#' + p).append(div);
+	$('#' + divId)
+	.attr('src', 'nuoptions.png')
+	.css({'width'			: 200, 
+	'height' 			: 100, 
+	'right' 				: 5, 
+	'top' 				: p == 'nuTabHolder' ? null : 50, 
+	'position' 			: 'absolute', 
+	'text-align' 			: 'center', 
+	'border-style' 		: 'none'
+	})
+	.addClass('nuOptionList')
+	.html(ul);
+	
+}
+
 
 function nuArrangeTab(p, f){
 

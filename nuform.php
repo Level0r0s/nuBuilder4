@@ -90,16 +90,16 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 
 		if($r->sob_all_type == 'subform'){
 
-			$r->subform_fk      	= $R;
+			//$r->subform_fk      	= $R;
+			$o->subform_fk      	= $R;
 			$o->subform_type    	= $r->sob_subform_type;
 			$o->delete          	= $r->sob_subform_delete;
 			$f->foreign_key_name 	= $r->sob_subform_foreign_key;
 			$o->add             	= $r->sob_subform_add;
 			$o->dimensions		= nuFormDimensions($r->sob_subform_zzzzsys_form_id);
 			$o->forms           	= nuGetSubformRecords($r, $o->add);
-			$o->form				= $r->sob_subform_zzzzsys_form_id;
+			$o->sf_form_id		= $r->sob_subform_zzzzsys_form_id;
 			$o->browse_columns  	= array();
-
 		}
 
 		$o->display				= nuDisplay($r->sob_all_display_condition);
@@ -119,8 +119,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 		}
 
 		$a[]    				= $o;
-
-    }
+	}
     
     $f->buttons			= nuButtonList($f);
     $f->tabs 				= nuRefineTabList($tabs);
