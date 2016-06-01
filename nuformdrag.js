@@ -74,7 +74,7 @@ function nuBindDragEvents(){
         nuUpdateDragFieldsListbox();
     });
 
-    $(document).on('keydown.nuformdrag', function(e){
+    var nuDragKeydownListener = function(e){
         var keyDirection = '';
         // if left
         if(e.keyCode == 37){
@@ -129,7 +129,10 @@ function nuBindDragEvents(){
                 $(this).css(prop,val+'px');
             });
         }
-    });
+    }
+
+    $(document).on('keydown.nuformdrag', nuDragKeydownListener);
+    $(window.parent.document).on('keydown.nuformdrag', nuDragKeydownListener);
 
 }
 
@@ -360,7 +363,7 @@ function nuCreateDragOptionsBox(form){
     var dragOptionsBoxWidth = 330;
     var dragOptionsBoxHeight = 500;
     $('#nuDragDialog',window.parent.document.body).css('width',$('#nuDragDialog',window.parent.document.body).width()+dragOptionsBoxWidth);
-    var optionsBoxHTML = '<div id="nuDragOptionsBox" class="nuDragOptionsBox" style="width:'+dragOptionsBoxWidth+'px;height:'+dragOptionsBoxHeight+'px;">'+
+    var optionsBoxHTML = '<div id="nuDragOptionsBox" class="nuDragOptionsBox" style="width:'+dragOptionsBoxWidth+'px;height:100%;min-height:'+dragOptionsBoxHeight+'px;">'+
         '<div class="nuDragOptionsBoxContainer">'+
             '<div id="dragOptionsTitle" class="nuDragOptionsBoxTitle">Options</div>'+
             '<label for="nuDragOptionsFields" class="nuDragOptionsFieldsLabel">Fields In Tab-order</label>'+
@@ -583,11 +586,13 @@ function nuSaveNuDrag(){
         data     : {nuSTATE : w},
         dataType : "json"
         }).done(function(data){
-            $("#overlay").remove();
             if(nuErrorMessages(data.errors)){
+                $("#overlay").remove();
                 alert(data.errors[0]);
             } else {
                 $('div#nuDragDialog div#dialogTitle img#dialogClose').click();
+                nuGetBreadcrumb(window.nuBC.length-1);
+                $("#overlay").remove();
             }
         }).fail(function(xhr, err){
             $("#overlay").remove();
