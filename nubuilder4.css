@@ -507,22 +507,16 @@ input {
     padding-left: 15px;
 }
 
-.nuDragOptionsBoxTitle {
-    margin-top: 40px;
-    font-weight: bold;
-    font-size: 14px;
-}
-
 .nuDragOptionsFieldsLabel {
     display: block;
     position: relative;
     text-align: left;
-    margin-top: 15px;
+    margin-top: 25px;
 }
 
 .nuDragOptionsFields {
     display: block;
-    width: 260px;
+    width: 308px;
     height: 200px;
 }
 
