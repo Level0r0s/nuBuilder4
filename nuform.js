@@ -1100,8 +1100,8 @@ function nuOptionsList(f, t, p){
 	$('#' + divId)
 	.attr('src', 'nuoptions.png')
 	.css('top',  p == 'nuTabHolder' ? null : 50)
-	.css({'top':top - 5, 'left': left - 200})
-	.addClass('nuOptionsList')
+	.css({'top':top - 5, 'left': left - 150})
+	.addClass('nuOptionsBox')
 	.html(ul);
 	
 }
