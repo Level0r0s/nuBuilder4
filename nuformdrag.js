@@ -361,12 +361,12 @@ function nuFindFieldInState(tabNo, fieldID){
 
 function nuCreateDragOptionsBox(form){
     var dragOptionsBoxWidth = 330;
-    var dragOptionsBoxHeight = 500;
+    var dragOptionsBoxMinHeight = 470;
     $('#nuDragDialog',window.parent.document.body).css('width',$('#nuDragDialog',window.parent.document.body).width()+dragOptionsBoxWidth);
-    var optionsBoxHTML = '<div id="nuDragOptionsBox" class="nuDragOptionsBox" style="width:'+dragOptionsBoxWidth+'px;height:100%;min-height:'+dragOptionsBoxHeight+'px;">'+
+    var optionsBoxHTML = '<div id="nuDragOptionsBox" class="nuDragOptionsBox" style="width:'+dragOptionsBoxWidth+'px;height:100%;min-height:'+dragOptionsBoxMinHeight+'px;">'+
         '<div class="nuDragOptionsBoxContainer">'+
             '<div id="dragOptionsTitle" class="nuDragOptionsBoxTitle">Options</div>'+
-            '<label for="nuDragOptionsFields" class="nuDragOptionsFieldsLabel">Fields In Tab-order</label>'+
+            '<label for="nuDragOptionsFields" class="nuDragOptionsFieldsLabel">Objects Taborder</label>'+
             '<select multiple id="nuDragOptionsFields" class="nuDragOptionsFields" onchange="nuUpdateDragSelections(this);"></select>'+
                 '<table>'+
                     '<tbody>'+
@@ -387,16 +387,16 @@ function nuCreateDragOptionsBox(form){
                             '<td><button class="nuDragOptionsButton nuButton" onclick="nuAlignBottom();">Align To Bottom</button></td>'+
                         '</tr>'+
                         '<tr>'+
-                            '<td><button class="nuDragOptionsButton nuButton" onclick="nuResizeToLowest();">Resize To Lowest</button></td>'+
+                            '<td><button class="nuDragOptionsButton nuButton" onclick="nuResizeToLowest();">Resize To Shortest</button></td>'+
                             '<td><button class="nuDragOptionsButton nuButton" onclick="nuResizeToThinnest();">Resize To Thinnest</button></td>'+
                         '</tr>'+
                         '<tr>'+
-                            '<td><button class="nuDragOptionsButton nuButton" onclick="nuResizeToHighest();">Resize To Highest</button></td>'+
+                            '<td><button class="nuDragOptionsButton nuButton" onclick="nuResizeToHighest();">Resize To Tallest</button></td>'+
                             '<td><button class="nuDragOptionsButton nuButton" onclick="nuResizeToWidest();">Resize To Widest</button></td>'+
                         '</tr>'+
                         '<tr>'+
                             '<td></td>'+
-                            '<td><button class="nuDragOptionsButton nuButton" style="font-weight: bold;" onclick="nuSaveNuDrag();">Save</button></td>'+
+                            '<td><button class="nuDragOptionsButton nuButton nuSaveButtonEdited" style="font-weight: bold;" onclick="nuSaveNuDrag();">Save</button></td>'+
                         '</tr>'+
                     '</tbody>'+
                 '</table>'+
