@@ -133,7 +133,7 @@ input {
 }
 
 .nuCalendarSelected:hover {
-   background-color	: #bb5d00;
+   background-color	: darkorange;
 }
 
 .nuNotBreadcrumb {
@@ -147,16 +147,27 @@ input {
    -webkit-box-shadow: 5px 5px 5px 0px rgba(150,147,150,1);
    -moz-box-shadow: 5px 5px 5px 0px rgba(150,147,150,1);
    box-shadow: 5px 5px 5px 0px rgba(150,147,150,1);
-   margin: 5px 0px;
    font-size:12px;
    width: 150px; 
    height: 100px;
    right: 5px; 
    position: absolute; 
    text-align: center;
-   padding: 5px 0px 5px;
    border-style: none;
    
+}
+
+.nuOptionsBox ul p {
+    margin: 0px;
+}
+
+.nuOptionsBox ul {
+    margin-top: 20px;
+}
+
+#nuOptionClose {
+    height: 25px;
+    width: 25px;
 }
 
 .nuOptions:hover {
@@ -168,10 +179,10 @@ input {
 
 .nuOptions {
    background-color: orange;
-   width:180px;
-   height:60px;
-   padding: 5px 0px 5px;
-
+   width:100%;
+   height:20px;
+    display: inline-block;
+    padding-top: 4px;
 }
 
 .nuRecordHolder {
