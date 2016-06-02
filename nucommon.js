@@ -466,25 +466,9 @@ function nuReformat(t){
 		
 	}else if(F.type == 'date'){
 
-		var d	= v.split('-');
-		var msk	= F.format.split('-');
-		var s	= [];
-		
-		if(msk[0] == 'mm' || msk[0] == 'mmm'){s[0] = d[0];}
-		if(msk[1] == 'mm' || msk[1] == 'mmm'){s[0] = d[1];}
-		if(msk[2] == 'mm' || msk[2] == 'mmm'){s[0] = d[2];}
-		
-		if(msk[0] == 'dd'){s[1] = d[0];}
-		if(msk[1] == 'dd'){s[1] = d[1];}
-		if(msk[2] == 'dd'){s[1] = d[2];}
-		
-		if(msk[0] == 'yy' || msk[0] == 'yyyy'){s[2] = d[0];}
-		if(msk[1] == 'yy' || msk[1] == 'yyyy'){s[2] = d[1];}
-		if(msk[2] == 'yy' || msk[2] == 'yyyy'){s[2] = d[2];}
+		var vd	= nuJavascriptDateParse(v, F.format);
 
-		var vd	= new Date(s[0] + '-' + s[1] + '-' + s[2]);
-
-		if(vd == 'Invalid Date'){
+		if(vd === null){
 			alert("Invalid Format (expecting '" + F.sample + "')");
 			o.val('');
 			return;
@@ -511,27 +495,41 @@ function nuJavascriptDate(t){
 	var o	= $('#' + t.id);
 	var f	= o.attr('data-nu-format');
 	var v	= String(o.val());
-	
-	if(v == ''){return v;}
-	
-	var F		= nuFormats[f];
+	var F   = nuFormats[f];
 
-	var d	= v.split('-');
-	var msk	= F.format.split('-');
-	var s	= [];
-	
-	if(msk[0] == 'mm' || msk[0] == 'mmm'){s[0] = d[0];}
-	if(msk[1] == 'mm' || msk[1] == 'mmm'){s[0] = d[1];}
-	if(msk[2] == 'mm' || msk[2] == 'mmm'){s[0] = d[2];}
-	
-	if(msk[0] == 'dd'){s[1] = d[0];}
-	if(msk[1] == 'dd'){s[1] = d[1];}
-	if(msk[2] == 'dd'){s[1] = d[2];}
-	
-	if(msk[0] == 'yy' || msk[0] == 'yyyy'){s[2] = d[0];}
-	if(msk[1] == 'yy' || msk[1] == 'yyyy'){s[2] = d[1];}
-	if(msk[2] == 'yy' || msk[2] == 'yyyy'){s[2] = d[2];}
+    if(v == ''){return v;}
 
-	return new Date(s[0] + '-' + s[1] + '-' + s[2]);
+    return nuJavascriptDateParse(v, F.format);
+
+}
+
+function nuJavascriptDateParse(valueStr, FormatStr){
+
+    var msk = FormatStr.split('-');
+    var s   = [];
+    var d   = valueStr.split('-');
+
+    if(msk[0] == 'mm'){s[0] = d[0];}
+    if(msk[1] == 'mm'){s[0] = d[1];}
+    if(msk[2] == 'mm'){s[0] = d[2];}
+    if(msk[0] == 'mmm'){s[0] = nu2Month(d[0]);}
+    if(msk[1] == 'mmm'){s[0] = nu2Month(d[1]);}
+    if(msk[2] == 'mmm'){s[0] = nu2Month(d[2]);}
+    
+    if(msk[0] == 'dd'){s[1] = d[0];}
+    if(msk[1] == 'dd'){s[1] = d[1];}
+    if(msk[2] == 'dd'){s[1] = d[2];}
+    
+    if(msk[0] == 'yy'){s[2] = d[0] >= 50 ? ((new Date().getFullYear())-1).toString().substr(0,2) + d[0] : new Date().getFullYear().toString().substr(0,2) + d[0];}
+    if(msk[1] == 'yy'){s[2] = d[1] >= 50 ? ((new Date().getFullYear())-1).toString().substr(0,2) + d[1] : new Date().getFullYear().toString().substr(0,2) + d[1];}
+    if(msk[2] == 'yy'){s[2] = d[2] >= 50 ? ((new Date().getFullYear())-1).toString().substr(0,2) + d[2] : new Date().getFullYear().toString().substr(0,2) + d[2];}
+    if(msk[0] == 'yyyy'){s[2] = d[0];}
+    if(msk[1] == 'yyyy'){s[2] = d[1];}
+    if(msk[2] == 'yyyy'){s[2] = d[2];}
+
+    var returnDate = new Date(s[2] + '-' + s[0] + '-' + s[1]);
+    if(returnDate == 'Invalid Date')
+        returnDate = null;
+    return returnDate;
 
 }
