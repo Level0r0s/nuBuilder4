@@ -1,5 +1,16 @@
 <?php
 
+function nuBeforeOpen($f){
+	
+	$s		= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$f'";
+	$t		= nuRunQuery($s);
+	$r		= db_fetch_object($t);
+	$before	= nuReplaceHashVariables(trim($r->sfo_before_open_php));
+
+	eval($before);
+	
+}
+
 function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 
     $tabs 			= nuBuildTabList($F);
