@@ -533,3 +533,15 @@ function nuJavascriptDateParse(valueStr, FormatStr){
     return returnDate;
 
 }
+
+
+function nuOpenAce(lang, obj){
+
+	var ts			= new Date().getTime();
+	window.nuAce		= [lang, obj, $('#' + obj).val()];
+	
+	window.open('nuace.html?' + ts);
+
+}
+
+

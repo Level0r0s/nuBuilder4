@@ -14,10 +14,8 @@
 
 <script>
 
-window.c = opener.nuFORM.aceLanguage;
-window.o = opener.nuFORM.aceField;
-window.t = opener.nuFORM.aceTitle;
-window.s = JSON.parse(opener.nuFORM.schema);
+window.c = opener.window.nuAce[0];
+window.o = opener.window.nuAce[1];
 
 function nuLoad(){
 
@@ -34,45 +32,6 @@ function nuLoad(){
 	}
 	if ( window.c == 'Javascript' ) {
 		editor.getSession().setMode({path:"ace/mode/javascript", inline:true});
-		nuPopSnip("nuAddRow(pSubformName)");
-		nuPopSnip("nuAjax(pCode [, pFunctionName])");
-		nuPopSnip("nuBrowseColumns()");
-		nuPopSnip("nuBrowseColumnTotal(columnNumber)");
-		nuPopSnip("nuBrowseRows()");
-		nuPopSnip("nuCloneForm(pThis, formID, recordID)");
-		nuPopSnip("nuCurrentRow()");
-		nuPopSnip("nuEmail(pPDF ,pPHP [,pEmailTo] [,pSubject] [,pMessage] [,pFileName])");
-		nuPopSnip("nuFieldTitle(field , list)");
-		nuPopSnip("nuDisable(object, value)");
-		nuPopSnip("nuEnable(object, value)");
-		nuPopSnip("nuFile(code)");
-		nuPopSnip("nuGetHash(name)");
-		nuPopSnip("nuGetJSONSubform(pSubformName)");
-		nuPopSnip("nuGoToForm([i] [,ask])");
-		nuPopSnip("nuGridClass(row, column, class, remove)");
-		nuPopSnip("nuGridValue(row, column [, value])");
-		nuPopSnip("nuIsGA()");
-		nuPopSnip("nuLoadBrowse()");
-		nuPopSnip("nuLoadBrowseGlobal()");
-		nuPopSnip("nuLoadEdit()");
-		nuPopSnip("nuLoadEditGlobal()");
-		nuPopSnip("nuOnClone()");
-		nuPopSnip("nuOnSave()");
-		nuPopSnip("nuOpenForm(parentFormID, parentRecordID, formID, recordID, formTitle [, filter])");
-		nuPopSnip("nuOpenFormInFrame(formID, recordID, functionName)");
-		nuPopSnip("nuOpenPHPForm(code)");
-		nuPopSnip("nuOpenReportForm(code)");
-		nuPopSnip("nuPrintPDF(pCode [, id])");
-		nuPopSnip("nuReloadForm()");
-		nuPopSnip("nuRemoveModal()");
-		nuPopSnip("nuRowNumber(pThis)");
-		nuPopSnip("nuRowPrefix(pThis)");
-		nuPopSnip("nuRunPHP(pCode [, id])");
-		nuPopSnip("nuRunPrintBrowse()");
-		nuPopSnip("nuSaveForm([ sync = true ] [, operation = 0 ])");
-		nuPopSnip("nuSetHash(name, value)");
-		nuPopSnip("nuSID()");
-		nuPopSnip("nuSubformArray(subformname [, all = true])");	
 	}
 	if ( window.c == 'JSON' ) {
 		editor.getSession().setMode({path:"ace/mode/json", inline:true});
@@ -82,41 +41,12 @@ function nuLoad(){
 	}
 	if ( window.c == 'PHP' ) {
 		editor.getSession().setMode({path:"ace/mode/php", inline:true});
-		nuPopSnip('nuDebug()');
-		nuPopSnip('nuDebug(print_r(,1))');
-		nuPopSnip("db_columns($table)");
-		nuPopSnip("db_fetch_array($qry)");
-		nuPopSnip("db_fetch_object($qry)");
-		nuPopSnip("db_fetch_row($qry)");
-		nuPopSnip("db_field_array($o)");
-		nuPopSnip("db_is_auto_id($t, $p)");
-		nuPopSnip("db_num_rows($o)");
-		nuPopSnip("nuAddJavascript($js)");
-		nuPopSnip("nuDebug($t)");
-		nuPopSnip("nuDisplayError($message)");
-		nuPopSnip("nuDownload($id, $sql = '')");
-		nuPopSnip("nuEmail($pPDForPHP, $pEmailTo, $pSubject, $pMessage, $hashData)");
-		nuPopSnip("nuEmailGetReportFile($request [, $request_url = null])");
-		nuPopSnip("nuEmailGetReportFile($request [, $request_url = null])");
-		nuPopSnip("nuErrorFound()");
-		nuPopSnip("nuGetBrowseSum()");
-		nuPopSnip("nuGetJSONSubform($formName)");
-		nuPopSnip("nuID()");
-		nuPopSnip("nuRunPHP($code)");
-		nuPopSnip("nuRunQuery([$sql = ] [, $variables = array()] [,$isInsert = false])");
-		nuPopSnip("nuSendEmail($to, [,$from] [,$fromname] [,$content] [,$subject] [,$filelist])");
-		nuPopSnip("nuSubformArray($subform [,$all = true])");
-		nuPopSnip("nuTime($message)");
 	}
 	if ( window.c == 'Plain Text' ) {
 		editor.getSession().setMode({path:"ace/mode/plain_text", inline:true});
 	}
 	if ( window.c == 'SQL' ) {
 		editor.getSession().setMode({path:"ace/mode/sql", inline:true});
-		nuPopSnip('');
-		nuPopSnip('SELECT * FROM  WHERE ');
-		nuPopSnip('INNER JOIN  ON  = ');
-		nuPopSnip('ORDER BY ');
 	}
 	if ( window.c == 'Text' ) {
 		editor.getSession().setMode({path:"ace/mode/text", inline:true});
@@ -131,7 +61,6 @@ function nuLoad(){
 	editor.setValue(window.startValue);
 	editor.focus();
 	editor.navigateFileStart();
-	nuPopTables();
 
 }
 
@@ -162,59 +91,6 @@ function nuWarning(){
 
 }
 
-
-function nuPopTables(){
-
-	var t = window.s;
-	var s = document.getElementById('nuTable');
-	
-	for(var i = 0 ; i < t.length ; i++){
-
-		var o = document.createElement('option');
-		o.value = i;
-		o.innerHTML = t[i].table;
-		s.appendChild(o);
-	
-	}
-	nuPopFields();
-}
-
-
-function nuPopFields(){
-
-	document.getElementById('nuField').options.length = 0;
-	
-	var n = document.getElementById('nuTable').value;
-	var t = window.s[n];
-	var s = document.getElementById('nuField');
-	
-	for(var i = 0 ; i < t.fields.length ; i++){
-
-		var o = document.createElement('option');
-		o.value = i;
-		o.innerHTML = t.fields[i];
-		s.appendChild(o);
-	
-	}
-
-	if(String(t.table).substr(0,6) == 'FORM: '){
-		document.getElementById('nuDrag').value = document.getElementById('nuField')[0].innerHTML;
-	}else{
-		document.getElementById('nuDrag').value = t.table;
-	}
-	
-}
-
-
-function nuPopSnip(v){
-
-	var s       = document.getElementById('nuSnip');
-	var o       = document.createElement('option');
-	o.value     = v;
-	o.innerHTML = v;
-	s.appendChild(o);
-	
-}
 
 function nuUpdateDrag(t){
 
