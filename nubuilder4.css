@@ -118,14 +118,22 @@ input {
    -moz-box-shadow: 5px 5px 5px 0px rgba(150,147,150,1);
    box-shadow: 5px 5px 5px 0px rgba(150,147,150,1);
    margin: 5px 0px;
-   font-size:12px;
+   font-size:16px;
+   font-weight:bold;
+   width: 200px; 
+   height: 120px;
+   right: 5px; 
+   position: absolute; 
+   text-align: center;
+   padding: 5px 0px 5px;
+   border-style: none;
+   
 }
 
 .nuOptions:hover {
-   background-color: #FFAD8F;
-   border-width: 1px;
-   border-style: solid;
-   border-color:lightgrey;
+   background-color: darkorange;
+   border-width: 0px;
+   border-style: none;
    cursor: pointer;
 }
 

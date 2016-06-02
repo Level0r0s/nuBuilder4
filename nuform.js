@@ -1069,6 +1069,13 @@ function nuOptions(p, f){
 
 function nuOptionsList(f, t, p){
 
+
+	var i	= t.id;
+	var icon	= $('#' + i);
+	var off	= icon.offset();
+	var top	= off.top;
+	var left	= off.left;
+
 	var list	= [];
 	var ul	= '<ul>';
 	list.push(['Arrange Objects', 'nuBuildPopup(&quot;' + f + '&quot;, &quot;-2&quot;)']);
@@ -1080,26 +1087,20 @@ function nuOptionsList(f, t, p){
 		ul += '<p><li class="nuOptions" onclick="$(\'#nuOptionsList\').remove();' + list[i][1] + '">' + list[i][0] + '</li>';
 		
 	}
-	
 	ul += '</ul>';
+	ul += '<img id="nuOptionClose" src="close.png" style="position: absolute; top: 0px; right: 0px;" onclick="$(\'#nuOptionsList\').remove()">'
 
+	
 
 	$('#nuOptionsList').remove();
 	var divId  = 'nuOptionsList';
 	var div    = document.createElement('div');
 	div.setAttribute('id', divId);
-	$('#' + p).append(div);
+	$('body').append(div);
 	$('#' + divId)
 	.attr('src', 'nuoptions.png')
-	.css({'width'			: 200, 
-	'height' 			: 100, 
-	'right' 				: 5, 
-	'top' 				: p == 'nuTabHolder' ? null : 50, 
-	'position' 			: 'absolute', 
-	'text-align' 			: 'center', 
-	'padding' 			: '5px 0px 5px', 
-	'border-style' 		: 'none'
-	})
+	.css('top',  p == 'nuTabHolder' ? null : 50)
+	.css({'top':top - 5, 'left': left - 200})
 	.addClass('nuOptionsList')
 	.html(ul);
 	
