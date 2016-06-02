@@ -698,7 +698,7 @@ function nuSUBFORM(w, i, l, p, prop){
 		.addClass('nuSubform' + even);
 
 		nuBuildEditObjects(SFR.forms[c], prefix, SF, SF.forms[0]);
-console.log(SF.forms[c]);
+
 		nuRecordProperties(SF.forms[c], prefix, rowWidth - 40);
 
 		rowTop 	= Number(rowTop) + Number(rowHeight);
@@ -1338,7 +1338,7 @@ function nuSelectBrowse(t){
 	var i 	= window.nuTARGET;
 	var p	= $('#' + t.id).attr('data-nu-primary-key');
 	var f	= nuBC[nuBC.length - 1].form_id;
-	console.log(y);
+
 	if(y == 'browse'){
 		
 		nuGetForm(f, p);
