@@ -171,7 +171,7 @@ function nuBuildEditObjects(f, p, o, prop){
 				
 			}else if(t == 'subform' && p == ''){
 				
-				l = l + nuSUBFORM(f, i, l, p, prop, o.subform_fk);
+				l = l + nuSUBFORM(f, i, l, p, prop);
 				
 			}
 			if(prop.objects[i].display == 0){$('#' + p + prop.objects[i].id).css('visibility', 'hidden');}
@@ -578,7 +578,6 @@ function nuSELECT(w, i, l, p, prop){
 }
 
 function nuSUBFORM(w, i, l, p, prop){
-
     var SF  = prop.objects[i];							//-- first row
     var SFR = w.objects[i];							//-- all rows
 	var id  = p + SF.id;
@@ -1339,7 +1338,7 @@ function nuSelectBrowse(t){
 	var i 	= window.nuTARGET;
 	var p	= $('#' + t.id).attr('data-nu-primary-key');
 	var f	= nuBC[nuBC.length - 1].form_id;
-	console.log(y);
+
 	if(y == 'browse'){
 		
 		nuGetForm(f, p);
