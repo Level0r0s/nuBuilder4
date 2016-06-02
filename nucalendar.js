@@ -36,20 +36,8 @@ function nuPopupCalendar(pThis){
 	c						= $('#nuCalendar');
 	c.attr('onmouseover', 'window.nuOnCalendar = 1');
 	c.attr('onmouseout', 'window.nuOnCalendar = 0');
-
-	c.css({'background-color'	: window.nuCalColor,
-			'position'		: 'absolute',
-			'top'			: (top + h + 3),
-			'left'			: left,
-			'width'			: 210,
-			'height'			: 213,
-			'color'			: '#000000',
-			'border-style'	: 'solid',
-			'border-width'	: 1,
-			'border-color'	: 'grey', 
-			'border-radius'	: 5, 
-			'boxShadow'		: '5px 5px 5px #888888'
-	})
+	c.css({'top':(top + h + 3), left: left})
+	.addClass('nuCalendar nuCalendarColor')
 	.html('<img id="dialogCalClose" src="close.png" style="position: absolute; top: 0px; right: 0px;" onclick="$(\'#nuCalendar\').remove()">');
 	
 	var c = nuAppendChild('#nuTabAreaHolder','div','nuCalCloser');
@@ -85,58 +73,51 @@ function nuPopupCalendar(pThis){
 			'left'			: 60,
 			'width'			: 90,
 			'height'			: 25,
-			'background-color':  window.nuCalColor,
 			'text-align'		: 'center',
 			'font-size'		: 14,
 			'color'			: '#000000',
 			'cursor'			: 'pointer',
-	});
+	})
+	.addClass('nuCalendarColor');
 
 
 	var c = nuAppendChild('#nuCalendar','div','nuCalYearLess');
 
 	c					= $('#nuCalYearLess');
 
-	c.attr({'onclick'		: "window.nuCalYear--;nuPopulateCalendar('')",
-			'onmouseover'	: "this.style.backgroundColor = '';",
-			'onmouseout'	: "this.style.backgroundColor = window.nuCalColor;"
-	})
+	c.attr('onclick', "window.nuCalYear--;nuPopulateCalendar('')")
 	.css({'position'			: 'absolute',
 			'top'			: (window.nuCalTop + 55),
 			'left'			: 40,
 			'width'			: 30,
 			'height'			: 25,
 			'cursor'			: 'pointer',
-			'background-color':  window.nuCalColor,
 			'text-align'		: 'center',
 			'font-size'		: 14,
 			'color'			: '#000000',
 	})
-	.html('&#9668;');
+	.html('&#9668;')
+	.addClass('nuCalendarSelected nuCalendar');
 
 
 	var c = nuAppendChild('#nuCalendar','div','nuCalYearMore');
 
 	c					= $('#nuCalYearMore');
 
-	c.attr({'onclick'		: "window.nuCalYear++;nuPopulateCalendar('')",
-			'onmouseover'	: "this.style.backgroundColor = '';",
-			'onmouseout'	: "this.style.backgroundColor = window.nuCalColor;"
-	})
+	c.attr('onclick', "window.nuCalYear++;nuPopulateCalendar('')")
+
 	.css({'position'			: 'absolute',
 			'top'			: (window.nuCalTop + 55),
 			'left'			: 140,
 			'width'			: 30,
 			'height'			: 25,
 			'cursor'			: 'pointer',
-			'background-color':  window.nuCalColor,
 			'text-align'		: 'center',
 			'font-size'		: 14,
 			'color'			: '#000000',
 	})
 	.html('&#9658;')
-	.addClass('nuCalendar');
-
+	.addClass('nuCalendarSelected nuCalendar');
 
 	var c = nuAppendChild('#nuCalendar','div','nuCalMonth');
 	
@@ -147,56 +128,48 @@ function nuPopupCalendar(pThis){
 			'left'			: 60,
 			'width'			: 90,
 			'height'			: 25,
-			'background-color':  window.nuCalColor,
 			'text-align'		: 'center',
 			'font-size'		: 14,
 			'color'			: '#000000',
 	})
+	.addClass('nuCalendarColor');
 
 	var c = nuAppendChild('#nuCalendar','div','nuCalMonthLess');
 
 	c					= $('#nuCalMonthLess');
 
-	c.attr({'onclick'		: "window.nuCalMonth--;nuPopulateCalendar(this.id)",
-			'onmouseover'	: "this.style.backgroundColor = '';",
-			'onmouseout'	: "this.style.backgroundColor = window.nuCalColor;"
-	})
+	c.attr('onclick', "window.nuCalMonth--;nuPopulateCalendar(this.id)")
 	.css({'position'			: 'absolute',
 			'top'			: (window.nuCalTop + 75),
 			'left'			: 40,
 			'width'			: 30,
 			'height'			: 25,
 			'cursor'			: 'pointer',
-			'background-color':  window.nuCalColor,
 			'text-align'		: 'center',
 			'font-size'		: 14,
 			'color'			: '#000000',
 	})
 	.html('&#9668;')
-	.addClass('nuCalendar');
+	.addClass('nuCalendarSelected nuCalendar');
 
 
 	var c = nuAppendChild('#nuCalendar','div','nuCalMonthMore');
 
 	c					= $('#nuCalMonthMore');
 
-	c.attr({'onclick'		: "window.nuCalMonth++;nuPopulateCalendar(this.id)",
-			'onmouseover'	: "this.style.backgroundColor = '';",
-			'onmouseout'	: "this.style.backgroundColor = window.nuCalColor;"
-	})
+	c.attr('onclick', "window.nuCalMonth++;nuPopulateCalendar(this.id)")
 	.css({'position'			: 'absolute',
 			'top'			: (window.nuCalTop + 75),
 			'left'			: 140,
 			'width'			: 30,
 			'height'			: 25,
 			'cursor'			: 'pointer',
-			'background-color':  window.nuCalColor,
 			'text-align'		: 'center',
 			'font-size'		: 14,
 			'color'			: '#000000',
 	})
 	.html('&#9658;')
-	.addClass('nuCalendar');
+	.addClass('nuCalendarSelected nuCalendar');
 	
 	var t                    = 90; 
 	var l                    = 0;
@@ -246,17 +219,16 @@ function nuTitleBox(n, l){
 			'width'			: 28,
 			'height'			: 18,
 			'cursor'			: 'pointer',
-			'background-color': '#EDEDED',
 			'color'			: '#000000',
 			'border-color'	: '#D3D3D3',
-			'border-style'	: 'solid',
+			'border-style'	: 'none',
 			'border-width'	: 1,
 			'text-align'		: 'center',
+			'font-style'		: 'bold',
 			'font-size'		: 14,
 	})
 	.html(t.substr(n, 1))
-	.addClass('nuCalendar');
-	
+	.addClass('nuCalendar nuCalendarColor');
 
 }
 
@@ -269,21 +241,18 @@ function nuDayBox(n, l, t){
 
 	c					= $('#nuCalDay' + n);
 
-	c.attr({'onclick'		: "window.nuCalDay=this.innerHTML;nuCalChoice(this)",
-			'onmouseover'	: "this.style.backgroundColor = '';",
-			'onmouseout'	: "this.style.backgroundColor = window.nuCalColor;"
-	})
+	c.attr('onclick', "window.nuCalDay=this.innerHTML;nuCalChoice(this)")
 	.css({'position'			: 'absolute',
 			'top'			: (window.nuCalTop + t + 30),
 			'left'			: Number(l),
 			'width'			: 30,
 			'height'			: 20,
 			'cursor'			: 'pointer',
-			'background-color':  window.nuCalColor,
 			'text-align'		: 'center',
 			'font-size'		: 14,
 			'color'			: '#000000',
-	});
+	})
+	.addClass('nuCalendarSelected nuCalendar');
 	
 }
 

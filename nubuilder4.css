@@ -102,8 +102,21 @@ input {
   cursor: pointer;
 }
 
-.nuCalendar         {
-  background-color: #93C8F9;
+.nuCalendar{
+   position			: absolute;
+   width			: 210px;
+   height			: 213px;
+   color			: #000000;
+   border-style		: none;
+   boxShadow		: 5px 5px 5px #888888;
+}
+
+.nuCalendarColor {
+   background-color	: orange;
+}
+
+.nuCalendarSelected:hover {
+   background-color	: #bb5d00;
 }
 
 .nuNotBreadcrumb {
