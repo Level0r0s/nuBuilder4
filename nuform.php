@@ -90,7 +90,8 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 
 		if($r->sob_all_type == 'subform'){
 
-			//$r->subform_fk      	= $R;
+            // need to set both subform_fk in $r and $o for later use
+			$r->subform_fk      	= $R;
 			$o->subform_fk      	= $R;
 			$o->subform_type    	= $r->sob_subform_type;
 			$o->delete          	= $r->sob_subform_delete;

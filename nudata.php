@@ -33,7 +33,7 @@ function nuUpdateData(){
 			
 		}
 	}
-	
+
 	for($i = 0 ; $i < count($nudata) ; $i++){
 		if($nudata[$i]['fk'] == '-1'){
 			$nudata[$i]['fk']	= $nudata[0]['pk'];
