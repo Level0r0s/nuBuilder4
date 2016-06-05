@@ -78,7 +78,13 @@ function nuAceSave(){
 
    window.nuWarn      = 0;
    opener.window.document.getElementById(window.o).value = editor.getValue();
-   window.opener.nuSetEdited();
+    if ("createEvent" in document) {
+        var evt = document.createEvent("HTMLEvents");
+        evt.initEvent("change", false, true);
+        opener.window.document.getElementById(window.o).dispatchEvent(evt);
+    }
+    else
+        opener.window.document.getElementById(window.o).fireEvent("onchange");
    window.close();
 
 }

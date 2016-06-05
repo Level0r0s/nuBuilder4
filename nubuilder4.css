@@ -542,8 +542,6 @@ input {
     position: absolute;
     right: 0px;
     top: 0px;
-    border-width: 0px 0px 0px 1px;
-    border-style: solid;
     background-color: #c1c1c1;
     z-index: -1;
     min-height: 440px;

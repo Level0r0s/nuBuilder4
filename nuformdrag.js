@@ -360,7 +360,7 @@ function nuFindFieldInState(tabNo, fieldID){
 }
 
 function nuCreateDragOptionsBox(form){
-    var dragOptionsBoxWidth = 330;
+    var dragOptionsBoxWidth = 341;
     var dragOptionsBoxMinHeight = 470;
     $('#nuDragDialog',window.parent.document.body).css('width',$('#nuDragDialog',window.parent.document.body).width()+dragOptionsBoxWidth);
     var optionsBoxHTML = '<div id="nuDragOptionsBox" class="nuDragOptionsBox" style="width:'+dragOptionsBoxWidth+'px;height:100%;min-height:'+dragOptionsBoxMinHeight+'px;">'+

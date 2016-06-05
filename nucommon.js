@@ -538,7 +538,7 @@ function nuJavascriptDateParse(valueStr, FormatStr){
 function nuOpenAce(lang, obj){
 
 	var ts			= new Date().getTime();
-	window.nuAce		= [lang, obj, $('#' + obj).val()];
+	window.nuAce		= [lang, obj];
 	
 	window.open('nuace.html?' + ts);
 
