@@ -256,9 +256,8 @@ function nuDRAG(w, i, l, p, prop){
 					'height'		: Number(prop.objects[i].height),
 					'text-align'	: prop.objects[i].align,
 					'position'	: 'absolute',
-					'background': 'white',
 					'overflow': 'hidden'
-	});
+	}).addClass('nuDragOptionsField');
 	
 	$('#' + id).text(id);
 	$('#' + id).attr('data-drag',1);

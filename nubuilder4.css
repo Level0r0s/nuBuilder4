@@ -430,6 +430,10 @@ input {
 	
 }
 
+.nuDragOptionsField {
+    background-color: orange;
+}
+
 .nuDragSelected {
 			outline:1px solid red;
 }
