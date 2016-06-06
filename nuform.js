@@ -1076,13 +1076,13 @@ function nuOptionsList(f, t, p){
 
 	var list	= [];
 	var ul	= '<ul>';
-	list.push(['Arrange Objects', 'nuBuildPopup(&quot;' + f + '&quot;, &quot;-2&quot;)', 'arrange.png']);
-	list.push(['Form Properties', 'nuBuildPopup(&quot;nuform&quot;, &quot;' + f + '&quot;)', 'arrange.png']);
-	list.push(['Form Object List', 'nuBuildPopup(&quot;nuobject&quot;, &quot;&quot;, &quot;' + f + '&quot;)', 'arrange.png']);
+	list.push(['Arrange Objects', 'nuBuildPopup(&quot;' + f + '&quot;, &quot;-2&quot;)', 'nuarrange.png']);
+	list.push(['Form Properties', 'nuBuildPopup(&quot;nuform&quot;, &quot;' + f + '&quot;)', 'nuformprop.png']);
+	list.push(['Form Object List', 'nuBuildPopup(&quot;nuobject&quot;, &quot;&quot;, &quot;' + f + '&quot;)', 'nuobjectlist.png']);
 	
 	for(var i = 0 ; i < list.length ; i++){
 		
-		ul += '<p><li class="nuOptions" onclick="$(\'#nuOptionsList\').remove();' + list[i][1] + '">' + list[i][0] + '</li>';
+		ul += '<li class="nuOptions" onclick="$(\'#nuOptionsList\').remove();' + list[i][1] + '"><img id="nuOption' + i + '" src="'+ list[i][2] +'" style="margin: 0px 10px 0px -5px; width: 12px; height: 12px;">' + list[i][0] + '</li><br>';
 		
 	}
 	ul += '</ul>';
