@@ -363,6 +363,7 @@ function nuCreateDragOptionsBox(form){
     var dragOptionsBoxWidth = 341;
     var dragOptionsBoxMinHeight = 470;
     $('#nuDragDialog',window.parent.document.body).css('width',$('#nuDragDialog',window.parent.document.body).width()+dragOptionsBoxWidth);
+    $('#nuDragDialog',window.parent.document.body).css('min-height',dragOptionsBoxMinHeight+'px');
     var optionsBoxHTML = '<div id="nuDragOptionsBox" class="nuDragOptionsBox" style="width:'+dragOptionsBoxWidth+'px;height:100%;min-height:'+dragOptionsBoxMinHeight+'px;">'+
         '<div class="nuDragOptionsBoxContainer">'+
             '<div id="dragOptionsTitle" class="nuDragOptionsBoxTitle">Options</div>'+
