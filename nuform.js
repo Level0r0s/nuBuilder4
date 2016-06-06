@@ -1374,16 +1374,14 @@ function nuBuildLookupList(fm, e){
 	var v	= fm.lookup_values;
 	var tar	= $('#' + i);
 	var off	= $('#' + i + 'code').offset();
-//	var p	= $('#' + i).parent().attr('id')
 	var d	= parseInt($('#' + i + 'description').css('width'));
-	var t	= off.top;//parseInt(tar.css('top'));
-	var l	= off.left; //parseInt(tar.css('left'));
+	var t	= off.top;
+	var l	= off.left;
 	var h	= parseInt(tar.css('height'));
 	var w	= parseInt(tar.css('width'));
 	var div 	= document.createElement('div');
 	div.setAttribute('id', 'nuLookupList');
 
-//	$('#' +p).append(div);
 	$('body').append(div);
 	
 	$('#nuLookupList').css({'top'		: t + h + 2,
@@ -1697,15 +1695,20 @@ function nuFormClass(frm){
 	var deleted		= $('#' + frm + 'nuDelete').is(":checked") ? 'Yes' : 'No';
 	var fields		= [];
 	var values		= [];
+	var rows			= [];
 	var o			= $("[data-nu-prefix='" + frm + "'][data-nu-field][data-nu-changed]");
 
 	o.each(function(index){
 
+		var rw		= String($(this).attr('data-nu-prefix'));
+		console.log(rw);
+		var rowno	= parseInt(rw.substr(rw.length - 3));
 		var f		= $(this).attr('data-nu-field');
 		var v		= $(this).val();
 
 		fields.push(f);
 		values.push(v);
+		rows.push(rw == '' ? rowno + 1 : 0);
 		
 	});
 	
@@ -1714,6 +1717,7 @@ function nuFormClass(frm){
 	this.fm	= form_id;
 	this.ff	= foreign_field;
 	this.d	= deleted;
+	this.r	= rows;
 	this.f	= fields;
 	this.v	= values;
 
