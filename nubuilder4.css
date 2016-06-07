@@ -1,3 +1,28 @@
+
+.nu_browse                   {background-color : #8de2e2}
+.nu_button                   {background-color : #98AFC7}
+.nu_checkbox                 {background-color : #FF6633}
+.nu_display                  {background-color : #C7B097}
+.nu_dropdown                 {background-color : #7bce98}
+.nu_html                     {background-color : #c497a6}
+.nu_input                    {background-color : #89C35C}
+.nu_listbox                  {background-color : #caa5f6}
+.nu_lookup                   {background-color : #EDDA74}
+.nu_subform                  {background-color : #fa9b96}
+.nu_run                      {background-color : #cbc287}
+.nu_textarea                 {background-color : #a0a7d6}
+.nu_select                   {background-color : #ffc082}   
+
+.nu_browseedit               {background-color : #fa9b96}
+.nu_edit                     {background-color : #cbc287}
+.nu_browse     	             {background-color : #a0a7d6}
+.nu_launch                   {background-color : #ffc082}   
+
+.nuRelatedTab {
+   color: red;
+}
+
+
 .php {
    background-color: #9AA9EB;
 }

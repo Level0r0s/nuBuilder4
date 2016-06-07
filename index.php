@@ -31,7 +31,6 @@ require_once('nucommon.php'); ?>
 		
 		function nuLoad(){
 			nuLogin();
-		
 		}
 		
 		";

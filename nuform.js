@@ -201,7 +201,7 @@ function nuAddJSObjectEvents(i, j){
 			var code = o.getAttribute(j[J].event);
 			code		= code === null ? '' : code;
 			o.setAttribute(j[J].event, code + ';' + j[J].js);
-
+console.log(i, j[J].js, code);
 		}
 
 	}
@@ -337,6 +337,8 @@ function nuINPUT(w, i, l, p, prop){
 		
 	}
 
+	nuAddJSObjectEvents(id, prop.objects[i].js);
+	
 	if(prop.objects[i].type == 'display'){
 		
 		$('#' + id).addClass('nuReadonly');
@@ -571,6 +573,8 @@ function nuSELECT(w, i, l, p, prop){
 			
 		}
 	}
+	
+	nuAddJSObjectEvents(id, prop.objects[i].js);
 
 	return Number(prop.objects[i].width);
 	
@@ -1767,8 +1771,8 @@ function nuOnChange(t,event){
 	
 	$('#nuCalendar').remove();
 
-	
 	if(p == ''){return;}
+	
 	nuAddSubformRow(t, event);
 	
 }
