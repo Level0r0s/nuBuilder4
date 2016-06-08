@@ -467,51 +467,65 @@ function nuResizeToWidest(){
     });
 }
 
-function nuSortAsc(a,b) {
-    return a - b;
+function nuSortObjAsc(a,b) {
+    return a.top - b.top;
 }
 
 function nuSpaceHorizontally(){
-    var fieldLeftsToSort = [];
-    var fieldsToChange = [];
+    var selectedFields = [];
     $('div.nuDragSelected',$('#nuDragDialog iframe').contents()).each(function(){
-        fieldLeftsToSort.push($(this).position().left);
-        fieldsToChange.push($(this).prop('id'));
-    });
-    fieldLeftsToSort.sort(nuSortAsc);
-    var difference = fieldLeftsToSort[(fieldLeftsToSort.length-1)] - fieldLeftsToSort[0];
-    if(difference == 0)
-        return false;
-    for(var i=1; i<fieldLeftsToSort.length; i++){
-        $('div.nuDragSelected',$('#nuDragDialog iframe').contents()).each(function(){
-            if($(this).position().left == fieldLeftsToSort[i] && fieldsToChange.indexOf($(this).prop('id')) != -1){
-                $(this).css('left',Math.round(fieldLeftsToSort[0]+(difference/(fieldLeftsToSort.length-1))*i)+'px');
-                fieldsToChange.splice(fieldsToChange.indexOf($(this).prop('id')),1);
-                return false;
-            }
+        selectedFields.push({
+            left: $(this).position().left,
+            width: $(this).width(),
+            id: $(this).prop('id')
         });
+    });
+    selectedFields.sort(nuSortObjAsc);
+    var gapTotal = 0;
+    var leftTotal = 0;
+    for(var i=1; i<selectedFields.length; i++){
+        gapTotal += selectedFields[i].left-(selectedFields[i-1].left+selectedFields[i-1].width);
+        leftTotal += selectedFields[i].left-selectedFields[i-1].left;
+    }
+    var gapAvg = Math.round(gapTotal/(selectedFields.length-1));
+    var leftAvg = Math.round(leftTotal/(selectedFields.length-1));
+    if(gapAvg < 0){
+        for(var i=1; i<selectedFields.length; i++){
+            $('#'+selectedFields[i].id,$('#nuDragDialog iframe').contents()).css('left',($('#'+selectedFields[i-1].id,$('#nuDragDialog iframe').contents()).position().left+leftAvg)+'px');
+        }
+    } else {
+        for(var i=1; i<selectedFields.length; i++){
+            $('#'+selectedFields[i].id,$('#nuDragDialog iframe').contents()).css('left',($('#'+selectedFields[i-1].id,$('#nuDragDialog iframe').contents()).position().left+$('#'+selectedFields[i-1].id,$('#nuDragDialog iframe').contents()).width()+gapAvg)+'px');
+        }
     }
 }
 
 function nuSpaceVertically(){
-    var fieldHeightsToSort = [];
-    var fieldsToChange = [];
+    var selectedFields = [];
     $('div.nuDragSelected',$('#nuDragDialog iframe').contents()).each(function(){
-        fieldHeightsToSort.push($(this).position().top);
-        fieldsToChange.push($(this).prop('id'));
-    });
-    fieldHeightsToSort.sort(nuSortAsc);
-    var difference = fieldHeightsToSort[(fieldHeightsToSort.length-1)] - fieldHeightsToSort[0];
-    if(difference == 0)
-        return false;
-    for(var i=1; i<fieldHeightsToSort.length; i++){
-        $('div.nuDragSelected',$('#nuDragDialog iframe').contents()).each(function(){
-            if($(this).position().top == fieldHeightsToSort[i] && fieldsToChange.indexOf($(this).prop('id')) != -1){
-                $(this).css('top',Math.round(fieldHeightsToSort[0]+(difference/(fieldHeightsToSort.length-1))*i)+'px');
-                fieldsToChange.splice(fieldsToChange.indexOf($(this).prop('id')),1);
-                return false;
-            }
+        selectedFields.push({
+            top: $(this).position().top,
+            height: $(this).height(),
+            id: $(this).prop('id')
         });
+    });
+    selectedFields.sort(nuSortObjAsc);
+    var gapTotal = 0;
+    var topTotal = 0;
+    for(var i=1; i<selectedFields.length; i++){
+        gapTotal += selectedFields[i].top-(selectedFields[i-1].top+selectedFields[i-1].height);
+        topTotal += selectedFields[i].top-selectedFields[i-1].top;
+    }
+    var gapAvg = Math.round(gapTotal/(selectedFields.length-1));
+    var topAvg = Math.round(topTotal/(selectedFields.length-1));
+    if(gapAvg < 0){
+        for(var i=1; i<selectedFields.length; i++){
+            $('#'+selectedFields[i].id,$('#nuDragDialog iframe').contents()).css('top',($('#'+selectedFields[i-1].id,$('#nuDragDialog iframe').contents()).position().top+topAvg)+'px');
+        }
+    } else {
+        for(var i=1; i<selectedFields.length; i++){
+            $('#'+selectedFields[i].id,$('#nuDragDialog iframe').contents()).css('top',($('#'+selectedFields[i-1].id,$('#nuDragDialog iframe').contents()).position().top+$('#'+selectedFields[i-1].id,$('#nuDragDialog iframe').contents()).height()+gapAvg)+'px');
+        }
     }
 }
 
