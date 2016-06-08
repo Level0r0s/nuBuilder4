@@ -1,3 +1,28 @@
+
+.nu_browse                   {background-color : #8de2e2}
+.nu_button                   {background-color : #98AFC7}
+.nu_checkbox                 {background-color : #FF6633}
+.nu_display                  {background-color : #C7B097}
+.nu_dropdown                 {background-color : #7bce98}
+.nu_html                     {background-color : #c497a6}
+.nu_input                    {background-color : #89C35C}
+.nu_listbox                  {background-color : #caa5f6}
+.nu_lookup                   {background-color : #EDDA74}
+.nu_subform                  {background-color : #fa9b96}
+.nu_run                      {background-color : #cbc287}
+.nu_textarea                 {background-color : #a0a7d6}
+.nu_select                   {background-color : #ffc082}   
+
+.nu_browseedit               {background-color : #fa9b96}
+.nu_edit                     {background-color : #cbc287}
+.nu_browse     	             {background-color : #a0a7d6}
+.nu_launch                   {background-color : #ffc082}   
+
+.nuRelatedTab {
+   color: red;
+}
+
+
 .php {
    background-color: #9AA9EB;
 }
@@ -125,7 +150,12 @@ input {
    height			: 213px;
    color			: #000000;
    border-style		: none;
-   boxShadow		: 5px 5px 5px #888888;
+}
+
+#nuCalendar {
+   -webkit-box-shadow: 5px 5px 5px 0px rgba(150,147,150,1);
+   -moz-box-shadow: 5px 5px 5px 0px rgba(150,147,150,1);
+   box-shadow: 5px 5px 5px 0px rgba(150,147,150,1);
 }
 
 .nuCalendarColor {
@@ -154,11 +184,11 @@ input {
    position: absolute; 
    text-align: center;
    border-style: none;
+   display: inline-block;
    
 }
 
 .nuOptionsBox ul p {
-    margin: 0px;
 }
 
 .nuOptionsBox ul {
@@ -181,8 +211,8 @@ input {
    background-color: orange;
    width:100%;
    height:20px;
-    display: inline-block;
-    padding-top: 4px;
+   display: inline-block;
+   padding-top: 4px;
 }
 
 .nuRecordHolder {
@@ -247,6 +277,13 @@ input {
 
 .nuLookupListSelect {
   background-color: #8DC9DC;
+}
+
+.nuIcon {
+
+  width: 12px;
+  height: 12px;
+  
 }
 
 .nuSort:hover {

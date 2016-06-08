@@ -201,7 +201,7 @@ function nuAddJSObjectEvents(i, j){
 			var code = o.getAttribute(j[J].event);
 			code		= code === null ? '' : code;
 			o.setAttribute(j[J].event, code + ';' + j[J].js);
-
+console.log(i, j[J].js, code);
 		}
 
 	}
@@ -337,6 +337,8 @@ function nuINPUT(w, i, l, p, prop){
 		
 	}
 
+	nuAddJSObjectEvents(id, prop.objects[i].js);
+	
 	if(prop.objects[i].type == 'display'){
 		
 		$('#' + id).addClass('nuReadonly');
@@ -571,6 +573,8 @@ function nuSELECT(w, i, l, p, prop){
 			
 		}
 	}
+	
+	nuAddJSObjectEvents(id, prop.objects[i].js);
 
 	return Number(prop.objects[i].width);
 	
@@ -1076,13 +1080,13 @@ function nuOptionsList(f, t, p){
 
 	var list	= [];
 	var ul	= '<ul>';
-	list.push(['Arrange Objects', 'nuBuildPopup(&quot;' + f + '&quot;, &quot;-2&quot;)']);
-	list.push(['Form Properties', 'nuBuildPopup(&quot;nuform&quot;, &quot;' + f + '&quot;)']);
-	list.push(['Form Object List', 'nuBuildPopup(&quot;nuobject&quot;, &quot;&quot;, &quot;' + f + '&quot;)']);
+	list.push(['Arrange Objects', 'nuBuildPopup(&quot;' + f + '&quot;, &quot;-2&quot;)', 'nuarrange.png']);
+	list.push(['Form Properties', 'nuBuildPopup(&quot;nuform&quot;, &quot;' + f + '&quot;)', 'nuformprop.png']);
+	list.push(['Form Object List', 'nuBuildPopup(&quot;nuobject&quot;, &quot;&quot;, &quot;' + f + '&quot;)', 'nuobjectlist.png']);
 	
 	for(var i = 0 ; i < list.length ; i++){
 		
-		ul += '<p><li class="nuOptions" onclick="$(\'#nuOptionsList\').remove();' + list[i][1] + '">' + list[i][0] + '</li>';
+		ul += '<li class="nuOptions" onclick="$(\'#nuOptionsList\').remove();' + list[i][1] + '"><img id="nuOption' + i + '" src="'+ list[i][2] +'" style="margin: 0px 10px 0px -5px; width: 12px; height: 12px;">' + list[i][0] + '</li><br>';
 		
 	}
 	ul += '</ul>';
@@ -1374,16 +1378,14 @@ function nuBuildLookupList(fm, e){
 	var v	= fm.lookup_values;
 	var tar	= $('#' + i);
 	var off	= $('#' + i + 'code').offset();
-//	var p	= $('#' + i).parent().attr('id')
 	var d	= parseInt($('#' + i + 'description').css('width'));
-	var t	= off.top;//parseInt(tar.css('top'));
-	var l	= off.left; //parseInt(tar.css('left'));
+	var t	= off.top;
+	var l	= off.left;
 	var h	= parseInt(tar.css('height'));
 	var w	= parseInt(tar.css('width'));
 	var div 	= document.createElement('div');
 	div.setAttribute('id', 'nuLookupList');
 
-//	$('#' +p).append(div);
 	$('body').append(div);
 	
 	$('#nuLookupList').css({'top'		: t + h + 2,
@@ -1697,15 +1699,20 @@ function nuFormClass(frm){
 	var deleted		= $('#' + frm + 'nuDelete').is(":checked") ? 'Yes' : 'No';
 	var fields		= [];
 	var values		= [];
+	var rows			= [];
 	var o			= $("[data-nu-prefix='" + frm + "'][data-nu-field][data-nu-changed]");
 
 	o.each(function(index){
 
+		var rw		= String($(this).attr('data-nu-prefix'));
+		console.log(rw);
+		var rowno	= parseInt(rw.substr(rw.length - 3));
 		var f		= $(this).attr('data-nu-field');
 		var v		= $(this).val();
 
 		fields.push(f);
 		values.push(v);
+		rows.push(rw == '' ? rowno + 1 : 0);
 		
 	});
 	
@@ -1714,6 +1721,7 @@ function nuFormClass(frm){
 	this.fm	= form_id;
 	this.ff	= foreign_field;
 	this.d	= deleted;
+	this.r	= rows;
 	this.f	= fields;
 	this.v	= values;
 
@@ -1763,8 +1771,8 @@ function nuOnChange(t,event){
 	
 	$('#nuCalendar').remove();
 
-	
 	if(p == ''){return;}
+	
 	nuAddSubformRow(t, event);
 	
 }

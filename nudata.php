@@ -9,7 +9,60 @@ function nuUpdateData(){
 	$s		= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$fid'";
 	$t		= nuRunQuery($s);
 	$FORM	= db_fetch_object($t);
+	$e		= array();
 
+	
+
+
+	for($i = 0 ; $i < count($nudata) ; $i++){
+
+		$pk		= $nudata[$i]['pk'];
+		$t		= nuRunQuery("SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = ? ", array($nudata[$i]['fm']));
+		$r		= db_fetch_object($t);
+		$del		= $nudata[$i]['d'];
+
+		if($del == 'No'){
+			
+			$o		= $nudata[$i];
+			$fmid	= $o['fm'];
+			
+			for($i = 0 ; $i < count($o['f']) ; $i++){
+				
+				$fdid	= $o['f'][$i];
+				$sq		= "SELECT * FROM zzzzsys_object WHERE sob_all_zzzzsys_form_id = '$fmid' AND sob_all_id = '$fdid'";
+				nuDebug($sq);
+				$T		= nuRunQuery($sq);
+				$O		= db_fetch_object($T);
+				
+				if($O->sob_all_validate != ''){
+
+					$m	= '';
+					
+					if($o['v'][$i] == ''){
+						
+						$lab	= addslashes($O->sob_all_label);
+						
+						if($o['fk'] == ''){
+							$m	= "$lab cannot be left blank";
+						}else{
+							$m	= "$lab (on row " . $o['r'] . ") cannot be left blank";
+						}
+						
+						nuErrorMessage($m);
+						
+					}
+					
+				}
+				
+			}
+		}
+		
+	}
+	
+	if(count($_POST['nuErrors']) > 0){
+		return;
+	}
+	
 	if($DEL == 'Yes'){
 		$before	= nuReplaceHashVariables(trim($FORM->sfo_before_delete_php));
 	}else{
