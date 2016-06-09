@@ -1,5 +1,17 @@
 <?php
 
+function nuBeforeBrowse($f){
+	
+	$s		= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$f'";
+	$t		= nuRunQuery($s);
+	$r		= db_fetch_object($t);
+	$before	= nuReplaceHashVariables(trim($r->sfo_before_browse_php));
+
+	eval($before);
+	
+}
+
+
 function nuBeforeOpen($f){
 	
 	$s		= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$f'";
@@ -80,13 +92,12 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 			$o->run_type		= $run->sfo_type;
 			$o->record_id		= -1;
 			$o->filter		= $r->sob_run_filter;
-			
-			if($o->run_type	== 'browse' || $o->run_type	== 'edit' || $o->run_type	== 'browseedit'){$o->record_id	= $r->sob_run_id;}
-			if($o->run_type	== 'procedure'){$o->record_id	= $r->sob_run_id;}
-			if($o->run_type	== 'report'){$o->record_id	= $r->sob_run_id;}
+
+			if($o->run_type	== 'browse' || $o->run_type	== 'edit' || $o->run_type	== 'browseedit'){
+				$o->record_id	= $r->sob_run_id;
+			}
 			
 			$o->run_method  	= $r->sob_run_method;
-
 		}
 		
 			
@@ -265,13 +276,15 @@ function nuGetEditForm($F){
     $t = nuRunQuery($s);
     $r = db_fetch_object($t);
     
+	$SQL 			= new nuSqlString($r->sfo_browse_sql);
     $f              	= new stdClass();
     $f->id          	= $r->zzzzsys_form_id;
     $f->type        	= $r->sfo_type;
     $f->table       	= $r->sfo_table;
     $f->primary_key 	= $r->sfo_primary_key;
     $f->javascript 	= $r->sfo_javascript;
-    
+    $f->order			= $SQL->orderBy;
+	
 	if(intval($r->sfo_row_height) == 0){
 		$f->row_height	= 25;
 	}else{
@@ -316,7 +329,7 @@ function nuGetLookupValues($R, $O){
 	$v[]		= array($O->id, isset($l[0]) ? $l[0] : '');
 	$v[]		= array($O->id . 'code', isset($l[1]) ? $l[1] : '');
 	$v[]		= array($O->id . 'description', isset($l[2]) ? $l[2] : '');
-
+	
 	return $v;
 	
 }
@@ -373,7 +386,7 @@ function nuGetOtherLookupValues($nuO){
 		$nuFLDS	= implode(", ", $nuVAL);
 		$nuS 	= "SELECT $nuFLDS $nuFROM WHERE `$nuPK` = '$nuO->value'";
 		$nuT 	= nuRunQuery($nuS);
-		
+
 		if(db_num_rows($nuT) > 0){
 			$nuL	= db_fetch_row($nuT);
 		}else{
@@ -433,7 +446,8 @@ function nuSelectOptions($sql) {
 function nuGetSubformRecords($R, $A){
 
     $f = nuGetEditForm($R->sob_subform_zzzzsys_form_id);
-    $s = "SELECT `$f->primary_key` FROM `$f->table` WHERE `$R->sob_subform_foreign_key` = '$R->subform_fk'";
+	
+    $s = "SELECT `$f->primary_key` FROM `$f->table` WHERE `$R->sob_subform_foreign_key` = '$R->subform_fk' $f->order";
     $t = nuRunQuery($s);
     $a = array();
 
@@ -523,10 +537,12 @@ function nuBrowseColumns($f, $P){
 	
 	if($f->record_id != ''){return array();}
 
+	nuBeforeBrowse($f->id);
+	
 	$s	= "SELECT * FROM zzzzsys_browse WHERE sbr_zzzzsys_form_id = '$f->id' ORDER BY sbr_order";
 	$t	= nuRunQuery($s);
 	$a	= array();
-	
+
 	while($r = db_fetch_object($t)){
 	
 		$r->title	= $r->sbr_title;
@@ -711,6 +727,7 @@ function nuBrowseWhereClause($searchFields, $searchString, $returnArray = false)
     } else {
         return ' (' . implode(' AND ', $where) . ') ';
     }
+
 }
 
 

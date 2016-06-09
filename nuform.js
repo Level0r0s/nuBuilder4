@@ -44,9 +44,11 @@ function nuBuildForm(f){
 	nuOptions('nuTabHolder', f.form_id);
 	nuAddActionButtons(f);
 	nuRecordProperties(f, '');
+
 	if(f.record_id != ''){
 		nuBuildEditObjects(f, '', '', f);
 	}
+
 	nuGetStartingTab();
 	nuAddJavascript(f);
 	$('#nuSearchField').focus();
@@ -201,7 +203,7 @@ function nuAddJSObjectEvents(i, j){
 			var code = o.getAttribute(j[J].event);
 			code		= code === null ? '' : code;
 			o.setAttribute(j[J].event, code + ';' + j[J].js);
-console.log(i, j[J].js, code);
+
 		}
 
 	}
@@ -215,7 +217,9 @@ function nuRecordProperties(w, p, l){
 	var chk   = document.createElement('input');
 
 	chk.setAttribute('id', de);
+	chk.setAttribute('title', 'Delete This Row When Saved');
 	chk.setAttribute('type', 'checkbox');
+
 	$('#' + fh)
 	.append(chk)
 	.addClass('nuSection')
@@ -497,6 +501,7 @@ function nuRUN(w, i, l, p, prop){
 					'height'   	: Number(prop.objects[i].height),
 					'position' 	: 'absolute'
 	});
+
 	if(prop.objects[i].run_method == 'b'){
 	
 		$('#' + id).attr({
@@ -1141,7 +1146,7 @@ function nuBrowseTitle(b, i, l){
 	var div  = document.createElement('div');
 	div.setAttribute('id', id);
 
-	var cb	= '<input id="nusearch_' + i + '" type="checkbox" class="nuSearchColumn" checked="checked" onclick="nuSetSearchColumn()">';
+	var cb	= '<input id="nusearch_' + i + '" type="checkbox" class="nuSearchColumn" checked="checked" onclick="nuSetSearchColumn()" title="Include In Search">';
 	
 	if(bc.sort == i){
 		if(bc.sort_direction == 'asc'){
@@ -1187,16 +1192,18 @@ function nuBrowseTable(){
 		
 		for(c = 0 ; c < col.length ; c++){
 		
-			var w	= Number(col[c].width);
-			var a	= nuAlign(col[c].align);
-			var rw	= 'nubrowse' + String('00' + r).substr(-3);
-			var id	= rw + String('00' + c).substr(-3);
+			var w		= Number(col[c].width);
+			var a		= nuAlign(col[c].align);
+			var rw		= 'nurow'    + String('00' + r).substr(-3);
+			var column	= 'nucolumn' + String('00' + c).substr(-3);
+			var id		= rw + String('00' + c).substr(-3);
 			var div  = document.createElement('div');
 			div.setAttribute('id', id);
 				
 			$('body').append(div);
 			$('#' + id)
 			.attr('data-nu-row', rw)
+			.attr('data-nu-column', column)
 			.addClass(w == 0 ? '' : 'nuBrowseTable')
 			.css({	'text-align'	: a,
 					'overflow'	: 'hidden',

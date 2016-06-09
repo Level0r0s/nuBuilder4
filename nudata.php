@@ -30,7 +30,6 @@ function nuUpdateData(){
 				
 				$fdid	= $o['f'][$i];
 				$sq		= "SELECT * FROM zzzzsys_object WHERE sob_all_zzzzsys_form_id = '$fmid' AND sob_all_id = '$fdid'";
-				nuDebug($sq);
 				$T		= nuRunQuery($sq);
 				$O		= db_fetch_object($T);
 				
