@@ -193,7 +193,7 @@ function nuUpdateData(){
 	r			= w.record_id;
 	w.deleteAll	= $('#nuDelete').is(":checked") ? 'Yes' : 'No';
 	w.hash		= nuHashFromEditForm();
-console.log(w);
+
 	var request 	= $.ajax({
 		url      : "nuapi.php",
 		type     : "POST",

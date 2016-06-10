@@ -62,7 +62,6 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 		}else{
 			$o->value		= $A[$r->sob_all_id];
 		}
-
 		if($r->sob_all_type == 'input' || $r->sob_all_type == 'display'){
 
 			$o->align 	= $r->sob_all_align;
@@ -72,6 +71,14 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 
 			if($r->sob_input_type == 'button'){
 				$o->value= $r->sob_all_label;
+			}
+
+			if($r->sob_all_type == 'display'){
+				$disS	= str_replace('#RECORD_ID#', $R, trim($r->sob_display_sql));
+				$disT	= nuRunQuery($disT);
+				$disR	= db_fetch_row($disT);
+				$o->value= $disR[0];
+				nudebug("$o->value .  $R  . $disS");
 			}
 
 		}

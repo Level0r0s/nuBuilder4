@@ -12,14 +12,11 @@ function nuUpdateData(){
 	$e		= array();
 
 	
-nudebug(print_r($nudata,1));
-
 	for($i = 0 ; $i < count($nudata) ; $i++){
 		$pk		= $nudata[$i]['pk'];
 		$t		= nuRunQuery("SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = ? ", array($nudata[$i]['fm']));
 		$r		= db_fetch_object($t);
 		$del		= $nudata[$i]['d'];
-nudebug($pk . '  ' . $i . '  ' . count($nudata));
 
 		if($del == 'No'){
 			
