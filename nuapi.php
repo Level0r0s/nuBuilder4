@@ -11,6 +11,7 @@
 	$s									= nuCheckSession();
 	$P									= $_POST['nuSTATE'];
 	$_POST['nuHash']						= nuSetHashList($P['hash']);
+
 	if($P['call_type'] == 'getlookupid')	{$f->forms[0]->lookup_values 			= nuGetAllLookupValues();}
 	if($P['call_type'] == 'getlookupcode')	{$f->forms[0]->lookup_values 			= nuGetAllLookupList();}
 	if($P['call_type'] == 'getform')		{nuBeforeOpen($s->form_id);$f->forms[0] = nuGetFormObject($s->form_id, $s->record_id, 0, $P);}

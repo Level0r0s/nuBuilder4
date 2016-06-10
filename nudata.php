@@ -12,23 +12,23 @@ function nuUpdateData(){
 	$e		= array();
 
 	
-
+nudebug(print_r($nudata,1));
 
 	for($i = 0 ; $i < count($nudata) ; $i++){
-
 		$pk		= $nudata[$i]['pk'];
 		$t		= nuRunQuery("SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = ? ", array($nudata[$i]['fm']));
 		$r		= db_fetch_object($t);
 		$del		= $nudata[$i]['d'];
+nudebug($pk . '  ' . $i . '  ' . count($nudata));
 
 		if($del == 'No'){
 			
 			$o		= $nudata[$i];
 			$fmid	= $o['fm'];
 			
-			for($i = 0 ; $i < count($o['f']) ; $i++){
+			for($ii = 0 ; $ii < count($o['f']) ; $ii++){
 				
-				$fdid	= $o['f'][$i];
+				$fdid	= $o['f'][$ii];
 				$sq		= "SELECT * FROM zzzzsys_object WHERE sob_all_zzzzsys_form_id = '$fmid' AND sob_all_id = '$fdid'";
 				$T		= nuRunQuery($sq);
 				$O		= db_fetch_object($T);
@@ -37,7 +37,7 @@ function nuUpdateData(){
 
 					$m	= '';
 					
-					if($o['v'][$i] == ''){
+					if($o['v'][$ii] == ''){
 						
 						$lab	= addslashes($O->sob_all_label);
 						
@@ -107,13 +107,13 @@ function nuUpdateData(){
 		}
 		
 	}
-
 	
 	if($DEL == 'Yes'){
 		$after	= nuReplaceHashVariables(trim($FORM->sfo_after_delete_php));
 	}else{
 		$after	= nuReplaceHashVariables(trim($FORM->sfo_after_save_php));
 	}
+
 	eval($after);
 
 	return $ID;

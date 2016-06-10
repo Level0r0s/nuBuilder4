@@ -1712,7 +1712,6 @@ function nuFormClass(frm){
 	o.each(function(index){
 
 		var rw		= String($(this).attr('data-nu-prefix'));
-		console.log(rw);
 		var rowno	= parseInt(rw.substr(rw.length - 3));
 		var f		= $(this).attr('data-nu-field');
 		var v		= $(this).val();
