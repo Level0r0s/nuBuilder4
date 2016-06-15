@@ -78,7 +78,6 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 				$disT	= nuRunQuery($disT);
 				$disR	= db_fetch_row($disT);
 				$o->value= $disR[0];
-				nudebug("$o->value .  $R  . $disS");
 			}
 
 		}
@@ -291,7 +290,8 @@ function nuGetEditForm($F){
     $f->primary_key 	= $r->sfo_primary_key;
     $f->javascript 	= $r->sfo_javascript;
     $f->order			= $SQL->orderBy;
-	
+    $f->from			= $SQL->from;
+
 	if(intval($r->sfo_row_height) == 0){
 		$f->row_height	= 25;
 	}else{
@@ -454,7 +454,7 @@ function nuGetSubformRecords($R, $A){
 
     $f = nuGetEditForm($R->sob_subform_zzzzsys_form_id);
 	
-    $s = "SELECT `$f->primary_key` FROM `$f->table` WHERE `$R->sob_subform_foreign_key` = '$R->subform_fk' $f->order";
+    $s = "SELECT `$f->primary_key` $f->from WHeRE `$R->sob_subform_foreign_key` = '$R->subform_fk' $f->order";
     $t = nuRunQuery($s);
     $a = array();
 
@@ -740,16 +740,17 @@ function nuBrowseWhereClause($searchFields, $searchString, $returnArray = false)
 
 function nuCheckSession(){
 	
-	$u					= $_POST['nuSTATE']['username'];
-	$p					= $_POST['nuSTATE']['password'];
-	$s					= $_POST['nuSTATE']['session_id'];
-	$_POST['nuLogAgain']	= 0;
-	$c					= new stdClass;
-	$c->session_id		= '';
-	$c->form_id			= '';
-	$c->record_id			= '-1';
-	$c->filter			= $_POST['nuFilter'];
-	$c->errors			= array();
+	$u						= $_POST['nuSTATE']['username'];
+	$p						= $_POST['nuSTATE']['password'];
+	$s						= $_POST['nuSTATE']['session_id'];
+	$_POST['nuLogAgain']		= 0;
+	$_POST['nuIsGlobeadmin']	= 0;
+	$c						= new stdClass;
+	$c->session_id			= '';
+	$c->form_id				= '';
+	$c->record_id				= '-1';
+	$c->filter				= $_POST['nuFilter'];
+	$c->errors				= array();
 	
 	
 	if($s == ''){
@@ -757,12 +758,12 @@ function nuCheckSession(){
 		if($u == $_SESSION['DBGlobeadminUsername']){
 			
 			if($p == $_SESSION['DBGlobeadminPassword']){
-				$c->session_id		= nuSetSession($u);
-				$c->form_id			= 'nuhome';
-				$c->record_id			= '-1';
+				$c->session_id			= nuSetSession($u);
+				$c->form_id				= 'nuhome';
+				$c->record_id				= '-1';
 			}else{
-				$_POST['nuErrors'][]	= 'Invalid Login';
-				$_POST['nuLogAgain']	= 1;
+				$_POST['nuErrors'][]		= 'Invalid Login';
+				$_POST['nuLogAgain']		= 1;
 			}
 
 		}else{

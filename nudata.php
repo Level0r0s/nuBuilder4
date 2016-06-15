@@ -223,6 +223,23 @@ function nuErrorMessage($m){
 
 }
 
+function nuSubformObject($sf){
+	
+	$s	= $_POST['nuSTATE']['subforms'];
+
+	for($i = 0 ; $i < count($s) ; $i++){
+
+		if($s[$i]['name'] == $sf){
+			
+			return $s[$i];
+		
+		}
+		
+	}
+	
+	return array();
+	
+}
 
 
 ?>

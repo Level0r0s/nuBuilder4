@@ -7,7 +7,8 @@ function nuBuildForm(f){
 
 	window.nuSESSION		= f.session_id;
 	window.nuSUBFORMROW	= [];
-	
+	window.nuSUBFORMJSON	= [];
+
 	$('body').html('');
 	$('body').removeClass('nuBrowseBody').removeClass('nuEditBody');
 	
@@ -215,6 +216,7 @@ function nuRecordProperties(w, p, l){
 	var de    = p + 'nuDelete';
 	var fh    = p + 'nuRecordHolder';                       //-- Edit Form Id
 	var chk   = document.createElement('input');
+	var sf    = p.substr(0, p.length - 3);
 
 	chk.setAttribute('id', de);
 	chk.setAttribute('title', 'Delete This Row When Saved');
@@ -226,20 +228,22 @@ function nuRecordProperties(w, p, l){
 	.attr('data-nu-form-id', w.id)
 	.attr('data-nu-primary-key', w.record_id)
 	.attr('data-nu-foreign-key', w.foreign_key)
-	.attr('data-nu-foreign-field', p == '' ? '' : w.foreign_key_name)
-	
+	.attr('data-nu-foreign-field', p == '' ? '' : w.foreign_key_name);
+
 	if(arguments.length == 3){
 		
 		$('#' + de).css({'top'		: 3, 
 						'left'		: Number(l) + 5, 
 						'position' 	: 'absolute', 
 						'visibility'	: 'visible'})
-		.prop('checked', w.record_id == -1);
+		.prop('checked', w.record_id == -1)
+		.attr('data-nu-checkbox', sf);
 		
 	}else{
 		
 		$('#' + de).css('visibility', 'hidden')
-		.prop('checked', false);
+		.prop('checked', false)
+		.attr('data-nu-checkbox', sf);
 		
 	}
 	
@@ -586,6 +590,7 @@ function nuSELECT(w, i, l, p, prop){
 }
 
 function nuSUBFORM(w, i, l, p, prop){
+	
     var SF  = prop.objects[i];							//-- first row
     var SFR = w.objects[i];							//-- all rows
 	var id  = p + SF.id;
@@ -613,10 +618,11 @@ function nuSUBFORM(w, i, l, p, prop){
 					'overflow-x'	: 'hidden',
 					'overflow-y'	: 'hidden'
 	})
+	.attr('data-nu-primary-key', SF.object_id)
 	.attr('data-nu-subform-parent', p)
 	.attr('data-nu-subform', 'true')
 	.addClass('nuSubform');
-	
+
 	nuGetSubformRowSize(SF.forms[0].objects, SF, id);
 
 	if(SF.subform_type == 'f'){
@@ -706,7 +712,6 @@ function nuSUBFORM(w, i, l, p, prop){
 		.addClass('nuSubform' + even);
 
 		nuBuildEditObjects(SFR.forms[c], prefix, SF, SF.forms[0]);
-
 		nuRecordProperties(SF.forms[c], prefix, rowWidth - 40);
 
 		rowTop 	= Number(rowTop) + Number(rowHeight);
@@ -1882,3 +1887,60 @@ function nuHashFromEditForm(){
 	return a;
 
 }
+
+
+function nuSubformToArray(sf, includeDeleted){
+
+	var s			= {};
+	var c			= [];
+	var r			= [];
+	var f			= [];
+	var v			= [];
+	var p			= '';
+	
+	includeDeleted	= arguments.length == 2 ? includeDeleted : 1;
+	
+	f.push('nuRecordHolder');
+	
+	$("[id^='" + sf + "000'][data-nu-field]").each(function( index ) {
+		
+		f.push(String(this.id).substr(sf.length + 3));
+		
+	});
+
+	f.push('nuDelete');
+	
+	var cb		= $("[data-nu-checkbox='" + sf + "']");
+	
+	cb.each(function( index ) {
+		
+		c		= [];
+		p		= this.id.substr(0, this.id.length - 8);
+
+		if(!$('#' + p + 'nuDelete').prop('checked') || includeDeleted == 1){
+
+			c.push($('#' + p + 'nuRecordHolder').attr('data-nu-primary-key'));
+			
+			for(var i = 1 ; i < f.length - 1 ; i++){
+				c.push($('#' + p + f[i]).val());
+			}
+			
+			c.push($('#' + p + 'nuDelete').val());
+			r.push(c);
+		
+		}
+	
+	});
+	
+	s.name		= p.substr(0, p.length - 3);
+	s.rows		= r;
+	s.columns	= f;
+
+//	return JSON.stringify(s);
+	return s;
+	
+}
+
+
+
+

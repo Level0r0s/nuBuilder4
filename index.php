@@ -69,6 +69,7 @@ jsinclude('nuform.js');
 jsinclude('nuformdrag.js');
 jsinclude('nucalendar.js');
 jsinclude('nucommon.js');
+jsinclude('nufunctions.js');
 	
 ?>
 

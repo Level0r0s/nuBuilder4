@@ -2,6 +2,7 @@ window.nuDialog 			= new nuCreateDialog('');
 window.nuBC 				= [];
 window.nuOPENER			= [];
 window.nuSUBFORMROW		= [];
+window.nuSUBFORMJSON		= [];
 window.nuFIELD			= [];
 window.nuFORM				= [];
 window.nuSESSION			= '';
@@ -193,7 +194,8 @@ function nuUpdateData(){
 	r			= w.record_id;
 	w.deleteAll	= $('#nuDelete').is(":checked") ? 'Yes' : 'No';
 	w.hash		= nuHashFromEditForm();
-
+	w.subforms	= nuGetSFArrays();
+	
 	var request 	= $.ajax({
 		url      : "nuapi.php",
 		type     : "POST",
@@ -204,7 +206,7 @@ function nuUpdateData(){
 			var fm 	= data;
 			if(nuErrorMessages(fm.errors)){
 			}else{
-				
+
 				if($('#nuDelete').prop('checked')){
 					nuBC.pop();  						//-- return to browse
 					nuGetBreadcrumb(nuBC.length - 1);
@@ -545,3 +547,20 @@ function nuOpenAce(lang, obj){
 }
 
 
+function nuBuildSFArray(s){
+	
+	window.nuSUBFORMJSON.push(s);
+	
+}
+
+function nuGetSFArrays(){
+	
+	var s 	= window.nuSUBFORMJSON;
+	var j	= [];
+	
+	for(var i = 0 ; i < s.length ; i++){
+		j.push(nuSubformToArray(s[i], 1));
+	}
+	
+	return j;
+}
