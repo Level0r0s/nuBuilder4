@@ -8,6 +8,7 @@ function nuBuildForm(f){
 	window.nuSESSION		= f.session_id;
 	window.nuSUBFORMROW	= [];
 	window.nuSUBFORMJSON	= [];
+	window.nuHASH			= [];                       //-- remove any hash variables previously set.
 
 	$('body').html('');
 	$('body').removeClass('nuBrowseBody').removeClass('nuEditBody');
@@ -351,7 +352,7 @@ function nuINPUT(w, i, l, p, prop){
 		
 		$('#' + id).addClass('nuReadonly');
 		$('#' + id).prop('readonly', true);
-	
+	console.log(111, prop.objects[i]);
 	}
 
 	if(prop.objects[i].type == 'lookup'){
@@ -1850,11 +1851,16 @@ function nuHashFromEditForm(){
 	var b	= nuBC[nuBC.length-1];
 	var o 	= {};
 
+	$.each(window.nuHASH, function(key, value){
+		a.push([key, value]);
+	});	
+
+	
 	a.push([b.form_id, b.record_id]);		//-- first element is Form and Record ID
 	a.push(['FORM_ID', b.form_id]);
 	a.push(['PREVIOUS_RECORD_ID', b.record_id]);
 	a.push(['RECORD_ID', b.record_id]);
-
+console.log(a);
 	$("[data-nu-field][data-nu-changed][data-nu-prefix='']").each(function( index ) {
 
 		o 	= $('#' + this.id);
@@ -1925,7 +1931,7 @@ function nuSubformToArray(sf, includeDeleted){
 				c.push($('#' + p + f[i]).val());
 			}
 			
-			c.push($('#' + p + 'nuDelete').val());
+			c.push($('#' + p + 'nuDelete').prop('checked') ? 1 : 0);
 			r.push(c);
 		
 		}

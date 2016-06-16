@@ -5,7 +5,7 @@ function nuBeforeBrowse($f){
 	$s		= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$f'";
 	$t		= nuRunQuery($s);
 	$r		= db_fetch_object($t);
-	$before	= nuReplaceHashVariables(trim($r->sfo_before_browse_php));
+	$before	= nuReplaceHashVariables($r->sfo_before_browse_php);
 
 	eval($before);
 	
@@ -17,7 +17,7 @@ function nuBeforeOpen($f){
 	$s		= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$f'";
 	$t		= nuRunQuery($s);
 	$r		= db_fetch_object($t);
-	$before	= nuReplaceHashVariables(trim($r->sfo_before_open_php));
+	$before	= nuReplaceHashVariables($r->sfo_before_open_php);
 
 	eval($before);
 	
@@ -49,105 +49,111 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
     ORDER BY sob_all_order    
 
     ";
+	
+	if($R != ''){
 
-    $t = nuRunQuery($s);
-    $a = array();
-    
-    while($r = db_fetch_object($t)){
-
-		$o 					= nuDefaultObject($r, $tabs);
+		$t = nuRunQuery($s);
+		$a = array();
 		
-		if($R == '-1'){
-			$o->value		= nuGetSQLValue($r->sob_all_default_value_sql);
-		}else{
-			$o->value		= $A[$r->sob_all_id];
-		}
-		if($r->sob_all_type == 'input' || $r->sob_all_type == 'display'){
+		while($r = db_fetch_object($t)){
 
-			$o->align 	= $r->sob_all_align;
-			$o->format 	= $r->sob_input_format;
-			$o->input 	= $r->sob_input_type;
-			$o->read 	= $r->sob_all_readonly;
-
-			if($r->sob_input_type == 'button'){
-				$o->value= $r->sob_all_label;
+			$o 				= nuDefaultObject($r, $tabs);
+			
+			if($R == '-1'){
+				$o->value	= nuGetSQLValue($r->sob_all_default_value_sql);
+			}else{
+				$o->value	= $A[$r->sob_all_id];
 			}
 
-			if($r->sob_all_type == 'display'){
-				$disS	= str_replace('#RECORD_ID#', $R, trim($r->sob_display_sql));
-				$disT	= nuRunQuery($disT);
-				$disR	= db_fetch_row($disT);
-				$o->value= $disR[0];
-			}
+			if($r->sob_all_type == 'input' || $r->sob_all_type == 'display'){
 
-		}
+				$o->align 	= $r->sob_all_align;
+				$o->format 	= $r->sob_input_format;
+				$o->input 	= $r->sob_input_type;
+				$o->read 	= $r->sob_all_readonly;
 
-        if($r->sob_all_type == 'html'){$o->html = $r->sob_html_code;}
+				if($r->sob_input_type == 'button' && $r->sob_all_type == 'input'){
+					$o->value= $r->sob_all_label;
+				}
 
-        if($r->sob_all_type == 'select'){
+				if($r->sob_all_type == 'display'){
+					$disS	= nuReplaceHashVariables($r->sob_display_sql);
+					$disT	= nuRunQuery($disS);
+					$disR	= db_fetch_row($disT);
+					$o->value= $disR[0];
+				}
 
-            $o->multiple	= $r->sob_select_multiple;
-            $o->options	= nuSelectOptions($r->sob_select_sql);
-        }
-
-		if($r->sob_all_type == 'run'){
-			
-			$o->form_id  		= $r->sob_run_zzzzsys_form_id;
-			$form			= nuRunQuery("SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$o->form_id'");
-			$run				= db_fetch_object($form);
-			$o->run_type		= $run->sfo_type;
-			$o->record_id		= -1;
-			$o->filter		= $r->sob_run_filter;
-
-			if($o->run_type	== 'browse' || $o->run_type	== 'edit' || $o->run_type	== 'browseedit'){
-				$o->record_id	= $r->sob_run_id;
 			}
 			
-			$o->run_method  	= $r->sob_run_method;
-		}
-		
+			if($r->sob_all_type == 'html'){$o->html = $r->sob_html_code;}
+
+			if($r->sob_all_type == 'select'){
+
+				$o->multiple	= $r->sob_select_multiple;
+				$o->options	= nuSelectOptions($r->sob_select_sql);
+			}
+
+			if($r->sob_all_type == 'run'){
+				
+				$o->form_id  		= $r->sob_run_zzzzsys_form_id;
+				$form			= nuRunQuery("SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$o->form_id'");
+				$run				= db_fetch_object($form);
+				$o->run_type		= $run->sfo_type;
+				$o->record_id		= -1;
+				$o->filter		= $r->sob_run_filter;
+
+				if($o->run_type	== 'browse' || $o->run_type	== 'edit' || $o->run_type	== 'browseedit'){
+					$o->record_id	= $r->sob_run_id;
+				}
+				
+				$o->run_method  	= $r->sob_run_method;
+			}
 			
-		if($r->sob_all_type == 'lookup'){
+				
+			if($r->sob_all_type == 'lookup'){
 
-			$o->description_width		= $r->sob_lookup_description_width;
-			$o->auto_complete			= $r->sob_lookup_autocomplete;
-			$o->form_id				= $r->sob_lookup_zzzzsys_form_id;
-			$o->values				= nuGetLookupValues($r, $o);
+				$o->description_width		= $r->sob_lookup_description_width;
+				$o->auto_complete			= $r->sob_lookup_autocomplete;
+				$o->form_id				= $r->sob_lookup_zzzzsys_form_id;
+				$o->values				= nuGetLookupValues($r, $o);
+				
+			}
+
+			if($r->sob_all_type == 'subform'){
+
+				// need to set both subform_fk in $r and $o for later use
+				$r->subform_fk      	= $R;
+				$o->subform_fk      	= $R;
+				$o->subform_type    	= $r->sob_subform_type;
+				$o->delete          	= $r->sob_subform_delete;
+				$f->foreign_key_name 	= $r->sob_subform_foreign_key;
+				$o->add             	= $r->sob_subform_add;
+				$o->dimensions		= nuFormDimensions($r->sob_subform_zzzzsys_form_id);
+				$o->forms           	= nuGetSubformRecords($r, $o->add);
+				$o->sf_form_id		= $r->sob_subform_zzzzsys_form_id;
+				$o->browse_columns  	= array();
+				
+			}
 			
+
+			$o->display				= nuDisplay($r->sob_all_display_condition);
+			$o->js					= nuObjectEvents($r->zzzzsys_object_id);
+
+			if($OBJS > 0){
+
+				unset($o->type);
+				unset($o->id);
+				unset($o->label);
+				unset($o->top);
+				unset($o->left);
+				unset($o->width);
+				unset($o->height);
+				unset($o->align);
+				
+			}
+
+			$a[]    			= $o;
 		}
-
-		if($r->sob_all_type == 'subform'){
-
-            // need to set both subform_fk in $r and $o for later use
-			$r->subform_fk      	= $R;
-			$o->subform_fk      	= $R;
-			$o->subform_type    	= $r->sob_subform_type;
-			$o->delete          	= $r->sob_subform_delete;
-			$f->foreign_key_name 	= $r->sob_subform_foreign_key;
-			$o->add             	= $r->sob_subform_add;
-			$o->dimensions		= nuFormDimensions($r->sob_subform_zzzzsys_form_id);
-			$o->forms           	= nuGetSubformRecords($r, $o->add);
-			$o->sf_form_id		= $r->sob_subform_zzzzsys_form_id;
-			$o->browse_columns  	= array();
-		}
-
-		$o->display				= nuDisplay($r->sob_all_display_condition);
-		$o->js					= nuObjectEvents($r->zzzzsys_object_id);
-
-		if($OBJS > 0){
-
-			unset($o->type);
-			unset($o->id);
-			unset($o->label);
-			unset($o->top);
-			unset($o->left);
-			unset($o->width);
-			unset($o->height);
-			unset($o->align);
-			
-		}
-
-		$a[]    				= $o;
 	}
     
     $f->buttons			= nuButtonList($f);
@@ -169,7 +175,9 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 
 function nuDisplay($s){
 
-	if(trim($s) == ''){
+	$s	= nuReplaceHashVariables(trim($s));
+
+	if($s == ''){
 		return 1;
 	}else{
 		
@@ -527,6 +535,8 @@ function nuRefineTabList($t){
 
 
 function nuGetSQLValue($s){
+	
+	$s	= nuReplaceHashVariables(trim($s));
     
     if(trim($s) == ''){
         return '';

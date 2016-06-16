@@ -316,7 +316,7 @@ function nuPreviousMonth(y, m, d){
 	
 	var p   = Array();
 	var day = 1;
-	debugger;
+
 	while (d.getDate() == day) {
 	
 		p.push(day);

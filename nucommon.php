@@ -586,7 +586,6 @@ function nuSetHashList($H){
 
 	$F		= $H[0][0];
 	$R		= $H[0][1];
-	$hash	= $_POST['hash'];
 	$s 		= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$F'";
 	$t 		= nuRunQuery($s);
 	$r 		= db_fetch_object($t);

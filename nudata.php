@@ -30,7 +30,7 @@ function nuUpdateData(){
 				$T		= nuRunQuery($sq);
 				$O		= db_fetch_object($T);
 				
-				if($O->sob_all_validate != ''){
+				if($O->sob_all_validate != 'none' and $O->sob_all_validate != ''){
 
 					$m	= '';
 					
@@ -60,9 +60,9 @@ function nuUpdateData(){
 	}
 	
 	if($DEL == 'Yes'){
-		$before	= nuReplaceHashVariables(trim($FORM->sfo_before_delete_php));
+		$before	= nuReplaceHashVariables($FORM->sfo_before_delete_php);
 	}else{
-		$before	= nuReplaceHashVariables(trim($FORM->sfo_before_save_php));
+		$before	= nuReplaceHashVariables($FORM->sfo_before_save_php);
 	}
 
 	eval($before);
@@ -106,9 +106,9 @@ function nuUpdateData(){
 	}
 	
 	if($DEL == 'Yes'){
-		$after	= nuReplaceHashVariables(trim($FORM->sfo_after_delete_php));
+		$after	= nuReplaceHashVariables($FORM->sfo_after_delete_php);
 	}else{
-		$after	= nuReplaceHashVariables(trim($FORM->sfo_after_save_php));
+		$after	= nuReplaceHashVariables($FORM->sfo_after_save_php);
 	}
 
 	eval($after);
@@ -200,6 +200,12 @@ function nuFormatValue($row, $i){
 
 function nuReplaceHashVariables($s){
 
+	$s		= trim($s);
+	
+	if($s == ''){
+		return '';
+	}
+	
 	$a		= $_POST['nuHash'];
 
 	foreach ($a as $k => $v) {

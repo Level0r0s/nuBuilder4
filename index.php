@@ -7,8 +7,20 @@ require_once('nucommon.php'); ?>
 <meta http-equiv='Content-type' content='text/html;charset=UTF-8'>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<?php
+cssinclude('nubuilder4.css');
+jsinclude('nuform.js');
+jsinclude('nuformdrag.js');
+jsinclude('nucalendar.js');
+jsinclude('nucommon.js');
+jsinclude('nufunctions.js');
+	
+?>
 
 <script>
+
+
+	window.nuHASH	= [];
 
 
 
@@ -27,7 +39,7 @@ require_once('nucommon.php'); ?>
 		
 	if($type == ''){			//-- login screen
 		
-		print "
+		$h	= "
 		
 		function nuLoad(){
 			nuLogin();
@@ -55,23 +67,13 @@ require_once('nucommon.php'); ?>
 		}
 		
 		";
-		print $h;
 
 	}
+	print $h;
 	
 ?>
 
 </script>
-
-<?php
-cssinclude('nubuilder4.css');
-jsinclude('nuform.js');
-jsinclude('nuformdrag.js');
-jsinclude('nucalendar.js');
-jsinclude('nucommon.js');
-jsinclude('nufunctions.js');
-	
-?>
 
 </head>
 

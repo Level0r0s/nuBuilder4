@@ -5,6 +5,7 @@ window.nuSUBFORMROW		= [];
 window.nuSUBFORMJSON		= [];
 window.nuFIELD			= [];
 window.nuFORM				= [];
+window.nuHASH				= [];
 window.nuSESSION			= '';
 window.nuTYPE 			= 'browse';
 
@@ -544,13 +545,6 @@ function nuOpenAce(lang, obj){
 	
 	window.open('nuace.html?' + ts);
 
-}
-
-
-function nuBuildSFArray(s){
-	
-	window.nuSUBFORMJSON.push(s);
-	
 }
 
 function nuGetSFArrays(){
