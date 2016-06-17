@@ -24,31 +24,72 @@ function nuUpdateData(){
 			$fmid	= $o['fm'];
 			
 			for($ii = 0 ; $ii < count($o['f']) ; $ii++){
-				
-				$fdid	= $o['f'][$ii];
-				$sq		= "SELECT * FROM zzzzsys_object WHERE sob_all_zzzzsys_form_id = '$fmid' AND sob_all_id = '$fdid'";
-				$T		= nuRunQuery($sq);
-				$O		= db_fetch_object($T);
-				
-				if($O->sob_all_validate != 'none' and $O->sob_all_validate != ''){
 
-					$m	= '';
+				$fdid	= $o['f'][$ii];
+				$sq		= "
+				
+				SELECT o.*, f.*, p.sob_all_label AS label
+				FROM zzzzsys_object AS o
+				INNER JOIN zzzzsys_form AS f ON zzzzsys_form_id = o.sob_all_zzzzsys_form_id
+				INNER JOIN zzzzsys_object AS p ON zzzzsys_form_id = p.sob_subform_zzzzsys_form_id
+				WHERE zzzzsys_form_id = '$fmid' AND o.sob_all_id = '$fdid'
+				
+				";
+				
+				nudebug($sq);
+				$T			= nuRunQuery($sq);
+				$O			= db_fetch_object($T);
+				$m			= '';
+				$value		= $o['v'][$ii];
+				
+				if($O->sob_all_validate == 'noblanks'){
 					
-					if($o['v'][$ii] == ''){
+					if($value == ''){
 						
 						$lab	= addslashes($O->sob_all_label);
 						
 						if($o['fk'] == ''){
 							$m	= "$lab cannot be left blank";
 						}else{
-							$m	= "$lab (on row " . $o['r'] . ") cannot be left blank";
+							$m	= "$lab (on row " . $o['r'][$ii] . ") cannot be left blank";
 						}
 						
 						nuErrorMessage($m);
 						
 					}
 					
+				}else if($O->sob_all_validate == 'noduplicates'){
+					
+					$noS	= "
+					
+					SELECT COUNT(*)
+					FROM `$O->sfo_table`
+					WHERE `$O->sob_all_id` = '$value'
+					AND `$O->sfo_primary_key` != '$O->label'
+					
+					";
+					
+					$noT	= nuRunQuery($noS);
+					nudebug($noS);
+					$noR	= db_fetch_row($noT);
+					
+					if($noR[0] != 0){
+						
+						$lab	= addslashes($O->sob_all_label);
+						
+						if($o['fk'] == ''){
+							$m	= "There is another record where $lab = '$value'";
+						}else{
+							$m	= "There is another record where $lab = '$value' (on row " . $o['r'][$ii] . ") of $O->label";
+						}
+						
+						nuErrorMessage($m);
+						
+					}
+					
+					
 				}
+					nudebug("$O->sob_all_validate    $noS");
 				
 			}
 		}

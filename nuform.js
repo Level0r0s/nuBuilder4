@@ -352,7 +352,7 @@ function nuINPUT(w, i, l, p, prop){
 		
 		$('#' + id).addClass('nuReadonly');
 		$('#' + id).prop('readonly', true);
-	console.log(111, prop.objects[i]);
+		
 	}
 
 	if(prop.objects[i].type == 'lookup'){
@@ -1724,7 +1724,8 @@ function nuFormClass(frm){
 
 		fields.push(f);
 		values.push(v);
-		rows.push(rw == '' ? rowno + 1 : 0);
+		rows.push(rw != '' ? rowno + 1 : 0);
+		console.log(rw);
 		
 	});
 	
@@ -1860,7 +1861,7 @@ function nuHashFromEditForm(){
 	a.push(['FORM_ID', b.form_id]);
 	a.push(['PREVIOUS_RECORD_ID', b.record_id]);
 	a.push(['RECORD_ID', b.record_id]);
-console.log(a);
+
 	$("[data-nu-field][data-nu-changed][data-nu-prefix='']").each(function( index ) {
 
 		o 	= $('#' + this.id);

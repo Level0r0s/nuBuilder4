@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 16, 2016 at 06:23 AM
+-- Generation Time: Jun 17, 2016 at 01:47 AM
 -- Server version: 5.5.9
 -- PHP Version: 5.3.5
 
@@ -142,7 +142,7 @@ INSERT INTO `company` (`company_id`, `com_code`, `com_name`, `com_business_id`, 
 ('57295aa5660f48b', '', 'Mrs Computer1234', '', '', '43 Allen St', 'Grazewood', '16-Jun-2016', '', '', '568ef920846a089', 0, '13132'),
 ('57295c4c33cddd6', '', 'PCP200011', '568a00e25b8d271', '', '108 KWS', 'Bute', '18-May-2016', '', '', '568ef920846a089#nuSep#568ef59c1bd769c', 0, 'blah'),
 ('57295ed9e996db0', '', 'OPSM111', '568a00c77f8f709', '', '', '', '20-May-2016', '', '', '568ef920846a089#nuSep#568ef59c1bd769c#nuSep#568ef931d196b3e', 0, 'oooo12'),
-('5716c7137efb0c5', '', 'Mr Compurvdcvcd12ff1', '568a00c77f8f709', '', '43 Allen St', 'Grazewood', '0423345544', '', 'm', '568ef920846a089#nuSep#568ef59c1bd769c#nuSep#568ef931d196b3e', 35, 'hh');
+('5716c7137efb0c5', '', 'OPSM1111', '568a00c77f8f709', '', '43 Allen St', 'Grazewood', '0423345544', '', 'm', '568ef920846a089#nuSep#568ef59c1bd769c#nuSep#568ef931d196b3e', 35, 'hh');
 
 -- --------------------------------------------------------
 
@@ -182,7 +182,7 @@ INSERT INTO `employee` (`employee_id`, `emp_company_id`, `emp_name`, `emp_mobile
 ('571475afa08d352', '571475afa08c69c', 'ukgfjgyy', '', ''),
 ('5716c642e4e23c8', '5716c079066e4a2', 'bbbbb', '', ''),
 ('5716c64c8cd4eef', '5716c64c8cd3592', 'bbbbb1', '', '568a00e25b8d271'),
-('5716c7137efe4c1', '5716c7137efb0c5', '', '', ''),
+('5716c7137efe4c1', '5716c7137efb0c5', 'bob', '', ''),
 ('5716cb29f11cfd1', '5716cb29f11c007', 'mr233', '', ''),
 ('5716cc0359429ae', '5716cc035941ba3', 'mr4', '', ''),
 ('5716cc0359433e9', '5716cc035941ba3', '444', '', ''),
@@ -194,9 +194,7 @@ INSERT INTO `employee` (`employee_id`, `emp_company_id`, `emp_name`, `emp_mobile
 ('57295c4c33d0ac0', '57295c4c33cddd6', '1111j', '', ''),
 ('57295c4c33d2ed9', '57295c4c33cddd6', '2222hj', '', ''),
 ('57296ad34207b75', '57295c4c33cddd6', '3', '', ''),
-('572aa8389424d9a', '57295ed9e996db0', '', 'May-24-2016', ''),
-('57302e6a6f67c49', '57295ed9e996db0', '', 'May-31-2016', ''),
-('57302e6a6f69877', '57295ed9e996db0', '', 'May-07-2016', ''),
+('572aa8389424d9a', '57295ed9e996db0', 'bob', 'May-24-2016', ''),
 ('57302e6a6f6aed1', '57295ed9e996db0', '', 'Jun-17-2017', ''),
 ('573a80f0e0db425', '5678d262e048faa', 'test', '', ''),
 ('573d099435f6b7c', '5729572e6331281', 'aaah1gh', '', '568a00e25b8d271'),
@@ -2843,8 +2841,11 @@ CREATE TABLE IF NOT EXISTS `zzzzsys_access_level_form` (
 --
 
 INSERT INTO `zzzzsys_access_level_form` (`zzzzsys_access_level_form_id`, `slf_zzzzsys_access_level_id`, `slf_zzzzsys_form_id`, `slf_add_button`, `slf_save_button`, `slf_delete_button`, `slf_clone_button`, `slf_new_button`, `slf_print_button`) VALUES
-('575f6436a053362', '5743d992b299afe', '575f55b59f8069b', '', '', '', '', '', ''),
-('575f69061a8fb41', '5743d992b299afe', 'nuaccess', '1', '', '', '1', '', '');
+('575f6436a053362', '5743d992b299afe', 'nuaccessreport', '', '', '', '', '', ''),
+('575f69061a8fb41', '5743d992b299afe', 'nuaccess', '1', '', '', '1', '', ''),
+('576247aa2251c13', '5743d992b299afe', 'nublank', '', '', '', '', '', ''),
+('576247aa2253f46', '5743d992b299afe', '56773cb405f4913', '', '', '', '', '', ''),
+('576247aa2255508', '5743d992b299afe', 'nubrowse', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -2968,8 +2969,6 @@ CREATE TABLE IF NOT EXISTS `zzzzsys_debug` (
 -- Dumping data for table `zzzzsys_debug`
 --
 
-INSERT INTO `zzzzsys_debug` (`zzzzsys_debug_id`, `deb_message`, `deb_order`, `deb_added`) VALUES
-('5762447babbd6b0', '9', '', '2016-06-16 15:47:31');
 
 -- --------------------------------------------------------
 
@@ -3080,7 +3079,7 @@ INSERT INTO `zzzzsys_form` (`zzzzsys_form_id`, `sfo_type`, `sfo_code`, `sfo_desc
 ('nuaccessgroup', 'subform', 'GAL', 'Groups Access Level', 'zzzzsys_user_group_access_level', 'zzzzsys_user_group_access_level_id', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('5757a4b7181e365', 'browse', 'RUN', 'Run Form, Report or Procedure', 'zzzzsys_run_list', 'id', '', '', '', '', '$s = "\n\nDROP VIEW IF EXISTS zzzzsys_run_list;\nCREATE VIEW zzzzsys_run_list AS\nSELECT zzzzsys_form_id AS id, ''Form'' AS run, sfo_code AS code, sfo_description AS description FROM zzzzsys_form\nUNION\nSELECT zzzzsys_report_id AS id, ''Report'' AS run, sre_code AS code, sre_description AS description FROM zzzzsys_report\nUNION\nSELECT zzzzsys_php_id AS id, ''Procedure'' AS run, sph_code AS code, sph_description AS description FROM zzzzsys_php\nORDER BY code;\n\n";\n\nnuRunQuery($s);', '', '', '', '', '', 'SELECT zzzzsys_form_id AS id, ''Form'' AS run, sfo_code AS code, sfo_description AS description FROM zzzzsys_run_list', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '\n$("[data-nu-column=''nucolumn000'']").each(function() {\n\n    $(this).addClass(''nu_''+this.innerHTML);\n\n});'),
 ('575a31897e8f3b2', 'browseedit', 'DEBUG', 'Debug', 'zzzzsys_debug', 'zzzzsys_debug_id', '', '', '', '', '', '', '', '', '\n$a  = ''#delete_option#'';\n$r  = ''#RECORD_ID#'';\n$d  = "DELETE FROM zzzzsys_debug ";\n\nif($a == 1){$d  = $d . "WHERE zzzzsys_debug_id = ''$r''";}\nif($a == 2){$d  = $d . "WHERE zzzzsys_debug_id != ''$r''";}\nif($a == 3){$d  = $d . "WHERE zzzzsys_debug_id < ''$r";}\n\nnuRunQuery($d);\n', '', 'SELECT * FROM zzzzsys_debug\nORDER BY zzzzsys_debug_id DESC', '', '', '', '', '', '', '', '', '', '1', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-('575f55b59f8069b', 'browseedit', 'ACCPHP', 'Access To Procedures', 'zzzzsys_access_level_php', 'zzzzsys_access_level_php_id', '', '', '', '', '', '', '', '', '', '', 'SELECT * \nFROM zzzzsys_access_level_php\nJOIN zzzzsys_php ON zzzzsys_php_id = slp_zzzzsys_php_id\nORDER BY sph_code', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+('nuaccessreport', 'browseedit', 'ACCPHP', 'Access To Procedures', 'zzzzsys_access_level_php', 'zzzzsys_access_level_php_id', '', '', '', '', '', '', '', '', '', '', 'SELECT * \nFROM zzzzsys_access_level_php\nJOIN zzzzsys_php ON zzzzsys_php_id = slp_zzzzsys_php_id\nORDER BY sph_code', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('5760ef351adda0c', 'browseedit', 'A', 'AAA', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
@@ -3190,11 +3189,11 @@ CREATE TABLE IF NOT EXISTS `zzzzsys_object` (
 --
 
 INSERT INTO `zzzzsys_object` (`zzzzsys_object_id`, `sob_all_zzzzsys_form_id`, `sob_all_type`, `sob_all_id`, `sob_all_label`, `sob_all_zzzzsys_tab_id`, `sob_all_order`, `sob_all_top`, `sob_all_left`, `sob_all_width`, `sob_all_height`, `sob_all_cloneable`, `sob_all_align`, `sob_all_validate`, `sob_all_readonly`, `sob_all_display_condition`, `sob_all_default_value_sql`, `sob_run_zzzzsys_form_id`, `sob_run_filter`, `sob_run_method`, `sob_run_id`, `sob_display_sql`, `sob_select_multiple`, `sob_select_sql`, `sob_lookup_code`, `sob_lookup_description`, `sob_lookup_description_width`, `sob_lookup_autocomplete`, `sob_lookup_zzzzsys_form_id`, `sob_lookup_javascript`, `sob_lookup_php`, `sob_subform_zzzzsys_form_id`, `sob_subform_foreign_key`, `sob_subform_add`, `sob_subform_delete`, `sob_subform_type`, `sob_input_format`, `sob_input_type`, `sob_html_code`) VALUES
-('567742c772b9642', '56773cb405f4913', 'input', 'com_name', 'Company Name', '56777715b87666e', 10, 17, 313, 100, 16, '1', 'l', 'noblanks', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+('567742c772b9642', '56773cb405f4913', 'input', 'com_name', 'Company Name', '56777715b87666e', 10, 17, 313, 100, 16, '1', 'l', 'noduplicates', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('56789912d6d9ddb', '56773cb405f4913', 'input', 'com_address', 'Address', '567898dbc543710', 110, 200, 150, 200, 16, '1', 'l', 'noblanks', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'text', ''),
 ('5678992c5432850', '56773cb405f4913', 'input', 'com_suburb', 'Suburb', '567898dbc543710', 120, 300, 100, 70, 16, '1', 'l', 'noblanks', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'text', ''),
 ('5678a9474a323f5', '56773cb405f4913', 'input', 'com_phone', 'Phone Date', '56777715b87666e', 100, 353, 213, 111, 16, '1', 'l', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '6', '', ''),
-('5678ac0f8f3d3b8', '5678ab2c48c5c41', 'input', 'emp_name', 'Name', '5678ab2c49bd810', 10, 20, 100, 200, 16, '1', 'l', 'noblanks', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+('5678ac0f8f3d3b8', '5678ab2c48c5c41', 'input', 'emp_name', 'Name', '5678ab2c49bd810', 10, 20, 100, 200, 16, '1', 'l', 'noduplicates', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('5679d499ad76e9f', '5678ab2c48c5c41', 'input', 'emp_mobile', 'Mobile', '569c44dd2339963', 30, 30, 138, 136, 17, '1', 'l', 'noblanks', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '8', 'text', ''),
 ('5689fdaf9babfb9', '56773cb405f4913', 'select', 'com_color_id', 'Color', '56777715b87666e', 20, 107, 473, 100, 159, '1', 'l', 'noblanks', '0', '', '', '', '', '', '', '', '1', 'SELECT \ncolor_id,\ncol_description\nFROM color\nORDER BY col_description', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('568b50020fc7a62', '56773cb405f4913', 'lookup', 'com_business_id', 'Business Type', '56777715b87666e', 30, 47, 163, 60, 16, '1', 'l', 'noblanks', '0', '', '', '', '', '', '', '', '', '', 'bus_code', 'bus_description', '200', '0', '568b508eec00d80', '', '', '', '', '', '', '', '', '', ''),
@@ -3344,9 +3343,10 @@ INSERT INTO `zzzzsys_object` (`zzzzsys_object_id`, `sob_all_zzzzsys_form_id`, `s
 ('575a3c0497ca756', '575a31897e8f3b2', 'textarea', 'deb_message', 'Message', '575a31edccc2012', 10, 55, 97, 600, 500, '0', 'l', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('575a3f7001496b0', '575a31897e8f3b2', 'select', 'delete_option', 'Delete', '575a31edccc2012', 40, 14, 100, 134, 16, '1', 'l', 'noblanks', '0', '', 'SELECT 1', '', '', '', '', '', '0', '0|All|1|This|2|All But This|3|Older Than This', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('575a4060ddc83ef', '575a31897e8f3b2', 'display', 'debug_id', 'Time Stamp', '575a31edccc2012', 20, 14, 574, 123, 16, '0', 'l', '', '0', '', '', '', '', '', '', 'SELECT deb_added \nFROM zzzzsys_debug \nWHERE zzzzsys_debug_id = ''#RECORD_ID#''', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-('575f5fe89bf014b', '575f55b59f8069b', 'lookup', 'slp_zzzzsys_php_id', 'PHP Procedures', '575f55e6e740d5a', 0, 20, 100, 100, 16, '1', 'l', 'noblanks', '0', '', '', '', '', '', '', '', '0', '', 'sph_code', 'sph_description', '200', '', 'nuphp', '', '', '', '', '1', '', '', '', '', ''),
-('575f592d57ff088', 'nuaccess', 'subform', 'accphp', '', '575f5474793747e', 0, 50, 50, 395, 400, '1', 'l', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '575f55b59f8069b', 'slp_zzzzsys_access_level_id', '1', '1', 'g', '', '', ''),
-('575f5b6ec00ca94', 'nuphp', 'input', 'sal_description1', 'Description', '574b8ee0b2a4cdf', 0, 80, 100, 200, 16, '1', 'l', 'noblanks', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
+('575f5fe89bf014b', 'nuaccessreport', 'lookup', 'slp_zzzzsys_php_id', 'PHP Procedures', '575f55e6e740d5a', 0, 20, 100, 100, 16, '1', 'l', 'noblanks', '0', '', '', '', '', '', '', '', '0', '', 'sph_code', 'sph_description', '200', '', 'nuphp', '', '', '', '', '1', '', '', '', '', ''),
+('575f592d57ff088', 'nuaccess', 'subform', 'accphp', '', '575f5474793747e', 0, 50, 50, 395, 400, '1', 'l', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'nuaccessreport', 'slp_zzzzsys_access_level_id', '1', '1', 'g', '', '', ''),
+('575f5b6ec00ca94', 'nuphp', 'input', 'sal_description1', 'Description', '574b8ee0b2a4cdf', 0, 80, 100, 200, 16, '1', 'l', 'noblanks', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+('57624c4714b0ce2', 'nuaccess', 'subform', 'accreport', '', '575f54747937ff5', 0, 50, 50, 395, 400, '1', 'l', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '57466ebd5c0dcdb', 'slr_zzzzsys_access_level_id', '1', '1', 'g', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -3433,6 +3433,14 @@ CREATE TABLE IF NOT EXISTS `zzzzsys_session` (
 -- Dumping data for table `zzzzsys_session`
 --
 
+INSERT INTO `zzzzsys_session` (`zzzzsys_session_id`, `sss_zzzzsys_user_id`, `sss_timeout`, `sss_access`) VALUES
+('576247475474341', 'globeadmin', 0, ''),
+('57624b72b46d1d2', 'globeadmin', 0, ''),
+('57633b947df0997', 'globeadmin', 0, ''),
+('57633bb6d01fada', 'globeadmin', 0, ''),
+('576344bb4b73b5c', 'globeadmin', 0, ''),
+('57634591b481fa7', 'globeadmin', 0, ''),
+('576345fc9d4e8e8', 'globeadmin', 0, '');
 
 -- --------------------------------------------------------
 
@@ -3541,7 +3549,7 @@ INSERT INTO `zzzzsys_tab` (`zzzzsys_tab_id`, `syt_zzzzsys_form_id`, `syt_title`,
 ('575f538d131616e', '575f538d131477c', 'Procedure', 10),
 ('575f5474793747e', 'nuaccess', 'Procedures', 30),
 ('575f54747937ff5', 'nuaccess', 'Reports', 40),
-('575f55e6e740d5a', '575f55b59f8069b', 'Access', 10);
+('575f55e6e740d5a', 'nuaccessreport', 'Access', 10);
 
 -- --------------------------------------------------------
 
@@ -3571,7 +3579,8 @@ INSERT INTO `zzzzsys_user` (`zzzzsys_user_id`, `sus_zzzzsys_user_group_id`, `sus
 ('5747caabead2aa8', '57466de0851d354', 'jon', 'jon', '1', NULL),
 ('5747cb8ca8d3de3', '57466de0851d354', 'g', 'g', 'g', NULL),
 ('5747cc333c476fc', '57466de0851d354', 'Bill12', 'Bill1', '1234', 'c81e728d9d4c2f636f067f89cc14862c'),
-('5747ce1dd50cdc5', '57466de0851d354', '55', '55', '55', 'b53b3a3d6ab90ce0268229151c9bde11');
+('5747ce1dd50cdc5', '57466de0851d354', '55', '55', '55', 'b53b3a3d6ab90ce0268229151c9bde11'),
+('5762478822092cd', '57466de0851d354', 'steven', 'steven@nubuilder.com', 'steven', '202cb962ac59075b964b07152d234b70');
 
 -- --------------------------------------------------------
 
