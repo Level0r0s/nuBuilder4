@@ -91,7 +91,7 @@ function nuGetForm(f, r, filter, n){
 	w.filter		= filter;
 	nuBC[nuBC.length - 1].filter = filter;	
 	w.hash		= parent.nuHashFromEditForm();
-	
+
 	var request 	= $.ajax({
 		url      : "nuapi.php",
 		type     : "POST",

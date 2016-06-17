@@ -36,12 +36,11 @@ function nuUpdateData(){
 				
 				";
 				
-				nudebug($sq);
 				$T			= nuRunQuery($sq);
 				$O			= db_fetch_object($T);
 				$m			= '';
 				$value		= $o['v'][$ii];
-				
+
 				if($O->sob_all_validate == 'noblanks'){
 					
 					if($value == ''){
@@ -51,7 +50,7 @@ function nuUpdateData(){
 						if($o['fk'] == ''){
 							$m	= "$lab cannot be left blank";
 						}else{
-							$m	= "$lab (on row " . $o['r'][$ii] . ") cannot be left blank";
+							$m	= "$lab (on row " . $o['r'][$ii] . ")  of $O->label cannot be left blank";
 						}
 						
 						nuErrorMessage($m);
@@ -70,7 +69,6 @@ function nuUpdateData(){
 					";
 					
 					$noT	= nuRunQuery($noS);
-					nudebug($noS);
 					$noR	= db_fetch_row($noT);
 					
 					if($noR[0] != 0){
@@ -87,9 +85,7 @@ function nuUpdateData(){
 						
 					}
 					
-					
 				}
-					nudebug("$O->sob_all_validate    $noS");
 				
 			}
 		}

@@ -155,7 +155,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 			$a[]    			= $o;
 		}
 	}
-    
+
     $f->buttons			= nuButtonList($f);
     $f->tabs 				= nuRefineTabList($tabs);
     $f->browse_columns	= nuBrowseColumns($f, $P);
@@ -588,7 +588,7 @@ function nuBrowseColumns($f, $P){
 
 
 function nuBrowseRows($f){
-	
+
 	if(trim($f->record_id) != ''){return array();}
 	
 	$P			= $_POST['nuSTATE'];
@@ -627,7 +627,7 @@ function nuBrowseRows($f){
 	}
 
 	$w	= nuBrowseWhereClause($flds, $filter . ' ' . $search);
-	
+
 	if(trim($w) != '()'){
 		$S->setWhere(' WHERE ' . $w);
 	}
@@ -638,6 +638,7 @@ function nuBrowseRows($f){
 	
 	$a		= array();
 	$s		= $S->SQL;
+
 	$t 		= nuRunQuery($s);
 	$rows	= db_num_rows($t);
 	$s		= $S->SQL . " LIMIT $start, $rows";

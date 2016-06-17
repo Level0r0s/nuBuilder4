@@ -1695,7 +1695,7 @@ function nuGetFormData(){
 	}
 
 	var c	= 0;
-
+console.log(r);
 	return r;
 
 }
