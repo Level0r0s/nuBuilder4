@@ -970,7 +970,6 @@ function nuSetStartingTab(p){
 	var t = window.nuBC[window.nuBC.length - 1].tab_start;
 	
 	for(var i = 0 ; i < t.length ; i++){
-		
 		if(t[i].prefix == p){return;}
 		
 	}
@@ -982,11 +981,30 @@ function nuSetStartingTab(p){
 function nuGetStartingTab(){
 
 	var t = window.nuBC[window.nuBC.length - 1].tab_start;
-	
+
 	for(var i = 0 ; i < t.length ; i++){
 		
 		$('#' + t[i].prefix + 'nuTab' + t[i].tabNumber).addClass('nuTabSelected');
 		$('#' + t[i].prefix + 'nuTab' + t[i].tabNumber).click();
+		
+	}
+	
+}
+
+
+function nuSetTab(pthis){
+
+	var t = window.nuBC[window.nuBC.length - 1].tab_start;
+	
+	for(var i = 0 ; i < t.length ; i++){
+		
+		if(t[i].prefix == $('#' + pthis.id).attr('data-nu-form-filter')){
+			
+			$('#' + t[i].prefix + 'nuTab' + t[i].tabNumber).addClass('nuTabSelected');
+			t[i].
+			$('#' + t[i].prefix + 'nuTab' + t[i].tabNumber).click();
+			
+		}
 		
 	}
 	
@@ -1121,15 +1139,26 @@ function nuOptionsList(f, t, p){
 
 function nuSelectTab(tab){
 
-    var n = String(tab.id).substr(5);
-    var t = $('#' + tab.id).attr('data-nu-tab-filter');
-    var f = $('#' + tab.id).attr('data-nu-form-filter');
+    var filt = $('#' + tab.id).attr('data-nu-tab-filter');
+    var form = $('#' + tab.id).attr('data-nu-form-filter');
+	
+	var t = window.nuBC[window.nuBC.length - 1].tab_start;
 
-    $("[data-nu-form='" + f + "']").hide();
-    $("[data-nu-form='" + f + "'][data-nu-tab='"  + t + "']:not([data-nu-lookup-id])").show();
+	for(var i = 0 ; i < t.length ; i++){
+		
+		if(t[i].prefix == form){
+			
+			t[i].tabNumber	= filt;
+		}
+		
+	}
+	
 
-    $("[data-nu-form-filter='" + f + "']").removeClass('nuTabSelected');
-    $("[data-nu-form-filter='" + f + "'][data-nu-tab-filter='"  + t + "']").show();
+    $("[data-nu-form='" + form + "']").hide();
+    $("[data-nu-form='" + form + "'][data-nu-tab='"  + filt + "']:not([data-nu-lookup-id])").show();
+
+    $("[data-nu-form-filter='" + form + "']").removeClass('nuTabSelected');
+    $("[data-nu-form-filter='" + form + "'][data-nu-tab-filter='"  + filt + "']").show();
 
     $('#' + tab.id).addClass('nuTabSelected');
 
