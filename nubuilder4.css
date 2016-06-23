@@ -148,6 +148,15 @@ input {
   cursor: pointer;
 }
 
+.nuTitleHover:hover {
+  cursor: pointer;
+  color: red;
+}
+
+
+
+
+
 .nuCalendar{
    position			: absolute;
    width			: 210px;

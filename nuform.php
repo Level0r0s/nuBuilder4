@@ -113,7 +113,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 			if($r->sob_all_type == 'lookup'){
 
 				$o->description_width		= $r->sob_lookup_description_width;
-				$o->auto_complete			= $r->sob_lookup_autocomplete;
+//				$o->auto_complete			= $r->sob_lookup_autocomplete;
 				$o->form_id				= $r->sob_lookup_zzzzsys_form_id;
 				$o->values				= nuGetLookupValues($r, $o);
 				
@@ -884,7 +884,7 @@ function nuGetAllLookupValues(){
 	$r						= db_fetch_object($t);
 	$o						= nuDefaultObject($r, array());
 	$o->description_width		= $r->sob_lookup_description_width;
-	$o->auto_complete			= $r->sob_lookup_autocomplete;
+//	$o->auto_complete			= $r->sob_lookup_autocomplete;
 	$o->form_id				= $r->sob_lookup_zzzzsys_form_id;
 	$o->value				= $PK;
 	$l						= nuGetLookupValues($r, $o);

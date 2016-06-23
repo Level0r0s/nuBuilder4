@@ -880,7 +880,7 @@ function nuGetSubformRowSize(o, SF, id){
         
         if(SF.subform_type == 'g'){                                             //-- grid
             
-            nuBuildSubformTitle(o[i], l, w, id);
+            nuBuildSubformTitle(o[i], l, w, id, i);
             l = l + w;
             
         }
@@ -889,7 +889,7 @@ function nuGetSubformRowSize(o, SF, id){
 
 }
 
-function nuBuildSubformTitle(o, l, w, id){
+function nuBuildSubformTitle(o, l, w, id, col){
     
 	var titleId  = id + o.id;
     	var div = document.createElement('div');
@@ -903,7 +903,11 @@ function nuBuildSubformTitle(o, l, w, id){
     					'text-align'    	: 'center',
     					'position'      	: 'absolute'
     	})
+	.click(function() {
+		nuSortSubform(id, (col+1), this);})
 	.html(o.label)
+	.attr('data-nu-sort',1)
+	.addClass('nuTitleHover')
 	.addClass('nuTabHolder');
 
 }
@@ -1972,11 +1976,100 @@ function nuSubformToArray(sf, includeDeleted){
 	s.rows		= r;
 	s.columns	= f;
 
-//	return JSON.stringify(s);
 	return s;
 	
 }
 
+function nuSortSubform(sf, columnNo, pThis){
+
+	var data 	= nuGetSFArrays()
+	var colname	= [];
+	var columns	= [];
+	var theArray	= [];
+	var direction	= $('#' + pThis.id).attr('data-nu-sort');
+	
+	for(var i = 0 ; i < data.length ; i++){
+	
+		if(data[i].name == sf){
+			
+			var rows 	= data[i].rows;
+			var cols 	= data[i].columns;
+			
+			for(var r = 0 ; r < rows.length ; r++){
+				
+				var row 		= [];
+				
+				for(var c = 0 ; c < cols.length ; c++){
+					row.push(rows[r][c]);
+				}
+				
+				if(direction == 0){
+					row.push(rows[r][c-1] + rows[r][columnNo]);
+				}else{
+					row.push((rows[r][c-1] == 0 ? '1' : '0') + rows[r][columnNo]);
+				}
+				theArray.push(row);
+			
+			}
+			
+			
+		}
+		
+	}
+
+	for(i = 0 ; i < cols.length ; i++){
+			columns[cols[i]]	= i;
+	}
+
+	var orderByDeleted	= [];
+	var sortedColumn		= columns[columnNo];
+	var totalColumns		= cols.length - 1;
+	var sort				= 0;
+	var sortedBy			= 	theArray.sort(function(b, a){
+		
+								var l	= a.length - 1;
+
+								if(direction == 1){
+									if(String(a[l]) > String(b[l])){sort = 1;}
+									if(String(a[l]) < String(b[l])){sort = -1;}
+								}
+								
+								if(direction == 0){
+									if(String(a[l]) > String(b[l])){sort = -1;}
+									if(String(a[l]) < String(b[l])){sort = 1;}
+								}
+								
+								return sort;
+								
+							});
+
+	$('#' + pThis.id).attr('data-nu-sort', direction == 1 ? 0 : 1);
+							
+	for(var r = 0 ; r < sortedBy.length ; r++){
+	
+		var currentRow 	= sortedBy[r];
+		var rowno		= nuPad3(r);
+		
+		$('#' + sf + rowno + 'nuRecordHolder').attr('data-nu-primary-key', currentRow[0]);
+		$('#' + sf + rowno + 'nuDelete').prop('checked', currentRow[cols.length-1] == '0' ? false : true);
+
+		for(var c = 1 ; c < cols.length - 1 ; c++){
+			$('#' + sf + rowno + cols[c]).val(currentRow[c]);
+		}
+	
+	}
+	
+}
 
 
+function nuSubformSorter(a, b, c){
+
+	var l 	= a.length - 1;
+	
+	var A	= nuPad3(a[l]) + a[c];
+	var B	= nuPad3(b[l]) + b[c];
+	
+	return A - B;
+	
+}
 
