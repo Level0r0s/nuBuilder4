@@ -623,3 +623,10 @@ input {
   background-color: #93C8F9 !important;
 }
 
+
+.nuValidate {
+  background-color: yellow !important;
+  border-color: red !important;
+  
+}
+

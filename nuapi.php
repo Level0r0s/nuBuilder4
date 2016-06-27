@@ -8,6 +8,8 @@
 
 	$P									= $_POST['nuSTATE'];
 	$_POST['nuHash']						= nuSetHashList($P['hash']);
+
+	$_POST['nuValidate']					= array();
 	$_POST['nuErrors']					= array();
 	$f->forms[0]							= new stdClass;
 	$s									= nuCheckSession();

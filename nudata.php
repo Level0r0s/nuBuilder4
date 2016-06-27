@@ -1,7 +1,7 @@
 <?php
 
 function nuUpdateData(){
-
+	
 	$nudata	= $_POST['nuSTATE']['data'];
 	$ID		= $_POST['nuSTATE']['record_id'];
 	$DEL		= $_POST['nuSTATE']['deleteAll'];	
@@ -10,8 +10,6 @@ function nuUpdateData(){
 	$t		= nuRunQuery($s);
 	$FORM	= db_fetch_object($t);
 	$e		= array();
-
-	
 	for($i = 0 ; $i < count($nudata) ; $i++){
 		$pk		= $nudata[$i]['pk'];
 		$t		= nuRunQuery("SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = ? ", array($nudata[$i]['fm']));
@@ -22,7 +20,7 @@ function nuUpdateData(){
 			
 			$o		= $nudata[$i];
 			$fmid	= $o['fm'];
-			
+
 			for($ii = 0 ; $ii < count($o['f']) ; $ii++){
 
 				$fdid	= $o['f'][$ii];
@@ -31,7 +29,7 @@ function nuUpdateData(){
 				SELECT o.*, f.*, p.sob_all_label AS label
 				FROM zzzzsys_object AS o
 				INNER JOIN zzzzsys_form AS f ON zzzzsys_form_id = o.sob_all_zzzzsys_form_id
-				INNER JOIN zzzzsys_object AS p ON zzzzsys_form_id = p.sob_subform_zzzzsys_form_id
+				LEFT JOIN zzzzsys_object AS p ON zzzzsys_form_id = p.sob_subform_zzzzsys_form_id
 				WHERE zzzzsys_form_id = '$fmid' AND o.sob_all_id = '$fdid'
 				
 				";
@@ -136,8 +134,11 @@ function nuUpdateData(){
 		if($del == 'Yes' or $DEL == 'Yes'){
 			nuDeleteRow($r, $pk);
 		}else{
-			nuInsertRow($r, $pk);
-			nuUpdateRow($r, $pk, $nudata[$i], $ID);
+
+		if(count($nudata[$i]['f']) > 0){  //-- something to update
+				nuInsertRow($r, $pk);
+				nuUpdateRow($r, $pk, $nudata[$i], $ID);
+			}
 		}
 		
 	}
@@ -260,10 +261,10 @@ function nuChangeHashVariable($h, $v){
 }
 
 
-function nuErrorMessage($m){
+function nuErrorMessage($m, $o = ''){
 
-	$_POST['nuErrors'][]	= $m;
-
+	$_POST['nuErrors'][]	= array($m, $o);
+	
 }
 
 function nuSubformObject($sf){

@@ -381,6 +381,7 @@ function nuINPUT(w, i, l, p, prop){
 		.attr('onkeydown', 'nuLookupKeyDown(event)')
 		.attr('onblur', 'nuLookupBlur(event)')
 		.attr('onfocus', 'nuLookupFocus(event)')
+		.attr('onchange', "$('#' + id).removeClass('nuValidate')")
 		.addClass('nuLookupCode');
 		
 		w.objects[i].values[0][0]	= p + w.objects[i].values[0][0];
@@ -1712,13 +1713,11 @@ function nuGetFormData(){
 		
 	});
 	
-	var b		= a.sort();
 	var r		= [];
 	
-	for(var i = 0 ; i < b.length ; i++){
+	for(var i = 0 ; i < a.length ; i++){
 
-		var rw	= new nuFormClass(b[i]);
-
+		var rw	= new nuFormClass(a[i]);
 		if(rw.d == 'Yes' || rw.pk == '-1' || rw.f.length > 0){
 			
 			r.push(rw);
@@ -1726,9 +1725,7 @@ function nuGetFormData(){
 		}
 		
 	}
-
-	var c	= 0;
-console.log(r);
+	
 	return r;
 
 }
@@ -1746,8 +1743,14 @@ function nuFormClass(frm){
 	var fields		= [];
 	var values		= [];
 	var rows			= [];
-	var o			= $("[data-nu-prefix='" + frm + "'][data-nu-field][data-nu-changed]");
 
+	if(primary_key == -1){
+		$('[data-nu-field]').attr('data-nu-changed', '');
+	}
+
+	
+	var o			= $("[data-nu-prefix='" + frm + "'][data-nu-field][data-nu-changed]");
+	
 	o.each(function(index){
 
 		var rw		= String($(this).attr('data-nu-prefix'));
@@ -1758,7 +1761,6 @@ function nuFormClass(frm){
 		fields.push(f);
 		values.push(v);
 		rows.push(rw != '' ? rowno + 1 : 0);
-		console.log(rw);
 		
 	});
 	
@@ -1816,6 +1818,7 @@ function nuOnChange(t,event){
 	$('#nuSaveButton').addClass('nuSaveButtonEdited');
 	
 	$('#nuCalendar').remove();
+	$('#' + t.id).removeClass('nuValidate');
 
 	if(p == ''){return;}
 	
@@ -1884,6 +1887,7 @@ function nuHashFromEditForm(){
 	var a	= [];
 	var b	= nuBC[nuBC.length-1];
 	var o 	= {};
+	var val 	= '';
 
 	$.each(window.nuHASH, function(key, value){
 		a.push([key, value]);
@@ -1895,28 +1899,33 @@ function nuHashFromEditForm(){
 	a.push(['PREVIOUS_RECORD_ID', b.record_id]);
 	a.push(['RECORD_ID', b.record_id]);
 
-	$("[data-nu-field][data-nu-changed][data-nu-prefix='']").each(function( index ) {
+	if(b.record_id == -1){
+		$("[data-nu-field]").attr('data-nu-changed','');		//-- make all fields edited
+	}
+	
+	$("[data-nu-field][data-nu-changed][data-nu-prefix='']").each(function( index ){
 
 		o 	= $('#' + this.id);
+		val 	= $('#' + this.id).val();
 
 		if(o.attr('multiple') == 'multiple'){
 
-			a.push([this.id, o.val().join('#nuSep#')]);
+			a.push([this.id, Array(val).join('#nuSep#')]);
 
 		}else{
 
 			var format	= o.attr('data-nu-format');
 			var F		= nuFormats[format == '' ? '0' : format];
 
-			if(F.type == 'date' && o.val() != ''){
+			if(F.type == 'date' && val != ''){
 
-				var d	= new Date(o.val());
+				var d	= new Date(val);
 				var f	= d.getFullYear() + '-' + nuPad2('00' + Number(Number(d.getMonth())+Number(1))) + '-' + nuPad2('00' + d.getDate());
 				a.push([this.id, f]);
 
 			}else{
 
-				a.push([this.id, o.val()]);
+				a.push([this.id, val]);
 
 			}
 

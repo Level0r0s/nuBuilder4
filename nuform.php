@@ -303,13 +303,13 @@ function nuGetEditForm($F){
 	if(intval($r->sfo_row_height) == 0){
 		$f->row_height	= 25;
 	}else{
-		$f->row_height	= $r->sfo_row_height;
+		$f->row_height	= intval($r->sfo_row_height);
 	}
     
 	if(intval($r->sfo_rows_per_page) == 0){
 		$f->rows	= 25;
 	}else{
-		$f->rows	= $r->sfo_rows_per_page;
+		$f->rows	= intval($r->sfo_rows_per_page);
 	}
 
     $f->title		= $r->sfo_description;

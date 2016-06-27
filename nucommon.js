@@ -196,7 +196,7 @@ function nuUpdateData(){
 	w.deleteAll	= $('#nuDelete').is(":checked") ? 'Yes' : 'No';
 	w.hash		= nuHashFromEditForm();
 	w.subforms	= nuGetSFArrays();
-	
+
 	var request 	= $.ajax({
 		url      : "nuapi.php",
 		type     : "POST",
@@ -228,7 +228,8 @@ function nuErrorMessages(e){
 	var m	= '';
 	
 	for(var i = 0 ; i < e.length ; i++){
-		m += e[i] + '\r';
+		m += e[i][0] + '\r';
+		$('#' + e[i][1]).addClass('nuValidate');
 	}
 
 	if(e.length > 0){
