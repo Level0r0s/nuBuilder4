@@ -613,5 +613,4 @@ function nuSetHashList($H){
 
 }
 
-
 ?>

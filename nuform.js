@@ -1,3 +1,4 @@
+
 function nuBuildForm(f){
 
 	if(f.form_id == ''){
@@ -5,6 +6,9 @@ function nuBuildForm(f){
 		return;
 	}
 
+	if(f.session_id != ''){window.nuSESSION = f.session_id;}
+
+	
 	window.nuSESSION		= f.session_id;
 	window.nuSUBFORMROW	= [];
 	window.nuSUBFORMJSON	= [];
@@ -515,7 +519,6 @@ function nuRUN(w, i, l, p, prop){
 					'value'		: prop.objects[i].label,
 					'onclick'	: "nuGetForm('" + prop.objects[i].form_id + "','" + prop.objects[i].record_id + "')"
 		}).addClass('nuButton');
-
 		
 	}else{
 	    
@@ -1388,9 +1391,8 @@ function nuSelectBrowse(t){
 	var i 	= window.nuTARGET;
 	var p	= $('#' + t.id).attr('data-nu-primary-key');
 	var f	= nuBC[nuBC.length - 1].form_id;
-
 	if(y == 'browse'){
-		
+
 		nuGetForm(f, p);
 		
 	}else if(y == 'lookup'){
@@ -1718,7 +1720,8 @@ function nuGetFormData(){
 	for(var i = 0 ; i < a.length ; i++){
 
 		var rw	= new nuFormClass(a[i]);
-		if(rw.d == 'Yes' || rw.pk == '-1' || rw.f.length > 0){
+
+		if(rw.d == 'Yes' || rw.pk == '-1' || rw.f.length > 0 || rw.fk === undefined){
 			
 			r.push(rw);
 			

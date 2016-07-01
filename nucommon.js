@@ -65,6 +65,8 @@ function nuGetForm(f, r, filter, n){
 
 	var u 	= '';
 	var p 	= '';
+	var s	= '';
+
 	filter		= (filter === undefined ? filter = '' : filter);
 	
 	if($('#nuusername').length == 1){
@@ -76,6 +78,8 @@ function nuGetForm(f, r, filter, n){
 		
 	}else{
 		
+		s			= nuSESSION;
+		
 		if(arguments.length != 4){   //-- add a new breadcrumb
 			window.nuBC.push(new nuFormState());
 		}
@@ -83,14 +87,18 @@ function nuGetForm(f, r, filter, n){
 	}
 
 	var w 		= nuGetFormState();
+
 	w.username	= u;
 	w.password	= p;
+	w.session_id	= s;
 	w.call_type	= 'getform';
 	w.form_id	= f;
 	w.record_id	= r;
 	w.filter		= filter;
 	nuBC[nuBC.length - 1].filter = filter;	
 	w.hash		= parent.nuHashFromEditForm();
+	
+console.log('session_id', nuSESSION);
 
 	var request 	= $.ajax({
 		url      : "nuapi.php",
@@ -105,6 +113,7 @@ function nuGetForm(f, r, filter, n){
 				if(fm.log_again == 1){nuLogin();}
 			}else{
 				nuBC[nuBC.length-1].record_id	= fm.record_id;
+				
 				nuBuildForm(fm);
 			}
 			
@@ -126,6 +135,7 @@ function nuGetLookupId(pk, id){
 	w.object_id	= l.attr('data-nu-object-id');
 	w.target		= l.attr('data-nu-target');
 	w.primary_key	= pk;
+	w.session_id	= window.nuSESSION;
 	
 	var request 	= $.ajax({
 		url      : "nuapi.php",
@@ -157,6 +167,7 @@ function nuGetLookupCode(e, buildLookupList){
 	w.object_id	= e.target.getAttribute('data-nu-object-id');
 	w.target		= e.target.getAttribute('data-nu-target');
 	w.code		= e.target.value;
+	w.session_id	= window.nuSESSION;
 
 	var request 	= $.ajax({
 		url      : "nuapi.php",
@@ -196,6 +207,7 @@ function nuUpdateData(){
 	w.deleteAll	= $('#nuDelete').is(":checked") ? 'Yes' : 'No';
 	w.hash		= nuHashFromEditForm();
 	w.subforms	= nuGetSFArrays();
+	w.session_id	= window.nuSESSION;
 
 	var request 	= $.ajax({
 		url      : "nuapi.php",
@@ -228,8 +240,10 @@ function nuErrorMessages(e){
 	var m	= '';
 	
 	for(var i = 0 ; i < e.length ; i++){
-		m += e[i][0] + '\r';
+		
+		m += e[i] + '\r';
 		$('#' + e[i][1]).addClass('nuValidate');
+		
 	}
 
 	if(e.length > 0){

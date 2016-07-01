@@ -10,6 +10,7 @@ function nuUpdateData(){
 	$t		= nuRunQuery($s);
 	$FORM	= db_fetch_object($t);
 	$e		= array();
+
 	for($i = 0 ; $i < count($nudata) ; $i++){
 		$pk		= $nudata[$i]['pk'];
 		$t		= nuRunQuery("SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = ? ", array($nudata[$i]['fm']));
@@ -33,7 +34,7 @@ function nuUpdateData(){
 				WHERE zzzzsys_form_id = '$fmid' AND o.sob_all_id = '$fdid'
 				
 				";
-				
+
 				$T			= nuRunQuery($sq);
 				$O			= db_fetch_object($T);
 				$m			= '';
@@ -56,16 +57,17 @@ function nuUpdateData(){
 					}
 					
 				}else if($O->sob_all_validate == 'noduplicates'){
-					
+
+					$nuV	= $o['r'][$ii];
 					$noS	= "
 					
 					SELECT COUNT(*)
 					FROM `$O->sfo_table`
 					WHERE `$O->sob_all_id` = '$value'
-					AND `$O->sfo_primary_key` != '$O->label'
+					AND `$O->sfo_primary_key` != '" . $o['pk'] . "'
 					
 					";
-					
+
 					$noT	= nuRunQuery($noS);
 					$noR	= db_fetch_row($noT);
 					
@@ -74,9 +76,9 @@ function nuUpdateData(){
 						$lab	= addslashes($O->sob_all_label);
 						
 						if($o['fk'] == ''){
-							$m	= "There is another record where $lab = '$value'";
+							$m	= "There is a duplicate record where $lab = '$value'";
 						}else{
-							$m	= "There is another record where $lab = '$value' (on row " . $o['r'][$ii] . ") of $O->label";
+							$m	= "There is a duplicate record where $lab = '$value' (on row " . $o['r'][$ii] . ") of $O->label";
 						}
 						
 						nuErrorMessage($m);
@@ -195,10 +197,14 @@ function nuUpdateRow($r, $p, $row, $FK){
 		
 	}
 	
-	$q[]		= $p;
-	$s	= "UPDATE `$r->sfo_table` SET " . implode(', ', $set) . " WHERE `$r->sfo_primary_key` = ? ";
+	if(count($set) > 0){
+		
+		$q[]		= $p;
+		$s	= "UPDATE `$r->sfo_table` SET " . implode(', ', $set) . " WHERE `$r->sfo_primary_key` = ? ";
 
-	nuRunQuery($s, $q);
+		nuRunQuery($s, $q);
+		
+	}
 	
 }
 
@@ -284,6 +290,35 @@ function nuSubformObject($sf){
 	return array();
 	
 }
+
+function nuCheckAccess($f, $r = ''){
+	
+	if(in_array($f, $_POST['forms'])){
+		
+		return 1;
+		
+	}else{
+
+	
+		if($r == '' or $r == '-1' or in_array($r, array_merge($_POST['reports'], $_POST['procedures']))){
+
+			return 2;
+			
+		}else{
+
+
+			nuErrorMessage("Access Denied..");
+			return 3;
+			
+		}
+		
+		nuErrorMessage("Access Denied..");
+		return 4;
+		
+	}
+	
+}
+
 
 
 ?>

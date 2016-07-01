@@ -8,11 +8,19 @@
 
 	$P									= $_POST['nuSTATE'];
 	$_POST['nuHash']						= nuSetHashList($P['hash']);
-
+	$_POST['forms']						= array();  //
+	$_POST['reports']						= array();  // -- level access
+	$_POST['procedures']					= array();  //
 	$_POST['nuValidate']					= array();
 	$_POST['nuErrors']					= array();
+
 	$f->forms[0]							= new stdClass;
 	$s									= nuCheckSession();
+	if($s->form_id == ''){
+		nudebug($P['call_type'] . print_r($s,1));
+	}
+	nudebug('nuCheckAccess : ' . nuCheckAccess($s->form_id, $s->record_id));
+	
 	$_POST['nuHash']['PREVIOUS_RECORD_ID'] 	= $s->record_id;
 	$_POST['nuHash']['RECORD_ID'] 			= $s->record_id;
 	$_POST['nuHash']['FORM_ID'] 			= $s->form_id;
