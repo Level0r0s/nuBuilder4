@@ -168,4 +168,22 @@ function db_num_rows($o) {
 	return $o->rowCount();
 }
 
+
+function nuSchema(){
+
+	$t	= nuRunQuery("SELECT table_name FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = DATABASE()");
+	$S	= array();
+
+	while($r = db_fetch_object($t)){
+
+		$tn		= $r->table_name; 
+		$S[$tn]	= db_columns($tn);
+
+	}
+
+	return $S;
+
+}
+
+
 ?>

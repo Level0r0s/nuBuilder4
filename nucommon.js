@@ -3,6 +3,7 @@ window.nuBC 				= [];
 window.nuOPENER			= [];
 window.nuSUBFORMROW		= [];
 window.nuSUBFORMJSON		= [];
+window.nuSCHEMA			= [];
 window.nuFIELD			= [];
 window.nuFORM				= [];
 window.nuHASH				= [];
@@ -67,7 +68,7 @@ function nuGetForm(f, r, filter, n){
 	var p 	= '';
 	var s	= '';
 
-	filter		= (filter === undefined ? filter = '' : filter);
+	filter	= (filter === undefined ? filter = '' : filter);
 	
 	if($('#nuusername').length == 1){
 		
@@ -98,8 +99,6 @@ function nuGetForm(f, r, filter, n){
 	nuBC[nuBC.length - 1].filter = filter;	
 	w.hash		= parent.nuHashFromEditForm();
 	
-console.log('session_id', nuSESSION);
-
 	var request 	= $.ajax({
 		url      : "nuapi.php",
 		type     : "POST",
@@ -112,6 +111,7 @@ console.log('session_id', nuSESSION);
 			if(nuErrorMessages(fm.errors)){
 				if(fm.log_again == 1){nuLogin();}
 			}else{
+				
 				nuBC[nuBC.length-1].record_id	= fm.record_id;
 				
 				nuBuildForm(fm);

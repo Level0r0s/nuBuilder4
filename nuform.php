@@ -459,10 +459,8 @@ function nuSelectOptions($sql) {
 
 
 function nuGetSubformRecords($R, $A){
-
+nuDebug($R->sob_subform_zzzzsys_form_id);
     $f = nuGetEditForm($R->sob_subform_zzzzsys_form_id);
-	nudebug(print_r($f,1));
-
     $s = "SELECT `$f->primary_key` $f->from WHeRE `$R->sob_subform_foreign_key` = '$R->subform_fk' $f->order";
     $t = nuRunQuery($s);
     $a = array();
@@ -751,7 +749,7 @@ function nuBrowseWhereClause($searchFields, $searchString, $returnArray = false)
 
 
 function nuCheckSession(){
-	nudebug(print_r($_POST,1));
+
 	$u						= $_POST['nuSTATE']['username'];
 	$p						= $_POST['nuSTATE']['password'];
 	$s						= $_POST['nuSTATE']['session_id'];
@@ -763,6 +761,7 @@ function nuCheckSession(){
 	$c->record_id				= '-1';
 	$c->filter				= $_POST['nuFilter'];
 	$c->errors				= array();
+	$c->schema				= array();
 	
 	if($s == ''){
 		
@@ -774,6 +773,7 @@ function nuCheckSession(){
 				$c->session_id			= nuSetSession($u);
 				$c->form_id				= 'nuhome';
 				$c->record_id				= '-1';
+				$c->schema				= nuSchema();	
 				$access					= new StdClass;
 				$access->forms			= nuAccessForms('');
 				$access->reports			= nuAccessReports('');
@@ -781,7 +781,6 @@ function nuCheckSession(){
 				$nuJ						= json_encode($access);
 				
 				nuRunQuery("UPDATE zzzzsys_session SET sss_access = '$nuJ' WHERE zzzzsys_session_id = '$c->session_id'");
-				
 			}else{
 				
 				nuErrorMessage('Invalid Login..');
@@ -794,7 +793,6 @@ function nuCheckSession(){
 		}else{                                       //-- normal user
 			$pw						= md5($p);
 			$t						= nuRunQuery("SELECT * FROM zzzzsys_user WHERE sus_login_name = ? AND sus_login_password = ?", array($u, $pw));
-nudebug("222 ($c->form_id)  $u == ". $_SESSION['DBGlobeadminUsername']);			
 			
 			if(db_num_rows($t) > 0){
 				
@@ -802,6 +800,7 @@ nudebug("222 ($c->form_id)  $u == ". $_SESSION['DBGlobeadminUsername']);
 				$c->session_id		= nuSetSession($r->zzzzsys_user_id);
 				$c->form_id			= 'nuhome';
 				$c->record_id			= '-1';
+				$c->schema			= nuSchema();	
 				$access				= new StdClass;
 				$access->forms		= nuAccessForms($r->sus_zzzzsys_user_group_id);
 				$access->reports		= nuAccessReports($r->sus_zzzzsys_user_group_id);
