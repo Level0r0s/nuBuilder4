@@ -4,7 +4,7 @@ function nuAppendActionButton(t, f){
 
 //--append a custom Action Button
 
-	var i	= String(t).toLowerCase().replaceAll(' ', '_', true);
+	var i	= String(t).toLowerCase().replaceAll(' ', '_', true).replaceAll("'", '_', true);
 	
 	h='<input id="' + i + '" type="button" class="nuButton" value="' + t + '" onclick="' + f + '">&nbsp;'
 	$('#nuActionHolder').append(h);

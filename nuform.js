@@ -1,5 +1,5 @@
 
-function nuBuildForm(f){
+function nuBuildForm(f, type){
 
 	if(f.form_id == ''){
 		nuLogin();
@@ -341,6 +341,10 @@ function nuINPUT(w, i, l, p, prop){
 	.attr('data-nu-format', w.objects[i].format)
 	.attr('data-nu-prefix', p)
 	.prop('readonly', prop.objects[i].read == '1' ? 'readonly' : '');
+	
+	if(w.objects[i].value == ''){             //== check for Cannot be left blank
+		$('#' + id).attr('data-nu-changed', 1);
+	}
 	
 	$('#' + id).val(w.objects[i].value);
 
@@ -1393,6 +1397,7 @@ function nuSelectBrowse(t){
 	var i 	= window.nuTARGET;
 	var p	= $('#' + t.id).attr('data-nu-primary-key');
 	var f	= nuBC[nuBC.length - 1].form_id;
+
 	if(y == 'browse'){
 
 		nuGetForm(f, p);
@@ -1402,9 +1407,12 @@ function nuSelectBrowse(t){
 		window.parent.nuGetLookupId(p, i);			//-- called from parent window
 		
 	}else{
+
 		window[y](t);
+
 	}
 	
+	window.nuTYPE = 'browse';
 }
 
 
@@ -1749,11 +1757,6 @@ function nuFormClass(frm){
 	var values		= [];
 	var rows			= [];
 
-	if(primary_key == -1){
-		$('[data-nu-field]').attr('data-nu-changed', '');
-	}
-
-	
 	var o			= $("[data-nu-prefix='" + frm + "'][data-nu-field][data-nu-changed]");
 	
 	o.each(function(index){

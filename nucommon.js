@@ -124,6 +124,43 @@ function nuGetForm(f, r, filter, n){
 }
 
 
+
+function nuGetReport(f, r){
+
+	window.nuBC.push(new nuFormState());
+
+	var w 		= nuGetFormState();
+
+	w.session_id	= nuSESSION;
+	w.call_type	= 'runreport';
+	w.form_id	= f;
+	w.record_id	= r;
+	w.hash		= parent.nuHashFromEditForm();
+	
+	var request 	= $.ajax({
+		url      : "nuapi.php",
+		type     : "POST",
+		data     : {nuSTATE : w},
+		dataType : "json"
+		}).done(function(data){
+
+			var fm 	= data;
+
+			if(nuErrorMessages(fm.errors)){
+			}else{
+				
+				nuBC[nuBC.length-1].record_id	= fm.record_id;
+				nuBuildForm(fm, 'report');
+				
+			}
+			
+		}).fail(function(xhr, err){
+			alert(nuFormatAjaxErrorMessage(xhr, err));
+	});
+
+}
+
+
 function nuGetLookupId(pk, id){
 
 	$('#nuLookupList').remove();
@@ -149,7 +186,6 @@ function nuGetLookupId(pk, id){
 			}else{
 				$('#' + id).change();
                 window.nuPopulateLookup(fm, id);
-                //window.parent.nuPopulateLookup(fm, id);
 			}
 			
 		}).fail(function(xhr, err){
@@ -356,7 +392,6 @@ function nuBuildLookup(t, p){
 	.append('<iframe style="left:5px;top:35px;width:400px;height:400px;position:absolute" id="nuLookup" src="index.php?opener=' + l + '&target=' + tar + '&type=lookup"></iframe>');
 
 }
-
 
 function nuBuildPopup(f, r, filter){
 

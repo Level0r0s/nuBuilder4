@@ -12,7 +12,7 @@ function nuBeforeBrowse($f){
 }
 
 
-function nuBeforeOpen($f){
+function nuBeforeOpen($f, $o){
 	
 	$s		= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$f'";
 	$t		= nuRunQuery($s);
@@ -284,13 +284,15 @@ function nuDefaultObject($r, $t){
 
 
 function nuGetEditForm($F){
+	
 
     $s = "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$F'";
 
     $t = nuRunQuery($s);
     $r = db_fetch_object($t);
-    
+
 	$SQL 			= new nuSqlString($r->sfo_browse_sql);
+
     $f              	= new stdClass();
     $f->id          	= $r->zzzzsys_form_id;
     $f->type        	= $r->sfo_type;
@@ -459,7 +461,7 @@ function nuSelectOptions($sql) {
 
 
 function nuGetSubformRecords($R, $A){
-nuDebug($R->sob_subform_zzzzsys_form_id);
+
     $f = nuGetEditForm($R->sob_subform_zzzzsys_form_id);
     $s = "SELECT `$f->primary_key` $f->from WHeRE `$R->sob_subform_foreign_key` = '$R->subform_fk' $f->order";
     $t = nuRunQuery($s);
@@ -840,6 +842,33 @@ function nuCheckSession(){
 
 	}
 
+	if(!in_array($c->form_id, $_POST['forms'])){
+		
+		$nuT	= nuRunQuery("SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$c->form_id'");
+		$nuR	= db_fetch_object($nuT);
+		
+		//nuErrorMessage("Access to Form Denied.. ($nuR->sfo_code)");
+	}
+
+	if($c->record_id != ''){
+
+		if($c->form_id == 'nureport' && !in_array($c->record_id, $_POST['reports'])){
+			
+			$nuT	= nuRunQuery("SELECT * FROM zzzzsys_report WHERE zzzzsys_report_id = '$c->record_id'");
+			$nuR	= db_fetch_object($nuT);
+			
+//			nuErrorMessage("Access to Report Denied.. ($nuR->sre_code)");
+		}
+		if($c->form_id == 'nuphp' && !in_array($c->record_id, $_POST['reports'])){
+			
+			$nuT	= nuRunQuery("SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = '$c->record_id'");
+			$nuR	= db_fetch_object($nuT);
+			
+//			nuErrorMessage("Access to Report Denied.. ($nuR->sph_code)");
+		}
+		
+	}
+
 	$c->dimensions					= nuFormDimensions($c->form_id);
 
 	return $c;
@@ -1088,7 +1117,9 @@ function nuSetAccessibility($s = ''){
 		$_POST['procedures']	= $a->procedures;
 
 	}
-
+nudebug(print_r($_POST['forms'],1));
+nudebug(print_r($_POST['reports'],1));
+nudebug(print_r($_POST['procedures'],1));
 }
 
 

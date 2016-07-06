@@ -152,7 +152,7 @@ class nuSqlString{
         $groupBy_string   = stristr($sql, ' group by ');
         $having_string    = stristr($sql, ' having ');
         $orderBy_string   = stristr($sql, ' order by ');
-        
+
         $from             = str_replace($where_string,   '', $from_string);
         $from             = str_replace($groupBy_string, '', $from);
         $from             = str_replace($having_string,  '', $from);
