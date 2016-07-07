@@ -24,7 +24,7 @@ function nuBeforeOpen($f, $o){
 }
 
 function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
-
+	
     $tabs 			= nuBuildTabList($F);
     $f				= nuGetEditForm($F);
     $f->form_id		= $F;
@@ -112,7 +112,6 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 			if($r->sob_all_type == 'lookup'){
 
 				$o->description_width		= $r->sob_lookup_description_width;
-//				$o->auto_complete			= $r->sob_lookup_autocomplete;
 				$o->form_id				= $r->sob_lookup_zzzzsys_form_id;
 				$o->values				= nuGetLookupValues($r, $o);
 				
@@ -133,7 +132,6 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 				$o->browse_columns  	= array();
 				
 			}
-			
 
 			$o->display				= nuDisplay($r->sob_all_display_condition);
 			$o->js					= nuObjectEvents($r->zzzzsys_object_id);
@@ -157,6 +155,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 
     $f->buttons			= nuButtonList($f);
     $f->tabs 				= nuRefineTabList($tabs);
+nudebug("2 $F, $R " . print_r($f->tabs,1));
     $f->browse_columns	= nuBrowseColumns($f, $P);
     $B					= nuBrowseRows($f);
     $f->browse_rows		= $B[0];
@@ -490,20 +489,21 @@ function nuGetSubformRecords($R, $A){
 }
 
 function nuBuildTabList($i){
-    
+
     $o = 0;
     $a = array();
     $s = "
     
-        SELECT zzzzsys_tab.* 
+        SELECT * 
         FROM zzzzsys_tab 
         INNER JOIN zzzzsys_object ON sob_all_zzzzsys_form_id = syt_zzzzsys_form_id
         WHERE syt_zzzzsys_form_id = '$i'
-        GROUP BY syt_zzzzsys_form_id,syt_title
+        GROUP BY syt_zzzzsys_form_id, syt_title
         ORDER BY syt_order
     
     ";
-    
+
+nuDebug($s);
     $t = nuRunQuery($s);
 
     while($r = db_fetch_object($t)){
@@ -513,7 +513,7 @@ function nuBuildTabList($i){
         $a[] = $r;
         
     }
-    
+	
     return $a;
     
 }
@@ -524,7 +524,7 @@ function nuRefineTabList($t){
     $a = array();
 
     for($i = 0 ; $i < count($t) ; $i++){
-        
+		
         $t[$i]->title = $t[$i]->syt_title;
         unset($t[$i]->syt_zzzzsys_form_id, $t[$i]->syt_title, $t[$i]->syt_order, $t[$i]->zzzzsys_tab_id);
         
@@ -1117,9 +1117,7 @@ function nuSetAccessibility($s = ''){
 		$_POST['procedures']	= $a->procedures;
 
 	}
-nudebug(print_r($_POST['forms'],1));
-nudebug(print_r($_POST['reports'],1));
-nudebug(print_r($_POST['procedures'],1));
+
 }
 
 

@@ -320,5 +320,10 @@ function nuCheckAccess($f, $r = ''){
 }
 
 
+function nuRunReport($id){
+
+	
+}
+
 
 ?>

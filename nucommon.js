@@ -132,7 +132,7 @@ function nuGetReport(f, r){
 	var w 		= nuGetFormState();
 
 	w.session_id	= nuSESSION;
-	w.call_type	= 'runreport';
+	w.call_type	= 'getreport';
 	w.form_id	= f;
 	w.record_id	= r;
 	w.hash		= parent.nuHashFromEditForm();
@@ -608,3 +608,6 @@ function nuGetSFArrays(){
 	
 	return j;
 }
+
+
+

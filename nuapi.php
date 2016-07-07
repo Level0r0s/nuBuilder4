@@ -20,11 +20,12 @@
 	$_POST['nuHash']['RECORD_ID'] 			= $s->record_id;
 	$_POST['nuHash']['FORM_ID'] 			= $s->form_id;
 
+	if($P['call_type'] == 'getform')		{nuBeforeOpen($s->form_id, $s->record_id);$f->forms[0] = nuGetFormObject($s->form_id, $s->record_id, 0, $P);}
+	if($P['call_type'] == 'update')		{$f->forms[0]->record_id				= nuUpdateData();}
 	if($P['call_type'] == 'getlookupid')	{$f->forms[0]->lookup_values 			= nuGetAllLookupValues();}
 	if($P['call_type'] == 'getlookupcode')	{$f->forms[0]->lookup_values 			= nuGetAllLookupList();}
-	if($P['call_type'] == 'getform')		{nuBeforeOpen($s->form_id, $s->record_id);$f->forms[0] = nuGetFormObject($s->form_id, $s->record_id, 0, $P);}
-	if($P['call_type'] == 'runreport')		{$f->forms[0] = nuGetFormObject($s->form_id, $s->record_id, 0, $P);}
-	if($P['call_type'] == 'update')		{$f->forms[0]->record_id				= nuUpdateData();}
+	if($P['call_type'] == 'getreport')		{$f->forms[0] 						= nuGetFormObject($s->record_id, $s->form_id, 0, $P);}
+	if($P['call_type'] == 'runreport')		{$f->forms[0] 						= nuRunReport($s->record_id, $s->form_id);}
     if($P['call_type'] == 'nudragsave')		{$f->forms[0]							= nuDragSave($P);}
 
 	$f->forms[0]->dimensions				= $s->dimensions;

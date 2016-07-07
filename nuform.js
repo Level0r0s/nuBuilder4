@@ -960,8 +960,8 @@ function nuAddEditTabs(p, w){
 	nuSetStartingTab(p);
 	
     for(var i = 0 ; i < w.tabs.length ; i++){
-        
-        nuEditTab(p, w.tabs[i], i);
+
+		nuEditTab(p, w.tabs[i], i);
 
     }
 	
@@ -1066,12 +1066,12 @@ function nuEditTab(p, t, i){
 	div.setAttribute('id', tabId);
 	
 	$('#' + p + 'nuTabHolder').append(div);
-	$('#' + tabId
-	).html(t.title
-	).addClass('nuTab'
-	).attr('data-nu-tab-filter', i
-	).attr('data-nu-form-filter', p
-	).attr('onclick','nuSelectTab(this)');
+	$('#' + tabId)
+	.html(t.title)
+	.addClass('nuTab')
+	.attr('data-nu-tab-filter', i)
+	.attr('data-nu-form-filter', p)
+	.attr('onclick','nuSelectTab(this)');
 	
 
 }
