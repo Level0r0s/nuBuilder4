@@ -1075,6 +1075,27 @@ function nuObjectDialog(){
 	nuBlankMultipleValues(S);
 	$('#nuDragDialog').css('height', top + 20);
 
+    $("#dialogTitleWords").append('<input id="deleteObject" type="button" value="Delete" onclick="deleteSelectedObjects()"/>');
+	$("#deleteObject").css('position','relative');
+	$("#deleteObject").css('left','230px');
+}
+
+function deleteSelectedObjects(){
+	
+	$(".nuDragSelected").each(function (e) {
+		var fieldIndex = findWithAttr(nuREPORT.groups[0].sections[0].objects, "id", this.id);
+		nuREPORT.groups[0].sections[0].objects.splice(fieldIndex,1);
+		$('#'+this.id).remove();
+	});
+	nuREPORT.selected = '';
+}
+
+function findWithAttr(array, attr, value) {
+    for(var i = 0; i < array.length; i += 1) {
+        if(array[i][attr] === value) {
+            return i;
+        }
+    }
 }
 
 function nuBlankMultipleValues(S){
