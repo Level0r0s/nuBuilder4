@@ -613,4 +613,12 @@ function nuSetHashList($H){
 
 }
 
+
+function nuRunReport($nuR){
+
+
+	
+}
+
+
 ?>

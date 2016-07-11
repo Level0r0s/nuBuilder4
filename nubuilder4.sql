@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 07, 2016 at 04:19 AM
+-- Generation Time: Jul 11, 2016 at 02:15 AM
 -- Server version: 5.5.9
 -- PHP Version: 5.3.5
 
@@ -141,7 +141,7 @@ INSERT INTO `company` (`company_id`, `com_code`, `com_name`, `com_business_id`, 
 ('5729572e6331281', '', 'Mrs Compr66r36456', '568a00e25b8d271', '', '43 Allen St', '2016-07-01', '07-May-2016', '', '', '568ef59c1bd769c#nuSep#568ef931d196b3e', 0, '13132'),
 ('57295aa5660f48b', '', 'Mrs Comuh', '568a00e25b8d271', '', '43 Allen Stkh', '2016-07-03', '16-Jun-2016', '', '', '568ef5a6968322b#nuSep#568ef58fe48207a', 35, '13132'),
 ('57295c4c33cddd6', '', 'PCP200011', '568a00e25b8d271', '', '108 KWStftgh', '2016-07-04', '18-May-2016', '', '', '568ef931d196b3e#nuSep#568ef5a6968322b', 0, 'blah'),
-('57295ed9e996db0', '', 'OPSM111', '568a00c77f8f709', '', 'y', '2016-07-06', '20-May-2016', '', '', '568ef920846a089#nuSep#568ef59c1bd769c', 12, 'oooo12'),
+('57295ed9e996db0', '', 'OPSM111', '568a00c77f8f709', '', 'yyyyy', '2016-07-06', '20-May-2016', '', '', '568ef920846a089#nuSep#568ef59c1bd769c', 12, 'oooo12'),
 ('5716c7137efb0c5', '', 'OPSM1111', '568a00c77f8f709', '', '43 Allen St', '2016-07-06', '0423345544', '', 'm', '568ef920846a089#nuSep#568ef59c1bd769c#nuSep#568ef931d196b3e', 35, 'hh');
 
 -- --------------------------------------------------------
@@ -762,7 +762,7 @@ INSERT INTO `zzzzsys_event` (`zzzzsys_event_id`, `sev_zzzzsys_object_id`, `sev_e
 ('5732c6ed52dcabd', '567742c772b9642', 'onchange', 'console.log(''onchange2'')'),
 ('5732d76f5c6f75d', '56b7e275560be71', 'onclick', 'console.log(''notes'')'),
 ('5732d76f5c70d68', '56b7e275560be71', 'onblur', 'console.log(''note123s'')'),
-('573d15d41e2aa8c', '573d15d41e279ba', 'onclick', 'window.open(''nureportbuilder.php'');'),
+('573d15d41e2aa8c', '573d15d41e279ba', 'onclick', 'window.open(''nureportbuilder4.php'');'),
 ('575619c3bb27cec', '570d98b34bf37c9', 'onchange', 'nuObjectColor();'),
 ('57578da6457dd67', '570b1abae987b02', 'onchange', 'nuCopyToSort(this);'),
 ('57620c455b19815', '575a3f7001496b0', 'onchange', 'nuSetHash(''delete_option'', this.value);');
@@ -851,7 +851,7 @@ INSERT INTO `zzzzsys_form` (`zzzzsys_form_id`, `sfo_type`, `sfo_code`, `sfo_desc
 ('nurunreport', 'browseedit', 'RUNREP', 'Run Report', 'zzzzsys_report', 'zzzzsys_report_id', '', '', '', '', 'window.nuTYPE== ''runreport'';', '', '', '', '', '', 'SELECT * FROM zzzzsys_report\nLEFT JOIN zzzzsys_form ON zzzzsys_form_id = sre_zzzzsys_form_id', '1', '', '', '', '', '', '1', '', '', '1', '', '', '1', '', '', '', '', '', '', '', '', '', '', 'window.nuTYPE = ''runreport'';\n\nfunction runreport(t){\n    \n    var r   = $(''#'' + t.id).attr(''data-nu-row'');\n    var c   = ''003'';\n	var f	= $(''#'' + r + c).html();\n	var p	= $(''#'' + t.id).attr(''data-nu-primary-key'');\n\n	nuGetReport(p, f);\n\n}\n\n'),
 ('nurunphp', 'browseedit', 'RUNPHP', 'Run PHP Code', 'zzzzsys_php', 'zzzzsys_php_id', '', '', '', '', 'nudebug(4444);', '', '', '', '', '', 'SELECT * FROM zzzzsys_php\nLEFT JOIN zzzzsys_form ON zzzzsys_form_id = sph_zzzzsys_form_id', '1', '', '', '0', '', '', '1', '', '', '1', '', '', '1', '', '', '0', '', '', '', '', '', '', '', ''),
 ('577b4d78ef9a2a0', 'launch', 'test', 'test', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-('577c5efa0d5e6dc', 'launch', '2DATES', 'Between 2 Dates', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '\nvar reportID    = nuBC[nuBC.length-1].record_id;\n\n$(''#nuTab0'').hide();\n\n$(''.nuActionHolder'').css(''text-align'',''center'');\n\nnuAppendActionButton(''Print'',"nuRunReport(''" + reportID + "'');");\nnuAppendActionButton(''Email'',"nuEmailReport(''" + reportID + "'');");\n\n\n\n');
+('nulaunchdates', 'launch', '2DATES', 'Between 2 Dates', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '\nvar reportID    = nuBC[nuBC.length-1].record_id;\n\n$(''#nuTab0'').hide();\n\n$(''.nuActionHolder'').css(''text-align'',''center'');\n\nnuAppendActionButton(''Print'',"nuRunReport(''" + reportID + "'');");\nnuAppendActionButton(''Email'',"nuEmailReport(''" + reportID + "'');");\n\n\n\n');
 
 -- --------------------------------------------------------
 
@@ -1026,7 +1026,7 @@ INSERT INTO `zzzzsys_object` (`zzzzsys_object_id`, `sob_all_zzzzsys_form_id`, `s
 ('570b49c90719215', 'nuform', 'textarea', 'sfo_before_delete_php', 'Before Delete', '5707303145b7760', 330, 369, 180, 600, 50, '1', 'right', 'none', '0', '', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('570b49ec1a3d1a1', 'nuform', 'textarea', 'sfo_after_delete_php', 'After Delete', '5707303145b7760', 340, 439, 180, 600, 50, '1', 'right', 'none', '0', '', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('573d15d41e279ba', 'nubuildreport', 'input', 'open_builder', 'Report Layout', '574b964941d3d1a', 50, 137, 152, 150, 30, '1', 'l', 'none', '1', '', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', 'button', ''),
-('570c3b5d641d514', 'nubuildreport', 'textarea', 'sre_report_layout', 'Layout', '574b964941d3d1a', 60, 181, 152, 300, 100, '1', 'l', 'none', '1', '', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+('570c3b5d641d514', 'nubuildreport', 'textarea', 'sre_layout', 'Layout', '574b964941d3d1a', 60, 181, 152, 300, 100, '1', 'l', 'none', '1', 'SELECT ''0''', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('570c3e6e67c39cb', 'nuform', 'textarea', 'sfo_javascript', 'Javascript', '570730315113e7e', 370, 54, 70, 600, 400, '1', 'right', '', '1', '', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('570c3fce5be3355', 'nuphp', 'lookup', 'sph_zzzzsys_php_id', 'Include', '574b8ee0b2a4cdf', 50, 517, 152, 100, 18, '1', 'right', '', '0', '', '', '', '', '', '', '', '0', 'SELECT zzzzsys_form_id, CONCAT(sfo_code, '' - '', sfo_description)\nFROM zzzzsys_form\nORDER BY sfo_code', 'sfo_code', 'sfo_description', '220', '', 'nunonsystemform', '', '', '', '', '', '', '', '', '', ''),
 ('57578afc803136a', 'nuphp', 'lookup', 'sph_zzzzsys_form_id', 'Launch from', '574b8ee0b2a4cdf', 30, 75, 152, 100, 16, '1', 'l', 'noblanks', '0', '', '', '', '', '', '', '', '0', 'SELECT zzzzsys_form_id, CONCAT(sfo_code, '' - '', sfo_description)\nFROM zzzzsys_form\nORDER BY sfo_code', 'sfo_code', 'sfo_description', '230', '', 'nuform', '', '', '', '', '', '', '', '', '', ''),
@@ -1117,13 +1117,13 @@ INSERT INTO `zzzzsys_object` (`zzzzsys_object_id`, `sob_all_zzzzsys_form_id`, `s
 ('575f592d57ff088', 'nuaccess', 'subform', 'accphp', '', '575f5474793747e', 50, 50, 50, 395, 400, '1', 'l', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'nuaccessreport', 'slp_zzzzsys_access_level_id', '1', '1', 'g', '', '', ''),
 ('57624c4714b0ce2', 'nuaccess', 'subform', 'accreport', '', '575f54747937ff5', 60, 50, 50, 395, 400, '1', 'l', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '57637ad7b560755', 'sre_zzzzsys_access_level_id', '1', '1', 'g', '', '', ''),
 ('57637d4688096ef', '57637ad7b560755', 'lookup', 'sre_zzzzsys_report_id', 'Report', '57637ad7b563282', 30, 47, 163, 100, 16, '1', 'l', 'noblanks', '0', '', '', '', '', '', '', '', '', '', 'sre_code', 'sre_description', '200', '0', 'nubuildreport', '', '', '', '', '', '', '', '', '', ''),
-('577b254578f0498', 'nubuildreport', 'input', 'sre_group', 'Group', '574b964941d3d1a', 30, 77, 152, 300, 16, '1', 'l', 'noblanks', '0', '', '', '', '', '', '', '', '', 'browse|Browse|edit|Edit|browseedit|Browse and Edit|criteria|Criteria or Home|procedure|Procedure|report|Report', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+('577b254578f0498', 'nubuildreport', 'input', 'sre_group', 'Group', '574b964941d3d1a', 30, 77, 152, 150, 16, '1', 'l', 'noblanks', '0', '', '', '', '', '', '', '', '', 'browse|Browse|edit|Edit|browseedit|Browse and Edit|criteria|Criteria or Home|procedure|Procedure|report|Report', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('577b4314f347f60', 'nuhome', 'run', 'run_report', 'Run Report', '569dc4ed270f08a', 120, 394, 263, 150, 30, '1', 'l', 'noblanks', '0', '', '', 'nurunreport', '', 'b', '', '', '', '', '', '', '', '', '', '', '', 'nurunreport', '', '0', '0', '', '', '', ''),
 ('577b49b3eb0c80f', 'nuhome', 'run', 'run_php', 'Run Procedure', '569dc4ed270f08a', 100, 394, 434, 150, 30, '1', 'l', 'noblanks', '0', '', '', 'nurunphp', '', 'b', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('577b4dd43e0a9eb', '577b4d78ef9a2a0', 'input', 'steven', 'test', '577b4d78ef9c1d6', 1, 100, 100, 100, 20, '1', 'l', 'none', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('577b4eb7ad0f7f5', '577b4d78ef9a2a0', 'input', 'com_address', 'Address', '577b4d78ef9c1d6', 110, 12, 74, 200, 16, '1', 'l', 'none', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'text', ''),
-('577c7a54b78326c', '577c5efa0d5e6dc', 'input', 'from_date', 'Between', '577c5efa0d6275e', 10, 146, 168, 90, 16, '1', 'l', 'none', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '6', '', ''),
-('577c7a71c405f7c', '577c5efa0d5e6dc', 'input', 'to_date', 'And', '577c5efa0d6275e', 20, 146, 296, 90, 16, '1', 'l', 'none', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '6', '', '');
+('577c7a54b78326c', 'nulaunchdates', 'input', 'from_date', 'Between', '577c5efa0d6275e', 10, 72, 115, 90, 16, '1', 'l', 'none', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '6', '', ''),
+('577c7a71c405f7c', 'nulaunchdates', 'input', 'to_date', 'And', '577c5efa0d6275e', 20, 72, 243, 90, 16, '1', 'l', 'none', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '6', '', '');
 
 -- --------------------------------------------------------
 
@@ -1166,7 +1166,7 @@ CREATE TABLE IF NOT EXISTS `zzzzsys_report` (
   `sre_group` varchar(100) NOT NULL,
   `sre_zzzzsys_php_id` varchar(25) NOT NULL,
   `sre_zzzzsys_form_id` varchar(25) NOT NULL,
-  `sre_report_layout` longtext NOT NULL,
+  `sre_layout` longtext NOT NULL,
   PRIMARY KEY (`zzzzsys_report_id`),
   KEY `sre_code` (`sre_code`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -1175,9 +1175,9 @@ CREATE TABLE IF NOT EXISTS `zzzzsys_report` (
 -- Dumping data for table `zzzzsys_report`
 --
 
-INSERT INTO `zzzzsys_report` (`zzzzsys_report_id`, `sre_code`, `sre_description`, `sre_group`, `sre_zzzzsys_php_id`, `sre_zzzzsys_form_id`, `sre_report_layout`) VALUES
+INSERT INTO `zzzzsys_report` (`zzzzsys_report_id`, `sre_code`, `sre_description`, `sre_group`, `sre_zzzzsys_php_id`, `sre_zzzzsys_form_id`, `sre_layout`) VALUES
 ('574b98244516a9b', '1', 'sgadsraegtd raear qg', '0', '', 'nublank', ''),
-('574b9845a681d27', '111', '2222', 'aaa', 'nuaccess', '577c5efa0d5e6dc', '1'),
+('574b9845a681d27', '111', '2222', 'aaa', 'nuaccess', 'nulaunchdates', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"","top":110,"height":40,"label":"Detail Header","page_break":0,"margins":6,"color":"#FFFFFF","objects":[{"id":"obj1001","objectType":"field","backgroundColor":"white","borderColor":"black","borderWidth":"0","fieldName":"#description#","fontColor":"black","fontFamily":"Arial","fontSize":"10","fontWeight":"","format":"","textAlign":"left","image":"","group":0,"section":0,"left":701,"top":10,"height":20,"width":100,"zIndex":124,"minRows":0,"maxRows":0,"selected":0,"name":"obj1001"}]}]},{"sortField":"Report","sortBy":"a","sections":[{"id":"","top":30,"height":40,"label":"Report Header","page_break":0,"margins":2,"color":"#FFFFFF","objects":[]},{"id":"","top":190,"height":40,"label":"Report Footer","page_break":0,"margins":10,"color":"#FFFFFF","objects":[]}]},{"sortField":"Page","sortBy":"a","sections":[{"id":"","top":70,"height":40,"label":"Page Header","page_break":0,"margins":4,"color":"#FFFFFF","objects":[]},{"id":"","top":150,"height":40,"label":"Page Footer","page_break":0,"margins":8,"color":"#FFFFFF","objects":[]}]},{"sortField":"","sortBy":"a","sections":[{"id":"","top":110,"height":0,"label":" Header","page_break":0,"margins":4,"color":"#FFFFFF","objects":[]},{"id":"","top":150,"height":0,"label":" Footer","page_break":0,"margins":6,"color":"#FFFFFF","objects":[]}]},{"sortField":"","sortBy":"a","sections":[{"id":"","top":110,"height":0,"label":" Header","page_break":0,"margins":4,"color":"#FFFFFF","objects":[]},{"id":"","top":150,"height":0,"label":" Footer","page_break":0,"margins":6,"color":"#FFFFFF","objects":[]}]},{"sortField":"","sortBy":"a","sections":[{"id":"","top":110,"height":0,"label":" Header","page_break":0,"margins":4,"color":"#FFFFFF","objects":[]},{"id":"","top":150,"height":0,"label":" Footer","page_break":0,"margins":6,"color":"#FFFFFF","objects":[]}]},{"sortField":"","sortBy":"a","sections":[{"id":"","top":110,"height":0,"label":" Header","page_break":0,"margins":4,"color":"#FFFFFF","objects":[]},{"id":"","top":150,"height":0,"label":" Footer","page_break":0,"margins":6,"color":"#FFFFFF","objects":[]}]},{"sortField":"","sortBy":"a","sections":[{"id":"","top":110,"height":0,"label":" Header","page_break":0,"margins":4,"color":"#FFFFFF","objects":[]},{"id":"","top":150,"height":0,"label":" Footer","page_break":0,"margins":6,"color":"#FFFFFF","objects":[]}]},{"sortField":"","sortBy":"a","sections":[{"id":"","top":110,"height":0,"label":" Header","page_break":0,"margins":4,"color":"#FFFFFF","objects":[]},{"id":"","top":150,"height":0,"label":" Footer","page_break":0,"margins":6,"color":"#FFFFFF","objects":[]}]},{"sortField":"","sortBy":"a","sections":[{"id":"","top":110,"height":0,"label":" Header","page_break":0,"margins":4,"color":"#FFFFFF","objects":[]},{"id":"","top":150,"height":0,"label":" Footer","page_break":0,"margins":6,"color":"#FFFFFF","objects":[]}]},{"sortField":"","sortBy":"a","sections":[{"id":"","top":110,"height":0,"label":" Header","page_break":0,"margins":4,"color":"#FFFFFF","objects":[]},{"id":"","top":150,"height":0,"label":" Footer","page_break":0,"margins":6,"color":"#FFFFFF","objects":[]}]}],"currentGroup":0,"selected":["obj1001"]}'),
 ('57579a14e1981b0', ' ', '', '0', '', '', '');
 
 -- --------------------------------------------------------
@@ -1324,7 +1324,7 @@ INSERT INTO `zzzzsys_tab` (`zzzzsys_tab_id`, `syt_zzzzsys_form_id`, `syt_title`,
 ('577b48b3f3554c1', '577b48b3f351026', 'PHP', 10),
 ('577b4b6ca3ec226', 'nurunphp', 'PHP', 10),
 ('577b4d78ef9c1d6', '577b4d78ef9a2a0', 'test', 10),
-('577c5efa0d6275e', '577c5efa0d5e6dc', 'Launch', 10),
+('577c5efa0d6275e', 'nulaunchdates', 'Launch', 10),
 ('577da395132bac7', '5757a4b7181e365', 'Test', 10);
 
 -- --------------------------------------------------------

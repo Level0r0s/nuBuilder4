@@ -14,7 +14,8 @@ function nuBuildForm(f, type){
 	window.nuSUBFORMROW	= [];
 	window.nuSUBFORMJSON	= [];
 	window.nuHASH			= [];                       //-- remove any hash variables previously set.
-
+	window.nuEDITED		= '';
+	
 	$('body').html('');
 	$('body').removeClass('nuBrowseBody').removeClass('nuEditBody');
 	
@@ -1145,7 +1146,7 @@ function nuOptionsList(f, t, p){
 	$('#' + divId)
 	.attr('src', 'nuoptions.png')
 	.css('top',  p == 'nuTabHolder' ? null : 50)
-	.css({'top':top - 5, 'left': left - 150})
+	.css({'top':top - 5, 'left': left - 155})
 	.addClass('nuOptionsBox')
 	.html(ul);
 	
@@ -1823,8 +1824,7 @@ function nuOnChange(t,event){
 	var p	= $('#' + t.id).attr('data-nu-prefix');
 	$('#' + p + 'nuDelete').prop('checked', false);
 	$('#' + t.id).attr('data-nu-changed', '1');
-	$('#nuSaveButton').addClass('nuSaveButtonEdited');
-	
+	nuEditedReport();
 	$('#nuCalendar').remove();
 	$('#' + t.id).removeClass('nuValidate');
 
@@ -1833,6 +1833,15 @@ function nuOnChange(t,event){
 	nuAddSubformRow(t, event);
 	
 }
+
+function nuEditedReport(){
+	
+	$('#sre_layout').attr('data-nu-changed', '1');
+	$('#nuSaveButton').addClass('nuSaveButtonEdited');
+	window.nuEDITED	= true;
+	
+}
+
 
 function nuDeleteAction(){
 	

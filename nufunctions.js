@@ -21,6 +21,42 @@ function nuBuildSubformArray(s){
 }
 
 function nuSetHash(n, v){
+	
 //-- set hash variable to be used on server side	
+
 	window.nuHASH[n] = v;
+	
+}
+
+function nuFullScreen(bb){  //-- remove all heading
+
+	if($('#nuBreadcrumbHolder').length = 1)	{$('#nuBreadcrumbHolder').remove();}
+	if($('#nuActionHolder').length = 1)		{$('#nuActionHolder').remove();}
+	if($('#nuTabHolder').length = 1)		{$('#nuTabHolder').remove();}
+	
+	if(bb){
+		nuBackButton();
+	}
+	
+	
+}
+
+
+function nuBackButton(){
+
+	var id  	= 'nuTabBackButton';
+	var img	= document.createElement('img');
+	var l	= nuBC.length - 2;
+	img.setAttribute('id', id);
+
+	$('body').append(img);
+	
+	$('#' + id)
+	.attr('src', 'nubackbutton.png')
+	.css({'top' : 0 , 'left' : 0 ,'width' : 20 , 'height' : 20 ,'position' : 'absolute'})
+	.addClass('nuIcon')
+	.attr('title','Back')
+	.attr('onclick','nuGetBreadcrumb(' + l + ')');
+
+
 }

@@ -155,7 +155,6 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 
     $f->buttons			= nuButtonList($f);
     $f->tabs 				= nuRefineTabList($tabs);
-nudebug("2 $F, $R " . print_r($f->tabs,1));
     $f->browse_columns	= nuBrowseColumns($f, $P);
     $B					= nuBrowseRows($f);
     $f->browse_rows		= $B[0];
@@ -503,7 +502,6 @@ function nuBuildTabList($i){
     
     ";
 
-nuDebug($s);
     $t = nuRunQuery($s);
 
     while($r = db_fetch_object($t)){
