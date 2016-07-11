@@ -1075,19 +1075,23 @@ function nuObjectDialog(){
 	nuBlankMultipleValues(S);
 	$('#nuDragDialog').css('height', top + 20);
 
-    $("#dialogTitleWords").append('<input id="deleteObject" type="button" value="Delete" onclick="deleteSelectedObjects()"/>');
+    $("#dialogTitleWords").append('<img src="./trash_can.png" height="17px" width="17px" id="deleteObject" value="Delete" onclick="deleteSelectedObjects()"/>');
 	$("#deleteObject").css('position','relative');
-	$("#deleteObject").css('left','230px');
+	$("#deleteObject").css('left','270px');
 }
 
 function deleteSelectedObjects(){
 	
-	$(".nuDragSelected").each(function (e) {
-		var fieldIndex = findWithAttr(nuREPORT.groups[0].sections[0].objects, "id", this.id);
-		nuREPORT.groups[0].sections[0].objects.splice(fieldIndex,1);
-		$('#'+this.id).remove();
-	});
-	nuREPORT.selected = '';
+	var sel = document.getElementsByClassName('nuDragSelected');
+			
+	for(var i = 0 ; i < sel.length ; i ++){
+		
+		window.nuDragR.removeObject(sel[i].id);
+
+	}
+	
+	nuREPORT.selected = [];
+	nuLoadReport();
 }
 
 function findWithAttr(array, attr, value) {
