@@ -614,9 +614,25 @@ function nuSetHashList($H){
 }
 
 
-function nuRunReport($nuR){
-
-
+function nuRunReport($nuRID){
+	
+	$_POST['nuHash']['reportID']		= nuID();
+	$i								= $_POST['nuHash']['reportID'];
+	$nuT								= nuRunQuery("SELECT * FROM zzzzsys_report WHERE zzzzsys_report_id = '$nuRID'");
+	$nuA								= db_fetch_object($nuT);
+	$_POST['nuHash']['sre_layout']		= nuReplaceHashVariables($nuA->sre_layout);
+	$nuI								= $nuA->sre_zzzzsys_php_id;
+	$nuT								= nuRunQuery("SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = '$nuI'");
+	$nuR								= db_fetch_object($nuT);
+	$_POST['nuHash']['sph_php']		= nuReplaceHashVariables($nuR->sph_php);
+	$nuJ								= json_encode($_POST['nuHash']);
+	$nuS								= "INSERT INTO zzzzsys_debug (zzzzsys_debug_id, deb_message) VALUES (?, ?)";
+	nuRunQuery($nuS, array($i, $nuJ));
+	$o		= new stdClass;
+	$o->id	= $i;
+	nudebug('okkk');
+	
+	return $o;
 	
 }
 

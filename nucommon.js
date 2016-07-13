@@ -172,7 +172,7 @@ function nuRunReport(f, iframe){
 	w.call_type	= 'runreport';
 	w.form_id	= f;
 	w.hash		= nuHashFromEditForm();
-	
+
 	var request 	= $.ajax({
 		url      : "nuapi.php",
 		type     : "POST",
@@ -184,16 +184,15 @@ function nuRunReport(f, iframe){
 
 			if(nuErrorMessages(fm.errors)){
 			}else{
+				var pdfUrl   = 'nurunpdf.php?i=' + fm.id;
 
-				var pdfUrl   = 'nurunpdf.php?i='+obj.id;
-
-				if(arguments.length == 0){
+				if(iframe === undefined){
 					
 					window.open(pdfUrl);
 				
 				}else{
 					
-					$('#'+id).attr('src',pdfUrl);
+					$('#'+iframe).attr('src',pdfUrl);
 				
 				}
 

@@ -1901,26 +1901,17 @@ function nuAddJavascript(f){
 
 function nuHashFromEditForm(){
 
-	var a	= [];
+	var a	= window.nuHASH;
 	var b	= nuBC[nuBC.length-1];
 	var o 	= {};
 	var val 	= '';
-
-	$.each(window.nuHASH, function(key, value){
-		a.push([key, value]);
-	});	
-
 	
 	a.push([b.form_id, b.record_id]);		//-- first element is Form and Record ID
 	a.push(['FORM_ID', b.form_id]);
 	a.push(['PREVIOUS_RECORD_ID', b.record_id]);
 	a.push(['RECORD_ID', b.record_id]);
 
-	if(b.record_id == -1){
-		$("[data-nu-field]").attr('data-nu-changed','');		//-- make all fields edited
-	}
-	
-	$("[data-nu-field][data-nu-changed][data-nu-prefix='']").each(function( index ){
+	$("[data-nu-field][data-nu-prefix='']").each(function( index ){
 
 		o 	= $('#' + this.id);
 		val 	= $('#' + this.id).val();

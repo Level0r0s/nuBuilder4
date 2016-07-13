@@ -29,18 +29,22 @@
 
 .php {
    background-color: #B1B4DF;
+   font-family:Lucida Console;
 }
 
 .js {
    background-color: #FCEEA3;
+   font-family:Lucida Console;
 }
 
 .html {
    background-color: #F48453;
+   font-family:Lucida Console;
 }
 
 .sql {
    background-color: #B4C5D1;
+   font-family:Lucida Console;
 }
 
 
