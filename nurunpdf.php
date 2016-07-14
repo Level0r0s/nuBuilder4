@@ -1,40 +1,41 @@
 <?php 
 require_once('nucommon.php'); 
+require_once('nudata.php'); 
 require_once('fpdf/fpdf.php');
 define('FPDF_FONTPATH','fpdf/font/');
 
-nudebug('ggggg');
 $GLOBALS['nu_report']       = array();
 $GLOBALS['nu_columns']      = array();
 $GLOBALS['nu_files']        = array();
 
 $jsonID                     = $_GET['i'];
+$TABLE_ID                   = nuTT();
 $t                          = nuRunQuery("SELECT deb_message AS json FROM zzzzsys_debug WHERE zzzzsys_debug_id = ? ", array($jsonID));
 $reportInfo                 = db_fetch_object($t);
 $JSON                       = json_decode($reportInfo->json);
 $LAYOUT  	              = json_decode($JSON->sre_layout);
-$PHP		                   = json_decode($JSON->sph_php);
-$TABLE_ID                   = nuTT();
+$hashData                   = nuAddToHashList($JSON);
+$hashData['TABLE_ID']       = $TABLE_ID;
 $GLOBALS['TABLE_ID']        = $TABLE_ID;
-$hashData                   = arraymerge($_POST['nuHash'], nuAddToHashList($JSON));
+$_POST['nuHash']			 = $hashData;
 
-nuRunQuery("DELETE FROM zzzzsys_debug WHERE zzzzsys_debug_id = ? ", array($jsonID));
+$PHP		                   = nuReplaceHashVariables($JSON->sph_php);
+nudebug($PHP);
+//nuRunQuery("DELETE FROM zzzzsys_debug WHERE zzzzsys_debug_id = ? ", array($jsonID));
 
 $PDF                        = new FPDF($LAYOUT->orientation, 'mm', $LAYOUT->paper);
 $PDF->SetAutoPageBreak(false);
 $REPORT                     = nuSetPixelsToMM($LAYOUT);
 $PDF->SetMargins(1,1,1);
-
 eval($PHP);                                                              //-- build temp table for report from php
 
-$GLOBALS['nu_columns']       = nuAddCriteriaValues($hashData);
+$GLOBALS['nu_columns']       = nuAddCriteriaValues($hashData, $TABLE_ID);
 
 nuRunQuery("ALTER TABLE $TABLE_ID ADD `nu__id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST");
 
 nuBuildReport($PDF, $REPORT, $TABLE_ID);
 $hashData['nu_pages']        = nuGetTotalPages();
 nuReplaceLabelHashVariables($REPORT, $hashData);
-nudebug(print_r($JSON,1));
 nuPrintReport($PDF, $REPORT, $GLOBALS['nu_report'], $JSON);
 
 nuRunQuery("DROP TABLE IF EXISTS $TABLE_ID");
@@ -290,6 +291,7 @@ class nuSECTION{
         $this->pageHeight     = $this->LAY->height;
         $this->sectionTop     = $sectionTop;
         $this->sectionHeight  = $this->LAY->groups[$group]->sections[$section]->height;
+		
     }
 
     public function buildSection(){
@@ -1010,44 +1012,41 @@ function nuMakeSummaryTable($REPORT, $TABLE_ID){
 }
 
 
-function nuAddCriteriaValues($hashData){
+function nuAddCriteriaValues($hashData, $T){
 
-    $T = $GLOBALS['TABLE_ID'];
     $c = db_columns($T);
     $a = array();
 
     foreach($hashData AS $key => $value){
     
-	//Changed by SG 1 May 2015
-	/*
-        if(!in_array($key, $c) and !is_array($value)){
-            $v   = substr(addslashes($value),0,199);
-            $l   = min(strlen($v), 200);
-            if($l > 0){
-                $a[] = " ADD `$key` VARCHAR($l) DEFAULT '$v' ";
-            }
-            $c[] = strtolower($key);
-        }
-	*/
-	if( !in_array($key, $c) and !is_array($value) and !is_object($value) ){
-            $v   = substr(addslashes($value),0,199);
-            if(substr($v,(strlen($v)-1),1) == '\\')
-                $v = substr($v,0,strlen($v)-1);
-            $l   = min(strlen($v), 200);
-            if($l > 0){
-                $a[] = " ADD `$key` VARCHAR($l) DEFAULT '$v' ";
-            }
-            $c[] = strtolower($key);
-        }
+		if( !in_array($key, $c) and !is_array($value) and !is_object($value) ){
+			
+				$v   = substr(addslashes($value),0,199);
+				
+				if(substr($v,(strlen($v)-1),1) == '\\')
+					
+					$v = substr($v,0,strlen($v)-1);
+					$l = min(strlen($v), 200);
+					
+				if($l > 0){
+					
+					$a[] = " ADD `$key` VARCHAR($l) DEFAULT '$v' ";
+					
+				}
+				
+				$c[] = strtolower($key);
+			}
 
-        
-    }
-    
-    if(count($a) > 0){
-        nuRunQuery("ALTER TABLE $T " . implode(',', $a)); 
-    }
-    
-    return $c;
+			
+		}
+		
+		if(count($a) > 0){
+			
+			nuRunQuery("ALTER TABLE $T " . implode(',', $a)); 
+			
+		}
+
+		return $c;
 
 }
 

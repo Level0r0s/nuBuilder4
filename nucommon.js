@@ -172,7 +172,7 @@ function nuRunReport(f, iframe){
 	w.call_type	= 'runreport';
 	w.form_id	= f;
 	w.hash		= nuHashFromEditForm();
-
+console.log(w.hash);
 	var request 	= $.ajax({
 		url      : "nuapi.php",
 		type     : "POST",

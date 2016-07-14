@@ -970,12 +970,16 @@ function nuAddEditTabs(p, w){
 	
     for(var i = 0 ; i < w.browse_columns.length ; i++){
         
-        l = nuBrowseTitle(w.browse_columns[i], i, l);
+        l = nuBrowseTitle(w.browse_columns, i, l);
 
     }
+	
 
 	if(w.browse_columns.length > 0){
+		
 		nuBrowseTable();
+		nuOptions('nuBrowseTitle' + (w.browse_columns.length - 1), w.form_id);
+	
 	}
     
 }
@@ -1093,6 +1097,7 @@ function nuOptions(p, f){
 		'height' 		: 12, 
 		'right' 			: 10, 
 		'position' 		: 'absolute', 
+		'opacity'		: 0.5,
 		'border-style' 	: 'none'})
 		.attr('title', 'Options')
 		.addClass('nuIcon')
@@ -1115,9 +1120,7 @@ function nuOptions(p, f){
 
 function nuOptionsList(f, t, p){
 
-
-	var i	= t.id;
-	var icon	= $('#' + i);
+	var icon	= $('#' + t.id);
 	var off	= icon.offset();
 	var top	= off.top;
 	var left	= off.left;
@@ -1192,10 +1195,10 @@ function nuBrowseTitle(b, i, l){
 	var bc	= nuBC[nuBC.length-1];
 	var un	= bc.nosearch_columns.indexOf(i);
 	var id  	= 'nuBrowseTitle' + i;
-	var w 	= Number(b.width);
+	var w 	= Number(b[i].width);
 	var div  = document.createElement('div');
 	div.setAttribute('id', id);
-
+	
 	var cb	= '<input id="nusearch_' + i + '" type="checkbox" class="nuSearchColumn" checked="checked" onclick="nuSetSearchColumn()" title="Include In Search">';
 	
 	if(bc.sort == i){
@@ -1207,7 +1210,7 @@ function nuBrowseTitle(b, i, l){
 	}
 		
 	var br	= '<br>';
-	var sp	= '<span style="font-size:16px" id="nusort_' + i + '" class="nuSort" onclick="nuSortBrowse(' + i + ')"> ' + b.title + ' </span>'
+	var sp	= '<span style="font-size:16px" id="nusort_' + i + '" class="nuSort" onclick="nuSortBrowse(' + i + ')"> ' + b[i].title + ' </span>'
 	
 	$('body').append(div);
 	$('#' + id)
@@ -1901,7 +1904,7 @@ function nuAddJavascript(f){
 
 function nuHashFromEditForm(){
 
-	var a	= window.nuHASH;
+	var a	= [];//window.nuHASH;
 	var b	= nuBC[nuBC.length-1];
 	var o 	= {};
 	var val 	= '';
