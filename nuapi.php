@@ -25,7 +25,9 @@
 	if($P['call_type'] == 'update')			{$f->forms[0]->record_id				= nuUpdateData();}
 	if($P['call_type'] == 'getlookupid')	{$f->forms[0]->lookup_values 			= nuGetAllLookupValues();}
 	if($P['call_type'] == 'getlookupcode')	{$f->forms[0]->lookup_values 			= nuGetAllLookupList();}
+	if($P['call_type'] == 'getphp')			{$f->forms[0] 						= nuGetFormObject($s->record_id, $s->form_id, 0, $P);}
 	if($P['call_type'] == 'getreport')		{$f->forms[0] 						= nuGetFormObject($s->record_id, $s->form_id, 0, $P);}
+	if($P['call_type'] == 'runphp')			{$f->forms[0] ->id					= nuRunPHP($s->form_id);}
 	if($P['call_type'] == 'runreport')		{$f->forms[0] ->id					= nuRunReport($s->form_id);}
     if($P['call_type'] == 'nudragsave')		{$f->forms[0]							= nuDragSave($P);}
 

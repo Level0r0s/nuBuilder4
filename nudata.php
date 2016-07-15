@@ -263,7 +263,6 @@ function nuReplaceHashVariables($s){
 	
 	foreach ($a as $k => $v) {
 		$s	= str_replace ('#' . $k . '#', $v, $s);
-		nudebug("#$k# v:$v, $s");
 	}
 
 	return $s;

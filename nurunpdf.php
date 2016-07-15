@@ -14,14 +14,13 @@ $t                          = nuRunQuery("SELECT deb_message AS json FROM zzzzsy
 $reportInfo                 = db_fetch_object($t);
 $JSON                       = json_decode($reportInfo->json);
 $LAYOUT  	              = json_decode($JSON->sre_layout);
-$hashData                   = nuAddToHashList($JSON);
+$hashData                   = nuAddToHashList($JSON, 'report');
 $hashData['TABLE_ID']       = $TABLE_ID;
 $GLOBALS['TABLE_ID']        = $TABLE_ID;
 $_POST['nuHash']			 = $hashData;
-
 $PHP		                   = nuReplaceHashVariables($JSON->sph_php);
-nudebug($PHP);
-//nuRunQuery("DELETE FROM zzzzsys_debug WHERE zzzzsys_debug_id = ? ", array($jsonID));
+
+nuRunQuery("DELETE FROM zzzzsys_debug WHERE zzzzsys_debug_id = ? ", array($jsonID));
 
 $PDF                        = new FPDF($LAYOUT->orientation, 'mm', $LAYOUT->paper);
 $PDF->SetAutoPageBreak(false);
@@ -1095,39 +1094,6 @@ function nuRemovePageBreak($S){
         if(count($S->LAY->groups[1]->sections[1]->objects) == 0)
 	       $S->LAY->groups[$S->group]->sections[$S->section]->page_break = 0;
 	}
-}
-
-
-function nuAddToHashList($J){
-
-    $hash               = array();
-    $ignore             = array();
-    $ignore[]           = 'sre_layout';
-    $ignore[]           = 'slp_php';
-    
-    foreach($J as $key => $v){                                           //-- add current hash variables
-        
-        if(!in_array($key, $ignore)){
-            $hash['' . $key . '']     = $v;
-        }
-        
-    }
-
-    $d                  = new DateTime();
-
-    $hash['nu_date_time']     = $d->format('Y-m-d H:i:s');
-    $hash['nu_date']          = $d->format('Y-m-d');
-    $hash['nu_time']          = $d->format('H:i:s');
-    $hash['nu_year']          = $d->format('Y');
-    $hash['nu_month']         = $d->format('m');
-    $hash['nu_day']           = $d->format('d');
-    $hash['nu_hour']          = $d->format('H');
-    $hash['nu_minute']        = $d->format('i');
-    $hash['sre_layout']       = $J->sre_layout;
-    $hash['slp_php']          = $J->slp_php;
-	
-    return $hash;
-
 }
 
 

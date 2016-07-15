@@ -53,7 +53,7 @@ function nuBackButton(){
 	
 	$('#' + id)
 	.attr('src', 'nubackbutton.png')
-	.css({'top' : 2 , 'left' : 2 ,'width' : 20 , 'height' : 20 ,'position' : 'absolute'})
+	.css({'top' : 2 , 'right' : 2 ,'width' : 20 , 'height' : 20 ,'position' : 'absolute'})
 	.addClass('nuIcon')
 	.attr('title','Back')
 	.attr('onclick','nuGetBreadcrumb(' + l + ')');

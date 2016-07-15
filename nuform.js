@@ -1,5 +1,5 @@
 
-function nuBuildForm(f, type){
+function nuBuildForm(f){
 
 	if(f.form_id == ''){
 		nuLogin();
@@ -44,8 +44,8 @@ function nuBuildForm(f, type){
 	
 	if(f.record_id != ''){
 		nuAddHolder('nuTabHolder');
-		nuAddHolder('nuRecordHolder');
 	}
+	nuAddHolder('nuRecordHolder');
 	
 	nuAddBreadcrumbs();
 	nuAddEditTabs('', f);
@@ -966,7 +966,7 @@ function nuAddEditTabs(p, w){
 
     }
 	
-	var l = 13;
+	var l = 10;
 	
     for(var i = 0 ; i < w.browse_columns.length ; i++){
         
@@ -1212,7 +1212,7 @@ function nuBrowseTitle(b, i, l){
 	var br	= '<br>';
 	var sp	= '<span style="font-size:16px" id="nusort_' + i + '" class="nuSort" onclick="nuSortBrowse(' + i + ')"> ' + b[i].title + ' </span>'
 	
-	$('body').append(div);
+	$('#nuRecordHolder').append(div);
 	$('#' + id)
 	.html(cb + br + sp)
 	.addClass('nuBrowseTitle')
@@ -1235,12 +1235,15 @@ function nuBrowseTable(){
 	var row	= bc.browse_rows;
 	var rows	= bc.rows;
 	var h	= bc.row_height;
-	var t	= 145 - h;
+	console.log(h);
+//	var t	= 145 - h;
+	var t	= 72 - h;
 	var l	= 13;
 	
 	for(r = 0 ; r < rows ; r++){
 	
-		l	= 13;
+		l	= 10;
+console.log(t, h, t+h);		
 		t	= t + h;
 		
 		for(c = 0 ; c < col.length ; c++){
@@ -1253,7 +1256,7 @@ function nuBrowseTable(){
 			var div  = document.createElement('div');
 			div.setAttribute('id', id);
 				
-			$('body').append(div);
+			$('#nuRecordHolder').append(div);
 			$('#' + id)
 			.attr('data-nu-row', rw)
 			.attr('data-nu-column', column)
@@ -1300,14 +1303,14 @@ function nuBrowseTable(){
 	var div  = document.createElement('div');
 	div.setAttribute('id', id);
 		
-	$('body').append(div);
+	$('#nuRecordHolder').append(div);
 	$('#' + id)
 	.addClass('nuBrowseTitle')
 	.html(la+pg+cu+of+ne)
 	.css({	'text-align'	: 'center',
-			'width'		: l - 13,
+			'width'		: l - 11,
 			'top'		: t + h,
-			'left'		: 13,
+			'left'		: 10,
 			'height'		: 25,
 			'position'	: 'absolute'
 	});

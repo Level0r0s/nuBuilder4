@@ -593,7 +593,6 @@ function nuSetHashList($H){
 
 function nuRunReport($nuRID){
 	
-	//$_POST['nuHash']['TABLE_ID']		= nuTT();
 	$i								= nuID();
 	$nuT								= nuRunQuery("SELECT * FROM zzzzsys_report WHERE zzzzsys_report_id = '$nuRID'");
 	$nuA								= db_fetch_object($nuT);
@@ -608,6 +607,23 @@ function nuRunReport($nuRID){
 	$nuS								= "INSERT INTO zzzzsys_debug (zzzzsys_debug_id, deb_message) VALUES (?, ?)";
 	nuRunQuery($nuS, array($i, $nuJ));
 	
+	return $i;
+	
+}
+
+
+function nuRunPHP($nuRID){
+	
+	$i								= nuID();
+	$nuT								= nuRunQuery("SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = '$nuRID'");
+	$nuA								= db_fetch_object($nuT);
+	$_POST['nuHash']['code']			= $nuA->sph_code;
+	$_POST['nuHash']['description']		= $nuA->sph_description;
+	$_POST['nuHash']['sph_php']		= nuReplaceHashVariables($nuA->sph_php);
+	$nuJ								= json_encode($_POST['nuHash']);
+	$nuS								= "INSERT INTO zzzzsys_debug (zzzzsys_debug_id, deb_message) VALUES (?, ?)";
+	nuRunQuery($nuS, array($i, $nuJ));
+
 	return $i;
 	
 }
@@ -812,5 +828,51 @@ function ColorToHex($pColor){
     if($vColor == 'YELLOWGREEN'){return '9ACD32';}
     return $vColor;
 }
+
+
+function nuAddToHashList($J, $run){
+
+    $hash               = array();
+    $ignore             = array();
+    $ignore[]           = 'sre_layout';
+    $ignore[]           = 'slp_php';
+    $ignore[]           = 'sre_php';
+
+    foreach($J as $key => $v){                                           //-- add current hash variables
+        
+        if(!in_array($key, $ignore)){
+            $hash['' . $key . '']     = $v;
+        }
+        
+    }
+
+    $d                  = new DateTime();
+
+    $hash['nu_date_time']     = $d->format('Y-m-d H:i:s');
+    $hash['nu_date']          = $d->format('Y-m-d');
+    $hash['nu_time']          = $d->format('H:i:s');
+    $hash['nu_year']          = $d->format('Y');
+    $hash['nu_month']         = $d->format('m');
+    $hash['nu_day']           = $d->format('d');
+    $hash['nu_hour']          = $d->format('H');
+    $hash['nu_minute']        = $d->format('i');
+	
+	if($run == 'report'){
+		
+		$hash['sre_layout']       = $J->sre_layout;
+		$hash['slp_php']          = $J->slp_php;
+		
+	}
+	
+	if($run == 'php'){
+		
+		$hash['sphphp']          = $J->sph_php;
+		
+	}
+	
+    return $hash;
+
+}
+
 
 ?>

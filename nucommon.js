@@ -125,6 +125,7 @@ function nuGetForm(f, r, filter, n){
 
 
 
+
 function nuGetReport(f, r){
 
 	window.nuBC.push(new nuFormState());
@@ -150,7 +151,7 @@ function nuGetReport(f, r){
 			}else{
 				
 				nuBC[nuBC.length-1].record_id	= fm.record_id;
-				nuBuildForm(fm, 'report');
+				nuBuildForm(fm);
 				
 			}
 			
@@ -172,7 +173,7 @@ function nuRunReport(f, iframe){
 	w.call_type	= 'runreport';
 	w.form_id	= f;
 	w.hash		= nuHashFromEditForm();
-console.log(w.hash);
+
 	var request 	= $.ajax({
 		url      : "nuapi.php",
 		type     : "POST",
@@ -185,6 +186,50 @@ console.log(w.hash);
 			if(nuErrorMessages(fm.errors)){
 			}else{
 				var pdfUrl   = 'nurunpdf.php?i=' + fm.id;
+
+				if(iframe === undefined){
+					
+					window.open(pdfUrl);
+				
+				}else{
+					
+					$('#'+iframe).attr('src',pdfUrl);
+				
+				}
+
+			}
+			
+		}).fail(function(xhr, err){
+			alert(nuFormatAjaxErrorMessage(xhr, err));
+	});
+
+}
+
+
+
+function nuRunPHP(f, iframe){
+
+	window.nuBC.push(new nuFormState());
+
+	var w 		= nuGetFormState();
+
+	w.session_id	= nuSESSION;
+	w.call_type	= 'runphp';
+	w.form_id	= f;
+	w.hash		= nuHashFromEditForm();
+
+	var request 	= $.ajax({
+		url      : "nuapi.php",
+		type     : "POST",
+		data     : {nuSTATE : w},
+		dataType : "json"
+		}).done(function(data){
+
+			var fm 	= data;
+
+			if(nuErrorMessages(fm.errors)){
+			}else{
+				var pdfUrl   = 'nurunphp.php?i=' + fm.id;
 
 				if(iframe === undefined){
 					
