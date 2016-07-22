@@ -596,9 +596,9 @@ function nuRunReport($nuRID){
 	$i								= nuID();
 	$nuT								= nuRunQuery("SELECT * FROM zzzzsys_report WHERE zzzzsys_report_id = '$nuRID'");
 	$nuA								= db_fetch_object($nuT);
-	$_POST['nuHash']['sre_layout']		= nuReplaceHashVariables($nuA->sre_layout);
 	$_POST['nuHash']['code']			= $nuA->sre_code;
 	$_POST['nuHash']['description']		= $nuA->sre_description;
+	$_POST['nuHash']['sre_layout']		= nuReplaceHashVariables($nuA->sre_layout);
 	$nuI								= $nuA->sre_zzzzsys_php_id;
 	$nuT								= nuRunQuery("SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = '$nuI'");
 	$nuR								= db_fetch_object($nuT);
@@ -606,7 +606,7 @@ function nuRunReport($nuRID){
 	$nuJ								= json_encode($_POST['nuHash']);
 	$nuS								= "INSERT INTO zzzzsys_debug (zzzzsys_debug_id, deb_message) VALUES (?, ?)";
 	nuRunQuery($nuS, array($i, $nuJ));
-	
+
 	return $i;
 	
 }
@@ -633,18 +633,10 @@ function nuReplaceHashes($str, $arr){
 
 	while(list($key, $value) = each($arr)){
 
-
-		//Changed by SG on 20 April 2015
-		/*	
-		if(!is_array($value) and $str != '' and $key != ''){
+		if( !is_object($value) and !is_array($value) and $str != '' and $key != ''){
 			$newValue = addslashes($value);
 			$str = str_replace('#'.$key.'#', $newValue, $str);
 		}
-		*/
-		 if( !is_object($value) and !is_array($value) and $str != '' and $key != ''){
-                        $newValue = addslashes($value);
-                        $str = str_replace('#'.$key.'#', $newValue, $str);
-                }
 		
 	}
 

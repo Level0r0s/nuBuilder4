@@ -12,8 +12,7 @@ $hashData			= nuAddToHashList($JSON, 'php');
 $hashData['TABLE_ID']	= $TABLE_ID;
 $GLOBALS['TABLE_ID']	= $TABLE_ID;
 $_POST['nuHash']		= $hashData;
-$PHP					= nuReplaceHashVariables($JSON->sph_php);
-
+$PHP					= $JSON->sph_php;
 eval($PHP);                                                                            //-- run php code
 
 nuRunQuery("DELETE FROM zzzzsys_debug WHERE zzzzsys_debug_id = ? ", array($jsonID));
