@@ -24,21 +24,25 @@ function nuBeforeOpen($f, $o){
 }
 
 function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
-	
+
     $tabs 			= nuBuildTabList($F);
     $f				= nuGetEditForm($F);
     $f->form_id		= $F;
     $f->record_id		= $R;
     
 	if($f->table == ''){
+		
 		$A			= array();
+		
 	}else{
 		
 		$s 			= "Select * From `$f->table` Where `$f->primary_key` = '$R'";
 		$t 			= nuRunQuery($s);
 		$A 			= db_fetch_array($t);
+		
 	}
-	
+
+
 	$s 				= "
  
     SELECT * 
@@ -48,8 +52,8 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
     ORDER BY sob_all_order    
 
     ";
-	
-	if($R != ''){
+
+	if($F != ''){
 
 		$t = nuRunQuery($s);
 		$a = array();
@@ -152,10 +156,10 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 			$a[]    			= $o;
 		}
 	}
-
+	nudebug('objects : ' . count($a));
     $f->buttons			= nuButtonList($f);
     $f->tabs 				= nuRefineTabList($tabs);
-    $f->browse_columns	= nuBrowseColumns($f, $P);
+    $f->browse_columns		= nuBrowseColumns($f, $P);
     $B					= nuBrowseRows($f);
     $f->browse_rows		= $B[0];
     $f->pages				= ceil($B[1]/$f->rows);
@@ -781,6 +785,7 @@ function nuCheckSession(){
 				$nuJ						= json_encode($access);
 				
 				nuRunQuery("UPDATE zzzzsys_session SET sss_access = '$nuJ' WHERE zzzzsys_session_id = '$c->session_id'");
+				
 			}else{
 				
 				nuErrorMessage('Invalid Login..');
@@ -791,6 +796,7 @@ function nuCheckSession(){
 			nuSetAccessibility();
 
 		}else{                                       //-- normal user
+		
 			$pw						= md5($p);
 			$t						= nuRunQuery("SELECT * FROM zzzzsys_user WHERE sus_login_name = ? AND sus_login_password = ?", array($u, $pw));
 			

@@ -582,29 +582,6 @@ function nuTextFormats($dropdownList = false){
 
 function nuSetHashList($H){
 
-	if($H[0][0] == ''){return array();}
-
-	$F		= $H[0][0];
-	$R		= $H[0][1];
-	$s 		= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$F'";
-	$t 		= nuRunQuery($s);
-	$r 		= db_fetch_object($t);
-	
-	if($r->sfo_table == ''){
-		
-		$r	= array();
-		
-	}else{
-	
-		$table	= $r->sfo_table;
-		$primary	= $r->sfo_primary_key;
-		$a		= array();
-		$s 		= "SELECT * FROM `$table` WHERE `$primary` = '$R'";
-		$t 		= nuRunQuery($s);
-		$r		= db_fetch_array($t);
-		
-	}
-
 	for($i = 1 ; $i < count($H) ; $i++){
 		$r[$H[$i][0]]	= $H[$i][1];
 	}
@@ -614,10 +591,279 @@ function nuSetHashList($H){
 }
 
 
-function nuRunReport($nuR){
-
-
+function nuRunReport($nuRID){
 	
+	$i								= nuID();
+	$nuT								= nuRunQuery("SELECT * FROM zzzzsys_report WHERE zzzzsys_report_id = '$nuRID'");
+	$nuA								= db_fetch_object($nuT);
+	$_POST['nuHash']['code']			= $nuA->sre_code;
+	$_POST['nuHash']['description']		= $nuA->sre_description;
+	$_POST['nuHash']['sre_layout']		= nuReplaceHashVariables($nuA->sre_layout);
+	$nuI								= $nuA->sre_zzzzsys_php_id;
+	$nuT								= nuRunQuery("SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = '$nuI'");
+	$nuR								= db_fetch_object($nuT);
+	$_POST['nuHash']['sph_php']		= $nuR->sph_php;
+	$nuJ								= json_encode($_POST['nuHash']);
+	$nuS								= "INSERT INTO zzzzsys_debug (zzzzsys_debug_id, deb_message) VALUES (?, ?)";
+	nuRunQuery($nuS, array($i, $nuJ));
+
+	return $i;
+	
+}
+
+
+function nuRunPHP($nuRID){
+	
+	$i								= nuID();
+	$nuT								= nuRunQuery("SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = '$nuRID'");
+	$nuA								= db_fetch_object($nuT);
+	$_POST['nuHash']['code']			= $nuA->sph_code;
+	$_POST['nuHash']['description']		= $nuA->sph_description;
+	$_POST['nuHash']['sph_php']		= nuReplaceHashVariables($nuA->sph_php);
+	$nuJ								= json_encode($_POST['nuHash']);
+	$nuS								= "INSERT INTO zzzzsys_debug (zzzzsys_debug_id, deb_message) VALUES (?, ?)";
+	nuRunQuery($nuS, array($i, $nuJ));
+
+	return $i;
+	
+}
+
+
+function nuReplaceHashes($str, $arr){
+
+	while(list($key, $value) = each($arr)){
+
+		if( !is_object($value) and !is_array($value) and $str != '' and $key != ''){
+			$newValue = addslashes($value);
+			$str = str_replace('#'.$key.'#', $newValue, $str);
+		}
+		
+	}
+
+    $GLOBALS['latest_hashData'] = $arr;
+    
+	return $str;
+}
+
+
+function hex2rgb($hexOrColor) {
+
+    $hex   = ColorToHex($hexOrColor);
+    $hex   = str_replace("#", "", $hex);
+
+    if(strlen($hex) == 3) {
+        $r = hexdec(substr($hex,0,1).substr($hex,0,1));
+        $g = hexdec(substr($hex,1,1).substr($hex,1,1));
+        $b = hexdec(substr($hex,2,1).substr($hex,2,1));
+    } else {
+        $r = hexdec(substr($hex,0,2));
+        $g = hexdec(substr($hex,2,2));
+        $b = hexdec(substr($hex,4,2));
+    }
+    $rgb   = array($r, $g, $b);
+
+    return $rgb;
+
+}
+
+
+function ColorToHex($pColor){
+
+    $vColor    = strtoupper($pColor);
+   
+    if($vColor =='ALICEBLUE'){return 'F0F8FF';}
+    if($vColor == 'ANTIQUEWHITE'){return 'FAEBD7';}
+    if($vColor == 'AQUA'){return '00FFFF';}
+    if($vColor == 'AQUAMARINE'){return '7FFFD4';}
+    if($vColor == 'AZURE'){return 'F0FFFF';}
+    if($vColor == 'BEIGE'){return 'F5F5DC';}
+    if($vColor == 'BISQUE'){return 'FFE4C4';}
+    if($vColor == 'BLACK'){return '000000';}
+    if($vColor == 'BLANCHEDALMOND'){return 'FFEBCD';}
+    if($vColor == 'BLUE'){return '0000FF';}
+    if($vColor == 'BLUEVIOLET'){return '8A2BE2';}
+    if($vColor == 'BROWN'){return 'A52A2A';}
+    if($vColor == 'BURLYWOOD'){return 'DEB887';}
+    if($vColor == 'CADETBLUE'){return '5F9EA0';}
+    if($vColor == 'CHARTREUSE'){return '7FFF00';}
+    if($vColor == 'CHOCOLATE'){return 'D2691E';}
+    if($vColor == 'CORAL'){return 'FF7F50';}
+    if($vColor == 'CORNFLOWERBLUE'){return '6495ED';}
+    if($vColor == 'CORNSILK'){return 'FFF8DC';}
+    if($vColor == 'CRIMSON'){return 'DC143C';}
+    if($vColor == 'CYAN'){return '00FFFF';}
+    if($vColor == 'DARKBLUE'){return '00008B';}
+    if($vColor == 'DARKCYAN'){return '008B8B';}
+    if($vColor == 'DARKGOLDENROD'){return 'B8860B';}
+    if($vColor == 'DARKGRAY'){return 'A9A9A9';}
+    if($vColor == 'DARKGREY'){return 'A9A9A9';}
+    if($vColor == 'DARKGREEN'){return '006400';}
+    if($vColor == 'DARKKHAKI'){return 'BDB76B';}
+    if($vColor == 'DARKMAGENTA'){return '8B008B';}
+    if($vColor == 'DARKOLIVEGREEN'){return '556B2F';}
+    if($vColor == 'DARKORANGE'){return 'FF8C00';}
+    if($vColor == 'DARKORCHID'){return '9932CC';}
+    if($vColor == 'DARKRED'){return '8B0000';}
+    if($vColor == 'DARKSALMON'){return 'E9967A';}
+    if($vColor == 'DARKSEAGREEN'){return '8FBC8F';}
+    if($vColor == 'DARKSLATEBLUE'){return '483D8B';}
+    if($vColor == 'DARKSLATEGRAY'){return '2F4F4F';}
+    if($vColor == 'DARKSLATEGREY'){return '2F4F4F';}
+    if($vColor == 'DARKTURQUOISE'){return '00CED1';}
+    if($vColor == 'DARKVIOLET'){return '9400D3';}
+    if($vColor == 'DEEPPINK'){return 'FF1493';}
+    if($vColor == 'DEEPSKYBLUE'){return '00BFFF';}
+    if($vColor == 'DIMGRAY'){return '696969';}
+    if($vColor == 'DIMGREY'){return '696969';}
+    if($vColor == 'DODGERBLUE'){return '1E90FF';}
+    if($vColor == 'FIREBRICK'){return 'B22222';}
+    if($vColor == 'FLORALWHITE'){return 'FFFAF0';}
+    if($vColor == 'FORESTGREEN'){return '228B22';}
+    if($vColor == 'FUCHSIA'){return 'FF00FF';}
+    if($vColor == 'GAINSBORO'){return 'DCDCDC';}
+    if($vColor == 'GHOSTWHITE'){return 'F8F8FF';}
+    if($vColor == 'GOLD'){return 'FFD700';}
+    if($vColor == 'GOLDENROD'){return 'DAA520';}
+    if($vColor == 'GRAY'){return '808080';}
+    if($vColor == 'GREY'){return '808080';}
+    if($vColor == 'GREEN'){return '008000';}
+    if($vColor == 'GREENYELLOW'){return 'ADFF2F';}
+    if($vColor == 'HONEYDEW'){return 'F0FFF0';}
+    if($vColor == 'HOTPINK'){return 'FF69B4';}
+    if($vColor == 'INDIANRED'){return 'CD5C5C';}
+    if($vColor == 'INDIGO'){return '4B0082';}
+    if($vColor == 'IVORY'){return 'FFFFF0';}
+    if($vColor == 'KHAKI'){return 'F0E68C';}
+    if($vColor == 'LAVENDER'){return 'E6E6FA';}
+    if($vColor == 'LAVENDERBLUSH'){return 'FFF0F5';}
+    if($vColor == 'LAWNGREEN'){return '7CFC00';}
+    if($vColor == 'LEMONCHIFFON'){return 'FFFACD';}
+    if($vColor == 'LIGHTBLUE'){return 'ADD8E6';}
+    if($vColor == 'LIGHTCORAL'){return 'F08080';}
+    if($vColor == 'LIGHTCYAN'){return 'E0FFFF';}
+    if($vColor == 'LIGHTGOLDENRODYELLOW'){return 'FAFAD2';}
+    if($vColor == 'LIGHTGRAY'){return 'D3D3D3';}
+    if($vColor == 'LIGHTGREY'){return 'D3D3D3';}
+    if($vColor == 'LIGHTGREEN'){return '90EE90';}
+    if($vColor == 'LIGHTPINK'){return 'FFB6C1';}
+    if($vColor == 'LIGHTSALMON'){return 'FFA07A';}
+    if($vColor == 'LIGHTSEAGREEN'){return '20B2AA';}
+    if($vColor == 'LIGHTSKYBLUE'){return '87CEFA';}
+    if($vColor == 'LIGHTSLATEGRAY'){return '778899';}
+    if($vColor == 'LIGHTSLATEGREY'){return '778899';}
+    if($vColor == 'LIGHTSTEELBLUE'){return 'B0C4DE';}
+    if($vColor == 'LIGHTYELLOW'){return 'FFFFE0';}
+    if($vColor == 'LIME'){return '00FF00';}
+    if($vColor == 'LIMEGREEN'){return '32CD32';}
+    if($vColor == 'LINEN'){return 'FAF0E6';}
+    if($vColor == 'MAGENTA'){return 'FF00FF';}
+    if($vColor == 'MAROON'){return '800000';}
+    if($vColor == 'MEDIUMAQUAMARINE'){return '66CDAA';}
+    if($vColor == 'MEDIUMBLUE'){return '0000CD';}
+    if($vColor == 'MEDIUMORCHID'){return 'BA55D3';}
+    if($vColor == 'MEDIUMPURPLE'){return '9370D8';}
+    if($vColor == 'MEDIUMSEAGREEN'){return '3CB371';}
+    if($vColor == 'MEDIUMSLATEBLUE'){return '7B68EE';}
+    if($vColor == 'MEDIUMSPRINGGREEN'){return '00FA9A';}
+    if($vColor == 'MEDIUMTURQUOISE'){return '48D1CC';}
+    if($vColor == 'MEDIUMVIOLETRED'){return 'C71585';}
+    if($vColor == 'MIDNIGHTBLUE'){return '191970';}
+    if($vColor == 'MINTCREAM'){return 'F5FFFA';}
+    if($vColor == 'MISTYROSE'){return 'FFE4E1';}
+    if($vColor == 'MOCCASIN'){return 'FFE4B5';}
+    if($vColor == 'NAVAJOWHITE'){return 'FFDEAD';}
+    if($vColor == 'NAVY'){return '000080';}
+    if($vColor == 'OLDLACE'){return 'FDF5E6';}
+    if($vColor == 'OLIVE'){return '808000';}
+    if($vColor == 'OLIVEDRAB'){return '6B8E23';}
+    if($vColor == 'ORANGE'){return 'FFA500';}
+    if($vColor == 'ORANGERED'){return 'FF4500';}
+    if($vColor == 'ORCHID'){return 'DA70D6';}
+    if($vColor == 'PALEGOLDENROD'){return 'EEE8AA';}
+    if($vColor == 'PALEGREEN'){return '98FB98';}
+    if($vColor == 'PALETURQUOISE'){return 'AFEEEE';}
+    if($vColor == 'PALEVIOLETRED'){return 'D87093';}
+    if($vColor == 'PAPAYAWHIP'){return 'FFEFD5';}
+    if($vColor == 'PEACHPUFF'){return 'FFDAB9';}
+    if($vColor == 'PERU'){return 'CD853F';}
+    if($vColor == 'PINK'){return 'FFC0CB';}
+    if($vColor == 'PLUM'){return 'DDA0DD';}
+    if($vColor == 'POWDERBLUE'){return 'B0E0E6';}
+    if($vColor == 'PURPLE'){return '800080';}
+    if($vColor == 'RED'){return 'FF0000';}
+    if($vColor == 'ROSYBROWN'){return 'BC8F8F';}
+    if($vColor == 'ROYALBLUE'){return '4169E1';}
+    if($vColor == 'SADDLEBROWN'){return '8B4513';}
+    if($vColor == 'SALMON'){return 'FA8072';}
+    if($vColor == 'SANDYBROWN'){return 'F4A460';}
+    if($vColor == 'SEAGREEN'){return '2E8B57';}
+    if($vColor == 'SEASHELL'){return 'FFF5EE';}
+    if($vColor == 'SIENNA'){return 'A0522D';}
+    if($vColor == 'SILVER'){return 'C0C0C0';}
+    if($vColor == 'SKYBLUE'){return '87CEEB';}
+    if($vColor == 'SLATEBLUE'){return '6A5ACD';}
+    if($vColor == 'SLATEGRAY'){return '708090';}
+    if($vColor == 'SLATEGREY'){return '708090';}
+    if($vColor == 'SNOW'){return 'FFFAFA';}
+    if($vColor == 'SPRINGGREEN'){return '00FF7F';}
+    if($vColor == 'STEELBLUE'){return '4682B4';}
+    if($vColor == 'TAN'){return 'D2B48C';}
+    if($vColor == 'TEAL'){return '008080';}
+    if($vColor == 'THISTLE'){return 'D8BFD8';}
+    if($vColor == 'TOMATO'){return 'FF6347';}
+    if($vColor == 'TURQUOISE'){return '40E0D0';}
+    if($vColor == 'VIOLET'){return 'EE82EE';}
+    if($vColor == 'WHEAT'){return 'F5DEB3';}
+    if($vColor == 'WHITE'){return 'FFFFFF';}
+    if($vColor == 'WHITESMOKE'){return 'F5F5F5';}
+    if($vColor == 'YELLOW'){return 'FFFF00';}
+    if($vColor == 'YELLOWGREEN'){return '9ACD32';}
+    return $vColor;
+}
+
+
+function nuAddToHashList($J, $run){
+
+    $hash               = array();
+    $ignore             = array();
+    $ignore[]           = 'sre_layout';
+    $ignore[]           = 'slp_php';
+    $ignore[]           = 'sre_php';
+
+    foreach($J as $key => $v){                                           //-- add current hash variables
+        
+        if(!in_array($key, $ignore)){
+            $hash['' . $key . '']     = $v;
+        }
+        
+    }
+
+    $d                  = new DateTime();
+
+    $hash['nu_date_time']     = $d->format('Y-m-d H:i:s');
+    $hash['nu_date']          = $d->format('Y-m-d');
+    $hash['nu_time']          = $d->format('H:i:s');
+    $hash['nu_year']          = $d->format('Y');
+    $hash['nu_month']         = $d->format('m');
+    $hash['nu_day']           = $d->format('d');
+    $hash['nu_hour']          = $d->format('H');
+    $hash['nu_minute']        = $d->format('i');
+	
+	if($run == 'report'){
+		
+		$hash['sre_layout']       = $J->sre_layout;
+		$hash['slp_php']          = $J->slp_php;
+		
+	}
+	
+	if($run == 'php'){
+		
+		$hash['sphphp']          = $J->sph_php;
+		
+	}
+	
+    return $hash;
+
 }
 
 

@@ -46,14 +46,14 @@ function nuBackButton(){
 
 	var id  	= 'nuTabBackButton';
 	var img	= document.createElement('img');
-	var l	= nuBC.length - 2;
+	var l	= (nuBC.length - 2) < 0 ? 0 :(nuBC.length - 2);
 	img.setAttribute('id', id);
 
 	$('body').append(img);
 	
 	$('#' + id)
 	.attr('src', 'nubackbutton.png')
-	.css({'top' : 0 , 'left' : 0 ,'width' : 20 , 'height' : 20 ,'position' : 'absolute'})
+	.css({'top' : 2 , 'right' : 2 ,'width' : 20 , 'height' : 20 ,'position' : 'absolute'})
 	.addClass('nuIcon')
 	.attr('title','Back')
 	.attr('onclick','nuGetBreadcrumb(' + l + ')');

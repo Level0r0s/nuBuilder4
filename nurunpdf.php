@@ -1,5 +1,6 @@
 <?php 
 require_once('nucommon.php'); 
+require_once('nudata.php'); 
 require_once('fpdf/fpdf.php');
 define('FPDF_FONTPATH','fpdf/font/');
 
@@ -8,63 +9,32 @@ $GLOBALS['nu_columns']      = array();
 $GLOBALS['nu_files']        = array();
 
 $jsonID                     = $_GET['i'];
-$t                          = nuRunQuery("SELECT deb_message AS json FROM zzzsys_debug WHERE zzzsys_debug_id = ? ", array($jsonID));
+$TABLE_ID                   = nuTT();
+$t                          = nuRunQuery("SELECT deb_message AS json FROM zzzzsys_debug WHERE zzzzsys_debug_id = ? ", array($jsonID));
 $reportInfo                 = db_fetch_object($t);
 $JSON                       = json_decode($reportInfo->json);
-$pxREPORT                   = json_decode($JSON->sre_layout);
-
-if($JSON->sre_zzzsys_sql == ''){
-	$DATA                   = $JSON->slp_php;
-	$ID             	= $JSON->zzzsys_php_id;
-	$DATA           	= nuGetSafePHP('slp_php', $ID, $DATA);
-}else{
-
-	$DATA                   = $JSON->sre_zzzsys_sql;
-}
-
-$TABLE_ID                   = nuTT();
+$LAYOUT  	              = json_decode($JSON->sre_layout);
+$hashData                   = nuAddToHashList($JSON, 'report');
+$hashData['TABLE_ID']       = $TABLE_ID;
 $GLOBALS['TABLE_ID']        = $TABLE_ID;
-$hashData                   = nuBuildHashData($JSON, $TABLE_ID);
+$_POST['nuHash']			 = $hashData;
+$PHP		                   = nuReplaceHashVariables($JSON->sph_php);
 
-nuRunQuery("DELETE FROM zzzsys_debug WHERE zzzsys_debug_id = ? ", array($jsonID));
+nuRunQuery("DELETE FROM zzzzsys_debug WHERE zzzzsys_debug_id = ? ", array($jsonID));
 
-$PDF                        = new FPDF($pxREPORT->orientation, 'mm', $pxREPORT->paper);
+$PDF                        = new FPDF($LAYOUT->orientation, 'mm', $LAYOUT->paper);
 $PDF->SetAutoPageBreak(false);
-
-
-
-$fonts      = explode("\n", trim($GLOBALS['nuSetup']->set_fonts));
-
-for($i = 0 ; $i < count($fonts) ; $i ++){
-
-    if(trim($fonts[$i]) != ''){
-        $PDF->AddFont($fonts[$i], '' , strtolower($fonts[$i]) . '.php');
-        $PDF->AddFont($fonts[$i], 'B', strtolower($fonts[$i]) . '.php');
-        $PDF->AddFont($fonts[$i], 'I', strtolower($fonts[$i]) . '.php');
-    }
-
-}
-
-$REPORT                     = nuSetPixelsToMM($pxREPORT);
-
+$REPORT                     = nuSetPixelsToMM($LAYOUT);
 $PDF->SetMargins(1,1,1);
+eval($PHP);                                                              //-- build temp table for report from php
 
-$createTable                 = nuReplaceHashes($DATA, $hashData);
-
-if($JSON->sre_zzzsys_sql == ''){
-	eval($createTable);                                                              //-- build temp table for report from php
-}else{
-	nuRunQuery('CREATE TABLE ' . $hashData['TABLE_ID'] . ' ' . $createTable);        //-- build temp table for report from sql
-}
-
-$GLOBALS['nu_columns']       = nuAddCriteriaValues($hashData);
+$GLOBALS['nu_columns']       = nuAddCriteriaValues($hashData, $TABLE_ID);
 
 nuRunQuery("ALTER TABLE $TABLE_ID ADD `nu__id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST");
 
 nuBuildReport($PDF, $REPORT, $TABLE_ID);
 $hashData['nu_pages']        = nuGetTotalPages();
 nuReplaceLabelHashVariables($REPORT, $hashData);
-
 nuPrintReport($PDF, $REPORT, $GLOBALS['nu_report'], $JSON);
 
 nuRunQuery("DROP TABLE IF EXISTS $TABLE_ID");
@@ -320,6 +290,7 @@ class nuSECTION{
         $this->pageHeight     = $this->LAY->height;
         $this->sectionTop     = $sectionTop;
         $this->sectionHeight  = $this->LAY->groups[$group]->sections[$section]->height;
+		
     }
 
     public function buildSection(){
@@ -385,7 +356,7 @@ class nuSECTION{
                 
                     $fld                        = $this->ROW[$im];
                     
-                    if(nuIsRecord($fld)){                                                         //-- valid code in zzzsys_file
+                    if(nuIsRecord($fld)){                                                         //-- valid code in zzzzsys_file
                     
                         $path                   = nuCreateFile($fld);
                         $GLOBALS['nu_files'][]  = $path;
@@ -398,7 +369,7 @@ class nuSECTION{
                     
                 }else{
                 
-                    if(nuIsRecord($im)){                                                          //-- valid code in zzzsys_file
+                    if(nuIsRecord($im)){                                                          //-- valid code in zzzzsys_file
                     
                         $path                   = nuCreateFile($im);
                         $GLOBALS['nu_files'][]  = $path;
@@ -1040,44 +1011,41 @@ function nuMakeSummaryTable($REPORT, $TABLE_ID){
 }
 
 
-function nuAddCriteriaValues($hashData){
+function nuAddCriteriaValues($hashData, $T){
 
-    $T = $GLOBALS['TABLE_ID'];
     $c = db_columns($T);
     $a = array();
 
     foreach($hashData AS $key => $value){
     
-	//Changed by SG 1 May 2015
-	/*
-        if(!in_array($key, $c) and !is_array($value)){
-            $v   = substr(addslashes($value),0,199);
-            $l   = min(strlen($v), 200);
-            if($l > 0){
-                $a[] = " ADD `$key` VARCHAR($l) DEFAULT '$v' ";
-            }
-            $c[] = strtolower($key);
-        }
-	*/
-	if( !in_array($key, $c) and !is_array($value) and !is_object($value) ){
-            $v   = substr(addslashes($value),0,199);
-            if(substr($v,(strlen($v)-1),1) == '\\')
-                $v = substr($v,0,strlen($v)-1);
-            $l   = min(strlen($v), 200);
-            if($l > 0){
-                $a[] = " ADD `$key` VARCHAR($l) DEFAULT '$v' ";
-            }
-            $c[] = strtolower($key);
-        }
+		if( !in_array($key, $c) and !is_array($value) and !is_object($value) ){
+			
+				$v   = substr(addslashes($value),0,199);
+				
+				if(substr($v,(strlen($v)-1),1) == '\\')
+					
+					$v = substr($v,0,strlen($v)-1);
+					$l = min(strlen($v), 200);
+					
+				if($l > 0){
+					
+					$a[] = " ADD `$key` VARCHAR($l) DEFAULT '$v' ";
+					
+				}
+				
+				$c[] = strtolower($key);
+			}
 
-        
-    }
-    
-    if(count($a) > 0){
-        nuRunQuery("ALTER TABLE $T " . implode(',', $a)); 
-    }
-    
-    return $c;
+			
+		}
+		
+		if(count($a) > 0){
+			
+			nuRunQuery("ALTER TABLE $T " . implode(',', $a)); 
+			
+		}
+
+		return $c;
 
 }
 
@@ -1089,12 +1057,12 @@ function nuIsField($i){
 
 function nuIsRecord($i){
 
-    $t = nuRunQuery("SELECT zzzsys_file_id FROM zzzsys_file WHERE sfi_code = ? ", array($i));
+    $t = nuRunQuery("SELECT zzzzsys_file_id FROM zzzzsys_file WHERE sfi_code = ? ", array($i));
     $r = db_fetch_object($t);
     
     
     if($r=='') return false;
-    else return $r->zzzsys_file_id != '';
+    else return $r->zzzzsys_file_id != '';
     
 }
 
@@ -1127,5 +1095,7 @@ function nuRemovePageBreak($S){
 	       $S->LAY->groups[$S->group]->sections[$S->section]->page_break = 0;
 	}
 }
+
+
 //-- was 1150 lines long
 ?>

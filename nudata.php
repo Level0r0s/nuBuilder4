@@ -12,6 +12,7 @@ function nuUpdateData(){
 	$e		= array();
 
 	for($i = 0 ; $i < count($nudata) ; $i++){
+		
 		$pk		= $nudata[$i]['pk'];
 		$t		= nuRunQuery("SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = ? ", array($nudata[$i]['fm']));
 		$r		= db_fetch_object($t);
@@ -121,9 +122,13 @@ function nuUpdateData(){
 	}
 
 	for($i = 0 ; $i < count($nudata) ; $i++){
+		
 		if($nudata[$i]['fk'] == '-1'){
+			
 			$nudata[$i]['fk']	= $nudata[0]['pk'];
+			
 		}
+		
 	}
 
 	for($i = 0 ; $i < count($nudata) ; $i++){
@@ -250,8 +255,12 @@ function nuReplaceHashVariables($s){
 		return '';
 	}
 	
-	$a		= $_POST['nuHash'];
+	$a = $_POST['nuHash'];
 
+	if ( !is_array($a) ) {
+		return $s;
+	}
+	
 	foreach ($a as $k => $v) {
 		$s	= str_replace ('#' . $k . '#', $v, $s);
 	}

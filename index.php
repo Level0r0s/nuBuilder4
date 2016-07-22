@@ -13,6 +13,7 @@ jsinclude('nuform.js');
 jsinclude('nuformdrag.js');
 jsinclude('nucalendar.js');
 jsinclude('nucommon.js');
+jsinclude('nuajax.js');       //-- calls to server
 jsinclude('nufunctions.js');
 	
 ?>
