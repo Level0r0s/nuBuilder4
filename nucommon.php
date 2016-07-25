@@ -858,10 +858,10 @@ function nuAddToHashList($J, $run){
 	
 	if($run == 'php'){
 		
-		$hash['sphphp']          = $J->sph_php;
+		$hash['sph_php']          = $J->sph_php;
 		
 	}
-	
+
     return $hash;
 
 }

@@ -52,7 +52,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
     ORDER BY sob_all_order    
 
     ";
-
+nudebug($s);
 	if($F != ''){
 
 		$t = nuRunQuery($s);
@@ -156,7 +156,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 			$a[]    			= $o;
 		}
 	}
-	nudebug('objects : ' . count($a));
+
     $f->buttons			= nuButtonList($f);
     $f->tabs 				= nuRefineTabList($tabs);
     $f->browse_columns		= nuBrowseColumns($f, $P);
