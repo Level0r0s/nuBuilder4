@@ -26,7 +26,7 @@ function nuBuildForm(f){
 	}
 	
 	var b 						= window.nuBC.length-1;
-	
+
 	window.nuBC[b].form_id 		= f.form_id;
 	window.nuBC[b].record_id 		= f.record_id;
 	window.nuBC[b].session_id 		= f.session_id;

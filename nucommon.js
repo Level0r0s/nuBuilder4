@@ -56,6 +56,7 @@ function nuFormState(){
 
 function nuGetBreadcrumb(b){
 
+	window.nuTYPE = "browse";
 	window.nuBC 	= window.nuBC.slice(0, b + 1);
 	nuGetForm(window.nuBC[b].form_id, window.nuBC[b].record_id, window.nuBC[b].filter,  1);
 	
