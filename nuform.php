@@ -52,7 +52,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
     ORDER BY sob_all_order    
 
     ";
-nudebug($s);
+
 	if($F != ''){
 
 		$t = nuRunQuery($s);
@@ -1124,5 +1124,19 @@ function nuSetAccessibility($s = ''){
 
 }
 
+function nuSetupButtons($f, $t) {
+	if($t == 'Report') {
+		nuAddPrintButtons($f, 'Run', 'Report');
+		nuAddPrintButtons($f, 'Email', 'Report');
+	} else if($t == 'PHP') {
+		nuAddPrintButtons($f, 'Run', 'PHP');
+	}
+}
+
+function nuAddPrintButtons($f, $t, $a){
+	$i = sizeof($f->forms[0]->buttons);
+	$f->forms[0]->buttons[$i][0] = $t;
+	$f->forms[0]->buttons[$i][1] = $t.$a;
+}
 
 ?>
