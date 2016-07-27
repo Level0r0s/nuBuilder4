@@ -1126,6 +1126,7 @@ function nuSetAccessibility($s = ''){
 
 }
 
+<<<<<<< HEAD
 function isForm($i){
 
 	$s	= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$i'";
@@ -1148,6 +1149,21 @@ function isReport($i){
 	$t	= nuRunQuery($s);
 	return $i == $r[0];
 
+=======
+function nuSetupButtons($f, $t) {
+	if($t == 'Report') {
+		nuAddPrintButtons($f, 'Run', 'Report');
+		nuAddPrintButtons($f, 'Email', 'Report');
+	} else if($t == 'PHP') {
+		nuAddPrintButtons($f, 'Run', 'PHP');
+	}
+}
+
+function nuAddPrintButtons($f, $t, $a){
+	$i = sizeof($f->forms[0]->buttons);
+	$f->forms[0]->buttons[$i][0] = $t;
+	$f->forms[0]->buttons[$i][1] = $t.$a;
+>>>>>>> e4832fae7c42cdf8fb87b11fcf059d941df01873
 }
 
 ?>

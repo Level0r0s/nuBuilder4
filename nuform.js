@@ -26,7 +26,7 @@ function nuBuildForm(f){
 	}
 	
 	var b 						= window.nuBC.length-1;
-	
+
 	window.nuBC[b].form_id 		= f.form_id;
 	window.nuBC[b].record_id 		= f.record_id;
 	window.nuBC[b].session_id 		= f.session_id;
@@ -63,7 +63,6 @@ function nuBuildForm(f){
     if(f.record_id == '-2'){
         nuCreateDragOptionsBox(f);
 	}
-	
 }
 
 function nuResizeiFrame(d, r){
@@ -122,7 +121,7 @@ function nuAddActionButtons(f){
 	}
 
 	var b = f.buttons;
-	
+
 	if(f.record_id == ''){
 
 		var s 	= nuDefine(window.nuBC[window.nuBC.length-1].search);
@@ -135,8 +134,13 @@ function nuAddActionButtons(f){
 	}
 
 	for(var i = 0 ; i < b.length ; i++){
+		var reportID = '';
+		if(b[i][0] == 'Run' || b[i][0] == 'Email') {
+			reportID = '\"' + window.nuBC[window.nuBC.length-1].record_id + '\"';
+		}
+		
 		if(!draggable) {
-			$('#nuActionHolder').append("<input id='nu" + b[i][1] + "Button' type='button' class='nuButton' value='" + b[i][0] + "' onclick='nu" + b[i][1] + "Action()'>&nbsp;");
+			$('#nuActionHolder').append("<input id='nu" + b[i][1] + "Button' type='button' class='nuButton' value='" + b[i][0] + "' onclick='nu" + b[i][1] + "Action(" + reportID + ")'>&nbsp;");
 		}
 	}
 	
@@ -1399,6 +1403,19 @@ function nuAddAction(){
 	
 }
 
+function nuRunPHPAction(reportID) {
+	nuRunPHP(reportID);
+}
+
+function nuRunReportAction(reportID) {
+	nuRunReport(reportID);
+}
+
+function nuEmailReportAction(reportID) {
+	nuEmailReport(reportID);
+}
+
+
 function nuSortBrowse(c){
 	
 	var l			= nuBC.length - 1;
@@ -1451,8 +1468,9 @@ function nuSelectBrowse(t){
 		window[y](t);
 
 	}
-	
+
 	window.nuTYPE = 'browse';
+
 }
 
 
@@ -2128,4 +2146,3 @@ function nuSubformSorter(a, b, c){
 	return A - B;
 	
 }
-
