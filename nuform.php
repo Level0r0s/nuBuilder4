@@ -24,6 +24,8 @@ function nuBeforeOpen($f, $o){
 }
 
 function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
+	
+nudebug("$F, $R,");
 
     $tabs 			= nuBuildTabList($F);
     $f				= nuGetEditForm($F);
@@ -52,7 +54,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
     ORDER BY sob_all_order    
 
     ";
-nudebug($s);
+
 	if($F != ''){
 
 		$t = nuRunQuery($s);
@@ -1124,5 +1126,28 @@ function nuSetAccessibility($s = ''){
 
 }
 
+function isForm($i){
+
+	$s	= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$i'";
+	$t	= nuRunQuery($s);
+	return $i == $r[0];
+
+}
+
+function isProcedure($i){
+
+	$s	= "SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = '$i'";
+	$t	= nuRunQuery($s);
+	return $i == $r[0];
+
+}
+
+function isReport($i){
+
+	$s	= "SELECT * FROM zzzzsys_report WHERE zzzzsys_report_id = '$i'";
+	$t	= nuRunQuery($s);
+	return $i == $r[0];
+
+}
 
 ?>

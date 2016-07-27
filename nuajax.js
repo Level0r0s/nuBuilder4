@@ -64,7 +64,7 @@ function nuGetForm(f, r, filter, n){
 
 
 
-function nuGetReport(f, r){
+function nuGetPDF(f, r){
 
 	window.nuBC.push(new nuFormState());
 

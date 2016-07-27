@@ -1228,9 +1228,41 @@ function nuBrowseTitle(b, i, l){
 	
 	$('#nusearch_' + i).attr('checked', un == -1);
 	
+	nuTitleDrag(i);
+	
 	return l + w;
 	
 }
+
+
+
+function nuTitleDrag(i){
+
+	var div    = document.createElement('div');
+	div.setAttribute('id', 'nuTitleDrag' + i);
+	
+	$('#' + 'nuBrowseTitle' + i).append(div);
+	var h	= parseInt($('#' + 'nuBrowseTitle' + i).css('height'));
+	$('#' + div.id)
+	.addClass('nuDragLineV')
+	.css('z-index', 2000 + i)
+	.attr('onclick','nuBrowseColumnSize(event)')
+	.attr('onmouseup','console.log(99,event)');
+	
+}
+
+
+function nuBrowseColumnSize(e){
+	
+	console.log(e);
+	
+	var h	= parseInt($('#' + e.target.id).parent().css('height'));
+	console.log(h);
+	$('#' + e.target.id).css('height', 400);
+}
+
+
+
 
 function nuBrowseTable(){
 

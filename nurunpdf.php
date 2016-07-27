@@ -26,6 +26,7 @@ $PDF                        = new FPDF($LAYOUT->orientation, 'mm', $LAYOUT->pape
 $PDF->SetAutoPageBreak(false);
 $REPORT                     = nuSetPixelsToMM($LAYOUT);
 $PDF->SetMargins(1,1,1);
+
 eval($PHP);                                                              //-- build temp table for report from php
 
 $GLOBALS['nu_columns']       = nuAddCriteriaValues($hashData, $TABLE_ID);
@@ -40,7 +41,6 @@ nuPrintReport($PDF, $REPORT, $GLOBALS['nu_report'], $JSON);
 nuRunQuery("DROP TABLE IF EXISTS $TABLE_ID");
 nuRunQuery("DROP TABLE IF EXISTS $TABLE_ID".'_nu_summary');
 $PDF->Output('nureport.pdf', 'I');
-
 nuRemoveFiles();
 
 function nuPrintReport($PDF, $LAY, $DATA, $JSON){
