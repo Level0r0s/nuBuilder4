@@ -198,6 +198,7 @@ input {
    text-align: center;
    border-style: none;
    display: inline-block;
+   z-index: 5000;
    
 }
 
@@ -540,7 +541,7 @@ input {
 			height:10px;
 			background-color:darkgrey;
 			border-style:none;
-			z-index:2000;
+			z-index:4000;
 }
 
 .nuDragLine:hover{
@@ -557,6 +558,7 @@ input {
 			top:0px;
 			background-color:darkgrey;
 			border-style:none;
+			z-index:4500;
 }
 
 .nuDragLineV:hover{
