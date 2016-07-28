@@ -25,8 +25,6 @@ function nuBeforeOpen($f, $o){
 
 function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 	
-nudebug("$F, $R,");
-
     $tabs 			= nuBuildTabList($F);
     $f				= nuGetEditForm($F);
     $f->form_id		= $F;

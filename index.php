@@ -41,15 +41,31 @@ jsinclude('nufunctions.js');
 	if($type == ''){			//-- login screen
 		
 		$h	= "
-		
-		function nuLoad(){
-			nuLogin();
+		if(window.opener == null) {
+			function nuLoad(){
+				
+				nuLogin();
+			}
+		} else {
+			function nuLoad(){
+				
+				window.nuTYPE		= window.opener.nuTYPE;
+				window.nuSESSION	= window.opener.nuSESSION;
+				var p				= window.opener.nuOPENER[window.opener.nuOPENER.length - 1];
+
+				nuGetForm(p.form_id, p.record_id, p.filter);
+
+				if(p.record_id == '-2'){
+					nuBindDragEvents();
+				}
+			}
+			
 		}
 		
 		";
 		
 	}else{
-		
+	
 		$h	= "
 		
 		function nuLoad(){

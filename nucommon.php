@@ -75,6 +75,7 @@ function nuDebug($t){
         error_log($nuDB->errorCode() . ": Could not establish nuBuilder database connection");
     }
 
+	return $i;
 }
 
 
@@ -829,7 +830,7 @@ function nuAddToHashList($J, $run){
     $ignore[]           = 'sre_layout';
     $ignore[]           = 'slp_php';
     $ignore[]           = 'sre_php';
-nudebug(print_r($J,1));
+
     foreach($J as $key => $v){                                           //-- add current hash variables
         
         if(!in_array($key, $ignore)){
@@ -865,6 +866,5 @@ nudebug(print_r($J,1));
     return $hash;
 
 }
-
 
 ?>
