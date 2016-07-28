@@ -162,6 +162,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
     $f->browse_columns		= nuBrowseColumns($f, $P);
     $B					= nuBrowseRows($f);
     $f->browse_rows		= $B[0];
+    $f->browse_height		= $B[0];
     $f->pages				= ceil($B[1]/$f->rows);
     $f->objects 			= $a;
 
@@ -650,7 +651,7 @@ function nuBrowseRows($f){
 	while($r = db_fetch_row($t)){
 		$a[] = $r;
 	}
-	
+
 	return array($a, $rows);
 	
 }

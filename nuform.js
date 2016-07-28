@@ -981,7 +981,7 @@ function nuAddEditTabs(p, w){
 		l = nuBrowseTitle(w.browse_columns, i, l);
 
     }
-	
+	nuDetach(event);
 
 	if(w.browse_columns.length > 0){
 		
@@ -1225,8 +1225,9 @@ function nuBrowseTitle(b, i, l){
 	.html(cb + br + sp)
 	.addClass('nuBrowseTitle')
 	.css({	'text-align'	: 'center',
-			'overflow'	: 'hidden',
+			'overflow'	: 'visible',
 			'width'		: w,
+			'z-index'	: 1000,
 			'left'		: l
 	});
 	
@@ -1242,27 +1243,74 @@ function nuBrowseTitle(b, i, l){
 
 function nuTitleDrag(i){
 
-	var div    = document.createElement('div');
+	var bc				= nuBC[nuBC.length-1];
+	var col				= bc.browse_columns;
+	var rows				= bc.rows;
+	var h				= bc.row_height;
+	var div				= document.createElement('div');
+
 	div.setAttribute('id', 'nuTitleDrag' + i);
 	
 	$('#' + 'nuBrowseTitle' + i).append(div);
-	var h	= parseInt($('#' + 'nuBrowseTitle' + i).css('height'));
+
+
 	$('#' + div.id)
 	.addClass('nuDragLineV')
-	.css('z-index', 2000 + i)
-	.attr('onclick','nuBrowseColumnSize(event)')
-	.attr('onmouseup','console.log(99,event)');
+	.css('height', h)
+	.attr('onmousedown', 'nuDragBrowseDown(event)')
+	.attr('onmousemove', 'nuDragBrowseMove(event)')
+	.attr('onmouseup','nuDragBrowseUp(event)');
 	
 }
 
 
+function nuDragBrowseDown(e){
+	
+	var t					= parseInt($('#nuBrowseTitle0').css('top'));
+	var l					= parseInt($('#nuBrowseTitle0').css('left'));
+	var f					= parseInt($('#nuBrowseFooter').css('top'));
+
+	window.nuDRAGLINEVSTART	= e.pageX;
+	window.nuDRAGLINEVID		= e.target.id;
+
+	$('#' + e.target.id).css('height', f-t);
+	
+}
+
+function nuDragBrowseMove(e){
+	
+	if(window.nuDRAGLINEVID == '' || e.buttons != 1){return;}
+	
+	var l	= e.x
+
+	$('#' + nuDRAGLINEVID).css('left', l);
+	
+}
+
+
+
+function nuDragBrowseUp(e){
+	
+	var l	= e.offsetX;
+	var h	= parseInt($('#nuBrowseTitle0').css('height'));
+	
+	$('#' + e.target.id).css('height', h);
+	window.nuDRAGLINEVID	= '';
+	
+}
+
+
+
+
+
 function nuBrowseColumnSize(e){
+
+	var l	= $('#' + e.target.id)
 	
-	console.log(e);
-	
-	var h	= parseInt($('#' + e.target.id).parent().css('height'));
-	console.log(h);
+	var bc	= nuBC[nuBC.length-1];
+	var totalBrowseHeight	= bc.rows * bc.row_height;
 	$('#' + e.target.id).css('height', 400);
+	
 }
 
 
@@ -1298,6 +1346,7 @@ function nuBrowseTable(){
 			.attr('data-nu-row', rw)
 			.attr('data-nu-column', column)
 			.addClass(w == 0 ? '' : 'nuBrowseTable')
+			.addClass('nuDragNoSelect')
 			.css({	'text-align'	: a,
 					'overflow'	: 'hidden',
 					'width'		: w-7,
@@ -2146,3 +2195,19 @@ function nuSubformSorter(a, b, c){
 	return A - B;
 	
 }
+
+function nuDetach(e){
+
+	$('.nuDragLineV').each(function( index ) {
+
+		var j	= $(this);
+		var o	= j.offset();
+		var t	= j.css('top', o.top);
+		var l	= j.css('left', o.left);
+		
+		j.appendTo('body')
+
+	});	
+		
+}
+

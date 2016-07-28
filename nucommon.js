@@ -9,6 +9,8 @@ window.nuFORM				= [];
 window.nuHASH				= [];
 window.nuSESSION			= '';
 window.nuTYPE 			= 'browse';
+window.nuDRAGLINEVSTART	= '';
+window.nuDRAGLINEVID		= '';
 
 function nuOpener(f, r, filter){
 
