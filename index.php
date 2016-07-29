@@ -43,7 +43,7 @@ jsinclude('nufunctions.js');
 		$h	= "
 		if(window.opener == null) {
 			function nuLoad(){
-				
+				nuBindCtrlEvents();
 				nuLogin();
 			}
 		} else {
@@ -57,6 +57,7 @@ jsinclude('nufunctions.js');
 
 				if(p.record_id == '-2'){
 					nuBindDragEvents();
+					nuBindCtrlEvents();
 				}
 			}
 			
@@ -79,6 +80,7 @@ jsinclude('nufunctions.js');
 
 			if(p.record_id == '-2'){
 				nuBindDragEvents();
+				nuBindCtrlEvents();
 			}
 
 		}

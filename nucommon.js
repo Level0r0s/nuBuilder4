@@ -25,6 +25,10 @@ function nuOpener(f, r, filter){
 	
 }
 
+function nuOpenerAppend(t, k) {
+	window.nuOPENER[window.nuOPENER.length - 1][t] = k;
+}
+
 function nuFormState(){
 
 	this.call_type        = '';
@@ -450,5 +454,25 @@ function nuRunIt(t, email, type){
 		
 }
 
+function nuBindCtrlEvents(){
 
+	var nuCtrlKeydownListener = function(e){	
+		if(e.keyCode == 17) { //Ctrl
+			window.nuWINDOW = 1;
+		}
+	}
+	
+	var nuCtrlKeyupListener = function(e){	
+		
+		window.nuWINDOW = 0;
+	}
+	
+    $(document).on('keydown.nubindctrl', nuCtrlKeydownListener);
+	
+	$(document).on('keyup.nubindctrl', nuCtrlKeyupListener);
 
+}
+
+function nuUnbindDragEvents(){
+    $(document).off('.nubindctrl');
+}
