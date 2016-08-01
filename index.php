@@ -51,7 +51,7 @@ jsinclude('nufunctions.js');
 				
 				window.nuTYPE		= window.opener.nuTYPE;
 				window.nuSESSION	= window.opener.nuSESSION;
-				var p				= window.opener.nuOPENER[window.opener.nuOPENER.length - 1];
+				var p			= window.opener.nuOPENER[window.opener.nuOPENER.length - 1];
 
 				nuGetForm(p.form_id, p.record_id, p.filter);
 

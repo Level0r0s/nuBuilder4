@@ -505,13 +505,14 @@ function nuRUN(w, i, l, p, prop){
 		
 		ele = 'iframe';
 		
+		if(!prop.objects[i].parent_type == 'g'){
+			
+			nuLabel(w, i, p, prop);
+			
+		}
+		
 	}
 
-	if(!prop.objects[i].parent_type == 'g' && prop.objects[i].run_method != 'b'){
-		
-		nuLabel(w, i, p, prop);
-		
-	}
 
 	var inp = document.createElement(ele);
 	
@@ -526,7 +527,7 @@ function nuRUN(w, i, l, p, prop){
 					'height'   	: Number(prop.objects[i].height),
 					'position' 	: 'absolute'
 	});
-
+console.log(9999, prop.objects[i]);
 	if(prop.objects[i].run_method == 'b'){
 	
 		$('#' + id).attr({
@@ -538,7 +539,7 @@ function nuRUN(w, i, l, p, prop){
 	}else{
 	    
 		$('#' + id).attr({'src':prop.objects[i].src})
-		$('#' + id).attr({'src':'http://forums.nubuilder.com/index.php'})
+//		$('#' + id).attr({'src':'http://forums.nubuilder.com/index.php'})
 
 
 	}
@@ -1233,7 +1234,7 @@ function nuBrowseTitle(b, i, l){
 	
 	$('#nusearch_' + i).attr('checked', un == -1);
 	
-	nuTitleDrag(i);
+	//nuTitleDrag(i);
 	
 	return l + w;
 	
