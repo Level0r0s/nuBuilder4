@@ -1,7 +1,14 @@
 function nuGetForm(f, r, filter, n){
+	if(window.nuEDIT == 1) {
+		if(!confirm("Leave This Form Without Saving?")) {
+			return
+		}
+	}
+	
 	if(window.nuWINDOW == 1) {
+		window.nuWINDOW = 0;
 		window.nuOPENER.push(new nuOpener(f, r, filter));
-		window.open(window.location.href+'index.php');
+		window.open(window.location.href);
 	} else {
 		var u 	= '';
 		var p 	= '';
@@ -64,6 +71,14 @@ function nuGetForm(f, r, filter, n){
 
 function nuGetPDF(f, r){
 
+	if(window.nuWINDOW == 1) {
+		window.nuWINDOW = 0;
+		window.nuOPENER.push(new nuOpener(f, r, ''));
+		nuOpenerAppend('type','getreport');
+		window.open(window.location.href);
+		return;
+	}
+
 	window.nuBC.push(new nuFormState());
 
 	var w 		= nuGetFormState();
@@ -85,10 +100,8 @@ function nuGetPDF(f, r){
 
 			if(nuErrorMessages(fm.errors)){
 			}else{
-				
 				nuBC[nuBC.length-1].record_id	= fm.record_id;
-				nuBuildForm(fm);
-				
+				nuBuildForm(fm);	
 			}
 			
 		}).fail(function(xhr, err){
@@ -143,6 +156,14 @@ function nuRunReport(f, iframe){
 
 
 function nuGetPHP(f, r){
+
+	if(window.nuWINDOW == 1) {
+		window.nuWINDOW = 0;
+		window.nuOPENER.push(new nuOpener(f, r, ''));
+		nuOpenerAppend('type','getphp');
+		window.open(window.location.href);
+		return;
+	}
 
 	window.nuBC.push(new nuFormState());
 
