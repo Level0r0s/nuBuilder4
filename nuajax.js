@@ -1,7 +1,13 @@
+
+
 function nuGetForm(f, r, filter, n){
-	if(window.nuWINDOW == 1) {
+	
+	if(window.nuOPENNEW == 1) {
+		
 		window.nuOPENER.push(new nuOpener(f, r, filter));
-		window.open(window.location.href+'index.php');
+		window.open(window.location.href);
+		window.focus();
+		
 	} else {
 		var u 	= '';
 		var p 	= '';

@@ -527,7 +527,7 @@ function nuRUN(w, i, l, p, prop){
 					'height'   	: Number(prop.objects[i].height),
 					'position' 	: 'absolute'
 	});
-console.log(9999, prop.objects[i]);
+
 	if(prop.objects[i].run_method == 'b'){
 	
 		$('#' + id).attr({

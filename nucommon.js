@@ -11,6 +11,7 @@ window.nuSESSION			= '';
 window.nuTYPE 			= 'browse';
 window.nuDRAGLINEVSTART	= '';
 window.nuDRAGLINEVID		= '';
+window.nuOPENNEW			= '';
 
 function nuOpener(f, r, filter){
 
@@ -458,13 +459,13 @@ function nuBindCtrlEvents(){
 
 	var nuCtrlKeydownListener = function(e){	
 		if(e.keyCode == 17) { //Ctrl
-			window.nuWINDOW = 1;
+			window.nuOPENNEW = 1;
 		}
 	}
 	
 	var nuCtrlKeyupListener = function(e){	
 		
-		window.nuWINDOW = 0;
+		window.nuOPENNEW = 0;
 	}
 	
     $(document).on('keydown.nubindctrl', nuCtrlKeydownListener);
