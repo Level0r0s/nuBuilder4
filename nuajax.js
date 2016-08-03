@@ -2,6 +2,7 @@
 
 function nuGetForm(f, r, filter, n){
 
+console.log(f, r, filter);		
 	if(window.nuEDIT == 1) {
 		if(!confirm("Leave This Form Without Saving?")) {
 			return
@@ -9,11 +10,13 @@ function nuGetForm(f, r, filter, n){
 	}
 	
 	if(window.nuNEW == 1) {
+		
 		window.nuNEW = 0;
 		window.nuOPENER.push(new nuOpener(f, r, filter));
 		window.open(window.location.href);
 
-		} else {
+	}else{
+			
 		var u 	= '';
 		var p 	= '';
 		var s	= '';
@@ -48,7 +51,7 @@ function nuGetForm(f, r, filter, n){
 		w.filter		= filter;
 		nuBC[nuBC.length - 1].filter = filter;	
 		w.hash		= parent.nuHashFromEditForm();
-		
+console.log(w);		
 		var request 	= $.ajax({
 			url      : "nuapi.php",
 			type     : "POST",
@@ -214,7 +217,6 @@ function nuRunPHP(f, iframe){
 	w.call_type	= 'runphp';
 	w.form_id	= f;
 	w.hash		= nuHashFromEditForm();
-
 	var request 	= $.ajax({
 		url      : "nuapi.php",
 		type     : "POST",

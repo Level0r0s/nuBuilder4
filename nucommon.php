@@ -614,7 +614,6 @@ function nuRunReport($nuRID){
 
 function nuRunPHP($nuRID){
 
-	nudebug("aaa SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = '$nuRID'");
 	$iii								= nuID();
 	$nuT								= nuRunQuery("SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = '$nuRID'");
 	$nuA								= db_fetch_object($nuT);

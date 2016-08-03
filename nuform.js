@@ -1,6 +1,6 @@
 
 function nuBuildForm(f){
-
+console.log('ff : ', f.form_id, f);
 	if(f.form_id == ''){
 		nuLogin();
 		return;
@@ -521,6 +521,7 @@ function nuRUN(w, i, l, p, prop){
 	$('#' + ef).append(inp);
 
 	nuAddDataTab(id, prop.objects[i].tab, p);
+	
 	$('#' + id).css({'top'     	: Number(prop.objects[i].top),
 					'left'     	: Number(prop.objects[i].left),
 					'width'    	: Number(prop.objects[i].width),
@@ -539,7 +540,6 @@ function nuRUN(w, i, l, p, prop){
 	}else{
 	    
 		$('#' + id).attr({'src':prop.objects[i].src})
-//		$('#' + id).attr({'src':'http://forums.nubuilder.com/index.php'})
 
 
 	}
@@ -1228,7 +1228,6 @@ function nuBrowseTitle(b, i, l){
 	.css({	'text-align'	: 'center',
 			'overflow'	: 'visible',
 			'width'		: w,
-			'z-index'	: 1000,
 			'left'		: l
 	});
 	
@@ -1453,16 +1452,16 @@ function nuAddAction(){
 	
 }
 
-function nuRunPHPAction(reportID) {
-	nuRunPHP(reportID);
+function nuRunPHPAction(id) {
+	nuRunPHP(id);
 }
 
-function nuRunReportAction(reportID) {
-	nuRunReport(reportID);
+function nuRunReportAction(id) {
+	nuRunReport(id);
 }
 
-function nuEmailReportAction(reportID) {
-	nuEmailReport(reportID);
+function nuEmailReportAction(id) {
+	nuEmailReport(id);
 }
 
 
