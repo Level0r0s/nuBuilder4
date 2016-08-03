@@ -11,7 +11,8 @@ window.nuSESSION			= '';
 window.nuTYPE 			= 'browse';
 window.nuDRAGLINEVSTART	= '';
 window.nuDRAGLINEVID		= '';
-window.nuOPENNEW			= '';
+window.nuNEW				= '';
+
 
 function nuOpener(f, r, filter){
 

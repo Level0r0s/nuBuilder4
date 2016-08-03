@@ -1509,18 +1509,17 @@ function nuSelectBrowse(t){
 	if(y == 'browse'){
 
 		nuGetForm(f, p);
+		window.nuTYPE = 'browse';
 		
 	}else if(y == 'lookup'){
 
 		window.parent.nuGetLookupId(p, i);			//-- called from parent window
+		window.nuTYPE = 'browse';
 		
 	}else{
 		window[y](t);
 
 	}
-
-	window.nuTYPE = 'browse';
-
 }
 
 

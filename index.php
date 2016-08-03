@@ -53,14 +53,20 @@ jsinclude('nufunctions.js');
 				window.nuSESSION	= window.opener.nuSESSION;
 				var p			= window.opener.nuOPENER[window.opener.nuOPENER.length - 1];
 
-				nuGetForm(p.form_id, p.record_id, p.filter);
+				nuBindCtrlEvents();
+
+				if(p.type == 'getreport') {
+					nuGetPDF(p.form_id, p.record_id)
+				} else if(p.type == 'getphp') {
+					nuGetPHP(p.form_id, p.record_id)
+				} else {
+					nuGetForm(p.form_id, p.record_id, p.filter);
+				}
 
 				if(p.record_id == '-2'){
-					nuBindDragEvents();
-					nuBindCtrlEvents();
+					nuBindDragEvents();		
 				}
-			}
-			
+			}		
 		}
 		
 		";
@@ -76,13 +82,12 @@ jsinclude('nufunctions.js');
 			window.nuSESSION	= parent.nuSESSION;
 			var p			= parent.nuOPENER[$opener];
 
+			nuBindCtrlEvents();
 			nuGetForm(p.form_id, p.record_id, p.filter);
 
 			if(p.record_id == '-2'){
 				nuBindDragEvents();
-				nuBindCtrlEvents();
 			}
-
 		}
 		
 		";
