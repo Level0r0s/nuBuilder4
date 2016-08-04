@@ -101,14 +101,12 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 				$o->record_id	= -1;
 				
 				if(isProcedure($F)){
-nudebug('pp');
 					
 					$runType	= 'P';
 					$o->form_id	= $r->sob_run_zzzzsys_form_id;
 					$o->record_id	= $r->sob_run_id;
 					
 				}else if(isReport($F)){
-nudebug('rr');
 					
 					$runType	= 'R';
 					$o->form_id	= $r->sob_run_zzzzsys_form_id;
@@ -116,14 +114,12 @@ nudebug('rr');
 					
 				}else{
 					
-nudebug('ff');
 					$runType	= 'F';
 					$o->record_id	= $r->sob_run_id;
 					$o->form_id	= $r->sob_run_zzzzsys_form_id;
 					
 				}
 
-nudebug("SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$o->form_id'");
 				$form			= nuRunQuery("SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$o->form_id'");
 				$run				= db_fetch_object($form);
 				$o->run_type		= $run->sfo_type;
@@ -866,6 +862,10 @@ function nuCheckSession(){
 		nuSetAccessibility($c->session_id);
 
 	}
+//nudebug('nuform : ' . print_r($_POST['forms'],1));
+//nudebug('nureport : ' . print_r($_POST['forms'],1));
+//nudebug('reports : ' . print_r($_POST['forms'],1));
+
 
 	if($c->form_id == 'nuform' && !in_array($c->form_id, $_POST['forms'])){
 		
@@ -883,16 +883,16 @@ function nuCheckSession(){
 			$nuT	= nuRunQuery("SELECT * FROM zzzzsys_report WHERE zzzzsys_report_id = '$c->record_id'");
 			$nuR	= db_fetch_object($nuT);
 			
-			nuErrorMessage("Access To Report Denied.. ($nuR->sre_code)");
+			nuErrorMessage("Access To Report Denied... ($nuR->sre_code)");
 			
 		}
 		
-		if($c->form_id == 'nuphp' && !in_array($c->record_id, $_POST['reports'])){
+		if($c->form_id == 'nuphp' && !in_array($c->record_id, $_POST['procedures'])){
 			
 			$nuT	= nuRunQuery("SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = '$c->record_id'");
 			$nuR	= db_fetch_object($nuT);
 			
-			nuErrorMessage("Access To Report Denied. ($nuR->sph_code)");
+			nuErrorMessage("Access To Procedure Denied... ($nuR->sph_code)");
 			
 		}
 		

@@ -1,6 +1,6 @@
 
 function nuBuildForm(f){
-console.log('ff : ', f.form_id, f);
+
 	if(f.form_id == ''){
 		nuLogin();
 		return;
@@ -436,6 +436,7 @@ function nuINPUT(w, i, l, p, prop){
 		$('#' + id).css({'top'		: Number(prop.objects[i].top),
 						'left'		: Number(prop.objects[i].left) + Number(prop.objects[i].width) + 21,
 						'width'		: prop.objects[i].description_width,
+						'visibility'	: prop.objects[i].description_width == 0 ? 'hidden' : 'visible',
 						'height'		: Number(prop.objects[i].height)
 		})
 		.attr('tabindex','-1')
@@ -1737,7 +1738,7 @@ function nuLookupObject(id, set, value){
 		this.id_value				= '';
 		this.code_value			= '';
 		this.description_value	= '';
-		console.log('No such field as ' + id);
+
 		return;
 		
 	}

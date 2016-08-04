@@ -2,7 +2,6 @@
 
 function nuGetForm(f, r, filter, n){
 
-console.log(f, r, filter);		
 	if(window.nuEDIT == 1) {
 		if(!confirm("Leave This Form Without Saving?")) {
 			return
@@ -51,7 +50,7 @@ console.log(f, r, filter);
 		w.filter		= filter;
 		nuBC[nuBC.length - 1].filter = filter;	
 		w.hash		= parent.nuHashFromEditForm();
-console.log(w);		
+
 		var request 	= $.ajax({
 			url      : "nuapi.php",
 			type     : "POST",
