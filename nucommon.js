@@ -485,12 +485,14 @@ function nuUnbindDragEvents(){
 
 function nuTranslate(s){
 
+<<<<<<< HEAD
 debugger;
+=======
+>>>>>>> d1b74b08c1ed8ed7a6e4a17037bc35e6a7feb93c
 	for(var i = 0 ; i < window.nuLANGUAGE.length ; i ++){
 		
 		if(window.nuLANGUAGE[i].trl_english == s){
 			
-			console.log(window.nuLANGUAGE[i].trl_translation);
 			return window.nuLANGUAGE[i].trl_translation;
 			
 		}

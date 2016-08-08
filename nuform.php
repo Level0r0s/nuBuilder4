@@ -784,7 +784,9 @@ function nuCheckSession(){
 	$c->filter				= $_POST['nuFilter'];
 	$c->errors				= array();
 	$c->schema				= array();
+	$c->translation			= array();
 	
+
 	if($s == ''){
 		if($u == $_SESSION['DBGlobeadminUsername']){           //-- globeadmin's username
 			
@@ -818,7 +820,7 @@ nudebug('a : ' . $c->translation);
 		
 			$pw						= md5($p);
 			$t						= nuRunQuery("SELECT * FROM zzzzsys_user WHERE sus_login_name = ? AND sus_login_password = ?", array($u, $pw));
-			
+
 			if(db_num_rows($t) > 0){
 				
 				$r 					= db_fetch_object($t);
@@ -830,12 +832,12 @@ nudebug('a : ' . $c->translation);
 nudebug('b : ' . print_r($c->translation, 1));
 				$access				= new StdClass;
 				$access->forms		= nuAccessForms($r->sus_zzzzsys_user_group_id);
-				$access->reports		= nuAccessReports($r->sus_zzzzsys_user_group_id);
+				$access->reports	= nuAccessReports($r->sus_zzzzsys_user_group_id);
 				$access->procedures	= nuAccessProcedures($r->sus_zzzzsys_user_group_id);
+				$access->language	= $r->sus_language;
 				$nuJ					= json_encode($access);
 				
 				nuRunQuery("UPDATE zzzzsys_session SET sss_access = '$nuJ' WHERE zzzzsys_session_id = '$c->session_id'");
-				
 			}else{
 				
 				nuErrorMessage('Invalid Login..');
@@ -848,13 +850,17 @@ nudebug('b : ' . print_r($c->translation, 1));
 		}
 			
 	}else{
-		
+				
 		$t							= nuRunQuery("SELECT * FROM zzzzsys_session WHERE zzzzsys_session_id = ?", array($s));
 		
 		if(db_num_rows($t) > 0){
 			
 			$c->form_id				= $_POST['nuSTATE']['form_id'];
-			$c->record_id				= $_POST['nuSTATE']['record_id'];
+			$c->record_id			= $_POST['nuSTATE']['record_id'];
+			
+			$r = db_fetch_object($t);
+			$nuJ = json_decode($r->sss_access);
+			$c->translation		= nuDictionary($nuJ->language);
 			
 		}else{
 			
@@ -922,7 +928,7 @@ function nuAccessForms($i){
 		GROUP BY slf_zzzzsys_form_id
 			
 		";
-
+		
 	if($i == ''){	$s	= "SELECT zzzzsys_form_id AS id FROM zzzzsys_form";}
 			
 	$t	= nuRunQuery($s);

@@ -11,11 +11,17 @@ function nuBuildForm(f){
 console.log(window.nuLANGUAGE, 1.6);
 	
 		window.nuSCHEMA 	= f.schema;
+<<<<<<< HEAD
 		window.nuLANGUAGE	= f.language;
 console.log(window.nuLANGUAGE, 1.7);
 		
 	}
 	
+=======
+		window.nuLANGUAGE	= f.translation;
+		
+	}
+>>>>>>> d1b74b08c1ed8ed7a6e4a17037bc35e6a7feb93c
 	
 	window.nuSESSION		= f.session_id;
 	window.nuSUBFORMROW	= [];
