@@ -4,6 +4,7 @@ window.nuOPENER			= [];
 window.nuSUBFORMROW		= [];
 window.nuSUBFORMJSON		= [];
 window.nuSCHEMA			= [];
+window.nuLANGUAGE			= [];
 window.nuFIELD			= [];
 window.nuFORM				= [];
 window.nuHASH				= [];
@@ -483,6 +484,7 @@ function nuUnbindDragEvents(){
 
 
 function nuTranslate(s){
+
 debugger;
 	for(var i = 0 ; i < window.nuLANGUAGE.length ; i ++){
 		

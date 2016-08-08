@@ -1,18 +1,21 @@
 
 function nuBuildForm(f){
 
+
 	if(f.form_id == ''){
 		nuLogin();
 		return;
 	}
 
 	if(f.schema.length !== undefined){  //-- its an Object
+console.log(window.nuLANGUAGE, 1.6);
 	
 		window.nuSCHEMA 	= f.schema;
 		window.nuLANGUAGE	= f.language;
+console.log(window.nuLANGUAGE, 1.7);
 		
 	}
-console.log('lang', f.language);		
+	
 	
 	window.nuSESSION		= f.session_id;
 	window.nuSUBFORMROW	= [];

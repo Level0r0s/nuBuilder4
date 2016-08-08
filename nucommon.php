@@ -899,8 +899,6 @@ function nuDictionary($l){
 
 	}
 
-nuDebug('========' . print_r($S,1));
-
 	return $S;
 
 }
