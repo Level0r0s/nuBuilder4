@@ -9,10 +9,9 @@ function nuBuildForm(f){
 	if(f.schema.length !== undefined){  //-- its an Object
 	
 		window.nuSCHEMA 	= f.schema;
-		window.nuLANGUAGE	= f.language;
+		window.nuLANGUAGE	= f.translation;
 		
 	}
-console.log('lang', f.language);		
 	
 	window.nuSESSION		= f.session_id;
 	window.nuSUBFORMROW	= [];

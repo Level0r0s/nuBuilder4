@@ -483,12 +483,11 @@ function nuUnbindDragEvents(){
 
 
 function nuTranslate(s){
-debugger;
+
 	for(var i = 0 ; i < window.nuLANGUAGE.length ; i ++){
 		
 		if(window.nuLANGUAGE[i].trl_english == s){
 			
-			console.log(window.nuLANGUAGE[i].trl_translation);
 			return window.nuLANGUAGE[i].trl_translation;
 			
 		}
