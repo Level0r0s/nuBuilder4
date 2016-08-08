@@ -863,23 +863,9 @@ function nuCheckSession(){
 
 	}
 
-	if($u != 'globeadmin') {
-		if($c->form_id != 'nuhome' && !in_array($c->form_id, $_POST['forms'])){
-			
-			$nuT	= nuRunQuery("SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$c->form_id'");
-			$nuR	= db_fetch_object($nuT);
-
-			nuErrorMessage("Access To Form Denied... ($nuR->sfo_code)");
-			
-		}
-
-	}
-	
-	if($u != 'globeadmin') {
-nudebug(print_r($c,1));
-		/*if($c->form_id == 'nureport'){
+	if($u != 'globeadmin' && $c->form_id != 'nuhome') {
+		if($c->call_type == 'getreport'){
 			if(!in_array($c->record_id, $_POST['reports'])) {
-				
 				$nuT	= nuRunQuery("SELECT * FROM zzzzsys_report WHERE zzzzsys_report_id = '$c->record_id'");
 				$nuR	= db_fetch_object($nuT);
 				
@@ -888,7 +874,7 @@ nudebug(print_r($c,1));
 			
 		}
 		
-		if($c->form_id == 'nuphp'){
+		if($c->call_type == 'getphp'){
 			
 			if(!in_array($c->record_id, $_POST['procedures'])) {
 			
@@ -907,7 +893,7 @@ nudebug(print_r($c,1));
 
 			nuErrorMessage("Access To Form Denied... ($nuR->sfo_code)");
 			
-		}*/
+		}
 		
 	}
 
