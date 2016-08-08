@@ -6,9 +6,13 @@ function nuBuildForm(f){
 		return;
 	}
 
-	if(f.schema.length === undefined){  //-- its an Object
+	if(f.schema.length !== undefined){  //-- its an Object
+	
 		window.nuSCHEMA 	= f.schema;
+		window.nuLANGUAGE	= f.language;
+		
 	}
+console.log('lang', f.language);		
 	
 	window.nuSESSION		= f.session_id;
 	window.nuSUBFORMROW	= [];
@@ -854,7 +858,7 @@ function nuLabel(w, i, p, prop){
 		              'left'          : Number(prop.objects[i].left) - lwidth - 7,
 		              'width'         : Number(lwidth)
 	})
-	.html(prop.objects[i].label)
+	.html(nuTranslate(prop.objects[i].label))
 	.attr('ondblclick','nuBuildPopup("nuobject", "' + prop.objects[i].object_id + '")');
 
 }

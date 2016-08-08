@@ -866,4 +866,45 @@ function nuAddToHashList($J, $run){
 
 }
 
+
+
+
+function nuSchema(){
+
+	$t	= nuRunQuery("SELECT table_name FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = DATABASE()");
+	$S	= array();
+
+	while($r = db_fetch_object($t)){
+
+		$tn		= $r->table_name; 
+		$S[$tn]	= db_columns($tn);
+
+	}
+
+	return $S;
+
+}
+
+
+function nuDictionary($l){
+
+	$t	= nuRunQuery("SELECT * FROM zzzzsys_translate WHERE trl_language = '$l' ORDER BY trl_english");
+	$S	= array();
+
+	if(db_num_rows($t) == 0){return $S;}
+	
+	while($r = db_fetch_object($t)){
+
+		$S[]		= $r;
+
+	}
+
+nuDebug('========' . print_r($S,1));
+
+	return $S;
+
+}
+
+
+
 ?>

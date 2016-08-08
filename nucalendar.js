@@ -422,9 +422,3 @@ function nuMonthScope(m){
 	return m;
 
 }
-
-function nuTranslate(s){
-	
-	return s;
-	
-}

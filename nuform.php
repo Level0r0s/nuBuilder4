@@ -794,7 +794,8 @@ function nuCheckSession(){
 				$c->session_id			= nuSetSession($u);
 				$c->form_id				= 'nuhome';
 				$c->record_id				= '-1';
-				$c->schema				= nuSchema();	
+				$c->schema				= nuSchema();
+				$c->translation			= nuDictionary('');
 				$access					= new StdClass;
 				$access->forms			= nuAccessForms('');
 				$access->reports			= nuAccessReports('');
@@ -824,6 +825,7 @@ function nuCheckSession(){
 				$c->form_id			= 'nuhome';
 				$c->record_id			= '-1';
 				$c->schema			= nuSchema();	
+				$c->translation		= nuDictionary($r->sus_language);
 				$access				= new StdClass;
 				$access->forms		= nuAccessForms($r->sus_zzzzsys_user_group_id);
 				$access->reports		= nuAccessReports($r->sus_zzzzsys_user_group_id);
