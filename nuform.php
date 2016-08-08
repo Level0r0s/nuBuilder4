@@ -779,13 +779,13 @@ function nuCheckSession(){
 	$c						= new stdClass;
 	$c->session_id			= $s;
 	$c->form_id				= $_POST['nuSTATE']['form_id'];
-	$c->record_id				= '-1';
+	$c->record_id			= '-1';
+	$c->call_type			= $_POST['nuSTATE']['call_type'];
 	$c->filter				= $_POST['nuFilter'];
 	$c->errors				= array();
 	$c->schema				= array();
 	
 	if($s == ''){
-
 		if($u == $_SESSION['DBGlobeadminUsername']){           //-- globeadmin's username
 			
 			if($p == $_SESSION['DBGlobeadminPassword']){      // -- check password
@@ -862,39 +862,52 @@ function nuCheckSession(){
 		nuSetAccessibility($c->session_id);
 
 	}
-//nudebug('nuform : ' . print_r($_POST['forms'],1));
-//nudebug('nureport : ' . print_r($_POST['forms'],1));
-//nudebug('reports : ' . print_r($_POST['forms'],1));
 
+	if($u != 'globeadmin') {
+		if($c->form_id != 'nuhome' && !in_array($c->form_id, $_POST['forms'])){
+			
+			$nuT	= nuRunQuery("SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$c->form_id'");
+			$nuR	= db_fetch_object($nuT);
 
-	if($c->form_id == 'nuform' && !in_array($c->form_id, $_POST['forms'])){
-		
-		$nuT	= nuRunQuery("SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$c->form_id'");
-		$nuR	= db_fetch_object($nuT);
+			nuErrorMessage("Access To Form Denied... ($nuR->sfo_code)");
+			
+		}
 
-		nuErrorMessage("Access To Form Denied... ($nuR->sfo_code)");
-		
 	}
-
-	if($c->record_id != ''){
-
-		if($c->form_id == 'nureport' && !in_array($c->record_id, $_POST['reports'])){
-			
-			$nuT	= nuRunQuery("SELECT * FROM zzzzsys_report WHERE zzzzsys_report_id = '$c->record_id'");
-			$nuR	= db_fetch_object($nuT);
-			
-			nuErrorMessage("Access To Report Denied... ($nuR->sre_code)");
+	
+	if($u != 'globeadmin') {
+nudebug(print_r($c,1));
+		/*if($c->form_id == 'nureport'){
+			if(!in_array($c->record_id, $_POST['reports'])) {
+				
+				$nuT	= nuRunQuery("SELECT * FROM zzzzsys_report WHERE zzzzsys_report_id = '$c->record_id'");
+				$nuR	= db_fetch_object($nuT);
+				
+				nuErrorMessage("Access To Report Denied... ($nuR->sre_code)");
+			}	
 			
 		}
 		
-		if($c->form_id == 'nuphp' && !in_array($c->record_id, $_POST['procedures'])){
+		if($c->form_id == 'nuphp'){
 			
-			$nuT	= nuRunQuery("SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = '$c->record_id'");
-			$nuR	= db_fetch_object($nuT);
+			if(!in_array($c->record_id, $_POST['procedures'])) {
 			
-			nuErrorMessage("Access To Procedure Denied... ($nuR->sph_code)");
-			
+				$nuT	= nuRunQuery("SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = '$c->record_id'");
+				$nuR	= db_fetch_object($nuT);
+				
+				nuErrorMessage("Access To Procedure Denied... ($nuR->sph_code)");
+			}
+				
 		}
+		
+		if(!in_array($c->form_id, $_POST['forms'])){
+		
+			$nuT	= nuRunQuery("SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$c->form_id'");
+			$nuR	= db_fetch_object($nuT);
+
+			nuErrorMessage("Access To Form Denied... ($nuR->sfo_code)");
+			
+		}*/
 		
 	}
 
@@ -911,8 +924,7 @@ function nuAccessForms($i){
 	$s	= "
 	
 		SELECT slf_zzzzsys_form_id AS id 
-		FROM zzzzsys_user
-		JOIN zzzzsys_user_group ON zzzzsys_user_group_id = sus_zzzzsys_user_group_id
+		FROM zzzzsys_user_group
 		JOIN zzzzsys_user_group_access_level ON gal_zzzzsys_user_group_id = zzzzsys_user_group_id
 		JOIN zzzzsys_access_level ON zzzzsys_access_level_id = gal_zzzzsys_access_level_id
 		JOIN zzzzsys_access_level_form ON zzzzsys_access_level_id = slf_zzzzsys_access_level_id
@@ -920,7 +932,7 @@ function nuAccessForms($i){
 		GROUP BY slf_zzzzsys_form_id
 			
 		";
-		
+
 	if($i == ''){	$s	= "SELECT zzzzsys_form_id AS id FROM zzzzsys_form";}
 			
 	$t	= nuRunQuery($s);
@@ -940,8 +952,7 @@ function nuAccessReports($i){
 	$s	= "
 	
 		SELECT sre_zzzzsys_report_id AS id 
-		FROM zzzzsys_user
-		JOIN zzzzsys_user_group ON zzzzsys_user_group_id = sus_zzzzsys_user_group_id
+		FROM zzzzsys_user_group
 		JOIN zzzzsys_user_group_access_level ON gal_zzzzsys_user_group_id = zzzzsys_user_group_id
 		JOIN zzzzsys_access_level ON zzzzsys_access_level_id = gal_zzzzsys_access_level_id
 		JOIN zzzzsys_access_level_report ON zzzzsys_access_level_id = sre_zzzzsys_access_level_id
@@ -969,8 +980,7 @@ function nuAccessProcedures($i){
 	$s	= "
 	
 		SELECT slp_zzzzsys_php_id AS id 
-		FROM zzzzsys_user
-		JOIN zzzzsys_user_group ON zzzzsys_user_group_id = sus_zzzzsys_user_group_id
+		FROM zzzzsys_user_group
 		JOIN zzzzsys_user_group_access_level ON gal_zzzzsys_user_group_id = zzzzsys_user_group_id
 		JOIN zzzzsys_access_level ON zzzzsys_access_level_id = gal_zzzzsys_access_level_id
 		JOIN zzzzsys_access_level_php ON zzzzsys_access_level_id = slp_zzzzsys_access_level_id
@@ -1111,7 +1121,7 @@ function nuGetAllLookupList(){
 }
 
 function nuSetAccessibility($s = ''){
-	
+
 	if($s == ''){
 		
 		$a				= array();
