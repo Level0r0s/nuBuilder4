@@ -134,7 +134,9 @@ function nuAddActionButtons(f){
 	}
 
 	for(var i = 0 ; i < b.length ; i++){
+		
 		var reportID = '';
+		
 		if(b[i][0] == 'Run' || b[i][0] == 'Email') {
 			reportID = '\"' + window.nuBC[window.nuBC.length-1].record_id + '\"';
 		}
@@ -142,9 +144,10 @@ function nuAddActionButtons(f){
 		if(!draggable) {
 			$('#nuActionHolder').append("<input id='nu" + b[i][1] + "Button' type='button' class='nuButton' value='" + b[i][0] + "' onclick='nu" + b[i][1] + "Action(" + reportID + ")'>&nbsp;");
 		}
+		
 	}
 	
-	if(window.nuTYPE 	== 'browse'){
+	if(window.parent.length == 0){ //-- only if Main Form
 		
 		$('#nuActionHolder').append("<img id='thelogo' src='logo.png' style='position:absolute;right:20px'>");
 		
