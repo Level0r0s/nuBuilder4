@@ -8,20 +8,11 @@ function nuBuildForm(f){
 	}
 
 	if(f.schema.length !== undefined){  //-- its an Object
-console.log(window.nuLANGUAGE, 1.6);
-	
+
 		window.nuSCHEMA 	= f.schema;
-<<<<<<< HEAD
-		window.nuLANGUAGE	= f.language;
-console.log(window.nuLANGUAGE, 1.7);
-		
-	}
-	
-=======
 		window.nuLANGUAGE	= f.translation;
 		
 	}
->>>>>>> d1b74b08c1ed8ed7a6e4a17037bc35e6a7feb93c
 	
 	window.nuSESSION		= f.session_id;
 	window.nuSUBFORMROW	= [];
@@ -856,7 +847,7 @@ function nuLabel(w, i, p, prop){
 	var id     = 'label_' + p + prop.objects[i].id;
 	var ef     = p + 'nuRecordHolder';                       //-- Edit Form Id
 	var lab    = document.createElement('label');
-	var lwidth = nuGetWordWidth(prop.objects[i].label);
+	var lwidth = nuGetWordWidth(nuTranslate(prop.objects[i].label));
 	
 	lab.setAttribute('id', id);
 	lab.setAttribute('for',  p + prop.objects[i].id);

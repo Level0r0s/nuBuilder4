@@ -8,7 +8,6 @@ window.nuLANGUAGE			= [];
 window.nuFIELD			= [];
 window.nuFORM				= [];
 window.nuHASH				= [];
-window.nuLANGUAGE			= [];
 window.nuSESSION			= '';
 window.nuTYPE 			= 'browse';
 window.nuDRAGLINEVSTART	= '';
@@ -482,13 +481,8 @@ function nuUnbindDragEvents(){
 }
 
 
-
 function nuTranslate(s){
 
-<<<<<<< HEAD
-debugger;
-=======
->>>>>>> d1b74b08c1ed8ed7a6e4a17037bc35e6a7feb93c
 	for(var i = 0 ; i < window.nuLANGUAGE.length ; i ++){
 		
 		if(window.nuLANGUAGE[i].trl_english == s){
@@ -498,7 +492,7 @@ debugger;
 		}
 		
 	}
-
+	
 	return s;
 	
 }

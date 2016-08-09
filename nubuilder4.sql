@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.2.7.1
+-- version 3.3.9.1
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 08, 2016 at 06:16 AM
--- Server version: 5.6.20-log
--- PHP Version: 5.4.31
+-- Generation Time: Aug 09, 2016 at 01:40 AM
+-- Server version: 5.5.9
+-- PHP Version: 5.3.5
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -30,7 +29,8 @@ CREATE TABLE IF NOT EXISTS `business` (
   `business_id` varchar(25) NOT NULL,
   `bus_code` varchar(300) NOT NULL,
   `bus_description` varchar(300) NOT NULL,
-  `bus_check` varchar(1) NOT NULL
+  `bus_check` varchar(1) NOT NULL,
+  PRIMARY KEY (`business_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -65,7 +65,8 @@ CREATE TABLE IF NOT EXISTS `children` (
   `children_id` varchar(25) NOT NULL,
   `chi_name` varchar(300) NOT NULL,
   `chi_dob` date NOT NULL,
-  `chi_employee_id` varchar(300) NOT NULL
+  `chi_employee_id` varchar(300) NOT NULL,
+  PRIMARY KEY (`children_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -73,16 +74,16 @@ CREATE TABLE IF NOT EXISTS `children` (
 --
 
 INSERT INTO `children` (`children_id`, `chi_name`, `chi_dob`, `chi_employee_id`) VALUES
-('54daabdd34ea19a', 'Jimmy', 0x303030302d30302d3030, '5678d416056e635'),
-('54daabdd34ea19b', 'Jane', 0x303030302d30302d3030, '5678d416056e635'),
-('54daabdd34ea19c', 'Zoe', 0x303030302d30302d3030, '5678d416056e635'),
-('54daabdd34ea19d', 'Alison', 0x303030302d30302d3030, '5678d416056e635'),
-('54daabdd34ea19e', 'Ben', 0x303030302d30302d3030, '5678d41605e4dda'),
-('54daabdd34ea19f', 'Dave', 0x303030302d30302d3030, '5678d41605e4dda'),
-('54daabdd34ea191', 'Jane', 0x303030302d30302d3030, '5678d416056e635'),
-('54daabdd34ea193', 'Glen', 0x303030302d30302d3030, '5678d416056e635'),
-('54daabdd34ea194', 'Bob', 0x303030302d30302d3030, '5678d416056e635'),
-('54daabdd34ea192', 'Dan', 0x303030302d30302d3030, '5678d416056e635');
+('54daabdd34ea19a', 'Jimmy', '0000-00-00', '5678d416056e635'),
+('54daabdd34ea19b', 'Jane', '0000-00-00', '5678d416056e635'),
+('54daabdd34ea19c', 'Zoe', '0000-00-00', '5678d416056e635'),
+('54daabdd34ea19d', 'Alison', '0000-00-00', '5678d416056e635'),
+('54daabdd34ea19e', 'Ben', '0000-00-00', '5678d41605e4dda'),
+('54daabdd34ea19f', 'Dave', '0000-00-00', '5678d41605e4dda'),
+('54daabdd34ea191', 'Jane', '0000-00-00', '5678d416056e635'),
+('54daabdd34ea193', 'Glen', '0000-00-00', '5678d416056e635'),
+('54daabdd34ea194', 'Bob', '0000-00-00', '5678d416056e635'),
+('54daabdd34ea192', 'Dan', '0000-00-00', '5678d416056e635');
 
 -- --------------------------------------------------------
 
@@ -93,7 +94,8 @@ INSERT INTO `children` (`children_id`, `chi_name`, `chi_dob`, `chi_employee_id`)
 CREATE TABLE IF NOT EXISTS `color` (
   `color_id` varchar(25) NOT NULL,
   `col_code` varchar(300) NOT NULL,
-  `col_description` varchar(300) NOT NULL
+  `col_description` varchar(300) NOT NULL,
+  PRIMARY KEY (`color_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -126,7 +128,8 @@ CREATE TABLE IF NOT EXISTS `company` (
   `com_sex` varchar(1) NOT NULL,
   `com_color_id` varchar(250) NOT NULL,
   `com_age` int(11) NOT NULL,
-  `com_notes` text NOT NULL
+  `com_notes` text NOT NULL,
+  PRIMARY KEY (`company_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -134,13 +137,13 @@ CREATE TABLE IF NOT EXISTS `company` (
 --
 
 INSERT INTO `company` (`company_id`, `com_code`, `com_name`, `com_business_id`, `com_company_id`, `com_address`, `com_suburb`, `com_phone`, `com_map_coordinates`, `com_sex`, `com_color_id`, `com_age`, `com_notes`) VALUES
-('5678d262e048faa', '0007', 'Terry White', '568a00c77f8f709', '', '5 Trent Grv', 0x323031362d30372d3032, '21-May-2014', '11 44', 'f', '568ef920846a089#nuSep#568ef59c1bd769c#nuSep#568ef931d196b3e', 50, 'hello worldsssstfffxv'),
-('5729572e6331281', '', 'Mrs Compr66r36456', '568a00e25b8d271', '', '43 Allen St', 0x323031362d30372d3031, '07-May-2016', '', '', '568ef59c1bd769c#nuSep#568ef931d196b3e', 0, '13132'),
-('57295aa5660f48b', '', 'Mrs Comuh', '568a00e25b8d271', '', '43 Allen Stkh', 0x323031362d30372d3033, '16-Jun-2016', '', '', '568ef59c1bd769c', 35, '13132'),
-('57295c4c33cddd6', '', 'PCP200011', '568a00e25b8d271', '', '108 KWStftgh', 0x323031362d30372d3034, '18-May-2016', '', '', '568ef920846a089#nuSep#568ef59c1bd769c#nuSep#568ef931d196b3e#nuSep#568ef5a6968322b', 0, 'blah'),
-('57295ed9e996db0', '', 'OPSM111', '568a00c77f8f709', '', 'yyyyy', 0x323031362d30372d3036, '20-May-2016', '', '', '568ef920846a089#nuSep#568ef59c1bd769c', 12, 'oooo12'),
-('5716c7137efb0c5', '', 'OPSM1111', '568a00c77f8f709', '', '43 Allen St', 0x323031362d30372d3036, '0423345544', '', 'm', '568ef920846a089#nuSep#568ef59c1bd769c#nuSep#568ef931d196b3e', 35, 'hh'),
-('57a17047de6fa3a', '', 'Delii', '568a00d504d264c', '', '', 0x303030302d30302d3030, '', '', '', '568ef59c1bd769c#nuSep#568ef931d196b3e#nuSep#568ef5a6968322b', 35, '');
+('5678d262e048faa', '0007', 'Terry White', '568a00c77f8f709', '', '5 Trent Grv', '2016-07-02', '21-May-2014', '11 44', 'f', '568ef920846a089#nuSep#568ef59c1bd769c#nuSep#568ef931d196b3e', 50, 'hello worldsssstfffxv'),
+('5729572e6331281', '', 'Mrs Compr66r36456', '568a00e25b8d271', '', '43 Allen St', '2016-07-01', '07-May-2016', '', '', '568ef59c1bd769c#nuSep#568ef931d196b3e', 0, '13132'),
+('57295aa5660f48b', '', 'Mrs Comuh', '568a00e25b8d271', '', '43 Allen Stkh', '2016-07-03', '18-Jun-2016', '', '', '568ef59c1bd769c', 35, '13132'),
+('57295c4c33cddd6', '', 'PCP200011', '568a00e25b8d271', '', '108 KWStftgh', '2016-07-04', '18-May-2016', '', '', '568ef59c1bd769c#nuSep#568ef58fe48207a', 0, 'blah'),
+('57295ed9e996db0', '', 'OPSM111', '568a00c77f8f709', '', 'yyyyy', '2016-07-06', '20-May-2016', '', '', '568ef920846a089#nuSep#568ef59c1bd769c', 12, 'oooo12'),
+('5716c7137efb0c5', '', 'OPSM1111', '568a00c77f8f709', '', '43 Allen St', '2016-07-06', '0423345544', '', 'm', '568ef920846a089#nuSep#568ef59c1bd769c#nuSep#568ef931d196b3e', 35, 'hh'),
+('57a17047de6fa3a', '', 'Delii', '568a00d504d264c', '', '', '0000-00-00', '', '', '', '568ef59c1bd769c#nuSep#568ef931d196b3e#nuSep#568ef5a6968322b', 35, '');
 
 -- --------------------------------------------------------
 
@@ -153,7 +156,8 @@ CREATE TABLE IF NOT EXISTS `employee` (
   `emp_company_id` varchar(25) NOT NULL,
   `emp_name` varchar(300) NOT NULL,
   `emp_mobile` varchar(50) NOT NULL,
-  `emp_business_id` varchar(25) NOT NULL
+  `emp_business_id` varchar(25) NOT NULL,
+  PRIMARY KEY (`employee_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -227,8 +231,14 @@ CREATE TABLE IF NOT EXISTS `test_table` (
   `tet_description` varchar(300) NOT NULL,
   `tet_sex` varchar(1) NOT NULL,
   `tet_notes` text NOT NULL,
-  `id` varchar(25) NOT NULL
+  `id` varchar(25) NOT NULL,
+  PRIMARY KEY (`test_table_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `test_table`
+--
+
 
 -- --------------------------------------------------------
 
@@ -240,7 +250,10 @@ CREATE TABLE IF NOT EXISTS `zzzzsys_access_level` (
   `zzzzsys_access_level_id` varchar(25) NOT NULL DEFAULT '',
   `sal_code` varchar(50) DEFAULT NULL,
   `sal_description` varchar(200) DEFAULT NULL,
-  `sal_zzzzsys_form_id` varchar(25) NOT NULL
+  `sal_zzzzsys_form_id` varchar(25) NOT NULL,
+  PRIMARY KEY (`zzzzsys_access_level_id`),
+  KEY `sal_name` (`sal_code`),
+  KEY `sal_zzzzsys_form_id` (`sal_zzzzsys_form_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -266,7 +279,10 @@ CREATE TABLE IF NOT EXISTS `zzzzsys_access_level_form` (
   `slf_delete_button` varchar(1) NOT NULL,
   `slf_clone_button` varchar(1) NOT NULL,
   `slf_new_button` varchar(1) NOT NULL,
-  `slf_print_button` varchar(1) NOT NULL
+  `slf_print_button` varchar(1) NOT NULL,
+  PRIMARY KEY (`zzzzsys_access_level_form_id`),
+  KEY `saf_zzzzsys_access_level_id` (`slf_zzzzsys_access_level_id`),
+  KEY `slf_zzzzsys_form_id` (`slf_zzzzsys_form_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -278,8 +294,7 @@ INSERT INTO `zzzzsys_access_level_form` (`zzzzsys_access_level_form_id`, `slf_zz
 ('5773260358ccf77', '57678e7dc00c099', '56c513162acd102', '', '', '', '', '', ''),
 ('577aea8e8847c7e', '577aea8e8844920', '56773cb405f4913', '', '', '', '', '', ''),
 ('57678f1c543a37f', '57678e7dc00c099', 'nublank', '', '', '', '', '', ''),
-('577b3eb0f202900', '577aea8e8844920', 'nuhome', '', '', '', '', '', ''),
-('57a8165e77482c9', '57678e7dc00c099', '57a7c1cb78bf3a3', '', '', '', '', '', '');
+('577b3eb0f202900', '577aea8e8844920', 'nuhome', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -290,7 +305,10 @@ INSERT INTO `zzzzsys_access_level_form` (`zzzzsys_access_level_form_id`, `slf_zz
 CREATE TABLE IF NOT EXISTS `zzzzsys_access_level_php` (
   `zzzzsys_access_level_php_id` varchar(25) NOT NULL,
   `slp_zzzzsys_access_level_id` varchar(25) DEFAULT NULL,
-  `slp_zzzzsys_php_id` varchar(25) DEFAULT NULL
+  `slp_zzzzsys_php_id` varchar(25) DEFAULT NULL,
+  PRIMARY KEY (`zzzzsys_access_level_php_id`),
+  KEY `slp_zzzzsys_access_level_id` (`slp_zzzzsys_access_level_id`),
+  KEY `slp_zzzzsys_php_id` (`slp_zzzzsys_php_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -310,7 +328,10 @@ INSERT INTO `zzzzsys_access_level_php` (`zzzzsys_access_level_php_id`, `slp_zzzz
 CREATE TABLE IF NOT EXISTS `zzzzsys_access_level_report` (
   `zzzzsys_access_level_report_id` varchar(25) NOT NULL,
   `sre_zzzzsys_access_level_id` varchar(25) DEFAULT NULL,
-  `sre_zzzzsys_report_id` varchar(25) DEFAULT NULL
+  `sre_zzzzsys_report_id` varchar(25) DEFAULT NULL,
+  PRIMARY KEY (`zzzzsys_access_level_report_id`),
+  KEY `sre_zzzzsys_access_level_id` (`sre_zzzzsys_access_level_id`),
+  KEY `sre_zzzzsys_report_id` (`sre_zzzzsys_report_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -338,7 +359,10 @@ CREATE TABLE IF NOT EXISTS `zzzzsys_browse` (
   `sbr_format` varchar(10) DEFAULT NULL,
   `sbr_sort` varchar(512) DEFAULT NULL,
   `sbr_order` int(11) DEFAULT NULL,
-  `sbr_width` int(11) DEFAULT NULL
+  `sbr_width` int(11) DEFAULT NULL,
+  PRIMARY KEY (`zzzzsys_browse_id`),
+  KEY `sbr_zzzsys_form_id` (`sbr_zzzzsys_form_id`),
+  KEY `sbr_sort` (`sbr_sort`(255))
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -429,42 +453,16 @@ CREATE TABLE IF NOT EXISTS `zzzzsys_debug` (
   `zzzzsys_debug_id` varchar(25) NOT NULL,
   `deb_message` longtext,
   `deb_order` varchar(25) NOT NULL,
-  `deb_added` datetime NOT NULL
+  `deb_added` datetime NOT NULL,
+  PRIMARY KEY (`zzzzsys_debug_id`),
+  KEY `deb_added` (`deb_added`),
+  KEY `deb_order` (`deb_order`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `zzzzsys_debug`
 --
 
-INSERT INTO `zzzzsys_debug` (`zzzzsys_debug_id`, `deb_message`, `deb_order`, `deb_added`) VALUES
-('57a81fc808d63e2', '========Array\n(\n    [0] => stdClass Object\n        (\n            [zzzzsys_translate_id] => 57a7e9543d0c2b2\n            [trl_language] => japanese\n            [trl_english] => Eddy\n            [trl_translation] => Edward\n        )\n\n    [1] => stdClass Object\n        (\n            [zzzzsys_translate_id] => 57a8160e1295b8f\n            [trl_language] => japanese\n            [trl_english] => English\n            [trl_translation] => Confused?\n        )\n\n    [2] => stdClass Object\n        (\n            [zzzzsys_translate_id] => 1\n            [trl_language] => japanese\n            [trl_english] => hi\n            [trl_translation] => Hurrow\n        )\n\n)\n', '', 0x323031362d30382d30382031353a32393a3336),
-('57a81fc906c60d0', '========Array\n(\n    [0] => stdClass Object\n        (\n            [zzzzsys_translate_id] => 57a7e9543d0c2b2\n            [trl_language] => japanese\n            [trl_english] => Eddy\n            [trl_translation] => Edward\n        )\n\n    [1] => stdClass Object\n        (\n            [zzzzsys_translate_id] => 57a8160e1295b8f\n            [trl_language] => japanese\n            [trl_english] => English\n            [trl_translation] => Confused?\n        )\n\n    [2] => stdClass Object\n        (\n            [zzzzsys_translate_id] => 1\n            [trl_language] => japanese\n            [trl_english] => hi\n            [trl_translation] => Hurrow\n        )\n\n)\n', '', 0x323031362d30382d30382031353a32393a3337),
-('57a82341dfb9b5e', '========Array\n(\n    [0] => stdClass Object\n        (\n            [zzzzsys_translate_id] => 57a7e9543d0c2b2\n            [trl_language] => japanese\n            [trl_english] => Eddy\n            [trl_translation] => Edward\n        )\n\n    [1] => stdClass Object\n        (\n            [zzzzsys_translate_id] => 57a8160e1295b8f\n            [trl_language] => japanese\n            [trl_english] => English\n            [trl_translation] => Confused?\n        )\n\n    [2] => stdClass Object\n        (\n            [zzzzsys_translate_id] => 1\n            [trl_language] => japanese\n            [trl_english] => hi\n            [trl_translation] => Hurrow\n        )\n\n)\n', '', 0x323031362d30382d30382031353a34343a3235),
-('57a823432a3262f', '========Array\n(\n    [0] => stdClass Object\n        (\n            [zzzzsys_translate_id] => 57a7e9543d0c2b2\n            [trl_language] => japanese\n            [trl_english] => Eddy\n            [trl_translation] => Edward\n        )\n\n    [1] => stdClass Object\n        (\n            [zzzzsys_translate_id] => 57a8160e1295b8f\n            [trl_language] => japanese\n            [trl_english] => English\n            [trl_translation] => Confused?\n        )\n\n    [2] => stdClass Object\n        (\n            [zzzzsys_translate_id] => 1\n            [trl_language] => japanese\n            [trl_english] => hi\n            [trl_translation] => Hurrow\n        )\n\n)\n', '', 0x323031362d30382d30382031353a34343a3237),
-('57a82344550a473', '========Array\n(\n    [0] => stdClass Object\n        (\n            [zzzzsys_translate_id] => 57a7e9543d0c2b2\n            [trl_language] => japanese\n            [trl_english] => Eddy\n            [trl_translation] => Edward\n        )\n\n    [1] => stdClass Object\n        (\n            [zzzzsys_translate_id] => 57a8160e1295b8f\n            [trl_language] => japanese\n            [trl_english] => English\n            [trl_translation] => Confused?\n        )\n\n    [2] => stdClass Object\n        (\n            [zzzzsys_translate_id] => 1\n            [trl_language] => japanese\n            [trl_english] => hi\n            [trl_translation] => Hurrow\n        )\n\n)\n', '', 0x323031362d30382d30382031353a34343a3238),
-('57a8234fe0e82e8', '========Array\n(\n    [0] => stdClass Object\n        (\n            [zzzzsys_translate_id] => 57a7e9543d0c2b2\n            [trl_language] => japanese\n            [trl_english] => Eddy\n            [trl_translation] => Edward\n        )\n\n    [1] => stdClass Object\n        (\n            [zzzzsys_translate_id] => 57a8160e1295b8f\n            [trl_language] => japanese\n            [trl_english] => English\n            [trl_translation] => Confused?\n        )\n\n    [2] => stdClass Object\n        (\n            [zzzzsys_translate_id] => 1\n            [trl_language] => japanese\n            [trl_english] => hi\n            [trl_translation] => Hurrow\n        )\n\n)\n', '', 0x323031362d30382d30382031353a34343a3339),
-('57a82364a471d2a', '========Array\n(\n    [0] => stdClass Object\n        (\n            [zzzzsys_translate_id] => 57a7e9543d0c2b2\n            [trl_language] => japanese\n            [trl_english] => Eddy\n            [trl_translation] => Edward\n        )\n\n    [1] => stdClass Object\n        (\n            [zzzzsys_translate_id] => 57a8160e1295b8f\n            [trl_language] => japanese\n            [trl_english] => English\n            [trl_translation] => Confused?\n        )\n\n    [2] => stdClass Object\n        (\n            [zzzzsys_translate_id] => 1\n            [trl_language] => japanese\n            [trl_english] => hi\n            [trl_translation] => Hurrow\n        )\n\n)\n', '', 0x323031362d30382d30382031353a34353a3030),
-('57a82365a91edee', '========Array\n(\n    [0] => stdClass Object\n        (\n            [zzzzsys_translate_id] => 57a7e9543d0c2b2\n            [trl_language] => japanese\n            [trl_english] => Eddy\n            [trl_translation] => Edward\n        )\n\n    [1] => stdClass Object\n        (\n            [zzzzsys_translate_id] => 57a8160e1295b8f\n            [trl_language] => japanese\n            [trl_english] => English\n            [trl_translation] => Confused?\n        )\n\n    [2] => stdClass Object\n        (\n            [zzzzsys_translate_id] => 1\n            [trl_language] => japanese\n            [trl_english] => hi\n            [trl_translation] => Hurrow\n        )\n\n)\n', '', 0x323031362d30382d30382031353a34353a3031),
-('57a82366c26ab5e', '========Array\n(\n    [0] => stdClass Object\n        (\n            [zzzzsys_translate_id] => 57a7e9543d0c2b2\n            [trl_language] => japanese\n            [trl_english] => Eddy\n            [trl_translation] => Edward\n        )\n\n    [1] => stdClass Object\n        (\n            [zzzzsys_translate_id] => 57a8160e1295b8f\n            [trl_language] => japanese\n            [trl_english] => English\n            [trl_translation] => Confused?\n        )\n\n    [2] => stdClass Object\n        (\n            [zzzzsys_translate_id] => 1\n            [trl_language] => japanese\n            [trl_english] => hi\n            [trl_translation] => Hurrow\n        )\n\n)\n', '', 0x323031362d30382d30382031353a34353a3032),
-('57a81fc72929aa3', '========Array\n(\n    [0] => stdClass Object\n        (\n            [zzzzsys_translate_id] => 57a7e9543d0c2b2\n            [trl_language] => japanese\n            [trl_english] => Eddy\n            [trl_translation] => Edward\n        )\n\n    [1] => stdClass Object\n        (\n            [zzzzsys_translate_id] => 57a8160e1295b8f\n            [trl_language] => japanese\n            [trl_english] => English\n            [trl_translation] => Confused?\n        )\n\n    [2] => stdClass Object\n        (\n            [zzzzsys_translate_id] => 1\n            [trl_language] => japanese\n            [trl_english] => hi\n            [trl_translation] => Hurrow\n        )\n\n)\n', '', 0x323031362d30382d30382031353a32393a3335),
-('57a81f350b1f922', '', '', 0x323031362d30382d30382031353a32373a3039),
-('57a81f35110e025', 'stdClass Object(    [session_id] => 57a81edf2cc62f6    [form_id] => 57a7c1cb78bf3a3    [record_id] =>     [call_type] => getform    [filter] =>     [errors] => Array        (        )    [schema] => Array        (        )    [translation] => Array        (        )    [dimensions] => Array        (            [0] => 850            [1] => 740            [2] => 317            [3] => 552            [4] => 142            [5] => 582            [6] => 25            [7] => 955        ))', '', 0x323031362d30382d30382031353a32373a3039),
-('57a81f504200c1a', 'stdClass Object\n(\n    [zzzzsys_session_id] => 57a81edf2cc62f6\n    [sss_zzzzsys_user_id] => 57a8163516fa6ae\n    [sss_timeout] => 0\n    [sss_access] => {"forms":["56c513162acd102","57466ebd5c0dcdb","57a7c1cb78bf3a3","nublank"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"],"language":"japanese"}\n)\n', '', 0x323031362d30382d30382031353a32373a3336),
-('57a81f35da1a974', '', '', 0x323031362d30382d30382031353a32373a3039),
-('57a81f35ddf0ada', 'stdClass Object\n(\n    [session_id] => 57a81edf2cc62f6\n    [form_id] => 57a7c1cb78bf3a3\n    [record_id] => 57a7e9543d0c2b2\n    [call_type] => getform\n    [filter] => \n    [errors] => Array\n        (\n        )\n\n    [schema] => Array\n        (\n        )\n\n    [translation] => Array\n        (\n        )\n\n    [dimensions] => Array\n        (\n            [0] => 850\n            [1] => 740\n            [2] => 317\n            [3] => 552\n            [4] => 142\n            [5] => 582\n            [6] => 25\n            [7] => 955\n        )\n\n)\n', '', 0x323031362d30382d30382031353a32373a3039),
-('57a81f504a32f58', 'stdClass Object\n(\n    [session_id] => 57a81edf2cc62f6\n    [form_id] => 57a7c1cb78bf3a3\n    [record_id] => \n    [call_type] => getform\n    [filter] => \n    [errors] => Array\n        (\n        )\n\n    [schema] => Array\n        (\n        )\n\n    [translation] => Array\n        (\n        )\n\n    [dimensions] => Array\n        (\n            [0] => 850\n            [1] => 740\n            [2] => 317\n            [3] => 552\n            [4] => 142\n            [5] => 582\n            [6] => 25\n            [7] => 955\n        )\n\n)\n', '', 0x323031362d30382d30382031353a32373a3336),
-('57a81f510c6b92c', 'stdClass Object(    [zzzzsys_session_id] => 57a81edf2cc62f6    [sss_zzzzsys_user_id] => 57a8163516fa6ae    [sss_timeout] => 0    [sss_access] => {"forms":["56c513162acd102","57466ebd5c0dcdb","57a7c1cb78bf3a3","nublank"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"],"language":"japanese"})', '', 0x323031362d30382d30382031353a32373a3337),
-('57a81f5110a29b2', 'stdClass Object\n(\n    [session_id] => 57a81edf2cc62f6\n    [form_id] => 57a7c1cb78bf3a3\n    [record_id] => 57a7e9543d0c2b2\n    [call_type] => getform\n    [filter] => \n    [errors] => Array\n        (\n        )\n\n    [schema] => Array\n        (\n        )\n\n    [translation] => Array\n        (\n        )\n\n    [dimensions] => Array\n        (\n            [0] => 850\n            [1] => 740\n            [2] => 317\n            [3] => 552\n            [4] => 142\n            [5] => 582\n            [6] => 25\n            [7] => 955\n        )\n\n)\n', '', 0x323031362d30382d30382031353a32373a3337),
-('57a81f702ab1326', 'stdClass Object\n(\n    [zzzzsys_session_id] => 57a81edf2cc62f6\n    [sss_zzzzsys_user_id] => 57a8163516fa6ae\n    [sss_timeout] => 0\n    [sss_access] => {"forms":["56c513162acd102","57466ebd5c0dcdb","57a7c1cb78bf3a3","nublank"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"],"language":"japanese"}\n)\n', '', 0x323031362d30382d30382031353a32383a3038),
-('57a81f702ac610c', 'stdClass Object\n(\n    [forms] => Array\n        (\n            [0] => 56c513162acd102\n            [1] => 57466ebd5c0dcdb\n            [2] => 57a7c1cb78bf3a3\n            [3] => nublank\n        )\n\n    [reports] => Array\n        (\n            [0] => 574b9845a681d27\n        )\n\n    [procedures] => Array\n        (\n            [0] => 57578be0057a49f\n        )\n\n    [language] => japanese\n)\n', '', 0x323031362d30382d30382031353a32383a3038),
-('57a81f7034081fc', 'stdClass Object\n(\n    [session_id] => 57a81edf2cc62f6\n    [form_id] => 57a7c1cb78bf3a3\n    [record_id] => \n    [call_type] => getform\n    [filter] => \n    [errors] => Array\n        (\n        )\n\n    [schema] => Array\n        (\n        )\n\n    [translation] => Array\n        (\n        )\n\n    [dimensions] => Array\n        (\n            [0] => 850\n            [1] => 740\n            [2] => 317\n            [3] => 552\n            [4] => 142\n            [5] => 582\n            [6] => 25\n            [7] => 955\n        )\n\n)\n', '', 0x323031362d30382d30382031353a32383a3038),
-('57a81f70c2272c2', 'stdClass Object\n(\n    [zzzzsys_session_id] => 57a81edf2cc62f6\n    [sss_zzzzsys_user_id] => 57a8163516fa6ae\n    [sss_timeout] => 0\n    [sss_access] => {"forms":["56c513162acd102","57466ebd5c0dcdb","57a7c1cb78bf3a3","nublank"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"],"language":"japanese"}\n)\n', '', 0x323031362d30382d30382031353a32383a3038),
-('57a81f70c23c8b3', 'stdClass Object(    [forms] => Array        (            [0] => 56c513162acd102            [1] => 57466ebd5c0dcdb            [2] => 57a7c1cb78bf3a3            [3] => nublank        )    [reports] => Array        (            [0] => 574b9845a681d27        )    [procedures] => Array        (            [0] => 57578be0057a49f        )    [language] => japanese)', '', 0x323031362d30382d30382031353a32383a3038),
-('57a81f70c51dac7', 'stdClass Object\n(\n    [session_id] => 57a81edf2cc62f6\n    [form_id] => 57a7c1cb78bf3a3\n    [record_id] => 57a7e9543d0c2b2\n    [call_type] => getform\n    [filter] => \n    [errors] => Array\n        (\n        )\n\n    [schema] => Array\n        (\n        )\n\n    [translation] => Array\n        (\n        )\n\n    [dimensions] => Array\n        (\n            [0] => 850\n            [1] => 740\n            [2] => 317\n            [3] => 552\n            [4] => 142\n            [5] => 582\n            [6] => 25\n            [7] => 955\n        )\n\n)\n', '', 0x323031362d30382d30382031353a32383a3038),
-('57a81f8d0787f14', '========Array\n(\n    [0] => stdClass Object\n        (\n            [zzzzsys_translate_id] => 57a7e9543d0c2b2\n            [trl_language] => japanese\n            [trl_english] => Eddy\n            [trl_translation] => Edward\n        )\n\n    [1] => stdClass Object\n        (\n            [zzzzsys_translate_id] => 57a8160e1295b8f\n            [trl_language] => japanese\n            [trl_english] => English\n            [trl_translation] => Confused?\n        )\n\n    [2] => stdClass Object\n        (\n            [zzzzsys_translate_id] => 1\n            [trl_language] => japanese\n            [trl_english] => hi\n            [trl_translation] => Hurrow\n        )\n\n)\n', '', 0x323031362d30382d30382031353a32383a3337),
-('57a81f8d0bc37e5', 'stdClass Object\n(\n    [session_id] => 57a81edf2cc62f6\n    [form_id] => 57a7c1cb78bf3a3\n    [record_id] => \n    [call_type] => getform\n    [filter] => \n    [errors] => Array\n        (\n        )\n\n    [schema] => Array\n        (\n        )\n\n    [translation] => Array\n        (\n            [0] => stdClass Object\n                (\n                    [zzzzsys_translate_id] => 57a7e9543d0c2b2\n                    [trl_language] => japanese\n                    [trl_english] => Eddy\n                    [trl_translation] => Edward\n                )\n\n            [1] => stdClass Object\n                (\n                    [zzzzsys_translate_id] => 57a8160e1295b8f\n                    [trl_language] => japanese\n                    [trl_english] => English\n                    [trl_translation] => Confused?\n                )\n\n            [2] => stdClass Object\n                (\n                    [zzzzsys_translate_id] => 1\n                    [trl_language] => japanese\n                    [trl_english] => hi\n                    [trl_translation] => Hurrow\n                )\n\n        )\n\n    [dimensions] => Array\n        (\n            [0] => 850\n            [1] => 740\n            [2] => 317\n            [3] => 552\n            [4] => 142\n            [5] => 582\n            [6] => 25\n            [7] => 955\n        )\n\n)\n', '', 0x323031362d30382d30382031353a32383a3337),
-('57a81f8e2401dfc', '========Array\n(\n    [0] => stdClass Object\n        (\n            [zzzzsys_translate_id] => 57a7e9543d0c2b2\n            [trl_language] => japanese\n            [trl_english] => Eddy\n            [trl_translation] => Edward\n        )\n\n    [1] => stdClass Object\n        (\n            [zzzzsys_translate_id] => 57a8160e1295b8f\n            [trl_language] => japanese\n            [trl_english] => English\n            [trl_translation] => Confused?\n        )\n\n    [2] => stdClass Object\n        (\n            [zzzzsys_translate_id] => 1\n            [trl_language] => japanese\n            [trl_english] => hi\n            [trl_translation] => Hurrow\n        )\n\n)\n', '', 0x323031362d30382d30382031353a32383a3338),
-('57a81f8e27d406c', 'stdClass Object\n(\n    [session_id] => 57a81edf2cc62f6\n    [form_id] => 57a7c1cb78bf3a3\n    [record_id] => 57a7e9543d0c2b2\n    [call_type] => getform\n    [filter] => \n    [errors] => Array\n        (\n        )\n\n    [schema] => Array\n        (\n        )\n\n    [translation] => Array\n        (\n            [0] => stdClass Object\n                (\n                    [zzzzsys_translate_id] => 57a7e9543d0c2b2\n                    [trl_language] => japanese\n                    [trl_english] => Eddy\n                    [trl_translation] => Edward\n                )\n\n            [1] => stdClass Object\n                (\n                    [zzzzsys_translate_id] => 57a8160e1295b8f\n                    [trl_language] => japanese\n                    [trl_english] => English\n                    [trl_translation] => Confused?\n                )\n\n            [2] => stdClass Object\n                (\n                    [zzzzsys_translate_id] => 1\n                    [trl_language] => japanese\n                    [trl_english] => hi\n                    [trl_translation] => Hurrow\n                )\n\n        )\n\n    [dimensions] => Array\n        (\n            [0] => 850\n            [1] => 740\n            [2] => 317\n            [3] => 552\n            [4] => 142\n            [5] => 582\n            [6] => 25\n            [7] => 955\n        )\n\n)\n', '', 0x323031362d30382d30382031353a32383a3338);
 
 -- --------------------------------------------------------
 
@@ -476,7 +474,9 @@ CREATE TABLE IF NOT EXISTS `zzzzsys_event` (
   `zzzzsys_event_id` varchar(25) NOT NULL,
   `sev_zzzzsys_object_id` varchar(25) NOT NULL,
   `sev_event` varchar(100) NOT NULL,
-  `sev_javascript` varchar(3000) NOT NULL
+  `sev_javascript` varchar(3000) NOT NULL,
+  PRIMARY KEY (`zzzzsys_event_id`),
+  KEY `sev_zzzsys_object_id` (`sev_zzzzsys_object_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -511,8 +511,15 @@ CREATE TABLE IF NOT EXISTS `zzzzsys_file` (
   `sfi_size` varchar(10) NOT NULL,
   `sfi_name` varchar(255) NOT NULL,
   `sfi_group` varchar(200) DEFAULT NULL,
-  `sfi_blob` longblob
+  `sfi_blob` longblob,
+  PRIMARY KEY (`zzzzsys_file_id`),
+  KEY `sfi_code` (`sfi_code`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `zzzzsys_file`
+--
+
 
 -- --------------------------------------------------------
 
@@ -561,7 +568,8 @@ CREATE TABLE IF NOT EXISTS `zzzzsys_form` (
   `sfo_report_criteria_zzzzsys_form_id` varchar(25) NOT NULL,
   `sfo_report_layout` longtext NOT NULL,
   `sfo_library_php` longtext NOT NULL,
-  `sfo_javascript` longtext NOT NULL
+  `sfo_javascript` longtext NOT NULL,
+  PRIMARY KEY (`zzzzsys_form_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -611,7 +619,8 @@ INSERT INTO `zzzzsys_form` (`zzzzsys_form_id`, `sfo_type`, `sfo_code`, `sfo_desc
 CREATE TABLE IF NOT EXISTS `zzzzsys_library` (
   `zzzzsys_library_id` varchar(25) NOT NULL,
   `sli_zzzzsys_form_id` varchar(25) NOT NULL,
-  `sli_library_zzzzsys_form_id` varchar(25) NOT NULL
+  `sli_library_zzzzsys_form_id` varchar(25) NOT NULL,
+  PRIMARY KEY (`zzzzsys_library_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -631,7 +640,9 @@ CREATE TABLE IF NOT EXISTS `zzzzsys_lookup` (
   `zzzzsys_lookup_id` varchar(25) NOT NULL DEFAULT '',
   `slo_zzzzsys_object_id` varchar(25) DEFAULT NULL,
   `zzzzsys_slo_object_name` varchar(300) DEFAULT NULL,
-  `zzzzsys_slo_field_function_name` varchar(2000) NOT NULL
+  `zzzzsys_slo_field_function_name` varchar(2000) NOT NULL,
+  PRIMARY KEY (`zzzzsys_lookup_id`),
+  KEY `slo_zzzzsys_object_id` (`slo_zzzzsys_object_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -697,7 +708,8 @@ CREATE TABLE IF NOT EXISTS `zzzzsys_object` (
   `sob_subform_type` varchar(300) NOT NULL,
   `sob_input_format` varchar(300) NOT NULL,
   `sob_input_type` varchar(300) NOT NULL,
-  `sob_html_code` text NOT NULL
+  `sob_html_code` text NOT NULL,
+  PRIMARY KEY (`zzzzsys_object_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -904,7 +916,11 @@ CREATE TABLE IF NOT EXISTS `zzzzsys_php` (
   `sph_group` varchar(100) NOT NULL,
   `sph_php` longtext NOT NULL,
   `sph_zzzzsys_php_id` varchar(25) NOT NULL,
-  `sph_zzzzsys_form_id` varchar(25) NOT NULL
+  `sph_zzzzsys_form_id` varchar(25) NOT NULL,
+  PRIMARY KEY (`zzzzsys_php_id`),
+  KEY `sph_code` (`sph_code`),
+  KEY `sph_zzzzsys_php_id` (`sph_zzzzsys_php_id`),
+  KEY `sph_zzzzsys_form_id` (`sph_zzzzsys_form_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -927,7 +943,9 @@ CREATE TABLE IF NOT EXISTS `zzzzsys_report` (
   `sre_group` varchar(100) NOT NULL,
   `sre_zzzzsys_php_id` varchar(25) NOT NULL,
   `sre_zzzzsys_form_id` varchar(25) NOT NULL,
-  `sre_layout` longtext NOT NULL
+  `sre_layout` longtext NOT NULL,
+  PRIMARY KEY (`zzzzsys_report_id`),
+  KEY `sre_code` (`sre_code`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -958,39 +976,14 @@ CREATE TABLE IF NOT EXISTS `zzzzsys_session` (
   `zzzzsys_session_id` varchar(25) NOT NULL DEFAULT '',
   `sss_zzzzsys_user_id` varchar(25) DEFAULT NULL,
   `sss_timeout` bigint(20) NOT NULL,
-  `sss_access` mediumtext NOT NULL
+  `sss_access` mediumtext NOT NULL,
+  PRIMARY KEY (`zzzzsys_session_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `zzzzsys_session`
 --
 
-INSERT INTO `zzzzsys_session` (`zzzzsys_session_id`, `sss_zzzzsys_user_id`, `sss_timeout`, `sss_access`) VALUES
-('57a813e5a4cbef5', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","57466ebd5c0dcdb","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nuphp","nurunphp","nurunreport","nutab","nutimezone"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57a814ad169dcfa', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","57466ebd5c0dcdb","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nuphp","nurunphp","nurunreport","nutab","nutimezone"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57a814f935b5e8a', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","57466ebd5c0dcdb","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nuphp","nurunphp","nurunreport","nutab","nutimezone"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57a815d28fe64da', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","57466ebd5c0dcdb","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nuphp","nurunphp","nurunreport","nutab","nutimezone"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57a81621543b4ea', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","57466ebd5c0dcdb","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nuphp","nurunphp","nurunreport","nutab","nutimezone"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57a8163c031ed7c', '57a8163516fa6ae', 0, '{"forms":[],"reports":[],"procedures":[]}'),
-('57a81642e3febba', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","57466ebd5c0dcdb","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nuphp","nurunphp","nurunreport","nutab","nutimezone"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57a816734765ccb', '57a8163516fa6ae', 0, '{"forms":[],"reports":[],"procedures":[]}'),
-('57a81679ce504c9', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","57466ebd5c0dcdb","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nuphp","nurunphp","nurunreport","nutab","nutimezone"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57a816a96ae4a08', '57a8163516fa6ae', 0, '{"forms":[],"reports":[],"procedures":[]}'),
-('57a81a2e849911b', '57a8163516fa6ae', 0, '{"forms":[],"reports":[],"procedures":[]}'),
-('57a81aa717218b2', '57a8163516fa6ae', 0, '{"forms":[],"reports":[],"procedures":[]}'),
-('57a81ade30786bd', '57a8163516fa6ae', 0, '{"forms":[],"reports":[],"procedures":[]}'),
-('57a81b03e291b26', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","57466ebd5c0dcdb","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nuphp","nurunphp","nurunreport","nutab","nutimezone"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57a81b12d0e90bc', '57a8163516fa6ae', 0, '{"forms":["56c513162acd102","57466ebd5c0dcdb","57a7c1cb78bf3a3","nublank"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57a81c1d912daee', '57a8163516fa6ae', 0, '{"forms":["56c513162acd102","57466ebd5c0dcdb","57a7c1cb78bf3a3","nublank"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57a81edf2cc62f6', '57a8163516fa6ae', 0, '{"forms":["56c513162acd102","57466ebd5c0dcdb","57a7c1cb78bf3a3","nublank"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"],"language":"japanese"}'),
-('57a81fc6d643641', '57a8163516fa6ae', 0, '{"forms":["56c513162acd102","57466ebd5c0dcdb","57a7c1cb78bf3a3","nublank"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"],"language":"japanese"}'),
-('57a8233345a7494', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","57466ebd5c0dcdb","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nuphp","nurunphp","nurunreport","nutab","nutimezone"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57a823354ff92e6', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","57466ebd5c0dcdb","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nuphp","nurunphp","nurunreport","nutab","nutimezone"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57a82336e1cc3af', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","57466ebd5c0dcdb","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nuphp","nurunphp","nurunreport","nutab","nutimezone"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57a82341341ce09', '57a8163516fa6ae', 0, '{"forms":["56c513162acd102","57466ebd5c0dcdb","57a7c1cb78bf3a3","nublank"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"],"language":"japanese"}'),
-('57a8235584c6edc', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","57466ebd5c0dcdb","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nuphp","nurunphp","nurunreport","nutab","nutimezone"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57a8236460001df', '57a8163516fa6ae', 0, '{"forms":["56c513162acd102","57466ebd5c0dcdb","57a7c1cb78bf3a3","nublank"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"],"language":"japanese"}'),
-('57a82393b123157', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","57466ebd5c0dcdb","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nuphp","nurunphp","nurunreport","nutab","nutimezone"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}');
 
 -- --------------------------------------------------------
 
@@ -1014,7 +1007,8 @@ CREATE TABLE IF NOT EXISTS `zzzzsys_setup` (
   `set_fonts` text NOT NULL,
   `set_css` longtext NOT NULL,
   `set_denied` varchar(255) NOT NULL,
-  `set_splash` varchar(1) NOT NULL
+  `set_splash` varchar(1) NOT NULL,
+  PRIMARY KEY (`zzzzsys_setup_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -1034,7 +1028,8 @@ CREATE TABLE IF NOT EXISTS `zzzzsys_tab` (
   `zzzzsys_tab_id` varchar(25) NOT NULL,
   `syt_zzzzsys_form_id` varchar(25) NOT NULL,
   `syt_title` varchar(250) NOT NULL,
-  `syt_order` int(11) NOT NULL
+  `syt_order` int(11) NOT NULL,
+  PRIMARY KEY (`zzzzsys_tab_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -1112,7 +1107,8 @@ INSERT INTO `zzzzsys_tab` (`zzzzsys_tab_id`, `syt_zzzzsys_form_id`, `syt_title`,
 
 CREATE TABLE IF NOT EXISTS `zzzzsys_timezone` (
   `zzzzsys_timezone_id` varchar(25) NOT NULL,
-  `stz_timezone` mediumtext NOT NULL
+  `stz_timezone` mediumtext NOT NULL,
+  PRIMARY KEY (`zzzzsys_timezone_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -1710,7 +1706,10 @@ CREATE TABLE IF NOT EXISTS `zzzzsys_translate` (
   `zzzzsys_translate_id` varchar(25) NOT NULL,
   `trl_language` varchar(20) NOT NULL,
   `trl_english` varchar(300) NOT NULL,
-  `trl_translation` varchar(300) NOT NULL
+  `trl_translation` varchar(300) NOT NULL,
+  PRIMARY KEY (`zzzzsys_translate_id`),
+  KEY `trl_language` (`trl_language`),
+  KEY `trl_english` (`trl_english`(255))
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -1719,8 +1718,7 @@ CREATE TABLE IF NOT EXISTS `zzzzsys_translate` (
 
 INSERT INTO `zzzzsys_translate` (`zzzzsys_translate_id`, `trl_language`, `trl_english`, `trl_translation`) VALUES
 ('1', 'japanese', 'hi', 'Hurrow'),
-('57a7e9543d0c2b2', 'japanese', 'Eddy', 'Edward'),
-('57a8160e1295b8f', 'japanese', 'English', 'Confused?');
+('57a7e9543d0c2b2', 'japanese', 'Eddy', 'Edward');
 
 -- --------------------------------------------------------
 
@@ -1735,7 +1733,9 @@ CREATE TABLE IF NOT EXISTS `zzzzsys_user` (
   `sus_name` varchar(50) DEFAULT NULL,
   `sus_email` varchar(255) DEFAULT NULL,
   `sus_login_name` varchar(20) DEFAULT NULL,
-  `sus_login_password` varchar(300) DEFAULT NULL
+  `sus_login_password` varchar(300) DEFAULT NULL,
+  PRIMARY KEY (`zzzzsys_user_id`),
+  KEY `sus_zzzzsys_user_group_id` (`sus_zzzzsys_user_group_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -1750,8 +1750,7 @@ INSERT INTO `zzzzsys_user` (`zzzzsys_user_id`, `sus_zzzzsys_user_group_id`, `sus
 ('5747cb8ca8d3de3', '57466de0851d354', 'japanese', 'g', 'g', 'g', 'b2f5ff47436671b6e533d8dc3614845d'),
 ('5747cc333c476fc', '57466de0851d354', 'japanese', 'Bill12', 'Bill1', 'b', '92eb5ffee6ae2fec3ad71c777531578f'),
 ('5747ce1dd50cdc5', '57466de0851d354', '', '55', '55', '55', 'b53b3a3d6ab90ce0268229151c9bde11'),
-('5762478822092cd', '57466de0851d354', '', 'steven', 'steven@nubuilder.com', 's', '03c7c0ace395d80182db07ae2c30f034'),
-('57a8163516fa6ae', '57466725f19a423', 'japanese', 'test', 'test', 'test', '098f6bcd4621d373cade4e832627b4f6');
+('5762478822092cd', '57466de0851d354', '', 'steven', 'steven@nubuilder.com', 's', '03c7c0ace395d80182db07ae2c30f034');
 
 -- --------------------------------------------------------
 
@@ -1763,7 +1762,9 @@ CREATE TABLE IF NOT EXISTS `zzzzsys_user_group` (
   `zzzzsys_user_group_id` varchar(25) NOT NULL DEFAULT '',
   `sug_code` varchar(50) DEFAULT NULL,
   `sug_description` varchar(255) DEFAULT NULL,
-  `sug_zzzzsys_form_id` varchar(25) DEFAULT NULL
+  `sug_zzzzsys_form_id` varchar(25) DEFAULT NULL,
+  PRIMARY KEY (`zzzzsys_user_group_id`),
+  KEY `sug_zzzzsys_access_level_id` (`sug_zzzzsys_form_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -1783,7 +1784,10 @@ INSERT INTO `zzzzsys_user_group` (`zzzzsys_user_group_id`, `sug_code`, `sug_desc
 CREATE TABLE IF NOT EXISTS `zzzzsys_user_group_access_level` (
   `zzzzsys_user_group_access_level_id` varchar(25) NOT NULL,
   `gal_zzzzsys_user_group_id` varchar(25) NOT NULL,
-  `gal_zzzzsys_access_level_id` varchar(25) NOT NULL
+  `gal_zzzzsys_access_level_id` varchar(25) NOT NULL,
+  PRIMARY KEY (`zzzzsys_user_group_access_level_id`),
+  KEY `zzzzsys_user_group_id` (`gal_zzzzsys_user_group_id`),
+  KEY `gal_zzzzsys_access_level_id` (`gal_zzzzsys_access_level_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -1795,8 +1799,7 @@ INSERT INTO `zzzzsys_user_group_access_level` (`zzzzsys_user_group_access_level_
 ('577b0c0fe1c6bb5', '', '577aea8e8844920'),
 ('577b0b676a16826', '', '57678e7dc00c099'),
 ('577b090acb48614', '', '577aea8e8844920'),
-('577b08fdf05e48d', '', '577aea8e8844920'),
-('57a81b0bcd4a4d0', '57466725f19a423', '57678e7dc00c099');
+('577b08fdf05e48d', '', '577aea8e8844920');
 
 -- --------------------------------------------------------
 
@@ -1815,179 +1818,3 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 DROP TABLE IF EXISTS `zzzzsys_run_list`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `zzzzsys_run_list` AS select `zzzzsys_form`.`zzzzsys_form_id` AS `id`,'Form' AS `run`,`zzzzsys_form`.`sfo_code` AS `code`,`zzzzsys_form`.`sfo_description` AS `description` from `zzzzsys_form` union select `zzzzsys_report`.`zzzzsys_report_id` AS `id`,'Report' AS `run`,`zzzzsys_report`.`sre_code` AS `code`,`zzzzsys_report`.`sre_description` AS `description` from `zzzzsys_report` union select `zzzzsys_php`.`zzzzsys_php_id` AS `id`,'Procedure' AS `run`,`zzzzsys_php`.`sph_code` AS `code`,`zzzzsys_php`.`sph_description` AS `description` from `zzzzsys_php` order by `code`;
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `business`
---
-ALTER TABLE `business`
- ADD PRIMARY KEY (`business_id`);
-
---
--- Indexes for table `children`
---
-ALTER TABLE `children`
- ADD PRIMARY KEY (`children_id`);
-
---
--- Indexes for table `color`
---
-ALTER TABLE `color`
- ADD PRIMARY KEY (`color_id`);
-
---
--- Indexes for table `company`
---
-ALTER TABLE `company`
- ADD PRIMARY KEY (`company_id`);
-
---
--- Indexes for table `employee`
---
-ALTER TABLE `employee`
- ADD PRIMARY KEY (`employee_id`);
-
---
--- Indexes for table `test_table`
---
-ALTER TABLE `test_table`
- ADD PRIMARY KEY (`test_table_id`);
-
---
--- Indexes for table `zzzzsys_access_level`
---
-ALTER TABLE `zzzzsys_access_level`
- ADD PRIMARY KEY (`zzzzsys_access_level_id`), ADD KEY `sal_name` (`sal_code`), ADD KEY `sal_zzzzsys_form_id` (`sal_zzzzsys_form_id`);
-
---
--- Indexes for table `zzzzsys_access_level_form`
---
-ALTER TABLE `zzzzsys_access_level_form`
- ADD PRIMARY KEY (`zzzzsys_access_level_form_id`), ADD KEY `saf_zzzzsys_access_level_id` (`slf_zzzzsys_access_level_id`), ADD KEY `slf_zzzzsys_form_id` (`slf_zzzzsys_form_id`);
-
---
--- Indexes for table `zzzzsys_access_level_php`
---
-ALTER TABLE `zzzzsys_access_level_php`
- ADD PRIMARY KEY (`zzzzsys_access_level_php_id`), ADD KEY `slp_zzzzsys_access_level_id` (`slp_zzzzsys_access_level_id`), ADD KEY `slp_zzzzsys_php_id` (`slp_zzzzsys_php_id`);
-
---
--- Indexes for table `zzzzsys_access_level_report`
---
-ALTER TABLE `zzzzsys_access_level_report`
- ADD PRIMARY KEY (`zzzzsys_access_level_report_id`), ADD KEY `sre_zzzzsys_access_level_id` (`sre_zzzzsys_access_level_id`), ADD KEY `sre_zzzzsys_report_id` (`sre_zzzzsys_report_id`);
-
---
--- Indexes for table `zzzzsys_browse`
---
-ALTER TABLE `zzzzsys_browse`
- ADD PRIMARY KEY (`zzzzsys_browse_id`), ADD KEY `sbr_zzzsys_form_id` (`sbr_zzzzsys_form_id`), ADD KEY `sbr_sort` (`sbr_sort`(255));
-
---
--- Indexes for table `zzzzsys_debug`
---
-ALTER TABLE `zzzzsys_debug`
- ADD PRIMARY KEY (`zzzzsys_debug_id`), ADD KEY `deb_added` (`deb_added`), ADD KEY `deb_order` (`deb_order`);
-
---
--- Indexes for table `zzzzsys_event`
---
-ALTER TABLE `zzzzsys_event`
- ADD PRIMARY KEY (`zzzzsys_event_id`), ADD KEY `sev_zzzsys_object_id` (`sev_zzzzsys_object_id`);
-
---
--- Indexes for table `zzzzsys_file`
---
-ALTER TABLE `zzzzsys_file`
- ADD PRIMARY KEY (`zzzzsys_file_id`), ADD KEY `sfi_code` (`sfi_code`);
-
---
--- Indexes for table `zzzzsys_form`
---
-ALTER TABLE `zzzzsys_form`
- ADD PRIMARY KEY (`zzzzsys_form_id`);
-
---
--- Indexes for table `zzzzsys_library`
---
-ALTER TABLE `zzzzsys_library`
- ADD PRIMARY KEY (`zzzzsys_library_id`);
-
---
--- Indexes for table `zzzzsys_lookup`
---
-ALTER TABLE `zzzzsys_lookup`
- ADD PRIMARY KEY (`zzzzsys_lookup_id`), ADD KEY `slo_zzzzsys_object_id` (`slo_zzzzsys_object_id`);
-
---
--- Indexes for table `zzzzsys_object`
---
-ALTER TABLE `zzzzsys_object`
- ADD PRIMARY KEY (`zzzzsys_object_id`);
-
---
--- Indexes for table `zzzzsys_php`
---
-ALTER TABLE `zzzzsys_php`
- ADD PRIMARY KEY (`zzzzsys_php_id`), ADD KEY `sph_code` (`sph_code`), ADD KEY `sph_zzzzsys_php_id` (`sph_zzzzsys_php_id`), ADD KEY `sph_zzzzsys_form_id` (`sph_zzzzsys_form_id`);
-
---
--- Indexes for table `zzzzsys_report`
---
-ALTER TABLE `zzzzsys_report`
- ADD PRIMARY KEY (`zzzzsys_report_id`), ADD KEY `sre_code` (`sre_code`);
-
---
--- Indexes for table `zzzzsys_session`
---
-ALTER TABLE `zzzzsys_session`
- ADD PRIMARY KEY (`zzzzsys_session_id`);
-
---
--- Indexes for table `zzzzsys_setup`
---
-ALTER TABLE `zzzzsys_setup`
- ADD PRIMARY KEY (`zzzzsys_setup_id`);
-
---
--- Indexes for table `zzzzsys_tab`
---
-ALTER TABLE `zzzzsys_tab`
- ADD PRIMARY KEY (`zzzzsys_tab_id`);
-
---
--- Indexes for table `zzzzsys_timezone`
---
-ALTER TABLE `zzzzsys_timezone`
- ADD PRIMARY KEY (`zzzzsys_timezone_id`);
-
---
--- Indexes for table `zzzzsys_translate`
---
-ALTER TABLE `zzzzsys_translate`
- ADD PRIMARY KEY (`zzzzsys_translate_id`), ADD KEY `trl_language` (`trl_language`), ADD KEY `trl_english` (`trl_english`(255));
-
---
--- Indexes for table `zzzzsys_user`
---
-ALTER TABLE `zzzzsys_user`
- ADD PRIMARY KEY (`zzzzsys_user_id`), ADD KEY `sus_zzzzsys_user_group_id` (`sus_zzzzsys_user_group_id`);
-
---
--- Indexes for table `zzzzsys_user_group`
---
-ALTER TABLE `zzzzsys_user_group`
- ADD PRIMARY KEY (`zzzzsys_user_group_id`), ADD KEY `sug_zzzzsys_access_level_id` (`sug_zzzzsys_form_id`);
-
---
--- Indexes for table `zzzzsys_user_group_access_level`
---
-ALTER TABLE `zzzzsys_user_group_access_level`
- ADD PRIMARY KEY (`zzzzsys_user_group_access_level_id`), ADD KEY `zzzzsys_user_group_id` (`gal_zzzzsys_user_group_id`), ADD KEY `gal_zzzzsys_access_level_id` (`gal_zzzzsys_access_level_id`);
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

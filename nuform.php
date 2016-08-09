@@ -771,16 +771,17 @@ function nuBrowseWhereClause($searchFields, $searchString, $returnArray = false)
 
 function nuCheckSession(){
 
+	$c->record_id				= '-1';
+	$c->form_id				= $_POST['nuSTATE']['form_id'];
 	$u						= $_POST['nuSTATE']['username'];
 	$p						= $_POST['nuSTATE']['password'];
 	$s						= $_POST['nuSTATE']['session_id'];
+	$ct						= $_POST['nuSTATE']['call_type'];
 	$_POST['nuLogAgain']		= 0;
 	$_POST['nuIsGlobeadmin']	= 0;
 	$c						= new stdClass;
 	$c->session_id			= $s;
-	$c->form_id				= $_POST['nuSTATE']['form_id'];
-	$c->record_id			= '-1';
-	$c->call_type			= $_POST['nuSTATE']['call_type'];
+	$c->call_type				= $ct;
 	$c->filter				= $_POST['nuFilter'];
 	$c->errors				= array();
 	$c->schema				= array();
@@ -797,8 +798,7 @@ function nuCheckSession(){
 				$c->form_id				= 'nuhome';
 				$c->record_id				= '-1';
 				$c->schema				= nuSchema();
-				$c->translation			= nuDictionary('');
-nudebug('a : ' . $c->translation);
+				$c->translation			= nuTranslate('');
 				$access					= new StdClass;
 				$access->forms			= nuAccessForms('');
 				$access->reports			= nuAccessReports('');
@@ -828,8 +828,7 @@ nudebug('a : ' . $c->translation);
 				$c->form_id			= 'nuhome';
 				$c->record_id			= '-1';
 				$c->schema			= nuSchema();	
-				$c->translation		= nuDictionary($r->sus_language);
-nudebug('b : ' . print_r($c->translation, 1));
+				$c->translation		= nuTranslate($r->sus_language);
 				$access				= new StdClass;
 				$access->forms		= nuAccessForms($r->sus_zzzzsys_user_group_id);
 				$access->reports	= nuAccessReports($r->sus_zzzzsys_user_group_id);
@@ -860,7 +859,7 @@ nudebug('b : ' . print_r($c->translation, 1));
 			
 			$r = db_fetch_object($t);
 			$nuJ = json_decode($r->sss_access);
-			$c->translation		= nuDictionary($nuJ->language);
+			$c->translation		= nuTranslate($nuJ->language);
 			
 		}else{
 			

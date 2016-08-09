@@ -886,7 +886,7 @@ function nuSchema(){
 }
 
 
-function nuDictionary($l){
+function nuTranslate($l){
 
 	$t	= nuRunQuery("SELECT * FROM zzzzsys_translate WHERE trl_language = '$l' ORDER BY trl_english");
 	$S	= array();
@@ -898,7 +898,7 @@ function nuDictionary($l){
 		$S[]		= $r;
 
 	}
-
+nudebug(print_r($S,1));
 	return $S;
 
 }
