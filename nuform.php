@@ -811,7 +811,7 @@ function nuCheckSession(){
 				
 				nuErrorMessage('Invalid Login..');
 				$_POST['nuLogAgain']		= 1;
-				
+				return;
 			}
 			
 			nuSetAccessibility();
@@ -841,7 +841,7 @@ function nuCheckSession(){
 				
 				nuErrorMessage('Invalid Login..');
 				$_POST['nuLogAgain']	= 1;
-				
+				return;
 			}
 			
 			nuSetAccessibility($c->session_id);
