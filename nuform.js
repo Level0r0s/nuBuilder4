@@ -1386,12 +1386,12 @@ function nuBrowseTable(){
 		}
 		
 	}
-	
-	var la	= '<span id="nuLast" onclick="nuGetPage(' + (bc.page_number) + ')" class="nuBrowsePage">&#9668;</span>';
+
+	var la	= '<span id="nuLast" onclick="nuGetPage(' + (bc.page_number) + ', \'' + window.nuTYPE + '\')" class="nuBrowsePage">&#9668;</span>';
 	var pg	= '&nbsp;Page&nbsp;';
-	var cu	= '<input id="browsePage" style="text-align:center;margin:3px 0px 0px 0px;width:40px" onchange="nuGetPage(this.value)" value="' + (bc.page_number + 1) + '" class="browsePage"/>';
+	var cu	= '<input id="browsePage" style="text-align:center;margin:3px 0px 0px 0px;width:40px" onchange="nuGetPage(this.value, \'' + window.nuTYPE + '\')" value="' + (bc.page_number + 1) + '" class="browsePage"/>';
 	var of	= '&nbsp;/&nbsp;' + bc.pages + '&nbsp;';
-	var ne	= '<span id="nuNext" onclick="nuGetPage(' + (bc.page_number + 2) + ')" class="nuBrowsePage">&#9658;</span>';
+	var ne	= '<span id="nuNext" onclick="nuGetPage(' + (bc.page_number + 2) + ',\'' + window.nuTYPE + '\')" class="nuBrowsePage">&#9658;</span>';
 	
 	var id	= 'nuBrowseFooter';
 	var div  = document.createElement('div');
@@ -1444,11 +1444,15 @@ function nuSearchPressed(e){
     
 }
 
-function nuSearchAction(){
+function nuSearchAction(t = ''){
 
 	window.nuBC[window.nuBC.length-1].search	= String($('#nuSearchField').val()).replaceAll("'","&#39;", true);
 	window.nuBC[window.nuBC.length-1].filter	= String($('#nuFilter').val()).replaceAll("'","&#39;", true);
-	nuGetBreadcrumb(nuBC.length - 1);
+	if(t != '') {
+		nuGetBreadcrumb(nuBC.length - 1);
+	} else {
+		nuGetBreadcrumb(nuBC.length - 1, t);
+	}
 	
 }
 
@@ -1490,7 +1494,7 @@ function nuSortBrowse(c){
 	
 }
 
-function nuGetPage(p){
+function nuGetPage(p, t){
 
 	var P = parseInt('00' + p);
 	var B = nuBC[nuBC.length - 1];
@@ -1500,7 +1504,7 @@ function nuGetPage(p){
 	
 	nuBC[nuBC.length - 1]. page_number = P - 1;
 	
-	nuSearchAction();
+	nuSearchAction(t);
 	
 	
 }
