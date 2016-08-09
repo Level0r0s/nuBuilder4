@@ -235,10 +235,12 @@ function nuButtonList($f){
 	$A = array();
 	
 	if($f->record_id == ''){
-		
-		$b = nuGetButton('add', $a);	if(count($b) == 2){$A[] = $b;}
-		$b = nuGetButton('print', $a);	if(count($b) == 2){$A[] = $b;}
-		
+		if($f->id != 'nurunreport' && $f->id != 'nurunphp'){
+			
+			$b = nuGetButton('add', $a);	if(count($b) == 2){$A[] = $b;}
+			$b = nuGetButton('print', $a);	if(count($b) == 2){$A[] = $b;}
+			
+		}
 	}else{
 		
 		$b = nuGetButton('save', $a);	if(count($b) == 2){$A[] = $b;}
