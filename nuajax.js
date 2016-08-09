@@ -2,7 +2,7 @@
 
 function nuGetForm(f, r, filter, n){
 
-	if(window.nuEDIT == 1) {
+	if(window.nuEDITED) {
 		if(!confirm("Leave This Form Without Saving?")) {
 			return
 		}
@@ -14,7 +14,7 @@ function nuGetForm(f, r, filter, n){
 		window.nuOPENER.push(new nuOpener(f, r, filter));
 		window.open(window.location.href);
 
-	}else{
+	} else {
 			
 		var u 	= '';
 		var p 	= '';
