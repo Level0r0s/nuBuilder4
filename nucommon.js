@@ -65,7 +65,7 @@ function nuFormState(){
 
 function nuGetBreadcrumb(b, t = ''){
 
-	if(t != '') {
+	if(t == '') {
 		window.nuTYPE = "browse";
 	}
 	

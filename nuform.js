@@ -1448,7 +1448,7 @@ function nuSearchAction(t = ''){
 
 	window.nuBC[window.nuBC.length-1].search	= String($('#nuSearchField').val()).replaceAll("'","&#39;", true);
 	window.nuBC[window.nuBC.length-1].filter	= String($('#nuFilter').val()).replaceAll("'","&#39;", true);
-	if(t != '') {
+	if(t == '') {
 		nuGetBreadcrumb(nuBC.length - 1);
 	} else {
 		nuGetBreadcrumb(nuBC.length - 1, t);
