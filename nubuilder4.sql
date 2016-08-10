@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 09, 2016 at 01:40 AM
+-- Generation Time: Aug 10, 2016 at 01:50 AM
 -- Server version: 5.5.9
 -- PHP Version: 5.3.5
 
@@ -140,10 +140,8 @@ INSERT INTO `company` (`company_id`, `com_code`, `com_name`, `com_business_id`, 
 ('5678d262e048faa', '0007', 'Terry White', '568a00c77f8f709', '', '5 Trent Grv', '2016-07-02', '21-May-2014', '11 44', 'f', '568ef920846a089#nuSep#568ef59c1bd769c#nuSep#568ef931d196b3e', 50, 'hello worldsssstfffxv'),
 ('5729572e6331281', '', 'Mrs Compr66r36456', '568a00e25b8d271', '', '43 Allen St', '2016-07-01', '07-May-2016', '', '', '568ef59c1bd769c#nuSep#568ef931d196b3e', 0, '13132'),
 ('57295aa5660f48b', '', 'Mrs Comuh', '568a00e25b8d271', '', '43 Allen Stkh', '2016-07-03', '18-Jun-2016', '', '', '568ef59c1bd769c', 35, '13132'),
-('57295c4c33cddd6', '', 'PCP200011', '568a00e25b8d271', '', '108 KWStftgh', '2016-07-04', '18-May-2016', '', '', '568ef59c1bd769c#nuSep#568ef58fe48207a', 0, 'blah'),
-('57295ed9e996db0', '', 'OPSM111', '568a00c77f8f709', '', 'yyyyy', '2016-07-06', '20-May-2016', '', '', '568ef920846a089#nuSep#568ef59c1bd769c', 12, 'oooo12'),
-('5716c7137efb0c5', '', 'OPSM1111', '568a00c77f8f709', '', '43 Allen St', '2016-07-06', '0423345544', '', 'm', '568ef920846a089#nuSep#568ef59c1bd769c#nuSep#568ef931d196b3e', 35, 'hh'),
-('57a17047de6fa3a', '', 'Delii', '568a00d504d264c', '', '', '0000-00-00', '', '', '', '568ef59c1bd769c#nuSep#568ef931d196b3e#nuSep#568ef5a6968322b', 35, '');
+('57295ed9e996db0', '', 'OPSM111', '568a00c77f8f709', '', 'yyyyy', '2016-07-06', '20-May-2016', '', '', '568ef58fe48207a', 12, 'oooo12hh'),
+('5716c7137efb0c5', '', 'OPSM1111', '568a00c77f8f709', '', '43 Allen St', '2016-07-06', '0423345544', '', 'm', '568ef920846a089#nuSep#568ef59c1bd769c#nuSep#568ef931d196b3e', 35, 'hh');
 
 -- --------------------------------------------------------
 
@@ -183,7 +181,7 @@ INSERT INTO `employee` (`employee_id`, `emp_company_id`, `emp_name`, `emp_mobile
 ('571475afa08d352', '571475afa08c69c', 'ukgfjgyy', '', ''),
 ('5716c642e4e23c8', '5716c079066e4a2', 'bbbbb', '', ''),
 ('5716c64c8cd4eef', '5716c64c8cd3592', 'bbbbb1', '', '568a00e25b8d271'),
-('5716c7137efe4c1', '5716c7137efb0c5', 'bob', 'Jul-20-2016', ''),
+('5716c7137efe4c1', '5716c7137efb0c5', 'bobg', 'Jul-20-2016', ''),
 ('5716cb29f11cfd1', '5716cb29f11c007', 'mr233', '', ''),
 ('5716cc0359429ae', '5716cc035941ba3', 'mr4', '', ''),
 ('5716cc0359433e9', '5716cc035941ba3', '444', '', ''),
@@ -192,21 +190,15 @@ INSERT INTO `employee` (`employee_id`, `emp_company_id`, `emp_name`, `emp_mobile
 ('57295aa566110ad', '57295aa5660f48b', '1234', 'Jul-20-2016', '568a00f3e57f096'),
 ('57294736bc86cd8', '572946e33e1b3ae', 'ssss', '', ''),
 ('57294736bc87e6f', '572946e33e1b3ae', '', 'fdsds', ''),
-('57295c4c33d0ac0', '57295c4c33cddd6', '1111j', 'Jun-15-2016', '568a00d504d264c'),
-('57295c4c33d2ed9', '57295c4c33cddd6', '2222hj', 'Jun-08-2016', ''),
-('57296ad34207b75', '57295c4c33cddd6', '3', 'Jul-20-2016', '568a00e25b8d271'),
 ('572aa8389424d9a', '57295ed9e996db0', 'bobby', 'May-26-2016', '568a00e25b8d271'),
 ('5770710113d40c6', '5770710113d261e', 'Rob', 'Jun-22-2016', '568a00f3e57f096'),
 ('573a80f0e0db425', '5678d262e048faa', 'test', '', ''),
 ('573d099435f6b7c', '5729572e6331281', 'aaah1gh', '', '568a00e25b8d271'),
 ('573d099435f7a3e', '5729572e6331281', '222ghu', '', '56aeff6f63b370b'),
-('5754e57406b71ea', '5716c7137efb0c5', '', 'Jul-20-2016', ''),
-('5754e57406b7ec7', '5716c7137efb0c5', 'ffhh', '', ''),
 ('5754e950b92bab5', '5729572e6331281', 'test13kgughj', '', ''),
 ('576ccdda0ccd2fc', '576ccdda0ccb042', 'fghdc', 'Jun-14-2016', '568a00e25b8d271'),
 ('577b0a4f5521871', '5770710113d261e', 'steve0', 'Jul-28-2016', '568a00d504d264c'),
-('5786e01113f6e5f', '57295aa5660f48b', 'Steveo', 'Jul-14-2016', '568a00f3e57f096'),
-('57a17047de70c71', '57a17047de6fa3a', 'Jim', 'Aug-23-2016', '568a00d504d264c');
+('5786e01113f6e5f', '57295aa5660f48b', 'Steveo', 'Jul-14-2016', '568a00f3e57f096');
 
 -- --------------------------------------------------------
 
@@ -294,7 +286,9 @@ INSERT INTO `zzzzsys_access_level_form` (`zzzzsys_access_level_form_id`, `slf_zz
 ('5773260358ccf77', '57678e7dc00c099', '56c513162acd102', '', '', '', '', '', ''),
 ('577aea8e8847c7e', '577aea8e8844920', '56773cb405f4913', '', '', '', '', '', ''),
 ('57678f1c543a37f', '57678e7dc00c099', 'nublank', '', '', '', '', '', ''),
-('577b3eb0f202900', '577aea8e8844920', 'nuhome', '', '', '', '', '', '');
+('577b3eb0f202900', '577aea8e8844920', 'nuhome', '', '', '', '', '', ''),
+('57a93edfb5ff43a', '577aea8e8844920', 'nupassword', '', '', '', '', '', ''),
+('57aa860b0ba585f', '577aea8e8844920', '57a7c1cb78bf3a3', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -373,7 +367,7 @@ INSERT INTO `zzzzsys_browse` (`zzzzsys_browse_id`, `sbr_zzzzsys_form_id`, `sbr_t
 ('5677420624710ab', '56773cb405f4913', 'Company', 'com_name', 'l', NULL, 'com_name', 10, 200),
 ('5677420624fd93d', '56773cb405f4913', 'Address', 'com_address', 'l', NULL, 'com_address', 20, 200),
 ('56774206258316d', '56773cb405f4913', 'Suburb', 'com_suburb', 'l', NULL, 'com_suburb', 30, 150),
-('56774206260b475', '56773cb405f4913', 'Phone', 'com_phone', 'l', NULL, 'com_phone', 40, 100),
+('56774206260b475', '56773cb405f4913', 'Phone', 'com_phone', 'l', NULL, 'com_phone', 40, 120),
 ('5678ab2c4ac37e0', '5678ab2c48c5c41', 'Name', 'emp_name', 'l', NULL, 'emp_name', 10, 200),
 ('568b508eee2f2ef', '568b508eec00d80', 'Code', 'bus_code', 'l', NULL, 'bus_code', 10, 100),
 ('568b508eeebdab9', '568b508eec00d80', 'Description', 'bus_description', 'l', NULL, 'bus_description', 20, 300),
@@ -441,7 +435,10 @@ INSERT INTO `zzzzsys_browse` (`zzzzsys_browse_id`, `sbr_zzzzsys_form_id`, `sbr_t
 ('57a29081a93f8d0', 'nutimezone', 'Time Zone', 'stz_timezone', NULL, NULL, 'stz_timezone', 10, 250),
 ('57a7c1cb78c07d1', '57a7c1cb78bf3a3', 'Language', 'trl_language', 'l', NULL, 'trl_language', 10, 100),
 ('57a7c1cb78c123b', '57a7c1cb78bf3a3', 'English', 'trl_english', 'l', NULL, 'trl_english', 20, 300),
-('57a7c1cb78c1c89', '57a7c1cb78bf3a3', 'Translation', 'trl_translation', 'l', NULL, 'trl_translation', 30, 300);
+('57a7c1cb78c1c89', '57a7c1cb78bf3a3', 'Translation', 'trl_translation', 'l', NULL, 'trl_translation', 30, 300),
+('57a93cb51e262f7', '57a93cb51e24fd8', 'Name', 'sus_name', 'l', '', 'sus_name', 10, 200),
+('57a93cb51e26c3f', '57a93cb51e24fd8', 'Email', 'sus_email', 'l', '', 'sus_email', 20, 300),
+('57a93cb51e2773a', '57a93cb51e24fd8', 'User Group', 'sug_description', 'l', '', 'sug_description', 30, 200);
 
 -- --------------------------------------------------------
 
@@ -608,7 +605,8 @@ INSERT INTO `zzzzsys_form` (`zzzzsys_form_id`, `sfo_type`, `sfo_code`, `sfo_desc
 ('nulaunchdates', 'launch', '2DATES', 'Between 2 Dates', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('nutimezone', 'browse', 'ZONE', 'Time Zone', 'zzzzsys_timezone', 'zzzzsys_timezone_id', '', '', '', '', '', '', '', '', '', '', 'SELECT * \nFROM zzzzsys_timezone\nORDER BY stz_timezone', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '1', '', '', '', '', '', '', '', ''),
 ('57a29441f16c351', 'edit', 'SET', 'Setup', 'zzzzsys_setup', 'zzzzsys_setup_id', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '1', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '$(''#set_css'').addClass(''html'');\n  \n$(''.html'').dblclick(function() {\n	nuOpenAce(''HTML'', this.id);\n});\n\n'),
-('57a7c1cb78bf3a3', 'browseedit', 'LANG', 'Language Translation', 'zzzzsys_translate', 'zzzzsys_translate_id', '', '', '', '', '', '', '', '', '', '', 'SELECT * \nFROM zzzzsys_translate\nORDER BY trl_language, trl_english', '1', '', '', '1', '', '', '1', '', '', '1', '', '', '1', '', '', '1', '', '', '', '', '', '', '', '');
+('57a7c1cb78bf3a3', 'browseedit', 'LANG', 'Language Translation', 'zzzzsys_translate', 'zzzzsys_translate_id', '', '', '', '', '', '', '', '', '', '', 'SELECT * \nFROM zzzzsys_translate\nORDER BY trl_language, trl_english', '1', '', '', '1', '', '', '1', '', '', '1', '', '', '1', '', '', '1', '', '', '', '', '', '', '', ''),
+('nupassword', 'edit', 'PASS', 'Change Password', 'zzzzsys_user', 'zzzzsys_user_id', '', '', '', '', '', '', '', 'if(''#new_password#'' == ''#check_password#'' && ''#check_password#'' != ''#check_p''.''assword#'' && ''#check_password#'' != ''''){\n\n	$pw	= md5(''#check_password#'');\n	nuRunQuery("UPDATE zzzzsys_user SET sus_login_password = ''$pw'' WHERE zzzzsys_user_id = ''#RECORD_ID#''");\n\n}\n\n', '', '', 'SELECT * FROM zzzzsys_user\nJOIN zzzzsys_user_group ON sus_zzzzsys_user_group_id = zzzzsys_user_group_id\nORDER BY sus_name', '1', '', '', '1', '', '', '1', '', '', '1', '', '', '1', '', '', '1', '', '', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -777,11 +775,11 @@ INSERT INTO `zzzzsys_object` (`zzzzsys_object_id`, `sob_all_zzzzsys_form_id`, `s
 ('570b4758d50f01c', 'nuform', 'select', 'sfo_new_button', 'New', '5707303145b7760', 280, 113, 467, 50, 18, '1', 'right', 'none', '0', '', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('570b48672a9beec', 'nuform', 'input', 'sfo_new_title', 'Title', '5707303145b7760', 290, 113, 580, 200, 16, '1', 'left', 'none', '0', '', '', '', '', '', '', '', '0', 'SELECT zzzzsys_form_id, CONCAT(sfo_code, '' - '', sfo_description)\nFROM zzzzsys_form\nORDER BY sfo_code', '', '', '', '', '', '', '', '', '', '', '', '', '', 'text', ''),
 ('570b48871430984', 'nuform', 'textarea', 'sfo_new_display_condition', 'Display Condition', '5707303145b7760', 300, 143, 580, 200, 50, '1', 'right', 'none', '0', '', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-('570b48e9d83a208', 'nuform', 'textarea', 'sfo_before_open_php', 'Before Open', '5754c7fd0191a83', 350, 295, 85, 600, 50, '1', 'right', 'none', '0', '', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-('570b49216a5ecb5', 'nuform', 'textarea', 'sfo_before_save_php', 'Before Save', '5707303145b7760', 310, 229, 180, 600, 50, '1', 'right', 'none', '0', '', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-('570b498bb3ec197', 'nuform', 'textarea', 'sfo_after_save_php', 'After Save', '5707303145b7760', 320, 299, 180, 600, 50, '1', 'right', '', '0', '', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-('570b49c90719215', 'nuform', 'textarea', 'sfo_before_delete_php', 'Before Delete', '5707303145b7760', 330, 369, 180, 600, 50, '1', 'right', 'none', '0', '', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-('570b49ec1a3d1a1', 'nuform', 'textarea', 'sfo_after_delete_php', 'After Delete', '5707303145b7760', 340, 439, 180, 600, 50, '1', 'right', 'none', '0', '', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+('570b48e9d83a208', 'nuform', 'textarea', 'sfo_before_open_php', 'Before Open', '5707303145b7760', 310, 215, 180, 600, 50, '1', 'right', 'none', '0', '', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+('570b49216a5ecb5', 'nuform', 'textarea', 'sfo_before_save_php', 'Before Save', '5707303145b7760', 320, 286, 180, 600, 50, '1', 'right', 'none', '0', '', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+('570b498bb3ec197', 'nuform', 'textarea', 'sfo_after_save_php', 'After Save', '5707303145b7760', 330, 356, 180, 600, 50, '1', 'right', '', '0', '', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+('570b49c90719215', 'nuform', 'textarea', 'sfo_before_delete_php', 'Before Delete', '5707303145b7760', 340, 426, 180, 600, 50, '1', 'right', 'none', '0', '', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+('570b49ec1a3d1a1', 'nuform', 'textarea', 'sfo_after_delete_php', 'After Delete', '5707303145b7760', 350, 496, 180, 600, 50, '1', 'right', 'none', '0', '', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('573d15d41e279ba', 'nubuildreport', 'input', 'open_builder', 'Report Layout', '574b964941d3d1a', 60, 192, 239, 150, 30, '1', 'left', 'none', '1', '', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', 'button', ''),
 ('570c3b5d641d514', 'nubuildreport', 'textarea', 'sre_layout', 'Layout', '574b964941d3d1a', 70, 236, 239, 300, 100, '1', 'left', 'none', '1', 'SELECT ''0''', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('570c3e6e67c39cb', 'nuform', 'textarea', 'sfo_javascript', 'Javascript', '570730315113e7e', 370, 54, 70, 600, 400, '1', 'right', '', '1', '', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
@@ -901,7 +899,8 @@ INSERT INTO `zzzzsys_object` (`zzzzsys_object_id`, `sob_all_zzzzsys_form_id`, `s
 ('57a7c213dc62789', 'nuhome', 'run', 'run_lang', 'Translation', '569dc4ed270f08a', 50, 164, 264, 150, 30, '1', 'left', 'noblanks', '0', '', '', '57a7c1cb78bf3a3', '', 'b', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('57a7d639f21d3a8', '57a7c1cb78bf3a3', 'input', 'trl_language', 'Language', '57a7c1cb78c31d5', 10, 39, 92, 100, 16, '1', 'left', 'noblanks', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('57a7d77ccd5d248', '57a7c1cb78bf3a3', 'input', 'trl_english', 'English', '57a7c1cb78c31d5', 20, 70, 92, 400, 16, '1', 'left', 'noduplicates', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-('57a7d7a35f01f40', '57a7c1cb78bf3a3', 'input', 'trl_translation', 'Translation', '57a7c1cb78c31d5', 30, 101, 92, 400, 16, '1', 'left', 'noduplicates', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
+('57a7d7a35f01f40', '57a7c1cb78bf3a3', 'input', 'trl_translation', 'Translation', '57a7c1cb78c31d5', 30, 101, 92, 400, 16, '1', 'left', 'noduplicates', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+('57a93d17300512b', 'nupassword', 'input', 'new_password', 'Enter New Password', '57a93cb51e28b8a', 50, 154, 150, 200, 16, '1', 'left', 'noblanks', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'password', '');
 
 -- --------------------------------------------------------
 
@@ -1097,7 +1096,8 @@ INSERT INTO `zzzzsys_tab` (`zzzzsys_tab_id`, `syt_zzzzsys_form_id`, `syt_title`,
 ('57a29441f16e2e2', '57a29441f16c351', 'Setup', 10),
 ('57a29441f16eb9f', '57a29441f16c351', 'Email Settings', 20),
 ('57a29441f16f59d', '57a29441f16c351', 'Header', 30),
-('57a7c1cb78c31d5', '57a7c1cb78bf3a3', 'Phrase', 10);
+('57a7c1cb78c31d5', '57a7c1cb78bf3a3', 'Phrase', 10),
+('57a93cb51e28b8a', '57a93cb51e24fd8', 'Password', 10);
 
 -- --------------------------------------------------------
 
@@ -1718,7 +1718,11 @@ CREATE TABLE IF NOT EXISTS `zzzzsys_translate` (
 
 INSERT INTO `zzzzsys_translate` (`zzzzsys_translate_id`, `trl_language`, `trl_english`, `trl_translation`) VALUES
 ('1', 'japanese', 'hi', 'Hurrow'),
-('57a7e9543d0c2b2', 'japanese', 'Eddy', 'Edward');
+('57a7e9543d0c2b2', 'japanese', 'Eddy', 'Edward'),
+('57aa756a39aadbd', 'japanese', 'Kids', 'Children'),
+('57aa78fb2b506e1', 'japanese', '111', '222'),
+('57aa8668df7a342', 'japanese', 'Leave this form without saving?', 'Leave this form?'),
+('57aa8822019b0e7', 'japanese', 'Company', 'Jobs');
 
 -- --------------------------------------------------------
 

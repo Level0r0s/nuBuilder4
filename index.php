@@ -21,6 +21,17 @@ jsinclude('nufunctions.js');
 <script>
 
 
+function nuHomeWarning(){
+
+	if(nuFORM.edited == '1'){
+		return nuTranslate('Leave this form without saving?')+'  '+nuTranslate('Doing this will return you to the login screen.');
+	}
+	return nuTranslate('Doing this will return you to the login screen.');
+}
+
+window.onbeforeunload = nuHomeWarning;
+
+
 	window.nuHASH	= [];
 
 

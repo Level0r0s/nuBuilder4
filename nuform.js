@@ -18,7 +18,7 @@ function nuBuildForm(f){
 	window.nuSUBFORMROW	= [];
 	window.nuSUBFORMJSON	= [];
 	window.nuHASH			= [];                       //-- remove any hash variables previously set.
-	window.nuEDITED		= '';
+	window.nuEDITED		= false;
 	
 	$('body').html('');
 	$('body').removeClass('nuBrowseBody').removeClass('nuEditBody');
@@ -1068,14 +1068,14 @@ function nuAddBreadcrumb(i, l){
 		
 		$('#' + bcId)
 		.addClass('nuNotBreadcrumb')
-		.html(bc.title);
+		.html(nuTranslate(bc.title));
 		
 	}else{
 		
 		$('#' + bcId)
 		.attr('onclick', 'nuGetBreadcrumb(' + i + ')')
 		.addClass('nuBreadcrumb')
-		.html(bc.title + '<div id="nuarrow'+i+'" class="nuBreadcrumbArrow">&nbsp;&#x25BA;&nbsp;<div>');
+		.html(nuTranslate(bc.title) + '<div id="nuarrow'+i+'" class="nuBreadcrumbArrow">&nbsp;&#x25BA;&nbsp;<div>');
 		
 	}
 	
@@ -1089,7 +1089,7 @@ function nuEditTab(p, t, i){
 	
 	$('#' + p + 'nuTabHolder').append(div);
 	$('#' + tabId)
-	.html(t.title)
+	.html(nuTranslate(t.title))
 	.addClass('nuTab')
 	.attr('data-nu-tab-filter', i)
 	.attr('data-nu-form-filter', p)

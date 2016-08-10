@@ -898,7 +898,7 @@ function nuTranslate($l){
 		$S[]		= $r;
 
 	}
-nudebug(print_r($S,1));
+
 	return $S;
 
 }

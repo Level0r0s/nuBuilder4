@@ -65,6 +65,12 @@ function nuFormState(){
 
 function nuGetBreadcrumb(b, t = ''){
 
+	if(window.nuEDITED){
+		if(!confirm(nuTranslate('Leave this form without saving?'))){
+			return;
+		}
+	}
+
 	if(t == '') {
 		window.nuTYPE = "browse";
 	}

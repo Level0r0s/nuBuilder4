@@ -1,13 +1,13 @@
 
 
 function nuGetForm(f, r, filter, n){
-
+/*
 	if(window.nuEDITED) {
 		if(!confirm("Leave This Form Without Saving?")) {
 			return
 		}
 	}
-	
+*/	
 	if(window.nuNEW == 1) {
 		
 		window.nuNEW = 0;
