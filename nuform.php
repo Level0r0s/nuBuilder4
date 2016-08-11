@@ -811,7 +811,7 @@ function nuCheckSession(){
 				
 			}else{
 				
-				nuErrorMessage('Invalid Login..');
+				nuDisplayError('Invalid Login..');
 				$_POST['nuLogAgain']		= 1;
 				return;
 			}
@@ -841,7 +841,7 @@ function nuCheckSession(){
 				nuRunQuery("UPDATE zzzzsys_session SET sss_access = '$nuJ' WHERE zzzzsys_session_id = '$c->session_id'");
 			}else{
 				
-				nuErrorMessage('Invalid Login..');
+				nuDisplayError('Invalid Login..');
 				$_POST['nuLogAgain']	= 1;
 				return;
 			}
@@ -865,7 +865,7 @@ function nuCheckSession(){
 			
 		}else{
 			
-			nuErrorMessage('Timeout..');
+			nuDisplayError('Timeout..');
 			$_POST['nuLogAgain']		= 1;
 			
 		}
@@ -874,13 +874,18 @@ function nuCheckSession(){
 
 	}
 
+//nudebug($c->call_type . "\n-f " . $c->form_id . "\n-r " . $c->record_id . "\n" . print_r($_POST['reports'],1));
+
+
 	if($u != 'globeadmin' && $c->form_id != 'nuhome') {
+		
 		if($c->call_type == 'getreport'){
+			
 			if(!in_array($c->record_id, $_POST['reports'])) {
 				$nuT	= nuRunQuery("SELECT * FROM zzzzsys_report WHERE zzzzsys_report_id = '$c->record_id'");
 				$nuR	= db_fetch_object($nuT);
 				
-				nuErrorMessage("Access To Report Denied... ($nuR->sre_code)");
+				nuDisplayError("Access To Report Denied... ($nuR->sre_code)");
 			}	
 			
 		}
@@ -892,17 +897,18 @@ function nuCheckSession(){
 				$nuT	= nuRunQuery("SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = '$c->record_id'");
 				$nuR	= db_fetch_object($nuT);
 				
-				nuErrorMessage("Access To Procedure Denied... ($nuR->sph_code)");
+				nuDisplayError("Access To Procedure Denied... ($nuR->sph_code)");
 			}
 				
 		}
 		
-		if(!in_array($c->form_id, $_POST['forms'])){
-		
+//		if(!in_array($c->form_id, $_POST['forms'])){
+		if(!in_array($c->form_id, $_POST['forms']) && $c->call_type == 'getform'){       //-- added 11-08-16
+
 			$nuT	= nuRunQuery("SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$c->form_id'");
 			$nuR	= db_fetch_object($nuT);
 
-			nuErrorMessage("Access To Form Denied... ($nuR->sfo_code)");
+			nuDisplayError("Access To Form Denied... ($nuR->sfo_code)");
 			
 		}
 		

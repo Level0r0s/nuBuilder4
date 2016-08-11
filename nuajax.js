@@ -1,13 +1,7 @@
 
 
 function nuGetForm(f, r, filter, n){
-/*
-	if(window.nuEDITED) {
-		if(!confirm("Leave This Form Without Saving?")) {
-			return
-		}
-	}
-*/	
+
 	if(window.nuNEW == 1) {
 		
 		window.nuNEW = 0;
@@ -60,7 +54,7 @@ function nuGetForm(f, r, filter, n){
 
 				var fm 	= data;
 
-				if(nuErrorMessages(fm.errors)){
+				if(nuDisplayError(fm.errors)){
 					nuBC.splice(nuBC.length-1,1);
 					if(fm.log_again == 1){nuLogin();}
 				}else{
@@ -105,7 +99,7 @@ function nuGetPDF(f, r){
 
 			var fm 	= data;
 
-			if(nuErrorMessages(fm.errors)){
+			if(nuDisplayError(fm.errors)){
 			}else{
 				nuBC[nuBC.length-1].record_id	= fm.record_id;
 				nuBuildForm(fm);	
@@ -139,7 +133,7 @@ function nuRunReport(f, iframe){
 
 			var fm 	= data;
 
-			if(nuErrorMessages(fm.errors)){
+			if(nuDisplayError(fm.errors)){
 			}else{
 				var pdfUrl   = 'nurunpdf.php?i=' + fm.id;
 
@@ -191,7 +185,7 @@ function nuGetPHP(f, r){
 
 			var fm 	= data;
 			
-			if(nuErrorMessages(fm.errors)){
+			if(nuDisplayError(fm.errors)){
 			}else{
 				
 				nuBC[nuBC.length-1].record_id	= fm.record_id;
@@ -226,7 +220,7 @@ function nuRunPHP(f, iframe){
 
 			var fm 	= data;
 
-			if(nuErrorMessages(fm.errors)){
+			if(nuDisplayError(fm.errors)){
 			}else{
 				var pdfUrl   = 'nurunphp.php?i=' + fm.id;
 
@@ -271,7 +265,7 @@ function nuGetLookupId(pk, id){
 		}).done(function(data){
 			
 			var fm 	= data;
-			if(nuErrorMessages(fm.errors)){
+			if(nuDisplayError(fm.errors)){
 			}else{
 				$('#' + id).change();
                 window.nuPopulateLookup(fm, id);
@@ -302,7 +296,7 @@ function nuGetLookupCode(e, buildLookupList){
 		}).done(function(data){
 			
 			var fm 	= data;
-			if(nuErrorMessages(fm.errors)){
+			if(nuDisplayError(fm.errors)){
 			}else{
 				
 				$('#nuLookupList').remove();
@@ -342,7 +336,7 @@ function nuUpdateData(){
 		}).done(function(data){
 			
 			var fm 	= data;
-			if(nuErrorMessages(fm.errors)){
+			if(nuDisplayError(fm.errors)){
 			}else{
 
 				if($('#nuDelete').prop('checked')){

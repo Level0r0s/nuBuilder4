@@ -53,7 +53,7 @@ function nuUpdateData(){
 							$m	= "$lab (on row " . $o['r'][$ii] . ")  of $O->label cannot be left blank";
 						}
 						
-						nuErrorMessage($m);
+						nuDisplayError($m);
 						
 					}
 					
@@ -82,7 +82,7 @@ function nuUpdateData(){
 							$m	= "There is a duplicate record where $lab = '$value' (on row " . $o['r'][$ii] . ") of $O->label";
 						}
 						
-						nuErrorMessage($m);
+						nuDisplayError($m);
 						
 					}
 					
@@ -276,7 +276,7 @@ function nuChangeHashVariable($h, $v){
 }
 
 
-function nuErrorMessage($m, $o = ''){
+function nuDisplayError($m, $o = ''){
 
 	$_POST['nuErrors'][]	= array($m, $o);
 	
@@ -316,12 +316,12 @@ function nuCheckAccess($f, $r = ''){
 		}else{
 
 
-			nuErrorMessage("Access Denied..");
+			nuDisplayError("Access Denied..");
 			return 3;
 			
 		}
 		
-		nuErrorMessage("Access Denied..");
+		nuDisplayError("Access Denied..");
 		return 4;
 		
 	}

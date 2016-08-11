@@ -81,7 +81,7 @@ function nuGetBreadcrumb(b, t = ''){
 }
 
 
-function nuErrorMessages(e){
+function nuDisplayError(e){
 
 	var m	= '';
 	

@@ -547,11 +547,11 @@ function nuRUN(w, i, l, p, prop){
 		
 	}else{
 	    
-		$('#' + id).attr({'src':prop.objects[i].src})
+		$('#' + id).attr('src', prop.objects[i].src)
 
 
 	}
-	
+
 	return Number(prop.objects[i].width);
 	
 }

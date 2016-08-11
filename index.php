@@ -23,7 +23,7 @@ jsinclude('nufunctions.js');
 
 function nuHomeWarning(){
 
-	if(nuFORM.edited == '1'){
+	if(nuEDITED){
 		return nuTranslate('Leave this form without saving?')+'  '+nuTranslate('Doing this will return you to the login screen.');
 	}
 	return nuTranslate('Doing this will return you to the login screen.');

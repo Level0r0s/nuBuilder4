@@ -601,7 +601,7 @@ function nuSaveNuDrag(){
         data     : {nuSTATE : w},
         dataType : "json"
         }).done(function(data){
-            if(nuErrorMessages(data.errors)){
+            if(nuDisplayError(data.errors)){
                 $("#overlay").remove();
                 alert(data.errors[0]);
             } else {
