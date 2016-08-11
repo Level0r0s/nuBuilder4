@@ -963,6 +963,10 @@ function nuBuildSubformDeleteTitle(l, id, subform_id){
 
 function nuAddBreadcrumbs(){
 
+	if(window.nuBC[window.nuBC.length - 1].title == '' || window.nuBC[window.nuBC.length - 1].title == null) {
+		window.nuBC.splice(window.nuBC.length-1,1);
+	}
+	
 	var b	= window.nuBC.length;
 	
     for(var i = 0 ; i < b ; i++){
