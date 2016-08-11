@@ -100,6 +100,7 @@ function nuGetPDF(f, r){
 			var fm 	= data;
 
 			if(nuDisplayError(fm.errors)){
+				nuBC.splice(nuBC.length-1,1);
 			}else{
 				nuBC[nuBC.length-1].record_id	= fm.record_id;
 				nuBuildForm(fm);	
@@ -134,6 +135,7 @@ function nuRunReport(f, iframe){
 			var fm 	= data;
 
 			if(nuDisplayError(fm.errors)){
+				nuBC.splice(nuBC.length-1,1);
 			}else{
 				var pdfUrl   = 'nurunpdf.php?i=' + fm.id;
 
@@ -186,6 +188,7 @@ function nuGetPHP(f, r){
 			var fm 	= data;
 			
 			if(nuDisplayError(fm.errors)){
+				nuBC.splice(nuBC.length-1,1);
 			}else{
 				
 				nuBC[nuBC.length-1].record_id	= fm.record_id;
@@ -221,6 +224,7 @@ function nuRunPHP(f, iframe){
 			var fm 	= data;
 
 			if(nuDisplayError(fm.errors)){
+				nuBC.splice(nuBC.length-1,1);
 			}else{
 				var pdfUrl   = 'nurunphp.php?i=' + fm.id;
 
@@ -266,6 +270,7 @@ function nuGetLookupId(pk, id){
 			
 			var fm 	= data;
 			if(nuDisplayError(fm.errors)){
+				nuBC.splice(nuBC.length-1,1);
 			}else{
 				$('#' + id).change();
                 window.nuPopulateLookup(fm, id);
@@ -297,6 +302,7 @@ function nuGetLookupCode(e, buildLookupList){
 			
 			var fm 	= data;
 			if(nuDisplayError(fm.errors)){
+				nuBC.splice(nuBC.length-1,1);
 			}else{
 				
 				$('#nuLookupList').remove();
@@ -337,6 +343,7 @@ function nuUpdateData(){
 			
 			var fm 	= data;
 			if(nuDisplayError(fm.errors)){
+				nuBC.splice(nuBC.length-1,1);
 			}else{
 
 				if($('#nuDelete').prop('checked')){
