@@ -91,6 +91,8 @@ function nuDisplayError(e){
 		$('#' + e[i][1]).addClass('nuValidate');
 		
 	}
+	
+	$('#nuModal').remove();
 
 	if(e.length > 0){
 		alert(m);
@@ -470,13 +472,13 @@ function nuBindCtrlEvents(){
 
 	var nuCtrlKeydownListener = function(e){	
 		if(e.keyCode == 17) { //Ctrl
-			window.nuOPENNEW = 1;
+			window.nuNEW = 1;
 		}
 	}
 	
 	var nuCtrlKeyupListener = function(e){	
 		
-		window.nuOPENNEW = 0;
+		window.nuNEW = 0;
 	}
 	
     $(document).on('keydown.nubindctrl', nuCtrlKeydownListener);
