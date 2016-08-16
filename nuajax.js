@@ -340,10 +340,11 @@ function nuUpdateData(){
 		data     : {nuSTATE : w},
 		dataType : "json"
 		}).done(function(data){
-			
+					
 			var fm 	= data;
 			if(nuDisplayError(fm.errors)){
 				nuBC.splice(nuBC.length-1,1);
+				nuAbortSave();
 			}else{
 
 				if($('#nuDelete').prop('checked')){
@@ -353,9 +354,11 @@ function nuUpdateData(){
 					nuGetForm(f, fm.record_id, '', 1);		//-- go to saved or created record
 				}
 
+				nuSavingMessage();
 			}
-			
+						
 		}).fail(function(xhr, err){
+			nuAbortSave();
 			alert(nuFormatAjaxErrorMessage(xhr, err));
 	});
 
