@@ -1,6 +1,10 @@
 
 function nuBuildForm(f){
 
+	window.onbeforeunload = closingCode;
+	function closingCode(){
+	   return null;
+	}
 
 	if(f.form_id == ''){
 		nuLogin();
@@ -2006,10 +2010,42 @@ function nuCloneAction(){
 
 function nuSaveAction(){
 	
+	nuSavingProgressMessage();
 	nuUpdateData();
 	
-	
 }
+
+function nuSavingProgressMessage(){
+    var e = document.createElement('div');
+    e.setAttribute('id', 'nuProgressSaved');
+    $('#nuActionHolder').append(e);
+    $('#' + e.id).html('<img src=\'ajax-loader.gif\'/>');
+    $('#' + e.id).addClass( 'nuSaveMessageProgress');
+	$('#' + e.id).css('position','absolute');
+	$('#' + e.id).css('left',(($('#nuActionHolder').width() / 2) - ($('#nuProgressSaved').width() / 2))+ 'px');
+    $('#' + e.id).show();
+	
+	$('#nuActionHolder .nuButton').hide();
+}  
+
+function nuSavingMessage(){
+    $("#nuProgressSaved").hide();
+    var e = document.createElement('div');
+    e.setAttribute('id', 'nuNowSaved');
+    $('#nuActionHolder').append(e);
+    $('#' + e.id).html('Record Saved');
+    $('#' + e.id).addClass( 'nuSaveMessage');
+	$('#' + e.id).css('position','absolute');
+	$('#' + e.id).css('left',(($('#nuActionHolder').width() / 2) - ($('#nuNowSaved').width() / 2))+ 'px');
+    $("#nuNowSaved").fadeToggle(3000);
+	
+	$('#nuActionHolder .nuButton').show();
+} 
+
+function nuAbortSave() {
+    $("#nuProgressSaved").hide();
+    $('#nuActionHolder .nuButton').show();
+}  
 
 function nuAddJavascript(f){
 	

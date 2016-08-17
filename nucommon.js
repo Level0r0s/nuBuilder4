@@ -217,6 +217,8 @@ debugger;
 	.css('visibility', 'hidden')
 	.append('<iframe style="left:5px;top:35px;width:400px;height:400px;position:absolute" id="nuLookup" src="index.php?opener=' + l + '&type=browse"></iframe>');
 
+	$('#nuDragDialog').attr('onmousemove', '$("#nuDragDialog").css("background-color","red");');
+	$('#nuDragDialog').attr('onmouseout', '$("#nuDragDialog").css("background-color","#DEDEDE");');
 }
 
 //-- object for dragging dialog --//
@@ -282,7 +284,7 @@ function nuCreateDialog(t){
 
 		$('#nuDragDialog').addClass('nuDragDialog nuDragNoSelect');
 		$('#nuDragDialog').css({'left':l, 'top':t, 'width':w, 'height':h, 'background-color':'#E0E0E0', 'z-index': 3000, 'position':'absolute'});
-		$('#nuDragDialog').html('<div id="dialogTitle" style="background-color:#CCCCCC ;position:absolute;width:100%;height:30px;font-size:16px;font-family:Helvetica"><div id="dialogTitleWords" style="padding-top: 6px;height:30px;">&nbsp;&nbsp;'+title+'</div><img id="dialogClose" src="close.png" style="position:absolute; top:0px; right:0px"></div>');
+		$('#nuDragDialog').html('<div id="dialogTitle" style="background-color:#CCCCCC ;position:absolute;width:100%;height:35px;font-size:16px;font-family:Helvetica"><div id="dialogTitleWords" style="padding-top: 6px;height:30px;">&nbsp;&nbsp;'+title+'</div><img id="dialogClose" src="close.png" style="position:absolute; top:0px; right:0px"></div>');
 		
 		$('#nuDragDialog').on('mousemove', 	function(event){nuDialog.move(event);});
 		$('#nuDragDialog').on('mouseout', 	function(event){$('#dialogClose').css('background-color','');});
