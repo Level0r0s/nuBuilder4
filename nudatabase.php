@@ -165,7 +165,7 @@ function db_columns($n){
 }
 
 function db_num_rows($o) {
-	
+
 	if(gettype($o) != 'object'){return 0;}
 		
 	return $o->rowCount();

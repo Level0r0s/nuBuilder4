@@ -92,6 +92,7 @@ function nuResizeiFrame(d, r){
 		var h			= Number(d[2]);
 		var w			= Number(d[3]);
 		
+console.log(h,w);
 		$('#nuDragDialog', window.parent.document).
 		css({'height'		:	(h - 0) + 'px',
 			'width' 		:	(w - 0) + 'px',
@@ -512,7 +513,7 @@ function nuRUN(w, i, l, p, prop){
 	if(prop.objects[i].run_method != 'b'){
 		
 		ele = 'iframe';
-		
+
 		if(!prop.objects[i].parent_type == 'g'){
 			
 			nuLabel(w, i, p, prop);
@@ -520,7 +521,6 @@ function nuRUN(w, i, l, p, prop){
 		}
 		
 	}
-
 
 	var inp = document.createElement(ele);
 	
@@ -547,8 +547,16 @@ function nuRUN(w, i, l, p, prop){
 		
 	}else{
 	    
-		$('#' + id).attr('src', prop.objects[i].src)
+		var F	= prop.objects[i].form_id;
+		var R	= prop.objects[i].record_id;
 
+		window.nuOPENER.push(new nuOpener(F, R, ''));
+		nuOpenerAppend('type','getreport');
+
+		var open = window.nuOPENER.length - 1;
+		var u	= window.location.origin + window.location.pathname + '?iframe=1&i=' + open;
+
+		$('#' + id).attr('src', u)
 
 	}
 
@@ -2225,4 +2233,3 @@ function nuDetach(e){
 	});	
 		
 }
-

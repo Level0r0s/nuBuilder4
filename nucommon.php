@@ -594,7 +594,7 @@ function nuSetHashList($H){
 
 function nuRunReport($nuRID){
 	
-	$iii								= nuID();
+	$id								= nuID();
 	$nuT								= nuRunQuery("SELECT * FROM zzzzsys_report WHERE zzzzsys_report_id = '$nuRID'");
 	$nuA								= db_fetch_object($nuT);
 	$_POST['nuHash']['code']			= $nuA->sre_code;
@@ -606,15 +606,16 @@ function nuRunReport($nuRID){
 	$_POST['nuHash']['sph_php']		= $nuR->sph_php;
 	$nuJ								= json_encode($_POST['nuHash']);
 	$nuS								= "INSERT INTO zzzzsys_debug (zzzzsys_debug_id, deb_message) VALUES (?, ?)";
-	nuRunQuery($nuS, array($iii, $nuJ));
-	return $iii;
+	nuRunQuery($nuS, array($id, $nuJ));
+	
+	return $id;
 	
 }
 
 
 function nuRunPHP($nuRID){
 
-	$iii								= nuID();
+	$id								= nuID();
 	$nuT								= nuRunQuery("SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = '$nuRID'");
 	$nuA								= db_fetch_object($nuT);
 	$_POST['nuHash']['code']			= $nuA->sph_code;
@@ -622,9 +623,9 @@ function nuRunPHP($nuRID){
 	$_POST['nuHash']['sph_php']		= nuReplaceHashVariables($nuA->sph_php);
 	$nuJ								= json_encode($_POST['nuHash']);
 	$nuS								= "INSERT INTO zzzzsys_debug (zzzzsys_debug_id, deb_message) VALUES (?, ?)";
-	nuRunQuery($nuS, array($iii, $nuJ));
+	nuRunQuery($nuS, array($id, $nuJ));
 
-	return $iii;
+	return $id;
 	
 }
 

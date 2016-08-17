@@ -2,94 +2,43 @@
 
 function nuGetForm(f, r, filter, n){
 
-	if(window.nuNEW == 1) {
-		
-		window.nuNEW = 0;
-		window.nuOPENER.push(new nuOpener(f, r, filter));
-		window.open(window.location.href);
+	if(nuOpenNewBrowserTab('', f, r, filter)){return;}
 
-	} else {
-			
-		var u 	= '';
-		var p 	= '';
-		var s	= '';
+	var u 	= '';
+	var p 	= '';
+	var s	= '';
 
-		filter	= (filter === undefined ? filter = '' : filter);
+	filter	= (filter === undefined ? filter = '' : filter);
+	
+	if($('#nuusername').length == 1){
 		
-		if($('#nuusername').length == 1){
-			
-			u 			= $('#nuusername').val();
-			p	 		= $('#nupassword').val();
-			window.nuBC	= [];
+		u 			= $('#nuusername').val();
+		p	 		= $('#nupassword').val();
+		window.nuBC	= [];
+		window.nuBC.push(new nuFormState());
+		
+	}else{
+		
+		s			= nuSESSION;
+		
+		if(arguments.length != 4){   //-- add a new breadcrumb
 			window.nuBC.push(new nuFormState());
-			
-		}else{
-			
-			s			= nuSESSION;
-			
-			if(arguments.length != 4){   //-- add a new breadcrumb
-				window.nuBC.push(new nuFormState());
-			}
-			
 		}
-
-		var w 		= nuGetFormState();
-
-		w.username	= u;
-		w.password	= p;
-		w.session_id	= s;
-		w.call_type	= 'getform';
-		w.form_id	= f;
-		w.record_id	= r;
-		w.filter		= filter;
-		nuBC[nuBC.length - 1].filter = filter;	
-		w.hash		= parent.nuHashFromEditForm();
-
-		var request 	= $.ajax({
-			url      : "nuapi.php",
-			type     : "POST",
-			data     : {nuSTATE : w},
-			dataType : "json"
-			}).done(function(data){
-
-				var fm 	= data;
-
-				if(nuDisplayError(fm.errors)){
-					nuBC.splice(nuBC.length-1,1);
-					if(fm.log_again == 1){nuLogin();}
-				}else{
-					
-					nuBC[nuBC.length-1].record_id	= fm.record_id;
-					
-					nuBuildForm(fm);
-				}
-				
-			}).fail(function(xhr, err){
-				alert(nuFormatAjaxErrorMessage(xhr, err));
-		});
+		
 	}
-}
-
-function nuGetPDF(f, r){
-
-	if(window.nuNEW == 1) {
-		window.nuNEW = 0;
-		window.nuOPENER.push(new nuOpener(f, r, ''));
-		nuOpenerAppend('type','getreport');
-		window.open(window.location.href);
-		return;
-	}
-
-	window.nuBC.push(new nuFormState());
 
 	var w 		= nuGetFormState();
 
-	w.session_id	= nuSESSION;
-	w.call_type	= 'getreport';
+	w.username	= u;
+	w.password	= p;
+	w.session_id	= s;
+	w.call_type	= 'getform';
 	w.form_id	= f;
 	w.record_id	= r;
-	w.hash		= nuHashFromEditForm();
-	
+	w.filter		= filter;
+	nuBC[nuBC.length - 1].filter = filter;	
+	w.hash		= parent.nuHashFromEditForm();
+
 	var request 	= $.ajax({
 		url      : "nuapi.php",
 		type     : "POST",
@@ -100,18 +49,23 @@ function nuGetPDF(f, r){
 			var fm 	= data;
 
 			if(nuDisplayError(fm.errors)){
+				
 				nuBC.splice(nuBC.length-1,1);
+
+				if(fm.log_again == 1){nuLogin();}
+				
 			}else{
+				
 				nuBC[nuBC.length-1].record_id	= fm.record_id;
-				nuBuildForm(fm);	
+				
+				nuBuildForm(fm);
 			}
 			
 		}).fail(function(xhr, err){
 			alert(nuFormatAjaxErrorMessage(xhr, err));
 	});
-
+	
 }
-
 
 
 function nuRunReport(f, iframe){
@@ -158,52 +112,6 @@ function nuRunReport(f, iframe){
 }
 
 
-function nuGetPHP(f, r){
-
-	if(window.nuNEW == 1) {
-		window.nuNEW = 0;
-		window.nuOPENER.push(new nuOpener(f, r, ''));
-		nuOpenerAppend('type','getphp');
-		window.open(window.location.href);
-		return;
-	}
-
-	window.nuBC.push(new nuFormState());
-
-	var w 		= nuGetFormState();
-
-	w.session_id	= nuSESSION;
-	w.call_type	= 'getphp';
-	w.form_id	= f;
-	w.record_id	= r;
-	w.hash		= nuHashFromEditForm();
-
-	var request 	= $.ajax({
-		url      : "nuapi.php",
-		type     : "POST",
-		data     : {nuSTATE : w},
-		dataType : "json"
-		}).done(function(data){
-
-			var fm 	= data;
-			
-			if(nuDisplayError(fm.errors)){
-				nuBC.splice(nuBC.length-1,1);
-			}else{
-				
-				nuBC[nuBC.length-1].record_id	= fm.record_id;
-				nuBuildForm(fm);
-				
-			}
-			
-		}).fail(function(xhr, err){
-			alert(nuFormatAjaxErrorMessage(xhr, err));
-	});
-
-}
-
-
-
 function nuRunPHP(f, iframe){
 
 	window.nuBC.push(new nuFormState());
@@ -246,6 +154,82 @@ function nuRunPHP(f, iframe){
 
 }
 
+
+function nuGetPHP(f, r){
+
+	if(nuOpenNewBrowserTab('getphp', f, r, '')){return;}
+
+	window.nuBC.push(new nuFormState());
+
+	var w 		= nuGetFormState();
+
+	w.session_id	= nuSESSION;
+	w.call_type	= 'getphp';
+	w.form_id	= f;
+	w.record_id	= r;
+	w.hash		= nuHashFromEditForm();
+
+	var request 	= $.ajax({
+		url      : "nuapi.php",
+		type     : "POST",
+		data     : {nuSTATE : w},
+		dataType : "json"
+		}).done(function(data){
+
+			var fm 	= data;
+			
+			if(nuDisplayError(fm.errors)){
+				nuBC.splice(nuBC.length-1,1);
+			}else{
+				
+				nuBC[nuBC.length-1].record_id	= fm.record_id;
+				nuBuildForm(fm);
+				
+			}
+			
+		}).fail(function(xhr, err){
+			alert(nuFormatAjaxErrorMessage(xhr, err));
+	});
+
+}
+
+
+function nuGetPDF(f, r){
+
+	if(nuOpenNewBrowserTab('getreport', f, r, '')){return;}
+
+	window.nuBC.push(new nuFormState());
+
+	var w 		= nuGetFormState();
+
+	w.session_id	= nuSESSION;
+	w.call_type	= 'getreport';
+	w.form_id	= f;
+	w.record_id	= r;
+	w.hash		= nuHashFromEditForm();
+parent.console.log('w ',w);		
+	
+	var request 	= $.ajax({
+		url      : "nuapi.php",
+		type     : "POST",
+		data     : {nuSTATE : w},
+		dataType : "json"
+		}).done(function(data){
+
+			var fm 	= data;
+
+			if(nuDisplayError(fm.errors)){
+				nuBC.splice(nuBC.length-1,1);
+			}else{
+				nuBC[nuBC.length-1].record_id	= fm.record_id;
+				nuBuildForm(fm);	
+			}
+			
+		}).fail(function(xhr, err){
+			alert(nuFormatAjaxErrorMessage(xhr, err));
+	});
+
+}
 
 
 function nuGetLookupId(pk, id){
@@ -360,3 +344,28 @@ function nuUpdateData(){
 	});
 
 }
+
+
+function nuOpenNewBrowserTab(c, f, r, filter){
+	
+	if(window.nuNEW == 1) {
+		
+		window.nuNEW = 0;
+		window.nuOPENER.push(new nuOpener(f, r, filter));
+		nuOpenerAppend('type', c);
+
+		var open = window.nuOPENER.length - 1;
+		var u	= window.location.href + '?i=' + open;
+
+		window.open(u);
+
+		return true;
+
+	}else{
+		
+		return false;
+		
+	}
+		
+}
+

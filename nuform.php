@@ -99,24 +99,28 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 			if($r->sob_all_type == 'run'){
 
 				$o->record_id	= -1;
+				$o->opener	= nuID();
 				
 				if(isProcedure($F)){
 					
 					$runType	= 'P';
 					$o->form_id	= $r->sob_run_zzzzsys_form_id;
 					$o->record_id	= $r->sob_run_id;
+					$o->src		= 'index.php?i=' . nuRunPHP($F);
 					
 				}else if(isReport($F)){
 					
 					$runType	= 'R';
 					$o->form_id	= $r->sob_run_zzzzsys_form_id;
 					$o->record_id	= $r->sob_run_id;
+					$o->src		= 'index.php?i=' . nuRunReport($F);
 					
 				}else{
 					
 					$runType	= 'F';
 					$o->record_id	= $r->sob_run_id;
 					$o->form_id	= $r->sob_run_zzzzsys_form_id;
+					$o->src		= 'index.php?';
 					
 				}
 

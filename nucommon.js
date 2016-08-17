@@ -91,12 +91,12 @@ function nuDisplayError(e){
 		$('#' + e[i][1]).addClass('nuValidate');
 		
 	}
-	
-	$('#nuModal').remove();
 
 	if(e.length > 0){
 		alert(m);
 	}
+	
+	//$('#nuModal', window.parent.document).remove();
 	
 	return e.length > 0;
 	
@@ -206,7 +206,7 @@ function nuBuildLookup(t, p){
 }
 
 function nuBuildPopup(f, r, filter){
-
+debugger;
 	window.nuOPENER.push(new nuOpener(f, r, filter));
 	
 	var l 	= window.nuOPENER.length -1;

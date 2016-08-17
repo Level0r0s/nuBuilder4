@@ -1,6 +1,3 @@
-<?php 
-require_once('nucommon.php'); ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 
 <head>
@@ -8,6 +5,7 @@ require_once('nucommon.php'); ?>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <?php
+require_once('nucommon.php');	
 cssinclude('nubuilder4.css');
 jsinclude('nuform.js');
 jsinclude('nuformdrag.js');
@@ -15,7 +13,6 @@ jsinclude('nucalendar.js');
 jsinclude('nucommon.js');
 jsinclude('nuajax.js');       //-- calls to server
 jsinclude('nufunctions.js');
-	
 ?>
 
 <script>
@@ -26,7 +23,9 @@ function nuHomeWarning(){
 	if(nuEDITED){
 		return nuTranslate('Leave this form without saving?')+'  '+nuTranslate('Doing this will return you to the login screen.');
 	}
+	
 	return nuTranslate('Doing this will return you to the login screen.');
+	
 }
 
 window.onbeforeunload = nuHomeWarning;
@@ -39,71 +38,65 @@ window.onbeforeunload = nuHomeWarning;
 
 <?php
 
-	$opener		= $_GET['opener'];
+	$opener		= $_GET['i'];
+	$iframe		= $_GET['iframe'];
 	$target		= $_GET['target'];
 	$type		= $_GET['type'];
 
 	$nuFormats	= json_encode(nuTextFormats(true));
-		
+nudebug("iframe $iframe");		
 	print "
+	
 	window.nuFormats	=	$nuFormats;
+	
 	";
 		
-	if($type == ''){			//-- login screen
-		
-		$h	= "
-		if(window.opener == null) {
-			function nuLoad(){
-				nuBindCtrlEvents();
-				nuLogin();
-			}
-		} else {
-			function nuLoad(){
-				
-				window.nuTYPE		= window.opener.nuTYPE;
-				window.nuSESSION	= window.opener.nuSESSION;
-				var p			= window.opener.nuOPENER[window.opener.nuOPENER.length - 1];
-
-				nuBindCtrlEvents();
-
-				if(p.type == 'getreport') {
-					nuGetPDF(p.form_id, p.record_id)
-				} else if(p.type == 'getphp') {
-					nuGetPHP(p.form_id, p.record_id)
-				} else {
-					nuGetForm(p.form_id, p.record_id, p.filter);
-				}
-
-				if(p.record_id == '-2'){
-					nuBindDragEvents();		
-				}
-			}		
-		}
-		
-		";
-		
-	}else{
+	$h	= "
 	
-		$h	= "
+	var nuFrame	= '$iframe';
+	
+	if(window.opener == null && nuFrame != '1'){
+
+		var from	= window['parent'];
 		
 		function nuLoad(){
+			nuBindCtrlEvents();
+			nuLogin();
+		}
+		
+	}else{
+
+		function nuLoad(){
+			
+			if(nuFrame == '1'){
+				var from		= window['parent'];
+			}else{
+				var from		= window['opener'];
+			}
 			
 			window.nuTYPE		= '$type';
 			window.nuTARGET	= '$target';
-			window.nuSESSION	= parent.nuSESSION;
-			var p			= parent.nuOPENER[$opener];
+			window.nuSESSION	= from.nuSESSION;
+			var p			= from.nuOPENER[0$opener];
 
 			nuBindCtrlEvents();
-			nuGetForm(p.form_id, p.record_id, p.filter);
+
+			if(p.type == 'getreport') {
+				nuGetPDF(p.form_id, p.record_id)
+			} else if(p.type == 'getphp') {
+				nuGetPHP(p.form_id, p.record_id)
+			} else {
+				nuGetForm(p.form_id, p.record_id, p.filter);
+			}
 
 			if(p.record_id == '-2'){
-				nuBindDragEvents();
+				nuBindDragEvents();		
 			}
-		}
-		
-		";
-
+		}		
 	}
+	
+	";
+	
 	print $h;
 	
 ?>
