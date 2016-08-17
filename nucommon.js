@@ -206,8 +206,9 @@ function nuBuildLookup(t, p){
 }
 
 function nuBuildPopup(f, r, filter){
-debugger;
+
 	window.nuOPENER.push(new nuOpener(f, r, filter));
+	console.log(f,r,filter);
 	
 	var l 	= window.nuOPENER.length -1;
 
@@ -215,7 +216,7 @@ debugger;
 	
 	$('#nuDragDialog')
 	.css('visibility', 'hidden')
-	.append('<iframe style="left:5px;top:35px;width:400px;height:400px;position:absolute" id="nuLookup" src="index.php?opener=' + l + '&type=browse"></iframe>');
+	.append('<iframe style="left:5px;top:35px;width:400px;height:400px;position:absolute" id="nuLookup" src="index.php?opener=' + l + '&type=browse&iframe=1"></iframe>');
 
 	$('#nuDragDialog').attr('onmousemove', '$("#nuDragDialog").css("background-color","red");');
 	$('#nuDragDialog').attr('onmouseout', '$("#nuDragDialog").css("background-color","#DEDEDE");');
@@ -273,7 +274,7 @@ function nuCreateDialog(t){
 	}
 
 	this.createDialog = function(l, t, w, h, title) {
-		
+
 		nuDialog.dialog = this.createDialog.caller.name;
 		var e = document.createElement('div');
 

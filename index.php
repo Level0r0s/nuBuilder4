@@ -44,7 +44,7 @@ window.onbeforeunload = nuHomeWarning;
 	$type		= $_GET['type'];
 
 	$nuFormats	= json_encode(nuTextFormats(true));
-nudebug("iframe $iframe");		
+		
 	print "
 	
 	window.nuFormats	=	$nuFormats;

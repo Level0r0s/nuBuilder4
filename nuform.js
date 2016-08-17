@@ -96,7 +96,6 @@ function nuResizeiFrame(d, r){
 		var h			= Number(d[2]);
 		var w			= Number(d[3]);
 		
-console.log(h,w);
 		$('#nuDragDialog', window.parent.document).
 		css({'height'		:	(h - 0) + 'px',
 			'width' 		:	(w - 0) + 'px',
