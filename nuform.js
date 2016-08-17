@@ -1,6 +1,10 @@
 
 function nuBuildForm(f){
 
+	window.onbeforeunload = closingCode;
+	function closingCode(){
+	   return null;
+	}
 
 	if(f.form_id == ''){
 		nuLogin();
