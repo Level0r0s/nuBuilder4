@@ -26,9 +26,8 @@ function nuBuildSubformArray(s){
 function nuSetHash(n, v){
 	
 //-- set hash variable to be used on server side	
-console.log(1,window.nuHASH);
 	window.nuHASH[n] = v;
-console.log(2, window.nuHASH);	
+	
 }
 
 function nuFullScreen(bb){  //-- remove all heading

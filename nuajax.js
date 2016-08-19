@@ -1,7 +1,7 @@
 
 
 function nuGetForm(f, r, filter, n){
-alert(555);
+
 	if(nuOpenNewBrowserTab('', f, r, filter)){return;}
 
 	var u 	= '';

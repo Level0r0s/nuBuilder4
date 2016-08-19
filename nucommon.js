@@ -201,14 +201,13 @@ function nuBuildLookup(t, p){
 	
 	$('#nuDragDialog')
 	.css('visibility', 'hidden')
-	.append('<iframe style="left:5px;top:35px;width:400px;height:400px;position:absolute" id="nuLookup" src="index.php?opener=' + l + '&target=' + tar + '&type=lookup"></iframe>');
+	.append('<iframe style="left:5px;top:35px;width:400px;height:400px;position:absolute" id="nuLookup" src="index.php?opener=' + l + '&target=' + tar + '&type=lookup&iframe=1"></iframe>');
 
 }
 
 function nuBuildPopup(f, r, filter){
 
 	window.nuOPENER.push(new nuOpener(f, r, filter));
-	console.log(f,r,filter);
 	
 	var l 	= window.nuOPENER.length -1;
 
