@@ -1,6 +1,6 @@
 
 function nuBuildForm(f){
-alert(111);
+
 	window.onbeforeunload = closingCode;
 	
 	function closingCode(){
@@ -47,7 +47,7 @@ alert(111);
 	window.nuBC[b].browse_columns	= f.browse_columns;
 	window.nuBC[b].browse_rows		= f.browse_rows;
 	window.nuBC[b].pages			= f.pages;
-alert(999);
+
 	nuResizeiFrame(f.dimensions, f.record_id);
 
 	nuAddHolder('nuActionHolder');
@@ -88,7 +88,6 @@ function nuResizeiFrame(d, r){
 			'width' 		:	(w - 0) + 'px',
 			'visibility' 	:	'visible'
 		});
-alert('done 1');
 
 		$('#nuLookup', window.parent.document).
 		css({'height'		:	(h - 40) + 'px',
@@ -105,7 +104,7 @@ alert('done 1');
 			'width' 		:	(w - 0) + 'px',
 			'visibility' 	:	'visible'
 		});
-alert('done 2');
+		
 		$('#nuLookup', window.parent.document).
 		css({'height'		:	(h - 40) + 'px',
 			'width' 		:	(w - 10) + 'px'
