@@ -1,7 +1,7 @@
 
 
 function nuGetForm(f, r, filter, n){
-
+alert(555);
 	if(nuOpenNewBrowserTab('', f, r, filter)){return;}
 
 	var u 	= '';
@@ -207,7 +207,6 @@ function nuGetPDF(f, r){
 	w.form_id	= f;
 	w.record_id	= r;
 	w.hash		= nuHashFromEditForm();
-parent.console.log('w ',w);		
 	
 	var request 	= $.ajax({
 		url      : "nuapi.php",

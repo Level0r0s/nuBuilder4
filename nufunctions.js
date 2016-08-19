@@ -4,9 +4,12 @@ function nuAppendActionButton(t, f){
 
 //--append a custom Action Button
 
-	var i	= String(t).toLowerCase().replaceAll(' ', '_', true).replaceAll("'", '_', true);
+	var i	= String(t)
+	.toLowerCase()
+	.replaceAll(' ', '_', true)
+	.replaceAll("'", '_', true);
 	
-	h='<input id="' + i + '" type="button" class="nuButton" value="' + t + '" onclick="' + f + '">&nbsp;'
+	h='<input id="' + i + '" type="button" class="nuButton" value="' + t + '" onclick="' + f + '">&nbsp;';
 	$('#nuActionHolder').append(h);
 	
 }
@@ -23,9 +26,9 @@ function nuBuildSubformArray(s){
 function nuSetHash(n, v){
 	
 //-- set hash variable to be used on server side	
-
+console.log(1,window.nuHASH);
 	window.nuHASH[n] = v;
-	
+console.log(2, window.nuHASH);	
 }
 
 function nuFullScreen(bb){  //-- remove all heading

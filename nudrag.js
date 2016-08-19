@@ -118,7 +118,8 @@ function nuCreateDrag(){
 		var m       = (event.buttons == 1 && this.classList.indexOf('nuDragSelected') != -1);
 
 		if(m || k == 37 || k == 38 || k == 39 || k == 40){
-			if($('#nuDragDialog').is(":visible") == false) {
+			
+			if($('#nuDragDialog').is(":visible") == false){
 				if(k == 38){
 					this.moveY = -1;
 					this.lastMoveY = 0;

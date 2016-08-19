@@ -38,7 +38,7 @@ window.onbeforeunload = nuHomeWarning;
 
 <?php
 
-	$opener		= $_GET['i'];
+	$opener		= $_GET['opener'];
 	$iframe		= $_GET['iframe'];
 	$target		= $_GET['target'];
 	$type		= $_GET['type'];
@@ -54,9 +54,10 @@ window.onbeforeunload = nuHomeWarning;
 	$h	= "
 	
 	var nuFrame	= '$iframe';
-	
+
 	if(window.opener == null && nuFrame != '1'){
 
+parent.console.log('opener null and not iframe');
 		var from	= window['parent'];
 		
 		function nuLoad(){
@@ -65,9 +66,9 @@ window.onbeforeunload = nuHomeWarning;
 		}
 		
 	}else{
-
+		
 		function nuLoad(){
-			
+
 			if(nuFrame == '1'){
 				var from		= window['parent'];
 			}else{
@@ -78,8 +79,11 @@ window.onbeforeunload = nuHomeWarning;
 			window.nuTARGET	= '$target';
 			window.nuSESSION	= from.nuSESSION;
 			var p			= from.nuOPENER[0$opener];
+parent.console.log(p);
+			nuSetHash('type', 'igetreport');
 
 			nuBindCtrlEvents();
+parent.console.log(p);
 
 			if(p.type == 'getreport') {
 				nuGetPDF(p.form_id, p.record_id)
@@ -97,6 +101,7 @@ window.onbeforeunload = nuHomeWarning;
 	
 	";
 	
+	nudebug($h);
 	print $h;
 	
 ?>

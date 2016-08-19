@@ -1,14 +1,17 @@
 
 function nuBuildForm(f){
-
+alert(111);
 	window.onbeforeunload = closingCode;
+	
 	function closingCode(){
 	   return null;
 	}
 
 	if(f.form_id == ''){
+		
 		nuLogin();
 		return;
+		
 	}
 
 	if(f.schema.length !== undefined){  //-- its an Object
@@ -44,7 +47,7 @@ function nuBuildForm(f){
 	window.nuBC[b].browse_columns	= f.browse_columns;
 	window.nuBC[b].browse_rows		= f.browse_rows;
 	window.nuBC[b].pages			= f.pages;
-
+alert(999);
 	nuResizeiFrame(f.dimensions, f.record_id);
 
 	nuAddHolder('nuActionHolder');
@@ -85,6 +88,7 @@ function nuResizeiFrame(d, r){
 			'width' 		:	(w - 0) + 'px',
 			'visibility' 	:	'visible'
 		});
+alert('done 1');
 
 		$('#nuLookup', window.parent.document).
 		css({'height'		:	(h - 40) + 'px',
@@ -101,7 +105,7 @@ function nuResizeiFrame(d, r){
 			'width' 		:	(w - 0) + 'px',
 			'visibility' 	:	'visible'
 		});
-
+alert('done 2');
 		$('#nuLookup', window.parent.document).
 		css({'height'		:	(h - 40) + 'px',
 			'width' 		:	(w - 10) + 'px'
@@ -555,6 +559,9 @@ function nuRUN(w, i, l, p, prop){
 
 		window.nuOPENER.push(new nuOpener(F, R, ''));
 		nuOpenerAppend('type','getreport');
+		nuOpenerAppend('type','getreport');
+		
+console.log('run',w);
 
 		var open = window.nuOPENER.length - 1;
 		var u	= window.location.origin + window.location.pathname + '?iframe=1&i=' + open;
@@ -2015,6 +2022,7 @@ function nuSaveAction(){
 }
 
 function nuSavingProgressMessage(){
+	
     var e = document.createElement('div');
     e.setAttribute('id', 'nuProgressSaved');
     $('#nuActionHolder').append(e);
@@ -2025,9 +2033,11 @@ function nuSavingProgressMessage(){
     $('#' + e.id).show();
 	
 	$('#nuActionHolder .nuButton').hide();
+	
 }  
 
 function nuSavingMessage(){
+
     $("#nuProgressSaved").hide();
     var e = document.createElement('div');
     e.setAttribute('id', 'nuNowSaved');
@@ -2039,11 +2049,14 @@ function nuSavingMessage(){
     $("#nuNowSaved").fadeToggle(3000);
 	
 	$('#nuActionHolder .nuButton').show();
+	
 } 
 
-function nuAbortSave() {
+function nuAbortSave(){
+	
     $("#nuProgressSaved").hide();
     $('#nuActionHolder .nuButton').show();
+	
 }  
 
 function nuAddJavascript(f){

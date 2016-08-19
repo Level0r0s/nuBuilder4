@@ -103,30 +103,30 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 				
 				if(isProcedure($F)){
 					
-					$runType	= 'P';
+					$o->run_type	= 'P';
 					$o->form_id	= $r->sob_run_zzzzsys_form_id;
 					$o->record_id	= $r->sob_run_id;
 					$o->src		= 'index.php?i=' . nuRunPHP($F);
 					
 				}else if(isReport($F)){
 					
-					$runType	= 'R';
+					$o->run_type	= 'R';
 					$o->form_id	= $r->sob_run_zzzzsys_form_id;
 					$o->record_id	= $r->sob_run_id;
 					$o->src		= 'index.php?i=' . nuRunReport($F);
 					
 				}else{
 					
-					$runType	= 'F';
+					$o->run_type	= 'F';
 					$o->record_id	= $r->sob_run_id;
 					$o->form_id	= $r->sob_run_zzzzsys_form_id;
 					$o->src		= 'index.php?';
 					
 				}
 
-				$form			= nuRunQuery("SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$o->form_id'");
-				$run				= db_fetch_object($form);
-				$o->run_type		= $run->sfo_type;
+//				$form			= nuRunQuery("SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$o->form_id'");
+//				$run				= db_fetch_object($form);
+//				$o->run_type		= $run->sfo_type;
 				$o->filter		= $r->sob_run_filter;
 				$o->run_method  	= $r->sob_run_method;
 
