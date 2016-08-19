@@ -57,7 +57,6 @@ window.onbeforeunload = nuHomeWarning;
 
 	if(window.opener == null && nuFrame != '1'){
 
-parent.console.log('opener null and not iframe');
 		var from	= window['parent'];
 		
 		function nuLoad(){
@@ -79,11 +78,9 @@ parent.console.log('opener null and not iframe');
 			window.nuTARGET	= '$target';
 			window.nuSESSION	= from.nuSESSION;
 			var p			= from.nuOPENER[0$opener];
-parent.console.log(p);
 			nuSetHash('type', 'igetreport');
 
 			nuBindCtrlEvents();
-parent.console.log(p);
 
 			if(p.type == 'getreport') {
 				nuGetPDF(p.form_id, p.record_id)
