@@ -793,10 +793,8 @@ function nuCheckSession(){
 	$c->schema				= array();
 	$c->translation			= array();
 	
-
-	if($s == ''){
+    if($s == ''){
 		if($u == $_SESSION['DBGlobeadminUsername']){           //-- globeadmin's username
-			
 			if($p == $_SESSION['DBGlobeadminPassword']){      // -- check password
 
 			
@@ -878,14 +876,17 @@ function nuCheckSession(){
 
 	}
 
-//nudebug($c->call_type . "\n-f " . $c->form_id . "\n-r " . $c->record_id . "\n" . print_r($_POST['reports'],1));
+    $sql = "
+        SELECT * FROM zzzzsys_session WHERE zzzzsys_session_id = '$s'
+    ";
+    $SesQry = nuRunQuery($sql);
+    $SesObj = db_fetch_object($SesQry);
 
-
-	if($u != 'globeadmin' && $c->form_id != 'nuhome') {
+	if($SesObj->sss_zzzzsys_user_id != 'globeadmin' && $c->form_id != 'nuhome') {
 		
 		if($c->call_type == 'getreport'){
 			
-			if(!in_array($c->record_id, $_POST['reports'])) {
+			if(!in_array($c->form_id, $_POST['reports'])) { //form_id is record_id for getreport
 				$nuT	= nuRunQuery("SELECT * FROM zzzzsys_report WHERE zzzzsys_report_id = '$c->record_id'");
 				$nuR	= db_fetch_object($nuT);
 				
@@ -893,10 +894,9 @@ function nuCheckSession(){
 			}	
 			
 		}
-		
+
 		if($c->call_type == 'getphp'){
-			
-			if(!in_array($c->record_id, $_POST['procedures'])) {
+			if(!in_array($c->form_id, $_POST['procedures'])) { //form_id is record_id for getphp
 			
 				$nuT	= nuRunQuery("SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = '$c->record_id'");
 				$nuR	= db_fetch_object($nuT);
@@ -905,9 +905,8 @@ function nuCheckSession(){
 			}
 				
 		}
-		
-//		if(!in_array($c->form_id, $_POST['forms'])){
-		if(!in_array($c->form_id, $_POST['forms']) && $c->call_type == 'getform'){       //-- added 11-08-16
+
+		if(!in_array($c->form_id, $_POST['forms']) && $c->call_type == 'getform'){
 
 			$nuT	= nuRunQuery("SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$c->form_id'");
 			$nuR	= db_fetch_object($nuT);
