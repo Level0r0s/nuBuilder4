@@ -104,11 +104,7 @@ function nuResizeiFrame(d, r){
 			'width' 		:	(w - 0) + 'px',
 			'visibility' 	:	'visible'
 		});
-<<<<<<< HEAD
-		
-=======
 
->>>>>>> 505f06ece22ea5818d37f7150bcb095fa8823f96
 		$('#nuLookup', window.parent.document).
 		css({'height'		:	(h - 40) + 'px',
 			'width' 		:	(w - 10) + 'px'
