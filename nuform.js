@@ -47,7 +47,7 @@ function nuBuildForm(f){
 	window.nuBC[b].browse_columns	= f.browse_columns;
 	window.nuBC[b].browse_rows		= f.browse_rows;
 	window.nuBC[b].pages			= f.pages;
-
+parent.console.log(123,f);	
 	nuResizeiFrame(f.dimensions, f.record_id);
 
 	nuAddHolder('nuActionHolder');
@@ -58,7 +58,6 @@ function nuBuildForm(f){
 	}
 	nuAddHolder('nuRecordHolder');
 	nuAddBreadcrumbs();
-console.log('t',f);
 	nuAddEditTabs('', f);
 	nuOptions('nuTabHolder', f.form_id);
 	nuAddActionButtons(f);
@@ -71,7 +70,8 @@ console.log('t',f);
 	nuGetStartingTab();
 	nuAddJavascript(f);
 	$('#nuSearchField').focus();
-
+nuSetSearchColumn();
+	
     if(f.record_id == '-2'){
         nuCreateDragOptionsBox(f);
 	}
@@ -1021,8 +1021,14 @@ function nuAddEditTabs(p, w){
 }
 
 function nuSetStartingTab(p){
-
-	var t = window.nuBC[window.nuBC.length - 1].tab_start;
+	
+	var b = window.nuBC[window.nuBC.length - 1];
+	
+	if(b === undefined){return;}
+	if(b.length == 0){return;}
+	if(!b.hasOwnProperty('tab_start')){return;}
+	
+	var t = b.tab_start;
 	
 	for(var i = 0 ; i < t.length ; i++){
 		if(t[i].prefix == p){return;}
@@ -1035,7 +1041,13 @@ function nuSetStartingTab(p){
 
 function nuGetStartingTab(){
 
-	var t = window.nuBC[window.nuBC.length - 1].tab_start;
+	var b = window.nuBC[window.nuBC.length - 1];
+	
+	if(b === undefined){return;}
+	if(b.length == 0){return;}
+	if(!b.hasOwnProperty('tab_start')){return;}
+	
+	var t = b.tab_start;
 
 	for(var i = 0 ; i < t.length ; i++){
 		
@@ -1229,6 +1241,8 @@ function nuAddDataTab(i, t, p){
 function nuBrowseTitle(b, i, l){
 
 	var bc	= nuBC[nuBC.length-1];
+	console.log(6,bc);
+parent.console.log(7,bc);
 	var un	= bc.nosearch_columns.indexOf(i);
 	var id  	= 'nuBrowseTitle' + i;
 	var w 	= Number(b[i].width);

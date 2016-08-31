@@ -52,7 +52,7 @@ window.onbeforeunload = nuHomeWarning;
 		
 	$h	= "
 	
-	var nuFrame	= '$iframe';
+	window.nuFrame	= '$iframe';
 
 	if(window.opener == null && nuFrame != '1'){
 
@@ -66,7 +66,7 @@ window.onbeforeunload = nuHomeWarning;
 	}else{
 		
 		function nuLoad(){
-parent.console.log(1);
+parent.console.log(1, window.nuFrame);
 			if(nuFrame == '1'){
 				var from		= window['parent'];
 			}else{
@@ -78,7 +78,7 @@ parent.console.log(1);
 			window.nuSESSION	= from.nuSESSION;
 			var p			= from.nuOPENER[0$opener];
 			nuSetHash('type', 'igetreport');
-parent.console.log(p);
+parent.console.log(2,p);
 			nuBindCtrlEvents();
 
 			if(p.type == 'getreport') {

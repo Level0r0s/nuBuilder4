@@ -37,7 +37,6 @@ function nuGetForm(f, r, filter, n){
 	w.filter		= filter;
 	nuBC[nuBC.length - 1].filter = filter;	
 	w.hash		= parent.nuHashFromEditForm();
-console.log(w);
 
 	var request 	= $.ajax({
 		url      : "nuapi.php",
@@ -175,7 +174,7 @@ function nuRunReport(f, iframe){
 				
 				}else{
 					
-					$('#'+iframe).attr('src',pdfUrl);
+					$('#' + iframe).attr('src',pdfUrl);
 				
 				}
 
