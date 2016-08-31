@@ -58,6 +58,7 @@ function nuBuildForm(f){
 	}
 	nuAddHolder('nuRecordHolder');
 	nuAddBreadcrumbs();
+console.log('t',f);
 	nuAddEditTabs('', f);
 	nuOptions('nuTabHolder', f.form_id);
 	nuAddActionButtons(f);
@@ -992,7 +993,7 @@ function nuAddBreadcrumbs(){
 }
 
 function nuAddEditTabs(p, w){
-
+	
 	nuSetStartingTab(p);
 	
     for(var i = 0 ; i < w.tabs.length ; i++){

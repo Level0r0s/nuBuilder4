@@ -2,8 +2,7 @@
 
 <head>
 <meta http-equiv='Content-type' content='text/html;charset=UTF-8'>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
 <?php
 require_once('nucommon.php');	
 cssinclude('nubuilder4.css');
@@ -67,7 +66,7 @@ window.onbeforeunload = nuHomeWarning;
 	}else{
 		
 		function nuLoad(){
-
+parent.console.log(1);
 			if(nuFrame == '1'){
 				var from		= window['parent'];
 			}else{
@@ -79,7 +78,7 @@ window.onbeforeunload = nuHomeWarning;
 			window.nuSESSION	= from.nuSESSION;
 			var p			= from.nuOPENER[0$opener];
 			nuSetHash('type', 'igetreport');
-
+parent.console.log(p);
 			nuBindCtrlEvents();
 
 			if(p.type == 'getreport') {
@@ -89,7 +88,7 @@ window.onbeforeunload = nuHomeWarning;
 			} else {
 				nuGetForm(p.form_id, p.record_id, p.filter);
 			}
-
+parent.console.log(3);
 			if(p.record_id == '-2'){
 				nuBindDragEvents();		
 			}

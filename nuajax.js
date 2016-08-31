@@ -28,7 +28,6 @@ function nuGetForm(f, r, filter, n){
 	}
 
 	var w 		= nuGetFormState();
-
 	w.username	= u;
 	w.password	= p;
 	w.session_id	= s;
@@ -38,6 +37,7 @@ function nuGetForm(f, r, filter, n){
 	w.filter		= filter;
 	nuBC[nuBC.length - 1].filter = filter;	
 	w.hash		= parent.nuHashFromEditForm();
+console.log(w);
 
 	var request 	= $.ajax({
 		url      : "nuapi.php",

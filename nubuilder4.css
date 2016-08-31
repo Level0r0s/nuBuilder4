@@ -552,6 +552,15 @@ input {
 			background-color:red;
 			cursor:ns-resize;
 }
+.nuChanged1{
+			background-color:#F7DC6F;
+}
+.nuChanged2{
+			background-color:#F5B041;
+}
+.nuChanged3{
+			background-color:#E67E22;
+}
 
 
 .nuDragLineV{
