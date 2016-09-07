@@ -37,7 +37,6 @@ function nuGetForm(f, r, filter, n){
 	w.filter		= filter;
 	nuBC[nuBC.length - 1].filter = filter;	
 	w.hash		= parent.nuHashFromEditForm();
-console.log(w);
 
 	var request 	= $.ajax({
 		url      : "nuapi.php",
@@ -45,7 +44,7 @@ console.log(w);
 		data     : {nuSTATE : w},
 		dataType : "json"
 		}).done(function(data){
-
+console.log(data);
 			var fm 	= data;
 
 			if(nuDisplayError(fm.errors)){
@@ -63,6 +62,7 @@ console.log(w);
 			
 		}).fail(function(xhr, err){
 			alert(nuFormatAjaxErrorMessage(xhr, err));
+			console.log(err);
 	});
 	
 }

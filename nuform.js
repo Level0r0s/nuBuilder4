@@ -58,7 +58,6 @@ function nuBuildForm(f){
 	}
 	nuAddHolder('nuRecordHolder');
 	nuAddBreadcrumbs();
-console.log('t',f);
 	nuAddEditTabs('', f);
 	nuOptions('nuTabHolder', f.form_id);
 	nuAddActionButtons(f);
@@ -556,13 +555,14 @@ function nuRUN(w, i, l, p, prop){
 	    
 		var F	= prop.objects[i].form_id;
 		var R	= prop.objects[i].record_id;
+		var P	= window.location.pathname;
+		var f	= P.substring(0,P.lastIndexOf('/') + 1)
 
 		window.nuOPENER.push(new nuOpener(F, R, ''));
 		nuOpenerAppend('type','getphp');
 
 		var open = window.nuOPENER.length - 1;
-		var u	= window.location.origin + window.location.pathname + '?iframe=1&i=' + open;
-
+		var u	= window.location.origin + f + prop.objects[i].src;
 		$('#' + id).attr('src', u)
 
 	}

@@ -66,7 +66,6 @@ window.onbeforeunload = nuHomeWarning;
 	}else{
 		
 		function nuLoad(){
-parent.console.log(1);
 			if(nuFrame == '1'){
 				var from		= window['parent'];
 			}else{
@@ -77,8 +76,9 @@ parent.console.log(1);
 			window.nuTARGET	= '$target';
 			window.nuSESSION	= from.nuSESSION;
 			var p			= from.nuOPENER[0$opener];
+			
 			nuSetHash('type', 'igetreport');
-parent.console.log(p);
+			
 			nuBindCtrlEvents();
 
 			if(p.type == 'getreport') {
@@ -88,7 +88,7 @@ parent.console.log(p);
 			} else {
 				nuGetForm(p.form_id, p.record_id, p.filter);
 			}
-parent.console.log(3);
+			
 			if(p.record_id == '-2'){
 				nuBindDragEvents();		
 			}
@@ -97,7 +97,6 @@ parent.console.log(3);
 	
 	";
 	
-	nudebug($h);
 	print $h;
 	
 ?>

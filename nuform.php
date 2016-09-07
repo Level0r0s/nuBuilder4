@@ -79,7 +79,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 					$o->value= $r->sob_all_label;
 				}
 
-				if($r->sob_all_type == 'display'){
+				if($r->sob_all_type == 'display')
 					$disS	= nuReplaceHashVariables($r->sob_display_sql);
 					$disT	= nuRunQuery($disS);
 					$disR	= db_fetch_row($disT);
@@ -97,36 +97,32 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 			}
 
 			if($r->sob_all_type == 'run'){
-
+				$type		= $r->sob_run_zzzzsys_form_id;
 				$o->record_id	= -1;
-				$o->opener	= nuID();
 				
-				if(isProcedure($F)){
+				if(isProcedure($type)){
 					
 					$o->run_type	= 'P';
-					$o->form_id	= $r->sob_run_zzzzsys_form_id;
+					$o->form_id	= $type;
 					$o->record_id	= $r->sob_run_id;
-					$o->src		= 'index.php?i=' . nuRunPHP($F);
+					$o->src		= 'nurunphp.php?i=' . nuRunPHP($type);
 					
-				}else if(isReport($F)){
+				}else if(isReport($type)){
 					
 					$o->run_type	= 'R';
-					$o->form_id	= $r->sob_run_zzzzsys_form_id;
+					$o->form_id	= $type;
 					$o->record_id	= $r->sob_run_id;
-					$o->src		= 'index.php?i=' . nuRunReport($F);
+					$o->src		= 'nurunpdf.php?i=' . nuRunReport($type);
 					
 				}else{
 					
 					$o->run_type	= 'F';
 					$o->record_id	= $r->sob_run_id;
-					$o->form_id	= $r->sob_run_zzzzsys_form_id;
+					$o->form_id	= $type;
 					$o->src		= 'index.php?';
 					
 				}
 
-//				$form			= nuRunQuery("SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$o->form_id'");
-//				$run				= db_fetch_object($form);
-//				$o->run_type		= $run->sfo_type;
 				$o->filter		= $r->sob_run_filter;
 				$o->run_method  	= $r->sob_run_method;
 
@@ -777,8 +773,6 @@ function nuBrowseWhereClause($searchFields, $searchString, $returnArray = false)
 
 function nuCheckSession(){
 
-	$c->record_id				= '-1';
-	$c->form_id				= $_POST['nuSTATE']['form_id'];
 	$u						= $_POST['nuSTATE']['username'];
 	$p						= $_POST['nuSTATE']['password'];
 	$s						= $_POST['nuSTATE']['session_id'];
@@ -786,6 +780,8 @@ function nuCheckSession(){
 	$_POST['nuLogAgain']		= 0;
 	$_POST['nuIsGlobeadmin']	= 0;
 	$c						= new stdClass;
+	$c->record_id				= '-1';
+	$c->form_id				= $_POST['nuSTATE']['form_id'];
 	$c->session_id			= $s;
 	$c->call_type				= $ct;
 	$c->filter				= $_POST['nuFilter'];
@@ -1170,7 +1166,9 @@ function isForm($i){
 
 	$s	= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$i'";
 	$t	= nuRunQuery($s);
-	return $i == $r[0];
+	$r	= db_fetch_object($t);
+	
+	return db_num_rows($t) > 0;
 
 }
 
@@ -1178,7 +1176,9 @@ function isProcedure($i){
 
 	$s	= "SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = '$i'";
 	$t	= nuRunQuery($s);
-	return $i == $r[0];
+	$r	= db_fetch_object($t);
+	
+	return db_num_rows($t) > 0;
 
 }
 
@@ -1186,8 +1186,10 @@ function isReport($i){
 
 	$s	= "SELECT * FROM zzzzsys_report WHERE zzzzsys_report_id = '$i'";
 	$t	= nuRunQuery($s);
-	return $i == $r[0];
+	$r	= db_fetch_object($t);
 	
+	return db_num_rows($t) > 0;
+
 }
 
 function nuSetupButtons($f, $t) {
