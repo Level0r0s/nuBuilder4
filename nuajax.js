@@ -1,4 +1,29 @@
-
+function nuAjax(w,successCallback,errorCallback) {
+ 	$.ajax({
+        	timeout  : 3000,
+		async    : true,  
+        	dataType : "json",
+		url      : "nuapi.php",
+        	method   : "POST",
+        	data     : {nuSTATE : w},
+        	dataType : "json",
+        	success: function(data,textStatus,jqXHR){
+            		successCallback(data,textStatus,jqXHR);
+        	},
+        	error: function(jqXHR,textStatus,errorThrown){
+			console.log(jqXHR);
+			console.log(textStatus);
+			console.log(errorThrown);
+			if (errorCallback !== undefinded) {
+				errorCallback(jqXHR,textStatus,errorThrown);
+			}
+			nuFormatAjaxErrorMessage(jqXHR, errorThrown);
+        	},
+		complete: function(jqXHR,textStatus){
+			//todo - probably not needed
+		} 
+    	});    
+}
 
 function nuGetForm(f, r, filter, n){
 
@@ -38,32 +63,18 @@ function nuGetForm(f, r, filter, n){
 	nuBC[nuBC.length - 1].filter = filter;	
 	w.hash		= parent.nuHashFromEditForm();
 
-	var request 	= $.ajax({
-		url      : "nuapi.php",
-		type     : "POST",
-		data     : {nuSTATE : w},
-		dataType : "json"
-		}).done(function(data){
+	var successCallback = function(data,textStatus,jqXHR){
+                var fm = data;
+                if(nuDisplayError(fm.errors)){
+                        nuBC.splice(nuBC.length-1,1);
+                        if(fm.log_again == 1){nuLogin();}
+               }else{
+                        nuBC[nuBC.length-1].record_id   = fm.record_id;
+                        nuBuildForm(fm);
+              }
+        };
 
-			var fm 	= data;
-
-			if(nuDisplayError(fm.errors)){
-				
-				nuBC.splice(nuBC.length-1,1);
-
-				if(fm.log_again == 1){nuLogin();}
-				
-			}else{
-				
-				nuBC[nuBC.length-1].record_id	= fm.record_id;
-				
-				nuBuildForm(fm);
-			}
-			
-		}).fail(function(xhr, err){
-			alert(nuFormatAjaxErrorMessage(xhr, err));
-	});
-	
+	nuAjax(w,successCallback);
 }
 
 
@@ -81,28 +92,16 @@ function nuGetPHP(f, r){
 	w.record_id	= r;
 	w.hash		= nuHashFromEditForm();
 
-	var request 	= $.ajax({
-		url      : "nuapi.php",
-		type     : "POST",
-		data     : {nuSTATE : w},
-		dataType : "json"
-		}).done(function(data){
-
-			var fm 	= data;
-			
-			if(nuDisplayError(fm.errors)){
-				nuBC.splice(nuBC.length-1,1);
-			}else{
-				
-				nuBC[nuBC.length-1].record_id	= fm.record_id;
-				nuBuildForm(fm);
-				
-			}
-			
-		}).fail(function(xhr, err){
-			alert(nuFormatAjaxErrorMessage(xhr, err));
-	});
-
+	var successCallback = function(data,textStatus,jqXHR){
+		var fm  = data;
+                if(nuDisplayError(fm.errors)){
+                	nuBC.splice(nuBC.length-1,1);
+                }else{
+                       nuBC[nuBC.length-1].record_id   = fm.record_id;
+                       nuBuildForm(fm);
+                }
+	}
+	nuAjax(w,successCallback);
 }
 
 
@@ -120,26 +119,16 @@ function nuGetPDF(f, r){
 	w.record_id	= r;
 	w.hash		= nuHashFromEditForm();
 	
-	var request 	= $.ajax({
-		url      : "nuapi.php",
-		type     : "POST",
-		data     : {nuSTATE : w},
-		dataType : "json"
-		}).done(function(data){
-
-			var fm 	= data;
-
-			if(nuDisplayError(fm.errors)){
-				nuBC.splice(nuBC.length-1,1);
-			}else{
-				nuBC[nuBC.length-1].record_id	= fm.record_id;
-				nuBuildForm(fm);	
-			}
-			
-		}).fail(function(xhr, err){
-			alert(nuFormatAjaxErrorMessage(xhr, err));
-	});
-
+	var successCallback = function(data,textStatus,jqXHR){
+                var fm  = data;
+                if(nuDisplayError(fm.errors)){
+                        nuBC.splice(nuBC.length-1,1);
+                }else{ 
+                       nuBC[nuBC.length-1].record_id   = fm.record_id;
+                       nuBuildForm(fm);
+                }
+        }
+        nuAjax(w,successCallback);
 }
 
 
@@ -154,36 +143,20 @@ function nuRunReport(f, iframe){
 	w.form_id	= f;
 	w.hash		= nuHashFromEditForm();
 
-	var request 	= $.ajax({
-		url      : "nuapi.php",
-		type     : "POST",
-		data     : {nuSTATE : w},
-		dataType : "json"
-		}).done(function(data){
-
-			var fm 	= data;
-
-			if(nuDisplayError(fm.errors)){
-				nuBC.splice(nuBC.length-1,1);
+	var successCallback = function(data,textStatus,jqXHR){
+		var fm 	= data;
+		if(nuDisplayError(fm.errors)){
+			nuBC.splice(nuBC.length-1,1);
+		}else{
+			var pdfUrl   = 'nurunpdf.php?i=' + fm.id;
+			if(iframe === undefined){
+				window.open(pdfUrl);
 			}else{
-				var pdfUrl   = 'nurunpdf.php?i=' + fm.id;
-
-				if(iframe === undefined){
-					
-					window.open(pdfUrl);
-				
-				}else{
-					
-					$('#'+iframe).attr('src',pdfUrl);
-				
-				}
-
+				$('#'+iframe).attr('src',pdfUrl);
 			}
-			
-		}).fail(function(xhr, err){
-			alert(nuFormatAjaxErrorMessage(xhr, err));
-	});
-
+		}
+	}
+	nuAjax(w,successCallback);
 }
 
 
@@ -197,36 +170,20 @@ function nuRunPHP(f, iframe){
 	w.call_type	= 'runphp';
 	w.form_id	= f;
 	w.hash		= nuHashFromEditForm();
-	var request 	= $.ajax({
-		url      : "nuapi.php",
-		type     : "POST",
-		data     : {nuSTATE : w},
-		dataType : "json"
-		}).done(function(data){
-
-			var fm 	= data;
-
-			if(nuDisplayError(fm.errors)){
-				nuBC.splice(nuBC.length-1,1);
+	var successCallback = function(data,textStatus,jqXHR){
+		var fm 	= data;
+		if(nuDisplayError(fm.errors)){
+			nuBC.splice(nuBC.length-1,1);
+		}else{
+			var pdfUrl   = 'nurunphp.php?i=' + fm.id;
+			if(iframe === undefined){
+				window.open(pdfUrl);
 			}else{
-				var pdfUrl   = 'nurunphp.php?i=' + fm.id;
-
-				if(iframe === undefined){
-					
-					window.open(pdfUrl);
-				
-				}else{
-					
-					$('#'+iframe).attr('src',pdfUrl);
-				
-				}
-
+				$('#'+iframe).attr('src',pdfUrl);
 			}
-			
-		}).fail(function(xhr, err){
-			alert(nuFormatAjaxErrorMessage(xhr, err));
-	});
-
+		}
+	};
+	nuAjax(w,successCallback);
 }
 
 
@@ -239,29 +196,19 @@ function nuGetLookupId(pk, id){
 
 	w.call_type	= 'getlookupid';
 	w.object_id	= l.attr('data-nu-object-id');
-	w.target		= l.attr('data-nu-target');
+	w.target	= l.attr('data-nu-target');
 	w.primary_key	= pk;
 	w.session_id	= window.nuSESSION;
-	
-	var request 	= $.ajax({
-		url      : "nuapi.php",
-		type     : "POST",
-		data     : {nuSTATE : w},
-		dataType : "json"
-		}).done(function(data){
-			
-			var fm 	= data;
-			if(nuDisplayError(fm.errors)){
-				nuBC.splice(nuBC.length-1,1);
-			}else{
-				$('#' + id).change();
-                window.nuPopulateLookup(fm, id);
-			}
-			
-		}).fail(function(xhr, err){
-			alert(nuFormatAjaxErrorMessage(xhr, err));
-	});
-
+	var successCallback = function(data,textStatus,jqXHR){		
+		var fm 	= data;
+		if(nuDisplayError(fm.errors)){
+			nuBC.splice(nuBC.length-1,1);
+		}else{
+			$('#' + id).change();
+                	window.nuPopulateLookup(fm, id);
+		}
+	};
+	nuAjax(w,successCallback);
 }
 
 
@@ -271,40 +218,27 @@ function nuGetLookupCode(e, buildLookupList){
 
 	w.call_type	= 'getlookupcode';
 	w.object_id	= e.target.getAttribute('data-nu-object-id');
-	w.target		= e.target.getAttribute('data-nu-target');
+	w.target	= e.target.getAttribute('data-nu-target');
 	w.code		= e.target.value;
 	w.session_id	= window.nuSESSION;
-
-	var request 	= $.ajax({
-		url      : "nuapi.php",
-		type     : "POST",
-		data     : {nuSTATE : w},
-		dataType : "json"
-		}).done(function(data){
-			
-			var fm 	= data;
-			if(nuDisplayError(fm.errors)){
-				nuBC.splice(nuBC.length-1,1);
+	var successCallback = function(data,textStatus,jqXHR){		
+		var fm 	= data;
+		if(nuDisplayError(fm.errors)){
+			nuBC.splice(nuBC.length-1,1);
+		}else{
+			$('#nuLookupList').remove();
+			if(buildLookupList){
+				nuBuildLookupList(fm, e);
 			}else{
-				
-				$('#nuLookupList').remove();
-	
-				if(buildLookupList){
-					nuBuildLookupList(fm, e);
-				}else{
-					nuChooseOneLookupRecord(e, fm);
-				}
-				
+				nuChooseOneLookupRecord(e, fm);
 			}
-			
-		}).fail(function(xhr, err){
-			alert(nuFormatAjaxErrorMessage(xhr, err));
-	});
-
+		}
+	};
+	nuAjax(w,successCallback);
 }
 
-function nuUpdateData(){
 
+function nuUpdateData(){
 
 	var w 		= nuGetFormState();
 	w.call_type	= 'update';
@@ -315,35 +249,22 @@ function nuUpdateData(){
 	w.hash		= nuHashFromEditForm();
 	w.subforms	= nuGetSFArrays();
 	w.session_id	= window.nuSESSION;
-
-	var request 	= $.ajax({
-		url      : "nuapi.php",
-		type     : "POST",
-		data     : {nuSTATE : w},
-		dataType : "json"
-		}).done(function(data){
-					
-			var fm 	= data;
-			if(nuDisplayError(fm.errors)){
-				nuBC.splice(nuBC.length-1,1);
-				nuAbortSave();
-			}else{
-
-				if($('#nuDelete').prop('checked')){
-					nuBC.pop();  						//-- return to browse
-					nuGetBreadcrumb(nuBC.length - 1);
-				}else{
-					nuGetForm(f, fm.record_id, '', 1);		//-- go to saved or created record
-				}
-
-				nuSavingMessage();
-			}
-						
-		}).fail(function(xhr, err){
+	var successCallback = function(data,textStatus,jqXHR){
+		var fm 	= data;
+		if(nuDisplayError(fm.errors)){
+			nuBC.splice(nuBC.length-1,1);
 			nuAbortSave();
-			alert(nuFormatAjaxErrorMessage(xhr, err));
-	});
-
+		}else{
+			if($('#nuDelete').prop('checked')){
+				nuBC.pop();  						//-- return to browse
+				nuGetBreadcrumb(nuBC.length - 1);
+			}else{
+				nuGetForm(f, fm.record_id, '', 1);		//-- go to saved or created record
+			}
+			nuSavingMessage();
+		}
+	};
+	nuAjax(w,successCallback,nuAbortSave);
 }
 
 
