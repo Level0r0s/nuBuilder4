@@ -256,7 +256,7 @@ function nuReplaceHashVariables($s){
 	}
 	
 	$a = $_POST['nuHash'];
-
+nudebug('zzz ' . $s . ' ' . print_r($a,1));
 	if ( !is_array($a) ) {
 		return $s;
 	}

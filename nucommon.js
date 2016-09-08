@@ -185,7 +185,7 @@ function nuLogin(){
 
 
 function nuBuildLookup(t, p){
-
+debugger;
 	var f	= $('#' + t.id).attr('data-nu-form-id');
 	var tar	= $('#' + t.id).attr('data-nu-target');
 	
@@ -510,3 +510,19 @@ function nuTranslate(s){
 	return s;
 	
 }
+
+
+function nuValidCaller(o){
+
+	for (var key in o) {
+		
+		if (key == 'nuVersion' && o[key] == 'nuBuilder4'){
+			return false;
+		}
+	
+	}
+	
+	return false;
+
+}
+

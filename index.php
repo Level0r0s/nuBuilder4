@@ -46,18 +46,17 @@ window.onbeforeunload = nuHomeWarning;
 		
 	print "
 	
+	window.nuVersion	=	'nuBuilder4';
 	window.nuFormats	=	$nuFormats;
 	
 	";
 		
 	$h	= "
-	
-	var nuFrame	= '$iframe';
 
-	if(window.opener == null && nuFrame != '1'){
+	if(!nuValidCaller(window.opener) && !nuValidCaller(window.parent)){
 
-		var from	= window['parent'];
-		
+	nuCALLERHASH      = null;
+
 		function nuLoad(){
 			nuBindCtrlEvents();
 			nuLogin();
@@ -66,17 +65,20 @@ window.onbeforeunload = nuHomeWarning;
 	}else{
 		
 		function nuLoad(){
-			if(nuFrame == '1'){
+			
+			if(nuValidCaller(window.parent)){
 				var from		= window['parent'];
 			}else{
 				var from		= window['opener'];
 			}
 			
+//			nuCALLERHASH      = from.nuReplaceHashVariables();
+
 			window.nuTYPE		= '$type';
 			window.nuTARGET	= '$target';
 			window.nuSESSION	= from.nuSESSION;
 			var p			= from.nuOPENER[0$opener];
-			
+//parent.console.log('nuCALLERHASH', nuCALLERHASH);			
 			nuSetHash('type', 'igetreport');
 			
 			nuBindCtrlEvents();

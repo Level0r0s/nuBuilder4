@@ -44,7 +44,7 @@ function nuGetForm(f, r, filter, n){
 		data     : {nuSTATE : w},
 		dataType : "json"
 		}).done(function(data){
-console.log(data);
+
 			var fm 	= data;
 
 			if(nuDisplayError(fm.errors)){

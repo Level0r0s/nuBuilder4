@@ -604,7 +604,7 @@ function nuRunReport($nuRID){
 	$nuI								= $nuA->sre_zzzzsys_php_id;
 	$nuT								= nuRunQuery("SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = '$nuI'");
 	$nuR								= db_fetch_object($nuT);
-	$_POST['nuHash']['sph_php']		= $nuR->sph_php;
+	$_POST['nuHash']['sph_php']		= nuReplaceHashVariables($nuA->sph_php);
 	$nuJ								= json_encode($_POST['nuHash']);
 	$nuS								= "INSERT INTO zzzzsys_debug (zzzzsys_debug_id, deb_message) VALUES (?, ?)";
 	nuRunQuery($nuS, array($id, $nuJ));
@@ -860,16 +860,13 @@ function nuAddToHashList($J, $run){
 	
 	if($run == 'php'){
 		
-		$hash['sph_php']          = $J->sph_php;
+		$hash['sph_php']          = nuReplaceHashVariables($J->sph_php);
 		
 	}
 
     return $hash;
 
 }
-
-
-
 
 function nuSchema(){
 
