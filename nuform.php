@@ -79,7 +79,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 					$o->value= $r->sob_all_label;
 				}
 
-				if($r->sob_all_type == 'display')
+				if($r->sob_all_type == 'display'){
 					$disS	= nuReplaceHashVariables($r->sob_display_sql);
 					$disT	= nuRunQuery($disS);
 					$disR	= db_fetch_row($disT);

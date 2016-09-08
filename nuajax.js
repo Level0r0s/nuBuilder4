@@ -62,7 +62,6 @@ console.log(data);
 			
 		}).fail(function(xhr, err){
 			alert(nuFormatAjaxErrorMessage(xhr, err));
-			console.log(err);
 	});
 	
 }
