@@ -1,4 +1,6 @@
+
 function nuAjax(w,successCallback,errorCallback) {
+
  	$.ajax({
         	timeout  : 3000,
 		async    : true,  
@@ -6,15 +8,15 @@ function nuAjax(w,successCallback,errorCallback) {
 		url      : "nuapi.php",
         	method   : "POST",
         	data     : {nuSTATE : w},
-        	dataType : "json",
+        	dataType : "json",			
         	success: function(data,textStatus,jqXHR){
             		successCallback(data,textStatus,jqXHR);
         	},
         	error: function(jqXHR,textStatus,errorThrown){
-			console.log(jqXHR);
-			console.log(textStatus);
-			console.log(errorThrown);
-			if (errorCallback !== undefinded) {
+			console.log('jqXHR : ' + jqXHR);
+			console.log('textStatus : ' + textStatus);
+			console.log('errorThrown : ' + errorThrown);
+			if (errorCallback !== undefined) {
 				errorCallback(jqXHR,textStatus,errorThrown);
 			}
 			nuFormatAjaxErrorMessage(jqXHR, errorThrown);
@@ -23,6 +25,7 @@ function nuAjax(w,successCallback,errorCallback) {
 			//todo - probably not needed
 		} 
     	});    
+
 }
 
 function nuGetForm(f, r, filter, n){
@@ -117,8 +120,8 @@ function nuGetPDF(f, r){
 	w.call_type	= 'getreport';
 	w.form_id	= f;
 	w.record_id	= r;
-	w.hash		= nuHashFromEditForm();
-	
+	w.hash		= parent.nuHashFromEditForm();
+
 	var successCallback = function(data,textStatus,jqXHR){
                 var fm  = data;
                 if(nuDisplayError(fm.errors)){
@@ -142,8 +145,9 @@ function nuRunReport(f, iframe){
 	w.call_type	= 'runreport';
 	w.form_id	= f;
 	w.hash		= nuHashFromEditForm();
-
+	
 	var successCallback = function(data,textStatus,jqXHR){
+		
 		var fm 	= data;
 		if(nuDisplayError(fm.errors)){
 			nuBC.splice(nuBC.length-1,1);
@@ -155,6 +159,7 @@ function nuRunReport(f, iframe){
 				$('#'+iframe).attr('src',pdfUrl);
 			}
 		}
+		
 	}
 	nuAjax(w,successCallback);
 }
@@ -249,8 +254,10 @@ function nuUpdateData(){
 	w.hash		= nuHashFromEditForm();
 	w.subforms	= nuGetSFArrays();
 	w.session_id	= window.nuSESSION;
+
 	var successCallback = function(data,textStatus,jqXHR){
 		var fm 	= data;
+
 		if(nuDisplayError(fm.errors)){
 			nuBC.splice(nuBC.length-1,1);
 			nuAbortSave();
@@ -264,6 +271,7 @@ function nuUpdateData(){
 			nuSavingMessage();
 		}
 	};
+
 	nuAjax(w,successCallback,nuAbortSave);
 }
 

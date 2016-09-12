@@ -185,7 +185,7 @@ function nuLogin(){
 
 
 function nuBuildLookup(t, p){
-debugger;
+
 	var f	= $('#' + t.id).attr('data-nu-form-id');
 	var tar	= $('#' + t.id).attr('data-nu-target');
 	
@@ -517,7 +517,7 @@ function nuValidCaller(o){
 	for (var key in o) {
 		
 		if (key == 'nuVersion' && o[key] == 'nuBuilder4'){
-			return false;
+			return true;
 		}
 	
 	}
@@ -525,4 +525,27 @@ function nuValidCaller(o){
 	return false;
 
 }
+
+
+
+function nuFormValues(){  //-- list of changed fields and values
+
+    var list   = {};
+    
+    $("[data-nu-data]").each(function() {
+        
+        list[$(this).attr('id')] = $(this).val();
+        
+    });
+    
+    var f = {};
+    
+    for (var fld in list) {
+        f[fld] = $('#' + fld).val();
+    }
+
+	return f;
+    
+}
+
 

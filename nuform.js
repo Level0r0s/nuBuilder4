@@ -1,11 +1,7 @@
 
 function nuBuildForm(f){
 
-	window.onbeforeunload = closingCode;
-	
-	function closingCode(){
-	   return null;
-	}
+	window.onbeforeunload = null;
 
 	if(f.form_id == ''){
 		
@@ -14,7 +10,7 @@ function nuBuildForm(f){
 		
 	}
 
-	if(f.schema.length !== undefined){  //-- its an Object
+	if(f.schema.length !== undefined){  //-- its an Object (load these once,  at login)
 
 		window.nuSCHEMA 	= f.schema;
 		window.nuLANGUAGE	= f.translation;
@@ -27,14 +23,7 @@ function nuBuildForm(f){
 	window.nuHASH			= [];                       //-- remove any hash variables previously set.
 	window.nuEDITED		= false;
 	
-	$('body').html('');
-	$('body').removeClass('nuBrowseBody').removeClass('nuEditBody');
-	
-	if(f.record_id == ''){
-		$('body').addClass('nuBrowseBody');
-	}else{
-		$('body').addClass('nuEditBody');
-	}
+	nuSetBODY(f);
 	
 	var b 						= window.nuBC.length-1;
 
@@ -75,6 +64,21 @@ function nuBuildForm(f){
         nuCreateDragOptionsBox(f);
 	}
 }
+
+
+function nuSetBODY(f){
+	
+	$('body').html('');
+	$('body').removeClass('nuBrowseBody nuEditBody');
+	
+	if(f.record_id == ''){
+		$('body').addClass('nuBrowseBody');
+	}else{
+		$('body').addClass('nuEditBody');
+	}
+	
+}
+
 
 function nuResizeiFrame(d, r){
 
@@ -2012,10 +2016,10 @@ function nuCloneAction(){
 }
 
 function nuSaveAction(){
-	
-	nuSavingProgressMessage();
+
+	//nuSavingProgressMessage();
 	nuUpdateData();
-	
+
 }
 
 function nuSavingProgressMessage(){
@@ -2075,10 +2079,10 @@ function nuAddJavascript(f){
 
 function nuHashFromEditForm(){
 
-	var a	= [];//window.nuHASH;
-	var b	= nuBC[nuBC.length-1];
-	var o 	= {};
-	var val 	= '';
+	var a		= [];
+	var b		= nuBC[nuBC.length-1];
+	var o 		= {};
+	var val 		= '';
 	
 	a.push([b.form_id, b.record_id]);		//-- first element is Form and Record ID
 	a.push(['FORM_ID', b.form_id]);
@@ -2104,6 +2108,7 @@ function nuHashFromEditForm(){
 				var d	= new Date(val);
 				var f	= d.getFullYear() + '-' + nuPad2('00' + Number(Number(d.getMonth())+Number(1))) + '-' + nuPad2('00' + d.getDate());
 				a.push([this.id, f]);
+				a.push([this.id, val]);
 
 			}else{
 

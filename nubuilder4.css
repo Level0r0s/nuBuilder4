@@ -248,7 +248,7 @@ input {
 }
 
 .nuLookupCode {
-  background-color: lightblue;
+  background-color: #9ED374;
   border: 1px solid rgba(0, 0, 0, 0.05);
   text-align: left;
   position: absolute;
@@ -456,13 +456,13 @@ input {
 
 .nuSearch {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  background-color: #abd886;
+  background-color: #9ED374;
   text-align: left;
   vertical-align: top;
   color: #666666;
   border: none;
-  font-size: 13px;
-  height: 28px;
+  font-size: 15px;
+  height: 40px;
   padding: 6px;
 }
 

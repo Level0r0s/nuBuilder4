@@ -41,21 +41,21 @@ window.onbeforeunload = nuHomeWarning;
 	$iframe		= $_GET['iframe'];
 	$target		= $_GET['target'];
 	$type		= $_GET['type'];
+	$type		= $_GET['type'] == '' ? 'browse' : $_GET['type'];
 
 	$nuFormats	= json_encode(nuTextFormats(true));
 		
 	print "
 	
-	window.nuVersion	=	'nuBuilder4';
-	window.nuFormats	=	$nuFormats;
+	window.nuVersion		= 'nuBuilder4';
+	window.nuFormats		= $nuFormats;
+	window.nuCALLERHASH	= [];
 	
 	";
 		
 	$h	= "
-
-	if(!nuValidCaller(window.opener) && !nuValidCaller(window.parent)){
-
-	nuCALLERHASH      = null;
+	if(window.parent == window && !nuValidCaller(window.opener)){
+		
 
 		function nuLoad(){
 			nuBindCtrlEvents();
@@ -72,14 +72,11 @@ window.onbeforeunload = nuHomeWarning;
 				var from		= window['opener'];
 			}
 			
-//			nuCALLERHASH      = from.nuReplaceHashVariables();
-
+			nuCALLERHASH      = from.nuHashFromEditForm();
 			window.nuTYPE		= '$type';
 			window.nuTARGET	= '$target';
 			window.nuSESSION	= from.nuSESSION;
 			var p			= from.nuOPENER[0$opener];
-//parent.console.log('nuCALLERHASH', nuCALLERHASH);			
-			nuSetHash('type', 'igetreport');
 			
 			nuBindCtrlEvents();
 
