@@ -540,11 +540,14 @@ function nuRUN(w, i, l, p, prop){
 
 	nuAddDataTab(id, prop.objects[i].tab, p);
 	
-	$('#' + id).css({'top'     	: Number(prop.objects[i].top),
-					'left'     	: Number(prop.objects[i].left),
-					'width'    	: Number(prop.objects[i].width),
-					'height'   	: Number(prop.objects[i].height),
-					'position' 	: 'absolute'
+	$('#' + id).css({'top'     		: Number(prop.objects[i].top),
+					'left'     		: Number(prop.objects[i].left),
+					'width'    		: Number(prop.objects[i].width),
+					'height'   		: Number(prop.objects[i].height),
+					'border-color'   	: 'grey',
+					'border-style'   	: 'solid',
+					'border-width'   	: 1,
+					'position' 		: 'absolute'
 	});
 
 	if(prop.objects[i].run_method == 'b'){
