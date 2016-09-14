@@ -144,7 +144,7 @@ function nuAddActionButtons(f){
 		
 		$('#nuActionHolder').append("<input id='nuSearchField' type='text' class='nuSearch' onkeypress='nuSearchPressed(event)' value='" + s + "'>&nbsp;");
 		$('#nuActionHolder').append("<input id='nuFilter' style='visibility:hidden;width:0px' value='" + f + "'>");
-		$('#nuActionHolder').append("<input id='nuSearchButton' type='button' class='nuButton' value='Search' onclick='nuSearchAction()'>&nbsp;");
+		$('#nuActionHolder').append("<input id='nuSearchButton' type='button' class='nuActionButton ' value='Search' onclick='nuSearchAction()'>&nbsp;");
 		
 	}
 
@@ -157,7 +157,7 @@ function nuAddActionButtons(f){
 		}
 		
 		if(!draggable) {
-			$('#nuActionHolder').append("<input id='nu" + b[i][1] + "Button' type='button' class='nuButton' value='" + b[i][0] + "' onclick='nu" + b[i][1] + "Action(" + reportID + ")'>&nbsp;");
+			$('#nuActionHolder').append("<input id='nu" + b[i][1] + "Button' type='button' class='nuActionButton' value='" + b[i][0] + "' onclick='nu" + b[i][1] + "Action(" + reportID + ")'>&nbsp;");
 		}
 		
 	}
@@ -544,9 +544,6 @@ function nuRUN(w, i, l, p, prop){
 					'left'     		: Number(prop.objects[i].left),
 					'width'    		: Number(prop.objects[i].width),
 					'height'   		: Number(prop.objects[i].height),
-					'border-color'   	: 'grey',
-					'border-style'   	: 'solid',
-					'border-width'   	: 1,
 					'position' 		: 'absolute'
 	});
 
@@ -559,7 +556,7 @@ function nuRUN(w, i, l, p, prop){
 		}).addClass('nuButton');
 		
 	}else{
-	    
+
 		var F	= prop.objects[i].form_id;
 		var R	= prop.objects[i].record_id;
 		var P	= window.location.pathname;
@@ -570,7 +567,7 @@ function nuRUN(w, i, l, p, prop){
 
 		var open = window.nuOPENER.length - 1;
 		var u	= window.location.origin + f + prop.objects[i].src;
-		$('#' + id).attr('src', u)
+		$('#' + id).attr('src', u).removeClass('').addClass('nuIframe');
 
 	}
 
@@ -2064,7 +2061,7 @@ function nuAbortSave(){
 }  
 
 function nuAddJavascript(f){
-	
+
 	nuLoadEdit	= null;
 	nuLoadBrowse	= null;
 	
