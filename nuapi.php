@@ -15,8 +15,7 @@
 	$_POST['procedures']					= array();  //
 	$f->forms[0]							= new stdClass;
 	$s									= nuCheckSession();
-nudebug('ssss'.print_r($s,1));
-	//$_POST['nuHash']['TABLE_ID'] 			= nuTT();
+
 	$_POST['nuHash']['PREVIOUS_RECORD_ID'] 	= $s->record_id;
 	$_POST['nuHash']['RECORD_ID'] 			= $s->record_id;
 	$_POST['nuHash']['FORM_ID'] 			= $s->form_id;

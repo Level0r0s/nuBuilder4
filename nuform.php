@@ -1,7 +1,7 @@
 <?php
 
 function nuBeforeBrowse($f){
-	
+
 	$s		= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$f'";
 	$t		= nuRunQuery($s);
 	$r		= db_fetch_object($t);
@@ -23,8 +23,18 @@ function nuBeforeOpen($f, $o){
 	
 }
 
-function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
+
+function nuFormCode($f){
 	
+	$s	= "SELECT sfo_code FROM zzzzsys_form WHERE zzzzsys_form_id = '$f'";
+	$t	= nuRunQuery($s);
+	$r	= db_fetch_row($t);
+	return $r[0];
+	
+}
+
+function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
+
     $tabs 			= nuBuildTabList($F);
     $f				= nuGetEditForm($F);
     $f->form_id		= $F;
@@ -773,6 +783,35 @@ function nuBrowseWhereClause($searchFields, $searchString, $returnArray = false)
 
 function nuCheckSession(){
 
+
+
+
+	$q					= "SELECT * FROM zzzzsys_session WHERE zzzzsys_session_id = '$s'";
+	$t					= nuRunQuery($q);
+	$r					= db_fetch_object($t);
+	$JSONACCESS			= json_decode($r->sss_access);
+
+	$_POST['forms']		= $JSONACCESS->forms;
+	$_POST['reports']		= $JSONACCESS->reports;
+	$_POST['procedures']	= $JSONACCESS->procedures;
+
+
+
+
+
+
+
+
+
+
+
+//	$_POST['forms']						= array();  //
+//	$_POST['reports']						= array();  // -- level access
+//	$_POST['procedures']					= array();  //
+
+
+
+
 	$u						= $_POST['nuSTATE']['username'];
 	$p						= $_POST['nuSTATE']['password'];
 	$s						= $_POST['nuSTATE']['session_id'];
@@ -857,7 +896,7 @@ function nuCheckSession(){
 		if(db_num_rows($t) > 0){
 			
 			$c->form_id				= $_POST['nuSTATE']['form_id'];
-			$c->record_id			= $_POST['nuSTATE']['record_id'];
+			$c->record_id				= $_POST['nuSTATE']['record_id'];
 			
 			$r = db_fetch_object($t);
 			$nuJ = json_decode($r->sss_access);
@@ -874,27 +913,31 @@ function nuCheckSession(){
 
 	}
 
-    $sql = "
-        SELECT * FROM zzzzsys_session WHERE zzzzsys_session_id = '$s'
-    ";
-    $SesQry = nuRunQuery($sql);
-    $SesObj = db_fetch_object($SesQry);
+    $sql					= "SELECT * FROM zzzzsys_session WHERE zzzzsys_session_id = '$s'";
+    $SesQry				= nuRunQuery($sql);
+    $SesObj				= db_fetch_object($SesQry);
+	$JSONACCESS			= json_decode($SesObj->sss_access);
+	$_POST['forms']		= $JSONACCESS->forms;
+	$_POST['reports']		= $JSONACCESS->reports;
+	$_POST['procedures']	= $JSONACCESS->procedures;
 
 	if($SesObj->sss_zzzzsys_user_id != 'globeadmin' && $c->form_id != 'nuhome') {
 		
 		if($c->call_type == 'getreport'){
 			
-			if(!in_array($c->form_id, $_POST['reports'])) { //form_id is record_id for getreport
+			if(in_array($c->form_id, $_POST['reports'])) { //form_id is record_id for getreport
+			
 				$nuT	= nuRunQuery("SELECT * FROM zzzzsys_report WHERE zzzzsys_report_id = '$c->record_id'");
 				$nuR	= db_fetch_object($nuT);
 				
 				nuDisplayError("Access To Report Denied... ($nuR->sre_code)");
+				
 			}	
 			
 		}
 
 		if($c->call_type == 'getphp'){
-			if(!in_array($c->form_id, $_POST['procedures'])) { //form_id is record_id for getphp
+			if(in_array($c->form_id, $_POST['procedures'])) { //form_id is record_id for getphp
 			
 				$nuT	= nuRunQuery("SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = '$c->record_id'");
 				$nuR	= db_fetch_object($nuT);
@@ -904,7 +947,7 @@ function nuCheckSession(){
 				
 		}
 
-		if(!in_array($c->form_id, $_POST['forms']) && $c->call_type == 'getform'){
+		if(in_array($c->form_id, $_POST['forms']) && $c->call_type == 'getform'){
 
 			$nuT	= nuRunQuery("SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$c->form_id'");
 			$nuR	= db_fetch_object($nuT);
@@ -1131,7 +1174,15 @@ function nuSetAccessibility($s = ''){
 		$a				= array();
 		$t				= nuRunQuery("SELECT zzzzsys_form_id FROM zzzzsys_form");
 		
-		while($r	= db_fetch_row($t)){$a[] = $r[0];}	
+		while($r	= db_fetch_row($t)){
+			
+			if(in_array($r[0], $_POST['forms'])){
+				
+				$a[] = $r[0];
+				
+			}
+			
+		}
 		
 		$_POST['forms']	= $a;
 

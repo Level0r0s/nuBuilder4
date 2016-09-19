@@ -248,7 +248,7 @@ function nuFormatValue($row, $i){
 
 }
 
-function nuReplaceHashVariables($s, $p=0){
+function nuReplaceHashVariables($s){
 
 	$s		= trim($s);
 	
@@ -265,9 +265,6 @@ function nuReplaceHashVariables($s, $p=0){
 		$s	= str_replace ('#' . $k . '#', $v, $s);
 	}
 	
-	if($p!=0){
-		nudebug(p .' ' . print_r($s,1));
-	}
 	return $s;
 
 }
