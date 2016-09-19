@@ -144,7 +144,13 @@ function nuAddActionButtons(f){
 		
 		$('#nuActionHolder').append("<input id='nuSearchField' type='text' class='nuSearch' onkeypress='nuSearchPressed(event)' value='" + s + "'>&nbsp;");
 		$('#nuActionHolder').append("<input id='nuFilter' style='visibility:hidden;width:0px' value='" + f + "'>");
-		$('#nuActionHolder').append("<input id='nuSearchButton' type='button' class='nuActionButton ' value='Search' onclick='nuSearchAction()'>&nbsp;");
+		
+		windowAction = '';
+		if(window.nuTYPE == 'lookup') {
+			windowAction = window.nuTYPE;
+		}
+		
+		$('#nuActionHolder').append("<input id='nuSearchButton' type='button' class='nuActionButton ' value='Search' onclick='nuSearchAction(\""+windowAction+"\")'>&nbsp;");
 		
 	}
 
