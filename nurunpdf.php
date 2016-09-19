@@ -18,7 +18,7 @@ $hashData                   = nuAddToHashList($JSON, 'report');
 $hashData['TABLE_ID']       = $TABLE_ID;
 $GLOBALS['TABLE_ID']        = $TABLE_ID;
 $_POST['nuHash']			 = $hashData;
-$PHP		                   = nuReplaceHashVariables($JSON->sph_php);
+$PHP		                   = nuReplaceHashVariables($JSON->sph_php,'rep');
 
 nuRunQuery("DELETE FROM zzzzsys_debug WHERE zzzzsys_debug_id = ? ", array($jsonID));
 
@@ -1014,6 +1014,7 @@ function nuMakeSummaryTable($REPORT, $TABLE_ID){
 function nuAddCriteriaValues($hashData, $T){
 
     $c = db_columns($T);
+
     $a = array();
 
     foreach($hashData AS $key => $value){

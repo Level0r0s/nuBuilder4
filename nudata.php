@@ -248,14 +248,13 @@ function nuFormatValue($row, $i){
 
 }
 
-function nuReplaceHashVariables($s){
+function nuReplaceHashVariables($s, $p=0){
 
 	$s		= trim($s);
 	
 	if($s == ''){
 		return '';
 	}
-	
 	$a = $_POST['nuHash'];
 
 	if ( !is_array($a) ) {
@@ -265,7 +264,10 @@ function nuReplaceHashVariables($s){
 	foreach ($a as $k => $v) {
 		$s	= str_replace ('#' . $k . '#', $v, $s);
 	}
-
+	
+	if($p!=0){
+		nudebug(p .' ' . print_r($s,1));
+	}
 	return $s;
 
 }

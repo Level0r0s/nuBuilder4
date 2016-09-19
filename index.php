@@ -49,7 +49,6 @@ window.onbeforeunload = nuHomeWarning;
 	
 	window.nuVersion		= 'nuBuilder4';
 	window.nuFormats		= $nuFormats;
-	window.nuCALLERHASH	= [];
 	
 	";
 		
@@ -63,7 +62,7 @@ window.onbeforeunload = nuHomeWarning;
 		}
 		
 	}else{
-		
+
 		function nuLoad(){
 			
 			if(nuValidCaller(window.parent)){
@@ -72,7 +71,6 @@ window.onbeforeunload = nuHomeWarning;
 				var from		= window['opener'];
 			}
 			
-			nuCALLERHASH      = from.nuHashFromEditForm();
 			window.nuTYPE		= '$type';
 			window.nuTARGET	= '$target';
 			window.nuSESSION	= from.nuSESSION;

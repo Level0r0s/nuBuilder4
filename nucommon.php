@@ -582,12 +582,48 @@ function nuTextFormats($dropdownList = false){
 
 }
 
-function nuSetHashList($H){
+function nuSetHashList($p){
+	
+	$H	= $p['hash'];
+	$r	= array();
 
 	for($i = 1 ; $i < count($H) ; $i++){
 		$r[$H[$i][0]]	= $H[$i][1];
 	}
+	
+	$fid	= $p['form_id'];
+	$rid	= $p['record_id'];
+	
+	if($fid == '' or $rid == ''){
+		return $r;
+	}else{
 
+		$s	= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$fid'";
+		$t	= nuRunQuery($s);
+		$R	= db_fetch_object($t);
+		
+		$s	= "SELECT * FROM $R->sfo_table WHERE $R->sfo_primary_key = '$rid'";
+		$t	= nuRunQuery($s);
+		$f	= db_fetch_object($t);
+
+		if (is_object($f) ) { 
+			foreach ( $f as $fld => $value )  {
+			
+				$r[$fld] = $value;
+			
+			}
+		} else {
+			$this_type = gettype($f);
+			error_log("f is not an object, it is a $this_type, see line 607 in nucommon.php",0);
+			error_log("sql which returned the non-object was $s",0);
+		}
+		
+		$r['PREVIOUS_RECORD_ID']	= $rid;
+		$r['RECORD_ID']			= $rid;
+		$r['FORM_ID']				= $fid;
+		
+	}
+	
 	return $r;
 
 }
@@ -595,7 +631,7 @@ function nuSetHashList($H){
 
 function nuRunReport($nuRID){
 	
-	$id								= nuID();
+	$nuID							= nuID();
 	$nuT								= nuRunQuery("SELECT * FROM zzzzsys_report WHERE zzzzsys_report_id = '$nuRID'");
 	$nuA								= db_fetch_object($nuT);
 	$_POST['nuHash']['code']			= $nuA->sre_code;
@@ -604,12 +640,12 @@ function nuRunReport($nuRID){
 	$nuI								= $nuA->sre_zzzzsys_php_id;
 	$nuT								= nuRunQuery("SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = '$nuI'");
 	$nuR								= db_fetch_object($nuT);
-	$_POST['nuHash']['sph_php']		= nuReplaceHashVariables($nuA->sph_php);
+	$_POST['nuHash']['sph_php']		= nuReplaceHashVariables($nuR->sph_php,'rr');
 	$nuJ								= json_encode($_POST['nuHash']);
 	$nuS								= "INSERT INTO zzzzsys_debug (zzzzsys_debug_id, deb_message) VALUES (?, ?)";
-	nuRunQuery($nuS, array($id, $nuJ));
+	nuRunQuery($nuS, array($nuID, $nuJ));
 	
-	return $id;
+	return $nuID;
 	
 }
 

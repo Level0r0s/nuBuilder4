@@ -49,7 +49,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
     FROM zzzzsys_form
     INNER JOIN zzzzsys_object ON sob_all_zzzzsys_form_id = zzzzsys_form_id
     WHERE zzzzsys_form_id = '$F'
-    ORDER BY sob_all_order    
+    ORDER BY (sob_all_type = 'run'), sob_all_order    
 
     ";
 
@@ -108,7 +108,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 					$o->src		= 'nurunphp.php?i=' . nuRunPHP($type);
 					
 				}else if(isReport($type)){
-					
+nudebug('isreport '.print_r($_POST['nuHash'],1));					
 					$o->run_type	= 'R';
 					$o->form_id	= $type;
 					$o->record_id	= $r->sob_run_id;
@@ -777,10 +777,12 @@ function nuCheckSession(){
 	$p						= $_POST['nuSTATE']['password'];
 	$s						= $_POST['nuSTATE']['session_id'];
 	$ct						= $_POST['nuSTATE']['call_type'];
+
 	$_POST['nuLogAgain']		= 0;
 	$_POST['nuIsGlobeadmin']	= 0;
 	$c						= new stdClass;
 	$c->record_id				= '-1';
+	$c->table_id				= $_POST['nuHash']['TABLE_ID'];
 	$c->form_id				= $_POST['nuSTATE']['form_id'];
 	$c->session_id			= $s;
 	$c->call_type				= $ct;
