@@ -7,19 +7,16 @@
     require_once('nudrag.php');
 
 	$P									= $_POST['nuSTATE'];
-	$_POST['nuHash']						= nuSetHashList($P);
-	$_POST['nuValidate']					= array();
-	$_POST['nuErrors']					= array();
-	$_POST['forms']						= array();  //
-	$_POST['reports']						= array();  // -- level access
-	$_POST['procedures']					= array();  //
-	$f->forms[0]							= new stdClass;
 	$s									= nuCheckSession();
-
+	$_POST['nuHash']						= nuSetHashList($P);
 	$_POST['nuHash']['PREVIOUS_RECORD_ID'] 	= $s->record_id;
 	$_POST['nuHash']['RECORD_ID'] 			= $s->record_id;
 	$_POST['nuHash']['FORM_ID'] 			= $s->form_id;
 	$_POST['nuHash']['SESSION_ID'] 			= $s->session_id;
+	$_POST['nuValidate']					= array();
+	$_POST['nuErrors']					= array();
+	
+	$f->forms[0]							= new stdClass;
 
 	if($P['call_type'] == 'getform')		{nuBeforeOpen($s->form_id, $s->record_id);$f->forms[0] = nuGetFormObject($s->form_id, $s->record_id, 0, $P);}
 	if($P['call_type'] == 'update')			{$f->forms[0]->record_id		= nuUpdateData();}

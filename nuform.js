@@ -36,7 +36,7 @@ function nuBuildForm(f){
 	window.nuBC[b].browse_columns	= f.browse_columns;
 	window.nuBC[b].browse_rows		= f.browse_rows;
 	window.nuBC[b].pages			= f.pages;
-console.log('f',f);
+
 	nuResizeiFrame(f.dimensions, f.record_id);
 
 	nuAddHolder('nuActionHolder');
@@ -620,20 +620,28 @@ function nuSELECT(w, i, l, p, prop){
 	
 	$('#' + id).css('height', Number(prop.objects[i].height));
 
-		var values = String(w.objects[i].value).split('#nuSep#');
+	var values = String(w.objects[i].value).split('#nuSep#');
 
 	if(values.length == '0'){
+		
 		$('#' + id).append('<option  value=""></option>');		//-- add a blank option at the top
-	} else {
+		
+	}else{
+		
 		$('#' + id).append('<option  value=""></option>');
+
 		for(var n = 0 ; n < prop.objects[i].options.length ; n++){
 
 			if(values.indexOf(prop.objects[i].options[n][0]) == -1){
+				
 				$('#' + id).append('<option  value="'+prop.objects[i].options[n][0]+'">'+prop.objects[i].options[n][1]+'</option>');
+				
 			}else{
+				
 				$('#' + id).append('<option selected="selected "value="'+prop.objects[i].options[n][0]+'">'+prop.objects[i].options[n][1]+'</option>');
+				
 			}
-			
+
 		}
 	}
 	

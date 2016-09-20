@@ -593,7 +593,7 @@ function nuSetHashList($p){
 	
 	$fid	= $p['form_id'];
 	$rid	= $p['record_id'];
-	
+nudebug("$fid == '' or $rid " . print_r($p,1));;
 	if($fid == '' or $rid == ''){
 		return $r;
 	}else{
@@ -861,7 +861,7 @@ function ColorToHex($pColor){
 
 
 function nuAddToHashList($J, $run){
-
+nudebug(print_r($J,1));
     $hash               = array();
     $ignore             = array();
     $ignore[]           = 'sre_layout';

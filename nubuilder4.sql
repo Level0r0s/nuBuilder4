@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 16, 2016 at 08:22 AM
+-- Generation Time: Sep 20, 2016 at 06:16 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -491,7 +491,8 @@ INSERT INTO `employee` (`employee_id`, `emp_company_id`, `emp_name`, `emp_mobile
 ('57d62ae13c69104', '57d5fabf102335b', 'r6yu', '', ''),
 ('57d62b6de6d9282', '57d5fabf102335b', 'tydufy77i', '', ''),
 ('57d63ace507c7fa', '57d5fabf102335b', '', '', '568a00f3e57f096'),
-('57d9cbccee74ec0', '57d5fabf102335b', '', 'Sep-22-2016', '');
+('57d9cbccee74ec0', '57d5fabf102335b', '', 'Sep-22-2016', ''),
+('57df373ddbb853a', '57295aa5660f48b', '', '', '568a00f3e57f096');
 
 -- --------------------------------------------------------
 
@@ -538,7 +539,8 @@ CREATE TABLE `zzzzsys_access_level` (
 --
 
 INSERT INTO `zzzzsys_access_level` (`zzzzsys_access_level_id`, `sal_code`, `sal_description`, `sal_zzzzsys_form_id`) VALUES
-('57678e7dc00c099', 'ADMIN', 'Admin', 'nuhome');
+('57678e7dc00c099', 'ADMIN', 'Admin', 'nuhome'),
+('57df38d1bdf5ae5', 'COM', 'company', 'nuhome');
 
 -- --------------------------------------------------------
 
@@ -567,7 +569,8 @@ INSERT INTO `zzzzsys_access_level_form` (`zzzzsys_access_level_form_id`, `slf_zz
 ('5773260358ccf77', '57678e7dc00c099', '56c513162acd102', '', '', '', '', '', ''),
 ('57678f1c543a37f', '57678e7dc00c099', 'nublank', '', '', '', '', '', ''),
 ('57ad1e15a537a9f', '57678e7dc00c099', 'nulaunchdates', '', '', '', '', '', ''),
-('57ad5184a1f8873', '57678e7dc00c099', 'nupassword', '', '', '', '', '', '');
+('57ad5184a1f8873', '57678e7dc00c099', 'nupassword', '', '', '', '', '', ''),
+('57df39025b9d6af', '57df38d1bdf5ae5', '56773cb405f4913', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -607,7 +610,8 @@ CREATE TABLE `zzzzsys_access_level_report` (
 INSERT INTO `zzzzsys_access_level_report` (`zzzzsys_access_level_report_id`, `sre_zzzzsys_access_level_id`, `sre_zzzzsys_report_id`) VALUES
 ('576784e884ccacc', NULL, '574b98244516a9b'),
 ('576784e884cd735', NULL, '574b9845a681d27'),
-('57678f1c543edd9', '57678e7dc00c099', '574b9845a681d27');
+('57678f1c543edd9', '57678e7dc00c099', '574b9845a681d27'),
+('57e0b49602acfce', '57df38d1bdf5ae5', '574b9845a681d27');
 
 -- --------------------------------------------------------
 
@@ -961,23 +965,23 @@ CREATE TABLE `zzzzsys_object` (
 --
 
 INSERT INTO `zzzzsys_object` (`zzzzsys_object_id`, `sob_all_zzzzsys_form_id`, `sob_all_type`, `sob_all_id`, `sob_all_label`, `sob_all_zzzzsys_tab_id`, `sob_all_order`, `sob_all_top`, `sob_all_left`, `sob_all_width`, `sob_all_height`, `sob_all_cloneable`, `sob_all_align`, `sob_all_validate`, `sob_all_readonly`, `sob_all_display_condition`, `sob_all_default_value_sql`, `sob_run_zzzzsys_form_id`, `sob_run_filter`, `sob_run_method`, `sob_run_id`, `sob_display_sql`, `sob_select_multiple`, `sob_select_sql`, `sob_lookup_code`, `sob_lookup_description`, `sob_lookup_description_width`, `sob_lookup_autocomplete`, `sob_lookup_zzzzsys_form_id`, `sob_lookup_javascript`, `sob_lookup_php`, `sob_subform_zzzzsys_form_id`, `sob_subform_foreign_key`, `sob_subform_add`, `sob_subform_delete`, `sob_subform_type`, `sob_input_format`, `sob_input_type`, `sob_html_code`) VALUES
-('567742c772b9642', '56773cb405f4913', 'input', 'com_name', 'Company Name', '56777715b87666e', 20, 60, 136, 100, 18, '1', 'left', 'noduplicates', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+('567742c772b9642', '56773cb405f4913', 'input', 'com_name', 'Company Name', '56777715b87666e', 20, 60, 153, 100, 18, '1', 'left', 'noduplicates', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('56789912d6d9ddb', '56773cb405f4913', 'input', 'com_address', 'Address', '567898dbc543710', 100, 12, 74, 200, 18, '1', 'left', 'none', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'text', ''),
 ('5678992c5432850', '56773cb405f4913', 'input', 'com_suburb', 'Suburb', '567898dbc543710', 110, 41, 74, 70, 18, '1', 'left', 'none', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'text', ''),
-('5678a9474a323f5', '56773cb405f4913', 'input', 'com_phone', 'Phone Date', '56777715b87666e', 30, 96, 136, 111, 18, '1', 'left', 'none', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '6', '', ''),
+('5678a9474a323f5', '56773cb405f4913', 'input', 'com_phone', 'Phone Date', '56777715b87666e', 30, 96, 153, 111, 18, '1', 'left', 'none', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '6', '', ''),
 ('5678ac0f8f3d3b8', '5678ab2c48c5c41', 'input', 'emp_name', 'Name', '5678ab2c49bd810', 10, 11, 100, 200, 18, '1', 'left', 'noduplicates', '0', '', '', 'nuuser', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('5679d499ad76e9f', '5678ab2c48c5c41', 'input', 'emp_mobile', 'Mobile', '569c44dd2339963', 30, 24, 97, 136, 17, '1', 'left', 'noblanks', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '8', 'text', ''),
 ('5689fdaf9babfb9', '56773cb405f4913', 'select', 'com_color_id', 'Color', '56777715b87666e', 60, 108, 337, 100, 159, '1', 'left', 'noblanks', '0', '', '', '', '', '', '', '', '1', 'SELECT \ncolor_id,\ncol_description\nFROM color\nORDER BY col_description', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-('568b50020fc7a62', '56773cb405f4913', 'lookup', 'com_business_id', 'Business Type', '56777715b87666e', 10, 10, 136, 60, 18, '1', 'left', 'noblanks', '0', '', '', '', '', '', '', '', '', '', 'bus_code', 'bus_description', '200', '0', '568b508eec00d80', '', '', '', '', '', '', '', '', '', ''),
-('568b543dab1d274', '56773cb405f4913', 'display', 'com_age', 'hi', '56777715b87666e', 40, 132, 136, 70, 18, '1', 'right', 'noblanks', '0', '', '', '', '', '', '', 'SELECT 12;', '', '', 'theCode', 'theDescription', '150', '0', '568b508eec00d80', '', '', '', '', '', '', '', '', '', ''),
+('568b50020fc7a62', '56773cb405f4913', 'lookup', 'com_business_id', 'Business Type', '56777715b87666e', 10, 10, 153, 60, 18, '1', 'left', 'noblanks', '0', '', '', '', '', '', '', '', '', '', 'bus_code', 'bus_description', '200', '0', '568b508eec00d80', '', '', '', '', '', '', '', '', '', ''),
+('568b543dab1d274', '56773cb405f4913', 'display', 'com_age', 'hi', '56777715b87666e', 40, 132, 153, 70, 18, '1', 'right', 'noblanks', '0', '', '', '', '', '', '', 'SELECT 12;', '', '', 'theCode', 'theDescription', '150', '0', '568b508eec00d80', '', '', '', '', '', '', '', '', '', ''),
 ('568dca341ca3737', '56773cb405f4913', 'run', 'com_run', 'Bus. Browse', '56777715b87666e', 80, 63, 337, 100, 30, '1', 'right', 'noblanks', '0', '', '', 'nublank', '', 'b', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-('568ddbbf00aae51', '56773cb405f4913', 'subform', 'com_subform', 'Subform', '56777715b87666e', 70, 308, 116, 401, 300, '1', 'right', 'noblanks', '0', '', '', '568b508eec00d80', '', 'i', '', '', '', '', '', '', '', '', '', '', '', '5678ab2c48c5c41', 'emp_company_id', '1', '1', 'f', '', '', '<div style=\\"top:0px;left:0px;width:200px;height:200px;background-color:tan;\\">Hello World</div>'),
+('568ddbbf00aae51', '56773cb405f4913', 'subform', 'com_subform', 'Subform', '56777715b87666e', 70, 308, 153, 401, 300, '1', 'right', 'noblanks', '0', '', '', '568b508eec00d80', '', 'i', '', '', '', '', '', '', '', '', '', '', '', '5678ab2c48c5c41', 'emp_company_id', '1', '1', 'f', '', '', '<div style=\\"top:0px;left:0px;width:200px;height:200px;background-color:tan;\\">Hello World</div>'),
 ('569dc5613f24e14', 'nuhome', 'run', 'run_browse', 'Company', '569dc4ed270f08a', 10, 164, 92, 150, 30, '1', 'right', 'noblanks', '0', '', '', '56773cb405f4913', '', 'b', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('56b2b18903c9991', '568b508eec00d80', 'input', 'bus_code', 'Code', '568b508eecf5dee', 0, 10, 50, 100, 18, '1', 'left', 'noblanks', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('56b2b1afab7397e', '568b508eec00d80', 'input', 'bus_description', 'Description', '568b508eecf5dee', 0, 40, 100, 100, 18, '1', 'left', 'noblanks', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('56b2b1c7939942e', '568b508eec00d80', 'input', 'bus_check', 'Check', '568b508eecf5dee', 0, 100, 50, 30, 18, '1', 'left', 'noblanks', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('5716e2428f5e8fb', 'nuobject', 'subform', 'sob_all_event_subform', 'Javascript', '570d90df5ce8e1a', 170, 288, 495, 355, 110, '1', 'left', 'noblanks', '0', '', '', '', '', 'b', '', '', '0', '0|No|1|Yes', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', 'nuevent', 'sev_zzzzsys_object_id', '1', '1', 'g', '0', 'text', ''),
-('56b7e275560be71', '56773cb405f4913', 'textarea', 'com_notes', 'Notes', '56777715b87666e', 50, 168, 136, 150, 77, '1', 'left', 'none', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+('56b7e275560be71', '56773cb405f4913', 'textarea', 'com_notes', 'Notes', '56777715b87666e', 50, 168, 153, 150, 77, '1', 'left', 'none', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('56c0fd692478b9e', '5678ab2c48c5c41', 'lookup', 'emp_business_id', 'Business Type', '5678ab2c49bd810', 20, 40, 104, 60, 18, '1', 'left', 'none', '0', '', '', '', '', '', '', '', '', '', 'bus_code', 'bus_description', '150', '0', '568b508eec00d80', '', '', '', '', '', '', '', '', '', ''),
 ('nuaccess', 'nuhome', 'run', 'run_access', 'Access Levels', '569dc4ed270f08a', 20, 50, 622, 150, 30, '1', 'left', 'noblanks', '0', '', '', 'nuaccess', '', 'b', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('57073c3a0b4ea44', 'nuform', 'select', 'sfo_type', 'Form Tab', '570730313dd25c5', 10, 10, 100, 200, 18, '1', 'left', 'noblanks', '0', '', '', '', '', '', '', '', '', 'browse|Browse|edit|Edit|browseedit|Browse and Edit|launch|Launch|subform|Subform Only', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
@@ -1219,140 +1223,6 @@ CREATE TABLE `zzzzsys_session` (
   `sss_access` mediumtext NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `zzzzsys_session`
---
-
-INSERT INTO `zzzzsys_session` (`zzzzsys_session_id`, `sss_zzzzsys_user_id`, `sss_timeout`, `sss_access`) VALUES
-('57d6386c6bd743c', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57d63a3851e74f9', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57d63a4d6d88979', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57d765bce957c38', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57d7675501c782f', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57d9cab7563c303', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57d9d2a65e10f69', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57d9d308495257d', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57d9d4849314a5f', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57d9d4ad7614936', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57d9d510a811c8a', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57d9d5bc6d482a8', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57d9d6ad4407179', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57d9d6e6c695700', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57d9d702f080f70', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57d9d793d8c9546', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57d9d9b6edd1c60', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57d9d9e43570729', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57d9da3a2e21183', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57d9db0573a909d', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57d9db3a122c725', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57d9e1938c69cef', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57d9e1bbe169d4e', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57d9e1dfb2ae853', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57d9e27c5e06083', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57d9e29bc40a1b0', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57d9e2caa855cd6', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57d9e2ec7b8bc53', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57d9e30eef6cf26', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57d9e347239d258', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57d9e365878549a', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57d9e37c14e445a', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57d9e3b4e5f2c20', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57d9e3cf1c0d29c', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57d9e3f81077a41', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57d9e4e72ce3be6', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57d9e502131a705', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57d9e51a53b90e0', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57d9e60046d8dc1', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57d9e614e2ee12c', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57d9e67bebe37c5', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57d9e68d35aee9f', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57d9e6d4cf5fce6', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57d9e77ec39be57', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57d9f9ec5030a51', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57d9fa1a95ebfd5', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57d9fa2ccb0319f', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57d9fa432844101', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57d9fa618bd99ca', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57d9fadc2fbba09', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57d9fdc512d2623', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57d9fe02a6aad68', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57d9fe0d577486b', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57d9fe1b2767536', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57da088586000fa', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57da0af2c6d8b02', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57da0d5dcea3154', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57da0e56539ffa4', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57da179e9783062', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57da183499392f1', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57da18531b635b8', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57da18675a45373', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57da19060e68f0a', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57da1a2714f7c9b', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57da1a803f33e7b', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57da1ead586b763', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57da1ec63f44a15', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57da1f47a561db3', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57da20da9ccd49f', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57da21fc2c7d0da', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57da2242e556ad0', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57da23a54077cd9', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57da292ed0eb943', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57da29fd5b12edd', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57da2a9142f4e2d', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57da2aca015d545', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57da2c094e48edc', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57da2cbc9c76171', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57da2d87d3c0e4b', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57da2dbddd1c621', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57da2ded9ae430c', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57da31b19e76488', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57da3237a4bf740', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57da326f892d77f', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57da33e4c4aefd1', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57da356233aae48', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57da37338f2de69', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}');
-INSERT INTO `zzzzsys_session` (`zzzzsys_session_id`, `sss_zzzzsys_user_id`, `sss_timeout`, `sss_access`) VALUES
-('57da37795fbff0b', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57da37dd841e526', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57da392e089cf0c', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57da3a2bc565692', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57da3c6d7b6e3a0', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57da3d386d57bfd', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57da3eb57334cba', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57da3f7b82b2add', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57da403126cc883', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57db2db53a3dde8', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57db30fa98068c4', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57db33da2befa2c', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57db3962cc7e23e', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57db5bb7340d641', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57db5c46219ac35', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57db5ce04f5fddb', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57db5ffde7df265', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57db606d96ef332', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57db6c65c49a86f', '5747caabead2aa8', 0, '{"forms":["56c513162acd102","nublank","nulaunchdates","nupassword","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"],"language":"japanese"}'),
-('57db6c8b0d34847', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f"]}'),
-('57db78e2cfa0c1d', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f","57db70b7aa22cda"]}'),
-('57db7b0be4e9c8b', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f","57db70b7aa22cda"]}'),
-('57db7e03e79a0c7', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f","57db70b7aa22cda"]}'),
-('57db7e3a8a3a590', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f","57db70b7aa22cda"]}'),
-('57db80301582e96', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f","57db70b7aa22cda"]}'),
-('57db8836d8dd3f7', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f","57db70b7aa22cda"]}'),
-('57db8ac6e6a4f64', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f","57db70b7aa22cda"]}'),
-('57db8ae140bd717', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f","57db70b7aa22cda"]}'),
-('57db8afe6c6fc8c', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f","57db70b7aa22cda"]}'),
-('57db8b1e1a06993', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f","57db70b7aa22cda"]}'),
-('57db8b4450f80e8', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f","57db70b7aa22cda"]}'),
-('57db8b69f326d8c', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f","57db70b7aa22cda"]}'),
-('57db8b7b79b53cc', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f","57db70b7aa22cda"]}'),
-('57db8bab94074ee', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f","57db70b7aa22cda"]}'),
-('57db8bcfa06beee', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f","57db70b7aa22cda"]}'),
-('57db8c0300554c4', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f","57db70b7aa22cda"]}'),
-('57db8c533ece4ad', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f","57db70b7aa22cda"]}'),
-('57db8c8ce8588d6', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f","57db70b7aa22cda"]}'),
-('57db8e976dc4e32', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f","57db70b7aa22cda"]}'),
-('57db8f4e5a71069', 'globeadmin', 0, '{"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuevent","nuform","nuhome","nulaunchdates","nulibrary","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["57578be0057a49f","57db70b7aa22cda"]}');
-
 -- --------------------------------------------------------
 
 --
@@ -1528,14 +1398,15 @@ INSERT INTO `zzzzsys_user` (`zzzzsys_user_id`, `sus_zzzzsys_user_group_id`, `sus
 ('5747c596c68fb68', '57466de0851d354', 'japanese', 'Stevendddd', 'steven@nubuilder.com', 'steven', '202cb962ac59075b964b07152d234b70'),
 ('5747c5fa10e4a7d', '57466de0851d354', '', 'Bob', 'bb@gmail.com', 'bob', 'bda9643ac6601722a28f238714274da4'),
 ('5747caabead2aa8', '57466de0851d354', 'japanese', 'jon', 'jon@ddddd.com', '1', 'c4ca4238a0b923820dcc509a6f75849b'),
-('5747cb8ca8d3de3', '57466de0851d354', 'japanese', 'g', 'g', 'g', 'b2f5ff47436671b6e533d8dc3614845d'),
+('5747cb8ca8d3de3', '57df3880bfdf41e', 'japanese', 'g', 'g', 'g', 'b2f5ff47436671b6e533d8dc3614845d'),
 ('5747cc333c476fc', '57466de0851d354', 'japanese', 'Bill12', 'Bill1', 'b', '92eb5ffee6ae2fec3ad71c777531578f'),
 ('5747ce1dd50cdc5', '57466de0851d354', '', '5567777', '55xfgjh', '55', 'b53b3a3d6ab90ce0268229151c9bde11'),
 ('5762478822092cd', '57466de0851d354', '', 'steven', 'steven@nubuilder.com', 's', '03c7c0ace395d80182db07ae2c30f034'),
 ('2', NULL, '', 'davidd', NULL, NULL, NULL),
 ('57d63171080ce15', '', '', 'Kevin', ' bj', '', NULL),
 ('57d63183c0014dd', '', '', 'kevin', '', '', NULL),
-('57d6349019226bd', '', '', 'shane', '', '', NULL);
+('57d6349019226bd', '', '', 'shane', '', '', NULL),
+('57df79826f454f2', '57df3880bfdf41e', '', '1', '1', '1', 'c4ca4238a0b923820dcc509a6f75849b');
 
 -- --------------------------------------------------------
 
@@ -1555,7 +1426,8 @@ CREATE TABLE `zzzzsys_user_group` (
 --
 
 INSERT INTO `zzzzsys_user_group` (`zzzzsys_user_group_id`, `sug_code`, `sug_description`, `sug_zzzzsys_form_id`) VALUES
-('57466de0851d354', 'ADMIN', 'Admin', 'nuhome');
+('57466de0851d354', 'ADMIN', 'Admin', 'nuhome'),
+('57df3880bfdf41e', 'JUSTCOMP', 'Just Company records', 'nuhome');
 
 -- --------------------------------------------------------
 
@@ -1578,619 +1450,8 @@ INSERT INTO `zzzzsys_user_group_access_level` (`zzzzsys_user_group_access_level_
 ('577b0c0fe1c6bb5', '', '577aea8e8844920'),
 ('577b0b676a16826', '', '57678e7dc00c099'),
 ('577b090acb48614', '', '577aea8e8844920'),
-('577b08fdf05e48d', '', '577aea8e8844920');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `___nu157db7e43aaffa___`
---
-
-CREATE TABLE `___nu157db7e43aaffa___` (
-  `company_id` varchar(25) CHARACTER SET utf8 NOT NULL,
-  `com_code` varchar(50) CHARACTER SET utf8 NOT NULL,
-  `com_name` varchar(500) CHARACTER SET utf8 NOT NULL,
-  `com_business_id` varchar(25) CHARACTER SET utf8 NOT NULL,
-  `com_company_id` varchar(25) CHARACTER SET utf8 NOT NULL,
-  `com_address` varchar(500) CHARACTER SET utf8 NOT NULL,
-  `com_suburb` date NOT NULL,
-  `com_phone` varchar(50) CHARACTER SET utf8 NOT NULL,
-  `com_map_coordinates` varchar(300) CHARACTER SET utf8 NOT NULL,
-  `com_sex` varchar(1) CHARACTER SET utf8 NOT NULL,
-  `com_color_id` varchar(250) CHARACTER SET utf8 NOT NULL,
-  `com_age` int(11) NOT NULL,
-  `com_notes` text CHARACTER SET utf8 NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `___nu157db7e43aaffa___`
---
-
-INSERT INTO `___nu157db7e43aaffa___` (`company_id`, `com_code`, `com_name`, `com_business_id`, `com_company_id`, `com_address`, `com_suburb`, `com_phone`, `com_map_coordinates`, `com_sex`, `com_color_id`, `com_age`, `com_notes`) VALUES
-('5678d262e048faa', '0007', 'Terry White2', '568a00c77f8f709', '', '5 Trent Grv', '2016-07-02', '21-May-2014', '11 44', 'f', '568ef920846a089#nuSep#568ef59c1bd769c#nuSep#568ef931d196b3e', 50, 'hello worldsssstfffxv'),
-('5729572e6331281', '', 'Mrs Compr66r36456', '568a00e25b8d271', '', '43 Allen St', '2016-07-01', '07-May-2016', '', '', '568ef59c1bd769c#nuSep#568ef931d196b3e', 0, '13132'),
-('57295aa5660f48b', '', 'Mrs Comuh', '568a00e25b8d271', '', '43 Allen Stkh', '2016-07-03', '18-Jun-2016', '', '', '568ef59c1bd769c', 35, '13132'),
-('57295ed9e996db0', '', 'OPSM111', '56aeff3276dfd7e', '', 'yyyyy', '2016-07-06', '20-May-2016', '', '', '568ef58fe48207a', 35, 'oooo12hh'),
-('5716c7137efb0c5', '', 'OPSM1111', '568a00c77f8f709', '', '43 Allen St', '2016-07-06', '0423345544', '', 'm', '568ef920846a089#nuSep#568ef59c1bd769c#nuSep#568ef931d196b3e', 35, 'hh'),
-('57d5fabf102335b', '', 'vbbvn ', '568a00f3e57f096', '', '', '0000-00-00', '', '', '', '', 35, 'vvccvg wwwfred');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `___nu157db8ac93f892___`
---
-
-CREATE TABLE `___nu157db8ac93f892___` (
-  `company_id` varchar(25) CHARACTER SET utf8 NOT NULL,
-  `com_code` varchar(50) CHARACTER SET utf8 NOT NULL,
-  `com_name` varchar(500) CHARACTER SET utf8 NOT NULL,
-  `com_business_id` varchar(25) CHARACTER SET utf8 NOT NULL,
-  `com_company_id` varchar(25) CHARACTER SET utf8 NOT NULL,
-  `com_address` varchar(500) CHARACTER SET utf8 NOT NULL,
-  `com_suburb` date NOT NULL,
-  `com_phone` varchar(50) CHARACTER SET utf8 NOT NULL,
-  `com_map_coordinates` varchar(300) CHARACTER SET utf8 NOT NULL,
-  `com_sex` varchar(1) CHARACTER SET utf8 NOT NULL,
-  `com_color_id` varchar(250) CHARACTER SET utf8 NOT NULL,
-  `com_age` int(11) NOT NULL,
-  `com_notes` text CHARACTER SET utf8 NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `___nu157db8ac93f892___`
---
-
-INSERT INTO `___nu157db8ac93f892___` (`company_id`, `com_code`, `com_name`, `com_business_id`, `com_company_id`, `com_address`, `com_suburb`, `com_phone`, `com_map_coordinates`, `com_sex`, `com_color_id`, `com_age`, `com_notes`) VALUES
-('5678d262e048faa', '0007', 'Terry White2', '568a00c77f8f709', '', '5 Trent Grv', '2016-07-02', '21-May-2014', '11 44', 'f', '568ef920846a089#nuSep#568ef59c1bd769c#nuSep#568ef931d196b3e', 50, 'hello worldsssstfffxv'),
-('5729572e6331281', '', 'Mrs Compr66r36456', '568a00e25b8d271', '', '43 Allen St', '2016-07-01', '07-May-2016', '', '', '568ef59c1bd769c#nuSep#568ef931d196b3e', 0, '13132'),
-('57295aa5660f48b', '', 'Mrs Comuh', '568a00e25b8d271', '', '43 Allen Stkh', '2016-07-03', '18-Jun-2016', '', '', '568ef59c1bd769c', 35, '13132'),
-('57295ed9e996db0', '', 'OPSM111', '56aeff3276dfd7e', '', 'yyyyy', '2016-07-06', '20-May-2016', '', '', '568ef58fe48207a', 35, 'oooo12hh'),
-('5716c7137efb0c5', '', 'OPSM1111', '568a00c77f8f709', '', '43 Allen St', '2016-07-06', '0423345544', '', 'm', '568ef920846a089#nuSep#568ef59c1bd769c#nuSep#568ef931d196b3e', 35, 'hh'),
-('57d5fabf102335b', '', 'vbbvn ', '568a00f3e57f096', '', '', '0000-00-00', '', '', '', '', 35, 'vvccvg wwwfred');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `___nu157db8ae416809___`
---
-
-CREATE TABLE `___nu157db8ae416809___` (
-  `company_id` varchar(25) CHARACTER SET utf8 NOT NULL,
-  `com_code` varchar(50) CHARACTER SET utf8 NOT NULL,
-  `com_name` varchar(500) CHARACTER SET utf8 NOT NULL,
-  `com_business_id` varchar(25) CHARACTER SET utf8 NOT NULL,
-  `com_company_id` varchar(25) CHARACTER SET utf8 NOT NULL,
-  `com_address` varchar(500) CHARACTER SET utf8 NOT NULL,
-  `com_suburb` date NOT NULL,
-  `com_phone` varchar(50) CHARACTER SET utf8 NOT NULL,
-  `com_map_coordinates` varchar(300) CHARACTER SET utf8 NOT NULL,
-  `com_sex` varchar(1) CHARACTER SET utf8 NOT NULL,
-  `com_color_id` varchar(250) CHARACTER SET utf8 NOT NULL,
-  `com_age` int(11) NOT NULL,
-  `com_notes` text CHARACTER SET utf8 NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `___nu157db8ae416809___`
---
-
-INSERT INTO `___nu157db8ae416809___` (`company_id`, `com_code`, `com_name`, `com_business_id`, `com_company_id`, `com_address`, `com_suburb`, `com_phone`, `com_map_coordinates`, `com_sex`, `com_color_id`, `com_age`, `com_notes`) VALUES
-('5678d262e048faa', '0007', 'Terry White2', '568a00c77f8f709', '', '5 Trent Grv', '2016-07-02', '21-May-2014', '11 44', 'f', '568ef920846a089#nuSep#568ef59c1bd769c#nuSep#568ef931d196b3e', 50, 'hello worldsssstfffxv'),
-('5729572e6331281', '', 'Mrs Compr66r36456', '568a00e25b8d271', '', '43 Allen St', '2016-07-01', '07-May-2016', '', '', '568ef59c1bd769c#nuSep#568ef931d196b3e', 0, '13132'),
-('57295aa5660f48b', '', 'Mrs Comuh', '568a00e25b8d271', '', '43 Allen Stkh', '2016-07-03', '18-Jun-2016', '', '', '568ef59c1bd769c', 35, '13132'),
-('57295ed9e996db0', '', 'OPSM111', '56aeff3276dfd7e', '', 'yyyyy', '2016-07-06', '20-May-2016', '', '', '568ef58fe48207a', 35, 'oooo12hh'),
-('5716c7137efb0c5', '', 'OPSM1111', '568a00c77f8f709', '', '43 Allen St', '2016-07-06', '0423345544', '', 'm', '568ef920846a089#nuSep#568ef59c1bd769c#nuSep#568ef931d196b3e', 35, 'hh'),
-('57d5fabf102335b', '', 'vbbvn ', '568a00f3e57f096', '', '', '0000-00-00', '', '', '', '', 35, 'vvccvg wwwfred');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `___nu157db8b01558d2___`
---
-
-CREATE TABLE `___nu157db8b01558d2___` (
-  `company_id` varchar(25) CHARACTER SET utf8 NOT NULL,
-  `com_code` varchar(50) CHARACTER SET utf8 NOT NULL,
-  `com_name` varchar(500) CHARACTER SET utf8 NOT NULL,
-  `com_business_id` varchar(25) CHARACTER SET utf8 NOT NULL,
-  `com_company_id` varchar(25) CHARACTER SET utf8 NOT NULL,
-  `com_address` varchar(500) CHARACTER SET utf8 NOT NULL,
-  `com_suburb` date NOT NULL,
-  `com_phone` varchar(50) CHARACTER SET utf8 NOT NULL,
-  `com_map_coordinates` varchar(300) CHARACTER SET utf8 NOT NULL,
-  `com_sex` varchar(1) CHARACTER SET utf8 NOT NULL,
-  `com_color_id` varchar(250) CHARACTER SET utf8 NOT NULL,
-  `com_age` int(11) NOT NULL,
-  `com_notes` text CHARACTER SET utf8 NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `___nu157db8b01558d2___`
---
-
-INSERT INTO `___nu157db8b01558d2___` (`company_id`, `com_code`, `com_name`, `com_business_id`, `com_company_id`, `com_address`, `com_suburb`, `com_phone`, `com_map_coordinates`, `com_sex`, `com_color_id`, `com_age`, `com_notes`) VALUES
-('5678d262e048faa', '0007', 'Terry White2', '568a00c77f8f709', '', '5 Trent Grv', '2016-07-02', '21-May-2014', '11 44', 'f', '568ef920846a089#nuSep#568ef59c1bd769c#nuSep#568ef931d196b3e', 50, 'hello worldsssstfffxv'),
-('5729572e6331281', '', 'Mrs Compr66r36456', '568a00e25b8d271', '', '43 Allen St', '2016-07-01', '07-May-2016', '', '', '568ef59c1bd769c#nuSep#568ef931d196b3e', 0, '13132'),
-('57295aa5660f48b', '', 'Mrs Comuh', '568a00e25b8d271', '', '43 Allen Stkh', '2016-07-03', '18-Jun-2016', '', '', '568ef59c1bd769c', 35, '13132'),
-('57295ed9e996db0', '', 'OPSM111', '56aeff3276dfd7e', '', 'yyyyy', '2016-07-06', '20-May-2016', '', '', '568ef58fe48207a', 35, 'oooo12hh'),
-('5716c7137efb0c5', '', 'OPSM1111', '568a00c77f8f709', '', '43 Allen St', '2016-07-06', '0423345544', '', 'm', '568ef920846a089#nuSep#568ef59c1bd769c#nuSep#568ef931d196b3e', 35, 'hh'),
-('57d5fabf102335b', '', 'vbbvn ', '568a00f3e57f096', '', '', '0000-00-00', '', '', '', '', 35, 'vvccvg wwwfred');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `___nu157db8b23c08f9___`
---
-
-CREATE TABLE `___nu157db8b23c08f9___` (
-  `company_id` varchar(25) CHARACTER SET utf8 NOT NULL,
-  `com_code` varchar(50) CHARACTER SET utf8 NOT NULL,
-  `com_name` varchar(500) CHARACTER SET utf8 NOT NULL,
-  `com_business_id` varchar(25) CHARACTER SET utf8 NOT NULL,
-  `com_company_id` varchar(25) CHARACTER SET utf8 NOT NULL,
-  `com_address` varchar(500) CHARACTER SET utf8 NOT NULL,
-  `com_suburb` date NOT NULL,
-  `com_phone` varchar(50) CHARACTER SET utf8 NOT NULL,
-  `com_map_coordinates` varchar(300) CHARACTER SET utf8 NOT NULL,
-  `com_sex` varchar(1) CHARACTER SET utf8 NOT NULL,
-  `com_color_id` varchar(250) CHARACTER SET utf8 NOT NULL,
-  `com_age` int(11) NOT NULL,
-  `com_notes` text CHARACTER SET utf8 NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `___nu157db8b23c08f9___`
---
-
-INSERT INTO `___nu157db8b23c08f9___` (`company_id`, `com_code`, `com_name`, `com_business_id`, `com_company_id`, `com_address`, `com_suburb`, `com_phone`, `com_map_coordinates`, `com_sex`, `com_color_id`, `com_age`, `com_notes`) VALUES
-('5678d262e048faa', '0007', 'Terry White2', '568a00c77f8f709', '', '5 Trent Grv', '2016-07-02', '21-May-2014', '11 44', 'f', '568ef920846a089#nuSep#568ef59c1bd769c#nuSep#568ef931d196b3e', 50, 'hello worldsssstfffxv'),
-('5729572e6331281', '', 'Mrs Compr66r36456', '568a00e25b8d271', '', '43 Allen St', '2016-07-01', '07-May-2016', '', '', '568ef59c1bd769c#nuSep#568ef931d196b3e', 0, '13132'),
-('57295aa5660f48b', '', 'Mrs Comuh', '568a00e25b8d271', '', '43 Allen Stkh', '2016-07-03', '18-Jun-2016', '', '', '568ef59c1bd769c', 35, '13132'),
-('57295ed9e996db0', '', 'OPSM111', '56aeff3276dfd7e', '', 'yyyyy', '2016-07-06', '20-May-2016', '', '', '568ef58fe48207a', 35, 'oooo12hh'),
-('5716c7137efb0c5', '', 'OPSM1111', '568a00c77f8f709', '', '43 Allen St', '2016-07-06', '0423345544', '', 'm', '568ef920846a089#nuSep#568ef59c1bd769c#nuSep#568ef931d196b3e', 35, 'hh'),
-('57d5fabf102335b', '', 'vbbvn ', '568a00f3e57f096', '', '', '0000-00-00', '', '', '', '', 35, 'vvccvg wwwfred');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `___nu157db8b46e539b___`
---
-
-CREATE TABLE `___nu157db8b46e539b___` (
-  `company_id` varchar(25) CHARACTER SET utf8 NOT NULL,
-  `com_code` varchar(50) CHARACTER SET utf8 NOT NULL,
-  `com_name` varchar(500) CHARACTER SET utf8 NOT NULL,
-  `com_business_id` varchar(25) CHARACTER SET utf8 NOT NULL,
-  `com_company_id` varchar(25) CHARACTER SET utf8 NOT NULL,
-  `com_address` varchar(500) CHARACTER SET utf8 NOT NULL,
-  `com_suburb` date NOT NULL,
-  `com_phone` varchar(50) CHARACTER SET utf8 NOT NULL,
-  `com_map_coordinates` varchar(300) CHARACTER SET utf8 NOT NULL,
-  `com_sex` varchar(1) CHARACTER SET utf8 NOT NULL,
-  `com_color_id` varchar(250) CHARACTER SET utf8 NOT NULL,
-  `com_age` int(11) NOT NULL,
-  `com_notes` text CHARACTER SET utf8 NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `___nu157db8b46e539b___`
---
-
-INSERT INTO `___nu157db8b46e539b___` (`company_id`, `com_code`, `com_name`, `com_business_id`, `com_company_id`, `com_address`, `com_suburb`, `com_phone`, `com_map_coordinates`, `com_sex`, `com_color_id`, `com_age`, `com_notes`) VALUES
-('5678d262e048faa', '0007', 'Terry White2', '568a00c77f8f709', '', '5 Trent Grv', '2016-07-02', '21-May-2014', '11 44', 'f', '568ef920846a089#nuSep#568ef59c1bd769c#nuSep#568ef931d196b3e', 50, 'hello worldsssstfffxv'),
-('5729572e6331281', '', 'Mrs Compr66r36456', '568a00e25b8d271', '', '43 Allen St', '2016-07-01', '07-May-2016', '', '', '568ef59c1bd769c#nuSep#568ef931d196b3e', 0, '13132'),
-('57295aa5660f48b', '', 'Mrs Comuh', '568a00e25b8d271', '', '43 Allen Stkh', '2016-07-03', '18-Jun-2016', '', '', '568ef59c1bd769c', 35, '13132'),
-('57295ed9e996db0', '', 'OPSM111', '56aeff3276dfd7e', '', 'yyyyy', '2016-07-06', '20-May-2016', '', '', '568ef58fe48207a', 35, 'oooo12hh'),
-('5716c7137efb0c5', '', 'OPSM1111', '568a00c77f8f709', '', '43 Allen St', '2016-07-06', '0423345544', '', 'm', '568ef920846a089#nuSep#568ef59c1bd769c#nuSep#568ef931d196b3e', 35, 'hh'),
-('57d5fabf102335b', '', 'vbbvn ', '568a00f3e57f096', '', '', '0000-00-00', '', '', '', '', 35, 'vvccvg wwwfred');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `___nu157db8bb0b7d27___`
---
-
-CREATE TABLE `___nu157db8bb0b7d27___` (
-  `company_id` varchar(25) CHARACTER SET utf8 NOT NULL,
-  `com_code` varchar(50) CHARACTER SET utf8 NOT NULL,
-  `com_name` varchar(500) CHARACTER SET utf8 NOT NULL,
-  `com_business_id` varchar(25) CHARACTER SET utf8 NOT NULL,
-  `com_company_id` varchar(25) CHARACTER SET utf8 NOT NULL,
-  `com_address` varchar(500) CHARACTER SET utf8 NOT NULL,
-  `com_suburb` date NOT NULL,
-  `com_phone` varchar(50) CHARACTER SET utf8 NOT NULL,
-  `com_map_coordinates` varchar(300) CHARACTER SET utf8 NOT NULL,
-  `com_sex` varchar(1) CHARACTER SET utf8 NOT NULL,
-  `com_color_id` varchar(250) CHARACTER SET utf8 NOT NULL,
-  `com_age` int(11) NOT NULL,
-  `com_notes` text CHARACTER SET utf8 NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `___nu157db8bb0b7d27___`
---
-
-INSERT INTO `___nu157db8bb0b7d27___` (`company_id`, `com_code`, `com_name`, `com_business_id`, `com_company_id`, `com_address`, `com_suburb`, `com_phone`, `com_map_coordinates`, `com_sex`, `com_color_id`, `com_age`, `com_notes`) VALUES
-('5678d262e048faa', '0007', 'Terry White2', '568a00c77f8f709', '', '5 Trent Grv', '2016-07-02', '21-May-2014', '11 44', 'f', '568ef920846a089#nuSep#568ef59c1bd769c#nuSep#568ef931d196b3e', 50, 'hello worldsssstfffxv'),
-('5729572e6331281', '', 'Mrs Compr66r36456', '568a00e25b8d271', '', '43 Allen St', '2016-07-01', '07-May-2016', '', '', '568ef59c1bd769c#nuSep#568ef931d196b3e', 0, '13132'),
-('57295aa5660f48b', '', 'Mrs Comuh', '568a00e25b8d271', '', '43 Allen Stkh', '2016-07-03', '18-Jun-2016', '', '', '568ef59c1bd769c', 35, '13132'),
-('57295ed9e996db0', '', 'OPSM111', '56aeff3276dfd7e', '', 'yyyyy', '2016-07-06', '20-May-2016', '', '', '568ef58fe48207a', 35, 'oooo12hh'),
-('5716c7137efb0c5', '', 'OPSM1111', '568a00c77f8f709', '', '43 Allen St', '2016-07-06', '0423345544', '', 'm', '568ef920846a089#nuSep#568ef59c1bd769c#nuSep#568ef931d196b3e', 35, 'hh'),
-('57d5fabf102335b', '', 'vbbvn ', '568a00f3e57f096', '', '', '0000-00-00', '', '', '', '', 35, 'vvccvg wwwfred');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `___nu157db8bd281d2a___`
---
-
-CREATE TABLE `___nu157db8bd281d2a___` (
-  `company_id` varchar(25) CHARACTER SET utf8 NOT NULL,
-  `com_code` varchar(50) CHARACTER SET utf8 NOT NULL,
-  `com_name` varchar(500) CHARACTER SET utf8 NOT NULL,
-  `com_business_id` varchar(25) CHARACTER SET utf8 NOT NULL,
-  `com_company_id` varchar(25) CHARACTER SET utf8 NOT NULL,
-  `com_address` varchar(500) CHARACTER SET utf8 NOT NULL,
-  `com_suburb` date NOT NULL,
-  `com_phone` varchar(50) CHARACTER SET utf8 NOT NULL,
-  `com_map_coordinates` varchar(300) CHARACTER SET utf8 NOT NULL,
-  `com_sex` varchar(1) CHARACTER SET utf8 NOT NULL,
-  `com_color_id` varchar(250) CHARACTER SET utf8 NOT NULL,
-  `com_age` int(11) NOT NULL,
-  `com_notes` text CHARACTER SET utf8 NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `___nu157db8bd281d2a___`
---
-
-INSERT INTO `___nu157db8bd281d2a___` (`company_id`, `com_code`, `com_name`, `com_business_id`, `com_company_id`, `com_address`, `com_suburb`, `com_phone`, `com_map_coordinates`, `com_sex`, `com_color_id`, `com_age`, `com_notes`) VALUES
-('5678d262e048faa', '0007', 'Terry White2', '568a00c77f8f709', '', '5 Trent Grv', '2016-07-02', '21-May-2014', '11 44', 'f', '568ef920846a089#nuSep#568ef59c1bd769c#nuSep#568ef931d196b3e', 50, 'hello worldsssstfffxv'),
-('5729572e6331281', '', 'Mrs Compr66r36456', '568a00e25b8d271', '', '43 Allen St', '2016-07-01', '07-May-2016', '', '', '568ef59c1bd769c#nuSep#568ef931d196b3e', 0, '13132'),
-('57295aa5660f48b', '', 'Mrs Comuh', '568a00e25b8d271', '', '43 Allen Stkh', '2016-07-03', '18-Jun-2016', '', '', '568ef59c1bd769c', 35, '13132'),
-('57295ed9e996db0', '', 'OPSM111', '56aeff3276dfd7e', '', 'yyyyy', '2016-07-06', '20-May-2016', '', '', '568ef58fe48207a', 35, 'oooo12hh'),
-('5716c7137efb0c5', '', 'OPSM1111', '568a00c77f8f709', '', '43 Allen St', '2016-07-06', '0423345544', '', 'm', '568ef920846a089#nuSep#568ef59c1bd769c#nuSep#568ef931d196b3e', 35, 'hh'),
-('57d5fabf102335b', '', 'vbbvn ', '568a00f3e57f096', '', '', '0000-00-00', '', '', '', '', 35, 'vvccvg wwwfred');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `___nu157db8c05d2d24___`
---
-
-CREATE TABLE `___nu157db8c05d2d24___` (
-  `company_id` varchar(25) CHARACTER SET utf8 NOT NULL,
-  `com_code` varchar(50) CHARACTER SET utf8 NOT NULL,
-  `com_name` varchar(500) CHARACTER SET utf8 NOT NULL,
-  `com_business_id` varchar(25) CHARACTER SET utf8 NOT NULL,
-  `com_company_id` varchar(25) CHARACTER SET utf8 NOT NULL,
-  `com_address` varchar(500) CHARACTER SET utf8 NOT NULL,
-  `com_suburb` date NOT NULL,
-  `com_phone` varchar(50) CHARACTER SET utf8 NOT NULL,
-  `com_map_coordinates` varchar(300) CHARACTER SET utf8 NOT NULL,
-  `com_sex` varchar(1) CHARACTER SET utf8 NOT NULL,
-  `com_color_id` varchar(250) CHARACTER SET utf8 NOT NULL,
-  `com_age` int(11) NOT NULL,
-  `com_notes` text CHARACTER SET utf8 NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `___nu157db8c05d2d24___`
---
-
-INSERT INTO `___nu157db8c05d2d24___` (`company_id`, `com_code`, `com_name`, `com_business_id`, `com_company_id`, `com_address`, `com_suburb`, `com_phone`, `com_map_coordinates`, `com_sex`, `com_color_id`, `com_age`, `com_notes`) VALUES
-('5678d262e048faa', '0007', 'Terry White2', '568a00c77f8f709', '', '5 Trent Grv', '2016-07-02', '21-May-2014', '11 44', 'f', '568ef920846a089#nuSep#568ef59c1bd769c#nuSep#568ef931d196b3e', 50, 'hello worldsssstfffxv'),
-('5729572e6331281', '', 'Mrs Compr66r36456', '568a00e25b8d271', '', '43 Allen St', '2016-07-01', '07-May-2016', '', '', '568ef59c1bd769c#nuSep#568ef931d196b3e', 0, '13132'),
-('57295aa5660f48b', '', 'Mrs Comuh', '568a00e25b8d271', '', '43 Allen Stkh', '2016-07-03', '18-Jun-2016', '', '', '568ef59c1bd769c', 35, '13132'),
-('57295ed9e996db0', '', 'OPSM111', '56aeff3276dfd7e', '', 'yyyyy', '2016-07-06', '20-May-2016', '', '', '568ef58fe48207a', 35, 'oooo12hh'),
-('5716c7137efb0c5', '', 'OPSM1111', '568a00c77f8f709', '', '43 Allen St', '2016-07-06', '0423345544', '', 'm', '568ef920846a089#nuSep#568ef59c1bd769c#nuSep#568ef931d196b3e', 35, 'hh'),
-('57d5fabf102335b', '', 'vbbvn ', '568a00f3e57f096', '', '', '0000-00-00', '', '', '', '', 35, 'vvccvg wwwfred');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `___nu157db8c8fe49ed___`
---
-
-CREATE TABLE `___nu157db8c8fe49ed___` (
-  `company_id` varchar(25) CHARACTER SET utf8 NOT NULL,
-  `com_code` varchar(50) CHARACTER SET utf8 NOT NULL,
-  `com_name` varchar(500) CHARACTER SET utf8 NOT NULL,
-  `com_business_id` varchar(25) CHARACTER SET utf8 NOT NULL,
-  `com_company_id` varchar(25) CHARACTER SET utf8 NOT NULL,
-  `com_address` varchar(500) CHARACTER SET utf8 NOT NULL,
-  `com_suburb` date NOT NULL,
-  `com_phone` varchar(50) CHARACTER SET utf8 NOT NULL,
-  `com_map_coordinates` varchar(300) CHARACTER SET utf8 NOT NULL,
-  `com_sex` varchar(1) CHARACTER SET utf8 NOT NULL,
-  `com_color_id` varchar(250) CHARACTER SET utf8 NOT NULL,
-  `com_age` int(11) NOT NULL,
-  `com_notes` text CHARACTER SET utf8 NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `___nu157db8c8fe49ed___`
---
-
-INSERT INTO `___nu157db8c8fe49ed___` (`company_id`, `com_code`, `com_name`, `com_business_id`, `com_company_id`, `com_address`, `com_suburb`, `com_phone`, `com_map_coordinates`, `com_sex`, `com_color_id`, `com_age`, `com_notes`) VALUES
-('5678d262e048faa', '0007', 'Terry White2', '568a00c77f8f709', '', '5 Trent Grv', '2016-07-02', '21-May-2014', '11 44', 'f', '568ef920846a089#nuSep#568ef59c1bd769c#nuSep#568ef931d196b3e', 50, 'hello worldsssstfffxv'),
-('5729572e6331281', '', 'Mrs Compr66r36456', '568a00e25b8d271', '', '43 Allen St', '2016-07-01', '07-May-2016', '', '', '568ef59c1bd769c#nuSep#568ef931d196b3e', 0, '13132'),
-('57295aa5660f48b', '', 'Mrs Comuh', '568a00e25b8d271', '', '43 Allen Stkh', '2016-07-03', '18-Jun-2016', '', '', '568ef59c1bd769c', 35, '13132'),
-('57295ed9e996db0', '', 'OPSM111', '56aeff3276dfd7e', '', 'yyyyy', '2016-07-06', '20-May-2016', '', '', '568ef58fe48207a', 35, 'oooo12hh'),
-('5716c7137efb0c5', '', 'OPSM1111', '568a00c77f8f709', '', '43 Allen St', '2016-07-06', '0423345544', '', 'm', '568ef920846a089#nuSep#568ef59c1bd769c#nuSep#568ef931d196b3e', 35, 'hh'),
-('57d5fabf102335b', '', 'vbbvn ', '568a00f3e57f096', '', '', '0000-00-00', '', '', '', '', 35, 'vvccvg wwwfred');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `___nu157db8c59b2440___`
---
-
-CREATE TABLE `___nu157db8c59b2440___` (
-  `company_id` varchar(25) CHARACTER SET utf8 NOT NULL,
-  `com_code` varchar(50) CHARACTER SET utf8 NOT NULL,
-  `com_name` varchar(500) CHARACTER SET utf8 NOT NULL,
-  `com_business_id` varchar(25) CHARACTER SET utf8 NOT NULL,
-  `com_company_id` varchar(25) CHARACTER SET utf8 NOT NULL,
-  `com_address` varchar(500) CHARACTER SET utf8 NOT NULL,
-  `com_suburb` date NOT NULL,
-  `com_phone` varchar(50) CHARACTER SET utf8 NOT NULL,
-  `com_map_coordinates` varchar(300) CHARACTER SET utf8 NOT NULL,
-  `com_sex` varchar(1) CHARACTER SET utf8 NOT NULL,
-  `com_color_id` varchar(250) CHARACTER SET utf8 NOT NULL,
-  `com_age` int(11) NOT NULL,
-  `com_notes` text CHARACTER SET utf8 NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `___nu157db8c59b2440___`
---
-
-INSERT INTO `___nu157db8c59b2440___` (`company_id`, `com_code`, `com_name`, `com_business_id`, `com_company_id`, `com_address`, `com_suburb`, `com_phone`, `com_map_coordinates`, `com_sex`, `com_color_id`, `com_age`, `com_notes`) VALUES
-('5678d262e048faa', '0007', 'Terry White2', '568a00c77f8f709', '', '5 Trent Grv', '2016-07-02', '21-May-2014', '11 44', 'f', '568ef920846a089#nuSep#568ef59c1bd769c#nuSep#568ef931d196b3e', 50, 'hello worldsssstfffxv'),
-('5729572e6331281', '', 'Mrs Compr66r36456', '568a00e25b8d271', '', '43 Allen St', '2016-07-01', '07-May-2016', '', '', '568ef59c1bd769c#nuSep#568ef931d196b3e', 0, '13132'),
-('57295aa5660f48b', '', 'Mrs Comuh', '568a00e25b8d271', '', '43 Allen Stkh', '2016-07-03', '18-Jun-2016', '', '', '568ef59c1bd769c', 35, '13132'),
-('57295ed9e996db0', '', 'OPSM111', '56aeff3276dfd7e', '', 'yyyyy', '2016-07-06', '20-May-2016', '', '', '568ef58fe48207a', 35, 'oooo12hh'),
-('5716c7137efb0c5', '', 'OPSM1111', '568a00c77f8f709', '', '43 Allen St', '2016-07-06', '0423345544', '', 'm', '568ef920846a089#nuSep#568ef59c1bd769c#nuSep#568ef931d196b3e', 35, 'hh'),
-('57d5fabf102335b', '', 'vbbvn ', '568a00f3e57f096', '', '', '0000-00-00', '', '', '', '', 35, 'vvccvg wwwfred');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `___nu157db8e9a59847___`
---
-
-CREATE TABLE `___nu157db8e9a59847___` (
-  `company_id` varchar(25) CHARACTER SET utf8 NOT NULL,
-  `com_code` varchar(50) CHARACTER SET utf8 NOT NULL,
-  `com_name` varchar(500) CHARACTER SET utf8 NOT NULL,
-  `com_business_id` varchar(25) CHARACTER SET utf8 NOT NULL,
-  `com_company_id` varchar(25) CHARACTER SET utf8 NOT NULL,
-  `com_address` varchar(500) CHARACTER SET utf8 NOT NULL,
-  `com_suburb` date NOT NULL,
-  `com_phone` varchar(50) CHARACTER SET utf8 NOT NULL,
-  `com_map_coordinates` varchar(300) CHARACTER SET utf8 NOT NULL,
-  `com_sex` varchar(1) CHARACTER SET utf8 NOT NULL,
-  `com_color_id` varchar(250) CHARACTER SET utf8 NOT NULL,
-  `com_age` int(11) NOT NULL,
-  `com_notes` text CHARACTER SET utf8 NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `___nu157db8e9a59847___`
---
-
-INSERT INTO `___nu157db8e9a59847___` (`company_id`, `com_code`, `com_name`, `com_business_id`, `com_company_id`, `com_address`, `com_suburb`, `com_phone`, `com_map_coordinates`, `com_sex`, `com_color_id`, `com_age`, `com_notes`) VALUES
-('5678d262e048faa', '0007', 'Terry White2', '568a00c77f8f709', '', '5 Trent Grv', '2016-07-02', '21-May-2014', '11 44', 'f', '568ef920846a089#nuSep#568ef59c1bd769c#nuSep#568ef931d196b3e', 50, 'hello worldsssstfffxv'),
-('5729572e6331281', '', 'Mrs Compr66r36456', '568a00e25b8d271', '', '43 Allen St', '2016-07-01', '07-May-2016', '', '', '568ef59c1bd769c#nuSep#568ef931d196b3e', 0, '13132'),
-('57295aa5660f48b', '', 'Mrs Comuh', '568a00e25b8d271', '', '43 Allen Stkh', '2016-07-03', '18-Jun-2016', '', '', '568ef59c1bd769c', 35, '13132'),
-('57295ed9e996db0', '', 'OPSM111', '56aeff3276dfd7e', '', 'yyyyy', '2016-07-06', '20-May-2016', '', '', '568ef58fe48207a', 35, 'oooo12hh'),
-('5716c7137efb0c5', '', 'OPSM1111', '568a00c77f8f709', '', '43 Allen St', '2016-07-06', '0423345544', '', 'm', '568ef920846a089#nuSep#568ef59c1bd769c#nuSep#568ef931d196b3e', 35, 'hh'),
-('57d5fabf102335b', '', 'vbbvn ', '568a00f3e57f096', '', '', '0000-00-00', '', '', '', '', 35, 'vvccvg wwwfred');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `___nu157db8f50e32ab___`
---
-
-CREATE TABLE `___nu157db8f50e32ab___` (
-  `company_id` varchar(25) CHARACTER SET utf8 NOT NULL,
-  `com_code` varchar(50) CHARACTER SET utf8 NOT NULL,
-  `com_name` varchar(500) CHARACTER SET utf8 NOT NULL,
-  `com_business_id` varchar(25) CHARACTER SET utf8 NOT NULL,
-  `com_company_id` varchar(25) CHARACTER SET utf8 NOT NULL,
-  `com_address` varchar(500) CHARACTER SET utf8 NOT NULL,
-  `com_suburb` date NOT NULL,
-  `com_phone` varchar(50) CHARACTER SET utf8 NOT NULL,
-  `com_map_coordinates` varchar(300) CHARACTER SET utf8 NOT NULL,
-  `com_sex` varchar(1) CHARACTER SET utf8 NOT NULL,
-  `com_color_id` varchar(250) CHARACTER SET utf8 NOT NULL,
-  `com_age` int(11) NOT NULL,
-  `com_notes` text CHARACTER SET utf8 NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `___nu157db8f50e32ab___`
---
-
-INSERT INTO `___nu157db8f50e32ab___` (`company_id`, `com_code`, `com_name`, `com_business_id`, `com_company_id`, `com_address`, `com_suburb`, `com_phone`, `com_map_coordinates`, `com_sex`, `com_color_id`, `com_age`, `com_notes`) VALUES
-('5678d262e048faa', '0007', 'Terry White2', '568a00c77f8f709', '', '5 Trent Grv', '2016-07-02', '21-May-2014', '11 44', 'f', '568ef920846a089#nuSep#568ef59c1bd769c#nuSep#568ef931d196b3e', 50, 'hello worldsssstfffxv'),
-('5729572e6331281', '', 'Mrs Compr66r36456', '568a00e25b8d271', '', '43 Allen St', '2016-07-01', '07-May-2016', '', '', '568ef59c1bd769c#nuSep#568ef931d196b3e', 0, '13132'),
-('57295aa5660f48b', '', 'Mrs Comuh', '568a00e25b8d271', '', '43 Allen Stkh', '2016-07-03', '18-Jun-2016', '', '', '568ef59c1bd769c', 35, '13132'),
-('57295ed9e996db0', '', 'OPSM111', '56aeff3276dfd7e', '', 'yyyyy', '2016-07-06', '20-May-2016', '', '', '568ef58fe48207a', 35, 'oooo12hh'),
-('5716c7137efb0c5', '', 'OPSM1111', '568a00c77f8f709', '', '43 Allen St', '2016-07-06', '0423345544', '', 'm', '568ef920846a089#nuSep#568ef59c1bd769c#nuSep#568ef931d196b3e', 35, 'hh'),
-('57d5fabf102335b', '', 'vbbvn ', '568a00f3e57f096', '', '', '0000-00-00', '', '', '', '', 35, 'vvccvg wwwfred');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `___nu157db80f540bc0___`
---
-
-CREATE TABLE `___nu157db80f540bc0___` (
-  `company_id` varchar(25) CHARACTER SET utf8 NOT NULL,
-  `com_code` varchar(50) CHARACTER SET utf8 NOT NULL,
-  `com_name` varchar(500) CHARACTER SET utf8 NOT NULL,
-  `com_business_id` varchar(25) CHARACTER SET utf8 NOT NULL,
-  `com_company_id` varchar(25) CHARACTER SET utf8 NOT NULL,
-  `com_address` varchar(500) CHARACTER SET utf8 NOT NULL,
-  `com_suburb` date NOT NULL,
-  `com_phone` varchar(50) CHARACTER SET utf8 NOT NULL,
-  `com_map_coordinates` varchar(300) CHARACTER SET utf8 NOT NULL,
-  `com_sex` varchar(1) CHARACTER SET utf8 NOT NULL,
-  `com_color_id` varchar(250) CHARACTER SET utf8 NOT NULL,
-  `com_age` int(11) NOT NULL,
-  `com_notes` text CHARACTER SET utf8 NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `___nu157db80f540bc0___`
---
-
-INSERT INTO `___nu157db80f540bc0___` (`company_id`, `com_code`, `com_name`, `com_business_id`, `com_company_id`, `com_address`, `com_suburb`, `com_phone`, `com_map_coordinates`, `com_sex`, `com_color_id`, `com_age`, `com_notes`) VALUES
-('5678d262e048faa', '0007', 'Terry White2', '568a00c77f8f709', '', '5 Trent Grv', '2016-07-02', '21-May-2014', '11 44', 'f', '568ef920846a089#nuSep#568ef59c1bd769c#nuSep#568ef931d196b3e', 50, 'hello worldsssstfffxv'),
-('5729572e6331281', '', 'Mrs Compr66r36456', '568a00e25b8d271', '', '43 Allen St', '2016-07-01', '07-May-2016', '', '', '568ef59c1bd769c#nuSep#568ef931d196b3e', 0, '13132'),
-('57295aa5660f48b', '', 'Mrs Comuh', '568a00e25b8d271', '', '43 Allen Stkh', '2016-07-03', '18-Jun-2016', '', '', '568ef59c1bd769c', 35, '13132'),
-('57295ed9e996db0', '', 'OPSM111', '56aeff3276dfd7e', '', 'yyyyy', '2016-07-06', '20-May-2016', '', '', '568ef58fe48207a', 35, 'oooo12hh'),
-('5716c7137efb0c5', '', 'OPSM1111', '568a00c77f8f709', '', '43 Allen St', '2016-07-06', '0423345544', '', 'm', '568ef920846a089#nuSep#568ef59c1bd769c#nuSep#568ef931d196b3e', 35, 'hh'),
-('57d5fabf102335b', '', 'vbbvn ', '568a00f3e57f096', '', '', '0000-00-00', '', '', '', '', 35, 'vvccvg wwwfred');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `___nu157db805be5878___`
---
-
-CREATE TABLE `___nu157db805be5878___` (
-  `company_id` varchar(25) CHARACTER SET utf8 NOT NULL,
-  `com_code` varchar(50) CHARACTER SET utf8 NOT NULL,
-  `com_name` varchar(500) CHARACTER SET utf8 NOT NULL,
-  `com_business_id` varchar(25) CHARACTER SET utf8 NOT NULL,
-  `com_company_id` varchar(25) CHARACTER SET utf8 NOT NULL,
-  `com_address` varchar(500) CHARACTER SET utf8 NOT NULL,
-  `com_suburb` date NOT NULL,
-  `com_phone` varchar(50) CHARACTER SET utf8 NOT NULL,
-  `com_map_coordinates` varchar(300) CHARACTER SET utf8 NOT NULL,
-  `com_sex` varchar(1) CHARACTER SET utf8 NOT NULL,
-  `com_color_id` varchar(250) CHARACTER SET utf8 NOT NULL,
-  `com_age` int(11) NOT NULL,
-  `com_notes` text CHARACTER SET utf8 NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `___nu157db805be5878___`
---
-
-INSERT INTO `___nu157db805be5878___` (`company_id`, `com_code`, `com_name`, `com_business_id`, `com_company_id`, `com_address`, `com_suburb`, `com_phone`, `com_map_coordinates`, `com_sex`, `com_color_id`, `com_age`, `com_notes`) VALUES
-('5678d262e048faa', '0007', 'Terry White2', '568a00c77f8f709', '', '5 Trent Grv', '2016-07-02', '21-May-2014', '11 44', 'f', '568ef920846a089#nuSep#568ef59c1bd769c#nuSep#568ef931d196b3e', 50, 'hello worldsssstfffxv'),
-('5729572e6331281', '', 'Mrs Compr66r36456', '568a00e25b8d271', '', '43 Allen St', '2016-07-01', '07-May-2016', '', '', '568ef59c1bd769c#nuSep#568ef931d196b3e', 0, '13132'),
-('57295aa5660f48b', '', 'Mrs Comuh', '568a00e25b8d271', '', '43 Allen Stkh', '2016-07-03', '18-Jun-2016', '', '', '568ef59c1bd769c', 35, '13132'),
-('57295ed9e996db0', '', 'OPSM111', '56aeff3276dfd7e', '', 'yyyyy', '2016-07-06', '20-May-2016', '', '', '568ef58fe48207a', 35, 'oooo12hh'),
-('5716c7137efb0c5', '', 'OPSM1111', '568a00c77f8f709', '', '43 Allen St', '2016-07-06', '0423345544', '', 'm', '568ef920846a089#nuSep#568ef59c1bd769c#nuSep#568ef931d196b3e', 35, 'hh'),
-('57d5fabf102335b', '', 'vbbvn ', '568a00f3e57f096', '', '', '0000-00-00', '', '', '', '', 35, 'vvccvg wwwfred');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `___nu157db829ab8857___`
---
-
-CREATE TABLE `___nu157db829ab8857___` (
-  `company_id` varchar(25) CHARACTER SET utf8 NOT NULL,
-  `com_code` varchar(50) CHARACTER SET utf8 NOT NULL,
-  `com_name` varchar(500) CHARACTER SET utf8 NOT NULL,
-  `com_business_id` varchar(25) CHARACTER SET utf8 NOT NULL,
-  `com_company_id` varchar(25) CHARACTER SET utf8 NOT NULL,
-  `com_address` varchar(500) CHARACTER SET utf8 NOT NULL,
-  `com_suburb` date NOT NULL,
-  `com_phone` varchar(50) CHARACTER SET utf8 NOT NULL,
-  `com_map_coordinates` varchar(300) CHARACTER SET utf8 NOT NULL,
-  `com_sex` varchar(1) CHARACTER SET utf8 NOT NULL,
-  `com_color_id` varchar(250) CHARACTER SET utf8 NOT NULL,
-  `com_age` int(11) NOT NULL,
-  `com_notes` text CHARACTER SET utf8 NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `___nu157db829ab8857___`
---
-
-INSERT INTO `___nu157db829ab8857___` (`company_id`, `com_code`, `com_name`, `com_business_id`, `com_company_id`, `com_address`, `com_suburb`, `com_phone`, `com_map_coordinates`, `com_sex`, `com_color_id`, `com_age`, `com_notes`) VALUES
-('5678d262e048faa', '0007', 'Terry White2', '568a00c77f8f709', '', '5 Trent Grv', '2016-07-02', '21-May-2014', '11 44', 'f', '568ef920846a089#nuSep#568ef59c1bd769c#nuSep#568ef931d196b3e', 50, 'hello worldsssstfffxv'),
-('5729572e6331281', '', 'Mrs Compr66r36456', '568a00e25b8d271', '', '43 Allen St', '2016-07-01', '07-May-2016', '', '', '568ef59c1bd769c#nuSep#568ef931d196b3e', 0, '13132'),
-('57295aa5660f48b', '', 'Mrs Comuh', '568a00e25b8d271', '', '43 Allen Stkh', '2016-07-03', '18-Jun-2016', '', '', '568ef59c1bd769c', 35, '13132'),
-('57295ed9e996db0', '', 'OPSM111', '56aeff3276dfd7e', '', 'yyyyy', '2016-07-06', '20-May-2016', '', '', '568ef58fe48207a', 35, 'oooo12hh'),
-('5716c7137efb0c5', '', 'OPSM1111', '568a00c77f8f709', '', '43 Allen St', '2016-07-06', '0423345544', '', 'm', '568ef920846a089#nuSep#568ef59c1bd769c#nuSep#568ef931d196b3e', 35, 'hh'),
-('57d5fabf102335b', '', 'vbbvn ', '568a00f3e57f096', '', '', '0000-00-00', '', '', '', '', 35, 'vvccvg wwwfred');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `___nu157db884dbed74___`
---
-
-CREATE TABLE `___nu157db884dbed74___` (
-  `company_id` varchar(25) CHARACTER SET utf8 NOT NULL,
-  `com_code` varchar(50) CHARACTER SET utf8 NOT NULL,
-  `com_name` varchar(500) CHARACTER SET utf8 NOT NULL,
-  `com_business_id` varchar(25) CHARACTER SET utf8 NOT NULL,
-  `com_company_id` varchar(25) CHARACTER SET utf8 NOT NULL,
-  `com_address` varchar(500) CHARACTER SET utf8 NOT NULL,
-  `com_suburb` date NOT NULL,
-  `com_phone` varchar(50) CHARACTER SET utf8 NOT NULL,
-  `com_map_coordinates` varchar(300) CHARACTER SET utf8 NOT NULL,
-  `com_sex` varchar(1) CHARACTER SET utf8 NOT NULL,
-  `com_color_id` varchar(250) CHARACTER SET utf8 NOT NULL,
-  `com_age` int(11) NOT NULL,
-  `com_notes` text CHARACTER SET utf8 NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `___nu157db884dbed74___`
---
-
-INSERT INTO `___nu157db884dbed74___` (`company_id`, `com_code`, `com_name`, `com_business_id`, `com_company_id`, `com_address`, `com_suburb`, `com_phone`, `com_map_coordinates`, `com_sex`, `com_color_id`, `com_age`, `com_notes`) VALUES
-('5678d262e048faa', '0007', 'Terry White2', '568a00c77f8f709', '', '5 Trent Grv', '2016-07-02', '21-May-2014', '11 44', 'f', '568ef920846a089#nuSep#568ef59c1bd769c#nuSep#568ef931d196b3e', 50, 'hello worldsssstfffxv'),
-('5729572e6331281', '', 'Mrs Compr66r36456', '568a00e25b8d271', '', '43 Allen St', '2016-07-01', '07-May-2016', '', '', '568ef59c1bd769c#nuSep#568ef931d196b3e', 0, '13132'),
-('57295aa5660f48b', '', 'Mrs Comuh', '568a00e25b8d271', '', '43 Allen Stkh', '2016-07-03', '18-Jun-2016', '', '', '568ef59c1bd769c', 35, '13132'),
-('57295ed9e996db0', '', 'OPSM111', '56aeff3276dfd7e', '', 'yyyyy', '2016-07-06', '20-May-2016', '', '', '568ef58fe48207a', 35, 'oooo12hh'),
-('5716c7137efb0c5', '', 'OPSM1111', '568a00c77f8f709', '', '43 Allen St', '2016-07-06', '0423345544', '', 'm', '568ef920846a089#nuSep#568ef59c1bd769c#nuSep#568ef931d196b3e', 35, 'hh'),
-('57d5fabf102335b', '', 'vbbvn ', '568a00f3e57f096', '', '', '0000-00-00', '', '', '', '', 35, 'vvccvg wwwfred');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `___nu157db803348210___`
---
-
-CREATE TABLE `___nu157db803348210___` (
-  `company_id` varchar(25) CHARACTER SET utf8 NOT NULL,
-  `com_code` varchar(50) CHARACTER SET utf8 NOT NULL,
-  `com_name` varchar(500) CHARACTER SET utf8 NOT NULL,
-  `com_business_id` varchar(25) CHARACTER SET utf8 NOT NULL,
-  `com_company_id` varchar(25) CHARACTER SET utf8 NOT NULL,
-  `com_address` varchar(500) CHARACTER SET utf8 NOT NULL,
-  `com_suburb` date NOT NULL,
-  `com_phone` varchar(50) CHARACTER SET utf8 NOT NULL,
-  `com_map_coordinates` varchar(300) CHARACTER SET utf8 NOT NULL,
-  `com_sex` varchar(1) CHARACTER SET utf8 NOT NULL,
-  `com_color_id` varchar(250) CHARACTER SET utf8 NOT NULL,
-  `com_age` int(11) NOT NULL,
-  `com_notes` text CHARACTER SET utf8 NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `___nu157db803348210___`
---
-
-INSERT INTO `___nu157db803348210___` (`company_id`, `com_code`, `com_name`, `com_business_id`, `com_company_id`, `com_address`, `com_suburb`, `com_phone`, `com_map_coordinates`, `com_sex`, `com_color_id`, `com_age`, `com_notes`) VALUES
-('5678d262e048faa', '0007', 'Terry White2', '568a00c77f8f709', '', '5 Trent Grv', '2016-07-02', '21-May-2014', '11 44', 'f', '568ef920846a089#nuSep#568ef59c1bd769c#nuSep#568ef931d196b3e', 50, 'hello worldsssstfffxv'),
-('5729572e6331281', '', 'Mrs Compr66r36456', '568a00e25b8d271', '', '43 Allen St', '2016-07-01', '07-May-2016', '', '', '568ef59c1bd769c#nuSep#568ef931d196b3e', 0, '13132'),
-('57295aa5660f48b', '', 'Mrs Comuh', '568a00e25b8d271', '', '43 Allen Stkh', '2016-07-03', '18-Jun-2016', '', '', '568ef59c1bd769c', 35, '13132'),
-('57295ed9e996db0', '', 'OPSM111', '56aeff3276dfd7e', '', 'yyyyy', '2016-07-06', '20-May-2016', '', '', '568ef58fe48207a', 35, 'oooo12hh'),
-('5716c7137efb0c5', '', 'OPSM1111', '568a00c77f8f709', '', '43 Allen St', '2016-07-06', '0423345544', '', 'm', '568ef920846a089#nuSep#568ef59c1bd769c#nuSep#568ef931d196b3e', 35, 'hh'),
-('57d5fabf102335b', '', 'vbbvn ', '568a00f3e57f096', '', '', '0000-00-00', '', '', '', '', 35, 'vvccvg wwwfred');
+('577b08fdf05e48d', '', '577aea8e8844920'),
+('57df3880bfdfc67', '57df3880bfdf41e', '57df38d1bdf5ae5');
 
 -- --------------------------------------------------------
 
