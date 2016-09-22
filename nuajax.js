@@ -29,7 +29,7 @@ function nuAjax(w,successCallback,errorCallback) {
 }
 
 function nuGetForm(f, r, filter, n){
-
+	debugger;
 	if(nuOpenNewBrowserTab('', f, r, filter)){return;}
 
 	var u 	= '';
@@ -47,7 +47,7 @@ function nuGetForm(f, r, filter, n){
 		
 	}else{
 		
-		s			= nuSESSION;
+		s			= window.nuSESSION;
 		
 		if(arguments.length != 4){   //-- add a new breadcrumb
 			window.nuBC.push(new nuFormState());
@@ -58,7 +58,7 @@ function nuGetForm(f, r, filter, n){
 	var w 		= nuGetFormState();
 	w.username	= u;
 	w.password	= p;
-	w.session_id	= s;
+	w.session_id	= window.nuSESSION;
 	w.call_type	= 'getform';
 	w.form_id	= f;
 	w.record_id	= r;
@@ -67,16 +67,22 @@ function nuGetForm(f, r, filter, n){
 	w.hash		= parent.nuHashFromEditForm();
 
 	var successCallback = function(data,textStatus,jqXHR){
-                var fm = data;
-console.log(fm);
-                if(nuDisplayError(fm.errors)){
-                        nuBC.splice(nuBC.length-1,1);
-                        if(fm.log_again == 1){nuLogin();}
-               }else{
-                        nuBC[nuBC.length-1].record_id   = fm.record_id;
-                        nuBuildForm(fm);
-              }
-        };
+
+		var fm = data;
+
+		if(nuDisplayError(fm.errors)){
+
+			nuBC.splice(nuBC.length-1,1);
+			
+		if(fm.log_again == 1){nuLogin();}
+		
+		}else{
+				
+			nuBC[nuBC.length-1].record_id   = fm.record_id;
+			nuBuildForm(fm);
+			
+		}
+     };
 
 	nuAjax(w,successCallback);
 }
@@ -90,7 +96,7 @@ function nuGetPHP(f, r){
 
 	var w 		= nuGetFormState();
 
-	w.session_id	= nuSESSION;
+	w.session_id	= window.nuSESSION;
 	w.call_type	= 'getphp';
 	w.form_id	= f;
 	w.record_id	= r;
@@ -117,7 +123,7 @@ function nuGetPDF(f, r){
 
 	var w 		= nuGetFormState();
 
-	w.session_id	= nuSESSION;
+	w.session_id	= window.nuSESSION;
 	w.call_type	= 'getreport';
 	w.form_id	= f;
 	w.record_id	= r;
@@ -142,7 +148,7 @@ function nuRunReport(f, iframe){
 
 	var w 		= nuGetFormState();
 
-	w.session_id	= nuSESSION;
+	w.session_id	= window.nuSESSION;
 	w.call_type	= 'runreport';
 	w.form_id	= f;
 	w.hash		= nuHashFromEditForm();
@@ -174,7 +180,7 @@ function nuRunPHP(f, iframe){
 
 	var w 		= nuGetFormState();
 
-	w.session_id	= nuSESSION;
+	w.session_id	= window.nuSESSION;
 	w.call_type	= 'runphp';
 	w.form_id	= f;
 	w.hash		= nuHashFromEditForm();

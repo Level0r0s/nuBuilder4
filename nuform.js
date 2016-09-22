@@ -1,14 +1,22 @@
 
 function nuBuildForm(f){
 
-	window.onbeforeunload = null;
-
 	if(f.form_id == ''){
 		
 		nuLogin();
 		return;
 		
 	}
+	
+	window.nuSESSION		= f.session_id;
+	window.onbeforeunload	= null;
+	window.nuSUBFORMROW	= [];
+	window.nuSUBFORMJSON	= [];
+	window.nuHASH			= [];                       //-- remove any hash variables previously set.
+	window.nuEDITED		= false;
+	
+	nuSetBODY(f);
+console.log(f);
 
 	if(f.schema.length !== undefined){  //-- its an Object (load these once,  at login)
 
@@ -17,19 +25,12 @@ function nuBuildForm(f){
 		
 	}
 	
-	window.nuSESSION		= f.session_id;
-	window.nuSUBFORMROW	= [];
-	window.nuSUBFORMJSON	= [];
-	window.nuHASH			= [];                       //-- remove any hash variables previously set.
-	window.nuEDITED		= false;
-	
-	nuSetBODY(f);
-	
 	var b 						= window.nuBC.length-1;
 
 	window.nuBC[b].form_id 		= f.form_id;
 	window.nuBC[b].record_id 		= f.record_id;
 	window.nuBC[b].session_id 		= f.session_id;
+	window.nuBC[b].user_id 		= f.user_id;
 	window.nuBC[b].title 			= f.title;
 	window.nuBC[b].row_height		= f.row_height;
 	window.nuBC[b].rows 			= f.rows;
@@ -1178,12 +1179,15 @@ function nuOptionsList(f, t, p){
 	var off	= icon.offset();
 	var top	= off.top;
 	var left	= off.left;
+	var r	= nuBC[nuBC.length-1].record_id;
 
 	var list	= [];
 	var ul	= '<ul>';
+
 	list.push(['Arrange Objects', 'nuBuildPopup(&quot;' + f + '&quot;, &quot;-2&quot;)', 'nuarrange.png']);
 	list.push(['Form Properties', 'nuBuildPopup(&quot;nuform&quot;, &quot;' + f + '&quot;)', 'nuformprop.png']);
 	list.push(['Form Object List', 'nuBuildPopup(&quot;nuobject&quot;, &quot;&quot;, &quot;' + f + '&quot;)', 'nuobjectlist.png']);
+	list.push(['Change Password', 'nuBuildPopup(&quot;nuuser&quot;, &quot;' + r + '&quot;, &quot;&quot;)', 'nuobjectlist.png']);
 	
 	for(var i = 0 ; i < list.length ; i++){
 		

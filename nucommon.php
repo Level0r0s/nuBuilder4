@@ -593,7 +593,7 @@ function nuSetHashList($p){
 	
 	$fid	= $p['form_id'];
 	$rid	= $p['record_id'];
-nudebug("$fid == '' or $rid " . print_r($p,1));;
+
 	if($fid == '' or $rid == ''){
 		return $r;
 	}else{
@@ -861,7 +861,7 @@ function ColorToHex($pColor){
 
 
 function nuAddToHashList($J, $run){
-nudebug(print_r($J,1));
+
     $hash               = array();
     $ignore             = array();
     $ignore[]           = 'sre_layout';
@@ -908,7 +908,7 @@ function nuSchema(){
 
 	$t	= nuRunQuery("SELECT table_name FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = DATABASE()");
 	$S	= array();
-
+return $S;
 	while($r = db_fetch_object($t)){
 
 		$tn		= $r->table_name; 
@@ -938,6 +938,14 @@ function nuTranslate($l){
 
 }
 
+function nuUserID(){
 
+	$t	= nuRunQuery("SELECT * FROM zzzzsys_session WHERE zzzzsys_session_id = ? ", array($_SESSION['SESSIONID']));		
+	$r	= db_fetch_object($t);
+	$j	= json_decode($r->sss_access);
+	
+	return $r->session->zzzzsys_user_id;
+	
+}
 
 ?>
