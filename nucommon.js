@@ -98,8 +98,6 @@ function nuDisplayError(e){
 		alert(m);
 	}
 	
-	//$('#nuModal', window.parent.document).remove();
-	
 	return e.length > 0;
 	
 }

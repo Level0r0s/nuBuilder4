@@ -29,7 +29,7 @@ function nuAjax(w,successCallback,errorCallback) {
 }
 
 function nuGetForm(f, r, filter, n){
-	debugger;
+
 	if(nuOpenNewBrowserTab('', f, r, filter)){return;}
 
 	var u 	= '';
@@ -152,9 +152,7 @@ function nuRunReport(f, iframe){
 	w.call_type	= 'runreport';
 	w.form_id	= f;
 	w.hash		= nuHashFromEditForm();
-	debugger;
-parent.console.log(w.hash);	
-console.log(11111,w.hash)
+
 	var successCallback = function(data,textStatus,jqXHR){
 		
 		var fm 	= data;
@@ -247,6 +245,27 @@ function nuGetLookupCode(e, buildLookupList){
 			}else{
 				nuChooseOneLookupRecord(e, fm);
 			}
+		}
+	};
+	nuAjax(w,successCallback);
+}
+
+
+function nuPrintAction(){
+
+	var w			= nuGetFormState();
+	w.call_type		= 'runhtml';
+	w.browse_columns	= nuFORMPROPERTIES.browse_columns;
+	w.browse_sql		= nuFORMPROPERTIES.browse_sql;
+	w.session_id		= window.nuSESSION;
+	
+	var successCallback = function(data,textStatus,jqXHR){		
+		var fm 	= data;
+		if(!nuDisplayError(fm.errors)){
+			
+			var p   = 'nurunhtml.php?i=' + fm.id;
+			window.open(p);
+
 		}
 	};
 	nuAjax(w,successCallback);

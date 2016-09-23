@@ -84,6 +84,8 @@ window.onbeforeunload = nuHomeWarning;
 				nuGetPHP(p.form_id, p.record_id)
 			} else {
 				nuGetForm(p.form_id, p.record_id, p.filter);
+				console.log(1111,p.form_id, p.record_id, p.filter);
+				parent.console.log(2222,p.form_id, p.record_id, p.filter);
 			}
 			
 			if(p.record_id == '-2'){

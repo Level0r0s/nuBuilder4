@@ -1,6 +1,8 @@
 
 function nuBuildForm(f){
 
+	nuCheckFormProperties(f);
+
 	if(f.form_id == ''){
 		
 		nuLogin();
@@ -16,7 +18,6 @@ function nuBuildForm(f){
 	window.nuEDITED		= false;
 	
 	nuSetBODY(f);
-console.log(f);
 
 	if(f.schema.length !== undefined){  //-- its an Object (load these once,  at login)
 
@@ -2300,4 +2301,19 @@ function nuDetach(e){
 
 	});	
 		
+}
+
+
+function nuCheckFormProperties(f){
+	
+	window.nuFORMPROPERTIES	= f;
+	
+	var J	= [];
+	J.push(f.browse_columns);
+	J.push(f.browse_sql);
+	window.nuFORMPROPERTIES.nuPrintBrowse	= encodeURI(JSON.stringify(J));
+	
+	
+	console.log(f);
+	
 }

@@ -269,13 +269,15 @@ class nuSqlString{
     }
 
     private function buildSQL(){
-    	$this->SQL           = 'SELECT '; 
-    	$this->SQL           = $this->SQL . ' ' . implode(',', $this->fields);
-    	$this->SQL           = $this->SQL . ' ' . $this->from;
-    	$this->SQL           = $this->SQL . ' ' . $this->where;
-    	$this->SQL           = $this->SQL . ' ' . $this->groupBy;
-    	$this->SQL           = $this->SQL . ' ' . $this->having;
-    	$this->SQL           = $this->SQL . ' ' . $this->orderBy;
+			
+			$this->SQL           = 'SELECT '; 
+			$this->SQL           = $this->SQL . ' ' . implode(',', $this->fields);
+			$this->SQL           = $this->SQL . ' ' . $this->from;
+			$this->SQL           = $this->SQL . ' ' . $this->where;
+			$this->SQL           = $this->SQL . ' ' . $this->groupBy;
+			$this->SQL           = $this->SQL . ' ' . $this->having;
+			$this->SQL           = $this->SQL . ' ' . $this->orderBy;
+			
     }
 
 }
@@ -667,6 +669,23 @@ function nuRunPHP($nuRID){
 }
 
 
+function nuRunHTML(){
+
+	$id								= nuID();
+	$P								= $_POST['nuSTATE'];
+	$o								= new stdClass;
+	$o->sql							= $P['browse_sql'];
+	$o->columns						= $P['browse_columns'];
+	$j								= json_encode($o);
+	
+	$nuS								= "INSERT INTO zzzzsys_debug (zzzzsys_debug_id, deb_message) VALUES (?, ?)";
+	nuRunQuery($nuS, array($id, $j));
+
+	return $id;
+	
+}
+
+
 function nuReplaceHashes($str, $arr){
 
 	while(list($key, $value) = each($arr)){
@@ -908,7 +927,7 @@ function nuSchema(){
 
 	$t	= nuRunQuery("SELECT table_name FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = DATABASE()");
 	$S	= array();
-return $S;
+
 	while($r = db_fetch_object($t)){
 
 		$tn		= $r->table_name; 
