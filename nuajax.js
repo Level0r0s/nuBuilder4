@@ -69,7 +69,7 @@ function nuGetForm(f, r, filter, n){
 	var successCallback = function(data,textStatus,jqXHR){
 
 		var fm = data;
-
+		
 		if(nuDisplayError(fm.errors)){
 
 			nuBC.splice(nuBC.length-1,1);

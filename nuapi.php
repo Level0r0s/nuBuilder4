@@ -8,6 +8,7 @@
 
 	$_SESSION['SESSIONID']	= ($_SESSION['SESSIONID'] == '' ? nuID() : $_SESSION['SESSIONID']);
 
+	$_POST['nuErrors']					= array();
 	$s									= nuCheckSession();
 	$P									= $_POST['nuSTATE'];
 	$_POST['nuHash']						= nuSetHashList($P);
@@ -16,7 +17,6 @@
 	$_POST['nuHash']['FORM_ID'] 			= $s->form_id;
 	$_POST['nuHash']['SESSION_ID'] 			= $s->session_id;
 	$_POST['nuValidate']					= array();
-	$_POST['nuErrors']					= array();
 
 	$f->forms[0]							= new stdClass;
 	

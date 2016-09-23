@@ -89,8 +89,10 @@ function nuDisplayError(e){
 	
 	for(var i = 0 ; i < e.length ; i++){
 		
-		m += e[i] + '\r';
-		$('#' + e[i][1]).addClass('nuValidate');
+		m += e[i][0] + '\r';
+		if( e[i][1] != '') {
+			$('#' + e[i][1]).addClass('nuValidate');
+		}
 		
 	}
 

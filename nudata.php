@@ -278,9 +278,8 @@ function nuChangeHashVariable($h, $v){
 
 function nuDisplayError($m, $o = ''){
 
-	if($o == ''){return;}
 	$_POST['nuErrors'][]	= array($m, $o);
-	
+
 }
 
 function nuSubformObject($sf){
