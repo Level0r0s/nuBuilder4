@@ -16,7 +16,6 @@ function nuBuildForm(f){
 	window.nuEDITED		= false;
 	
 	nuSetBODY(f);
-console.log(f);
 
 	if(f.schema.length !== undefined){  //-- its an Object (load these once,  at login)
 

@@ -29,7 +29,7 @@ function nuAjax(w,successCallback,errorCallback) {
 }
 
 function nuGetForm(f, r, filter, n){
-	debugger;
+
 	if(nuOpenNewBrowserTab('', f, r, filter)){return;}
 
 	var u 	= '';
@@ -69,7 +69,7 @@ function nuGetForm(f, r, filter, n){
 	var successCallback = function(data,textStatus,jqXHR){
 
 		var fm = data;
-
+		
 		if(nuDisplayError(fm.errors)){
 
 			nuBC.splice(nuBC.length-1,1);
@@ -152,7 +152,7 @@ function nuRunReport(f, iframe){
 	w.call_type	= 'runreport';
 	w.form_id	= f;
 	w.hash		= nuHashFromEditForm();
-	debugger;
+
 parent.console.log(w.hash);	
 console.log(11111,w.hash)
 	var successCallback = function(data,textStatus,jqXHR){
