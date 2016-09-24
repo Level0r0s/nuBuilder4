@@ -548,3 +548,11 @@ function nuFormValues(){  //-- list of changed fields and values
     
 }
 
+function nuCleanupString(s){
+
+	return s.replace(/[^A-Za-z 0-9 \.,\?""!@#\$%\^&\*\(\)-_=\+;:<>\/\\\|\}\{\[\]`~]*/g, '');
+
+}
+
+
+

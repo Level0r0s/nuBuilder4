@@ -11,6 +11,7 @@ $DBPassword                  = $_SESSION['DBPassword'];
 
 $nuDB = new PDO("mysql:host=$DBHost;dbname=$DBName;charset=utf8", $DBUser, $DBPassword, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
 $nuDB->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$nuDB->exec("SET CHARACTER SET utf8");
 
 $GLOBALS['nuSetup']          = db_setup();
 
