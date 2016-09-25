@@ -108,6 +108,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 			}
 
 			if($r->sob_all_type == 'run'){
+				
 				$type		= $r->sob_run_zzzzsys_form_id;
 				$o->record_id	= -1;
 				
