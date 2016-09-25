@@ -271,17 +271,30 @@ class nuSqlString{
     private function buildSQL(){
 			
 			$this->SQL           = 'SELECT '; 
-			$this->SQL           = $this->SQL . ' ' . implode(',', $this->fields);
-			$this->SQL           = $this->SQL . ' ' . $this->from;
-			$this->SQL           = $this->SQL . ' ' . $this->where;
-			$this->SQL           = $this->SQL . ' ' . $this->groupBy;
-			$this->SQL           = $this->SQL . ' ' . $this->having;
-			$this->SQL           = $this->SQL . ' ' . $this->orderBy;
+			$this->SQL           = $this->SQL . nuSQLTrim(implode(',', $this->fields), 1);
+			$this->SQL           = $this->SQL . nuSQLTrim($this->from);
+			$this->SQL           = $this->SQL . nuSQLTrim($this->where);
+			$this->SQL           = $this->SQL . nuSQLTrim($this->groupBy);
+			$this->SQL           = $this->SQL . nuSQLTrim($this->having);
+			$this->SQL           = $this->SQL . nuSQLTrim($this->orderBy);
 			
     }
 
 }
 
+function nuSQLTrim($s, $noCR = 0){
+	
+	if(trim($s) == ''){
+		return '';
+	}else{
+		if($noCR == 0){
+			return "\n$s";
+		}else{
+			return $s;
+		}
+	}
+
+}
 
 function nuTextFormats($dropdownList = false){
 
