@@ -610,7 +610,7 @@ function nuSetHashList($p){
 	$rid	= addslashes($p['record_id']);
 	
 	$A	= nuGetUserAccess();
-nudebug('aaaa '.print_r($A,1));
+
 	if($fid == '' or $rid == ''){
 
 		$r	= array_merge($r, $A);
@@ -701,7 +701,6 @@ function nuRunHTML(){
 	$o								= new stdClass;
 	$o->sql							= $P['browse_sql'];
 	$o->columns						= $P['browse_columns'];
-nudebug('pppp '. print_r($P,1));	
 	$j								= json_encode($o);
 	
 	$nuS								= "INSERT INTO zzzzsys_debug (zzzzsys_debug_id, deb_message) VALUES (?, ?)";
@@ -987,16 +986,16 @@ function nuGetUserAccess(){
 
 	$A	= array();
 	
-	$s	= "SELECT * FROM zzzzsys_session WHERE zzzzsys_session_id = ? ";
-	$t	= nuRunQuery($s, array($_SESSION['SESSIONID']));		
+     $s	= "SELECT * FROM zzzzsys_session WHERE zzzzsys_session_id = ? ";
+     $t	= nuRunQuery($s, array($_SESSION['SESSIONID']));			 
 	$r	= db_fetch_object($t);
 	$j	= json_decode($r->sss_access);
 	
-	$A['USER_ID']					= $j->zzzzsys_user_id;
-	$A['zzzzsys_user_group_id']	= $j->zzzzsys_user_group_id;
-	$A['sug_zzzzsys_form_id']		= $j->sug_zzzzsys_form_id;
-	$A['globalAccess']			= $j->globalAccess;
-
+	$A['USER_ID']					= $j->session->zzzzsys_user_id;
+	$A['USER_GROUP_ID']			= $j->session->zzzzsys_user_group_id;
+	$A['HOME_ID']					= $j->session->sug_zzzzsys_form_id;
+	$A['globalAccess']			= $j->session->globalAccess;
+	
 	return $A;
 	
 }

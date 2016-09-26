@@ -50,7 +50,7 @@ function nuBuildForm(f){
 	nuAddHolder('nuRecordHolder');
 	nuAddBreadcrumbs();
 	nuAddEditTabs('', f);
-	nuOptions('nuTabHolder', f.form_id);
+	nuOptions('nuTabHolder', f.form_id, f.global_access);
 	nuAddActionButtons(f);
 	nuRecordProperties(f, '');
 
@@ -1137,7 +1137,7 @@ function nuEditTab(p, t, i){
 
 }
 
-function nuOptions(p, f){
+function nuOptions(p, f, access){
 
 	if(window.nuBC[window.nuBC.length-1].record_id != '-2') {
 
@@ -1148,7 +1148,7 @@ function nuOptions(p, f){
 		$('#' + p).append(img);
 		$('#' + imgId)
 		.attr('src', 'nuoptions.png')
-		.attr('onclick', 'nuOptionsList("' + f + '", this, "' + p + '")')
+		.attr('onclick', 'nuOptionsList("' + f + '", this, "' + p + '", "' + access  + '")')
 		.css({'width'		: 12, 
 		'height' 		: 12, 
 		'right' 			: 10, 
@@ -1174,7 +1174,7 @@ function nuOptions(p, f){
 }
 
 
-function nuOptionsList(f, t, p){
+function nuOptionsList(f, t, p, a){
 
 	var icon	= $('#' + t.id);
 	var off	= icon.offset();
@@ -1185,10 +1185,14 @@ function nuOptionsList(f, t, p){
 	var list	= [];
 	var ul	= '<ul>';
 
-	list.push(['Arrange Objects', 'nuBuildPopup(&quot;' + f + '&quot;, &quot;-2&quot;)', 'nuarrange.png']);
-	list.push(['Form Properties', 'nuBuildPopup(&quot;nuform&quot;, &quot;' + f + '&quot;)', 'nuformprop.png']);
-	list.push(['Form Object List', 'nuBuildPopup(&quot;nuobject&quot;, &quot;&quot;, &quot;' + f + '&quot;)', 'nuobjectlist.png']);
-	list.push(['Change Login', 'nuBuildPopup(&quot;nupassword&quot;, &quot;' + u + '&quot;, &quot;&quot;)', 'nuobjectlist.png']);
+	if(a == 1){
+		list.push(['Arrange Objects', 'nuBuildPopup(&quot;' + f + '&quot;, &quot;-2&quot;)', 'nuarrange.png']);
+		list.push(['Form Properties', 'nuBuildPopup(&quot;nuform&quot;, &quot;' + f + '&quot;)', 'nuformprop.png']);
+		list.push(['Form Object List', 'nuBuildPopup(&quot;nuobject&quot;, &quot;&quot;, &quot;' + f + '&quot;)', 'nuobjectlist.png']);
+	}else{
+		list.push(['Change Login', 'nuBuildPopup(&quot;nupassword&quot;, &quot;' + u + '&quot;, &quot;&quot;)', 'nuobjectlist.png']);
+	}
+		
 	
 	for(var i = 0 ; i < list.length ; i++){
 		
@@ -1197,8 +1201,6 @@ function nuOptionsList(f, t, p){
 	}
 	ul += '</ul>';
 	ul += '<img id="nuOptionClose" src="close.png" style="position: absolute; top: 0px; right: 0px;" onclick="$(\'#nuOptionsList\').remove()">'
-
-	
 
 	$('#nuOptionsList').remove();
 	var divId  = 'nuOptionsList';
