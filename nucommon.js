@@ -62,6 +62,7 @@ function nuFormState(){
 	this.sort_direction   = 'desc';
 	this.tab_start      	= [];
 	this.username         = '';
+	this.user_id         = '';
 	
 }
 
@@ -97,6 +98,7 @@ function nuDisplayError(e){
 	}
 
 	if(e.length > 0){
+		nuBC.splice(nuBC.length-1,1);
 		alert(m);
 	}
 	

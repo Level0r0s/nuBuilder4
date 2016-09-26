@@ -72,9 +72,7 @@ function nuGetForm(f, r, filter, n){
 		
 		if(nuDisplayError(fm.errors)){
 
-			nuBC.splice(nuBC.length-1,1);
-			
-		if(fm.log_again == 1){nuLogin();}
+			if(fm.log_again == 1){nuLogin();}
 		
 		}else{
 				
@@ -105,7 +103,6 @@ function nuGetPHP(f, r){
 	var successCallback = function(data,textStatus,jqXHR){
 		var fm  = data;
                 if(nuDisplayError(fm.errors)){
-                	nuBC.splice(nuBC.length-1,1);
                 }else{
                        nuBC[nuBC.length-1].record_id   = fm.record_id;
                        nuBuildForm(fm);
@@ -132,7 +129,6 @@ function nuGetPDF(f, r){
 	var successCallback = function(data,textStatus,jqXHR){
                 var fm  = data;
                 if(nuDisplayError(fm.errors)){
-                        nuBC.splice(nuBC.length-1,1);
                 }else{ 
                        nuBC[nuBC.length-1].record_id   = fm.record_id;
                        nuBuildForm(fm);
@@ -157,7 +153,6 @@ function nuRunReport(f, iframe){
 		
 		var fm 	= data;
 		if(nuDisplayError(fm.errors)){
-			nuBC.splice(nuBC.length-1,1);
 		}else{
 			var pdfUrl   = 'nurunpdf.php?i=' + fm.id;
 			if(iframe === undefined){
@@ -186,7 +181,6 @@ function nuRunPHP(f, iframe){
 	var successCallback = function(data,textStatus,jqXHR){
 		var fm 	= data;
 		if(nuDisplayError(fm.errors)){
-			nuBC.splice(nuBC.length-1,1);
 		}else{
 			var pdfUrl   = 'nurunphp.php?i=' + fm.id;
 			if(iframe === undefined){
@@ -215,7 +209,6 @@ function nuGetLookupId(pk, id){
 	var successCallback = function(data,textStatus,jqXHR){		
 		var fm 	= data;
 		if(nuDisplayError(fm.errors)){
-			nuBC.splice(nuBC.length-1,1);
 		}else{
 			$('#' + id).change();
                 	window.nuPopulateLookup(fm, id);
@@ -237,7 +230,6 @@ function nuGetLookupCode(e, buildLookupList){
 	var successCallback = function(data,textStatus,jqXHR){		
 		var fm 	= data;
 		if(nuDisplayError(fm.errors)){
-			nuBC.splice(nuBC.length-1,1);
 		}else{
 			$('#nuLookupList').remove();
 			if(buildLookupList){
@@ -288,7 +280,6 @@ function nuUpdateData(){
 		var fm 	= data;
 
 		if(nuDisplayError(fm.errors)){
-			nuBC.splice(nuBC.length-1,1);
 			nuAbortSave();
 		}else{
 			if($('#nuDelete').prop('checked')){

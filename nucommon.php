@@ -598,7 +598,7 @@ function nuTextFormats($dropdownList = false){
 }
 
 function nuSetHashList($p){
-	
+
 	$H	= $p['hash'];
 	$r	= array();
 
@@ -617,24 +617,27 @@ function nuSetHashList($p){
 		$t	= nuRunQuery($s);
 		$R	= db_fetch_object($t);
 		
-		$s	= "SELECT * FROM $R->sfo_table WHERE $R->sfo_primary_key = '$rid'";
-		$t	= nuRunQuery($s);
-		$f	= db_fetch_object($t);
+		if(db_num_rows($t) > 0){
+			
+			$s	= "SELECT * FROM $R->sfo_table WHERE $R->sfo_primary_key = '$rid'";
+			$t	= nuRunQuery($s);
+			$f	= db_fetch_object($t);
 
-		if(is_object($f) ){
-		
-			foreach ( $f as $fld => $value )  {
+			if(is_object($f) ){
 			
-				$r[$fld] = addslashes($value);
-			
+				foreach ( $f as $fld => $value )  {
+				
+					$r[$fld] = addslashes($value);
+				
+				}
+				
+			}else{
+				
+				$this_type = gettype($f);
+				error_log("f is not an object, it is a $this_type, see line 607 in nucommon.php",0);
+				error_log("sql which returned the non-object was $s",0);
+				
 			}
-			
-		}else{
-			
-			$this_type = gettype($f);
-			error_log("f is not an object, it is a $this_type, see line 607 in nucommon.php",0);
-			error_log("sql which returned the non-object was $s",0);
-			
 		}
 		
 		$r['PREVIOUS_RECORD_ID']	= $rid;
@@ -693,6 +696,7 @@ function nuRunHTML(){
 	$o								= new stdClass;
 	$o->sql							= $P['browse_sql'];
 	$o->columns						= $P['browse_columns'];
+nudebug('pppp '. print_r($P,1));	
 	$j								= json_encode($o);
 	
 	$nuS								= "INSERT INTO zzzzsys_debug (zzzzsys_debug_id, deb_message) VALUES (?, ?)";

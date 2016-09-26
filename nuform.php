@@ -682,6 +682,8 @@ function nuBrowseRows($f){
 	while($r = db_fetch_row($t)){
 		$a[] = $r;
 	}
+	
+nudebug('sql : ' . $S->SQL);
 
 	return array($a, $rows, $S->SQL);
 	
