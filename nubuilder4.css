@@ -271,6 +271,14 @@ input {
   margin-left: 1px;
 }
 
+.nuLookupImg {
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  left: 3px;
+  top: 4px;
+}
+
 .nuLookupButton:hover {
   background-color: #CCCCCC;
   border-width: 1px 0px 0px 1px;
