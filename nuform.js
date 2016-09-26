@@ -1188,8 +1188,7 @@ function nuOptionsList(f, t, p){
 	list.push(['Arrange Objects', 'nuBuildPopup(&quot;' + f + '&quot;, &quot;-2&quot;)', 'nuarrange.png']);
 	list.push(['Form Properties', 'nuBuildPopup(&quot;nuform&quot;, &quot;' + f + '&quot;)', 'nuformprop.png']);
 	list.push(['Form Object List', 'nuBuildPopup(&quot;nuobject&quot;, &quot;&quot;, &quot;' + f + '&quot;)', 'nuobjectlist.png']);
-	list.push(['Change Login', 'nuBuildPopup(&quot;nuuser&quot;, &quot;' + u + '&quot;, &quot;&quot;)', 'nuobjectlist.png']);
-	list.push(['Change newin', 'nuBuildPopup(&quot;nupassword&quot;, &quot;' + u + '&quot;, &quot;&quot;)', 'nuobjectlist.png']);
+	list.push(['Change Login', 'nuBuildPopup(&quot;nupassword&quot;, &quot;' + u + '&quot;, &quot;&quot;)', 'nuobjectlist.png']);
 	
 	for(var i = 0 ; i < list.length ; i++){
 		

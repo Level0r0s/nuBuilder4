@@ -608,16 +608,22 @@ function nuSetHashList($p){
 	
 	$fid	= addslashes($p['form_id']);
 	$rid	= addslashes($p['record_id']);
-
+	
+	$A	= nuGetUserAccess();
+nudebug('aaaa '.print_r($A,1));
 	if($fid == '' or $rid == ''){
+
+		$r	= array_merge($r, $A);
+		
 		return $r;
+		
 	}else{
 
 		$s	= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$fid'";
 		$t	= nuRunQuery($s);
 		$R	= db_fetch_object($t);
 		
-		if(db_num_rows($t) > 0){
+		if(db_num_rows($t) == 1){
 			
 			$s	= "SELECT * FROM $R->sfo_table WHERE $R->sfo_primary_key = '$rid'";
 			$t	= nuRunQuery($s);
@@ -631,24 +637,23 @@ function nuSetHashList($p){
 				
 				}
 				
-			}else{
-				
-				$this_type = gettype($f);
-				error_log("f is not an object, it is a $this_type, see line 607 in nucommon.php",0);
-				error_log("sql which returned the non-object was $s",0);
-				
 			}
 		}
 		
 		$r['PREVIOUS_RECORD_ID']	= $rid;
 		$r['RECORD_ID']			= $rid;
 		$r['FORM_ID']				= $fid;
+		$r['FORM_ID']				= $fid;
+		
+		$r	= array_merge($r, $A);
 		
 	}
 	
 	return $r;
 
 }
+
+
 
 
 function nuRunReport($nuRID){
@@ -978,14 +983,21 @@ function nuTranslate($l){
 
 }
 
-function nuUserID(){
+function nuGetUserAccess(){
 
+	$A	= array();
+	
 	$s	= "SELECT * FROM zzzzsys_session WHERE zzzzsys_session_id = ? ";
 	$t	= nuRunQuery($s, array($_SESSION['SESSIONID']));		
 	$r	= db_fetch_object($t);
 	$j	= json_decode($r->sss_access);
+	
+	$A['USER_ID']					= $j->zzzzsys_user_id;
+	$A['zzzzsys_user_group_id']	= $j->zzzzsys_user_group_id;
+	$A['sug_zzzzsys_form_id']		= $j->sug_zzzzsys_form_id;
+	$A['globalAccess']			= $j->globalAccess;
 
-	return $j->session->zzzzsys_user_id;
+	return $A;
 	
 }
 

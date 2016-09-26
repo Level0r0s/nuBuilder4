@@ -12,6 +12,7 @@
 	$s									= nuCheckSession();
 	$P									= $_POST['nuSTATE'];
 	$_POST['nuHash']						= nuSetHashList($P);
+
 	$_POST['nuHash']['PREVIOUS_RECORD_ID'] 	= $s->record_id;
 	$_POST['nuHash']['RECORD_ID'] 			= $s->record_id;
 	$_POST['nuHash']['FORM_ID'] 			= $s->form_id;
@@ -31,7 +32,9 @@
 	if($P['call_type'] == 'runhtml')		{$f->forms[0]->id				= nuRunHTML();}
     if($P['call_type'] == 'nudragsave')		{$f->forms[0]					= nuDragSave($P);}
 
-	$f->forms[0]->user_id					= nuUserID();
+	$u									= nuGetUserAccess();
+	
+	$f->forms[0]->user_id					= $u['USER_ID'];
 	$f->forms[0]->dimensions				= $s->dimensions;
 	$f->forms[0]->schema					= $s->schema;
 	$f->forms[0]->translation				= $s->translation;
