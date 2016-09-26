@@ -450,7 +450,7 @@ function nuINPUT(w, i, l, p, prop){
 		.attr('data-nu-object-id', w.objects[i].object_id)
 		.attr('data-nu-target', target)
 		.addClass('nuLookupButton')
-		.html('<img border="0" src="lookup.png" width="10" height="10">')
+		.html('<img border="0" src="lookup.png" class="nuLookupImg">')
 		.attr('onclick', 'nuBuildLookup(this,[])');
 
 		id = p + prop.objects[i].id + 'description';
