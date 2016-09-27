@@ -2312,9 +2312,12 @@ function nuCheckFormProperties(f){
 	
 	window.nuFORMPROPERTIES	= f;
 	
-	var J	= [];
+	var J					= [];
+	
 	J.push(f.browse_columns);
 	J.push(f.browse_sql);
+	
 	window.nuFORMPROPERTIES.nuPrintBrowse	= encodeURI(JSON.stringify(J));
+	window.nuFORMPROPERTIES.nuPrintBrowse	= JSON.stringify(J);
 		
 }

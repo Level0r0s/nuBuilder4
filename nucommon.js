@@ -36,19 +36,20 @@ function nuOpenerAppend(t, k) {
 
 function nuFormState(){
 
-	this.call_type        = '';
-	this.filter           = window.nuBC.length == 0 ? '' : window.nuBC[nuBC.length-1].filter;
-	this.form_id          = '';
-	this.forms        	= [];
-	this.iframe       	= 0;
-	this.lookup_id        = '';
-	this.object_id        = '1';
-	this.page_number      = 0;
-	this.password     	= '';
-	this.record_id        = '';
+	window.bread_crumbs		= nuBC.length;
+	this.call_type        	= '';
+	this.filter           	= window.nuBC.length == 0 ? '' : window.nuBC[nuBC.length-1].filter;
+	this.form_id          	= '';
+	this.forms        		= [];
+	this.iframe				= 0;
+	this.lookup_id        	= '';
+	this.object_id        	= '1';
+	this.page_number      	= 0;
+	this.password     		= '';
+	this.record_id        	= '';
 	this.rows        		= 25;
-	this.row_height		= 25;
-	this.search           = '';
+	this.row_height			= 25;
+	this.search           	= '';
 
 	if(window.parent != null){
 		if(window.parent.nuOPENER.length > 0){
@@ -56,13 +57,13 @@ function nuFormState(){
 		}
 	}
 	
-	this.session_id		= window.nuSESSION;
-	this.nosearch_columns = [];
-	this.sort             = '-1';
-	this.sort_direction   = 'desc';
+	this.session_id			= window.nuSESSION;
+	this.nosearch_columns 	= [];
+	this.sort             	= '-1';
+	this.sort_direction   	= 'desc';
 	this.tab_start      	= [];
-	this.username         = '';
-	this.user_id         = '';
+	this.username			= '';
+	this.user_id			= '';
 	
 }
 
@@ -98,8 +99,14 @@ function nuDisplayError(e){
 	}
 
 	if(e.length > 0){
-		nuBC.splice(nuBC.length-1,1);
-		alert(m);
+		
+		if(window.bread_crumbs < nuBC.length){
+			
+			nuBC.splice(nuBC.length-1,1);
+			alert(m);
+			
+		}
+		
 	}
 	
 	return e.length > 0;

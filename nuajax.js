@@ -6,20 +6,23 @@ function nuAjax(w,successCallback,errorCallback) {
 		async    : true,  
         	dataType : "json",
 		url      : "nuapi.php",
-        	method   : "POST",
-        	data     : {nuSTATE : w},
-        	dataType : "json",			
-        	success: function(data,textStatus,jqXHR){
-            		successCallback(data,textStatus,jqXHR);
-        	},
-        	error: function(jqXHR,textStatus,errorThrown){
-			console.log('jqXHR : ' + jqXHR);
-			console.log('textStatus : ' + textStatus);
-			console.log('errorThrown : ' + errorThrown);
-			if (errorCallback !== undefined) {
-				errorCallback(jqXHR,textStatus,errorThrown);
-			}
-			nuFormatAjaxErrorMessage(jqXHR, errorThrown);
+		method   : "POST",
+		data     : {nuSTATE : w},
+		dataType : "json",			
+		success: function(data,textStatus,jqXHR){
+				successCallback(data,textStatus,jqXHR);
+		},
+		error: function(jqXHR,textStatus,errorThrown){
+			
+					console.log('jqXHR : ' + jqXHR);
+					console.log('textStatus : ' + textStatus);
+					console.log('errorThrown : ' + errorThrown);
+		
+					if (errorCallback !== undefined) {
+						errorCallback(jqXHR,textStatus,errorThrown);
+					}
+			
+					nuFormatAjaxErrorMessage(jqXHR, errorThrown);
         	},
 		complete: function(jqXHR,textStatus){
 			//todo - probably not needed
@@ -31,14 +34,13 @@ function nuAjax(w,successCallback,errorCallback) {
 function nuGetForm(f, r, filter, n){
 	
 	filter	= (filter === undefined ? filter = '' : filter);
-parent.console.log('filter : ' ,filter,filter);
 
 	if(nuOpenNewBrowserTab('getform', f, r, filter)){return;}
 
-	var u 	= '';
-	var p 	= '';
-	var s	= '';
-
+	var u 			= '';
+	var p 			= '';
+	var s			= '';
+	var b			= nuBC.length;
 	
 	if($('#nuusername').length == 1){
 		
@@ -242,14 +244,16 @@ function nuGetLookupCode(e, buildLookupList){
 			}
 		}
 	};
+
 	nuAjax(w,successCallback);
+	
 }
 
 
 function nuPrintAction(){
 
-	var w			= nuGetFormState();
-	w.call_type		= 'runhtml';
+	var w				= nuGetFormState();
+	w.call_type			= 'runhtml';
 	w.browse_columns	= nuFORMPROPERTIES.browse_columns;
 	w.browse_sql		= nuFORMPROPERTIES.browse_sql;
 	w.session_id		= window.nuSESSION;
@@ -263,7 +267,9 @@ function nuPrintAction(){
 
 		}
 	};
+
 	nuAjax(w,successCallback);
+
 }
 
 
