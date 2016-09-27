@@ -610,7 +610,7 @@ function nuSetHashList($p){
 	$rid	= addslashes($p['record_id']);
 	
 	$A	= nuGetUserAccess();
-nudebug('aaaa '.print_r($A,1));
+
 	if($fid == '' or $rid == ''){
 
 		$r	= array_merge($r, $A);

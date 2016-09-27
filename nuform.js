@@ -2312,8 +2312,5 @@ function nuCheckFormProperties(f){
 	J.push(f.browse_columns);
 	J.push(f.browse_sql);
 	window.nuFORMPROPERTIES.nuPrintBrowse	= encodeURI(JSON.stringify(J));
-	
-	
-	console.log(f);
-	
+		
 }
