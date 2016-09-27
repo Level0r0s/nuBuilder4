@@ -263,6 +263,7 @@ function nuRecordProperties(w, p, l){
 	chk.setAttribute('id', de);
 	chk.setAttribute('title', 'Delete This Row When Saved');
 	chk.setAttribute('type', 'checkbox');
+	chk.setAttribute('onclick', 'nuEditedReport()');
 
 	$('#' + fh)
 	.append(chk)
@@ -1976,7 +1977,7 @@ function nuFormatObject(t){
 }
 
 
-function nuOnChange(t,event){
+function nuOnChange(t, event){
 
 	var f	= $('#' + t.id).attr('data-nu-format');
 	
@@ -1985,9 +1986,12 @@ function nuOnChange(t,event){
 	}
 	
 	var p	= $('#' + t.id).attr('data-nu-prefix');
+	
 	$('#' + p + 'nuDelete').prop('checked', false);
 	$('#' + t.id).attr('data-nu-changed', '1');
+	
 	nuEditedReport();
+	
 	$('#nuCalendar').remove();
 	$('#' + t.id).removeClass('nuValidate');
 
@@ -2021,10 +2025,15 @@ function nuDeleteAction(){
 function nuCloneAction(){
 	
 	$('[data-nu-primary-key]').each(function(index){
+		
 			$(this).attr('data-nu-primary-key','-1');
+			
 	});
+	
 	$('[data-nu-field]').each(function(index){
+		
 			$(this).attr('data-nu-changed','1');
+			
 	});
 	
 	nuBC[nuBC.length-1].record_id	= '-1';
