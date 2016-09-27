@@ -46,16 +46,15 @@ window.onbeforeunload = nuHomeWarning;
 	$nuFormats	= json_encode(nuTextFormats(true));
 		
 	print "
-	
 	window.nuVersion		= 'nuBuilder4';
 	window.nuFormats		= $nuFormats;
 	
 	";
 		
 	$h	= "
+
 	if(window.parent == window && !nuValidCaller(window.opener)){
 		
-
 		function nuLoad(){
 			nuBindCtrlEvents();
 			nuLogin();
@@ -65,17 +64,20 @@ window.onbeforeunload = nuHomeWarning;
 
 		function nuLoad(){
 			
-			if(nuValidCaller(window.parent)){
-				var from		= window['parent'];
-			}else{
+			if(nuIsOpener(window)){
 				var from		= window['opener'];
+			}else{
+				var from		= window['parent'];
 			}
 			
 			window.nuTYPE		= '$type';
 			window.nuTARGET		= '$target';
 			window.nuSESSION	= from.nuSESSION;
-			var p				= from.nuOPENER[0$opener];
-
+			if('$opener' != '') {
+				var p			= from.nuOPENER[0$opener];
+			} else {
+				var p			= from.nuOPENER[from.nuOPENER.length -1];
+			}
 			nuBindCtrlEvents();
 
 			if(p.type == 'getreport') {

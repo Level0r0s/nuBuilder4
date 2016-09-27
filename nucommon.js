@@ -528,7 +528,14 @@ function nuValidCaller(o){
 
 }
 
-
+function nuIsOpener() {
+	
+	if(window.opener != null) {
+		return true;
+	}
+	
+	return false;
+}
 
 function nuFormValues(){  //-- list of changed fields and values
 

@@ -33,7 +33,7 @@ function nuGetForm(f, r, filter, n){
 	filter	= (filter === undefined ? filter = '' : filter);
 parent.console.log('filter : ' ,filter,filter);
 
-	if(nuOpenNewBrowserTab('', f, r, filter)){return;}
+	if(nuOpenNewBrowserTab('getform', f, r, filter)){return;}
 
 	var u 	= '';
 	var p 	= '';
@@ -306,8 +306,9 @@ function nuOpenNewBrowserTab(c, f, r, filter){
 		
 		window.nuNEW = 0;
 		window.nuOPENER.push(new nuOpener(f, r, filter));
-		nuOpenerAppend('type', c);
 
+		nuOpenerAppend('type', c);
+		
 		var open = window.nuOPENER.length - 1;
 		var u	= window.location.href + '?i=' + open;
 
