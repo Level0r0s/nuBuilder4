@@ -560,18 +560,20 @@ function nuRUN(w, i, l, p, prop){
 		$('#' + id).attr({
 					'type'		: 'button',
 					'value'		: prop.objects[i].label,
-					'onclick'	: "nuGetForm('" + prop.objects[i].form_id + "','" + prop.objects[i].record_id + "')"
-		}).addClass('nuButton');
+					'onclick'	: "nuGetForm('" + prop.objects[i].form_id + "','" + prop.objects[i].record_id + "','" + prop.objects[i].filter + "')"
+		})
+		.addClass('nuButton');
 		
 	}else{
 
 		var F	= prop.objects[i].form_id;
 		var R	= prop.objects[i].record_id;
+		var L	= prop.objects[i].filter;
 		var P	= window.location.pathname;
 		var f	= P.substring(0,P.lastIndexOf('/') + 1)
 
-		window.nuOPENER.push(new nuOpener(F, R, ''));
-		nuOpenerAppend('type','getphp');
+		window.nuOPENER.push(new nuOpener(F, R, L));
+		//nuOpenerAppend('type','getphp');
 
 		var open = window.nuOPENER.length - 1;
 		var u	= window.location.origin + f + prop.objects[i].src;
@@ -1569,7 +1571,7 @@ function nuSelectBrowse(t){
 	}else if(y == 'lookup'){
 
 		window.parent.nuGetLookupId(p, i);			//-- called from parent window
-		window.nuTYPE = 'browse';
+//		window.nuTYPE = 'browse';
 		
 	}else{
 		window[y](t);

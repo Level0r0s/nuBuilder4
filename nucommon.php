@@ -197,7 +197,7 @@ class nuSqlString{
     }
 
 
-
+/*
     public function addWhereClause($pClause){
 
         if(trim($this->where) == ''){
@@ -209,7 +209,7 @@ class nuSqlString{
 
     }
 
-    
+*/    
     public function getTableName(){
 
     	return trim(substr($this->from, 5));
@@ -641,11 +641,10 @@ function nuSetHashList($p){
 		}
 		
 		$r['PREVIOUS_RECORD_ID']	= $rid;
-		$r['RECORD_ID']			= $rid;
+		$r['RECORD_ID']				= $rid;
 		$r['FORM_ID']				= $fid;
 		$r['FORM_ID']				= $fid;
-		
-		$r	= array_merge($r, $A);
+		$r							= array_merge($r, $A);
 		
 	}
 	

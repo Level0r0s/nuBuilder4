@@ -29,6 +29,9 @@ function nuAjax(w,successCallback,errorCallback) {
 }
 
 function nuGetForm(f, r, filter, n){
+	
+	filter	= (filter === undefined ? filter = '' : filter);
+parent.console.log('filter : ' ,filter,filter);
 
 	if(nuOpenNewBrowserTab('', f, r, filter)){return;}
 
@@ -36,7 +39,6 @@ function nuGetForm(f, r, filter, n){
 	var p 	= '';
 	var s	= '';
 
-	filter	= (filter === undefined ? filter = '' : filter);
 	
 	if($('#nuusername').length == 1){
 		
@@ -55,16 +57,17 @@ function nuGetForm(f, r, filter, n){
 		
 	}
 
-	var w 		= nuGetFormState();
-	w.username	= u;
-	w.password	= p;
+	var w 			= nuGetFormState();
+	
+	w.username		= u;
+	w.password		= p;
 	w.session_id	= window.nuSESSION;
-	w.call_type	= 'getform';
-	w.form_id	= f;
-	w.record_id	= r;
+	w.call_type		= 'getform';
+	w.form_id		= f;
+	w.record_id		= r;
 	w.filter		= filter;
 	nuBC[nuBC.length - 1].filter = filter;	
-	w.hash		= parent.nuHashFromEditForm();
+	w.hash			= parent.nuHashFromEditForm();
 
 	var successCallback = function(data,textStatus,jqXHR){
 
@@ -286,7 +289,8 @@ function nuUpdateData(){
 				nuBC.pop();  						//-- return to browse
 				nuGetBreadcrumb(nuBC.length - 1);
 			}else{
-				nuGetForm(f, fm.record_id, '', 1);		//-- go to saved or created record
+				console.log('fm ' , fm);
+				nuGetForm(f, fm.record_id, fm.filter, 1);		//-- go to saved or created record
 			}
 			nuSavingMessage();
 		}

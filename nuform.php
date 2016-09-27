@@ -185,18 +185,16 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 		}
 	}
 
-    $f->buttons			= nuButtonList($f);
+    $f->buttons				= nuButtonList($f);
     $f->tabs 				= nuRefineTabList($tabs);
     $f->browse_columns		= nuBrowseColumns($f, $P);
-    $B					= nuBrowseRows($f);
-    $f->browse_rows		= $B[0];
+    $B						= nuBrowseRows($f);
+    $f->browse_rows			= $B[0];
     $f->browse_height		= $B[1];
-    $f->browse_sql		= $B[2];
+    $f->browse_sql			= $B[2];
     $f->pages				= ceil($B[1]/$f->rows);
     $f->objects 			= $a;
-
-    $O 					= new stdClass();
-
+    $O 						= new stdClass();
     $O->forms[] 			= $f;
 
     return $O->forms[0];
@@ -332,7 +330,7 @@ function nuGetEditForm($F){
     $f->type        	= $r->sfo_type;
     $f->table       	= $r->sfo_table;
     $f->primary_key 	= $r->sfo_primary_key;
-    $f->javascript 	= $r->sfo_javascript;
+    $f->javascript		= $r->sfo_javascript;
     $f->order			= $SQL->orderBy;
     $f->from			= $SQL->from;
 
@@ -632,6 +630,7 @@ function nuBrowseRows($f){
 	$start		= $page_number * $rows;
 	$search		= str_replace('&#39;', "'", $P['search']);
 	$filter		= str_replace('&#39;', "'", $P['filter']);
+	nudebug("filter $filter " . print_r($P,1));
 	$s 			= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$f->id'";
 	$t 			= nuRunQuery($s);
 	$r 			= db_fetch_object($t);

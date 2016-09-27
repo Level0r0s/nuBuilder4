@@ -16,7 +16,7 @@
 	$_POST['nuHash']						= nuSetHashList($P);
 	$u										= nuGetUserAccess();
 	$_POST['nuHash']						= array_merge($_POST['nuHash'], $u);
-	nudebug(print_r($_POST['nuHash'],1));
+	nudebug('^^^^^^^ ' . print_r($_POST['nuHash'],1));
 	$_POST['nuHash']['PREVIOUS_RECORD_ID'] 	= $s->record_id;
 	$_POST['nuHash']['RECORD_ID'] 			= $s->record_id;
 	$_POST['nuHash']['FORM_ID'] 			= $s->form_id;
