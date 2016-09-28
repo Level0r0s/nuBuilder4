@@ -317,7 +317,7 @@ function nuUpdateData(){
 		
 		var fm 	= data;
 
-		if(nuDisplayError(fm.errors)){
+		if(nuDisplayError(fm.errors, 1)){
 			
 			nuAbortSave();
 			
@@ -330,7 +330,6 @@ function nuUpdateData(){
 				
 			}else{
 				
-				console.log('fm ' , fm);
 				nuGetForm(f, fm.record_id, fm.filter, 1);		//-- go to saved or created record
 				
 			}

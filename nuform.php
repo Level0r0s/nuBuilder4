@@ -630,7 +630,6 @@ function nuBrowseRows($f){
 	$start		= $page_number * $rows;
 	$search		= str_replace('&#39;', "'", $P['search']);
 	$filter		= str_replace('&#39;', "'", $P['filter']);
-	nudebug("filter $filter " . print_r($P,1));
 	$s 			= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$f->id'";
 	$t 			= nuRunQuery($s);
 	$r 			= db_fetch_object($t);
@@ -682,8 +681,6 @@ function nuBrowseRows($f){
 		$a[] = $r;
 	}
 	
-nudebug('sql : ' . $S->SQL);
-
 	return array($a, $rows, $S->SQL);
 	
 }
@@ -939,7 +936,7 @@ function nuCheckSession(){
 
 function nuAccessForms($session){
 
-	if($session->globalAccess == '1'){
+	if($session->global_access == '1'){
 		
 		$s	= "SELECT zzzzsys_form_id AS id FROM zzzzsys_form";
 		
@@ -973,7 +970,7 @@ function nuAccessForms($session){
 
 function nuAccessReports($session){
 	
-	if($session->globalAccess == '1'){
+	if($session->global_access == '1'){
 		
 		$s	= "SELECT zzzzsys_report_id AS id FROM zzzzsys_report";
 		
@@ -1007,7 +1004,7 @@ function nuAccessReports($session){
 
 function nuAccessProcedures($session){
 
-	if($session->globalAccess == '1'){
+	if($session->global_access == '1'){
 		
 		$s	= "SELECT zzzzsys_php_id AS id FROM zzzzsys_php";
 		
@@ -1239,12 +1236,12 @@ function nuSessionDetails($u){
 		$r->zzzzsys_user_group_id	= '';
 		$r->zzzzsys_user_id		= $_SESSION['DBGlobeadminUsername'];
 		$r->sug_zzzzsys_form_id	= 'nuhome';
-		$r->globalAccess			= '1';
+		$r->global_access			= '1';
 		
 	}else{
 		
 		$r						= db_fetch_object($t);
-		$r->globalAccess			= '0';
+		$r->global_access		= '0';
 		
 	}
 	

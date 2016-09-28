@@ -85,7 +85,7 @@ function nuGetBreadcrumb(b, t = ''){
 }
 
 
-function nuDisplayError(e){
+function nuDisplayError(e, nosplicing){
 
 	var m	= '';
 	
@@ -100,12 +100,8 @@ function nuDisplayError(e){
 
 	if(e.length > 0){
 		
-		if(window.bread_crumbs < nuBC.length){
-			
-			nuBC.splice(nuBC.length-1,1);
-			alert(m);
-			
-		}
+//			nuBC.splice(nuBC.length-1,1);
+		alert(m);
 		
 	}
 	
@@ -557,18 +553,26 @@ function nuFormValues(){  //-- list of changed fields and values
     var f = {};
     
     for (var fld in list) {
+		
         f[fld] = $('#' + fld).val();
+		
     }
 
 	return f;
     
 }
 
-function nuCleanupString(s){
+function nuCloseAllnuOptionsLists(){
 
-	return s.replace(/[^A-Za-z 0-9 \.,\?""!@#\$%\^&\*\(\)-_=\+;:<>\/\\\|\}\{\[\]`~]*/g, '');
+	$('#nuOptionsList').remove();
+	
+	parent.$('#nuOptionsList').remove();
+	
+	$('iframe').each(function() {
+		
+		$('#' + this.id).contents().find('#nuOptionsList').remove();
+		
+	});	
 
 }
-
-
 
