@@ -1207,7 +1207,11 @@ function nuSetAccessibility($userid = ''){
 	$access->reports			= nuAccessReports($access->session);
 	$access->procedures			= nuAccessProcedures($access->session);
 	
+<<<<<<< HEAD
 	$nuJ						= json_encode($access);
+=======
+	$nuJ							= json_encode($access);
+>>>>>>> 429cd4d96c5fa7879c31afd2f7f2b301ee9bb968
 	
 	$today 						= strtotime('now');
 	$timeout 					= date("Y-m-d H:i:s", strtotime('+'.$_SESSION['Timeout'].' min', $today));
