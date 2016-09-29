@@ -811,10 +811,7 @@ function nuCheckSession(){
 
 	$isGlobeadmin			= ($_POST['nuSTATE']['username'] == $_SESSION['DBGlobeadminUsername'] ? true : false);
 	$isGlobeadminPassword	= ($_POST['nuSTATE']['password'] == $_SESSION['DBGlobeadminPassword'] ? true : false);
-<<<<<<< HEAD
 	$timeout 				= $_SESSION['Timeout'];
-=======
->>>>>>> 661fac501194fffd21480f99d653a9460f8588b5
 	$u						= $_POST['nuSTATE']['username'];
 	$p						= $_POST['nuSTATE']['password'];
 	$s						= $_POST['nuSTATE']['session_id'];
@@ -1203,24 +1200,19 @@ function nuGetAllLookupList(){
 function nuSetAccessibility($userid = ''){
 
 	$_SESSION['SESSIONID']		= nuID();
+	
 	$access						= new stdClass;
 	$access->session			= nuSessionDetails($userid);
 	$access->forms				= nuAccessForms($access->session);
 	$access->reports			= nuAccessReports($access->session);
 	$access->procedures			= nuAccessProcedures($access->session);
 	
-<<<<<<< HEAD
-	$nuJ							= json_encode($access);
-	
-	$today = strtotime('now');
-	$timeout = date("Y-m-d H:i:s", strtotime('+'.$_SESSION['Timeout'].' min', $today));
-
-	nuRunQuery("INSERT INTO zzzzsys_session SET sss_timeout = '$timeout', sss_access = ?, zzzzsys_session_id = ?", array($nuJ, $_SESSION['SESSIONID']));
-=======
 	$nuJ						= json_encode($access);
 	
-	nuRunQuery("INSERT INTO zzzzsys_session SET sss_access = ?, zzzzsys_session_id = ?", array($nuJ, $_SESSION['SESSIONID']));
->>>>>>> 661fac501194fffd21480f99d653a9460f8588b5
+	$today 						= strtotime('now');
+	$timeout 					= date("Y-m-d H:i:s", strtotime('+'.$_SESSION['Timeout'].' min', $today));
+
+	nuRunQuery("INSERT INTO zzzzsys_session SET sss_timeout = '$timeout', sss_access = ?, zzzzsys_session_id = ?", array($nuJ, $_SESSION['SESSIONID']));
 	
 	return $i;
 
