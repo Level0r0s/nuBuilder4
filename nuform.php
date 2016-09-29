@@ -1066,13 +1066,16 @@ function nuAccessProcedures($session){
 
 		$s	= "
 		
-			SELECT slp_zzzzsys_php_id AS id 
+			SELECT 
+				slp_zzzzsys_php_id AS id
 			FROM zzzzsys_user_group
 			JOIN zzzzsys_user_group_access_level ON gal_zzzzsys_user_group_id = zzzzsys_user_group_id
 			JOIN zzzzsys_access_level ON zzzzsys_access_level_id = gal_zzzzsys_access_level_id
 			JOIN zzzzsys_access_level_php ON zzzzsys_access_level_id = slp_zzzzsys_access_level_id
-			WHERE zzzzsys_user_group_id = '$session->zzzzsys_user_group_id'
-			GROUP BY slp_zzzzsys_php_id
+			WHERE 
+				zzzzsys_user_group_id = '$session->zzzzsys_user_group_id'
+			GROUP BY 
+				slp_zzzzsys_php_id
 				
 		";
 		
@@ -1091,23 +1094,23 @@ function nuAccessProcedures($session){
 
 function nuFormDimensions($f){
 
-	$d	= array();
-	$t	= nuRunQuery("SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$f'");
-	$r	= db_fetch_object($t);
+	$d			= array();
+	$t			= nuRunQuery("SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$f'");
+	$r			= db_fetch_object($t);
 	
-	$rh	= intval($r->sfo_row_height)    == 0 ? 25 : $r->sfo_row_height;
-	$rs	= intval($r->sfo_rows_per_page) == 0 ? 25 : $r->sfo_rows_per_page;
+	$rh			= intval($r->sfo_row_height)    == 0 ? 25 : $r->sfo_row_height;
+	$rs			= intval($r->sfo_rows_per_page) == 0 ? 25 : $r->sfo_rows_per_page;
 	
-	$d[]	= ($rs * $rh) + 225;    //-- lookup browse height
+	$d[]		= ($rs * $rh) + 225;    //-- lookup browse height
 	
-	$t	= nuRunQuery("SELECT * FROM zzzzsys_browse WHERE sbr_zzzzsys_form_id = '$f'");
-	$w	= 0;
+	$t			= nuRunQuery("SELECT * FROM zzzzsys_browse WHERE sbr_zzzzsys_form_id = '$f'");
+	$w			= 0;
 	
 	while($r	= db_fetch_object($t)){
 		$w = $w + $r->sbr_width;
 	}
 	
-	$d[]	= $w + 40;             //-- lookup browse width
+	$d[]		= $w + 40;             //-- lookup browse width
 	
 	$t	= nuRunQuery("SELECT * FROM zzzzsys_object WHERE sob_all_zzzzsys_form_id = '$f'");
 	$h	= 0;
@@ -1118,14 +1121,18 @@ function nuFormDimensions($f){
 	while($r	= db_fetch_object($t)){
 		
 		if($r->sob_all_type == 'lookup'){
+			
 			$w 	= max($w, $r->sob_all_left + $r->sob_all_width + $r->sob_lookup_description_width + 40);
 			$gw	= $gw + $r->sob_all_width + $r->sob_lookup_description_width + 40;
+			
 		}else{
+			
 			$w 	= max($w, $r->sob_all_left + $r->sob_all_width + 40);
-			$gw 	= $gw + $r->sob_all_width;
+			$gw = $gw + $r->sob_all_width;
+			
 		}
 
-		$h	= max($h, $r->sob_all_top + $r->sob_all_height);
+		$h		= max($h, $r->sob_all_top + $r->sob_all_height);
 		$gh 	= max($r->sob_all_height, 25);
 
 	}
@@ -1190,7 +1197,7 @@ function nuGetAllLookupList(){
 	$a				= array();
 	
 	while($r = db_fetch_row($t)){
-		$a[]	= $r;
+		$a[]		= $r;
 	}
 
 	return $a;
@@ -1207,12 +1214,7 @@ function nuSetAccessibility($userid = ''){
 	$access->reports			= nuAccessReports($access->session);
 	$access->procedures			= nuAccessProcedures($access->session);
 	
-<<<<<<< HEAD
 	$nuJ						= json_encode($access);
-=======
-	$nuJ							= json_encode($access);
->>>>>>> 429cd4d96c5fa7879c31afd2f7f2b301ee9bb968
-	
 	$today 						= strtotime('now');
 	$timeout 					= date("Y-m-d H:i:s", strtotime('+'.$_SESSION['Timeout'].' min', $today));
 
