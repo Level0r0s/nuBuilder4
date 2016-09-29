@@ -162,6 +162,8 @@ function loginInputKeyup(event){
 
 function nuLogin(){
 	
+	window.nuSESSION = '';
+	
 	$('body').html('');
 	
 	var l1	= '<div id="login" class="nuLogin" style="  border-style: solid;border-width: 1px;border-color: rgba(0, 0, 0, 0.08);">';

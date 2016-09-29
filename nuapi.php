@@ -9,7 +9,7 @@
 	if(!isset($_SESSION['SESSIONID'])){
 		$_SESSION['SESSIONID'] = nuID();
 	}
-
+	
 	$_POST['nuErrors']						= array();
 	$s										= nuCheckSession();
 	$P										= $_POST['nuSTATE'];

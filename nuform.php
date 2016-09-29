@@ -811,6 +811,10 @@ function nuCheckSession(){
 
 	$isGlobeadmin			= ($_POST['nuSTATE']['username'] == $_SESSION['DBGlobeadminUsername'] ? true : false);
 	$isGlobeadminPassword	= ($_POST['nuSTATE']['password'] == $_SESSION['DBGlobeadminPassword'] ? true : false);
+<<<<<<< HEAD
+	$timeout 				= $_SESSION['Timeout'];
+=======
+>>>>>>> 661fac501194fffd21480f99d653a9460f8588b5
 	$u						= $_POST['nuSTATE']['username'];
 	$p						= $_POST['nuSTATE']['password'];
 	$s						= $_POST['nuSTATE']['session_id'];
@@ -887,18 +891,24 @@ function nuCheckSession(){
 		if(db_num_rows($t) > 0){
 
 			$r 					= db_fetch_object($t);
-			$s					= $_SESSION['SESSIONID'];
-			$c->session_id		= $s;
-			$c->form_id			= $_POST['nuSTATE']['form_id'];
-			$c->record_id			= $_POST['nuSTATE']['record_id'];
-			$c->schema			= nuSchema();	
-			$c->translation		= nuTranslate($r->sus_language);
+			
+			if(nuHasSessionTimedOut($r->sss_timeout)) {
+				$s					= $_SESSION['SESSIONID'];
+				$c->session_id		= $s;
+				$c->form_id			= $_POST['nuSTATE']['form_id'];
+				$c->record_id		= $_POST['nuSTATE']['record_id'];
+				$c->schema			= nuSchema();	
+				$c->translation		= nuTranslate($r->sus_language);
+			} else {
+			
+				nuDisplayTimeout();	
+				return;
+				
+			}
 			
 		}else{
 		
-			nuDisplayError('Timeout..');
-			$_POST['nuLogAgain']	= 1;
-			
+			nuDisplayTimeout();
 			return;
 			
 		}
@@ -957,6 +967,28 @@ function nuCheckSession(){
 
 	return $c;
 	
+}
+
+function nuHasSessionTimedOut($timeout) {
+	
+	$currentTime				= time();
+	$sessionTimeoutScheduled 	= strtotime($timeout);
+		
+	if(intval($currentTime) <= intval($sessionTimeoutScheduled)) {
+			return true;
+	}
+	
+	return false;
+}
+
+function nuDisplayTimeout() {
+
+	nuRunQuery("DELETE FROM zzzzsys_session WHERE zzzzsys_session_id = ?",array($_SESSION['SESSIONID']));
+	
+	nuDisplayError('Timeout..');
+	$_POST['nuLogAgain']	= 1;
+	
+	return;
 }
 
 function nuAccessForms($session){
@@ -1177,9 +1209,18 @@ function nuSetAccessibility($userid = ''){
 	$access->reports			= nuAccessReports($access->session);
 	$access->procedures			= nuAccessProcedures($access->session);
 	
+<<<<<<< HEAD
+	$nuJ							= json_encode($access);
+	
+	$today = strtotime('now');
+	$timeout = date("Y-m-d H:i:s", strtotime('+'.$_SESSION['Timeout'].' min', $today));
+
+	nuRunQuery("INSERT INTO zzzzsys_session SET sss_timeout = '$timeout', sss_access = ?, zzzzsys_session_id = ?", array($nuJ, $_SESSION['SESSIONID']));
+=======
 	$nuJ						= json_encode($access);
 	
 	nuRunQuery("INSERT INTO zzzzsys_session SET sss_access = ?, zzzzsys_session_id = ?", array($nuJ, $_SESSION['SESSIONID']));
+>>>>>>> 661fac501194fffd21480f99d653a9460f8588b5
 	
 	return $i;
 
