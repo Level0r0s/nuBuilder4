@@ -201,7 +201,7 @@ class nuSqlString{
     }
 
 
-
+/*
     public function addWhereClause($pClause){
 
         if(trim($this->where) == ''){
@@ -213,7 +213,7 @@ class nuSqlString{
 
     }
 
-    
+*/    
     public function getTableName(){
 
     	return trim(substr($this->from, 5));
@@ -602,13 +602,6 @@ function nuTextFormats($dropdownList = false){
 }
 
 function nuSetHashList($p){
-
-	$H	= $p['hash'];
-	$r	= array();
-
-	for($i = 1 ; $i < count($H) ; $i++){
-		$r[$H[$i][0]]	= addslashes($H[$i][1]);
-	}
 	
 	$fid	= addslashes($p['form_id']);
 	$rid	= addslashes($p['record_id']);
@@ -617,9 +610,7 @@ function nuSetHashList($p){
 
 	if($fid == '' or $rid == ''){
 
-		$r	= array_merge($r, $A);
-		
-		return $r;
+		return $A;
 		
 	}else{
 
@@ -629,7 +620,7 @@ function nuSetHashList($p){
 		
 		if(db_num_rows($t) == 1){
 			
-			$s	= "SELECT * FROM $R->sfo_table WHERE $R->sfo_primary_key = '$rid'";
+			$s	= "SELECt * FROM $R->sfo_table WHERE $R->sfo_primary_key = '$rid'";
 			$t	= nuRunQuery($s);
 			$f	= db_fetch_object($t);
 
@@ -643,21 +634,26 @@ function nuSetHashList($p){
 				
 			}
 		}
+
+		$H		= $p['hash'];
+		$r		= array();
+
+		for($i = 1 ; $i < count($H) ; $i++){
+			$r[$H[$i][0]]	= addslashes($H[$i][1]);
+		}
 		
 		$r['PREVIOUS_RECORD_ID']	= $rid;
-		$r['RECORD_ID']			= $rid;
+		$r['RECORD_ID']				= $rid;
 		$r['FORM_ID']				= $fid;
 		$r['FORM_ID']				= $fid;
-		
-		$r	= array_merge($r, $A);
+
+		$r							= array_merge($A, $r);
 		
 	}
 	
 	return $r;
 
 }
-
-
 
 
 function nuRunReport($nuRID){
@@ -924,27 +920,27 @@ function nuAddToHashList($J, $run){
         
     }
 
-    $d                  = new DateTime();
+    $d                  		= new DateTime();
 
-    $hash['nu_date_time']     = $d->format('Y-m-d H:i:s');
-    $hash['nu_date']          = $d->format('Y-m-d');
-    $hash['nu_time']          = $d->format('H:i:s');
-    $hash['nu_year']          = $d->format('Y');
-    $hash['nu_month']         = $d->format('m');
-    $hash['nu_day']           = $d->format('d');
-    $hash['nu_hour']          = $d->format('H');
-    $hash['nu_minute']        = $d->format('i');
+    $hash['nu_date_time']		= $d->format('Y-m-d H:i:s');
+    $hash['nu_date']			= $d->format('Y-m-d');
+    $hash['nu_time']			= $d->format('H:i:s');
+    $hash['nu_year']			= $d->format('Y');
+    $hash['nu_month']    		= $d->format('m');
+    $hash['nu_day'] 			= $d->format('d');
+    $hash['nu_hour']			= $d->format('H');
+    $hash['nu_minute']			= $d->format('i');
 	
 	if($run == 'report'){
 		
-		$hash['sre_layout']       = $J->sre_layout;
-		$hash['slp_php']          = $J->slp_php;
+		$hash['sre_layout']		= $J->sre_layout;
+		$hash['slp_php']		= $J->slp_php;
 		
 	}
 	
 	if($run == 'php'){
 		
-		$hash['sph_php']          = nuReplaceHashVariables($J->sph_php);
+		$hash['sph_php']		= nuReplaceHashVariables($J->sph_php);
 		
 	}
 
@@ -988,18 +984,18 @@ function nuTranslate($l){
 
 function nuGetUserAccess(){
 
-	$A	= array();
+	$A					= array();
+
+	$s					= "SELECT * FROM zzzzsys_session WHERE zzzzsys_session_id = ? ";
+	$t					= nuRunQuery($s, array($_SESSION['SESSIONID']));			 
+	$r					= db_fetch_object($t);
+	$j					= json_decode($r->sss_access);
 	
-     $s	= "SELECT * FROM zzzzsys_session WHERE zzzzsys_session_id = ? ";
-     $t	= nuRunQuery($s, array($_SESSION['SESSIONID']));			 
-	$r	= db_fetch_object($t);
-	$j	= json_decode($r->sss_access);
-	
-	$A['USER_ID']					= $j->session->zzzzsys_user_id;
-	$A['USER_GROUP_ID']			= $j->session->zzzzsys_user_group_id;
-	$A['HOME_ID']					= $j->session->sug_zzzzsys_form_id;
-	$A['globalAccess']			= $j->session->globalAccess;
-	
+	$A['USER_ID']		= $j->session->zzzzsys_user_id;
+	$A['USER_GROUP_ID']	= $j->session->zzzzsys_user_group_id;
+	$A['HOME_ID']		= $j->session->sug_zzzzsys_form_id;
+	$A['global_access']	= $j->session->global_access;
+
 	return $A;
 	
 }

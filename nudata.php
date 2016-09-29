@@ -4,8 +4,8 @@ function nuUpdateData(){
 	
 	$nudata	= $_POST['nuSTATE']['data'];
 	$ID		= $_POST['nuSTATE']['record_id'];
-	$DEL		= $_POST['nuSTATE']['deleteAll'];	
-	$fid		= $_POST['nuSTATE']['form_id'];
+	$DEL	= $_POST['nuSTATE']['deleteAll'];	
+	$fid	= $_POST['nuSTATE']['form_id'];
 	$s		= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$fid'";
 	$t		= nuRunQuery($s);
 	$FORM	= db_fetch_object($t);

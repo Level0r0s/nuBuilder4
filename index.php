@@ -71,14 +71,13 @@ window.onbeforeunload = nuHomeWarning;
 			}
 			
 			window.nuTYPE		= '$type';
-			window.nuTARGET	= '$target';
+			window.nuTARGET		= '$target';
 			window.nuSESSION	= from.nuSESSION;
 			if('$opener' != '') {
 				var p			= from.nuOPENER[0$opener];
 			} else {
 				var p			= from.nuOPENER[from.nuOPENER.length -1];
 			}
-
 			nuBindCtrlEvents();
 
 			if(p.type == 'getreport') {

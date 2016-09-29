@@ -185,18 +185,16 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 		}
 	}
 
-    $f->buttons			= nuButtonList($f);
+    $f->buttons				= nuButtonList($f);
     $f->tabs 				= nuRefineTabList($tabs);
     $f->browse_columns		= nuBrowseColumns($f, $P);
-    $B					= nuBrowseRows($f);
-    $f->browse_rows		= $B[0];
+    $B						= nuBrowseRows($f);
+    $f->browse_rows			= $B[0];
     $f->browse_height		= $B[1];
-    $f->browse_sql		= $B[2];
+    $f->browse_sql			= $B[2];
     $f->pages				= ceil($B[1]/$f->rows);
     $f->objects 			= $a;
-
-    $O 					= new stdClass();
-
+    $O 						= new stdClass();
     $O->forms[] 			= $f;
 
     return $O->forms[0];
@@ -332,7 +330,7 @@ function nuGetEditForm($F){
     $f->type        	= $r->sfo_type;
     $f->table       	= $r->sfo_table;
     $f->primary_key 	= $r->sfo_primary_key;
-    $f->javascript 	= $r->sfo_javascript;
+    $f->javascript		= $r->sfo_javascript;
     $f->order			= $SQL->orderBy;
     $f->from			= $SQL->from;
 
@@ -683,8 +681,6 @@ function nuBrowseRows($f){
 		$a[] = $r;
 	}
 	
-nudebug('sql : ' . $S->SQL);
-
 	return array($a, $rows, $S->SQL);
 	
 }
@@ -693,64 +689,88 @@ nudebug('sql : ' . $S->SQL);
 
 function nuBrowseWhereClause($searchFields, $searchString, $returnArray = false) {
 
-    $pos          = -1;
-    $start        = -1;
-	$where		= array();
-    $phrases      = array();
-    $SEARCHES     = array();
-    $wordSearches = array();
-    $highlight    = array();
+    $pos					= -1;
+    $start					= -1;
+	$where					= array();
+    $phrases      			= array();
+    $SEARCHES     			= array();
+    $wordSearches 			= array();
+    $highlight    			= array();
 
     while (true) {
+		
         $pos = strpos($searchString, '"', $pos + 1);                              //-- search for double quotes
+		
         if ($pos === false) {
+			
             break;                                                                            //-- stop searching
+			
         } else {
+			
             if ($start == -1) {
-                $start     = $pos;                                                            //-- find start position of phrase
+				
+                $start     	= $pos;                                                            //-- find start position of phrase
+				
             } else {
-                $phrases[] = "$start," . ($pos + 1);                                             //-- add start and end to array
-                $start     = -1;
+				
+                $phrases[] 	= "$start," . ($pos + 1);                                             //-- add start and end to array
+                $start     	= -1;
+				
             }
+			
         }
+		
     }
 
     for ($i = 0; $i < count($phrases); $i++) {
 
-        $p          = explode(',', $phrases[$i]);
-        $SEARCHES[] = substr($searchString, $p[0], $p[1] - $p[0]);
+        $p          		= explode(',', $phrases[$i]);
+        $SEARCHES[] 		= substr($searchString, $p[0], $p[1] - $p[0]);
     }
     
     for ($i = 0; $i < count($SEARCHES); $i++) {
 
         $pos = strpos($searchString, '-' . $SEARCHES[$i]);                                      //-- check for a preceeding minus
+		
         if ($pos === false) {
-            $task[]       = 'include';
-            $searchString = str_replace($SEARCHES[$i], ' ', $searchString);             //-- include phrase
-            $highlight[]  = substr($SEARCHES[$i], 1, -1);
+			
+            $task[]       	= 'include';
+            $searchString 	= str_replace($SEARCHES[$i], ' ', $searchString);             //-- include phrase
+            $highlight[]  	= substr($SEARCHES[$i], 1, -1);
+			
         } else {
-            $task[]       = 'exclude';
-            $searchString       = str_replace('-' . $SEARCHES[$i], ' ', $searchString);                   //-- remove phrase
+			
+            $task[]			= 'exclude';
+            $searchString	= str_replace('-' . $SEARCHES[$i], ' ', $searchString);                   //-- remove phrase
+			
         }
-        $SEARCHES[$i] = ' "%' . substr($SEARCHES[$i], 1, -1) . '%" ';
+		
+        $SEARCHES[$i] 		= ' "%' . substr($SEARCHES[$i], 1, -1) . '%" ';
         
     }
 
-    $wordSearches = explode(' ', $searchString);
-    $quo = '"';
+    $wordSearches 			= explode(' ', $searchString);
+    $quo 					= '"';
     
     for ($i = 0; $i < count($wordSearches); $i++) {
 
         if (strlen($wordSearches[$i]) > 0) {
+			
             if (substr($wordSearches[$i], 0, 1) == '-' and strlen($wordSearches[$i]) > 1) {       //-- check for a preceeding minus
+			
                 $task[]      = 'exclude';
                 $SEARCHES[]  = $quo . '%' . addslashes(substr($wordSearches[$i], 1)) . '%' . $quo;      //-- add word to exclude
+				
             } else {
+				
                 $task[]      = 'include';
                 $SEARCHES[]  = $quo . '%' . addslashes($wordSearches[$i]) . '%' . $quo;                //-- add word to include
                 $highlight[] = $wordSearches[$i];
+				
             }
+			
         }
+		
     }
     
     for ($i = 0; $i < count($SEARCHES); $i++) {                                                //-- search for (or exclude) these strings
@@ -790,13 +810,16 @@ function nuCheckSession(){
 
 	$isGlobeadmin			= ($_POST['nuSTATE']['username'] == $_SESSION['DBGlobeadminUsername'] ? true : false);
 	$isGlobeadminPassword	= ($_POST['nuSTATE']['password'] == $_SESSION['DBGlobeadminPassword'] ? true : false);
+<<<<<<< HEAD
 	$timeout 				= $_SESSION['Timeout'];
+=======
+>>>>>>> 661fac501194fffd21480f99d653a9460f8588b5
 	$u						= $_POST['nuSTATE']['username'];
 	$p						= $_POST['nuSTATE']['password'];
 	$s						= $_POST['nuSTATE']['session_id'];
 	$ct						= $_POST['nuSTATE']['call_type'];
-	$_POST['nuLogAgain']		= 0;
-	$_POST['nuIsGlobeadmin']	= 0;
+	$_POST['nuLogAgain']	= 0;
+	$_POST['nuIsGlobeadmin']= 0;
 
 	$c						= new stdClass;
 	$c->record_id			= '-1';
@@ -818,13 +841,13 @@ function nuCheckSession(){
 				$s						= nuSetAccessibility($u);
 				$c->session_id			= $s;
 				$c->form_id				= 'nuhome';
-				$c->record_id				= '-1';
+				$c->record_id			= '-1';
 				$c->schema				= nuSchema();
 				$c->translation			= nuTranslate('');
 
 			}else{
 				nuDisplayError('Invalid Login..');
-				$_POST['nuLogAgain']		= 1;
+				$_POST['nuLogAgain']	= 1;
 				return;
 				
 			}
@@ -845,7 +868,7 @@ function nuCheckSession(){
 				$s					= nuSetAccessibility($r->zzzzsys_user_id);
 				$c->session_id		= $s;
 				$c->form_id			= $r->sug_zzzzsys_form_id;			//-- home Form
-				$c->record_id			= '-1';
+				$c->record_id		= '-1';
 				$c->schema			= nuSchema();	
 				$c->translation		= nuTranslate($r->sus_language);
 
@@ -891,14 +914,14 @@ function nuCheckSession(){
 
 	}
 
-	$t					= nuRunQuery("SELECT * FROM zzzzsys_session WHERE zzzzsys_session_id = ? ", array($_SESSION['SESSIONID']));		
-	$r 					= db_fetch_object($t);
-	$nuJ 				= json_decode($r->sss_access);
-	$_POST['forms']		= $nuJ->forms;
+	$t						= nuRunQuery("SELECT * FROM zzzzsys_session WHERE zzzzsys_session_id = ? ", array($_SESSION['SESSIONID']));		
+	$r 						= db_fetch_object($t);
+	$nuJ 					= json_decode($r->sss_access);
+	$_POST['forms']			= $nuJ->forms;
 	$_POST['reports']		= $nuJ->reports;
 	$_POST['procedures']	= $nuJ->procedures;
 	$_POST['session']		= $nuJ->session;
-	$c->translation		= nuTranslate($nuJ->language);
+	$c->translation			= nuTranslate($nuJ->language);
 
 	if($nuJ->session->zzzzsys_user_id != $_SESSION['DBGlobeadminUsername'] && $c->form_id != 'nuhome') {
 
@@ -969,7 +992,7 @@ function nuDisplayTimeout() {
 
 function nuAccessForms($session){
 
-	if($session->globalAccess == '1'){
+	if($session->global_access == '1'){
 		
 		$s	= "SELECT zzzzsys_form_id AS id FROM zzzzsys_form";
 		
@@ -1003,7 +1026,7 @@ function nuAccessForms($session){
 
 function nuAccessReports($session){
 	
-	if($session->globalAccess == '1'){
+	if($session->global_access == '1'){
 		
 		$s	= "SELECT zzzzsys_report_id AS id FROM zzzzsys_report";
 		
@@ -1037,7 +1060,7 @@ function nuAccessReports($session){
 
 function nuAccessProcedures($session){
 
-	if($session->globalAccess == '1'){
+	if($session->global_access == '1'){
 		
 		$s	= "SELECT zzzzsys_php_id AS id FROM zzzzsys_php";
 		
@@ -1065,64 +1088,7 @@ function nuAccessProcedures($session){
 	}
 
 	return $a;
-	
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	if($i == ''){	
-	
-		$s	= "SELECT zzzzsys_php_id AS id FROM zzzzsys_php";
-		
-	}else{
-		
-		$s	= "SELECT * FROM zzzzsys_user WHERE zzzzsys_user_id = '$i'";
-		$t	= nuRunQuery($s);
-		$r	= db_fetch_object($t);
-		
-		$s	= "
-		
-			SELECT slp_zzzzsys_php_id AS id 
-			FROM zzzzsys_user_group
-			JOIN zzzzsys_user_group_access_level ON gal_zzzzsys_user_group_id = zzzzsys_user_group_id
-			JOIN zzzzsys_access_level ON zzzzsys_access_level_id = gal_zzzzsys_access_level_id
-			JOIN zzzzsys_access_level_php ON zzzzsys_access_level_id = slp_zzzzsys_access_level_id
-			WHERE zzzzsys_user_group_id = '$r->sus_zzzzsys_user_group_id'
-			GROUP BY slp_zzzzsys_php_id
-				
-		";
-		
-	}
-
-	$t	= nuRunQuery($s);
-	$a	= Array();
-
-	while($r	= db_fetch_row($t)){
-		$a[]	= $r[0];
-	}
-
-	return $a;
-	
 }
 
 function nuFormDimensions($f){
@@ -1181,7 +1147,7 @@ function nuFormDimensions($f){
 function nuGetAllLookupValues(){
 
 	$a						= array();
-	$OID						= $_POST['nuSTATE']['object_id'];
+	$OID					= $_POST['nuSTATE']['object_id'];
 	$PK						= $_POST['nuSTATE']['primary_key'];
 	$s						= "SELECT * FROM zzzzsys_object WHERE zzzzsys_object_id = '$OID'";
 	$t						= nuRunQuery($s);
@@ -1200,33 +1166,33 @@ function nuGetAllLookupValues(){
 
 function nuGetAllLookupList(){
 
-	$O			= $_POST['nuSTATE']['object_id'];
-	$C			= $_POST['nuSTATE']['code'];
-	$s			= "SELECT * FROM zzzzsys_object WHERE zzzzsys_object_id = '$O'";
-	$t			= nuRunQuery($s);
-	$r	 		= db_fetch_object($t);
-	$code		= $r->sob_lookup_code;
+	$O				= $_POST['nuSTATE']['object_id'];
+	$C				= $_POST['nuSTATE']['code'];
+	$s				= "SELECT * FROM zzzzsys_object WHERE zzzzsys_object_id = '$O'";
+	$t				= nuRunQuery($s);
+	$r	 			= db_fetch_object($t);
+	$code			= $r->sob_lookup_code;
 	$description	= $r->sob_lookup_description;
 	
-	$s	 		= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$r->sob_lookup_zzzzsys_form_id'";
-	$t			= nuRunQuery($s);
-	$r	 		= db_fetch_object($t);
-	$id	 		= $r->sfo_primary_key;
-	$SQL 		= new nuSqlString($r->sfo_browse_sql);
+	$s		 		= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$r->sob_lookup_zzzzsys_form_id'";
+	$t				= nuRunQuery($s);
+	$r	 			= db_fetch_object($t);
+	$id	 			= $r->sfo_primary_key;
+	$SQL 			= new nuSqlString($r->sfo_browse_sql);
 
-	$s			= "
-				SELECT $id, $code, $description
-				$SQL->from
-				WHERE $code LIKE '%$C%'
-				ORDER BY $code
-				LIMIT 0 , 10
-				";
+	$s				= "
+					SELECT $id, $code, $description
+					$SQL->from
+					WHERE $code LIKE '%$C%'
+					ORDER BY $code
+					LIMIT 0 , 10
+					";
 
-	$t			= nuRunQuery($s);
-	$a			= array();
+	$t				= nuRunQuery($s);
+	$a				= array();
 	
 	while($r = db_fetch_row($t)){
-		$a[]		= $r;
+		$a[]	= $r;
 	}
 
 	return $a;
@@ -1235,19 +1201,25 @@ function nuGetAllLookupList(){
 
 function nuSetAccessibility($userid = ''){
 
-	$_SESSION['SESSIONID']	 		= nuID();
+	$_SESSION['SESSIONID']		= nuID();
 	$access						= new stdClass;
-	$access->session				= nuSessionDetails($userid);
+	$access->session			= nuSessionDetails($userid);
 	$access->forms				= nuAccessForms($access->session);
-	$access->reports				= nuAccessReports($access->session);
+	$access->reports			= nuAccessReports($access->session);
 	$access->procedures			= nuAccessProcedures($access->session);
 	
+<<<<<<< HEAD
 	$nuJ							= json_encode($access);
 	
 	$today = strtotime('now');
 	$timeout = date("Y-m-d H:i:s", strtotime('+'.$_SESSION['Timeout'].' min', $today));
 
 	nuRunQuery("INSERT INTO zzzzsys_session SET sss_timeout = '$timeout', sss_access = ?, zzzzsys_session_id = ?", array($nuJ, $_SESSION['SESSIONID']));
+=======
+	$nuJ						= json_encode($access);
+	
+	nuRunQuery("INSERT INTO zzzzsys_session SET sss_access = ?, zzzzsys_session_id = ?", array($nuJ, $_SESSION['SESSIONID']));
+>>>>>>> 661fac501194fffd21480f99d653a9460f8588b5
 	
 	return $i;
 
@@ -1265,20 +1237,21 @@ function nuSessionDetails($u){
 		GROUP BY sus_zzzzsys_user_group_id
 		
 	";
-	$t	= nuRunQuery($q);
+	
+	$t								= nuRunQuery($q);
 	
 	if(db_num_rows($t) == 0){		//-- globeadmin so manually poulate object
 		
-		$r						= new stdClass;
+		$r							= new stdClass;
 		$r->zzzzsys_user_group_id	= '';
-		$r->zzzzsys_user_id		= $_SESSION['DBGlobeadminUsername'];
-		$r->sug_zzzzsys_form_id	= 'nuhome';
-		$r->globalAccess			= '1';
+		$r->zzzzsys_user_id			= $_SESSION['DBGlobeadminUsername'];
+		$r->sug_zzzzsys_form_id		= 'nuhome';
+		$r->global_access			= '1';
 		
 	}else{
 		
-		$r						= db_fetch_object($t);
-		$r->globalAccess			= '0';
+		$r							= db_fetch_object($t);
+		$r->global_access			= '0';
 		
 	}
 	

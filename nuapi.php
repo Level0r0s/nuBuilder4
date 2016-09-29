@@ -15,8 +15,9 @@
 	$P										= $_POST['nuSTATE'];
 	$_POST['nuHash']						= nuSetHashList($P);
 	$u										= nuGetUserAccess();
-	$_POST['nuHash']						= array_merge($_POST['nuHash'], $u);
-	nudebug(print_r($_POST['nuHash'],1));
+	nudebug('hash : ' . print_r($_POST['nuHash'],1));
+	nudebug('u : ' . print_r($u,1));
+	$_POST['nuHash']						= array_merge($u, $_POST['nuHash']);
 	$_POST['nuHash']['PREVIOUS_RECORD_ID'] 	= $s->record_id;
 	$_POST['nuHash']['RECORD_ID'] 			= $s->record_id;
 	$_POST['nuHash']['FORM_ID'] 			= $s->form_id;
@@ -44,7 +45,7 @@
 	$f->forms[0]->errors					= $_POST['nuErrors'];
 	$f->forms[0]->log_again				    = $_POST['nuLogAgain'];
 	$f->forms[0]->target					= $P['target'];
-	$f->forms[0]->global_access				= $_POST['nuHash']['globalAccess'];
+	$f->forms[0]->global_access				= $_POST['nuHash']['global_access'];
 	$j								    	= json_encode($f->forms[0]);
 
 	print $j;

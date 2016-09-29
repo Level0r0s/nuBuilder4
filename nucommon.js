@@ -36,19 +36,20 @@ function nuOpenerAppend(t, k) {
 
 function nuFormState(){
 
-	this.call_type        = '';
-	this.filter           = window.nuBC.length == 0 ? '' : window.nuBC[nuBC.length-1].filter;
-	this.form_id          = '';
-	this.forms        	= [];
-	this.iframe       	= 0;
-	this.lookup_id        = '';
-	this.object_id        = '1';
-	this.page_number      = 0;
-	this.password     	= '';
-	this.record_id        = '';
+	window.bread_crumbs		= nuBC.length;
+	this.call_type        	= '';
+	this.filter           	= window.nuBC.length == 0 ? '' : window.nuBC[nuBC.length-1].filter;
+	this.form_id          	= '';
+	this.forms        		= [];
+	this.iframe				= 0;
+	this.lookup_id        	= '';
+	this.object_id        	= '1';
+	this.page_number      	= 0;
+	this.password     		= '';
+	this.record_id        	= '';
 	this.rows        		= 25;
-	this.row_height		= 25;
-	this.search           = '';
+	this.row_height			= 25;
+	this.search           	= '';
 
 	if(window.parent != null){
 		if(window.parent.nuOPENER.length > 0){
@@ -56,13 +57,13 @@ function nuFormState(){
 		}
 	}
 	
-	this.session_id		= window.nuSESSION;
-	this.nosearch_columns = [];
-	this.sort             = '-1';
-	this.sort_direction   = 'desc';
+	this.session_id			= window.nuSESSION;
+	this.nosearch_columns 	= [];
+	this.sort             	= '-1';
+	this.sort_direction   	= 'desc';
 	this.tab_start      	= [];
-	this.username         = '';
-	this.user_id         = '';
+	this.username			= '';
+	this.user_id			= '';
 	
 }
 
@@ -84,7 +85,7 @@ function nuGetBreadcrumb(b, t = ''){
 }
 
 
-function nuDisplayError(e){
+function nuDisplayError(e, nosplicing){
 
 	var m	= '';
 	
@@ -98,8 +99,10 @@ function nuDisplayError(e){
 	}
 
 	if(e.length > 0){
-		nuBC.splice(nuBC.length-1,1);
+		
+//			nuBC.splice(nuBC.length-1,1);
 		alert(m);
+		
 	}
 	
 	return e.length > 0;
@@ -552,18 +555,26 @@ function nuFormValues(){  //-- list of changed fields and values
     var f = {};
     
     for (var fld in list) {
+		
         f[fld] = $('#' + fld).val();
+		
     }
 
 	return f;
     
 }
 
-function nuCleanupString(s){
+function nuCloseAllnuOptionsLists(){
 
-	return s.replace(/[^A-Za-z 0-9 \.,\?""!@#\$%\^&\*\(\)-_=\+;:<>\/\\\|\}\{\[\]`~]*/g, '');
+	$('#nuOptionsList').remove();
+	
+	parent.$('#nuOptionsList').remove();
+	
+	$('iframe').each(function() {
+		
+		$('#' + this.id).contents().find('#nuOptionsList').remove();
+		
+	});	
 
 }
-
-
 
