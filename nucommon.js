@@ -69,7 +69,7 @@ function nuFormState(){
 
 function nuGetBreadcrumb(b, t = ''){
 
-	if(window.nuEDITED){
+	if(window.nuEDITED && window.nuTYPE != 'runreport' && window.nuTYPE != 'getphp'){
 		if(!confirm(nuTranslate('Leave this form without saving?'))){
 			return;
 		}
