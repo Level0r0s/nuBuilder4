@@ -576,3 +576,93 @@ function nuCloseAllnuOptionsLists(){
 
 }
 
+
+
+function nuSubformArray(sf, all){
+
+    var a 	= Array();
+    var i 	= 0;
+    var p 	= '';
+
+    if(arguments.length == 1){
+        all = true;
+    }
+    
+    while($('#' + sf + nuPad3(i) + 'nuDelete').length == 1){
+    
+        p 	= sf + nuPad3(i);
+		
+        if(!$('#' + p + 'nuDelete').is(':checked') || all){
+			a.push(p);
+        }
+		
+        i++;
+		
+    }
+    
+    return a;
+
+}
+
+function nuSortSubform(sf, fld){
+	
+	var rows	= nuSubformArray(sf);
+	var value	= [];
+	var row		= []
+	
+	for(var i = 0 ; i < rows.length ; i++){
+
+		$("[data-nu-subform-sort=1][id^=" + rows[i] + "]").each(function( index ) {
+			value.push(new nuSubformRecordValues(this.id, rows[i]));
+		});
+		
+		row.push(value);
+		value	= [];
+
+	}
+	
+	row.sort(function(a, b, fld){
+		
+console.log(a, b, fld);
+		return a-(b + fld)
+		
+	});
+	
+	return row;
+
+}
+
+//function nuSortSubformData(sf
+
+
+function nuSubformRecordValues(i, r){
+
+	this.old_id = i;
+	this.new_id = '';
+	this.new_value = $('#' + i).val();
+
+}
+
+
+
+function nuSortSubformBy(row, col){
+
+
+	
+	for(var i = 0 ; i < col.length ; i++){
+		
+	}
+	
+		return function(a, b) {
+			
+			return a[col] - b[col];
+			
+		}
+	
+}
+
+//arr.sort(nuSortSuformBy(row, col));
+
+
+
+

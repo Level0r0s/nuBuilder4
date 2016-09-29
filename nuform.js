@@ -10,28 +10,28 @@ function nuBuildForm(f){
 		
 	}
 	
-	window.nuSESSION		= f.session_id;
-	window.onbeforeunload	= null;
-	window.nuSUBFORMROW	= [];
-	window.nuSUBFORMJSON	= [];
-	window.nuHASH			= [];                       //-- remove any hash variables previously set.
-	window.nuEDITED		= false;
+	window.nuSESSION				= f.session_id;
+	window.onbeforeunload			= null;
+	window.nuSUBFORMROW				= [];
+	window.nuSUBFORMJSON			= [];
+	window.nuHASH					= [];                       //-- remove any hash variables previously set.
+	window.nuEDITED					= false;
 	
 	nuSetBODY(f);
 
-	if(f.schema.length !== undefined){  //-- its an Object (load these once,  at login)
+	if(window.nuSCHEMA === undefined){  						//-- its an Object (load these once,  at login)
 
-		window.nuSCHEMA 	= f.schema;
-		window.nuLANGUAGE	= f.translation;
+		window.nuSCHEMA 			= f.schema;
+		window.nuLANGUAGE			= f.translation;
 		
 	}
 	
-	var b 						= window.nuBC.length-1;
+	var b 							= window.nuBC.length-1;
 
-	window.nuBC[b].form_id 		= f.form_id;
+	window.nuBC[b].form_id 			= f.form_id;
 	window.nuBC[b].record_id 		= f.record_id;
 	window.nuBC[b].session_id 		= f.session_id;
-	window.nuBC[b].user_id 		= f.user_id;
+	window.nuBC[b].user_id 			= f.user_id;
 	window.nuBC[b].title 			= f.title;
 	window.nuBC[b].row_height		= f.row_height;
 	window.nuBC[b].rows 			= f.rows;
@@ -47,6 +47,7 @@ function nuBuildForm(f){
 	if(f.record_id != ''){
 		nuAddHolder('nuTabHolder');
 	}
+	
 	nuAddHolder('nuRecordHolder');
 	nuAddBreadcrumbs();
 	nuAddEditTabs('', f);
@@ -65,6 +66,7 @@ function nuBuildForm(f){
     if(f.record_id == '-2'){
         nuCreateDragOptionsBox(f);
 	}
+	
 }
 
 
@@ -133,6 +135,7 @@ function nuDefine(v){
 function nuAddActionButtons(f){
 
 	var draggable = 0;
+	
 	if(window.nuBC[window.nuBC.length-1].record_id == '-2') {
 		draggable = 1;
 	}
@@ -321,14 +324,12 @@ function nuDRAG(w, i, l, p, prop){
 
 function nuINPUT(w, i, l, p, prop){
 	
-	var id   = p + prop.objects[i].id;
-	var ef   = p + 'nuRecordHolder';                       //-- Edit Form Id
-	var ty	= 'textarea';
+	var id			= p + prop.objects[i].id;
+	var ef			= p + 'nuRecordHolder';                       //-- Edit Form Id
+	var ty			= 'textarea';
 	
 	if(prop.objects[i].type != 'textarea'){         		//-- Input Object
-		
-		ty	= 'input';
-
+		ty		= 'input';
 	}
 
 	var inp  		= document.createElement(ty);
@@ -340,8 +341,8 @@ function nuINPUT(w, i, l, p, prop){
 
 	if(prop.objects[i].parent_type == 'g'){        		//--  in a grid subform
 		
-		prop.objects[i].left = l;
-		prop.objects[i].top = 3;
+		prop.objects[i].left 	= l;
+		prop.objects[i].top 	= 3;
 		
 	}else{
 		
@@ -363,11 +364,11 @@ function nuINPUT(w, i, l, p, prop){
 	
 	nuAddDataTab(id, prop.objects[i].tab, p);
 
-	$('#' + id).css({'top'       	: Number(prop.objects[i].top),
+	$('#' + id).css({'top'      : Number(prop.objects[i].top),
 					'left'		: Number(prop.objects[i].left),
 					'width'		: Number(prop.objects[i].width),
-					'height'		: Number(prop.objects[i].height),
-					'text-align'	: prop.objects[i].align,
+					'height'	: Number(prop.objects[i].height),
+					'text-align': prop.objects[i].align,
 					'position'	: 'absolute'
 	})
 	
@@ -376,6 +377,7 @@ function nuINPUT(w, i, l, p, prop){
 	.attr('data-nu-object-id', w.objects[i].object_id)
 	.attr('data-nu-format', w.objects[i].format)
 	.attr('data-nu-prefix', p)
+	.attr('data-nu-subform-sort', 1)
 	.prop('readonly', prop.objects[i].read == '1' ? 'readonly' : '');
 	
 	if(w.objects[i].value == ''){             //== check for Cannot be left blank
@@ -423,6 +425,7 @@ function nuINPUT(w, i, l, p, prop){
 		.attr('data-nu-form-id', w.objects[i].form_id)
 		.attr('data-nu-object-id', w.objects[i].object_id)
 		.attr('data-nu-target', target)
+		.attr('data-nu-subform-sort', 1)
 		.attr('onkeyup', 'nuLookupKeyUp(event)')
 		.attr('onkeydown', 'nuLookupKeyDown(event)')
 		.attr('onblur', 'nuLookupBlur(event)')
@@ -434,13 +437,15 @@ function nuINPUT(w, i, l, p, prop){
 		w.objects[i].values[1][0]	= p + w.objects[i].values[1][0];
 		w.objects[i].values[2][0]	= p + w.objects[i].values[2][0];
 		
-		id 			= target + 'button';
+		id 				= target + 'button';
 		var inp 		= document.createElement('div');
 		
 		inp.setAttribute('id', id);
 		
 		$('#' + ef).append(inp);
+		
 		nuAddDataTab(id, prop.objects[i].tab, p);
+		
 		$('#' + id).css({'top'      	: Number(prop.objects[i].top),
 						'left'      	: Number(prop.objects[i].left) + Number(prop.objects[i].width) + 2,
 						'width'		: 15,
@@ -450,6 +455,7 @@ function nuINPUT(w, i, l, p, prop){
 		.attr('data-nu-form-id', w.objects[i].form_id)
 		.attr('data-nu-object-id', w.objects[i].object_id)
 		.attr('data-nu-target', target)
+		.attr('data-nu-subform-sort', 1)
 		.addClass('nuLookupButton')
 		.html('<img border="0" src="lookup.png" class="nuLookupImg">')
 		.attr('onclick', 'nuBuildLookup(this,[])');
@@ -605,7 +611,9 @@ function nuSELECT(w, i, l, p, prop){
 	sel.setAttribute('id', id);
 
 	$('#' + ef).append(sel);
+
 	nuAddDataTab(id, prop.objects[i].tab, p);
+
 	$('#' + id).css({'top'     : Number(prop.objects[i].top),
 					'left'     : Number(prop.objects[i].left),
 					'width'    : Number(prop.objects[i].width),
@@ -615,6 +623,7 @@ function nuSELECT(w, i, l, p, prop){
 	.attr('data-nu-field', prop.objects[i].id)
 	.attr('data-nu-object-id', w.objects[i].object_id)
 	.attr('data-nu-format', '')
+	.attr('data-nu-subform-sort', 1)
 	.attr('data-nu-prefix', p);
 
 	if(prop.objects[i].multiple == 1){
@@ -658,26 +667,28 @@ function nuSELECT(w, i, l, p, prop){
 
 function nuSUBFORM(w, i, l, p, prop){
 	
-    var SF  = prop.objects[i];						//-- First row
-    var SFR = w.objects[i];							//-- All rows
-	var id  = p + SF.id;
-	var ef  = p + 'nuRecordHolder';					//-- Edit Form Id
-	var inp = document.createElement('div');
-	var fms = SFR.forms;
+    var SF  		= prop.objects[i];						//-- First row
+    var SFR 		= w.objects[i];							//-- All rows
+	var id  		= p + SF.id;
+	var ef  		= p + 'nuRecordHolder';					//-- Edit Form Id
+	var inp 		= document.createElement('div');
+	var fms 		= SFR.forms;
 
 	inp.setAttribute('id', id);
 	
 	if(SF.parent_type == 'g'){
 		
-		SF.left = l;
-		SF.top = 3;
+		SF.left 	= l;
+		SF.top 		= 3;
 		
 	}else{		
-			nuLabel(w, i, p, prop);	
+		nuLabel(w, i, p, prop);	
 	}
 
 	$('#' + ef).append(inp);
+	
 	nuAddDataTab(id, prop.objects[i].tab, p);
+	
 	$('#' + id).css({'top'         : Number(SF.top),
 					'left'       	: Number(SF.left),
 					'width'      	: Number(SF.width),
@@ -776,6 +787,7 @@ function nuSUBFORM(w, i, l, p, prop){
 						'height'        : Number(rowHeight),
 						'position'      : 'absolute'
 		})
+		.attr('data-nu-subform-sort', 1)
 		.addClass('nuSubform' + even);
 
 		nuBuildEditObjects(SFR.forms[c], prefix, SF, SF.forms[0]);
