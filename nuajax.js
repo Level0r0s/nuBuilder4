@@ -2,29 +2,30 @@
 function nuAjax(w,successCallback,errorCallback) {
 
  	$.ajax({
-        	timeout  : 3000,
+		timeout  : 3000,
 		async    : true,  
-        	dataType : "json",
+		dataType : "json",
 		url      : "nuapi.php",
-        	method   : "POST",
-        	data     : {nuSTATE : w},
-        	dataType : "json",			
-        	success: function(data,textStatus,jqXHR){
-            		successCallback(data,textStatus,jqXHR);
-        	},
-        	error: function(jqXHR,textStatus,errorThrown){
+		method   : "POST",
+		data     : {nuSTATE : w},
+		dataType : "json",			
+		success: function(data,textStatus,jqXHR){
+				successCallback(data,textStatus,jqXHR);
+		},
+		error: function(jqXHR,textStatus,errorThrown){
 			console.log('jqXHR : ' + jqXHR);
 			console.log('textStatus : ' + textStatus);
 			console.log('errorThrown : ' + errorThrown);
+		
 			if (errorCallback !== undefined) {
 				errorCallback(jqXHR,textStatus,errorThrown);
 			}
 			nuFormatAjaxErrorMessage(jqXHR, errorThrown);
-        	},
+		},
 		complete: function(jqXHR,textStatus){
 			//todo - probably not needed
 		} 
-    	});    
+	});    
 
 }
 
