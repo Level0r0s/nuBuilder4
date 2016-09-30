@@ -679,12 +679,28 @@ function nuRunReport($nuRID){
 
 function nuRunPHP($nuRID){
 
-	$id								= nuID();
+	$id									= nuID();
 	$nuT								= nuRunQuery("SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = '$nuRID'");
 	$nuA								= db_fetch_object($nuT);
 	$_POST['nuHash']['code']			= $nuA->sph_code;
 	$_POST['nuHash']['description']		= $nuA->sph_description;
-	$_POST['nuHash']['sph_php']		= nuReplaceHashVariables($nuA->sph_php);
+	$php								= $nuA->sph_php;
+	
+	try {
+		
+		$s 								= "SELECT * FROM zzzzsys_php_library LEFT JOIN zzzzsys_php ON zzzzsys_php_id = spl_library_zzzzsys_php_id WHERE spl_zzzzsys_php_id = '$nuRID'";
+		$nuT							= nuRunQuery($s);
+		
+		while($nuA= db_fetch_object($nuT)) {
+			$php .= "\n ".$nuA->sph_php;
+		}
+		
+	} catch (Exception $e) {
+		error_log("RunPHP error: ".$e);
+		echo 'Caught exception: ',  $e->getMessage(), "\n";
+	}
+	
+	$_POST['nuHash']['sph_php']			= nuReplaceHashVariables($php);
 	$nuJ								= json_encode($_POST['nuHash']);
 	$nuS								= "INSERT INTO zzzzsys_debug (zzzzsys_debug_id, deb_message) VALUES (?, ?)";
 	nuRunQuery($nuS, array($id, $nuJ));
