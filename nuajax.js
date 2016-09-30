@@ -312,7 +312,7 @@ function nuUpdateData(){
 	w.hash				= nuHashFromEditForm();
 	w.subforms			= nuGetSFArrays();
 	w.session_id		= window.nuSESSION;
-
+console.log(w);
 	var successCallback = function(data,textStatus,jqXHR){
 		
 		var fm 	= data;

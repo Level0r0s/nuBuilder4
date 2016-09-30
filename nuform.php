@@ -29,6 +29,7 @@ function nuFormCode($f){
 	$s	= "SELECT sfo_code FROM zzzzsys_form WHERE zzzzsys_form_id = '$f'";
 	$t	= nuRunQuery($s);
 	$r	= db_fetch_row($t);
+	
 	return $r[0];
 	
 }
@@ -38,7 +39,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
     $tabs 			= nuBuildTabList($F);
     $f				= nuGetEditForm($F);
     $f->form_id		= $F;
-    $f->record_id		= $R;
+    $f->record_id	= $R;
     
 	if($f->table == ''){
 		
@@ -228,6 +229,7 @@ function nuObjectEvents($i){
 	$a	= array();
 	$s	= "SELECT sev_event AS event, sev_javascript AS js FROM zzzzsys_event WHERE sev_zzzzsys_object_id = '$i'";
 	$t	= nuRunQuery($s);
+	
 	while($r = db_fetch_object($t)){
 		$a[]	= $r;
 	}
@@ -246,12 +248,14 @@ function nuButtonList($f){
 	$A = array();
 	
 	if($f->record_id == ''){
+		
 		if($f->id != 'nurunreport' && $f->id != 'nurunphp'){
 			
 			$b = nuGetButton('add', $a);	if(count($b) == 2){$A[] = $b;}
 			$b = nuGetButton('print', $a);	if(count($b) == 2){$A[] = $b;}
 			
 		}
+		
 	}else{
 		
 		$b = nuGetButton('save', $a);	if(count($b) == 2){$A[] = $b;}

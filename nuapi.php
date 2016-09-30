@@ -15,8 +15,7 @@
 	$P										= $_POST['nuSTATE'];
 	$_POST['nuHash']						= nuSetHashList($P);
 	$u										= nuGetUserAccess();
-	nudebug('hash : ' . print_r($_POST['nuHash'],1));
-	nudebug('u : ' . print_r($u,1));
+
 	$_POST['nuHash']						= array_merge($u, $_POST['nuHash']);
 	$_POST['nuHash']['PREVIOUS_RECORD_ID'] 	= $s->record_id;
 	$_POST['nuHash']['RECORD_ID'] 			= $s->record_id;
