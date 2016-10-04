@@ -17,11 +17,12 @@ function nuUpdateData(){
 		$pk		= $nudata[$i]['pk'];
 		$t		= nuRunQuery("SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = ? ", array($nudata[$i]['fm']));
 		$r		= db_fetch_object($t);
-		$del		= $nudata[$i]['d'];
+		$del	= $nudata[$i]['d'];
 
 		if($del == 'No'){
 			
 			$o		= $nudata[$i];
+			nudebug('252525' . print_r($o,1));
 			$fmid	= $o['fm'];
 
 			for($ii = 0 ; $ii < count($o['f']) ; $ii++){
@@ -29,18 +30,25 @@ function nuUpdateData(){
 				$fdid	= $o['f'][$ii];
 				$sq		= "
 				
-				SELECT o.*, f.*, p.sob_all_label AS label
+				SELECT 
+					o.*, 
+					f.*, 
+					p.sob_all_label AS label
 				FROM zzzzsys_object AS o
 				INNER JOIN zzzzsys_form AS f ON zzzzsys_form_id = o.sob_all_zzzzsys_form_id
 				LEFT JOIN zzzzsys_object AS p ON zzzzsys_form_id = p.sob_subform_zzzzsys_form_id
-				WHERE zzzzsys_form_id = '$fmid' AND o.sob_all_id = '$fdid'
-				
+				WHERE 
+					zzzzsys_form_id = '$fmid' AND 
+					o.sob_all_id    = '$fdid'
+					
 				";
 
 				$T			= nuRunQuery($sq);
 				$O			= db_fetch_object($T);
 				$m			= '';
 				$value		= $o['v'][$ii];
+
+nudebug($sq.'  494949' . "$O->sob_all_id : $value  " . print_r($o['v'],1));
 
 				if($O->sob_all_validate == 'noblanks'){
 					
@@ -137,15 +145,17 @@ function nuUpdateData(){
 		$pk		= $nudata[$i]['pk'];
 		$t		= nuRunQuery("SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = ? ", array($nudata[$i]['fm']));
 		$r		= db_fetch_object($t);
-		$del		= $nudata[$i]['d'];
+		$del	= $nudata[$i]['d'];
 
 		if($del == 'Yes' or $DEL == 'Yes'){
 			nuDeleteRow($r, $pk);
 		}else{
 
-		if(count($nudata[$i]['f']) > 0){  //-- something to update
+			if(count($nudata[$i]['f']) > 0){  //-- something to update
+		
 				nuInsertRow($r, $pk);
 				nuUpdateRow($r, $pk, $nudata[$i], $ID);
+				
 			}
 		}
 		

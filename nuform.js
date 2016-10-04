@@ -381,7 +381,10 @@ function nuINPUT(w, i, l, p, prop){
 	.prop('readonly', prop.objects[i].read == '1' ? 'readonly' : '');
 	
 	if(w.objects[i].value == ''){             //== check for Cannot be left blank
+	
 		$('#' + id).attr('data-nu-changed', 1);
+		$('#' + id).addClass('nuEdited');
+		
 	}
 	
 	$('#' + id).val(w.objects[i].value);
@@ -1616,9 +1619,9 @@ function nuPopulateLookup(fm, target){
 
 function nuBuildLookupList(fm, e){
 
-	var i	= fm.target;
 	$('#nuLookupList').remove();
 	
+	var i	= fm.target;
 	var v	= fm.lookup_values;
 	var tar	= $('#' + i);
 	var off	= $('#' + i + 'code').offset();
@@ -1931,25 +1934,26 @@ function nuGetFormData(){
 
 function nuFormClass(frm){
 
-	var fh			= '#' + frm + 'nuRecordHolder';
-	var foreign_key	= $(fh).attr('data-nu-foreign-key');
-	var primary_key	= $(fh).attr('data-nu-primary-key');
-	var form_id		= $(fh).attr('data-nu-form-id');
+	var fh				= '#' + frm + 'nuRecordHolder';
+	var foreign_key		= $(fh).attr('data-nu-foreign-key');
+	var primary_key		= $(fh).attr('data-nu-primary-key');
+	var form_id			= $(fh).attr('data-nu-form-id');
 	var foreign_field	= $(fh).attr('data-nu-foreign-field');
 	
-	var deleted		= $('#' + frm + 'nuDelete').is(":checked") ? 'Yes' : 'No';
-	var fields		= [];
-	var values		= [];
+	var deleted			= $('#' + frm + 'nuDelete').is(":checked") ? 'Yes' : 'No';
+	var fields			= [];
+	var values			= [];
 	var rows			= [];
 
 	var o			= $("[data-nu-prefix='" + frm + "'][data-nu-field][data-nu-changed]");
 
 	o.each(function(index){
 
-		var rw		= String($(this).attr('data-nu-prefix'));
-		var rowno	= parseInt(rw.substr(rw.length - 3));
-		var f		= $(this).attr('data-nu-field');
-		var v		= $(this).val();
+		var rw			= String($(this).attr('data-nu-prefix'));
+		var rowno		= parseInt(rw.substr(rw.length - 3));
+		var f			= $(this).attr('data-nu-field');
+		var v			= $(this).val();
+console.log(f,v, $('#' + f).val(), "[data-nu-prefix='" + frm + "'][data-nu-field][data-nu-changed]");
 
 		fields.push(f);
 		values.push(v);
@@ -2051,7 +2055,8 @@ function nuCloneAction(){
 	
 	$('[data-nu-field]').each(function(index){
 		
-			$(this).attr('data-nu-changed','1');
+		$(this).attr('data-nu-changed','1');
+		$(this).addClass('data-nu-changed','1');
 			
 	});
 	
