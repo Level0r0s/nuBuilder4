@@ -6,12 +6,9 @@ session_start();
 error_reporting( error_reporting() & ~E_NOTICE );
 
 require_once('config.php'); 
-<<<<<<< HEAD
+
 require_once dirname(__FILE__) . '/sql-parser/src/PHPSQLParser.php';
  
-=======
->>>>>>> cef82be996f7c9401c166e754968a2c0ae419da0
-
 $_SESSION['DBHost']                 = $nuConfigDBHost;
 $_SESSION['DBName']                 = $nuConfigDBName;
 $_SESSION['DBUser']                 = $nuConfigDBUser;
