@@ -8,6 +8,7 @@ $DBHost                      = $_SESSION['DBHost'];
 $DBName                      = $_SESSION['DBName'];
 $DBUser                      = $_SESSION['DBUser'];
 $DBPassword                  = $_SESSION['DBPassword'];
+//die("mysql:host=$DBHost;dbname=$DBName;charset=utf8");
 
 $nuDB = new PDO("mysql:host=$DBHost;dbname=$DBName;charset=utf8", $DBUser, $DBPassword, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
 $nuDB->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -22,7 +23,7 @@ function db_setup(){
 	
     if (empty($setup)) {                                          //check if setup has already been called
 		
-		$rs 	= nuRunQuery("Select * From zzzzsys_setup");        //get setup info from db
+		$rs 	= nuRunQuery("SeLect * From zzzzsys_setup");        //get setup info from db
 		$setup 	= db_fetch_object($rs);
 	}
 	

@@ -4,8 +4,10 @@
 session_start();
 
 error_reporting( error_reporting() & ~E_NOTICE );
+
 require_once('config.php'); 
-require_once('nudatabase.php');
+require_once dirname(__FILE__) . '/sql-parser/src/PHPSQLParser.php';
+ 
 
 $_SESSION['DBHost']                 = $nuConfigDBHost;
 $_SESSION['DBName']                 = $nuConfigDBName;
@@ -18,6 +20,8 @@ $_SESSION['IsDemo']                 = $nuConfigIsDemo;
 $_SESSION['SafeMode']               = (isset($nuConfigSafeMode) ? $nuConfigSafeMode : false);
 $_SESSION['SafePHP']                = (isset($nuConfigSafePHP)  ? $nuConfigSafePHP  : array());
 
+require_once('nudatabase.php');
+
 $t = nuRunQuery("SELECT * FROM zzzzsys_setup");
 $r = db_fetch_object($t);
 
@@ -29,7 +33,6 @@ mb_internal_encoding('UTF-8');
 $setup                           = $GLOBALS['nuSetup'];                                   //--  setup php code just used for this database
 
 nuClientTimeZone();
-
 
 //==================FUNCTIONS============================================================
 
@@ -602,7 +605,9 @@ function nuTextFormats($dropdownList = false){
 }
 
 function nuSetHashList($p){
-	
+
+//nudebug('nuSetHashList from : ' . $p['call_type']);	
+
 	$fid	= addslashes($p['form_id']);
 	$rid	= addslashes($p['record_id']);
 	
@@ -617,7 +622,7 @@ function nuSetHashList($p){
 		$s	= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$fid'";
 		$t	= nuRunQuery($s);
 		$R	= db_fetch_object($t);
-		
+
 		if(db_num_rows($t) == 1){
 			
 			$s	= "SELECt * FROM $R->sfo_table WHERE $R->sfo_primary_key = '$rid'";
@@ -642,10 +647,10 @@ function nuSetHashList($p){
 			$r[$H[$i][0]]	= addslashes($H[$i][1]);
 		}
 		
-		$r['PREVIOUS_RECORD_ID']	= $rid;
-		$r['RECORD_ID']				= $rid;
-		$r['FORM_ID']				= $fid;
-		$r['FORM_ID']				= $fid;
+		$r['PREVIOUS_RECORD_ID']	= addslashes($rid);
+		$r['RECORD_ID']				= addslashes($rid);
+		$r['FORM_ID']				= addslashes($fid);
+		$r['FORM_ID']				= addslashes($fid);
 
 		$r							= array_merge($A, $r);
 		

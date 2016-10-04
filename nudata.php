@@ -3,6 +3,7 @@
 function nuUpdateData(){
 	
 	$nudata	= $_POST['nuSTATE']['data'];
+nudebug(print_r($nudata,1));
 	$ID		= $_POST['nuSTATE']['record_id'];
 	$DEL	= $_POST['nuSTATE']['deleteAll'];	
 	$fid	= $_POST['nuSTATE']['form_id'];
@@ -21,9 +22,8 @@ function nuUpdateData(){
 
 		if($del == 'No'){
 			
-			$o		= $nudata[$i];
-			nudebug('252525' . print_r($o,1));
-			$fmid	= $o['fm'];
+			$o			= $nudata[$i];
+			$fmid		= $o['fm'];
 
 			for($ii = 0 ; $ii < count($o['f']) ; $ii++){
 
@@ -47,8 +47,6 @@ function nuUpdateData(){
 				$O			= db_fetch_object($T);
 				$m			= '';
 				$value		= $o['v'][$ii];
-
-nudebug($sq.'  494949' . "$O->sob_all_id : $value  " . print_r($o['v'],1));
 
 				if($O->sob_all_validate == 'noblanks'){
 					

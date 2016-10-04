@@ -499,7 +499,6 @@ function nuSelectOptions($sql) {
 function nuGetSubformRecords($R, $A){
 
     $f = nuGetEditForm($R->sob_subform_zzzzsys_form_id);
-	nudebug($R->sob_subform_zzzzsys_form_id . ' ' . print_r($f,1));
     $s = "SELECT `$f->primary_key` $f->from WHeRE `$R->sob_subform_foreign_key` = '$R->subform_fk' $f->order";
     $t = nuRunQuery($s);
     $a = array();
