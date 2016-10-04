@@ -53,7 +53,7 @@ nudebug(print_r($nudata,1));
 					if($value == ''){
 						
 						$lab	= addslashes($O->sob_all_label);
-						
+
 						if($o['fk'] == ''){
 							$m	= "$lab cannot be left blank";
 						}else{

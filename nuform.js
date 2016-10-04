@@ -1963,7 +1963,6 @@ function nuFormClass(frm){
 		fields.push(f);
 		values.push(v);
 		rows.push(rw != '' ? rowno + 1 : 0);
-		
 	});
 	
 	this.pk	= primary_key;
