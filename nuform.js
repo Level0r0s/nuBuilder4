@@ -1943,7 +1943,7 @@ function nuFormClass(frm){
 	var rows			= [];
 
 	var o			= $("[data-nu-prefix='" + frm + "'][data-nu-field][data-nu-changed]");
-	
+
 	o.each(function(index){
 
 		var rw		= String($(this).attr('data-nu-prefix'));
@@ -1954,7 +1954,6 @@ function nuFormClass(frm){
 		fields.push(f);
 		values.push(v);
 		rows.push(rw != '' ? rowno + 1 : 0);
-		
 	});
 	
 	this.pk	= primary_key;

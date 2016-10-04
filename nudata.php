@@ -47,7 +47,7 @@ function nuUpdateData(){
 					if($value == ''){
 						
 						$lab	= addslashes($O->sob_all_label);
-						
+
 						if($o['fk'] == ''){
 							$m	= "$lab cannot be left blank";
 						}else{

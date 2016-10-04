@@ -5,7 +5,6 @@ session_start();
 
 error_reporting( error_reporting() & ~E_NOTICE );
 require_once('config.php'); 
-require_once('nudatabase.php');
 
 $_SESSION['DBHost']                 = $nuConfigDBHost;
 $_SESSION['DBName']                 = $nuConfigDBName;
@@ -17,6 +16,8 @@ $_SESSION['title']                  = $nuConfigTitle;
 $_SESSION['IsDemo']                 = $nuConfigIsDemo; 
 $_SESSION['SafeMode']               = (isset($nuConfigSafeMode) ? $nuConfigSafeMode : false);
 $_SESSION['SafePHP']                = (isset($nuConfigSafePHP)  ? $nuConfigSafePHP  : array());
+
+require_once('nudatabase.php');
 
 $t = nuRunQuery("SELECT * FROM zzzzsys_setup");
 $r = db_fetch_object($t);
