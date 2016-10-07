@@ -25,7 +25,7 @@
 	$_POST['nuValidate']					= array();
 
 	$f->forms[0]							= new stdClass;
-	
+
 	if($P['call_type'] == 'getform')		{nuBeforeOpen($s->form_id, $s->record_id);$f->forms[0] = nuGetFormObject($s->form_id, $s->record_id, 0, $P);}
 	if($P['call_type'] == 'update')			{$f->forms[0]->record_id		= nuUpdateData();}
 	if($P['call_type'] == 'getlookupid')	{$f->forms[0]->lookup_values 	= nuGetAllLookupValues();}
