@@ -10,7 +10,7 @@ function nuUpdateData(){
 	$t		= nuRunQuery($s);
 	$FORM	= db_fetch_object($t);
 	$e		= array();
-
+nudebug(print_r('nnnnn '.$nudata,1));
 	
 	for($i = 0 ; $i < count($nudata) ; $i++){
 
@@ -199,20 +199,23 @@ function nuUpdateRow($r, $p, $row, $FK){
 		
 	}
 	
-	$set		= array();
-	$columns	= db_columns($r->sfo_table);
-	$objects	= nuEditObjects($r->zzzzsys_form_id);
-	$q		= array();
+	$set			= array();
+	$columns		= db_columns($r->sfo_table);
+	$objects		= nuEditObjects($r->zzzzsys_form_id);
+	$q				= array();
 	
 	for($i = 0 ; $i < count($row['f']) ; $i++){
 		
 		if(array_search($row['f'][$i], $columns) !== false){
+			
 			$set[] 	= $row['f'][$i] . ' = ? ';
-			$q[]		= nuFormatValue($row, $i);
+			$q[]	= nuFormatValue($row, $i);
+			
 		}
 		
 	}
-	
+nudebug('set : ' . implode(', ', $set) );	
+nudebug('q : ' . implode(', ', $q) );	
 	if(count($set) > 0){
 		
 		$q[]		= $p;
@@ -244,15 +247,16 @@ function nuEditObjects($id){
 function nuFormatValue($row, $i){
 	
 	$form_id	= $row['fm'];
-	$field	= $row['f'][$i];
+	$field		= $row['f'][$i];
 	
-	$s		= "SELECT * FROM zzzzsys_object WHERE sob_all_zzzzsys_form_id = ? AND sob_all_id = ? ";
-	$t		= nuRunQuery($s, array($form_id, $field));
-	$r		= db_fetch_object($t);
+	$s			= "SELECT * FROM zzzzsys_object WHERE sob_all_zzzzsys_form_id = ? AND sob_all_id = ? ";
+	$t			= nuRunQuery($s, array($form_id, $field));
+	$r			= db_fetch_object($t);
 	
 	if($r->sob_all_type == 'select' and $r->sob_select_multiple == '1' and $row['v'][$i] != ''){
 		return implode('#nuSep#', $row['v'][$i]);
 	}else{
+		nudebug(print_r($row,1));
 		return $row['v'][$i];
 	}
 

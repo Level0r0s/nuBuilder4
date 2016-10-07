@@ -6,9 +6,16 @@ session_start();
 error_reporting( error_reporting() & ~E_NOTICE );
 
 require_once('config.php'); 
+<<<<<<< HEAD
+require_once dirname(__FILE__) . '/sql-parser/src/PHPSQLParser.php';
+require_once dirname(__FILE__) . '/sql-parser/src/PHPSQLCreator.php';
+require_once dirname(__FILE__) . '/nusqlclass.php';
+
+=======
 
 require_once dirname(__FILE__) . '/sql-parser/src/PHPSQLParser.php';
  
+>>>>>>> e28759cca3f3be54a237dad6135c2e3fabbb7da1
 $_SESSION['DBHost']                 = $nuConfigDBHost;
 $_SESSION['DBName']                 = $nuConfigDBName;
 $_SESSION['DBUser']                 = $nuConfigDBUser;
@@ -225,8 +232,8 @@ class nuSqlString{
         if(trim($this->where) == ''){
             $this->where = "WHERE $pClause";
         }else{
-            $clause      = substr($this->where, 6);
-            $this->where = "WHERE ($clause) AND ($pClause)";
+            'SELECT'      = substr($this->where, 6);
+            $this->where = "WHERE ('SELECT') AND ($pClause)";
         }
 
     }
@@ -638,7 +645,7 @@ function nuSetHashList($p){
 		$t	= nuRunQuery($s);
 		$R	= db_fetch_object($t);
 
-		if(db_num_rows($t) == 1){
+		if($R->sfo_table != ''){
 			
 			$s	= "SELECt * FROM $R->sfo_table WHERE $R->sfo_primary_key = '$rid'";
 			$t	= nuRunQuery($s);
@@ -1035,5 +1042,102 @@ function nuGetUserAccess(){
 	return $A;
 	
 }
+
+
+
+
+
+
+function test111(){
+	
+	$s	= nus();
+	
+	$SQL = new nuSqlClass($s);
+	print $SQL->SQL() . '<br><br>remove all select elements<br>';
+	$SQL->nuRemoveSelectElements();
+	print $SQL->SQL() . '<br><br>add cus_name<br>';
+	$SQL->nuAddSelectElement('colref', 'cus_name');
+	print $SQL->SQL() . '<br><br>add cus_address<br>';
+	$SQL->nuAddSelectElement('colref', 'cus_address');
+	print $SQL->SQL() . '<br><br>remove all where elements<br>';
+	$SQL->nuAddBracketsToWhere();
+	$SQL->nuAddWhereElement('colref', "cus_name = 'bob'");
+	$SQL->nuAddWhereElement('colref', "cus_desc = 'man'");
+	print $SQL->SQL();
+	nudebug(print_r($SQL,1));
+}
+
+
+
+function nus(){
+
+$s = "
+SELECT 
+CONCAT(docket_type_weigh_link.docket_type_weigh_link_id, '_',IFNULL(sr.contract_id, ''),'_',IFNULL(dr.contract_id, '')) AS docket_type_lookup_id, 
+IFNULL(sp.pro_code, dp.pro_code) AS pro_code,
+IFNULL(sr.cot_season, dr.cot_season) AS season,
+docket_type.*,
+docket_type_weigh_link.dtw_source_weigh AS source_weigh,
+docket_type_weigh_link.dtw_destination_weigh AS destination_weigh,
+sr.cot_number AS source_cot_number,
+dr.cot_number AS destination_cot_number,
+sr.cot_quantity AS source_cot_quantity,
+dr.cot_quantity AS destination_cot_quantity,
+sr.cot_source_remaining AS source_remaining,
+dr.cot_destination_remaining AS destination_remaining,
+sc.con_code AS source_con_code,
+IF(sr.cot_multigrade='1','Y','') AS source_multi,
+
+sgr.gra_code AS source_grade,
+dgr.gra_code AS destination_grade,
+dc.con_code AS destination_con_code,
+sct.ctt_description AS source_description,
+dct.ctt_description AS destination_description,
+dot_show_in_bridge_dockets AS bridge_docket_type_filter 
+
+FROM docket_type_weigh_link 
+LEFT JOIN docket_type ON dtw_docket_type_id = docket_type_id
+LEFT JOIN contract_type AS sct ON dot_source_contract_type_id = sct.contract_type_id
+LEFT JOIN contract_type AS dct ON dot_destination_contract_type_id = dct.contract_type_id
+LEFT JOIN contract AS sr ON sct.contract_type_id = sr.cot_contract_type_id
+LEFT JOIN contract AS dr ON dct.contract_type_id = dr.cot_contract_type_id
+LEFT JOIN product sp ON sr.cot_product_id = sp.product_id 
+LEFT JOIN product dp ON dr.cot_product_id = dp.product_id 
+LEFT JOIN contact AS sc ON sr.cot_seller_contact_id = sc.contact_id
+LEFT JOIN contact AS dc ON dr.cot_buyer_contact_id = dc.contact_id
+LEFT JOIN grade AS sgr ON sr.cot_grade_id = sgr.grade_id
+LEFT JOIN grade AS dgr ON dr.cot_grade_id = dgr.grade_id
+
+WHERE IFNULL(sr.cot_season,dr.cot_season) = IFNULL(dr.cot_season,sr.cot_season) 
+AND IFNULL(sr.cot_product_id,dr.cot_product_id) = IFNULL(dr.cot_product_id,sr.cot_product_id)
+AND dot_transfer = '0'
+AND IFNULL(sr.cot_status,'') != 'Completed'
+AND IFNULL(dr.cot_status,'') != 'Completed'
+AND
+(
+sr.cot_grade_id = dr.cot_grade_id 
+OR 
+IFNULL(sr.cot_grade_id,'') = '' 
+OR
+IFNULL(dr.cot_multigrade,'1') = '1'
+OR
+IFNULL(sr.cot_grade_id,'') = ''
+OR
+IFNULL(dr.cot_multigrade,'1') = '1'
+)
+ORDER BY CONCAT(docket_type_weigh_link.docket_type_weigh_link_id, '_',IFNULL(sr.contract_id, ''),'_',IFNULL(dr.contract_id, ''))
+
+
+";
+
+
+return $s;
+
+}
+
+
+
+
+
 
 ?>

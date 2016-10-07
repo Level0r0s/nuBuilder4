@@ -9,7 +9,7 @@ function nuAppendActionButton(t, f){
 	.replaceAll(' ', '_', true)
 	.replaceAll("'", '_', true);
 	
-	h='<input id="' + i + '" type="button" class="nuButton" value="' + t + '" onclick="' + f + '">&nbsp;';
+	h='<input id="' + i + '" type="button" class="nuActionButton" value="' + t + '" onclick="' + f + '">&nbsp;';
 	$('#nuActionHolder').append(h);
 	
 }

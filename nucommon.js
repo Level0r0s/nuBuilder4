@@ -630,10 +630,7 @@ function nuSortSubform(sf, fld){
 	}
 	
 	row.sort(function(a, b, fld){
-		
-console.log(a, b, fld);
 		return a-(b + fld)
-		
 	});
 	
 	return row;

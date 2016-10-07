@@ -59,15 +59,17 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
     SELECT * 
     FROM zzzzsys_form
     INNER JOIN zzzzsys_object ON sob_all_zzzzsys_form_id = zzzzsys_form_id
-    WHERE zzzzsys_form_id = '$F'
+    WHERE zzzzsys_form_id = ?
     ORDER BY (sob_all_type = 'run'), sob_all_order    
 
     ";
 
+	nudebug("$F : $s");
+
 	if($F != ''){
 
-		$t = nuRunQuery($s);
-		$a = array();
+		$t 					= nuRunQuery($s, array($F));
+		$a 					= array();
 		
 		while($r = db_fetch_object($t)){
 
@@ -91,10 +93,12 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 				}
 
 				if($r->sob_all_type == 'display'){
+					
 					$disS	= nuReplaceHashVariables($r->sob_display_sql);
 					$disT	= nuRunQuery($disS);
 					$disR	= db_fetch_row($disT);
 					$o->value= $disR[0];
+					
 				}
 
 			}
@@ -110,33 +114,33 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 
 			if($r->sob_all_type == 'run'){
 				
-				$type		= $r->sob_run_zzzzsys_form_id;
+				$type			= $r->sob_run_zzzzsys_form_id;
 				$o->record_id	= -1;
 				
 				if(isProcedure($type)){
 					
 					$o->run_type	= 'P';
-					$o->form_id	= $type;
+					$o->form_id		= $type;
 					$o->record_id	= $r->sob_run_id;
-					$o->src		= 'nurunphp.php?i=' . nuRunPHP($type);
+					$o->src			= 'nurunphp.php?i=' . nuRunPHP($type);
 					
 				}else if(isReport($type)){
 					
 					$o->run_type	= 'R';
-					$o->form_id	= $type;
+					$o->form_id		= $type;
 					$o->record_id	= $r->sob_run_id;
-					$o->src		= 'nurunpdf.php?i=' . nuRunReport($type);
+					$o->src			= 'nurunpdf.php?i=' . nuRunReport($type);
 					
 				}else{
 					
 					$o->run_type	= 'F';
 					$o->record_id	= $r->sob_run_id;
-					$o->form_id	= $type;
-					$o->src		= 'index.php?';
+					$o->form_id		= $type;
+					$o->src			= 'index.php?';
 					
 				}
 
-				$o->filter		= $r->sob_run_filter;
+				$o->filter			= $r->sob_run_filter;
 				$o->run_method  	= $r->sob_run_method;
 
 			}
@@ -144,7 +148,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 				
 			if($r->sob_all_type == 'lookup'){
 
-				$o->description_width		= $r->sob_lookup_description_width;
+				$o->description_width	= $r->sob_lookup_description_width;
 				$o->form_id				= $r->sob_lookup_zzzzsys_form_id;
 				$o->values				= nuGetLookupValues($r, $o);
 				
@@ -188,7 +192,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 
     $f->buttons				= nuButtonList($f);
     $f->tabs 				= nuRefineTabList($tabs);
-    $f->browse_columns		= nuBrowseColumns($f, $P);
+    $f->browse_columns		= nuBrowseColumns($f);
     $B						= nuBrowseRows($f);
     $f->browse_rows			= $B[0];
     $f->browse_height		= $B[1];
@@ -361,24 +365,24 @@ function nuGetLookupValues($R, $O){
     $s = "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$O->form_id'";
     $t = nuRunQuery($s);
     $r = db_fetch_object($t);
-
-    $S = new nuSqlString($r->sfo_browse_sql);
+	
+	$S = new nuSqlString($r->sfo_browse_sql);
 	
     $s = "
 		SELECT 
-		$r->sfo_primary_key,
-		$R->sob_lookup_code,
-		$R->sob_lookup_description
-		$S->from 
-		WHERe `$r->sfo_primary_key` = '$O->value'
+			$r->sfo_primary_key,
+			$R->sob_lookup_code,
+			$R->sob_lookup_description
+			$S->from
+		WHERe 
+			`$r->sfo_primary_key` = '$O->value'
         
     ";
 
-    $t = nuRunQuery($s);
-
-    $l = db_fetch_row($t);
+    $t 			= nuRunQuery($s);
+    $l 			= db_fetch_row($t);
 	
-	$v		= array();
+	$v			= array();
 	$v[]		= array($O->id, isset($l[0]) ? $l[0] : '');
 	$v[]		= array($O->id . 'code', isset($l[1]) ? $l[1] : '');
 	$v[]		= array($O->id . 'description', isset($l[2]) ? $l[2] : '');
@@ -462,7 +466,7 @@ function nuGetOtherLookupValues($nuO){
 function nuSelectOptions($sql) {
 
     $a = array();
-
+ 
     if (substr(strtoupper(trim($sql)), 0, 6) == 'SELECT') {                      //-- sql statement
 
         $t = nuRunQuery($sql);
@@ -587,7 +591,7 @@ function nuGetSQLValue($s){
     
 }
 
-function nuBrowseColumns($f, $P){
+function nuBrowseColumns($f){
 	
 	if($f->record_id != ''){return array();}
 

@@ -348,7 +348,7 @@ function nuINPUT(w, i, l, p, prop){
 		prop.objects[i].top 	= 3;
 		
 	}else{
-		
+
 		if(input_type != 'button'){						//-- Input Object
 			nuLabel(w, i, p, prop);
 		}
@@ -910,13 +910,19 @@ function nuLabel(w, i, p, prop){
 	lab.setAttribute('for',  p + prop.objects[i].id);
 	
 	$('#' + ef).append(lab);
+
 	nuAddDataTab(id, prop.objects[i].tab, p);
-	$('#' + id).css({'top'            : Number(prop.objects[i].top),
-		              'left'          : Number(prop.objects[i].left) - lwidth - 7,
-		              'width'         : Number(lwidth)
+	
+	var l = String(nuTranslate(prop.objects[i].label));
+	
+	$('#' + id).css({'top'		: Number(prop.objects[i].top),
+		              'left'	: Number(prop.objects[i].left) - lwidth - 7,
+		              'width'	: Number(lwidth)
 	})
-	.html(nuTranslate(prop.objects[i].label))
+	.html(l)
 	.attr('ondblclick','nuBuildPopup("nuobject", "' + prop.objects[i].object_id + '")');
+
+	if(true){	console.log(id, '==',nuTranslate(prop.objects[i].label));}
 
 }
 
@@ -1652,12 +1658,16 @@ function nuBuildLookupList(fm, e){
 	.html(nuLookupListItems(fm, h, w, d));
 	
 	$('.nuLookupList').hover(
+	
 		function() {
+			
 			$('.nuLookupListSelect').removeClass('nuLookupListSelect');
 			$( this ).addClass('nuLookupListSelect');
+			
 		}, function() {
 			$( this ).removeClass('nuLookupListSelect');
 		}
+		
 	);
 	
 }
@@ -1674,8 +1684,8 @@ function nuLookupListItems(fm, h, w, d){
 		ht 	+= 'id="nuLookupList' + i + '" ';
 		ht 	+= 'class="nuLookupList" ';
 		ht 	+= 'data-nu-target="' 	+ fm.target + '" ';
-		ht 	+= 'data-nu-down="'	 	+ (i == v.length - 1 	? 0 				: i+1) + '" ';
-		ht 	+= 'data-nu-up="' 		+ (i == 0 			? v.length-1 		: i-1) + '" ';
+		ht 	+= 'data-nu-down="'	 	+ (i == v.length - 1 	? 0 			: i+1) + '" ';
+		ht 	+= 'data-nu-up="' 		+ (i == 0 				? v.length-1	: i-1) + '" ';
 		ht 	+= 'data-nu-id="' 		+ v[i][0] + '" ';
 		ht 	+= 'data-nu-code="' 		+ v[i][1] + '" ';
 		ht 	+= 'data-nu-description="' + v[i][2] + '" ';
@@ -1911,7 +1921,7 @@ function nuGetFormData(){
 	var f	= $("[id$='nuRecordHolder']");
 
 	f.each(function(index){
-	
+		
 		var	s	= String($(this).attr('id'));
 		
 		a.push(s.substr(0, s.length - 14));
@@ -1962,6 +1972,7 @@ function nuFormClass(frm){
 		fields.push(f);
 		values.push(v);
 		rows.push(rw != '' ? rowno + 1 : 0);
+		
 	});
 	
 	this.pk	= primary_key;
@@ -2029,7 +2040,7 @@ function nuOnChange(t, event){
 
 function nuEditedReport(){
 	
-	$('#sre_layout').addClass('nuEdited');
+	$('#sre_layout').addClass('nuEdited'); //-- hidden field set to class - nuEdited (generally ignored except when editing Reports)
 	$('#nuSaveButton').addClass('nuSaveButtonEdited');
 	window.nuEDITED	= true;
 	
