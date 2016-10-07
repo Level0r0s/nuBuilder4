@@ -13,12 +13,12 @@ $TABLE_ID                   = nuTT();
 $t                          = nuRunQuery("SELECT deb_message AS json FROM zzzzsys_debug WHERE zzzzsys_debug_id = ? ", array($jsonID));		//-- created by nuRunReport()
 $reportInfo                 = db_fetch_object($t);
 $JSON                       = json_decode($reportInfo->json);
-$LAYOUT  	              = json_decode($JSON->sre_layout);
+$LAYOUT						= json_decode($JSON->sre_layout);
 $hashData                   = nuAddToHashList($JSON, 'report');
 $hashData['TABLE_ID']       = $TABLE_ID;
 $GLOBALS['TABLE_ID']        = $TABLE_ID;
-$_POST['nuHash']			 = $hashData;
-$PHP		                   = nuReplaceHashVariables($JSON->sph_php,'rep');
+$_POST['nuHash']			= $hashData;
+$PHP						= nuReplaceHashVariables($JSON->sph_php,'rep');
 
 nuRunQuery("DELETE FROM zzzzsys_debug WHERE zzzzsys_debug_id = ? ", array($jsonID));
 

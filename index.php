@@ -3,6 +3,7 @@
 <head>
 <meta http-equiv='Content-type' content='text/html;charset=UTF-8'>
 <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+
 <?php
 require_once('nucommon.php');	
 cssinclude('nubuilder4.css');
@@ -16,7 +17,7 @@ jsinclude('nufunctions.js');
 
 <script>
 
-
+  
 function nuHomeWarning(){
 
 	if(nuEDITED){
@@ -103,6 +104,7 @@ window.onbeforeunload = nuHomeWarning;
 </script>
 
 </head>
+
 
 <body onload="nuLoad()" >
 
