@@ -34,6 +34,21 @@ $setup                           = $GLOBALS['nuSetup'];                         
 
 nuClientTimeZone();
 
+//==================CLASS=================================================================
+
+class nuException extends Exception
+{
+    public function __construct($message, $code=0) 
+	{ 
+		parent::__construct($message,$code); 
+	}    
+
+	public function __toString() 
+	{ 
+		return "<b style='color:red'>".$this->message."</b>"; 
+	} 
+}
+
 //==================FUNCTIONS============================================================
 
 function nuClientTimeZone(){
@@ -690,7 +705,7 @@ function nuRunPHP($nuRID){
 	$_POST['nuHash']['code']			= $nuA->sph_code;
 	$_POST['nuHash']['description']		= $nuA->sph_description;
 	$php								= $nuA->sph_php;
-	
+		
 	try {
 		
 		$s 								= "SELECT * FROM zzzzsys_php_library LEFT JOIN zzzzsys_php ON zzzzsys_php_id = spl_library_zzzzsys_php_id WHERE spl_zzzzsys_php_id = '$nuRID'";
@@ -699,10 +714,10 @@ function nuRunPHP($nuRID){
 		while($nuA= db_fetch_object($nuT)) {
 			$php .= "\n ".$nuA->sph_php;
 		}
-		
+	 } catch(Throwable $e) {
+		 throw new nuException("Error Building PHP");       
 	} catch (Exception $e) {
-		error_log("RunPHP error: ".$e);
-		echo 'Caught exception: ',  $e->getMessage(), "\n";
+		throw new nuException("Error Building PHP");
 	}
 	
 	$_POST['nuHash']['sph_php']			= nuReplaceHashVariables($php);

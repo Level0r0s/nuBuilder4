@@ -85,24 +85,30 @@ function nuGetBreadcrumb(b, t = ''){
 }
 
 
-function nuDisplayError(e, nosplicing){
+function nuDisplayError(e, g = 0){
 
 	var m	= '';
 	
 	for(var i = 0 ; i < e.length ; i++){
 		
-		m += e[i][0] + '\r';
-		if( e[i][1] != '') {
-			$('#' + e[i][1]).addClass('nuValidate');
+		var msg = e[i][0];
+
+		if(g == 1) {
+			msg = '<span title="' + e[i][1] + '">' + msg + '</span>';
 		}
+
+		if( e[i][2]) {
+			$('#' + e[i][1]).addClass('nuValidate');			
+		}
+		
+		m += msg + '<br>';
 		
 	}
 
 	if(e.length > 0){
-		
-//			nuBC.splice(nuBC.length-1,1);
-		alert(m);
-		
+
+		$('#nuRecordHolder').append('<div id="nuErrorDialog" class="nuErrorDisplay" onclick="$(this).hide();">'+m+'</div');
+			
 	}
 	
 	return e.length > 0;

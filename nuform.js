@@ -1592,16 +1592,15 @@ function nuSelectBrowse(t){
 	t.form_id	= f;
 
 	if(y == 'browse'){
-
 		nuGetForm(f, p);
 		window.nuTYPE = 'browse';
 		
 	}else if(y == 'lookup'){
-
 		window.parent.nuGetLookupId(p, i);			//-- called from parent window
 //		window.nuTYPE = 'browse';
 		
 	}else{
+
 		window[y](t);
 
 	}
@@ -1612,11 +1611,11 @@ function nuPopulateLookup(fm, target){
 
 	var p 	= $('#' + target).attr('data-nu-prefix');
 	var f	= fm.lookup_values;
-	
 	for(var i = 0 ; i < f.length ; i++){
 		
 		$('#' + p + f[i][0]).addClass('nuEdited');
-		
+		$('#' + p + f[i][0]).val(f[i][1]);
+
 	}
 	
 	$('#dialogClose').click();

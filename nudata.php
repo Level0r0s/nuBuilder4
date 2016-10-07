@@ -3,7 +3,6 @@
 function nuUpdateData(){
 	
 	$nudata	= $_POST['nuSTATE']['data'];
-nudebug(print_r($nudata,1));
 	$ID		= $_POST['nuSTATE']['record_id'];
 	$DEL	= $_POST['nuSTATE']['deleteAll'];	
 	$fid	= $_POST['nuSTATE']['form_id'];
@@ -33,16 +32,17 @@ nudebug(print_r($nudata,1));
 				SELECT 
 					o.*, 
 					f.*, 
-					p.sob_all_label AS label
+					p.sob_all_label AS label,
+					syt_title
 				FROM zzzzsys_object AS o
 				INNER JOIN zzzzsys_form AS f ON zzzzsys_form_id = o.sob_all_zzzzsys_form_id
 				LEFT JOIN zzzzsys_object AS p ON zzzzsys_form_id = p.sob_subform_zzzzsys_form_id
+				LEFT JOIN zzzzsys_tab ON zzzzsys_tab_id = o.sob_all_zzzzsys_tab_id
 				WHERE 
 					zzzzsys_form_id = '$fmid' AND 
 					o.sob_all_id    = '$fdid'
 					
 				";
-
 				$T			= nuRunQuery($sq);
 				$O			= db_fetch_object($T);
 				$m			= '';
@@ -53,14 +53,16 @@ nudebug(print_r($nudata,1));
 					if($value == ''){
 						
 						$lab	= addslashes($O->sob_all_label);
+						$tab	= addslashes($O->syt_title);
+						$f 		= addslashes($O->sob_all_id);
 
 						if($o['fk'] == ''){
-							$m	= "$lab cannot be left blank";
+							$m	= "<b>$lab</b> on tab <b>$tab</b> cannot be left blank";
 						}else{
 							$m	= "$lab (on row " . $o['r'][$ii] . ")  of $O->label cannot be left blank";
 						}
 						
-						nuDisplayError($m);
+						//nuDisplayError($m, $f, 1);
 						
 					}
 					
@@ -284,9 +286,9 @@ function nuChangeHashVariable($h, $v){
 }
 
 
-function nuDisplayError($m, $o = ''){
+function nuDisplayError($m, $f = '', $s = 0){ //m = message, f = field, s = show validation class
 
-	$_POST['nuErrors'][]	= array($m, $o);
+	$_POST['nuErrors'][]	= array($m, $f, $s);
 
 }
 

@@ -233,9 +233,9 @@ function nuGetLookupId(pk, id){
 	var successCallback = function(data,textStatus,jqXHR){		
 	
 		var fm 	= data;
-		
+
 		if(!nuDisplayError(fm.errors)){
-			$('#' + id).change();
+			$('#' + id).change();	
 			window.nuPopulateLookup(fm, id);
 		}
 	};
@@ -317,7 +317,7 @@ function nuUpdateData(){
 		
 		var fm 	= data;
 
-		if(nuDisplayError(fm.errors, 1)){
+		if(nuDisplayError(fm.errors, fm.global_access)){
 			
 			nuAbortSave();
 			

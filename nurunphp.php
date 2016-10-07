@@ -13,7 +13,20 @@ $hashData['TABLE_ID']	= $TABLE_ID;
 $GLOBALS['TABLE_ID']	= $TABLE_ID;
 $_POST['nuHash']		= $hashData;
 $PHP					= $JSON;
-eval($PHP->sph_php);                                                                            //-- run php code
+
+try {
+		
+	eval($PHP->sph_php); 
+	
+ } catch(Throwable $e) {
+	 
+	 throw new nuException("Error Running PHP");   
+	 
+} catch (Exception $e) {
+	
+	throw new nuException("Error Running PHP");
+	
+}
 
 nuRunQuery("DELETE FROM zzzzsys_debug WHERE zzzzsys_debug_id = ? ", array($jsonID));
 
