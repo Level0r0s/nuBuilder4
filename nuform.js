@@ -922,8 +922,6 @@ function nuLabel(w, i, p, prop){
 	.html(l)
 	.attr('ondblclick','nuBuildPopup("nuobject", "' + prop.objects[i].object_id + '")');
 
-	if(true){	console.log(id, '==',nuTranslate(prop.objects[i].label));}
-
 }
 
 function nuPopulateLookup3(v){
