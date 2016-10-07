@@ -1,21 +1,14 @@
 <?php
 
-
 session_start();
 
 error_reporting( error_reporting() & ~E_NOTICE );
 
 require_once('config.php'); 
-<<<<<<< HEAD
 require_once dirname(__FILE__) . '/sql-parser/src/PHPSQLParser.php';
 require_once dirname(__FILE__) . '/sql-parser/src/PHPSQLCreator.php';
 require_once dirname(__FILE__) . '/nusqlclass.php';
 
-=======
-
-require_once dirname(__FILE__) . '/sql-parser/src/PHPSQLParser.php';
- 
->>>>>>> e28759cca3f3be54a237dad6135c2e3fabbb7da1
 $_SESSION['DBHost']                 = $nuConfigDBHost;
 $_SESSION['DBName']                 = $nuConfigDBName;
 $_SESSION['DBUser']                 = $nuConfigDBUser;
