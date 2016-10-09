@@ -224,7 +224,7 @@ function nuBuildEditObjects(f, p, o, prop){
 			}
 			if(prop.objects[i].display == 0){$('#' + p + prop.objects[i].id).css('visibility', 'hidden');}
 			
-			l = l + 2;
+			l 	= l + 2;
 		
 		} else{
 			
@@ -925,7 +925,10 @@ function nuLabel(w, i, p, prop){
 	.html(l)
 	.attr('ondblclick','nuBuildPopup("nuobject", "' + prop.objects[i].object_id + '")');
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> e76043a50cd64a6600b1a39b035d46522f50bebb
 }
 
 function nuPopulateLookup3(v){

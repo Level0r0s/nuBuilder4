@@ -13,18 +13,19 @@ $hashData['TABLE_ID']	= $TABLE_ID;
 $GLOBALS['TABLE_ID']	= $TABLE_ID;
 $_POST['nuHash']		= $hashData;
 $PHP					= $JSON;
+$PHPData				= $PHP->lines;
 
 try {
 		
 	eval($PHP->sph_php); 
 	
- } catch(Throwable $e) {
-	 
-	 throw new nuException("Error Running PHP");   
+} catch(Throwable $e) {
+
+	throw new nuException("Error Running PHP ",1,array($e->getLine(),$PHPData));   
 	 
 } catch (Exception $e) {
-	
-	throw new nuException("Error Running PHP");
+
+	throw new nuException("Error Running PHP",1,array($e->getLine(),$PHPData));
 	
 }
 

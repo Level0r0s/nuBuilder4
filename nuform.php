@@ -320,7 +320,6 @@ function nuDefaultObject($r, $t){
 
 }
 
-
 function nuGetEditForm($F, $R){
 	
 

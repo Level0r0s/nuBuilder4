@@ -5,6 +5,7 @@ session_start();
 error_reporting( error_reporting() & ~E_NOTICE );
 
 require_once('config.php'); 
+require_once('nuException.php'); 
 require_once dirname(__FILE__) . '/sql-parser/src/PHPSQLParser.php';
 require_once dirname(__FILE__) . '/sql-parser/src/PHPSQLCreator.php';
 require_once dirname(__FILE__) . '/nusqlclass.php';
@@ -33,21 +34,6 @@ mb_internal_encoding('UTF-8');
 $setup                           = $GLOBALS['nuSetup'];                                   //--  setup php code just used for this database
 
 nuClientTimeZone();
-
-//==================CLASS=================================================================
-
-class nuException extends Exception
-{
-    public function __construct($message, $code=0) 
-	{ 
-		parent::__construct($message,$code); 
-	}    
-
-	public function __toString() 
-	{ 
-		return "<b style='color:red'>".$this->message."</b>"; 
-	} 
-}
 
 //==================FUNCTIONS============================================================
 
@@ -703,22 +689,37 @@ function nuRunPHP($nuRID){
 	$_POST['nuHash']['code']			= $nuA->sph_code;
 	$_POST['nuHash']['description']		= $nuA->sph_description;
 	$php								= $nuA->sph_php;
+	$lines[0]['code']					= $nuA->sph_code;
+	$lines[0]['start']					= 0;
+	$lines[0]['length']					= substr_count($nuA->sph_php, "\n" ) + 1;
+	$line 								= substr_count($nuA->sph_php, "\n" ) + 1;
 		
 	try {
 		
 		$s 								= "SELECT * FROM zzzzsys_php_library LEFT JOIN zzzzsys_php ON zzzzsys_php_id = spl_library_zzzzsys_php_id WHERE spl_zzzzsys_php_id = '$nuRID'";
 		$nuT							= nuRunQuery($s);
+		$i 								= 1;
 		
 		while($nuA= db_fetch_object($nuT)) {
+			
+			$lines[$i]['code']					= $nuA->sph_code;
+			$lines[$i]['start']					= $line;
+
 			$php .= "\n ".$nuA->sph_php;
+			
+			$lines[$i]['length']				= substr_count($nuA->sph_php, "\n" ) + 1;
+			$line 								= $line + substr_count($nuA->sph_php, "\n" ) + 1;
+			$i++;
+			
 		}
 	 } catch(Throwable $e) {
-		 throw new nuException("Error Building PHP");       
+		 throw new nuException("Error Building PHP",0);       
 	} catch (Exception $e) {
-		throw new nuException("Error Building PHP");
+		throw new nuException("Error Building PHP",0);
 	}
 	
 	$_POST['nuHash']['sph_php']			= nuReplaceHashVariables($php);
+	$_POST['nuHash']['lines']			= $lines;
 	$nuJ								= json_encode($_POST['nuHash']);
 	$nuS								= "INSERT INTO zzzzsys_debug (zzzzsys_debug_id, deb_message) VALUES (?, ?)";
 	nuRunQuery($nuS, array($id, $nuJ));

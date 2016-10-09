@@ -16,7 +16,6 @@ window.nuDRAGLINEVSTART			= '';
 window.nuDRAGLINEVID			= '';
 window.nuNEW					= '';
 
-
 function nuOpener(f, r, filter){
 
 	this.form_id			= f;
