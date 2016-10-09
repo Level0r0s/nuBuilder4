@@ -61,7 +61,7 @@ function nuUpdateData(){
 							$m	= "$lab (on row " . $o['r'][$ii] . ")  of $O->label cannot be left blank";
 						}
 						
-						//nuDisplayError($m, $f, 1);
+						nuDisplayError($m, $f, 1);
 						
 					}
 					
