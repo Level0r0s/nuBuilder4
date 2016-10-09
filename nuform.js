@@ -224,7 +224,7 @@ function nuBuildEditObjects(f, p, o, prop){
 			}
 			if(prop.objects[i].display == 0){$('#' + p + prop.objects[i].id).css('visibility', 'hidden');}
 			
-			l = l + 2;
+			l 	= l + 2;
 		
 		} else{
 			
@@ -330,7 +330,8 @@ function nuINPUT(w, i, l, p, prop){
 	var id			= p + prop.objects[i].id;
 	var ef			= p + 'nuRecordHolder';                 //-- Edit Form Id
 	var ty			= 'textarea';
-	
+	var vis			= prop.objects[i].display == 0 ? 'hidden' : 'visible';
+
 	if(prop.objects[i].type != 'textarea'){         		//-- Input Object
 		ty			= 'input';
 	}
@@ -436,6 +437,7 @@ function nuINPUT(w, i, l, p, prop){
 		.attr('onblur', 'nuLookupBlur(event)')
 		.attr('onfocus', 'nuLookupFocus(event)')
 		.attr('onchange', "$('#' + id).removeClass('nuValidate')")
+		.css('visibility', vis)
 		.addClass('nuLookupCode');
 		
 		w.objects[i].values[0][0]	= p + w.objects[i].values[0][0];
@@ -461,9 +463,10 @@ function nuINPUT(w, i, l, p, prop){
 		.attr('data-nu-object-id', w.objects[i].object_id)
 		.attr('data-nu-target', target)
 		.attr('data-nu-subform-sort', 1)
+		.attr('onclick', 'nuBuildLookup(this,[])')
 		.addClass('nuLookupButton')
 		.html('<img border="0" src="lookup.png" class="nuLookupImg">')
-		.attr('onclick', 'nuBuildLookup(this,[])');
+		.css('visibility', vis);
 
 		id = p + prop.objects[i].id + 'description';
 		var inp = document.createElement('input');
@@ -474,8 +477,8 @@ function nuINPUT(w, i, l, p, prop){
 		$('#' + id).css({'top'		: Number(prop.objects[i].top),
 						'left'		: Number(prop.objects[i].left) + Number(prop.objects[i].width) + 21,
 						'width'		: prop.objects[i].description_width,
-						'visibility'	: prop.objects[i].description_width == 0 ? 'hidden' : 'visible',
-						'height'		: Number(prop.objects[i].height)
+						'visibility': prop.objects[i].description_width == 0 || prop.objects[i].display == 0 ? 'hidden' : 'visible',
+						'height'	: Number(prop.objects[i].height)
 		})
 		.attr('tabindex','-1')
 		.addClass('nuLookupDescription')
@@ -922,6 +925,10 @@ function nuLabel(w, i, p, prop){
 	.html(l)
 	.attr('ondblclick','nuBuildPopup("nuobject", "' + prop.objects[i].object_id + '")');
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> e76043a50cd64a6600b1a39b035d46522f50bebb
 }
 
 function nuPopulateLookup3(v){

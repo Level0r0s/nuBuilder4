@@ -75,8 +75,6 @@ class nuSqlClass{
 		array_unshift($this->OBJ['WHERE'], $bo);
 		array_push($this->OBJ['WHERE'], $bc); 
 
-		nudebug('where meger ' . print_r($this->OBJ['WHERE'],1));
-		
     }
 
     public function SQL(){

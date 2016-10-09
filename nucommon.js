@@ -1,31 +1,30 @@
-window.nuDialog 			= new nuCreateDialog('');
-window.nuBC 				= [];
-window.nuOPENER			= [];
-window.nuSUBFORMROW		= [];
-window.nuSUBFORMJSON		= [];
-window.nuSCHEMA			= [];
-window.nuLANGUAGE			= [];
-window.nuFIELD			= [];
-window.nuFORM				= [];
-window.nuHASH				= [];
-window.nuBEFORE			= [];
-window.nuAFTER			= [];
-window.nuSESSION			= '';
-window.nuTYPE 			= 'browse';
-window.nuDRAGLINEVSTART	= '';
-window.nuDRAGLINEVID		= '';
-window.nuNEW				= '';
-
+window.nuDialog 				= new nuCreateDialog('');
+window.nuBC 					= [];
+window.nuOPENER					= [];
+window.nuSUBFORMROW				= [];
+window.nuSUBFORMJSON			= [];
+window.nuSCHEMA					= [];
+window.nuLANGUAGE				= [];
+window.nuFIELD					= [];
+window.nuFORM					= [];
+window.nuHASH					= [];
+window.nuBEFORE					= [];
+window.nuAFTER					= [];
+window.nuSESSION				= '';
+window.nuTYPE 					= 'browse';
+window.nuDRAGLINEVSTART			= '';
+window.nuDRAGLINEVID			= '';
+window.nuNEW					= '';
 
 function nuOpener(f, r, filter){
 
-	this.form_id          = f;
-	this.record_id        = r;
+	this.form_id			= f;
+	this.record_id			= r;
 	
-	if(arguments.length = 3){
-		this.filter		= filter;
+	if(arguments.length 	= 3){
+		this.filter			= filter;
 	}else{
-		this.filter		= '';
+		this.filter			= '';
 	}
 	
 }
@@ -682,8 +681,22 @@ function nuSortSubformBy(row, col){
 	
 }
 
-//arr.sort(nuSortSuformBy(row, col));
+function nuEditPHP(ev){
 
+	var b   = nuBC[nuBC.length-1];
+	var i   = b.record_id + '_' + ev;
+
+	if(b.record_id == '-1'){
+	
+		alert('Must Save Record Before Adding Procedures');
+		return;
+		
+	}
+	
+	nuSetHash('nuSystemPHP', 1);
+	nuBuildPopup("nuphp", i);
+
+}
 
 
 
