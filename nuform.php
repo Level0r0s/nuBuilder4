@@ -37,7 +37,7 @@ function nuFormCode($f){
 function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 
     $tabs 			= nuBuildTabList($F);
-    $f				= nuGetEditForm($F);
+    $f				= nuGetEditForm($F, $R);
     $f->form_id		= $F;
     $f->record_id	= $R;
     
@@ -63,8 +63,6 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
     ORDER BY (sob_all_type = 'run'), sob_all_order    
 
     ";
-
-	nudebug("$F : $s");
 
 	if($F != ''){
 
@@ -164,7 +162,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 				$f->foreign_key_name 	= $r->sob_subform_foreign_key;
 				$o->add             	= $r->sob_subform_add;
 				$o->dimensions		= nuFormDimensions($r->sob_subform_zzzzsys_form_id);
-				$o->forms           	= nuGetSubformRecords($r, $o->add);
+				$o->forms           	= nuGetSubformRecords($r, $o->add, $R);
 				$o->sf_form_id		= $r->sob_subform_zzzzsys_form_id;
 				$o->browse_columns  	= array();
 				
@@ -323,7 +321,7 @@ function nuDefaultObject($r, $t){
 }
 
 
-function nuGetEditForm($F){
+function nuGetEditForm($F, $R){
 	
 
     $s = "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$F'";
@@ -354,10 +352,21 @@ function nuGetEditForm($F){
 		$f->rows	= intval($r->sfo_rows_per_page);
 	}
 
-    $f->title		= $r->sfo_description;
+    $f->title		= nuBreadcrumbDescription($r, $R);
 
     return $f;
     
+}
+
+function nuBreadcrumbDescription($r, $R){
+	
+	if($R 								== '')	{return $r->sfo_description;}		//-- Browse Form
+	if($R 								== '-1'){return $r->sfo_description;}		//-- new record
+	if(trim($r->sfo_breadcrumb_title) 	== '')	{return $r->sfo_description;}		//-- no breadcrumb
+	
+	return nuReplaceHashVariables($r->sfo_breadcrumb_title);
+	
+	
 }
 
 function nuGetLookupValues($R, $O){
@@ -502,7 +511,7 @@ function nuSelectOptions($sql) {
 
 function nuGetSubformRecords($R, $A){
 
-    $f = nuGetEditForm($R->sob_subform_zzzzsys_form_id);
+    $f = nuGetEditForm($R->sob_subform_zzzzsys_form_id, '');
     $s = "SELECT `$f->primary_key` $f->from WHeRE `$R->sob_subform_foreign_key` = '$R->subform_fk' $f->order";
     $t = nuRunQuery($s);
     $a = array();
@@ -1317,6 +1326,55 @@ function nuAddPrintButtons($f, $t, $a){
 	$i = sizeof($f->forms[0]->buttons);
 	$f->forms[0]->buttons[$i][0] = $t;
 	$f->forms[0]->buttons[$i][1] = $t.$a;
+	
+}
+
+
+function nuAddSystemEvents(){
+	
+	$F			= $_POST['nuHash']['RECORD_ID'];
+	$events		= ['BB' => 'Before Browse','BO' => 'Before Open','BS' => 'Before Save','AS' => 'After Save','BD' => 'Before Delete','AD' => 'After Delete'];
+	
+	foreach ($events as $key => $value) {
+		
+		$i		= $F . '_' . $key;
+		$s		= "
+				SELECT * 
+				FROM zzzzsys_php 
+				WHERE 
+					zzzzsys_php_id = ?
+				";
+
+		$t		= nuRunQuery($s, array($i));
+
+		if(db_num_rows($t) == 0){
+	
+			$r	= db_fetch_row($t);
+			$e	= $value . ' for ' . $r->sfo_code . ' - ' . $r->sfo_description;
+			$s	= "
+
+					INSERT INTO zzzzsys_php 
+					(
+						zzzzsys_php_id, 
+						sph_description, 
+						sph_group, 
+						sph_system
+					) 
+					VALUES 
+					(
+						'$i',
+						'$e',
+						'nubuilder',
+						'1'
+					 );
+		 
+				";
+			 
+			$t	= nuRunQuery($s);
+			
+		}
+		 
+	}
 	
 }
 

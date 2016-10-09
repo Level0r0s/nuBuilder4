@@ -621,12 +621,10 @@ function nuTextFormats($dropdownList = false){
 
 function nuSetHashList($p){
 
-//nudebug('nuSetHashList from : ' . $p['call_type']);	
-
-	$fid	= addslashes($p['form_id']);
-	$rid	= addslashes($p['record_id']);
+	$fid		= addslashes($p['form_id']);
+	$rid		= addslashes($p['record_id']);
 	
-	$A	= nuGetUserAccess();
+	$A			= nuGetUserAccess();
 
 	if($fid == '' or $rid == ''){
 
@@ -634,9 +632,9 @@ function nuSetHashList($p){
 		
 	}else{
 
-		$s	= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$fid'";
-		$t	= nuRunQuery($s);
-		$R	= db_fetch_object($t);
+		$s		= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$fid'";
+		$t		= nuRunQuery($s);
+		$R		= db_fetch_object($t);
 
 		if($R->sfo_table != ''){
 			
@@ -1057,7 +1055,7 @@ function test111(){
 	$SQL->nuAddWhereElement('colref', "cus_name = 'bob'");
 	$SQL->nuAddWhereElement('colref', "cus_desc = 'man'");
 	print $SQL->SQL();
-	nudebug(print_r($SQL,1));
+	
 }
 
 

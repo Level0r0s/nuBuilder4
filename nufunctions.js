@@ -23,8 +23,10 @@ function nuBuildSubformArray(s){				//-- add this subform to the list of subform
 
 function nuSetHash(n, v){ 						//-- set hash variable to be used on server side	
 
-	window.nuHASH[n] = v;
-	
+	var b	= nuBC[nuBC.length - 1];
+	console.log(b);
+	b[n] 	= v;
+console.log('BBBBB ' , b);	
 }
 
 function nuFullScreen(bb){  //-- remove all heading

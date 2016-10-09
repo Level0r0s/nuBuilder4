@@ -10,7 +10,6 @@ function nuUpdateData(){
 	$t		= nuRunQuery($s);
 	$FORM	= db_fetch_object($t);
 	$e		= array();
-nudebug(print_r('nnnnn '.$nudata,1));
 	
 	for($i = 0 ; $i < count($nudata) ; $i++){
 
@@ -214,8 +213,7 @@ function nuUpdateRow($r, $p, $row, $FK){
 		}
 		
 	}
-nudebug('set : ' . implode(', ', $set) );	
-nudebug('q : ' . implode(', ', $q) );	
+
 	if(count($set) > 0){
 		
 		$q[]		= $p;
@@ -256,7 +254,6 @@ function nuFormatValue($row, $i){
 	if($r->sob_all_type == 'select' and $r->sob_select_multiple == '1' and $row['v'][$i] != ''){
 		return implode('#nuSep#', $row['v'][$i]);
 	}else{
-		nudebug(print_r($row,1));
 		return $row['v'][$i];
 	}
 
@@ -269,16 +266,16 @@ function nuReplaceHashVariables($s){
 	if($s == ''){
 		return '';
 	}
-	$a = $_POST['nuHash'];
+	$a 		= $_POST['nuHash'];
 
-	if ( !is_array($a) ) {
+	if (!is_array($a)) {
 		return $s;
 	}
 	
 	foreach ($a as $k => $v) {
 		$s	= str_replace ('#' . $k . '#', $v, $s);
 	}
-	
+
 	return $s;
 
 }
