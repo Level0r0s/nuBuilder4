@@ -362,7 +362,7 @@ function nuBreadcrumbDescription($r, $R){
 	if($R 								== '')	{return $r->sfo_description;}		//-- Browse Form
 	if($R 								== '-1'){return $r->sfo_description;}		//-- new record
 	if(trim($r->sfo_breadcrumb_title) 	== '')	{return $r->sfo_description;}		//-- no breadcrumb
-	
+nudebug(print_r($_POST['nuHash'],1));	
 	return nuReplaceHashVariables($r->sfo_breadcrumb_title);
 	
 	
