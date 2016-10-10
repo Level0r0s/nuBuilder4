@@ -221,6 +221,10 @@ function nuBuildEditObjects(f, p, o, prop){
 				
 				l = l + nuSUBFORM(f, i, l, p, prop);
 				
+			}else if(t == 'word'){
+				
+				l = l + nuWORD(f, i, l, p, prop);
+				
 			}
 			if(prop.objects[i].display == 0){$('#' + p + prop.objects[i].id).css('visibility', 'hidden');}
 			
@@ -532,6 +536,33 @@ function nuHTML(w, i, l, p, prop){
 
 }
 
+
+function nuWORD(w, i, l, p, prop){
+
+	var id  = p + prop.objects[i].id;
+	var ef  = p + 'nuRecordHolder';                       //-- Edit Form Id
+	var inp = document.createElement('div');
+	
+	inp.setAttribute('id', id);
+	
+	$('#' + ef).append(inp);
+	
+	nuAddDataTab(id, prop.objects[i].tab, p);
+	
+	$('#' + id).css({'top'     		: Number(prop.objects[i].top),
+					'left'     		: Number(prop.objects[i].left),
+					'width'    		: Number(prop.objects[i].width),
+					'height'   		: Number(prop.objects[i].height),
+					'position' 		: 'absolute',
+					'text-align'	: prop.objects[i].align
+	})
+	.html(w.objects[i].word)
+	.attr('ondblclick','nuBuildPopup("nuobject", "' + prop.objects[i].object_id + '")');
+console.log(prop.objects[i]);
+	return Number(prop.objects[i].width);
+
+}
+
 function nuRUN(w, i, l, p, prop){
 
 	var id  = p + prop.objects[i].id;
@@ -590,7 +621,6 @@ function nuRUN(w, i, l, p, prop){
 		var f	= P.substring(0,P.lastIndexOf('/') + 1)
 
 		window.nuOPENER.push(new nuOpener(F, R, L));
-		//nuOpenerAppend('type','getphp');
 
 		var open = window.nuOPENER.length - 1;
 		var u	= window.location.origin + f + prop.objects[i].src;
@@ -1215,32 +1245,32 @@ function nuOptionsList(f, t, p, a){
 
 	if(a == 1){
 		
-		list.push(['Arrange Objects', 'nuBuildPopup(&quot;' + f + '&quot;, &quot;-2&quot;)', 'nuarrange.png']);
-		list.push(['Form Properties', 'nuBuildPopup(&quot;nuform&quot;, &quot;' + f + '&quot;)', 'nuformprop.png']);
-		list.push(['Form Object List', 'nuBuildPopup(&quot;nuobject&quot;, &quot;&quot;, &quot;' + f + '&quot;)', 'nuobjectlist.png']);
+		list.push(['Arrange Objects', 	'nuBuildPopup(&quot;' + f + '&quot;, &quot;-2&quot;)', 						'nuarrange.png']);
+		list.push(['Form Properties', 	'nuBuildPopup(&quot;nuform&quot;, &quot;' + f + '&quot;)', 					'nuformprop.png']);
+		list.push(['Form Object List', 	'nuBuildPopup(&quot;nuobject&quot;, &quot;&quot;, &quot;' + f + '&quot;)', 	'nuobjectlist.png']);
 		
 	}else{
 		
 		list.push(['Change Login', 'nuBuildPopup(&quot;nupassword&quot;, &quot;' + u + '&quot;, &quot;&quot;)', 'nuobjectlist.png']);
 		
 	}
-		
-	
+
 	for(var i = 0 ; i < list.length ; i++){
 		
-		ul += '<li class="nuOptions" onclick="nuOptionsList;' + list[i][1] + '"><img id="nuOption' + i + '" src="'+ list[i][2] +'" style="margin: 0px 10px 0px -5px; width: 12px; height: 12px;">' + list[i][0] + '</li><br>';
+		ul += '<li class="nuOptions" onclick="nuOptionsList;' + list[i][1] + '"><img id="nuOption' + i + '" src="'+ list[i][2] +'" style="margin: 0px 20px 0px -5px; width: 12px; height: 12px;">' + list[i][0] + '</li><br>';
 		
 	}
 
-	ul += '</ul>';
-	ul += '<img id="nuOptionClose" src="close.png" style="position: absolute; top: 0px; right: 0px;" onclick="$(\'#nuOptionsList\').remove()">'
+	ul 		+= '</ul>';
+	ul 		+= '<img id="nuOptionClose" src="close.png" style="position: absolute; top: 0px; right: 0px;" onclick="$(\'#nuOptionsList\').remove()">'
 
-	nuCloseAllnuOptionsLists();
-	
+	//nuCloseAllnuOptionsLists();
+
 	var divId  		= 'nuOptionsList';
 	var div    		= document.createElement('div');
 	
 	div.setAttribute('id', divId);
+
 	$('body').append(div);
 	$('#' + divId)
 	.attr('src', 'nuoptions.png')
@@ -2086,7 +2116,7 @@ function nuCloneAction(){
 }
 
 function nuSaveAction(){
-
+	
 	//nuSavingProgressMessage();
 	nuUpdateData();
 
