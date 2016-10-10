@@ -172,6 +172,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 
 			if($r->sob_all_type == 'word'){
 				$o->word				= $r->sob_all_label;
+				$o->align				= $r->sob_all_align;
 			}
 
 			$o->display					= nuDisplay($r->sob_all_display_condition);

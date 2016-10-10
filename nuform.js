@@ -554,10 +554,11 @@ function nuWORD(w, i, l, p, prop){
 					'width'    		: Number(prop.objects[i].width),
 					'height'   		: Number(prop.objects[i].height),
 					'position' 		: 'absolute',
-					'text-align'	: prop.objects[i].text_align
+					'text-align'	: prop.objects[i].align
 	})
-	.html(w.objects[i].word);
-
+	.html(w.objects[i].word)
+	.attr('ondblclick','nuBuildPopup("nuobject", "' + prop.objects[i].object_id + '")');
+console.log(prop.objects[i]);
 	return Number(prop.objects[i].width);
 
 }
