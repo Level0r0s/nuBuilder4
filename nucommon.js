@@ -106,24 +106,8 @@ function nuDisplayError(e, g = 0){
 
 	if(e.length > 0){
 
-		f = 'nuerror';
-	
-		window.nuOPENER.push(new nuOpener(f, ''));
-	
-		var l 	= window.nuOPENER.length -1;
+		nuBuildPopup("nuerror", "-1");
 		
-		for(var i = 0 ; i < p.length ; i++){
-			
-			window.nuOPENER[l][p[i][0]]	= p[i][1];
-		
-		}
-		
-		window.nuDialog.createDialog(50, 50, 50, 50, '');
-		
-		$('#nuDragDialog')
-		.css('visibility', 'hidden')
-		.append('<iframe style="left:5px;top:35px;width:400px;height:400px;position:absolute" id="nuErrorWindow" src="index.php?opener=' + l + '&target=' + tar + '&type=lookup&iframe=1"></iframe>');
-			
 	}
 	
 	return e.length > 0;
