@@ -627,10 +627,11 @@ function nuSetHashList($p){
 			$s	= "SELECt * FROM $R->sfo_table WHERE $R->sfo_primary_key = '$rid'";
 			$t	= nuRunQuery($s);
 			$f	= db_fetch_object($t);
-
+nudebug($s);
 			if(is_object($f) ){
 			
 				foreach ( $f as $fld => $value )  {
+nudebug("value: $fld => $value");
 				
 					$r[$fld] = addslashes($value);
 				
