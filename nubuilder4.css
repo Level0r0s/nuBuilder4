@@ -772,3 +772,8 @@ input {
 	width: 500px;
 	height: 500px;
 }
+
+.fake-link {
+    text-decoration: underline;
+    cursor: pointer;
+}

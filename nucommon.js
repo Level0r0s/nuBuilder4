@@ -85,28 +85,18 @@ function nuGetBreadcrumb(b, t = ''){
 
 
 function nuDisplayError(e, g = 0){
-
-	var m	= '';
 	
 	for(var i = 0 ; i < e.length ; i++){
-		
-		var msg = e[i][0];
-
-		if(g == 1) {
-			msg = '<span title="' + e[i][1] + '">' + msg + '</span>';
-		}
 
 		if( e[i][2]) {
 			$('#' + e[i][1]).addClass('nuValidate');			
 		}
-		
-		m += msg + '<br>';
-		
+				
 	}
 
 	if(e.length > 0){
 
-		nuBuildPopup("nuerror", "-1");
+		nuBuildPopup("nuerror", "-1", e);
 		
 	}
 	
