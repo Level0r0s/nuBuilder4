@@ -101,7 +101,9 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 
 			}
 			
-			if($r->sob_all_type == 'html'){$o->html = $r->sob_html_code;}
+			if($r->sob_all_type == 'html'){
+				$o->html = $r->sob_html_code;
+			}
 
 			if($r->sob_all_type == 'select'){
 
@@ -161,15 +163,19 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 				$o->delete          	= $r->sob_subform_delete;
 				$f->foreign_key_name 	= $r->sob_subform_foreign_key;
 				$o->add             	= $r->sob_subform_add;
-				$o->dimensions		= nuFormDimensions($r->sob_subform_zzzzsys_form_id);
+				$o->dimensions			= nuFormDimensions($r->sob_subform_zzzzsys_form_id);
 				$o->forms           	= nuGetSubformRecords($r, $o->add, $R);
-				$o->sf_form_id		= $r->sob_subform_zzzzsys_form_id;
+				$o->sf_form_id			= $r->sob_subform_zzzzsys_form_id;
 				$o->browse_columns  	= array();
 				
 			}
 
-			$o->display				= nuDisplay($r->sob_all_display_condition);
-			$o->js					= nuObjectEvents($r->zzzzsys_object_id);
+			if($r->sob_all_type == 'word'){
+				$o->word				= $r->sob_all_label;
+			}
+
+			$o->display					= nuDisplay($r->sob_all_display_condition);
+			$o->js						= nuObjectEvents($r->zzzzsys_object_id);
 
 			if($OBJS > 0){
 

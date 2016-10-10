@@ -622,41 +622,39 @@ function nuSetHashList($p){
 		$t		= nuRunQuery($s);
 		$R		= db_fetch_object($t);
 
-		if($R->sfo_table != ''){
+		if(db_num_rows($t) != 0){
 			
 			$s	= "SELECt * FROM $R->sfo_table WHERE $R->sfo_primary_key = '$rid'";
 			$t	= nuRunQuery($s);
 			$f	= db_fetch_object($t);
-nudebug($s);
+nudebug($s);			
 			if(is_object($f) ){
 			
-				foreach ( $f as $fld => $value )  {
-nudebug("value: $fld => $value");
-				
+				foreach ($f as $fld => $value ){
 					$r[$fld] = addslashes($value);
-				
 				}
 				
 			}
 		}
 
 		$H		= $p['hash'];
-		$r		= array();
+		nudebug('dddddd ' . print_r($H,1));
+		$ha		= array();
 
 		for($i = 1 ; $i < count($H) ; $i++){
-			$r[$H[$i][0]]	= addslashes($H[$i][1]);
+			$ha[$H[$i][0]]	= addslashes($H[$i][1]);
 		}
+		nudebug('eeeeee ' . print_r($ha,1));
 		
-		$r['PREVIOUS_RECORD_ID']	= addslashes($rid);
-		$r['RECORD_ID']				= addslashes($rid);
-		$r['FORM_ID']				= addslashes($fid);
-		$r['FORM_ID']				= addslashes($fid);
-
-		$r							= array_merge($A, $r);
+		$ha['PREVIOUS_RECORD_ID']	= addslashes($rid);
+		$ha['RECORD_ID']				= addslashes($rid);
+		$ha['FORM_ID']				= addslashes($fid);
+		$ha['FORM_ID']				= addslashes($fid);
+		$ha							= array_merge($A, $ha);
 		
 	}
 	
-	return $r;
+	return $ha;
 
 }
 
