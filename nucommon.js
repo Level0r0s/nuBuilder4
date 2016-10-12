@@ -6,7 +6,8 @@ window.nuSUBFORMJSON			= [];
 window.nuSCHEMA					= [];
 window.nuLANGUAGE				= [];
 window.nuFIELD					= [];
-window.nuFORM					= [];
+//window.nuFORM					= [];
+window.nuFORM					= new nuFormObject();
 window.nuHASH					= [];
 window.nuBEFORE					= [];
 window.nuAFTER					= [];
@@ -35,7 +36,7 @@ function nuOpenerAppend(t, k) {
 
 function nuFormState(){
 
-	window.bread_crumbs		= nuBC.length;
+	//window.bread_crumbs		= nuBC.length;
 	this.call_type        	= '';
 	this.filter           	= window.nuBC.length == 0 ? '' : window.nuBC[nuBC.length-1].filter;
 	this.form_id          	= '';
