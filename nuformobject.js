@@ -27,12 +27,12 @@ class nuFormObject {
 
 		if(json) {
 			
-			var selectedBC  = this.nuBreadCrumb[this.nuBreadCrumb.length - 1];
+			var selectedBC  = this.nuBreadCrumb[this.getBCLength() - 1];
 			var j			= JSON.stringify(selectedBC)
 			return JSON.parse(j);
 			
 		} else {
-			return this.nuBreadCrumb[this.nuBreadCrumb.length - 1];
+			return this.nuBreadCrumb[this.getBCLength() - 1];
 		}
 	}
 	
@@ -43,13 +43,23 @@ class nuFormObject {
 	cleanBC() {
 		
 		if(this.getLastBC().getBCField('title') == '' || this.getLastBC().getBCField('title') == null) {
-			this.nuBreadCrumb.splice(this.getBCLength() - 1, 1);
+			removeLastBC();
 		}
 					
 	}
 	
 	removeLastBC() {
 		this.nuBreadCrumb.pop();
+	}
+	
+	removeBCBefore(b) {
+
+		var n = this.getBCLength() - b - 1;
+
+		for(var i = 0; i < n; i++) {
+			this.removeLastBC();
+		}
+		
 	}
 	
 }
