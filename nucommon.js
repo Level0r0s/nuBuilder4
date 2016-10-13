@@ -1,5 +1,5 @@
 window.nuDialog 				= new nuCreateDialog('');
-window.nuBC 					= [];
+//window.nuBC 					= [];
 window.nuOPENER					= [];
 window.nuSUBFORMROW				= [];
 window.nuSUBFORMJSON			= [];
@@ -34,7 +34,7 @@ function nuOpenerAppend(t, k) {
 	window.nuOPENER[window.nuOPENER.length - 1][t] = k;
 }
 
-function nuFormState(){
+/*function nuFormState(){
 
 	//window.bread_crumbs		= nuBC.length;
 	this.call_type        	= '';
@@ -65,7 +65,7 @@ function nuFormState(){
 	this.username			= '';
 	this.user_id			= '';
 	
-}
+}*/
 
 function nuGetBreadcrumb(b, t = ''){
 
@@ -79,9 +79,10 @@ function nuGetBreadcrumb(b, t = ''){
 		window.nuTYPE = "browse";
 	}
 	
-	window.nuBC 	= window.nuBC.slice(0, b + 1);
-	nuGetForm(window.nuBC[b].form_id, window.nuBC[b].record_id, window.nuBC[b].filter,  1);
-	
+	//window.nuBC 	= window.nuBC.slice(0, b + 1);
+	//nuGetForm(window.nuBC[b].form_id, window.nuBC[b].record_id, window.nuBC[b].filter,  1);
+	window.nuFORM.cleanBC();
+	nuGetForm(window.nuFORM.getBC(b).getBCField('form_id'), window.nuFORM.getBC(b).getBCField('record_id'), window.nuFORM.getBC(b).getBCField('filter'),  1);
 }
 
 
@@ -105,7 +106,7 @@ function nuDisplayError(e, g = 0){
 	
 }
 
-function nuGetFormState(){
+/*function nuGetFormState(){
 
 	var l = window.nuBC.length;
 	var o = window.nuBC[l-1];
@@ -113,17 +114,17 @@ function nuGetFormState(){
 	
 	return  JSON.parse(j);
 	
-}
+}*/
 
 
-function nuSetFormState(){
+/*function nuSetFormState(){
 
 	var l = window.nuBC.length;
 	var o = window.nuBC[l];
 	var j = JSON.stringify(o);
 	return  JSON.parse(j);
 	
-}
+}*/
 
 function nuFormatAjaxErrorMessage(jqXHR, exception) {
 
@@ -448,7 +449,8 @@ function nuRunIt(t, email, type){
 	}
 	
 	var f	= $('#' + t.id).attr('data-nu-primary-key');
-	var i    = nuBC[nuBC.length-1].record_id;
+	//var i    = nuBC[nuBC.length-1].record_id;
+	var i    = window.nuFORM.getLastBC().getBCField('record_id');
 
 	if(email == 1){
 		
@@ -658,10 +660,13 @@ function nuSortSubformBy(row, col){
 
 function nuEditPHP(ev){
 
-	var b   = nuBC[nuBC.length-1];
-	var i   = b.record_id + '_' + ev;
+	//var b   = nuBC[nuBC.length-1];
+	//var i   = b.record_id + '_' + ev;
+	var b   = window.nuFORM.getLastBC();
+	var i   = b.getBCField('record_id') + '_' + ev;
 
-	if(b.record_id == '-1'){
+	//if(b.record_id == '-1'){
+	if(b.getBCField('record_id') == '-1'){
 	
 		alert('Must Save Record Before Adding Procedures');
 		return;

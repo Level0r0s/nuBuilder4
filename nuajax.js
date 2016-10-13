@@ -40,13 +40,14 @@ function nuGetForm(f, r, filter, n){
 	var u 			= '';
 	var p 			= '';
 	var s			= '';
-	var b			= nuBC.length;
+	//var b			= nuBC.length;
+	var b			= window.nuFORM.getBCLength();
 	
 	if($('#nuusername').length == 1){
 		
 		u 			= $('#nuusername').val();
 		p	 		= $('#nupassword').val();
-		window.nuBC	= [];
+		//window.nuBC	= [];
 		//window.nuBC.push(new nuFormState());
 		window.nuFORM.addBC();
 		
@@ -409,7 +410,8 @@ function nuUpdateData(){
 			
 			if($('#nuDelete').prop('checked')){
 				
-				nuBC.pop();  						//-- return to browse
+				//nuBC.pop();  						//-- return to browse
+				window.nuFORM.removeLastBC();		//-- return to browse
 				//nuGetBreadcrumb(nuBC.length - 1);
 				nuGetBreadcrumb(window.nuFORM.getBCLength() - 1);
 				

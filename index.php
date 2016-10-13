@@ -22,7 +22,7 @@ jsinclude('nufunctions.js');
   
 function nuHomeWarning(){
 
-	if(nuEDITED){
+	if(window.nuEDITED){
 		return nuTranslate('Leave this form without saving?')+'  '+nuTranslate('Doing this will return you to the login screen.');
 	}
 	
@@ -72,7 +72,8 @@ window.onbeforeunload = nuHomeWarning;
 			}else{
 				var from		= window['parent'];
 			}
-			window.nuCaller		= from.nuBC[from.nuBC.length - 1];
+			//window.nuCaller	= from.nuBC[from.nuBC.length - 1];
+			window.nuCaller		= from.nuFORM.getLastBC();
 			window.nuTYPE		= '$type';
 			window.nuTARGET		= '$target';
 			window.nuSESSION	= from.nuSESSION;

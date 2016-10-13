@@ -48,6 +48,10 @@ class nuFormObject {
 					
 	}
 	
+	removeLastBC() {
+		this.nuBreadCrumb.pop();
+	}
+	
 }
 
 class nuBreadCrumb {

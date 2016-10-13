@@ -576,7 +576,7 @@ function nuWORD(w, i, l, p, prop){
 	})
 	.html(w.objects[i].word)
 	.attr('ondblclick','nuBuildPopup("nuobject", "' + prop.objects[i].object_id + '")');
-console.log(prop.objects[i]);
+
 	return Number(prop.objects[i].width);
 
 }
@@ -1152,7 +1152,8 @@ function nuGetStartingTab(){
 
 function nuSetTab(pthis){
 
-	var t = window.nuBC[window.nuBC.length - 1].tab_start;
+	//var t = window.nuBC[window.nuBC.length - 1].tab_start;
+	var t = window.nuFORM.getLastBC().getBCField('tab_start');
 	
 	for(var i = 0 ; i < t.length ; i++){
 		
@@ -1267,7 +1268,8 @@ function nuOptionsList(f, t, p, a){
 	var off		= icon.offset();
 	var top		= off.top;
 	var left	= off.left;
-	var u		= nuBC[nuBC.length-1].user_id;
+	//var u		= nuBC[nuBC.length-1].user_id;
+	var u		= window.nuFORM.getLastBC().getBCField('user_id');
 	var list	= [];
 	var ul		= '<ul>';
 
@@ -1393,10 +1395,14 @@ function nuBrowseTitle(b, i, l){
 
 function nuTitleDrag(i){
 
-	var bc				= nuBC[nuBC.length-1];
+	/*var bc				= nuBC[nuBC.length-1];
 	var col				= bc.browse_columns;
-	var rows				= bc.rows;
-	var h				= bc.row_height;
+	var rows			= bc.rows;
+	var h				= bc.row_height;*/
+	var bc				= window.nuFORM.getLastBC();
+	var col				= bc.getBCField('browse_columns');
+	var rows			= bc.getBCField('rows');
+	var h				= bc.getBCField('row_height');
 	var div				= document.createElement('div');
 
 	div.setAttribute('id', 'nuTitleDrag' + i);
@@ -1421,7 +1427,7 @@ function nuDragBrowseDown(e){
 	var f					= parseInt($('#nuBrowseFooter').css('top'));
 
 	window.nuDRAGLINEVSTART	= e.pageX;
-	window.nuDRAGLINEVID		= e.target.id;
+	window.nuDRAGLINEVID	= e.target.id;
 
 	$('#' + e.target.id).css('height', f-t);
 	
@@ -1457,8 +1463,10 @@ function nuBrowseColumnSize(e){
 
 	var l	= $('#' + e.target.id)
 	
-	var bc	= nuBC[nuBC.length-1];
-	var totalBrowseHeight	= bc.rows * bc.row_height;
+	//var bc	= nuBC[nuBC.length-1];
+	//var totalBrowseHeight	= bc.rows * bc.row_height;
+	var bc	= window.nuFORM.getLastBC();
+	var totalBrowseHeight	= bc.getBCField('rows') * bc.getBCField('row_height');
 	$('#' + e.target.id).css('height', 400);
 	
 }
@@ -1535,11 +1543,15 @@ function nuBrowseTable(){
 		
 	}
 
-	var la	= '<span id="nuLast" onclick="nuGetPage(' + (bc.page_number) + ', \'' + window.nuTYPE + '\')" class="nuBrowsePage">&#9668;</span>';
+	//var la	= '<span id="nuLast" onclick="nuGetPage(' + (bc.page_number) + ', \'' + window.nuTYPE + '\')" class="nuBrowsePage">&#9668;</span>';
+	var la	= '<span id="nuLast" onclick="nuGetPage(' + (bc.getBCField('page_number')) + ', \'' + window.nuTYPE + '\')" class="nuBrowsePage">&#9668;</span>';
 	var pg	= '&nbsp;Page&nbsp;';
-	var cu	= '<input id="browsePage" style="text-align:center;margin:3px 0px 0px 0px;width:40px" onchange="nuGetPage(this.value, \'' + window.nuTYPE + '\')" value="' + (bc.page_number + 1) + '" class="browsePage"/>';
-	var of	= '&nbsp;/&nbsp;' + bc.pages + '&nbsp;';
-	var ne	= '<span id="nuNext" onclick="nuGetPage(' + (bc.page_number + 2) + ',\'' + window.nuTYPE + '\')" class="nuBrowsePage">&#9658;</span>';
+	//var cu	= '<input id="browsePage" style="text-align:center;margin:3px 0px 0px 0px;width:40px" onchange="nuGetPage(this.value, \'' + window.nuTYPE + '\')" value="' + (bc.page_number + 1) + '" class="browsePage"/>';
+	//var of	= '&nbsp;/&nbsp;' + bc.pages + '&nbsp;';
+	//var ne	= '<span id="nuNext" onclick="nuGetPage(' + (bc.page_number + 2) + ',\'' + window.nuTYPE + '\')" class="nuBrowsePage">&#9658;</span>';
+	var cu	= '<input id="browsePage" style="text-align:center;margin:3px 0px 0px 0px;width:40px" onchange="nuGetPage(this.value, \'' + window.nuTYPE + '\')" value="' + (bc.getBCField('page_number') + 1) + '" class="browsePage"/>';
+	var of	= '&nbsp;/&nbsp;' + bc.getBCField('pages') + '&nbsp;';
+	var ne	= '<span id="nuNext" onclick="nuGetPage(' + (bc.getBCField('page_number') + 2) + ',\'' + window.nuTYPE + '\')" class="nuBrowsePage">&#9658;</span>';
 	
 	var id	= 'nuBrowseFooter';
 	var div  = document.createElement('div');
@@ -1578,7 +1590,8 @@ function nuSetSearchColumn(){
 		if(!$(this).is(':checked')) {nosearch.push(index);}
 	});
 
-	window.nuBC[window.nuBC.length-1].nosearch_columns = nosearch;
+	//window.nuBC[window.nuBC.length-1].nosearch_columns = nosearch;
+	window.nuFORM.getLastBC().setBCField('nosearch_columns', nosearch);
 	
 }
 
@@ -1594,12 +1607,16 @@ function nuSearchPressed(e){
 
 function nuSearchAction(t = ''){
 
-	window.nuBC[window.nuBC.length-1].search	= String($('#nuSearchField').val()).replaceAll("'","&#39;", true);
-	window.nuBC[window.nuBC.length-1].filter	= String($('#nuFilter').val()).replaceAll("'","&#39;", true);
+	//window.nuBC[window.nuBC.length-1].search	= String($('#nuSearchField').val()).replaceAll("'","&#39;", true);
+	//window.nuBC[window.nuBC.length-1].filter	= String($('#nuFilter').val()).replaceAll("'","&#39;", true);
+	window.getLastBC().setBCField('search', String($('#nuSearchField').val()).replaceAll("'","&#39;", true));
+	window.getLastBC().setBCField('filter', String($('#nuFilter').val()).replaceAll("'","&#39;", true));
 	if(t == '') {
-		nuGetBreadcrumb(nuBC.length - 1);
+		//nuGetBreadcrumb(nuBC.length - 1);
+		nuGetBreadcrumb(window.nuFORM.getBCLength());
 	} else {
-		nuGetBreadcrumb(nuBC.length - 1, t);
+		//nuGetBreadcrumb(nuBC.length - 1, t);
+		nuGetBreadcrumb(window.nuFORM.getBCLength(), t);
 	}
 	
 }
@@ -1607,8 +1624,10 @@ function nuSearchAction(t = ''){
 
 function nuAddAction(){
 
-	var bc	= nuBC[nuBC.length - 1];
-	nuGetForm(bc.form_id, '-1');
+	//var bc	= nuBC[nuBC.length - 1];
+	//nuGetForm(bc.form_id, '-1');
+	var bc	= window.nuFORM.getLastBC();
+	nuGetForm(bc.getBCField('form_id'), '-1');
 	
 }
 
@@ -1627,7 +1646,7 @@ function nuEmailReportAction(id) {
 
 function nuSortBrowse(c){
 	
-	var l			= nuBC.length - 1;
+	/*var l			= nuBC.length - 1;
 	var B 			= nuBC[l];
 	nuBC[l].filter	= $('#nuFilter').val();
 	
@@ -1636,8 +1655,18 @@ function nuSortBrowse(c){
 	}else{
 		nuBC[l].sort 				= c;
 		nuBC[l].sort_direction	= 'asc';
-	}
+	}*/
 
+	var l			= window.nuFORM.getLastBC();
+	l.setBCField('filter', $('#nuFilter').val());
+	
+	if(c == l.getBCField('sort')){
+		l.setBCField('sort_direction',(l.getBCField('sort_direction') == 'asc' ? 'desc' : 'asc'));
+	}else{
+		l.setBCField('sort', c);
+		l.setBCField('sort_direction', 'asc');
+	}
+	
 	nuSearchAction();
 	
 }
@@ -1645,12 +1674,15 @@ function nuSortBrowse(c){
 function nuGetPage(p, t){
 
 	var P = parseInt('00' + p);
-	var B = nuBC[nuBC.length - 1];
+	//var B = nuBC[nuBC.length - 1];
+	var B = window.nuFORM.getLastBC();
 	
 	if(P == 0){P = 1;}
-	if(P > B.pages){P = B.pages;}
+	//if(P > B.pages){P = B.pages;}
+	if(P > B.getBCField('pages')){P = B.getBCField('pages');}
 	
-	nuBC[nuBC.length - 1]. page_number = P - 1;
+	//nuBC[nuBC.length - 1]. page_number = P - 1;
+	B.setBCField('page_number', P - 1);
 	
 	nuSearchAction(t);
 	
@@ -2148,7 +2180,8 @@ function nuCloneAction(){
 			
 	});
 	
-	nuBC[nuBC.length-1].record_id	= '-1';
+	//nuBC[nuBC.length-1].record_id	= '-1';
+	window.nuFORM.getLastBC().setBCField('record_id', '-1');
 
 	$('#nuCloneButton').css('visibility','hidden');
 	$('#nuDeleteButton').css('visibility','hidden');
@@ -2229,11 +2262,16 @@ function nuHashFromEditForm(){
 	var o 			= {};
 	var val 		= '';
 	
-	a.push([b.form_id, b.record_id]);		//-- first element is Form and Record ID
+	/*a.push([b.form_id, b.record_id]);		//-- first element is Form and Record ID
 	a.push(['FORM_ID', b.form_id]);
 	a.push(['PREVIOUS_RECORD_ID', b.record_id]);
-	a.push(['RECORD_ID', b.record_id]);
+	a.push(['RECORD_ID', b.record_id]);*/
 
+	a.push([b.getBCField('form_id'), b.getBCField('record_id')]);		//-- first element is Form and Record ID
+	a.push(['FORM_ID', b.getBCField('form_id')]);
+	a.push(['PREVIOUS_RECORD_ID', b.getBCField('record_id')]);
+	a.push(['RECORD_ID', b.getBCField('record_id')]);
+	
 	$("[data-nu-field][data-nu-prefix='']").each(function( index ){
 
 		o 		= $('#' + this.id);
