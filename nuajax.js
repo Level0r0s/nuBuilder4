@@ -429,6 +429,33 @@ function nuUpdateData(){
 	nuAjax(w,successCallback,nuAbortSave);
 }
 
+function nuSaveAfterDrag() {
+	
+	//var w       = $('#nuDragDialog iframe')[0].contentWindow.nuGetFormState();
+	//w.call_type = 'nudragsave';
+    var w       = $('#nuDragDialog iframe')[0].contentWindow.nuFORM.getLastBC();
+    w.setBCField('call_type', 'nudragsave');
+	
+    //w.nuDragState = $('#nuDragDialog iframe')[0].contentWindow.nuDragOptionsState;
+    w.setBCField('nuDragState', $('#nuDragDialog iframe')[0].contentWindow.nuDragOptionsState);
+			
+	var successCallback = function(data,textStatus,jqXHR){
+		
+		if(nuDisplayError(data.errors)){
+			alert(data.errors[0]);
+		} else {
+			
+			$('div#nuDragDialog div#dialogTitle img#dialogClose').click();
+			//nuGetBreadcrumb(window.nuBC.length-1);
+			nuGetBreadcrumb(window.nuFORM.getBCLength() - 1);
+			
+		}
+		
+		$("#overlay").remove();
+	};
+		
+	nuAjax(w,successCallback,nuAbortSaveDrag);
+}
 
 function nuOpenNewBrowserTab(c, f, r, filter){
 	
