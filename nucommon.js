@@ -667,6 +667,10 @@ function nuEditPHP(ev){
 		
 	}
 	
+	c	= $('#sfo_code').val();
+	d	= $('#sfo_description').val();
+	
+	nuSetHash('the_form', d + ' (' + c + ')');
 	nuSetHash('nuSystemPHP', 1);
 	nuBuildPopup("nuphp", i);
 

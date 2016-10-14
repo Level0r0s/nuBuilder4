@@ -1356,7 +1356,7 @@ function nuAddSystemEvents(){
 		if(db_num_rows($t) == 0){
 	
 			$r	= db_fetch_row($t);
-			$e	= $value . ' for ' . $r->sfo_code . ' - ' . $r->sfo_description;
+			$e	= $value . ' for ' . $r->sfo_code . ' ' . $r->sfo_description;
 			$s	= "
 
 					INSERT INTO zzzzsys_php 
@@ -1383,5 +1383,7 @@ function nuAddSystemEvents(){
 	}
 	
 }
+
+
 
 ?>

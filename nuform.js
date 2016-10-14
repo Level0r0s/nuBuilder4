@@ -556,6 +556,7 @@ function nuWORD(w, i, l, p, prop){
 					'position' 		: 'absolute',
 					'text-align'	: prop.objects[i].align
 	})
+	.addClass('nuWord')
 	.html(w.objects[i].word)
 	.attr('ondblclick','nuBuildPopup("nuobject", "' + prop.objects[i].object_id + '")');
 console.log(prop.objects[i]);
@@ -2184,6 +2185,10 @@ function nuHashFromEditForm(){
 	var o 			= {};
 	var val 		= '';
 	
+	for (var key in b) {
+		a.push([key, b[key]]);
+	}	
+		
 	a.push([b.form_id, b.record_id]);		//-- first element is Form and Record ID
 	a.push(['FORM_ID', b.form_id]);
 	a.push(['PREVIOUS_RECORD_ID', b.record_id]);
@@ -2216,7 +2221,7 @@ function nuHashFromEditForm(){
 		}
 
 	});
-	
+
 	return a;
 
 }

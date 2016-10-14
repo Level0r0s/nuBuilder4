@@ -5,7 +5,7 @@ session_start();
 error_reporting( error_reporting() & ~E_NOTICE );
 
 require_once('config.php'); 
-require_once('nuException.php'); 
+require_once('nuexception.php'); 
 require_once dirname(__FILE__) . '/sql-parser/src/PHPSQLParser.php';
 require_once dirname(__FILE__) . '/sql-parser/src/PHPSQLCreator.php';
 require_once dirname(__FILE__) . '/nusqlclass.php';
@@ -123,12 +123,30 @@ function nuErrorFound(){
     
 }
 
+function nuHeader(){
+
+		$s	= "
+			SELECT set_header
+			FROM zzzzsys_setup
+			WHERE zzzzsys_setup_id = 1
+		";
+		
+		$t	= nuRunQuery($s);
+		$r	= db_fetch_row($t);
+		$j	= "\n\n//-- CREATED BY Setup -> Header\n\n\n" . $r[0];
+		
+		return $j;
+		
+}
+
 
 function nuID(){
 
 	$i   = uniqid();
 	$s   = md5($i);
+	
     while($i == uniqid()){}
+
     return uniqid().$s[0].$s[1];
 
 }
@@ -609,13 +627,12 @@ function nuSetHashList($p){
 
 	$fid		= addslashes($p['form_id']);
 	$rid		= addslashes($p['record_id']);
+	$r			= array();
 	
 	$A			= nuGetUserAccess();
 
 	if($fid == '' or $rid == ''){
-
 		return $A;
-		
 	}else{
 
 		$s		= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$fid'";
@@ -627,10 +644,10 @@ function nuSetHashList($p){
 			$s	= "SELECt * FROM $R->sfo_table WHERE $R->sfo_primary_key = '$rid'";
 			$t	= nuRunQuery($s);
 			$f	= db_fetch_object($t);
-nudebug($s);			
+
 			if(is_object($f) ){
-			
-				foreach ($f as $fld => $value ){
+				
+				foreach ($f as $fld => $value ){								//-- add parent Breadcrumb Object
 					$r[$fld] = addslashes($value);
 				}
 				
@@ -638,30 +655,34 @@ nudebug($s);
 		}
 
 		$H		= $p['hash'];
-		nudebug('dddddd ' . print_r($H,1));
 		$ha		= array();
 
-		for($i = 1 ; $i < count($H) ; $i++){
-			$ha[$H[$i][0]]	= addslashes($H[$i][1]);
+		for($i = 1 ; $i < count($H) ; $i++){									//-- add parent Form field values
+			
+			$f	= $H[$i][0];
+			$v	= $H[$i][1];
+
+			if(gettype($v) == 'string'){
+				$ha[$f]	= addslashes($v);
+			}
+			
 		}
-		nudebug('eeeeee ' . print_r($ha,1));
 		
 		$ha['PREVIOUS_RECORD_ID']	= addslashes($rid);
-		$ha['RECORD_ID']				= addslashes($rid);
+		$ha['RECORD_ID']			= addslashes($rid);
 		$ha['FORM_ID']				= addslashes($fid);
 		$ha['FORM_ID']				= addslashes($fid);
-		$ha							= array_merge($A, $ha);
 		
 	}
 	
-	return $ha;
+	return array_merge($r, $ha);
 
 }
 
 
 function nuRunReport($nuRID){
 	
-	$nuID							= nuID();
+	$nuID								= nuID();
 	$nuT								= nuRunQuery("SELECT * FROM zzzzsys_report WHERE zzzzsys_report_id = '$nuRID'");
 	$nuA								= db_fetch_object($nuT);
 	$_POST['nuHash']['code']			= $nuA->sre_code;
@@ -670,9 +691,10 @@ function nuRunReport($nuRID){
 	$nuI								= $nuA->sre_zzzzsys_php_id;
 	$nuT								= nuRunQuery("SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = '$nuI'");
 	$nuR								= db_fetch_object($nuT);
-	$_POST['nuHash']['sph_php']		= nuReplaceHashVariables($nuR->sph_php,'rr');
+	$_POST['nuHash']['sph_php']			= nuReplaceHashVariables($nuR->sph_php);
 	$nuJ								= json_encode($_POST['nuHash']);
 	$nuS								= "INSERT INTO zzzzsys_debug (zzzzsys_debug_id, deb_message) VALUES (?, ?)";
+	
 	nuRunQuery($nuS, array($nuID, $nuJ));
 	
 	return $nuID;
@@ -682,7 +704,7 @@ function nuRunReport($nuRID){
 
 function nuRunPHP($nuRID){
 
-	$id									= nuID();
+	$nuID								= nuID();
 	$nuT								= nuRunQuery("SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = '$nuRID'");
 	$nuA								= db_fetch_object($nuT);
 	$_POST['nuHash']['code']			= $nuA->sph_code;
@@ -694,36 +716,57 @@ function nuRunPHP($nuRID){
 	$line 								= substr_count($nuA->sph_php, "\n" ) + 1;
 		
 	try {
-		
+
 		$s 								= "SELECT * FROM zzzzsys_php_library LEFT JOIN zzzzsys_php ON zzzzsys_php_id = spl_library_zzzzsys_php_id WHERE spl_zzzzsys_php_id = '$nuRID'";
 		$nuT							= nuRunQuery($s);
 		$i 								= 1;
-		
+
 		while($nuA= db_fetch_object($nuT)) {
-			
-			$lines[$i]['code']					= $nuA->sph_code;
-			$lines[$i]['start']					= $line;
+
+			$lines[$i]['code']			= $nuA->sph_code;
+			$lines[$i]['start']			= $line;
 
 			$php .= "\n ".$nuA->sph_php;
-			
-			$lines[$i]['length']				= substr_count($nuA->sph_php, "\n" ) + 1;
-			$line 								= $line + substr_count($nuA->sph_php, "\n" ) + 1;
+
+			$lines[$i]['length']		= substr_count($nuA->sph_php, "\n" ) + 1;
+			$line 						= $line + substr_count($nuA->sph_php, "\n" ) + 1;
 			$i++;
-			
+
 		}
-	 } catch(Throwable $e) {
-		 throw new nuException("Error Building PHP",0);       
-	} catch (Exception $e) {
+
+	}catch(Throwable $e) {
+		throw new nuException("Error Building PHP",0);       
+	}catch(Exception $e) {
 		throw new nuException("Error Building PHP",0);
 	}
-	
+
 	$_POST['nuHash']['sph_php']			= nuReplaceHashVariables($php);
 	$_POST['nuHash']['lines']			= $lines;
 	$nuJ								= json_encode($_POST['nuHash']);
 	$nuS								= "INSERT INTO zzzzsys_debug (zzzzsys_debug_id, deb_message) VALUES (?, ?)";
-	nuRunQuery($nuS, array($id, $nuJ));
 
-	return $id;
+	nuRunQuery($nuS, array($nuID, $nuJ));
+
+	return $nuID;
+	
+}
+
+
+function nuGetProcedure($i){
+	
+	$a		= array();
+	$a[]	= $i;
+	$s		= "
+
+	SELECT sph_php 
+	FROM zzzzsys_php
+	WHERE zzzzsys_php_id = ?
+
+	";
+	$t		= nuRunQuery($s, $a);
+	$r		= db_fetch_row($t);
+	
+	return $r[0];
 	
 }
 
@@ -1041,20 +1084,22 @@ function nuGetUserAccess(){
 
 function test111(){
 	
-	$s	= nus();
+	$s		= nus();
 	
-	$SQL = new nuSqlClass($s);
-	print $SQL->SQL() . '<br><br>remove all select elements<br>';
-	$SQL->nuRemoveSelectElements();
-	print $SQL->SQL() . '<br><br>add cus_name<br>';
-	$SQL->nuAddSelectElement('colref', 'cus_name');
-	print $SQL->SQL() . '<br><br>add cus_address<br>';
-	$SQL->nuAddSelectElement('colref', 'cus_address');
-	print $SQL->SQL() . '<br><br>remove all where elements<br>';
+	$SQL 	= new nuSqlClass($s);
+
+	$SQL->removeSelectElements();
+
+	$SQL->addSelectElement('cus_name');
+	$SQL->addSelectElement('cus_address');
+	$SQL->addWhereElement("and cus_name = 'bob'");
+
+	print $SQL->SQL() . '<br><br><br>';
 	$SQL->nuAddBracketsToWhere();
-	$SQL->nuAddWhereElement('colref', "cus_name = 'bob'");
-	$SQL->nuAddWhereElement('colref', "cus_desc = 'man'");
-	print $SQL->SQL();
+	print $SQL->SQL() . '<br><br><br>';
+	$Q 		= new nuSqlClass($SQL->SQL());
+	nudebug(print_r($Q,1));
+	print $Q->SQL() . '<br><br><br>';
 	
 }
 
@@ -1116,7 +1161,6 @@ IFNULL(sr.cot_grade_id,'') = ''
 OR
 IFNULL(dr.cot_multigrade,'1') = '1'
 )
-ORDER BY CONCAT(docket_type_weigh_link.docket_type_weigh_link_id, '_',IFNULL(sr.contract_id, ''),'_',IFNULL(dr.contract_id, ''))
 
 
 ";
