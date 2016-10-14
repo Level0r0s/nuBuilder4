@@ -7,12 +7,14 @@
 <?php
 require_once('nucommon.php');	
 cssinclude('nubuilder4.css');
+jsinclude('nuformobject.js');
 jsinclude('nuform.js');
 jsinclude('nuformdrag.js');
 jsinclude('nucalendar.js');
 jsinclude('nucommon.js');
 jsinclude('nuajax.js');       //-- calls to server
 jsinclude('nufunctions.js');
+
 ?>
 
 <script>
@@ -20,7 +22,7 @@ jsinclude('nufunctions.js');
   
 function nuHomeWarning(){
 
-	if(nuEDITED){
+	if(window.nuEDITED){
 		return nuTranslate('Leave this form without saving?')+'  '+nuTranslate('Doing this will return you to the login screen.');
 	}
 	
@@ -73,8 +75,13 @@ window.onbeforeunload = nuHomeWarning;
 			}else{
 				var from		= window['parent'];
 			}
+<<<<<<< HEAD
 			
 			window.nuCaller		= from.nuBC[from.nuBC.length - 1];
+=======
+			//window.nuCaller	= from.nuBC[from.nuBC.length - 1];
+			window.nuCaller		= from.nuFORM.getLastBC();
+>>>>>>> 5b3a3951657a699b5a89c7a07c07e294c7ea86a1
 			window.nuTYPE		= '$type';
 			window.nuTARGET		= '$target';
 			window.nuSESSION	= from.nuSESSION;

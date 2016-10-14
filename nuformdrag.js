@@ -3,8 +3,10 @@ function nuBindDragEvents(){
     $(document).on('mousemove.nuformdrag', function(e) {
 		
         var draggable = 0;
-		if(window.nuBC.length > 0) {
-			if(window.nuBC[window.nuBC.length-1].record_id == '-2') {
+		//if(window.nuBC.length > 0) {
+		if(window.nuFORM.getBCLength() > 0) {
+			//if(window.nuBC[window.nuBC.length-1].record_id == '-2') {
+			if(window.nuFORM.getLastBC().getBCField('record_id') == '-2') {
 				draggable = 1;
 			}
 		}
@@ -29,8 +31,10 @@ function nuBindDragEvents(){
 		window.moveY = 0;
 		
         var draggable = 0;
-		if(window.nuBC.length > 0) {
-			if(window.nuBC[window.nuBC.length-1].record_id == '-2') {
+		//if(window.nuBC.length > 0) {
+		if(window.nuFORM.getBCLength() > 0) {
+			//if(window.nuBC[window.nuBC.length-1].record_id == '-2') {
+			if(window.nuFORM.getLastBC().getBCField('record_id') == '-2') {
 				draggable = 1;
 			}
 		}
@@ -60,8 +64,10 @@ function nuBindDragEvents(){
 	
     $(document).on('mouseup.nuformdrag', function(e) {
        var draggable = 0;
-		if(window.nuBC.length > 0) {	
-			if(window.nuBC[window.nuBC.length-1].record_id == '-2') {
+		//if(window.nuBC.length > 0) {
+		if(window.nuFORM.getBCLength() > 0) {
+			//if(window.nuBC[window.nuBC.length-1].record_id == '-2') {
+			if(window.nuFORM.getLastBC().getBCField('record_id') == '-2') {
 				draggable = 1;
 			}
 		}
@@ -588,13 +594,16 @@ function nuAlignBottom(){
 
 function nuSaveNuDrag(){
     $("body").append('<div id="overlay" style="background-color:grey;position:absolute;top:0;left:0;height:100%;width:100%;z-index:999;"></div>');
-    var w       = $('#nuDragDialog iframe')[0].contentWindow.nuGetFormState();
-    w.call_type = 'nudragsave';
+    //var w       = $('#nuDragDialog iframe')[0].contentWindow.nuGetFormState();
+	//w.call_type = 'nudragsave';
+    var w       = $('#nuDragDialog iframe')[0].contentWindow.nuFORM.getLastBC();
+    w.setBCField('call_type', 'nudragsave');
     if(!nuPutFieldDimensionsIntoState()){
         return;
 	}
 	
-    w.nuDragState = $('#nuDragDialog iframe')[0].contentWindow.nuDragOptionsState;
+    //w.nuDragState = $('#nuDragDialog iframe')[0].contentWindow.nuDragOptionsState;
+    w.setBCField('nuDragState', $('#nuDragDialog iframe')[0].contentWindow.nuDragOptionsState);
     $.ajax({
         url      : "nuapi.php",
         type     : "POST",

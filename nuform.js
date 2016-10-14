@@ -26,7 +26,7 @@ function nuBuildForm(f){
 		
 	}
 	
-	var b 							= window.nuBC.length-1;
+	/*var b 							= window.nuBC.length-1;
 
 	window.nuBC[b].form_id 			= f.form_id;
 	window.nuBC[b].record_id 		= f.record_id;
@@ -37,7 +37,20 @@ function nuBuildForm(f){
 	window.nuBC[b].rows 			= f.rows;
 	window.nuBC[b].browse_columns	= f.browse_columns;
 	window.nuBC[b].browse_rows		= f.browse_rows;
-	window.nuBC[b].pages			= f.pages;
+	window.nuBC[b].pages			= f.pages;*/
+	
+	var b 							= window.nuFORM.getLastBC();
+
+	b.setBCField('form_id', f.form_id);
+	b.setBCField('record_id', f.record_id);
+	b.setBCField('session_id', f.session_id);
+	b.setBCField('user_id', f.user_id);
+	b.setBCField('title', f.title);
+	b.setBCField('row_height', f.row_height);
+	b.setBCField('rows', f.rows);
+	b.setBCField('browse_columns', f.browse_columns);
+	b.setBCField('browse_rows', f.browse_rows);
+	b.setBCField('pages', f.pages);
 
 	nuResizeiFrame(f.dimensions, f.record_id);
 
@@ -136,7 +149,8 @@ function nuAddActionButtons(f){
 
 	var draggable = 0;
 	
-	if(window.nuBC[window.nuBC.length-1].record_id == '-2') {
+	//if(window.nuBC[window.nuBC.length-1].record_id == '-2') {
+	if(window.nuFORM.getLastBC().getBCField('record_id') == '-2') {
 		draggable = 1;
 	}
 
@@ -144,8 +158,10 @@ function nuAddActionButtons(f){
 
 	if(f.record_id == ''){
 
-		var s 	= nuDefine(window.nuBC[window.nuBC.length-1].search);
-		var f 	= nuDefine(window.nuBC[window.nuBC.length-1].filter);
+		//var s 	= nuDefine(window.nuBC[window.nuBC.length-1].search);
+		var s 	= nuDefine(window.nuFORM.getLastBC().getBCField('search'));
+		//var f 	= nuDefine(window.nuBC[window.nuBC.length-1].filter);
+		var f 	= nuDefine(window.nuFORM.getLastBC().getBCField('filter'));
 		
 		$('#nuActionHolder').append("<input id='nuSearchField' type='text' class='nuSearch' onkeypress='nuSearchPressed(event)' value='" + s + "'>&nbsp;");
 		$('#nuActionHolder').append("<input id='nuFilter' style='visibility:hidden;width:0px' value='" + f + "'>");
@@ -164,7 +180,8 @@ function nuAddActionButtons(f){
 		var reportID = '';
 		
 		if(b[i][0] == 'Run' || b[i][0] == 'Email') {
-			reportID = '\"' + window.nuBC[window.nuBC.length-1].record_id + '\"';
+			//reportID = '\"' + window.nuBC[window.nuBC.length-1].record_id + '\"';
+			reportID = '\"' + window.nuFORM.getLastBC().getBCField('record_id') + '\"';
 		}
 		
 		if(!draggable) {
@@ -186,7 +203,8 @@ function nuBuildEditObjects(f, p, o, prop){
 	var l 			= 3;
 	var draggable 	= 0;
 	
-	if(window.nuBC[window.nuBC.length-1].record_id == '-2'){
+	//if(window.nuBC[window.nuBC.length-1].record_id == '-2'){
+	if(window.nuFORM.getLastBC().getBCField('record_id') == '-2'){
 		draggable 	= 1;
 	}
 	
@@ -559,7 +577,7 @@ function nuWORD(w, i, l, p, prop){
 	.addClass('nuWord')
 	.html(w.objects[i].word)
 	.attr('ondblclick','nuBuildPopup("nuobject", "' + prop.objects[i].object_id + '")');
-console.log(prop.objects[i]);
+
 	return Number(prop.objects[i].width);
 
 }
@@ -1058,11 +1076,15 @@ function nuBuildSubformDeleteTitle(l, id, subform_id){
 
 function nuAddBreadcrumbs(){
 
-	if(window.nuBC[window.nuBC.length - 1].title == '' || window.nuBC[window.nuBC.length - 1].title == null) {
+	/*if(window.nuBC[window.nuBC.length - 1].title == '' || window.nuBC[window.nuBC.length - 1].title == null) {
 		window.nuBC.splice(window.nuBC.length-1,1);
 	}
 	
-	var b	= window.nuBC.length;
+	var b	= window.nuBC.length;*/
+	
+	window.nuFORM.cleanBC();
+	
+	var b	= window.nuFORM.getBCLength();
 	
     for(var i = 0 ; i < b ; i++){
         
@@ -1102,7 +1124,8 @@ function nuAddEditTabs(p, w){
 
 function nuSetStartingTab(p){
 
-	var t = window.nuBC[window.nuBC.length - 1].tab_start;
+	//var t = window.nuBC[window.nuBC.length - 1].tab_start;
+	var t = window.nuFORM.getLastBC().getBCField('tab_start');
 	
 	for(var i = 0 ; i < t.length ; i++){
 		if(t[i].prefix == p){return;}
@@ -1115,7 +1138,8 @@ function nuSetStartingTab(p){
 
 function nuGetStartingTab(){
 
-	var t = window.nuBC[window.nuBC.length - 1].tab_start;
+	//var t = window.nuBC[window.nuBC.length - 1].tab_start;
+	var t = window.nuFORM.getLastBC().getBCField('tab_start');
 
 	for(var i = 0 ; i < t.length ; i++){
 		
@@ -1129,7 +1153,8 @@ function nuGetStartingTab(){
 
 function nuSetTab(pthis){
 
-	var t = window.nuBC[window.nuBC.length - 1].tab_start;
+	//var t = window.nuBC[window.nuBC.length - 1].tab_start;
+	var t = window.nuFORM.getLastBC().getBCField('tab_start');
 	
 	for(var i = 0 ; i < t.length ; i++){
 		
@@ -1154,11 +1179,12 @@ function nuStartingTab(p){
 
 function nuAddBreadcrumb(i, l){
 
-	var last = (i + 1 == l);                  //-- last breadcrumb
-	var bc 	= window.nuBC[i];
-	var bcId = 'nuBC' + i;
+	var last 	= (i + 1 == l);                  //-- last breadcrumb
+	//var bc 	= window.nuBC[i];
+	var bc 		= window.nuFORM.getBC(i);
+	var bcId 	= 'nuBC' + i;
 	
-	var div    = document.createElement('div');
+	var div		= document.createElement('div');
 	div.setAttribute('id', bcId);
 
 	$('#' + 'nuBreadcrumbHolder').append(div);
@@ -1167,14 +1193,16 @@ function nuAddBreadcrumb(i, l){
 		
 		$('#' + bcId)
 		.addClass('nuNotBreadcrumb')
-		.html(nuTranslate(bc.title));
+		//.html(nuTranslate(bc.title));
+		.html(nuTranslate(bc.getBCField('title')));
 		
 	}else{
 		
 		$('#' + bcId)
 		.attr('onclick', 'nuGetBreadcrumb(' + i + ')')
 		.addClass('nuBreadcrumb')
-		.html(nuTranslate(bc.title) + '<div id="nuarrow'+i+'" class="nuBreadcrumbArrow">&nbsp;&#x25BA;&nbsp;<div>');
+		//.html(nuTranslate(bc.title) + '<div id="nuarrow'+i+'" class="nuBreadcrumbArrow">&nbsp;&#x25BA;&nbsp;<div>');
+		.html(nuTranslate(bc.getBCField('title')) + '<div id="nuarrow'+i+'" class="nuBreadcrumbArrow">&nbsp;&#x25BA;&nbsp;<div>');
 		
 	}
 	
@@ -1199,7 +1227,8 @@ function nuEditTab(p, t, i){
 
 function nuOptions(p, f, access){
 
-	if(window.nuBC[window.nuBC.length-1].record_id != '-2') {
+	//if(window.nuBC[window.nuBC.length-1].record_id != '-2') {
+	if(window.nuFORM.getLastBC().getBCField('record_id') != '-2') {
 
 		var imgId  = p + 'nuOptions';
 		var img    = document.createElement('img');
@@ -1240,7 +1269,8 @@ function nuOptionsList(f, t, p, a){
 	var off		= icon.offset();
 	var top		= off.top;
 	var left	= off.left;
-	var u		= nuBC[nuBC.length-1].user_id;
+	//var u		= nuBC[nuBC.length-1].user_id;
+	var u		= window.nuFORM.getLastBC().getBCField('user_id');
 	var list	= [];
 	var ul		= '<ul>';
 
@@ -1289,7 +1319,8 @@ function nuSelectTab(tab){
     var filt = $('#' + tab.id).attr('data-nu-tab-filter');
     var form = $('#' + tab.id).attr('data-nu-form-filter');
 	
-	var t = window.nuBC[window.nuBC.length - 1].tab_start;
+	//var t = window.nuBC[window.nuBC.length - 1].tab_start;
+	var t = window.nuFORM.getLastBC().getBCField('tab_start');
 
 	for(var i = 0 ; i < t.length ; i++){
 		
@@ -1321,8 +1352,10 @@ function nuAddDataTab(i, t, p){
 
 function nuBrowseTitle(b, i, l){
 
-	var bc	= nuBC[nuBC.length-1];
-	var un	= bc.nosearch_columns.indexOf(i);
+	/*var bc	= nuBC[nuBC.length-1];
+	var un	= bc.nosearch_columns.indexOf(i);*/
+	var bc	= window.nuFORM.getLastBC();
+	var un	= bc.getBCField('nosearch_columns').indexOf(i);
 	var id  	= 'nuBrowseTitle' + i;
 	var w 	= Number(b[i].width);
 	var div  = document.createElement('div');
@@ -1363,10 +1396,14 @@ function nuBrowseTitle(b, i, l){
 
 function nuTitleDrag(i){
 
-	var bc				= nuBC[nuBC.length-1];
+	/*var bc				= nuBC[nuBC.length-1];
 	var col				= bc.browse_columns;
-	var rows				= bc.rows;
-	var h				= bc.row_height;
+	var rows			= bc.rows;
+	var h				= bc.row_height;*/
+	var bc				= window.nuFORM.getLastBC();
+	var col				= bc.getBCField('browse_columns');
+	var rows			= bc.getBCField('rows');
+	var h				= bc.getBCField('row_height');
 	var div				= document.createElement('div');
 
 	div.setAttribute('id', 'nuTitleDrag' + i);
@@ -1391,7 +1428,7 @@ function nuDragBrowseDown(e){
 	var f					= parseInt($('#nuBrowseFooter').css('top'));
 
 	window.nuDRAGLINEVSTART	= e.pageX;
-	window.nuDRAGLINEVID		= e.target.id;
+	window.nuDRAGLINEVID	= e.target.id;
 
 	$('#' + e.target.id).css('height', f-t);
 	
@@ -1427,8 +1464,10 @@ function nuBrowseColumnSize(e){
 
 	var l	= $('#' + e.target.id)
 	
-	var bc	= nuBC[nuBC.length-1];
-	var totalBrowseHeight	= bc.rows * bc.row_height;
+	//var bc	= nuBC[nuBC.length-1];
+	//var totalBrowseHeight	= bc.rows * bc.row_height;
+	var bc	= window.nuFORM.getLastBC();
+	var totalBrowseHeight	= bc.getBCField('rows') * bc.getBCField('row_height');
 	$('#' + e.target.id).css('height', 400);
 	
 }
@@ -1438,11 +1477,17 @@ function nuBrowseColumnSize(e){
 
 function nuBrowseTable(){
 
-	var bc	= nuBC[nuBC.length-1];
+	/*var bc	= nuBC[nuBC.length-1];
 	var col	= bc.browse_columns;
 	var row	= bc.browse_rows;
 	var rows	= bc.rows;
-	var h	= bc.row_height;
+	var h	= bc.row_height;*/
+	var bc		= window.nuFORM.getLastBC();
+	var col		= bc.getBCField('browse_columns');
+	var row		= bc.getBCField('browse_rows');
+	var rows	= bc.getBCField('rows');
+	var h		= bc.getBCField('row_height');
+	
 	var t	= 72 - h;
 	var l	= 13;
 	
@@ -1499,11 +1544,15 @@ function nuBrowseTable(){
 		
 	}
 
-	var la	= '<span id="nuLast" onclick="nuGetPage(' + (bc.page_number) + ', \'' + window.nuTYPE + '\')" class="nuBrowsePage">&#9668;</span>';
+	//var la	= '<span id="nuLast" onclick="nuGetPage(' + (bc.page_number) + ', \'' + window.nuTYPE + '\')" class="nuBrowsePage">&#9668;</span>';
+	var la	= '<span id="nuLast" onclick="nuGetPage(' + (bc.getBCField('page_number')) + ', \'' + window.nuTYPE + '\')" class="nuBrowsePage">&#9668;</span>';
 	var pg	= '&nbsp;Page&nbsp;';
-	var cu	= '<input id="browsePage" style="text-align:center;margin:3px 0px 0px 0px;width:40px" onchange="nuGetPage(this.value, \'' + window.nuTYPE + '\')" value="' + (bc.page_number + 1) + '" class="browsePage"/>';
-	var of	= '&nbsp;/&nbsp;' + bc.pages + '&nbsp;';
-	var ne	= '<span id="nuNext" onclick="nuGetPage(' + (bc.page_number + 2) + ',\'' + window.nuTYPE + '\')" class="nuBrowsePage">&#9658;</span>';
+	//var cu	= '<input id="browsePage" style="text-align:center;margin:3px 0px 0px 0px;width:40px" onchange="nuGetPage(this.value, \'' + window.nuTYPE + '\')" value="' + (bc.page_number + 1) + '" class="browsePage"/>';
+	//var of	= '&nbsp;/&nbsp;' + bc.pages + '&nbsp;';
+	//var ne	= '<span id="nuNext" onclick="nuGetPage(' + (bc.page_number + 2) + ',\'' + window.nuTYPE + '\')" class="nuBrowsePage">&#9658;</span>';
+	var cu	= '<input id="browsePage" style="text-align:center;margin:3px 0px 0px 0px;width:40px" onchange="nuGetPage(this.value, \'' + window.nuTYPE + '\')" value="' + (bc.getBCField('page_number') + 1) + '" class="browsePage"/>';
+	var of	= '&nbsp;/&nbsp;' + bc.getBCField('pages') + '&nbsp;';
+	var ne	= '<span id="nuNext" onclick="nuGetPage(' + (bc.getBCField('page_number') + 2) + ',\'' + window.nuTYPE + '\')" class="nuBrowsePage">&#9658;</span>';
 	
 	var id	= 'nuBrowseFooter';
 	var div  = document.createElement('div');
@@ -1542,7 +1591,8 @@ function nuSetSearchColumn(){
 		if(!$(this).is(':checked')) {nosearch.push(index);}
 	});
 
-	window.nuBC[window.nuBC.length-1].nosearch_columns = nosearch;
+	//window.nuBC[window.nuBC.length-1].nosearch_columns = nosearch;
+	window.nuFORM.getLastBC().setBCField('nosearch_columns', nosearch);
 	
 }
 
@@ -1558,12 +1608,16 @@ function nuSearchPressed(e){
 
 function nuSearchAction(t = ''){
 
-	window.nuBC[window.nuBC.length-1].search	= String($('#nuSearchField').val()).replaceAll("'","&#39;", true);
-	window.nuBC[window.nuBC.length-1].filter	= String($('#nuFilter').val()).replaceAll("'","&#39;", true);
+	//window.nuBC[window.nuBC.length-1].search	= String($('#nuSearchField').val()).replaceAll("'","&#39;", true);
+	//window.nuBC[window.nuBC.length-1].filter	= String($('#nuFilter').val()).replaceAll("'","&#39;", true);
+	window.getLastBC().setBCField('search', String($('#nuSearchField').val()).replaceAll("'","&#39;", true));
+	window.getLastBC().setBCField('filter', String($('#nuFilter').val()).replaceAll("'","&#39;", true));
 	if(t == '') {
-		nuGetBreadcrumb(nuBC.length - 1);
+		//nuGetBreadcrumb(nuBC.length - 1);
+		nuGetBreadcrumb(window.nuFORM.getBCLength());
 	} else {
-		nuGetBreadcrumb(nuBC.length - 1, t);
+		//nuGetBreadcrumb(nuBC.length - 1, t);
+		nuGetBreadcrumb(window.nuFORM.getBCLength(), t);
 	}
 	
 }
@@ -1571,8 +1625,10 @@ function nuSearchAction(t = ''){
 
 function nuAddAction(){
 
-	var bc	= nuBC[nuBC.length - 1];
-	nuGetForm(bc.form_id, '-1');
+	//var bc	= nuBC[nuBC.length - 1];
+	//nuGetForm(bc.form_id, '-1');
+	var bc	= window.nuFORM.getLastBC();
+	nuGetForm(bc.getBCField('form_id'), '-1');
 	
 }
 
@@ -1591,7 +1647,7 @@ function nuEmailReportAction(id) {
 
 function nuSortBrowse(c){
 	
-	var l			= nuBC.length - 1;
+	/*var l			= nuBC.length - 1;
 	var B 			= nuBC[l];
 	nuBC[l].filter	= $('#nuFilter').val();
 	
@@ -1600,8 +1656,18 @@ function nuSortBrowse(c){
 	}else{
 		nuBC[l].sort 				= c;
 		nuBC[l].sort_direction	= 'asc';
-	}
+	}*/
 
+	var l			= window.nuFORM.getLastBC();
+	l.setBCField('filter', $('#nuFilter').val());
+	
+	if(c == l.getBCField('sort')){
+		l.setBCField('sort_direction',(l.getBCField('sort_direction') == 'asc' ? 'desc' : 'asc'));
+	}else{
+		l.setBCField('sort', c);
+		l.setBCField('sort_direction', 'asc');
+	}
+	
 	nuSearchAction();
 	
 }
@@ -1609,12 +1675,15 @@ function nuSortBrowse(c){
 function nuGetPage(p, t){
 
 	var P = parseInt('00' + p);
-	var B = nuBC[nuBC.length - 1];
+	//var B = nuBC[nuBC.length - 1];
+	var B = window.nuFORM.getLastBC();
 	
 	if(P == 0){P = 1;}
-	if(P > B.pages){P = B.pages;}
+	//if(P > B.pages){P = B.pages;}
+	if(P > B.getBCField('pages')){P = B.getBCField('pages');}
 	
-	nuBC[nuBC.length - 1]. page_number = P - 1;
+	//nuBC[nuBC.length - 1]. page_number = P - 1;
+	B.setBCField('page_number', P - 1);
 	
 	nuSearchAction(t);
 	
@@ -1626,7 +1695,8 @@ function nuSelectBrowse(t){
 	var y 		= window.nuTYPE;
 	var i 		= window.nuTARGET;
 	var p		= $('#' + t.id).attr('data-nu-primary-key');
-	var f		= nuBC[nuBC.length - 1].form_id;
+	//var f		= nuBC[nuBC.length - 1].form_id;
+	var f		= window.nuFORM.getLastBC().getBCField('form_id');
 	t.form_id	= f;
 
 	if(y == 'browse'){
@@ -1917,12 +1987,18 @@ function nuValidLookupId(id, fld){
 
 function nuHighlightSearch(){
 
-	var bc		= nuBC[nuBC.length - 1];
+	/*var bc		= nuBC[nuBC.length - 1];
 	var exclude	= bc.nosearch_columns;
 	var search	= String(bc.search).split(' ')
 	.filter(function(a) {return (a != '' && a.substr(0,1) != '-')})
-	.sort(function(a,b) {return (a.length > b.length)});
+	.sort(function(a,b) {return (a.length > b.length)});*/
 
+	var bc		= window.nuFORM.getLastBC();
+	var exclude	= bc.getBCField('nosearch_columns');
+	var search	= String(bc.getBCField('search')).split(' ')
+	.filter(function(a) {return (a != '' && a.substr(0,1) != '-')})
+	.sort(function(a,b) {return (a.length > b.length)});
+	
 	$('.nuBrowseTable').each(function(index){
 		
 		var col	= Number(String($(this).attr('id')).substr(11));
@@ -2105,7 +2181,8 @@ function nuCloneAction(){
 			
 	});
 	
-	nuBC[nuBC.length-1].record_id	= '-1';
+	//nuBC[nuBC.length-1].record_id	= '-1';
+	window.nuFORM.getLastBC().setBCField('record_id', '-1');
 
 	$('#nuCloneButton').css('visibility','hidden');
 	$('#nuDeleteButton').css('visibility','hidden');
@@ -2181,19 +2258,29 @@ function nuAddJavascript(f){
 function nuHashFromEditForm(){
 
 	var a			= [];
-	var b			= nuBC[nuBC.length-1];
+	//var b			= nuBC[nuBC.length-1];
+	var b			= window.nuFORM.getLastBC();
 	var o 			= {};
 	var val 		= '';
 	
+<<<<<<< HEAD
 	for (var key in b) {
 		a.push([key, b[key]]);
 	}	
 		
 	a.push([b.form_id, b.record_id]);		//-- first element is Form and Record ID
+=======
+	/*a.push([b.form_id, b.record_id]);		//-- first element is Form and Record ID
+>>>>>>> 5b3a3951657a699b5a89c7a07c07e294c7ea86a1
 	a.push(['FORM_ID', b.form_id]);
 	a.push(['PREVIOUS_RECORD_ID', b.record_id]);
-	a.push(['RECORD_ID', b.record_id]);
+	a.push(['RECORD_ID', b.record_id]);*/
 
+	a.push([b.getBCField('form_id'), b.getBCField('record_id')]);		//-- first element is Form and Record ID
+	a.push(['FORM_ID', b.getBCField('form_id')]);
+	a.push(['PREVIOUS_RECORD_ID', b.getBCField('record_id')]);
+	a.push(['RECORD_ID', b.getBCField('record_id')]);
+	
 	$("[data-nu-field][data-nu-prefix='']").each(function( index ){
 
 		o 		= $('#' + this.id);
