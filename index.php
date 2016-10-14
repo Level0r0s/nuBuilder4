@@ -75,13 +75,9 @@ window.onbeforeunload = nuHomeWarning;
 			}else{
 				var from		= window['parent'];
 			}
-<<<<<<< HEAD
-			
-			window.nuCaller		= from.nuBC[from.nuBC.length - 1];
-=======
+
 			//window.nuCaller	= from.nuBC[from.nuBC.length - 1];
 			window.nuCaller		= from.nuFORM.getLastBC();
->>>>>>> 5b3a3951657a699b5a89c7a07c07e294c7ea86a1
 			window.nuTYPE		= '$type';
 			window.nuTARGET		= '$target';
 			window.nuSESSION	= from.nuSESSION;

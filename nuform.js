@@ -2263,15 +2263,11 @@ function nuHashFromEditForm(){
 	var o 			= {};
 	var val 		= '';
 	
-<<<<<<< HEAD
 	for (var key in b) {
 		a.push([key, b[key]]);
 	}	
 		
-	a.push([b.form_id, b.record_id]);		//-- first element is Form and Record ID
-=======
 	/*a.push([b.form_id, b.record_id]);		//-- first element is Form and Record ID
->>>>>>> 5b3a3951657a699b5a89c7a07c07e294c7ea86a1
 	a.push(['FORM_ID', b.form_id]);
 	a.push(['PREVIOUS_RECORD_ID', b.record_id]);
 	a.push(['RECORD_ID', b.record_id]);*/
