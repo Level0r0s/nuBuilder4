@@ -65,7 +65,7 @@ var JavaScriptHighlightRules = function() {
         "keyword":
             "const|yield|import|get|set|" +
             "break|case|catch|continue|default|delete|do|else|finally|for|function|" +
-            "if|in|instanceof|new|return|switch|throw|try|typeof|let|var|while|with|debugger|" +
+            "if|in|instanceof|new|return|switch|throw|try|typeof|let|var|while|with|debugger|nuFORM|" +
             "__parent__|__count__|escape|unescape|with|__proto__|" +
             "class|enum|extends|super|export|implements|private|public|interface|package|protected|static",
         "storage.type":
