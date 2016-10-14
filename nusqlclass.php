@@ -13,20 +13,34 @@ class nuSqlClass{
 		$this->OBJ			= $S->parsed;
 
     }
-	
-    public function nuRemoveSelectElements(){
-		$this->OBJ['SELECT']		= array();
-    }
 
-    public function nuAddSelectElement($et, $be){
+
+	
+	public function setMulitArray($n){
 		
-		
-		if(!isset($this->OBJ['SELECT'])){
-			$this->OBJ['SELECT']	= array();
+		if(!isset($this->OBJ[$n])){
+			$this->OBJ[$n]		= array();
 		}
 		
+	}
+	
+    public function removeSelectElements(){
+		
+		$w							= $this->OBJ['SELECT'];
+		$this->OBJ['SELECT']		= array();
+		return $w;
+		
+    }
+
+    public function addSelectElement($be){
+		
+		$this->setMulitArray('SELECT');
+//		if(!isset($this->OBJ['SELECT'])){
+	//		$this->OBJ['SELECT']	= array();
+		//}
+		
 		$c							= array();
-		$c['expr_type']				= $et;
+		$c['expr_type']				= ExpressionType::CONSTANT;
 		$c['base_expr']				= $be;
 		
 		$this->OBJ['SELECT'][] 		= $c;
@@ -39,7 +53,7 @@ class nuSqlClass{
 		
     }
 
-    public function nuAddWhereElement($et, $be){
+    public function addWhereElement($be){
 		
 		
 		if(!isset($this->OBJ['WHERE'])){
@@ -47,15 +61,17 @@ class nuSqlClass{
 		}
 		
 		$c							= array();
-		$c['expr_type']				= $et;
+		$c['expr_type']				= ExpressionType::CONSTANT;
 		$c['base_expr']				= $be;
+		$c['sub_tree']				= false;
+		$c['nubuilder']				= 1;
 		
 		$this->OBJ['WHERE'][] 		= $c;
 		
     }
 
 
-    public function nuAddBracketsToWhere(){
+    public function addBracketsToWhere(){
 		
 		if(!isset($this->OBJ['WHERE'])){
 			
@@ -65,21 +81,26 @@ class nuSqlClass{
 		}
 		
 		$bo							= array();
-		$bo['expr_type']			= 'bracket_expression';
+		$bo['expr_type']			= ExpressionType::CONSTANT;
 		$bo['base_expr']			= '(';
+		$bo['sub_tree']				= false;
+		$bo['nubuilder']			= 1;
 		
 		$bc							= array();
-		$bc['expr_type']			= 'bracket_expression';
+		$bc['expr_type']			= ExpressionType::CONSTANT;
 		$bc['base_expr']			= ')';
+		$bc['sub_tree']				= false;
+		$bc['nubuilder']			= 1;
 		
 		array_unshift($this->OBJ['WHERE'], $bo);
-		array_push($this->OBJ['WHERE'], $bc); 
-
+		
+		$this->OBJ['WHERE'][]		= $bc; 
+		
     }
 
     public function SQL(){
 
-			$s	= new PHPSQLCreator($this->OBJ);
+			$s						= new PHPSQLCreator($this->OBJ);
 			
 			return $s->created;
 			

@@ -13,8 +13,8 @@
 	$_POST['nuErrors']						= array();
 	$s										= nuCheckSession();
 	$P										= $_POST['nuSTATE'];
-
 	$_POST['nuHash']						= nuSetHashList($P);
+
 	$u										= nuGetUserAccess();
 
 	$_POST['nuHash']						= array_merge($u, $_POST['nuHash']);

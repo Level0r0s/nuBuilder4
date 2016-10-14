@@ -47,7 +47,8 @@ window.onbeforeunload = nuHomeWarning;
 	$type		= $_GET['type'] == '' ? 'browse' : $_GET['type'];
 
 	$nuFormats	= json_encode(nuTextFormats(true));
-		
+	$nuHeader	= nuHeader();
+	
 	print "
 	window.nuVersion		= 'nuBuilder4';
 	window.nuFormats		= $nuFormats;
@@ -59,8 +60,10 @@ window.onbeforeunload = nuHomeWarning;
 	if(window.parent == window && !nuValidCaller(window.opener)){
 		
 		function nuLoad(){
+			
 			nuBindCtrlEvents();
 			nuLogin();
+
 		}
 		
 	}else{
@@ -72,6 +75,7 @@ window.onbeforeunload = nuHomeWarning;
 			}else{
 				var from		= window['parent'];
 			}
+
 			//window.nuCaller	= from.nuBC[from.nuBC.length - 1];
 			window.nuCaller		= from.nuFORM.getLastBC();
 			window.nuTYPE		= '$type';
@@ -100,6 +104,8 @@ window.onbeforeunload = nuHomeWarning;
 		}		
 	}
 	
+$nuHeader
+
 	";
 	
 	print $h;
