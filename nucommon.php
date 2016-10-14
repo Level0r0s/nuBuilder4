@@ -691,7 +691,12 @@ function nuRunReport($nuRID){
 	$nuI								= $nuA->sre_zzzzsys_php_id;
 	$nuT								= nuRunQuery("SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = '$nuI'");
 	$nuR								= db_fetch_object($nuT);
-	$_POST['nuHash']['sph_php']			= nuReplaceHashVariables($nuR->sph_php);
+	
+	$phpInfo = nuBuildPHPandData($nuR);
+	
+	$_POST['nuHash']['sph_php']			= $phpInfo['php'];
+	$_POST['nuHash']['lines']			= $phpInfo['lines'];
+	
 	$nuJ								= json_encode($_POST['nuHash']);
 	$nuS								= "INSERT INTO zzzzsys_debug (zzzzsys_debug_id, deb_message) VALUES (?, ?)";
 	
@@ -709,19 +714,35 @@ function nuRunPHP($nuRID){
 	$nuA								= db_fetch_object($nuT);
 	$_POST['nuHash']['code']			= $nuA->sph_code;
 	$_POST['nuHash']['description']		= $nuA->sph_description;
+	
+	$phpInfo = nuBuildPHPandData($nuA);
+
+	$_POST['nuHash']['sph_php']			= $phpInfo['php'];
+	$_POST['nuHash']['lines']			= $phpInfo['lines'];
+	$nuJ								= json_encode($_POST['nuHash']);
+	$nuS								= "INSERT INTO zzzzsys_debug (zzzzsys_debug_id, deb_message) VALUES (?, ?)";
+
+	nuRunQuery($nuS, array($nuID, $nuJ));
+
+	return $nuID;
+	
+}
+
+function nuBuildPHPandData($nuA) {
+	
 	$php								= $nuA->sph_php;
 	$lines[0]['code']					= $nuA->sph_code;
 	$lines[0]['start']					= 0;
 	$lines[0]['length']					= substr_count($nuA->sph_php, "\n" ) + 1;
 	$line 								= substr_count($nuA->sph_php, "\n" ) + 1;
-		
+	
 	try {
 
-		$s 								= "SELECT * FROM zzzzsys_php_library LEFT JOIN zzzzsys_php ON zzzzsys_php_id = spl_library_zzzzsys_php_id WHERE spl_zzzzsys_php_id = '$nuRID'";
+		$s 								= "SELECT * FROM zzzzsys_php_library LEFT JOIN zzzzsys_php ON zzzzsys_php_id = spl_library_zzzzsys_php_id WHERE spl_zzzzsys_php_id = '$nuA->zzzzsys_php_id'";
 		$nuT							= nuRunQuery($s);
 		$i 								= 1;
 
-		while($nuA= db_fetch_object($nuT)) {
+		while($nuA = db_fetch_object($nuT)) {
 
 			$lines[$i]['code']			= $nuA->sph_code;
 			$lines[$i]['start']			= $line;
@@ -740,17 +761,12 @@ function nuRunPHP($nuRID){
 		throw new nuException("Error Building PHP",0);
 	}
 
-	$_POST['nuHash']['sph_php']			= nuReplaceHashVariables($php);
-	$_POST['nuHash']['lines']			= $lines;
-	$nuJ								= json_encode($_POST['nuHash']);
-	$nuS								= "INSERT INTO zzzzsys_debug (zzzzsys_debug_id, deb_message) VALUES (?, ?)";
-
-	nuRunQuery($nuS, array($nuID, $nuJ));
-
-	return $nuID;
+	$phpinfo = [];
+	$phpinfo['php'] = nuReplaceHashVariables($php);
+	$phpinfo['lines'] = $lines;
 	
+	return $phpinfo;
 }
-
 
 function nuGetProcedure($i){
 	
@@ -1170,9 +1186,22 @@ return $s;
 
 }
 
+function nuEvalPHP($php, $PHPData) {
+	
+	try {
+		
+		eval($php); 
+		
+	} catch(Throwable $e) {
 
+		throw new nuException("Error Running PHP ",1,array($e->getLine(),$PHPData));   
+		 
+	} catch (Exception $e) {
 
-
-
+		throw new nuException("Error Running PHP",1,array($e->getLine(),$PHPData));
+		
+	}
+	
+}
 
 ?>
