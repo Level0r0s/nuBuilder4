@@ -2236,7 +2236,7 @@ function nuAbortSave(){
     $("#nuProgressSaved").hide();
     $('#nuActionHolder .nuButton').show();
 	
-}  
+}
 
 function nuAddJavascript(f){
 
