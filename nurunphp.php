@@ -15,19 +15,7 @@ $_POST['nuHash']		= $hashData;
 $PHP					= $JSON;
 $PHPData				= $PHP->lines;
 
-try {
-		
-	eval($PHP->sph_php); 
-	
-} catch(Throwable $e) {
-
-	throw new nuException("Error Running PHP ",1,array($e->getLine(),$PHPData));   
-	 
-} catch (Exception $e) {
-
-	throw new nuException("Error Running PHP",1,array($e->getLine(),$PHPData));
-	
-}
+nuEvalPHP($PHP->sph_php, $PHPData);
 
 nuRunQuery("DELETE FROM zzzzsys_debug WHERE zzzzsys_debug_id = ? ", array($jsonID));
 

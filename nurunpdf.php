@@ -19,6 +19,7 @@ $hashData['TABLE_ID']       = $TABLE_ID;
 $GLOBALS['TABLE_ID']        = $TABLE_ID;
 $_POST['nuHash']			= $hashData;
 $PHP						= nuReplaceHashVariables($JSON->sph_php,'rep');
+$PHPData					= $JSON->lines;
 
 nuRunQuery("DELETE FROM zzzzsys_debug WHERE zzzzsys_debug_id = ? ", array($jsonID));
 
@@ -27,7 +28,7 @@ $PDF->SetAutoPageBreak(false);
 $REPORT                     = nuSetPixelsToMM($LAYOUT);
 $PDF->SetMargins(1,1,1);
 
-eval($PHP);                                                              //-- build temp table for report from php
+nuEvalPHP($PHP, $PHPData);                                         //-- build temp table for report from php
 
 $GLOBALS['nu_columns']       = nuAddCriteriaValues($hashData, $TABLE_ID);
 
