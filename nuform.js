@@ -1610,8 +1610,8 @@ function nuSearchAction(t = ''){
 
 	//window.nuBC[window.nuBC.length-1].search	= String($('#nuSearchField').val()).replaceAll("'","&#39;", true);
 	//window.nuBC[window.nuBC.length-1].filter	= String($('#nuFilter').val()).replaceAll("'","&#39;", true);
-	window.getLastBC().setBCField('search', String($('#nuSearchField').val()).replaceAll("'","&#39;", true));
-	window.getLastBC().setBCField('filter', String($('#nuFilter').val()).replaceAll("'","&#39;", true));
+	window.nuFORM.getLastBC().setBCField('search', String($('#nuSearchField').val()).replaceAll("'","&#39;", true));
+	window.nuFORM.getLastBC().setBCField('filter', String($('#nuFilter').val()).replaceAll("'","&#39;", true));
 	if(t == '') {
 		//nuGetBreadcrumb(nuBC.length - 1);
 		nuGetBreadcrumb(window.nuFORM.getBCLength());
