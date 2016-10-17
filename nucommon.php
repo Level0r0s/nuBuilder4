@@ -1186,19 +1186,22 @@ return $s;
 
 }
 
-function nuEvalPHP($php, $PHPData) {
+function nuEvalPHP($JSON) {
+	
+	$PHP 				= nuReplaceHashVariables($JSON->sph_php);
+	$PHPData			= $JSON->lines;
 	
 	try {
 		
-		eval($php); 
+		eval($PHP); 
 		
 	} catch(Throwable $e) {
 
-		throw new nuException("Error Running PHP ",1,array($e->getLine(),$PHPData));   
+		nuException("Error Running PHP ",1,array($e,$PHPData));   
 		 
 	} catch (Exception $e) {
 
-		throw new nuException("Error Running PHP",1,array($e->getLine(),$PHPData));
+		nuException("Error Running PHP",1,array($e,$PHPData));
 		
 	}
 	
