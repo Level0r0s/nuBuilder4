@@ -719,6 +719,7 @@ function nuRunPHP($nuRID){
 
 	$_POST['nuHash']['sph_php']			= $phpInfo['php'];
 	$_POST['nuHash']['lines']			= $phpInfo['lines'];
+
 	$nuJ								= json_encode($_POST['nuHash']);
 	$nuS								= "INSERT INTO zzzzsys_debug (zzzzsys_debug_id, deb_message) VALUES (?, ?)";
 
@@ -728,43 +729,50 @@ function nuRunPHP($nuRID){
 	
 }
 
-function nuBuildPHPandData($nuA) {
+function nuBuildPHPandData($PHP) {
 	
-	$php								= $nuA->sph_php;
-	$lines[0]['code']					= $nuA->sph_code;
-	$lines[0]['start']					= 0;
-	$lines[0]['length']					= substr_count($nuA->sph_php, "\n" ) + 1;
-	$line 								= substr_count($nuA->sph_php, "\n" ) + 1;
+	$php 								= '';
+	$lines 								= [];
 	
 	try {
 
-		$s 								= "SELECT * FROM zzzzsys_php_library LEFT JOIN zzzzsys_php ON zzzzsys_php_id = spl_library_zzzzsys_php_id WHERE spl_zzzzsys_php_id = '$nuA->zzzzsys_php_id'";
+		$s 								= "SELECT * FROM zzzzsys_php_library LEFT JOIN zzzzsys_php ON zzzzsys_php_id = spl_library_zzzzsys_php_id WHERE spl_zzzzsys_php_id = '$PHP->zzzzsys_php_id'";
 		$nuT							= nuRunQuery($s);
-		$i 								= 1;
+		$i 								= 0;
+		$line 							= 0;
 
 		while($nuA = db_fetch_object($nuT)) {
 
 			$lines[$i]['code']			= $nuA->sph_code;
 			$lines[$i]['start']			= $line;
 
-			$php .= "\n ".$nuA->sph_php;
+			if($php == '') {
+				$php = $nuA->sph_php;
+			} else {
+				$php .= "\n".$nuA->sph_php;
+			}
 
 			$lines[$i]['length']		= substr_count($nuA->sph_php, "\n" ) + 1;
 			$line 						= $line + substr_count($nuA->sph_php, "\n" ) + 1;
 			$i++;
 
 		}
+			
+		$php								.= "\n".$PHP->sph_php;
+		$lines[$i]['code']					= $PHP->sph_code;
+		$lines[$i]['start']					= $line;
+		$lines[$i]['length']				= substr_count($PHP->sph_php, "\n" ) + 1;
 
 	}catch(Throwable $e) {
 		throw new nuException("Error Building PHP",0);       
 	}catch(Exception $e) {
 		throw new nuException("Error Building PHP",0);
 	}
-
-	$phpinfo = [];
-	$phpinfo['php'] = nuReplaceHashVariables($php);
-	$phpinfo['lines'] = $lines;
 	
+	$phpinfo = [];
+	$phpinfo['php'] = $php;
+	$phpinfo['lines'] = $lines;
+
 	return $phpinfo;
 }
 
@@ -1033,7 +1041,7 @@ function nuAddToHashList($J, $run){
 	
 	if($run == 'php'){
 		
-		$hash['sph_php']		= nuReplaceHashVariables($J->sph_php);
+		$hash['sph_php']		= $J->sph_php;
 		
 	}
 
@@ -1187,7 +1195,7 @@ return $s;
 }
 
 function nuEvalPHP($JSON) {
-	
+
 	$PHP 				= nuReplaceHashVariables($JSON->sph_php);
 	$PHPData			= $JSON->lines;
 	
@@ -1204,6 +1212,30 @@ function nuEvalPHP($JSON) {
 		nuException("Error Running PHP",1,array($e,$PHPData));
 		
 	}
+	
+}
+
+function nuDisplayHeaderHTML() {
+	
+	$h = "
+		<html>
+			<head>
+			</head>
+			<body>
+	";
+	
+	echo $h;
+	
+}
+
+function nuDisplayFooterHTML(){
+	
+	$h = "
+			</body>
+		</html>
+	";
+	
+	echo $h;
 	
 }
 

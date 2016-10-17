@@ -271,9 +271,11 @@ function nuReplaceHashVariables($s){
 	if (!is_array($a)) {
 		return $s;
 	}
-	
+
 	foreach ($a as $k => $v) {
-		$s	= str_replace ('#' . $k . '#', $v, $s);
+		if(!is_object ($a[$k])) {
+			$s	= str_replace ('#' . $k . '#', $v, $s);
+		}
 	}
 
 	return $s;
