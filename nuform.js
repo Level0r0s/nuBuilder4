@@ -1614,10 +1614,10 @@ function nuSearchAction(t = ''){
 	window.nuFORM.getLastBC().setBCField('filter', String($('#nuFilter').val()).replaceAll("'","&#39;", true));
 	if(t == '') {
 		//nuGetBreadcrumb(nuBC.length - 1);
-		nuGetBreadcrumb(window.nuFORM.getBCLength());
+		nuGetBreadcrumb(window.nuFORM.getBCLength() - 1);
 	} else {
 		//nuGetBreadcrumb(nuBC.length - 1, t);
-		nuGetBreadcrumb(window.nuFORM.getBCLength(), t);
+		nuGetBreadcrumb(window.nuFORM.getBCLength() - 1, t);
 	}
 	
 }
