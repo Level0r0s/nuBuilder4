@@ -345,12 +345,6 @@ function nuGetLookupCode(e, buildLookupList){
 
 function nuPrintAction(){
 
-	/*var w				= nuGetFormState();
-	w.call_type			= 'runhtml';
-	w.browse_columns	= nuFORMPROPERTIES.browse_columns;
-	w.browse_sql		= nuFORMPROPERTIES.browse_sql;
-	w.session_id		= window.nuSESSION;*/
-	
 	var w 				= window.nuFORM.getLastBC();
 	
 	w.setBCField('call_type', 'runhtml');

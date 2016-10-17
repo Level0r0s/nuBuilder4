@@ -44,16 +44,20 @@ nuRemoveFiles();
 
 function nuPrintReport($PDF, $LAY, $DATA, $JSON){
 
-    $lastSectionTop = 10000;
-    $pageNumber     = 0;
+    $lastSectionTop 			= 10000;
+    $pageNumber     			= 0;
     
     for($s = 0 ; $s < count($DATA) ; $s++){
         
-        if($lastSectionTop > $DATA[$s]->sectionTop){$pageNumber++;}
+        if($lastSectionTop > $DATA[$s]->sectionTop){
+			$pageNumber++;
+		}
+		
         $lastSectionTop=$DATA[$s]->sectionTop;
+		
         for($o = 0 ; $o < count($DATA[$s]->objects) ; $o++){
 
-            $O               = nuGetObjectProperties($LAY, $DATA[$s]->objects[$o]->id);
+            $O               	= nuGetObjectProperties($LAY, $DATA[$s]->objects[$o]->id);
             
             if($O->objectType == 'label'){
                 $DATA[$s]->objects[$o]->lines[0] = str_replace('#page#' , $pageNumber, $DATA[$s]->objects[$o]->lines[0]);
