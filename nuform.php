@@ -409,10 +409,11 @@ function nuGetLookupValues($R, $O){
 
 function nuGetOtherLookupValues($nuO){
 
-	$nuS			= "SELECT * FROM zzzzsys_object WHERE zzzzsys_object_id = '$nuO->object_id'";
-	$nuT			= nuRunQuery($nuS);
+	$nuS		= "SELECT * FROM zzzzsys_object WHERE zzzzsys_object_id = '$nuO->object_id'";
+	$nuT		= nuRunQuery($nuS);
 	$nuR 		= db_fetch_object($nuT);
 	$nuPHP		= trim($nuR->sob_lookup_php);
+	$nuLookup	= $nuR->sob_all_id;
 	$nuS 		= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$nuO->form_id'";
 	$nuT 		= nuRunQuery($nuS);
 	$nuR 		= db_fetch_object($nuT);
@@ -433,7 +434,14 @@ function nuGetOtherLookupValues($nuO){
 	$nuVAL 		= array();
 	$nuVALUES	= array();
 	
-	eval($nuPHP);
+	$nuO = array();
+	$nuO['sph_php'] = $nuPHP;
+	$nuO['lines']['code'] = 'Lookup '.$nuLookup;
+	$nuO['lines']['start'] = 0;
+	$nuO['lines']['length'] = substr_count($nuPHP, "\n" ) + 1;
+	$nuO = (object)$nuO;
+	
+	nuEvalPHP($nuO);
 
 	while($nuR = db_fetch_object($nuT)){
 		
