@@ -3,12 +3,13 @@ function nuBindDragEvents(){
     $(document).on('mousemove.nuformdrag', function(e) {
 		
         var draggable = 0;
-		//if(window.nuBC.length > 0) {
-		if(window.nuFORM.getBCLength() > 0) {
-			//if(window.nuBC[window.nuBC.length-1].record_id == '-2') {
-			if(window.nuFORM.getLastBC().getBCField('record_id') == '-2') {
+		
+		if(window.nuFORM.last != -1) {
+			
+			if(window.nuFORM.current.record_id == '-2') {
 				draggable = 1;
 			}
+			
 		}
 
 		if(draggable) {
@@ -35,12 +36,13 @@ function nuBindDragEvents(){
 		window.moveY = 0;
 		
         var draggable = 0;
-		//if(window.nuBC.length > 0) {
-		if(window.nuFORM.getBCLength() > 0) {
-			//if(window.nuBC[window.nuBC.length-1].record_id == '-2') {
-			if(window.nuFORM.getLastBC().getBCField('record_id') == '-2') {
+		
+		if(window.nuFORM.last != -1) {
+			
+			if(window.nuFORM.current.record_id == '-2') {
 				draggable = 1;
 			}
+			
 		}
 
 		if(draggable) {
@@ -74,10 +76,8 @@ function nuBindDragEvents(){
     $(document).on('mouseup.nuformdrag', function(e) {
 		
        var draggable = 0;
-		//if(window.nuBC.length > 0) {
-		if(window.nuFORM.getBCLength() > 0) {
-			//if(window.nuBC[window.nuBC.length-1].record_id == '-2') {
-			if(window.nuFORM.getLastBC().getBCField('record_id') == '-2') {
+		if(window.nuFORM.last != -1) {
+			if(window.nuFORM.current.record_id == '-2') {
 				draggable = 1;
 			}
 			
@@ -638,18 +638,18 @@ function nuSpaceHorizontally(){
 	
     selectedFields.sort(nuSortObjAsc);
 	
-    var gapTotal = 0;
-    var leftTotal = 0;
+    var gapTotal 	= 0;
+    var leftTotal	= 0;
 	
     for(var i=1; i<selectedFields.length; i++){
 		
-        gapTotal += selectedFields[i].left-(selectedFields[i-1].left+selectedFields[i-1].width);
-        leftTotal += selectedFields[i].left-selectedFields[i-1].left;
+        gapTotal 	+= selectedFields[i].left-(selectedFields[i-1].left+selectedFields[i-1].width);
+        leftTotal	+= selectedFields[i].left-selectedFields[i-1].left;
 		
     }
 	
-    var gapAvg = Math.round(gapTotal/(selectedFields.length-1));
-    var leftAvg = Math.round(leftTotal/(selectedFields.length-1));
+    var gapAvg 		= Math.round(gapTotal/(selectedFields.length-1));
+    var leftAvg 	= Math.round(leftTotal/(selectedFields.length-1));
 	
     if(gapAvg < 0){
 		
@@ -660,9 +660,7 @@ function nuSpaceHorizontally(){
     } else {
 		
         for(var i=1; i<selectedFields.length; i++){
-			
             $('#'+selectedFields[i].id,$('#nuDragDialog iframe').contents()).css('left',($('#'+selectedFields[i-1].id,$('#nuDragDialog iframe').contents()).position().left+$('#'+selectedFields[i-1].id,$('#nuDragDialog iframe').contents()).width()+gapAvg)+'px');
-			
         }
 		
     }
@@ -686,6 +684,7 @@ function nuSpaceVertically(){
     });
 	
     selectedFields.sort(nuSortObjAsc);
+
     var gapTotal = 0;
     var topTotal = 0;
 	
@@ -708,9 +707,7 @@ function nuSpaceVertically(){
     } else {
 		
         for(var i=1; i<selectedFields.length; i++){
-			
             $('#'+selectedFields[i].id,$('#nuDragDialog iframe').contents()).css('top',($('#'+selectedFields[i-1].id,$('#nuDragDialog iframe').contents()).position().top+$('#'+selectedFields[i-1].id,$('#nuDragDialog iframe').contents()).height()+gapAvg)+'px');
-			
         }
 		
     }
@@ -946,10 +943,10 @@ function nuGetMinTabOrderInTab(currentTabNo){
 
 function nuMoveSelected() {
 
-	var s = document.getElementsByClassName('nuDragSelected');
-	var l = 0;
-	var t = 0;
-	var o = {};
+	var s		= document.getElementsByClassName('nuDragSelected');
+	var l		= 0;
+	var t		= 0;
+	var o		= {};
 
 	for(var i = 0 ; i < s.length ; i ++){
 
@@ -964,10 +961,10 @@ function nuMoveSelected() {
 
 function nuCanMove() {
 	
-	var s = document.getElementsByClassName('nuDragSelected');
-	var l = 0;
-	var t = 0;
-	var o = {};
+	var s 		= document.getElementsByClassName('nuDragSelected');
+	var l 		= 0;
+	var t 		= 0;
+	var o 		= {};
 
 	for(var i = 0 ; i < s.length ; i ++){
 

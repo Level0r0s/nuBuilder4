@@ -10,8 +10,6 @@ function nuLoadReport(b){
 		}
 	}, false);
 
-	//window.off('keydown');
-	
 	if($('#nuDragDialog').length == 0){
 		
 		nuDIALOG.dialog = '';
@@ -207,8 +205,8 @@ function nuDragReport(){
 		
 		nuDrag.areaHeight(this.height);
 		nuDragR.areaHeight(this.height);
+
 		$('#nuDragArea').css('border-style', 'solid solid none solid');
-		
 		$('body').css('height', this.sectionTop + 500);
 
 	}
@@ -1212,17 +1210,6 @@ function nuGroupDialog(){
 	var top = 550;
 	
 	if(nuREPORT.groups[nuDIALOG.groupNumber].sections.length == 2){
-	
-		/*
-		top = nuDialogInput('Section Name', 'label', top, left, nuREPORT.groups[nuDIALOG.groupNumber].sections[1], 'nuDoNothing');
-                $('#label').attr('id', 'label1').attr('readonly', true).css('background-color','#DFDFDF');
-                top = nuDialogInput('Section Height', 'height', top-5, left, nuREPORT.groups[nuDIALOG.groupNumber].sections[1], 'nuUpdateSectionProperty');
-                $('#height').attr({'id' : 'height0', 'data-property' : 'height', 'data-section' : '1'});
-                top = nuDialogInput('Section Color', 'color', top-5, left, nuREPORT.groups[nuDIALOG.groupNumber].sections[1], 'nuUpdateSectionProperty');
-                $('#color').attr({'id' : 'color0', 'data-property' : 'color', 'data-section' : '1'});
-                top = nuDialogInput('Page Break', 'page_break', top-5, left, nuREPORT.groups[nuDIALOG.groupNumber].sections[1], 'nuUpdateSectionProperty', [['0','No'],['1','Yes']]);
-                $('#page_break').attr({'id' : 'page_break0', 'data-property' : 'page_break', 'data-section' : '1'});
-		*/
 
 		top = nuDialogInput('Section Name', 'label', top, left, nuREPORT.groups[nuDIALOG.groupNumber].sections[1], 'nuDoNothing');
                 $('#label').attr('id', 'label1').attr('readonly', true).css('background-color','#DFDFDF');

@@ -1,103 +1,78 @@
 
+
 class nuFormObject {
 	
+	
 	constructor() {
-		this.nuBreadCrumb = [];
+		
+		this.breadCrumb 	= [];
+		this.current		= {};
+		this.last			= -1;
+		this.setCurrent();
+		
 	}
 
-	addBC() {
-		this.nuBreadCrumb.push(new nuBreadCrumb());
+	
+	setCurrent(){
+		
+		this.last			= this.breadCrumb.length - 1;
+		this.current		= this.breadCrumb[this.last];
+		
 	}
+	
+	removeLast(){
+		
+		this.breadCrumb.pop();
+		this.setCurrent();
+		
+	}
+	
+	removeAfter(b) {
 
-	getBC(n, json = 0) {
-
-		if(json) {
-			
-			var selectedBC  = this.nuBreadCrumb[n];
-			var j			= JSON.stringify(selectedBC)
-			return JSON.parse(j);
-			
-		} else {
-			return this.nuBreadCrumb[n];
+		while(this.last > b) {
+			this.removeLast();
 		}
 		
 	}
 	
-	getLastBC(json = 0) {
-
-		if(json) {
-			
-			var selectedBC  = this.nuBreadCrumb[this.getBCLength() - 1];
-			var j			= JSON.stringify(selectedBC)
-			return JSON.parse(j);
-			
-		} else {
-			return this.nuBreadCrumb[this.getBCLength() - 1];
-		}
-	}
-	
-	getBCLength() {
-		return this.nuBreadCrumb.length;
-	}
-
-	cleanBC() {
+	add(){
 		
-		if(this.getLastBC().getBCField('title') == '' || this.getLastBC().getBCField('title') == null) {
-			removeLastBC();
-		}
-					
+		var b				= {};
+		b.form_id 			= '';
+		b.record_id 		= '';
+		b.title				= '';
+		b.call_type        	= '';
+		b.filter           	= '';
+		b.form_id          	= '';
+		b.forms        		= [];
+		b.iframe			= 0;
+		b.lookup_id        	= '';
+		b.object_id        	= '1';
+		b.page_number      	= 0;
+		b.password     		= '';
+		b.record_id        	= '';
+		b.rows        		= 25;
+		b.row_height		= 25;
+		b.search           	= '';	
+		b.session_id		= '';
+		b.nosearch_columns 	= [];
+		b.sort             	= '-1';
+		b.sort_direction   	= 'desc';
+		b.tab_start      	= [];
+		b.username			= '';
+		b.user_id			= '';
+		
+		this.breadCrumb.push(b);
+		this.setCurrent();
+		
 	}
-	
-	removeLastBC() {
-		this.nuBreadCrumb.pop();
-	}
-	
-	removeBCBefore(b) {
 
-		var n = this.getBCLength() - b - 1;
-
-		for(var i = 0; i < n; i++) {
-			this.removeLastBC();
-		}
+	setField(f, v) {
+		
+		this.current[f] = v;
+		this.setCurrent();
 		
 	}
 	
 }
 
-class nuBreadCrumb {
-	constructor() {
-		
-		this.form_id 			= '';
-		this.record_id 			= '';
-		this.title				= '';
-		this.call_type        	= '';
-		this.filter           	= '';
-		this.form_id          	= '';
-		this.forms        		= [];
-		this.iframe				= 0;
-		this.lookup_id        	= '';
-		this.object_id        	= '1';
-		this.page_number      	= 0;
-		this.password     		= '';
-		this.record_id        	= '';
-		this.rows        		= 25;
-		this.row_height			= 25;
-		this.search           	= '';	
-		this.session_id			= '';
-		this.nosearch_columns 	= [];
-		this.sort             	= '-1';
-		this.sort_direction   	= 'desc';
-		this.tab_start      	= [];
-		this.username			= '';
-		this.user_id			= '';
-		
-	}
-	
-	setBCField(f, v) {
-		this[f] = v;
-	}
-	
-	getBCField(f) {
-		return this[f];
-	}
-}

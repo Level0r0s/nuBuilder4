@@ -1200,7 +1200,7 @@ function nuEvalPHP($JSON) {
 	$PHPData			= $JSON->lines;
 	
 	try {
-
+		
 		eval($PHP); 
 		
 	} catch(Throwable $e) {

@@ -37,6 +37,7 @@ function nuFormCode($f){
 function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 
     $tabs 			= nuBuildTabList($F);
+nudebug('tabs ' . print_r($tabs,1));
     $f				= nuGetEditForm($F, $R);
     $f->form_id		= $F;
     $f->record_id	= $R;
@@ -409,11 +410,10 @@ function nuGetLookupValues($R, $O){
 
 function nuGetOtherLookupValues($nuO){
 
-	$nuS		= "SELECT * FROM zzzzsys_object WHERE zzzzsys_object_id = '$nuO->object_id'";
-	$nuT		= nuRunQuery($nuS);
+	$nuS			= "SELECT * FROM zzzzsys_object WHERE zzzzsys_object_id = '$nuO->object_id'";
+	$nuT			= nuRunQuery($nuS);
 	$nuR 		= db_fetch_object($nuT);
 	$nuPHP		= trim($nuR->sob_lookup_php);
-	$nuLookup	= $nuR->sob_all_id;
 	$nuS 		= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$nuO->form_id'";
 	$nuT 		= nuRunQuery($nuS);
 	$nuR 		= db_fetch_object($nuT);
@@ -434,14 +434,7 @@ function nuGetOtherLookupValues($nuO){
 	$nuVAL 		= array();
 	$nuVALUES	= array();
 	
-	$nuO = array();
-	$nuO['sph_php'] = $nuPHP;
-	$nuO['lines']['code'] = 'Lookup '.$nuLookup;
-	$nuO['lines']['start'] = 0;
-	$nuO['lines']['length'] = substr_count($nuPHP, "\n" ) + 1;
-	$nuO = (object)$nuO;
-	
-	nuEvalPHP($nuO);
+	eval($nuPHP);
 
 	while($nuR = db_fetch_object($nuT)){
 		
@@ -848,6 +841,8 @@ function nuCheckSession(){
 	$ct						= $_POST['nuSTATE']['call_type'];
 	$_POST['nuLogAgain']	= 0;
 	$_POST['nuIsGlobeadmin']= 0;
+
+	nudebug(($isGlobeadminPassword ? 1 : 0) . ' ' . ($isGlobeadmin ? 1 : 0) . ' -' . $_POST['nuSTATE']['password'] . '- ' .  $_SESSION['DBGlobeadminPassword']);
 
 	$c						= new stdClass;
 	$c->record_id			= '-1';

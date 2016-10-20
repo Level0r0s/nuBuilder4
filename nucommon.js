@@ -6,7 +6,6 @@ window.nuSUBFORMJSON			= [];
 window.nuSCHEMA					= [];
 window.nuLANGUAGE				= [];
 window.nuFIELD					= [];
-//window.nuFORM					= [];
 window.nuFORM					= new nuFormObject();
 window.nuHASH					= [];
 window.nuBEFORE					= [];
@@ -34,39 +33,6 @@ function nuOpenerAppend(t, k) {
 	window.nuOPENER[window.nuOPENER.length - 1][t] = k;
 }
 
-/*function nuFormState(){
-
-	//window.bread_crumbs		= nuBC.length;
-	this.call_type        	= '';
-	this.filter           	= window.nuBC.length == 0 ? '' : window.nuBC[nuBC.length-1].filter;
-	this.form_id          	= '';
-	this.forms        		= [];
-	this.iframe				= 0;
-	this.lookup_id        	= '';
-	this.object_id        	= '1';
-	this.page_number      	= 0;
-	this.password     		= '';
-	this.record_id        	= '';
-	this.rows        		= 25;
-	this.row_height			= 25;
-	this.search           	= '';
-
-	if(window.parent != null){
-		if(window.parent.nuOPENER.length > 0){
-			this.search		= window.parent.nuOPENER[window.parent.nuOPENER.length-1].search
-		}
-	}
-	
-	this.session_id			= window.nuSESSION;
-	this.nosearch_columns 	= [];
-	this.sort             	= '-1';
-	this.sort_direction   	= 'desc';
-	this.tab_start      	= [];
-	this.username			= '';
-	this.user_id			= '';
-	
-}*/
-
 function nuGetBreadcrumb(b, t = ''){
 
 	if(window.nuEDITED && window.nuTYPE != 'runreport' && window.nuTYPE != 'getphp'){
@@ -79,10 +45,12 @@ function nuGetBreadcrumb(b, t = ''){
 		window.nuTYPE = "browse";
 	}
 	
-	//window.nuBC 	= window.nuBC.slice(0, b + 1);
-	//nuGetForm(window.nuBC[b].form_id, window.nuBC[b].record_id, window.nuBC[b].filter,  1);
-	window.nuFORM.removeBCBefore(b);
-	nuGetForm(window.nuFORM.getBC(b).getBCField('form_id'), window.nuFORM.getBC(b).getBCField('record_id'), window.nuFORM.getBC(b).getBCField('filter'),  1);
+	window.nuFORM.removeAfter(b);
+	
+	var c	= window.nuFORM.current;
+	
+	nuGetForm(c.form_id, c.record_id, c.filter,  1);
+	
 }
 
 
@@ -105,26 +73,6 @@ function nuDisplayError(e, g = 0){
 	return e.length > 0;
 	
 }
-
-/*function nuGetFormState(){
-
-	var l = window.nuBC.length;
-	var o = window.nuBC[l-1];
-	var j = JSON.stringify(o);
-	
-	return  JSON.parse(j);
-	
-}*/
-
-
-/*function nuSetFormState(){
-
-	var l = window.nuBC.length;
-	var o = window.nuBC[l];
-	var j = JSON.stringify(o);
-	return  JSON.parse(j);
-	
-}*/
 
 function nuFormatAjaxErrorMessage(jqXHR, exception) {
 
@@ -304,24 +252,27 @@ function nuCreateDialog(t){
 
 function nuReformat(t){
 
-	var o	= $('#' + t.id);
-	var f	= o.attr('data-nu-format');
-	var v	= String(o.val());
+	var o			= $('#' + t.id);
+	var f			= o.attr('data-nu-format');
+	var v			= String(o.val());
 	
 	if(f == '' || v == ''){return v;}
 	
-	var F		= nuFormats[f];
+	var F			= nuFormats[f];
 	
 	if(F.type == 'number'){
-		var n	= v.split(F.decimal);
+		
+		var n		= v.split(F.decimal);
 		n[1]		= n.length == 1 ? '0' : n[1];
-		n[0] 	= String(Number(String(n[0]).replaceAll(',', '', true).replaceAll('.', '', true)));
+		n[0] 		= String(Number(String(n[0]).replaceAll(',', '', true).replaceAll('.', '', true)));
 		n[1]		= String(n[1] + '0000000').substr(0, F.format);
 		
 		if(isNaN(n[0] + F.decimal + n[1])){
+			
 			alert("Invalid Number");
 			o.val('');
 			return;
+			
 		}
 
 		n[0] = n[0].replace(/\B(?=(\d{3})+(?!\d))/g, F.separator);
@@ -329,11 +280,13 @@ function nuReformat(t){
 		if(F.format == 0){
 			o.val(n[0]);
 		}else{
+			
 			if(n[0] == ''){
 				o.val('0' + F.decimal + n[1]);
 			}else{
 				o.val(n[0] + F.decimal + n[1]);
 			}
+			
 		}
 		
 	}else if(F.type == 'date'){
@@ -341,13 +294,15 @@ function nuReformat(t){
 		var vd	= nuJavascriptDateParse(v, F.format);
 
 		if(vd === null){
+			
 			alert("Invalid Format (expecting '" + F.sample + "')");
 			o.val('');
 			return;
+			
 		}
 
 		var nd		= String(F.format);
-		var full		= String(vd).split(' ');
+		var full	= String(vd).split(' ');
 		var mthno	= ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
 		
 		nd	= nd.replace('yyyy', full[3])
@@ -400,8 +355,9 @@ function nuJavascriptDateParse(valueStr, FormatStr){
     if(msk[2] == 'yyyy'){s[2] = d[2];}
 
     var returnDate = new Date(s[2] + '-' + s[0] + '-' + s[1]);
-    if(returnDate == 'Invalid Date')
-        returnDate = null;
+	
+    if(returnDate == 'Invalid Date'){returnDate = null;}
+	
     return returnDate;
 
 }
@@ -410,7 +366,7 @@ function nuJavascriptDateParse(valueStr, FormatStr){
 function nuOpenAce(lang, obj){
 
 	var ts			= new Date().getTime();
-	window.nuAce		= [lang, obj];
+	window.nuAce	= [lang, obj];
 	
 	window.open('nuace.html?' + ts);
 
@@ -449,8 +405,7 @@ function nuRunIt(t, email, type){
 	}
 	
 	var f	= $('#' + t.id).attr('data-nu-primary-key');
-	//var i    = nuBC[nuBC.length-1].record_id;
-	var i    = window.nuFORM.getLastBC().getBCField('record_id');
+	var i    = window.nuFORM.current.record_id;
 
 	if(email == 1){
 		
@@ -629,9 +584,6 @@ function nuSortSubform(sf, fld){
 
 }
 
-//function nuSortSubformData(sf
-
-
 function nuSubformRecordValues(i, r){
 
 	this.old_id = i;
@@ -660,13 +612,9 @@ function nuSortSubformBy(row, col){
 
 function nuEditPHP(ev){
 
-	//var b   = nuBC[nuBC.length-1];
-	//var i   = b.record_id + '_' + ev;
-	var b   = window.nuFORM.getLastBC();
-	var i   = b.getBCField('record_id') + '_' + ev;
-
-	//if(b.record_id == '-1'){
-	if(b.getBCField('record_id') == '-1'){
+	var i	= window.nuFORM.current.record_id + '_' + ev;
+	
+	if(b.current.record_id == '-1'){
 	
 		alert('Must Save Record Before Adding Procedures');
 		return;
