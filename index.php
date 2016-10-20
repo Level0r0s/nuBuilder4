@@ -73,22 +73,22 @@ window.onbeforeunload = nuHomeWarning;
 		function nuLoad(){
 			
 			if(nuIsOpener(window)){
-				var from		= window['opener'];
+				var from			= window['opener'];
 			}else{
-				var from		= window['parent'];
+				var from			= window['parent'];
 			}
 
-//			window.nuCaller		= from.nuBC[from.nuBC.length - 1];
-//			window.nuCaller		= from.nuFORM.getLastBC();
-			window.nuCaller		= from.nuFORM.current;
-			window.nuTYPE		= '$type';
-			window.nuTARGET		= '$target';
-			window.nuSESSION	= from.nuSESSION;
+			window.nuFORM.caller	= from.nuFORM.current;
+			window.nuTYPE			= '$type';
+			window.nuTARGET			= '$target';
+			window.nuSESSION		= from.nuSESSION;
+			
+			window.nuFORM.setCurrent();
 			
 			if('$opener' != '') {
-				var p			= from.nuOPENER[0$opener];
+				var p				= from.nuOPENER[0$opener];
 			} else {
-				var p			= from.nuOPENER[from.nuOPENER.length -1];
+				var p				= from.nuOPENER[from.nuOPENER.length -1];
 			}
 
 			nuBindCtrlEvents();
