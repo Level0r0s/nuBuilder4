@@ -692,7 +692,7 @@ function nuRunReport($nuRID){
 	$nuT								= nuRunQuery("SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = '$nuI'");
 	$nuR								= db_fetch_object($nuT);
 	
-	$phpInfo = nuBuildPHPandData($nuR);
+	$phpInfo 							= nuBuildPHPandData($nuR);
 	
 	$_POST['nuHash']['sph_php']			= $phpInfo['php'];
 	$_POST['nuHash']['lines']			= $phpInfo['lines'];
@@ -715,7 +715,7 @@ function nuRunPHP($nuRID){
 	$_POST['nuHash']['code']			= $nuA->sph_code;
 	$_POST['nuHash']['description']		= $nuA->sph_description;
 	
-	$phpInfo = nuBuildPHPandData($nuA);
+	$phpInfo 							= nuBuildPHPandData($nuA);
 
 	$_POST['nuHash']['sph_php']			= $phpInfo['php'];
 	$_POST['nuHash']['lines']			= $phpInfo['lines'];
@@ -736,7 +736,13 @@ function nuBuildPHPandData($PHP) {
 	
 	try {
 
-		$s 								= "SELECT * FROM zzzzsys_php_library LEFT JOIN zzzzsys_php ON zzzzsys_php_id = spl_library_zzzzsys_php_id WHERE spl_zzzzsys_php_id = '$PHP->zzzzsys_php_id'";
+		$s 								= "
+			SELECT * 
+			FROM zzzzsys_php_library 
+			LEFT JOIN zzzzsys_php ON zzzzsys_php_id = spl_library_zzzzsys_php_id 
+			WHERE spl_zzzzsys_php_id = '$PHP->zzzzsys_php_id'
+		";
+			
 		$nuT							= nuRunQuery($s);
 		$i 								= 0;
 		$line 							= 0;
@@ -758,10 +764,10 @@ function nuBuildPHPandData($PHP) {
 
 		}
 			
-		$php								.= "\n".$PHP->sph_php;
-		$lines[$i]['code']					= $PHP->sph_code;
-		$lines[$i]['start']					= $line;
-		$lines[$i]['length']				= substr_count($PHP->sph_php, "\n" ) + 1;
+		$php							.= "\n".$PHP->sph_php;
+		$lines[$i]['code']				= $PHP->sph_code;
+		$lines[$i]['start']				= $line;
+		$lines[$i]['length']			= substr_count($PHP->sph_php, "\n" ) + 1;
 
 	}catch(Throwable $e) {
 		throw new nuException("Error Building PHP",0);       
@@ -769,11 +775,12 @@ function nuBuildPHPandData($PHP) {
 		throw new nuException("Error Building PHP",0);
 	}
 	
-	$phpinfo = [];
-	$phpinfo['php'] = $php;
-	$phpinfo['lines'] = $lines;
+	$phpinfo 							= [];
+	$phpinfo['php'] 					= $php;
+	$phpinfo['lines'] 					= $lines;
 
 	return $phpinfo;
+	
 }
 
 function nuGetProcedure($i){

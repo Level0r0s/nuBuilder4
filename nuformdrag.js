@@ -485,7 +485,7 @@ function nuCreateDragOptionsBox(form){
     var optionsBoxHTML = '<div id="nuDragOptionsBox" class="nuDragOptionsBox" style="width:'+dragOptionsBoxWidth+'px;height:100%;min-height:'+dragOptionsBoxMinHeight+'px;">'+
         '<div class="nuDragOptionsBoxContainer">'+
             '<div id="dragOptionsTitle" class="nuDragOptionsBoxTitle">Options</div>'+
-            '<label for="nuDragOptionsFields" class="nuDragOptionsFieldsLabel">Objects Taborder</label>'+
+            '<label for="nuDragOptionsFields" class="nuDragOptionsFieldsLabel">Object Tab Order</label>'+
             '<select multiple id="nuDragOptionsFields" class="nuDragOptionsFields" onchange="nuUpdateDragSelections(this);"></select>'+
                 '<table>'+
                     '<tbody>'+
