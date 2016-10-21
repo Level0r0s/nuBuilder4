@@ -37,7 +37,6 @@ function nuFormCode($f){
 function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 
     $tabs 			= nuBuildTabList($F);
-nudebug('tabs ' . print_r($tabs,1));
     $f				= nuGetEditForm($F, $R);
     $f->form_id		= $F;
     $f->record_id	= $R;
@@ -409,6 +408,7 @@ function nuGetLookupValues($R, $O){
 
 
 function nuGetOtherLookupValues($nuO){
+	
 	$nuS		= "SELECT * FROM zzzzsys_object WHERE zzzzsys_object_id = '$nuO->object_id'";
 	$nuT		= nuRunQuery($nuS);
 	$nuR 		= db_fetch_object($nuT);
@@ -433,14 +433,18 @@ function nuGetOtherLookupValues($nuO){
 	$nuVAL 		= array();
 	$nuVALUES	= array();
 	
-	$nuO = array();
-	$nuO['sph_php'] = $nuPHP;
-	$nuO['lines']['code'] = 'Lookup '.$nuLookup;
-	$nuO['lines']['start'] = 0;
-	$nuO['lines']['length'] = substr_count($nuPHP, "\n" ) + 1;
-	$nuO = (object)$nuO;
+	$nuO 			= new stdClass;
+	$nuO->sph_php	= $nuPHP;
+	$nuO->code 		= 'Lookup '.$nuLookup;
+	$nuO->start		= 0;
+	$nuO->length	= substr_count($nuPHP, "\n" ) + 1;
+
+
+
+
 	
 	nuEvalPHP($nuO);
+	
 	while($nuR = db_fetch_object($nuT)){
 		
 		$nuID[]			= $nuR->obj;
