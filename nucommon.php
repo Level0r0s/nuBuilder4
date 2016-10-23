@@ -1205,7 +1205,7 @@ function nuEvalPHP($JSON) {
 
 	$PHP 				= nuReplaceHashVariables($JSON->sph_php);
 	$PHPData			= $JSON->lines;
-	
+
 	try {
 		
 		eval($PHP); 

@@ -13,7 +13,7 @@ function nuException($errorMessage, $errorCode, $exceptionInfo) {
 		1 = PHP exception
 	*/
 	echo $errorMessage;
-
+	nudebug("array:".sizeof($exceptionInfo[1]));
 	if($errorCode == 1) {
 		
 		$phpNum = sizeof($exceptionInfo[1]);
