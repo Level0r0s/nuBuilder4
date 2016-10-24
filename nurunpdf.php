@@ -11,6 +11,14 @@ $GLOBALS['nu_files']        = array();
 $jsonID                     = $_GET['i'];
 $TABLE_ID                   = nuTT();
 $t                          = nuRunQuery("SELECT deb_message AS json FROM zzzzsys_debug WHERE zzzzsys_debug_id = ? ", array($jsonID));		//-- created by nuRunReport()
+
+if(db_num_rows($t) == 0){
+
+	print 'nuBuilder Report No Longer Available..';
+	return;
+	
+}
+
 $reportInfo                 = db_fetch_object($t);
 $JSON                       = json_decode($reportInfo->json);
 $LAYOUT						= json_decode($JSON->sre_layout);

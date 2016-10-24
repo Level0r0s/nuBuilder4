@@ -4,10 +4,11 @@
 function nuLoadReport(b){
 
 	window.addEventListener("keydown", function(e) {
-		// space and arrow keys
-		if([38, 40].indexOf(e.keyCode) > -1) {
+		
+		if([38, 40].indexOf(e.keyCode) > -1) {					// space and arrow keys
 			e.preventDefault();
 		}
+		
 	}, false);
 
 	if($('#nuDragDialog').length == 0){
@@ -26,7 +27,7 @@ function nuLoadReport(b){
 	$('body').children().remove();
 
 	window.nuDrag  = new nuCreateDrag();
-	window.nuDragD = new nuCreateDialog('testtesttesttesttest');
+	window.nuDragD = new nuCreateDialog('');
 	window.nuDragR = new nuDragReport();
 
 	if(nuID == 1000){
@@ -52,7 +53,7 @@ function nuLoadReport(b){
 
 	if(arguments.length == 0){
 		
-		var r = JSON.stringify(nuREPORT);
+		var r 		= JSON.stringify(nuREPORT);
 		nuBACKUP.push(JSON.parse(r));
 		
 	}
@@ -85,7 +86,9 @@ function nuDragReport(){
 	this.getObject = function(id) {
 
 		for(var g = 0 ; g < nuREPORT.groups.length ; g++){
+			
 			for(var s = 0 ; s < nuREPORT.groups[g].sections.length ; s++){
+				
 				for(var o = 0 ; o < nuREPORT.groups[g].sections[s].objects.length ; o++){
 					
 					if(nuREPORT.groups[g].sections[s].objects[o].id == id){return nuREPORT.groups[g].sections[s].objects[o];}
@@ -102,7 +105,9 @@ function nuDragReport(){
 	this.getGroupAndSection = function(id) {
 
 		for(var g = 0 ; g < nuREPORT.groups.length ; g++){
+			
 			for(var s = 0 ; s < nuREPORT.groups[g].sections.length ; s++){
+				
 				for(var o = 0 ; o < nuREPORT.groups[g].sections[s].objects.length ; o++){
 					
 					if(nuREPORT.groups[g].sections[s].objects[o].id == id){return [g,s];}
@@ -119,13 +124,17 @@ function nuDragReport(){
 	this.setObject = function(O) {
 
 		for(var g = 0 ; g < nuREPORT.groups.length ; g++){
+			
 			for(var s = 0 ; s < nuREPORT.groups[g].sections.length ; s++){
+				
 				for(var o = 0 ; o < nuREPORT.groups[g].sections[s].objects.length ; o++){
+					
 					
 					if(nuREPORT.groups[g].sections[s].objects[o].id == O.id){
 						
 						nuREPORT.groups[g].sections[s].objects.splice(o, 1);
 						nuREPORT.groups[g].sections[s].objects.push(O);
+						
 						return;
 						
 					}
@@ -144,7 +153,9 @@ function nuDragReport(){
 	this.removeObject = function(i) {
 		
 		for(var g = 0 ; g < nuREPORT.groups.length ; g++){
+			
 			for(var s = 0 ; s < nuREPORT.groups[g].sections.length ; s++){
+				
 				for(var o = 0 ; o < nuREPORT.groups[g].sections[s].objects.length ; o++){
 					
 					if(nuREPORT.groups[g].sections[s].objects[o].id == i){
@@ -163,11 +174,16 @@ function nuDragReport(){
 	this.setIds = function() {
 
 		for(var g = 0 ; g < nuREPORT.groups.length ; g++){
+			
 			for(var s = 0 ; s < nuREPORT.groups[g].sections.length ; s++){
+				
 				for(var o = 0 ; o < nuREPORT.groups[g].sections[s].objects.length ; o++){
+					
 					var i = this.newId();
+					
 					nuREPORT.groups[g].sections[s].objects[o].id   = i;
 					nuREPORT.groups[g].sections[s].objects[o].name = i;
+					
 				}
 			}
 		}

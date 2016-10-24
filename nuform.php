@@ -650,21 +650,21 @@ function nuBrowseRows($f){
 
 	if(trim($f->record_id) != ''){return array();}
 	
-	$P			= $_POST['nuSTATE'];
-	$rows		= $P['rows'];
+	$P				= $_POST['nuSTATE'];
+	$rows			= $P['rows'];
 	$page_number	= $P['page_number'];
-	$start		= $page_number * $rows;
-	$search		= str_replace('&#39;', "'", $P['search']);
-	$filter		= str_replace('&#39;', "'", $P['filter']);
-	$s 			= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$f->id'";
-	$t 			= nuRunQuery($s);
-	$r 			= db_fetch_object($t);
+	$start			= $page_number * $rows;
+	$search			= str_replace('&#39;', "'", $P['search']);
+	$filter			= str_replace('&#39;', "'", $P['filter']);
+	$s 				= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$f->id'";
+	$t 				= nuRunQuery($s);
+	$r 				= db_fetch_object($t);
 	
 	if(trim($r->sfo_browse_sql) == ''){
 		return array(array(), 0);
 	}
 	
-    $S = new nuSqlString($r->sfo_browse_sql);
+    $S 				= new nuSqlString($r->sfo_browse_sql);
 	
 	$S->addField($f->primary_key);
 	
@@ -672,20 +672,22 @@ function nuBrowseRows($f){
 		$S->addField($f->browse_columns[$i]->display);
 	}
 	
-	$flds 	= array();
-	$fields 	= array_slice($S->fields,1);
+	$flds			= array();
+	$fields 		= array_slice($S->fields,1);
 
 	if(count($_POST['nuSTATE']['nosearch_columns']) == 0){
 		$_POST['nuSTATE']['nosearch_columns']	= array();
 	}
 	
 	for($i = 0 ; $i < count($fields) ; $i++){
+		
 		if(!in_array($i, $_POST['nuSTATE']['nosearch_columns'])){
 			$flds[]	= $fields[$i];
 		}
+		
 	}
 
-	$w	= nuBrowseWhereClause($flds, $filter . ' ' . $search);
+	$w				= nuBrowseWhereClause($flds, $filter . ' ' . $search);
 
 	if(trim($w) != '()'){
 		$S->setWhere(' WHERE ' . $w);
@@ -695,16 +697,15 @@ function nuBrowseRows($f){
 		$S->setOrderBy(' ORDER BY ' . $S->fields[$P['sort'] + 1] . ' ' . $P['sort_direction']);
 	}
 	
-	$a		= array();
-	$s		= $S->SQL;
-
-	$t 		= nuRunQuery($s);
-	$rows	= db_num_rows($t);
-	$s		= $S->SQL . " LIMIT $start, $rows";
-	$t 		= nuRunQuery($s);
+	$a				= array();
+	$s				= $S->SQL;
+	$t 				= nuRunQuery($s);
+	$rows			= db_num_rows($t);
+	$s				= $S->SQL . " LIMIT $start, $rows";
+	$t 				= nuRunQuery($s);
 
 	while($r = db_fetch_row($t)){
-		$a[] = $r;
+		$a[] 		= $r;
 	}
 	
 	return array($a, $rows, $S->SQL);
