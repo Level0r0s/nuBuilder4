@@ -471,19 +471,6 @@ function nuTranslate(s){
 }
 
 
-function nuValidCaller(o){
-
-	for (var key in o) {
-		
-		if (key == 'nuVersion' && o[key] == 'nuBuilder4'){
-			return true;
-		}
-	
-	}
-	
-	return false;
-
-}
 
 function nuIsOpener() {
 	

@@ -21,6 +21,12 @@ jsinclude('nufunctions.js');
 
 <script>
 
+	
+function nuValidCaller(o){
+	
+	if(o === null){return false;}
+	return o.hasOwnProperty('nuVersion');
+}
   
 function nuHomeWarning(){
 
@@ -32,10 +38,9 @@ function nuHomeWarning(){
 	
 }
 
-window.onbeforeunload = nuHomeWarning;
-
-
-	window.nuHASH	= [];
+window.nuVersion 		= 'nuBuilder4';
+window.onbeforeunload	= nuHomeWarning;
+window.nuHASH			= [];
 
 
 
@@ -67,15 +72,14 @@ window.onbeforeunload = nuHomeWarning;
 			nuLogin();
 
 		}
-		
 	}else{
 
 		function nuLoad(){
 			
 			if(nuIsOpener(window)){
-				var from			= window['opener'];
+				var from			= window.opener;
 			}else{
-				var from			= window['parent'];
+				var from			= window.parent;
 			}
 
 			window.nuFORM.caller	= from.nuFORM.current;
