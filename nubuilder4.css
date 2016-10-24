@@ -335,10 +335,10 @@ input {
 }
 
 .nuBrowseTable {
-  background-color: #DFDFDF;
+  background-color: #E6E6E6;
   height: 70px;
   border-style: solid;
-  border-color: #CCCCCC;
+  border-color: #D8D8D8;
   border-width: 1px;
   padding: 3px;
   position:absolute;

@@ -2489,13 +2489,55 @@ function nuSearchableList(){
 
 	}
 
-
-
-	
-
-	
 }
 
+
+function nuGetSearchList(n, c){
+
+	var d = document.createElement('div');
+	d.setAttribute('id', 'nuSearchList');
+	$('body').append(d);
+	$('#' + d.id).css({
+		'width'				: 200,
+		'height'			: 20 + (c.length * 30),
+		'top'				: 200,
+		'left'				: 800,
+		'background-color'	: 'red',
+		'position'			: 'absolute',
+		'text-align'    	: 'left'
+	});
+	
+	for(var i = 0 ; i < c.length ; i++){
+		
+		var p = document.createElement('input');
+		p.setAttribute('id', 'nuSearchList' + i);
+		p.setAttribute('type', 'checkbox');
+		$('#' + d.id).append(p);
+		$('#' + p.id).css({
+			'width'			: 20,
+			'height'		: 20,
+			'top'			: 30 + (i * 20),
+			'left'			: 20,
+			'position'		: 'absolute',
+			'text-align'    : 'left'
+		});
+		
+		var t = document.createElement('div');
+		t.setAttribute('id', 'nuSearchText' + i);
+		$('#' + d.id).append(t);
+		$('#' + t.id).css({
+			'width'			: 20,
+			'height'		: 20,
+			'top'			: 20 + (i * 20),
+			'left'			: 50,
+			'position'		: 'absolute',
+			'text-align'    : 'left'
+		})
+		.html(c[i].title);
+	
+	}
+	
+}
 
 
 

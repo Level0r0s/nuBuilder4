@@ -25,7 +25,9 @@ jsinclude('nufunctions.js');
 function nuValidCaller(o){
 	
 	if(o === null){return false;}
+	
 	return o.hasOwnProperty('nuVersion');
+	
 }
   
 function nuHomeWarning(){
