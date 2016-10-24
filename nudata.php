@@ -106,12 +106,17 @@ function nuUpdateData(){
 	}
 	
 	if($DEL == 'Yes'){
-		$before	= nuReplaceHashVariables($FORM->sfo_before_delete_php);
+		//$before	= nuReplaceHashVariables($FORM->sfo_before_delete_php);
+		$before	= $FORM->sfo_before_delete_php;
 	}else{
-		$before	= nuReplaceHashVariables($FORM->sfo_before_save_php);
+		//$before	= nuReplaceHashVariables($FORM->sfo_before_save_php);
+		$before	= $FORM->sfo_before_save_php;
 	}
 
-	eval($before);
+	//eval($before);
+	if($before) {
+		$evalPHP = new nuEvalPHPClass($before);
+	}
 	
 	if(count($_POST['nuErrors']) > 0){return;}
 
@@ -161,12 +166,17 @@ function nuUpdateData(){
 	}
 	
 	if($DEL == 'Yes'){
-		$after	= nuReplaceHashVariables($FORM->sfo_after_delete_php);
+		//$after	= nuReplaceHashVariables($FORM->sfo_after_delete_php);
+		$after	= $FORM->sfo_after_delete_php;
 	}else{
-		$after	= nuReplaceHashVariables($FORM->sfo_after_save_php);
+		//$after	= nuReplaceHashVariables($FORM->sfo_after_save_php);
+		$after	= $FORM->sfo_after_save_php;
 	}
 
-	eval($after);
+	//eval($after);
+	if($after) {
+		$evalPHP = new nuEvalPHPClass($after);
+	}
 
 	return $ID;
 	
