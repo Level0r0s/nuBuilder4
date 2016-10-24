@@ -5,9 +5,13 @@ function nuBeforeBrowse($f){
 	$s		= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$f'";
 	$t		= nuRunQuery($s);
 	$r		= db_fetch_object($t);
-	$before	= nuReplaceHashVariables($r->sfo_before_browse_php);
+	//$before	= nuReplaceHashVariables($r->sfo_before_browse_php);
+	$before	= $r->sfo_before_browse_php;
 
-	eval($before);
+	//eval($before);
+	if($before) {
+		$evalPHP = new nuEvalPHPClass($before);
+	}
 	
 }
 
@@ -17,9 +21,13 @@ function nuBeforeOpen($f, $o){
 	$s		= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$f'";
 	$t		= nuRunQuery($s);
 	$r		= db_fetch_object($t);
-	$before	= nuReplaceHashVariables($r->sfo_before_open_php);
+	//$before	= nuReplaceHashVariables($r->sfo_before_open_php);
+	$before	= $r->sfo_before_open_php;
 
-	eval($before);
+	//eval($before);
+	if($before) {
+		$evalPHP = new nuEvalPHPClass($before);
+	}
 	
 }
 
@@ -433,14 +441,10 @@ function nuGetOtherLookupValues($nuO){
 	$nuVAL 		= array();
 	$nuVALUES	= array();
 	
-	$nuO 			= new stdClass;
-	$nuO->sph_php	= $nuPHP;
-	$nuO->code 		= 'Lookup '.$nuLookup;
-	$nuO->start		= 0;
-	$nuO->length	= substr_count($nuPHP, "\n" ) + 1;
-
-
-	nuEvalPHP($nuO);
+	//nuEvalPHP($nuO);
+	if($nuPHP) {
+		$evalPHP = new nuEvalPHPClass($nuPHP);
+	}
 	
 	while($nuR = db_fetch_object($nuT)){
 		

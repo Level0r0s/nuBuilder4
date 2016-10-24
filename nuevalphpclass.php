@@ -3,13 +3,15 @@
 	class nuEvalPHPClass {
 			
 		function __construct($parentID) {
-			$this->parentID = $parentID;
 			
+			$this->parentID = $parentID;
+		
 			$this->processPHP();
+			
 		}
 		
 		function processPHP() {
-								
+		
 			try {
 
 				$s = "
@@ -34,12 +36,16 @@
 					WHERE zzzzsys_php_id = '$this->parentID'
 				";
 				$nuT							= nuRunQuery($s);
-				$nuA = db_fetch_object($nuT);
-				
-				$phpCode				= $nuA->sph_code;
-				$phpToEval				= nuReplaceHashVariables($nuA->sph_php);
-				
-				$this->evalPHP($phpCode, $phpToEval);
+				if(db_num_rows($nuT) > 0) {
+					$nuA = db_fetch_object($nuT);
+					
+					$phpCode				= $nuA->sph_code;
+					$phpToEval				= nuReplaceHashVariables($nuA->sph_php);
+					
+					$this->evalPHP($phpCode, $phpToEval);
+				} else {
+					echo "PHP Doesn't Exist";
+				}
 
 			}catch(Throwable $e) {
 				nuExceptionHandler("Error Building PHP");       
@@ -68,7 +74,7 @@
 		
 		function nuExceptionHandler($e, $phpCode, $phpToEval) {
 
-			echo '<br><br>Error Running PHP<br>';
+			echo '<br>Error Running PHP<br>';
 			echo 'PHP: '.$phpCode.'<br>';
 			echo 'Error: '.$e->getMessage().'<br><br>';
 			
