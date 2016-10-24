@@ -10,6 +10,7 @@ require_once('nuevalphpclass.php');
 require_once dirname(__FILE__) . '/sql-parser/src/PHPSQLParser.php';
 require_once dirname(__FILE__) . '/sql-parser/src/PHPSQLCreator.php';
 require_once dirname(__FILE__) . '/nusqlclass.php';
+require_once dirname(__FILE__) . '/nusearchclass.php';
 
 $_SESSION['DBHost']                 = $nuConfigDBHost;
 $_SESSION['DBName']                 = $nuConfigDBName;
@@ -135,6 +136,7 @@ function nuHeader(){
 		$t	= nuRunQuery($s);
 		$r	= db_fetch_row($t);
 		$j	= "\n\n//-- CREATED BY Setup -> Header\n\n\n" . $r[0];
+		$j .= "\n\n//===========================================\n\n";
 		
 		return $j;
 		
@@ -1024,7 +1026,7 @@ function nuAddToHashList($J, $run){
     $ignore[]           = 'sre_layout';
     $ignore[]           = 'slp_php';
     $ignore[]           = 'sre_php';
-
+nudebug('jjj ' . print_r($J,1));
     foreach($J as $key => $v){                                           //-- add current hash variables
         
         if(!in_array($key, $ignore)){
@@ -1112,11 +1114,6 @@ function nuGetUserAccess(){
 	return $A;
 	
 }
-
-
-
-
-
 
 function test111(){
 	

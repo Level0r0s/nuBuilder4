@@ -1,5 +1,4 @@
 window.nuDialog 				= new nuCreateDialog('');
-//window.nuBC 					= [];
 window.nuOPENER					= [];
 window.nuSUBFORMROW				= [];
 window.nuSUBFORMJSON			= [];
@@ -66,7 +65,7 @@ function nuDisplayError(e, g = 0){
 
 	if(e.length > 0){
 
-		nuBuildPopup("nuerror", "-1", e);
+		nuPopup("nuerror", "-1", e);
 		
 	}
 	
@@ -159,7 +158,7 @@ function nuBuildLookup(t, p){
 
 }
 
-function nuBuildPopup(f, r, filter){
+function nuPopup(f, r, filter){
 
 	window.nuOPENER.push(new nuOpener(f, r, filter));
 	
@@ -626,7 +625,7 @@ function nuEditPHP(ev){
 	
 	nuSetHash('the_form', d + ' (' + c + ')');
 	nuSetHash('nuSystemPHP', 1);
-	nuBuildPopup("nuphp", i);
+	nuPopup("nuphp", i);
 
 }
 

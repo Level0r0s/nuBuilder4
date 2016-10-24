@@ -23,7 +23,7 @@ function nuAjax(w,successCallback,errorCallback) {
  			errorLog[0][1] 	= "";
  			errorLog[0][2] 	= 0;
  		
- 			nuBuildPopup("nuerror", "-1", errorLog);
+ 			nuPopup("nuerror", "-1", errorLog);
 		
 			if (errorCallback !== undefined) {
 				errorCallback(jqXHR,textStatus,errorThrown);
