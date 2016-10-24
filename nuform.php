@@ -440,9 +440,6 @@ function nuGetOtherLookupValues($nuO){
 	$nuO->length	= substr_count($nuPHP, "\n" ) + 1;
 
 
-
-
-	
 	nuEvalPHP($nuO);
 	
 	while($nuR = db_fetch_object($nuT)){

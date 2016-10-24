@@ -21,9 +21,7 @@ $hashData['TABLE_ID']	= $TABLE_ID;
 $GLOBALS['TABLE_ID']	= $TABLE_ID;
 $_POST['nuHash']		= $hashData;
 
-nudebug(print_r($JSON,1));
-
-nuEvalPHP($JSON);
+$evalPHP = new nuEvalPHPClass($JSON->parentID);
 
 nuRunQuery("DELETE FROM zzzzsys_debug WHERE zzzzsys_debug_id = ? ", array($jsonID));
 
