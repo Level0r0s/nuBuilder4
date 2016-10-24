@@ -2,7 +2,7 @@
 
 //==================CLASS=================================================================
 
-function nuException($errorMessage, $errorCode, $exceptionInfo) {
+function nuException($errorMessage, $errorCode, $exceptionInfo = array()) {
   
 	cssinclude('nubuilder4.css');
   
@@ -13,8 +13,8 @@ function nuException($errorMessage, $errorCode, $exceptionInfo) {
 		1 = PHP exception
 	*/
 	echo $errorMessage;
-	nudebug("array:".sizeof($exceptionInfo[1]));
-	if($errorCode == 1) {
+
+	/*if($errorCode == 1) {
 		
 		$phpNum = sizeof($exceptionInfo[1]);
 		$phpCode = '';
@@ -72,8 +72,8 @@ function nuException($errorMessage, $errorCode, $exceptionInfo) {
 	
 		}
 				
-	}
-	
+	}*/
+		
 	nuDisplayFooterHTML();
 	
 	die();

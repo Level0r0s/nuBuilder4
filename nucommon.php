@@ -6,6 +6,7 @@ error_reporting( error_reporting() & ~E_NOTICE );
 
 require_once('config.php'); 
 require_once('nuexception.php'); 
+require_once('nuevalphpclass.php'); 
 require_once dirname(__FILE__) . '/sql-parser/src/PHPSQLParser.php';
 require_once dirname(__FILE__) . '/sql-parser/src/PHPSQLCreator.php';
 require_once dirname(__FILE__) . '/nusqlclass.php';
@@ -692,10 +693,12 @@ function nuRunReport($nuRID){
 	$nuT								= nuRunQuery("SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = '$nuI'");
 	$nuR								= db_fetch_object($nuT);
 	
-	$phpInfo 							= nuBuildPHPandData($nuR);
+	$_POST['nuHash']['parentID']		= $nuR->zzzzsys_php_id;
 	
-	$_POST['nuHash']['sph_php']			= $phpInfo['php'];
-	$_POST['nuHash']['lines']			= $phpInfo['lines'];
+	//$phpInfo 							= nuBuildPHPandData($nuR);
+	
+	//$_POST['nuHash']['sph_php']		= $phpInfo['php'];
+	//$_POST['nuHash']['lines']			= $phpInfo['lines'];
 	
 	$nuJ								= json_encode($_POST['nuHash']);
 	$nuS								= "INSERT INTO zzzzsys_debug (zzzzsys_debug_id, deb_message) VALUES (?, ?)";
@@ -715,11 +718,13 @@ function nuRunPHP($nuRID){
 	$_POST['nuHash']['code']			= $nuA->sph_code;
 	$_POST['nuHash']['description']		= $nuA->sph_description;
 	
-	$phpInfo 							= nuBuildPHPandData($nuA);
+	//$phpInfo 							= nuBuildPHPandData($nuA);
 
-	$_POST['nuHash']['sph_php']			= $phpInfo['php'];
-	$_POST['nuHash']['lines']			= $phpInfo['lines'];
+	//$_POST['nuHash']['sph_php']		= $phpInfo['php'];
+	//$_POST['nuHash']['lines']			= $phpInfo['lines'];
 
+	$_POST['nuHash']['parentID']		= $nuRID;
+	
 	$nuJ								= json_encode($_POST['nuHash']);
 	$nuS								= "INSERT INTO zzzzsys_debug (zzzzsys_debug_id, deb_message) VALUES (?, ?)";
 
@@ -729,7 +734,7 @@ function nuRunPHP($nuRID){
 	
 }
 
-function nuBuildPHPandData($PHP) {
+/*function nuBuildPHPandData($PHP) {
 	
 	$php 								= '';
 	$lines 								= [];
@@ -770,9 +775,9 @@ function nuBuildPHPandData($PHP) {
 		$lines[$i]['length']			= substr_count($PHP->sph_php, "\n" ) + 1;
 
 	}catch(Throwable $e) {
-		throw new nuException("Error Building PHP",0);       
+		nuException("Error Building PHP",0);       
 	}catch(Exception $e) {
-		throw new nuException("Error Building PHP",0);
+		nuException("Error Building PHP",0);
 	}
 	
 	$phpinfo 							= [];
@@ -781,7 +786,7 @@ function nuBuildPHPandData($PHP) {
 
 	return $phpinfo;
 	
-}
+}*/
 
 function nuGetProcedure($i){
 	
@@ -1201,7 +1206,7 @@ return $s;
 
 }
 
-function nuEvalPHP($JSON) {
+/*function nuEvalPHP($JSON) {
 
 	$PHP 				= nuReplaceHashVariables($JSON->sph_php);
 	$PHPData			= $JSON->lines;
@@ -1220,7 +1225,7 @@ function nuEvalPHP($JSON) {
 		
 	}
 	
-}
+}*/
 
 function nuDisplayHeaderHTML() {
 	
