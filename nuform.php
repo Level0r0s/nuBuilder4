@@ -500,8 +500,8 @@ function nuSelectOptions($sql) {
 
     } else {                                                                     //-- comma delimited string
 
-        $t = explode('|', $sql);
-
+        $t = explode('|', nuRemoveNonCharacters($sql));
+nudebug(print_r($t,1));
         for ($i = 0; $i < count($t); $i++) {
 
             $r    = array();
@@ -517,6 +517,17 @@ function nuSelectOptions($sql) {
     return $a;
 }
 
+function nuRemoveNonCharacters($s){
+
+	$snip = str_replace('.', '', $s); // remove dots
+	$snip = str_replace(' ', '', $snip); // remove spaces
+	$snip = str_replace("\t", '', $snip); // remove tabs
+	$snip = str_replace("\n", '', $snip); // remove new lines
+	$snip = str_replace("\r", '', $snip); // remove carriage returns	
+	
+	return $snip;
+
+}
 
 
 function nuGetSubformRecords($R, $A){
@@ -845,8 +856,6 @@ function nuCheckSession(){
 	$ct						= $_POST['nuSTATE']['call_type'];
 	$_POST['nuLogAgain']	= 0;
 	$_POST['nuIsGlobeadmin']= 0;
-
-	nudebug(($isGlobeadminPassword ? 1 : 0) . ' ' . ($isGlobeadmin ? 1 : 0) . ' -' . $_POST['nuSTATE']['password'] . '- ' .  $_SESSION['DBGlobeadminPassword']);
 
 	$c						= new stdClass;
 	$c->record_id			= '-1';

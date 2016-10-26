@@ -9,6 +9,7 @@
 	if(!isset($_SESSION['SESSIONID'])){
 		$_SESSION['SESSIONID'] = nuID();
 	}
+nudebug('call ' . $P['call_type'] . '  ' . print_r($_POST['nuSTATE'],1));
 	
 	$_POST['nuErrors']						= array();
 	$s										= nuCheckSession();
@@ -25,7 +26,6 @@
 	$_POST['nuValidate']					= array();
 
 	$f->forms[0]							= new stdClass;
-//nudebug('call ' . $P['call_type'] . '  ' . print_r($s,1));
 
 	if($P['call_type'] == 'getform')		{nuBeforeOpen($s->form_id, $s->record_id);$f->forms[0] = nuGetFormObject($s->form_id, $s->record_id, 0, $P);}
 	if($P['call_type'] == 'update')			{$f->forms[0]->record_id		= nuUpdateData();}

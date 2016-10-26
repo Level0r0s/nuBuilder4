@@ -11,7 +11,6 @@ class nuFormObject {
 		this.setCurrent();
 		
 	}
-
 	
 	setCurrent(){
 		
