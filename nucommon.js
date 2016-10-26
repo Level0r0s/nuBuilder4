@@ -160,6 +160,8 @@ function nuBuildLookup(t, p){
 
 function nuPopup(f, r, filter){
 
+	$('#nuOptionsListBox').remove();
+	
 	window.nuOPENER.push(new nuOpener(f, r, filter));
 	
 	var l 	= window.nuOPENER.length -1;

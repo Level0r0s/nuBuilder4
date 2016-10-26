@@ -65,8 +65,7 @@ window.nuHASH			= [];
 	";
 		
 	$h	= "
-
-	if(window.parent == window && !nuValidCaller(window.opener)){
+	if(window.parent == window && window.opener == null){
 		
 		function nuLoad(){
 			
@@ -77,7 +76,7 @@ window.nuHASH			= [];
 	}else{
 
 		function nuLoad(){
-			
+
 			if(nuIsOpener(window)){
 				var from			= window.opener;
 			}else{

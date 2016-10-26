@@ -15,8 +15,9 @@ class nuFormObject {
 	
 	setCurrent(){
 		
-		this.last			= this.breadCrumb.length - 1;
-		this.current		= this.breadCrumb[this.last];
+		this.last					= this.breadCrumb.length - 1;
+		this.current				= this.breadCrumb[this.last];
+		this.breadCrumb[this.last]	= this.current;						//-- copy changes from current to last
 		
 	}
 	
