@@ -1349,7 +1349,7 @@ function nuBuildOptionsList(l, p){												//-- loop through adding options t
 
 		$('#' + icon.id)
 		.css(prop)
-		.css({'top'	: itemtop, 'left' : 5, 'width' : 15, 'height' : 15})
+		.css({'top'	: itemtop, 'left' : 5, 'width' : 20})
 		.attr('onclick', f)
 		.attr('src', c);
 
