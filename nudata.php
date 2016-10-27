@@ -106,16 +106,9 @@ function nuUpdateData(){
 	}
 	
 	if($DEL == 'Yes'){
-		//$before	= nuReplaceHashVariables($FORM->sfo_before_delete_php);
-		$before	= $FORM->sfo_before_delete_php;
+		$evalPHP = new nuEvalPHPClass($FORM->zzzzsys_form_id . '_BD');
 	}else{
-		//$before	= nuReplaceHashVariables($FORM->sfo_before_save_php);
-		$before	= $FORM->sfo_before_save_php;
-	}
-
-	//eval($before);
-	if($before) {
-		$evalPHP = new nuEvalPHPClass($before);
+		$evalPHP = new nuEvalPHPClass($FORM->zzzzsys_form_id . '_BS');
 	}
 	
 	if(count($_POST['nuErrors']) > 0){return;}
@@ -166,21 +159,20 @@ function nuUpdateData(){
 	}
 	
 	if($DEL == 'Yes'){
-		//$after	= nuReplaceHashVariables($FORM->sfo_after_delete_php);
-		$after	= $FORM->sfo_after_delete_php;
+		$event	= $FORM->zzzzsys_form_id . '_AD';
 	}else{
-		//$after	= nuReplaceHashVariables($FORM->sfo_after_save_php);
-		$after	= $FORM->sfo_after_save_php;
+		$event	= $FORM->zzzzsys_form_id . '_AS';
 	}
 
 	//eval($after);
-	if($after) {
-		$evalPHP = new nuEvalPHPClass($after);
+	if(trim($event) != '') {
+		$evalPHP = new nuEvalPHPClass($event);
 	}
 
 	return $ID;
 	
 }
+
 
 function nuDeleteRow($r, $p){
 

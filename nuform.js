@@ -182,6 +182,8 @@ function nuAddActionButtons(f){
 
 function nuBuildEditObjects(f, p, o, prop){
 
+	if(typeof(f.objects) != 'object'){return;}
+	
 	var l 			= 3;
 	var draggable 	= 0;
 	
@@ -189,16 +191,12 @@ function nuBuildEditObjects(f, p, o, prop){
 		draggable 	= 1;
 	}
 	
-	if(typeof(f.objects) != 'object'){
-		return;
-	}
-	
 	for(var i = 0 ; i < f.objects.length  ; i++){
 		
 		if(!draggable) {
-			
+
 			var t                       = prop.objects[i].type;
-			f.objects[i].parent_type    = o.subform_type;
+			f.objects[i].parent_type    = o == '' ? '' : o.subform_type;
 
 			if(t == 'input' || t == 'display' || t == 'lookup' || t == 'textarea'){
 				
