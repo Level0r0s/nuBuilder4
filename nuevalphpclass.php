@@ -6,7 +6,9 @@
 			
 			$this->parentID = $parentID;
 		
-			$this->processPHP();
+			if($this->parentID != '') {
+				$this->processPHP();
+			}
 			
 		}
 		
