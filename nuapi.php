@@ -9,7 +9,6 @@
 	if(!isset($_SESSION['SESSIONID'])){
 		$_SESSION['SESSIONID'] = nuID();
 	}
-nudebug('call ' . $P['call_type'] . '  ' . print_r($_POST['nuSTATE'],1));
 	
 	$_POST['nuErrors']						= array();
 	$s										= nuCheckSession();

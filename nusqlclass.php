@@ -124,7 +124,7 @@ function test111(){
 	$SQL->addBracketsToWhere();
 	print $SQL->SQL() . '<br><br><br>';
 	$Q 		= new nuSqlClass($SQL->SQL());
-	nudebug(print_r($Q,1));
+
 	print $Q->SQL() . '<br><br><br>';
 	
 }

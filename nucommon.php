@@ -1026,7 +1026,7 @@ function nuAddToHashList($J, $run){
     $ignore[]           = 'sre_layout';
     $ignore[]           = 'slp_php';
     $ignore[]           = 'sre_php';
-nudebug('jjj ' . print_r($J,1));
+
     foreach($J as $key => $v){                                           //-- add current hash variables
         
         if(!in_array($key, $ignore)){

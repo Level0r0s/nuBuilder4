@@ -22,7 +22,7 @@ function nuAjax(w,successCallback,errorCallback) {
  			errorLog[0][0] 	= jqXHR.responseText;
  			errorLog[0][1] 	= "";
  			errorLog[0][2] 	= 0;
- 		
+
  			nuPopup("nuerror", "-1", errorLog);
 		
 			if (errorCallback !== undefined) {

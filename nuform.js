@@ -52,7 +52,8 @@ function nuBuildForm(f){
 	nuAddHolder('nuRecordHolder');
 	nuAddBreadcrumbs();
 	nuAddEditTabs('', f);
-	nuOptions('nuTabHolder', f.form_id, f.global_access);
+	nuOptions('', f.form_id, 'form', f.global_access);
+
 	nuAddActionButtons(f);
 	nuRecordProperties(f, '');
 
@@ -772,7 +773,7 @@ function nuSUBFORM(w, i, l, p, prop){
 		$('#' + id).append(tabDiv);
 		$('#' + tabId).css({'top'      : 0,
 						'left'       	: 0,
-						'width'      	: rowWidth - 45,
+						'width'      	: rowWidth,
 						'height'     	: rowTop,
 						'overflow-x'	: 'hidden',
 						'overflow-y'	: 'hidden',
@@ -784,7 +785,7 @@ function nuSUBFORM(w, i, l, p, prop){
 		
 	}
 	
-	nuOptions(id, SF.sf_form_id, w.global_access);
+	nuOptions(id, SF.sf_form_id, 'subform', w.global_access);
 	
     var scrId		= id + 'scrollDiv';
 	var scrDiv		= document.createElement('div');
@@ -1090,7 +1091,7 @@ function nuAddEditTabs(p, w){
 	if(w.browse_columns.length > 0){
 		
 		nuBrowseTable();
-		nuOptions('nuBrowseTitle' + (w.browse_columns.length - 1), w.form_id, w.global_access);
+		nuOptions('nuBrowseTitle' + (w.browse_columns.length - 1), w.form_id, 'browse', w.global_access);
 	
 	}
     
@@ -1194,24 +1195,23 @@ function nuEditTab(p, t, i){
 
 }
 
-function nuOptions(p, f, access){
+function nuOptions(p, f, t, access){
 
-//	var icon	= $('#' + t.id);
-//	var off		= icon.offset();
-//	var top		= off.top;
-//	var left	= off.left;
 	var R		= window.nuFORM.current.record_id;
 	
 	if(R != '-2') {
 
 		var id  	= p + 'nuOptions';
-		var id  	= 'nuOptions';
 		var img		= document.createElement('img');
 		
 		img.setAttribute('id', id);
 		
-		$('#' + p).append(img);
-		
+		if(t == 'browse') {
+			$('#' + p).append(img);	
+		} else {
+			$('#' + p + 'nuTabHolder').append(img);
+		}
+
 		$('#' + id)
 		.attr('src', 'nuoptions.png')
 		.attr('title', 'Options')
@@ -1227,22 +1227,20 @@ function nuOptions(p, f, access){
 		}, function(){
 			$( this ).attr('src', 'nuoptions.png');
 		});
-		
-		if(R == ''){
-//		if(p == 'nuTabHolder'){
-			$('#' + id)
-			.css('top', 0)
-			.css('right', 0);
-		}else{
+
+		if(t == 'form'){
 			$('#' + id)
 			.css('top', 66)
 			.css('right', 10);
+		} else {
+			$('#' + id)
+			.css('top', 0)
+			.css('right', 0);
 		}
 		
 	}
    
 }
-
 
 function nuGetOptionsList(f, t, p, a){
 
@@ -1270,6 +1268,11 @@ function nuGetOptionsList(f, t, p, a){
 		
 	}
 
+	//hide all other listboxes
+	$('#nuOptionsListBox').remove();
+	$('.nuIframe').contents().find('#nuOptionsListBox').remove();
+	$('#nuOptionsListBox', window.parent.document).remove();
+	
 	var id  		= 'nuOptionsListBox';
 	var div    		= document.createElement('div');
 
@@ -1312,14 +1315,14 @@ function nuGetOptionsList(f, t, p, a){
 	.html('X')
 	.addClass('nuSearchListClose');
 	
-	nuBuildOptionsList(list);
+	nuBuildOptionsList(list, p);
 	
 }
 
 
-function nuBuildOptionsList(l){												//-- loop through adding options to menu
+function nuBuildOptionsList(l, p){												//-- loop through adding options to menu
 
-	var icon		= $('#nuOptions');
+	var icon		= $('#' + p + 'nuOptions');
 	var off			= icon.offset();
 	var top			= off.top;
 	var left		= off.left;
@@ -1334,10 +1337,10 @@ function nuBuildOptionsList(l){												//-- loop through adding options to m
 
 	for(var i = 0 ; i < l.length ; i++){
 		
-		var t		= l[i][0];
-		var f		= l[i][1];
-		var c		= l[i][2];
-		var top 	= 30 + (i * 20);
+		var t			= l[i][0];
+		var f			= l[i][1];
+		var c			= l[i][2];
+		var itemtop 	= 30 + (i * 20);
 		
 		var icon 	= document.createElement('img');
 		var icon_id 		= 'nuOptionList' + i.toString();
@@ -1348,13 +1351,10 @@ function nuBuildOptionsList(l){												//-- loop through adding options to m
 
 		$('#' + icon.id)
 		.css(prop)
-		.css({'top'	: top, 'left' : 5, 'width' : 15, 'height' : 15})
+		.css({'top'	: itemtop, 'left' : 5, 'width' : 15, 'height' : 15})
 		.attr('onclick', f)
 		.attr('src', c);
 
-
-
-		
 		var desc = document.createElement('div');
 		var desc_id 		= 'nuOptionText' + i.toString();
 		
@@ -1364,7 +1364,7 @@ function nuBuildOptionsList(l){												//-- loop through adding options to m
 
 		$('#' + desc.id)
 		.css(prop)
-		.css({'top'	: top,'left' : 30})
+		.css({'top'	: itemtop,'left' : 30})
 		.html(t)
 		.attr('onclick', f)
 		.addClass('nuOptionsItem');
