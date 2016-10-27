@@ -1325,7 +1325,7 @@ function nuBuildOptionsList(l, p){												//-- loop through adding options t
 	var top			= off.top;
 	var left		= off.left;
 	var ul			= '';
-	var	prop		= {'position': 'absolute','text-align' : 'left'};
+	var	prop		= {'position': 'absolute','text-align' : 'left' , 'width' : 15, 'height' : 15};
 	var width		= 0;
 	var height		= 30 + (l.length * 30);
 	
@@ -1349,7 +1349,7 @@ function nuBuildOptionsList(l, p){												//-- loop through adding options t
 
 		$('#' + icon.id)
 		.css(prop)
-		.css({'top'	: itemtop, 'left' : 5, 'width' : 20})
+		.css({'top'	: itemtop, 'left' : 5})
 		.attr('onclick', f)
 		.attr('src', c);
 
@@ -1359,6 +1359,7 @@ function nuBuildOptionsList(l, p){												//-- loop through adding options t
 		desc.setAttribute('id', desc_id);
 
 		$('#nuOptionsListBox').append(desc);
+	var	prop		= {'position' : 'absolute', 'text-align' : 'left', 'height' : 15};
 
 		$('#' + desc.id)
 		.css(prop)
