@@ -12,6 +12,12 @@
 		
 		function processPHP() {
 		
+			$s	= "SELECT sph_php FROM zzzzsys_php WHERE zzzzsys_php_id = '$this->parentID'";
+			$t	= nuRunQuery($s);
+			$r	= db_fetch_object($t);
+			
+			if(trim($r->sph_php) == ''){return;}
+			
 			try {
 
 				$s = "

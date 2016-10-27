@@ -2,32 +2,20 @@
 
 function nuBeforeBrowse($f){
 
-	$s		= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$f'";
-	$t		= nuRunQuery($s);
-	$r		= db_fetch_object($t);
-	//$before	= nuReplaceHashVariables($r->sfo_before_browse_php);
-	$before	= $r->sfo_before_browse_php;
-
-	//eval($before);
-	if($before) {
-		$evalPHP = new nuEvalPHPClass($before);
-	}
+	$s			= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$f'";
+	$t			= nuRunQuery($s);
+	$r			= db_fetch_object($t);
+	$evalPHP 	= new nuEvalPHPClass($f . '_BB');
 	
 }
 
 
 function nuBeforeOpen($f, $o){
 	
-	$s		= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$f'";
-	$t		= nuRunQuery($s);
-	$r		= db_fetch_object($t);
-	//$before	= nuReplaceHashVariables($r->sfo_before_open_php);
-	$before	= $r->sfo_before_open_php;
-
-	//eval($before);
-	if($before) {
-		$evalPHP = new nuEvalPHPClass($before);
-	}
+	$s			= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$f'";
+	$t			= nuRunQuery($s);
+	$r			= db_fetch_object($t);
+	$evalPHP 	= new nuEvalPHPClass($f . '_BO');
 	
 }
 
@@ -417,34 +405,33 @@ function nuGetLookupValues($R, $O){
 
 function nuGetOtherLookupValues($nuO){
 	
-	$nuS		= "SELECT * FROM zzzzsys_object WHERE zzzzsys_object_id = '$nuO->object_id'";
-	$nuT		= nuRunQuery($nuS);
-	$nuR 		= db_fetch_object($nuT);
-	$nuPHP		= trim($nuR->sob_lookup_php);
-	$nuLookup	= $nuR->sob_all_id;
-	$nuS 		= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$nuO->form_id'";
-	$nuT 		= nuRunQuery($nuS);
-	$nuR 		= db_fetch_object($nuT);
-	$nuPK 		= $nuR->sfo_primary_key;
-	$nuSQL 		= new nuSqlString($nuR->sfo_browse_sql);
-	$nuFROM		= $nuSQL->from;
+	$oid			= $nuO->object_id;
+	$nuS			= "SELECT * FROM zzzzsys_object WHERE zzzzsys_object_id = '$oid'";
+	$nuT			= nuRunQuery($nuS);
+	$nuR 			= db_fetch_object($nuT);
+	$nuPHP			= trim($nuR->sob_lookup_php);
+	$nuLookup		= $nuR->sob_all_id;
+	$nuS 			= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$nuO->form_id'";
+	$nuT 			= nuRunQuery($nuS);
+	$nuR 			= db_fetch_object($nuT);
+	$nuPK 			= $nuR->sfo_primary_key;
+	$nuSQL 			= new nuSqlString($nuR->sfo_browse_sql);
+	$nuFROM			= $nuSQL->from;
 	
-	$nuS 		= "
-				SELECT 
-				TRIM(zzzzsys_slo_object_name) AS obj,
-				TRIM(zzzzsys_slo_field_function_name) AS fld
-				FROM zzzzsys_lookup 
-				WHERE slo_zzzzsys_object_id = '$nuO->object_id'
+	$nuS 			= "
+						SELECT 
+						TRIM(zzzzsys_slo_object_name) AS obj,
+						TRIM(zzzzsys_slo_field_function_name) AS fld
+						FROM zzzzsys_lookup 
+						WHERE slo_zzzzsys_object_id = '$oid'
 	";
-	$nuT 		= nuRunQuery($nuS);
-	$nuID 		= array();
-	$nuVAL 		= array();
-	$nuVALUES	= array();
 	
-	//nuEvalPHP($nuO);
-	if($nuPHP) {
-		$evalPHP = new nuEvalPHPClass($nuPHP);
-	}
+	$nuT 			= nuRunQuery($nuS);
+	$nuID 			= array();
+	$nuVAL 			= array();
+	$nuVALUES		= array();
+	
+	$evalPHP = new nuEvalPHPClass($oid . '_AB');
 	
 	while($nuR = db_fetch_object($nuT)){
 		
@@ -454,26 +441,32 @@ function nuGetOtherLookupValues($nuO){
 		if(substr($nuFLD, -2) == '()' && strpos($nuPHP, $nuFLD) !== false){
 			
 			eval('$nuVAR = ' . $nuFLD . ';');
-			$nuVAL[]		=  "'" . str_replace("'", "\\'", $nuVAR) . "'";
+			$nuVAL[]	=  "'" . str_replace("'", "\\'", $nuVAR) . "'";
 		}else{
 			
-			$nuVAL[]		= $nuFLD;
+			$nuVAL[]	= $nuFLD;
 			
 		}
 		
 	}
 	if(count($nuVAL) > 0){
-		$nuFLDS	= implode(", ", $nuVAL);
-		$nuS 	= "SELECT $nuFLDS $nuFROM WHERE `$nuPK` = '$nuO->value'";
-		$nuT 	= nuRunQuery($nuS);
+		
+		$nuFLDS			= implode(", ", $nuVAL);
+		$nuS 			= "SELECT $nuFLDS $nuFROM WHERE `$nuPK` = '$nuO->value'";
+		$nuT 			= nuRunQuery($nuS);
+		
 		if(db_num_rows($nuT) > 0){
-			$nuL	= db_fetch_row($nuT);
+			$nuL		= db_fetch_row($nuT);
 		}else{
-			for($nuCT = 0 ; $nuCT < count($nuID) ; $nuCT++){$nuL[] = '';}
+			
+			for($nuCT = 0 ; $nuCT < count($nuID) ; $nuCT++){
+				$nuL[] 	= '';
+			}
+			
 		}
+		
 		for($nuCT = 0 ; $nuCT < count($nuID) ; $nuCT++){
 			$nuVALUES[]	= array($nuID[$nuCT], $nuL[$nuCT]);
-			
 		}
 		
 	}
