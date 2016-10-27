@@ -97,6 +97,7 @@ window.nuHASH			= [];
 			}
 
 			nuBindCtrlEvents();
+			window.filter			= p.filter;
 
 			if(p.type == 'getreport') {
 				nuGetPDF(p.form_id, p.record_id)
