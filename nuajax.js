@@ -173,6 +173,7 @@ function nuRunReport(f, iframe){
 	w.current.session_id 	= window.nuSESSION;
 	w.current.call_type 	= 'runreport';
 	w.current.form_id 		= f;
+	w.current.record_id		= 'report';
 	w.current.hash 			= nuHashFromEditForm();
 	w.setCurrent();
 
@@ -208,6 +209,8 @@ function nuRunPHP(f, iframe){
 	w.current.session_id	= window.nuSESSION;
 	w.current.call_type 	= 'runphp';
 	w.current.form_id  		= f;
+	w.current.record_id		= 'php';
+	w.current.data 			= nuGetFormData();
 	w.current.hash  		= nuHashFromEditForm();
 	w.setCurrent();
 	

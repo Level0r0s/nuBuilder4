@@ -634,7 +634,7 @@ function nuSetHashList($p){
 	
 	$A			= nuGetUserAccess();
 
-	if($fid == '' or $rid == ''){
+	if($rid == ''){
 		return $A;
 	}else{
 
@@ -677,7 +677,7 @@ function nuSetHashList($p){
 		$ha['FORM_ID']				= addslashes($fid);
 		
 	}
-	
+
 	return array_merge($r, $ha);
 
 }

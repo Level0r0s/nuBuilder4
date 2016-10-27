@@ -1719,7 +1719,6 @@ function nuEmailReportAction(id) {
 	nuEmailReport(id);
 }
 
-
 function nuSortBrowse(c){
 	
 	var l					= window.nuFORM.current;
