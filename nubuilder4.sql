@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 27, 2016 at 11:51 PM
+-- Generation Time: Oct 28, 2016 at 03:43 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -136,7 +136,7 @@ CREATE TABLE `company` (
 INSERT INTO `company` (`company_id`, `com_code`, `com_name`, `com_business_id`, `com_company_id`, `com_address`, `com_suburb`, `com_phone`, `com_map_coordinates`, `com_sex`, `com_color_id`, `com_age`, `com_notes`) VALUES
 ('5678d262e048faa', '0007', '', '568a00c77f8f709', '', '5 Trent Grv', '2016-07-02', '', '11 44', 'f', '568ef920846a089#nuSep#568ef59c1bd769c#nuSep#568ef931d196b3e', 50, 'hello worldsssstfffxv'),
 ('5729572e6331281', '', 'Mrs Compr66r36456', '568a00e25b8d271', '', '43 Allen St', '2016-07-01', '07-May-2016', '', '', '568ef59c1bd769c#nuSep#568ef931d196b3e', 0, '13132'),
-('57295aa5660f48b', '', 'Mrs Comuh', '568a00e25b8d271', '', '43 Allen Stkh', '2016-07-03', '18-Jun-2016', '', '', '568ef59c1bd769c', 35, '13132'),
+('57295aa5660f48b', '', 'Mrs Comuh', '568a00d504d264c', '', '43 Allen Stkh', '2016-07-03', '18-Jun-2016', '', '', '568ef59c1bd769c', 35, '13132'),
 ('57295ed9e996db0', '', 'OPSM111', '56aeff3276dfd7e', '', 'yyyyy', '2016-07-06', '20-May-2016', '', '', '568ef58fe48207a', 35, 'oooo12hh'),
 ('5716c7137efb0c5', '', 'OPSM1111fwe', '568a00c77f8f709', '', '43 Allen St', '2016-07-06', '0423345544', '', 'm', '568ef920846a089#nuSep#568ef59c1bd769c#nuSep#568ef931d196b3e', 35, 'hh'),
 ('57d5fabf102335b', '', 'vbbvn ', '568a00f3e57f096', '', '', '0000-00-00', '', '', '', '', 35, 'vvccvg wwwfred');
@@ -200,7 +200,7 @@ INSERT INTO `employee` (`employee_id`, `emp_company_id`, `emp_name`, `emp_mobile
 ('57d62b6de6d9282', '57d5fabf102335b', 'tydufy77i', '', ''),
 ('57d63ace507c7fa', '57d5fabf102335b', '', '', '568a00f3e57f096'),
 ('57d9cbccee74ec0', '57d5fabf102335b', '', 'Sep-22-2016', ''),
-('57df373ddbb853a', '57295aa5660f48b', '', '', '568a00f3e57f096');
+('57df373ddbb853a', '57295aa5660f48b', 'yh', '', '568a00f3e57f096');
 
 -- --------------------------------------------------------
 
@@ -907,7 +907,7 @@ INSERT INTO `zzzzsys_object` (`zzzzsys_object_id`, `sob_all_zzzzsys_form_id`, `s
 ('574671cdcc77367', 'nuuser', 'lookup', 'sus_zzzzsys_user_group_id', 'User Group', '57466ebd5c0fff2', 40, 94, 150, 100, 18, '1', 'left', 'noblanks', '0', '', '', '', '', '', '', '', '', '', '', 'sug_code', 'sug_description', '200', '', '574665a15bbc1a1', '', '', '', '', '', '', '', '', 'text', ''),
 ('574b8f87a400809', 'nuphp', 'input', 'sph_code', 'Code', '574b8ee0b2a4cdf', 10, 17, 152, 100, 18, '1', 'left', 'noblanks', '0', '', '', '', '', '', '', '', '', '', 'browse|Browse|edit|Edit|browseedit|Browse and Edit|criteria|Criteria or Home|procedure|Procedure|report|Report', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('574b8fa359b39fc', 'nuphp', 'input', 'sph_description', 'Description', '574b8ee0b2a4cdf', 20, 48, 152, 300, 18, '1', 'left', 'noblanks', '0', '', '', '', '', '', '', '', '', '', 'browse|Browse|edit|Edit|browseedit|Browse and Edit|criteria|Criteria or Home|procedure|Procedure|report|Report', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-('574b9008ac10e16', 'nuphp', 'textarea', 'sph_php', 'PHP', '5811788510768ef', 50, 23, 78, 600, 469, '1', 'left', 'noblanks', '1', '', '', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+('574b9008ac10e16', 'nuphp', 'textarea', 'sph_php', 'PHP', '5811788510768ef', 50, 21, 38, 600, 469, '1', 'left', 'noblanks', '1', '', '', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('574b91aec1e5c94', 'nuhome', 'run', 'edit_php', 'Build Procedures', '569dc4ed270f08a', 100, 50, 434, 150, 30, '1', 'left', 'noblanks', '0', '', '', '', 'nuphp', '', 'b', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('574b97322568df5', 'nuhome', 'run', 'edit_report', 'Build Reports', '569dc4ed270f08a', 120, 50, 264, 150, 30, '1', 'left', 'noblanks', '0', '', '', '', 'nubuildreport', '', 'b', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('57561237059313b', 'nublank', 'html', 'bla_html', '', '575611cca558059', 11, 400, 400, 1, 1, '', 'left', '', '', 'SELECT ''0''', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '.'),
@@ -991,90 +991,47 @@ INSERT INTO `zzzzsys_php` (`zzzzsys_php_id`, `sph_code`, `sph_description`, `sph
 ('57578be0057a49f', 'HELLOW', 'Hello World', 'test', 'echo ''hello user #USER_ID#, today is.. #com_name# #to_date# #from_date#'';\necho ''hello user #USER_ID#, today is.. #com_name# #to_date# #from_date#'';', '5678ab2c48c5c41', 'nulaunchdates', ''),
 ('57db70b7aa22cda', 'CUSTAB', 'Customer Temp Table', 'aaa', 'echo ''x'';\necho ''x'';\necho ''x'';\necho ''x'';\necho ''x'';\necho ''x'';\necho ''x'';\necho ''x'';', '', '57edbac65e1c52a', ''),
 ('57f6e1f954955c1', 'Dodgy', 'Dodgy', 'Dodgy', 'echo ''y'';\necho ''y'';\nx\necho ''y'';\necho ''y'';', '', 'nuaccessforms', ''),
-('581135daea4f878', 'EV', 'copy events to form', 'nu', '$s  = "SELECT * FROM zzzzsys_form_backup";\n\n$t  = nuRunQuery($s);\n\nwhile($r = db_fetch_array($t)){\n    \n    addP(''BB'', $r);\n    addP(''BO'', $r);\n    addP(''BS'', $r);\n    addP(''AS'', $r);\n    addP(''BD'', $r);\n    addP(''AD'', $r);\n    \n    udForm($r);\n\n}\n\n$s  = "SELECT * FROM zzzzsys_object WHERE sob_all_type = ''lookup''";\n\n$t  = nuRunQuery($s);\n\nwhile($r = db_fetch_array($t)){\n    \n    print $r[''sob_all_id''].''===================<br><br>'';\n    look($r);\n\n}\n\n\nfunction look($r){\n    \n    $i              = $r[''zzzzsys_object_id''] . ''_AB'';      //-- after browse\n    $c              = $r[''sob_all_id''];\n    $p              = $r[''sob_lookup_php''];\n    \n    if(trim($p) == ''''){return;}\n    \n    $s              = "\n    INSERT INTO zzzzsys_php\n    (\n        zzzzsys_php_id,\n        sph_code,\n        sph_description,\n        sph_group,\n        sph_php,\n        sph_system\n    )\n    VALUES\n    (\n        ''$i'',\n        ''$c'',\n        ''After Browse ($c)'',\n        ''nubuilder'',\n        ?,\n        ''1''\n    )\n    ";\n    \n    nuRunQuery($s, array($p));\n    \n\n}\n\n\nfunction udForm($r){\n    \n    $id = $r[''zzzzsys_form_id''];\n    $BB = $r[''sfo_before_browse_php''];\n    $BO = $r[''sfo_before_open_php''];\n    $BS = $r[''sfo_before_save_php''];\n    $AS = $r[''sfo_after_save_php''];\n    $BD = $r[''sfo_before_delete_php''];\n    $AD = $r[''sfo_after_delete_php''];\n    \n    $s  = "UPDATE zzzzsys_form SET sfo_before_browse_php = ? WHERE zzzzsys_form_id = ''$id''";\n    print $s.''<br><br>'';\n    nuRunQuery($s, array($BB));\n    \n    $s  = "UPDATE zzzzsys_form SET sfo_before_open_php = ? WHERE zzzzsys_form_id = ''$id''";\n    print $s.''<br><br>'';\n    nuRunQuery($s, array($BO));\n    \n    $s  = "UPDATE zzzzsys_form SET sfo_before_save_php = ? WHERE zzzzsys_form_id = ''$id''";\n    print $s.''<br><br>'';\n    nuRunQuery($s, array($BS));\n    \n    $s  = "UPDATE zzzzsys_form SET sfo_after_save_php = ? WHERE zzzzsys_form_id = ''$id''";\n    print $s.''<br><br>'';\n    nuRunQuery($s, array($AS));\n    \n    $s  = "UPDATE zzzzsys_form SET sfo_before_delete_php = ? WHERE zzzzsys_form_id = ''$id''";\n    print $s.''<br><br>'';\n    nuRunQuery($s, array($BD));\n    \n    $s  = "UPDATE zzzzsys_form SET sfo_after_delete_php = ? WHERE zzzzsys_form_id = ''$id''";\n    print $s.''<br><br>'';\n    nuRunQuery($s, array($AD));\n\n}\n\n\n\n\nfunction addP($ev,$r){\n\n    $event	        = array();\n    $event[''BB'']    = ''sfo_before_browse_php'';\n    $event[''BO'']    = ''sfo_before_open_php'';\n    $event[''BS'']    = ''sfo_before_save_php'';\n    $event[''AS'']    = ''sfo_after_save_php'';\n    $event[''BD'']    = ''sfo_before_delete_php'';\n    $event[''AD'']    = ''sfo_after_delete_php'';\n    \n    $i              = $r[''zzzzsys_form_id''] . ''_'' . $ev;\n    $c              = $r[''sfo_code''];\n    $p              = $r[$event[$ev]];\n    \n    if(trim($p) == ''''){return;}\n    \n    $s              = "\n    INSERT INTO zzzzsys_php\n    (\n        zzzzsys_php_id,\n        sph_code,\n        sph_description,\n        sph_group,\n        sph_php,\n        sph_system\n    )\n    VALUES\n    (\n        ''$i'',\n        ''$ev'',\n        ''$ev ($c)'',\n        ''nubuilder'',\n        ?,\n        ''1''\n    )\n    ";\n    \n    nuRunQuery($s, array($p));\n    print $s.''<br><br>'';\n    \n}\n\n\n', '', 'nublank', ''),
-('5678ab2c48c5c41_AD', '', 'After Delete for  ', 'nubuilder', '', '', '', '1'),
-('5678ab2c48c5c41_BD', '', 'Before Delete for  ', 'nubuilder', '', '', '', '1'),
-('5678ab2c48c5c41_AS', '', 'After Save for  ', 'nubuilder', '', '', '', '1'),
-('5678ab2c48c5c41_BS', '', 'Before Save for  ', 'nubuilder', '', '', '', '1'),
-('56773cb405f4913_AD', '', 'After Delete for  ', 'nubuilder', '', '', '', '1'),
-('56773cb405f4913_BD', '', 'Before Delete for  ', 'nubuilder', '', '', '', '1'),
-('56773cb405f4913_AS', '', 'After Save for  ', 'nubuilder', '', '', '', '1'),
-('56773cb405f4913_BS', '', 'Before Save for  ', 'nubuilder', '', '', '', '1'),
-('56773cb405f4913_BO', '', 'Before Open for  ', 'nubuilder', '', '', '', '1'),
-('56773cb405f4913_BB', '', 'Before Browse for  ', 'nubuilder', '', '', '', '1'),
+('581135daea4f878', 'EV', 'copy events to form', 'nu', '$s  = "SELECT * FROM zzzzsys_form_backup";\n\n$t  = nuRunQuery($s);\n\nwhile($r = db_fetch_array($t)){\n    \n    addP(''BB'', $r);\n    addP(''BO'', $r);\n    addP(''BS'', $r);\n    addP(''AS'', $r);\n    addP(''BD'', $r);\n    addP(''AD'', $r);\n    \n    udForm($r);\n\n}\n\n$s  = "SELECT * FROM zzzzsys_object WHERE sob_all_type = ''lookup''";\n\n$t  = nuRunQuery($s);\n\nwhile($r = db_fetch_array($t)){\n    \n    look($r);\n\n}\n\n\nfunction look($r){\n    \n    $i              = $r[''zzzzsys_object_id''] . ''_AB'';      //-- after browse\n    $c              = $r[''sob_all_id''];\n    $p              = $r[''sob_lookup_php''];\n    \n    if(trim($p) == ''''){return;}\n    \n    $s              = "\n    INSERT INTO zzzzsys_php\n    (\n        zzzzsys_php_id,\n        sph_code,\n        sph_description,\n        sph_group,\n        sph_php,\n        sph_system\n    )\n    VALUES\n    (\n        ''$i'',\n        ''$c'',\n        ''After Browse ($c)'',\n        ''nubuilder'',\n        ?,\n        ''1''\n    )\n    ";\n    \n    nuRunQuery($s, array($p));\n    print $s.''<br><br>'';\n    \n\n}\n\n\nfunction udForm($r){\n    \n    $id = $r[''zzzzsys_form_id''];\n    $BB = $r[''sfo_before_browse_php''];\n    $BO = $r[''sfo_before_open_php''];\n    $BS = $r[''sfo_before_save_php''];\n    $AS = $r[''sfo_after_save_php''];\n    $BD = $r[''sfo_before_delete_php''];\n    $AD = $r[''sfo_after_delete_php''];\n    \n    $s  = "UPDATE zzzzsys_form SET sfo_before_browse_php = ? WHERE zzzzsys_form_id = ''$id''";\n    print $s.''<br><br>'';\n    nuRunQuery($s, array($BB));\n    \n    $s  = "UPDATE zzzzsys_form SET sfo_before_open_php = ? WHERE zzzzsys_form_id = ''$id''";\n    print $s.''<br><br>'';\n    nuRunQuery($s, array($BO));\n    \n    $s  = "UPDATE zzzzsys_form SET sfo_before_save_php = ? WHERE zzzzsys_form_id = ''$id''";\n    print $s.''<br><br>'';\n    nuRunQuery($s, array($BS));\n    \n    $s  = "UPDATE zzzzsys_form SET sfo_after_save_php = ? WHERE zzzzsys_form_id = ''$id''";\n    print $s.''<br><br>'';\n    nuRunQuery($s, array($AS));\n    \n    $s  = "UPDATE zzzzsys_form SET sfo_before_delete_php = ? WHERE zzzzsys_form_id = ''$id''";\n    print $s.''<br><br>'';\n    nuRunQuery($s, array($BD));\n    \n    $s  = "UPDATE zzzzsys_form SET sfo_after_delete_php = ? WHERE zzzzsys_form_id = ''$id''";\n    print $s.''<br><br>'';\n    nuRunQuery($s, array($AD));\n\n}\n\n\n\n\nfunction addP($ev,$r){\n\n    $event	        = array();\n    $event[''BB'']    = ''sfo_before_browse_php'';\n    $event[''BO'']    = ''sfo_before_open_php'';\n    $event[''BS'']    = ''sfo_before_save_php'';\n    $event[''AS'']    = ''sfo_after_save_php'';\n    $event[''BD'']    = ''sfo_before_delete_php'';\n    $event[''AD'']    = ''sfo_after_delete_php'';\n    \n    $i              = $r[''zzzzsys_form_id''] . ''_'' . $ev;\n    $c              = $r[''sfo_code''];\n    $p              = $r[$event[$ev]];\n    \n    if(trim($p) == ''''){return;}\n    \n    $s              = "\n    INSERT INTO zzzzsys_php\n    (\n        zzzzsys_php_id,\n        sph_code,\n        sph_description,\n        sph_group,\n        sph_php,\n        sph_system\n    )\n    VALUES\n    (\n        ''$i'',\n        ''$ev'',\n        ''$ev ($c)'',\n        ''nubuilder'',\n        ?,\n        ''1''\n    )\n    ";\n    \n    nuRunQuery($s, array($p));\n    print $s.''<br><br>'';\n    \n}\n\n\n', '', 'nublank', ''),
 ('574665a15bbc1a1_AD', '', 'After Delete for  ', 'nubuilder', '', '', '', '1'),
 ('574665a15bbc1a1_BD', '', 'Before Delete for  ', 'nubuilder', '', '', '', '1'),
 ('574665a15bbc1a1_AS', '', 'After Save for  ', 'nubuilder', '', '', '', '1'),
 ('574665a15bbc1a1_BS', '', 'Before Save for  ', 'nubuilder', '', '', '', '1'),
-('574665a15bbc1a1_BO', '', 'Before Open for  ', 'nubuilder', '', '', '', '1'),
+('574665a15bbc1a1_BO', '', 'Before Open for  ', 'nubuilder', 'nudebug(''before open BO'');', '', '', '1'),
 ('574665a15bbc1a1_BB', '', 'Before Browse for  ', 'nubuilder', '', '', '', '1'),
-('nulaunchdates_AD', '', 'After Delete for  ', 'nubuilder', '', '', '', '1'),
-('nulaunchdates_BD', '', 'Before Delete for  ', 'nubuilder', '', '', '', '1'),
-('nulaunchdates_AS', '', 'After Save for  ', 'nubuilder', '', '', '', '1'),
-('nulaunchdates_BS', '', 'Before Save for  ', 'nubuilder', '', '', '', '1'),
-('nulaunchdates_BO', '', 'Before Open for  ', 'nubuilder', '', '', '', '1'),
 ('nulaunchdates_BB', '', 'Before Browse for  ', 'nubuilder', '', '', '', '1'),
-('-2_AD', '', 'After Delete for  ', 'nubuilder', '', '', '', '1'),
-('-2_BD', '', 'Before Delete for  ', 'nubuilder', '', '', '', '1'),
-('-2_AS', '', 'After Save for  ', 'nubuilder', '', '', '', '1'),
-('-2_BS', '', 'Before Save for  ', 'nubuilder', '', '', '', '1'),
-('-2_BO', '', 'Before Open for  ', 'nubuilder', '', '', '', '1'),
-('-2_BB', '', 'Before Browse for  ', 'nubuilder', '', '', '', '1'),
-('nuaccessreport_AD', '', 'After Delete for  ', 'nubuilder', '', '', '', '1'),
-('nuaccessreport_BD', '', 'Before Delete for  ', 'nubuilder', '', '', '', '1'),
-('nuaccessreport_AS', '', 'After Save for  ', 'nubuilder', '', '', '', '1'),
-('nuaccessreport_BS', '', 'Before Save for  ', 'nubuilder', '', '', '', '1'),
-('nuaccessreport_BO', '', 'Before Open for  ', 'nubuilder', '', '', '', '1'),
-('nuaccessreport_BB', '', 'Before Browse for  ', 'nubuilder', '', '', '', '1'),
-('nuaccess_AD', '', 'After Delete for  ', 'nubuilder', '', '', '', '1'),
-('nuaccess_BD', '', 'Before Delete for  ', 'nubuilder', '', '', '', '1'),
-('nuaccess_AS', '', 'After Save for  ', 'nubuilder', '', '', '', '1'),
-('nuaccess_BS', '', 'Before Save for  ', 'nubuilder', '', '', '', '1'),
-('nuaccess_BO', '', 'Before Open for  ', 'nubuilder', '', '', '', '1'),
-('nuaccess_BB', '', 'Before Browse for  ', 'nubuilder', '', '', '', '1'),
-('nuform_AD', '', 'After Delete for  ', 'nubuilder', '', '', '', '1'),
-('nuform_BD', '', 'Before Delete for  ', 'nubuilder', '', '', '', '1'),
-('56c513162acd102_AD', '', 'After Delete for  ', 'nubuilder', '', '', '', '1'),
-('56c513162acd102_BD', '', 'Before Delete for  ', 'nubuilder', '', '', '', '1'),
-('56c513162acd102_AS', '', 'After Save for  ', 'nubuilder', '', '', '', '1'),
-('56c513162acd102_BS', '', 'Before Save for  ', 'nubuilder', '', '', '', '1'),
-('56c513162acd102_BO', '', 'Before Open for  ', 'nubuilder', '', '', '', '1'),
-('56c513162acd102_BB', '', 'Before Browse for  ', 'nubuilder', '', '', '', '1'),
-('nuaccessforms_AD', '', 'After Delete for  ', 'nubuilder', '', '', '', '1'),
-('nuaccessforms_BD', '', 'Before Delete for  ', 'nubuilder', '', '', '', '1'),
-('nuphp_BD', '', 'Before Delete for  ', 'nubuilder', '', '', '', '1'),
+('nulaunchdates_BO', '', 'Before Open for  ', 'nubuilder', 'nudebug(''before'');', '', '', '1'),
+('nulaunchdates_BS', '', 'Before Save for  ', 'nubuilder', '', '', '', '1'),
+('nulaunchdates_AS', '', 'After Save for  ', 'nubuilder', '', '', '', '1'),
+('nulaunchdates_BD', '', 'Before Delete for  ', 'nubuilder', '', '', '', '1'),
+('nulaunchdates_AD', '', 'After Delete for  ', 'nubuilder', '', '', '', '1'),
+('nuform_BB', 'BB', 'BB (FORM)', 'nubuilder', 'nuAddSystemEvents();', '', '', '1'),
+('nuform_BO', 'BO', 'BO (FORM)', 'nubuilder', 'nuAddSystemEvents();', '', '', '1'),
+('nuform_BS', 'BS', 'BS (FORM)', 'nubuilder', '    $o = ''#sfo_type#'';\n\n    if(''#sfo_type#''             == ''''){nuDisplayError(''Type Cannot Be Blank..'', ''sfo_type'');}\n    if(''#sfo_code#''             == ''''){nuDisplayError(''Code Cannot Be Blank..'', ''sfo_code'');}\n    if(''#sfo_description#''      == ''''){nuDisplayError(''Description Cannot Be Blank..'', ''sfo_description'');}\n\n\n    \n    \n    if($o == ''browseedit'' || $o == ''subform'' || $o == ''browse''){\n        \n        if($o != ''browse''){\n            nuCheckTabs();\n        }\n        \n        if($o != ''subform''){\n            nuCheckBrowse();\n        }\n        \n        if(''#sfo_browse_sql#''   == ''''){nuDisplayError(''Browse SQL Cannot Be Blank..'', ''sfo_browse_sql'');}\n    }\n\n    if($o == ''edit'' or $o == ''launch''){\n        nuCheckTabs();\n    }\n\n    if($o != ''launch''){\n        if(''#sfo_table#''            == ''''){nuDisplayError(''Table Cannot Be Blank..'', ''sfo_table'');}\n        if(''#sfo_primary_key#''      == ''''){nuDisplayError(''Primary Key Cannot Be Blank..'', ''sfo_primary_key'');}\n    }\n\nfunction nuCheckBrowse(){\n\n    $r  = 0;\n    $sf = nuSubformObject(''browse_sf'');\n\n    for($i = 0 ; $i < count($sf[''rows'']) ; $i++){\n       if($sf[''rows''][$i][8] == 0){$r++;}\n    }\n    \n    if($r == 0){\n       nuDisplayError(''Must have at least 1 Browse Column Defined..'');\n    }\n    \n}\n\nfunction nuCheckTabs(){\n    \n    $r  = 0;\n    $sf = nuSubformObject(''tab_sf'');\n    \n    for($i = 0 ; $i < count($sf[''rows'']) ; $i++){\n       if($sf[''rows''][$i][3] == 0){$r++;}\n    }\n    \n    if($r == 0){\n       nuDisplayError(''Must have at least 1 Tab Defined..'');\n    }\n    \n}', '', '', '1'),
 ('nuphp_AD', '', 'After Delete for  ', 'nubuilder', '', '', '', '1'),
-('nuaccessforms_BB', '', 'Before Browse for  ', 'nubuilder', '', '', '', '1'),
-('nuaccessforms_BO', '', 'Before Open for  ', 'nubuilder', '', '', '', '1'),
-('nuaccessforms_BS', '', 'Before Save for  ', 'nubuilder', '', '', '', '1'),
-('nuaccessforms_AS', '', 'After Save for  ', 'nubuilder', '', '', '', '1'),
+('nuphp_BD', '', 'Before Delete for  ', 'nubuilder', '', '', '', '1'),
 ('nuphp_AS', '', 'After Save for  ', 'nubuilder', '', '', '', '1'),
-('nuphp_BS', '', 'Before Save for  ', 'nubuilder', '', '', '', '1'),
+('nuphp_BS', '', 'Before Save for  ', 'nubuilder', '$rid    = ''#RECORD_ID#'';\n\n$s      = "SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = ''$rid''";\n$t      = nuRunQuery($s);\n$r      = db_fetch_object($t);\n\nif(db_num_rows($t) == 0){\n\n    $c              = $r->sob_all_id;\n    $p              = $r->sob_lookup_php;\n    \n    if(trim($p) == ''''){return;}\n    \n    $s              = "\n    INSERT INTO zzzzsys_php\n    (zzzzsys_php_id, sph_system)\n    VALUES\n    (''$rid'', ''1'')\n    ";\n    \n    nuRunQuery($s);\n    \n}\n\n\n\n', '', '', '1'),
 ('nuphp_BO', '', 'Before Open for  ', 'nubuilder', '', '', '', '1'),
-('5678ab2c48c5c41_BB', '', 'Before Browse for  ', 'nubuilder', '', '', '', '1'),
+('nuphp_BB', '', 'Before Browse for  ', 'nubuilder', '', '', '', '1'),
+('-1_AD', '', 'After Delete for  ', 'nubuilder', '', '', '', '1'),
+('-1_BD', '', 'Before Delete for  ', 'nubuilder', '', '', '', '1'),
+('-1_AS', '', 'After Save for  ', 'nubuilder', '', '', '', '1'),
+('-1_BS', '', 'Before Save for  ', 'nubuilder', '', '', '', '1'),
+('568b50020fc7a62_AB', 'com_business_id', 'After Browse (com_business_id)', 'nubuilder', '57f6e1f954955c1', '', '', '1'),
 ('_BB', '', 'Before Browse for  ', 'nubuilder', '', '', '', '1'),
 ('_BO', '', 'Before Open for  ', 'nubuilder', '', '', '', '1'),
 ('_BS', '', 'Before Save for  ', 'nubuilder', '', '', '', '1'),
 ('_AS', '', 'After Save for  ', 'nubuilder', '', '', '', '1'),
 ('_BD', '', 'Before Delete for  ', 'nubuilder', '', '', '', '1'),
 ('_AD', '', 'After Delete for  ', 'nubuilder', '', '', '', '1'),
-('nudebug_BB', '', 'Before Browse for  ', 'nubuilder', '', '', '', '1'),
-('nudebug_BO', '', 'Before Open for  ', 'nubuilder', '', '', '', '1'),
-('nudebug_BS', '', 'Before Save for  ', 'nubuilder', '', '', '', '1'),
-('nudebug_AS', '', 'After Save for  ', 'nubuilder', '', '', '', '1'),
-('nudebug_AD', '', 'After Delete for  ', 'nubuilder', '', '', '', '1'),
-('nuphp_BB', '', 'Before Browse for  ', 'nubuilder', '', '', '', '1'),
-('nudebug_BD', 'BD', 'BD (DEBUG)', 'nubuilder', '\n$a  = ''#delete_option#'';\n$r  = ''#RECORD_ID#'';\n$d  = "DELETE FROM zzzzsys_debug ";\n\nif($a == 1){$d  = $d . "WHERE zzzzsys_debug_id = ''$r''";}\nif($a == 2){$d  = $d . "WHERE zzzzsys_debug_id != ''$r''";}\nif($a == 3){$d  = $d . "WHERE zzzzsys_debug_id < ''$r''";}\n\nnuRunQuery($d);\n', '', '', '1'),
+('-1_BB', '', 'Before Browse for  ', 'nubuilder', '', '', '', '1'),
+('-1_BO', '', 'Before Open for  ', 'nubuilder', '', '', '', '1'),
 ('nupassword_BS', 'BS', 'BS (PASS)', 'nubuilder', '\n\n$is		= md5(''#old_password#'');\n$was	= md5(''#new_password_check#'');\n$will	= md5(''#new_password#'');\n$ses	= ''#SESSION_ID#'';\nnudebug("$is,$was,$will");\n\n$s      = "\n\n    SELECT * \n    FROM zzzzsys_session\n    WHERE zzzzsys_session_id = ''$ses''\n\n";\n\n$t  = nuRunQuery($s);\n$r  = db_fetch_object($t);\n$j  = json_decode($r->sss_access);\n\n$s      = "\n\n    SELECT * \n    FROM zzzzsys_user\n    WHERE zzzzsys_user_id = ''#USER_ID#''\n    AND sus_login_password = ''$is''\n\n";\n\n$t  = nuRunQuery($s);\nnudebug(''31 '' . $s);\n\nif(db_num_rows($t) == 0){\n\n    nuDisplayError(''Incorrect Password'');\n    return;\n    \n}\n\nif($will == $was){\n\n    $s  = "\n\n    UPDATE zzzzsys_user \n    SET sus_login_password = ''$will''\n    WHERE zzzzsys_user_id = ''#RECORD_ID#''\n    AND sus_login_password = ''$is''\n    \n    ";\n\nnudebug(''qqqq ''.$s);\n    nuRunQuery($s);\n\n}else{\n    \n    nuDisplayError(''"Enter New Password" Must be the same as "Re-Enter New Password"'');\n\n}\n\n\n\n\n\n\n\n', '', '', '1'),
 ('nuuser_AS', 'AS', 'AS (ACCUSE)', 'nubuilder', 'if(''#new_password#'' == ''#check_password#'' && ''#check_password#'' != ''#check_p''.''assword#'' && ''#check_password#'' != ''''){\n\n	$pw	= md5(''#check_password#'');\n	nuRunQuery("UPDATE zzzzsys_user SET sus_login_password = ''$pw'' WHERE zzzzsys_user_id = ''#RECORD_ID#''");\n\n}\n\n', '', '', '1'),
 ('5757a4b7181e365_BB', 'BB', 'BB (RUN)', 'nubuilder', '$s = "\n\nDROP VIEW IF EXISTS zzzzsys_run_list;\nCREATE VIEW zzzzsys_run_list AS\nSELECT zzzzsys_form_id AS id, ''Form'' AS run, sfo_code AS code, sfo_description AS description FROM zzzzsys_form\nUNION\nSELECT zzzzsys_report_id AS id, ''Report'' AS run, sre_code AS code, sre_description AS description FROM zzzzsys_report\nUNION\nSELECT zzzzsys_php_id AS id, ''Procedure'' AS run, sph_code AS code, sph_description AS description FROM zzzzsys_php\nORDER BY code;\n\n";\n\nnuRunQuery($s);', '', '', '1'),
-('568b50020fc7a62_AB', 'com_business_id', 'After Browse (com_business_id)', 'nubuilder', '//57f6e1f954955c1', '', '', '1'),
-('5678ab2c48c5c41_BO', '', 'Before Open for  ', 'nubuilder', '', '', '', '1'),
+('nudebug_BD', 'BD', 'BD (DEBUG)', 'nubuilder', '\n$a  = ''#delete_option#'';\n$r  = ''#RECORD_ID#'';\n$d  = "DELETE FROM zzzzsys_debug ";\n\nif($a == 1){$d  = $d . "WHERE zzzzsys_debug_id = ''$r''";}\nif($a == 2){$d  = $d . "WHERE zzzzsys_debug_id != ''$r''";}\nif($a == 3){$d  = $d . "WHERE zzzzsys_debug_id < ''$r''";}\n\nnuRunQuery($d);\n', '', '', '1'),
 ('nuobject_BS', 'BS', 'BS (OBJECT)', 'nubuilder', '    $o = ''#sob_all_type#'';\n\n    if(''#sob_all_zzzzsys_tab_id#''             == ''''){nuDisplayError(''Type Cannot Be Blank..'', ''sob_all_zzzzsys_tab_idcode'');}\n    if(''#sob_all_type#''             == ''''){nuDisplayError(''Type Cannot Be Blank..'', ''sob_all_type'');}\n    if(''#sob_all_zzzzsys_form_id#''  == ''''){nuDisplayError(''Tab - Form Cannot Be Blank..'', ''sob_all_zzzzsys_form_idcode'');}\n    if(''#sob_all_id#''               == ''''){nuDisplayError(''ID Cannot Be Blank..'', ''sob_all_id'');}\n    if(''#sob_all_label#''   == ''''){nuDisplayError(''Label Cannot Be Blank..'', ''sob_all_label'');}\n    if(''#sob_all_order#''   == ''''){nuDisplayError(''Order Cannot Be Blank..'', ''sob_all_order'');}\n    if(''#sob_all_top#''   == ''''){nuDisplayError(''Top Cannot Be Blank..'', ''sob_all_top'');}\n    if(''#sob_all_left#''   == ''''){nuDisplayError(''Left Cannot Be Blank..'', ''sob_all_left'');}\n    if(''#sob_all_width#''   == ''''){nuDisplayError(''Width Cannot Be Blank..'', ''sob_all_width'');}\nnudebug(''nuHash : |#sob_all_type#| '' . print_r($_POST[''nuHash''],1));\n\n    if(''#sob_all_height#''   == ''''){nuDisplayError(''Height Cannot Be Blank..'', ''sob_all_height'');}\n    if(''#sob_all_cloneable#''   == ''''){nuDisplayError(''Cloneable Cannot Be Blank..'', ''sob_all_cloneable'');}\n    if(''#sob_all_align#''   == ''''){nuDisplayError(''Align Cannot Be Blank..'', ''sob_all_align'');}\n    if(''#sob_all_validate#''   == ''''){nudebug(''sob_all_validate : #sob_all_validate#'');nuDisplayError(''Validation Cannot Be Blank..'', ''sob_all_validate'');}\n    if(''#sob_all_readonly#''   == ''''){nuDisplayError(''Read Only Cannot Be Blank..'', ''sob_all_readonly'');}\n\n\n    if($o == ''display''){\n        if(''#sob_display_sql#''   == ''''){nuDisplayError(''Display Cannot Be Blank..'',''sob_display_sql'');}\n    }\n\n    if($o == ''html''){\n        if(''#sob_html_code#''   == ''''){nuDisplayError(''HTML Cannot Be Blank..'',''sob_html_code'');}\n    }\n\n    if($o == ''lookup''){\n        if(''#sob_lookup_zzzzsys_form_id#''   == ''''){nuDisplayError(''Form Cannot Be Blank..'', ''sob_lookup_zzzzsys_form_idcode'');}\n        if(''#sob_lookup_code#''   == ''''){nuDisplayError(''Code Cannot Be Blank..'', ''sob_lookup_code'');}\n        if(''#sob_lookup_description#''   == ''''){nuDisplayError(''Descrition Cannot Be Blank..'', ''sob_lookup_description'');}\n        if(''#sob_lookup_description_width#''   == ''''){nuDisplayError(''Width Cdddannot Be Blank..'', ''sob_lookup_description_width'');}\n    }\n\n    if($o == ''run''){\n        if(''#sob_run_zzzzsys_form_id#''   == ''''){nuDisplayError(''Run Cannot Be Blank..'', ''sob_run_zzzzsys_form_idcode'');}\n        if(''#sob_run_method#''   == ''''){nuDisplayError(''Method Cannot Be Blank..'', ''sob_run_method'');}\n    }\n\n\n    if($o == ''select''){\n        if(''#sob_select_multiple#''   == ''''){nuDisplayError(''Multiple Cannot Be Blank..'', ''sob_select_multiple'');}\n        if(''#sob_select_sql#''   == ''''){nuDisplayError(''SQL/List Cannot Be Blank..'', ''sob_select_sql'');}\n    }\n\n    if($o == ''subform''){\n        if(''#sob_subform_zzzzsys_form_id#''   == ''''){nuDisplayError(''Form Cannot Be Blank..'', ''sob_subform_zzzzsys_form_idcode'');}\n        if(''#sob_subform_foreign_key#''   == ''''){nuDisplayError(''Foreign Key Cannot Be Blank..'', ''sob_subform_foreign_key'');}\n        if(''#sob_subform_add#''   == ''''){nuDisplayError(''Addable Cannot Be Blank..'', ''sob_subform_add'');}\n        if(''#sob_subform_delete#''   == ''''){nuDisplayError(''Deletable Cannot Be Blank..'', ''sob_subform_delete'');}\n        if(''#sob_subform_type#''   == ''''){nuDisplayError(''Type Cannot Be Blank..'', ''sob_subform_type'');}\n    }\n\n    if($o == ''''){\n        if(''#sfo_browse_sql#''   == ''''){nuDisplayError(''Browse SQL Cannot Be Blank..'', ''sfo_browse_sql'');}\n    }\n', '', '', '1'),
-('nuform_BS', 'BS', 'BS (FORM)', 'nubuilder', '    $o = ''#sfo_type#'';\n\n    if(''#sfo_type#''             == ''''){nuDisplayError(''Type Cannot Be Blank..'', ''sfo_type'');}\n    if(''#sfo_code#''             == ''''){nuDisplayError(''Code Cannot Be Blank..'', ''sfo_code'');}\n    if(''#sfo_description#''      == ''''){nuDisplayError(''Description Cannot Be Blank..'', ''sfo_description'');}\n\n\n    \n    \n    if($o == ''browseedit'' || $o == ''subform'' || $o == ''browse''){\n        \n        if($o != ''browse''){\n            nuCheckTabs();\n        }\n        \n        if($o != ''subform''){\n            nuCheckBrowse();\n        }\n        \n        if(''#sfo_browse_sql#''   == ''''){nuDisplayError(''Browse SQL Cannot Be Blank..'', ''sfo_browse_sql'');}\n    }\n\n    if($o == ''edit'' or $o == ''launch''){\n        nuCheckTabs();\n    }\n\n    if($o != ''launch''){\n        if(''#sfo_table#''            == ''''){nuDisplayError(''Table Cannot Be Blank..'', ''sfo_table'');}\n        if(''#sfo_primary_key#''      == ''''){nuDisplayError(''Primary Key Cannot Be Blank..'', ''sfo_primary_key'');}\n    }\n\nfunction nuCheckBrowse(){\n\n    $r  = 0;\n    $sf = nuSubformObject(''browse_sf'');\n\n    for($i = 0 ; $i < count($sf[''rows'']) ; $i++){\n       if($sf[''rows''][$i][8] == 0){$r++;}\n    }\n    \n    if($r == 0){\n       nuDisplayError(''Must have at least 1 Browse Column Defined..'');\n    }\n    \n}\n\nfunction nuCheckTabs(){\n    \n    $r  = 0;\n    $sf = nuSubformObject(''tab_sf'');\n    \n    for($i = 0 ; $i < count($sf[''rows'']) ; $i++){\n       if($sf[''rows''][$i][3] == 0){$r++;}\n    }\n    \n    if($r == 0){\n       nuDisplayError(''Must have at least 1 Tab Defined..'');\n    }\n    \n}', '', '', '1'),
-('nuform_AS', 'AS', 'AS (FORM)', 'nubuilder', '$s  = "\r\n    SELECT * \r\n    FROM zzzzsys_browse \r\n    WHERE sbr_zzzzsys_form_id = ''#RECORD_ID#''\r\n    ORDER BY sbr_order;\r\n";\r\n\r\n\r\n$t = nuRunQuery($s);\r\n$o = 10;\r\n\r\nwhile($r = db_fetch_object($t)){\r\n        \r\n    $s  = "\r\n        UPDATE zzzzsys_browse \r\n        SET sbr_order = ''$o''\r\n        WHERE zzzzsys_browse_id = ''$r->zzzzsys_browse_id''\r\n        ORDER BY sbr_order;\r\n    ";\r\n    \r\n    nuRunQuery($s);\r\n    \r\n    $o = $o + 10;    \r\n    \r\n}\r\n\r\n$s  = "\r\n    SELECT * \r\n    FROM zzzzsys_tab \r\n    WHERE syt_zzzzsys_form_id = ''#RECORD_ID#''\r\n    ORDER BY syt_order;\r\n";\r\n\r\n$t = nuRunQuery($s);\r\n$o = 10;\r\n\r\nwhile($r = db_fetch_object($t)){\r\n        \r\n    $s  = "\r\n        UPDATE zzzzsys_tab \r\n        SET syt_order = ''$o''\r\n        WHERE zzzzsys_tab_id = ''$r->zzzzsys_tab_id''\r\n        ORDER BY syt_order;\r\n    ";\r\n    \r\n    nuRunQuery($s);\r\n    \r\n    $o = $o + 10;    \r\n    \r\n}\r\n\r\n', '', '', '1'),
-('nuform_BO', 'BO', 'BO (FORM)', 'nubuilder', 'nuAddSystemEvents();', '', '', '1'),
-('nuform_BB', 'BB', 'BB (FORM)', 'nubuilder', 'nuAddSystemEvents();', '', '', '1');
+('nuform_AS', 'AS', 'AS (FORM)', 'nubuilder', '$s  = "\r\n    SELECT * \r\n    FROM zzzzsys_browse \r\n    WHERE sbr_zzzzsys_form_id = ''#RECORD_ID#''\r\n    ORDER BY sbr_order;\r\n";\r\n\r\n\r\n$t = nuRunQuery($s);\r\n$o = 10;\r\n\r\nwhile($r = db_fetch_object($t)){\r\n        \r\n    $s  = "\r\n        UPDATE zzzzsys_browse \r\n        SET sbr_order = ''$o''\r\n        WHERE zzzzsys_browse_id = ''$r->zzzzsys_browse_id''\r\n        ORDER BY sbr_order;\r\n    ";\r\n    \r\n    nuRunQuery($s);\r\n    \r\n    $o = $o + 10;    \r\n    \r\n}\r\n\r\n$s  = "\r\n    SELECT * \r\n    FROM zzzzsys_tab \r\n    WHERE syt_zzzzsys_form_id = ''#RECORD_ID#''\r\n    ORDER BY syt_order;\r\n";\r\n\r\n$t = nuRunQuery($s);\r\n$o = 10;\r\n\r\nwhile($r = db_fetch_object($t)){\r\n        \r\n    $s  = "\r\n        UPDATE zzzzsys_tab \r\n        SET syt_order = ''$o''\r\n        WHERE zzzzsys_tab_id = ''$r->zzzzsys_tab_id''\r\n        ORDER BY syt_order;\r\n    ";\r\n    \r\n    nuRunQuery($s);\r\n    \r\n    $o = $o + 10;    \r\n    \r\n}\r\n\r\n', '', '', '1');
 
 -- --------------------------------------------------------
 
@@ -1174,7 +1131,7 @@ CREATE TABLE `zzzzsys_setup` (
 --
 
 INSERT INTO `zzzzsys_setup` (`zzzzsys_setup_id`, `set_title`, `set_time_out_minutes`, `set_zzzzsys_timezone_id`, `set_trl_language`, `set_smtp_username`, `set_smtp_password`, `set_smtp_host`, `set_smtp_from_address`, `set_smtp_from_name`, `set_smtp_port`, `set_smtp_use_ssl`, `set_fonts`, `set_header`, `set_denied`, `set_splash`) VALUES
-('1', 'NOT USED DELETED THIS FIELD', 120, '52819fa94bc9a93', '', '', '', '', '', '', 0, '', '', 'function nuPopPHP(ev){\n\n    nuSetHash(''system_php'',1);\n    nuPopup(''nuphp'', nuFORM.current.record_id + ''_'' + ev, ''systemPHP'');\n\n}', '', '1');
+('1', 'NOT USED DELETED THIS FIELD', 120, '52819fa94bc9a93', '', '', '', '', '', '', 0, '', '', 'function nuPopPHP(ev){\n\n    var i   = nuFORM.current.record_id;\n\n    if(i == ''''){\n        \n        alert(''Cannot create Event Until This Form Has Been Saved..'')\n        return;\n    }\n    \n    nuSetHash(''system_php'',1);\n\n    nuPopup(''nuphp'', i + ''_'' + ev, ''systemPHP'');\n\n}', '', '1');
 
 -- --------------------------------------------------------
 
@@ -1200,7 +1157,7 @@ INSERT INTO `zzzzsys_tab` (`zzzzsys_tab_id`, `syt_zzzzsys_form_id`, `syt_title`,
 ('570730313dd25c5', 'nuform', 'Main', 10),
 ('56c5131630c0b35', '56c513162acd102', 'Kids Name', 10),
 ('56c5145674c17a1', '5678ab2c48c5c41', 'Kids', 20),
-('569dc4ed270f08a', 'nuhome', 'Setup', 5),
+('569dc4ed270f08a', 'nuhome', 'Setup', 10),
 ('569c44dd2339963', '5678ab2c48c5c41', 'Phone', 30),
 ('568b508eecf5dee', '568b508eec00d80', 'Business', 7),
 ('5678ab2c49bd810', '5678ab2c48c5c41', 'Employee', 10),
@@ -1262,7 +1219,8 @@ INSERT INTO `zzzzsys_tab` (`zzzzsys_tab_id`, `syt_zzzzsys_form_id`, `syt_title`,
 ('57edbac65e1d42e', '57edbac65e1c52a', 'Main', 10),
 ('57fad2784b27d77', '57fad2784b26e07', 'Main', 10),
 ('5806f4d6c7627ff', 'nuerror', 'Main', 10),
-('5811788510768ef', 'nuphp', 'Code', 20);
+('5811788510768ef', 'nuphp', 'Code', 20),
+('581288bcd699493', 'nuhome', 'Builders', 20);
 
 -- --------------------------------------------------------
 

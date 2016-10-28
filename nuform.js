@@ -1084,6 +1084,9 @@ function nuAddEditTabs(p, w){
 		l = nuBrowseTitle(w.browse_columns, i, l);
 
     }
+	
+	window.nuBrowseWidth	= l;
+	
 	nuDetach(event);
 
 	if(w.browse_columns.length > 0){
@@ -2617,10 +2620,10 @@ function nuGetSearchList(){
 	d.setAttribute('id', 'nuSearchList');
 	$('body').append(d);
 	$('#' + d.id).css({
-		'width'				: 250,
-		'height'			: (c.length * 30) + 10,
+		'width'				: 200,
+		'height'			: 10 + (c.length * 30),
 		'top'				: 138,
-		'left'				: 20,
+		'left'				: (window.nuBrowseWidth - 200) / 2,
 		'position'			: 'absolute',
 		'text-align'    	: 'left'
 	})
@@ -2664,7 +2667,6 @@ function nuGetSearchList(){
 		t.setAttribute('id', 'nuSearchText' + i);
 		$('#' + d.id).append(t);
 		$('#' + t.id).css({
-			'width'			: 20,
 			'height'		: 20,
 			'top'			: 33 + (i * 20),
 			'left'			: 40,
