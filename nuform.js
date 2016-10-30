@@ -1668,8 +1668,7 @@ function nuSetSearchColumn(){
 		
 	});
 
-	window.nuFORM.current.nosearch_columns = nosearch;
-	window.nuFORM.setCurrent();
+	window.nuFORM.setField('nosearch_columns', nosearch);
 
 }
 
@@ -1749,7 +1748,7 @@ function nuGetPage(p, t){
 	if(P == 0){P = 1;}
 	if(P > B.pages){P = B.pages;}
 	
-	b.page_number = P - 1;
+	B.page_number = P - 1;
 	
 	nuSearchAction(t);
 	
