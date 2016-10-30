@@ -642,8 +642,7 @@ function nuSetHashList($p){
 		$t		= nuRunQuery($s);
 		$R		= db_fetch_object($t);
 
-//		if(db_num_rows($t) != 0){
-		if($R->sfo_primary_key == ''){
+		if(db_num_rows($t) != 0){
 			
 			$s	= "SELECt * FROM $R->sfo_table WHERE $R->sfo_primary_key = '$rid'";
 			$t	= nuRunQuery($s);
