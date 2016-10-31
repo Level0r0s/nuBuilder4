@@ -18,8 +18,8 @@ function nuBuildForm(f){
 	window.nuEDITED					= false;
 	
 	nuSetBODY(f);
-
-	if(window.nuSCHEMA === undefined){  						//-- its an Object (load these once,  at login)
+	
+	if(f.schema.length != 0){  						//-- its an Object (load these once,  at login)
 
 		window.nuSCHEMA 			= f.schema;
 		window.nuLANGUAGE			= f.translation;
@@ -267,9 +267,9 @@ function nuRecordProperties(w, p, l){
 	var chk   = document.createElement('input');
 	var sf    = p.substr(0, p.length - 3);
 
-	chk.setAttribute('id', de);
-	chk.setAttribute('title', 'Delete This Row When Saved');
-	chk.setAttribute('type', 'checkbox');
+	chk.setAttribute('id', 		de);
+	chk.setAttribute('title', 	'Delete This Row When Saved');
+	chk.setAttribute('type', 	'checkbox');
 	chk.setAttribute('onclick', 'nuEditedReport()');
 
 	$('#' + fh)
@@ -1084,6 +1084,12 @@ function nuAddEditTabs(p, w){
 		l = nuBrowseTitle(w.browse_columns, i, l);
 
     }
+
+	var f = nuFORM.current.nosearch_columns;
+	
+	for(var i = 0 ; i < nuFORM.current.nosearch_columns.length ; i++){
+		$('#nusearch_' + f[i]).attr('nuNoSearch');
+	}
 	
 	window.nuBrowseWidth	= l;
 	
@@ -1452,11 +1458,11 @@ function nuBrowseTitle(b, i, l){
 	.html(cb + br + sp)
 	.addClass('nuBrowseTitle')
 	.css({	'text-align'	: 'center',
-			'overflow'	: 'visible',
-			'width'		: w,
-			'left'		: l
+			'overflow'		: 'visible',
+			'width'			: w,
+			'left'			: l
 	});
-	
+
 	$('#nusearch_' + i).attr('checked', un == -1);
 	
 	return l + w;
@@ -1658,12 +1664,12 @@ function nuSetSearchColumn(){
 			nosearch.push(index);
 			
 			$('#nusort_' + index)
-			.addClass('nuNoSort')
+			.addClass('nuNoSearch')
 			
 		}else{
 			
 			$('#nusort_' + index)
-			.removeClass('nuNoSort')
+			.removeClass('nuNoSearch')
 		}
 		
 	});
@@ -2572,19 +2578,24 @@ function nuSearchableList(){
 	for(var i = 0 ; i < col.length ; i++){
 		
 		var input				= document.createElement('input');
+		var search				= bc.nosearch_columns.indexOf(i) == -1 ? false : true;
 		
 		input.setAttribute('id', 'nuSearchableCheckbox' + i);
 		
 		$('#nuSearchableDialog').append(input);
-
+		
 		$('#' + 'nuSearchableCheckbox' + i)
 		.append(input)
 		.addClass('nuSearchableDialog')
 		.css('left', 5)
 		.css('height', 25)
 		.css('top', 10 + (i * 27))
-		.checked				= bc.nosearch_columns.indexOf(i) == -1 ? false : true;
+		.checked				= search;
 
+		if(search){
+			$('#' + 'nuSearchableCheckbox' + i)
+			.addClass('nuNoSearch')
+		}
 
 
 		

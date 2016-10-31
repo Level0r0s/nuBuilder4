@@ -1064,15 +1064,20 @@ function nuAddToHashList($J, $run){
 }
 
 function nuSchema(){
+	
+	$S				= array();
 
-	$t	= nuRunQuery("SELECT table_name FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = DATABASE()");
-	$S	= array();
+	if($_POST['nuSTATE']['session_id'] == ''){
+		
+		$t			= nuRunQuery("SELECT table_name FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = DATABASE()");
 
-	while($r = db_fetch_object($t)){
+		while($r = db_fetch_object($t)){
 
-		$tn		= $r->table_name; 
-		$S[$tn]	= db_columns($tn);
+			$tn		= $r->table_name; 
+			$S[$tn]	= db_columns($tn);
 
+		}
+		
 	}
 
 	return $S;

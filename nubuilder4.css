@@ -110,7 +110,6 @@ input {
   padding: 0px;
 }
 
-
 .nuIframe {
   border-color: lightgrey;
   border-style: solid;
@@ -322,9 +321,8 @@ input {
   cursor: pointer;
 }
 
-.nuNoSort {
+.nuNoSearch {
   color: #959595;	
-  cursor: pointer;
 }
 
 .nuBrowseTitle {
@@ -710,6 +708,11 @@ input {
   background-color: yellow !important;
   border-color: red !important;
   
+}
+
+.nuMust:after{ 
+    content: " *";
+    color:#f00;
 }
 
 .nuSaveMessageProgress {
