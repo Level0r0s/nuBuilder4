@@ -665,7 +665,7 @@ input {
 
 .nuDragOptionsBox {
     position: absolute;
-    right: 0px;
+    left: 0px;
     top: 0px;
     background-color: #c1c1c1;
     z-index: -1;

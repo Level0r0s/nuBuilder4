@@ -154,7 +154,7 @@ function nuBuildLookup(t, p){
 	
 	$('#nuDragDialog')
 	.css('visibility', 'hidden')
-	.append('<iframe style="left:5px;top:35px;width:400px;height:400px;position:absolute" id="nuLookup" src="index.php?opener=' + l + '&target=' + tar + '&type=lookup&iframe=1"></iframe>');
+	.append('<iframe style="right:5px;top:35px;width:400px;height:400px;position:absolute" id="nuLookup" src="index.php?opener=' + l + '&target=' + tar + '&type=lookup&iframe=1"></iframe>');
 
 }
 
@@ -165,13 +165,13 @@ function nuPopup(f, r, filter){
 	window.nuOPENER.push(new nuOpener(f, r, filter));
 	
 	var l 	= window.nuOPENER.length -1;
-console.log('opening popup :', f, r, l);
+    //console.log('opening popup :', f, r, l);
 
 	window.nuDialog.createDialog(50, 50, 50, 50, '');
 	
 	$('#nuDragDialog')
 	.css('visibility', 'hidden')
-	.append('<iframe style="left:5px;top:35px;width:400px;height:400px;position:absolute" id="nuLookup" src="index.php?opener=' + l + '&type=browse&iframe=1"></iframe>')
+	.append('<iframe style="right:5px;top:35px;width:400px;height:400px;position:absolute" id="nuLookup" src="index.php?opener=' + l + '&type=browse&iframe=1"></iframe>')
 	.prepend('<div id="nuDraggingBox" style="position:absolute; bottom:0px; right:0px; width:20px; height:20px; z-index:200"></div>');
 	
 }
@@ -240,7 +240,7 @@ function nuCreateDialog(t){
 
 		$('#nuDragDialog').addClass('nuDragDialog nuDragNoSelect')
 		.css({'left':l, 'top':t, 'width':w, 'height':h, 'background-color':'#E0E0E0', 'z-index': 3000, 'position':'absolute'})
-		.html('<div id="dialogTitle" style="background-color:#CCCCCC ;position:absolute;width:100%;height:35px;font-size:16px;font-family:Helvetica"><div id="dialogTitleWords" style="padding-top: 6px;height:30px;">&nbsp;&nbsp;'+title+'</div><img id="dialogClose" src="close.png" style="position:absolute; top:0px; right:0px"></div>')
+		.html('<div id="dialogTitle" style="background-color:#CCCCCC ;position:absolute;width:100%;height:35px;font-size:16px;font-family:Helvetica"><div id="dialogTitleWords" style="padding-top: 6px;height:30px;">&nbsp;&nbsp;'+title+'</div><img id="dialogClose" src="close.png" style="position:absolute; top:0px; left:0px"></div>')
 		.on('mousemove', 	function(event){nuDialog.move(event);})
 		.on('mouseout', 	function(event){$('#dialogClose').css('background-color','');})
 		.on('click',     	function(event){nuDialog.click(event);});

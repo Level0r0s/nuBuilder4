@@ -60,7 +60,7 @@ function nuCreateDialog(t){
 
 		$('#nuDragDialog').addClass('nuDragDialog nuDragNoSelect');
 		$('#nuDragDialog').css({'left':l, 'top':t, 'width':w, 'height':h, 'background-color':'#F0F0F0', 'z-index': 3000, 'position':'absolute'});
-		$('#nuDragDialog').html('<div id="dialogTitle" style="background-color:#CCCCCC ;position:absolute;width:100%;height:30px;font-size:16px;font-family:Helvetica"><div id="dialogTitleWords" style="padding-top: 6px;height:30px;">&nbsp;&nbsp;'+title+'</div><img id="dialogClose" src="close.png" style="position:absolute; top:0px; right:0px"></div>');
+		$('#nuDragDialog').html('<div id="dialogTitle" style="background-color:#CCCCCC ;position:absolute;width:100%;height:30px;font-size:16px;font-family:Helvetica"><div id="dialogTitleWords" style="padding-top: 6px;height:30px;">&nbsp;&nbsp;'+title+'</div><img id="dialogClose" src="close.png" style="position:absolute; top:0px; left:0px"></div>');
 		
 		$('#nuDragDialog').on('mousemove', function(event){nuDragD.move(event);});
 		$('#nuDragDialog').on('mouseout', function(event){$('#dialogClose').css('background-color','');});
