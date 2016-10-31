@@ -522,7 +522,7 @@ function nuCreateDragOptionsBox(form){
         '</div>'+
     '</div>';
 	
-    $('#nuDragDialog',window.parent.document.body).append(optionsBoxHTML);
+    $('#nuDragDialog',window.parent.document.body).prepend(optionsBoxHTML);
     nuInitialiseDragState();
     nuPopulateFieldsList(0);
 	
