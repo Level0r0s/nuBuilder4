@@ -225,6 +225,10 @@ input {
    cursor: pointer;
 }
 
+.nuShadow {
+  box-shadow: 5px 5px 5px 0px rgba(150,147,150,1);
+}
+
 .nuOptionsList {
   box-shadow: 5px 5px 5px 0px rgba(150,147,150,1);
    background-color: orange;
@@ -354,16 +358,17 @@ input {
   color: red;
 }
 
-.nuSearchList{
-  background-color: #D8D8D8;
+#nuSearchList{
+  background-color: orange;
   border-style: solid;
   border-width: 1px;
   border-color: #C3C3C3;
   box-shadow: 5px 5px 5px 0px rgba(150,147,150,1);
   padding: 5px 0px;
+  box-shadow: 5px 5px 5px 0px rgba(150,147,150,1);
 }
 
-.nuSearchListClose:hover{
+#nuSearchListClose:hover{
   cursor: pointer;
   color: red;
 }
@@ -522,7 +527,6 @@ input {
   width: 100%;
   height: 100%;
   opacity: 0.70;
-	
 }
 
 .nuDragOptionsField {

@@ -1086,9 +1086,9 @@ function nuAddEditTabs(p, w){
     }
 
 	var f = nuFORM.current.nosearch_columns;
-	
+
 	for(var i = 0 ; i < nuFORM.current.nosearch_columns.length ; i++){
-		$('#nusearch_' + f[i]).attr('nuNoSearch');
+		$('#nusort_' + f[i]).addClass('nuNoSearch');
 	}
 	
 	window.nuBrowseWidth	= l;
@@ -2620,7 +2620,9 @@ function nuSearchableList(){
 
 
 function nuGetSearchList(){
-
+	
+	$('body').append('<div id="nuModal"></div>')
+	
 	var n	= nuFORM.current.nosearch_columns;
 	var c	= nuFORM.current.browse_columns;
 	var d 	= document.createElement('div');
@@ -2651,7 +2653,7 @@ function nuGetSearchList(){
 		'position'			: 'absolute',
 		'text-align'    	: 'center'
 	})
-	.attr('onclick', '$("#nuSearchList").remove();')
+	.attr('onclick', '$("#nuSearchList").remove();;$("#nuModal").remove();')
 	.html('X')
 	.addClass('nuSearchListClose');
 	
