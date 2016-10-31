@@ -21,7 +21,7 @@ function nuBuildForm(f){
 	
 	if(f.schema.length != 0){  						//-- its an Object (load these once,  at login)
 
-		window.nuSCHEMA 			= f.schema;
+		nuFORM.schema				= f.schema;
 		window.nuLANGUAGE			= f.translation;
 		
 	}
@@ -1554,7 +1554,7 @@ function nuBrowseTable(){
 	var row				= bc.browse_rows;
 	var rows			= bc.rows;
 	var h				= bc.row_height;
-	var t				= 72 - h;
+	var t				= 57 - h;
 	var l				= 13;
 	
 	for(r = 0 ; r < rows ; r++){
@@ -2618,24 +2618,38 @@ function nuSearchableList(){
 
 }
 
+function nuWidestTitle(c){
+	
+	var w	= 0;
+
+	for(var i = 0 ; i < c.length ; i++){
+		w	= Math.max(nuGetWordWidth(c[i].title), w);
+	}
+	
+	return w + 70;
+	
+}
+
 
 function nuGetSearchList(){
 	
 	$('body').append('<div id="nuModal"></div>')
 	
-	var n	= nuFORM.current.nosearch_columns;
-	var c	= nuFORM.current.browse_columns;
-	var d 	= document.createElement('div');
+	var n		= nuFORM.current.nosearch_columns;
+	var c		= nuFORM.current.browse_columns;
+	var d 		= document.createElement('div');
 
 	$('#nuOptionsListBox').remove();
+
+	var widest	= nuWidestTitle(c);
 
 	d.setAttribute('id', 'nuSearchList');
 	$('body').append(d);
 	$('#' + d.id).css({
-		'width'				: 200,
+		'width'				: widest,
 		'height'			: 10 + (c.length * 30),
 		'top'				: 138,
-		'left'				: (window.nuBrowseWidth - 200) / 2,
+		'left'				: (window.nuBrowseWidth - widest) / 2,
 		'position'			: 'absolute',
 		'text-align'    	: 'left'
 	})
@@ -2685,6 +2699,17 @@ function nuGetSearchList(){
 			'position'		: 'absolute',
 			'text-align'    : 'left'
 		})
+		.attr('onclick', 'nuSetSearchColumn();')
+		.click(function() {
+			
+			var cb = $('#nuSearchList' + i).attr('checked');
+			
+			$('#' + 'nuSearchList' + i).attr('checked', !cb);
+			
+			nuSetSearchColumn();
+			
+		})
+		.addClass('nuOptionItem')
 		.html(c[i].title);
 	
 	}
