@@ -760,27 +760,27 @@ function nuSUBFORM(w, i, l, p, prop){
     }
 
 	var rowTop      = 50;
-
+	
 	if(SF.subform_type == 'f'){
-        
-        rowTop = 33;
-
-		var tabId  = id + 'nuTabHolder';
-		var tabDiv = document.createElement('div');
-		tabDiv.setAttribute('id', tabId);
-		$('#' + id).append(tabDiv);
-		$('#' + tabId).css({'top'      : 0,
-						'left'       	: 0,
-						'width'      	: rowWidth,
-						'height'     	: rowTop,
-						'overflow-x'	: 'hidden',
-						'overflow-y'	: 'hidden',
-						'position'	: 'absolute',
-						'padding'	: '12px 0px 0px 0px'
-		}).addClass('nuTabHolder');
-
-		nuAddEditTabs(id, SF.forms[0]);
+		rowTop      = 33;
+	}
+	
+	var tabId  = id + 'nuTabHolder';
+	var tabDiv = document.createElement('div');
+	tabDiv.setAttribute('id', tabId);
+	$('#' + id).append(tabDiv);
+	$('#' + tabId).css({'top'      : 0,
+					'left'       	: 0,
+					'width'      	: rowWidth,
+					'height'     	: rowTop,
+					'overflow-x'	: 'hidden',
+					'overflow-y'	: 'hidden',
+					'position'	: 'absolute',
+					'padding'	: '12px 0px 0px 0px'
+	}).addClass('nuTabHolder');
 		
+	if(SF.subform_type == 'f'){
+		nuAddEditTabs(id, SF.forms[0]);
 	}
 	
 	nuOptions(id, SF.sf_form_id, 'subform', w.global_access);
@@ -1235,6 +1235,8 @@ function nuOptions(p, f, t, access){
 			$( this ).attr('src', 'nuoptions.png');
 		});
 
+		console.log(id);
+		
 		if(t == 'form'){
 			$('#' + id)
 			.css('top', 66)
