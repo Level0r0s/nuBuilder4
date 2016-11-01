@@ -165,7 +165,6 @@ function nuPopup(f, r, filter){
 	window.nuOPENER.push(new nuOpener(f, r, filter));
 	
 	var l 	= window.nuOPENER.length -1;
-console.log('opening popup :', f, r, l);
 
 	window.nuDialog.createDialog(50, 50, 50, 50, '');
 	
