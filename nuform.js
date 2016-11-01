@@ -1234,8 +1234,6 @@ function nuOptions(p, f, t, access){
 		}, function(){
 			$( this ).attr('src', 'nuoptions.png');
 		});
-
-		console.log(id);
 		
 		if(t == 'form'){
 			$('#' + id)
