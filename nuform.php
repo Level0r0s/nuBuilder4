@@ -678,7 +678,7 @@ function nuBrowseRows($f){
 	
 	$flds			= array();
 	$fields 		= array_slice($S->fields,1);
-
+	
 	if(count($_POST['nuSTATE']['nosearch_columns']) == 0){
 		$_POST['nuSTATE']['nosearch_columns']	= array();
 	}
@@ -913,19 +913,20 @@ function nuCheckSession(){
 		
 	}else{
 
-		$t						= nuRunQuery("SELECT * FROM zzzzsys_session WHERE zzzzsys_session_id = ? ", array($_SESSION['SESSIONID']));		
+		$t							= nuRunQuery("SELECT * FROM zzzzsys_session WHERE zzzzsys_session_id = ? ", array($_SESSION['SESSIONID']));		
 		
 		if(db_num_rows($t) > 0){
 
-			$r 					= db_fetch_object($t);
+			$r 						= db_fetch_object($t);
 			
 			if(nuHasSessionTimedOut($r->sss_timeout)) {
-				$s					= $_SESSION['SESSIONID'];
-				$c->session_id		= $s;
+
+				$c->session_id		= $_SESSION['SESSIONID'];
 				$c->form_id			= $_POST['nuSTATE']['form_id'];
 				$c->record_id		= $_POST['nuSTATE']['record_id'];
 				$c->schema			= nuSchema();	
 				$c->translation		= nuTranslate($r->sus_language);
+				
 			} else {
 			
 				nuDisplayTimeout();	

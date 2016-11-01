@@ -642,8 +642,7 @@ function nuSetHashList($p){
 		$t		= nuRunQuery($s);
 		$R		= db_fetch_object($t);
 
-//		if(db_num_rows($t) != 0){
-		if($R->sfo_primary_key == ''){
+		if(db_num_rows($t) != 0){
 			
 			$s	= "SELECt * FROM $R->sfo_table WHERE $R->sfo_primary_key = '$rid'";
 			$t	= nuRunQuery($s);
@@ -1065,15 +1064,20 @@ function nuAddToHashList($J, $run){
 }
 
 function nuSchema(){
+	
+	$S				= array();
 
-	$t	= nuRunQuery("SELECT table_name FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = DATABASE()");
-	$S	= array();
+	if($_POST['nuSTATE']['session_id'] == ''){
+		
+		$t			= nuRunQuery("SELECT table_name FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = DATABASE()");
 
-	while($r = db_fetch_object($t)){
+		while($r = db_fetch_object($t)){
 
-		$tn		= $r->table_name; 
-		$S[$tn]	= db_columns($tn);
+			$tn		= $r->table_name; 
+			$S[$tn]	= db_columns($tn);
 
+		}
+		
 	}
 
 	return $S;

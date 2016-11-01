@@ -5,9 +5,9 @@ class nuFormObject {
 	
 	constructor() {
 		
-		this.breadCrumb 	= [];
-		this.current		= {};
-		this.last			= -1;
+		this.breadCrumb 			= [];
+		this.current				= {};
+		this.last					= -1;
 		this.setCurrent();
 		
 	}
@@ -17,6 +17,12 @@ class nuFormObject {
 		this.last					= this.breadCrumb.length - 1;
 		this.current				= this.breadCrumb[this.last];
 		this.breadCrumb[this.last]	= this.current;						//-- copy changes from current to last
+		
+	}
+	
+	setFromCurrent(){
+		
+		this.breadCrumb[this.last]	= this.current;
 		
 	}
 	

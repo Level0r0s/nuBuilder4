@@ -18,10 +18,10 @@ function nuBuildForm(f){
 	window.nuEDITED					= false;
 	
 	nuSetBODY(f);
+	
+	if(f.schema.length != 0){  						//-- its an Object (load these once,  at login)
 
-	if(window.nuSCHEMA === undefined){  						//-- its an Object (load these once,  at login)
-
-		window.nuSCHEMA 			= f.schema;
+		nuFORM.schema				= f.schema;
 		window.nuLANGUAGE			= f.translation;
 		
 	}
@@ -267,9 +267,9 @@ function nuRecordProperties(w, p, l){
 	var chk   = document.createElement('input');
 	var sf    = p.substr(0, p.length - 3);
 
-	chk.setAttribute('id', de);
-	chk.setAttribute('title', 'Delete This Row When Saved');
-	chk.setAttribute('type', 'checkbox');
+	chk.setAttribute('id', 		de);
+	chk.setAttribute('title', 	'Delete This Row When Saved');
+	chk.setAttribute('type', 	'checkbox');
 	chk.setAttribute('onclick', 'nuEditedReport()');
 
 	$('#' + fh)
@@ -1084,6 +1084,12 @@ function nuAddEditTabs(p, w){
 		l = nuBrowseTitle(w.browse_columns, i, l);
 
     }
+
+	var f = nuFORM.current.nosearch_columns;
+
+	for(var i = 0 ; i < nuFORM.current.nosearch_columns.length ; i++){
+		$('#nusort_' + f[i]).addClass('nuNoSearch');
+	}
 	
 	window.nuBrowseWidth	= l;
 	
@@ -1452,11 +1458,11 @@ function nuBrowseTitle(b, i, l){
 	.html(cb + br + sp)
 	.addClass('nuBrowseTitle')
 	.css({	'text-align'	: 'center',
-			'overflow'	: 'visible',
-			'width'		: w,
-			'left'		: l
+			'overflow'		: 'visible',
+			'width'			: w,
+			'left'			: l
 	});
-	
+
 	$('#nusearch_' + i).attr('checked', un == -1);
 	
 	return l + w;
@@ -1548,7 +1554,7 @@ function nuBrowseTable(){
 	var row				= bc.browse_rows;
 	var rows			= bc.rows;
 	var h				= bc.row_height;
-	var t				= 72 - h;
+	var t				= 57 - h;
 	var l				= 13;
 	
 	for(r = 0 ; r < rows ; r++){
@@ -1658,18 +1664,17 @@ function nuSetSearchColumn(){
 			nosearch.push(index);
 			
 			$('#nusort_' + index)
-			.addClass('nuNoSort')
+			.addClass('nuNoSearch')
 			
 		}else{
 			
 			$('#nusort_' + index)
-			.removeClass('nuNoSort')
+			.removeClass('nuNoSearch')
 		}
 		
 	});
 
-	window.nuFORM.current.nosearch_columns = nosearch;
-	window.nuFORM.setCurrent();
+	window.nuFORM.setField('nosearch_columns', nosearch);
 
 }
 
@@ -1749,7 +1754,7 @@ function nuGetPage(p, t){
 	if(P == 0){P = 1;}
 	if(P > B.pages){P = B.pages;}
 	
-	b.page_number = P - 1;
+	B.page_number = P - 1;
 	
 	nuSearchAction(t);
 	
@@ -2573,19 +2578,24 @@ function nuSearchableList(){
 	for(var i = 0 ; i < col.length ; i++){
 		
 		var input				= document.createElement('input');
+		var search				= bc.nosearch_columns.indexOf(i) == -1 ? false : true;
 		
 		input.setAttribute('id', 'nuSearchableCheckbox' + i);
 		
 		$('#nuSearchableDialog').append(input);
-
+		
 		$('#' + 'nuSearchableCheckbox' + i)
 		.append(input)
 		.addClass('nuSearchableDialog')
 		.css('left', 5)
 		.css('height', 25)
 		.css('top', 10 + (i * 27))
-		.checked				= bc.nosearch_columns.indexOf(i) == -1 ? false : true;
+		.checked				= search;
 
+		if(search){
+			$('#' + 'nuSearchableCheckbox' + i)
+			.addClass('nuNoSearch')
+		}
 
 
 		
@@ -2608,22 +2618,38 @@ function nuSearchableList(){
 
 }
 
+function nuWidestTitle(c){
+	
+	var w	= 0;
+
+	for(var i = 0 ; i < c.length ; i++){
+		w	= Math.max(nuGetWordWidth(c[i].title), w);
+	}
+	
+	return w + 70;
+	
+}
+
 
 function nuGetSearchList(){
-
-	var n	= nuFORM.current.nosearch_columns;
-	var c	= nuFORM.current.browse_columns;
-	var d 	= document.createElement('div');
+	
+	$('body').append('<div id="nuModal"></div>')
+	
+	var n		= nuFORM.current.nosearch_columns;
+	var c		= nuFORM.current.browse_columns;
+	var d 		= document.createElement('div');
 
 	$('#nuOptionsListBox').remove();
+
+	var widest	= nuWidestTitle(c);
 
 	d.setAttribute('id', 'nuSearchList');
 	$('body').append(d);
 	$('#' + d.id).css({
-		'width'				: 200,
+		'width'				: widest,
 		'height'			: 10 + (c.length * 30),
 		'top'				: 138,
-		'left'				: (window.nuBrowseWidth - 200) / 2,
+		'left'				: (window.nuBrowseWidth - widest) / 2,
 		'position'			: 'absolute',
 		'text-align'    	: 'left'
 	})
@@ -2641,7 +2667,7 @@ function nuGetSearchList(){
 		'position'			: 'absolute',
 		'text-align'    	: 'center'
 	})
-	.attr('onclick', '$("#nuSearchList").remove();')
+	.attr('onclick', '$("#nuSearchList").remove();;$("#nuModal").remove();')
 	.html('X')
 	.addClass('nuSearchListClose');
 	
@@ -2673,6 +2699,17 @@ function nuGetSearchList(){
 			'position'		: 'absolute',
 			'text-align'    : 'left'
 		})
+		.attr('onclick', 'nuSetSearchColumn();')
+		.click(function() {
+			
+			var cb = $('#nuSearchList' + i).attr('checked');
+			
+			$('#' + 'nuSearchList' + i).attr('checked', !cb);
+			
+			nuSetSearchColumn();
+			
+		})
+		.addClass('nuOptionItem')
 		.html(c[i].title);
 	
 	}

@@ -1,6 +1,8 @@
 
-function nuAjax(w,successCallback,errorCallback) {
+function nuAjax(w,successCallback,errorCallback){
+console.log('current : ', w.current);
  	$.ajax({
+
 		timeout  : 3000,
 		async    : true,  
 		dataType : "json",
@@ -8,7 +10,7 @@ function nuAjax(w,successCallback,errorCallback) {
 		method   : "POST",
 		data     : {nuSTATE : w.current},
 		dataType : "json",			
-		success: function(data,textStatus,jqXHR){
+		success	 : function(data,textStatus,jqXHR){
 				successCallback(data,textStatus,jqXHR);
 		},
 		error: function(jqXHR,textStatus,errorThrown){
@@ -28,12 +30,15 @@ function nuAjax(w,successCallback,errorCallback) {
 			if (errorCallback !== undefined) {
 				errorCallback(jqXHR,textStatus,errorThrown);
 			}
+			
 			nuFormatAjaxErrorMessage(jqXHR, errorThrown);
+			
 		},
 
 		complete: function(jqXHR,textStatus){
 			//todo - probably not needed
-		} 
+		}
+		
 	});    
 
 }
