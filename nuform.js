@@ -955,7 +955,7 @@ function nuLabel(w, i, p, prop){
 	})
 	.html(l)
 	.attr('ondblclick','nuPopup("nuobject", "' + prop.objects[i].object_id + '")');
-debugger;
+
 	if(prop.objects[i].valid == 1){$('#' + id).addClass('nuBlank');}
 	if(prop.objects[i].valid == 2){$('#' + id).addClass('nuDuplicate');}
 	
@@ -2624,7 +2624,7 @@ function nuSearchableList(){
 
 function nuWidestTitle(c){
 	
-	var w	= 0;
+	var w	= 120;
 
 	for(var i = 0 ; i < c.length ; i++){
 		w	= Math.max(nuGetWordWidth(c[i].title), w);
