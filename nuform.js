@@ -931,6 +931,7 @@ function nuPad2(i){
 
 
 function nuLabel(w, i, p, prop){
+	
 
 	if(prop.objects[i].label == '' || prop.objects[i].display == 0){return;}
 	
@@ -954,7 +955,10 @@ function nuLabel(w, i, p, prop){
 	})
 	.html(l)
 	.attr('ondblclick','nuPopup("nuobject", "' + prop.objects[i].object_id + '")');
-
+debugger;
+	if(prop.objects[i].valid == 1){$('#' + id).addClass('nuBlank');}
+	if(prop.objects[i].valid == 2){$('#' + id).addClass('nuDuplicate');}
+	
 }
 
 function nuPopulateLookup3(v){

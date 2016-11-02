@@ -329,6 +329,17 @@ input {
   color: #959595;	
 }
 
+.nuBlank:before{ 
+    content: ' *';
+    color:#00ADEF;
+}
+
+.nuDuplicate:before{ 
+    font-size:14px;
+    content: ' *';
+    color:#7FC347;
+}
+
 .nuBrowseTitle {
   background-color: #CCCCCC;
   height: 55px;
