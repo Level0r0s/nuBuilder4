@@ -299,17 +299,23 @@ function nuGetButton($b, $a){
 
 function nuDefaultObject($r, $t){
     
-	$o      = new stdClass();
+	$o					= new stdClass();
+	$a					= array();
+	$a['none']			= 0;
+	$a['noblanks']		= 1;
+	$a['noduplicate']	= 2;
+	$v					= $r->sob_all_validate;
 
-	$o->type   		= $r->sob_all_type;
+	$o->type 	  		= $r->sob_all_type;
 	$o->object_id		= $r->zzzzsys_object_id;
-	$o->id   		= $r->sob_all_id;
+	$o->id  	 		= $r->sob_all_id;
 	$o->label   		= $r->sob_all_label;
-	$o->top   		= $r->sob_all_top;
+	$o->top   			= $r->sob_all_top;
 	$o->left			= $r->sob_all_left;
 	$o->width   		= $r->sob_all_width;
-	$o->height		= $r->sob_all_height;
-	$o->format		= '';
+	$o->height			= $r->sob_all_height;
+	$o->valid			= $a[$r->sob_all_validate];
+	$o->format			= '';
 
 	for($i = 0 ; $i < count($t) ; $i++){
 
