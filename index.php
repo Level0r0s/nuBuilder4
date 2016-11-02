@@ -95,6 +95,8 @@ window.nuHASH			= [];
 			} else {
 				var p				= from.nuOPENER[from.nuOPENER.length -1];
 			}
+			
+			from.nuOPENER.pop();
 
 			nuBindCtrlEvents();
 			window.filter			= p.filter;

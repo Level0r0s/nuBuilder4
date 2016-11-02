@@ -1,6 +1,6 @@
 
 function nuAjax(w,successCallback,errorCallback){
-console.log('current : ', w.current);
+
  	$.ajax({
 
 		timeout  : 3000,

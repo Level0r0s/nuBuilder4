@@ -519,7 +519,6 @@ function nuSelectOptions($sql) {
 function nuRemoveNonCharacters($s){
 
 	$snip = str_replace('.', '', $s); // remove dots
-	$snip = str_replace(' ', '', $snip); // remove spaces
 	$snip = str_replace("\t", '', $snip); // remove tabs
 	$snip = str_replace("\n", '', $snip); // remove new lines
 	$snip = str_replace("\r", '', $snip); // remove carriage returns	
@@ -1352,7 +1351,7 @@ function nuAddPrintButtons($f, $t, $a){
 }
 
 
-function nuAddSystemEvents(){
+function nuAddSystemEvent($event){
 	
 	$F			= $_POST['nuHash']['RECORD_ID'];
 	$events		= ['BB' => 'Before Browse','BO' => 'Before Open','BS' => 'Before Save','AS' => 'After Save','BD' => 'Before Delete','AD' => 'After Delete'];
