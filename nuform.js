@@ -142,7 +142,7 @@ function nuAddActionButtons(f){
 		draggable = 1;
 	}
 
-	var b 		= f.buttons;
+	var b		= f.buttons;
 
 	if(f.record_id == ''){
 
