@@ -163,9 +163,9 @@ function nuPopup(f, r, filter){
 	$('#nuOptionsListBox').remove();
 	
 	window.nuOPENER.push(new nuOpener(f, r, filter));
-	
-	var l 	= window.nuOPENER.length -1;
 
+	var l 	= window.nuOPENER.length - 1;
+	
 	window.nuDialog.createDialog(50, 50, 50, 50, '');
 	
 	$('#nuDragDialog')
