@@ -16,7 +16,8 @@ window.nuDRAGLINEVID			= '';
 window.nuNEW					= '';
 
 function nuOpener(f, r, filter){
-
+	
+	this.id					= nuID();
 	this.form_id			= f;
 	this.record_id			= r;
 	
@@ -30,6 +31,27 @@ function nuOpener(f, r, filter){
 
 function nuOpenerAppend(t, k) {
 	window.nuOPENER[window.nuOPENER.length - 1][t] = k;
+}
+
+function getOpenerById(pOPENER, pid) {
+	
+	for (var i = 0; i < pOPENER.length; i++) {
+		if(pOPENER[i].id == pid) {
+			return pOPENER[i];
+		}
+	}
+	
+	return;
+}
+
+function removeOpenerById(pOPENER, pid) {
+
+	for (var i = 0; i < pOPENER.length; i++) {
+		if(pOPENER[i].id == pid) {
+			pOPENER.splice(i,1);
+		}
+	}
+
 }
 
 function nuGetBreadcrumb(b, t = ''){
@@ -150,11 +172,13 @@ function nuBuildLookup(t, p){
 	
 	}
 	
+	var open = window.nuOPENER[window.nuOPENER.length - 1];
+	
 	window.nuDialog.createDialog(50, 50, 50, 50, '');
 	
 	$('#nuDragDialog')
 	.css('visibility', 'hidden')
-	.append('<iframe style="right:5px;top:35px;width:400px;height:400px;position:absolute" id="nuLookup" src="index.php?opener=' + l + '&target=' + tar + '&type=lookup&iframe=1"></iframe>');
+	.append('<iframe style="right:5px;top:35px;width:400px;height:400px;position:absolute" id="nuLookup" src="index.php?opener=' +open.id + '&target=' + tar + '&type=lookup&iframe=1"></iframe>');
 
 }
 
@@ -163,14 +187,14 @@ console.log(f, r, filter);
 	$('#nuOptionsListBox').remove();
 	
 	window.nuOPENER.push(new nuOpener(f, r, filter));
-	
-	var l 	= window.nuOPENER.length -1;
 
+	var id 	= window.nuOPENER[window.nuOPENER.length - 1].id;
+	
 	window.nuDialog.createDialog(50, 50, 50, 50, '');
 	
 	$('#nuDragDialog')
 	.css('visibility', 'hidden')
-	.append('<iframe style="right:5px;top:35px;width:400px;height:400px;position:absolute" id="nuLookup" src="index.php?opener=' + l + '&type=browse&iframe=1"></iframe>')
+	.append('<iframe style="right:5px;top:35px;width:400px;height:400px;position:absolute" id="nuLookup" src="index.php?opener=' + id + '&type=browse&iframe=1"></iframe>')
 	.prepend('<div id="nuDraggingBox" style="position:absolute; bottom:0px; right:0px; width:20px; height:20px; z-index:200"></div>');
 	
 }
@@ -618,5 +642,12 @@ function nuEditPHP(ev){
 
 }
 
+function nuID() {
 
+    var ts = +new Date;
+    var tsStr = ts.toString();
+
+    return tsStr;
+
+};
 

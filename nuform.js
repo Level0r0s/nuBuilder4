@@ -620,8 +620,9 @@ function nuRUN(w, i, l, p, prop){
 
 		window.nuOPENER.push(new nuOpener(F, R, L));
 
-		var open = window.nuOPENER.length - 1;
-		var u	= window.location.origin + f + prop.objects[i].src;
+		var open = window.nuOPENER[window.nuOPENER.length - 1];
+		
+		var u	= window.location.origin + f + prop.objects[i].src + '&opener=' + open.id;
 		$('#' + id).attr('src', u).removeClass('').addClass('nuIframe');
 
 	}
