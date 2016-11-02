@@ -79,6 +79,7 @@ window.nuHASH			= [];
 
 			if(nuIsOpener(window)){
 				var from			= window.opener;
+
 			}else{
 				var from			= window.parent;
 			}
@@ -91,12 +92,13 @@ window.nuHASH			= [];
 			window.nuFORM.setCurrent();
 
 			if('$opener' != '') {
-				var p				= from.nuOPENER[Number($opener)];
+				var p				= getOpenerById(from.nuOPENER, Number($opener));
+				removeOpenerById(from.nuOPENER, Number($opener));
 			} else {
 				var p				= from.nuOPENER[from.nuOPENER.length -1];
+				removeOpenerById(from.nuOPENER, from.nuOPENER[from.nuOPENER.length -1]);
 			}
-						
-			
+		
 			nuBindCtrlEvents();
 			window.filter			= p.filter;
 

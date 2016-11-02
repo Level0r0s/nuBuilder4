@@ -620,8 +620,9 @@ function nuRUN(w, i, l, p, prop){
 
 		window.nuOPENER.push(new nuOpener(F, R, L));
 
-		var open = window.nuOPENER.length - 1;
-		var u	= window.location.origin + f + prop.objects[i].src + '&opener=' + open;
+		var open = window.nuOPENER[window.nuOPENER.length - 1];
+		
+		var u	= window.location.origin + f + prop.objects[i].src + '&opener=' + open.id;
 		$('#' + id).attr('src', u).removeClass('').addClass('nuIframe');
 
 	}
@@ -955,7 +956,7 @@ function nuLabel(w, i, p, prop){
 	})
 	.html(l)
 	.attr('ondblclick','nuPopup("nuobject", "' + prop.objects[i].object_id + '")');
-debugger;
+
 	if(prop.objects[i].valid == 1){$('#' + id).addClass('nuBlank');}
 	if(prop.objects[i].valid == 2){$('#' + id).addClass('nuDuplicate');}
 	
