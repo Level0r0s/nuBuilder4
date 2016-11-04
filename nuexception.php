@@ -2,6 +2,7 @@
 
 //==================CLASS=================================================================
 
+
 function nuException($errorMessage, $errorCode, $exceptionInfo = array()) {
   
 	cssinclude('nubuilder4.css');

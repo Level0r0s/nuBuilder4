@@ -378,6 +378,7 @@ function nuBreadcrumbDescription($r, $R){
 		
 		$t	= nuRunQuery($b);
 		$r	= db_fetch_row($t);
+		
 		return $r[0];
 	
 	}
