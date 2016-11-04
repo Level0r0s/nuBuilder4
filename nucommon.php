@@ -826,20 +826,27 @@ function nuRunHTML(){
 }
 
 
-function nuReplaceHashes($str, $arr){
+function nuReplaceHashVariables($s){
 
-	while(list($key, $value) = each($arr)){
+	$s		= trim($s);
+	
+	if($s == ''){
+		return '';
+	}
+	$a 		= $_POST['nuHash'];
 
-		if( !is_object($value) and !is_array($value) and $str != '' and $key != ''){
-			$newValue = addslashes($value);
-			$str = str_replace('#'.$key.'#', $newValue, $str);
-		}
-		
+	if (!is_array($a)) {
+		return $s;
 	}
 
-    $GLOBALS['latest_hashData'] = $arr;
-    
-	return $str;
+	foreach ($a as $k => $v) {
+		if(!is_object ($a[$k])) {
+			$s	= str_replace ('#' . $k . '#', $v, $s);
+		}
+	}
+
+	return $s;
+
 }
 
 

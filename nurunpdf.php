@@ -952,6 +952,7 @@ function nuReplaceLabelHashVariables($LAY, $hashData){
             $O = nuGetObjectProperties($LAY, $GLOBALS['nu_report'][$i]->objects[$o]->id);
         
             if($O->objectType == 'label'){
+				
                 for($l = 0 ; $l < count($GLOBALS['nu_report'][$i]->objects[$o]->lines) ; $l++){
                     $GLOBALS['nu_report'][$i]->objects[$o]->lines[$l] = nuReplaceHashes($GLOBALS['nu_report'][$i]->objects[$o]->lines[$l], $hashData);
                     
@@ -961,6 +962,26 @@ function nuReplaceLabelHashVariables($LAY, $hashData){
     }
     
 }
+
+function nuReplaceHashes($str, $arr){
+
+	while(list($key, $value) = each($arr)){
+
+		if( !is_object($value) and !is_array($value) and $str != '' and $key != ''){
+			
+			$newValue	= addslashes($value);
+			$str 		= str_replace('#'.$key.'#', $newValue, $str);
+			
+		}
+		
+	}
+
+    $GLOBALS['latest_hashData'] = $arr;
+    
+	return $str;
+	
+}
+
 
 function nuMakeSummaryTable($REPORT, $TABLE_ID){
     

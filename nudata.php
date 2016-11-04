@@ -6,6 +6,17 @@ function nuUpdateData(){
 	$ID		= $_POST['nuSTATE']['record_id'];
 	$DEL	= $_POST['nuSTATE']['deleteAll'];	
 	$fid	= $_POST['nuSTATE']['form_id'];
+	$rid	= $_POST['nuSTATE']['record_id'];
+
+
+	if($rid == -3){
+		
+		nuDisplayError('Cannot be Saved..');
+		return;
+		
+	}
+		
+	
 	$s		= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$fid'";
 	$t		= nuRunQuery($s);
 	$FORM	= db_fetch_object($t);
@@ -258,29 +269,6 @@ function nuFormatValue($row, $i){
 	}else{
 		return $row['v'][$i];
 	}
-
-}
-
-function nuReplaceHashVariables($s){
-
-	$s		= trim($s);
-	
-	if($s == ''){
-		return '';
-	}
-	$a 		= $_POST['nuHash'];
-
-	if (!is_array($a)) {
-		return $s;
-	}
-
-	foreach ($a as $k => $v) {
-		if(!is_object ($a[$k])) {
-			$s	= str_replace ('#' . $k . '#', $v, $s);
-		}
-	}
-
-	return $s;
 
 }
 

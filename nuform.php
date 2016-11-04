@@ -372,8 +372,17 @@ function nuBreadcrumbDescription($r, $R){
 	if($R 								== '-1'){return $r->sfo_description;}		//-- new record
 	if(trim($r->sfo_breadcrumb_title) 	== '')	{return $r->sfo_description;}		//-- no breadcrumb
 	
-	return nuReplaceHashVariables($r->sfo_breadcrumb_title);
+	$b		= nuReplaceHashVariables($r->sfo_breadcrumb_title);
 	
+	if(strtolower(substr(trim($b), 0, 6)) == 'select'){
+		
+		$t	= nuRunQuery($b);
+		$r	= db_fetch_row($t);
+		return $r[0];
+	
+	}
+
+	return nuReplaceHashVariables($r->sfo_breadcrumb_title);
 	
 }
 
