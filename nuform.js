@@ -956,7 +956,7 @@ function nuLabel(w, i, p, prop){
 	})
 	.html(l)
 	.attr('ondblclick','nuPopup("nuobject", "' + prop.objects[i].object_id + '")');
-
+console.log(prop.objects[i].valid);
 	if(prop.objects[i].valid == 1){$('#' + id).addClass('nuBlank');}
 	if(prop.objects[i].valid == 2){$('#' + id).addClass('nuDuplicate');}
 	
