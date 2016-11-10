@@ -71,34 +71,22 @@
 				
 			} catch(Throwable $e) {
 
-				$this->nuExceptionHandler($e, $phpCode, $phpToEval);   
+				$this->exceptionHandler($e, $phpCode, $phpToEval);   
 				 
 			} catch (Exception $e) {
 
-				$this->nuExceptionHandler($e, $phpCode, $phpToEval);
+				$this->exceptionHandler($e, $phpCode, $phpToEval);
 				
 			}
 		}
 		
-		function nuExceptionHandler($e, $phpCode, $phpToEval) {
+		function exceptionHandler($e, $phpCode, $phpToEval){
 
-			echo '<br>Error Running PHP<br>';
-			echo 'PHP: '.$phpCode.'<br>';
-			echo 'Error: '.$e->getMessage().'<br><br>';
-			
-			$phpLines = explode("\n",$phpToEval);
-			
-			for($i = 0; $i < sizeof($phpLines); $i++){
-				
-				if($i == ($e->getLine() - 1)) {
-					echo '<span style="background-color: #FFFF20">'.$phpLines[$i].'</span><br>';
-				} else{				
-					echo $phpLines[$i].'<br>';
-				}
-				
-			}
-			
-			die();
+			$error			= new stdClass;
+			$error->code	= $phpCode;
+			$error->trace	= array_reverse($e->getTrace());
+nudebug(print_r($error,1));			
+			return $trace;
 			
 		}
 	   

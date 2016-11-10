@@ -2720,3 +2720,21 @@ function nuGetSearchList(){
 	}
 	
 }
+
+
+function nuAlert(t, o){
+	
+	var w	= screen.width * .2;
+	if(t == 'php_error'){
+		var warning	= '<b>PHP Error !</b><br><br>';
+	}
+	var c	= " onclick=\"$('#nuErrorAlert').remove();\"";
+	
+	
+	$('body').append("<div id='nuErrorAlert' style='left:" + w + "' " + c + " class='" + t + "'></div>")
+	
+	$('#nuErrorAlert').append(warning);
+	$('#nuErrorAlert').append('drgrdg');
+	
+	
+}

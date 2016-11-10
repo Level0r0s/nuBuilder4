@@ -5,6 +5,7 @@ class nuFormObject {
 	
 	constructor() {
 		
+		this.schema					= [];
 		this.breadCrumb 			= [];
 		this.current				= {};
 		this.last					= -1;
@@ -78,6 +79,34 @@ class nuFormObject {
 		this.current[f] = v;
 		this.setCurrent();
 		
+	}
+	
+	getDataType(t, f){
+		
+		var tab	= this.schema[t];
+		
+		for(var i = 0 ; i < tab.length ; i++){
+			
+			if(tab[i][0] == f){
+				return tab[i][1];
+			}
+		}
+	
+	}
+	
+	getTableFields(t){
+		
+		var tab	= this.schema[t];
+		var fld	= [];
+		
+		for(var i = 0 ; i < tab.length ; i++){
+			
+			fld.push(tab[i]);
+			
+		}
+		
+		return fld;
+	
 	}
 	
 }
