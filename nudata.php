@@ -58,7 +58,7 @@ function nuUpdateData(){
 				$m			= '';
 				$value		= $o['v'][$ii];
 
-				if($O->sob_all_validate == 'noblanks'){
+				if($O->sob_all_validate == '1'){				//-- noblanks
 					
 					if($value == ''){
 						
@@ -72,11 +72,11 @@ function nuUpdateData(){
 							$m	= "$lab (on row " . $o['r'][$ii] . ")  of $O->label cannot be left blank";
 						}
 						
-						//nuDisplayError($m, $f, 1);
+						nuDisplayError($m);
 						
 					}
 					
-				}else if($O->sob_all_validate == 'noduplicates'){
+				}else if($O->sob_all_validate == '2'){			// -- noduplicates
 
 					$nuV	= $o['r'][$ii];
 					$noS	= "

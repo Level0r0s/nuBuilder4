@@ -75,22 +75,24 @@ function nuGetBreadcrumb(b, t = ''){
 }
 
 
-function nuDisplayError(e, g = 0){
+function nuDisplayError(e){
 	
 	for(var i = 0 ; i < e.length ; i++){
 
-		if( e[i][2]) {
+		if(e[i][2]) {
 			$('#' + e[i][1]).addClass('nuValidate');			
 		}
-				
+		
 	}
 
-	if(e.length > 0){
+	nuAlert(e);
+	
+/*	if(e.length > 0){
 
 		nuPopup("nuerror", "-1", e);
 		
 	}
-	
+*/	
 	return e.length > 0;
 	
 }

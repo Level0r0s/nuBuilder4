@@ -355,7 +355,7 @@ function nuUpdateData(){
 		
 		var fm 	= data;
 
-		if(nuDisplayError(fm.errors, fm.global_access)){
+		if(nuDisplayError(fm.errors)){
 			
 			nuAbortSave();
 			

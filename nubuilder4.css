@@ -822,12 +822,21 @@ input {
 	
 	position:absolute;
 	top:10px;
-	color: #01A6F5;
-	width: 60%;
-	background-color: #FFEEA6;
  	text-align: left;
-	padding:10px;
+	padding:20px;
+	background-color: #FFEEA6;
+	box-shadow: 5px 5px 5px 0px rgba(150,147,150,1);
 	
+}
+
+
+.nuErrorPHP {
+	color: #66A334;
+}
+
+
+.nuErrorValidate {
+	color: black;
 }
 
 #close_error {

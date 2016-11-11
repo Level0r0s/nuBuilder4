@@ -2722,19 +2722,30 @@ function nuGetSearchList(){
 }
 
 
-function nuAlert(t, o){
+function nuAlert(o){
+
+	$('#nuErrorAlert').remove();
+
+	if(o.length == 0){return;}
 	
-	var w	= screen.width * .2;
-	if(t == 'php_error'){
-		var warning	= '<b>PHP Error !</b><br><br>';
+	var c		= " onclick=\"$('#nuErrorAlert').remove();\"";
+	var widest	= 5;
+	var cla		= o[0][1];
+
+	for(var i = 0 ; i < o.length ; i++){
+		widest	= Math.max(widest, nuGetWordWidth(o[i][0]));
 	}
-	var c	= " onclick=\"$('#nuErrorAlert').remove();\"";
+
+	widest		= widest + 200;
 	
+	var l		= (screen.width - widest) / 2;
+
+	$('body').append("<div id='nuErrorAlert' class='" + cla + "' style='width:" + widest + "px;left:" + l + "px' " + c + "></div>")
 	
-	$('body').append("<div id='nuErrorAlert' style='left:" + w + "' " + c + " class='" + t + "'></div>")
-	
-	$('#nuErrorAlert').append(warning);
-	$('#nuErrorAlert').append('drgrdg');
-	
+	for(var i = 0 ; i < o.length ; i++){
+		
+		$('#nuErrorAlert').append(o[i][0]);
+		$('#nuErrorAlert').append('<br>');
+	}
 	
 }

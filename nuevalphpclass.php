@@ -19,54 +19,47 @@
 			$r	= db_fetch_object($t);
 			
 			if(trim($r->sph_php) == ''){return;}
-			
-			try {
 
-				$s = "
-					SELECT * 
-					FROM zzzzsys_php_library 
-					LEFT JOIN zzzzsys_php ON zzzzsys_php_id = spl_library_zzzzsys_php_id 
-					WHERE spl_zzzzsys_php_id = '$this->parentID'
-				";
-				$nuT							= nuRunQuery($s);
-								
-				while($nuA = db_fetch_object($nuT)) {
+			$s = "
+				SELECT * 
+				FROM zzzzsys_php_library 
+				LEFT JOIN zzzzsys_php ON zzzzsys_php_id = spl_library_zzzzsys_php_id 
+				WHERE spl_zzzzsys_php_id = '$this->parentID'
+			";
+			$nuT							= nuRunQuery($s);
+							
+			while($nuA = db_fetch_object($nuT)) {
 
-					$phpCode				= $nuA->sph_code;
-					$phpToEval				= nuReplaceHashVariables($nuA->sph_php);
+				$phpCode				= $nuA->sph_code;
+				$phpToEval				= nuReplaceHashVariables($nuA->sph_php);
 
-					$this->evalPHP($phpCode, $phpToEval);
-				}
+				$this->evalPHP($phpCode, $phpToEval);
 				
-				$s = "
-					SELECT * 
-					FROM zzzzsys_php 
-					WHERE zzzzsys_php_id = '$this->parentID'
-				";
-				$nuT							= nuRunQuery($s);
-				if(db_num_rows($nuT) > 0) {
-					$nuA = db_fetch_object($nuT);
-					
-					$phpCode				= $nuA->sph_code;
-					$phpToEval				= nuReplaceHashVariables($nuA->sph_php);
-					
-					$this->evalPHP($phpCode, $phpToEval);
-				} else {
-					echo "PHP Doesn't Exist";
-				}
-
-			}catch(Throwable $e) {
-				nuExceptionHandler("Error Building PHP");       
-			}catch(Exception $e) {
-				nuExceptionHandler("Error Building PHP");
 			}
 			
+			$s = "
+				SELECT * 
+				FROM zzzzsys_php 
+				WHERE zzzzsys_php_id = '$this->parentID'
+			";
+			
+			$nuT						= nuRunQuery($s);
+
+			if(db_num_rows($nuT) > 0) {
+				
+				$nuA 		= db_fetch_object($nuT);
+				$phpCode	= $nuA->sph_code;
+				$phpToEval	= nuReplaceHashVariables($nuA->sph_php);
+				
+				$this->evalPHP($phpCode, $phpToEval);
+				
+			}
+
 		}
 		
 		function evalPHP($phpCode, $phpToEval){
 			
 			try {
-				
 				eval($phpToEval); 
 				
 			} catch(Throwable $e) {
@@ -81,15 +74,27 @@
 		}
 		
 		function exceptionHandler($e, $phpCode, $phpToEval){
+			
+			nuDisplayError('<b>Error Running Procedure !</b><br>', 'nuErrorPHP');
+			nuDisplayError($e->getFile(), 'nuErrorPHP');
+			nuDisplayError('<br><b><i>Traced from...</i></b><br>', 'nuErrorPHP');
+			
+			$a	= $e->getTrace();
+			$t	= array_reverse($a);
 
-			$error			= new stdClass;
-			$error->code	= $phpCode;
-			$error->trace	= array_reverse($e->getTrace());
-nudebug(print_r($error,1));			
-			return $trace;
+			for($i = 0 ; $i < count($t) ; $i++){
+				
+				$m	= '(line:<i>' . $t[$i]['line'] . '</i>) ' . $t[$i]['file'] . ' <b> - ' . $t[$i]['function'] . '<b>';
+				
+				nuDisplayError($m . '<br>', 'nuErrorPHP');
+				
+			}
 			
 		}
 	   
 	}
+	
+	
+	
 	
 ?>

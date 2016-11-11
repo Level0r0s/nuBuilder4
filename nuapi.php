@@ -44,6 +44,7 @@
 	$f->forms[0]->translation				= $s->translation;
 	$f->forms[0]->session_id				= $_SESSION['SESSIONID'];
 	$f->forms[0]->errors					= $_POST['nuErrors'];
+	nudebug(print_r($_POST['nuErrors'],1));
 	$f->forms[0]->log_again				    = $_POST['nuLogAgain'];
 	$f->forms[0]->target					= $P['target'];
 	$f->forms[0]->global_access				= $_POST['nuHash']['global_access'];

@@ -1,16 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
+<?php
 
-<link rel="stylesheet" type="text/css" href="nudrag.css">
+require_once('nucommon.php');	
 
-<script src='nureportjson.js' type='text/javascript'></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src='nudrag.js' type='text/javascript'></script>
-<script src='nudragreport.js' type='text/javascript'></script>
-<script src='nudragdialog.js' type='text/javascript'></script>
+jsinclude('jquery/jquery.js');
+jsinclude('dropzone/dropzone.js');
+jsinclude('nuformobject.js');
+jsinclude('nuform.js');
+jsinclude('nuformdrag.js');
+jsinclude('nudrag.js');
+jsinclude('nudragreport.js');
+jsinclude('nudragdialog.js');
+jsinclude('nucalendar.js');
+jsinclude('nucommon.js');
+jsinclude('nuajax.js');       //-- calls to server
+jsinclude('nufunctions.js');
+jsinclude('nureportjson.js');
+
+cssinclude('nubuilder4.css');
+cssinclude('nudrag.css');
+
+?>
+
 
 <script>
+
+
 $(document).ready(function() {
 	
 	if(window.opener){

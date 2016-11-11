@@ -2,13 +2,13 @@
 
 <head>
 <meta http-equiv='Content-type' content='text/html;charset=UTF-8'>
-<script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
-<script src="dropzone/dropzone.js"></script>
 
 <?php
+
 require_once('nucommon.php');	
-cssinclude('nubuilder4.css');
-cssinclude('dropzone/dropzone.css');
+
+jsinclude('jquery/jquery.js');
+jsinclude('dropzone/dropzone.js');
 jsinclude('nuformobject.js');
 jsinclude('nuform.js');
 jsinclude('nuformdrag.js');
@@ -16,6 +16,9 @@ jsinclude('nucalendar.js');
 jsinclude('nucommon.js');
 jsinclude('nuajax.js');       //-- calls to server
 jsinclude('nufunctions.js');
+
+cssinclude('nubuilder4.css');
+cssinclude('dropzone/dropzone.css');
 
 ?>
 
