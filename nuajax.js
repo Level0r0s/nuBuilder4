@@ -83,13 +83,14 @@ function nuGetForm(f, r, filter, n){
 
 		var fm = data;
 	
-		if(nuDisplayError(fm.errors)){
+		if(nuDisplayError(fm)){
 
 			if(fm.log_again == 1){nuLogin();}
 		
 		}else{
 				
 			window.nuFORM.current.record_id = fm.record_id;
+			window.nuFORM.current.FORM 		= fm.form;
 			window.nuFORM.setCurrent();
 			
 			nuBuildForm(fm);
@@ -121,7 +122,7 @@ function nuGetPHP(f, r){
 		
 		var fm  			= data;
 
-		if(!nuDisplayError(fm.errors)){
+		if(!nuDisplayError(fm)){
 			
 			window.nuFORM.current.record_id = fm.record_id;
 			nuFORM.setCurrent();
@@ -154,7 +155,7 @@ function nuGetPDF(f, r){
 		
                 var fm  = data;
 				
-                if(!nuDisplayError(fm.errors)){
+                if(!nuDisplayError(fm)){
 					
 				   window.nuFORM.current.record_id = fm.record_id;
 				   nuFORM.setCurrent();
@@ -186,7 +187,7 @@ function nuRunReport(f, iframe){
 		
 		var fm 	= data;
 		
-		if(!nuDisplayError(fm.errors)){
+		if(!nuDisplayError(fm)){
 			
 			var pdfUrl   = 'nurunpdf.php?i=' + fm.id;
 			
@@ -223,7 +224,7 @@ function nuRunPHP(f, iframe){
 		
 		var fm 	= data;
 		
-		if(!nuDisplayError(fm.errors)){
+		if(!nuDisplayError(fm)){
 			
 			var pdfUrl   = 'nurunphp.php?i=' + fm.id;
 			
@@ -260,7 +261,7 @@ function nuGetLookupId(pk, id){
 	
 		var fm 	= data;
 
-		if(!nuDisplayError(fm.errors)){
+		if(!nuDisplayError(fm)){
 			
 			$('#' + id).change();	
 			window.nuPopulateLookup(fm, id);
@@ -289,7 +290,7 @@ function nuGetLookupCode(e, buildLookupList){
 		
 		var fm 			= data;
 
-		if(!nuDisplayError(fm.errors)){
+		if(!nuDisplayError(fm)){
 			
 			$('#nuLookupList').remove();
 			
@@ -322,7 +323,7 @@ function nuPrintAction(){
 
 		var fm 					= data;
 		
-		if(!nuDisplayError(fm.errors)){
+		if(!nuDisplayError(fm)){
 			
 			var p   			= 'nurunhtml.php?i=' + fm.id;
 			
@@ -355,7 +356,7 @@ function nuUpdateData(){
 		
 		var fm 	= data;
 
-		if(nuDisplayError(fm.errors)){
+		if(nuDisplayError(fm)){
 			
 			nuAbortSave();
 			
@@ -387,7 +388,7 @@ function nuSaveAfterDrag() {
     w.current.nuDragState	= $('#nuDragDialog iframe')[0].contentWindow.nuDragOptionsState;
 	w.setCurrent();
 	
-	var successCallback = function(data,textStatus,jqXHR){
+	var successCallback 	= function(data,textStatus,jqXHR){
 		
 		if(nuDisplayError(data.errors)){
 			alert(data.errors[0]);

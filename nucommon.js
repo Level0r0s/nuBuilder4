@@ -75,7 +75,10 @@ function nuGetBreadcrumb(b, t = ''){
 }
 
 
-function nuDisplayError(e){
+function nuDisplayError(fm){
+	
+	var e	= fm.errors;
+	var p	= fm.phpcode;
 	
 	for(var i = 0 ; i < e.length ; i++){
 
@@ -84,15 +87,9 @@ function nuDisplayError(e){
 		}
 		
 	}
-
-	nuAlert(e);
 	
-/*	if(e.length > 0){
+	nuAlert(e, p);
 
-		nuPopup("nuerror", "-1", e);
-		
-	}
-*/	
 	return e.length > 0;
 	
 }
@@ -652,4 +649,12 @@ function nuID() {
     return tsStr;
 
 };
+
+
+function testsql(){
+
+		return "SELECT * FROM zzzzsys_user_group LEFT JOIN zzzzsys_form ON sug_zzzzsys_form_id = zzzzsys_form_id ORDER BY sug_code";
+
+	
+}
 

@@ -75,7 +75,8 @@
 		
 		function exceptionHandler($e, $phpCode, $phpToEval){
 			
-			nuDisplayError('<b>Error Running Procedure !</b><br>', 'nuErrorPHP');
+			nuReturn('phpcode', $phpToEval);
+			nuDisplayError("<b>Error Running Procedure !</b> ($phpCode)<br>", "nuErrorPHP");
 			nuDisplayError($e->getFile(), 'nuErrorPHP');
 			nuDisplayError('<br><b><i>Traced from...</i></b><br>', 'nuErrorPHP');
 			

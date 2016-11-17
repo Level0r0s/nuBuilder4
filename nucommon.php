@@ -642,7 +642,8 @@ function nuSetHashList($p){
 		$t		= nuRunQuery($s);
 		$R		= db_fetch_object($t);
 
-		if(db_num_rows($t) != 0){
+//		if(db_num_rows($t) != 0){
+		if(trim($R->sfo_table) != ''){
 			
 			$s	= "SELECt * FROM $R->sfo_table WHERE $R->sfo_primary_key = '$rid'";
 			$t	= nuRunQuery($s);
@@ -697,11 +698,6 @@ function nuRunReport($nuRID){
 	
 	$_POST['nuHash']['parentID']		= $nuR->zzzzsys_php_id;
 	
-	//$phpInfo 							= nuBuildPHPandData($nuR);
-	
-	//$_POST['nuHash']['sph_php']		= $phpInfo['php'];
-	//$_POST['nuHash']['lines']			= $phpInfo['lines'];
-	
 	$nuJ								= json_encode($_POST['nuHash']);
 	$nuS								= "INSERT INTO zzzzsys_debug (zzzzsys_debug_id, deb_message) VALUES (?, ?)";
 	
@@ -719,12 +715,6 @@ function nuRunPHP($nuRID){
 	$nuA								= db_fetch_object($nuT);
 	$_POST['nuHash']['code']			= $nuA->sph_code;
 	$_POST['nuHash']['description']		= $nuA->sph_description;
-	
-	//$phpInfo 							= nuBuildPHPandData($nuA);
-
-	//$_POST['nuHash']['sph_php']		= $phpInfo['php'];
-	//$_POST['nuHash']['lines']			= $phpInfo['lines'];
-
 	$_POST['nuHash']['parentID']		= $nuRID;
 	
 	$nuJ								= json_encode($_POST['nuHash']);
@@ -1169,6 +1159,14 @@ function nuDisplayFooterHTML(){
 	";
 	
 	echo $h;
+	
+}
+
+function nuGetFormProperties($i){
+
+	$t	= nuRunQuery("SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = ? ", array($i));
+	
+	return db_fetch_object($t);
 	
 }
 

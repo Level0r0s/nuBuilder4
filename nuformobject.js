@@ -94,6 +94,24 @@ class nuFormObject {
 	
 	}
 	
+	getTablesFromSQL(sql){
+		
+		var t		= [];
+		var tables	= this.getTables();
+		sql			= sql.replace(/[\n\r]/g, ' ');
+		
+		for(var i = 0 ; i < tables.length ; i++){
+			
+			if(sql.indexOf(' ' + tables[i] + ' ') != -1){
+				t.push(tables[i]);
+			}
+			
+		}
+		
+		return t;
+	
+	}
+	
 	getTableFields(t){
 		
 		var tab	= this.schema[t];
@@ -109,5 +127,38 @@ class nuFormObject {
 	
 	}
 	
-}
+	
+	getSQLFields(sql){
+//debugger;		
+		var tab	= this.getTablesFromSQL(sql);
+		var fld	= [];
+		
+		for(var i = 0 ; i < tab.length ; i++){
+			
+			var f	= this.getTableFields(tab[i]);
+			
+			fld	= fld.concat(f);
+			
+		}
+		
+		return fld;
+	
+	}
+	
+	getTables(){
+	
+		var tables	= [];
+		
+		for (var key in nuFORM.schema) {
 
+			if (nuFORM.schema.hasOwnProperty(key)) {
+				tables.push(key) 
+			}
+			
+		}
+		
+		return tables;
+		
+	}
+
+}

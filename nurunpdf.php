@@ -34,8 +34,7 @@ $PDF->SetAutoPageBreak(false);
 $REPORT                     = nuSetPixelsToMM($LAYOUT);
 $PDF->SetMargins(1,1,1);
 
-//nuEvalPHP($JSON);                                        //-- build temp table for report from php
-$evalPHP = new nuEvalPHPClass($JSON->parentID);
+$evalPHP = new nuEvalPHPClass($JSON->parentID);            //-- build temp table for report from php
 
 $GLOBALS['nu_columns']       = nuAddCriteriaValues($hashData, $TABLE_ID);
 

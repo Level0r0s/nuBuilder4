@@ -15,6 +15,7 @@ function nuBuildForm(f){
 	window.nuSUBFORMROW				= [];
 	window.nuSUBFORMJSON			= [];
 	window.nuHASH					= [];                       //-- remove any hash variables previously set.
+	nuFORM.current.FORM				= f.form;					//-- Form properties
 	window.nuEDITED					= false;
 	
 	nuSetBODY(f);
@@ -241,20 +242,20 @@ function nuBuildEditObjects(f, p, o, prop){
 function nuAddJSObjectEvents(i, j){
 
 	var o		= document.getElementById(i);
-	var on		= ['onclick','onfocus','onblur','onchange'];
+//	var on		= ['onclick','onfocus','onblur','onchange','onkeydown'];
 
 	for(var J = 0 ; J < j.length ; J++){
 
-		var pos	= on.indexOf(j[J].event);
+//		var pos	= on.indexOf(j[J].event);
 
-		if(pos != -1){
+//		if(pos != -1){
 
 			var code 	= o.getAttribute(j[J].event);
 			
 			code		= code === null ? '' : code;
 			o.setAttribute(j[J].event, code + ';' + j[J].js);
 
-		}
+//		}
 
 	}
 
@@ -776,7 +777,6 @@ function nuSUBFORM(w, i, l, p, prop){
 					'height'     	: rowTop,
 					'overflow-x'	: 'hidden',
 					'overflow-y'	: 'hidden',
-					'position'	: 'absolute',
 					'padding'	: '12px 0px 0px 0px'
 	}).addClass('nuTabHolder');
 		
@@ -956,7 +956,7 @@ function nuLabel(w, i, p, prop){
 	})
 	.html(l)
 	.attr('ondblclick','nuPopup("nuobject", "' + prop.objects[i].object_id + '")');
-console.log(prop.objects[i].valid);
+
 	if(prop.objects[i].valid == 1){$('#' + id).addClass('nuBlank');}
 	if(prop.objects[i].valid == 2){$('#' + id).addClass('nuDuplicate');}
 	
@@ -2747,5 +2747,77 @@ function nuAlert(o){
 		$('#nuErrorAlert').append(o[i][0]);
 		$('#nuErrorAlert').append('<br>');
 	}
+	
+}
+
+function nuLister(e, a){
+
+	if(e.keyCode != 32){return;}
+			
+	var i			= 'nuList_' + t.id;
+	
+	if(window[i] === undefined){
+		window[i] 	= -1;
+	}
+
+	if(window[i] == a.length - 1){
+		window[i] 	= 0;
+	}else{
+		window[i] 	= window[i] + 1;
+	}
+	
+	$('#' + e.target.id).val(a[window[i]]);
+	
+	return false;
+	
+}
+
+
+
+
+
+function nuLister(e, a){
+
+	var i			= 'nuList_' + e.target.id;
+	var v			= $('#' + e.target.id).val();
+	
+	
+	if(window[i] === undefined){
+		
+		window[i] 	= -1;
+		
+		for(var c = 0 ; c < a.length ; c++){
+			
+			if(a[c] == v){window[i] = c;}
+			
+		}
+		
+	}
+	
+	
+	if(e.keyCode == 38){							//-- up
+		
+		if(window[i] == 0){
+			window[i] 	= a.length - 1;
+		}else{
+			window[i] 	= window[i] - 1;
+		}
+		
+		$('#' + e.target.id).val(a[window[i]]);
+		
+	}
+	
+	if(e.keyCode == 40){							//-- down
+		
+		if(window[i] == a.length - 1){
+			window[i] 	= 0;
+		}else{
+			window[i] 	= window[i] + 1;
+		}
+		
+		$('#' + e.target.id).val(a[window[i]]);
+		
+	}
+	
 	
 }

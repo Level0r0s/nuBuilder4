@@ -24,6 +24,7 @@
 	$_POST['nuHash']['FORM_ID'] 			= $s->form_id;
 	$_POST['nuHash']['SESSION_ID'] 			= $s->session_id;
 	$_POST['nuValidate']					= array();
+	$_POST['nuReturn']						= array();
 
 	$f->forms[0]							= new stdClass;
 
@@ -38,18 +39,26 @@
 	if($P['call_type'] == 'runhtml')		{$f->forms[0]->id				= nuRunHTML();}
     if($P['call_type'] == 'nudragsave')		{$f->forms[0]					= nuDragSave($P);}
 
+	$f->forms[0]->form						= nuGetFormProperties($s->form_id);
 	$f->forms[0]->user_id					= $u['USER_ID'];
 	$f->forms[0]->dimensions				= $s->dimensions;
 	$f->forms[0]->schema					= $s->schema;
 	$f->forms[0]->translation				= $s->translation;
 	$f->forms[0]->session_id				= $_SESSION['SESSIONID'];
 	$f->forms[0]->errors					= $_POST['nuErrors'];
-	nudebug(print_r($_POST['nuErrors'],1));
 	$f->forms[0]->log_again				    = $_POST['nuLogAgain'];
 	$f->forms[0]->target					= $P['target'];
 	$f->forms[0]->global_access				= $_POST['nuHash']['global_access'];
+	$f->forms[0]->return					= $_POST['nuReturn'];
 	$j								    	= json_encode($f->forms[0]);
 
 	print $j;
+	
+	
+	function nuReturn($k, $v){
+	nudebug('return 1' . print_r($_POST['nuReturn'],1));
+		$_POST['nuReturn'][$k]				= $v;
+	nudebug('return 2' . print_r($_POST['nuReturn'],1));
+	}
 
 ?>

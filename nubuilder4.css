@@ -826,8 +826,22 @@ input {
 	padding:20px;
 	background-color: #FFEEA6;
 	box-shadow: 5px 5px 5px 0px rgba(150,147,150,1);
+    opacity: 0;
 	
 }
+
+#nuErrorCode {
+	
+	position:relative;
+	height:50px;
+	background-color: black;
+	color: white;
+	overflow:scroll;
+	overflow-x: hidden;
+	
+}
+
+
 
 
 .nuErrorPHP {
