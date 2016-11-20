@@ -15,7 +15,6 @@ function nuBuildForm(f){
 	window.nuSUBFORMROW				= [];
 	window.nuSUBFORMJSON			= [];
 	window.nuHASH					= [];                       //-- remove any hash variables previously set.
-	nuFORM.current.FORM				= f.form;					//-- Form properties
 	window.nuEDITED					= false;
 	
 	nuSetBODY(f);
@@ -241,21 +240,14 @@ function nuBuildEditObjects(f, p, o, prop){
 
 function nuAddJSObjectEvents(i, j){
 
-	var o		= document.getElementById(i);
-//	var on		= ['onclick','onfocus','onblur','onchange','onkeydown'];
-
+	var o			= document.getElementById(i);
+	
 	for(var J = 0 ; J < j.length ; J++){
 
-//		var pos	= on.indexOf(j[J].event);
-
-//		if(pos != -1){
-
-			var code 	= o.getAttribute(j[J].event);
-			
-			code		= code === null ? '' : code;
-			o.setAttribute(j[J].event, code + ';' + j[J].js);
-
-//		}
+		var code 	= o.getAttribute(j[J].event);
+		
+		code		= code === null ? '' : code;
+		o.setAttribute(j[J].event, code + ';' + j[J].js);
 
 	}
 
@@ -770,15 +762,18 @@ function nuSUBFORM(w, i, l, p, prop){
 	var tabId  = id + 'nuTabHolder';
 	var tabDiv = document.createElement('div');
 	tabDiv.setAttribute('id', tabId);
-	$('#' + id).append(tabDiv);
+	$('#' + id).prepend(tabDiv);
 	$('#' + tabId).css({'top'      : 0,
 					'left'       	: 0,
 					'width'      	: rowWidth,
 					'height'     	: rowTop,
 					'overflow-x'	: 'hidden',
 					'overflow-y'	: 'hidden',
+					'position'	: 'absolute',
 					'padding'	: '12px 0px 0px 0px'
-	}).addClass('nuTabHolder');
+	})
+	.addClass('nuTabHolder')
+	.attr('data-nu-subform', tabId);
 		
 	if(SF.subform_type == 'f'){
 		nuAddEditTabs(id, SF.forms[0]);
@@ -828,7 +823,6 @@ function nuSUBFORM(w, i, l, p, prop){
 						'height'        : Number(rowHeight),
 						'position'      : 'absolute'
 		})
-		.attr('data-nu-subform-sort', 1)
 		.addClass('nuSubform' + even);
 
 		nuBuildEditObjects(SFR.forms[c], prefix, SF, SF.forms[0]);
@@ -1030,13 +1024,10 @@ function nuBuildSubformTitle(o, l, w, id, col){
     					'text-align'    	: 'center',
     					'position'      	: 'absolute'
     	})
-	.click(function() {
-		nuSortSubform(id, (col+1), this);})
 	.html(o.label)
-	.attr('data-nu-sort',1)
-	.addClass('nuTitleHover')
+	.attr('ondblclick', 'nuPopup("nuobject", "' + o.object_id + '")')
 	.addClass('nuTabHolder');
-
+console.log(o);
 }
 
 function nuBuildSubformDeleteTitle(l, id, subform_id){
@@ -2321,17 +2312,35 @@ function nuAbortSave(){
 	
 }
 
-function nuAddJavascript(f){
+
+/*
+function nuAddJavascript(o){
+        
+    window.nuLoadBrowse       = null;
+    window.nuLoadEdit         = null;
+    window.nuOnSave           = null;
+    window.nuDraggableObjects = Array();
+    window.nuDraggableObjects = o.draggable_objects;
+
+    $('#nuHolder').append('<script type="text/javascript">'+o.javascript+'</script>');
+        
+}
+
+*/
+
+
+
+function nuAddJavascript(o){
 
 	var nuLoadEdit		= null;
 	var nuLoadBrowse	= null;
 	
 	var s				= document.createElement('script');
-	s.innerHTML 		= "\n" + f.javascript + "\n\n";
+	s.innerHTML 		= "\n" + o.javascript + "\n\n";
 	
 	$('body').append(s);
 	
-	if(f.record_id == ''){
+	if(o.record_id == ''){
 		if(nuLoadBrowse != null){nuLoadBrowse();}
 	}else{
 		if(nuLoadEdit != null){nuLoadEdit();}
@@ -2724,7 +2733,9 @@ function nuGetSearchList(){
 
 function nuAlert(o){
 
-	$('#nuErrorAlert').remove();
+	var par		= window.parent.document;
+	
+	$('#nuErrorAlert', par).remove();
 
 	if(o.length == 0){return;}
 	
@@ -2740,84 +2751,46 @@ function nuAlert(o){
 	
 	var l		= (screen.width - widest) / 2;
 
-	$('body').append("<div id='nuErrorAlert' class='" + cla + "' style='width:" + widest + "px;left:" + l + "px' " + c + "></div>")
+	$('body', par).append("<div id='nuErrorAlert' class='" + cla + "' style='width:" + widest + "px;left:" + l + "px' " + c + "></div>")
 	
 	for(var i = 0 ; i < o.length ; i++){
 		
-		$('#nuErrorAlert').append(o[i][0]);
-		$('#nuErrorAlert').append('<br>');
+		$('#nuErrorAlert', par).append(o[i][0]);
+		$('#nuErrorAlert', par).append('<br>');
 	}
 	
 }
-
-function nuLister(e, a){
-
-	if(e.keyCode != 32){return;}
-			
-	var i			= 'nuList_' + t.id;
-	
-	if(window[i] === undefined){
-		window[i] 	= -1;
-	}
-
-	if(window[i] == a.length - 1){
-		window[i] 	= 0;
-	}else{
-		window[i] 	= window[i] + 1;
-	}
-	
-	$('#' + e.target.id).val(a[window[i]]);
-	
-	return false;
-	
-}
-
-
-
 
 
 function nuLister(e, a){
 
-	var i			= 'nuList_' + e.target.id;
-	var v			= $('#' + e.target.id).val();
+	if(a.length == 0){return;;}
 	
+	var i	= e.target.id;
+	var n	= 'nuList_' + i;
+	var k	= e.keyCode;
 	
-	if(window[i] === undefined){
+	if(window[n] === undefined){
+		window[n]	= 0;
+	}
+	
+	if(k == 38){						//-- up;
+	
+		window[n] = window[n] - 1
+		if(window[n] < 0){window[n] = a.length - 1;}
+	}
+	
+	if(k == 40){						//-- down;
+	
+		window[n] = window[n] + 1
 		
-		window[i] 	= -1;
-		
-		for(var c = 0 ; c < a.length ; c++){
-			
-			if(a[c] == v){window[i] = c;}
-			
-		}
+		if(window[n] > a.length - 1){window[n] = 0;}
 		
 	}
 	
-	
-	if(e.keyCode == 38){							//-- up
-		
-		if(window[i] == 0){
-			window[i] 	= a.length - 1;
-		}else{
-			window[i] 	= window[i] - 1;
-		}
-		
-		$('#' + e.target.id).val(a[window[i]]);
-		
-	}
-	
-	if(e.keyCode == 40){							//-- down
-		
-		if(window[i] == a.length - 1){
-			window[i] 	= 0;
-		}else{
-			window[i] 	= window[i] + 1;
-		}
-		
-		$('#' + e.target.id).val(a[window[i]]);
-		
-	}
-	
-	
+	$('#' + i).val(a[window[n]]);
+
 }
+
+
+

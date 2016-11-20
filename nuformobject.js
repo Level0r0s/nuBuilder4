@@ -129,7 +129,7 @@ class nuFormObject {
 	
 	
 	getSQLFields(sql){
-//debugger;		
+
 		var tab	= this.getTablesFromSQL(sql);
 		var fld	= [];
 		

@@ -1406,5 +1406,10 @@ function nuAddSystemEvent($event){
 }
 
 
+function nuAddJavascript($js){
+    $GLOBALS['EXTRAJS'] = $GLOBALS['EXTRAJS'] . "\n\n" . $js;
+}
+
+
 
 ?>

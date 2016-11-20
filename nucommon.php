@@ -1170,4 +1170,20 @@ function nuGetFormProperties($i){
 	
 }
 
+
+
+function nuSubformArray($sf){
+
+    $a 	= array();
+    $i 	= 0;
+    $p 	= '';
+	
+	return $_POST['nuSTATE']['subforms'][$sf];
+
+}
+
+
+
+
+
 ?>

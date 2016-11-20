@@ -75,22 +75,19 @@ function nuGetBreadcrumb(b, t = ''){
 }
 
 
-function nuDisplayError(fm){
-	
-	var e	= fm.errors;
-	var p	= fm.phpcode;
-	
-	for(var i = 0 ; i < e.length ; i++){
+function nuDisplayError(er){
+/*	
+	for(var i = 0 ; i < er.length ; i++){
 
-		if(e[i][2]) {
-			$('#' + e[i][1]).addClass('nuValidate');			
+		if(er[i][2]) {
+			$('#' + er[i][1]).addClass('nuValidate');			
 		}
 		
 	}
-	
-	nuAlert(e, p);
+*/	
+	nuAlert(er.errors);
 
-	return e.length > 0;
+	return er.errors.length > 0;
 	
 }
 
@@ -397,7 +394,7 @@ function nuOpenAce(lang, obj){
 }
 
 function nuGetSFArrays(){
-	
+	debugger;
 	var s 	= window.nuSUBFORMJSON;
 	var j	= [];
 	
@@ -544,54 +541,25 @@ function nuCloseAllnuOptionsLists(){
 
 
 
-function nuSubformArray(sf, all){
+function nuSubformArray(sf){
 
     var a 	= Array();
     var i 	= 0;
     var p 	= '';
+	var c	= true;
 
-    if(arguments.length == 1){
-        all = true;
-    }
-    
     while($('#' + sf + nuPad3(i) + 'nuDelete').length == 1){
     
         p 	= sf + nuPad3(i);
-		
-        if(!$('#' + p + 'nuDelete').is(':checked') || all){
-			a.push(p);
-        }
+		c	= !$('#' + p + 'nuDelete').is(':checked');
+	
+		a.push(p, c);
 		
         i++;
 		
     }
     
     return a;
-
-}
-
-function nuSortSubform(sf, fld){
-	
-	var rows	= nuSubformArray(sf);
-	var value	= [];
-	var row		= []
-	
-	for(var i = 0 ; i < rows.length ; i++){
-
-		$("[data-nu-subform-sort=1][id^=" + rows[i] + "]").each(function( index ) {
-			value.push(new nuSubformRecordValues(this.id, rows[i]));
-		});
-		
-		row.push(value);
-		value	= [];
-
-	}
-	
-	row.sort(function(a, b, fld){
-		return a-(b + fld)
-	});
-	
-	return row;
 
 }
 
@@ -643,8 +611,8 @@ function nuEditPHP(ev){
 
 function nuID() {
 
-    var ts = +new Date;
-    var tsStr = ts.toString();
+    var ts 		= +new Date;
+    var tsStr	= ts.toString();
 
     return tsStr;
 

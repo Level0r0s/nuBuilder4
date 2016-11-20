@@ -67,12 +67,12 @@ function nuUpdateData(){
 						$f 		= addslashes($O->sob_all_id);
 
 						if($o['fk'] == ''){
-							$m	= "<b>$lab</b> on tab <b>$tab</b> cannot be left blank";
+							$m	= "<b>$lab</b> on tab <b>$tab</b> cannot be left blank..";
 						}else{
-							$m	= "$lab (on row " . $o['r'][$ii] . ")  of $O->label cannot be left blank";
+							$m	= "$lab (on row " . $o['r'][$ii] . ")  of $O->label cannot be left blank..";
 						}
 						
-						nuDisplayError($m);
+						nuDisplayError($m, 'blank');
 						
 					}
 					
@@ -96,12 +96,12 @@ function nuUpdateData(){
 						$lab	= addslashes($O->sob_all_label);
 						
 						if($o['fk'] == ''){
-							$m	= "There is a duplicate record where $lab = '$value'";
+							$m	= "There is a duplicate record where $lab = '$value'..";
 						}else{
-							$m	= "There is a duplicate record where $lab = '$value' (on row " . $o['r'][$ii] . ") of $O->label";
+							$m	= "There is a duplicate record where $lab = '$value' (on row " . $o['r'][$ii] . ") of $O->label..";
 						}
 						
-						nuDisplayError($m);
+						nuDisplayError($m, 'dupe');
 						
 					}
 					

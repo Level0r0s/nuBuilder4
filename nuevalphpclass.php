@@ -75,9 +75,9 @@
 		
 		function exceptionHandler($e, $phpCode, $phpToEval){
 			
-			nuReturn('phpcode', $phpToEval);
 			nuDisplayError("<b>Error Running Procedure !</b> ($phpCode)<br>", "nuErrorPHP");
-			nuDisplayError($e->getFile(), 'nuErrorPHP');
+			nuDisplayError($e->getFile(), 'eval');
+			nuDisplayError('<i>' . $e->getMessage() . '</i>', 'eval');
 			nuDisplayError('<br><b><i>Traced from...</i></b><br>', 'nuErrorPHP');
 			
 			$a	= $e->getTrace();
@@ -87,7 +87,7 @@
 				
 				$m	= '(line:<i>' . $t[$i]['line'] . '</i>) ' . $t[$i]['file'] . ' <b> - ' . $t[$i]['function'] . '<b>';
 				
-				nuDisplayError($m . '<br>', 'nuErrorPHP');
+				nuDisplayError($m . '<br>', 'eval');
 				
 			}
 			

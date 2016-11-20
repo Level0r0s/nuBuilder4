@@ -156,11 +156,6 @@ input {
   cursor: pointer;
 }
 
-.nuTitleHover:hover {
-  cursor: pointer;
-  color: red;
-}
-
 .nuCalendar{
    position			: absolute;
    width			: 210px;
@@ -820,13 +815,15 @@ input {
 
 #nuErrorAlert {
 	
+    font-family:Tahoma,Geneva,Arial,sans-serif;
 	position:absolute;
 	top:10px;
  	text-align: left;
 	padding:20px;
 	background-color: #FFEEA6;
 	box-shadow: 5px 5px 5px 0px rgba(150,147,150,1);
-    opacity: 0;
+    opacity: 100;
+    z-index: 5000;
 	
 }
 
