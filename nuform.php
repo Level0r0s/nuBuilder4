@@ -12,10 +12,11 @@ function nuBeforeBrowse($f){
 
 function nuBeforeOpen($f, $o){
 	
-	$s			= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$f'";
-	$t			= nuRunQuery($s);
-	$r			= db_fetch_object($t);
-	$evalPHP 	= new nuEvalPHPClass($f . '_BO');
+	$s					= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$f'";
+	$t					= nuRunQuery($s);
+	$r					= db_fetch_object($t);
+    $GLOBALS['EXTRAJS']	= $r->sfo_javascript;
+	$evalPHP 			= new nuEvalPHPClass($f . '_BO');
 	
 }
 
@@ -342,8 +343,8 @@ function nuGetEditForm($F, $R){
     $f->primary_key 	= $r->sfo_primary_key;
     $f->order			= $SQL->orderBy;
     $f->from			= $SQL->from;
-    $GLOBALS['EXTRAJS']	= $r->sfo_javascript;
-
+    $f->javascript		= $r->sfo_javascript;
+	
 	if(intval($r->sfo_row_height) == 0){
 		$f->row_height	= 25;
 	}else{
@@ -1407,7 +1408,7 @@ function nuAddSystemEvent($event){
 
 
 function nuAddJavascript($js){
-    $GLOBALS['EXTRAJS'] = $GLOBALS['EXTRAJS'] . "\n\n" . $js;
+	$GLOBALS['EXTRAJS'] = $GLOBALS['EXTRAJS'] . "\n\n" . $js;
 }
 
 

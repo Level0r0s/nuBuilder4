@@ -49,7 +49,7 @@
 	$f->forms[0]->target					= $P['target'];
 	$f->forms[0]->global_access				= $_POST['nuHash']['global_access'];
 	$f->forms[0]->javascript				= $GLOBALS['EXTRAJS'];
-	
+nudebug($GLOBALS['EXTRAJS']);	
 	$j								    	= json_encode($f->forms[0]);
 
 	print $j;

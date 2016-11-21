@@ -117,10 +117,13 @@ class nuFormObject {
 		var tab	= this.schema[t];
 		var fld	= [];
 		
+		if(tab === undefined){
+			return fld;
+		}
+		
+		
 		for(var i = 0 ; i < tab.length ; i++){
-			
 			fld.push(tab[i]);
-			
 		}
 		
 		return fld;
