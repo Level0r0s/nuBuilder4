@@ -422,7 +422,7 @@ function nuGetLookupValues($R, $O){
 
 
 function nuGetOtherLookupValues($nuO){
-	
+
 	$oid			= $nuO->object_id;
 	$nuS			= "SELECT * FROM zzzzsys_object WHERE zzzzsys_object_id = '$oid'";
 	$nuT			= nuRunQuery($nuS);
@@ -488,7 +488,7 @@ function nuGetOtherLookupValues($nuO){
 		}
 		
 	}
-	
+
 	return $nuVALUES;
 }
 

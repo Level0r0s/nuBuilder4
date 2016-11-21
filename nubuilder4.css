@@ -208,6 +208,10 @@ input {
     margin-top: 20px;
 }
 
+.nuLister {
+   background-color:#FFB7B7;
+}
+
 #nuOptionClose {
     height: 25px;
     width: 25px;

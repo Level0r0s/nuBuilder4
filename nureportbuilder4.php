@@ -7,7 +7,7 @@ require_once('nucommon.php');
 
 jsinclude('jquery/jquery.js');
 jsinclude('dropzone/dropzone.js');
-jsinclude('nuformobject.js');
+jsinclude('nuformclass.js');
 jsinclude('nuform.js');
 jsinclude('nuformdrag.js');
 jsinclude('nudrag.js');

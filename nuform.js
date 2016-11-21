@@ -370,7 +370,7 @@ function nuINPUT(w, i, l, p, prop){
 					'position'	: 'absolute'
 	})
 	
-	.attr('onchange', 'nuOnChange(this,event)')
+	.attr('onchange', 'nuOnChange(event)')
 	.attr('data-nu-field', input_type == 'button' ? null :prop.objects[i].id)
 	.attr('data-nu-object-id', w.objects[i].object_id)
 	.attr('data-nu-format', w.objects[i].format)
@@ -651,7 +651,7 @@ function nuSELECT(w, i, l, p, prop){
 					'width'    : Number(prop.objects[i].width),
 					'position' : 'absolute'
 	})
-	.attr('onchange', 'nuOnChange(this,event)')
+	.attr('onchange', 'nuOnChange(event)')
 	.attr('data-nu-field', prop.objects[i].id)
 	.attr('data-nu-object-id', w.objects[i].object_id)
 	.attr('data-nu-format', '')
@@ -1967,9 +1967,13 @@ function nuLookupBlur(e){
 		if($('.nuLookupListSelect').length == 0){				//-- nothing selected from Lookup List
 			nuGetLookupCode(e, false);
 		}else{
+			
 			var l = new nuLookupObject(e.target.id);
+			
 			nuGetLookupId($('#' + l.id_id).val(), l.id_id);
+			
 			$('#nuLookupList').remove();
+			
 		}
 
 	}
@@ -2199,8 +2203,9 @@ function nuFormatObject(t){
 	
 }
 
-function nuOnChange(t, event){
+function nuOnChange(e){
 
+	var t	= $('#' + e.target.id)[0];
 	var f	= $('#' + t.id).attr('data-nu-format');
 	var p	= $('#' + t.id).attr('data-nu-prefix');
 	
@@ -2782,7 +2787,11 @@ function nuLister(e, a){
 	if(k == 38){						//-- up;
 	
 		window[n] = window[n] - 1
+
 		if(window[n] < 0){window[n] = a.length - 1;}
+		
+		$('#' + i).val(a[window[n]]);
+		
 	}
 	
 	if(k == 40){						//-- down;
@@ -2791,9 +2800,10 @@ function nuLister(e, a){
 		
 		if(window[n] > a.length - 1){window[n] = 0;}
 		
+		$('#' + i).val(a[window[n]]);
+		
 	}
 	
-	$('#' + i).val(a[window[n]]);
 
 }
 
