@@ -1,10 +1,19 @@
 <?php
 
+function nuFormProperties($f){
+
+	$s	= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = ? ";
+	$t	= nuRunQuery($s, array($f));
+	$r	= db_fetch_object($t);
+	
+	return $r;
+	
+}
+
+
 function nuBeforeBrowse($f){
 
-	$s			= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$f'";
-	$t			= nuRunQuery($s);
-	$r			= db_fetch_object($t);
+	$r			= nuFormProperties($f);
 	$evalPHP 	= new nuEvalPHPClass($f . '_BB');
 	
 }
@@ -12,9 +21,7 @@ function nuBeforeBrowse($f){
 
 function nuBeforeOpen($f, $o){
 	
-	$s					= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$f'";
-	$t					= nuRunQuery($s);
-	$r					= db_fetch_object($t);
+	$r					= nuFormProperties($f);
     $GLOBALS['EXTRAJS']	= $r->sfo_javascript;
 	$evalPHP 			= new nuEvalPHPClass($f . '_BO');
 	
@@ -23,11 +30,9 @@ function nuBeforeOpen($f, $o){
 
 function nuFormCode($f){
 	
-	$s	= "SELECT sfo_code FROM zzzzsys_form WHERE zzzzsys_form_id = '$f'";
-	$t	= nuRunQuery($s);
-	$r	= db_fetch_row($t);
+	$r	= nuFormProperties($f);
 	
-	return $r[0];
+	return $r->sfo_code;
 	
 }
 
