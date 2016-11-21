@@ -39,7 +39,6 @@
 	if($P['call_type'] == 'runhtml')		{$f->forms[0]->id				= nuRunHTML();}
     if($P['call_type'] == 'nudragsave')		{$f->forms[0]					= nuDragSave($P);}
 
-	//$f->forms[0]->form						= nuGetFormProperties($s->form_id);
 	$f->forms[0]->user_id					= $u['USER_ID'];
 	$f->forms[0]->dimensions				= $s->dimensions;
 	$f->forms[0]->schema					= $s->schema;

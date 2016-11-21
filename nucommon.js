@@ -394,7 +394,7 @@ function nuOpenAce(lang, obj){
 }
 
 function nuGetSFArrays(){
-	debugger;
+
 	var s 	= window.nuSUBFORMJSON;
 	var j	= [];
 	

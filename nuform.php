@@ -340,9 +340,9 @@ function nuGetEditForm($F, $R){
     $f->type        	= $r->sfo_type;
     $f->table       	= $r->sfo_table;
     $f->primary_key 	= $r->sfo_primary_key;
-    $f->javascript		= $r->sfo_javascript;
     $f->order			= $SQL->orderBy;
     $f->from			= $SQL->from;
+    $GLOBALS['EXTRAJS']	= $r->sfo_javascript;
 
 	if(intval($r->sfo_row_height) == 0){
 		$f->row_height	= 25;

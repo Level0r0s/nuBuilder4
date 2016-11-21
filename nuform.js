@@ -721,7 +721,7 @@ function nuSUBFORM(w, i, l, p, prop){
 	
 	nuAddDataTab(id, prop.objects[i].tab, p);
 	
-	$('#' + id).css({'top'         : Number(SF.top),
+	$('#' + id).css({'top'         	: Number(SF.top),
 					'left'       	: Number(SF.left),
 					'width'      	: Number(SF.width),
 					'height'		: Number(SF.height) + 2,
@@ -734,13 +734,18 @@ function nuSUBFORM(w, i, l, p, prop){
 	.addClass('nuSubform');
 
 	nuGetSubformRowSize(SF.forms[0].objects, SF, id);
+	nuBuildSubformArray(id);
 
 	if(SF.subform_type == 'f'){
+		
 		var rowHeight   	= Number(SF.dimensions[4]);
 		var rowWidth    	= Number(SF.dimensions[5]);
+		
 	}else{
+		
 		var rowHeight   	= Number(SF.dimensions[6]);
 		var rowWidth    	= Number(SF.dimensions[7]);
+		
 	}
 	
     if(SF.delete == '1'){
@@ -1027,7 +1032,7 @@ function nuBuildSubformTitle(o, l, w, id, col){
 	.html(o.label)
 	.attr('ondblclick', 'nuPopup("nuobject", "' + o.object_id + '")')
 	.addClass('nuTabHolder');
-console.log(o);
+	
 }
 
 function nuBuildSubformDeleteTitle(l, id, subform_id){
