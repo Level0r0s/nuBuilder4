@@ -261,7 +261,7 @@ function nuGetLookupId(pk, id){
 		
 	};
 	
-	nuAjax(w,successCallback);
+	nuAjax(last,successCallback);
 }
 
 

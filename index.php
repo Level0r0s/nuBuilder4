@@ -55,6 +55,8 @@ window.nuHASH			= [];
 	$opener		= $_GET['opener'];
 	$iframe		= $_GET['iframe'];
 	$target		= $_GET['target'];
+	nudebug('get type: ' . $_GET['type']);
+	nudebug('get opener: ' . $_GET['opener']);
 	$type		= $_GET['type'];
 	$type		= $_GET['type'] == '' ? 'browse' : $_GET['type'];
 

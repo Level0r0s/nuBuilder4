@@ -150,13 +150,7 @@ function nuAddActionButtons(f){
 		
 		$('#nuActionHolder').append("<input id='nuSearchField' type='text' class='nuSearch' onkeypress='nuSearchPressed(event)' value='" + s + "'>&nbsp;");
 		$('#nuActionHolder').append("<input id='nuFilter' style='visibility:hidden;width:0px' value='" + f + "'>");
-		
-		windowAction = '';
-		if(window.nuTYPE == 'lookup') {
-			windowAction = window.nuTYPE;
-		}
-		
-		$('#nuActionHolder').append("<input id='nuSearchButton' type='button' class='nuActionButton ' value='Search' onclick='nuSearchAction(\""+windowAction+"\")'>&nbsp;");
+		$('#nuActionHolder').append("<input id='nuSearchButton' type='button' class='nuActionButton ' value='Search' onclick='nuSearchAction()'>&nbsp;");
 		
 	}
 
@@ -1696,23 +1690,15 @@ function nuSearchPressed(e){
     
 }
 
-function nuSearchAction(t = ''){
+function nuSearchAction(){
 
 	var s	= String($('#nuSearchField').val()).replaceAll("'","&#39;", true);
 	var f	= String($('#nuFilter').val()).replaceAll("'","&#39;", true);
 	
-	window.nuFORM.getProperty('search', s);
-	window.nuFORM.getProperty('filter', f);
+	window.nuFORM.setProperty('search', s);
+	window.nuFORM.setProperty('filter', f);
 
-	if(t == '') {
-		
-		nuGetBreadcrumb(window.nuFORM.last);
-		
-	} else {
-		
-		nuGetBreadcrumb(window.nuFORM.last, t);
-		
-	}
+	nuGetBreadcrumb();
 	
 }
 

@@ -56,12 +56,9 @@ function removeOpenerById(o, pid) {
 
 }
 
-function nuGetBreadcrumb(b = -1, t = ''){
-debugger;
-	if(b == -1){
-		b	= nuFORM.breadCrumb.length -1;
-	}
-
+function nuGetBreadcrumb(b){
+	
+	b		= arguments.length == 0 ? nuFORM.breadCrumb.length -1 : b;
 	var y	= window.nuTYPE;
 	
 	if(window.nuEDITED && y != 'runreport' && y != 'getphp'){
@@ -72,10 +69,6 @@ debugger;
 		
 	}
 
-	if(t == '') {
-		window.nuTYPE	= "browse";
-	}
-	
 	window.nuFORM.removeAfter(b);
 	
 	var c				= window.nuFORM.getCurrent();
@@ -176,7 +169,7 @@ function nuBuildLookup(t, p){
 	
 	$('#nuDragDialog')
 	.css('visibility', 'hidden')
-	.append('<iframe style="right:5px;top:35px;width:400px;height:400px;position:absolute" id="nuLookup" src="index.php?opener=' +open.id + '&target=' + tar + '&type=lookup&iframe=1"></iframe>');
+	.append('<iframe style="right:5px;top:35px;width:400px;height:400px;position:absolute" id="nuLookup" src="index.php?steven=111&opener=' +open.id + '&target=' + tar + '&type=lookup&iframe=1"></iframe>');
 
 }
 
