@@ -23,7 +23,18 @@ function nuBuildSubformArray(s){				//-- add this subform to the list of subform
 
 function nuSetHash(n, v){ 						//-- set hash variable to be used on server side	
 
-	window.nuFORM.current[n]	= v;
+	var l	= window.nuFORM.breadCrumb.length - 1;
+	
+	window.nuFORM.breadCrumb[l][n]	= v;
+
+}
+
+function nuGetHash(n){ 						//-- get hash variable to be used on server side	
+
+	var l	= window.nuFORM.breadCrumb.length - 1;
+	
+	return window.nuFORM.breadCrumb[l][n];
+
 	
 }
 
@@ -45,7 +56,6 @@ function nuBackButton(){
 
 	var id  	= 'nuTabBackButton';
 	var img		= document.createElement('img');
-	var l		= window.nuFORM.last == -1 ? 0 : (window.nuFORM.last - 1);
 	
 	img.setAttribute('id', id);
 
@@ -56,7 +66,7 @@ function nuBackButton(){
 	.css({'top' : 2 , 'right' : 2 ,'width' : 20 , 'height' : 20 ,'position' : 'absolute'})
 	.addClass('nuIcon')
 	.attr('title','Back')
-	.attr('onclick','nuGetBreadcrumb(' + l + ')');
+	.attr('onclick','nuGetBreadcrumb()');
 
 
 }

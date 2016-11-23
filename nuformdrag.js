@@ -4,9 +4,9 @@ function nuBindDragEvents(){
 		
         var draggable = 0;
 		
-		if(window.nuFORM.last != -1) {
+		if(window.nuFORM.breadCrumb.length != -1) {
 			
-			if(window.nuFORM.current.record_id == '-2') {
+			if(window.nuFORM.getProperty('record_id') == '-2') {
 				draggable = 1;
 			}
 			
@@ -39,7 +39,7 @@ function nuBindDragEvents(){
 		
 		if(window.nuFORM.last != -1) {
 			
-			if(window.nuFORM.current.record_id == '-2') {
+			if(window.nuFORM.getProperty('record_id') == '-2') {
 				draggable = 1;
 			}
 			
@@ -74,25 +74,27 @@ function nuBindDragEvents(){
     });
 	
     $(document).on('mouseup.nuformdrag', function(e) {
+
+		var draggable = 0;
 		
-       var draggable = 0;
 		if(window.nuFORM.last != -1) {
-			if(window.nuFORM.current.record_id == '-2') {
+			
+			if(window.nuFORM.getProperty('record_id') == '-2') {
 				draggable = 1;
 			}
-			
+
 		}
-		
+
 		if(draggable) {
-			
+
 			if($('#nuSelectBox').length > 0) {
 				nuRemoveBox(e.ctrlKey);
 			}
-			
+
 		}
-		
-        nuUpdateDragFieldsListbox();
-		
+
+		nuUpdateDragFieldsListbox();
+
     });
 
     var nuDragKeydownListener = function(e){

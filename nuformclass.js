@@ -7,36 +7,24 @@ class nuFormObject {
 		
 		this.schema					= [];
 		this.breadCrumb 			= [];
-		this.current				= {};
-		this.last					= -1;
-		this.setCurrent();
 		
 	}
 	
-	setCurrent(){
+	getCurrent(){
 		
-		this.last					= this.breadCrumb.length - 1;
-		this.current				= this.breadCrumb[this.last];
-		this.breadCrumb[this.last]	= this.current;						//-- copy changes from current to last
-		
-	}
-	
-	setFromCurrent(){
-		
-		this.breadCrumb[this.last]	= this.current;
+		return this.breadCrumb[this.breadCrumb.length - 1];
 		
 	}
 	
 	removeLast(){
 		
 		this.breadCrumb.pop();
-		this.setCurrent();
 		
 	}
 	
 	removeAfter(b) {
 
-		while(this.last > b) {
+		while(this.breadCrumb.length - 1 > b) {
 			this.removeLast();
 		}
 		
@@ -70,15 +58,18 @@ class nuFormObject {
 		b.user_id			= '';
 		
 		this.breadCrumb.push(b);
-		this.setCurrent();
+		
+		return this.getCurrent();
 		
 	}
 
-	setField(f, v) {
-		
-		this.current[f] = v;
-		this.setCurrent();
-		
+	setProperty(f, v) {
+		this.breadCrumb[this.breadCrumb.length -1][f] = v;
+	}
+	
+
+	getProperty(f) {
+		return this.breadCrumb[this.breadCrumb.length - 1][f];
 	}
 	
 	getDataType(t, f){

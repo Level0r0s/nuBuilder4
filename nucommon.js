@@ -54,21 +54,29 @@ function removeOpenerById(pOPENER, pid) {
 
 }
 
-function nuGetBreadcrumb(b, t = ''){
+function nuGetBreadcrumb(b = -1, t = ''){
 
-	if(window.nuEDITED && window.nuTYPE != 'runreport' && window.nuTYPE != 'getphp'){
+	if(b == -1){
+		b	= nuFORM.breadCrumbs.length;
+	}
+
+	var y	= window.nuTYPE;
+	
+	if(window.nuEDITED && y != 'runreport' && y != 'getphp'){
+		
 		if(!confirm(nuTranslate('Leave this form without saving?'))){
 			return;
 		}
+		
 	}
 
 	if(t == '') {
-		window.nuTYPE = "browse";
+		window.nuTYPE	= "browse";
 	}
 	
 	window.nuFORM.removeAfter(b);
 	
-	var c	= window.nuFORM.current;
+	var c				= window.nuFORM.getCurrent();
 	
 	nuGetForm(c.form_id, c.record_id, c.filter,  1);
 	
@@ -76,15 +84,7 @@ function nuGetBreadcrumb(b, t = ''){
 
 
 function nuDisplayError(er){
-/*	
-	for(var i = 0 ; i < er.length ; i++){
-
-		if(er[i][2]) {
-			$('#' + er[i][1]).addClass('nuValidate');			
-		}
-		
-	}
-*/	
+	
 	nuAlert(er.errors);
 
 	return er.errors.length > 0;
@@ -426,7 +426,7 @@ function nuRunIt(t, email, type){
 	}
 	
 	var f	= $('#' + t.id).attr('data-nu-primary-key');
-	var i    = window.nuFORM.current.record_id;
+	var i	= window.nuFORM.getProperty('record_id');
 
 	if(email == 1){
 		
@@ -591,9 +591,10 @@ function nuSortSubformBy(row, col){
 
 function nuEditPHP(ev){
 
-	var i	= window.nuFORM.current.record_id + '_' + ev;
+	var r	= window.nuFORM.getProperty('record_id');
+	var i	= r + '_' + ev;
 	
-	if(b.current.record_id == '-1'){
+	if(r == '-1'){
 	
 		alert('Must Save Record Before Adding Procedures');
 		return;

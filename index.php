@@ -87,13 +87,11 @@ window.nuHASH			= [];
 				var from			= window.parent;
 			}
 
-			window.nuFORM.caller	= from.nuFORM.current;
+			window.nuFORM.caller	= from.nuFORM.getCurrent();
 			window.nuTYPE			= '$type';
 			window.nuTARGET			= '$target';
 			window.nuSESSION		= from.nuSESSION;
 			
-			window.nuFORM.setCurrent();
-
 			if('$opener' != '') {
 				var p				= getOpenerById(from.nuOPENER, Number($opener));
 				removeOpenerById(from.nuOPENER, Number($opener));
