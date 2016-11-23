@@ -44,20 +44,22 @@ function getOpenerById(pOPENER, pid) {
 	return;
 }
 
-function removeOpenerById(pOPENER, pid) {
+function removeOpenerById(o, pid) {
 
-	for (var i = 0; i < pOPENER.length; i++) {
-		if(pOPENER[i].id == pid) {
-			pOPENER.splice(i,1);
+	for (var i = 0; i < o.length; i++) {
+		
+		if(o[i].id == pid) {
+			o.splice(i,1);
 		}
+		
 	}
 
 }
 
 function nuGetBreadcrumb(b = -1, t = ''){
-
+debugger;
 	if(b == -1){
-		b	= nuFORM.breadCrumbs.length;
+		b	= nuFORM.breadCrumb.length -1;
 	}
 
 	var y	= window.nuTYPE;
