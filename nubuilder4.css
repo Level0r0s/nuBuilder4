@@ -342,9 +342,7 @@ input {
 .nuBrowseTitle {
   background-color: #CCCCCC;
   height: 55px;
-  border-style: solid;
-  border-color: #CCCCCC;
-  border-width: 1px;
+  border-width: 0px;
   position:absolute;
   top:0px;
   font-size:12px;
@@ -366,6 +364,27 @@ input {
 
 .nuBrowseSearch {
   color: red;
+}
+
+#nuListerListBox{
+  background-color: orange;
+  color: black;
+}
+
+.nuListerListBoxSelected{
+  background-color: red;
+  color: black;
+}
+
+
+.nuListerListBoxNotSelected:hover{
+  cursor: pointer;
+  color: grey;
+}
+
+.nuListerListBoxSelected:hover{
+  cursor: pointer;
+  color: grey;
 }
 
 #nuSearchList{

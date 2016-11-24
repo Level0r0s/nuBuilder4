@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 23, 2016 at 07:22 PM
+-- Generation Time: Nov 24, 2016 at 02:22 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -412,7 +412,8 @@ INSERT INTO `zzzzsys_browse` (`zzzzsys_browse_id`, `sbr_zzzzsys_form_id`, `sbr_t
 ('57a93cb51e2773a', '57a93cb51e24fd8', 'User Group', 'sug_description', 'l', '', 'sug_description', 30, 200),
 ('583386b1b39f3ea', '583361606250b6e', 'Code', 'sfo_code', NULL, NULL, 'sfo_code', 10, 100),
 ('583386b1b39f9fc', '583361606250b6e', 'Description', 'sfo_description', NULL, NULL, 'sfo_description', 20, 300),
-('58338c35b340e06', '58338c35b340428', 'Object', 'sob_all_fast_form_description', NULL, NULL, 'sob_all_fast_form_description', 10, 250);
+('58338c35b340e06', '58338c35b340428', 'Object', 'sob_all_fast_form_description', NULL, NULL, 'sob_all_fast_form_description', 10, 250),
+('5835f77037fc82c', '58338c35b340428', 'o', 'sob_all_fast_form_description', NULL, NULL, 'sob_all_fast_form_description', 20, 222);
 
 -- --------------------------------------------------------
 
@@ -426,55 +427,6 @@ CREATE TABLE `zzzzsys_debug` (
   `deb_order` varchar(25) NOT NULL,
   `deb_added` datetime NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `zzzzsys_debug`
---
-
-INSERT INTO `zzzzsys_debug` (`zzzzsys_debug_id`, `deb_message`, `deb_order`, `deb_added`) VALUES
-('5835d561a681dae', 'get type: ', '', '2016-11-24 04:14:01'),
-('5835d612bcaf9c7', 'get type: ', '', '2016-11-24 04:16:58'),
-('5835d612bcbb974', 'get type: 1479923218591', '', '2016-11-24 04:16:58'),
-('5835d645157d7c5', 'get type: ', '', '2016-11-24 04:17:49'),
-('5835d6451599e35', 'get opener: 1479923268948', '', '2016-11-24 04:17:49'),
-('5835d75c18a6374', 'get type: ', '', '2016-11-24 04:22:28'),
-('5835d75c18b6763', 'get opener: ', '', '2016-11-24 04:22:28'),
-('5835d761b6e758b', 'get type: ', '', '2016-11-24 04:22:33'),
-('5835d761b6f37d4', 'get opener: 1479923553613', '', '2016-11-24 04:22:33'),
-('5835d7d47d1da56', 'get type: ', '', '2016-11-24 04:24:28'),
-('5835d7d47d418a0', 'get opener: 1479923668341', '', '2016-11-24 04:24:28'),
-('5835d7d614c89ef', 'get type: lookup', '', '2016-11-24 04:24:30'),
-('5835d7d614e66cd', 'get opener: 1479923669981', '', '2016-11-24 04:24:30'),
-('5835d8720df9ad7', 'get type: ', '', '2016-11-24 04:27:06'),
-('5835d8720e0b9e2', 'get opener: ', '', '2016-11-24 04:27:06'),
-('5835d876d7d22b7', 'get type: ', '', '2016-11-24 04:27:10'),
-('5835d876d7de1f7', 'get opener: 1479923830753', '', '2016-11-24 04:27:10'),
-('5835d8787060cda', 'get type: lookup', '', '2016-11-24 04:27:12'),
-('5835d878709a964', 'get opener: 1479923832351', '', '2016-11-24 04:27:12'),
-('5835d8799b8f7c2', 'After Browse (com_business_id)', '', '2016-11-24 04:27:13'),
-('5835d87bf40a4dd', 'get type: lookup', '', '2016-11-24 04:27:15'),
-('5835d87bf421a94', 'get opener: 1479923835907', '', '2016-11-24 04:27:15'),
-('5835d87d25bc396', 'After Browse (com_business_id)', '', '2016-11-24 04:27:17'),
-('5835d87f1354af0', 'get type: lookup', '', '2016-11-24 04:27:19'),
-('5835d87f136b490', 'get opener: 1479923838972', '', '2016-11-24 04:27:19'),
-('5835d8807985dfb', 'After Browse (com_business_id)', '', '2016-11-24 04:27:20'),
-('5835d883895ea17', 'get type: ', '', '2016-11-24 04:27:23'),
-('5835d8838970a51', 'get opener: 1479923843446', '', '2016-11-24 04:27:23'),
-('5835d8b477b4982', 'get type: browse', '', '2016-11-24 04:28:12'),
-('5835d8b477c6360', 'get opener: 1479923892305', '', '2016-11-24 04:28:12'),
-('5835da0b6378b98', 'get type: ', '', '2016-11-24 04:33:55'),
-('5835da0b639b172', 'get opener: 1479924235244', '', '2016-11-24 04:33:55'),
-('5835db2d30161e8', 'get type: ', '', '2016-11-24 04:38:45'),
-('5835db2d3025cb8', 'get opener: ', '', '2016-11-24 04:38:45'),
-('5835db32309d569', 'get type: ', '', '2016-11-24 04:38:50'),
-('5835db3230b2bbe', 'get opener: 1479924530107', '', '2016-11-24 04:38:50'),
-('5835de10904d121', 'get type: ', '', '2016-11-24 04:51:04'),
-('5835de109060225', 'get opener: ', '', '2016-11-24 04:51:04'),
-('5835de18aeab733', 'get type: ', '', '2016-11-24 04:51:12'),
-('5835de18aedff78', 'get opener: 1479925272566', '', '2016-11-24 04:51:12'),
-('5835de1a1108adb', 'get type: lookup', '', '2016-11-24 04:51:14'),
-('5835de1a1117753', 'get opener: 1479925273958', '', '2016-11-24 04:51:14'),
-('5835de1c5e51c87', 'After Browse (com_business_id)', '', '2016-11-24 04:51:16');
 
 -- --------------------------------------------------------
 
@@ -1026,7 +978,7 @@ INSERT INTO `zzzzsys_object` (`zzzzsys_object_id`, `sob_all_zzzzsys_form_id`, `s
 ('581a4d665798263', 'nuform', 'input', 'preiviewbtn', 'Preview', '570730313dd25c5', 70, 268, 151, 232, 25, '1', 'center', '0', '0', '', '', 'preiviewbtn', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'button', ''),
 ('5833648c6db79f7', 'nuobject', 'input', 'sob_lookup_table', 'Code', '570d90df6a2c12a', 260, 3, 3, 50, 18, '1', 'left', '0', '0', 'select ''0''', '', 'sob_lookup_table', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', 'text', ''),
 ('583387f044052c5', 'nuhome', 'run', 'ff_button', 'Fast Form', '581288bcd699493', 60, 50, 92, 150, 30, '1', 'right', '0', '0', '', '', 'ff_button', '583361606250b6e', '', 'b', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-('58338d5893ec00a', '583361606250b6e', 'run', 'aframe', 'FORM', '583361606251aef', 90, 41, 564, 280, 390, '1', 'right', '1', '0', '', '', 'aframe', '58338c35b340428', '', 'i', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+('58338d5893ec00a', '583361606250b6e', 'run', 'aframe', 'FORM', '583361606251aef', 90, 41, 564, 560, 390, '1', 'right', '1', '0', '', '', 'aframe', '58338c35b340428', '', 'i', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('583394db01a2a76', 'nuhome', 'run', 'form_button11', 'ff', '581288bcd699493', 60, 50, 92, 150, 30, '1', 'right', '1', '0', '', '', 'form_button11', '583361606250b6e', '', 'b', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
@@ -1137,25 +1089,6 @@ CREATE TABLE `zzzzsys_session` (
   `sss_timeout` datetime NOT NULL,
   `sss_access` mediumtext NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `zzzzsys_session`
---
-
-INSERT INTO `zzzzsys_session` (`zzzzsys_session_id`, `sss_timeout`, `sss_access`) VALUES
-('5834e2df7868ec9', '2016-11-23 12:59:19', '{"session":{"zzzzsys_user_group_id":"","zzzzsys_user_id":"globeadmin","sug_zzzzsys_form_id":"nuhome","global_access":"1"},"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","57edbac65e1c52a","583361606250b6e","58338c35b340428","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuerror","nuevent","nuform","nuhome","nulaunchdates","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nuphplibrary","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["568b50020fc7a62_AB","574665a15bbc1a1_BO","57578be0057a49f","5757a4b7181e365_BB","57db70b7aa22cda","57f6e1f954955c1","581135daea4f878","nudebug_BD","nuform_AS","nuform_BS","nulaunchdates_BO","nuobject_BO","nuobject_BS","nupassword_BS","nuphp_AS","nuphp_BS","nuuser_AS"]}'),
-('5834f652a6c04f2', '2016-11-23 14:22:18', '{"session":{"zzzzsys_user_group_id":"","zzzzsys_user_id":"globeadmin","sug_zzzzsys_form_id":"nuhome","global_access":"1"},"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","57edbac65e1c52a","583361606250b6e","58338c35b340428","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuerror","nuevent","nuform","nuhome","nulaunchdates","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nuphplibrary","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["568b50020fc7a62_AB","574665a15bbc1a1_BO","57578be0057a49f","5757a4b7181e365_BB","57db70b7aa22cda","57f6e1f954955c1","581135daea4f878","nudebug_BD","nuform_AS","nuform_BS","nulaunchdates_BO","nuobject_BO","nuobject_BS","nupassword_BS","nuphp_AS","nuphp_BS","nuuser_AS"]}'),
-('5834f6d150459db', '2016-11-23 14:24:25', '{"session":{"zzzzsys_user_group_id":"","zzzzsys_user_id":"globeadmin","sug_zzzzsys_form_id":"nuhome","global_access":"1"},"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","57edbac65e1c52a","583361606250b6e","58338c35b340428","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuerror","nuevent","nuform","nuhome","nulaunchdates","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nuphplibrary","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["568b50020fc7a62_AB","574665a15bbc1a1_BO","57578be0057a49f","5757a4b7181e365_BB","57db70b7aa22cda","57f6e1f954955c1","581135daea4f878","nudebug_BD","nuform_AS","nuform_BS","nulaunchdates_BO","nuobject_BO","nuobject_BS","nupassword_BS","nuphp_AS","nuphp_BS","nuuser_AS"]}'),
-('5834f8c14d0a5dd', '2016-11-23 14:32:41', '{"session":{"zzzzsys_user_group_id":"","zzzzsys_user_id":"globeadmin","sug_zzzzsys_form_id":"nuhome","global_access":"1"},"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","57edbac65e1c52a","583361606250b6e","58338c35b340428","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuerror","nuevent","nuform","nuhome","nulaunchdates","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nuphplibrary","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["568b50020fc7a62_AB","574665a15bbc1a1_BO","57578be0057a49f","5757a4b7181e365_BB","57db70b7aa22cda","57f6e1f954955c1","581135daea4f878","nudebug_BD","nuform_AS","nuform_BS","nulaunchdates_BO","nuobject_BO","nuobject_BS","nupassword_BS","nuphp_AS","nuphp_BS","nuuser_AS"]}'),
-('5834f8e484a3ffd', '2016-11-23 14:33:16', '{"session":{"zzzzsys_user_group_id":"","zzzzsys_user_id":"globeadmin","sug_zzzzsys_form_id":"nuhome","global_access":"1"},"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","57edbac65e1c52a","583361606250b6e","58338c35b340428","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuerror","nuevent","nuform","nuhome","nulaunchdates","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nuphplibrary","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["568b50020fc7a62_AB","574665a15bbc1a1_BO","57578be0057a49f","5757a4b7181e365_BB","57db70b7aa22cda","57f6e1f954955c1","581135daea4f878","nudebug_BD","nuform_AS","nuform_BS","nulaunchdates_BO","nuobject_BO","nuobject_BS","nupassword_BS","nuphp_AS","nuphp_BS","nuuser_AS"]}'),
-('5834fadc6a019a7', '2016-11-23 14:41:40', '{"session":{"zzzzsys_user_group_id":"","zzzzsys_user_id":"globeadmin","sug_zzzzsys_form_id":"nuhome","global_access":"1"},"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","57edbac65e1c52a","583361606250b6e","58338c35b340428","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuerror","nuevent","nuform","nuhome","nulaunchdates","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nuphplibrary","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["568b50020fc7a62_AB","574665a15bbc1a1_BO","57578be0057a49f","5757a4b7181e365_BB","57db70b7aa22cda","57f6e1f954955c1","581135daea4f878","nudebug_BD","nuform_AS","nuform_BS","nulaunchdates_BO","nuobject_BO","nuobject_BS","nupassword_BS","nuphp_AS","nuphp_BS","nuuser_AS"]}'),
-('5835c9a8b71c0fe', '2016-11-24 05:24:00', '{"session":{"zzzzsys_user_group_id":"","zzzzsys_user_id":"globeadmin","sug_zzzzsys_form_id":"nuhome","global_access":"1"},"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","57edbac65e1c52a","583361606250b6e","58338c35b340428","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuerror","nuevent","nuform","nuhome","nulaunchdates","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nuphplibrary","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["568b50020fc7a62_AB","574665a15bbc1a1_BO","57578be0057a49f","5757a4b7181e365_BB","57db70b7aa22cda","57f6e1f954955c1","581135daea4f878","nudebug_BD","nuform_AS","nuform_BS","nulaunchdates_BO","nuobject_BO","nuobject_BS","nupassword_BS","nuphp_AS","nuphp_BS","nuuser_AS"]}'),
-('5835d14fc0a8cc7', '2016-11-24 05:56:39', '{"session":{"zzzzsys_user_group_id":"","zzzzsys_user_id":"globeadmin","sug_zzzzsys_form_id":"nuhome","global_access":"1"},"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","57edbac65e1c52a","583361606250b6e","58338c35b340428","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuerror","nuevent","nuform","nuhome","nulaunchdates","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nuphplibrary","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["568b50020fc7a62_AB","574665a15bbc1a1_BO","57578be0057a49f","5757a4b7181e365_BB","57db70b7aa22cda","57f6e1f954955c1","581135daea4f878","nudebug_BD","nuform_AS","nuform_BS","nulaunchdates_BO","nuobject_BO","nuobject_BS","nupassword_BS","nuphp_AS","nuphp_BS","nuuser_AS"]}'),
-('5835d517505e749', '2016-11-24 06:12:47', '{"session":{"zzzzsys_user_group_id":"","zzzzsys_user_id":"globeadmin","sug_zzzzsys_form_id":"nuhome","global_access":"1"},"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","57edbac65e1c52a","583361606250b6e","58338c35b340428","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuerror","nuevent","nuform","nuhome","nulaunchdates","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nuphplibrary","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["568b50020fc7a62_AB","574665a15bbc1a1_BO","57578be0057a49f","5757a4b7181e365_BB","57db70b7aa22cda","57f6e1f954955c1","581135daea4f878","nudebug_BD","nuform_AS","nuform_BS","nulaunchdates_BO","nuobject_BO","nuobject_BS","nupassword_BS","nuphp_AS","nuphp_BS","nuuser_AS"]}'),
-('5835d75d854b8af', '2016-11-24 06:22:29', '{"session":{"zzzzsys_user_group_id":"","zzzzsys_user_id":"globeadmin","sug_zzzzsys_form_id":"nuhome","global_access":"1"},"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","57edbac65e1c52a","583361606250b6e","58338c35b340428","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuerror","nuevent","nuform","nuhome","nulaunchdates","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nuphplibrary","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["568b50020fc7a62_AB","574665a15bbc1a1_BO","57578be0057a49f","5757a4b7181e365_BB","57db70b7aa22cda","57f6e1f954955c1","581135daea4f878","nudebug_BD","nuform_AS","nuform_BS","nulaunchdates_BO","nuobject_BO","nuobject_BS","nupassword_BS","nuphp_AS","nuphp_BS","nuuser_AS"]}'),
-('5835d873799d9db', '2016-11-24 06:27:07', '{"session":{"zzzzsys_user_group_id":"","zzzzsys_user_id":"globeadmin","sug_zzzzsys_form_id":"nuhome","global_access":"1"},"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","57edbac65e1c52a","583361606250b6e","58338c35b340428","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuerror","nuevent","nuform","nuhome","nulaunchdates","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nuphplibrary","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["568b50020fc7a62_AB","574665a15bbc1a1_BO","57578be0057a49f","5757a4b7181e365_BB","57db70b7aa22cda","57f6e1f954955c1","581135daea4f878","nudebug_BD","nuform_AS","nuform_BS","nulaunchdates_BO","nuobject_BO","nuobject_BS","nupassword_BS","nuphp_AS","nuphp_BS","nuuser_AS"]}'),
-('5835db2ea824122', '2016-11-24 06:38:46', '{"session":{"zzzzsys_user_group_id":"","zzzzsys_user_id":"globeadmin","sug_zzzzsys_form_id":"nuhome","global_access":"1"},"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","57edbac65e1c52a","583361606250b6e","58338c35b340428","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuerror","nuevent","nuform","nuhome","nulaunchdates","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nuphplibrary","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["568b50020fc7a62_AB","574665a15bbc1a1_BO","57578be0057a49f","5757a4b7181e365_BB","57db70b7aa22cda","57f6e1f954955c1","581135daea4f878","nudebug_BD","nuform_AS","nuform_BS","nulaunchdates_BO","nuobject_BO","nuobject_BS","nupassword_BS","nuphp_AS","nuphp_BS","nuuser_AS"]}'),
-('5835de12272bee7', '2016-11-24 06:51:06', '{"session":{"zzzzsys_user_group_id":"","zzzzsys_user_id":"globeadmin","sug_zzzzsys_form_id":"nuhome","global_access":"1"},"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","57edbac65e1c52a","583361606250b6e","58338c35b340428","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuerror","nuevent","nuform","nuhome","nulaunchdates","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nuphplibrary","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["568b50020fc7a62_AB","574665a15bbc1a1_BO","57578be0057a49f","5757a4b7181e365_BB","57db70b7aa22cda","57f6e1f954955c1","581135daea4f878","nudebug_BD","nuform_AS","nuform_BS","nulaunchdates_BO","nuobject_BO","nuobject_BS","nupassword_BS","nuphp_AS","nuphp_BS","nuuser_AS"]}');
 
 -- --------------------------------------------------------
 
