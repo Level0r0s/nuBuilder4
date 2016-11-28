@@ -208,10 +208,6 @@ input {
     margin-top: 20px;
 }
 
-.nuLister {
-   background-color:#FFDDDD;
-}
-
 #nuOptionClose {
     height: 25px;
     width: 25px;
@@ -367,15 +363,18 @@ input {
 }
 
 #nuListerListBox{
-  background-color: orange;
+  background-color: #FFDDDD;
   color: black;
+}
+
+.nuLister {
+   background-color: #FFDDDD;
 }
 
 .nuListerListBoxSelected{
   background-color: red;
   color: black;
 }
-
 
 .nuListerListBoxNotSelected:hover{
   cursor: pointer;

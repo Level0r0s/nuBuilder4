@@ -7,6 +7,7 @@ class nuFormObject {
 		
 		this.schema					= [];
 		this.breadCrumb 			= [];
+		this.lists		 			= [];
 		
 	}
 	
@@ -30,7 +31,30 @@ class nuFormObject {
 		
 	}
 	
-	add(){
+	scrollList(e, l){
+
+		var k	= e.keyCode;
+		var o	= this.lists[e.target.id];
+		
+		if(typeof o == 'undefined'){
+			
+			o	= new nuListObject(e);
+			o.setList(l);
+
+		}
+		if(k == 38){o.up();}														//-- up
+
+		if(k == 40){o.down();}														//-- down
+
+		if(k == 9 || k == 13){$('#nuListerListBox').remove();}		//-- tab or enter;
+		
+		$('#' + e.target.id).change();
+
+		o.buildList();
+	
+	}
+	
+	addBreadcrumb(){
 		
 		var b				= {};
 		b.form_id 			= '';

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 25, 2016 at 02:31 AM
+-- Generation Time: Nov 28, 2016 at 02:54 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -464,7 +464,7 @@ INSERT INTO `zzzzsys_event` (`zzzzsys_event_id`, `sev_zzzzsys_object_id`, `sev_e
 ('58117aed5514341', '58117aed5513a01', 'onclick', 'nuPopPHP(''BB'');'),
 ('5811808723dc0a2', '5811808723db54b', 'onclick', 'nuPopPHP(''AB'');'),
 ('581a4d665798ede', '581a4d665798263', 'onclick', 'nuPreview()'),
-('582bbcaa5d4e95d', '570746cc078074e', 'onkeydown', 'nuLister(event, nuFORM.getTables())'),
+('582bbcaa5d4e95d', '570746cc078074e', 'onkeydown', 'nuFORM.scrollList(event, nuFORM.getTables())'),
 ('582c013be5d3a06', '570b00aa9ff6b8d', 'onkeydown', 'nuLister(event, nuFORM.getTableFields($(''#sfo_table'').val()))'),
 ('582d17fa1df2192', '570d9938ebe4428', 'onkeydown', 'nuLister(event, window.nuObjectFields);'),
 ('583362e1aebadc1', '570b1ad216682ef', 'onkeydown', 'nuLister(event, nuFORM.getSQLFields($(''#sfo_browse_sql'').val() + '' ''))'),

@@ -1,37 +1,25 @@
 
-
 class nuListObject{
-	
 	
 	constructor(e){
 		
 		var obj						= $('#' + e.target.id);
 		var off						= obj.offset();
-		var w						= obj.css('width');
-		var h						= obj.css('height');
+		var w						= parseInt(obj.css('width'));
+		var h						= parseInt(obj.css('height'));
 
 		this.OBJECT					= obj[0];
 		this.EVENT					= e;
 		this.rowHeight				= 30;
-		this.rows					= 0;
 		this.top					= off.top + h;
 		this.left					= off.left;
 		this.width					= w;
 		this.height					= 0;
 		this.list					= [];
-		this.subList				= [];
-		this.pointer 				= 0;
-		this.pointing 				= 'up';
-		this.first					= 0;
-		this.last					= 9;
-		
-	}
-	
-	setSubList(f){
-
-		this.first					= f;
-		this.subList				= this.list.splice(this.first, 10);
-		this.last	 				= this.first + this.subList.length;
+		this.boxTop					= 0;
+		this.boxRows				= 0;
+		this.boxList				= [];
+		this.boxHighlight			= 0;
 		
 	}
 	
@@ -40,12 +28,27 @@ class nuListObject{
 		if(JSON.stringify(this.list) != JSON.stringify(a)){
 				
 			this.list				= a;
-			this.rows				= a.length > 9  ? 10 : a.length;
-			this.pointer 			= 0;
-			this.first				= 0;
-			this.lastDirection		= -1;
-		
+			this.boxRows			= a.splice(0, 10).length;
+			this.boxHighlight 		= 0;
+			this.boxTop				= 0;
+			this.height				= this.rowHeight * this.boxRows.length;
+			this.setBoxList(0);
+			
 		}
+		
+	}
+	
+	bob(){console.log('bobby');}
+	
+	setBoxList(bt){
+
+		if(bt == -1 || bt == 1){
+			this.boxTop				+= bt;
+		}else{
+			this.boxTop				=  bt;
+		}
+		
+		this.boxList				= this.list.splice(this.boxTop, 10);
 		
 	}
 	
@@ -53,9 +56,9 @@ class nuListObject{
 		
 		this.setList();
 		
-		if(k == 38){this.pointUp();}								//-- up;
-		if(k == 40){this.pointDown();}								//-- down;
-		if(k == 9 || k == 13){$('#nuListerListBox').remove();}		//-- tab or enter;
+		if(e.keyCode == 38){this.up();}												//-- up;
+		if(e.keyCode == 40){this.down();}											//-- down;
+		if(e.keyCode == 9 || e.keyCode == 13){$('#nuListerListBox').remove();}		//-- tab or enter;
 		
 		$('#' + i).change();
 
@@ -63,81 +66,49 @@ class nuListObject{
 		
 	}
 	
-	pointUp(){
+	up(){
 		
-		if(this.pointer == 0){
+		if(this.boxHighlight == 0){											//-- top of box
 			
-			if(this.first == 0){
-				
-				var rows	= this.list.length;
-				
-				if(rows > 9){
-					this.first		= rows - 10;
-					this.pointer	= 9;
-				}else{
-					this.first		= rows - 1;
-					this.pointer	= this.first;
-				}
-				
+			this.boxHighlight	= this.boxRows - 1;							//-- bottom of box
+			
+			if(this.boxTop == 0){											//-- top of list
+				this.boxTop			= this.list.length - this.boxRows;		//-- bottom of list
 			}
-				
+			
 		}else{
-			this.pointer 	= this.pointer - 1;
+			this.boxHighlight 	= this.boxHighlight - 1;					//-- move up in box
 		}
-		
-		this.lastDirection	= 'up';
 		
 	}
 	
-	pointDown(){
+	down(){
 		
-		if(this.pointer == this.subList.length - 1){
+		if(this.boxHighlight == this.boxRows - 1){							//-- bottom of box
 			
-			this.first	= 0;
+			this.boxHighlight	= 0;										//-- top of box
 			
-			if(this.first == this.list.length - 1){
-				
-				this.first	= 0;
-				
-				if(rows > 9){
-					this.first		= rows - 10;
-					this.pointer	= 9;
-				}else{
-					this.first		= rows - 1;
-					this.pointer	= this.first;
-				}
-				
+			if(this.boxTop + this.boxRows == this.list.length){				//-- bottom of list
+				this.boxTop		= 0;										//-- top of list
 			}
-				
+			
 		}else{
-			this.pointer 	= this.pointer - 1;
+			this.boxHighlight 	= this.boxHighlight + 1;					//-- move down in box
 		}
-		
-		this.lastDirection	= 'down';
 		
 	}
-
+	
 	buildList(){
 		
-		var	a	= a.
+		$('#nuListerListBox').remove();
 		
-		if(this.lastDirection == 'up'){
-		    
-			if(this.pointer == 0){
-			    
-				if(this.first == 0){
-				    
-				}
-			}
-			
-		}
-		
-		var box 	= document.createElement('div');
+		var box 		= document.createElement('div');
+		var rw			= '';
 		
 		box.setAttribute('id', 'nuListerListBox');
 		
 		$('body').append(box);
-		
+
 		$('#nuListerListBox').css({
 						'top'			: this.top,
 						'left'			: this.left,
@@ -148,31 +119,22 @@ class nuListObject{
 						'overflow'		: 'hidden',
 		});
 		
-		
-		
-		for(var i = this.top ; i < this.list.length ; i++){
+		for(var i = 0 ; i < this.boxList.length ; i++){
 			
-			var listID	= ' id="nulister' + j + '" ';
+			var uid		= 'id="nulister' + i + '"';
+			var id		= this.EVENT.target.id
+			var item	= this.boxList[i];
 			
-			if(i == j){
-				rw	= '<div' + listID + 'onclick="nuListerPick(event, \'' + e.target.id + '\')" data-nu-index=' + j + '" class="nuListerListBoxSelected">' + a[j] + '</div>';
+			if(i == this.boxHighlight){
+				rw		= '<div ' + uid + ' onclick="nuListerPick(event, \'' + id + '\')" data-nu-index=' + i + '" class="nuListerListBoxSelected">' + item + '</div>';
 			}else{
-				rw	= '<div' + listID + 'onclick="nuListerPick(event, \'' + e.target.id + '\')" data-nu-index=' + j + '" class="nuListerListBoxNotSelected">' + a[j] + '</div>';
+				rw		= '<div ' + uid + ' onclick="nuListerPick(event, \'' + id + '\')" data-nu-index=' + i + '" class="nuListerListBoxNotSelected">' + item + '</div>';
 			}
 			
 			$('#nuListerListBox').append(rw);
 		
 		}
 		
-
-
-
-
-
-
-		
 	}
-	
-	
 
 }

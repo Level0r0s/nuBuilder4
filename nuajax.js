@@ -55,7 +55,7 @@ function nuGetForm(f, r, filter, n){
 	
 	if($('#nuusername').length == 1){
 		
-		var last	= window.nuFORM.add();
+		var last	= window.nuFORM.addBreadcrumb();
 		
 		last.username	= $('#nuusername').val();
 		last.password	= $('#nupassword').val();
@@ -65,7 +65,7 @@ function nuGetForm(f, r, filter, n){
 		s			= window.nuSESSION;
 		
 		if(arguments.length != 4){   //-- add a new breadcrumb
-			window.nuFORM.add();
+			window.nuFORM.addBreadcrumb();
 		}
 		
 	}
@@ -108,7 +108,7 @@ function nuGetPHP(f, r){
 
 	if(nuOpenNewBrowserTab('getphp', f, r, '')){return;}
 
-	window.nuFORM.add();
+	window.nuFORM.addBreadcrumb();
 
 	var last			= window.nuFORM.getCurrent();
 
@@ -139,7 +139,7 @@ function nuGetPDF(f, r){
 
 	if(nuOpenNewBrowserTab('getreport', f, r, '')){return;}
 
-	var last			= window.nuFORM.add();
+	var last			= window.nuFORM.addBreadcrumb();
 
 	last.session_id 	= window.nuSESSION;
 	last.call_type 		= 'getreport';
@@ -167,7 +167,7 @@ function nuGetPDF(f, r){
 
 function nuRunReport(f, iframe){
 	
-	window.nuFORM.add();
+	window.nuFORM.addBreadcrumb();
 
 	var last			= window.nuFORM.getCurrent();
 
@@ -202,7 +202,7 @@ function nuRunReport(f, iframe){
 
 function nuRunPHP(f, iframe){
 
-	var last		= window.nuFORM.add();
+	var last		= window.nuFORM.addBreadcrumb();
 
 	last.session_id	= window.nuSESSION;
 	last.call_type 	= 'runphp';
