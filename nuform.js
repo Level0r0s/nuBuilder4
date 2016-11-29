@@ -16,6 +16,7 @@ function nuBuildForm(f){
 	window.nuSUBFORMJSON			= [];
 	window.nuHASH					= [];                       //-- remove any hash variables previously set.
 	window.nuEDITED					= false;
+	window.nuFORM.lists				= [];
 	
 	nuSetBODY(f);
 	
@@ -2833,8 +2834,6 @@ function nuListerList(e, a){
 	var n	= 'nuList_' + e.target.id;
 	var i	= window[n];
 	
-console.log(n, 'pp ',i);
-
 	ll.setAttribute('id', 'nuListerListBox');
 	
 	$('body').append(ll);
@@ -2849,7 +2848,7 @@ console.log(n, 'pp ',i);
 	});
 	
 	var I	= 0;
-	console.log(a.length,i);
+
 	if(a.length - i < 10){			//-- if 'i' is in the last 10
 	
 		I	= a.length - 10;

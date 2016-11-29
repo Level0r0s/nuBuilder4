@@ -33,15 +33,16 @@ class nuFormObject {
 	
 	scrollList(e, l){
 
+		if(typeof this.lists[e.target.id] == 'undefined'){
+			
+			this.lists[e.target.id]	= new nuListObject(e);
+			this.lists[e.target.id].setList(l);
+
+		}
+
 		var k	= e.keyCode;
 		var o	= this.lists[e.target.id];
 		
-		if(typeof o == 'undefined'){
-			
-			o	= new nuListObject(e);
-			o.setList(l);
-
-		}
 		if(k == 38){o.up();}														//-- up
 
 		if(k == 40){o.down();}														//-- down

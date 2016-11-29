@@ -26,19 +26,17 @@ class nuListObject{
 	setList(a){
 
 		if(JSON.stringify(this.list) != JSON.stringify(a)){
-				
+
 			this.list				= a;
-			this.boxRows			= a.splice(0, 10).length;
+			this.boxRows			= a.slice(0, 10).length;
 			this.boxHighlight 		= 0;
 			this.boxTop				= 0;
-			this.height				= this.rowHeight * this.boxRows.length;
+			this.height				= this.rowHeight * this.boxRows;
 			this.setBoxList(0);
 			
 		}
 		
 	}
-	
-	bob(){console.log('bobby');}
 	
 	setBoxList(bt){
 
@@ -47,33 +45,22 @@ class nuListObject{
 		}else{
 			this.boxTop				=  bt;
 		}
-		
-		this.boxList				= this.list.splice(this.boxTop, 10);
+		this.boxList				= this.list.slice(bt, bt + 10);	
+console.log(bt, bt + 10);		
+		this.boxRows				= this.boxList.length;	
 		
 	}
-	
-	keyEvent(e){
-		
-		this.setList();
-		
-		if(e.keyCode == 38){this.up();}												//-- up;
-		if(e.keyCode == 40){this.down();}											//-- down;
-		if(e.keyCode == 9 || e.keyCode == 13){$('#nuListerListBox').remove();}		//-- tab or enter;
-		
-		$('#' + i).change();
 
-		this.buildList();
-		
-	}
-	
 	up(){
-		
+		console.log('up',this.boxHighlight,this.boxRows);
 		if(this.boxHighlight == 0){											//-- top of box
 			
 			this.boxHighlight	= this.boxRows - 1;							//-- bottom of box
 			
 			if(this.boxTop == 0){											//-- top of list
-				this.boxTop			= this.list.length - this.boxRows;		//-- bottom of list
+				this.setBoxList(this.list.length - this.boxRows);			//-- bottom of list
+			}else{
+				this.setBoxList(-1);											
 			}
 			
 		}else{
@@ -83,13 +70,15 @@ class nuListObject{
 	}
 	
 	down(){
-		
+		console.log('down',this.boxHighlight,this.boxRows);
 		if(this.boxHighlight == this.boxRows - 1){							//-- bottom of box
 			
 			this.boxHighlight	= 0;										//-- top of box
 			
-			if(this.boxTop + this.boxRows == this.list.length){				//-- bottom of list
-				this.boxTop		= 0;										//-- top of list
+			if(this.boxTop + this.boxRows < this.list.length - 1){			//-- bottom of list
+				this.setBoxList(1);											//-- top of list
+			}else{
+				this.setBoxList(0);											
 			}
 			
 		}else{
@@ -124,6 +113,7 @@ class nuListObject{
 			var uid		= 'id="nulister' + i + '"';
 			var id		= this.EVENT.target.id
 			var item	= this.boxList[i];
+			$('#' + id).val(item);
 			
 			if(i == this.boxHighlight){
 				rw		= '<div ' + uid + ' onclick="nuListerPick(event, \'' + id + '\')" data-nu-index=' + i + '" class="nuListerListBoxSelected">' + item + '</div>';
