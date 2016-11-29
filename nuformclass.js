@@ -43,13 +43,20 @@ class nuFormObject {
 		var k	= e.keyCode;
 		var o	= this.lists[e.target.id];
 		
-		if(k == 38){o.up();}														//-- up
-
-		if(k == 40){o.down();}														//-- down
-
-		if(k == 9 || k == 13){$('#nuListerListBox').remove();}		//-- tab or enter;
+		if(k == 38){														//-- up
+			o.up();
+		} else if(k == 40){													//-- down
+			o.down();
+		} else if(k == 9 || k == 13){										//-- tab or enter;
 		
-		$('#' + e.target.id).change();
+			$('#nuListerListBox').remove();
+			return;
+			
+		} else {
+			return;
+		}
+		
+		//$('#' + e.target.id).change();
 
 		o.buildList();
 	

@@ -10,7 +10,7 @@ class nuListObject{
 
 		this.OBJECT					= obj[0];
 		this.EVENT					= e;
-		this.rowHeight				= 30;
+		this.rowHeight				= 19;
 		this.top					= off.top + h;
 		this.left					= off.left;
 		this.width					= w;
@@ -44,21 +44,24 @@ class nuListObject{
 			this.boxTop				+= bt;
 		}else{
 			this.boxTop				=  bt;
+		
 		}
-		this.boxList				= this.list.slice(bt, bt + 10);	
-console.log(bt, bt + 10);		
+		
+		this.boxTop					= Math.min(this.list.length - 10, this.boxTop);
+		this.boxList				= this.list.slice(this.boxTop, this.boxTop + 10);	
 		this.boxRows				= this.boxList.length;	
 		
 	}
 
 	up(){
-		console.log('up',this.boxHighlight,this.boxRows);
-		if(this.boxHighlight == 0){											//-- top of box
+
+		if(this.boxHighlight < 1){											//-- top of box
 			
-			this.boxHighlight	= this.boxRows - 1;							//-- bottom of box
+			if(this.boxTop < 1){											//-- top of list
 			
-			if(this.boxTop == 0){											//-- top of list
+				this.boxHighlight	= this.boxRows - 1;						//-- bottom of box
 				this.setBoxList(this.list.length - this.boxRows);			//-- bottom of list
+				
 			}else{
 				this.setBoxList(-1);											
 			}
@@ -67,23 +70,28 @@ console.log(bt, bt + 10);
 			this.boxHighlight 	= this.boxHighlight - 1;					//-- move up in box
 		}
 		
+		$('#' + this.OBJECT.id).change();
+		
 	}
 	
 	down(){
-		console.log('down',this.boxHighlight,this.boxRows);
-		if(this.boxHighlight == this.boxRows - 1){							//-- bottom of box
+		
+		if(this.boxHighlight + 2 > this.boxRows){							//-- bottom of box
 			
-			this.boxHighlight	= 0;										//-- top of box
-			
-			if(this.boxTop + this.boxRows < this.list.length - 1){			//-- bottom of list
-				this.setBoxList(1);											//-- top of list
-			}else{
+			if(this.boxTop + this.boxRows == this.list.length - 1){			//-- bottom of list
+				
+				this.boxHighlight	= 0;									//-- top of box
 				this.setBoxList(0);											
+				
+			}else{
+				this.setBoxList(1);											//-- top of list
 			}
 			
 		}else{
 			this.boxHighlight 	= this.boxHighlight + 1;					//-- move down in box
 		}
+		
+		$('#' + this.OBJECT.id).change();
 		
 	}
 	
@@ -113,12 +121,14 @@ console.log(bt, bt + 10);
 			var uid		= 'id="nulister' + i + '"';
 			var id		= this.EVENT.target.id
 			var item	= this.boxList[i];
+			var fit		= this.choppedAt(item, this.width);
 			$('#' + id).val(item);
 			
+			
 			if(i == this.boxHighlight){
-				rw		= '<div ' + uid + ' onclick="nuListerPick(event, \'' + id + '\')" data-nu-index=' + i + '" class="nuListerListBoxSelected">' + item + '</div>';
+				rw		= '<div ' + uid + ' onclick="nuListerPick(event, \'' + id + '\')" data-nu-index=' + (i + this.boxTop) + '" class="nuListerListBoxSelected">' + fit + '</div>';
 			}else{
-				rw		= '<div ' + uid + ' onclick="nuListerPick(event, \'' + id + '\')" data-nu-index=' + i + '" class="nuListerListBoxNotSelected">' + item + '</div>';
+				rw		= '<div ' + uid + ' onclick="nuListerPick(event, \'' + id + '\')" data-nu-index=' + (i + this.boxTop) + '" class="nuListerListBoxNotSelected">' + fit + '</div>';
 			}
 			
 			$('#nuListerListBox').append(rw);
@@ -126,5 +136,24 @@ console.log(bt, bt + 10);
 		}
 		
 	}
+	
+	choppedAt(s, w){
+		
+		var len	= 0;
+		
+		for(var i = 0 ; i < s.length ; i++){
+			
+			len	= nuGetWordWidth(s.substr(0, s.length - i)) + 10;
+			
+			if(len < w){
+				return s.substr(0, s.length - i) + (i === 0 ? '' : '...');
+			}
+		
+		}
+		
+	}
 
 }
+
+
+
