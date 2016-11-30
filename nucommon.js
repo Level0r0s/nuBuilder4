@@ -622,3 +622,42 @@ function testsql(){
 	
 }
 
+
+
+function nuPreview(){
+
+    var t   = $('#sfo_type').val();
+    var f   = nuFORM.getProperty('form_id');
+    var r   = nuFORM.getProperty('record_id');
+    
+    if(r == '-1'){
+        
+        alert('Form must be saved first..');
+        return;
+        
+    }
+    
+    if(t == 'browse'){
+        nuPopup(r, '');
+    }
+    
+    if(t == 'edit'){
+        nuPopup(r, '-3');
+    }
+    
+    if(t == 'browseedit'){
+        nuPopup(r, '');
+    }
+    
+    if(t == 'subform'){
+        nuPopup(r, '-3');
+    }
+    
+    if(t == 'launch'){
+        nuPopup(r, '-3');
+    }
+    
+}
+
+
+

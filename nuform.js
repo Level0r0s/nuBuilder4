@@ -2262,7 +2262,7 @@ function nuCloneAction(){
 			
 	});
 	
-	window.nuFORM.getProperty('record_id') = -1;
+	window.nuFORM.setProperty('record_id', -1);
 
 	$('#nuCloneButton').css('visibility','hidden');
 	$('#nuDeleteButton').css('visibility','hidden');
@@ -2288,7 +2288,7 @@ function nuSavingProgressMessage(){
 
     $('#nuActionHolder').append(e);
     $('#' + e.id).html('<img src=\'ajax-loader.gif\'/>');
-    $('#' + e.id).addClass( 'nuSaveMessageProgress');
+    $('#' + e.id).addClass('nuSaveMessageProgress');
 	$('#' + e.id).css('position','absolute');
 	$('#' + e.id).css('left',(($('#nuActionHolder').width() / 2) - ($('#nuProgressSaved').width() / 2))+ 'px');
     $('#' + e.id).show();
@@ -2771,3 +2771,5 @@ function nuAlert(o){
 	}
 	
 }
+
+function nuLister(){}

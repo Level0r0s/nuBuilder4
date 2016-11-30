@@ -59,7 +59,7 @@ function nuUpdateData(){
 				$value		= $o['v'][$ii];
 
 				if($O->sob_all_validate == '1'){				//-- noblanks
-					
+				
 					if($value == ''){
 						
 						$lab	= addslashes($O->sob_all_label);

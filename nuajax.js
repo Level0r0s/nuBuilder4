@@ -325,7 +325,6 @@ function nuPrintAction(){
 
 }
 
-
 function nuUpdateData(){
 
 	var last			= window.nuFORM.getCurrent();
@@ -367,6 +366,7 @@ function nuUpdateData(){
 	};
 
 	nuAjax(last,successCallback,nuAbortSave);
+	
 }
 
 function nuSaveAfterDrag() {
