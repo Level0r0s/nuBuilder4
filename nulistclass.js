@@ -47,9 +47,13 @@ class nuListObject{
 		
 		}
 		
-		this.boxTop					= Math.min(this.list.length - 10, this.boxTop);
+		if(this.list.length - this.boxRows == this.boxTop){
+			this.boxTop				= 0;
+		}
+		
 		this.boxList				= this.list.slice(this.boxTop, this.boxTop + 10);	
 		this.boxRows				= this.boxList.length;	
+		this.boxSize				= this.boxList.length;	
 		
 	}
 
@@ -123,12 +127,11 @@ class nuListObject{
 			var item	= this.boxList[i];
 			var fit		= this.choppedAt(item, this.width);
 			$('#' + id).val(item);
-			
-			
+			console.log(id);
 			if(i == this.boxHighlight){
-				rw		= '<div ' + uid + ' onclick="nuListerPick(event, \'' + id + '\')" data-nu-index=' + (i + this.boxTop) + '" class="nuListerListBoxSelected">' + fit + '</div>';
+				rw		= "<div " + uid + " onclick='nuPickFromList(event)' data-nu-index='" + (i + this.boxTop) + "' data-nu-value='" + item + "' data-nu-id='" + id + "' class='nuListerListBoxSelected'>" + fit + "</div>";
 			}else{
-				rw		= '<div ' + uid + ' onclick="nuListerPick(event, \'' + id + '\')" data-nu-index=' + (i + this.boxTop) + '" class="nuListerListBoxNotSelected">' + fit + '</div>';
+				rw		= "<div " + uid + " onclick='nuPickFromList(event)' data-nu-index='" + (i + this.boxTop) + "' data-nu-value='" + item + "' data-nu-id='" + id + "' class='nuListerListBoxNotSelected'>" + fit + "</div>";
 			}
 			
 			$('#nuListerListBox').append(rw);
@@ -152,8 +155,23 @@ class nuListObject{
 		}
 		
 	}
-
+	
 }
 
+
+function nuPickFromList(e){
+		
+		var o				= $('#' + e.target.id);
+		var ind				= o.attr('data-nu-index');
+		var val				= o.attr('data-nu-value');
+		var id				= o.attr('data-nu-id');
+		
+		this.boxHighlight	= Number(ind);
+		
+		$('#' + id).val(val);
+
+		$('#nuListerListBox').remove();
+		
+	}
 
 
