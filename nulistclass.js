@@ -122,19 +122,24 @@ class nuListObject{
 		
 		for(var i = 0 ; i < this.boxList.length ; i++){
 			
-			var uid		= 'id="nulister' + i + '"';
+			var divid		= 'nulister' + i;
+			var uid		= 'id="' + divid + '"';
 			var id		= this.EVENT.target.id
 			var item	= this.boxList[i];
 			var fit		= this.choppedAt(item, this.width);
 			$('#' + id).val(item);
-			console.log(id);
+
 			if(i == this.boxHighlight){
 				rw		= "<div " + uid + " onclick='nuPickFromList(event)' data-nu-index='" + (i + this.boxTop) + "' data-nu-value='" + item + "' data-nu-id='" + id + "' class='nuListerListBoxSelected'>" + fit + "</div>";
 			}else{
 				rw		= "<div " + uid + " onclick='nuPickFromList(event)' data-nu-index='" + (i + this.boxTop) + "' data-nu-value='" + item + "' data-nu-id='" + id + "' class='nuListerListBoxNotSelected'>" + fit + "</div>";
 			}
-			
+						
 			$('#nuListerListBox').append(rw);
+		
+			if(fit != item) {
+				$('#' + divid).attr('title',item);
+			}
 		
 		}
 		
