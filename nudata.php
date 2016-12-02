@@ -1,7 +1,7 @@
 <?php
 
 function nuUpdateData(){
-	
+
 	$nudata	= $_POST['nuSTATE']['data'];
 	$ID		= $_POST['nuSTATE']['record_id'];
 	$DEL	= $_POST['nuSTATE']['deleteAll'];	

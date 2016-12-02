@@ -236,7 +236,7 @@ function nuBuildEditObjects(f, p, o, prop){
 function nuAddJSObjectEvents(i, j){
 
 	var o			= document.getElementById(i);
-	console.log('i',i);
+
 	for(var J = 0 ; J < j.length ; J++){
 
 		var code 	= o.getAttribute(j[J].event);

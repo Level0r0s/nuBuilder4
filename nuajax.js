@@ -372,7 +372,9 @@ function nuUpdateData(){
 function nuSaveAfterDrag() {
 	
 	var f				= $('#nuDragDialog iframe')[0].contentWindow.nuFORM;
-	var last			= f.breadCrumb[f.breadCrumb.lenghth - 1];
+//	var last			= f.breadCrumb[f.breadCrumb.length - 1];
+
+	var last			= f.getCurrent();
 
     last.call_type		= 'nudragsave';
     last.nuDragState	= $('#nuDragDialog iframe')[0].contentWindow.nuDragOptionsState;
