@@ -9,7 +9,8 @@ function nuAppendActionButton(t, f){
 	.replaceAll(' ', '_', true)
 	.replaceAll("'", '_', true);
 	
-	h='<input id="' + i + '" type="button" class="nuActionButton" value="' + t + '" onclick="' + f + '">&nbsp;';
+	var h	= '<input id="' + i + '" type="button" class="nuActionButton" value="' + t + '" onclick="' + f + '">&nbsp;';
+	
 	$('#nuActionHolder').append(h);
 	
 }
@@ -20,6 +21,7 @@ function nuBuildSubformArray(s){				//-- add this subform to the list of subform
 	window.nuSUBFORMJSON.push(s);
 	
 }
+
 
 function nuSetHash(n, v){ 						//-- set hash variable to be used on server side	
 

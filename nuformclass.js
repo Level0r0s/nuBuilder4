@@ -186,5 +186,43 @@ class nuFormObject {
 		return tables;
 		
 	}
+	
+	subform(sf){
+		
+		var sel	= "[id*='" + sf + "'][id*='nuRecordHolder']";
+		var o	= {'id':sf};
+		o.rows	= [];
+		var F	= [];
+		var F	= ['nuId'];
+		
+		$(sel).each(function(index){
+			
+			var $this	= $(this);
+			var V		= [];
+			
+			V.push($('#' + $this[0].id).attr('data-nu-primary-key'));
+
+			$this.children().each(function(index){
+				
+				F[index+1] = this.id.substr(sf.length + 3);
+				V[index+1] = $('#' + this.id).val();
+				
+				if(F[index+1] == 'nuDelete'){
+					
+					V[index+1] = $('#' + this.id).prop("checked");
+					
+				}
+				
+			});
+			
+			o.rows.push(V)
+			
+		});
+			
+		o.fields		= F;
+		
+		return o;
+
+	}
 
 }
