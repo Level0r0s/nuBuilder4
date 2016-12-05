@@ -188,19 +188,17 @@ class nuFormObject {
 	}
 	
 	subform(sf){
-		
+
 		var sel	= "[id*='" + sf + "'][id*='nuRecordHolder']";
 		var o	= {'id':sf};
 		o.rows	= [];
-		var F	= [];
-		var F	= ['nuId'];
+		var F	= ['ID'];
 		
 		$(sel).each(function(index){
 			
 			var $this	= $(this);
-			var V		= [];
 			
-			V.push($('#' + $this[0].id).attr('data-nu-primary-key'));
+			var V		= [$(this).attr('data-nu-primary-key')];
 
 			$this.children().each(function(index){
 				
@@ -209,6 +207,7 @@ class nuFormObject {
 				
 				if(F[index+1] == 'nuDelete'){
 					
+					F[index+1] = 'DELETE';
 					V[index+1] = $('#' + this.id).prop("checked");
 					
 				}
@@ -217,12 +216,14 @@ class nuFormObject {
 			
 			o.rows.push(V)
 			
-		});
 			
+		});
+
 		o.fields		= F;
 		
 		return o;
 
-	}
+}	
+	
 
 }

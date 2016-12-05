@@ -314,6 +314,11 @@ input {
   
 }
 
+.nuLanding {
+  border: 1px solid red;	
+  cursor: pointer;
+}
+
 .nuSort:hover {
   color: red;	
   cursor: pointer;
