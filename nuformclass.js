@@ -38,10 +38,10 @@ class nuFormObject {
 			this.lists[e.target.id]	= new nuListObject(e);
 			this.lists[e.target.id].setList(l);				
 		}
-
-		var c = $.inArray($('#'+e.target.id).val(), l);
+	
 		var k	= e.keyCode;
 		var o	= this.lists[e.target.id];
+		var c = $.inArray($('#'+e.target.id).val(), o.boxList);
 
 		if($('#nuListerListBox').length > 0) {
 			if(k == 38){														//-- up
