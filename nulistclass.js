@@ -23,7 +23,7 @@ class nuListObject{
 		
 	}
 	
-	setList(a){
+	setList(a, c){
 
 		if(JSON.stringify(this.list) != JSON.stringify(a)){
 
@@ -43,18 +43,13 @@ class nuListObject{
 		if(bt == -1 || bt == 1){
 			this.boxTop				+= bt;
 		}else{
-			this.boxTop				=  bt;
-		
+			this.boxTop				=  bt;		
 		}
-		
-		if(this.list.length - this.boxRows == this.boxTop){
-			this.boxTop				= 0;
-		}
-		
+				
 		this.boxList				= this.list.slice(this.boxTop, this.boxTop + 10);	
 		this.boxRows				= this.boxList.length;	
 		this.boxSize				= this.boxList.length;	
-		
+
 	}
 
 	up(){
@@ -65,7 +60,7 @@ class nuListObject{
 			
 				this.boxHighlight	= this.boxRows - 1;						//-- bottom of box
 				this.setBoxList(this.list.length - this.boxRows);			//-- bottom of list
-				
+
 			}else{
 				this.setBoxList(-1);											
 			}
@@ -82,9 +77,9 @@ class nuListObject{
 		
 		if(this.boxHighlight + 2 > this.boxRows){							//-- bottom of box
 			
-			if(this.boxTop + this.boxRows == this.list.length - 1){			//-- bottom of list
+			if(this.boxTop + this.boxRows == this.list.length){				//-- bottom of list
 				
-				this.boxHighlight	= 0;									//-- top of box
+				this.boxHighlight = 0;										//-- top of box
 				this.setBoxList(0);											
 				
 			}else{
@@ -96,11 +91,11 @@ class nuListObject{
 		}
 		
 		$('#' + this.OBJECT.id).change();
-		
+
 	}
 	
 	buildList(){
-		
+
 		$('#nuListerListBox').remove();
 		
 		var box 		= document.createElement('div');
@@ -119,7 +114,7 @@ class nuListObject{
 						'position'		: 'absolute',
 						'overflow'		: 'hidden',
 		});
-		
+
 		for(var i = 0 ; i < this.boxList.length ; i++){
 			
 			var divid		= 'nulister' + i;
@@ -127,14 +122,15 @@ class nuListObject{
 			var id		= this.EVENT.target.id
 			var item	= this.boxList[i];
 			var fit		= this.choppedAt(item, this.width);
-			$('#' + id).val(item);
 
 			if(i == this.boxHighlight){
 				rw		= "<div " + uid + " onclick='nuPickFromList(event)' data-nu-index='" + (i + this.boxTop) + "' data-nu-value='" + item + "' data-nu-id='" + id + "' class='nuListerListBoxSelected'>" + fit + "</div>";
 			}else{
 				rw		= "<div " + uid + " onclick='nuPickFromList(event)' data-nu-index='" + (i + this.boxTop) + "' data-nu-value='" + item + "' data-nu-id='" + id + "' class='nuListerListBoxNotSelected'>" + fit + "</div>";
 			}
-						
+			
+			$('#' + id).val(this.boxList[this.boxHighlight]);	
+			
 			$('#nuListerListBox').append(rw);
 		
 			if(fit != item) {
@@ -165,18 +161,16 @@ class nuListObject{
 
 
 function nuPickFromList(e){
-		
-		var o				= $('#' + e.target.id);
-		var ind				= o.attr('data-nu-index');
-		var val				= o.attr('data-nu-value');
-		var id				= o.attr('data-nu-id');
-		
-		this.boxHighlight	= Number(ind);
-		
-		$('#' + id).val(val);
+	
+	var o				= $('#' + e.target.id);
+	var ind				= o.attr('data-nu-index');
+	var val				= o.attr('data-nu-value');
+	var id				= o.attr('data-nu-id');
+	
+	nuFORM.lists[id].boxHighlight	= Number(ind) - nuFORM.lists[id].boxTop;
 
-		$('#nuListerListBox').remove();
-		
-	}
+	$('#' + id).val(val);
 
+	$('#nuListerListBox').remove();
+}
 

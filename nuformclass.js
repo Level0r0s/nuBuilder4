@@ -36,28 +36,30 @@ class nuFormObject {
 		if(typeof this.lists[e.target.id] == 'undefined'){
 			
 			this.lists[e.target.id]	= new nuListObject(e);
-			this.lists[e.target.id].setList(l);
-
+			this.lists[e.target.id].setList(l);				
 		}
 
+		var c = $.inArray($('#'+e.target.id).val(), l);
 		var k	= e.keyCode;
 		var o	= this.lists[e.target.id];
-		
-		if(k == 38){														//-- up
-			o.up();
-		} else if(k == 40){													//-- down
-			o.down();
-		} else if(k == 9 || k == 13){										//-- tab or enter;
-		
-			$('#nuListerListBox').remove();
-			return;
+
+		if($('#nuListerListBox').length > 0) {
+			if(k == 38){														//-- up
+				o.up();
+			} else if(k == 40){													//-- down
+				o.down();
+			} else if(k == 9 || k == 13){										//-- tab or enter;
 			
+				$('#nuListerListBox').remove();
+				return;
+				
+			} else {
+				return;
+			}
 		} else {
-			return;
+			o.boxHighlight = c;
 		}
 		
-		//$('#' + e.target.id).change();
-
 		o.buildList();
 	
 	}
