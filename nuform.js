@@ -1636,7 +1636,7 @@ function nuBrowseTable(){
 	.addClass('nuBrowseTitle')
 	.html(la+pg+cu+of+ne)
 	.css({	'text-align'	: 'center',
-			'width'			: l - 8,
+			'width'			: l - 6,
 			'top'			: t + h,
 			'left'			: 7,
 			'height'		: 25,
@@ -2768,8 +2768,12 @@ function nuAlert(o){
 		
 		$('#nuErrorAlert', par).append(o[i][0]);
 		$('#nuErrorAlert', par).append('<br>');
+		
 	}
 	
 }
 
 function nuLister(){}
+
+
+
