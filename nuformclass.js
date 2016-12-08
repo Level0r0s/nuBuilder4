@@ -43,7 +43,7 @@ class nuFormObject {
 		var o	= this.lists[e.target.id];
 		var c = $.inArray($('#'+e.target.id).val(), o.boxList);
 
-		if($('#nuListerListBox').length > 0) {
+		if($('#nuListerListBox').length > 0 && $('#nuListerListBox').children().first().attr('data-nu-id') == e.target.id) {
 			if(k == 38){														//-- up
 				o.up();
 			} else if(k == 40){													//-- down
