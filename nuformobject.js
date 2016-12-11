@@ -7,64 +7,42 @@ class nuFormObject {
 		
 		this.schema					= [];
 		this.breadCrumb 			= [];
-		this.lists		 			= [];
+		this.current				= {};
+		this.last					= -1;
+		this.setCurrent();
 		
 	}
 	
-	getCurrent(){
+	setCurrent(){
 		
-		return this.breadCrumb[this.breadCrumb.length - 1];
+		this.last					= this.breadCrumb.length - 1;
+		this.current				= this.breadCrumb[this.last];
+		this.breadCrumb[this.last]	= this.current;						//-- copy changes from current to last
+		
+	}
+	
+	setFromCurrent(){
+		
+		this.breadCrumb[this.last]	= this.current;
 		
 	}
 	
 	removeLast(){
 		
 		this.breadCrumb.pop();
+		this.setCurrent();
 		
 	}
 	
 	removeAfter(b) {
 
-		while(this.breadCrumb.length - 1 > b) {
+		while(this.last > b) {
 			this.removeLast();
 		}
 		
 	}
 	
-	scrollList(e, l){
-
-		if(typeof this.lists[e.target.id] == 'undefined'){
-			
-			this.lists[e.target.id]	= new nuListObject(e);
-			this.lists[e.target.id].setList(l);				
-		}
-	
-		var k	= e.keyCode;
-		var o	= this.lists[e.target.id];
-		var c = $.inArray($('#'+e.target.id).val(), o.boxList);
-
-		if($('#nuListerListBox').length > 0 && $('#nuListerListBox').children().first().attr('data-nu-id') == e.target.id) {
-			if(k == 38){														//-- up
-				o.up();
-			} else if(k == 40){													//-- down
-				o.down();
-			} else if(k == 9 || k == 13){										//-- tab or enter;
-			
-				$('#nuListerListBox').remove();
-				return;
-				
-			} else {
-				return;
-			}
-		} else {
-			o.boxHighlight = c;
-		}
-		
-		o.buildList();
-	
-	}
-	
-	addBreadcrumb(){
+	add(){
 		
 		var b				= {};
 		b.form_id 			= '';
@@ -92,18 +70,15 @@ class nuFormObject {
 		b.user_id			= '';
 		
 		this.breadCrumb.push(b);
-		
-		return this.getCurrent();
+		this.setCurrent();
 		
 	}
 
-	setProperty(f, v) {
-		this.breadCrumb[this.breadCrumb.length -1][f] = v;
-	}
-	
-
-	getProperty(f) {
-		return this.breadCrumb[this.breadCrumb.length - 1][f];
+	setField(f, v) {
+		
+		this.current[f] = v;
+		this.setCurrent();
+		
 	}
 	
 	getDataType(t, f){
@@ -188,44 +163,5 @@ class nuFormObject {
 		return tables;
 		
 	}
-	
-	subform(sf){
-
-		var sel	= "[id*='" + sf + "'][id*='nuRecordHolder']";
-		var o	= {'id':sf};
-		o.rows	= [];
-		var F	= ['ID'];
-		
-		$(sel).each(function(index){
-			
-			var $this	= $(this);
-			
-			var V		= [$(this).attr('data-nu-primary-key')];
-
-			$this.children().each(function(index){
-				
-				F[index+1] = this.id.substr(sf.length + 3);
-				V[index+1] = $('#' + this.id).val();
-				
-				if(F[index+1] == 'nuDelete'){
-					
-					F[index+1] = 'DELETE';
-					V[index+1] = $('#' + this.id).prop("checked");
-					
-				}
-				
-			});
-			
-			o.rows.push(V)
-			
-			
-		});
-
-		o.fields		= F;
-		
-		return o;
-
-}	
-	
 
 }

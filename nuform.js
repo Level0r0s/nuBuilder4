@@ -454,7 +454,7 @@ function nuINPUT(w, i, l, p, prop){
 		.attr('data-nu-subform-sort', 1)
 		.attr('onclick', 'nuBuildLookup(this,[])')
 		.addClass('nuLookupButton')
-		.html('<img border="0" src="lookup.png" class="nuLookupImg">')
+		.html('<img border="0" src="magnify.png" class="nuLookupImg">')
 		.css('visibility', vis);
 
 		id = p + prop.objects[i].id + 'description';
