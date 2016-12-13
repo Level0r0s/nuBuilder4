@@ -1,7 +1,7 @@
 
 function nuBuildForm(f){
 
-	nuCheckFormProperties(f);
+	//nuCheckFormProperties(f);
 
 	if(f.form_id == ''){
 		
@@ -1090,7 +1090,8 @@ function nuAddEditTabs(p, w){
 	
 	window.nuBrowseWidth	= l;
 	
-	nuDetach(event);
+//	nuDetach(event);
+	nuDetach();
 
 	if(w.browse_columns.length > 0){
 		
@@ -2459,6 +2460,7 @@ function nuSubformToArray(sf, includeDeleted){
 	
 }
 
+/*
 function nuSortSubform(sf, columnNo, pThis){
 
 	var data 			= nuGetSFArrays()
@@ -2541,6 +2543,7 @@ function nuSortSubform(sf, columnNo, pThis){
 }
 
 
+
 function nuSubformSorter(a, b, c){
 
 	var l 	= a.length - 1;
@@ -2552,7 +2555,11 @@ function nuSubformSorter(a, b, c){
 	
 }
 
+
 function nuDetach(e){
+*/
+
+function nuDetach(){
 
 	$('.nuDragLineV').each(function( index ) {
 
@@ -2567,7 +2574,7 @@ function nuDetach(e){
 		
 }
 
-
+/*
 function nuCheckFormProperties(f){
 	
 	window.nuFORMPROPERTIES	= f;
@@ -2581,6 +2588,7 @@ function nuCheckFormProperties(f){
 	window.nuFORMPROPERTIES.nuPrintBrowse	= JSON.stringify(J);
 		
 }
+*/
 
 function nuSearchableList(){
 

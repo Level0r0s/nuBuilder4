@@ -174,7 +174,9 @@ function nuBuildLookup(t, p){
 }
 
 function nuPopup(f, r, filter){
-parent.console.log(f, r, filter);	
+
+	parent.console.log('Parameters for nuPopup :',f, r, filter);	
+
 	$('#nuOptionsListBox').remove();
 	
 	window.nuOPENER.push(new nuOpener(f, r, filter));
