@@ -112,7 +112,7 @@ window.nuHASH			= [];
 			} else if(p.type == 'getphp') {
 				nuGetPHP(p.form_id, p.record_id)
 			} else {
-				nuGetForm(p.form_id, p.record_id, p.filter);
+				nuForm(p.form_id, p.record_id, p.filter);
 			}
 			
 			if(p.record_id == '-2'){

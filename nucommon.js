@@ -58,7 +58,7 @@ function removeOpenerById(o, pid) {
 
 function nuGetBreadcrumb(b){
 	
-	b		= arguments.length == 0 ? nuFORM.breadCrumb.length -1 : b;
+	b		= arguments.length == 0 ? nuFORM.breadcrumbs.length -1 : b;
 	var y	= window.nuTYPE;
 	
 	if(window.nuEDITED && y != 'runreport' && y != 'getphp'){
@@ -73,7 +73,7 @@ function nuGetBreadcrumb(b){
 	
 	var c				= window.nuFORM.getCurrent();
 	
-	nuGetForm(c.form_id, c.record_id, c.filter,  1);
+	nuForm(c.form_id, c.record_id, c.filter,  1);
 	
 }
 
@@ -127,7 +127,7 @@ function nuLogin(){
 	var i 	= '<br><img id="thelogo" src="logo.png">';
 	var u 	= '<br><br><span style="width:90px;display:inline-block;">Username</span><input id="nuusername" style="padding: 2px;" />';
 	var p 	= '<br><br><span style="width:90px;display:inline-block;">Password</span><input id="nupassword" onkeyup="loginInputKeyup(event);" style="padding: 2px;" type="password"/>';
-	var s 	= '<br><br><input id="submit" type="button" class="nuButton" style="height:30px;" onclick="nuGetForm()" value="Log in"/>';
+	var s 	= '<br><br><input id="submit" type="button" class="nuButton" style="height:30px;" onclick="nuForm()" value="Log in"/>';
 	var l2	= '<br><br></div>';
 	
 	var e = document.createElement('div');

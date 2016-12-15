@@ -43,7 +43,7 @@ function nuAjax(w,successCallback,errorCallback){
 
 }
 
-function nuGetForm(f, r, filter, n){
+function nuForm(f, r, filter, n){
 
 	filter	= (filter === undefined ? filter = '' : filter);
 
@@ -356,7 +356,7 @@ function nuUpdateData(){
 				
 			}else{
 				
-				nuGetForm(f, fm.record_id, fm.filter, 1);		//-- go to saved or created record
+				nuForm(f, fm.record_id, fm.filter, 1);		//-- go to saved or created record
 				
 			}
 			
@@ -372,7 +372,7 @@ function nuUpdateData(){
 function nuSaveAfterDrag() {
 	
 	var f				= $('#nuDragDialog iframe')[0].contentWindow.nuFORM;
-//	var last			= f.breadCrumb[f.breadCrumb.length - 1];
+//	var last			= f.breadcrumbs[f.breadcrumbs.length - 1];
 
 	var last			= f.getCurrent();
 

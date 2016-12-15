@@ -6,26 +6,26 @@ class nuFormObject {
 	constructor() {
 		
 		this.schema					= [];
-		this.breadCrumb 			= [];
+		this.breadcrumbs 			= [];
 		this.lists		 			= [];
 		
 	}
 	
 	getCurrent(){
 		
-		return this.breadCrumb[this.breadCrumb.length - 1];
+		return this.breadcrumbs[this.breadcrumbs.length - 1];
 		
 	}
 	
 	removeLast(){
 		
-		this.breadCrumb.pop();
+		this.breadcrumbs.pop();
 		
 	}
 	
 	removeAfter(b) {
 
-		while(this.breadCrumb.length - 1 > b) {
+		while(this.breadcrumbs.length - 1 > b) {
 			this.removeLast();
 		}
 		
@@ -91,19 +91,19 @@ class nuFormObject {
 		b.username			= '';
 		b.user_id			= '';
 		
-		this.breadCrumb.push(b);
+		this.breadcrumbs.push(b);
 		
 		return this.getCurrent();
 		
 	}
 
 	setProperty(f, v) {
-		this.breadCrumb[this.breadCrumb.length -1][f] = v;
+		this.breadcrumbs[this.breadcrumbs.length -1][f] = v;
 	}
 	
 
 	getProperty(f) {
-		return this.breadCrumb[this.breadCrumb.length - 1][f];
+		return this.breadcrumbs[this.breadcrumbs.length - 1][f];
 	}
 	
 	getDataType(t, f){
@@ -223,7 +223,7 @@ class nuFormObject {
 	
 	subform(sf){
 
-		var sel	= "[id*='" + sf + "'][id*='nuRecordHolder']";
+		var sel	= "[id*='" + sf + "'][id*='nuRECORD']";
 		var o	= {'id':sf};
 		o.rows	= [];
 		var F	= ['ID'];

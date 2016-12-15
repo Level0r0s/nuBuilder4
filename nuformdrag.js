@@ -4,7 +4,7 @@ function nuBindDragEvents(){
 		
         var draggable = 0;
 		
-		if(window.nuFORM.breadCrumb.length != -1) {
+		if(window.nuFORM.breadcrumbs.length != -1) {
 			
 			if(window.nuFORM.getProperty('record_id') == '-2') {
 				draggable = 1;
@@ -359,7 +359,7 @@ function nuInitialiseDragState(){
             'objects': []
         };
 		
-        $('div#nuRecordHolder div[data-nu-tab="'+$(this).prop('id').replace('nuTab','')+'"]').each(function(){
+        $('div#nuRECORD div[data-nu-tab="'+$(this).prop('id').replace('nuTab','')+'"]').each(function(){
 			
             var objectPosition = $(this).position();
 			

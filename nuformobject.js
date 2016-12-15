@@ -6,7 +6,7 @@ class nuFormObject {
 	constructor() {
 		
 		this.schema					= [];
-		this.breadCrumb 			= [];
+		this.breadcrumbs 			= [];
 		this.current				= {};
 		this.last					= -1;
 		this.setCurrent();
@@ -15,21 +15,21 @@ class nuFormObject {
 	
 	setCurrent(){
 		
-		this.last					= this.breadCrumb.length - 1;
-		this.current				= this.breadCrumb[this.last];
-		this.breadCrumb[this.last]	= this.current;						//-- copy changes from current to last
+		this.last					= this.breadcrumbs.length - 1;
+		this.current				= this.breadcrumbs[this.last];
+		this.breadcrumbs[this.last]	= this.current;						//-- copy changes from current to last
 		
 	}
 	
 	setFromCurrent(){
 		
-		this.breadCrumb[this.last]	= this.current;
+		this.breadcrumbs[this.last]	= this.current;
 		
 	}
 	
 	removeLast(){
 		
-		this.breadCrumb.pop();
+		this.breadcrumbs.pop();
 		this.setCurrent();
 		
 	}
@@ -69,7 +69,7 @@ class nuFormObject {
 		b.username			= '';
 		b.user_id			= '';
 		
-		this.breadCrumb.push(b);
+		this.breadcrumbs.push(b);
 		this.setCurrent();
 		
 	}

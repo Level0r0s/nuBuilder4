@@ -25,17 +25,17 @@ function nuBuildSubformArray(s){				//-- add this subform to the list of subform
 
 function nuSetHash(n, v){ 						//-- set hash variable to be used on server side	
 
-	var l	= window.nuFORM.breadCrumb.length - 1;
+	var l	= window.nuFORM.breadcrumbs.length - 1;
 	
-	window.nuFORM.breadCrumb[l][n]	= v;
+	window.nuFORM.breadcrumbs[l][n]	= v;
 
 }
 
 function nuGetHash(n){ 						//-- get hash variable to be used on server side	
 
-	var l	= window.nuFORM.breadCrumb.length - 1;
+	var l	= window.nuFORM.breadcrumbs.length - 1;
 	
-	return window.nuFORM.breadCrumb[l][n];
+	return window.nuFORM.breadcrumbs[l][n];
 
 	
 }

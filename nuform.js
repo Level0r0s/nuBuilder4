@@ -49,7 +49,7 @@ function nuBuildForm(f){
 		nuAddHolder('nuTabHolder');
 	}
 	
-	nuAddHolder('nuRecordHolder');
+	nuAddHolder('nuRECORD');
 	nuAddBreadcrumbs();
 	nuAddEditTabs('', f);
 	nuOptions('', f.form_id, 'form', f.global_access);
@@ -193,7 +193,7 @@ function nuBuildEditObjects(f, p, o, prop){
 			var t                       = prop.objects[i].type;
 			f.objects[i].parent_type    = o == '' ? '' : o.subform_type;
 
-			if(t == 'input' || t == 'display' || t == 'lookup' || t == 'textarea'){
+			if(t == 'input' || t == 'display' || t == 'lookup' || t == 'textarea' || t == 'calc'){
 				
 				l = l + nuINPUT(f, i, l, p, prop);
 				
@@ -251,7 +251,7 @@ function nuAddJSObjectEvents(i, j){
 function nuRecordProperties(w, p, l){
 
 	var de    = p + 'nuDelete';
-	var fh    = p + 'nuRecordHolder';                       //-- Edit Form Id
+	var fh    = p + 'nuRECORD';                       //-- Edit Form Id
 	var chk   = document.createElement('input');
 	var sf    = p.substr(0, p.length - 3);
 
@@ -290,7 +290,7 @@ function nuRecordProperties(w, p, l){
 function nuDRAG(w, i, l, p, prop){
 
 	var id   = p + prop.objects[i].id;
-	var ef   = p + 'nuRecordHolder';
+	var ef   = p + 'nuRECORD';
 	var drg 		= document.createElement('div');
 	drg.setAttribute('id', id);
 	
@@ -317,7 +317,7 @@ function nuDRAG(w, i, l, p, prop){
 function nuINPUT(w, i, l, p, prop){
 	
 	var id			= p + prop.objects[i].id;
-	var ef			= p + 'nuRecordHolder';                 //-- Edit Form Id
+	var ef			= p + 'nuRECORD';                 //-- Edit Form Id
 	var ty			= 'textarea';
 	var vis			= prop.objects[i].display == 0 ? 'hidden' : 'visible';
 
@@ -367,7 +367,7 @@ function nuINPUT(w, i, l, p, prop){
 	
 	.addClass(prop.objects[i].classes)
 	
-	.attr('onchange', 'nuOnChange(event)')
+	.attr('onchange', 'nuChange(event)')
 	.attr('data-nu-field', input_type == 'button' ? null :prop.objects[i].id)
 	.attr('data-nu-object-id', w.objects[i].object_id)
 	.attr('data-nu-format', w.objects[i].format)
@@ -491,7 +491,7 @@ function nuINPUT(w, i, l, p, prop){
 function nuHTML(w, i, l, p, prop){
 
 	var id  = p + prop.objects[i].id;
-	var ef  = p + 'nuRecordHolder';                       //-- Edit Form Id
+	var ef  = p + 'nuRECORD';                       //-- Edit Form Id
 	var inp = document.createElement('div');
 	
 	inp.setAttribute('id', id);
@@ -527,7 +527,7 @@ function nuHTML(w, i, l, p, prop){
 function nuWORD(w, i, l, p, prop){
 
 	var id  = p + prop.objects[i].id;
-	var ef  = p + 'nuRecordHolder';                       //-- Edit Form Id
+	var ef  = p + 'nuRECORD';                       //-- Edit Form Id
 	var inp = document.createElement('div');
 	
 	inp.setAttribute('id', id);
@@ -554,7 +554,7 @@ function nuWORD(w, i, l, p, prop){
 function nuRUN(w, i, l, p, prop){
 
 	var id  = p + prop.objects[i].id;
-	var ef  = p + 'nuRecordHolder';                       //-- Edit Form Id
+	var ef  = p + 'nuRECORD';                       //-- Edit Form Id
 	var ele = 'input';
 	
 	if(prop.objects[i].parent_type == 'g'){
@@ -596,7 +596,7 @@ function nuRUN(w, i, l, p, prop){
 		$('#' + id).attr({
 					'type'		: 'button',
 					'value'		: prop.objects[i].label,
-					'onclick'	: "nuGetForm('" + prop.objects[i].form_id + "','" + prop.objects[i].record_id + "','" + prop.objects[i].filter + "')"
+					'onclick'	: "nuForm('" + prop.objects[i].form_id + "','" + prop.objects[i].record_id + "','" + prop.objects[i].filter + "')"
 		})
 		.addClass('nuButton');
 		
@@ -625,7 +625,7 @@ function nuRUN(w, i, l, p, prop){
 function nuSELECT(w, i, l, p, prop){
 
 	var id  = p + prop.objects[i].id;
-	var ef  = p + 'nuRecordHolder';                       //-- Edit Form Id
+	var ef  = p + 'nuRECORD';                       //-- Edit Form Id
 	
 	if(prop.objects[i].parent_type == 'g'){
 		
@@ -649,7 +649,7 @@ function nuSELECT(w, i, l, p, prop){
 					'width'    : Number(prop.objects[i].width),
 					'position' : 'absolute'
 	})
-	.attr('onchange', 'nuOnChange(event)')
+	.attr('onchange', 'nuChange(event)')
 	.attr('data-nu-field', prop.objects[i].id)
 	.attr('data-nu-object-id', w.objects[i].object_id)
 	.attr('data-nu-format', '')
@@ -702,7 +702,7 @@ function nuSUBFORM(w, i, l, p, prop){
     var SF  		= prop.objects[i];						//-- First row
     var SFR 		= w.objects[i];							//-- All rows
 	var id  		= p + SF.id;
-	var ef  		= p + 'nuRecordHolder';					//-- Edit Form Id
+	var ef  		= p + 'nuRECORD';					//-- Edit Form Id
 	var inp 		= document.createElement('div');
 	var fms 		= SFR.forms;
 
@@ -818,7 +818,7 @@ function nuSUBFORM(w, i, l, p, prop){
 	for(var c = 0 ; c < fms.length ; c++){
 
 		var prefix = id + nuPad3(c);
-		var frmId  = prefix + 'nuRecordHolder';
+		var frmId  = prefix + 'nuRECORD';
 		var frmDiv = document.createElement('div');
 		frmDiv.setAttribute('id', frmId);
 		$('#' + scrId).append(frmDiv);
@@ -850,9 +850,9 @@ function nuNewRowObject(p){
 
 	var sf	= p.substr(0, p.length - 3);
 	
-	if($('#' + p + 'nuRecordHolder').length == 0){return;}
+	if($('#' + p + 'nuRECORD').length == 0){return;}
 	
-	var h	= document.getElementById(p + 'nuRecordHolder').outerHTML;
+	var h	= document.getElementById(p + 'nuRECORD').outerHTML;
 	window.nuSUBFORMROW[sf]	= String(h.replaceAll(p, '#nuSubformRowNumber#', true));
 	
 }
@@ -863,7 +863,7 @@ function nuSubformLastRow(t){
 	var i					= String($('#' + t.id).parent().attr('id'));
 	var p					= i.substr(0, i.length - 17);
 	var s					= parseInt(i.substr(11,3)) + 1;
-	var n					= $('#' + p + nuPad3(s) + 'nuRecordHolder').length;
+	var n					= $('#' + p + nuPad3(s) + 'nuRECORD').length;
 
 	return n == 0;
 	
@@ -872,7 +872,7 @@ function nuSubformLastRow(t){
 
 function nuRecordHolderObject(t){
 	
-	var h		= 'nuRecordHolder';
+	var h		= 'nuRECORD';
 	var p		= $('#' + t.id).parent();
 	var i		= String(p.attr('id'));
 	var c		= 0;
@@ -905,8 +905,8 @@ function nuAddSubformRow(t, e){
 	
 	$('#' + o.form + 'scrollDiv').append(h);
 	
-	$('#' + o.form + nuPad3(o.rows) + 'nuRecordHolder').addClass('nuSubform'+ o.even);
-	$('#' + o.form + nuPad3(o.rows) + 'nuRecordHolder').css('top', o.top);
+	$('#' + o.form + nuPad3(o.rows) + 'nuRECORD').addClass('nuSubform'+ o.even);
+	$('#' + o.form + nuPad3(o.rows) + 'nuRECORD').css('top', o.top);
 	$('#' + o.form + nuPad3(o.rows)).attr('data-nu-primary-key', '-1');
 	$('#' + o.form + nuPad3(o.rows) + 'nuDelete').prop('checked', true);
 	$('#' + o.form + nuPad3(o.rows-1) + 'nuDelete').prop('checked', false);
@@ -936,7 +936,7 @@ function nuLabel(w, i, p, prop){
 	if(prop.objects[i].label == '' || prop.objects[i].display == 0){return;}
 	
 	var id     = 'label_' + p + prop.objects[i].id;
-	var ef     = p + 'nuRecordHolder';                       //-- Edit Form Id
+	var ef     = p + 'nuRECORD';                       //-- Edit Form Id
 	var lab    = document.createElement('label');
 	var lwidth = nuGetWordWidth(nuTranslate(prop.objects[i].label));
 	
@@ -1058,7 +1058,7 @@ function nuBuildSubformDeleteTitle(l, id, subform_id){
 
 function nuAddBreadcrumbs(){
 
-	var b	= window.nuFORM.breadCrumb.length;
+	var b	= window.nuFORM.breadcrumbs.length;
 	
     for(var i = 0 ; i < b ; i++){
         
@@ -1160,9 +1160,9 @@ function nuStartingTab(p){
 
 function nuAddBreadcrumb(i){
 
-	var last 	= (i + 1 == window.nuFORM.breadCrumb.length);                 //-- last breadcrumb
+	var last 	= (i + 1 == window.nuFORM.breadcrumbs.length);                 //-- last breadcrumb
 
-	var bc 		= window.nuFORM.breadCrumb[i];
+	var bc 		= window.nuFORM.breadcrumbs[i];
 	var bcId 	= 'nu_bc_' + i;
 	
 	var div		= document.createElement('div');
@@ -1460,7 +1460,7 @@ function nuBrowseTitle(b, i, l){
 	var br	= '<br>';
 	var sp	= '<span style="font-size:16px" id="nusort_' + i + '" class="nuSort" onclick="nuSortBrowse(' + i + ')"> ' + b[i].title + ' </span>'
 	
-	$('#nuRecordHolder').append(div);
+	$('#nuRECORD').append(div);
 
 	$('#' + id)
 	.html(cb + br + sp)
@@ -1581,7 +1581,7 @@ function nuBrowseTable(){
 			
 			div.setAttribute('id', id);
 				
-			$('#nuRecordHolder').append(div);
+			$('#nuRECORD').append(div);
 
 			$('#' + id)
 			.attr('data-nu-row', rw)
@@ -1635,7 +1635,7 @@ function nuBrowseTable(){
 	var div = document.createElement('div');
 	div.setAttribute('id', id);
 		
-	$('#nuRecordHolder').append(div);
+	$('#nuRECORD').append(div);
 
 	$('#' + id)
 	.addClass('nuBrowseTitle')
@@ -1712,7 +1712,7 @@ function nuSearchAction(){
 function nuAddAction(){
 
 	var bc					= window.nuFORM.getCurrent();
-	nuGetForm(bc.form_id, '-1');
+	nuForm(bc.form_id, '-1');
 	
 }
 
@@ -1776,7 +1776,7 @@ function nuSelectBrowse(e){
 
 	if(y == 'browse'){
 		
-		nuGetForm(f, p);
+		nuForm(f, p);
 		window.nuTYPE = 'browse';
 		
 	}else if(y == 'lookup'){
@@ -2115,7 +2115,7 @@ function nuGetFormData(){
 
 	var a	= [];
 	var s	= '';
-	var f	= $("[id$='nuRecordHolder']");
+	var f	= $("[id$='nuRECORD']");
 
 	f.each(function(index){
 		
@@ -2146,7 +2146,7 @@ function nuGetFormData(){
 
 function nuFormClass(frm){
 
-	var fh				= '#' + frm + 'nuRecordHolder';
+	var fh				= '#' + frm + 'nuRECORD';
 	var foreign_key		= $(fh).attr('data-nu-foreign-key');
 	var primary_key		= $(fh).attr('data-nu-primary-key');
 	var form_id			= $(fh).attr('data-nu-form-id');
@@ -2209,7 +2209,7 @@ function nuFormatObject(t){
 	
 }
 
-function nuOnChange(e){
+function nuChange(e){
 
 	var t	= $('#' + e.target.id)[0];
 	var f	= $('#' + t.id).attr('data-nu-format');
@@ -2424,7 +2424,7 @@ function nuSubformToArray(sf, includeDeleted){
 	
 	includeDeleted	= arguments.length == 2 ? includeDeleted : 1;
 	
-	f.push('nuRecordHolder');
+	f.push('nuRECORD');
 	
 	$("[id^='" + sf + "000'][data-nu-field]").each(function( index ) {
 		
@@ -2443,7 +2443,7 @@ function nuSubformToArray(sf, includeDeleted){
 
 		if(!$('#' + p + 'nuDelete').prop('checked') || includeDeleted == 1){
 
-			c.push($('#' + p + 'nuRecordHolder').attr('data-nu-primary-key'));
+			c.push($('#' + p + 'nuRECORD').attr('data-nu-primary-key'));
 			
 			for(var i = 1 ; i < f.length - 1 ; i++){
 				c.push($('#' + p + f[i]).val());
@@ -2535,7 +2535,7 @@ function nuSortSubform(sf, columnNo, pThis){
 		var currentRow 	= sortedBy[r];
 		var rowno		= nuPad3(r);
 		
-		$('#' + sf + rowno + 'nuRecordHolder').attr('data-nu-primary-key', currentRow[0]);
+		$('#' + sf + rowno + 'nuRECORD').attr('data-nu-primary-key', currentRow[0]);
 		$('#' + sf + rowno + 'nuDelete').prop('checked', currentRow[cols.length-1] == '0' ? false : true);
 
 		for(var c = 1 ; c < cols.length - 1 ; c++){
