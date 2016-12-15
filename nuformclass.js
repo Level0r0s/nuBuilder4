@@ -189,6 +189,38 @@ class nuFormObject {
 		
 	}
 	
+	calcField(i){
+	
+		return $('#' + i).val();
+		
+	}
+	
+	calcRow(s, c){
+	
+		$("[id*='" + s + "'][id*='" + c + "']").each(function() {
+			console.log($(this)[0].id);
+		});
+
+		
+	}
+	
+	calcColumn(s, c){
+		debugger;
+		var sf	= this.subform(s);
+		var fld	= sf.fields.indexOf(c);
+		
+		if(fld == -1){return 0;}
+
+		var v	= 0;
+		
+		for(var i = 0 ; i < sf.rows.length ; i++){
+				v	= v + (isNaN(Number(sf.rows[i][fld])) ? 0 : Number(sf.rows[i][fld]));
+		}
+		
+		return v;
+		
+	}
+	
 	subform(sf){
 
 		var sel	= "[id*='" + sf + "'][id*='nuRecordHolder']";
@@ -224,8 +256,8 @@ class nuFormObject {
 		o.fields		= F;
 		
 		return o;
-
-}	
+		
+	}	
 	
-
+	
 }

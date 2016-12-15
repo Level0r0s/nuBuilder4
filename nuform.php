@@ -317,6 +317,7 @@ function nuDefaultObject($r, $t){
 	$o->width   		= $r->sob_all_width;
 	$o->height			= $r->sob_all_height;
 	$o->valid			= $r->sob_all_validate;
+	$o->classes			= $r->sob_all_classes;
 	$o->format			= '';
 
 	for($i = 0 ; $i < count($t) ; $i++){
