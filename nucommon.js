@@ -79,7 +79,8 @@ function nuGetBreadcrumb(b){
 
 
 function nuDisplayError(er){
-	
+
+	if(typeof(er.errors) == 'undefined') {return false;}
 	nuAlert(er.errors);
 
 	return er.errors.length > 0;
