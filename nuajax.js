@@ -380,7 +380,7 @@ function nuSaveAfterDrag() {
     last.nuDragState	= $('#nuDragDialog iframe')[0].contentWindow.nuDragOptionsState;
 	
 	var successCallback	= function(data,textStatus,jqXHR){
-		
+
 		if(nuDisplayError(data.errors)){
 			alert(data.errors[0]);
 		} else {
