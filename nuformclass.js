@@ -8,6 +8,8 @@ class nuFormObject {
 		this.schema					= [];
 		this.breadcrumbs 			= [];
 		this.lists		 			= [];
+		this.edited					= false;
+		this.form_id				= '';
 		
 	}
 	
@@ -87,6 +89,7 @@ class nuFormObject {
 		b.nosearch_columns 	= [];
 		b.sort             	= '-1';
 		b.sort_direction   	= 'desc';
+		b.subforms			= 0;
 		b.tab_start      	= [];
 		b.username			= '';
 		b.user_id			= '';
@@ -205,7 +208,7 @@ class nuFormObject {
 	}
 	
 	calcColumn(s, c){
-		debugger;
+
 		var sf	= this.subform(s);
 		var fld	= sf.fields.indexOf(c);
 		
@@ -221,9 +224,39 @@ class nuFormObject {
 		
 	}
 	
+	data(){
+		
+		var d	= [];
+		var sf	= this.subforms();
+		
+		for(var i = 0 ; i < sf.length ; i++){
+			d.push(this.subform(sf[i]));
+		}
+		
+		return d;
+		
+	}
+	
+	subforms(){
+		
+		var s	= [];
+			
+		$("[data-nu-subform='true']").each(function(index) {
+			s.push($(this)[0].id);
+		});
+		
+		return s;
+
+	}
+
 	subform(sf){
 
-		var sel	= "[id*='" + sf + "'][id*='nuRECORD']";
+		if(sf == ''){
+			var sel	= "[id='nuRECORD']";
+		}else{
+			var sel	= "[id*='" + sf + "'][id*='nuRECORD']";
+		}
+		
 		var o	= {'id':sf};
 		o.rows	= [];
 		var F	= ['ID'];
@@ -234,9 +267,14 @@ class nuFormObject {
 			
 			var V		= [$(this).attr('data-nu-primary-key')];
 
-			$this.children().each(function(index){
+			$this.children('[data-nu-data]').each(function(index){
 				
-				F[index+1] = this.id.substr(sf.length + 3);
+				if(sf == ''){
+					F[index+1] = this.id;
+				}else{
+					F[index+1] = this.id.substr(sf.length + 3);
+				}
+				
 				V[index+1] = $('#' + this.id).val();
 				
 				if(F[index+1] == 'nuDelete'){

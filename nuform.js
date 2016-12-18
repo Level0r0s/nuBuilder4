@@ -15,8 +15,8 @@ function nuBuildForm(f){
 	window.nuSUBFORMROW				= [];
 	window.nuSUBFORMJSON			= [];
 	window.nuHASH					= [];                       //-- remove any hash variables previously set.
-	window.nuEDITED					= false;
-	window.nuFORM.lists				= [];
+	nuFORM.edited					= false;
+	nuFORM.lists					= [];
 	
 	nuSetBODY(f);
 	
@@ -255,10 +255,10 @@ function nuRecordProperties(w, p, l){
 	var chk   = document.createElement('input');
 	var sf    = p.substr(0, p.length - 3);
 
-	chk.setAttribute('id', 		de);
-	chk.setAttribute('title', 	'Delete This Row When Saved');
-	chk.setAttribute('type', 	'checkbox');
-	chk.setAttribute('onclick', 'nuEditedReport()');
+	chk.setAttribute('id', de);
+	chk.setAttribute('title', 'Delete This Row When Saved');
+	chk.setAttribute('type', 'checkbox');
+	chk.setAttribute('onclick', 'nuChange()');
 
 	$('#' + fh)
 	.append(chk)
@@ -267,6 +267,8 @@ function nuRecordProperties(w, p, l){
 	.attr('data-nu-primary-key', w.record_id)
 	.attr('data-nu-foreign-key', w.foreign_key)
 	.attr('data-nu-foreign-field', p == '' ? '' : w.foreign_key_name);
+
+	$('#' + de).attr('data-nu-data', '');
 
 	if(arguments.length == 3){
 		
@@ -365,8 +367,6 @@ function nuINPUT(w, i, l, p, prop){
 					'position'	: 'absolute'
 	})
 	
-	.addClass(prop.objects[i].classes)
-	
 	.attr('onchange', 'nuChange(event)')
 	.attr('data-nu-field', input_type == 'button' ? null :prop.objects[i].id)
 	.attr('data-nu-object-id', w.objects[i].object_id)
@@ -374,6 +374,14 @@ function nuINPUT(w, i, l, p, prop){
 	.attr('data-nu-prefix', p)
 	.attr('data-nu-subform-sort', 1)
 	.prop('readonly', prop.objects[i].read == '1' ? 'readonly' : '');
+	
+	if(input_type != 'button'){
+		$('#' + id).attr('data-nu-data', '');
+	}
+		
+
+
+
 	
 	if(w.objects[i].value == ''){             //== check for Cannot be left blank
 		$('#' + id).addClass('nuEdited');
@@ -654,6 +662,7 @@ function nuSELECT(w, i, l, p, prop){
 	.attr('data-nu-object-id', w.objects[i].object_id)
 	.attr('data-nu-format', '')
 	.attr('data-nu-subform-sort', 1)
+	.attr('data-nu-data', '')
 	.attr('data-nu-prefix', p);
 
 	if(prop.objects[i].multiple == 1){
@@ -729,7 +738,7 @@ function nuSUBFORM(w, i, l, p, prop){
 					'overflow-y'	: 'hidden'
 	})
 	.attr('data-nu-primary-key', SF.object_id)
-	.attr('data-nu-subform-parent', p)
+//	.attr('data-nu-subform-parent', p)
 	.attr('data-nu-subform', 'true')
 	.addClass('nuSubform');
 
@@ -1445,7 +1454,7 @@ function nuBrowseTitle(b, i, l){
 	
 	div.setAttribute('id', id);
 	
-	var cb	= '';//<input id="nusearch_' + i + '" type="checkbox" class="nuSearchColumn" checked="checked" onclick="nuSetSearchColumn()" title="Include In Search">';
+	var cb	= '';
 	
 	if(bc.sort == i){
 		
@@ -2121,7 +2130,7 @@ function nuGetFormData(){
 		
 		var	s	= String($(this).attr('id'));
 		
-		a.push(s.substr(0, s.length - 14));
+		a.push(s.substr(0, s.length - 8));
 		
 	});
 	
@@ -2147,6 +2156,7 @@ function nuGetFormData(){
 function nuFormClass(frm){
 
 	var fh				= '#' + frm + 'nuRECORD';
+	console.log(frm,888);
 	var foreign_key		= $(fh).attr('data-nu-foreign-key');
 	var primary_key		= $(fh).attr('data-nu-primary-key');
 	var form_id			= $(fh).attr('data-nu-form-id');
@@ -2182,6 +2192,7 @@ function nuFormClass(frm){
 	this.v	= values;
 
 }
+/*
 
 function nuSetFORM(F){
 	
@@ -2200,6 +2211,8 @@ function nuSetFORM(F){
 	}
 	
 }
+
+*/
 
 function nuFormatObject(t){
 	
@@ -2221,8 +2234,7 @@ function nuChange(e){
 	
 	$('#' + p + 'nuDelete').prop('checked', false);
 	$('#' + t.id).addClass('nuEdited');
-	
-	nuEditedReport();
+	nuHasBeenEdited();
 	
 	$('#nuCalendar').remove();
 	$('#' + t.id).removeClass('nuValidate');
@@ -2233,11 +2245,10 @@ function nuChange(e){
 	
 }
 
-function nuEditedReport(){
+function nuHasBeenEdited(){
 	
-	$('#sre_layout').addClass('nuEdited'); //-- hidden field set to class - nuEdited (generally ignored except when editing Reports)
 	$('#nuSaveButton').addClass('nuSaveButtonEdited');
-	window.nuEDITED	= true;
+	nuFORM.edited	= true;
 	
 }
 
@@ -2464,104 +2475,6 @@ function nuSubformToArray(sf, includeDeleted){
 	
 }
 
-/*
-function nuSortSubform(sf, columnNo, pThis){
-
-	var data 			= nuGetSFArrays()
-	var colname			= [];
-	var columns			= [];
-	var theArray		= [];
-	var direction		= $('#' + pThis.id).attr('data-nu-sort');
-	
-	for(var i = 0 ; i < data.length ; i++){
-	
-		if(data[i].name == sf){
-			
-			var rows 	= data[i].rows;
-			var cols 	= data[i].columns;
-			
-			for(var r = 0 ; r < rows.length ; r++){
-				
-				var row = [];
-				
-				for(var c = 0 ; c < cols.length ; c++){
-					row.push(rows[r][c]);
-				}
-				
-				if(direction == 0){
-					row.push(rows[r][c-1] + rows[r][columnNo]);
-				}else{
-					row.push((rows[r][c-1] == 0 ? '1' : '0') + rows[r][columnNo]);
-				}
-				theArray.push(row);
-			
-			}
-			
-			
-		}
-		
-	}
-
-	for(i = 0 ; i < cols.length ; i++){
-			columns[cols[i]]	= i;
-	}
-
-	var orderByDeleted		= [];
-	var sortedColumn		= columns[columnNo];
-	var totalColumns		= cols.length - 1;
-	var sort				= 0;
-	var sortedBy			= 	theArray.sort(function(b, a){
-		
-								var l	= a.length - 1;
-
-								if(direction == 1){
-									if(String(a[l]) > String(b[l])){sort = 1;}
-									if(String(a[l]) < String(b[l])){sort = -1;}
-								}
-								
-								if(direction == 0){
-									if(String(a[l]) > String(b[l])){sort = -1;}
-									if(String(a[l]) < String(b[l])){sort = 1;}
-								}
-								
-								return sort;
-								
-							});
-
-	$('#' + pThis.id).attr('data-nu-sort', direction == 1 ? 0 : 1);
-							
-	for(var r = 0 ; r < sortedBy.length ; r++){
-	
-		var currentRow 	= sortedBy[r];
-		var rowno		= nuPad3(r);
-		
-		$('#' + sf + rowno + 'nuRECORD').attr('data-nu-primary-key', currentRow[0]);
-		$('#' + sf + rowno + 'nuDelete').prop('checked', currentRow[cols.length-1] == '0' ? false : true);
-
-		for(var c = 1 ; c < cols.length - 1 ; c++){
-			$('#' + sf + rowno + cols[c]).val(currentRow[c]);
-		}
-	
-	}
-	
-}
-
-
-
-function nuSubformSorter(a, b, c){
-
-	var l 	= a.length - 1;
-	
-	var A	= nuPad3(a[l]) + a[c];
-	var B	= nuPad3(b[l]) + b[c];
-	
-	return A - B;
-	
-}
-
-
-function nuDetach(e){
-*/
 
 function nuDetach(){
 

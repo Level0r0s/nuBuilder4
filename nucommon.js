@@ -1,3 +1,4 @@
+
 window.nuDialog 				= new nuCreateDialog('');
 window.nuOPENER					= [];
 window.nuSUBFORMROW				= [];
@@ -61,7 +62,7 @@ function nuGetBreadcrumb(b){
 	b		= arguments.length == 0 ? nuFORM.breadcrumbs.length -1 : b;
 	var y	= window.nuTYPE;
 	
-	if(window.nuEDITED && y != 'runreport' && y != 'getphp'){
+	if(nuFORM.edited && y != 'runreport' && y != 'getphp'){
 		
 		if(!confirm(nuTranslate('Leave this form without saving?'))){
 			return;
@@ -79,7 +80,8 @@ function nuGetBreadcrumb(b){
 
 
 function nuDisplayError(er){
-	
+
+	if(typeof(er.errors) == 'undefined') {return false;}
 	nuAlert(er.errors);
 
 	return er.errors.length > 0;
@@ -662,5 +664,36 @@ function nuPreview(){
 }
 
 
+function nuPopPHP(ev){
+
+    var i   = nuFORM.getProperty('record_id');
+
+    if(i == ''){
+        
+        alert('Cannot create Event Until This Form Has Been Saved..')
+        return;
+    }
+    
+    nuPopup('nuphp', i + '_' + ev, 'justphp');
+
+}
+
+    
+    
+    function nuPopJS(){
+
+        var i  = $('#sob_all_zzzzsys_form_id').val();
+        
+        if(i == ''){
+            
+            alert('Cannot Create Event Until This Form Has Been Saved..')
+            return;
+            
+        }
+        
+        nuPopup('nuobject', i, 'justjs');
+        
+    }
+    
 
 

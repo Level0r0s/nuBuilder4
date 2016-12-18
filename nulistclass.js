@@ -169,7 +169,9 @@ function nuPickFromList(e){
 	
 	nuFORM.lists[id].boxHighlight	= Number(ind) - nuFORM.lists[id].boxTop;
 
-	$('#' + id).val(val);
+	$('#' + id)
+	.val(val)
+	.focus();
 
 	$('#nuListerListBox').remove();
 }
