@@ -240,9 +240,9 @@ function nuGetLookupId(pk, id){
 	
 	var l				= $('#' + id);
 	
-	var last			= window.nuFORM.getCurrent();
+	var last			= nuFORM.getCurrent();
 
-	last.session_id		= window.nuSESSION;
+	last.session_id		= nuSESSION;
 	last.call_type 		= 'getlookupid';
 	last.object_id		= l.attr('data-nu-object-id');
 	last.target			= l.attr('data-nu-target');
@@ -255,7 +255,7 @@ function nuGetLookupId(pk, id){
 		if(!nuDisplayError(fm)){
 			
 			$('#' + id).change();	
-			window.nuPopulateLookup(fm, id);
+			nuPopulateLookup(fm, id);
 			
 		}
 		

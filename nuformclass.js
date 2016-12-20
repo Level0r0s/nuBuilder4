@@ -43,22 +43,24 @@ class nuFormObject {
 	
 		var k	= e.keyCode;
 		var o	= this.lists[e.target.id];
-		var c = $.inArray($('#'+e.target.id).val(), o.boxList);
+		var c 	= $.inArray($('#'+e.target.id).val(), o.boxList);
 
 		if($('#nuListerListBox').length > 0 && $('#nuListerListBox').children().first().attr('data-nu-id') == e.target.id) {
+			
 			if(k == 38){														//-- up
 				o.up();
-			} else if(k == 40){													//-- down
+			}else if(k == 40){													//-- down
 				o.down();
-			} else if(k == 9 || k == 13){										//-- tab or enter;
+			}else if(k == 9 || k == 13){										//-- tab or enter;
 			
 				$('#nuListerListBox').remove();
 				return;
 				
-			} else {
+			}else {
 				return;
 			}
-		} else {
+			
+		}else {
 			o.boxHighlight = c;
 		}
 		

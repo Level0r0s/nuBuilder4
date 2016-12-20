@@ -380,20 +380,22 @@ input {
 }
 
 .nuLister {
+  display: inline;
    background-color: #FFDDDD;
 }
 
-.nuListerListBoxSelected{
+.nuListerSelected{
+  display: inline;
   background-color: red;
   color: black;
 }
 
-.nuListerListBoxNotSelected:hover{
+.nuListerNotSelected:hover{
   cursor: pointer;
   color: grey;
 }
 
-.nuListerListBoxSelected:hover{
+.nuListerSelected:hover{
   cursor: pointer;
   color: grey;
 }

@@ -319,11 +319,11 @@ function nuDRAG(w, i, l, p, prop){
 function nuINPUT(w, i, l, p, prop){
 	
 	var id			= p + prop.objects[i].id;
-	var ef			= p + 'nuRECORD';                 //-- Edit Form Id
+	var ef			= p + 'nuRECORD';                 						//-- Edit Form Id
 	var ty			= 'textarea';
 	var vis			= prop.objects[i].display == 0 ? 'hidden' : 'visible';
 
-	if(prop.objects[i].type != 'textarea'){         		//-- Input Object
+	if(prop.objects[i].type != 'textarea'){         						//-- Input Object
 		ty			= 'input';
 	}
 
@@ -334,20 +334,20 @@ function nuINPUT(w, i, l, p, prop){
 
 	$('#' + ef).append(inp);
 
-	if(prop.objects[i].parent_type == 'g'){        		//--  in a grid subform
+	if(prop.objects[i].parent_type == 'g'){        							//--  in a grid subform
 		
 		prop.objects[i].left 	= l;
 		prop.objects[i].top 	= 3;
 		
 	}else{
 
-		if(input_type != 'button'){						//-- Input Object
+		if(input_type != 'button'){											//-- Input Object
 			nuLabel(w, i, p, prop);
 		}
 		
 	}
 
-	if(ty == 'input'){	//-- Input Object
+	if(ty == 'input'){														//-- Input Object
 
 		inp.setAttribute('type', prop.objects[i].input);
 
@@ -372,6 +372,7 @@ function nuINPUT(w, i, l, p, prop){
 	.attr('data-nu-object-id', w.objects[i].object_id)
 	.attr('data-nu-format', w.objects[i].format)
 	.attr('data-nu-prefix', p)
+	.attr('data-nu-type', 'input')
 	.attr('data-nu-subform-sort', 1)
 	.prop('readonly', prop.objects[i].read == '1' ? 'readonly' : '');
 	
@@ -379,9 +380,6 @@ function nuINPUT(w, i, l, p, prop){
 		$('#' + id).attr('data-nu-data', '');
 	}
 		
-
-
-
 	
 	if(w.objects[i].value == ''){             //== check for Cannot be left blank
 		$('#' + id).addClass('nuEdited');
@@ -430,12 +428,11 @@ function nuINPUT(w, i, l, p, prop){
 		.attr('data-nu-form-id', w.objects[i].form_id)
 		.attr('data-nu-object-id', w.objects[i].object_id)
 		.attr('data-nu-target', target)
+		.attr('data-nu-type', 'lookup')
 		.attr('data-nu-subform-sort', 1)
+		.attr('onfocus', 'nuLookupFocus(event)')
 		.attr('onkeyup', 'nuLookupKeyUp(event)')
 		.attr('onkeydown', 'nuLookupKeyDown(event)')
-		.attr('onblur', 'nuLookupBlur(event)')
-		.attr('onfocus', 'nuLookupFocus(event)')
-		.attr('onchange', "$('#' + id).removeClass('nuValidate')")
 		.css('visibility', vis)
 		.addClass('nuLookupCode');
 		
@@ -1424,7 +1421,6 @@ function nuSelectTab(tab){
 		}
 		
 	}
-	
 
     $("[data-nu-form='" + form + "']").hide();
     $("[data-nu-form='" + form + "'][data-nu-tab='"  + filt + "']:not([data-nu-lookup-id])").show();
