@@ -8,12 +8,12 @@ class nuListObject{
 		var w						= parseInt(obj.css('width'));
 		var h						= parseInt(obj.css('height'));
 
-		this.OBJECT					= obj[0];
+		this.OBJECT					= obj;
 		this.EVENT					= e;
 		this.rowHeight				= 19;
 		this.top					= off.top + h;
 		this.left					= off.left;
-		this.widths					= [w, 0];
+		this.widths					= [0,0];
 		this.height					= 0;
 		this.list					= [];
 		this.boxTop					= 0;
@@ -21,18 +21,36 @@ class nuListObject{
 		this.boxList				= [];
 		this.boxHighlight			= 0;
 		this.descriptionWidth		= 0;
+		this.isLookup				= this.OBJECT.attr('data-nu-type') == 'lookup';
+		this.setWidths();		
 		
 	}
 	
-	widths(){
+	setWidths(){
 		
+		var id						= this.OBJECT[0].id;
+		var code					= id + 'code';
+		var desc					= id + 'description';
+		var button					= id + 'button';
+		var c						= 0;
+		var b						= 0;
+		var d						= 0;
 		
-		if(OBJECT.attr('data-nu-type') == 'lookup'){
+		if($('#' + code).length == 1){c	= parseInt($('#' + code).css('width'));}
 
-			var i				= OBJECT[0].id
-			var desc			= i.substr(0, i.length - 3) + 'description';
-			var dwidth			= parseInt($('#' + desc).css('width'));
-			this.widths[1]		= dwidth;
+		if($('#' + button).length == 1){b = parseInt($('#' + button).css('width'));}
+
+		if($('#' + desc).length == 1){d = parseInt($('#' + desc).css('width'));}
+
+		if(this.isLookup){
+			
+			this.widths[0]			= c + b;
+			this.widths[1]			= d;
+			
+		}else{
+		
+			this.widths[0]			= parseInt($('#' + id).css('width'));
+			this.widths[1]			= 0;
 			
 		}
 		
@@ -40,16 +58,29 @@ class nuListObject{
 	
 	setList(a){
 
-		if(JSON.stringify(this.list) != JSON.stringify(a)){
-
-			this.list				= a;
-			this.boxRows			= a.slice(0, 10).length;
-			this.boxHighlight 		= 0;
-			this.boxTop				= 0;
-			this.height				= this.rowHeight * this.boxRows;
-			this.setBoxList(0);
+		this.list				= this.formatList(a);
+		this.boxRows			= a.slice(0, 10).length;
+		this.boxHighlight 		= 0;
+		this.boxTop				= 0;
+		this.height				= this.rowHeight * this.boxRows;
+		this.setBoxList(0);
+		
+	}
+	
+	formatList(a){
+		
+		var arr		= [];
+		var cols	= a[0].length;
+		
+		for(var i = 0 ; i < a.length ; i++){
+			
+			if(cols == 1){arr.push([a[0], a[0], a[0]]);}
+			if(cols == 2){arr.push([a[0], a[1], a[1]]);}
+			if(cols == 3){arr.push([a[0], a[1], a[2]]);}
 			
 		}
+		
+		return arr;
 		
 	}
 	
@@ -84,7 +115,7 @@ class nuListObject{
 			this.boxHighlight 	= this.boxHighlight - 1;					//-- move up in box
 		}
 		
-		$('#' + this.OBJECT.id).change();
+		$('#' + this.OBJECT[0].id).change();
 		
 	}
 	
@@ -105,7 +136,7 @@ class nuListObject{
 			this.boxHighlight 	= this.boxHighlight + 1;					//-- move down in box
 		}
 		
-		$('#' + this.OBJECT.id).change();
+		$('#' + this.OBJECT[0].id).change();
 
 	}
 	
@@ -123,13 +154,14 @@ class nuListObject{
 		$('#nuListerListBox').css({
 						'top'			: this.top,
 						'left'			: this.left,
-						'width'			: this.widths[0] + 50 + this.widths[1],
+						'width'			: this.widths[0] + this.widths[1],
 						'height'		: this.height,
 						'text-align'	: 'left',
 						'position'		: 'absolute',
 						'overflow'		: 'hidden',
 		});
 
+		
 		for(var i = 0 ; i < this.boxList.length ; i++){
 			
 			var divid	= 'nulister' + i;
@@ -143,22 +175,17 @@ class nuListObject{
 				var	cl 	= 'nuListerNotSelected';
 			}
 			
-			var datai	= ' data-nu-id="' 			+ item[0]  + '" ';
-			var datac	= ' data-nu-code="' 		+ this.choppedAt(item[1], this.widths[0]) + '" ';
-			var datad	= ' data-nu-description="'	+ this.choppedAt(item[2], this.widths[1]) + '" ';
+			var datan	= ' data-nu-ind="' 			+ i + '" ';
+			var datai	= ' data-nu-id="' 			+ item[i][0]  + '" ';
+			var datac	= ' data-nu-code="' 		+ this.choppedAt(item[i][1], this.widths[0]) + '" ';
+			var datad	= ' data-nu-description="'	+ this.choppedAt(item[i][2], this.widths[1]) + '" ';
+			var datal	= this.isLookup ? 'event, ' + '1' :  'event, ' + '0';
 			
-			var rw		= "<div " + uid + " onclick='nuClickLister(event)' class='nuListerSelected' " + datai + datac + datad + ">";
-			rw			+= "   <div id='code_" + i + "' style='width:300px'>" + this.choppedAt(item[1], this.widths[0]) + '" ' + "</div>";
-			rw			+= "   <div id='desc_" + i + "' style='width:200px'>" + this.choppedAt(item[2], this.widths[1]) + '" ' + "</div>";
+			var rw		= "<div " + uid + " onclick='nuClickLister(" + datal + ")' class='" + cl + "' " + datai + datac + datad + ">";
+			rw			+= "   <div id='code_" + i + "' style='display:inline-block;width:" + this.widths[0] + "px;height:20px'>" + this.choppedAt(item[i][1], this.widths[0]) + "</div>";
+			rw			+= this.choppedAt(item[i][2], this.widths[1]);
 			rw			+= "</div>";
 
-			/*
-			if(i == this.boxHighlight){
-				rw		= "<div " + uid + " onclick='nuPickFromList(event)' data-nu-index='" + (i + this.boxTop) + "' data-nu-value='" + item + "' data-nu-id='" + id + "' class='nuListerSelected'>" + fit + "</div>";
-			}else{
-				rw		= "<div " + uid + " onclick='nuPickFromList(event)' data-nu-index='" + (i + this.boxTop) + "' data-nu-value='" + item + "' data-nu-id='" + id + "' class='nuListerNotSelected'>" + fit + "</div>";
-			}
-*/		
 			$('#' + id).val(this.boxList[this.boxHighlight]);	
 			
 			$('#nuListerListBox').append(rw);
@@ -185,24 +212,31 @@ class nuListObject{
 		
 		}
 		
+		return s;
+
 	}
-	
+
 }
 
+function nuClickLister(e, isLookup){
 
-function nuClickLister(e){
-	
 	var o							= $('#' + e.target.id);
+	var ind							= o.attr('data-nu-ind');
 	var id							= o.attr('data-nu-id');
 	var code						= o.attr('data-nu-code');
 	var description					= o.attr('data-nu-description');
-	
+
 	nuFORM.lists[id].boxHighlight	= Number(ind) - nuFORM.lists[id].boxTop;
 
-	$('#' + id)
-	.val(val)
-	.focus();
+	$('#' + id.substr(-4)).val(id);
+	$('#' + id).val(code).focus();
+	
+	if(isLookup){
+		$('#' + id.substr(-4) + 'description').val(description);
+	}
 
 	$('#nuListerListBox').remove();
+
 }
+
 
