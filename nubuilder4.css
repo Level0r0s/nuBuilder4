@@ -315,10 +315,8 @@ input {
 }
 
 .nuIcon {
-
   width: 12px;
   height: 12px;
-  
 }
 
 .nuLanding {
@@ -375,29 +373,32 @@ input {
 }
 
 #nuListerListBox{
-  background-color: #FFDDDD;
+  box-shadow: 5px 5px 5px 0px rgba(150,147,150,1);
+  background-color: #D0EABB;
+  border: 1px solid rgba(0, 0, 0, 0.05);
   color: black;
 }
 
 .nuLister {
+  background-color: #D0EABB;
   display: inline;
-   background-color: #FFDDDD;
 }
 
 .nuListerSelected{
+  background-color: #9ED374;
+  border: 1px solid rgba(0, 0, 0, 0.05);
   display: inline;
-  background-color: red;
   color: black;
 }
 
 .nuListerNotSelected:hover{
   cursor: pointer;
-  color: grey;
+  background-color: #C0E2A5;
 }
 
 .nuListerSelected:hover{
   cursor: pointer;
-  color: grey;
+  background-color: #C0E2A5;
 }
 
 #nuSearchList{
@@ -407,7 +408,6 @@ input {
   border-color: #C3C3C3;
   box-shadow: 5px 5px 5px 0px rgba(150,147,150,1);
   padding: 5px 0px;
-  box-shadow: 5px 5px 5px 0px rgba(150,147,150,1);
 }
 
 #nuSearchListClose:hover{

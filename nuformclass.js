@@ -45,6 +45,7 @@ class nuFormObject {
 		var o	= this.lists[e.target.id];
 		var c 	= $.inArray($('#'+e.target.id).val(), o.boxList);
 
+//		if($('#nuListerListBox').length > 0 && $('#nuListerListBox').children().first().attr('data-nu-id') == e.target.id) {
 		if($('#nuListerListBox').length > 0 && $('#nuListerListBox').children().length > 0) {
 			
 			if(k == 38){														//-- up
@@ -254,14 +255,14 @@ class nuFormObject {
 	subform(sf){
 
 		if(sf == ''){
-			var sel		= "[id='nuRECORD']";
+			var sel	= "[id='nuRECORD']";
 		}else{
-			var sel		= "[id*='" + sf + "'][id*='nuRECORD']";
+			var sel	= "[id*='" + sf + "'][id*='nuRECORD']";
 		}
 		
-		var o			= {'id':sf};
-		o.rows			= [];
-		var F			= ['ID'];
+		var o	= {'id':sf};
+		o.rows	= [];
+		var F	= ['ID'];
 		
 		$(sel).each(function(index){
 			

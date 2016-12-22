@@ -679,21 +679,46 @@ function nuPopPHP(ev){
 }
 
     
-    
-    function nuPopJS(){
 
-        var i  = $('#sob_all_zzzzsys_form_id').val();
-        
-        if(i == ''){
-            
-            alert('Cannot Create Event Until This Form Has Been Saved..')
-            return;
-            
-        }
-        
-        nuPopup('nuobject', i, 'justjs');
-        
-    }
-    
+function nuPopJS(){
+
+	var i  = $('#sob_all_zzzzsys_form_id').val();
+	
+	if(i == ''){
+		
+		alert('Cannot Create Event Until This Form Has Been Saved..')
+		return;
+		
+	}
+	
+	nuPopup('nuobject', i, 'justjs');
+	
+}
+
+function  nuGetLookupFields(id){
+
+	var i	= id.substr(0, id.length - 4);
+	var o	= $('#' + id);
+	var a	= [];
+	
+	if(o.length == 1){
+		
+		if(o.attr('data-nu-type') == 'subform'){
+			
+			a.push(i);
+			a.push(id);
+			a.push(i + 'description');
+
+		}else{
+			a.push('nunosuchfield');
+			a.push(id);
+			a.push('nunosuchfield');
+		}
+
+	}
+
+	return a;
+	
+}
 
 

@@ -10,7 +10,7 @@ class nuListObject{
 
 		this.OBJECT					= obj;
 		this.EVENT					= e;
-		this.rowHeight				= 19;
+		this.rowHeight				= 20;
 		this.top					= off.top + h;
 		this.left					= off.left;
 		this.widths					= [0,0];
@@ -74,9 +74,9 @@ class nuListObject{
 		
 		for(var i = 0 ; i < a.length ; i++){
 			
-			if(cols == 1){arr.push([a[0], a[0], a[0]]);}
-			if(cols == 2){arr.push([a[0], a[1], a[1]]);}
-			if(cols == 3){arr.push([a[0], a[1], a[2]]);}
+			if(cols == 1){arr.push([a[i], a[i], a[i]]);}
+			if(cols == 2){arr.push([a[i][0], a[i][1], a[i][1]]);}
+			if(cols == 3){arr.push([a[i][0], a[i][1], a[i][2]]);}
 			
 		}
 		
@@ -175,28 +175,37 @@ class nuListObject{
 				var	cl 	= 'nuListerNotSelected';
 			}
 			
+			var chopc	= this.choppedAt(item[1], this.widths[0]);
+			var chopd	= this.choppedAt(item[2], this.widths[1]);
+
 			var datan	= ' data-nu-ind="' 			+ i + '" ';
-			var datai	= ' data-nu-id="' 			+ item[i][0]  + '" ';
-			var datac	= ' data-nu-code="' 		+ this.choppedAt(item[i][1], this.widths[0]) + '" ';
-			var datad	= ' data-nu-description="'	+ this.choppedAt(item[i][2], this.widths[1]) + '" ';
-			var datal	= this.isLookup ? 'event, ' + '1' :  'event, ' + '0';
-			
-			var rw		= "<div " + uid + " onclick='nuClickLister(" + datal + ")' class='" + cl + "' " + datai + datac + datad + ">";
-			rw			+= "   <div id='code_" + i + "' style='display:inline-block;width:" + this.widths[0] + "px;height:20px'>" + this.choppedAt(item[i][1], this.widths[0]) + "</div>";
-			rw			+= this.choppedAt(item[i][2], this.widths[1]);
+			var datai	= ' data-nu-id="' 			+ item[0]  + '" ';
+			var datac	= ' data-nu-code="' 		+ chopc + '" ';
+			var datad	= ' data-nu-description="'	+ chopd + '" ';
+			var datal	= this.isLookup ? 'event, ' + '1, "' + this.OBJECT[0].id + '"' : 'event, ' + '0, "' + this.OBJECT[0].id + '"';
+
+			var rw		= "<div " + uid + ">";
+			rw			+= "   <div id='code_" + i + "' style='display:inline-block;width:" + this.widths[0] + "px;height:20px' " + " onclick='nuClickLister(" + datal + ")' class='" + cl + "' " + datan + datai + datac + datad + ">" + chopc + "</div>";
+			rw			+= chopd;
 			rw			+= "</div>";
 
-			$('#' + id).val(this.boxList[this.boxHighlight]);	
+			if(this.boxHighlight == -1){
+				$('#' + id).val('');
+			}else{
+				$('#' + id).val(this.boxList[this.boxHighlight][1]);	
+			}
 			
 			$('#nuListerListBox').append(rw);
 		
-			$('#' + divid).attr('title',item);
+			$('#' + divid).attr('title',item[1]);
 		
 		}
 		
 	}
 	
 	choppedAt(s, w){
+		
+		if(w == 0){return '';}
 		
 		var len	= 0;
 		
@@ -218,21 +227,22 @@ class nuListObject{
 
 }
 
-function nuClickLister(e, isLookup){
+function nuClickLister(e, isLookup, fieldName){
 
-	var o							= $('#' + e.target.id);
+	var id							= e.target.id;
+	var o							= $('#' + id);
 	var ind							= o.attr('data-nu-ind');
-	var id							= o.attr('data-nu-id');
 	var code						= o.attr('data-nu-code');
 	var description					= o.attr('data-nu-description');
+	var fields						= nuGetLookupFields(fieldName);
 
-	nuFORM.lists[id].boxHighlight	= Number(ind) - nuFORM.lists[id].boxTop;
+	nuFORM.lists[fieldName].boxHighlight	= Number(ind) - nuFORM.lists[fieldName].boxTop;
 
-	$('#' + id.substr(-4)).val(id);
-	$('#' + id).val(code).focus();
+	$('#' + fields[1]).val(code).focus();
 	
 	if(isLookup){
-		$('#' + id.substr(-4) + 'description').val(description);
+		$('#' + fields[0]).val(id);
+		$('#' + fields[2]).val(description);
 	}
 
 	$('#nuListerListBox').remove();
