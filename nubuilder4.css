@@ -549,6 +549,22 @@ input {
   border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
+.nuCalculator {
+	border:1px solid black;
+	text-align:center;
+	width:30px;
+	height:30px;
+	font: 20px bold;
+	font-family:monospace;
+	background-color:lightgray;
+}
+
+.nuCalculator:hover {
+	background-color:darkgray;
+	cursor:pointer;
+}
+
+
 .nuSearch {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   background-color: #9ED374;

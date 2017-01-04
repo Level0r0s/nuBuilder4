@@ -284,7 +284,7 @@ function nuGetLookupCode(e, buildLookupList){
 			$('#nuLookupList').remove();
 			
 			if(buildLookupList){
-				nuBuildLookupList(fm, e);
+				nuBuildLookupList(e, fm);
 			}else{
 				nuChooseOneLookupRecord(e, fm);
 			}

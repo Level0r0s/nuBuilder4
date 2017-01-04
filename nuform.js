@@ -240,8 +240,8 @@ function nuAddJSObjectEvents(i, j){
 	for(var J = 0 ; J < j.length ; J++){
 
 		var code 	= o.getAttribute(j[J].event);
-		
 		code		= code === null ? '' : code;
+		
 		o.setAttribute(j[J].event, code + ';' + j[J].js);
 
 	}
@@ -708,7 +708,7 @@ function nuSUBFORM(w, i, l, p, prop){
     var SF  		= prop.objects[i];						//-- First row
     var SFR 		= w.objects[i];							//-- All rows
 	var id  		= p + SF.id;
-	var ef  		= p + 'nuRECORD';					//-- Edit Form Id
+	var ef  		= p + 'nuRECORD';						//-- Edit Form Id
 	var inp 		= document.createElement('div');
 	var fms 		= SFR.forms;
 
@@ -734,8 +734,9 @@ function nuSUBFORM(w, i, l, p, prop){
 					'overflow-x'	: 'hidden',
 					'overflow-y'	: 'hidden'
 	})
-	.attr('data-nu-primary-key', SF.object_id)
-//	.attr('data-nu-subform-parent', p)
+	.attr('data-nu-primary-key', SF.object_id)    //-- could remove this I think
+	.attr('data-nu-object-id', SF.object_id)
+	.attr('data-nu-foreign-key-name', SF.foreign_key_name)
 	.attr('data-nu-subform', 'true')
 	.addClass('nuSubform');
 
@@ -1773,11 +1774,11 @@ function nuGetPage(p, t){
 
 
 function nuSelectBrowse(e){
-	
-	var y 		= window.nuTYPE;					//-- browse, lookup or custom function name
-	var i 		= window.nuTARGET;
-	var p		= $('#' + e.target.id).attr('data-nu-primary-key');
-	var f		= window.nuFORM.getProperty('form_id');
+
+	var y 				= window.nuTYPE;					//-- browse, lookup or custom function name
+	var i 				= window.nuTARGET;
+	var p				= $('#' + e.target.id).attr('data-nu-primary-key');
+	var f				= window.nuFORM.getProperty('form_id');
 
 	if(y == 'browse'){
 		
@@ -1812,7 +1813,7 @@ function nuPopulateLookup(fm, target){
 
 }
 
-function nuBuildLookupList(fm, e){
+function nuBuildLookupList(e, fm){
 
 	$('#nuLookupList').remove();
 	
@@ -2152,7 +2153,6 @@ function nuGetFormData(){
 function nuFormClass(frm){
 
 	var fh				= '#' + frm + 'nuRECORD';
-	console.log(frm,888);
 	var foreign_key		= $(fh).attr('data-nu-foreign-key');
 	var primary_key		= $(fh).attr('data-nu-primary-key');
 	var form_id			= $(fh).attr('data-nu-form-id');

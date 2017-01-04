@@ -1163,7 +1163,7 @@ function nuDisplayFooterHTML(){
 }
 
 function nuGetFormProperties($i){
-
+	
 	$t	= nuRunQuery("SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = ? ", array($i));
 	
 	return db_fetch_object($t);

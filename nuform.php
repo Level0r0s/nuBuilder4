@@ -164,6 +164,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 				$o->subform_type    	= $r->sob_subform_type;
 				$o->delete          	= $r->sob_subform_delete;
 				$f->foreign_key_name 	= $r->sob_subform_foreign_key;
+				$o->foreign_key_name 	= $r->sob_subform_foreign_key;
 				$o->add             	= $r->sob_subform_add;
 				$o->dimensions			= nuFormDimensions($r->sob_subform_zzzzsys_form_id);
 				$o->forms           	= nuGetSubformRecords($r, $o->add, $R);
