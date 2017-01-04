@@ -42,8 +42,8 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
     $f				= nuGetEditForm($F, $R);
     $f->form_id		= $F;
     $f->record_id	= $R;
-    
-	if($f->table == ''){
+	
+	if(!array_key_exists($f->table, nuSchema())){
 		
 		$A			= array();
 		
@@ -345,7 +345,7 @@ function nuGetEditForm($F, $R){
     $f              	= new stdClass();
     $f->id          	= $r->zzzzsys_form_id;
     $f->type        	= $r->sfo_type;
-    $f->table       	= $r->sfo_table;
+    $f->table       	= nuReplaceHashVariables($r->sfo_table);
     $f->primary_key 	= $r->sfo_primary_key;
     $f->order			= $SQL->orderBy;
     $f->from			= $SQL->from;
@@ -687,7 +687,7 @@ function nuBrowseRows($f){
 		return array(array(), 0);
 	}
 	
-    $S 				= new nuSqlString($r->sfo_browse_sql);
+    $S 				= new nuSqlString(nuReplaceHashVariables($r->sfo_browse_sql));
 	
 	$S->addField($f->primary_key);
 	
@@ -721,7 +721,7 @@ function nuBrowseRows($f){
 	}
 	
 	$a				= array();
-	$s				= $S->SQL;
+	$s				= nuReplaceHashVariables($S->SQL);
 	$t 				= nuRunQuery($s);
 	$rows			= db_num_rows($t);
 	$s				= $S->SQL . " LIMIT $start, $rows";
@@ -870,7 +870,6 @@ function nuCheckSession(){
 
 	$c						= new stdClass;
 	$c->record_id			= '-1';
-	$c->table_id			= $_POST['nuHash']['TABLE_ID'];
 	$c->form_id				= $_POST['nuSTATE']['form_id'];
 	$c->session_id			= $s;
 	$c->call_type			= $ct;

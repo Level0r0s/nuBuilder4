@@ -7,22 +7,20 @@
     require_once('nudrag.php');
 
 	if(!isset($_SESSION['SESSIONID'])){
-		$_SESSION['SESSIONID'] = nuID();
+		$_SESSION['SESSIONID'] 				= nuID();
 	}
 	
 	
 	$_POST['nuErrors']						= array();
 	$s										= nuCheckSession();
 	$P										= $_POST['nuSTATE'];
-
 	$_POST['nuHash']						= nuSetHashList($P);
-
 	$u										= nuGetUserAccess();
-
 	$_POST['nuHash']						= array_merge($u, $_POST['nuHash']);
 	$_POST['nuHash']['PREVIOUS_RECORD_ID'] 	= $s->record_id;
 	$_POST['nuHash']['RECORD_ID'] 			= $s->record_id;
 	$_POST['nuHash']['FORM_ID'] 			= $s->form_id;
+	$_POST['nuHash']['TABLE_ID'] 			= nuTT();
 	$_POST['nuHash']['SESSION_ID'] 			= $s->session_id;
 	$_POST['nuValidate']					= array();
 

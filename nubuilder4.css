@@ -559,7 +559,17 @@ input {
 	background-color:lightgray;
 }
 
-.nuCalculator:hover {
+.nuCalculatorButton {
+	border:1px solid black;
+	text-align:center;
+	width:30px;
+	height:30px;
+	font: 20px bold;
+	font-family:monospace;
+	background-color:lightgray;
+}
+
+.nuCalculatorButton:hover {
 	background-color:darkgray;
 	cursor:pointer;
 }

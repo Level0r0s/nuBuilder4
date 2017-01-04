@@ -26,13 +26,13 @@
 				LEFT JOIN zzzzsys_php ON zzzzsys_php_id = spl_library_zzzzsys_php_id 
 				WHERE spl_zzzzsys_php_id = '$this->parentID'
 			";
+			
 			$nuT							= nuRunQuery($s);
 							
 			while($nuA = db_fetch_object($nuT)) {
 
 				$phpCode				= $nuA->sph_code;
 				$phpToEval				= nuReplaceHashVariables($nuA->sph_php);
-
 				$this->evalPHP($phpCode, $phpToEval);
 				
 			}
@@ -46,6 +46,7 @@
 			$nuT						= nuRunQuery($s);
 
 			if(db_num_rows($nuT) > 0) {
+nudebug('hello ' . print_r($_POST['nuHash'],1));
 				
 				$nuA 		= db_fetch_object($nuT);
 				$phpCode	= $nuA->sph_code;

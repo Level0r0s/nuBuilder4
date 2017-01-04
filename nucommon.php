@@ -110,7 +110,9 @@ function cssinclude($pfile){
 
 function nuTT(){
 
-	return '___nu'.uniqid('1').'___';                                                         //--create a unique name for a Temp Table
+	$fn	= '___nu'.uniqid('1').'___';
+	
+	return $fn;                                                         //--create a unique name for a Temp Table
     
 }
 
