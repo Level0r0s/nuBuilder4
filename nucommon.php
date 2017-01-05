@@ -1062,11 +1062,11 @@ function nuAddToHashList($J, $run){
 
 }
 
-function nuSchema(){
+function nuSchema($p = ''){
 	
 	$S				= array();
 
-	if($_POST['nuSTATE']['session_id'] == ''){
+	if($_POST['nuSTATE']['session_id'] == '' or $p == '1'){
 		
 		$t			= nuRunQuery("SELECT table_name FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = DATABASE()");
 

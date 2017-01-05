@@ -46,7 +46,6 @@
 			$nuT						= nuRunQuery($s);
 
 			if(db_num_rows($nuT) > 0) {
-nudebug('hello ' . print_r($_POST['nuHash'],1));
 				
 				$nuA 		= db_fetch_object($nuT);
 				$phpCode	= $nuA->sph_code;

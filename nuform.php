@@ -12,7 +12,7 @@ function nuFormProperties($f){
 
 
 function nuBeforeBrowse($f){
-
+	
 	$r			= nuFormProperties($f);
 	$evalPHP 	= new nuEvalPHPClass($f . '_BB');
 	
@@ -42,8 +42,8 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
     $f				= nuGetEditForm($F, $R);
     $f->form_id		= $F;
     $f->record_id	= $R;
-	
-	if(!array_key_exists($f->table, nuSchema())){
+
+	if(!array_key_exists($f->table, nuSchema(1))){
 		
 		$A			= array();
 		
@@ -670,7 +670,7 @@ function nuBrowseColumns($f){
 
 
 function nuBrowseRows($f){
-
+	
 	if(trim($f->record_id) != ''){return array();}
 	
 	$P				= $_POST['nuSTATE'];
@@ -688,7 +688,7 @@ function nuBrowseRows($f){
 	}
 	
     $S 				= new nuSqlString(nuReplaceHashVariables($r->sfo_browse_sql));
-	
+
 	$S->addField($f->primary_key);
 	
 	for($i = 0 ; $i < count($f->browse_columns) ; $i++){
@@ -724,7 +724,8 @@ function nuBrowseRows($f){
 	$s				= nuReplaceHashVariables($S->SQL);
 	$t 				= nuRunQuery($s);
 	$rows			= db_num_rows($t);
-	$s				= $S->SQL . " LIMIT $start, $rows";
+	$s				.= " LIMIT $start, $rows";
+	nudebug($s);
 	$t 				= nuRunQuery($s);
 
 	while($r = db_fetch_row($t)){
