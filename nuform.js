@@ -1232,8 +1232,8 @@ function nuOptions(p, f, t, access){
 		.attr('src', 'nuoptions.png')
 		.attr('title', 'Options')
 		.attr('onclick', 'nuGetOptionsList("' + f + '", this, "' + p + '", "' + access + '")')
-		.css({'top'			: 0, 
-		'right' 			: 0, 
+		.css({'top'			: 5, 
+		'right' 			: 5, 
 		'position' 			: 'absolute', 
 		'opacity'			: 0.5,
 		'border-style' 		: 'none'})
@@ -1250,8 +1250,8 @@ function nuOptions(p, f, t, access){
 			.css('right', 10);
 		} else {
 			$('#' + id)
-			.css('top', 0)
-			.css('right', 0);
+			.css('top', 5)
+			.css('right', 5);
 		}
 		
 	}
