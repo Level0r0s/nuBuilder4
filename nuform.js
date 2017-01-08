@@ -1599,8 +1599,16 @@ function nuBrowseTable(){
 					'width'		: w-7,
 					'top'		: t,
 					'left'		: l,
-					'height'		: h-7
+					'height'	: h-7
 			});
+console.log(w);			
+			if(w < 8){
+				
+				$('#' + id)
+				.css('padding', 0)
+				.css('border-width', 0);
+				
+			}
 
 			if(r < row.length){
 				

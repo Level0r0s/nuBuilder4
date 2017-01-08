@@ -70,6 +70,21 @@ class nuListObject{
 	formatList(a){
 		
 		var arr		= [];
+		var A		= [];
+		
+		
+		if(typeof(a[0]) != 'array'){
+			
+			for(var i = 0 ; i < a.length ; i++){
+				
+				A.push([a[i]]);
+				
+			}
+			
+			a	= A;
+			
+		}
+
 		var cols	= a[0].length;
 		
 		for(var i = 0 ; i < a.length ; i++){

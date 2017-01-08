@@ -142,7 +142,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 					
 				}
 
-				$o->filter			= $r->sob_run_filter;
+				$o->filter			= nuReplaceHashVariables($r->sob_run_filter);
 				$o->run_method  	= $r->sob_run_method;
 
 			}
