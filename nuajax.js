@@ -24,9 +24,9 @@ function nuAjax(w,successCallback,errorCallback){
  			errorLog[0][0] 	= jqXHR.responseText;
  			errorLog[0][1] 	= "";
  			errorLog[0][2] 	= 0;
-
+            
  			nuPopup("nuerror", "-1", errorLog);
-		
+
 			if (errorCallback !== undefined) {
 				errorCallback(jqXHR,textStatus,errorThrown);
 			}
@@ -77,7 +77,11 @@ function nuForm(f, r, filter, n){
 	last.form_id 		= f;
 	last.record_id		= r;
 	last.filter 		= filter;
-	last.hash 			= parent.nuHashFromEditForm();
+    if(f != 'nuerror'){
+        last.hash 			= parent.nuHashFromEditForm();
+    } else {
+        last.hash = [];
+    }
 
 	var successCallback = function(data,textStatus,jqXHR){
 
