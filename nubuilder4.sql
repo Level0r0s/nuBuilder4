@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 09, 2017 at 01:25 AM
+-- Generation Time: Jan 09, 2017 at 11:00 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -554,7 +554,7 @@ INSERT INTO `zzzzsys_form` (`zzzzsys_form_id`, `sfo_type`, `sfo_code`, `sfo_desc
 ('nuform', 'browseedit', 'FORM', 'nuBuilder Form', 'zzzzsys_form', 'zzzzsys_form_id', 'select ''#sfo_code#''', '', '', '', 'SELECT * FROM zzzzsys_form\nORDER BY sfo_code\n', '1', '', '', '', '', '', '1', '', '', '1', '', '', '1', '', '', '1', '', '', '', '', '', '', '', '$("[onkeydown^='';nuLister'']").addClass(''nuLister'');\n\n$(''#sfo_breadcrumb_title'').addClass(''sql'');\n$(''#sfo_add_display_condition'').addClass(''sql'');\n$(''#sfo_print_display_condition'').addClass(''sql'');\n$(''#sfo_browse_sql'').addClass(''sql'');\n$(''#sfo_save_display_condition'').addClass(''sql'');\n$(''#sfo_clone_display_condition'').addClass(''sql'');\n$(''#sfo_delete_display_condition'').addClass(''sql'');\n$(''#sfo_new_display_condition'').addClass(''sql'');\n$(''#sfo_before_browse_php'').addClass(''php'');\n$(''#sfo_before_open_php'').addClass(''php'');\n$(''#sfo_before_save_php'').addClass(''php'');\n$(''#sfo_after_save_php'').addClass(''php'');\n$(''#sfo_before_delete_php'').addClass(''php'');\n$(''#sfo_after_delete_php'').addClass(''php'');\n$(''#sfo_javascript'').addClass(''js'');\n  \n$(''.js'').dblclick(function() {\n	nuOpenAce(''Javascript'', this.id);\n});\n\n$(''.sql'').dblclick(function() {\n	nuOpenAce(''SQL'', this.id);\n});\n\n$(''.html'').dblclick(function() {\n	nuOpenAce(''HTML'', this.id);\n});\n\n$(''.php'').dblclick(function() {\n	nuOpenAce(''PHP'', this.id);\n});\n\n\nif(window.filter == ''justjs''){\n    \n    $(''#nuTab0'').remove();\n    $(''#nuDelete'').remove();\n    $(''#nuClone'').remove();\n    $(''#nuTab1'').remove();\n    $(''#nuTab2'').remove();\n    $(''#nuTab3'').remove();\n    $(''#nuTab4'').click();\n    $(''#nu_bc_0'').html($(''#sfo_description'').val());\n    \n}\n\n\n\nfunction nuFormColor(){\n\n    var h           =     $(''#sfo_type'').addClass(''nuEdited'');\n    var o           = [];\n    o[''browse'']		= Array(1,4);\n    o[''edit''] 		= Array(2,3,4);\n    o[''browseedit''] = Array(1,2,3,4);\n    o[''launch''] 	= Array(3,4);\n    o[''subform''] 	= Array(3,11);\n\n    $(''#sfo_type'').removeClass();\n    $(''#sfo_type'').addClass(''nu_''+$(''#sfo_type'').val());\n    \n    if(h){\n        $(''#sfo_type'').addClass(''nuEdited'');\n    }\n    \n    $("#sfo_type > option").each(function() {\n        $(this).addClass(''nu_''+this.value);\n    });\n\n    for(var i = 0 ; i < 7 ; i++){\n        $(''#nuTab'' + i).removeClass(''nuRelatedTab'');\n    }\n    \n    var t   = o[$(''#sfo_type'').val()];\n\n    $(''#nuTab0'').addClass(''nuRelatedTab'');\n\n    if(t !== undefined){\n        \n    	for(var i = 0 ; i < t.length ; i++){\n    		$(''#nuTab'' + t[i]).addClass(''nuRelatedTab'');		\n    	}\n    	\n    }\n    \n}\n\nnuFormColor();\n\nnuBuildSubformArray(''zzzzsys_tab_sf'');\nnuBuildSubformArray(''zzzzsys_browse_sf'');\n\n$("[data-nu-column=''nucolumn000'']").each(function() {\n    $(this).addClass(''nu_''+this.textContent);\n});\n\n\n\nfunction nuCopyToSort(t){\n\n    var o = $(''#'' + t.id);\n    var p = o.attr(''data-nu-prefix'');\n    var s = $(''#'' + p + ''sbr_sort'');\n    \n    if(s.val() == ''''){\n        s.val( o.val())\n        .change();\n    }\n\n}\n\n\n\nfunction nuEventList(){\n	\n	if($(''sob_all_type'').val() == ''subform''){\n		return [''onchange'',''onadd''];\n	}else{\n		return [''onblur'',''onchange'',''onfocus'',''onkeydown''];\n	}\n	\n}\n\n\n'),
 ('nubrowse', 'subform', 'FRMBR', 'Form Browse Subform', 'zzzzsys_browse', 'zzzzsys_browse_id', '', '', '', '', 'SELECT * FROM zzzzsys_browse\nORDER BY sbr_order\n', '1', '', '', '', '', '', '1', 'Save Me', '', '1', '', '', '1', '', '', '', '', '', '', '', '', '', '', ''),
 ('nutab', 'browseedit', 'TAB', 'Form Tab', 'zzzzsys_tab', 'zzzzsys_tab_id', '', '', '', '', 'SELECT * FROM zzzzsys_tab\nJOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id\nORDER BY syt_order', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '0', '', '', '', '', '', '', '', '\n$("[data-nu-column=''nucolumn000'']").each(function() {\n    $(this).addClass(''nu_''+this.innerHTML);\n});\n'),
-('nuobject', 'browseedit', 'OBJECT', 'Object', 'zzzzsys_object', 'zzzzsys_object_id', '', '', '', '', 'SELECT * FROM zzzzsys_object\nJOIN zzzzsys_tab ON zzzzsys_tab_id = sob_all_zzzzsys_tab_id\nJOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id\n', '1', '', '', '', '', '', '1', '', '', '1', '', '', '1', '', '', '0', '', '', '', '', '', '', '', '\n$(''#sob_calc_formula'').addClass(''nuCalculator'');\n$(''#sob_all_display_condition'').addClass(''sql'');\n$(''#sob_all_default_value_sql'').addClass(''sql'');\n$(''#sob_display_sql'').addClass(''sql'');\n$(''#sob_select_sql'').addClass(''sql'');\n$(''#sob_lookup_php'').addClass(''php'');\n$(''#sob_lookup_javascript'').addClass(''js'');\n$(''#sob_html_code'').addClass(''html'');\n  \n$(''.js'').dblclick(function() {\n	nuOpenAce(''Javascript'', this.id);\n});\n\n\n$(''.js'').dblclick(function() {\n	nuOpenAce(''Javascript'', this.id);\n});\n\n$(''.sql'').dblclick(function() {\n	nuOpenAce(''SQL'', this.id);\n});\n\n$(''.html'').dblclick(function() {\n	nuOpenAce(''HTML'', this.id);\n});\n\n$(''.php'').dblclick(function() {\n	nuOpenAce(''PHP'', this.id);\n});\n\nnuObjectColor();\n\n$("[data-nu-column=''nucolumn000'']").each(function() {\n    $(this).addClass(''nu_''+this.textContent);\n});\n\nif(window.filter == ''justjs''){\n/*    \n    $(''#nuTab0'').remove();\n    $(''#nuTab1'').remove();\n    $(''#nuTab2'').remove();\n    $(''#nuTab3'').remove();\n    $(''#nuTab4'').remove();\n    $(''#nuTab5'').remove();\n    $(''#nuTab6'').click();\n    $(''#nu_bc_0'').html($(''#sfo_description'').val());\n*/\n}\n\n\nfunction nuObjectColor(){\n\n    $(''.nuValidate'').removeClass(''nuValidate'');\n\n	var o			= [];\n	o[''run'']		= 1;\n	o[''display'']	= 2;\n	o[''select'']		= 3;\n	o[''lookup'']		= 4;\n	o[''subform'']	= 5;\n	o[''input'']		= 6;\n	o[''html'']		= 7;\n	o[''calc'']		= 8;\n\n    $(''#sob_all_type'').addClass(''nu_''+$(''#sob_all_type'').val());\n    \n    $("#sob_all_type > option").each(function() {\n        $(this).addClass(''nu_''+this.value);\n    });\n	\n    var t   = o[$(''#sob_all_type'').val()];\n    \n$("[id^=''nuTab'']").removeClass(''nuRelatedTab'');\nfor(var i = 1 ; i < o.length ; i++){\n        $(''#nuTab'' + i).removeClass(''nuRelatedTab'');\n    }\n    \n    $(''#nuTab0'').addClass(''nuRelatedTab'');\n    $(''#nuTab'' + t).addClass(''nuRelatedTab'');\n    \n} \n\nfunction nuChooseEventList(){\n\n    if($(''#sob_all_type'').val() == ''subform''){\n        \n        return [''onchange'',''beforeadd'',''afteradd'', ''ondelete''];\n    \n    }else{\n        \n        return [''onblur'',''onchange'',''onfocus'',''onkeydown''];\n    \n    }\n\n}\n\n\n'),
+('nuobject', 'browseedit', 'OBJECT', 'Object', 'zzzzsys_object', 'zzzzsys_object_id', '', '', '', '', 'SELECT * FROM zzzzsys_object\nJOIN zzzzsys_tab ON zzzzsys_tab_id = sob_all_zzzzsys_tab_id\nJOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id\n', '1', '', '', '', '', '', '1', '', '', '1', '', '', '1', '', '', '0', '', '', '', '', '', '', '', '\n$(''#sob_calc_formula'').addClass(''nuCalculator'');\n$(''#sob_all_display_condition'').addClass(''sql'');\n$(''#sob_all_default_value_sql'').addClass(''sql'');\n$(''#sob_display_sql'').addClass(''sql'');\n$(''#sob_select_sql'').addClass(''sql'');\n$(''#sob_lookup_php'').addClass(''php'');\n$(''#sob_lookup_javascript'').addClass(''js'');\n$(''#sob_html_code'').addClass(''html'');\n  \n$(''.js'').dblclick(function() {\n	nuOpenAce(''Javascript'', this.id);\n});\n\n\n$(''.js'').dblclick(function() {\n	nuOpenAce(''Javascript'', this.id);\n});\n\n$(''.sql'').dblclick(function() {\n	nuOpenAce(''SQL'', this.id);\n});\n\n$(''.html'').dblclick(function() {\n	nuOpenAce(''HTML'', this.id);\n});\n\n$(''.php'').dblclick(function() {\n	nuOpenAce(''PHP'', this.id);\n});\n\nnuObjectColor();\n\n$("[data-nu-column=''nucolumn000'']").each(function() {\n    $(this).addClass(''nu_''+this.textContent);\n});\n\nif(window.filter == ''justjs''){\n/*    \n    $(''#nuTab0'').remove();\n    $(''#nuTab1'').remove();\n    $(''#nuTab2'').remove();\n    $(''#nuTab3'').remove();\n    $(''#nuTab4'').remove();\n    $(''#nuTab5'').remove();\n    $(''#nuTab6'').click();\n    $(''#nu_bc_0'').html($(''#sfo_description'').val());\n*/\n}\n\n\nfunction nuObjectColor(){\n\n    $(''.nuValidate'').removeClass(''nuValidate'');\n\n	var o			= [];\n	o[''run'']		= 1;\n	o[''display'']	= 2;\n	o[''select'']		= 3;\n	o[''lookup'']		= 4;\n	o[''subform'']	= 5;\n	o[''input'']		= 6;\n	o[''html'']		= 7;\n	o[''calc'']		= 8;\n\n    $(''#sob_all_type'').addClass(''nu_''+$(''#sob_all_type'').val());\n    \n    $("#sob_all_type > option").each(function() {\n        $(this).addClass(''nu_''+this.value);\n    });\n	\n    var t   = o[$(''#sob_all_type'').val()];\n    \n$("[id^=''nuTab'']").removeClass(''nuRelatedTab'');\nfor(var i = 1 ; i < o.length ; i++){\n        $(''#nuTab'' + i).removeClass(''nuRelatedTab'');\n    }\n    \n    $(''#nuTab0'').addClass(''nuRelatedTab'');\n    $(''#nuTab'' + t).addClass(''nuRelatedTab'');\n    \n} \n\nfunction nuChooseEventList(){\n\n    if($(''#sob_all_type'').val() == ''subform''){\n        \n        return [''onchange'',''beforeadd'',''afteradd'', ''ondelete''];\n    \n    }else{\n        \n        return [''onblur'',''onchange'',''onfocus'',''onkeydown''];\n    \n    }\n\n}\n\n\n\nfunction nuAddToFormula(e){\n\n    var row = e.target.id.substr(0,8);\n    var fld = $(''#'' + row + ''004'').html();\n    var frm = $(''#sob_calc_formula'', parent.window.document).val();\n\n    $(''#sob_calc_formula'', parent.window.document).val(frm + '' '' + fld);\n\n}\n\n'),
 ('583361606250b6e', 'browseedit', 'FF', 'Fast Form', 'zzzzsys_form', 'zzzzsys_form_id', '', '', '', '', 'SELECT * FROM zzzzsys_form', '1', '', '', '', '', '', '1', '', '', '1', '', '', '', '', '', '', '', '', '', '', '', '', '', '    \n    $(''#obj_sfscrollDiv'').on(''dragover'', function(e){\n    \n    if (e.preventDefault) {\n        e.preventDefault();\n    }\n    \n    return false;\n    \n    });\n    \n    $(''#obj_sfscrollDiv'').on(''dragenter'', function(e){\n\n        $(this).css(''border-width'', 4);\n        \n        var pre             = ''#obj_sf'' + nuPad3(nuFORM.subform(''obj_sf'').rows.length - 1)\n        $(pre + ''sob_all_id'').focus();\n        \n    });\n    \n    $(''#obj_sfscrollDiv'').on(''dragleave'', function(e){\n        $(this).removeClass(''nuDragIn'');\n    });\n    \n    \n    $(''#obj_sfscrollDiv'').on(''drop'', function(e){\n        \n        e.preventDefault();\n        \n        e.dataTransfer      = e.originalEvent.dataTransfer;\n        var pre             = ''#obj_sf'' + nuPad3(nuFORM.subform(''obj_sf'').rows.length - 1)\n        var id              = e.dataTransfer.getData(''id'');\n        var label           = e.dataTransfer.getData(''label'');\n        var field_name      = e.dataTransfer.getData(''field_name'');\n        var Class           = ''nu_'' + e.dataTransfer.getData(''Class'');\n        \n        $(pre + ''custom_id'').val(id).addClass(Class);\n        $(pre + ''sob_all_label'').val(label).addClass(Class);\n        $(pre + ''sob_all_id'').val(field_name).addClass(Class).focus().change();\n        \n    });\n    \n    \n'),
 ('nulookup', 'edit', 'LOOK', 'Lookup Objects to populate', 'zzzzsys_lookup', 'zzzzsys_lookup_id', '', '', '', '', 'SELECT *\nFROM zzzzsys_lookup', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('nuevent', 'edit', 'EVE', 'Object Events', 'zzzzsys_event', 'zzzzsys_event_id', '', '', '', '', 'SELECT * FROM zzzzsys_event', '', '', '', '', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
@@ -584,7 +584,7 @@ INSERT INTO `zzzzsys_form` (`zzzzsys_form_id`, `sfo_type`, `sfo_code`, `sfo_desc
 ('nuerror', 'edit', 'ERROR', 'Error Form', 'zzzzsys_form', 'zzzzsys_form_id', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '$(''#error'').hide(); \n$(''#nuTabHolder'').hide(); \n$(''#nuBreadcrumbHolder'').hide(); \n$(''#nuActionHolder'').hide();  \n\nfor(i = 0; i < window.nuFORM.getCurrent().filter.length; i++) {  	\n\n	$(''#nuRECORD'').append(''<div id="errorMessage'' + i + ''" style="margin: 10px"><span class="fake-link">''+window.nuFORM.getCurrent().filter[i][0]+''</span></div>''); 	\n	\n	$(''#errorMessage'' + i).click({\n		param1: window.nuFORM.getCurrent().filter[i][1]}, nuCloseAndFocus\n	); 	 \n	\n}  \n\nfunction nuCloseAndFocus(event) {  	\n\n	if(event.data.param1 != '''') {\n		$(''#'' + event.data.param1, window.parent.document).focus(); 	\n	}\n	\n	$(''#dialogClose'', window.parent.document).click(); \n	\n}'),
 ('58338c35b340428', 'browse', 'FFCO', 'Fast Form Custom Objects', 'zzzzsys_object', 'zzzzsys_object_id', '', '', '', '10', 'SELECT *\nFROM zzzzsys_object\nWHERE sob_all_fast_form_description != ''''\n', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '\n$("[data-nu-column=''nucolumn003'']").each(function() {\n    $(this).addClass(''nu_'' + this.textContent);\n});\n\n$(''.nuBrowseTable'').attr(''draggable'', ''true'');\n\n$(''#nuBreadcrumbHolder'').remove();\n\nwindow.nuTYPE = ''nuSelectCustomObject'';\n\n\n//$(''.nuBrowseTable'').on(''dragstart'', ''nuSetDataTransfer'');\n\n$(''.nuBrowseTable'').on(''dragstart'', function(event){\n    nuSetDataTransfer(event);\n});\n\n\n$(''.nuBrowseTable'').on(''drag'', function(event){\n    console.log(event.currentTarget.id);\n});\n\n\nfunction nuSetDataTransfer(e){\n    \n	var row                         = $(''#'' + e.target.id).attr(''data-nu-row'');\n	var field_name                  = $(''#'' + row + ''001'').html();\n	var label                       = $(''#'' + row + ''002'').html();\n	var Class                       = $(''#'' + row + ''003'').html();\n	var id                          = $(''#'' + e.target.id).attr(''data-nu-primary-key'');\n\n    e.dataTransfer                  = e.originalEvent.dataTransfer;\n	e.dataTransfer.effectAllowed    = ''copy''; \n	e.dataTransfer.setData(''id'', id);\n    e.dataTransfer.setData(''label'', label);\n    e.dataTransfer.setData(''field_name'', field_name);\n    e.dataTransfer.setData(''Class'', Class);\n\n	var i                           = document.createElement(''img'');\n    i.src                           = Class + ''.png'';\n    i.width                         = 20;\n    \n    e.dataTransfer.setDragImage(i,3,3);\n    \n}\n\n\n\n'),
 ('583f372b53b972c', 'subform', 'FFO', 'Fast Form Objects', 'zzzzsys_object', 'zzzzsys_object_id', '', '', '', '', 'SELECT * FROM zzzzsys_object\nJOIN zzzzsys_tab ON zzzzsys_tab_id = sob_all_zzzzsys_tab_id\nJOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id\n', '1', '', '', '', '', '', '1', '', '', '1', '', '', '1', '', '', '0', '', '', '', '', '', '', '', ''),
-('585efbcfe4dfaf4', 'browse', 'CALC', 'Values On This Form And Its Subforms', '#TABLE_ID#', 'thevalue', '', '', '', '10', 'SELECT * FROM #TABLE_ID#', '0', '', '', '0', '', '', '0', '', '', '0', '', '', '0', '', '', '0', '', '', '', '', '', '', '', '\nwindow.nuTYPE = ''nuSelectCalcField'';\n\n\nfunction nuSelectCalcField(e){\n    \n    console.log(e.target);\n    \n}\n\n');
+('585efbcfe4dfaf4', 'browse', 'CALC', 'Values On This Form And Its Subforms', '#TABLE_ID#', 'thevalue', '', '', '', '10', 'SELECT * FROM #TABLE_ID#', '0', '', '', '0', '', '', '0', '', '', '0', '', '', '0', '', '', '0', '', '', '', '', '', '', '', '\nwindow.nuTYPE = ''nuSelectCalcField'';\n\nfunction nuSelectCalcField(e){\n\n    var row = e.target.id.substr(0,8);\n    var fld = $(''#'' + row + ''004'').html();\n    var frm = $(''#sob_calc_formula'', parent.window.document).val();\n\n    $(''#sob_calc_formula'', parent.window.document).val(frm + '' '' + fld);\n\n}\n\n');
 
 -- --------------------------------------------------------
 
@@ -1112,6 +1112,13 @@ CREATE TABLE `zzzzsys_session` (
   `sss_access` mediumtext NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `zzzzsys_session`
+--
+
+INSERT INTO `zzzzsys_session` (`zzzzsys_session_id`, `sss_timeout`, `sss_access`) VALUES
+('5874021fb4aceb1', '2017-01-10 10:05:27', '{"session":{"zzzzsys_user_group_id":"","zzzzsys_user_id":"globeadmin","sug_zzzzsys_form_id":"nuhome","global_access":"1"},"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","57edbac65e1c52a","583361606250b6e","58338c35b340428","583f372b53b972c","585efbcfe4dfaf4","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuerror","nuevent","nuform","nuhome","nulaunchdates","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nuphplibrary","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["568b50020fc7a62_AB","574665a15bbc1a1_BO","57578be0057a49f","5757a4b7181e365_BB","57db70b7aa22cda","57f6e1f954955c1","581135daea4f878","585efbcfe4dfaf4_BB","nudebug_BD","nuform_AS","nuform_BS","nulaunchdates_BO","nuobject_BO","nuobject_BS","nupassword_BS","nuphp_AS","nuphp_BS","nuuser_AS"]}');
+
 -- --------------------------------------------------------
 
 --
@@ -1356,6 +1363,135 @@ INSERT INTO `zzzzsys_user_group_access_level` (`zzzzsys_user_group_access_level_
 ('577b090acb48614', '', '577aea8e8844920'),
 ('577b08fdf05e48d', '', '577aea8e8844920'),
 ('57df3880bfdfc67', '57df3880bfdf41e', '57df38d1bdf5ae5');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `___nu1587402a738d3f___`
+--
+
+CREATE TABLE `___nu1587402a738d3f___` (
+  `theform` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
+  `theparent` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
+  `thechild` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
+  `thevalue` text CHARACTER SET utf8 NOT NULL,
+  `thefilter` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `___nu1587402a738d3f___`
+--
+
+INSERT INTO `___nu1587402a738d3f___` (`theform`, `theparent`, `thechild`, `thevalue`, `thefilter`) VALUES
+('56773cb405f4913', 'FORM', 'com_name', 'FORM.com_name', '56773cb405f4913'),
+('56773cb405f4913', 'FORM', 'com_address', 'FORM.com_address', '56773cb405f4913'),
+('56773cb405f4913', 'FORM', 'com_suburb', 'FORM.com_suburb', '56773cb405f4913'),
+('5678ab2c48c5c41', 'FORM', 'emp_name', 'FORM.emp_name', '5678ab2c48c5c41'),
+('5678ab2c48c5c41', 'FORM', 'emp_mobile', 'FORM.emp_mobile', '5678ab2c48c5c41'),
+('568b508eec00d80', 'FORM', 'bus_code', 'FORM.bus_code', '568b508eec00d80'),
+('568b508eec00d80', 'FORM', 'bus_description', 'FORM.bus_description', '568b508eec00d80'),
+('568b508eec00d80', 'FORM', 'bus_check', 'FORM.bus_check', '568b508eec00d80'),
+('nuform', 'FORM', 'sfo_code', 'FORM.sfo_code', 'nuform'),
+('nuform', 'FORM', 'sfo_description', 'FORM.sfo_description', 'nuform'),
+('nuform', 'FORM', 'sfo_table', 'FORM.sfo_table', 'nuform'),
+('nuform', 'FORM', 'sfo_primary_key', 'FORM.sfo_primary_key', 'nuform'),
+('nuform', 'FORM', 'sfo_row_height', 'FORM.sfo_row_height', 'nuform'),
+('nuform', 'FORM', 'sfo_rows_per_page', 'FORM.sfo_rows_per_page', 'nuform'),
+('nuform', 'FORM', 'sfo_add_title', 'FORM.sfo_add_title', 'nuform'),
+('nuform', 'FORM', 'sfo_print_title', 'FORM.sfo_print_title', 'nuform'),
+('nubrowse', 'FORM', 'sbr_title', 'FORM.sbr_title', 'nubrowse'),
+('nubrowse', 'FORM', 'sbr_display', 'FORM.sbr_display', 'nubrowse'),
+('nubrowse', 'FORM', 'sbr_sort', 'FORM.sbr_sort', 'nubrowse'),
+('nubrowse', 'FORM', 'sbr_width', 'FORM.sbr_width', 'nubrowse'),
+('nubrowse', 'FORM', 'sbr_order', 'FORM.sbr_order', 'nubrowse'),
+('nutab', 'FORM', 'syt_title', 'FORM.syt_title', 'nutab'),
+('nutab', 'FORM', 'syt_order', 'FORM.syt_order', 'nutab'),
+('nuform', 'FORM', 'sfo_save_title', 'FORM.sfo_save_title', 'nuform'),
+('nuform', 'FORM', 'sfo_clone_title', 'FORM.sfo_clone_title', 'nuform'),
+('nuform', 'FORM', 'sfo_delete_title', 'FORM.sfo_delete_title', 'nuform'),
+('nuform', 'FORM', 'sfo_new_title', 'FORM.sfo_new_title', 'nuform'),
+('nuform', 'FORM', 'bb_event', 'FORM.bb_event', 'nuform'),
+('nubuildreport', 'FORM', 'open_builder', 'FORM.open_builder', 'nubuildreport'),
+('nuobject', 'FORM', 'sob_all_id', 'FORM.sob_all_id', 'nuobject'),
+('nuobject', 'FORM', 'sob_all_label', 'FORM.sob_all_label', 'nuobject'),
+('nuobject', 'FORM', 'sob_all_order', 'FORM.sob_all_order', 'nuobject'),
+('nuobject', 'FORM', 'sob_all_top', 'FORM.sob_all_top', 'nuobject'),
+('nuobject', 'FORM', 'sob_all_left', 'FORM.sob_all_left', 'nuobject'),
+('nuobject', 'FORM', 'sob_all_width', 'FORM.sob_all_width', 'nuobject'),
+('nuobject', 'FORM', 'sob_all_height', 'FORM.sob_all_height', 'nuobject'),
+('nuobject', 'FORM', 'sob_subform_foreign_key', 'FORM.sob_subform_foreign_key', 'nuobject'),
+('nuobject', 'FORM', 'sob_run_filter', 'FORM.sob_run_filter', 'nuobject'),
+('nuobject', 'FORM', 'sob_run_id', 'FORM.sob_run_id', 'nuobject'),
+('nuobject', 'FORM', 'sob_lookup_code', 'FORM.sob_lookup_code', 'nuobject'),
+('nuobject', 'FORM', 'sob_lookup_description', 'FORM.sob_lookup_description', 'nuobject'),
+('nuobject', 'FORM', 'sob_lookup_description_width', 'FORM.sob_lookup_description_width', 'nuobject'),
+('nulookup', 'FORM', 'zzzzsys_slo_object_name', 'FORM.zzzzsys_slo_object_name', 'nulookup'),
+('nulookup', 'FORM', 'zzzzsys_slo_field_function_name', 'FORM.zzzzsys_slo_field_function_name', 'nulookup'),
+('nuevent', 'FORM', 'sev_event', 'FORM.sev_event', 'nuevent'),
+('nuaccess', 'FORM', 'sal_description', 'FORM.sal_description', 'nuaccess'),
+('nuobject', 'FORM', 'sob_all_zzzzsys_form_id', 'FORM.sob_all_zzzzsys_form_id', 'nuobject'),
+('nuaccess', 'FORM', 'sal_code', 'FORM.sal_code', 'nuaccess'),
+('574665a15bbc1a1', 'FORM', 'sug_code', 'FORM.sug_code', '574665a15bbc1a1'),
+('574665a15bbc1a1', 'FORM', 'sug_description', 'FORM.sug_description', '574665a15bbc1a1'),
+('nuuser', 'FORM', 'sus_name', 'FORM.sus_name', 'nuuser'),
+('nuuser', 'FORM', 'sus_email', 'FORM.sus_email', 'nuuser'),
+('nuuser', 'FORM', 'sus_login_name', 'FORM.sus_login_name', 'nuuser'),
+('nuuser', 'FORM', 'new_password', 'FORM.new_password', 'nuuser'),
+('nuuser', 'FORM', 'check_password', 'FORM.check_password', 'nuuser'),
+('nuphp', 'FORM', 'sph_code', 'FORM.sph_code', 'nuphp'),
+('nuphp', 'FORM', 'sph_description', 'FORM.sph_description', 'nuphp'),
+('nublank', 'FORM', 'bla_html', 'FORM.bla_html', 'nublank'),
+('nubuildreport', 'FORM', 'sre_code', 'FORM.sre_code', 'nubuildreport'),
+('nubuildreport', 'FORM', 'sre_description', 'FORM.sre_description', 'nubuildreport'),
+('nubuildreport', 'FORM', 'sre_group', 'FORM.sre_group', 'nubuildreport'),
+('577b4d78ef9a2a0', 'FORM', 'steven', 'FORM.steven', '577b4d78ef9a2a0'),
+('577b4d78ef9a2a0', 'FORM', 'com_address', 'FORM.com_address', '577b4d78ef9a2a0'),
+('nulaunchdates', 'FORM', 'from_date', 'FORM.from_date', 'nulaunchdates'),
+('nulaunchdates', 'FORM', 'to_date', 'FORM.to_date', 'nulaunchdates'),
+('nuphp', 'FORM', 'sph_group', 'FORM.sph_group', 'nuphp'),
+('57a29441f16c351', 'FORM', 'set_time_out_minutes', 'FORM.set_time_out_minutes', '57a29441f16c351'),
+('57a29441f16c351', 'FORM', 'set_smtp_username', 'FORM.set_smtp_username', '57a29441f16c351'),
+('57a29441f16c351', 'FORM', 'set_smtp_password', 'FORM.set_smtp_password', '57a29441f16c351'),
+('57a29441f16c351', 'FORM', 'set_smtp_host', 'FORM.set_smtp_host', '57a29441f16c351'),
+('57a29441f16c351', 'FORM', 'set_smtp_from_address', 'FORM.set_smtp_from_address', '57a29441f16c351'),
+('57a29441f16c351', 'FORM', 'set_smtp_from_name', 'FORM.set_smtp_from_name', '57a29441f16c351'),
+('57a29441f16c351', 'FORM', 'set_smtp_port', 'FORM.set_smtp_port', '57a29441f16c351'),
+('57a7c1cb78bf3a3', 'FORM', 'trl_language', 'FORM.trl_language', '57a7c1cb78bf3a3'),
+('57a7c1cb78bf3a3', 'FORM', 'trl_english', 'FORM.trl_english', '57a7c1cb78bf3a3'),
+('57a7c1cb78bf3a3', 'FORM', 'trl_translation', 'FORM.trl_translation', '57a7c1cb78bf3a3'),
+('nupassword', 'FORM', 'new_password_check', 'FORM.new_password_check', 'nupassword'),
+('nuobject', 'FORM', 'sob_all_fast_form_description', 'FORM.sob_all_fast_form_description', 'nuobject'),
+('nupassword', 'FORM', 'new_password', 'FORM.new_password', 'nupassword'),
+('nupassword', 'FORM', 'old_password', 'FORM.old_password', 'nupassword'),
+('nuobject', 'FORM', 'ab_event', 'FORM.ab_event', 'nuobject'),
+('nuerror', 'FORM', 'error', 'FORM.error', 'nuerror'),
+('nuform', 'FORM', 'bo_event', 'FORM.bo_event', 'nuform'),
+('nuform', 'FORM', 'bs_event', 'FORM.bs_event', 'nuform'),
+('nuform', 'FORM', 'as_event', 'FORM.as_event', 'nuform'),
+('nuform', 'FORM', 'bd_event', 'FORM.bd_event', 'nuform'),
+('nuform', 'FORM', 'ad_event', 'FORM.ad_event', 'nuform'),
+('nuform', 'FORM', 'preiviewbtn', 'FORM.preiviewbtn', 'nuform'),
+('nuobject', 'FORM', 'sob_lookup_table', 'FORM.sob_lookup_table', 'nuobject'),
+('583f372b53b972c', 'FORM', 'sob_all_id', 'FORM.sob_all_id', '583f372b53b972c'),
+('583f372b53b972c', 'FORM', 'sob_all_label', 'FORM.sob_all_label', '583f372b53b972c'),
+('583f372b53b972c', 'FORM', 'custom_id', 'FORM.custom_id', '583f372b53b972c'),
+('nuobject', 'FORM', 'javascriptbtn', 'FORM.javascriptbtn', 'nuobject'),
+('nuobject', 'FORM', 'sob_calc_formula', 'FORM.sob_calc_formula', 'nuobject'),
+('56773cb405f4913', 'employee_sf', 'emp_name', 'employee_sf.emp_name', '56773cb405f4913'),
+('56773cb405f4913', 'employee_sf', 'emp_mobile', 'employee_sf.emp_mobile', '56773cb405f4913'),
+('nuform', 'zzzzsys_browse_sf', 'sbr_title', 'zzzzsys_browse_sf.sbr_title', 'nuform'),
+('nuform', 'zzzzsys_browse_sf', 'sbr_display', 'zzzzsys_browse_sf.sbr_display', 'nuform'),
+('nuform', 'zzzzsys_browse_sf', 'sbr_sort', 'zzzzsys_browse_sf.sbr_sort', 'nuform'),
+('nuform', 'zzzzsys_browse_sf', 'sbr_width', 'zzzzsys_browse_sf.sbr_width', 'nuform'),
+('nuform', 'zzzzsys_browse_sf', 'sbr_order', 'zzzzsys_browse_sf.sbr_order', 'nuform'),
+('nuform', 'zzzzsys_tab_sf', 'syt_title', 'zzzzsys_tab_sf.syt_title', 'nuform'),
+('nuform', 'zzzzsys_tab_sf', 'syt_order', 'zzzzsys_tab_sf.syt_order', 'nuform'),
+('nuobject', 'lookup_sf', 'zzzzsys_slo_object_name', 'lookup_sf.zzzzsys_slo_object_name', 'nuobject'),
+('nuobject', 'lookup_sf', 'zzzzsys_slo_field_function_name', 'lookup_sf.zzzzsys_slo_field_function_name', 'nuobject'),
+('nuobject', 'zzzzsys_event_sf', 'sev_event', 'zzzzsys_event_sf.sev_event', 'nuobject'),
+('583361606250b6e', 'obj_sf', 'sob_all_id', 'obj_sf.sob_all_id', '583361606250b6e'),
+('583361606250b6e', 'obj_sf', 'sob_all_label', 'obj_sf.sob_all_label', '583361606250b6e'),
+('583361606250b6e', 'obj_sf', 'custom_id', 'obj_sf.custom_id', '583361606250b6e');
 
 -- --------------------------------------------------------
 
