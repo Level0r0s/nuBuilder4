@@ -69,7 +69,8 @@ window.nuHASH			= [];
 	";
 
 	$h	= "
-	if(window.parent == window && window.opener == null){
+//	if(window.parent == window && window.opener == null){
+	if('$opener' == ''){
 		
 		function nuLoad(){
 			
