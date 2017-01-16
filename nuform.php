@@ -543,19 +543,19 @@ function nuRemoveNonCharacters($s){
 
 function nuGetSubformRecords($R, $A){
 
-    $f = nuGetEditForm($R->sob_subform_zzzzsys_form_id, '');
-    $s = "SELECT `$f->primary_key` $f->from WHeRE `$R->sob_subform_foreign_key` = '$R->subform_fk' $f->order";
-    $t = nuRunQuery($s);
+    //$f = nuGetEditForm($R->sob_subform_zzzzsys_form_id, '');
+    //$s = "SELECT `$f->primary_key` $f->from WHeRE `$R->sob_subform_foreign_key` = '$R->subform_fk' $f->order";
+    //$t = nuRunQuery($s);
     $a = array();
 
-    while($r = db_fetch_row($t)){
+    //while($r = db_fetch_row($t)){
 
 		$o						= nuGetFormObject($R->sob_subform_zzzzsys_form_id, $r[0], count($a));
 		$o->foreign_key			= $R->subform_fk;
 		$o->foreign_key_name	= $R->sob_subform_foreign_key;
 		$a[] 					= $o;
 
-    }
+    //}
 
     if($A == 1){  //-- add blank record
     
@@ -606,12 +606,11 @@ function nuRefineTabList($t){
 
     for($i = 0 ; $i < count($t) ; $i++){
 		
-        $t[$i]->title = $t[$i]->syt_title;
-        unset($t[$i]->syt_zzzzsys_form_id, $t[$i]->syt_title, $t[$i]->syt_order, $t[$i]->zzzzsys_tab_id);
+		$a[]	= array(title => $t[$i]->syt_title);
         
     }
 
-    return $t;
+    return $a;
    
 }
 
@@ -626,6 +625,7 @@ function nuGetSQLValue($s){
     
         $t = nuRunQuery($s);
         $r = db_fetch_row($t);
+		
         return $r[0];
         
     }
