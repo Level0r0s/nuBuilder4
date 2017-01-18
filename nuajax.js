@@ -77,6 +77,7 @@ function nuForm(f, r, filter, n){
 	last.form_id 		= f;
 	last.record_id		= r;
 	last.filter 		= filter;
+	
     if(f != 'nuerror'){
         last.hash 			= parent.nuHashFromEditForm();
     } else {
@@ -94,7 +95,6 @@ function nuForm(f, r, filter, n){
 		}else{
 			
 			var last		= window.nuFORM.getCurrent();
-			
 			last.record_id	= fm.record_id;
 			last.FORM 		= fm.form;
 			

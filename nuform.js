@@ -1,5 +1,8 @@
 
 function nuBuildForm(f){
+	
+	var d = new Date();
+	console.log(d.getTime());
 
 	//nuCheckFormProperties(f);
 
@@ -68,6 +71,9 @@ function nuBuildForm(f){
     if(f.record_id == '-2'){
         nuCreateDragOptionsBox(f);
 	}
+	
+	var d = new Date();
+	console.log(d.getTime());
 	
 }
 
@@ -1601,7 +1607,7 @@ function nuBrowseTable(){
 					'left'		: l,
 					'height'	: h-7
 			});
-console.log(w);			
+
 			if(w < 8){
 				
 				$('#' + id)
