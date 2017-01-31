@@ -260,6 +260,7 @@ function nuGetLookupId(pk, id){
 			
 			$('#' + id).change();	
 			nuPopulateLookup(fm, id);
+			console.log('fm',fm)
 			
 		}
 		

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 19, 2017 at 12:56 AM
+-- Generation Time: Jan 31, 2017 at 03:59 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -134,7 +134,7 @@ CREATE TABLE `company` (
 --
 
 INSERT INTO `company` (`company_id`, `com_code`, `com_name`, `com_business_id`, `com_company_id`, `com_address`, `com_suburb`, `com_phone`, `com_map_coordinates`, `com_sex`, `com_color_id`, `com_age`, `com_notes`) VALUES
-('5678d262e048faa', '0007', '', '568a00c77f8f709', '', '5 Trent Grv', '2016-07-02', '', '11 44', 'f', '568ef920846a089#nuSep#568ef59c1bd769c#nuSep#568ef931d196b3e', 50, 'hello worldsssstfffxv'),
+('5678d262e048faa', '0007', 'sfdgb', '568a00e25b8d271', '', '5 Trent Grv', '2016-07-02', 'ghjm', '11 44', 'f', '568ef920846a089#nuSep#568ef59c1bd769c#nuSep#568ef931d196b3e', 50, 'hello worldsssstfffxv'),
 ('5729572e6331281', '', 'Mrs Compr66r36456', '568a00e25b8d271', '', '43 Allen St', '2016-07-01', '07-May-2016', '', '', '568ef59c1bd769c#nuSep#568ef931d196b3e', 0, '13132'),
 ('57295aa5660f48b', '', 'Mrs Comuh', '568a00d504d264c', '', '43 Allen Stkh', '2016-07-03', '18-Jun-2016', '', '', '568ef59c1bd769c', 35, '13132'),
 ('57295ed9e996db0', '', 'OPSM111', '568a00c77f8f709', '', 'yyyyy', '2016-07-06', '20-May-2016', '', '', '568ef58fe48207a', 35, 'oooo12hh'),
@@ -437,120 +437,6 @@ CREATE TABLE `zzzzsys_debug` (
   `deb_added` datetime NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `zzzzsys_debug`
---
-
-INSERT INTO `zzzzsys_debug` (`zzzzsys_debug_id`, `deb_message`, `deb_order`, `deb_added`) VALUES
-('587d5099d507664', '{"id":"nuform","type":"browseedit","table":"zzzzsys_form","primary_key":"zzzzsys_form_id","order":" ORDER BY sfo_code ","from":" FROM zzzzsys_form","javascript":"$(\\"[onkeydown^='';nuLister'']\\").addClass(''nuLister'');\\n\\n$(''#sfo_breadcrumb_title'').addClass(''sql'');\\n$(''#sfo_add_display_condition'').addClass(''sql'');\\n$(''#sfo_print_display_condition'').addClass(''sql'');\\n$(''#sfo_browse_sql'').addClass(''sql'');\\n$(''#sfo_save_display_condition'').addClass(''sql'');\\n$(''#sfo_clone_display_condition'').addClass(''sql'');\\n$(''#sfo_delete_display_condition'').addClass(''sql'');\\n$(''#sfo_new_display_condition'').addClass(''sql'');\\n$(''#sfo_before_browse_php'').addClass(''php'');\\n$(''#sfo_before_open_php'').addClass(''php'');\\n$(''#sfo_before_save_php'').addClass(''php'');\\n$(''#sfo_after_save_php'').addClass(''php'');\\n$(''#sfo_before_delete_php'').addClass(''php'');\\n$(''#sfo_after_delete_php'').addClass(''php'');\\n$(''#sfo_javascript'').addClass(''js'');\\n  \\n$(''.js'').dblclick(function() {\\n\\tnuOpenAce(''Javascript'', this.id);\\n});\\n\\n$(''.sql'').dblclick(function() {\\n\\tnuOpenAce(''SQL'', this.id);\\n});\\n\\n$(''.html'').dblclick(function() {\\n\\tnuOpenAce(''HTML'', this.id);\\n});\\n\\n$(''.php'').dblclick(function() {\\n\\tnuOpenAce(''PHP'', this.id);\\n});\\n\\n\\nif(window.filter == ''justjs''){\\n    \\n    $(''#nuTab0'').remove();\\n    $(''#nuDelete'').remove();\\n    $(''#nuClone'').remove();\\n    $(''#nuTab1'').remove();\\n    $(''#nuTab2'').remove();\\n    $(''#nuTab3'').remove();\\n    $(''#nuTab4'').click();\\n    $(''#nu_bc_0'').html($(''#sfo_description'').val());\\n    \\n}\\n\\n\\n\\nfunction nuFormColor(){\\n\\n    var h           =     $(''#sfo_type'').addClass(''nuEdited'');\\n    var o           = [];\\n    o[''browse'']\\t\\t= Array(1,4);\\n    o[''edit''] \\t\\t= Array(2,3,4);\\n    o[''browseedit''] = Array(1,2,3,4);\\n    o[''launch''] \\t= Array(3,4);\\n    o[''subform''] \\t= Array(3,11);\\n\\n    $(''#sfo_type'').removeClass();\\n    $(''#sfo_type'').addClass(''nu_''+$(''#sfo_type'').val());\\n    \\n    if(h){\\n        $(''#sfo_type'').addClass(''nuEdited'');\\n    }\\n    \\n    $(\\"#sfo_type > option\\").each(function() {\\n        $(this).addClass(''nu_''+this.value);\\n    });\\n\\n    for(var i = 0 ; i < 7 ; i++){\\n        $(''#nuTab'' + i).removeClass(''nuRelatedTab'');\\n    }\\n    \\n    var t   = o[$(''#sfo_type'').val()];\\n\\n    $(''#nuTab0'').addClass(''nuRelatedTab'');\\n\\n    if(t !== undefined){\\n        \\n    \\tfor(var i = 0 ; i < t.length ; i++){\\n    \\t\\t$(''#nuTab'' + t[i]).addClass(''nuRelatedTab'');\\t\\t\\n    \\t}\\n    \\t\\n    }\\n    \\n}\\n\\nnuFormColor();\\n\\nnuBuildSubformArray(''zzzzsys_tab_sf'');\\nnuBuildSubformArray(''zzzzsys_browse_sf'');\\n\\n$(\\"[data-nu-column=''nucolumn000'']\\").each(function() {\\n    $(this).addClass(''nu_''+this.textContent);\\n});\\n\\n\\n\\nfunction nuCopyToSort(t){\\n\\n    var o = $(''#'' + t.id);\\n    var p = o.attr(''data-nu-prefix'');\\n    var s = $(''#'' + p + ''sbr_sort'');\\n    \\n    if(s.val() == ''''){\\n        s.val( o.val())\\n        .change();\\n    }\\n\\n}\\n\\n\\n\\nfunction nuEventList(){\\n\\t\\n\\tif($(''sob_all_type'').val() == ''subform''){\\n\\t\\treturn [''onchange'',''onadd''];\\n\\t}else{\\n\\t\\treturn [''onblur'',''onchange'',''onfocus'',''onkeydown''];\\n\\t}\\n\\t\\n}\\n\\n\\n","row_height":25,"rows":25,"title":"OBJECT","form_id":"nuform","record_id":"nuobject","foreign_key_name":"syt_zzzzsys_form_id","buttons":[["Save","Save"],["Clone","Clone"],["Delete","Delete"]],"tabs":[{"title":"Main"},{"title":"Browse"},{"title":"Edit"},{"title":"Tabs"},{"title":"Javascript"}],"browse_columns":[],"browse_rows":null,"browse_height":null,"browse_sql":null,"pages":0,"objects":[{"type":"select","object_id":"57073c3a0b4ea44","id":"sfo_type","label":"Form Tab","top":"43","left":"150","width":"232","height":"18","valid":"1","format":"","tab":0,"value":"browseedit","multiple":"","options":[["browse","Browse"],["edit","Edit"],["browseedit","Browse and Edit"],["launch","Launch"],["subform","Subform Only"]],"display":1,"js":[{"event":"onchange","js":"nuFormColor();"}]},{"type":"input","object_id":"57074535d3d3ec8","id":"sfo_code","label":"Code","top":"73","left":"151","width":"100","height":"18","valid":"2","format":"","tab":0,"value":"OBJECT","align":"left","input":"","read":"0","display":1,"js":[]},{"type":"input","object_id":"5707456baf5bf41","id":"sfo_description","label":"Description","top":"103","left":"151","width":"232","height":"18","valid":"1","format":"","tab":0,"value":"Object","align":"left","input":"","read":"0","display":1,"js":[]},{"type":"input","object_id":"570746cc078074e","id":"sfo_table","label":"Table Name","top":"133","left":"151","width":"232","height":"18","valid":"0","format":"","tab":0,"value":"zzzzsys_object","align":"left","input":"","read":"0","display":1,"js":[{"event":"onkeydown","js":"nuFORM.scrollList(event, [[1,2,3],[11,22,33],[111,222,333]])"}]},{"type":"input","object_id":"570b00aa9ff6b8d","id":"sfo_primary_key","label":"Primary Key","top":"162","left":"151","width":"232","height":"18","valid":"0","format":"","tab":0,"value":"zzzzsys_object_id","align":"left","input":"","read":"0","display":1,"js":[{"event":"onkeydown","js":"nuFORM.scrollList(event, nuFORM.tableFields($(''#sfo_table'').val()))"}]},{"type":"textarea","object_id":"570b01cfd71142a","id":"sfo_breadcrumb_title","label":"Breadcrumb Title","top":"192","left":"151","width":"232","height":"18","valid":"0","format":"","tab":0,"value":"","display":1,"js":[]},{"type":"input","object_id":"581a4d665798263","id":"preiviewbtn","label":"Preview","top":"268","left":"151","width":"232","height":"25","valid":"0","format":"","tab":0,"value":"Preview","align":"center","input":"button","read":"0","display":1,"js":[{"event":"onclick","js":"nuPreview()"}]},{"type":"select","object_id":"570b03bd99faa56","id":"sfo_add_button","label":"Add","top":"37","left":"143","width":"50","height":"18","valid":"0","format":"","tab":1,"value":"1","multiple":"0","options":[["0","No"],["1","Yes"]],"display":1,"js":[]},{"type":"input","object_id":"570b0701d63eeb4","id":"sfo_add_title","label":" ","top":"37","left":"201","width":"200","height":"18","valid":"0","format":"","tab":1,"value":"","align":"left","input":"text","read":"0","display":1,"js":[]},{"type":"textarea","object_id":"570b152a3c72ab7","id":"sfo_add_display_condition","label":" ","top":"38","left":"409","width":"200","height":"18","valid":"0","format":"","tab":1,"value":"","display":1,"js":[]},{"type":"select","object_id":"570b0771c4014e2","id":"sfo_print_button","label":"Print","top":"71","left":"144","width":"50","height":"18","valid":"0","format":"","tab":1,"value":"0","multiple":"0","options":[["0","No"],["1","Yes"]],"display":1,"js":[]},{"type":"input","object_id":"570b072d4270428","id":"sfo_print_title","label":" ","top":"70","left":"202","width":"200","height":"18","valid":"0","format":"","tab":1,"value":"","align":"left","input":"text","read":"0","display":1,"js":[]},{"type":"textarea","object_id":"570b165f71f99da","id":"sfo_print_display_condition","label":" ","top":"71","left":"410","width":"200","height":"18","valid":"0","format":"","tab":1,"value":"","display":1,"js":[]},{"type":"word","object_id":"5816669c70e5ad5","id":"buttonswrd2","label":"Buttons","top":"12","left":"143","width":"50","height":"18","valid":"0","format":"","tab":1,"value":null,"word":"Buttons","align":"left","display":1,"js":[]},{"type":"word","object_id":"581666d5c06c0f8","id":"displayconditionwrd2","label":"Display Condition","top":"12","left":"409","width":"111","height":"18","valid":"0","format":"","tab":1,"value":null,"word":"Display Condition","align":"left","display":1,"js":[]},{"type":"word","object_id":"5816672a8a12ea9","id":"titlewrd2","label":"Title","top":"12","left":"202","width":"111","height":"18","valid":"0","format":"","tab":1,"value":null,"word":"Title","align":"left","display":1,"js":[]},{"type":"word","object_id":"5817aa72351e2d9","id":"proceduresswrd2","label":"<b>Procedure Run...<\\/b>","top":"112","left":"14","width":"120","height":"18","valid":"0","format":"","tab":1,"value":null,"word":"<b>Procedure Run...<\\/b>","align":"right","display":1,"js":[]},{"type":"input","object_id":"58117aed5513a01","id":"bb_event","label":"Before Browse","top":"108","left":"143","width":"150","height":"25","valid":"0","format":"","tab":1,"value":"Before Browse","align":"center","input":"button","read":"0","display":1,"js":[{"event":"onclick","js":"nuPopPHP(''BB'');"}]},{"type":"textarea","object_id":"570b1883bbeec99","id":"sfo_browse_sql","label":"SQL","top":"143","left":"143","width":"745","height":"100","valid":"0","format":"","tab":1,"value":"SELECT * FROM zzzzsys_object\\nJOIN zzzzsys_tab ON zzzzsys_tab_id = sob_all_zzzzsys_tab_id\\nJOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id\\n","display":1,"js":[]},{"type":"subform","object_id":"570b192e68d97ac","id":"zzzzsys_browse_sf","label":"Columns","top":"260","left":"143","width":"745","height":"150","valid":"0","format":"","tab":1,"value":null,"subform_fk":"nuobject","subform_type":"g","delete":"1","foreign_key_name":"sbr_zzzzsys_form_id","add":"1","dimensions":[850,41,228,220,53,250,25,745],"forms":[{"id":"nubrowse","type":"subform","table":"zzzzsys_browse","primary_key":"zzzzsys_browse_id","order":" ORDER BY sbr_order ","from":" FROM zzzzsys_browse","javascript":"","row_height":25,"rows":25,"title":"Form Browse Subform","form_id":"nubrowse","record_id":"570db5ea2aa8afe","buttons":[["Save Me","Save"],["Clone","Clone"],["Delete","Delete"]],"tabs":[{"title":"Browse"}],"browse_columns":[],"browse_rows":null,"browse_height":null,"browse_sql":null,"pages":0,"objects":[{"type":"input","object_id":"570b1a86d41a62c","id":"sbr_title","label":"Title","top":"10","left":"10","width":"150","height":"18","valid":"1","format":"","tab":0,"value":"Type","align":"left","input":"","read":"0","display":1,"js":[]},{"type":"input","object_id":"570b1abae987b02","id":"sbr_display","label":"Display","top":"10","left":"10","width":"150","height":"18","valid":"1","format":"","tab":0,"value":"sob_all_type","align":"left","input":"text","read":"0","display":1,"js":[{"event":"onblur","js":"nuCopyToSort(this);"},{"event":"onkeydown","js":"nuLister(event, nuFORM.SQLFields($(''#sfo_browse_sql'').val() + '' ''))"}]},{"type":"input","object_id":"570b1ad216682ef","id":"sbr_sort","label":"Sort","top":"10","left":"10","width":"150","height":"18","valid":"1","format":"","tab":0,"value":"sob_all_type","align":"left","input":"text","read":"0","display":1,"js":[{"event":"onkeydown","js":"nuLister(event, nuFORM.SQLFields($(''#sfo_browse_sql'').val() + '' ''))"}]},{"type":"select","object_id":"570b2330ea5f52a","id":"sbr_align","label":"Align","top":"10","left":"10","width":"60","height":"18","valid":"1","format":"","tab":0,"value":"l","multiple":"0","options":[["l","Left"],["r","Right"],["c","Center"]],"display":1,"js":[]},{"type":"select","object_id":"570b23a2439a04c","id":"sbr_format","label":"Format","top":"10","left":"10","width":"80","height":"18","valid":"0","format":"","tab":0,"value":null,"multiple":"0","options":[["date","Date"],["number","Number"]],"display":1,"js":[]},{"type":"input","object_id":"570b242a368005e","id":"sbr_width","label":"Width","top":"10","left":"10","width":"50","height":"18","valid":"1","format":"","tab":0,"value":"70","align":"right","input":"text","read":"0","display":1,"js":[]},{"type":"input","object_id":"570b24bfbf54a99","id":"sbr_order","label":"Order","top":"10","left":"10","width":"50","height":"18","valid":"1","format":"","tab":0,"value":"10","align":"right","input":"text","read":"0","display":1,"js":[]}],"foreign_key":"nuobject","foreign_key_name":"sbr_zzzzsys_form_id"},{"id":"nubrowse","type":"subform","table":"zzzzsys_browse","primary_key":"zzzzsys_browse_id","order":" ORDER BY sbr_order ","from":" FROM zzzzsys_browse","javascript":"","row_height":25,"rows":25,"title":"Form Browse Subform","form_id":"nubrowse","record_id":"570c8e1adb04ffc","buttons":[["Save Me","Save"],["Clone","Clone"],["Delete","Delete"]],"tabs":[{"title":"Browse"}],"browse_columns":[],"browse_rows":null,"browse_height":null,"browse_sql":null,"pages":0,"objects":[{"object_id":"570b1a86d41a62c","valid":"1","format":"","tab":0,"value":"Form","input":"","read":"0","display":1,"js":[]},{"object_id":"570b1abae987b02","valid":"1","format":"","tab":0,"value":"sfo_description","input":"text","read":"0","display":1,"js":[{"event":"onblur","js":"nuCopyToSort(this);"},{"event":"onkeydown","js":"nuLister(event, nuFORM.SQLFields($(''#sfo_browse_sql'').val() + '' ''))"}]},{"object_id":"570b1ad216682ef","valid":"1","format":"","tab":0,"value":"sfo_description","input":"text","read":"0","display":1,"js":[{"event":"onkeydown","js":"nuLister(event, nuFORM.SQLFields($(''#sfo_browse_sql'').val() + '' ''))"}]},{"object_id":"570b2330ea5f52a","valid":"1","format":"","tab":0,"value":"l","multiple":"0","options":[["l","Left"],["r","Right"],["c","Center"]],"display":1,"js":[]},{"object_id":"570b23a2439a04c","valid":"0","format":"","tab":0,"value":null,"multiple":"0","options":[["date","Date"],["number","Number"]],"display":1,"js":[]},{"object_id":"570b242a368005e","valid":"1","format":"","tab":0,"value":"200","input":"text","read":"0","display":1,"js":[]},{"object_id":"570b24bfbf54a99","valid":"1","format":"","tab":0,"value":"20","input":"text","read":"0","display":1,"js":[]}],"foreign_key":"nuobject","foreign_key_name":"sbr_zzzzsys_form_id"},{"id":"nubrowse","type":"subform","table":"zzzzsys_browse","primary_key":"zzzzsys_browse_id","order":" ORDER BY sbr_order ","from":" FROM zzzzsys_browse","javascript":"","row_height":25,"rows":25,"title":"Form Browse Subform","form_id":"nubrowse","record_id":"570c8e1adeae32a","buttons":[["Save Me","Save"],["Clone","Clone"],["Delete","Delete"]],"tabs":[{"title":"Browse"}],"browse_columns":[],"browse_rows":null,"browse_height":null,"browse_sql":null,"pages":0,"objects":[{"object_id":"570b1a86d41a62c","valid":"1","format":"","tab":0,"value":"Tab","input":"","read":"0","display":1,"js":[]},{"object_id":"570b1abae987b02","valid":"1","format":"","tab":0,"value":"syt_title","input":"text","read":"0","display":1,"js":[{"event":"onblur","js":"nuCopyToSort(this);"},{"event":"onkeydown","js":"nuLister(event, nuFORM.SQLFields($(''#sfo_browse_sql'').val() + '' ''))"}]},{"object_id":"570b1ad216682ef","valid":"1","format":"","tab":0,"value":"syt_title","input":"text","read":"0","display":1,"js":[{"event":"onkeydown","js":"nuLister(event, nuFORM.SQLFields($(''#sfo_browse_sql'').val() + '' ''))"}]},{"object_id":"570b2330ea5f52a","valid":"1","format":"","tab":0,"value":"l","multiple":"0","options":[["l","Left"],["r","Right"],["c","Center"]],"display":1,"js":[]},{"object_id":"570b23a2439a04c","valid":"0","format":"","tab":0,"value":null,"multiple":"0","options":[["date","Date"],["number","Number"]],"display":1,"js":[]},{"object_id":"570b242a368005e","valid":"1","format":"","tab":0,"value":"100","input":"text","read":"0","display":1,"js":[]},{"object_id":"570b24bfbf54a99","valid":"1","format":"","tab":0,"value":"30","input":"text","read":"0","display":1,"js":[]}],"foreign_key":"nuobject","foreign_key_name":"sbr_zzzzsys_form_id"},{"id":"nubrowse","type":"subform","table":"zzzzsys_browse","primary_key":"zzzzsys_browse_id","order":" ORDER BY sbr_order ","from":" FROM zzzzsys_browse","javascript":"","row_height":25,"rows":25,"title":"Form Browse Subform","form_id":"nubrowse","record_id":"5710406a290c874","buttons":[["Save Me","Save"],["Clone","Clone"],["Delete","Delete"]],"tabs":[{"title":"Browse"}],"browse_columns":[],"browse_rows":null,"browse_height":null,"browse_sql":null,"pages":0,"objects":[{"object_id":"570b1a86d41a62c","valid":"1","format":"","tab":0,"value":"Label","input":"","read":"0","display":1,"js":[]},{"object_id":"570b1abae987b02","valid":"1","format":"","tab":0,"value":"sob_all_label","input":"text","read":"0","display":1,"js":[{"event":"onblur","js":"nuCopyToSort(this);"},{"event":"onkeydown","js":"nuLister(event, nuFORM.SQLFields($(''#sfo_browse_sql'').val() + '' ''))"}]},{"object_id":"570b1ad216682ef","valid":"1","format":"","tab":0,"value":"sob_all_label","input":"text","read":"0","display":1,"js":[{"event":"onkeydown","js":"nuLister(event, nuFORM.SQLFields($(''#sfo_browse_sql'').val() + '' ''))"}]},{"object_id":"570b2330ea5f52a","valid":"1","format":"","tab":0,"value":null,"multiple":"0","options":[["l","Left"],["r","Right"],["c","Center"]],"display":1,"js":[]},{"object_id":"570b23a2439a04c","valid":"0","format":"","tab":0,"value":null,"multiple":"0","options":[["date","Date"],["number","Number"]],"display":1,"js":[]},{"object_id":"570b242a368005e","valid":"1","format":"","tab":0,"value":"150","input":"text","read":"0","display":1,"js":[]},{"object_id":"570b24bfbf54a99","valid":"1","format":"","tab":0,"value":"40","input":"text","read":"0","display":1,"js":[]}],"foreign_key":"nuobject","foreign_key_name":"sbr_zzzzsys_form_id"},{"id":"nubrowse","type":"subform","table":"zzzzsys_browse","primary_key":"zzzzsys_browse_id","order":" ORDER BY sbr_order ","from":" FROM zzzzsys_browse","javascript":"","row_height":25,"rows":25,"title":"Form Browse Subform","form_id":"nubrowse","record_id":"578835e91a3f8fa","buttons":[["Save Me","Save"],["Clone","Clone"],["Delete","Delete"]],"tabs":[{"title":"Browse"}],"browse_columns":[],"browse_rows":null,"browse_height":null,"browse_sql":null,"pages":0,"objects":[{"object_id":"570b1a86d41a62c","valid":"1","format":"","tab":0,"value":"i","input":"","read":"0","display":1,"js":[]},{"object_id":"570b1abae987b02","valid":"1","format":"","tab":0,"value":"zzzzsys_form_id","input":"text","read":"0","display":1,"js":[{"event":"onblur","js":"nuCopyToSort(this);"},{"event":"onkeydown","js":"nuLister(event, nuFORM.SQLFields($(''#sfo_browse_sql'').val() + '' ''))"}]},{"object_id":"570b1ad216682ef","valid":"1","format":"","tab":0,"value":"zzzzsys_form_id","input":"text","read":"0","display":1,"js":[{"event":"onkeydown","js":"nuLister(event, nuFORM.SQLFields($(''#sfo_browse_sql'').val() + '' ''))"}]},{"object_id":"570b2330ea5f52a","valid":"1","format":"","tab":0,"value":null,"multiple":"0","options":[["l","Left"],["r","Right"],["c","Center"]],"display":1,"js":[]},{"object_id":"570b23a2439a04c","valid":"0","format":"","tab":0,"value":null,"multiple":"0","options":[["date","Date"],["number","Number"]],"display":1,"js":[]},{"object_id":"570b242a368005e","valid":"1","format":"","tab":0,"value":"1","input":"text","read":"0","display":1,"js":[]},{"object_id":"570b24bfbf54a99","valid":"1","format":"","tab":0,"value":"50","input":"text","read":"0","display":1,"js":[]}],"foreign_key":"nuobject","foreign_key_name":"sbr_zzzzsys_form_id"},{"id":"nubrowse","type":"subform","table":"zzzzsys_browse","primary_key":"zzzzsys_browse_id","order":" ORDER BY sbr_order ","from":" FROM zzzzsys_browse","javascript":"","row_height":25,"rows":25,"title":"Form Browse Subform","form_id":"nubrowse","record_id":"570c8e1ae1b33cb","buttons":[["Save Me","Save"],["Clone","Clone"],["Delete","Delete"]],"tabs":[{"title":"Browse"}],"browse_columns":[],"browse_rows":null,"browse_height":null,"browse_sql":null,"pages":0,"objects":[{"object_id":"570b1a86d41a62c","valid":"1","format":"","tab":0,"value":"Object","input":"","read":"0","display":1,"js":[]},{"object_id":"570b1abae987b02","valid":"1","format":"","tab":0,"value":"sob_all_id","input":"text","read":"0","display":1,"js":[{"event":"onblur","js":"nuCopyToSort(this);"},{"event":"onkeydown","js":"nuLister(event, nuFORM.SQLFields($(''#sfo_browse_sql'').val() + '' ''))"}]},{"object_id":"570b1ad216682ef","valid":"1","format":"","tab":0,"value":"sob_all_id","input":"text","read":"0","display":1,"js":[{"event":"onkeydown","js":"nuLister(event, nuFORM.SQLFields($(''#sfo_browse_sql'').val() + '' ''))"}]},{"object_id":"570b2330ea5f52a","valid":"1","format":"","tab":0,"value":"l","multiple":"0","options":[["l","Left"],["r","Right"],["c","Center"]],"display":1,"js":[]},{"object_id":"570b23a2439a04c","valid":"0","format":"","tab":0,"value":null,"multiple":"0","options":[["date","Date"],["number","Number"]],"display":1,"js":[]},{"object_id":"570b242a368005e","valid":"1","format":"","tab":0,"value":"250","input":"text","read":"0","display":1,"js":[]},{"object_id":"570b24bfbf54a99","valid":"1","format":"","tab":0,"value":"60","input":"text","read":"0","display":1,"js":[]}],"foreign_key":"nuobject","foreign_key_name":"sbr_zzzzsys_form_id"},{"id":"nubrowse","type":"subform","table":"zzzzsys_browse","primary_key":"zzzzsys_browse_id","order":" ORDER BY sbr_order ","from":" FROM zzzzsys_browse","javascript":"","row_height":25,"rows":25,"title":"Form Browse Subform","form_id":"nubrowse","record_id":-1,"buttons":[["Save Me","Save"],["Clone","Clone"],["Delete","Delete"]],"tabs":[{"title":"Browse"}],"browse_columns":[],"browse_rows":null,"browse_height":null,"browse_sql":null,"pages":0,"objects":[{"object_id":"570b1a86d41a62c","valid":"1","format":"","tab":0,"value":"","input":"","read":"0","display":1,"js":[]},{"object_id":"570b1abae987b02","valid":"1","format":"","tab":0,"value":"","input":"text","read":"0","display":1,"js":[{"event":"onblur","js":"nuCopyToSort(this);"},{"event":"onkeydown","js":"nuLister(event, nuFORM.SQLFields($(''#sfo_browse_sql'').val() + '' ''))"}]},{"object_id":"570b1ad216682ef","valid":"1","format":"","tab":0,"value":"","input":"text","read":"0","display":1,"js":[{"event":"onkeydown","js":"nuLister(event, nuFORM.SQLFields($(''#sfo_browse_sql'').val() + '' ''))"}]},{"object_id":"570b2330ea5f52a","valid":"1","format":"","tab":0,"value":"l","multiple":"0","options":[["l","Left"],["r","Right"],["c","Center"]],"display":1,"js":[]},{"object_id":"570b23a2439a04c","valid":"0","format":"","tab":0,"value":"","multiple":"0","options":[["date","Date"],["number","Number"]],"display":1,"js":[]},{"object_id":"570b242a368005e","valid":"1","format":"","tab":0,"value":"","input":"text","read":"0","display":1,"js":[]},{"object_id":"570b24bfbf54a99","valid":"1","format":"","tab":0,"value":"","input":"text","read":"0","display":1,"js":[]}],"foreign_key":"nuobject","foreign_key_name":"sbr_zzzzsys_form_id"}],"sf_form_id":"nubrowse","browse_columns":[],"display":1,"js":[]},{"type":"input","object_id":"570b026adaa8641","id":"sfo_row_height","label":"Row Height","top":"428","left":"143","width":"50","height":"18","valid":"0","format":"","tab":1,"value":"","align":"right","input":"","read":"0","display":1,"js":[]},{"type":"input","object_id":"570b02f9b8e2424","id":"sfo_rows_per_page","label":"Rows Per Page","top":"458","left":"143","width":"50","height":"18","valid":"0","format":"","tab":1,"value":"","align":"right","input":"","read":"0","display":1,"js":[]},{"type":"lookup","object_id":"570b067c2f7cdf5","id":"sfo_redirect_form_id","label":"Open Different<br>Edit Form","top":"490","left":"143","width":"100","height":"18","valid":"0","format":"","tab":1,"value":"","description_width":"230","form_id":"nuform","values":[["sfo_redirect_form_id",""],["sfo_redirect_form_idcode",""],["sfo_redirect_form_iddescription",""]],"display":1,"js":[]},{"type":"input","object_id":"570b427781e5e78","id":"sfo_save_title","label":" ","top":"65","left":"157","width":"200","height":"18","valid":"0","format":"","tab":2,"value":"","align":"left","input":"text","read":"0","display":1,"js":[]},{"type":"select","object_id":"570b429d2588a7a","id":"sfo_save_button","label":"Save","top":"65","left":"99","width":"50","height":"18","valid":"0","format":"","tab":2,"value":"1","multiple":"0","options":[["0","No"],["1","Yes"]],"display":1,"js":[]},{"type":"select","object_id":"570b4310d967879","id":"sfo_clone_button","label":"Clone","top":"135","left":"99","width":"50","height":"18","valid":"0","format":"","tab":2,"value":"1","multiple":"0","options":[["0","No"],["1","Yes"]],"display":1,"js":[]},{"type":"input","object_id":"570b4353e4d8681","id":"sfo_clone_title","label":" ","top":"135","left":"157","width":"200","height":"18","valid":"0","format":"","tab":2,"value":"","align":"left","input":"text","read":"0","display":1,"js":[]},{"type":"textarea","object_id":"570b44921b219e7","id":"sfo_delete_display_condition","label":" ","top":"101","left":"364","width":"200","height":"18","valid":"0","format":"","tab":2,"value":"","display":1,"js":[]},{"type":"textarea","object_id":"570b44e872eb861","id":"sfo_clone_display_condition","label":" ","top":"136","left":"364","width":"200","height":"18","valid":"0","format":"","tab":2,"value":"","display":1,"js":[]},{"type":"input","object_id":"570b4611eff6854","id":"sfo_delete_title","label":" ","top":"100","left":"157","width":"200","height":"18","valid":"0","format":"","tab":2,"value":"","align":"left","input":"text","read":"0","display":1,"js":[]},{"type":"select","object_id":"570b46616bf1679","id":"sfo_delete_button","label":"Delete","top":"100","left":"99","width":"50","height":"18","valid":"0","format":"","tab":2,"value":"1","multiple":"0","options":[["0","No"],["1","Yes"]],"display":1,"js":[]},{"type":"textarea","object_id":"570b47026e770be","id":"sfo_save_display_condition","label":" ","top":"66","left":"364","width":"200","height":"18","valid":"0","format":"","tab":2,"value":"","display":1,"js":[]},{"type":"select","object_id":"570b4758d50f01c","id":"sfo_new_button","label":"New","top":"170","left":"99","width":"50","height":"18","valid":"0","format":"","tab":2,"value":"","multiple":"0","options":[["0","No"],["1","Yes"]],"display":1,"js":[]},{"type":"word","object_id":"58165f54bd8bdc7","id":"titlewrd","label":"Title","top":"39","left":"157","width":"50","height":"18","valid":"0","format":"","tab":2,"value":null,"word":"Title","align":"left","display":1,"js":[]},{"type":"word","object_id":"58165fa5e18bf61","id":"displayconditionwrd","label":"Display Condition","top":"39","left":"364","width":"150","height":"18","valid":"0","format":"","tab":2,"value":null,"word":"Display Condition","align":"left","display":1,"js":[]},{"type":"word","object_id":"58165fbc36e019b","id":"buttonswrd","label":"Buttons","top":"39","left":"99","width":"50","height":"18","valid":"0","format":"","tab":2,"value":null,"word":"Buttons","align":"left","display":1,"js":[]},{"type":"word","object_id":"5817a9b3eaec59e","id":"proceduresswrd","label":"<b>Procedures Run...<\\/b>","top":"236","left":"99","width":"200","height":"18","valid":"0","format":"","tab":2,"value":null,"word":"<b>Procedures Run...<\\/b>","align":"left","display":1,"js":[]},{"type":"input","object_id":"570b48672a9beec","id":"sfo_new_title","label":" ","top":"170","left":"157","width":"200","height":"18","valid":"0","format":"","tab":2,"value":"","align":"left","input":"text","read":"0","display":1,"js":[]},{"type":"textarea","object_id":"570b48871430984","id":"sfo_new_display_condition","label":" ","top":"170","left":"364","width":"200","height":"18","valid":"0","format":"","tab":2,"value":"","display":1,"js":[]},{"type":"input","object_id":"5811633909eeadd","id":"bo_event","label":"Before Open","top":"262","left":"98","width":"129","height":"25","valid":"0","format":"","tab":2,"value":"Before Open","align":"center","input":"button","read":"0","display":1,"js":[{"event":"onclick","js":"nuPopPHP(''BO'');"}]},{"type":"input","object_id":"58116941a1a1f06","id":"bs_event","label":"Before Save","top":"262","left":"266","width":"129","height":"25","valid":"0","format":"","tab":2,"value":"Before Save","align":"center","input":"button","read":"0","display":1,"js":[{"event":"onclick","js":"nuPopPHP(''BS'');"}]},{"type":"input","object_id":"58116968afd5b6a","id":"as_event","label":"After Save","top":"308","left":"266","width":"129","height":"25","valid":"0","format":"","tab":2,"value":"After Save","align":"center","input":"button","read":"0","display":1,"js":[{"event":"onclick","js":"nuPopPHP(''AS'');"}]},{"type":"input","object_id":"581169ba2112f38","id":"bd_event","label":"Before Delete","top":"262","left":"434","width":"129","height":"25","valid":"0","format":"","tab":2,"value":"Before Delete","align":"center","input":"button","read":"0","display":1,"js":[{"event":"onclick","js":"nuPopPHP(''BD'');"}]},{"type":"input","object_id":"581169d91b9d203","id":"ad_event","label":"After Delete","top":"308","left":"434","width":"129","height":"25","valid":"0","format":"","tab":2,"value":"After Delete","align":"center","input":"button","read":"0","display":1,"js":[{"event":"onclick","js":"nuPopPHP(''AD'');"}]},{"type":"subform","object_id":"570b3915874d635","id":"zzzzsys_tab_sf","label":"Tabs","top":"58","left":"85","width":"255","height":"200","valid":"0","format":"","tab":3,"value":null,"subform_fk":"nuobject","subform_type":"g","delete":"1","foreign_key_name":"syt_zzzzsys_form_id","add":"1","dimensions":[850,640,258,310,83,340,25,255],"forms":[{"id":"nutab","type":"browseedit","table":"zzzzsys_tab","primary_key":"zzzzsys_tab_id","order":" ORDER BY syt_order","from":" FROM zzzzsys_tab JOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id","javascript":"\\n$(\\"[data-nu-column=''nucolumn000'']\\").each(function() {\\n    $(this).addClass(''nu_''+this.innerHTML);\\n});\\n","row_height":25,"rows":25,"title":"Form Tab","form_id":"nutab","record_id":"570d90df5ce8e1a","buttons":[],"tabs":[{"title":"Tabs"}],"browse_columns":[],"browse_rows":null,"browse_height":null,"browse_sql":null,"pages":0,"objects":[{"type":"input","object_id":"570b39cc123601d","id":"syt_title","label":"Title","top":"10","left":"100","width":"150","height":"18","valid":"1","format":"","tab":0,"value":"All","align":"left","input":"","read":"0","display":1,"js":[]},{"type":"input","object_id":"570b39f046ded37","id":"syt_order","label":"Order","top":"40","left":"100","width":"50","height":"18","valid":"1","format":"","tab":0,"value":"10","align":"right","input":"","read":"0","display":1,"js":[]}],"foreign_key":"nuobject","foreign_key_name":"syt_zzzzsys_form_id"},{"id":"nutab","type":"browseedit","table":"zzzzsys_tab","primary_key":"zzzzsys_tab_id","order":" ORDER BY syt_order","from":" FROM zzzzsys_tab JOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id","javascript":"\\n$(\\"[data-nu-column=''nucolumn000'']\\").each(function() {\\n    $(this).addClass(''nu_''+this.innerHTML);\\n});\\n","row_height":25,"rows":25,"title":"Form Tab","form_id":"nutab","record_id":"570d90df60880c2","buttons":[],"tabs":[{"title":"Tabs"}],"browse_columns":[],"browse_rows":null,"browse_height":null,"browse_sql":null,"pages":0,"objects":[{"object_id":"570b39cc123601d","valid":"1","format":"","tab":0,"value":"Run","input":"","read":"0","display":1,"js":[]},{"object_id":"570b39f046ded37","valid":"1","format":"","tab":0,"value":"20","input":"","read":"0","display":1,"js":[]}],"foreign_key":"nuobject","foreign_key_name":"syt_zzzzsys_form_id"},{"id":"nutab","type":"browseedit","table":"zzzzsys_tab","primary_key":"zzzzsys_tab_id","order":" ORDER BY syt_order","from":" FROM zzzzsys_tab JOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id","javascript":"\\n$(\\"[data-nu-column=''nucolumn000'']\\").each(function() {\\n    $(this).addClass(''nu_''+this.innerHTML);\\n});\\n","row_height":25,"rows":25,"title":"Form Tab","form_id":"nutab","record_id":"570d90df63e6972","buttons":[],"tabs":[{"title":"Tabs"}],"browse_columns":[],"browse_rows":null,"browse_height":null,"browse_sql":null,"pages":0,"objects":[{"object_id":"570b39cc123601d","valid":"1","format":"","tab":0,"value":"Display","input":"","read":"0","display":1,"js":[]},{"object_id":"570b39f046ded37","valid":"1","format":"","tab":0,"value":"30","input":"","read":"0","display":1,"js":[]}],"foreign_key":"nuobject","foreign_key_name":"syt_zzzzsys_form_id"},{"id":"nutab","type":"browseedit","table":"zzzzsys_tab","primary_key":"zzzzsys_tab_id","order":" ORDER BY syt_order","from":" FROM zzzzsys_tab JOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id","javascript":"\\n$(\\"[data-nu-column=''nucolumn000'']\\").each(function() {\\n    $(this).addClass(''nu_''+this.innerHTML);\\n});\\n","row_height":25,"rows":25,"title":"Form Tab","form_id":"nutab","record_id":"570d90df670db61","buttons":[],"tabs":[{"title":"Tabs"}],"browse_columns":[],"browse_rows":null,"browse_height":null,"browse_sql":null,"pages":0,"objects":[{"object_id":"570b39cc123601d","valid":"1","format":"","tab":0,"value":"Select","input":"","read":"0","display":1,"js":[]},{"object_id":"570b39f046ded37","valid":"1","format":"","tab":0,"value":"40","input":"","read":"0","display":1,"js":[]}],"foreign_key":"nuobject","foreign_key_name":"syt_zzzzsys_form_id"},{"id":"nutab","type":"browseedit","table":"zzzzsys_tab","primary_key":"zzzzsys_tab_id","order":" ORDER BY syt_order","from":" FROM zzzzsys_tab JOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id","javascript":"\\n$(\\"[data-nu-column=''nucolumn000'']\\").each(function() {\\n    $(this).addClass(''nu_''+this.innerHTML);\\n});\\n","row_height":25,"rows":25,"title":"Form Tab","form_id":"nutab","record_id":"570d90df6a2c12a","buttons":[],"tabs":[{"title":"Tabs"}],"browse_columns":[],"browse_rows":null,"browse_height":null,"browse_sql":null,"pages":0,"objects":[{"object_id":"570b39cc123601d","valid":"1","format":"","tab":0,"value":"Lookup","input":"","read":"0","display":1,"js":[]},{"object_id":"570b39f046ded37","valid":"1","format":"","tab":0,"value":"50","input":"","read":"0","display":1,"js":[]}],"foreign_key":"nuobject","foreign_key_name":"syt_zzzzsys_form_id"},{"id":"nutab","type":"browseedit","table":"zzzzsys_tab","primary_key":"zzzzsys_tab_id","order":" ORDER BY syt_order","from":" FROM zzzzsys_tab JOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id","javascript":"\\n$(\\"[data-nu-column=''nucolumn000'']\\").each(function() {\\n    $(this).addClass(''nu_''+this.innerHTML);\\n});\\n","row_height":25,"rows":25,"title":"Form Tab","form_id":"nutab","record_id":"570d90df6d35fde","buttons":[],"tabs":[{"title":"Tabs"}],"browse_columns":[],"browse_rows":null,"browse_height":null,"browse_sql":null,"pages":0,"objects":[{"object_id":"570b39cc123601d","valid":"1","format":"","tab":0,"value":"Subform","input":"","read":"0","display":1,"js":[]},{"object_id":"570b39f046ded37","valid":"1","format":"","tab":0,"value":"60","input":"","read":"0","display":1,"js":[]}],"foreign_key":"nuobject","foreign_key_name":"syt_zzzzsys_form_id"},{"id":"nutab","type":"browseedit","table":"zzzzsys_tab","primary_key":"zzzzsys_tab_id","order":" ORDER BY syt_order","from":" FROM zzzzsys_tab JOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id","javascript":"\\n$(\\"[data-nu-column=''nucolumn000'']\\").each(function() {\\n    $(this).addClass(''nu_''+this.innerHTML);\\n});\\n","row_height":25,"rows":25,"title":"Form Tab","form_id":"nutab","record_id":"570d90df707867b","buttons":[],"tabs":[{"title":"Tabs"}],"browse_columns":[],"browse_rows":null,"browse_height":null,"browse_sql":null,"pages":0,"objects":[{"object_id":"570b39cc123601d","valid":"1","format":"","tab":0,"value":"Input","input":"","read":"0","display":1,"js":[]},{"object_id":"570b39f046ded37","valid":"1","format":"","tab":0,"value":"70","input":"","read":"0","display":1,"js":[]}],"foreign_key":"nuobject","foreign_key_name":"syt_zzzzsys_form_id"},{"id":"nutab","type":"browseedit","table":"zzzzsys_tab","primary_key":"zzzzsys_tab_id","order":" ORDER BY syt_order","from":" FROM zzzzsys_tab JOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id","javascript":"\\n$(\\"[data-nu-column=''nucolumn000'']\\").each(function() {\\n    $(this).addClass(''nu_''+this.innerHTML);\\n});\\n","row_height":25,"rows":25,"title":"Form Tab","form_id":"nutab","record_id":"570d90df73d3a2a","buttons":[],"tabs":[{"title":"Tabs"}],"browse_columns":[],"browse_rows":null,"browse_height":null,"browse_sql":null,"pages":0,"objects":[{"object_id":"570b39cc123601d","valid":"1","format":"","tab":0,"value":"HTML","input":"","read":"0","display":1,"js":[]},{"object_id":"570b39f046ded37","valid":"1","format":"","tab":0,"value":"80","input":"","read":"0","display":1,"js":[]}],"foreign_key":"nuobject","foreign_key_name":"syt_zzzzsys_form_id"},{"id":"nutab","type":"browseedit","table":"zzzzsys_tab","primary_key":"zzzzsys_tab_id","order":" ORDER BY syt_order","from":" FROM zzzzsys_tab JOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id","javascript":"\\n$(\\"[data-nu-column=''nucolumn000'']\\").each(function() {\\n    $(this).addClass(''nu_''+this.innerHTML);\\n});\\n","row_height":25,"rows":25,"title":"Form Tab","form_id":"nutab","record_id":"5851cf915a1c653","buttons":[],"tabs":[{"title":"Tabs"}],"browse_columns":[],"browse_rows":null,"browse_height":null,"browse_sql":null,"pages":0,"objects":[{"object_id":"570b39cc123601d","valid":"1","format":"","tab":0,"value":"Calc","input":"","read":"0","display":1,"js":[]},{"object_id":"570b39f046ded37","valid":"1","format":"","tab":0,"value":"90","input":"","read":"0","display":1,"js":[]}],"foreign_key":"nuobject","foreign_key_name":"syt_zzzzsys_form_id"},{"id":"nutab","type":"browseedit","table":"zzzzsys_tab","primary_key":"zzzzsys_tab_id","order":" ORDER BY syt_order","from":" FROM zzzzsys_tab JOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id","javascript":"\\n$(\\"[data-nu-column=''nucolumn000'']\\").each(function() {\\n    $(this).addClass(''nu_''+this.innerHTML);\\n});\\n","row_height":25,"rows":25,"title":"Form Tab","form_id":"nutab","record_id":"57e9abf690319a4","buttons":[],"tabs":[{"title":"Tabs"}],"browse_columns":[],"browse_rows":null,"browse_height":null,"browse_sql":null,"pages":0,"objects":[{"object_id":"570b39cc123601d","valid":"1","format":"","tab":0,"value":"Fast Form","input":"","read":"0","display":1,"js":[]},{"object_id":"570b39f046ded37","valid":"1","format":"","tab":0,"value":"100","input":"","read":"0","display":1,"js":[]}],"foreign_key":"nuobject","foreign_key_name":"syt_zzzzsys_form_id"},{"id":"nutab","type":"browseedit","table":"zzzzsys_tab","primary_key":"zzzzsys_tab_id","order":" ORDER BY syt_order","from":" FROM zzzzsys_tab JOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id","javascript":"\\n$(\\"[data-nu-column=''nucolumn000'']\\").each(function() {\\n    $(this).addClass(''nu_''+this.innerHTML);\\n});\\n","row_height":25,"rows":25,"title":"Form Tab","form_id":"nutab","record_id":-1,"buttons":[],"tabs":[{"title":"Tabs"}],"browse_columns":[],"browse_rows":null,"browse_height":null,"browse_sql":null,"pages":0,"objects":[{"object_id":"570b39cc123601d","valid":"1","format":"","tab":0,"value":"","input":"","read":"0","display":1,"js":[]},{"object_id":"570b39f046ded37","valid":"1","format":"","tab":0,"value":"","input":"","read":"0","display":1,"js":[]}],"foreign_key":"nuobject","foreign_key_name":"syt_zzzzsys_form_id"}],"sf_form_id":"nutab","browse_columns":[],"display":1,"js":[]},{"type":"textarea","object_id":"570c3e6e67c39cb","id":"sfo_javascript","label":"Javascript","top":"23","left":"69","width":"857","height":"500","valid":"0","format":"","tab":4,"value":"\\n$(''#sob_calc_formula'').addClass(''nuCalculator'');\\n$(''#sob_all_display_condition'').addClass(''sql'');\\n$(''#sob_all_default_value_sql'').addClass(''sql'');\\n$(''#sob_display_sql'').addClass(''sql'');\\n$(''#sob_select_sql'').addClass(''sql'');\\n$(''#sob_lookup_php'').addClass(''php'');\\n$(''#sob_lookup_javascript'').addClass(''js'');\\n$(''#sob_html_code'').addClass(''html'');\\n  \\n$(''.js'').dblclick(function() {\\n\\tnuOpenAce(''Javascript'', this.id);\\n});\\n\\n\\n$(''.js'').dblclick(function() {\\n\\tnuOpenAce(''Javascript'', this.id);\\n});\\n\\n$(''.sql'').dblclick(function() {\\n\\tnuOpenAce(''SQL'', this.id);\\n});\\n\\n$(''.html'').dblclick(function() {\\n\\tnuOpenAce(''HTML'', this.id);\\n});\\n\\n$(''.php'').dblclick(function() {\\n\\tnuOpenAce(''PHP'', this.id);\\n});\\n\\nnuObjectColor();\\n\\n$(\\"[data-nu-column=''nucolumn000'']\\").each(function() {\\n    $(this).addClass(''nu_''+this.textContent);\\n});\\n\\nif(window.filter == ''justjs''){\\n\\/*    \\n    $(''#nuTab0'').remove();\\n    $(''#nuTab1'').remove();\\n    $(''#nuTab2'').remove();\\n    $(''#nuTab3'').remove();\\n    $(''#nuTab4'').remove();\\n    $(''#nuTab5'').remove();\\n    $(''#nuTab6'').click();\\n    $(''#nu_bc_0'').html($(''#sfo_description'').val());\\n*\\/\\n}\\n\\n\\nfunction nuObjectColor(){\\n\\n    $(''.nuValidate'').removeClass(''nuValidate'');\\n\\n\\tvar o\\t\\t\\t= [];\\n\\to[''run'']\\t\\t= 1;\\n\\to[''display'']\\t= 2;\\n\\to[''select'']\\t\\t= 3;\\n\\to[''lookup'']\\t\\t= 4;\\n\\to[''subform'']\\t= 5;\\n\\to[''input'']\\t\\t= 6;\\n\\to[''html'']\\t\\t= 7;\\n\\to[''calc'']\\t\\t= 8;\\n\\n    $(''#sob_all_type'').addClass(''nu_''+$(''#sob_all_type'').val());\\n    \\n    $(\\"#sob_all_type > option\\").each(function() {\\n        $(this).addClass(''nu_''+this.value);\\n    });\\n\\t\\n    var t   = o[$(''#sob_all_type'').val()];\\n    \\n$(\\"[id^=''nuTab'']\\").removeClass(''nuRelatedTab'');\\nfor(var i = 1 ; i < o.length ; i++){\\n        $(''#nuTab'' + i).removeClass(''nuRelatedTab'');\\n    }\\n    \\n    $(''#nuTab0'').addClass(''nuRelatedTab'');\\n    $(''#nuTab'' + t).addClass(''nuRelatedTab'');\\n    \\n} \\n\\nfunction nuChooseEventList(){\\n\\n    if($(''#sob_all_type'').val() == ''subform''){\\n        \\n        return [''onchange'',''beforeadd'',''afteradd'', ''ondelete''];\\n    \\n    }else{\\n        \\n        return [''onblur'',''onchange'',''onfocus'',''onkeydown''];\\n    \\n    }\\n\\n}\\n\\n\\n\\nfunction nuAddToFormula(e){\\n\\n    var row = e.target.id.substr(0,8);\\n    var fld = $(''#'' + row + ''004'').html();\\n    var frm = $(''#sob_calc_formula'', parent.window.document).val();\\n\\n    $(''#sob_calc_formula'', parent.window.document).val(frm + '' '' + fld);\\n\\n}\\n\\n","display":1,"js":[]}],"user_id":"globeadmin","dimensions":[850,490,723,986,548,1016,25,8956],"schema":[],"translation":[],"session_id":"587d50285434a8b","errors":[],"log_again":0,"target":null,"global_access":"1"}', '', '2017-01-17 09:30:41'),
-('587d509a2b1f172', '{"id":"nuerror","type":"edit","table":"zzzzsys_form","primary_key":"zzzzsys_form_id","order":false,"from":"","javascript":"$(''#error'').hide(); \\n$(''#nuTabHolder'').hide(); \\n$(''#nuBreadcrumbHolder'').hide(); \\n$(''#nuActionHolder'').hide();  \\n\\nfor(i = 0; i < window.nuFORM.getCurrent().filter.length; i++) {  \\t\\n\\n\\t$(''#nuRECORD'').append(''<div id=\\"errorMessage'' + i + ''\\" style=\\"margin: 10px\\"><span class=\\"fake-link\\">''+window.nuFORM.getCurrent().filter[i][0]+''<\\/span><\\/div>''); \\t\\n\\t\\n\\t$(''#errorMessage'' + i).click({\\n\\t\\tparam1: window.nuFORM.getCurrent().filter[i][1]}, nuCloseAndFocus\\n\\t); \\t \\n\\t\\n}  \\n\\nfunction nuCloseAndFocus(event) {  \\t\\n\\n\\tif(event.data.param1 != '''') {\\n\\t\\t$(''#'' + event.data.param1, window.parent.document).focus(); \\t\\n\\t}\\n\\t\\n\\t$(''#dialogClose'', window.parent.document).click(); \\n\\t\\n}","row_height":25,"rows":25,"title":"Error Form","form_id":"nuerror","record_id":"-1","buttons":[],"tabs":[{"title":"Main"}],"browse_columns":[],"browse_rows":null,"browse_height":null,"browse_sql":null,"pages":0,"objects":[{"type":"input","object_id":"57fadb3206fceda","id":"error","label":"","top":"10","left":"10","width":"800","height":"200","valid":"0","format":"","value":"","align":"left","input":"","read":"0","display":1,"js":[]}],"user_id":"globeadmin","dimensions":[850,40,410,870,235,900,200,855],"schema":[],"translation":[],"session_id":"587d50285434a8b","errors":[],"log_again":0,"target":null,"global_access":"1"}', '', '2017-01-17 09:30:42'),
-('587d524e4946bdf', 'hello nuobjectbob', '', '2017-01-17 09:37:58'),
-('587d524ec71cd81', 'SELECT zzzzsys_object_id,sob_all_type,sfo_description,syt_title,sob_all_label,zzzzsys_form_id,sob_all_id\n FROM zzzzsys_object JOIN zzzzsys_tab ON zzzzsys_tab_id = sob_all_zzzzsys_tab_id JOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id LIMIT 0, 209', '', '2017-01-17 09:37:58'),
-('587d52514c4eba5', 'hello nuobjectbob', '', '2017-01-17 09:38:01'),
-('587d5252d1701ae', 'SELECT thevalue,theparent,thechild,thefilter,theform,thevalue\n FROM ___nu1587d52520bde8___\n WHERE  ( (theparent LIKE  "%nuobject%" OR thechild LIKE  "%nuobject%" OR thefilter LIKE  "%nuobject%" OR theform LIKE  "%nuobject%" OR thevalue LIKE  "%nuobject%") ) LIMIT 0, 22', '', '2017-01-17 09:38:02'),
-('587d5265dc04729', 'hello nuobjectbob', '', '2017-01-17 09:38:21'),
-('587d52665f2aa59', 'SELECT zzzzsys_object_id,sob_all_type,sfo_description,syt_title,sob_all_label,zzzzsys_form_id,sob_all_id\n FROM zzzzsys_object JOIN zzzzsys_tab ON zzzzsys_tab_id = sob_all_zzzzsys_tab_id JOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id LIMIT 0, 209', '', '2017-01-17 09:38:22'),
-('587d526cd5389c9', 'SELECT zzzzsys_form_id,sfo_type,sfo_code,sfo_description\n FROM zzzzsys_form\n ORDER BY sfo_code LIMIT 0, 39', '', '2017-01-17 09:38:28'),
-('587d5270941e2c4', 'SELECT zzzzsys_form_id,sfo_type,sfo_code,sfo_description\n FROM zzzzsys_form\n ORDER BY sfo_code LIMIT 25, 39', '', '2017-01-17 09:38:32'),
-('587d52b05d1678a', 'SELECT zzzzsys_form_id,sfo_type,sfo_code,sfo_description\n FROM zzzzsys_form\n ORDER BY sfo_code LIMIT 0, 39', '', '2017-01-17 09:39:36'),
-('587d52b661e5a02', 'SELECT zzzzsys_form_id,sfo_type,sfo_code,sfo_description\n FROM zzzzsys_form\n WHERE  ( (sfo_type LIKE  "%ob%" OR sfo_code LIKE  "%ob%" OR sfo_description LIKE  "%ob%") ) \n ORDER BY sfo_code LIMIT 0, 5', '', '2017-01-17 09:39:42'),
-('587d52ee71c62f5', 'SELECT zzzzsys_form_id,sfo_type,sfo_code,sfo_description\n FROM zzzzsys_form\n ORDER BY sfo_code LIMIT 0, 39', '', '2017-01-17 09:40:38'),
-('587d52f05a1bc3a', 'SELECT zzzzsys_form_id,sfo_type,sfo_code,sfo_description\n FROM zzzzsys_form\n ORDER BY sfo_code LIMIT 25, 39', '', '2017-01-17 09:40:40'),
-('587d53669ae62cb', 'SELECT zzzzsys_form_id,sfo_type,sfo_code,sfo_description\n FROM zzzzsys_form\n ORDER BY sfo_code LIMIT 25, 39', '', '2017-01-17 09:42:38'),
-('587d536b339badc', 'SELECT zzzzsys_form_id,sfo_type,sfo_code,sfo_description\n FROM zzzzsys_form\n ORDER BY sfo_code LIMIT 0, 39', '', '2017-01-17 09:42:43'),
-('587d536d51c51c9', 'SELECT zzzzsys_form_id,sfo_type,sfo_code,sfo_description\n FROM zzzzsys_form\n ORDER BY sfo_code LIMIT 25, 39', '', '2017-01-17 09:42:45'),
-('587eab76799063e', 'hello nuobjectbob', '', '2017-01-18 10:10:38'),
-('587eab770b2cf13', 'SELECT zzzzsys_object_id,sob_all_type,sfo_description,syt_title,sob_all_label,zzzzsys_form_id,sob_all_id\n FROM zzzzsys_object JOIN zzzzsys_tab ON zzzzsys_tab_id = sob_all_zzzzsys_tab_id JOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id LIMIT 0, 209', '', '2017-01-18 10:10:39'),
-('587eab78d387354', 'hello nuobjectbob', '', '2017-01-18 10:10:40'),
-('587eab7a7623e2d', 'SELECT thevalue,theparent,thechild,thefilter,theform,thevalue\n FROM ___nu1587eab79a72d4___\n WHERE  ( (theparent LIKE  "%nuobject%" OR thechild LIKE  "%nuobject%" OR thefilter LIKE  "%nuobject%" OR theform LIKE  "%nuobject%" OR thevalue LIKE  "%nuobject%") ) LIMIT 0, 22', '', '2017-01-18 10:10:42'),
-('587eabada88baff', 'hello nuobjectbob', '', '2017-01-18 10:11:33'),
-('587eabae641bc67', 'SELECT zzzzsys_object_id,sob_all_type,sfo_description,syt_title,sob_all_label,zzzzsys_form_id,sob_all_id\n FROM zzzzsys_object JOIN zzzzsys_tab ON zzzzsys_tab_id = sob_all_zzzzsys_tab_id JOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id LIMIT 0, 209', '', '2017-01-18 10:11:34'),
-('587eabaf2a3d35d', 'hello nuobjectbob', '', '2017-01-18 10:11:35'),
-('587eabb0be5d464', 'SELECT thevalue,theparent,thechild,thefilter,theform,thevalue\n FROM ___nu1587eabb0078b6___\n WHERE  ( (theparent LIKE  "%nuobject%" OR thechild LIKE  "%nuobject%" OR thefilter LIKE  "%nuobject%" OR theform LIKE  "%nuobject%" OR thevalue LIKE  "%nuobject%") ) LIMIT 0, 22', '', '2017-01-18 10:11:36'),
-('587eae46c6c9e02', 'hello nuobjectbob', '', '2017-01-18 10:22:38'),
-('587eae4788377da', 'SELECT zzzzsys_object_id,sob_all_type,sfo_description,syt_title,sob_all_label,zzzzsys_form_id,sob_all_id\n FROM zzzzsys_object JOIN zzzzsys_tab ON zzzzsys_tab_id = sob_all_zzzzsys_tab_id JOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id LIMIT 0, 209', '', '2017-01-18 10:22:39'),
-('587eae484bd39d2', 'hello nuobjectbob', '', '2017-01-18 10:22:40'),
-('587eae49e25755c', 'SELECT thevalue,theparent,thechild,thefilter,theform,thevalue\n FROM ___nu1587eae4936f51___\n WHERE  ( (theparent LIKE  "%nuobject%" OR thechild LIKE  "%nuobject%" OR thefilter LIKE  "%nuobject%" OR theform LIKE  "%nuobject%" OR thevalue LIKE  "%nuobject%") ) LIMIT 0, 22', '', '2017-01-18 10:22:41'),
-('587eaea49bfe14a', 'hello nuobjectbob', '', '2017-01-18 10:24:12'),
-('587eaea534c7447', 'SELECT zzzzsys_object_id,sob_all_type,sfo_description,syt_title,sob_all_label,zzzzsys_form_id,sob_all_id\n FROM zzzzsys_object JOIN zzzzsys_tab ON zzzzsys_tab_id = sob_all_zzzzsys_tab_id JOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id LIMIT 0, 209', '', '2017-01-18 10:24:13'),
-('587eaea5c7cc8e0', 'hello nuobjectbob', '', '2017-01-18 10:24:13'),
-('587eaea77709bae', 'SELECT thevalue,theparent,thechild,thefilter,theform,thevalue\n FROM ___nu1587eaea6a1ec4___\n WHERE  ( (theparent LIKE  "%nuobject%" OR thechild LIKE  "%nuobject%" OR thefilter LIKE  "%nuobject%" OR theform LIKE  "%nuobject%" OR thevalue LIKE  "%nuobject%") ) LIMIT 0, 22', '', '2017-01-18 10:24:15'),
-('587eb0c5a5164df', 'hello nuobjectbob', '', '2017-01-18 10:33:17'),
-('587eb0c6456913a', 'SELECT zzzzsys_object_id,sob_all_type,sfo_description,syt_title,sob_all_label,zzzzsys_form_id,sob_all_id\n FROM zzzzsys_object JOIN zzzzsys_tab ON zzzzsys_tab_id = sob_all_zzzzsys_tab_id JOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id LIMIT 0, 209', '', '2017-01-18 10:33:18'),
-('587eb0c71e3a48c', 'hello nuobjectbob', '', '2017-01-18 10:33:19');
-INSERT INTO `zzzzsys_debug` (`zzzzsys_debug_id`, `deb_message`, `deb_order`, `deb_added`) VALUES
-('587eb0c8cda6f56', 'SELECT thevalue,theparent,thechild,thefilter,theform,thevalue\n FROM ___nu1587eb0c806b6e___\n WHERE  ( (theparent LIKE  "%nuobject%" OR thechild LIKE  "%nuobject%" OR thefilter LIKE  "%nuobject%" OR theform LIKE  "%nuobject%" OR thevalue LIKE  "%nuobject%") ) LIMIT 0, 22', '', '2017-01-18 10:33:20'),
-('587eb21d72be7ff', 'hello nuobjectbob', '', '2017-01-18 10:39:01'),
-('587eb21e1964b5e', 'SELECT zzzzsys_object_id,sob_all_type,sfo_description,syt_title,sob_all_label,zzzzsys_form_id,sob_all_id\n FROM zzzzsys_object JOIN zzzzsys_tab ON zzzzsys_tab_id = sob_all_zzzzsys_tab_id JOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id LIMIT 0, 209', '', '2017-01-18 10:39:02'),
-('587eb21ec148c1f', 'hello nuobjectbob', '', '2017-01-18 10:39:02'),
-('587eb220ac637c8', 'SELECT thevalue,theparent,thechild,thefilter,theform,thevalue\n FROM ___nu1587eb21fe427d___\n WHERE  ( (theparent LIKE  "%nuobject%" OR thechild LIKE  "%nuobject%" OR thefilter LIKE  "%nuobject%" OR theform LIKE  "%nuobject%" OR thevalue LIKE  "%nuobject%") ) LIMIT 0, 22', '', '2017-01-18 10:39:04'),
-('587eb25a92b8e48', 'hello nuobjectbob', '', '2017-01-18 10:40:02'),
-('587eb25c1528867', 'SELECT thevalue,theparent,thechild,thefilter,theform,thevalue\n FROM ___nu1587eb25b823f7___\n WHERE  ( (theparent LIKE  "%nuobject%" OR thechild LIKE  "%nuobject%" OR thefilter LIKE  "%nuobject%" OR theform LIKE  "%nuobject%" OR thevalue LIKE  "%nuobject%") ) LIMIT 0, 22', '', '2017-01-18 10:40:04'),
-('587eb26b91012b5', 'nuHash : |input| Array\n(\n    [USER_ID] => globeadmin\n    [USER_GROUP_ID] => \n    [HOME_ID] => nuhome\n    [global_access] => 1\n    [zzzzsys_object_id] => 5851cfeb30f9047\n    [sob_all_zzzzsys_form_id] => nuobject\n    [sob_all_type] => input\n    [sob_all_id] => sob_calc_formula\n    [sob_all_label] => Formula\n    [sob_all_zzzzsys_tab_id] => 5851cf915a1c653\n    [sob_all_order] => 460\n    [sob_all_top] => 23\n    [sob_all_left] => 69\n    [sob_all_width] => 500\n    [sob_all_height] => 30\n    [sob_all_classes] => \n    [sob_all_cloneable] => 1\n    [sob_all_align] => left\n    [sob_all_validate] => 0\n    [sob_all_readonly] => 1\n    [sob_all_display_condition] => \n    [sob_all_default_value_sql] => \n    [sob_all_fast_form_description] => sfo_javascript\n    [sob_calc_formula] => \n    [sob_run_zzzzsys_form_id] => \n    [sob_run_filter] => \n    [sob_run_method] => \n    [sob_run_id] => \n    [sob_display_sql] => \n    [sob_select_multiple] => 0\n    [sob_select_sql] => 0|No|1|Yes\n    [sob_lookup_code] => \n    [sob_lookup_description] => \n    [sob_lookup_description_width] => \n    [sob_lookup_autocomplete] => \n    [sob_lookup_zzzzsys_form_id] => \n    [sob_lookup_javascript] => \n    [sob_lookup_php] => \n    [sob_lookup_table] => \n    [sob_subform_zzzzsys_form_id] => \n    [sob_subform_foreign_key] => \n    [sob_subform_add] => \n    [sob_subform_delete] => \n    [sob_subform_type] => \n    [sob_subform_table] => \n    [sob_input_format] => \n    [sob_input_type] => \n    [sob_html_code] => \n    [record_id] => 5851cfeb30f9047\n    [title] => Object\n    [call_type] => update\n    [filter] => \n    [iframe] => 0\n    [lookup_id] => \n    [object_id] => 1\n    [page_number] => 0\n    [password] => \n    [rows] => 25\n    [row_height] => 25\n    [search] => \n    [session_id] => 587eb21bb96bc95\n    [sort] => -1\n    [sort_direction] => desc\n    [subforms] => 0\n    [username] => \n    [user_id] => globeadmin\n    [browse_rows] => \n    [pages] => 0\n    [deleteAll] => No\n    [nuobject] => 5851cfeb30f9047\n    [FORM_ID] => nuobject\n    [PREVIOUS_RECORD_ID] => 5851cfeb30f9047\n    [RECORD_ID] => 5851cfeb30f9047\n    [TABLE_ID] => ___nu1587eb26b8ba5b___\n    [SESSION_ID] => 587eb21bb96bc95\n)\n', '', '2017-01-18 10:40:19'),
-('587eb26babbb0dc', 'hello nuobjectbob', '', '2017-01-18 10:40:19'),
-('587eb271c292796', 'hello nuobjectbob', '', '2017-01-18 10:40:25'),
-('587eb272679564f', 'SELECT zzzzsys_object_id,sob_all_type,sfo_description,syt_title,sob_all_label,zzzzsys_form_id,sob_all_id\n FROM zzzzsys_object JOIN zzzzsys_tab ON zzzzsys_tab_id = sob_all_zzzzsys_tab_id JOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id\n WHERE  ( (sob_all_type LIKE  "%nuobject%" OR sfo_description LIKE  "%nuobject%" OR syt_title LIKE  "%nuobject%" OR sob_all_label LIKE  "%nuobject%" OR zzzzsys_form_id LIKE  "%nuobject%" OR sob_all_id LIKE  "%nuobject%") ) LIMIT 0, 45', '', '2017-01-18 10:40:26'),
-('587eb2755920b28', 'hello nuobjectbob', '', '2017-01-18 10:40:29'),
-('587eb275df8cb47', 'SELECT zzzzsys_object_id,sob_all_type,sfo_description,syt_title,sob_all_label,zzzzsys_form_id,sob_all_id\n FROM zzzzsys_object JOIN zzzzsys_tab ON zzzzsys_tab_id = sob_all_zzzzsys_tab_id JOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id\n WHERE  ( (sob_all_type LIKE  "%nuobject%" OR sfo_description LIKE  "%nuobject%" OR syt_title LIKE  "%nuobject%" OR sob_all_label LIKE  "%nuobject%" OR zzzzsys_form_id LIKE  "%nuobject%" OR sob_all_id LIKE  "%nuobject%") ) LIMIT 25, 45', '', '2017-01-18 10:40:29'),
-('587eb27933361ae', 'hello nuobjectbob', '', '2017-01-18 10:40:33'),
-('587eb27ade50e46', 'SELECT thevalue,theparent,thechild,thefilter,theform,thevalue\n FROM ___nu1587eb27a17a0b___\n WHERE  ( (theparent LIKE  "%nuobject%" OR thechild LIKE  "%nuobject%" OR thefilter LIKE  "%nuobject%" OR theform LIKE  "%nuobject%" OR thevalue LIKE  "%nuobject%") ) LIMIT 0, 22', '', '2017-01-18 10:40:34'),
-('587eb294c08e645', 'nuHash : |input| Array\n(\n    [USER_ID] => globeadmin\n    [USER_GROUP_ID] => \n    [HOME_ID] => nuhome\n    [global_access] => 1\n    [zzzzsys_object_id] => 5851cfeb30f9047\n    [sob_all_zzzzsys_form_id] => nuobject\n    [sob_all_type] => input\n    [sob_all_id] => sob_calc_formula\n    [sob_all_label] => Formula\n    [sob_all_zzzzsys_tab_id] => 5851cf915a1c653\n    [sob_all_order] => 460\n    [sob_all_top] => 77\n    [sob_all_left] => 69\n    [sob_all_width] => 500\n    [sob_all_height] => 30\n    [sob_all_classes] => \n    [sob_all_cloneable] => 1\n    [sob_all_align] => left\n    [sob_all_validate] => 0\n    [sob_all_readonly] => 1\n    [sob_all_display_condition] => \n    [sob_all_default_value_sql] => \n    [sob_all_fast_form_description] => sfo_javascript\n    [sob_calc_formula] =>  +\n    [sob_run_zzzzsys_form_id] => \n    [sob_run_filter] => \n    [sob_run_method] => \n    [sob_run_id] => \n    [sob_display_sql] => \n    [sob_select_multiple] => 0\n    [sob_select_sql] => 0|No|1|Yes\n    [sob_lookup_code] => \n    [sob_lookup_description] => \n    [sob_lookup_description_width] => \n    [sob_lookup_autocomplete] => \n    [sob_lookup_zzzzsys_form_id] => \n    [sob_lookup_javascript] => \n    [sob_lookup_php] => \n    [sob_lookup_table] => \n    [sob_subform_zzzzsys_form_id] => \n    [sob_subform_foreign_key] => \n    [sob_subform_add] => \n    [sob_subform_delete] => \n    [sob_subform_type] => \n    [sob_subform_table] => \n    [sob_input_format] => \n    [sob_input_type] => \n    [sob_html_code] => \n    [record_id] => 5851cfeb30f9047\n    [title] => Object\n    [call_type] => update\n    [filter] => \n    [iframe] => 0\n    [lookup_id] => \n    [object_id] => 1\n    [page_number] => 0\n    [password] => \n    [rows] => 25\n    [row_height] => 25\n    [search] => \n    [session_id] => 587eb21bb96bc95\n    [sort] => -1\n    [sort_direction] => desc\n    [subforms] => 0\n    [username] => \n    [user_id] => globeadmin\n    [browse_rows] => \n    [pages] => 0\n    [deleteAll] => No\n    [nuobject] => 5851cfeb30f9047\n    [FORM_ID] => nuobject\n    [PREVIOUS_RECORD_ID] => 5851cfeb30f9047\n    [RECORD_ID] => 5851cfeb30f9047\n    [TABLE_ID] => ___nu1587eb294bbcff___\n    [SESSION_ID] => 587eb21bb96bc95\n)\n', '', '2017-01-18 10:41:00'),
-('587eb294d8a8e5f', 'hello nuobjectbob', '', '2017-01-18 10:41:00'),
-('587eb296f300b78', 'SELECT thevalue,theparent,thechild,thefilter,theform,thevalue\n FROM ___nu1587eb295d35fe___\n WHERE  ( (theparent LIKE  "%nuobject%" OR thechild LIKE  "%nuobject%" OR thefilter LIKE  "%nuobject%" OR theform LIKE  "%nuobject%" OR thevalue LIKE  "%nuobject%") ) LIMIT 0, 22', '', '2017-01-18 10:41:02'),
-('587eb297110b5b7', 'hello nuobjectbob', '', '2017-01-18 10:41:03'),
-('587eb297c39f5e0', 'SELECT zzzzsys_object_id,sob_all_type,sfo_description,syt_title,sob_all_label,zzzzsys_form_id,sob_all_id\n FROM zzzzsys_object JOIN zzzzsys_tab ON zzzzsys_tab_id = sob_all_zzzzsys_tab_id JOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id LIMIT 0, 209', '', '2017-01-18 10:41:03'),
-('587eb2989365b93', 'hello nuobjectbob', '', '2017-01-18 10:41:04'),
-('587eb29a41de436', 'SELECT thevalue,theparent,thechild,thefilter,theform,thevalue\n FROM ___nu1587eb2999d2d1___\n WHERE  ( (theparent LIKE  "%nuobject%" OR thechild LIKE  "%nuobject%" OR thefilter LIKE  "%nuobject%" OR theform LIKE  "%nuobject%" OR thevalue LIKE  "%nuobject%") ) LIMIT 0, 22', '', '2017-01-18 10:41:06'),
-('587eb2a52eb9fd1', 'hello nuobjectbob', '', '2017-01-18 10:41:17'),
-('587eb2b80a0dd96', 'hello nuobjectbob', '', '2017-01-18 10:41:36'),
-('587eb2b9d8a9a34', 'SELECT thevalue,theparent,thechild,thefilter,theform,thevalue\n FROM ___nu1587eb2b902441___\n WHERE  ( (theparent LIKE  "%nuobject%" OR thechild LIKE  "%nuobject%" OR thefilter LIKE  "%nuobject%" OR theform LIKE  "%nuobject%" OR thevalue LIKE  "%nuobject%") ) LIMIT 0, 22', '', '2017-01-18 10:41:37'),
-('587eb2c85c13ca0', 'hello nuobjectbob', '', '2017-01-18 10:41:52'),
-('587eb2c8f0e1c4d', 'SELECT zzzzsys_object_id,sob_all_type,sfo_description,syt_title,sob_all_label,zzzzsys_form_id,sob_all_id\n FROM zzzzsys_object JOIN zzzzsys_tab ON zzzzsys_tab_id = sob_all_zzzzsys_tab_id JOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id\n WHERE  ( (sob_all_type LIKE  "%nuobject%" OR sfo_description LIKE  "%nuobject%" OR syt_title LIKE  "%nuobject%" OR sob_all_label LIKE  "%nuobject%" OR zzzzsys_form_id LIKE  "%nuobject%" OR sob_all_id LIKE  "%nuobject%") ) LIMIT 0, 45', '', '2017-01-18 10:41:52'),
-('587eb31c1f09464', 'hello nuobjectbob', '', '2017-01-18 10:43:16'),
-('587eb31cbdcd36e', 'SELECT zzzzsys_object_id,sob_all_type,sfo_description,syt_title,sob_all_label,zzzzsys_form_id,sob_all_id\n FROM zzzzsys_object JOIN zzzzsys_tab ON zzzzsys_tab_id = sob_all_zzzzsys_tab_id JOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id\n WHERE  ( (sob_all_type LIKE  "%nuobject%" OR sfo_description LIKE  "%nuobject%" OR syt_title LIKE  "%nuobject%" OR sob_all_label LIKE  "%nuobject%" OR zzzzsys_form_id LIKE  "%nuobject%" OR sob_all_id LIKE  "%nuobject%") ) LIMIT 0, 45', '', '2017-01-18 10:43:16'),
-('587eb31f45d7eba', 'hello nuobjectbob', '', '2017-01-18 10:43:19'),
-('587eb31fe31badd', 'SELECT zzzzsys_object_id,sob_all_type,sfo_description,syt_title,sob_all_label,zzzzsys_form_id,sob_all_id\n FROM zzzzsys_object JOIN zzzzsys_tab ON zzzzsys_tab_id = sob_all_zzzzsys_tab_id JOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id\n WHERE  ( (sob_all_type LIKE  "%nuobject%" OR sfo_description LIKE  "%nuobject%" OR syt_title LIKE  "%nuobject%" OR sob_all_label LIKE  "%nuobject%" OR zzzzsys_form_id LIKE  "%nuobject%" OR sob_all_id LIKE  "%nuobject%") ) LIMIT 25, 45', '', '2017-01-18 10:43:19'),
-('587eb3450532c93', 'hello nuobjectbob', '', '2017-01-18 10:43:57'),
-('587eb359cf4fb06', 'hello nuobjectbob', '', '2017-01-18 10:44:17'),
-('587eb35b6b67409', 'SELECT thevalue,theparent,thechild,thefilter,theform,thevalue\n FROM ___nu1587eb35abf6a2___\n WHERE  ( (theparent LIKE  "%nuobject%" OR thechild LIKE  "%nuobject%" OR thefilter LIKE  "%nuobject%" OR theform LIKE  "%nuobject%" OR thevalue LIKE  "%nuobject%") ) LIMIT 0, 22', '', '2017-01-18 10:44:19'),
-('587eb3601964b59', 'hello nuobjectbob', '', '2017-01-18 10:44:24'),
-('587eb361a45aeff', 'SELECT thevalue,theparent,thechild,thefilter,theform,thevalue\n FROM ___nu1587eb361094df___\n WHERE  ( (theparent LIKE  "%nuobject%" OR thechild LIKE  "%nuobject%" OR thefilter LIKE  "%nuobject%" OR theform LIKE  "%nuobject%" OR thevalue LIKE  "%nuobject%") ) LIMIT 0, 22', '', '2017-01-18 10:44:25'),
-('587eb36989cf228', 'nuHash : |input| Array\n(\n    [USER_ID] => globeadmin\n    [USER_GROUP_ID] => \n    [HOME_ID] => nuhome\n    [global_access] => 1\n    [zzzzsys_object_id] => 5851cfeb30f9047\n    [sob_all_zzzzsys_form_id] => nuobject\n    [sob_all_type] => input\n    [sob_all_id] => sob_calc_formula\n    [sob_all_label] => Formula\n    [sob_all_zzzzsys_tab_id] => 5851cf915a1c653\n    [sob_all_order] => 430\n    [sob_all_top] => 27\n    [sob_all_left] => 68\n    [sob_all_width] => 550\n    [sob_all_height] => 30\n    [sob_all_classes] => \n    [sob_all_cloneable] => 1\n    [sob_all_align] => left\n    [sob_all_validate] => 0\n    [sob_all_readonly] => 1\n    [sob_all_display_condition] => \n    [sob_all_default_value_sql] => \n    [sob_all_fast_form_description] => sfo_javascript\n    [sob_calc_formula] =>  +\n    [sob_run_zzzzsys_form_id] => \n    [sob_run_filter] => \n    [sob_run_method] => \n    [sob_run_id] => \n    [sob_display_sql] => \n    [sob_select_multiple] => 0\n    [sob_select_sql] => 0|No|1|Yes\n    [sob_lookup_code] => \n    [sob_lookup_description] => \n    [sob_lookup_description_width] => \n    [sob_lookup_autocomplete] => \n    [sob_lookup_zzzzsys_form_id] => \n    [sob_lookup_javascript] => \n    [sob_lookup_php] => \n    [sob_lookup_table] => \n    [sob_subform_zzzzsys_form_id] => \n    [sob_subform_foreign_key] => \n    [sob_subform_add] => \n    [sob_subform_delete] => \n    [sob_subform_type] => \n    [sob_subform_table] => \n    [sob_input_format] => \n    [sob_input_type] => \n    [sob_html_code] => \n    [record_id] => 5851cfeb30f9047\n    [title] => Object\n    [call_type] => update\n    [filter] => \n    [iframe] => 0\n    [lookup_id] => \n    [object_id] => 1\n    [page_number] => 0\n    [password] => \n    [rows] => 25\n    [row_height] => 25\n    [search] => \n    [session_id] => 587eb21bb96bc95\n    [sort] => -1\n    [sort_direction] => desc\n    [subforms] => 0\n    [username] => \n    [user_id] => globeadmin\n    [browse_rows] => \n    [pages] => 0\n    [deleteAll] => No\n    [nuobject] => 5851cfeb30f9047\n    [FORM_ID] => nuobject\n    [PREVIOUS_RECORD_ID] => 5851cfeb30f9047\n    [RECORD_ID] => 5851cfeb30f9047\n    [TABLE_ID] => ___nu1587eb369855bd___\n    [SESSION_ID] => 587eb21bb96bc95\n)\n', '', '2017-01-18 10:44:33'),
-('587eb369a3f4377', 'hello nuobjectbob', '', '2017-01-18 10:44:33'),
-('587eb36b6f26886', 'SELECT thevalue,theparent,thechild,thefilter,theform,thevalue\n FROM ___nu1587eb36abed07___\n WHERE  ( (theparent LIKE  "%nuobject%" OR thechild LIKE  "%nuobject%" OR thefilter LIKE  "%nuobject%" OR theform LIKE  "%nuobject%" OR thevalue LIKE  "%nuobject%") ) LIMIT 0, 22', '', '2017-01-18 10:44:35'),
-('587eb3803486bbf', 'hello nuobjectbob', '', '2017-01-18 10:44:56'),
-('587eb38221dc42f', 'SELECT thevalue,theparent,thechild,thefilter,theform,thevalue\n FROM ___nu1587eb3814f369___\n WHERE  ( (theparent LIKE  "%nuobject%" OR thechild LIKE  "%nuobject%" OR thefilter LIKE  "%nuobject%" OR theform LIKE  "%nuobject%" OR thevalue LIKE  "%nuobject%") ) LIMIT 0, 22', '', '2017-01-18 10:44:58'),
-('587eb44180518f0', 'nuHash : |html| Array\n(\n    [USER_ID] => globeadmin\n    [USER_GROUP_ID] => \n    [HOME_ID] => nuhome\n    [global_access] => 1\n    [zzzzsys_object_id] => 585e5705f3e9867\n    [sob_all_zzzzsys_form_id] => nuobject\n    [sob_all_type] => html\n    [sob_all_id] => nucalculator\n    [sob_all_label] => Operators\n    [sob_all_zzzzsys_tab_id] => 5851cf915a1c653\n    [sob_all_order] => 420\n    [sob_all_top] => 97\n    [sob_all_left] => 68\n    [sob_all_width] => 200\n    [sob_all_height] => 200\n    [sob_all_classes] => \n    [sob_all_cloneable] => 1\n    [sob_all_align] => right\n    [sob_all_validate] => 0\n    [sob_all_readonly] => 1\n    [sob_all_display_condition] => \n    [sob_all_default_value_sql] => \n    [sob_all_fast_form_description] => sfo_javascript\n    [sob_calc_formula] => \n    [sob_run_zzzzsys_form_id] => \n    [sob_run_filter] => \n    [sob_run_method] => \n    [sob_run_id] => \n    [sob_display_sql] => \n    [sob_select_multiple] => 0\n    [sob_select_sql] => 0|No|1|Yes\n    [sob_lookup_code] => \n    [sob_lookup_description] => \n    [sob_lookup_description_width] => \n    [sob_lookup_autocomplete] => \n    [sob_lookup_zzzzsys_form_id] => \n    [sob_lookup_javascript] => \n    [sob_lookup_php] => \n    [sob_lookup_table] => \n    [sob_subform_zzzzsys_form_id] => \n    [sob_subform_foreign_key] => \n    [sob_subform_add] => \n    [sob_subform_delete] => \n    [sob_subform_type] => \n    [sob_subform_table] => \n    [sob_input_format] => \n    [sob_input_type] => \n    [sob_html_code] => \n<table>\n  <tr>\n    <td onclick=\\''nuAddToFormula(event)\\''  class=\\''nuCalculatorButton\\''>+</td>\n    <td onclick=\\''nuAddToFormula(event)\\''  class=\\''nuCalculatorButton\\''>-</td> \n    <td onclick=\\''nuAddToFormula(event)\\''  class=\\''nuCalculatorButton\\''>*</td>\n  </tr>\n  <tr>\n    <td onclick=\\''nuAddToFormula(event)\\''  class=\\''nuCalculatorButton\\''>/</td>\n    <td onclick=\\''nuAddToFormula(event)\\''  class=\\''nuCalculatorButton\\''>(</td>\n    <td onclick=\\''nuAddToFormula(event)\\''  class=\\''nuCalculatorButton\\''>)</td>\n  </tr>\n  <tr>\n    <td onclick=\\''nuAddToFormula(event)\\''  class=\\''nuCalculatorButton\\''>?</td>\n    <td onclick=\\''nuAddToFormula(event)\\''  class=\\''nuCalculatorButton\\''>:</td> \n    <td onclick=\\''nuAddToFormula(event)\\''  class=\\''nuCalculatorButton\\''>=</td> \n  </tr>\n\n  <tr>\n    <td onclick=\\''nuAddToFormula(event)\\''  class=\\''nuCalculatorButton\\''>1</td>\n    <td onclick=\\''nuAddToFormula(event)\\''  class=\\''nuCalculatorButton\\''>2</td> \n    <td onclick=\\''nuAddToFormula(event)\\''  class=\\''nuCalculatorButton\\''>3</td> \n  </tr>\n\n  <tr>\n    <td onclick=\\''nuAddToFormula(event)\\''  class=\\''nuCalculatorButton\\''>4</td>\n    <td onclick=\\''nuAddToFormula(event)\\''  class=\\''nuCalculatorButton\\''>5</td> \n    <td onclick=\\''nuAddToFormula(event)\\''  class=\\''nuCalculatorButton\\''>6</td> \n  </tr>\n\n  <tr>\n    <td onclick=\\''nuAddToFormula(event)\\''  class=\\''nuCalculatorButton\\''>7</td>\n    <td onclick=\\''nuAddToFormula(event)\\''  class=\\''nuCalculatorButton\\''>8</td> \n    <td onclick=\\''nuAddToFormula(event)\\''  class=\\''nuCalculatorButton\\''>9</td> \n  </tr>\n\n  <tr>\n    <td onclick=\\''nuAddToFormula(event)\\''  class=\\''nuCalculatorButton\\''>0</td>\n    <td onclick=\\''nuAddToFormula(event)\\''  class=\\''nuCalculatorButton\\''></td> \n    <td onclick=\\''nuAddToFormula(event)\\''  class=\\''nuCalculatorButton\\''>C</td> \n  </tr>\n\n</table>\n\n    [record_id] => 585e5705f3e9867\n    [title] => Object\n    [call_type] => update\n    [filter] => \n    [iframe] => 0\n    [lookup_id] => \n    [object_id] => 1\n    [page_number] => 0\n    [password] => \n    [rows] => 25\n    [row_height] => 25\n    [search] => \n    [session_id] => 587eb21bb96bc95\n    [sort] => -1\n    [sort_direction] => desc\n    [subforms] => 0\n    [username] => \n    [user_id] => globeadmin\n    [browse_rows] => \n    [pages] => 0\n    [deleteAll] => No\n    [nuobject] => 585e5705f3e9867\n    [FORM_ID] => nuobject\n    [PREVIOUS_RECORD_ID] => 585e5705f3e9867\n    [RECORD_ID] => 585e5705f3e9867\n    [TABLE_ID] => ___nu1587eb4417bee5___\n    [SESSION_ID] => 587eb21bb96bc95\n)\n', '', '2017-01-18 10:48:09'),
-('587eb4419907fc3', 'hello nuobjectbob', '', '2017-01-18 10:48:09'),
-('587eb443652f326', 'SELECT thevalue,theparent,thechild,thefilter,theform,thevalue\n FROM ___nu1587eb442a82b5___\n WHERE  ( (theparent LIKE  "%nuobject%" OR thechild LIKE  "%nuobject%" OR thefilter LIKE  "%nuobject%" OR theform LIKE  "%nuobject%" OR thevalue LIKE  "%nuobject%") ) LIMIT 0, 22', '', '2017-01-18 10:48:11'),
-('587eb449f22c3da', 'hello nuobjectbob', '', '2017-01-18 10:48:17'),
-('587eb44aa48e9f0', 'SELECT zzzzsys_object_id,sob_all_type,sfo_description,syt_title,sob_all_label,zzzzsys_form_id,sob_all_id\n FROM zzzzsys_object JOIN zzzzsys_tab ON zzzzsys_tab_id = sob_all_zzzzsys_tab_id JOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id LIMIT 0, 209', '', '2017-01-18 10:48:18'),
-('587eb44b3cc24c4', 'hello nuobjectbob', '', '2017-01-18 10:48:19'),
-('587eb44d4e2d40c', 'SELECT thevalue,theparent,thechild,thefilter,theform,thevalue\n FROM ___nu1587eb44c88226___\n WHERE  ( (theparent LIKE  "%nuobject%" OR thechild LIKE  "%nuobject%" OR thefilter LIKE  "%nuobject%" OR theform LIKE  "%nuobject%" OR thevalue LIKE  "%nuobject%") ) LIMIT 0, 22', '', '2017-01-18 10:48:21'),
-('587eb5332a92aaa', 'SELECT zzzzsys_form_id,sfo_type,sfo_code,sfo_description\n FROM zzzzsys_form\n ORDER BY sfo_code LIMIT 0, 39', '', '2017-01-18 10:52:11'),
-('587eb539bb1a8b7', 'hello nuobjectbob', '', '2017-01-18 10:52:17'),
-('587eb53a8b86867', 'SELECT zzzzsys_object_id,sob_all_type,sfo_description,syt_title,sob_all_label,zzzzsys_form_id,sob_all_id\n FROM zzzzsys_object JOIN zzzzsys_tab ON zzzzsys_tab_id = sob_all_zzzzsys_tab_id JOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id LIMIT 0, 209', '', '2017-01-18 10:52:18'),
-('587eb53ed039d8a', 'hello nuobjectbob', '', '2017-01-18 10:52:22'),
-('587eb540a68d63c', 'SELECT thevalue,theparent,thechild,thefilter,theform,thevalue\n FROM ___nu1587eb53fdbf0a___\n WHERE  ( (theparent LIKE  "%nuobject%" OR thechild LIKE  "%nuobject%" OR thefilter LIKE  "%nuobject%" OR theform LIKE  "%nuobject%" OR thevalue LIKE  "%nuobject%") ) LIMIT 0, 22', '', '2017-01-18 10:52:24'),
-('587eb5eed690fd6', 'hello nuobjectbob', '', '2017-01-18 10:55:18'),
-('587eb5ef8994c90', 'SELECT zzzzsys_object_id,sob_all_type,sfo_description,syt_title,sob_all_label,zzzzsys_form_id,sob_all_id\n FROM zzzzsys_object JOIN zzzzsys_tab ON zzzzsys_tab_id = sob_all_zzzzsys_tab_id JOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id LIMIT 0, 209', '', '2017-01-18 10:55:19'),
-('587eb5f0e007bd7', 'hello nuobjectbob', '', '2017-01-18 10:55:20'),
-('587eb5f299a40dd', 'SELECT thevalue,theparent,thechild,thefilter,theform,thevalue\n FROM ___nu1587eb5f1e02b7___\n WHERE  ( (theparent LIKE  "%nuobject%" OR thechild LIKE  "%nuobject%" OR thefilter LIKE  "%nuobject%" OR theform LIKE  "%nuobject%" OR thevalue LIKE  "%nuobject%") ) LIMIT 0, 22', '', '2017-01-18 10:55:22'),
-('587eb6237f9b9b2', 'hello nuobjectbob', '', '2017-01-18 10:56:11'),
-('587eb6243f598a3', 'SELECT zzzzsys_object_id,sob_all_type,sfo_description,syt_title,sob_all_label,zzzzsys_form_id,sob_all_id\n FROM zzzzsys_object JOIN zzzzsys_tab ON zzzzsys_tab_id = sob_all_zzzzsys_tab_id JOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id LIMIT 0, 209', '', '2017-01-18 10:56:12'),
-('587eb626c34c957', 'hello nuobjectbob', '', '2017-01-18 10:56:14'),
-('587eb6277966166', 'SELECT zzzzsys_object_id,sob_all_type,sfo_description,syt_title,sob_all_label,zzzzsys_form_id,sob_all_id\n FROM zzzzsys_object JOIN zzzzsys_tab ON zzzzsys_tab_id = sob_all_zzzzsys_tab_id JOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id LIMIT 25, 209', '', '2017-01-18 10:56:15'),
-('587eb62e8594c93', 'SELECT zzzzsys_form_id,sfo_type,sfo_code,sfo_description\n FROM zzzzsys_form\n ORDER BY sfo_code LIMIT 0, 39', '', '2017-01-18 10:56:22'),
-('587eb633d63cb84', 'SELECT zzzzsys_form_id,sfo_type,sfo_code,sfo_description\n FROM zzzzsys_form\n ORDER BY sfo_code LIMIT 25, 39', '', '2017-01-18 10:56:27'),
-('587eb8e1c304f66', 'hello nuobjectbob', '', '2017-01-18 11:07:53'),
-('587eb8e2e285a92', 'SELECT zzzzsys_object_id,sob_all_type,sfo_description,syt_title,sob_all_label,zzzzsys_form_id,sob_all_id\n FROM zzzzsys_object JOIN zzzzsys_tab ON zzzzsys_tab_id = sob_all_zzzzsys_tab_id JOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id LIMIT 0, 209', '', '2017-01-18 11:07:54'),
-('587eb8e645ca771', 'hello nuobjectbob', '', '2017-01-18 11:07:58'),
-('587eb8e80eab2f9', 'SELECT thevalue,theparent,thechild,thefilter,theform,thevalue\n FROM ___nu1587eb8e7565b2___\n WHERE  ( (theparent LIKE  "%nuobject%" OR thechild LIKE  "%nuobject%" OR thefilter LIKE  "%nuobject%" OR theform LIKE  "%nuobject%" OR thevalue LIKE  "%nuobject%") ) LIMIT 0, 22', '', '2017-01-18 11:08:00'),
-('587eb956733cbf0', 'hello nuobjectbob', '', '2017-01-18 11:09:50'),
-('587eb957457d4a1', 'SELECT zzzzsys_object_id,sob_all_type,sfo_description,syt_title,sob_all_label,zzzzsys_form_id,sob_all_id\n FROM zzzzsys_object JOIN zzzzsys_tab ON zzzzsys_tab_id = sob_all_zzzzsys_tab_id JOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id LIMIT 0, 209', '', '2017-01-18 11:09:51'),
-('587eb958171fb81', 'hello nuobjectbob', '', '2017-01-18 11:09:52'),
-('587eb95a1d615a0', 'SELECT thevalue,theparent,thechild,thefilter,theform,thevalue\n FROM ___nu1587eb9594fe36___\n WHERE  ( (theparent LIKE  "%nuobject%" OR thechild LIKE  "%nuobject%" OR thefilter LIKE  "%nuobject%" OR theform LIKE  "%nuobject%" OR thevalue LIKE  "%nuobject%") ) LIMIT 0, 22', '', '2017-01-18 11:09:54');
-
 -- --------------------------------------------------------
 
 --
@@ -575,13 +461,13 @@ INSERT INTO `zzzzsys_event` (`zzzzsys_event_id`, `sev_zzzzsys_object_id`, `sev_e
 ('57578da6457dd67', '570b1abae987b02', 'onblur', 'nuCopyToSort(this);'),
 ('57620c455b19815', '575a3f7001496b0', 'onchange', 'nuSetHash(''delete_option'', this.value);'),
 ('5855ba7a105a235', '5726cca96d51595', 'onkeydown', 'nuFORM.scrollList(event, nuChooseEventList());'),
-('5811633909ef4fb', '5811633909eeadd', 'onclick', 'nuPopPHP(''BO'');'),
-('58116941a1a294e', '58116941a1a1f06', 'onclick', 'nuPopPHP(''BS'');'),
-('58116968afd6467', '58116968afd5b6a', 'onclick', 'nuPopPHP(''AS'');'),
-('581169ba21137b1', '581169ba2112f38', 'onclick', 'nuPopPHP(''BD'');'),
-('581169d91b9db26', '581169d91b9d203', 'onclick', 'nuPopPHP(''AD'');'),
-('58117aed5514341', '58117aed5513a01', 'onclick', 'nuPopPHP(''BB'');'),
-('5811808723dc0a2', '5811808723db54b', 'onclick', 'nuPopPHP(''AB'');'),
+('5811633909ef4fb', '5811633909eeadd', 'onclick', 'nuPopPHP(event, ''BO'');'),
+('58116941a1a294e', '58116941a1a1f06', 'onclick', 'nuPopPHP(event, ''BS'');'),
+('58116968afd6467', '58116968afd5b6a', 'onclick', 'nuPopPHP(event, ''AS'');'),
+('581169ba21137b1', '581169ba2112f38', 'onclick', 'nuPopPHP(event, ''BD'');'),
+('581169d91b9db26', '581169d91b9d203', 'onclick', 'nuPopPHP(event, ''AD'');'),
+('58117aed5514341', '58117aed5513a01', 'onclick', 'nuPopPHP(event, ''BB'');'),
+('5811808723dc0a2', '5811808723db54b', 'onclick', 'nuPopPHP(event, ''AB'');'),
 ('581a4d665798ede', '581a4d665798263', 'onclick', 'nuPreview()'),
 ('582bbcaa5d4e95d', '570746cc078074e', 'onkeydown', 'nuFORM.scrollList(event, [[1,2,3],[11,22,33],[111,222,333]])'),
 ('582c013be5d3a06', '570b00aa9ff6b8d', 'onkeydown', 'nuFORM.scrollList(event, nuFORM.tableFields($(''#sfo_table'').val()))'),
@@ -665,7 +551,7 @@ INSERT INTO `zzzzsys_form` (`zzzzsys_form_id`, `sfo_type`, `sfo_code`, `sfo_desc
 ('568b508eec00d80', 'browseedit', 'BUS', 'Business', 'business', 'business_id', '', '', '', '4', 'SELECT * FROM business', '1', '', '', '', '', '', '1', '', '', '', '', '', '1', '', '', '1', '', '', '', '', '', '', '', ''),
 ('nuhome', 'launch', 'HOME', 'Home', '', '', '', '', '', '', '', '', '', '', '0', '', '', '0', '', '', '0', '', '', '0', '', '', '', '', '', '', '', '', '', '', ''),
 ('56c513162acd102', 'edit', 'CHI', 'Children', 'children', 'children_id', '', '', '', '', 'SELECT * FROM employee', '1', '', '', '0', '', '', '1', '', '', '1', '', '', '1', '', '', '', '', '', '', '', '', '', '', ''),
-('nuform', 'browseedit', 'FORM', 'nuBuilder Form', 'zzzzsys_form', 'zzzzsys_form_id', 'select ''#sfo_code#''', '', '', '', 'SELECT * FROM zzzzsys_form\nORDER BY sfo_code\n', '1', '', '', '', '', '', '1', '', '', '1', '', '', '1', '', '', '1', '', '', '', '', '', '', '', '$("[onkeydown^='';nuLister'']").addClass(''nuLister'');\n\n$(''#sfo_breadcrumb_title'').addClass(''sql'');\n$(''#sfo_add_display_condition'').addClass(''sql'');\n$(''#sfo_print_display_condition'').addClass(''sql'');\n$(''#sfo_browse_sql'').addClass(''sql'');\n$(''#sfo_save_display_condition'').addClass(''sql'');\n$(''#sfo_clone_display_condition'').addClass(''sql'');\n$(''#sfo_delete_display_condition'').addClass(''sql'');\n$(''#sfo_new_display_condition'').addClass(''sql'');\n$(''#sfo_before_browse_php'').addClass(''php'');\n$(''#sfo_before_open_php'').addClass(''php'');\n$(''#sfo_before_save_php'').addClass(''php'');\n$(''#sfo_after_save_php'').addClass(''php'');\n$(''#sfo_before_delete_php'').addClass(''php'');\n$(''#sfo_after_delete_php'').addClass(''php'');\n$(''#sfo_javascript'').addClass(''js'');\n  \n$(''.js'').dblclick(function() {\n	nuOpenAce(''Javascript'', this.id);\n});\n\n$(''.sql'').dblclick(function() {\n	nuOpenAce(''SQL'', this.id);\n});\n\n$(''.html'').dblclick(function() {\n	nuOpenAce(''HTML'', this.id);\n});\n\n$(''.php'').dblclick(function() {\n	nuOpenAce(''PHP'', this.id);\n});\n\n\nif(window.filter == ''justjs''){\n    \n    $(''#nuTab0'').remove();\n    $(''#nuDelete'').remove();\n    $(''#nuClone'').remove();\n    $(''#nuTab1'').remove();\n    $(''#nuTab2'').remove();\n    $(''#nuTab3'').remove();\n    $(''#nuTab4'').click();\n    $(''#nu_bc_0'').html($(''#sfo_description'').val());\n    \n}\n\n\n\nfunction nuFormColor(){\n\n    var h           =     $(''#sfo_type'').addClass(''nuEdited'');\n    var o           = [];\n    o[''browse'']		= Array(1,4);\n    o[''edit''] 		= Array(2,3,4);\n    o[''browseedit''] = Array(1,2,3,4);\n    o[''launch''] 	= Array(3,4);\n    o[''subform''] 	= Array(3,11);\n\n    $(''#sfo_type'').removeClass();\n    $(''#sfo_type'').addClass(''nu_''+$(''#sfo_type'').val());\n    \n    if(h){\n        $(''#sfo_type'').addClass(''nuEdited'');\n    }\n    \n    $("#sfo_type > option").each(function() {\n        $(this).addClass(''nu_''+this.value);\n    });\n\n    for(var i = 0 ; i < 7 ; i++){\n        $(''#nuTab'' + i).removeClass(''nuRelatedTab'');\n    }\n    \n    var t   = o[$(''#sfo_type'').val()];\n\n    $(''#nuTab0'').addClass(''nuRelatedTab'');\n\n    if(t !== undefined){\n        \n    	for(var i = 0 ; i < t.length ; i++){\n    		$(''#nuTab'' + t[i]).addClass(''nuRelatedTab'');		\n    	}\n    	\n    }\n    \n}\n\nnuFormColor();\n\nnuBuildSubformArray(''zzzzsys_tab_sf'');\nnuBuildSubformArray(''zzzzsys_browse_sf'');\n\n$("[data-nu-column=''nucolumn000'']").each(function() {\n    $(this).addClass(''nu_''+this.textContent);\n});\n\n\n\nfunction nuCopyToSort(t){\n\n    var o = $(''#'' + t.id);\n    var p = o.attr(''data-nu-prefix'');\n    var s = $(''#'' + p + ''sbr_sort'');\n    \n    if(s.val() == ''''){\n        s.val( o.val())\n        .change();\n    }\n\n}\n\n\n\nfunction nuEventList(){\n	\n	if($(''sob_all_type'').val() == ''subform''){\n		return [''onchange'',''onadd''];\n	}else{\n		return [''onblur'',''onchange'',''onfocus'',''onkeydown''];\n	}\n	\n}\n\n\n'),
+('nuform', 'browseedit', 'FORM', 'nuBuilder Form', 'zzzzsys_form', 'zzzzsys_form_id', 'select ''#sfo_code#''', '', '', '15', 'SELECT * FROM zzzzsys_form\nORDER BY sfo_code\n', '1', '', '', '', '', '', '1', '', '', '1', '', '', '1', '', '', '1', '', '', '', '', '', '', '', '$("[onkeydown^='';nuLister'']").addClass(''nuLister'');\n\n$(''#sfo_breadcrumb_title'').addClass(''sql'');\n$(''#sfo_add_display_condition'').addClass(''sql'');\n$(''#sfo_print_display_condition'').addClass(''sql'');\n$(''#sfo_browse_sql'').addClass(''sql'');\n$(''#sfo_save_display_condition'').addClass(''sql'');\n$(''#sfo_clone_display_condition'').addClass(''sql'');\n$(''#sfo_delete_display_condition'').addClass(''sql'');\n$(''#sfo_new_display_condition'').addClass(''sql'');\n$(''#sfo_before_browse_php'').addClass(''php'');\n$(''#sfo_before_open_php'').addClass(''php'');\n$(''#sfo_before_save_php'').addClass(''php'');\n$(''#sfo_after_save_php'').addClass(''php'');\n$(''#sfo_before_delete_php'').addClass(''php'');\n$(''#sfo_after_delete_php'').addClass(''php'');\n$(''#sfo_javascript'').addClass(''js'');\n  \n$(''.js'').dblclick(function() {\n	nuOpenAce(''Javascript'', this.id);\n});\n\n$(''.sql'').dblclick(function() {\n	nuOpenAce(''SQL'', this.id);\n});\n\n$(''.html'').dblclick(function() {\n	nuOpenAce(''HTML'', this.id);\n});\n\n$(''.php'').dblclick(function() {\n	nuOpenAce(''PHP'', this.id);\n});\n\n\nif(window.filter == ''justjs''){\n    \n    $(''#nuTab0'').remove();\n    $(''#nuDelete'').remove();\n    $(''#nuClone'').remove();\n    $(''#nuTab1'').remove();\n    $(''#nuTab2'').remove();\n    $(''#nuTab3'').remove();\n    $(''#nuTab4'').click();\n    $(''#nu_bc_0'').html($(''#sfo_description'').val());\n    \n}\n\n\n\nfunction nuFormColor(){\n\n    var h           =     $(''#sfo_type'').addClass(''nuEdited'');\n    var o           = [];\n    o[''browse'']		= Array(1,4);\n    o[''edit''] 		= Array(2,3,4);\n    o[''browseedit''] = Array(1,2,3,4);\n    o[''launch''] 	= Array(3,4);\n    o[''subform''] 	= Array(3,11);\n\n    $(''#sfo_type'').removeClass();\n    $(''#sfo_type'').addClass(''nu_''+$(''#sfo_type'').val());\n    \n    if(h){\n        $(''#sfo_type'').addClass(''nuEdited'');\n    }\n    \n    $("#sfo_type > option").each(function() {\n        $(this).addClass(''nu_''+this.value);\n    });\n\n    for(var i = 0 ; i < 7 ; i++){\n        $(''#nuTab'' + i).removeClass(''nuRelatedTab'');\n    }\n    \n    var t   = o[$(''#sfo_type'').val()];\n\n    $(''#nuTab0'').addClass(''nuRelatedTab'');\n\n    if(t !== undefined){\n        \n    	for(var i = 0 ; i < t.length ; i++){\n    		$(''#nuTab'' + t[i]).addClass(''nuRelatedTab'');		\n    	}\n    	\n    }\n    \n}\n\nnuFormColor();\n\nnuBuildSubformArray(''zzzzsys_tab_sf'');\nnuBuildSubformArray(''zzzzsys_browse_sf'');\n\n$("[data-nu-column=''nucolumn000'']").each(function() {\n    $(this).addClass(''nu_''+this.textContent);\n});\n\n\n\nfunction nuCopyToSort(t){\n\n    var o = $(''#'' + t.id);\n    var p = o.attr(''data-nu-prefix'');\n    var s = $(''#'' + p + ''sbr_sort'');\n    \n    if(s.val() == ''''){\n        s.val( o.val())\n        .change();\n    }\n\n}\n\n\n\nfunction nuEventList(){\n	\n	if($(''sob_all_type'').val() == ''subform''){\n		return [''onchange'',''onadd''];\n	}else{\n		return [''onblur'',''onchange'',''onfocus'',''onkeydown''];\n	}\n	\n}\n\n\n'),
 ('nubrowse', 'subform', 'FRMBR', 'Form Browse Subform', 'zzzzsys_browse', 'zzzzsys_browse_id', '', '', '', '', 'SELECT * FROM zzzzsys_browse\nORDER BY sbr_order\n', '1', '', '', '', '', '', '1', 'Save Me', '', '1', '', '', '1', '', '', '', '', '', '', '', '', '', '', ''),
 ('nutab', 'browseedit', 'TAB', 'Form Tab', 'zzzzsys_tab', 'zzzzsys_tab_id', '', '', '', '', 'SELECT * FROM zzzzsys_tab\nJOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id\nORDER BY syt_order', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '0', '', '', '', '', '', '', '', '\n$("[data-nu-column=''nucolumn000'']").each(function() {\n    $(this).addClass(''nu_''+this.innerHTML);\n});\n'),
 ('nuobject', 'browseedit', 'OBJECT', 'Object', 'zzzzsys_object', 'zzzzsys_object_id', '', '', '', '', 'SELECT * FROM zzzzsys_object\nJOIN zzzzsys_tab ON zzzzsys_tab_id = sob_all_zzzzsys_tab_id\nJOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id \n', '1', '', '', '', '', '', '1', '', '', '1', '', '', '1', '', '', '0', '', '', '', '', '', '', '', '\n$(''#sob_calc_formula'').addClass(''nuCalculator'');\n$(''#sob_all_display_condition'').addClass(''sql'');\n$(''#sob_all_default_value_sql'').addClass(''sql'');\n$(''#sob_display_sql'').addClass(''sql'');\n$(''#sob_select_sql'').addClass(''sql'');\n$(''#sob_lookup_php'').addClass(''php'');\n$(''#sob_lookup_javascript'').addClass(''js'');\n$(''#sob_html_code'').addClass(''html'');\n  \n$(''.js'').dblclick(function() {\n	nuOpenAce(''Javascript'', this.id);\n});\n\n\n$(''.js'').dblclick(function() {\n	nuOpenAce(''Javascript'', this.id);\n});\n\n$(''.sql'').dblclick(function() {\n	nuOpenAce(''SQL'', this.id);\n});\n\n$(''.html'').dblclick(function() {\n	nuOpenAce(''HTML'', this.id);\n});\n\n$(''.php'').dblclick(function() {\n	nuOpenAce(''PHP'', this.id);\n});\n\nnuObjectColor();\n\n$("[data-nu-column=''nucolumn000'']").each(function() {\n    $(this).addClass(''nu_''+this.textContent);\n});\n\nif(window.filter == ''justjs''){\n/*    \n    $(''#nuTab0'').remove();\n    $(''#nuTab1'').remove();\n    $(''#nuTab2'').remove();\n    $(''#nuTab3'').remove();\n    $(''#nuTab4'').remove();\n    $(''#nuTab5'').remove();\n    $(''#nuTab6'').click();\n    $(''#nu_bc_0'').html($(''#sfo_description'').val());\n*/\n}\n\n\nfunction nuObjectColor(){\n\n    $(''.nuValidate'').removeClass(''nuValidate'');\n\n	var o			= [];\n	o[''run'']		= 1;\n	o[''display'']	= 2;\n	o[''select'']		= 3;\n	o[''lookup'']		= 4;\n	o[''subform'']	= 5;\n	o[''input'']		= 6;\n	o[''html'']		= 7;\n	o[''calc'']		= 8;\n\n    $(''#sob_all_type'').addClass(''nu_''+$(''#sob_all_type'').val());\n    \n    $("#sob_all_type > option").each(function() {\n        $(this).addClass(''nu_''+this.value);\n    });\n	\n    var t   = o[$(''#sob_all_type'').val()];\n    \n$("[id^=''nuTab'']").removeClass(''nuRelatedTab'');\nfor(var i = 1 ; i < o.length ; i++){\n        $(''#nuTab'' + i).removeClass(''nuRelatedTab'');\n    }\n    \n    $(''#nuTab0'').addClass(''nuRelatedTab'');\n    $(''#nuTab'' + t).addClass(''nuRelatedTab'');\n    \n} \n\nfunction nuChooseEventList(){\n\n    if($(''#sob_all_type'').val() == ''subform''){\n        \n        return [''onchange'',''beforeadd'',''afteradd'', ''ondelete''];\n    \n    }else{\n        \n        return [''onblur'',''onchange'',''onfocus'',''onkeydown''];\n    \n    }\n\n}\n\n\n\nfunction nuAddToFormula(e){\n    \n    var fld = e.target.innerHTML;\n    var frm = $(''#sob_calc_formula'').val();\n\n    $(''#sob_calc_formula'').val(frm + '' '' + fld);\n    \n    if(fld == ''C''){\n        \n        $(''#sob_calc_formula'').val('''');\n        return;\n        \n    }\n\n    $(''#sob_calc_formula'').val(frm + '' '' + fld);\n    \n}\n\n'),
@@ -678,7 +564,7 @@ INSERT INTO `zzzzsys_form` (`zzzzsys_form_id`, `sfo_type`, `sfo_code`, `sfo_desc
 ('574665a15bbc1a1', 'browseedit', 'ACCGRP', 'Access Group', 'zzzzsys_user_group', 'zzzzsys_user_group_id', '', '', '', '', 'SELECT * FROM zzzzsys_user_group\nLEFT JOIN zzzzsys_form ON sug_zzzzsys_form_id = zzzzsys_form_id\nORDER BY sug_code', '1', '', '', '1', '', '', '1', '', '', '1', '', '', '1', '', '', '1', '', '', '', '', '', '', '', ''),
 ('nuuser', 'browseedit', 'ACCUSE', 'User', 'zzzzsys_user', 'zzzzsys_user_id', '', '', '', '15', 'SELECT * \nFROM zzzzsys_user \nLEFT JOIN zzzzsys_user_group ON sus_zzzzsys_user_group_id = zzzzsys_user_group_id \nORDER BY sus_name', '1', '', '', '1', '', '', '1', '', '', '1', '', '', '1', '', '', '1', '', '', '', '', '', '', '', ''),
 ('nubuildreport', 'browseedit', 'BLDREP', 'Build Report', 'zzzzsys_report', 'zzzzsys_report_id', '', '', '', '', 'SELECT * FROM zzzzsys_report\nLEFT JOIN zzzzsys_form ON zzzzsys_form_id = sre_zzzzsys_form_id', '1', '', '', '', '', '', '1', '', '', '1', '', '', '1', '', '', '', '', '', '', '', '', '', '', '//-- hidden field set to class - nuEdited (generally ignored except when editing Reports)\n\n$(''#sre_layout'').addClass(''nuEdited''); \n'),
-('nuphp', 'browseedit', 'PHPCODE', 'PHP Code', 'zzzzsys_php', 'zzzzsys_php_id', '', '', '', '', 'SELECT * FROM zzzzsys_php\r\nLEFT JOIN zzzzsys_form ON zzzzsys_form_id = sph_zzzzsys_form_id\r\nWHERE sph_system != 1\r\nORDER BY sph_code\r\n', '1', '', '', '0', '', '', '1', '', '', '1', '', '', '1', '', '', '0', '', '', '', '', '', '', '', '\n$(''#sph_php'').addClass(''php'');\n\n$(''.php'').dblclick(function() {\n	nuOpenAce(''PHP'', this.id);\n});\n\nif($(''#lib_sf000spl_library_zzzzsys_php_idcode'').val() != ''''){ //-- uses libraries\n\n    $(''#nuTab2'').addClass(''nuRelatedTab'');\n    \n}\n\nif(window.filter == ''justphp''){\n\n    var ev      = [];\n    ev[''BB'']    = ''Before Browse'';\n    ev[''BO'']    = ''Before Open'';\n    ev[''BS'']    = ''Before Save'';\n    ev[''AS'']    = ''After Save'';\n    ev[''BD'']    = ''Before Delete'';\n    ev[''AD'']    = ''After Delete'';\n    \n    var e       = ev[nuFORM.getCurrent().record_id.substr(-2)];\n    var f       = $(''#sfo_description'', window.parent.document).val();\n\n    $(''#nuTab0'').remove();\n    $(''#nuTab2'').remove();\n    $(''#nuTab1'').click();\n    $(''#nu_bc_0'').html(''<b>'' + e + ''</b> for : '' + f);\n    $(''#sph_code'').val(''SYS'')\n    $(''#sph_description'').val(''System PHP'')\n    \n}\n\n'),
+('nuphp', 'browseedit', 'PHPCODE', 'PHP Code', 'zzzzsys_php', 'zzzzsys_php_id', '', '', '', '', 'SELECT * FROM zzzzsys_php\r\nLEFT JOIN zzzzsys_form ON zzzzsys_form_id = sph_zzzzsys_form_id\r\nWHERE sph_system != 1\r\nORDER BY sph_code\r\n', '1', '', '', '0', '', '', '1', '', '', '1', '', '', '1', '', '', '0', '', '', '', '', '', '', '', '\n$(''#sph_php'').addClass(''php'');\n\n$(''.php'').dblclick(function() {\n	nuOpenAce(''PHP'', this.id);\n});\n\nif($(''#lib_sf000spl_library_zzzzsys_php_idcode'').val() != ''''){ //-- uses libraries\n\n    $(''#nuTab2'').addClass(''nuRelatedTab'');\n    \n}\n\nif(window.filter == ''justphp''){\n\n    var ev      = [];\n    ev[''BB'']    = ''Before Browse'';\n    ev[''BO'']    = ''Before Open'';\n    ev[''BS'']    = ''Before Save'';\n    ev[''AS'']    = ''After Save'';\n    ev[''BD'']    = ''Before Delete'';\n    ev[''AD'']    = ''After Delete'';\n    ev[''AB'']    = ''After Browse'';\n    \n    var e       = ev[nuFORM.getCurrent().record_id.substr(-2)];\n    var f       = $(''#sfo_description'', window.parent.document).val();\n\n    if(e == ''After Browse''){\n        var f   = $(''#sob_all_label'', window.parent.document).val();\n    }\n    \n\n    $(''#nuTab0'').remove();\n    $(''#nuTab2'').remove();\n    $(''#nuTab1'').click();\n    $(''#nu_bc_0'').html(''<b>'' + e + ''</b> for : '' + f);\n    $(''#sph_code'').val(''SYS'')\n    $(''#sph_description'').val(''System PHP'')\n    \n}\n\n'),
 ('nublank', 'launch', 'BLA', 'Blank', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'var reportID    = nuFORM.current.record_id;\r\n\r\n$(''#nuTab0'').hide();\r\n\r\n$(''.nuActionHolder'').css(''text-align'',''center'');\r\n\r\nnuAppendActionButton(''Print'',"nuRunReport(''" + reportID + "'');");\r\nnuAppendActionButton(''Email'',"nuEmailReport(''" + reportID + "'');");\r\n\r\n\r\n\r\n'),
 ('nuaccessgroup', 'subform', 'GAL', 'Groups Access Level', 'zzzzsys_user_group_access_level', 'zzzzsys_user_group_access_level_id', '', '', '', '', 'SELECT * FROM zzzzsys_user_group_access_level', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('5757a4b7181e365', 'browse', 'RUN', 'Run Form, Report or Procedure', 'zzzzsys_run_list', 'id', '', '', '', '', 'SELECT zzzzsys_form_id AS id, ''Form'' AS run, sfo_code AS code, sfo_description AS description FROM zzzzsys_run_list', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '\n$("[data-nu-column=''nucolumn000'']").each(function() {\n\n    $(this).addClass(''nu_''+this.innerHTML);\n\n});'),
@@ -698,7 +584,7 @@ INSERT INTO `zzzzsys_form` (`zzzzsys_form_id`, `sfo_type`, `sfo_code`, `sfo_desc
 ('nuerror', 'edit', 'ERROR', 'Error Form', 'zzzzsys_form', 'zzzzsys_form_id', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '$(''#error'').hide(); \n$(''#nuTabHolder'').hide(); \n$(''#nuBreadcrumbHolder'').hide(); \n$(''#nuActionHolder'').hide();  \n\nfor(i = 0; i < window.nuFORM.getCurrent().filter.length; i++) {  	\n\n	$(''#nuRECORD'').append(''<div id="errorMessage'' + i + ''" style="margin: 10px"><span class="fake-link">''+window.nuFORM.getCurrent().filter[i][0]+''</span></div>''); 	\n	\n	$(''#errorMessage'' + i).click({\n		param1: window.nuFORM.getCurrent().filter[i][1]}, nuCloseAndFocus\n	); 	 \n	\n}  \n\nfunction nuCloseAndFocus(event) {  	\n\n	if(event.data.param1 != '''') {\n		$(''#'' + event.data.param1, window.parent.document).focus(); 	\n	}\n	\n	$(''#dialogClose'', window.parent.document).click(); \n	\n}'),
 ('58338c35b340428', 'browse', 'FFCO', 'Fast Form Custom Objects', 'zzzzsys_object', 'zzzzsys_object_id', '', '', '', '10', 'SELECT *\nFROM zzzzsys_object\nWHERE sob_all_fast_form_description != ''''\n', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '\n$("[data-nu-column=''nucolumn003'']").each(function() {\n    $(this).addClass(''nu_'' + this.textContent);\n});\n\n$(''.nuBrowseTable'').attr(''draggable'', ''true'');\n\n$(''#nuBreadcrumbHolder'').remove();\n\nwindow.nuTYPE = ''nuSelectCustomObject'';\n\n\n//$(''.nuBrowseTable'').on(''dragstart'', ''nuSetDataTransfer'');\n\n$(''.nuBrowseTable'').on(''dragstart'', function(event){\n    nuSetDataTransfer(event);\n});\n\n\n$(''.nuBrowseTable'').on(''drag'', function(event){\n    console.log(event.currentTarget.id);\n});\n\n\nfunction nuSetDataTransfer(e){\n    \n	var row                         = $(''#'' + e.target.id).attr(''data-nu-row'');\n	var field_name                  = $(''#'' + row + ''001'').html();\n	var label                       = $(''#'' + row + ''002'').html();\n	var Class                       = $(''#'' + row + ''003'').html();\n	var id                          = $(''#'' + e.target.id).attr(''data-nu-primary-key'');\n\n    e.dataTransfer                  = e.originalEvent.dataTransfer;\n	e.dataTransfer.effectAllowed    = ''copy''; \n	e.dataTransfer.setData(''id'', id);\n    e.dataTransfer.setData(''label'', label);\n    e.dataTransfer.setData(''field_name'', field_name);\n    e.dataTransfer.setData(''Class'', Class);\n\n	var i                           = document.createElement(''img'');\n    i.src                           = Class + ''.png'';\n    i.width                         = 20;\n    \n    e.dataTransfer.setDragImage(i,3,3);\n    \n}\n\n\n\n'),
 ('583f372b53b972c', 'subform', 'FFO', 'Fast Form Objects', 'zzzzsys_object', 'zzzzsys_object_id', '', '', '', '', 'SELECT * FROM zzzzsys_object\nJOIN zzzzsys_tab ON zzzzsys_tab_id = sob_all_zzzzsys_tab_id\nJOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id\n', '1', '', '', '', '', '', '1', '', '', '1', '', '', '1', '', '', '0', '', '', '', '', '', '', '', ''),
-('585efbcfe4dfaf4', 'browse', 'CALC', 'Values On This Form And Its Subforms', '#TABLE_ID#', 'thevalue', '', '', '', '10', 'SELECT * FROM #TABLE_ID#', '0', '', '', '0', '', '', '0', '', '', '0', '', '', '0', '', '', '0', '', '', '', '', '', '', '', '\nwindow.nuTYPE = ''nuSelectCalcField'';\n\nfunction nuSelectCalcField(e){\n\n    var row = e.target.id.substr(0,8);\n    var fld = $(''#'' + row + ''004'').html();\n    var frm = $(''#sob_calc_formula'', parent.window.document).val();\n\n    $(''#sob_calc_formula'', parent.window.document).val(frm + '' '' + fld);\n\n}\n\n');
+('585efbcfe4dfaf4', 'browse', 'CALC', 'Values On This Form And Its Subforms', '#TABLE_ID#', 'thevalue', '', '', '', '4', 'SELECT * FROM #TABLE_ID#', '0', '', '', '0', '', '', '0', '', '', '0', '', '', '0', '', '', '0', '', '', '', '', '', '', '', '\nwindow.nuTYPE = ''nuSelectCalcField'';\n\nfunction nuSelectCalcField(e){\n\n    var row = e.target.id.substr(0,8);\n    var fld = $(''#'' + row + ''004'').html();\n    var frm = $(''#sob_calc_formula'', parent.window.document).val();\n\n    $(''#sob_calc_formula'', parent.window.document).val(frm + '' '' + fld);\n\n}\n\n');
 
 -- --------------------------------------------------------
 
@@ -985,17 +871,17 @@ INSERT INTO `zzzzsys_object` (`zzzzsys_object_id`, `sob_all_zzzzsys_form_id`, `s
 ('570d9e1c5a6bcfd', 'nuobject', 'select', 'sob_all_readonly', 'Read Only', '570d90df5ce8e1a', 140, 246, 109, 50, 18, '', '1', 'right', '1', '0', '', '', 'sob_all_readonly', '', '', '', '', '', '', '0', '0|No|1|Yes', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', '', 'text', ''),
 ('570d9e6b7f6353a', 'nuobject', 'textarea', 'sob_all_display_condition', 'Display Condition', '570d90df5ce8e1a', 150, 298, 112, 250, 18, '', '1', 'left', '0', '0', '', '', 'sob_all_display_condition', '', '', '', '', '', '', '0', '0|No|1|Yes', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', '', 'text', ''),
 ('570d9f1b9e51828', 'nuobject', 'textarea', 'sob_all_default_value_sql', 'Default Value', '570d90df5ce8e1a', 160, 324, 112, 250, 18, '', '1', 'left', '0', '0', '', '', 'sob_all_default_value_sql', '', '', '', '', '', '', '0', '0|No|1|Yes', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', '', 'text', ''),
-('570d9f7b580e04a', 'nuobject', 'textarea', 'sob_html_code', 'HTML', '570d90df73d3a2a', 410, 20, 100, 600, 400, '', '1', 'left', '0', '0', '', '', 'sob_html_code', '', '', '', '', '', '', '0', '0|No|1|Yes', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', '', 'text', ''),
-('570d9fa3e7160c2', 'nuobject', 'textarea', 'sob_display_sql', 'Display', '570d90df63e6972', 230, 20, 100, 600, 400, '', '1', 'left', '0', '0', '', '', 'sob_display_sql', '', '', '', '', '', '', '0', '0|No|1|Yes', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', '', 'text', ''),
+('570d9f7b580e04a', 'nuobject', 'textarea', 'sob_html_code', 'HTML', '570d90df73d3a2a', 400, 20, 100, 600, 200, '', '1', 'left', '0', '0', '', '', 'sob_html_code', '', '', '', '', '', '', '0', '0|No|1|Yes', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', '', 'text', ''),
+('570d9fa3e7160c2', 'nuobject', 'textarea', 'sob_display_sql', 'Display', '570d90df63e6972', 230, 20, 100, 600, 250, '', '1', 'left', '0', '0', '', '', 'sob_display_sql', '', '', '', '', '', '', '0', '0|No|1|Yes', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', '', 'text', ''),
 ('570d9ffcd716321', 'nuobject', 'textarea', 'sob_select_sql', 'SQL/List', '570d90df670db61', 240, 50, 200, 500, 150, '', '1', 'left', '0', '0', '', '', 'sob_select_sql', '', '', '', '', '', '', '0', '0|No|1|Yes', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', '', 'text', ''),
 ('570da046d5f9f4c', 'nuobject', 'select', 'sob_select_multiple', 'Multiple', '570d90df670db61', 250, 20, 200, 50, 18, '', '1', 'left', '0', '0', '', '', 'sob_select_multiple', '', '', '', '', '', '', '0', '0|No|1|Yes', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', '', 'text', ''),
-('570da149b76e0e6', 'nuobject', 'select', 'sob_input_type', 'Input Type', '570d90df707867b', 390, 50, 100, 120, 18, '', '1', 'left', '0', '0', '', '', 'sob_input_type', '', '', '', '', '', '', '0', 'button|Button|\ncheckbox|Checkbox|\nnumber|Number|\npassword|Password|\ntext|Text', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', '', 'text', ''),
-('570da31addae07f', 'nuobject', 'select', 'sob_input_format', 'Format', '570d90df707867b', 400, 20, 100, 120, 18, '', '1', 'right', '0', '0', '', '', 'sob_input_format', '', '', '', '', '', '', '0', '0|10000|1|10000.0|2|10000.00|3|10000.000|4|10000.0000|5|10000.00000|6|13-Jan-2007|7|13-01-2007|8|Jan-13-2007|9|01-13-2007|10|13-Jan-07|11|13-01-07|12|Jan-13-07|13|01-13-07|14|10,000|15|10,000.0|16|10,000.00|17|10,000.000|18|10,000.0000|19|10,000.00000|20|10000|21|10000,0|22|10000,00|23|10000,000|24|10000,0000|25|10000,00000|26|10.000|27|10.000,0|28|10.000,00|29|10.000,000|30|10.000,0000|31|10.000,00000|32|2007-01-13', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', '', 'text', ''),
-('570da52f2828508', 'nuobject', 'lookup', 'sob_subform_zzzzsys_form_id', 'Form', '570d90df6d35fde', 340, 20, 200, 100, 18, '', '1', 'right', '0', '0', '', '', 'sob_subform_zzzzsys_form_id', '', '', '', '', '', '', '0', 'SELECT zzzzsys_form_id, CONCAT(sfo_code, '' - '', sfo_description)\nFROM zzzzsys_form\nORDER BY sfo_code', 'sfo_code', 'sfo_description', '200', '', 'nuform', '', '', 'zzzzsys_form', 'nuform', '', '1', '', '', '', '', '', ''),
-('570da72cb4282e3', 'nuobject', 'input', 'sob_subform_foreign_key', 'Foreign Key', '570d90df6d35fde', 350, 50, 200, 200, 18, '', '1', 'left', '0', '0', '', '', 'sob_subform_foreign_key', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', '', 'text', ''),
-('570da7b07ce4d7a', 'nuobject', 'select', 'sob_subform_add', 'Addable', '570d90df6d35fde', 360, 80, 200, 50, 18, '', '1', 'left', '0', '0', '', '', 'sob_subform_add', '', '', '', '', '', '', '0', '0|No|1|Yes', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', '', 'text', ''),
-('570da7d7d12aea2', 'nuobject', 'select', 'sob_subform_delete', 'Deleteable', '570d90df6d35fde', 370, 110, 200, 50, 18, '', '1', 'left', '0', '0', '', '', 'sob_subform_delete', '', '', '', '', '', '', '0', '0|No|1|Yes', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', '', 'text', ''),
-('570da861e15f8f6', 'nuobject', 'select', 'sob_subform_type', 'Type', '570d90df6d35fde', 380, 140, 200, 80, 18, '', '1', 'left', '0', '0', '', '', 'sob_subform_type', '', '', '', '', '', '', '0', 'g|Grid|f|Form', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', '', 'text', ''),
+('570da149b76e0e6', 'nuobject', 'select', 'sob_input_type', 'Input Type', '570d90df707867b', 380, 50, 100, 120, 18, '', '1', 'left', '0', '0', '', '', 'sob_input_type', '', '', '', '', '', '', '0', 'button|Button|\ncheckbox|Checkbox|\nnumber|Number|\npassword|Password|\ntext|Text', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', '', 'text', ''),
+('570da31addae07f', 'nuobject', 'select', 'sob_input_format', 'Format', '570d90df707867b', 390, 20, 100, 120, 18, '', '1', 'right', '0', '0', '', '', 'sob_input_format', '', '', '', '', '', '', '0', '0|10000|1|10000.0|2|10000.00|3|10000.000|4|10000.0000|5|10000.00000|6|13-Jan-2007|7|13-01-2007|8|Jan-13-2007|9|01-13-2007|10|13-Jan-07|11|13-01-07|12|Jan-13-07|13|01-13-07|14|10,000|15|10,000.0|16|10,000.00|17|10,000.000|18|10,000.0000|19|10,000.00000|20|10000|21|10000,0|22|10000,00|23|10000,000|24|10000,0000|25|10000,00000|26|10.000|27|10.000,0|28|10.000,00|29|10.000,000|30|10.000,0000|31|10.000,00000|32|2007-01-13', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', '', 'text', ''),
+('570da52f2828508', 'nuobject', 'lookup', 'sob_subform_zzzzsys_form_id', 'Form', '570d90df6d35fde', 330, 20, 200, 100, 18, '', '1', 'right', '0', '0', '', '', 'sob_subform_zzzzsys_form_id', '', '', '', '', '', '', '0', 'SELECT zzzzsys_form_id, CONCAT(sfo_code, '' - '', sfo_description)\nFROM zzzzsys_form\nORDER BY sfo_code', 'sfo_code', 'sfo_description', '200', '', 'nuform', '', '', 'zzzzsys_form', 'nuform', '', '1', '', '', '', '', '', ''),
+('570da72cb4282e3', 'nuobject', 'input', 'sob_subform_foreign_key', 'Foreign Key', '570d90df6d35fde', 340, 50, 200, 200, 18, '', '1', 'left', '0', '0', '', '', 'sob_subform_foreign_key', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', '', 'text', ''),
+('570da7b07ce4d7a', 'nuobject', 'select', 'sob_subform_add', 'Addable', '570d90df6d35fde', 350, 80, 200, 50, 18, '', '1', 'left', '0', '0', '', '', 'sob_subform_add', '', '', '', '', '', '', '0', '0|No|1|Yes', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', '', 'text', ''),
+('570da7d7d12aea2', 'nuobject', 'select', 'sob_subform_delete', 'Deleteable', '570d90df6d35fde', 360, 110, 200, 50, 18, '', '1', 'left', '0', '0', '', '', 'sob_subform_delete', '', '', '', '', '', '', '0', '0|No|1|Yes', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', '', 'text', ''),
+('570da861e15f8f6', 'nuobject', 'select', 'sob_subform_type', 'Type', '570d90df6d35fde', 370, 140, 200, 80, 18, '', '1', 'left', '0', '0', '', '', 'sob_subform_type', '', '', '', '', '', '', '0', 'g|Grid|f|Form', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', '', 'text', ''),
 ('570da8ac71acec7', 'nuobject', 'lookup', 'sob_run_zzzzsys_form_id', 'Run', '570d90df60880c2', 190, 36, 141, 100, 18, '', '1', 'right', '0', '0', '', '', 'sob_run_zzzzsys_form_id', '', '', '', '', '', '', '0', 'SELECT zzzzsys_form_id, CONCAT(sfo_code, '' - '', sfo_description)\nFROM zzzzsys_form\nORDER BY sfo_code', 'code', 'CONCAT(run, '' - '', description)', '200', '', '5757a4b7181e365', '', '', 'zzzzsys_run_list', '', '', '', '', '', '', '', '', ''),
 ('570da93be3f323f', 'nuobject', 'input', 'sob_run_filter', 'Filter', '570d90df60880c2', 200, 66, 141, 200, 18, '', '1', 'left', '0', '0', '', '', 'sob_run_filter', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', '', 'text', ''),
 ('570da986cb6807a', 'nuobject', 'input', 'sob_run_id', 'Record ID', '570d90df60880c2', 210, 96, 141, 200, 18, '', '1', 'left', '0', '0', '', '', 'sob_run_id', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', '', 'text', ''),
@@ -1004,7 +890,7 @@ INSERT INTO `zzzzsys_object` (`zzzzsys_object_id`, `sob_all_zzzzsys_form_id`, `s
 ('570dabca9be44fd', 'nuobject', 'input', 'sob_lookup_code', 'Code', '570d90df6a2c12a', 270, 57, 165, 200, 18, '', '1', 'left', '0', '0', '', '', 'sob_lookup_code', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', '', 'text', ''),
 ('570dabf5a2e2b8f', 'nuobject', 'input', 'sob_lookup_description', 'Description', '570d90df6a2c12a', 290, 85, 165, 200, 18, '', '1', 'left', '0', '0', '', '', 'sob_lookup_description', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', '', 'text', ''),
 ('570dac54b62da77', 'nuobject', 'input', 'sob_lookup_description_width', 'Width', '570d90df6a2c12a', 300, 85, 434, 50, 18, '', '1', 'right', '0', '0', '', 'SELECT 0;', 'sob_lookup_description_width', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', '', 'text', ''),
-('570dadc061c6ef5', 'nuobject', 'textarea', 'sob_lookup_javascript', 'Javascript To Be Run<br>After Populating Fields', '570d90df6a2c12a', 310, 362, 165, 600, 100, '', '1', 'left', '0', '0', '', '', 'sob_lookup_javascript', '', '', '', '', '', '', '0', '0|No|1|Yes', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', '', 'text', ''),
+('570dadc061c6ef5', 'nuobject', 'textarea', 'sob_lookup_javascript', 'Javascript To Be Run<br>After Populating Fields', '570d90df6a2c12a', 310, 175, 165, 600, 100, '', '1', 'left', '0', '0', '', '', 'sob_lookup_javascript', '', '', '', '', '', '', '0', '0|No|1|Yes', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', '', 'text', ''),
 ('570db01f6dd4d3d', 'nulookup', 'input', 'zzzzsys_slo_object_name', 'Form Object Name', '570dafc86862c1b', 0, 20, 200, 274, 18, '', '1', 'left', '1', '0', '', '', 'zzzzsys_slo_object_name', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', '', 'text', ''),
 ('570db0522404442', 'nulookup', 'input', 'zzzzsys_slo_field_function_name', 'Field / Function Name', '570dafc86862c1b', 0, 40, 200, 270, 18, '', '1', 'left', '1', '0', '', '', 'zzzzsys_slo_field_function_name', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', '', 'text', ''),
 ('570db786c678c27', 'nuhome', 'run', 'form_button', 'Forms', '569dc4ed270f08a', 60, 50, 92, 150, 30, '', '1', 'right', '1', '0', '', '', 'form_button', '', 'nuform', '', 'b', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
@@ -1080,12 +966,12 @@ INSERT INTO `zzzzsys_object` (`zzzzsys_object_id`, `sob_all_zzzzsys_form_id`, `s
 ('57a7d77ccd5d248', '57a7c1cb78bf3a3', 'input', 'trl_english', 'English', '57a7c1cb78c31d5', 20, 70, 92, 400, 18, '', '1', 'left', '2', '0', '', '', 'trl_english', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('57a7d7a35f01f40', '57a7c1cb78bf3a3', 'input', 'trl_translation', 'Translation', '57a7c1cb78c31d5', 30, 101, 92, 400, 18, '', '1', 'left', '2', '0', '', '', 'trl_translation', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('57a93d17300512b', 'nupassword', 'input', 'new_password_check', 'Re-Enter New Password', '57abe72610d666d', 40, 133, 181, 200, 18, '', '1', 'left', '1', '0', '', '', 'new_password_check', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'password', ''),
-('57e9ac7558a551b', 'nuobject', 'input', 'sob_all_fast_form_description', 'Description If Available In Fast Forms', '57e9abf690319a4', 450, 101, 253, 300, 18, '', '1', 'left', '0', '0', '', '', 'sob_all_fast_form_description', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', '', 'text', ''),
+('57e9ac7558a551b', 'nuobject', 'input', 'sob_all_fast_form_description', 'Description If Available In Fast Forms', '57e9abf690319a4', 440, 101, 253, 300, 18, '', '1', 'left', '0', '0', '', '', 'sob_all_fast_form_description', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', '', 'text', ''),
 ('57abea0d8fc5446', 'nupassword', 'input', 'new_password', 'Enter New Password', '57abe72610d666d', 30, 104, 181, 200, 18, '', '1', 'left', '1', '0', '', '', 'new_password', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'password', ''),
 ('57d62bdf8dd4459', '56773cb405f4913', 'run', 'aframe', 'FORM', '56777715b87666e', 90, 0, 557, 650, 600, '', '1', 'right', '1', '0', '', '', 'aframe', '', 'nuuser', 'Admin', 'i', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('57e8595cdef6edc', 'nupassword', 'input', 'old_password', 'Enter Current Password', '57abe72610d666d', 20, 75, 181, 200, 18, '', '1', 'left', '1', '0', '', '', 'old_password', '', '', '', '', '', 'SELECT CONCAT(''( '', sus_login_name, '' )'')\nFROM zzzzsys_user\nWHERE zzzzsys_user_id = ''#RECORD_ID#''', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'password', ''),
 ('57eb03abed05e20', 'nuphplibrary', 'lookup', 'spl_library_zzzzsys_php_id', 'Include', '57eaf962bd0a957', 60, 556, 152, 100, 18, '', '1', 'right', '1', '0', '', '', 'spl_library_zzzzsys_php_id', '', '', '', '', '', '', '0', 'SELECT zzzzsys_form_id, CONCAT(sfo_code, '' - '', sfo_description)\nFROM zzzzsys_form\nORDER BY sfo_code', 'sph_code', 'sph_description', '220', '', 'nuphp', '', '', 'zzzzsys_php', '', '', '', '', '', '', '', '', ''),
-('5811808723db54b', 'nuobject', 'input', 'ab_event', 'After Browse', '570d90df6a2c12a', 330, 123, 165, 150, 25, '', '1', 'center', '0', '0', '', '', 'ab_event', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'button', ''),
+('5811808723db54b', 'nuobject', 'input', 'ab_event', 'After Browse', '570d90df6a2c12a', 320, 123, 165, 150, 25, '', '1', 'center', '0', '0', '', '', 'ab_event', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'button', ''),
 ('57edbb1638832c4', '57edbac65e1c52a', 'textarea', 'com_name', 'Name', '57edbac65e1d42e', 10, 0, 0, 100, 20, '', '1', '', '0', '0', '', '', 'com_name', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('57fadb3206fceda', 'nuerror', 'input', 'error', '', '57fad2784b27d77', 10, 10, 10, 800, 200, '', '0', 'left', '0', '0', '', '', 'error', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('5811633909eeadd', 'nuform', 'input', 'bo_event', 'Before Open', '5707303145b7760', 400, 262, 98, 129, 25, '', '1', 'center', '0', '0', '', '', 'bo_event', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'button', ''),
@@ -1107,14 +993,12 @@ INSERT INTO `zzzzsys_object` (`zzzzsys_object_id`, `sob_all_zzzzsys_form_id`, `s
 ('58338d5893ec00a', '583361606250b6e', 'run', 'aframe', 'FORM', '583361606251aef', 20, 43, 705, 600, 390, '', '1', 'right', '1', '0', '', '', 'aframe', '', '58338c35b340428', '', 'i', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('583f37bc5bba917', '583f372b53b972c', 'input', 'sob_all_id', ' Field Name', '5840d1f62187912', 20, 20, 30, 200, 18, '', '1', 'left', '1', '0', '', '', 'sob_all_id', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', '', 'text', ''),
 ('583f37d3224bcc8', '583f372b53b972c', 'input', 'sob_all_label', ' Label', '5840d1f62187912', 10, 49, 24, 200, 18, '', '1', 'left', '0', '0', '', '', 'sob_all_label', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', '', 'text', ''),
-('583f49912ae53dc', 'nuobject', 'subform', 'lookup_sf', 'Update Fields', '570d90df6a2c12a', 320, 165, 165, 600, 180, '', '1', 'left', '0', '0', '', '', 'lookup_sf', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'nulookup', 'slo_zzzzsys_object_id', '1', '1', 'g', '', '', '', ''),
 ('583f4ed643fcc3b', '583361606250b6e', 'subform', 'obj_sf', 'Objects', '583361606251aef', 10, 80, 97, 455, 390, '', '1', 'right', '0', '0', '', '', 'aframe', '', '58338c35b340428', '', 'i', '', '', '', '', '', '', '', '', '', '', '', 'zzzzsys_object', '583f372b53b972c', 'sob_all_zzzzsys_form_id', '1', '1', 'g', '', '', '', ''),
 ('5845061c0e179c7', '583f372b53b972c', 'input', 'custom_id', ' ', '5840d1f62187912', 30, 20, 10, 0, 18, '', '1', 'left', '0', '0', 'SELECT 0', '', 'sob_all_label', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', '', 'text', ''),
 ('584de442bfbd456', 'nuobject', 'input', 'javascriptbtn', 'Javascript', '570d90df5ce8e1a', 80, 320, 420, 150, 25, '', '1', 'center', '0', '0', '', '', 'preiviewbtn', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'button', ''),
-('585e5705f3e9867', 'nuobject', 'html', 'nucalculator', 'Operators', '5851cf915a1c653', 420, 97, 68, 200, 200, '', '1', 'right', '0', '1', '', '', 'sfo_javascript', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '\n<table>\n  <tr>\n    <td onclick=''nuAddToFormula(event)''  class=''nuCalculatorButton''>+</td>\n    <td onclick=''nuAddToFormula(event)''  class=''nuCalculatorButton''>-</td> \n    <td onclick=''nuAddToFormula(event)''  class=''nuCalculatorButton''>*</td>\n  </tr>\n  <tr>\n    <td onclick=''nuAddToFormula(event)''  class=''nuCalculatorButton''>/</td>\n    <td onclick=''nuAddToFormula(event)''  class=''nuCalculatorButton''>(</td>\n    <td onclick=''nuAddToFormula(event)''  class=''nuCalculatorButton''>)</td>\n  </tr>\n  <tr>\n    <td onclick=''nuAddToFormula(event)''  class=''nuCalculatorButton''>?</td>\n    <td onclick=''nuAddToFormula(event)''  class=''nuCalculatorButton''>:</td> \n    <td onclick=''nuAddToFormula(event)''  class=''nuCalculatorButton''>=</td> \n  </tr>\n\n  <tr>\n    <td onclick=''nuAddToFormula(event)''  class=''nuCalculatorButton''>1</td>\n    <td onclick=''nuAddToFormula(event)''  class=''nuCalculatorButton''>2</td> \n    <td onclick=''nuAddToFormula(event)''  class=''nuCalculatorButton''>3</td> \n  </tr>\n\n  <tr>\n    <td onclick=''nuAddToFormula(event)''  class=''nuCalculatorButton''>4</td>\n    <td onclick=''nuAddToFormula(event)''  class=''nuCalculatorButton''>5</td> \n    <td onclick=''nuAddToFormula(event)''  class=''nuCalculatorButton''>6</td> \n  </tr>\n\n  <tr>\n    <td onclick=''nuAddToFormula(event)''  class=''nuCalculatorButton''>7</td>\n    <td onclick=''nuAddToFormula(event)''  class=''nuCalculatorButton''>8</td> \n    <td onclick=''nuAddToFormula(event)''  class=''nuCalculatorButton''>9</td> \n  </tr>\n\n  <tr>\n    <td onclick=''nuAddToFormula(event)''  class=''nuCalculatorButton''>0</td>\n    <td onclick=''nuAddToFormula(event)''  class=''nuCalculatorButton''></td> \n    <td onclick=''nuAddToFormula(event)''  class=''nuCalculatorButton''>C</td> \n  </tr>\n\n</table>\n'),
-('5851cfeb30f9047', 'nuobject', 'input', 'sob_calc_formula', 'Formula', '5851cf915a1c653', 430, 27, 68, 550, 30, '', '1', 'left', '0', '1', '', '', 'sfo_javascript', ' +', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-('585efdb9945d363', '56773cb405f4913', 'run', 'aframe2', 'FORM', '567898dbc543710', 90, 50, 400, 450, 420, '', '1', 'right', '1', '0', '', '', 'aframe', '', '585efbcfe4dfaf4', '585efbcfe4dfaf4', 'i', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-('586d9964e5ab10c', 'nuobject', 'run', 'calcobjects', 'Calc', '5851cf915a1c653', 440, 98, 296, 325, 450, '', '1', 'right', '1', '0', '', '', 'aframe', '', '585efbcfe4dfaf4', '#FORM_ID#', 'i', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
+('585e5705f3e9867', 'nuobject', 'html', 'nucalculator', 'Operators', '5851cf915a1c653', 410, 97, 68, 200, 200, '', '1', 'right', '0', '1', '', '', 'sfo_javascript', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '\n<table>\n  <tr>\n    <td onclick=''nuAddToFormula(event)''  class=''nuCalculatorButton''>+</td>\n    <td onclick=''nuAddToFormula(event)''  class=''nuCalculatorButton''>-</td> \n    <td onclick=''nuAddToFormula(event)''  class=''nuCalculatorButton''>*</td>\n  </tr>\n  <tr>\n    <td onclick=''nuAddToFormula(event)''  class=''nuCalculatorButton''>/</td>\n    <td onclick=''nuAddToFormula(event)''  class=''nuCalculatorButton''>(</td>\n    <td onclick=''nuAddToFormula(event)''  class=''nuCalculatorButton''>)</td>\n  </tr>\n  <tr>\n    <td onclick=''nuAddToFormula(event)''  class=''nuCalculatorButton''>?</td>\n    <td onclick=''nuAddToFormula(event)''  class=''nuCalculatorButton''>:</td> \n    <td onclick=''nuAddToFormula(event)''  class=''nuCalculatorButton''>=</td> \n  </tr>\n\n  <tr>\n    <td onclick=''nuAddToFormula(event)''  class=''nuCalculatorButton''>1</td>\n    <td onclick=''nuAddToFormula(event)''  class=''nuCalculatorButton''>2</td> \n    <td onclick=''nuAddToFormula(event)''  class=''nuCalculatorButton''>3</td> \n  </tr>\n\n  <tr>\n    <td onclick=''nuAddToFormula(event)''  class=''nuCalculatorButton''>4</td>\n    <td onclick=''nuAddToFormula(event)''  class=''nuCalculatorButton''>5</td> \n    <td onclick=''nuAddToFormula(event)''  class=''nuCalculatorButton''>6</td> \n  </tr>\n\n  <tr>\n    <td onclick=''nuAddToFormula(event)''  class=''nuCalculatorButton''>7</td>\n    <td onclick=''nuAddToFormula(event)''  class=''nuCalculatorButton''>8</td> \n    <td onclick=''nuAddToFormula(event)''  class=''nuCalculatorButton''>9</td> \n  </tr>\n\n  <tr>\n    <td onclick=''nuAddToFormula(event)''  class=''nuCalculatorButton''>0</td>\n    <td onclick=''nuAddToFormula(event)''  class=''nuCalculatorButton''></td> \n    <td onclick=''nuAddToFormula(event)''  class=''nuCalculatorButton''>C</td> \n  </tr>\n\n</table>\n'),
+('5851cfeb30f9047', 'nuobject', 'input', 'sob_calc_formula', 'Formula', '5851cf915a1c653', 420, 27, 68, 550, 30, '', '1', 'left', '0', '1', '', '', 'sfo_javascript', ' +', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+('586d9964e5ab10c', 'nuobject', 'run', 'calcobjects', 'Calc', '5851cf915a1c653', 430, 98, 296, 325, 250, '', '1', 'right', '1', '0', '', '', 'aframe', '', '585efbcfe4dfaf4', '#FORM_ID#', 'i', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -1148,7 +1032,7 @@ INSERT INTO `zzzzsys_php` (`zzzzsys_php_id`, `sph_code`, `sph_description`, `sph
 ('nuform_BS', 'BS', 'BS (FORM)', 'nubuilder', '    $o = ''#sfo_type#'';\n\n    if(''#sfo_type#''             == ''''){nuDisplayError(''<b>Type</b> Cannot Be Blank..'', ''sfo_type'');}\n    if(''#sfo_code#''             == ''''){nuDisplayError(''<b>Code</b> Cannot Be Blank..'', ''sfo_code'');}\n    if(''#sfo_description#''      == ''''){nuDisplayError(''<b>Description</b> Cannot Be Blank..'', ''sfo_description'');}\n\n\n    \n    \n    if($o == ''browseedit'' || $o == ''subform'' || $o == ''browse''){\n        \n        if($o != ''browse''){\n            nuCheckTabs();\n        }\n        \n        if($o != ''subform''){\n            nuCheckBrowse();\n        }\n        \n        if(''#sfo_browse_sql#''   == ''''){nuDisplayError(''<b>Browse SQL</b> Cannot Be Blank..'', ''sfo_browse_sql'');}\n    }\n\n    if($o == ''edit'' or $o == ''launch''){\n        nuCheckTabs();\n    }\n\n    if($o != ''launch''){\n        if(''#sfo_table#''            == ''''){nuDisplayError(''<b>Table Name</b> Cannot Be Blank..'', ''sfo_table'');}\n        if(''#sfo_primary_key#''      == ''''){nuDisplayError(''<b>Primary Key</b> Cannot Be Blank..'', ''sfo_primary_key'');}\n    }\n\nfunction nuCheckBrowse(){\n\n    $r  = 0;\n    $sf = nuSubformObject(''zzzzsys_browse_sf'');\n\n    for($i = 0 ; $i < count($sf[''rows'']) ; $i++){\n       if($sf[''rows''][$i][8] == 0){$r++;}\n    }\n    \n    if($r == 0){\n       nuDisplayError(''<b>Must have at least 1</b> Browse Column Defined..'');\n    }\n    \n}\n\nfunction nuCheckTabs(){\n    \n    $r  = 0;\n    $sf = nuSubformObject(''zzzzsys_tab_sf'');\n    \n    for($i = 0 ; $i < count($sf[''rows'']) ; $i++){\n       if($sf[''rows''][$i][3] == 0){$r++;}\n    }\n    \n    if($r == 0){\n       nuDisplayError(''<b>Must have at least 1</b> Tab Defined..'');\n    }\n    \n}', '', '', '1', ''),
 ('nuphp_AS', '', 'After Save for  ', 'nubuilder', '\nif(''#sph_php#'' == ''''){\n    nuRunQuery("DELETE FROM zzzzsys_php WHERE zzzzsys_php_id = ''#RECORD_ID#''");\n}\n', '', '', '1', ''),
 ('nuphp_BS', '', 'Before Save for  ', 'nubuilder', '$rid    = ''#RECORD_ID#'';\n$php    = ''#sph_php#'';\n\nif($rid != ''-1'' and $rid != ''-2''){ \n    \n    $s      = "SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = ''$rid''";\n    $t      = nuRunQuery($s);\n    $r      = db_fetch_object($t);\n    \n    if(db_num_rows($t) == 0){\n    \n        $c              = $r->sob_all_id;\n        $p              = $r->sob_lookup_php;\n        \n        if(trim($p) == ''''){return;}\n        \n        $s              = "\n        INSERT INTO zzzzsys_php\n        (zzzzsys_php_id, sph_system)\n        VALUES\n        (''$rid'', ''1'')\n        ";\n        \n        nuRunQuery($s);\n        \n    }\n    \n}\n\n', '', '', '1', ''),
-('568b50020fc7a62_AB', 'com_business_id', 'After Browse (com_business_id)', 'nubuilder', 'nudebug("After Browse (com_business_id)");', '', '', '1', ''),
+('568b50020fc7a62_AB', 'com_business_id', 'After Browse (com_business_id)', 'nubuilder', '\nnuSetFormValue(''com_phone'', 1234);\nnuSetFormValue(''com_name'', 777);\nnuSetFormValue(''com_age'', 1966);\n\n\n', '', '', '1', ''),
 ('nupassword_BS', 'BS', 'BS (PASS)', 'nubuilder', '\n\n$is		= md5(''#old_password#'');\n$was	= md5(''#new_password_check#'');\n$will	= md5(''#new_password#'');\n$ses	= ''#SESSION_ID#'';\nnudebug("$is,$was,$will");\n\n$s      = "\n\n    SELECT * \n    FROM zzzzsys_session\n    WHERE zzzzsys_session_id = ''$ses''\n\n";\n\n$t  = nuRunQuery($s);\n$r  = db_fetch_object($t);\n$j  = json_decode($r->sss_access);\n\n$s      = "\n\n    SELECT * \n    FROM zzzzsys_user\n    WHERE zzzzsys_user_id = ''#USER_ID#''\n    AND sus_login_password = ''$is''\n\n";\n\n$t  = nuRunQuery($s);\nnudebug(''31 '' . $s);\n\nif(db_num_rows($t) == 0){\n\n    nuDisplayError(''Incorrect Password'');\n    return;\n    \n}\n\nif($will == $was){\n\n    $s  = "\n\n    UPDATE zzzzsys_user \n    SET sus_login_password = ''$will''\n    WHERE zzzzsys_user_id = ''#RECORD_ID#''\n    AND sus_login_password = ''$is''\n    \n    ";\n\nnudebug(''qqqq ''.$s);\n    nuRunQuery($s);\n\n}else{\n    \n    nuDisplayError(''"Enter New Password" Must be the same as "Re-Enter New Password"'');\n\n}\n\n\n\n\n\n\n\n', '', '', '1', ''),
 ('nuuser_AS', 'AS', 'AS (ACCUSE)', 'nubuilder', 'if(''#new_password#'' == ''#check_password#'' && ''#check_password#'' != ''#check_p''.''assword#'' && ''#check_password#'' != ''''){\n\n	$pw	= md5(''#check_password#'');\n	nuRunQuery("UPDATE zzzzsys_user SET sus_login_password = ''$pw'' WHERE zzzzsys_user_id = ''#RECORD_ID#''");\n\n}\n\n', '', '', '1', ''),
 ('5757a4b7181e365_BB', 'BB', 'BB (RUN)', 'nubuilder', '$s = "\n\nDROP VIEW IF EXISTS zzzzsys_run_list;\nCREATE VIEW zzzzsys_run_list AS\nSELECT zzzzsys_form_id AS id, ''Form'' AS run, sfo_code AS code, sfo_description AS description FROM zzzzsys_form\nUNION\nSELECT zzzzsys_report_id AS id, ''Report'' AS run, sre_code AS code, sre_description AS description FROM zzzzsys_report\nUNION\nSELECT zzzzsys_php_id AS id, ''Procedure'' AS run, sph_code AS code, sph_description AS description FROM zzzzsys_php\nORDER BY code;\n\n";\n\nnuRunQuery($s);', '', '', '1', ''),
@@ -1156,7 +1040,8 @@ INSERT INTO `zzzzsys_php` (`zzzzsys_php_id`, `sph_code`, `sph_description`, `sph
 ('nuobject_BS', 'BS', 'BS (OBJECT)', 'nubuilder', '    $o = ''#sob_all_type#'';\n\n    if(''#sob_all_zzzzsys_tab_id#''             == ''''){nuDisplayError(''Type Cannot Be Blank..'', ''sob_all_zzzzsys_tab_idcode'');}\n    if(''#sob_all_type#''             == ''''){nuDisplayError(''Type Cannot Be Blank..'', ''sob_all_type'');}\n    if(''#sob_all_zzzzsys_form_id#''  == ''''){nuDisplayError(''Tab - Form Cannot Be Blank..'', ''sob_all_zzzzsys_form_idcode'');}\n    if(''#sob_all_id#''               == ''''){nuDisplayError(''ID Cannot Be Blank..'', ''sob_all_id'');}\n    if(''#sob_all_label#''   == ''''){nuDisplayError(''Label Cannot Be Blank..'', ''sob_all_label'');}\n    if(''#sob_all_order#''   == ''''){nuDisplayError(''Order Cannot Be Blank..'', ''sob_all_order'');}\n    if(''#sob_all_top#''   == ''''){nuDisplayError(''Top Cannot Be Blank..'', ''sob_all_top'');}\n    if(''#sob_all_left#''   == ''''){nuDisplayError(''Left Cannot Be Blank..'', ''sob_all_left'');}\n    if(''#sob_all_width#''   == ''''){nuDisplayError(''Width Cannot Be Blank..'', ''sob_all_width'');}\nnudebug(''nuHash : |#sob_all_type#| '' . print_r($_POST[''nuHash''],1));\n\n    if(''#sob_all_height#''   == ''''){nuDisplayError(''Height Cannot Be Blank..'', ''sob_all_height'');}\n    if(''#sob_all_cloneable#''   == ''''){nuDisplayError(''Cloneable Cannot Be Blank..'', ''sob_all_cloneable'');}\n    if(''#sob_all_align#''   == ''''){nuDisplayError(''Align Cannot Be Blank..'', ''sob_all_align'');}\n    if(''#sob_all_validate#''   == ''''){nudebug(''sob_all_validate : #sob_all_validate#'');nuDisplayError(''Validation Cannot Be Blank..'', ''sob_all_validate'');}\n    if(''#sob_all_readonly#''   == ''''){nuDisplayError(''Read Only Cannot Be Blank..'', ''sob_all_readonly'');}\n\n\n    if($o == ''display''){\n        if(''#sob_display_sql#''   == ''''){nuDisplayError(''Display Cannot Be Blank..'',''sob_display_sql'');}\n    }\n\n    if($o == ''html''){\n        if(''#sob_html_code#''   == ''''){nuDisplayError(''HTML Cannot Be Blank..'',''sob_html_code'');}\n    }\n\n    if($o == ''lookup''){\n        if(''#sob_lookup_zzzzsys_form_id#''   == ''''){nuDisplayError(''Form Cannot Be Blank..'', ''sob_lookup_zzzzsys_form_idcode'');}\n        if(''#sob_lookup_code#''   == ''''){nuDisplayError(''Code Cannot Be Blank..'', ''sob_lookup_code'');}\n        if(''#sob_lookup_description#''   == ''''){nuDisplayError(''Descrition Cannot Be Blank..'', ''sob_lookup_description'');}\n        if(''#sob_lookup_description_width#''   == ''''){nuDisplayError(''Width Cdddannot Be Blank..'', ''sob_lookup_description_width'');}\n    }\n\n    if($o == ''run''){\n        if(''#sob_run_zzzzsys_form_id#''   == ''''){nuDisplayError(''Run Cannot Be Blank..'', ''sob_run_zzzzsys_form_idcode'');}\n        if(''#sob_run_method#''   == ''''){nuDisplayError(''Method Cannot Be Blank..'', ''sob_run_method'');}\n    }\n\n\n    if($o == ''select''){\n        if(''#sob_select_multiple#''   == ''''){nuDisplayError(''Multiple Cannot Be Blank..'', ''sob_select_multiple'');}\n        if(''#sob_select_sql#''   == ''''){nuDisplayError(''SQL/List Cannot Be Blank..'', ''sob_select_sql'');}\n    }\n\n    if($o == ''subform''){\n        if(''#sob_subform_zzzzsys_form_id#''   == ''''){nuDisplayError(''Form Cannot Be Blank..'', ''sob_subform_zzzzsys_form_idcode'');}\n        if(''#sob_subform_foreign_key#''   == ''''){nuDisplayError(''Foreign Key Cannot Be Blank..'', ''sob_subform_foreign_key'');}\n        if(''#sob_subform_add#''   == ''''){nuDisplayError(''Addable Cannot Be Blank..'', ''sob_subform_add'');}\n        if(''#sob_subform_delete#''   == ''''){nuDisplayError(''Deletable Cannot Be Blank..'', ''sob_subform_delete'');}\n        if(''#sob_subform_type#''   == ''''){nuDisplayError(''Type Cannot Be Blank..'', ''sob_subform_type'');}\n    }\n\n    if($o == ''''){\n        if(''#sfo_browse_sql#''   == ''''){nuDisplayError(''Browse SQL Cannot Be Blank..'', ''sfo_browse_sql'');}\n    }\n', '', '', '1', ''),
 ('nuform_AS', 'AS', 'AS (FORM)', 'nubuilder', '$s  = "\r\n    SELECT * \r\n    FROM zzzzsys_browse \r\n    WHERE sbr_zzzzsys_form_id = ''#RECORD_ID#''\r\n    ORDER BY sbr_order;\r\n";\r\n\r\n\r\n$t = nuRunQuery($s);\r\n$o = 10;\r\n\r\nwhile($r = db_fetch_object($t)){\r\n        \r\n    $s  = "\r\n        UPDATE zzzzsys_browse \r\n        SET sbr_order = ''$o''\r\n        WHERE zzzzsys_browse_id = ''$r->zzzzsys_browse_id''\r\n        ORDER BY sbr_order;\r\n    ";\r\n    \r\n    nuRunQuery($s);\r\n    \r\n    $o = $o + 10;    \r\n    \r\n}\r\n\r\n$s  = "\r\n    SELECT * \r\n    FROM zzzzsys_tab \r\n    WHERE syt_zzzzsys_form_id = ''#RECORD_ID#''\r\n    ORDER BY syt_order;\r\n";\r\n\r\n$t = nuRunQuery($s);\r\n$o = 10;\r\n\r\nwhile($r = db_fetch_object($t)){\r\n        \r\n    $s  = "\r\n        UPDATE zzzzsys_tab \r\n        SET syt_order = ''$o''\r\n        WHERE zzzzsys_tab_id = ''$r->zzzzsys_tab_id''\r\n        ORDER BY syt_order;\r\n    ";\r\n    \r\n    nuRunQuery($s);\r\n    \r\n    $o = $o + 10;    \r\n    \r\n}\r\n\r\n', '', '', '1', ''),
 ('nuobject_BO', '1', '1', '1', 'nudebug(''hello #FORM_ID#bob'');\n\n$f  = nuGetFormProperties(''#FORM_ID#'');\n$j  = "\\n\\nwindow.nuObjectFields = nuFORM.tableFields(''$f->sfo_table'');\\n\\n";\n\nnuAddJavascript($j);\n\n\n', '', '', '', ''),
-('585efbcfe4dfaf4_BB', 'SYS', 'System PHP', '', '$s = "\n\nCREATE TABLE #TABLE_ID#\n\nSELECT \n   sob_all_zzzzsys_form_id AS theform,\n   ''FORM'' AS theparent,\n   sob_all_id AS thechild,\n   CONCAT(''FORM'', ''.'', sob_all_id) as thevalue,\n   sob_all_zzzzsys_form_id as thefilter\nFROM zzzzsys_object \nWHERE sob_all_type = ''input''\n\nUNION \n\nSELECT \n   su.sob_all_zzzzsys_form_id AS theform,\n   su.sob_all_id AS theparent,\n   inp.sob_all_id AS thechild,\n   CONCAT(su.sob_all_id, ''.'', inp.sob_all_id) as thevalue,\n   su.sob_all_zzzzsys_form_id as thefilter\nFROM zzzzsys_object AS su\nJOIN zzzzsys_object AS inp ON su.sob_subform_zzzzsys_form_id = inp.sob_all_zzzzsys_form_id\nWHERE su.sob_all_type = ''subform''\nAND inp.sob_all_type = ''input''\n\n";\n    \nnuRunQuery($s);\n\n', '', '', '', '');
+('585efbcfe4dfaf4_BB', 'SYS', 'System PHP', '', '$s = "\n\nCREATE TABLE #TABLE_ID#\n\nSELECT \n   sob_all_zzzzsys_form_id AS theform,\n   ''FORM'' AS theparent,\n   sob_all_id AS thechild,\n   CONCAT(''FORM'', ''.'', sob_all_id) as thevalue,\n   sob_all_zzzzsys_form_id as thefilter\nFROM zzzzsys_object \nWHERE sob_all_type = ''input''\n\nUNION \n\nSELECT \n   su.sob_all_zzzzsys_form_id AS theform,\n   su.sob_all_id AS theparent,\n   inp.sob_all_id AS thechild,\n   CONCAT(su.sob_all_id, ''.'', inp.sob_all_id) as thevalue,\n   su.sob_all_zzzzsys_form_id as thefilter\nFROM zzzzsys_object AS su\nJOIN zzzzsys_object AS inp ON su.sob_subform_zzzzsys_form_id = inp.sob_all_zzzzsys_form_id\nWHERE su.sob_all_type = ''subform''\nAND inp.sob_all_type = ''input''\n\n";\n    \nnuRunQuery($s);\n\n', '', '', '', ''),
+('56c0fd692478b9e_AB', 'SYS', 'System PHP', '', '\nnuSetFormValue(''#ROW#emp_name'', 2222);', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -1225,31 +1110,6 @@ CREATE TABLE `zzzzsys_session` (
   `sss_timeout` datetime NOT NULL,
   `sss_access` mediumtext NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `zzzzsys_session`
---
-
-INSERT INTO `zzzzsys_session` (`zzzzsys_session_id`, `sss_timeout`, `sss_access`) VALUES
-('5874021fb4aceb1', '2017-01-10 10:05:27', '{"session":{"zzzzsys_user_group_id":"","zzzzsys_user_id":"globeadmin","sug_zzzzsys_form_id":"nuhome","global_access":"1"},"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","57edbac65e1c52a","583361606250b6e","58338c35b340428","583f372b53b972c","585efbcfe4dfaf4","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuerror","nuevent","nuform","nuhome","nulaunchdates","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nuphplibrary","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["568b50020fc7a62_AB","574665a15bbc1a1_BO","57578be0057a49f","5757a4b7181e365_BB","57db70b7aa22cda","57f6e1f954955c1","581135daea4f878","585efbcfe4dfaf4_BB","nudebug_BD","nuform_AS","nuform_BS","nulaunchdates_BO","nuobject_BO","nuobject_BS","nupassword_BS","nuphp_AS","nuphp_BS","nuuser_AS"]}'),
-('587d3fb1e0b134a', '2017-01-17 10:18:33', '{"session":{"zzzzsys_user_group_id":"","zzzzsys_user_id":"globeadmin","sug_zzzzsys_form_id":"nuhome","global_access":"1"},"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","57edbac65e1c52a","583361606250b6e","58338c35b340428","583f372b53b972c","585efbcfe4dfaf4","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuerror","nuevent","nuform","nuhome","nulaunchdates","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nuphplibrary","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["568b50020fc7a62_AB","574665a15bbc1a1_BO","57578be0057a49f","5757a4b7181e365_BB","57db70b7aa22cda","57f6e1f954955c1","581135daea4f878","585efbcfe4dfaf4_BB","nudebug_BD","nuform_AS","nuform_BS","nulaunchdates_BO","nuobject_BO","nuobject_BS","nupassword_BS","nuphp_AS","nuphp_BS","nuuser_AS"]}'),
-('587d45fad807149', '2017-01-17 10:45:22', '{"session":{"zzzzsys_user_group_id":"","zzzzsys_user_id":"globeadmin","sug_zzzzsys_form_id":"nuhome","global_access":"1"},"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","57edbac65e1c52a","583361606250b6e","58338c35b340428","583f372b53b972c","585efbcfe4dfaf4","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuerror","nuevent","nuform","nuhome","nulaunchdates","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nuphplibrary","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["568b50020fc7a62_AB","574665a15bbc1a1_BO","57578be0057a49f","5757a4b7181e365_BB","57db70b7aa22cda","57f6e1f954955c1","581135daea4f878","585efbcfe4dfaf4_BB","nudebug_BD","nuform_AS","nuform_BS","nulaunchdates_BO","nuobject_BO","nuobject_BS","nupassword_BS","nuphp_AS","nuphp_BS","nuuser_AS"]}'),
-('587d4e7c6a2bf33', '2017-01-17 11:21:40', '{"session":{"zzzzsys_user_group_id":"","zzzzsys_user_id":"globeadmin","sug_zzzzsys_form_id":"nuhome","global_access":"1"},"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","57edbac65e1c52a","583361606250b6e","58338c35b340428","583f372b53b972c","585efbcfe4dfaf4","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuerror","nuevent","nuform","nuhome","nulaunchdates","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nuphplibrary","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["568b50020fc7a62_AB","574665a15bbc1a1_BO","57578be0057a49f","5757a4b7181e365_BB","57db70b7aa22cda","57f6e1f954955c1","581135daea4f878","585efbcfe4dfaf4_BB","nudebug_BD","nuform_AS","nuform_BS","nulaunchdates_BO","nuobject_BO","nuobject_BS","nupassword_BS","nuphp_AS","nuphp_BS","nuuser_AS"]}'),
-('587d4e8e4a8bd48', '2017-01-17 11:21:58', '{"session":{"zzzzsys_user_group_id":"","zzzzsys_user_id":"globeadmin","sug_zzzzsys_form_id":"nuhome","global_access":"1"},"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","57edbac65e1c52a","583361606250b6e","58338c35b340428","583f372b53b972c","585efbcfe4dfaf4","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuerror","nuevent","nuform","nuhome","nulaunchdates","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nuphplibrary","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["568b50020fc7a62_AB","574665a15bbc1a1_BO","57578be0057a49f","5757a4b7181e365_BB","57db70b7aa22cda","57f6e1f954955c1","581135daea4f878","585efbcfe4dfaf4_BB","nudebug_BD","nuform_AS","nuform_BS","nulaunchdates_BO","nuobject_BO","nuobject_BS","nupassword_BS","nuphp_AS","nuphp_BS","nuuser_AS"]}'),
-('587d4eafa312cce', '2017-01-17 11:22:31', '{"session":{"zzzzsys_user_group_id":"","zzzzsys_user_id":"globeadmin","sug_zzzzsys_form_id":"nuhome","global_access":"1"},"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","57edbac65e1c52a","583361606250b6e","58338c35b340428","583f372b53b972c","585efbcfe4dfaf4","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuerror","nuevent","nuform","nuhome","nulaunchdates","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nuphplibrary","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["568b50020fc7a62_AB","574665a15bbc1a1_BO","57578be0057a49f","5757a4b7181e365_BB","57db70b7aa22cda","57f6e1f954955c1","581135daea4f878","585efbcfe4dfaf4_BB","nudebug_BD","nuform_AS","nuform_BS","nulaunchdates_BO","nuobject_BO","nuobject_BS","nupassword_BS","nuphp_AS","nuphp_BS","nuuser_AS"]}'),
-('587d4ef0507fb95', '2017-01-17 11:23:36', '{"session":{"zzzzsys_user_group_id":"","zzzzsys_user_id":"globeadmin","sug_zzzzsys_form_id":"nuhome","global_access":"1"},"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","57edbac65e1c52a","583361606250b6e","58338c35b340428","583f372b53b972c","585efbcfe4dfaf4","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuerror","nuevent","nuform","nuhome","nulaunchdates","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nuphplibrary","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["568b50020fc7a62_AB","574665a15bbc1a1_BO","57578be0057a49f","5757a4b7181e365_BB","57db70b7aa22cda","57f6e1f954955c1","581135daea4f878","585efbcfe4dfaf4_BB","nudebug_BD","nuform_AS","nuform_BS","nulaunchdates_BO","nuobject_BO","nuobject_BS","nupassword_BS","nuphp_AS","nuphp_BS","nuuser_AS"]}'),
-('587d50285434a8b', '2017-01-17 11:28:48', '{"session":{"zzzzsys_user_group_id":"","zzzzsys_user_id":"globeadmin","sug_zzzzsys_form_id":"nuhome","global_access":"1"},"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","57edbac65e1c52a","583361606250b6e","58338c35b340428","583f372b53b972c","585efbcfe4dfaf4","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuerror","nuevent","nuform","nuhome","nulaunchdates","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nuphplibrary","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["568b50020fc7a62_AB","574665a15bbc1a1_BO","57578be0057a49f","5757a4b7181e365_BB","57db70b7aa22cda","57f6e1f954955c1","581135daea4f878","585efbcfe4dfaf4_BB","nudebug_BD","nuform_AS","nuform_BS","nulaunchdates_BO","nuobject_BO","nuobject_BS","nupassword_BS","nuphp_AS","nuphp_BS","nuuser_AS"]}'),
-('587d524c2e4002a', '2017-01-17 11:37:56', '{"session":{"zzzzsys_user_group_id":"","zzzzsys_user_id":"globeadmin","sug_zzzzsys_form_id":"nuhome","global_access":"1"},"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","57edbac65e1c52a","583361606250b6e","58338c35b340428","583f372b53b972c","585efbcfe4dfaf4","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuerror","nuevent","nuform","nuhome","nulaunchdates","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nuphplibrary","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["568b50020fc7a62_AB","574665a15bbc1a1_BO","57578be0057a49f","5757a4b7181e365_BB","57db70b7aa22cda","57f6e1f954955c1","581135daea4f878","585efbcfe4dfaf4_BB","nudebug_BD","nuform_AS","nuform_BS","nulaunchdates_BO","nuobject_BO","nuobject_BS","nupassword_BS","nuphp_AS","nuphp_BS","nuuser_AS"]}'),
-('587d52ada401fbb', '2017-01-17 11:39:33', '{"session":{"zzzzsys_user_group_id":"","zzzzsys_user_id":"globeadmin","sug_zzzzsys_form_id":"nuhome","global_access":"1"},"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","57edbac65e1c52a","583361606250b6e","58338c35b340428","583f372b53b972c","585efbcfe4dfaf4","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuerror","nuevent","nuform","nuhome","nulaunchdates","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nuphplibrary","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["568b50020fc7a62_AB","574665a15bbc1a1_BO","57578be0057a49f","5757a4b7181e365_BB","57db70b7aa22cda","57f6e1f954955c1","581135daea4f878","585efbcfe4dfaf4_BB","nudebug_BD","nuform_AS","nuform_BS","nulaunchdates_BO","nuobject_BO","nuobject_BS","nupassword_BS","nuphp_AS","nuphp_BS","nuuser_AS"]}'),
-('587d52eb662328f', '2017-01-17 11:40:35', '{"session":{"zzzzsys_user_group_id":"","zzzzsys_user_id":"globeadmin","sug_zzzzsys_form_id":"nuhome","global_access":"1"},"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","57edbac65e1c52a","583361606250b6e","58338c35b340428","583f372b53b972c","585efbcfe4dfaf4","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuerror","nuevent","nuform","nuhome","nulaunchdates","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nuphplibrary","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["568b50020fc7a62_AB","574665a15bbc1a1_BO","57578be0057a49f","5757a4b7181e365_BB","57db70b7aa22cda","57f6e1f954955c1","581135daea4f878","585efbcfe4dfaf4_BB","nudebug_BD","nuform_AS","nuform_BS","nulaunchdates_BO","nuobject_BO","nuobject_BS","nupassword_BS","nuphp_AS","nuphp_BS","nuuser_AS"]}'),
-('587eab7350de3e5', '2017-01-18 12:10:35', '{"session":{"zzzzsys_user_group_id":"","zzzzsys_user_id":"globeadmin","sug_zzzzsys_form_id":"nuhome","global_access":"1"},"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","57edbac65e1c52a","583361606250b6e","58338c35b340428","583f372b53b972c","585efbcfe4dfaf4","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuerror","nuevent","nuform","nuhome","nulaunchdates","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nuphplibrary","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["568b50020fc7a62_AB","574665a15bbc1a1_BO","57578be0057a49f","5757a4b7181e365_BB","57db70b7aa22cda","57f6e1f954955c1","581135daea4f878","585efbcfe4dfaf4_BB","nudebug_BD","nuform_AS","nuform_BS","nulaunchdates_BO","nuobject_BO","nuobject_BS","nupassword_BS","nuphp_AS","nuphp_BS","nuuser_AS"]}'),
-('587eae45508371f', '2017-01-18 12:22:37', '{"session":{"zzzzsys_user_group_id":"","zzzzsys_user_id":"globeadmin","sug_zzzzsys_form_id":"nuhome","global_access":"1"},"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","57edbac65e1c52a","583361606250b6e","58338c35b340428","583f372b53b972c","585efbcfe4dfaf4","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuerror","nuevent","nuform","nuhome","nulaunchdates","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nuphplibrary","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["568b50020fc7a62_AB","574665a15bbc1a1_BO","57578be0057a49f","5757a4b7181e365_BB","57db70b7aa22cda","57f6e1f954955c1","581135daea4f878","585efbcfe4dfaf4_BB","nudebug_BD","nuform_AS","nuform_BS","nulaunchdates_BO","nuobject_BO","nuobject_BS","nupassword_BS","nuphp_AS","nuphp_BS","nuuser_AS"]}'),
-('587eaea2ebf069b', '2017-01-18 12:24:10', '{"session":{"zzzzsys_user_group_id":"","zzzzsys_user_id":"globeadmin","sug_zzzzsys_form_id":"nuhome","global_access":"1"},"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","57edbac65e1c52a","583361606250b6e","58338c35b340428","583f372b53b972c","585efbcfe4dfaf4","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuerror","nuevent","nuform","nuhome","nulaunchdates","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nuphplibrary","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["568b50020fc7a62_AB","574665a15bbc1a1_BO","57578be0057a49f","5757a4b7181e365_BB","57db70b7aa22cda","57f6e1f954955c1","581135daea4f878","585efbcfe4dfaf4_BB","nudebug_BD","nuform_AS","nuform_BS","nulaunchdates_BO","nuobject_BO","nuobject_BS","nupassword_BS","nuphp_AS","nuphp_BS","nuuser_AS"]}'),
-('587eaf806d2e9bd', '2017-01-18 12:27:52', '{"session":{"zzzzsys_user_group_id":"","zzzzsys_user_id":"globeadmin","sug_zzzzsys_form_id":"nuhome","global_access":"1"},"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","57edbac65e1c52a","583361606250b6e","58338c35b340428","583f372b53b972c","585efbcfe4dfaf4","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuerror","nuevent","nuform","nuhome","nulaunchdates","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nuphplibrary","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["568b50020fc7a62_AB","574665a15bbc1a1_BO","57578be0057a49f","5757a4b7181e365_BB","57db70b7aa22cda","57f6e1f954955c1","581135daea4f878","585efbcfe4dfaf4_BB","nudebug_BD","nuform_AS","nuform_BS","nulaunchdates_BO","nuobject_BO","nuobject_BS","nupassword_BS","nuphp_AS","nuphp_BS","nuuser_AS"]}'),
-('587eb21bb96bc95', '2017-01-18 12:38:59', '{"session":{"zzzzsys_user_group_id":"","zzzzsys_user_id":"globeadmin","sug_zzzzsys_form_id":"nuhome","global_access":"1"},"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","57edbac65e1c52a","583361606250b6e","58338c35b340428","583f372b53b972c","585efbcfe4dfaf4","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuerror","nuevent","nuform","nuhome","nulaunchdates","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nuphplibrary","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["568b50020fc7a62_AB","574665a15bbc1a1_BO","57578be0057a49f","5757a4b7181e365_BB","57db70b7aa22cda","57f6e1f954955c1","581135daea4f878","585efbcfe4dfaf4_BB","nudebug_BD","nuform_AS","nuform_BS","nulaunchdates_BO","nuobject_BO","nuobject_BS","nupassword_BS","nuphp_AS","nuphp_BS","nuuser_AS"]}'),
-('587eb4482ff7327', '2017-01-18 12:48:16', '{"session":{"zzzzsys_user_group_id":"","zzzzsys_user_id":"globeadmin","sug_zzzzsys_form_id":"nuhome","global_access":"1"},"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","57edbac65e1c52a","583361606250b6e","58338c35b340428","583f372b53b972c","585efbcfe4dfaf4","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuerror","nuevent","nuform","nuhome","nulaunchdates","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nuphplibrary","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["568b50020fc7a62_AB","574665a15bbc1a1_BO","57578be0057a49f","5757a4b7181e365_BB","57db70b7aa22cda","57f6e1f954955c1","581135daea4f878","585efbcfe4dfaf4_BB","nudebug_BD","nuform_AS","nuform_BS","nulaunchdates_BO","nuobject_BO","nuobject_BS","nupassword_BS","nuphp_AS","nuphp_BS","nuuser_AS"]}'),
-('587eb8ce57edf6d', '2017-01-18 13:07:34', '{"session":{"zzzzsys_user_group_id":"","zzzzsys_user_id":"globeadmin","sug_zzzzsys_form_id":"nuhome","global_access":"1"},"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","57edbac65e1c52a","583361606250b6e","58338c35b340428","583f372b53b972c","585efbcfe4dfaf4","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuerror","nuevent","nuform","nuhome","nulaunchdates","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nuphplibrary","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["568b50020fc7a62_AB","574665a15bbc1a1_BO","57578be0057a49f","5757a4b7181e365_BB","57db70b7aa22cda","57f6e1f954955c1","581135daea4f878","585efbcfe4dfaf4_BB","nudebug_BD","nuform_AS","nuform_BS","nulaunchdates_BO","nuobject_BO","nuobject_BS","nupassword_BS","nuphp_AS","nuphp_BS","nuuser_AS"]}'),
-('587fe8cee02dd6f', '2017-01-19 10:44:38', '{"session":{"zzzzsys_user_group_id":"","zzzzsys_user_id":"globeadmin","sug_zzzzsys_form_id":"nuhome","global_access":"1"},"forms":["56773cb405f4913","5678ab2c48c5c41","568b508eec00d80","56c513162acd102","574665a15bbc1a1","5757a4b7181e365","57637ad7b560755","577b4d78ef9a2a0","57a29441f16c351","57a7c1cb78bf3a3","57edbac65e1c52a","583361606250b6e","58338c35b340428","583f372b53b972c","585efbcfe4dfaf4","nuaccess","nuaccessforms","nuaccessgroup","nuaccessreport","nublank","nubrowse","nubuildreport","nudebug","nuerror","nuevent","nuform","nuhome","nulaunchdates","nulookup","nunonsystemform","nuobject","nupassword","nuphp","nuphplibrary","nurunphp","nurunreport","nutab","nutimezone","nuuser"],"reports":["574b9845a681d27"],"procedures":["568b50020fc7a62_AB","574665a15bbc1a1_BO","57578be0057a49f","5757a4b7181e365_BB","57db70b7aa22cda","57f6e1f954955c1","581135daea4f878","585efbcfe4dfaf4_BB","nudebug_BD","nuform_AS","nuform_BS","nulaunchdates_BO","nuobject_BO","nuobject_BS","nupassword_BS","nuphp_AS","nuphp_BS","nuuser_AS"]}');
 
 -- --------------------------------------------------------
 
@@ -1499,22 +1359,22 @@ INSERT INTO `zzzzsys_user_group_access_level` (`zzzzsys_user_group_access_level_
 -- --------------------------------------------------------
 
 --
--- Table structure for table `___nu1587d4ef42cae0___`
+-- Table structure for table `___nu1588e52b0cefc6___`
 --
 
-CREATE TABLE `___nu1587d4ef42cae0___` (
-  `theform` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `theparent` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `thechild` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `thevalue` text CHARACTER SET utf8 NOT NULL,
-  `thefilter` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `___nu1588e52b0cefc6___` (
+  `theform` varchar(300) NOT NULL DEFAULT '',
+  `theparent` varchar(300) NOT NULL DEFAULT '',
+  `thechild` varchar(300) NOT NULL DEFAULT '',
+  `thevalue` text NOT NULL,
+  `thefilter` varchar(300) NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `___nu1587d4ef42cae0___`
+-- Dumping data for table `___nu1588e52b0cefc6___`
 --
 
-INSERT INTO `___nu1587d4ef42cae0___` (`theform`, `theparent`, `thechild`, `thevalue`, `thefilter`) VALUES
+INSERT INTO `___nu1588e52b0cefc6___` (`theform`, `theparent`, `thechild`, `thevalue`, `thefilter`) VALUES
 ('56773cb405f4913', 'FORM', 'com_name', 'FORM.com_name', '56773cb405f4913'),
 ('56773cb405f4913', 'FORM', 'com_address', 'FORM.com_address', '56773cb405f4913'),
 ('56773cb405f4913', 'FORM', 'com_suburb', 'FORM.com_suburb', '56773cb405f4913'),
@@ -1628,22 +1488,22 @@ INSERT INTO `___nu1587d4ef42cae0___` (`theform`, `theparent`, `thechild`, `theva
 -- --------------------------------------------------------
 
 --
--- Table structure for table `___nu1587d4efb7c1ef___`
+-- Table structure for table `___nu1588e58d16911e___`
 --
 
-CREATE TABLE `___nu1587d4efb7c1ef___` (
-  `theform` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `theparent` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `thechild` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `thevalue` text CHARACTER SET utf8 NOT NULL,
-  `thefilter` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `___nu1588e58d16911e___` (
+  `theform` varchar(300) NOT NULL DEFAULT '',
+  `theparent` varchar(300) NOT NULL DEFAULT '',
+  `thechild` varchar(300) NOT NULL DEFAULT '',
+  `thevalue` text NOT NULL,
+  `thefilter` varchar(300) NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `___nu1587d4efb7c1ef___`
+-- Dumping data for table `___nu1588e58d16911e___`
 --
 
-INSERT INTO `___nu1587d4efb7c1ef___` (`theform`, `theparent`, `thechild`, `thevalue`, `thefilter`) VALUES
+INSERT INTO `___nu1588e58d16911e___` (`theform`, `theparent`, `thechild`, `thevalue`, `thefilter`) VALUES
 ('56773cb405f4913', 'FORM', 'com_name', 'FORM.com_name', '56773cb405f4913'),
 ('56773cb405f4913', 'FORM', 'com_address', 'FORM.com_address', '56773cb405f4913'),
 ('56773cb405f4913', 'FORM', 'com_suburb', 'FORM.com_suburb', '56773cb405f4913'),
@@ -1757,22 +1617,22 @@ INSERT INTO `___nu1587d4efb7c1ef___` (`theform`, `theparent`, `thechild`, `theva
 -- --------------------------------------------------------
 
 --
--- Table structure for table `___nu1587d4f1b6b1e3___`
+-- Table structure for table `___nu1588e60fde12fc___`
 --
 
-CREATE TABLE `___nu1587d4f1b6b1e3___` (
-  `theform` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `theparent` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `thechild` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `thevalue` text CHARACTER SET utf8 NOT NULL,
-  `thefilter` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `___nu1588e60fde12fc___` (
+  `theform` varchar(300) NOT NULL DEFAULT '',
+  `theparent` varchar(300) NOT NULL DEFAULT '',
+  `thechild` varchar(300) NOT NULL DEFAULT '',
+  `thevalue` text NOT NULL,
+  `thefilter` varchar(300) NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `___nu1587d4f1b6b1e3___`
+-- Dumping data for table `___nu1588e60fde12fc___`
 --
 
-INSERT INTO `___nu1587d4f1b6b1e3___` (`theform`, `theparent`, `thechild`, `thevalue`, `thefilter`) VALUES
+INSERT INTO `___nu1588e60fde12fc___` (`theform`, `theparent`, `thechild`, `thevalue`, `thefilter`) VALUES
 ('56773cb405f4913', 'FORM', 'com_name', 'FORM.com_name', '56773cb405f4913'),
 ('56773cb405f4913', 'FORM', 'com_address', 'FORM.com_address', '56773cb405f4913'),
 ('56773cb405f4913', 'FORM', 'com_suburb', 'FORM.com_suburb', '56773cb405f4913'),
@@ -1886,22 +1746,149 @@ INSERT INTO `___nu1587d4f1b6b1e3___` (`theform`, `theparent`, `thechild`, `theva
 -- --------------------------------------------------------
 
 --
--- Table structure for table `___nu1587d52520bde8___`
+-- Table structure for table `___nu1588e86f0296db___`
 --
 
-CREATE TABLE `___nu1587d52520bde8___` (
-  `theform` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `theparent` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `thechild` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `thevalue` text CHARACTER SET utf8 NOT NULL,
-  `thefilter` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `___nu1588e86f0296db___` (
+  `theform` varchar(300) NOT NULL DEFAULT '',
+  `theparent` varchar(300) NOT NULL DEFAULT '',
+  `thechild` varchar(300) NOT NULL DEFAULT '',
+  `thevalue` text NOT NULL,
+  `thefilter` varchar(300) NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `___nu1587d52520bde8___`
+-- Dumping data for table `___nu1588e86f0296db___`
 --
 
-INSERT INTO `___nu1587d52520bde8___` (`theform`, `theparent`, `thechild`, `thevalue`, `thefilter`) VALUES
+INSERT INTO `___nu1588e86f0296db___` (`theform`, `theparent`, `thechild`, `thevalue`, `thefilter`) VALUES
+('56773cb405f4913', 'FORM', 'com_name', 'FORM.com_name', '56773cb405f4913'),
+('56773cb405f4913', 'FORM', 'com_address', 'FORM.com_address', '56773cb405f4913'),
+('56773cb405f4913', 'FORM', 'com_suburb', 'FORM.com_suburb', '56773cb405f4913'),
+('5678ab2c48c5c41', 'FORM', 'emp_name', 'FORM.emp_name', '5678ab2c48c5c41'),
+('5678ab2c48c5c41', 'FORM', 'emp_mobile', 'FORM.emp_mobile', '5678ab2c48c5c41'),
+('568b508eec00d80', 'FORM', 'bus_code', 'FORM.bus_code', '568b508eec00d80'),
+('568b508eec00d80', 'FORM', 'bus_description', 'FORM.bus_description', '568b508eec00d80'),
+('568b508eec00d80', 'FORM', 'bus_check', 'FORM.bus_check', '568b508eec00d80'),
+('nuform', 'FORM', 'sfo_code', 'FORM.sfo_code', 'nuform'),
+('nuform', 'FORM', 'sfo_description', 'FORM.sfo_description', 'nuform'),
+('nuform', 'FORM', 'sfo_table', 'FORM.sfo_table', 'nuform'),
+('nuform', 'FORM', 'sfo_primary_key', 'FORM.sfo_primary_key', 'nuform'),
+('nuform', 'FORM', 'sfo_row_height', 'FORM.sfo_row_height', 'nuform'),
+('nuform', 'FORM', 'sfo_rows_per_page', 'FORM.sfo_rows_per_page', 'nuform'),
+('nuform', 'FORM', 'sfo_add_title', 'FORM.sfo_add_title', 'nuform'),
+('nuform', 'FORM', 'sfo_print_title', 'FORM.sfo_print_title', 'nuform'),
+('nubrowse', 'FORM', 'sbr_title', 'FORM.sbr_title', 'nubrowse'),
+('nubrowse', 'FORM', 'sbr_display', 'FORM.sbr_display', 'nubrowse'),
+('nubrowse', 'FORM', 'sbr_sort', 'FORM.sbr_sort', 'nubrowse'),
+('nubrowse', 'FORM', 'sbr_width', 'FORM.sbr_width', 'nubrowse'),
+('nubrowse', 'FORM', 'sbr_order', 'FORM.sbr_order', 'nubrowse'),
+('nutab', 'FORM', 'syt_title', 'FORM.syt_title', 'nutab'),
+('nutab', 'FORM', 'syt_order', 'FORM.syt_order', 'nutab'),
+('nuform', 'FORM', 'sfo_save_title', 'FORM.sfo_save_title', 'nuform'),
+('nuform', 'FORM', 'sfo_clone_title', 'FORM.sfo_clone_title', 'nuform'),
+('nuform', 'FORM', 'sfo_delete_title', 'FORM.sfo_delete_title', 'nuform'),
+('nuform', 'FORM', 'sfo_new_title', 'FORM.sfo_new_title', 'nuform'),
+('nuform', 'FORM', 'bb_event', 'FORM.bb_event', 'nuform'),
+('nubuildreport', 'FORM', 'open_builder', 'FORM.open_builder', 'nubuildreport'),
+('nuobject', 'FORM', 'sob_all_id', 'FORM.sob_all_id', 'nuobject'),
+('nuobject', 'FORM', 'sob_all_label', 'FORM.sob_all_label', 'nuobject'),
+('nuobject', 'FORM', 'sob_all_order', 'FORM.sob_all_order', 'nuobject'),
+('nuobject', 'FORM', 'sob_all_top', 'FORM.sob_all_top', 'nuobject'),
+('nuobject', 'FORM', 'sob_all_left', 'FORM.sob_all_left', 'nuobject'),
+('nuobject', 'FORM', 'sob_all_width', 'FORM.sob_all_width', 'nuobject'),
+('nuobject', 'FORM', 'sob_all_height', 'FORM.sob_all_height', 'nuobject'),
+('nuobject', 'FORM', 'sob_subform_foreign_key', 'FORM.sob_subform_foreign_key', 'nuobject'),
+('nuobject', 'FORM', 'sob_run_filter', 'FORM.sob_run_filter', 'nuobject'),
+('nuobject', 'FORM', 'sob_run_id', 'FORM.sob_run_id', 'nuobject'),
+('nuobject', 'FORM', 'sob_lookup_code', 'FORM.sob_lookup_code', 'nuobject'),
+('nuobject', 'FORM', 'sob_lookup_description', 'FORM.sob_lookup_description', 'nuobject'),
+('nuobject', 'FORM', 'sob_lookup_description_width', 'FORM.sob_lookup_description_width', 'nuobject'),
+('nulookup', 'FORM', 'zzzzsys_slo_object_name', 'FORM.zzzzsys_slo_object_name', 'nulookup'),
+('nulookup', 'FORM', 'zzzzsys_slo_field_function_name', 'FORM.zzzzsys_slo_field_function_name', 'nulookup'),
+('nuevent', 'FORM', 'sev_event', 'FORM.sev_event', 'nuevent'),
+('nuaccess', 'FORM', 'sal_description', 'FORM.sal_description', 'nuaccess'),
+('nuobject', 'FORM', 'sob_all_zzzzsys_form_id', 'FORM.sob_all_zzzzsys_form_id', 'nuobject'),
+('nuaccess', 'FORM', 'sal_code', 'FORM.sal_code', 'nuaccess'),
+('574665a15bbc1a1', 'FORM', 'sug_code', 'FORM.sug_code', '574665a15bbc1a1'),
+('574665a15bbc1a1', 'FORM', 'sug_description', 'FORM.sug_description', '574665a15bbc1a1'),
+('nuuser', 'FORM', 'sus_name', 'FORM.sus_name', 'nuuser'),
+('nuuser', 'FORM', 'sus_email', 'FORM.sus_email', 'nuuser'),
+('nuuser', 'FORM', 'sus_login_name', 'FORM.sus_login_name', 'nuuser'),
+('nuuser', 'FORM', 'new_password', 'FORM.new_password', 'nuuser'),
+('nuuser', 'FORM', 'check_password', 'FORM.check_password', 'nuuser'),
+('nuphp', 'FORM', 'sph_code', 'FORM.sph_code', 'nuphp'),
+('nuphp', 'FORM', 'sph_description', 'FORM.sph_description', 'nuphp'),
+('nublank', 'FORM', 'bla_html', 'FORM.bla_html', 'nublank'),
+('nubuildreport', 'FORM', 'sre_code', 'FORM.sre_code', 'nubuildreport'),
+('nubuildreport', 'FORM', 'sre_description', 'FORM.sre_description', 'nubuildreport'),
+('nubuildreport', 'FORM', 'sre_group', 'FORM.sre_group', 'nubuildreport'),
+('577b4d78ef9a2a0', 'FORM', 'steven', 'FORM.steven', '577b4d78ef9a2a0'),
+('577b4d78ef9a2a0', 'FORM', 'com_address', 'FORM.com_address', '577b4d78ef9a2a0'),
+('nulaunchdates', 'FORM', 'from_date', 'FORM.from_date', 'nulaunchdates'),
+('nulaunchdates', 'FORM', 'to_date', 'FORM.to_date', 'nulaunchdates'),
+('nuphp', 'FORM', 'sph_group', 'FORM.sph_group', 'nuphp'),
+('57a29441f16c351', 'FORM', 'set_time_out_minutes', 'FORM.set_time_out_minutes', '57a29441f16c351'),
+('57a29441f16c351', 'FORM', 'set_smtp_username', 'FORM.set_smtp_username', '57a29441f16c351'),
+('57a29441f16c351', 'FORM', 'set_smtp_password', 'FORM.set_smtp_password', '57a29441f16c351'),
+('57a29441f16c351', 'FORM', 'set_smtp_host', 'FORM.set_smtp_host', '57a29441f16c351'),
+('57a29441f16c351', 'FORM', 'set_smtp_from_address', 'FORM.set_smtp_from_address', '57a29441f16c351'),
+('57a29441f16c351', 'FORM', 'set_smtp_from_name', 'FORM.set_smtp_from_name', '57a29441f16c351'),
+('57a29441f16c351', 'FORM', 'set_smtp_port', 'FORM.set_smtp_port', '57a29441f16c351'),
+('57a7c1cb78bf3a3', 'FORM', 'trl_language', 'FORM.trl_language', '57a7c1cb78bf3a3'),
+('57a7c1cb78bf3a3', 'FORM', 'trl_english', 'FORM.trl_english', '57a7c1cb78bf3a3'),
+('57a7c1cb78bf3a3', 'FORM', 'trl_translation', 'FORM.trl_translation', '57a7c1cb78bf3a3'),
+('nupassword', 'FORM', 'new_password_check', 'FORM.new_password_check', 'nupassword'),
+('nuobject', 'FORM', 'sob_all_fast_form_description', 'FORM.sob_all_fast_form_description', 'nuobject'),
+('nupassword', 'FORM', 'new_password', 'FORM.new_password', 'nupassword'),
+('nupassword', 'FORM', 'old_password', 'FORM.old_password', 'nupassword'),
+('nuobject', 'FORM', 'ab_event', 'FORM.ab_event', 'nuobject'),
+('nuerror', 'FORM', 'error', 'FORM.error', 'nuerror'),
+('nuform', 'FORM', 'bo_event', 'FORM.bo_event', 'nuform'),
+('nuform', 'FORM', 'bs_event', 'FORM.bs_event', 'nuform'),
+('nuform', 'FORM', 'as_event', 'FORM.as_event', 'nuform'),
+('nuform', 'FORM', 'bd_event', 'FORM.bd_event', 'nuform'),
+('nuform', 'FORM', 'ad_event', 'FORM.ad_event', 'nuform'),
+('nuform', 'FORM', 'preiviewbtn', 'FORM.preiviewbtn', 'nuform'),
+('nuobject', 'FORM', 'sob_lookup_table', 'FORM.sob_lookup_table', 'nuobject'),
+('583f372b53b972c', 'FORM', 'sob_all_id', 'FORM.sob_all_id', '583f372b53b972c'),
+('583f372b53b972c', 'FORM', 'sob_all_label', 'FORM.sob_all_label', '583f372b53b972c'),
+('583f372b53b972c', 'FORM', 'custom_id', 'FORM.custom_id', '583f372b53b972c'),
+('nuobject', 'FORM', 'javascriptbtn', 'FORM.javascriptbtn', 'nuobject'),
+('nuobject', 'FORM', 'sob_calc_formula', 'FORM.sob_calc_formula', 'nuobject'),
+('56773cb405f4913', 'employee_sf', 'emp_name', 'employee_sf.emp_name', '56773cb405f4913'),
+('56773cb405f4913', 'employee_sf', 'emp_mobile', 'employee_sf.emp_mobile', '56773cb405f4913'),
+('nuform', 'zzzzsys_browse_sf', 'sbr_title', 'zzzzsys_browse_sf.sbr_title', 'nuform'),
+('nuform', 'zzzzsys_browse_sf', 'sbr_display', 'zzzzsys_browse_sf.sbr_display', 'nuform'),
+('nuform', 'zzzzsys_browse_sf', 'sbr_sort', 'zzzzsys_browse_sf.sbr_sort', 'nuform'),
+('nuform', 'zzzzsys_browse_sf', 'sbr_width', 'zzzzsys_browse_sf.sbr_width', 'nuform'),
+('nuform', 'zzzzsys_browse_sf', 'sbr_order', 'zzzzsys_browse_sf.sbr_order', 'nuform'),
+('nuform', 'zzzzsys_tab_sf', 'syt_title', 'zzzzsys_tab_sf.syt_title', 'nuform'),
+('nuform', 'zzzzsys_tab_sf', 'syt_order', 'zzzzsys_tab_sf.syt_order', 'nuform'),
+('nuobject', 'zzzzsys_event_sf', 'sev_event', 'zzzzsys_event_sf.sev_event', 'nuobject'),
+('583361606250b6e', 'obj_sf', 'sob_all_id', 'obj_sf.sob_all_id', '583361606250b6e'),
+('583361606250b6e', 'obj_sf', 'sob_all_label', 'obj_sf.sob_all_label', '583361606250b6e'),
+('583361606250b6e', 'obj_sf', 'custom_id', 'obj_sf.custom_id', '583361606250b6e');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `___nu1588e611a5acca___`
+--
+
+CREATE TABLE `___nu1588e611a5acca___` (
+  `theform` varchar(300) NOT NULL DEFAULT '',
+  `theparent` varchar(300) NOT NULL DEFAULT '',
+  `thechild` varchar(300) NOT NULL DEFAULT '',
+  `thevalue` text NOT NULL,
+  `thefilter` varchar(300) NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `___nu1588e611a5acca___`
+--
+
+INSERT INTO `___nu1588e611a5acca___` (`theform`, `theparent`, `thechild`, `thevalue`, `thefilter`) VALUES
 ('56773cb405f4913', 'FORM', 'com_name', 'FORM.com_name', '56773cb405f4913'),
 ('56773cb405f4913', 'FORM', 'com_address', 'FORM.com_address', '56773cb405f4913'),
 ('56773cb405f4913', 'FORM', 'com_suburb', 'FORM.com_suburb', '56773cb405f4913'),
@@ -2015,22 +2002,22 @@ INSERT INTO `___nu1587d52520bde8___` (`theform`, `theparent`, `thechild`, `theva
 -- --------------------------------------------------------
 
 --
--- Table structure for table `___nu1587eab79a72d4___`
+-- Table structure for table `___nu1588e856ebc84f___`
 --
 
-CREATE TABLE `___nu1587eab79a72d4___` (
-  `theform` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `theparent` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `thechild` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `thevalue` text CHARACTER SET utf8 NOT NULL,
-  `thefilter` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `___nu1588e856ebc84f___` (
+  `theform` varchar(300) NOT NULL DEFAULT '',
+  `theparent` varchar(300) NOT NULL DEFAULT '',
+  `thechild` varchar(300) NOT NULL DEFAULT '',
+  `thevalue` text NOT NULL,
+  `thefilter` varchar(300) NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `___nu1587eab79a72d4___`
+-- Dumping data for table `___nu1588e856ebc84f___`
 --
 
-INSERT INTO `___nu1587eab79a72d4___` (`theform`, `theparent`, `thechild`, `thevalue`, `thefilter`) VALUES
+INSERT INTO `___nu1588e856ebc84f___` (`theform`, `theparent`, `thechild`, `thevalue`, `thefilter`) VALUES
 ('56773cb405f4913', 'FORM', 'com_name', 'FORM.com_name', '56773cb405f4913'),
 ('56773cb405f4913', 'FORM', 'com_address', 'FORM.com_address', '56773cb405f4913'),
 ('56773cb405f4913', 'FORM', 'com_suburb', 'FORM.com_suburb', '56773cb405f4913'),
@@ -2134,8 +2121,6 @@ INSERT INTO `___nu1587eab79a72d4___` (`theform`, `theparent`, `thechild`, `theva
 ('nuform', 'zzzzsys_browse_sf', 'sbr_order', 'zzzzsys_browse_sf.sbr_order', 'nuform'),
 ('nuform', 'zzzzsys_tab_sf', 'syt_title', 'zzzzsys_tab_sf.syt_title', 'nuform'),
 ('nuform', 'zzzzsys_tab_sf', 'syt_order', 'zzzzsys_tab_sf.syt_order', 'nuform'),
-('nuobject', 'lookup_sf', 'zzzzsys_slo_object_name', 'lookup_sf.zzzzsys_slo_object_name', 'nuobject'),
-('nuobject', 'lookup_sf', 'zzzzsys_slo_field_function_name', 'lookup_sf.zzzzsys_slo_field_function_name', 'nuobject'),
 ('nuobject', 'zzzzsys_event_sf', 'sev_event', 'zzzzsys_event_sf.sev_event', 'nuobject'),
 ('583361606250b6e', 'obj_sf', 'sob_all_id', 'obj_sf.sob_all_id', '583361606250b6e'),
 ('583361606250b6e', 'obj_sf', 'sob_all_label', 'obj_sf.sob_all_label', '583361606250b6e'),
@@ -2144,22 +2129,22 @@ INSERT INTO `___nu1587eab79a72d4___` (`theform`, `theparent`, `thechild`, `theva
 -- --------------------------------------------------------
 
 --
--- Table structure for table `___nu1587eabb0078b6___`
+-- Table structure for table `___nu1588e6143a0e74___`
 --
 
-CREATE TABLE `___nu1587eabb0078b6___` (
-  `theform` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `theparent` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `thechild` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `thevalue` text CHARACTER SET utf8 NOT NULL,
-  `thefilter` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `___nu1588e6143a0e74___` (
+  `theform` varchar(300) NOT NULL DEFAULT '',
+  `theparent` varchar(300) NOT NULL DEFAULT '',
+  `thechild` varchar(300) NOT NULL DEFAULT '',
+  `thevalue` text NOT NULL,
+  `thefilter` varchar(300) NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `___nu1587eabb0078b6___`
+-- Dumping data for table `___nu1588e6143a0e74___`
 --
 
-INSERT INTO `___nu1587eabb0078b6___` (`theform`, `theparent`, `thechild`, `thevalue`, `thefilter`) VALUES
+INSERT INTO `___nu1588e6143a0e74___` (`theform`, `theparent`, `thechild`, `thevalue`, `thefilter`) VALUES
 ('56773cb405f4913', 'FORM', 'com_name', 'FORM.com_name', '56773cb405f4913'),
 ('56773cb405f4913', 'FORM', 'com_address', 'FORM.com_address', '56773cb405f4913'),
 ('56773cb405f4913', 'FORM', 'com_suburb', 'FORM.com_suburb', '56773cb405f4913'),
@@ -2263,8 +2248,6 @@ INSERT INTO `___nu1587eabb0078b6___` (`theform`, `theparent`, `thechild`, `theva
 ('nuform', 'zzzzsys_browse_sf', 'sbr_order', 'zzzzsys_browse_sf.sbr_order', 'nuform'),
 ('nuform', 'zzzzsys_tab_sf', 'syt_title', 'zzzzsys_tab_sf.syt_title', 'nuform'),
 ('nuform', 'zzzzsys_tab_sf', 'syt_order', 'zzzzsys_tab_sf.syt_order', 'nuform'),
-('nuobject', 'lookup_sf', 'zzzzsys_slo_object_name', 'lookup_sf.zzzzsys_slo_object_name', 'nuobject'),
-('nuobject', 'lookup_sf', 'zzzzsys_slo_field_function_name', 'lookup_sf.zzzzsys_slo_field_function_name', 'nuobject'),
 ('nuobject', 'zzzzsys_event_sf', 'sev_event', 'zzzzsys_event_sf.sev_event', 'nuobject'),
 ('583361606250b6e', 'obj_sf', 'sob_all_id', 'obj_sf.sob_all_id', '583361606250b6e'),
 ('583361606250b6e', 'obj_sf', 'sob_all_label', 'obj_sf.sob_all_label', '583361606250b6e'),
@@ -2273,22 +2256,22 @@ INSERT INTO `___nu1587eabb0078b6___` (`theform`, `theparent`, `thechild`, `theva
 -- --------------------------------------------------------
 
 --
--- Table structure for table `___nu1587eae4936f51___`
+-- Table structure for table `___nu1588e8688c18b4___`
 --
 
-CREATE TABLE `___nu1587eae4936f51___` (
-  `theform` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `theparent` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `thechild` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `thevalue` text CHARACTER SET utf8 NOT NULL,
-  `thefilter` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `___nu1588e8688c18b4___` (
+  `theform` varchar(300) NOT NULL DEFAULT '',
+  `theparent` varchar(300) NOT NULL DEFAULT '',
+  `thechild` varchar(300) NOT NULL DEFAULT '',
+  `thevalue` text NOT NULL,
+  `thefilter` varchar(300) NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `___nu1587eae4936f51___`
+-- Dumping data for table `___nu1588e8688c18b4___`
 --
 
-INSERT INTO `___nu1587eae4936f51___` (`theform`, `theparent`, `thechild`, `thevalue`, `thefilter`) VALUES
+INSERT INTO `___nu1588e8688c18b4___` (`theform`, `theparent`, `thechild`, `thevalue`, `thefilter`) VALUES
 ('56773cb405f4913', 'FORM', 'com_name', 'FORM.com_name', '56773cb405f4913'),
 ('56773cb405f4913', 'FORM', 'com_address', 'FORM.com_address', '56773cb405f4913'),
 ('56773cb405f4913', 'FORM', 'com_suburb', 'FORM.com_suburb', '56773cb405f4913'),
@@ -2392,8 +2375,6 @@ INSERT INTO `___nu1587eae4936f51___` (`theform`, `theparent`, `thechild`, `theva
 ('nuform', 'zzzzsys_browse_sf', 'sbr_order', 'zzzzsys_browse_sf.sbr_order', 'nuform'),
 ('nuform', 'zzzzsys_tab_sf', 'syt_title', 'zzzzsys_tab_sf.syt_title', 'nuform'),
 ('nuform', 'zzzzsys_tab_sf', 'syt_order', 'zzzzsys_tab_sf.syt_order', 'nuform'),
-('nuobject', 'lookup_sf', 'zzzzsys_slo_object_name', 'lookup_sf.zzzzsys_slo_object_name', 'nuobject'),
-('nuobject', 'lookup_sf', 'zzzzsys_slo_field_function_name', 'lookup_sf.zzzzsys_slo_field_function_name', 'nuobject'),
 ('nuobject', 'zzzzsys_event_sf', 'sev_event', 'zzzzsys_event_sf.sev_event', 'nuobject'),
 ('583361606250b6e', 'obj_sf', 'sob_all_id', 'obj_sf.sob_all_id', '583361606250b6e'),
 ('583361606250b6e', 'obj_sf', 'sob_all_label', 'obj_sf.sob_all_label', '583361606250b6e'),
@@ -2402,22 +2383,22 @@ INSERT INTO `___nu1587eae4936f51___` (`theform`, `theparent`, `thechild`, `theva
 -- --------------------------------------------------------
 
 --
--- Table structure for table `___nu1587eaea6a1ec4___`
+-- Table structure for table `___nu1588e61555cce3___`
 --
 
-CREATE TABLE `___nu1587eaea6a1ec4___` (
-  `theform` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `theparent` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `thechild` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `thevalue` text CHARACTER SET utf8 NOT NULL,
-  `thefilter` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `___nu1588e61555cce3___` (
+  `theform` varchar(300) NOT NULL DEFAULT '',
+  `theparent` varchar(300) NOT NULL DEFAULT '',
+  `thechild` varchar(300) NOT NULL DEFAULT '',
+  `thevalue` text NOT NULL,
+  `thefilter` varchar(300) NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `___nu1587eaea6a1ec4___`
+-- Dumping data for table `___nu1588e61555cce3___`
 --
 
-INSERT INTO `___nu1587eaea6a1ec4___` (`theform`, `theparent`, `thechild`, `thevalue`, `thefilter`) VALUES
+INSERT INTO `___nu1588e61555cce3___` (`theform`, `theparent`, `thechild`, `thevalue`, `thefilter`) VALUES
 ('56773cb405f4913', 'FORM', 'com_name', 'FORM.com_name', '56773cb405f4913'),
 ('56773cb405f4913', 'FORM', 'com_address', 'FORM.com_address', '56773cb405f4913'),
 ('56773cb405f4913', 'FORM', 'com_suburb', 'FORM.com_suburb', '56773cb405f4913'),
@@ -2521,8 +2502,6 @@ INSERT INTO `___nu1587eaea6a1ec4___` (`theform`, `theparent`, `thechild`, `theva
 ('nuform', 'zzzzsys_browse_sf', 'sbr_order', 'zzzzsys_browse_sf.sbr_order', 'nuform'),
 ('nuform', 'zzzzsys_tab_sf', 'syt_title', 'zzzzsys_tab_sf.syt_title', 'nuform'),
 ('nuform', 'zzzzsys_tab_sf', 'syt_order', 'zzzzsys_tab_sf.syt_order', 'nuform'),
-('nuobject', 'lookup_sf', 'zzzzsys_slo_object_name', 'lookup_sf.zzzzsys_slo_object_name', 'nuobject'),
-('nuobject', 'lookup_sf', 'zzzzsys_slo_field_function_name', 'lookup_sf.zzzzsys_slo_field_function_name', 'nuobject'),
 ('nuobject', 'zzzzsys_event_sf', 'sev_event', 'zzzzsys_event_sf.sev_event', 'nuobject'),
 ('583361606250b6e', 'obj_sf', 'sob_all_id', 'obj_sf.sob_all_id', '583361606250b6e'),
 ('583361606250b6e', 'obj_sf', 'sob_all_label', 'obj_sf.sob_all_label', '583361606250b6e'),
@@ -2531,22 +2510,22 @@ INSERT INTO `___nu1587eaea6a1ec4___` (`theform`, `theparent`, `thechild`, `theva
 -- --------------------------------------------------------
 
 --
--- Table structure for table `___nu1587eb0c806b6e___`
+-- Table structure for table `___nu1588eb8c77b06d___`
 --
 
-CREATE TABLE `___nu1587eb0c806b6e___` (
-  `theform` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `theparent` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `thechild` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `thevalue` text CHARACTER SET utf8 NOT NULL,
-  `thefilter` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `___nu1588eb8c77b06d___` (
+  `theform` varchar(300) NOT NULL DEFAULT '',
+  `theparent` varchar(300) NOT NULL DEFAULT '',
+  `thechild` varchar(300) NOT NULL DEFAULT '',
+  `thevalue` text NOT NULL,
+  `thefilter` varchar(300) NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `___nu1587eb0c806b6e___`
+-- Dumping data for table `___nu1588eb8c77b06d___`
 --
 
-INSERT INTO `___nu1587eb0c806b6e___` (`theform`, `theparent`, `thechild`, `thevalue`, `thefilter`) VALUES
+INSERT INTO `___nu1588eb8c77b06d___` (`theform`, `theparent`, `thechild`, `thevalue`, `thefilter`) VALUES
 ('56773cb405f4913', 'FORM', 'com_name', 'FORM.com_name', '56773cb405f4913'),
 ('56773cb405f4913', 'FORM', 'com_address', 'FORM.com_address', '56773cb405f4913'),
 ('56773cb405f4913', 'FORM', 'com_suburb', 'FORM.com_suburb', '56773cb405f4913'),
@@ -2650,8 +2629,6 @@ INSERT INTO `___nu1587eb0c806b6e___` (`theform`, `theparent`, `thechild`, `theva
 ('nuform', 'zzzzsys_browse_sf', 'sbr_order', 'zzzzsys_browse_sf.sbr_order', 'nuform'),
 ('nuform', 'zzzzsys_tab_sf', 'syt_title', 'zzzzsys_tab_sf.syt_title', 'nuform'),
 ('nuform', 'zzzzsys_tab_sf', 'syt_order', 'zzzzsys_tab_sf.syt_order', 'nuform'),
-('nuobject', 'lookup_sf', 'zzzzsys_slo_object_name', 'lookup_sf.zzzzsys_slo_object_name', 'nuobject'),
-('nuobject', 'lookup_sf', 'zzzzsys_slo_field_function_name', 'lookup_sf.zzzzsys_slo_field_function_name', 'nuobject'),
 ('nuobject', 'zzzzsys_event_sf', 'sev_event', 'zzzzsys_event_sf.sev_event', 'nuobject'),
 ('583361606250b6e', 'obj_sf', 'sob_all_id', 'obj_sf.sob_all_id', '583361606250b6e'),
 ('583361606250b6e', 'obj_sf', 'sob_all_label', 'obj_sf.sob_all_label', '583361606250b6e'),
@@ -2660,22 +2637,22 @@ INSERT INTO `___nu1587eb0c806b6e___` (`theform`, `theparent`, `thechild`, `theva
 -- --------------------------------------------------------
 
 --
--- Table structure for table `___nu1587eb2b902441___`
+-- Table structure for table `___nu1588eb9e0ee0ef___`
 --
 
-CREATE TABLE `___nu1587eb2b902441___` (
-  `theform` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `theparent` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `thechild` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `thevalue` text CHARACTER SET utf8 NOT NULL,
-  `thefilter` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `___nu1588eb9e0ee0ef___` (
+  `theform` varchar(300) NOT NULL DEFAULT '',
+  `theparent` varchar(300) NOT NULL DEFAULT '',
+  `thechild` varchar(300) NOT NULL DEFAULT '',
+  `thevalue` text NOT NULL,
+  `thefilter` varchar(300) NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `___nu1587eb2b902441___`
+-- Dumping data for table `___nu1588eb9e0ee0ef___`
 --
 
-INSERT INTO `___nu1587eb2b902441___` (`theform`, `theparent`, `thechild`, `thevalue`, `thefilter`) VALUES
+INSERT INTO `___nu1588eb9e0ee0ef___` (`theform`, `theparent`, `thechild`, `thevalue`, `thefilter`) VALUES
 ('56773cb405f4913', 'FORM', 'com_name', 'FORM.com_name', '56773cb405f4913'),
 ('56773cb405f4913', 'FORM', 'com_address', 'FORM.com_address', '56773cb405f4913'),
 ('56773cb405f4913', 'FORM', 'com_suburb', 'FORM.com_suburb', '56773cb405f4913'),
@@ -2779,8 +2756,6 @@ INSERT INTO `___nu1587eb2b902441___` (`theform`, `theparent`, `thechild`, `theva
 ('nuform', 'zzzzsys_browse_sf', 'sbr_order', 'zzzzsys_browse_sf.sbr_order', 'nuform'),
 ('nuform', 'zzzzsys_tab_sf', 'syt_title', 'zzzzsys_tab_sf.syt_title', 'nuform'),
 ('nuform', 'zzzzsys_tab_sf', 'syt_order', 'zzzzsys_tab_sf.syt_order', 'nuform'),
-('nuobject', 'lookup_sf', 'zzzzsys_slo_object_name', 'lookup_sf.zzzzsys_slo_object_name', 'nuobject'),
-('nuobject', 'lookup_sf', 'zzzzsys_slo_field_function_name', 'lookup_sf.zzzzsys_slo_field_function_name', 'nuobject'),
 ('nuobject', 'zzzzsys_event_sf', 'sev_event', 'zzzzsys_event_sf.sev_event', 'nuobject'),
 ('583361606250b6e', 'obj_sf', 'sob_all_id', 'obj_sf.sob_all_id', '583361606250b6e'),
 ('583361606250b6e', 'obj_sf', 'sob_all_label', 'obj_sf.sob_all_label', '583361606250b6e'),
@@ -2789,22 +2764,22 @@ INSERT INTO `___nu1587eb2b902441___` (`theform`, `theparent`, `thechild`, `theva
 -- --------------------------------------------------------
 
 --
--- Table structure for table `___nu1587eb5f1e02b7___`
+-- Table structure for table `___nu1588fbce3430ec___`
 --
 
-CREATE TABLE `___nu1587eb5f1e02b7___` (
-  `theform` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `theparent` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `thechild` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `thevalue` text CHARACTER SET utf8 NOT NULL,
-  `thefilter` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `___nu1588fbce3430ec___` (
+  `theform` varchar(300) NOT NULL DEFAULT '',
+  `theparent` varchar(300) NOT NULL DEFAULT '',
+  `thechild` varchar(300) NOT NULL DEFAULT '',
+  `thevalue` text NOT NULL,
+  `thefilter` varchar(300) NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `___nu1587eb5f1e02b7___`
+-- Dumping data for table `___nu1588fbce3430ec___`
 --
 
-INSERT INTO `___nu1587eb5f1e02b7___` (`theform`, `theparent`, `thechild`, `thevalue`, `thefilter`) VALUES
+INSERT INTO `___nu1588fbce3430ec___` (`theform`, `theparent`, `thechild`, `thevalue`, `thefilter`) VALUES
 ('56773cb405f4913', 'FORM', 'com_name', 'FORM.com_name', '56773cb405f4913'),
 ('56773cb405f4913', 'FORM', 'com_address', 'FORM.com_address', '56773cb405f4913'),
 ('56773cb405f4913', 'FORM', 'com_suburb', 'FORM.com_suburb', '56773cb405f4913'),
@@ -2908,8 +2883,6 @@ INSERT INTO `___nu1587eb5f1e02b7___` (`theform`, `theparent`, `thechild`, `theva
 ('nuform', 'zzzzsys_browse_sf', 'sbr_order', 'zzzzsys_browse_sf.sbr_order', 'nuform'),
 ('nuform', 'zzzzsys_tab_sf', 'syt_title', 'zzzzsys_tab_sf.syt_title', 'nuform'),
 ('nuform', 'zzzzsys_tab_sf', 'syt_order', 'zzzzsys_tab_sf.syt_order', 'nuform'),
-('nuobject', 'lookup_sf', 'zzzzsys_slo_object_name', 'lookup_sf.zzzzsys_slo_object_name', 'nuobject'),
-('nuobject', 'lookup_sf', 'zzzzsys_slo_field_function_name', 'lookup_sf.zzzzsys_slo_field_function_name', 'nuobject'),
 ('nuobject', 'zzzzsys_event_sf', 'sev_event', 'zzzzsys_event_sf.sev_event', 'nuobject'),
 ('583361606250b6e', 'obj_sf', 'sob_all_id', 'obj_sf.sob_all_id', '583361606250b6e'),
 ('583361606250b6e', 'obj_sf', 'sob_all_label', 'obj_sf.sob_all_label', '583361606250b6e'),
@@ -2918,22 +2891,22 @@ INSERT INTO `___nu1587eb5f1e02b7___` (`theform`, `theparent`, `thechild`, `theva
 -- --------------------------------------------------------
 
 --
--- Table structure for table `___nu1587eb8e7565b2___`
+-- Table structure for table `___nu1588fc20fd5fd5___`
 --
 
-CREATE TABLE `___nu1587eb8e7565b2___` (
-  `theform` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `theparent` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `thechild` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `thevalue` text CHARACTER SET utf8 NOT NULL,
-  `thefilter` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `___nu1588fc20fd5fd5___` (
+  `theform` varchar(300) NOT NULL DEFAULT '',
+  `theparent` varchar(300) NOT NULL DEFAULT '',
+  `thechild` varchar(300) NOT NULL DEFAULT '',
+  `thevalue` text NOT NULL,
+  `thefilter` varchar(300) NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `___nu1587eb8e7565b2___`
+-- Dumping data for table `___nu1588fc20fd5fd5___`
 --
 
-INSERT INTO `___nu1587eb8e7565b2___` (`theform`, `theparent`, `thechild`, `thevalue`, `thefilter`) VALUES
+INSERT INTO `___nu1588fc20fd5fd5___` (`theform`, `theparent`, `thechild`, `thevalue`, `thefilter`) VALUES
 ('56773cb405f4913', 'FORM', 'com_name', 'FORM.com_name', '56773cb405f4913'),
 ('56773cb405f4913', 'FORM', 'com_address', 'FORM.com_address', '56773cb405f4913'),
 ('56773cb405f4913', 'FORM', 'com_suburb', 'FORM.com_suburb', '56773cb405f4913'),
@@ -3037,8 +3010,6 @@ INSERT INTO `___nu1587eb8e7565b2___` (`theform`, `theparent`, `thechild`, `theva
 ('nuform', 'zzzzsys_browse_sf', 'sbr_order', 'zzzzsys_browse_sf.sbr_order', 'nuform'),
 ('nuform', 'zzzzsys_tab_sf', 'syt_title', 'zzzzsys_tab_sf.syt_title', 'nuform'),
 ('nuform', 'zzzzsys_tab_sf', 'syt_order', 'zzzzsys_tab_sf.syt_order', 'nuform'),
-('nuobject', 'lookup_sf', 'zzzzsys_slo_object_name', 'lookup_sf.zzzzsys_slo_object_name', 'nuobject'),
-('nuobject', 'lookup_sf', 'zzzzsys_slo_field_function_name', 'lookup_sf.zzzzsys_slo_field_function_name', 'nuobject'),
 ('nuobject', 'zzzzsys_event_sf', 'sev_event', 'zzzzsys_event_sf.sev_event', 'nuobject'),
 ('583361606250b6e', 'obj_sf', 'sob_all_id', 'obj_sf.sob_all_id', '583361606250b6e'),
 ('583361606250b6e', 'obj_sf', 'sob_all_label', 'obj_sf.sob_all_label', '583361606250b6e'),
@@ -3047,22 +3018,22 @@ INSERT INTO `___nu1587eb8e7565b2___` (`theform`, `theparent`, `thechild`, `theva
 -- --------------------------------------------------------
 
 --
--- Table structure for table `___nu1587eb21fe427d___`
+-- Table structure for table `___nu1588ffbbec6a6e___`
 --
 
-CREATE TABLE `___nu1587eb21fe427d___` (
-  `theform` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `theparent` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `thechild` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `thevalue` text CHARACTER SET utf8 NOT NULL,
-  `thefilter` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `___nu1588ffbbec6a6e___` (
+  `theform` varchar(300) NOT NULL DEFAULT '',
+  `theparent` varchar(300) NOT NULL DEFAULT '',
+  `thechild` varchar(300) NOT NULL DEFAULT '',
+  `thevalue` text NOT NULL,
+  `thefilter` varchar(300) NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `___nu1587eb21fe427d___`
+-- Dumping data for table `___nu1588ffbbec6a6e___`
 --
 
-INSERT INTO `___nu1587eb21fe427d___` (`theform`, `theparent`, `thechild`, `thevalue`, `thefilter`) VALUES
+INSERT INTO `___nu1588ffbbec6a6e___` (`theform`, `theparent`, `thechild`, `thevalue`, `thefilter`) VALUES
 ('56773cb405f4913', 'FORM', 'com_name', 'FORM.com_name', '56773cb405f4913'),
 ('56773cb405f4913', 'FORM', 'com_address', 'FORM.com_address', '56773cb405f4913'),
 ('56773cb405f4913', 'FORM', 'com_suburb', 'FORM.com_suburb', '56773cb405f4913'),
@@ -3166,8 +3137,6 @@ INSERT INTO `___nu1587eb21fe427d___` (`theform`, `theparent`, `thechild`, `theva
 ('nuform', 'zzzzsys_browse_sf', 'sbr_order', 'zzzzsys_browse_sf.sbr_order', 'nuform'),
 ('nuform', 'zzzzsys_tab_sf', 'syt_title', 'zzzzsys_tab_sf.syt_title', 'nuform'),
 ('nuform', 'zzzzsys_tab_sf', 'syt_order', 'zzzzsys_tab_sf.syt_order', 'nuform'),
-('nuobject', 'lookup_sf', 'zzzzsys_slo_object_name', 'lookup_sf.zzzzsys_slo_object_name', 'nuobject'),
-('nuobject', 'lookup_sf', 'zzzzsys_slo_field_function_name', 'lookup_sf.zzzzsys_slo_field_function_name', 'nuobject'),
 ('nuobject', 'zzzzsys_event_sf', 'sev_event', 'zzzzsys_event_sf.sev_event', 'nuobject'),
 ('583361606250b6e', 'obj_sf', 'sob_all_id', 'obj_sf.sob_all_id', '583361606250b6e'),
 ('583361606250b6e', 'obj_sf', 'sob_all_label', 'obj_sf.sob_all_label', '583361606250b6e'),
@@ -3176,22 +3145,22 @@ INSERT INTO `___nu1587eb21fe427d___` (`theform`, `theparent`, `thechild`, `theva
 -- --------------------------------------------------------
 
 --
--- Table structure for table `___nu1587eb25b823f7___`
+-- Table structure for table `___nu1588ffc67b4833___`
 --
 
-CREATE TABLE `___nu1587eb25b823f7___` (
-  `theform` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `theparent` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `thechild` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `thevalue` text CHARACTER SET utf8 NOT NULL,
-  `thefilter` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `___nu1588ffc67b4833___` (
+  `theform` varchar(300) NOT NULL DEFAULT '',
+  `theparent` varchar(300) NOT NULL DEFAULT '',
+  `thechild` varchar(300) NOT NULL DEFAULT '',
+  `thevalue` text NOT NULL,
+  `thefilter` varchar(300) NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `___nu1587eb25b823f7___`
+-- Dumping data for table `___nu1588ffc67b4833___`
 --
 
-INSERT INTO `___nu1587eb25b823f7___` (`theform`, `theparent`, `thechild`, `thevalue`, `thefilter`) VALUES
+INSERT INTO `___nu1588ffc67b4833___` (`theform`, `theparent`, `thechild`, `thevalue`, `thefilter`) VALUES
 ('56773cb405f4913', 'FORM', 'com_name', 'FORM.com_name', '56773cb405f4913'),
 ('56773cb405f4913', 'FORM', 'com_address', 'FORM.com_address', '56773cb405f4913'),
 ('56773cb405f4913', 'FORM', 'com_suburb', 'FORM.com_suburb', '56773cb405f4913'),
@@ -3295,1556 +3264,6 @@ INSERT INTO `___nu1587eb25b823f7___` (`theform`, `theparent`, `thechild`, `theva
 ('nuform', 'zzzzsys_browse_sf', 'sbr_order', 'zzzzsys_browse_sf.sbr_order', 'nuform'),
 ('nuform', 'zzzzsys_tab_sf', 'syt_title', 'zzzzsys_tab_sf.syt_title', 'nuform'),
 ('nuform', 'zzzzsys_tab_sf', 'syt_order', 'zzzzsys_tab_sf.syt_order', 'nuform'),
-('nuobject', 'lookup_sf', 'zzzzsys_slo_object_name', 'lookup_sf.zzzzsys_slo_object_name', 'nuobject'),
-('nuobject', 'lookup_sf', 'zzzzsys_slo_field_function_name', 'lookup_sf.zzzzsys_slo_field_function_name', 'nuobject'),
-('nuobject', 'zzzzsys_event_sf', 'sev_event', 'zzzzsys_event_sf.sev_event', 'nuobject'),
-('583361606250b6e', 'obj_sf', 'sob_all_id', 'obj_sf.sob_all_id', '583361606250b6e'),
-('583361606250b6e', 'obj_sf', 'sob_all_label', 'obj_sf.sob_all_label', '583361606250b6e'),
-('583361606250b6e', 'obj_sf', 'custom_id', 'obj_sf.custom_id', '583361606250b6e');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `___nu1587eb27a17a0b___`
---
-
-CREATE TABLE `___nu1587eb27a17a0b___` (
-  `theform` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `theparent` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `thechild` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `thevalue` text CHARACTER SET utf8 NOT NULL,
-  `thefilter` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `___nu1587eb27a17a0b___`
---
-
-INSERT INTO `___nu1587eb27a17a0b___` (`theform`, `theparent`, `thechild`, `thevalue`, `thefilter`) VALUES
-('56773cb405f4913', 'FORM', 'com_name', 'FORM.com_name', '56773cb405f4913'),
-('56773cb405f4913', 'FORM', 'com_address', 'FORM.com_address', '56773cb405f4913'),
-('56773cb405f4913', 'FORM', 'com_suburb', 'FORM.com_suburb', '56773cb405f4913'),
-('5678ab2c48c5c41', 'FORM', 'emp_name', 'FORM.emp_name', '5678ab2c48c5c41'),
-('5678ab2c48c5c41', 'FORM', 'emp_mobile', 'FORM.emp_mobile', '5678ab2c48c5c41'),
-('568b508eec00d80', 'FORM', 'bus_code', 'FORM.bus_code', '568b508eec00d80'),
-('568b508eec00d80', 'FORM', 'bus_description', 'FORM.bus_description', '568b508eec00d80'),
-('568b508eec00d80', 'FORM', 'bus_check', 'FORM.bus_check', '568b508eec00d80'),
-('nuform', 'FORM', 'sfo_code', 'FORM.sfo_code', 'nuform'),
-('nuform', 'FORM', 'sfo_description', 'FORM.sfo_description', 'nuform'),
-('nuform', 'FORM', 'sfo_table', 'FORM.sfo_table', 'nuform'),
-('nuform', 'FORM', 'sfo_primary_key', 'FORM.sfo_primary_key', 'nuform'),
-('nuform', 'FORM', 'sfo_row_height', 'FORM.sfo_row_height', 'nuform'),
-('nuform', 'FORM', 'sfo_rows_per_page', 'FORM.sfo_rows_per_page', 'nuform'),
-('nuform', 'FORM', 'sfo_add_title', 'FORM.sfo_add_title', 'nuform'),
-('nuform', 'FORM', 'sfo_print_title', 'FORM.sfo_print_title', 'nuform'),
-('nubrowse', 'FORM', 'sbr_title', 'FORM.sbr_title', 'nubrowse'),
-('nubrowse', 'FORM', 'sbr_display', 'FORM.sbr_display', 'nubrowse'),
-('nubrowse', 'FORM', 'sbr_sort', 'FORM.sbr_sort', 'nubrowse'),
-('nubrowse', 'FORM', 'sbr_width', 'FORM.sbr_width', 'nubrowse'),
-('nubrowse', 'FORM', 'sbr_order', 'FORM.sbr_order', 'nubrowse'),
-('nutab', 'FORM', 'syt_title', 'FORM.syt_title', 'nutab'),
-('nutab', 'FORM', 'syt_order', 'FORM.syt_order', 'nutab'),
-('nuform', 'FORM', 'sfo_save_title', 'FORM.sfo_save_title', 'nuform'),
-('nuform', 'FORM', 'sfo_clone_title', 'FORM.sfo_clone_title', 'nuform'),
-('nuform', 'FORM', 'sfo_delete_title', 'FORM.sfo_delete_title', 'nuform'),
-('nuform', 'FORM', 'sfo_new_title', 'FORM.sfo_new_title', 'nuform'),
-('nuform', 'FORM', 'bb_event', 'FORM.bb_event', 'nuform'),
-('nubuildreport', 'FORM', 'open_builder', 'FORM.open_builder', 'nubuildreport'),
-('nuobject', 'FORM', 'sob_all_id', 'FORM.sob_all_id', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_label', 'FORM.sob_all_label', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_order', 'FORM.sob_all_order', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_top', 'FORM.sob_all_top', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_left', 'FORM.sob_all_left', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_width', 'FORM.sob_all_width', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_height', 'FORM.sob_all_height', 'nuobject'),
-('nuobject', 'FORM', 'sob_subform_foreign_key', 'FORM.sob_subform_foreign_key', 'nuobject'),
-('nuobject', 'FORM', 'sob_run_filter', 'FORM.sob_run_filter', 'nuobject'),
-('nuobject', 'FORM', 'sob_run_id', 'FORM.sob_run_id', 'nuobject'),
-('nuobject', 'FORM', 'sob_lookup_code', 'FORM.sob_lookup_code', 'nuobject'),
-('nuobject', 'FORM', 'sob_lookup_description', 'FORM.sob_lookup_description', 'nuobject'),
-('nuobject', 'FORM', 'sob_lookup_description_width', 'FORM.sob_lookup_description_width', 'nuobject'),
-('nulookup', 'FORM', 'zzzzsys_slo_object_name', 'FORM.zzzzsys_slo_object_name', 'nulookup'),
-('nulookup', 'FORM', 'zzzzsys_slo_field_function_name', 'FORM.zzzzsys_slo_field_function_name', 'nulookup'),
-('nuevent', 'FORM', 'sev_event', 'FORM.sev_event', 'nuevent'),
-('nuaccess', 'FORM', 'sal_description', 'FORM.sal_description', 'nuaccess'),
-('nuobject', 'FORM', 'sob_all_zzzzsys_form_id', 'FORM.sob_all_zzzzsys_form_id', 'nuobject'),
-('nuaccess', 'FORM', 'sal_code', 'FORM.sal_code', 'nuaccess'),
-('574665a15bbc1a1', 'FORM', 'sug_code', 'FORM.sug_code', '574665a15bbc1a1'),
-('574665a15bbc1a1', 'FORM', 'sug_description', 'FORM.sug_description', '574665a15bbc1a1'),
-('nuuser', 'FORM', 'sus_name', 'FORM.sus_name', 'nuuser'),
-('nuuser', 'FORM', 'sus_email', 'FORM.sus_email', 'nuuser'),
-('nuuser', 'FORM', 'sus_login_name', 'FORM.sus_login_name', 'nuuser'),
-('nuuser', 'FORM', 'new_password', 'FORM.new_password', 'nuuser'),
-('nuuser', 'FORM', 'check_password', 'FORM.check_password', 'nuuser'),
-('nuphp', 'FORM', 'sph_code', 'FORM.sph_code', 'nuphp'),
-('nuphp', 'FORM', 'sph_description', 'FORM.sph_description', 'nuphp'),
-('nublank', 'FORM', 'bla_html', 'FORM.bla_html', 'nublank'),
-('nubuildreport', 'FORM', 'sre_code', 'FORM.sre_code', 'nubuildreport'),
-('nubuildreport', 'FORM', 'sre_description', 'FORM.sre_description', 'nubuildreport'),
-('nubuildreport', 'FORM', 'sre_group', 'FORM.sre_group', 'nubuildreport'),
-('577b4d78ef9a2a0', 'FORM', 'steven', 'FORM.steven', '577b4d78ef9a2a0'),
-('577b4d78ef9a2a0', 'FORM', 'com_address', 'FORM.com_address', '577b4d78ef9a2a0'),
-('nulaunchdates', 'FORM', 'from_date', 'FORM.from_date', 'nulaunchdates'),
-('nulaunchdates', 'FORM', 'to_date', 'FORM.to_date', 'nulaunchdates'),
-('nuphp', 'FORM', 'sph_group', 'FORM.sph_group', 'nuphp'),
-('57a29441f16c351', 'FORM', 'set_time_out_minutes', 'FORM.set_time_out_minutes', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_username', 'FORM.set_smtp_username', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_password', 'FORM.set_smtp_password', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_host', 'FORM.set_smtp_host', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_from_address', 'FORM.set_smtp_from_address', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_from_name', 'FORM.set_smtp_from_name', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_port', 'FORM.set_smtp_port', '57a29441f16c351'),
-('57a7c1cb78bf3a3', 'FORM', 'trl_language', 'FORM.trl_language', '57a7c1cb78bf3a3'),
-('57a7c1cb78bf3a3', 'FORM', 'trl_english', 'FORM.trl_english', '57a7c1cb78bf3a3'),
-('57a7c1cb78bf3a3', 'FORM', 'trl_translation', 'FORM.trl_translation', '57a7c1cb78bf3a3'),
-('nupassword', 'FORM', 'new_password_check', 'FORM.new_password_check', 'nupassword'),
-('nuobject', 'FORM', 'sob_all_fast_form_description', 'FORM.sob_all_fast_form_description', 'nuobject'),
-('nupassword', 'FORM', 'new_password', 'FORM.new_password', 'nupassword'),
-('nupassword', 'FORM', 'old_password', 'FORM.old_password', 'nupassword'),
-('nuobject', 'FORM', 'ab_event', 'FORM.ab_event', 'nuobject'),
-('nuerror', 'FORM', 'error', 'FORM.error', 'nuerror'),
-('nuform', 'FORM', 'bo_event', 'FORM.bo_event', 'nuform'),
-('nuform', 'FORM', 'bs_event', 'FORM.bs_event', 'nuform'),
-('nuform', 'FORM', 'as_event', 'FORM.as_event', 'nuform'),
-('nuform', 'FORM', 'bd_event', 'FORM.bd_event', 'nuform'),
-('nuform', 'FORM', 'ad_event', 'FORM.ad_event', 'nuform'),
-('nuform', 'FORM', 'preiviewbtn', 'FORM.preiviewbtn', 'nuform'),
-('nuobject', 'FORM', 'sob_lookup_table', 'FORM.sob_lookup_table', 'nuobject'),
-('583f372b53b972c', 'FORM', 'sob_all_id', 'FORM.sob_all_id', '583f372b53b972c'),
-('583f372b53b972c', 'FORM', 'sob_all_label', 'FORM.sob_all_label', '583f372b53b972c'),
-('583f372b53b972c', 'FORM', 'custom_id', 'FORM.custom_id', '583f372b53b972c'),
-('nuobject', 'FORM', 'javascriptbtn', 'FORM.javascriptbtn', 'nuobject'),
-('nuobject', 'FORM', 'sob_calc_formula', 'FORM.sob_calc_formula', 'nuobject'),
-('56773cb405f4913', 'employee_sf', 'emp_name', 'employee_sf.emp_name', '56773cb405f4913'),
-('56773cb405f4913', 'employee_sf', 'emp_mobile', 'employee_sf.emp_mobile', '56773cb405f4913'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_title', 'zzzzsys_browse_sf.sbr_title', 'nuform'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_display', 'zzzzsys_browse_sf.sbr_display', 'nuform'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_sort', 'zzzzsys_browse_sf.sbr_sort', 'nuform'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_width', 'zzzzsys_browse_sf.sbr_width', 'nuform'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_order', 'zzzzsys_browse_sf.sbr_order', 'nuform'),
-('nuform', 'zzzzsys_tab_sf', 'syt_title', 'zzzzsys_tab_sf.syt_title', 'nuform'),
-('nuform', 'zzzzsys_tab_sf', 'syt_order', 'zzzzsys_tab_sf.syt_order', 'nuform'),
-('nuobject', 'lookup_sf', 'zzzzsys_slo_object_name', 'lookup_sf.zzzzsys_slo_object_name', 'nuobject'),
-('nuobject', 'lookup_sf', 'zzzzsys_slo_field_function_name', 'lookup_sf.zzzzsys_slo_field_function_name', 'nuobject'),
-('nuobject', 'zzzzsys_event_sf', 'sev_event', 'zzzzsys_event_sf.sev_event', 'nuobject'),
-('583361606250b6e', 'obj_sf', 'sob_all_id', 'obj_sf.sob_all_id', '583361606250b6e'),
-('583361606250b6e', 'obj_sf', 'sob_all_label', 'obj_sf.sob_all_label', '583361606250b6e'),
-('583361606250b6e', 'obj_sf', 'custom_id', 'obj_sf.custom_id', '583361606250b6e');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `___nu1587eb35abf6a2___`
---
-
-CREATE TABLE `___nu1587eb35abf6a2___` (
-  `theform` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `theparent` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `thechild` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `thevalue` text CHARACTER SET utf8 NOT NULL,
-  `thefilter` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `___nu1587eb35abf6a2___`
---
-
-INSERT INTO `___nu1587eb35abf6a2___` (`theform`, `theparent`, `thechild`, `thevalue`, `thefilter`) VALUES
-('56773cb405f4913', 'FORM', 'com_name', 'FORM.com_name', '56773cb405f4913'),
-('56773cb405f4913', 'FORM', 'com_address', 'FORM.com_address', '56773cb405f4913'),
-('56773cb405f4913', 'FORM', 'com_suburb', 'FORM.com_suburb', '56773cb405f4913'),
-('5678ab2c48c5c41', 'FORM', 'emp_name', 'FORM.emp_name', '5678ab2c48c5c41'),
-('5678ab2c48c5c41', 'FORM', 'emp_mobile', 'FORM.emp_mobile', '5678ab2c48c5c41'),
-('568b508eec00d80', 'FORM', 'bus_code', 'FORM.bus_code', '568b508eec00d80'),
-('568b508eec00d80', 'FORM', 'bus_description', 'FORM.bus_description', '568b508eec00d80'),
-('568b508eec00d80', 'FORM', 'bus_check', 'FORM.bus_check', '568b508eec00d80'),
-('nuform', 'FORM', 'sfo_code', 'FORM.sfo_code', 'nuform'),
-('nuform', 'FORM', 'sfo_description', 'FORM.sfo_description', 'nuform'),
-('nuform', 'FORM', 'sfo_table', 'FORM.sfo_table', 'nuform'),
-('nuform', 'FORM', 'sfo_primary_key', 'FORM.sfo_primary_key', 'nuform'),
-('nuform', 'FORM', 'sfo_row_height', 'FORM.sfo_row_height', 'nuform'),
-('nuform', 'FORM', 'sfo_rows_per_page', 'FORM.sfo_rows_per_page', 'nuform'),
-('nuform', 'FORM', 'sfo_add_title', 'FORM.sfo_add_title', 'nuform'),
-('nuform', 'FORM', 'sfo_print_title', 'FORM.sfo_print_title', 'nuform'),
-('nubrowse', 'FORM', 'sbr_title', 'FORM.sbr_title', 'nubrowse'),
-('nubrowse', 'FORM', 'sbr_display', 'FORM.sbr_display', 'nubrowse'),
-('nubrowse', 'FORM', 'sbr_sort', 'FORM.sbr_sort', 'nubrowse'),
-('nubrowse', 'FORM', 'sbr_width', 'FORM.sbr_width', 'nubrowse'),
-('nubrowse', 'FORM', 'sbr_order', 'FORM.sbr_order', 'nubrowse'),
-('nutab', 'FORM', 'syt_title', 'FORM.syt_title', 'nutab'),
-('nutab', 'FORM', 'syt_order', 'FORM.syt_order', 'nutab'),
-('nuform', 'FORM', 'sfo_save_title', 'FORM.sfo_save_title', 'nuform'),
-('nuform', 'FORM', 'sfo_clone_title', 'FORM.sfo_clone_title', 'nuform'),
-('nuform', 'FORM', 'sfo_delete_title', 'FORM.sfo_delete_title', 'nuform'),
-('nuform', 'FORM', 'sfo_new_title', 'FORM.sfo_new_title', 'nuform'),
-('nuform', 'FORM', 'bb_event', 'FORM.bb_event', 'nuform'),
-('nubuildreport', 'FORM', 'open_builder', 'FORM.open_builder', 'nubuildreport'),
-('nuobject', 'FORM', 'sob_all_id', 'FORM.sob_all_id', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_label', 'FORM.sob_all_label', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_order', 'FORM.sob_all_order', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_top', 'FORM.sob_all_top', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_left', 'FORM.sob_all_left', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_width', 'FORM.sob_all_width', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_height', 'FORM.sob_all_height', 'nuobject'),
-('nuobject', 'FORM', 'sob_subform_foreign_key', 'FORM.sob_subform_foreign_key', 'nuobject'),
-('nuobject', 'FORM', 'sob_run_filter', 'FORM.sob_run_filter', 'nuobject'),
-('nuobject', 'FORM', 'sob_run_id', 'FORM.sob_run_id', 'nuobject'),
-('nuobject', 'FORM', 'sob_lookup_code', 'FORM.sob_lookup_code', 'nuobject'),
-('nuobject', 'FORM', 'sob_lookup_description', 'FORM.sob_lookup_description', 'nuobject'),
-('nuobject', 'FORM', 'sob_lookup_description_width', 'FORM.sob_lookup_description_width', 'nuobject'),
-('nulookup', 'FORM', 'zzzzsys_slo_object_name', 'FORM.zzzzsys_slo_object_name', 'nulookup'),
-('nulookup', 'FORM', 'zzzzsys_slo_field_function_name', 'FORM.zzzzsys_slo_field_function_name', 'nulookup'),
-('nuevent', 'FORM', 'sev_event', 'FORM.sev_event', 'nuevent'),
-('nuaccess', 'FORM', 'sal_description', 'FORM.sal_description', 'nuaccess'),
-('nuobject', 'FORM', 'sob_all_zzzzsys_form_id', 'FORM.sob_all_zzzzsys_form_id', 'nuobject'),
-('nuaccess', 'FORM', 'sal_code', 'FORM.sal_code', 'nuaccess'),
-('574665a15bbc1a1', 'FORM', 'sug_code', 'FORM.sug_code', '574665a15bbc1a1'),
-('574665a15bbc1a1', 'FORM', 'sug_description', 'FORM.sug_description', '574665a15bbc1a1'),
-('nuuser', 'FORM', 'sus_name', 'FORM.sus_name', 'nuuser'),
-('nuuser', 'FORM', 'sus_email', 'FORM.sus_email', 'nuuser'),
-('nuuser', 'FORM', 'sus_login_name', 'FORM.sus_login_name', 'nuuser'),
-('nuuser', 'FORM', 'new_password', 'FORM.new_password', 'nuuser'),
-('nuuser', 'FORM', 'check_password', 'FORM.check_password', 'nuuser'),
-('nuphp', 'FORM', 'sph_code', 'FORM.sph_code', 'nuphp'),
-('nuphp', 'FORM', 'sph_description', 'FORM.sph_description', 'nuphp'),
-('nublank', 'FORM', 'bla_html', 'FORM.bla_html', 'nublank'),
-('nubuildreport', 'FORM', 'sre_code', 'FORM.sre_code', 'nubuildreport'),
-('nubuildreport', 'FORM', 'sre_description', 'FORM.sre_description', 'nubuildreport'),
-('nubuildreport', 'FORM', 'sre_group', 'FORM.sre_group', 'nubuildreport'),
-('577b4d78ef9a2a0', 'FORM', 'steven', 'FORM.steven', '577b4d78ef9a2a0'),
-('577b4d78ef9a2a0', 'FORM', 'com_address', 'FORM.com_address', '577b4d78ef9a2a0'),
-('nulaunchdates', 'FORM', 'from_date', 'FORM.from_date', 'nulaunchdates'),
-('nulaunchdates', 'FORM', 'to_date', 'FORM.to_date', 'nulaunchdates'),
-('nuphp', 'FORM', 'sph_group', 'FORM.sph_group', 'nuphp'),
-('57a29441f16c351', 'FORM', 'set_time_out_minutes', 'FORM.set_time_out_minutes', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_username', 'FORM.set_smtp_username', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_password', 'FORM.set_smtp_password', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_host', 'FORM.set_smtp_host', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_from_address', 'FORM.set_smtp_from_address', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_from_name', 'FORM.set_smtp_from_name', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_port', 'FORM.set_smtp_port', '57a29441f16c351'),
-('57a7c1cb78bf3a3', 'FORM', 'trl_language', 'FORM.trl_language', '57a7c1cb78bf3a3'),
-('57a7c1cb78bf3a3', 'FORM', 'trl_english', 'FORM.trl_english', '57a7c1cb78bf3a3'),
-('57a7c1cb78bf3a3', 'FORM', 'trl_translation', 'FORM.trl_translation', '57a7c1cb78bf3a3'),
-('nupassword', 'FORM', 'new_password_check', 'FORM.new_password_check', 'nupassword'),
-('nuobject', 'FORM', 'sob_all_fast_form_description', 'FORM.sob_all_fast_form_description', 'nuobject'),
-('nupassword', 'FORM', 'new_password', 'FORM.new_password', 'nupassword'),
-('nupassword', 'FORM', 'old_password', 'FORM.old_password', 'nupassword'),
-('nuobject', 'FORM', 'ab_event', 'FORM.ab_event', 'nuobject'),
-('nuerror', 'FORM', 'error', 'FORM.error', 'nuerror'),
-('nuform', 'FORM', 'bo_event', 'FORM.bo_event', 'nuform'),
-('nuform', 'FORM', 'bs_event', 'FORM.bs_event', 'nuform'),
-('nuform', 'FORM', 'as_event', 'FORM.as_event', 'nuform'),
-('nuform', 'FORM', 'bd_event', 'FORM.bd_event', 'nuform'),
-('nuform', 'FORM', 'ad_event', 'FORM.ad_event', 'nuform'),
-('nuform', 'FORM', 'preiviewbtn', 'FORM.preiviewbtn', 'nuform'),
-('nuobject', 'FORM', 'sob_lookup_table', 'FORM.sob_lookup_table', 'nuobject'),
-('583f372b53b972c', 'FORM', 'sob_all_id', 'FORM.sob_all_id', '583f372b53b972c'),
-('583f372b53b972c', 'FORM', 'sob_all_label', 'FORM.sob_all_label', '583f372b53b972c'),
-('583f372b53b972c', 'FORM', 'custom_id', 'FORM.custom_id', '583f372b53b972c'),
-('nuobject', 'FORM', 'javascriptbtn', 'FORM.javascriptbtn', 'nuobject'),
-('nuobject', 'FORM', 'sob_calc_formula', 'FORM.sob_calc_formula', 'nuobject'),
-('56773cb405f4913', 'employee_sf', 'emp_name', 'employee_sf.emp_name', '56773cb405f4913'),
-('56773cb405f4913', 'employee_sf', 'emp_mobile', 'employee_sf.emp_mobile', '56773cb405f4913'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_title', 'zzzzsys_browse_sf.sbr_title', 'nuform'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_display', 'zzzzsys_browse_sf.sbr_display', 'nuform'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_sort', 'zzzzsys_browse_sf.sbr_sort', 'nuform'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_width', 'zzzzsys_browse_sf.sbr_width', 'nuform'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_order', 'zzzzsys_browse_sf.sbr_order', 'nuform'),
-('nuform', 'zzzzsys_tab_sf', 'syt_title', 'zzzzsys_tab_sf.syt_title', 'nuform'),
-('nuform', 'zzzzsys_tab_sf', 'syt_order', 'zzzzsys_tab_sf.syt_order', 'nuform'),
-('nuobject', 'lookup_sf', 'zzzzsys_slo_object_name', 'lookup_sf.zzzzsys_slo_object_name', 'nuobject'),
-('nuobject', 'lookup_sf', 'zzzzsys_slo_field_function_name', 'lookup_sf.zzzzsys_slo_field_function_name', 'nuobject'),
-('nuobject', 'zzzzsys_event_sf', 'sev_event', 'zzzzsys_event_sf.sev_event', 'nuobject'),
-('583361606250b6e', 'obj_sf', 'sob_all_id', 'obj_sf.sob_all_id', '583361606250b6e'),
-('583361606250b6e', 'obj_sf', 'sob_all_label', 'obj_sf.sob_all_label', '583361606250b6e'),
-('583361606250b6e', 'obj_sf', 'custom_id', 'obj_sf.custom_id', '583361606250b6e');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `___nu1587eb36abed07___`
---
-
-CREATE TABLE `___nu1587eb36abed07___` (
-  `theform` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `theparent` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `thechild` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `thevalue` text CHARACTER SET utf8 NOT NULL,
-  `thefilter` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `___nu1587eb36abed07___`
---
-
-INSERT INTO `___nu1587eb36abed07___` (`theform`, `theparent`, `thechild`, `thevalue`, `thefilter`) VALUES
-('56773cb405f4913', 'FORM', 'com_name', 'FORM.com_name', '56773cb405f4913'),
-('56773cb405f4913', 'FORM', 'com_address', 'FORM.com_address', '56773cb405f4913'),
-('56773cb405f4913', 'FORM', 'com_suburb', 'FORM.com_suburb', '56773cb405f4913'),
-('5678ab2c48c5c41', 'FORM', 'emp_name', 'FORM.emp_name', '5678ab2c48c5c41'),
-('5678ab2c48c5c41', 'FORM', 'emp_mobile', 'FORM.emp_mobile', '5678ab2c48c5c41'),
-('568b508eec00d80', 'FORM', 'bus_code', 'FORM.bus_code', '568b508eec00d80'),
-('568b508eec00d80', 'FORM', 'bus_description', 'FORM.bus_description', '568b508eec00d80'),
-('568b508eec00d80', 'FORM', 'bus_check', 'FORM.bus_check', '568b508eec00d80'),
-('nuform', 'FORM', 'sfo_code', 'FORM.sfo_code', 'nuform'),
-('nuform', 'FORM', 'sfo_description', 'FORM.sfo_description', 'nuform'),
-('nuform', 'FORM', 'sfo_table', 'FORM.sfo_table', 'nuform'),
-('nuform', 'FORM', 'sfo_primary_key', 'FORM.sfo_primary_key', 'nuform'),
-('nuform', 'FORM', 'sfo_row_height', 'FORM.sfo_row_height', 'nuform'),
-('nuform', 'FORM', 'sfo_rows_per_page', 'FORM.sfo_rows_per_page', 'nuform'),
-('nuform', 'FORM', 'sfo_add_title', 'FORM.sfo_add_title', 'nuform'),
-('nuform', 'FORM', 'sfo_print_title', 'FORM.sfo_print_title', 'nuform'),
-('nubrowse', 'FORM', 'sbr_title', 'FORM.sbr_title', 'nubrowse'),
-('nubrowse', 'FORM', 'sbr_display', 'FORM.sbr_display', 'nubrowse'),
-('nubrowse', 'FORM', 'sbr_sort', 'FORM.sbr_sort', 'nubrowse'),
-('nubrowse', 'FORM', 'sbr_width', 'FORM.sbr_width', 'nubrowse'),
-('nubrowse', 'FORM', 'sbr_order', 'FORM.sbr_order', 'nubrowse'),
-('nutab', 'FORM', 'syt_title', 'FORM.syt_title', 'nutab'),
-('nutab', 'FORM', 'syt_order', 'FORM.syt_order', 'nutab'),
-('nuform', 'FORM', 'sfo_save_title', 'FORM.sfo_save_title', 'nuform'),
-('nuform', 'FORM', 'sfo_clone_title', 'FORM.sfo_clone_title', 'nuform'),
-('nuform', 'FORM', 'sfo_delete_title', 'FORM.sfo_delete_title', 'nuform'),
-('nuform', 'FORM', 'sfo_new_title', 'FORM.sfo_new_title', 'nuform'),
-('nuform', 'FORM', 'bb_event', 'FORM.bb_event', 'nuform'),
-('nubuildreport', 'FORM', 'open_builder', 'FORM.open_builder', 'nubuildreport'),
-('nuobject', 'FORM', 'sob_all_id', 'FORM.sob_all_id', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_label', 'FORM.sob_all_label', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_order', 'FORM.sob_all_order', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_top', 'FORM.sob_all_top', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_left', 'FORM.sob_all_left', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_width', 'FORM.sob_all_width', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_height', 'FORM.sob_all_height', 'nuobject'),
-('nuobject', 'FORM', 'sob_subform_foreign_key', 'FORM.sob_subform_foreign_key', 'nuobject'),
-('nuobject', 'FORM', 'sob_run_filter', 'FORM.sob_run_filter', 'nuobject'),
-('nuobject', 'FORM', 'sob_run_id', 'FORM.sob_run_id', 'nuobject'),
-('nuobject', 'FORM', 'sob_lookup_code', 'FORM.sob_lookup_code', 'nuobject'),
-('nuobject', 'FORM', 'sob_lookup_description', 'FORM.sob_lookup_description', 'nuobject'),
-('nuobject', 'FORM', 'sob_lookup_description_width', 'FORM.sob_lookup_description_width', 'nuobject'),
-('nulookup', 'FORM', 'zzzzsys_slo_object_name', 'FORM.zzzzsys_slo_object_name', 'nulookup'),
-('nulookup', 'FORM', 'zzzzsys_slo_field_function_name', 'FORM.zzzzsys_slo_field_function_name', 'nulookup'),
-('nuevent', 'FORM', 'sev_event', 'FORM.sev_event', 'nuevent'),
-('nuaccess', 'FORM', 'sal_description', 'FORM.sal_description', 'nuaccess'),
-('nuobject', 'FORM', 'sob_all_zzzzsys_form_id', 'FORM.sob_all_zzzzsys_form_id', 'nuobject'),
-('nuaccess', 'FORM', 'sal_code', 'FORM.sal_code', 'nuaccess'),
-('574665a15bbc1a1', 'FORM', 'sug_code', 'FORM.sug_code', '574665a15bbc1a1'),
-('574665a15bbc1a1', 'FORM', 'sug_description', 'FORM.sug_description', '574665a15bbc1a1'),
-('nuuser', 'FORM', 'sus_name', 'FORM.sus_name', 'nuuser'),
-('nuuser', 'FORM', 'sus_email', 'FORM.sus_email', 'nuuser'),
-('nuuser', 'FORM', 'sus_login_name', 'FORM.sus_login_name', 'nuuser'),
-('nuuser', 'FORM', 'new_password', 'FORM.new_password', 'nuuser'),
-('nuuser', 'FORM', 'check_password', 'FORM.check_password', 'nuuser'),
-('nuphp', 'FORM', 'sph_code', 'FORM.sph_code', 'nuphp'),
-('nuphp', 'FORM', 'sph_description', 'FORM.sph_description', 'nuphp'),
-('nublank', 'FORM', 'bla_html', 'FORM.bla_html', 'nublank'),
-('nubuildreport', 'FORM', 'sre_code', 'FORM.sre_code', 'nubuildreport'),
-('nubuildreport', 'FORM', 'sre_description', 'FORM.sre_description', 'nubuildreport'),
-('nubuildreport', 'FORM', 'sre_group', 'FORM.sre_group', 'nubuildreport'),
-('577b4d78ef9a2a0', 'FORM', 'steven', 'FORM.steven', '577b4d78ef9a2a0'),
-('577b4d78ef9a2a0', 'FORM', 'com_address', 'FORM.com_address', '577b4d78ef9a2a0'),
-('nulaunchdates', 'FORM', 'from_date', 'FORM.from_date', 'nulaunchdates'),
-('nulaunchdates', 'FORM', 'to_date', 'FORM.to_date', 'nulaunchdates'),
-('nuphp', 'FORM', 'sph_group', 'FORM.sph_group', 'nuphp'),
-('57a29441f16c351', 'FORM', 'set_time_out_minutes', 'FORM.set_time_out_minutes', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_username', 'FORM.set_smtp_username', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_password', 'FORM.set_smtp_password', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_host', 'FORM.set_smtp_host', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_from_address', 'FORM.set_smtp_from_address', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_from_name', 'FORM.set_smtp_from_name', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_port', 'FORM.set_smtp_port', '57a29441f16c351'),
-('57a7c1cb78bf3a3', 'FORM', 'trl_language', 'FORM.trl_language', '57a7c1cb78bf3a3'),
-('57a7c1cb78bf3a3', 'FORM', 'trl_english', 'FORM.trl_english', '57a7c1cb78bf3a3'),
-('57a7c1cb78bf3a3', 'FORM', 'trl_translation', 'FORM.trl_translation', '57a7c1cb78bf3a3'),
-('nupassword', 'FORM', 'new_password_check', 'FORM.new_password_check', 'nupassword'),
-('nuobject', 'FORM', 'sob_all_fast_form_description', 'FORM.sob_all_fast_form_description', 'nuobject'),
-('nupassword', 'FORM', 'new_password', 'FORM.new_password', 'nupassword'),
-('nupassword', 'FORM', 'old_password', 'FORM.old_password', 'nupassword'),
-('nuobject', 'FORM', 'ab_event', 'FORM.ab_event', 'nuobject'),
-('nuerror', 'FORM', 'error', 'FORM.error', 'nuerror'),
-('nuform', 'FORM', 'bo_event', 'FORM.bo_event', 'nuform'),
-('nuform', 'FORM', 'bs_event', 'FORM.bs_event', 'nuform'),
-('nuform', 'FORM', 'as_event', 'FORM.as_event', 'nuform'),
-('nuform', 'FORM', 'bd_event', 'FORM.bd_event', 'nuform'),
-('nuform', 'FORM', 'ad_event', 'FORM.ad_event', 'nuform'),
-('nuform', 'FORM', 'preiviewbtn', 'FORM.preiviewbtn', 'nuform'),
-('nuobject', 'FORM', 'sob_lookup_table', 'FORM.sob_lookup_table', 'nuobject'),
-('583f372b53b972c', 'FORM', 'sob_all_id', 'FORM.sob_all_id', '583f372b53b972c'),
-('583f372b53b972c', 'FORM', 'sob_all_label', 'FORM.sob_all_label', '583f372b53b972c'),
-('583f372b53b972c', 'FORM', 'custom_id', 'FORM.custom_id', '583f372b53b972c'),
-('nuobject', 'FORM', 'javascriptbtn', 'FORM.javascriptbtn', 'nuobject'),
-('nuobject', 'FORM', 'sob_calc_formula', 'FORM.sob_calc_formula', 'nuobject'),
-('56773cb405f4913', 'employee_sf', 'emp_name', 'employee_sf.emp_name', '56773cb405f4913'),
-('56773cb405f4913', 'employee_sf', 'emp_mobile', 'employee_sf.emp_mobile', '56773cb405f4913'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_title', 'zzzzsys_browse_sf.sbr_title', 'nuform'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_display', 'zzzzsys_browse_sf.sbr_display', 'nuform'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_sort', 'zzzzsys_browse_sf.sbr_sort', 'nuform'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_width', 'zzzzsys_browse_sf.sbr_width', 'nuform'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_order', 'zzzzsys_browse_sf.sbr_order', 'nuform'),
-('nuform', 'zzzzsys_tab_sf', 'syt_title', 'zzzzsys_tab_sf.syt_title', 'nuform'),
-('nuform', 'zzzzsys_tab_sf', 'syt_order', 'zzzzsys_tab_sf.syt_order', 'nuform'),
-('nuobject', 'lookup_sf', 'zzzzsys_slo_object_name', 'lookup_sf.zzzzsys_slo_object_name', 'nuobject'),
-('nuobject', 'lookup_sf', 'zzzzsys_slo_field_function_name', 'lookup_sf.zzzzsys_slo_field_function_name', 'nuobject'),
-('nuobject', 'zzzzsys_event_sf', 'sev_event', 'zzzzsys_event_sf.sev_event', 'nuobject'),
-('583361606250b6e', 'obj_sf', 'sob_all_id', 'obj_sf.sob_all_id', '583361606250b6e'),
-('583361606250b6e', 'obj_sf', 'sob_all_label', 'obj_sf.sob_all_label', '583361606250b6e'),
-('583361606250b6e', 'obj_sf', 'custom_id', 'obj_sf.custom_id', '583361606250b6e');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `___nu1587eb44c88226___`
---
-
-CREATE TABLE `___nu1587eb44c88226___` (
-  `theform` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `theparent` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `thechild` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `thevalue` text CHARACTER SET utf8 NOT NULL,
-  `thefilter` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `___nu1587eb44c88226___`
---
-
-INSERT INTO `___nu1587eb44c88226___` (`theform`, `theparent`, `thechild`, `thevalue`, `thefilter`) VALUES
-('56773cb405f4913', 'FORM', 'com_name', 'FORM.com_name', '56773cb405f4913'),
-('56773cb405f4913', 'FORM', 'com_address', 'FORM.com_address', '56773cb405f4913'),
-('56773cb405f4913', 'FORM', 'com_suburb', 'FORM.com_suburb', '56773cb405f4913'),
-('5678ab2c48c5c41', 'FORM', 'emp_name', 'FORM.emp_name', '5678ab2c48c5c41'),
-('5678ab2c48c5c41', 'FORM', 'emp_mobile', 'FORM.emp_mobile', '5678ab2c48c5c41'),
-('568b508eec00d80', 'FORM', 'bus_code', 'FORM.bus_code', '568b508eec00d80'),
-('568b508eec00d80', 'FORM', 'bus_description', 'FORM.bus_description', '568b508eec00d80'),
-('568b508eec00d80', 'FORM', 'bus_check', 'FORM.bus_check', '568b508eec00d80'),
-('nuform', 'FORM', 'sfo_code', 'FORM.sfo_code', 'nuform'),
-('nuform', 'FORM', 'sfo_description', 'FORM.sfo_description', 'nuform'),
-('nuform', 'FORM', 'sfo_table', 'FORM.sfo_table', 'nuform'),
-('nuform', 'FORM', 'sfo_primary_key', 'FORM.sfo_primary_key', 'nuform'),
-('nuform', 'FORM', 'sfo_row_height', 'FORM.sfo_row_height', 'nuform'),
-('nuform', 'FORM', 'sfo_rows_per_page', 'FORM.sfo_rows_per_page', 'nuform'),
-('nuform', 'FORM', 'sfo_add_title', 'FORM.sfo_add_title', 'nuform'),
-('nuform', 'FORM', 'sfo_print_title', 'FORM.sfo_print_title', 'nuform'),
-('nubrowse', 'FORM', 'sbr_title', 'FORM.sbr_title', 'nubrowse'),
-('nubrowse', 'FORM', 'sbr_display', 'FORM.sbr_display', 'nubrowse'),
-('nubrowse', 'FORM', 'sbr_sort', 'FORM.sbr_sort', 'nubrowse'),
-('nubrowse', 'FORM', 'sbr_width', 'FORM.sbr_width', 'nubrowse'),
-('nubrowse', 'FORM', 'sbr_order', 'FORM.sbr_order', 'nubrowse'),
-('nutab', 'FORM', 'syt_title', 'FORM.syt_title', 'nutab'),
-('nutab', 'FORM', 'syt_order', 'FORM.syt_order', 'nutab'),
-('nuform', 'FORM', 'sfo_save_title', 'FORM.sfo_save_title', 'nuform'),
-('nuform', 'FORM', 'sfo_clone_title', 'FORM.sfo_clone_title', 'nuform'),
-('nuform', 'FORM', 'sfo_delete_title', 'FORM.sfo_delete_title', 'nuform'),
-('nuform', 'FORM', 'sfo_new_title', 'FORM.sfo_new_title', 'nuform'),
-('nuform', 'FORM', 'bb_event', 'FORM.bb_event', 'nuform'),
-('nubuildreport', 'FORM', 'open_builder', 'FORM.open_builder', 'nubuildreport'),
-('nuobject', 'FORM', 'sob_all_id', 'FORM.sob_all_id', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_label', 'FORM.sob_all_label', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_order', 'FORM.sob_all_order', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_top', 'FORM.sob_all_top', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_left', 'FORM.sob_all_left', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_width', 'FORM.sob_all_width', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_height', 'FORM.sob_all_height', 'nuobject'),
-('nuobject', 'FORM', 'sob_subform_foreign_key', 'FORM.sob_subform_foreign_key', 'nuobject'),
-('nuobject', 'FORM', 'sob_run_filter', 'FORM.sob_run_filter', 'nuobject'),
-('nuobject', 'FORM', 'sob_run_id', 'FORM.sob_run_id', 'nuobject'),
-('nuobject', 'FORM', 'sob_lookup_code', 'FORM.sob_lookup_code', 'nuobject'),
-('nuobject', 'FORM', 'sob_lookup_description', 'FORM.sob_lookup_description', 'nuobject'),
-('nuobject', 'FORM', 'sob_lookup_description_width', 'FORM.sob_lookup_description_width', 'nuobject'),
-('nulookup', 'FORM', 'zzzzsys_slo_object_name', 'FORM.zzzzsys_slo_object_name', 'nulookup'),
-('nulookup', 'FORM', 'zzzzsys_slo_field_function_name', 'FORM.zzzzsys_slo_field_function_name', 'nulookup'),
-('nuevent', 'FORM', 'sev_event', 'FORM.sev_event', 'nuevent'),
-('nuaccess', 'FORM', 'sal_description', 'FORM.sal_description', 'nuaccess'),
-('nuobject', 'FORM', 'sob_all_zzzzsys_form_id', 'FORM.sob_all_zzzzsys_form_id', 'nuobject'),
-('nuaccess', 'FORM', 'sal_code', 'FORM.sal_code', 'nuaccess'),
-('574665a15bbc1a1', 'FORM', 'sug_code', 'FORM.sug_code', '574665a15bbc1a1'),
-('574665a15bbc1a1', 'FORM', 'sug_description', 'FORM.sug_description', '574665a15bbc1a1'),
-('nuuser', 'FORM', 'sus_name', 'FORM.sus_name', 'nuuser'),
-('nuuser', 'FORM', 'sus_email', 'FORM.sus_email', 'nuuser'),
-('nuuser', 'FORM', 'sus_login_name', 'FORM.sus_login_name', 'nuuser'),
-('nuuser', 'FORM', 'new_password', 'FORM.new_password', 'nuuser'),
-('nuuser', 'FORM', 'check_password', 'FORM.check_password', 'nuuser'),
-('nuphp', 'FORM', 'sph_code', 'FORM.sph_code', 'nuphp'),
-('nuphp', 'FORM', 'sph_description', 'FORM.sph_description', 'nuphp'),
-('nublank', 'FORM', 'bla_html', 'FORM.bla_html', 'nublank'),
-('nubuildreport', 'FORM', 'sre_code', 'FORM.sre_code', 'nubuildreport'),
-('nubuildreport', 'FORM', 'sre_description', 'FORM.sre_description', 'nubuildreport'),
-('nubuildreport', 'FORM', 'sre_group', 'FORM.sre_group', 'nubuildreport'),
-('577b4d78ef9a2a0', 'FORM', 'steven', 'FORM.steven', '577b4d78ef9a2a0'),
-('577b4d78ef9a2a0', 'FORM', 'com_address', 'FORM.com_address', '577b4d78ef9a2a0'),
-('nulaunchdates', 'FORM', 'from_date', 'FORM.from_date', 'nulaunchdates'),
-('nulaunchdates', 'FORM', 'to_date', 'FORM.to_date', 'nulaunchdates'),
-('nuphp', 'FORM', 'sph_group', 'FORM.sph_group', 'nuphp'),
-('57a29441f16c351', 'FORM', 'set_time_out_minutes', 'FORM.set_time_out_minutes', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_username', 'FORM.set_smtp_username', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_password', 'FORM.set_smtp_password', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_host', 'FORM.set_smtp_host', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_from_address', 'FORM.set_smtp_from_address', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_from_name', 'FORM.set_smtp_from_name', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_port', 'FORM.set_smtp_port', '57a29441f16c351'),
-('57a7c1cb78bf3a3', 'FORM', 'trl_language', 'FORM.trl_language', '57a7c1cb78bf3a3'),
-('57a7c1cb78bf3a3', 'FORM', 'trl_english', 'FORM.trl_english', '57a7c1cb78bf3a3'),
-('57a7c1cb78bf3a3', 'FORM', 'trl_translation', 'FORM.trl_translation', '57a7c1cb78bf3a3'),
-('nupassword', 'FORM', 'new_password_check', 'FORM.new_password_check', 'nupassword'),
-('nuobject', 'FORM', 'sob_all_fast_form_description', 'FORM.sob_all_fast_form_description', 'nuobject'),
-('nupassword', 'FORM', 'new_password', 'FORM.new_password', 'nupassword'),
-('nupassword', 'FORM', 'old_password', 'FORM.old_password', 'nupassword'),
-('nuobject', 'FORM', 'ab_event', 'FORM.ab_event', 'nuobject'),
-('nuerror', 'FORM', 'error', 'FORM.error', 'nuerror'),
-('nuform', 'FORM', 'bo_event', 'FORM.bo_event', 'nuform'),
-('nuform', 'FORM', 'bs_event', 'FORM.bs_event', 'nuform'),
-('nuform', 'FORM', 'as_event', 'FORM.as_event', 'nuform'),
-('nuform', 'FORM', 'bd_event', 'FORM.bd_event', 'nuform'),
-('nuform', 'FORM', 'ad_event', 'FORM.ad_event', 'nuform'),
-('nuform', 'FORM', 'preiviewbtn', 'FORM.preiviewbtn', 'nuform'),
-('nuobject', 'FORM', 'sob_lookup_table', 'FORM.sob_lookup_table', 'nuobject'),
-('583f372b53b972c', 'FORM', 'sob_all_id', 'FORM.sob_all_id', '583f372b53b972c'),
-('583f372b53b972c', 'FORM', 'sob_all_label', 'FORM.sob_all_label', '583f372b53b972c'),
-('583f372b53b972c', 'FORM', 'custom_id', 'FORM.custom_id', '583f372b53b972c'),
-('nuobject', 'FORM', 'javascriptbtn', 'FORM.javascriptbtn', 'nuobject'),
-('nuobject', 'FORM', 'sob_calc_formula', 'FORM.sob_calc_formula', 'nuobject'),
-('56773cb405f4913', 'employee_sf', 'emp_name', 'employee_sf.emp_name', '56773cb405f4913'),
-('56773cb405f4913', 'employee_sf', 'emp_mobile', 'employee_sf.emp_mobile', '56773cb405f4913'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_title', 'zzzzsys_browse_sf.sbr_title', 'nuform'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_display', 'zzzzsys_browse_sf.sbr_display', 'nuform'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_sort', 'zzzzsys_browse_sf.sbr_sort', 'nuform'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_width', 'zzzzsys_browse_sf.sbr_width', 'nuform'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_order', 'zzzzsys_browse_sf.sbr_order', 'nuform'),
-('nuform', 'zzzzsys_tab_sf', 'syt_title', 'zzzzsys_tab_sf.syt_title', 'nuform'),
-('nuform', 'zzzzsys_tab_sf', 'syt_order', 'zzzzsys_tab_sf.syt_order', 'nuform'),
-('nuobject', 'lookup_sf', 'zzzzsys_slo_object_name', 'lookup_sf.zzzzsys_slo_object_name', 'nuobject'),
-('nuobject', 'lookup_sf', 'zzzzsys_slo_field_function_name', 'lookup_sf.zzzzsys_slo_field_function_name', 'nuobject'),
-('nuobject', 'zzzzsys_event_sf', 'sev_event', 'zzzzsys_event_sf.sev_event', 'nuobject'),
-('583361606250b6e', 'obj_sf', 'sob_all_id', 'obj_sf.sob_all_id', '583361606250b6e'),
-('583361606250b6e', 'obj_sf', 'sob_all_label', 'obj_sf.sob_all_label', '583361606250b6e'),
-('583361606250b6e', 'obj_sf', 'custom_id', 'obj_sf.custom_id', '583361606250b6e');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `___nu1587eb53fdbf0a___`
---
-
-CREATE TABLE `___nu1587eb53fdbf0a___` (
-  `theform` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `theparent` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `thechild` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `thevalue` text CHARACTER SET utf8 NOT NULL,
-  `thefilter` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `___nu1587eb53fdbf0a___`
---
-
-INSERT INTO `___nu1587eb53fdbf0a___` (`theform`, `theparent`, `thechild`, `thevalue`, `thefilter`) VALUES
-('56773cb405f4913', 'FORM', 'com_name', 'FORM.com_name', '56773cb405f4913'),
-('56773cb405f4913', 'FORM', 'com_address', 'FORM.com_address', '56773cb405f4913'),
-('56773cb405f4913', 'FORM', 'com_suburb', 'FORM.com_suburb', '56773cb405f4913'),
-('5678ab2c48c5c41', 'FORM', 'emp_name', 'FORM.emp_name', '5678ab2c48c5c41'),
-('5678ab2c48c5c41', 'FORM', 'emp_mobile', 'FORM.emp_mobile', '5678ab2c48c5c41'),
-('568b508eec00d80', 'FORM', 'bus_code', 'FORM.bus_code', '568b508eec00d80'),
-('568b508eec00d80', 'FORM', 'bus_description', 'FORM.bus_description', '568b508eec00d80'),
-('568b508eec00d80', 'FORM', 'bus_check', 'FORM.bus_check', '568b508eec00d80'),
-('nuform', 'FORM', 'sfo_code', 'FORM.sfo_code', 'nuform'),
-('nuform', 'FORM', 'sfo_description', 'FORM.sfo_description', 'nuform'),
-('nuform', 'FORM', 'sfo_table', 'FORM.sfo_table', 'nuform'),
-('nuform', 'FORM', 'sfo_primary_key', 'FORM.sfo_primary_key', 'nuform'),
-('nuform', 'FORM', 'sfo_row_height', 'FORM.sfo_row_height', 'nuform'),
-('nuform', 'FORM', 'sfo_rows_per_page', 'FORM.sfo_rows_per_page', 'nuform'),
-('nuform', 'FORM', 'sfo_add_title', 'FORM.sfo_add_title', 'nuform'),
-('nuform', 'FORM', 'sfo_print_title', 'FORM.sfo_print_title', 'nuform'),
-('nubrowse', 'FORM', 'sbr_title', 'FORM.sbr_title', 'nubrowse'),
-('nubrowse', 'FORM', 'sbr_display', 'FORM.sbr_display', 'nubrowse'),
-('nubrowse', 'FORM', 'sbr_sort', 'FORM.sbr_sort', 'nubrowse'),
-('nubrowse', 'FORM', 'sbr_width', 'FORM.sbr_width', 'nubrowse'),
-('nubrowse', 'FORM', 'sbr_order', 'FORM.sbr_order', 'nubrowse'),
-('nutab', 'FORM', 'syt_title', 'FORM.syt_title', 'nutab'),
-('nutab', 'FORM', 'syt_order', 'FORM.syt_order', 'nutab'),
-('nuform', 'FORM', 'sfo_save_title', 'FORM.sfo_save_title', 'nuform'),
-('nuform', 'FORM', 'sfo_clone_title', 'FORM.sfo_clone_title', 'nuform'),
-('nuform', 'FORM', 'sfo_delete_title', 'FORM.sfo_delete_title', 'nuform'),
-('nuform', 'FORM', 'sfo_new_title', 'FORM.sfo_new_title', 'nuform'),
-('nuform', 'FORM', 'bb_event', 'FORM.bb_event', 'nuform'),
-('nubuildreport', 'FORM', 'open_builder', 'FORM.open_builder', 'nubuildreport'),
-('nuobject', 'FORM', 'sob_all_id', 'FORM.sob_all_id', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_label', 'FORM.sob_all_label', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_order', 'FORM.sob_all_order', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_top', 'FORM.sob_all_top', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_left', 'FORM.sob_all_left', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_width', 'FORM.sob_all_width', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_height', 'FORM.sob_all_height', 'nuobject'),
-('nuobject', 'FORM', 'sob_subform_foreign_key', 'FORM.sob_subform_foreign_key', 'nuobject'),
-('nuobject', 'FORM', 'sob_run_filter', 'FORM.sob_run_filter', 'nuobject'),
-('nuobject', 'FORM', 'sob_run_id', 'FORM.sob_run_id', 'nuobject'),
-('nuobject', 'FORM', 'sob_lookup_code', 'FORM.sob_lookup_code', 'nuobject'),
-('nuobject', 'FORM', 'sob_lookup_description', 'FORM.sob_lookup_description', 'nuobject'),
-('nuobject', 'FORM', 'sob_lookup_description_width', 'FORM.sob_lookup_description_width', 'nuobject'),
-('nulookup', 'FORM', 'zzzzsys_slo_object_name', 'FORM.zzzzsys_slo_object_name', 'nulookup'),
-('nulookup', 'FORM', 'zzzzsys_slo_field_function_name', 'FORM.zzzzsys_slo_field_function_name', 'nulookup'),
-('nuevent', 'FORM', 'sev_event', 'FORM.sev_event', 'nuevent'),
-('nuaccess', 'FORM', 'sal_description', 'FORM.sal_description', 'nuaccess'),
-('nuobject', 'FORM', 'sob_all_zzzzsys_form_id', 'FORM.sob_all_zzzzsys_form_id', 'nuobject'),
-('nuaccess', 'FORM', 'sal_code', 'FORM.sal_code', 'nuaccess'),
-('574665a15bbc1a1', 'FORM', 'sug_code', 'FORM.sug_code', '574665a15bbc1a1'),
-('574665a15bbc1a1', 'FORM', 'sug_description', 'FORM.sug_description', '574665a15bbc1a1'),
-('nuuser', 'FORM', 'sus_name', 'FORM.sus_name', 'nuuser'),
-('nuuser', 'FORM', 'sus_email', 'FORM.sus_email', 'nuuser'),
-('nuuser', 'FORM', 'sus_login_name', 'FORM.sus_login_name', 'nuuser'),
-('nuuser', 'FORM', 'new_password', 'FORM.new_password', 'nuuser'),
-('nuuser', 'FORM', 'check_password', 'FORM.check_password', 'nuuser'),
-('nuphp', 'FORM', 'sph_code', 'FORM.sph_code', 'nuphp'),
-('nuphp', 'FORM', 'sph_description', 'FORM.sph_description', 'nuphp'),
-('nublank', 'FORM', 'bla_html', 'FORM.bla_html', 'nublank'),
-('nubuildreport', 'FORM', 'sre_code', 'FORM.sre_code', 'nubuildreport'),
-('nubuildreport', 'FORM', 'sre_description', 'FORM.sre_description', 'nubuildreport'),
-('nubuildreport', 'FORM', 'sre_group', 'FORM.sre_group', 'nubuildreport'),
-('577b4d78ef9a2a0', 'FORM', 'steven', 'FORM.steven', '577b4d78ef9a2a0'),
-('577b4d78ef9a2a0', 'FORM', 'com_address', 'FORM.com_address', '577b4d78ef9a2a0'),
-('nulaunchdates', 'FORM', 'from_date', 'FORM.from_date', 'nulaunchdates'),
-('nulaunchdates', 'FORM', 'to_date', 'FORM.to_date', 'nulaunchdates'),
-('nuphp', 'FORM', 'sph_group', 'FORM.sph_group', 'nuphp'),
-('57a29441f16c351', 'FORM', 'set_time_out_minutes', 'FORM.set_time_out_minutes', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_username', 'FORM.set_smtp_username', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_password', 'FORM.set_smtp_password', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_host', 'FORM.set_smtp_host', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_from_address', 'FORM.set_smtp_from_address', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_from_name', 'FORM.set_smtp_from_name', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_port', 'FORM.set_smtp_port', '57a29441f16c351'),
-('57a7c1cb78bf3a3', 'FORM', 'trl_language', 'FORM.trl_language', '57a7c1cb78bf3a3'),
-('57a7c1cb78bf3a3', 'FORM', 'trl_english', 'FORM.trl_english', '57a7c1cb78bf3a3'),
-('57a7c1cb78bf3a3', 'FORM', 'trl_translation', 'FORM.trl_translation', '57a7c1cb78bf3a3'),
-('nupassword', 'FORM', 'new_password_check', 'FORM.new_password_check', 'nupassword'),
-('nuobject', 'FORM', 'sob_all_fast_form_description', 'FORM.sob_all_fast_form_description', 'nuobject'),
-('nupassword', 'FORM', 'new_password', 'FORM.new_password', 'nupassword'),
-('nupassword', 'FORM', 'old_password', 'FORM.old_password', 'nupassword'),
-('nuobject', 'FORM', 'ab_event', 'FORM.ab_event', 'nuobject'),
-('nuerror', 'FORM', 'error', 'FORM.error', 'nuerror'),
-('nuform', 'FORM', 'bo_event', 'FORM.bo_event', 'nuform'),
-('nuform', 'FORM', 'bs_event', 'FORM.bs_event', 'nuform'),
-('nuform', 'FORM', 'as_event', 'FORM.as_event', 'nuform'),
-('nuform', 'FORM', 'bd_event', 'FORM.bd_event', 'nuform'),
-('nuform', 'FORM', 'ad_event', 'FORM.ad_event', 'nuform'),
-('nuform', 'FORM', 'preiviewbtn', 'FORM.preiviewbtn', 'nuform'),
-('nuobject', 'FORM', 'sob_lookup_table', 'FORM.sob_lookup_table', 'nuobject'),
-('583f372b53b972c', 'FORM', 'sob_all_id', 'FORM.sob_all_id', '583f372b53b972c'),
-('583f372b53b972c', 'FORM', 'sob_all_label', 'FORM.sob_all_label', '583f372b53b972c'),
-('583f372b53b972c', 'FORM', 'custom_id', 'FORM.custom_id', '583f372b53b972c'),
-('nuobject', 'FORM', 'javascriptbtn', 'FORM.javascriptbtn', 'nuobject'),
-('nuobject', 'FORM', 'sob_calc_formula', 'FORM.sob_calc_formula', 'nuobject'),
-('56773cb405f4913', 'employee_sf', 'emp_name', 'employee_sf.emp_name', '56773cb405f4913'),
-('56773cb405f4913', 'employee_sf', 'emp_mobile', 'employee_sf.emp_mobile', '56773cb405f4913'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_title', 'zzzzsys_browse_sf.sbr_title', 'nuform'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_display', 'zzzzsys_browse_sf.sbr_display', 'nuform'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_sort', 'zzzzsys_browse_sf.sbr_sort', 'nuform'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_width', 'zzzzsys_browse_sf.sbr_width', 'nuform'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_order', 'zzzzsys_browse_sf.sbr_order', 'nuform'),
-('nuform', 'zzzzsys_tab_sf', 'syt_title', 'zzzzsys_tab_sf.syt_title', 'nuform'),
-('nuform', 'zzzzsys_tab_sf', 'syt_order', 'zzzzsys_tab_sf.syt_order', 'nuform'),
-('nuobject', 'lookup_sf', 'zzzzsys_slo_object_name', 'lookup_sf.zzzzsys_slo_object_name', 'nuobject'),
-('nuobject', 'lookup_sf', 'zzzzsys_slo_field_function_name', 'lookup_sf.zzzzsys_slo_field_function_name', 'nuobject'),
-('nuobject', 'zzzzsys_event_sf', 'sev_event', 'zzzzsys_event_sf.sev_event', 'nuobject'),
-('583361606250b6e', 'obj_sf', 'sob_all_id', 'obj_sf.sob_all_id', '583361606250b6e'),
-('583361606250b6e', 'obj_sf', 'sob_all_label', 'obj_sf.sob_all_label', '583361606250b6e'),
-('583361606250b6e', 'obj_sf', 'custom_id', 'obj_sf.custom_id', '583361606250b6e');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `___nu1587eb295d35fe___`
---
-
-CREATE TABLE `___nu1587eb295d35fe___` (
-  `theform` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `theparent` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `thechild` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `thevalue` text CHARACTER SET utf8 NOT NULL,
-  `thefilter` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `___nu1587eb295d35fe___`
---
-
-INSERT INTO `___nu1587eb295d35fe___` (`theform`, `theparent`, `thechild`, `thevalue`, `thefilter`) VALUES
-('56773cb405f4913', 'FORM', 'com_name', 'FORM.com_name', '56773cb405f4913'),
-('56773cb405f4913', 'FORM', 'com_address', 'FORM.com_address', '56773cb405f4913'),
-('56773cb405f4913', 'FORM', 'com_suburb', 'FORM.com_suburb', '56773cb405f4913'),
-('5678ab2c48c5c41', 'FORM', 'emp_name', 'FORM.emp_name', '5678ab2c48c5c41'),
-('5678ab2c48c5c41', 'FORM', 'emp_mobile', 'FORM.emp_mobile', '5678ab2c48c5c41'),
-('568b508eec00d80', 'FORM', 'bus_code', 'FORM.bus_code', '568b508eec00d80'),
-('568b508eec00d80', 'FORM', 'bus_description', 'FORM.bus_description', '568b508eec00d80'),
-('568b508eec00d80', 'FORM', 'bus_check', 'FORM.bus_check', '568b508eec00d80'),
-('nuform', 'FORM', 'sfo_code', 'FORM.sfo_code', 'nuform'),
-('nuform', 'FORM', 'sfo_description', 'FORM.sfo_description', 'nuform'),
-('nuform', 'FORM', 'sfo_table', 'FORM.sfo_table', 'nuform'),
-('nuform', 'FORM', 'sfo_primary_key', 'FORM.sfo_primary_key', 'nuform'),
-('nuform', 'FORM', 'sfo_row_height', 'FORM.sfo_row_height', 'nuform'),
-('nuform', 'FORM', 'sfo_rows_per_page', 'FORM.sfo_rows_per_page', 'nuform'),
-('nuform', 'FORM', 'sfo_add_title', 'FORM.sfo_add_title', 'nuform'),
-('nuform', 'FORM', 'sfo_print_title', 'FORM.sfo_print_title', 'nuform'),
-('nubrowse', 'FORM', 'sbr_title', 'FORM.sbr_title', 'nubrowse'),
-('nubrowse', 'FORM', 'sbr_display', 'FORM.sbr_display', 'nubrowse'),
-('nubrowse', 'FORM', 'sbr_sort', 'FORM.sbr_sort', 'nubrowse'),
-('nubrowse', 'FORM', 'sbr_width', 'FORM.sbr_width', 'nubrowse'),
-('nubrowse', 'FORM', 'sbr_order', 'FORM.sbr_order', 'nubrowse'),
-('nutab', 'FORM', 'syt_title', 'FORM.syt_title', 'nutab'),
-('nutab', 'FORM', 'syt_order', 'FORM.syt_order', 'nutab'),
-('nuform', 'FORM', 'sfo_save_title', 'FORM.sfo_save_title', 'nuform'),
-('nuform', 'FORM', 'sfo_clone_title', 'FORM.sfo_clone_title', 'nuform'),
-('nuform', 'FORM', 'sfo_delete_title', 'FORM.sfo_delete_title', 'nuform'),
-('nuform', 'FORM', 'sfo_new_title', 'FORM.sfo_new_title', 'nuform'),
-('nuform', 'FORM', 'bb_event', 'FORM.bb_event', 'nuform'),
-('nubuildreport', 'FORM', 'open_builder', 'FORM.open_builder', 'nubuildreport'),
-('nuobject', 'FORM', 'sob_all_id', 'FORM.sob_all_id', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_label', 'FORM.sob_all_label', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_order', 'FORM.sob_all_order', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_top', 'FORM.sob_all_top', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_left', 'FORM.sob_all_left', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_width', 'FORM.sob_all_width', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_height', 'FORM.sob_all_height', 'nuobject'),
-('nuobject', 'FORM', 'sob_subform_foreign_key', 'FORM.sob_subform_foreign_key', 'nuobject'),
-('nuobject', 'FORM', 'sob_run_filter', 'FORM.sob_run_filter', 'nuobject'),
-('nuobject', 'FORM', 'sob_run_id', 'FORM.sob_run_id', 'nuobject'),
-('nuobject', 'FORM', 'sob_lookup_code', 'FORM.sob_lookup_code', 'nuobject'),
-('nuobject', 'FORM', 'sob_lookup_description', 'FORM.sob_lookup_description', 'nuobject'),
-('nuobject', 'FORM', 'sob_lookup_description_width', 'FORM.sob_lookup_description_width', 'nuobject'),
-('nulookup', 'FORM', 'zzzzsys_slo_object_name', 'FORM.zzzzsys_slo_object_name', 'nulookup'),
-('nulookup', 'FORM', 'zzzzsys_slo_field_function_name', 'FORM.zzzzsys_slo_field_function_name', 'nulookup'),
-('nuevent', 'FORM', 'sev_event', 'FORM.sev_event', 'nuevent'),
-('nuaccess', 'FORM', 'sal_description', 'FORM.sal_description', 'nuaccess'),
-('nuobject', 'FORM', 'sob_all_zzzzsys_form_id', 'FORM.sob_all_zzzzsys_form_id', 'nuobject'),
-('nuaccess', 'FORM', 'sal_code', 'FORM.sal_code', 'nuaccess'),
-('574665a15bbc1a1', 'FORM', 'sug_code', 'FORM.sug_code', '574665a15bbc1a1'),
-('574665a15bbc1a1', 'FORM', 'sug_description', 'FORM.sug_description', '574665a15bbc1a1'),
-('nuuser', 'FORM', 'sus_name', 'FORM.sus_name', 'nuuser'),
-('nuuser', 'FORM', 'sus_email', 'FORM.sus_email', 'nuuser'),
-('nuuser', 'FORM', 'sus_login_name', 'FORM.sus_login_name', 'nuuser'),
-('nuuser', 'FORM', 'new_password', 'FORM.new_password', 'nuuser'),
-('nuuser', 'FORM', 'check_password', 'FORM.check_password', 'nuuser'),
-('nuphp', 'FORM', 'sph_code', 'FORM.sph_code', 'nuphp'),
-('nuphp', 'FORM', 'sph_description', 'FORM.sph_description', 'nuphp'),
-('nublank', 'FORM', 'bla_html', 'FORM.bla_html', 'nublank'),
-('nubuildreport', 'FORM', 'sre_code', 'FORM.sre_code', 'nubuildreport'),
-('nubuildreport', 'FORM', 'sre_description', 'FORM.sre_description', 'nubuildreport'),
-('nubuildreport', 'FORM', 'sre_group', 'FORM.sre_group', 'nubuildreport'),
-('577b4d78ef9a2a0', 'FORM', 'steven', 'FORM.steven', '577b4d78ef9a2a0'),
-('577b4d78ef9a2a0', 'FORM', 'com_address', 'FORM.com_address', '577b4d78ef9a2a0'),
-('nulaunchdates', 'FORM', 'from_date', 'FORM.from_date', 'nulaunchdates'),
-('nulaunchdates', 'FORM', 'to_date', 'FORM.to_date', 'nulaunchdates'),
-('nuphp', 'FORM', 'sph_group', 'FORM.sph_group', 'nuphp'),
-('57a29441f16c351', 'FORM', 'set_time_out_minutes', 'FORM.set_time_out_minutes', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_username', 'FORM.set_smtp_username', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_password', 'FORM.set_smtp_password', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_host', 'FORM.set_smtp_host', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_from_address', 'FORM.set_smtp_from_address', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_from_name', 'FORM.set_smtp_from_name', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_port', 'FORM.set_smtp_port', '57a29441f16c351'),
-('57a7c1cb78bf3a3', 'FORM', 'trl_language', 'FORM.trl_language', '57a7c1cb78bf3a3'),
-('57a7c1cb78bf3a3', 'FORM', 'trl_english', 'FORM.trl_english', '57a7c1cb78bf3a3'),
-('57a7c1cb78bf3a3', 'FORM', 'trl_translation', 'FORM.trl_translation', '57a7c1cb78bf3a3'),
-('nupassword', 'FORM', 'new_password_check', 'FORM.new_password_check', 'nupassword'),
-('nuobject', 'FORM', 'sob_all_fast_form_description', 'FORM.sob_all_fast_form_description', 'nuobject'),
-('nupassword', 'FORM', 'new_password', 'FORM.new_password', 'nupassword'),
-('nupassword', 'FORM', 'old_password', 'FORM.old_password', 'nupassword'),
-('nuobject', 'FORM', 'ab_event', 'FORM.ab_event', 'nuobject'),
-('nuerror', 'FORM', 'error', 'FORM.error', 'nuerror'),
-('nuform', 'FORM', 'bo_event', 'FORM.bo_event', 'nuform'),
-('nuform', 'FORM', 'bs_event', 'FORM.bs_event', 'nuform'),
-('nuform', 'FORM', 'as_event', 'FORM.as_event', 'nuform'),
-('nuform', 'FORM', 'bd_event', 'FORM.bd_event', 'nuform'),
-('nuform', 'FORM', 'ad_event', 'FORM.ad_event', 'nuform'),
-('nuform', 'FORM', 'preiviewbtn', 'FORM.preiviewbtn', 'nuform'),
-('nuobject', 'FORM', 'sob_lookup_table', 'FORM.sob_lookup_table', 'nuobject'),
-('583f372b53b972c', 'FORM', 'sob_all_id', 'FORM.sob_all_id', '583f372b53b972c'),
-('583f372b53b972c', 'FORM', 'sob_all_label', 'FORM.sob_all_label', '583f372b53b972c'),
-('583f372b53b972c', 'FORM', 'custom_id', 'FORM.custom_id', '583f372b53b972c'),
-('nuobject', 'FORM', 'javascriptbtn', 'FORM.javascriptbtn', 'nuobject'),
-('nuobject', 'FORM', 'sob_calc_formula', 'FORM.sob_calc_formula', 'nuobject'),
-('56773cb405f4913', 'employee_sf', 'emp_name', 'employee_sf.emp_name', '56773cb405f4913'),
-('56773cb405f4913', 'employee_sf', 'emp_mobile', 'employee_sf.emp_mobile', '56773cb405f4913'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_title', 'zzzzsys_browse_sf.sbr_title', 'nuform'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_display', 'zzzzsys_browse_sf.sbr_display', 'nuform'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_sort', 'zzzzsys_browse_sf.sbr_sort', 'nuform'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_width', 'zzzzsys_browse_sf.sbr_width', 'nuform'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_order', 'zzzzsys_browse_sf.sbr_order', 'nuform'),
-('nuform', 'zzzzsys_tab_sf', 'syt_title', 'zzzzsys_tab_sf.syt_title', 'nuform'),
-('nuform', 'zzzzsys_tab_sf', 'syt_order', 'zzzzsys_tab_sf.syt_order', 'nuform'),
-('nuobject', 'lookup_sf', 'zzzzsys_slo_object_name', 'lookup_sf.zzzzsys_slo_object_name', 'nuobject'),
-('nuobject', 'lookup_sf', 'zzzzsys_slo_field_function_name', 'lookup_sf.zzzzsys_slo_field_function_name', 'nuobject'),
-('nuobject', 'zzzzsys_event_sf', 'sev_event', 'zzzzsys_event_sf.sev_event', 'nuobject'),
-('583361606250b6e', 'obj_sf', 'sob_all_id', 'obj_sf.sob_all_id', '583361606250b6e'),
-('583361606250b6e', 'obj_sf', 'sob_all_label', 'obj_sf.sob_all_label', '583361606250b6e'),
-('583361606250b6e', 'obj_sf', 'custom_id', 'obj_sf.custom_id', '583361606250b6e');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `___nu1587eb442a82b5___`
---
-
-CREATE TABLE `___nu1587eb442a82b5___` (
-  `theform` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `theparent` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `thechild` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `thevalue` text CHARACTER SET utf8 NOT NULL,
-  `thefilter` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `___nu1587eb442a82b5___`
---
-
-INSERT INTO `___nu1587eb442a82b5___` (`theform`, `theparent`, `thechild`, `thevalue`, `thefilter`) VALUES
-('56773cb405f4913', 'FORM', 'com_name', 'FORM.com_name', '56773cb405f4913'),
-('56773cb405f4913', 'FORM', 'com_address', 'FORM.com_address', '56773cb405f4913'),
-('56773cb405f4913', 'FORM', 'com_suburb', 'FORM.com_suburb', '56773cb405f4913'),
-('5678ab2c48c5c41', 'FORM', 'emp_name', 'FORM.emp_name', '5678ab2c48c5c41'),
-('5678ab2c48c5c41', 'FORM', 'emp_mobile', 'FORM.emp_mobile', '5678ab2c48c5c41'),
-('568b508eec00d80', 'FORM', 'bus_code', 'FORM.bus_code', '568b508eec00d80'),
-('568b508eec00d80', 'FORM', 'bus_description', 'FORM.bus_description', '568b508eec00d80'),
-('568b508eec00d80', 'FORM', 'bus_check', 'FORM.bus_check', '568b508eec00d80'),
-('nuform', 'FORM', 'sfo_code', 'FORM.sfo_code', 'nuform'),
-('nuform', 'FORM', 'sfo_description', 'FORM.sfo_description', 'nuform'),
-('nuform', 'FORM', 'sfo_table', 'FORM.sfo_table', 'nuform'),
-('nuform', 'FORM', 'sfo_primary_key', 'FORM.sfo_primary_key', 'nuform'),
-('nuform', 'FORM', 'sfo_row_height', 'FORM.sfo_row_height', 'nuform'),
-('nuform', 'FORM', 'sfo_rows_per_page', 'FORM.sfo_rows_per_page', 'nuform'),
-('nuform', 'FORM', 'sfo_add_title', 'FORM.sfo_add_title', 'nuform'),
-('nuform', 'FORM', 'sfo_print_title', 'FORM.sfo_print_title', 'nuform'),
-('nubrowse', 'FORM', 'sbr_title', 'FORM.sbr_title', 'nubrowse'),
-('nubrowse', 'FORM', 'sbr_display', 'FORM.sbr_display', 'nubrowse'),
-('nubrowse', 'FORM', 'sbr_sort', 'FORM.sbr_sort', 'nubrowse'),
-('nubrowse', 'FORM', 'sbr_width', 'FORM.sbr_width', 'nubrowse'),
-('nubrowse', 'FORM', 'sbr_order', 'FORM.sbr_order', 'nubrowse'),
-('nutab', 'FORM', 'syt_title', 'FORM.syt_title', 'nutab'),
-('nutab', 'FORM', 'syt_order', 'FORM.syt_order', 'nutab'),
-('nuform', 'FORM', 'sfo_save_title', 'FORM.sfo_save_title', 'nuform'),
-('nuform', 'FORM', 'sfo_clone_title', 'FORM.sfo_clone_title', 'nuform'),
-('nuform', 'FORM', 'sfo_delete_title', 'FORM.sfo_delete_title', 'nuform'),
-('nuform', 'FORM', 'sfo_new_title', 'FORM.sfo_new_title', 'nuform'),
-('nuform', 'FORM', 'bb_event', 'FORM.bb_event', 'nuform'),
-('nubuildreport', 'FORM', 'open_builder', 'FORM.open_builder', 'nubuildreport'),
-('nuobject', 'FORM', 'sob_all_id', 'FORM.sob_all_id', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_label', 'FORM.sob_all_label', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_order', 'FORM.sob_all_order', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_top', 'FORM.sob_all_top', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_left', 'FORM.sob_all_left', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_width', 'FORM.sob_all_width', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_height', 'FORM.sob_all_height', 'nuobject'),
-('nuobject', 'FORM', 'sob_subform_foreign_key', 'FORM.sob_subform_foreign_key', 'nuobject'),
-('nuobject', 'FORM', 'sob_run_filter', 'FORM.sob_run_filter', 'nuobject'),
-('nuobject', 'FORM', 'sob_run_id', 'FORM.sob_run_id', 'nuobject'),
-('nuobject', 'FORM', 'sob_lookup_code', 'FORM.sob_lookup_code', 'nuobject'),
-('nuobject', 'FORM', 'sob_lookup_description', 'FORM.sob_lookup_description', 'nuobject'),
-('nuobject', 'FORM', 'sob_lookup_description_width', 'FORM.sob_lookup_description_width', 'nuobject'),
-('nulookup', 'FORM', 'zzzzsys_slo_object_name', 'FORM.zzzzsys_slo_object_name', 'nulookup'),
-('nulookup', 'FORM', 'zzzzsys_slo_field_function_name', 'FORM.zzzzsys_slo_field_function_name', 'nulookup'),
-('nuevent', 'FORM', 'sev_event', 'FORM.sev_event', 'nuevent'),
-('nuaccess', 'FORM', 'sal_description', 'FORM.sal_description', 'nuaccess'),
-('nuobject', 'FORM', 'sob_all_zzzzsys_form_id', 'FORM.sob_all_zzzzsys_form_id', 'nuobject'),
-('nuaccess', 'FORM', 'sal_code', 'FORM.sal_code', 'nuaccess'),
-('574665a15bbc1a1', 'FORM', 'sug_code', 'FORM.sug_code', '574665a15bbc1a1'),
-('574665a15bbc1a1', 'FORM', 'sug_description', 'FORM.sug_description', '574665a15bbc1a1'),
-('nuuser', 'FORM', 'sus_name', 'FORM.sus_name', 'nuuser'),
-('nuuser', 'FORM', 'sus_email', 'FORM.sus_email', 'nuuser'),
-('nuuser', 'FORM', 'sus_login_name', 'FORM.sus_login_name', 'nuuser'),
-('nuuser', 'FORM', 'new_password', 'FORM.new_password', 'nuuser'),
-('nuuser', 'FORM', 'check_password', 'FORM.check_password', 'nuuser'),
-('nuphp', 'FORM', 'sph_code', 'FORM.sph_code', 'nuphp'),
-('nuphp', 'FORM', 'sph_description', 'FORM.sph_description', 'nuphp'),
-('nublank', 'FORM', 'bla_html', 'FORM.bla_html', 'nublank'),
-('nubuildreport', 'FORM', 'sre_code', 'FORM.sre_code', 'nubuildreport'),
-('nubuildreport', 'FORM', 'sre_description', 'FORM.sre_description', 'nubuildreport'),
-('nubuildreport', 'FORM', 'sre_group', 'FORM.sre_group', 'nubuildreport'),
-('577b4d78ef9a2a0', 'FORM', 'steven', 'FORM.steven', '577b4d78ef9a2a0'),
-('577b4d78ef9a2a0', 'FORM', 'com_address', 'FORM.com_address', '577b4d78ef9a2a0'),
-('nulaunchdates', 'FORM', 'from_date', 'FORM.from_date', 'nulaunchdates'),
-('nulaunchdates', 'FORM', 'to_date', 'FORM.to_date', 'nulaunchdates'),
-('nuphp', 'FORM', 'sph_group', 'FORM.sph_group', 'nuphp'),
-('57a29441f16c351', 'FORM', 'set_time_out_minutes', 'FORM.set_time_out_minutes', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_username', 'FORM.set_smtp_username', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_password', 'FORM.set_smtp_password', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_host', 'FORM.set_smtp_host', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_from_address', 'FORM.set_smtp_from_address', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_from_name', 'FORM.set_smtp_from_name', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_port', 'FORM.set_smtp_port', '57a29441f16c351'),
-('57a7c1cb78bf3a3', 'FORM', 'trl_language', 'FORM.trl_language', '57a7c1cb78bf3a3'),
-('57a7c1cb78bf3a3', 'FORM', 'trl_english', 'FORM.trl_english', '57a7c1cb78bf3a3'),
-('57a7c1cb78bf3a3', 'FORM', 'trl_translation', 'FORM.trl_translation', '57a7c1cb78bf3a3'),
-('nupassword', 'FORM', 'new_password_check', 'FORM.new_password_check', 'nupassword'),
-('nuobject', 'FORM', 'sob_all_fast_form_description', 'FORM.sob_all_fast_form_description', 'nuobject'),
-('nupassword', 'FORM', 'new_password', 'FORM.new_password', 'nupassword'),
-('nupassword', 'FORM', 'old_password', 'FORM.old_password', 'nupassword'),
-('nuobject', 'FORM', 'ab_event', 'FORM.ab_event', 'nuobject'),
-('nuerror', 'FORM', 'error', 'FORM.error', 'nuerror'),
-('nuform', 'FORM', 'bo_event', 'FORM.bo_event', 'nuform'),
-('nuform', 'FORM', 'bs_event', 'FORM.bs_event', 'nuform'),
-('nuform', 'FORM', 'as_event', 'FORM.as_event', 'nuform'),
-('nuform', 'FORM', 'bd_event', 'FORM.bd_event', 'nuform'),
-('nuform', 'FORM', 'ad_event', 'FORM.ad_event', 'nuform'),
-('nuform', 'FORM', 'preiviewbtn', 'FORM.preiviewbtn', 'nuform'),
-('nuobject', 'FORM', 'sob_lookup_table', 'FORM.sob_lookup_table', 'nuobject'),
-('583f372b53b972c', 'FORM', 'sob_all_id', 'FORM.sob_all_id', '583f372b53b972c'),
-('583f372b53b972c', 'FORM', 'sob_all_label', 'FORM.sob_all_label', '583f372b53b972c'),
-('583f372b53b972c', 'FORM', 'custom_id', 'FORM.custom_id', '583f372b53b972c'),
-('nuobject', 'FORM', 'javascriptbtn', 'FORM.javascriptbtn', 'nuobject'),
-('nuobject', 'FORM', 'sob_calc_formula', 'FORM.sob_calc_formula', 'nuobject'),
-('56773cb405f4913', 'employee_sf', 'emp_name', 'employee_sf.emp_name', '56773cb405f4913'),
-('56773cb405f4913', 'employee_sf', 'emp_mobile', 'employee_sf.emp_mobile', '56773cb405f4913'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_title', 'zzzzsys_browse_sf.sbr_title', 'nuform'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_display', 'zzzzsys_browse_sf.sbr_display', 'nuform'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_sort', 'zzzzsys_browse_sf.sbr_sort', 'nuform'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_width', 'zzzzsys_browse_sf.sbr_width', 'nuform'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_order', 'zzzzsys_browse_sf.sbr_order', 'nuform'),
-('nuform', 'zzzzsys_tab_sf', 'syt_title', 'zzzzsys_tab_sf.syt_title', 'nuform'),
-('nuform', 'zzzzsys_tab_sf', 'syt_order', 'zzzzsys_tab_sf.syt_order', 'nuform'),
-('nuobject', 'lookup_sf', 'zzzzsys_slo_object_name', 'lookup_sf.zzzzsys_slo_object_name', 'nuobject'),
-('nuobject', 'lookup_sf', 'zzzzsys_slo_field_function_name', 'lookup_sf.zzzzsys_slo_field_function_name', 'nuobject'),
-('nuobject', 'zzzzsys_event_sf', 'sev_event', 'zzzzsys_event_sf.sev_event', 'nuobject'),
-('583361606250b6e', 'obj_sf', 'sob_all_id', 'obj_sf.sob_all_id', '583361606250b6e'),
-('583361606250b6e', 'obj_sf', 'sob_all_label', 'obj_sf.sob_all_label', '583361606250b6e'),
-('583361606250b6e', 'obj_sf', 'custom_id', 'obj_sf.custom_id', '583361606250b6e');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `___nu1587eb2999d2d1___`
---
-
-CREATE TABLE `___nu1587eb2999d2d1___` (
-  `theform` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `theparent` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `thechild` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `thevalue` text CHARACTER SET utf8 NOT NULL,
-  `thefilter` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `___nu1587eb2999d2d1___`
---
-
-INSERT INTO `___nu1587eb2999d2d1___` (`theform`, `theparent`, `thechild`, `thevalue`, `thefilter`) VALUES
-('56773cb405f4913', 'FORM', 'com_name', 'FORM.com_name', '56773cb405f4913'),
-('56773cb405f4913', 'FORM', 'com_address', 'FORM.com_address', '56773cb405f4913'),
-('56773cb405f4913', 'FORM', 'com_suburb', 'FORM.com_suburb', '56773cb405f4913'),
-('5678ab2c48c5c41', 'FORM', 'emp_name', 'FORM.emp_name', '5678ab2c48c5c41'),
-('5678ab2c48c5c41', 'FORM', 'emp_mobile', 'FORM.emp_mobile', '5678ab2c48c5c41'),
-('568b508eec00d80', 'FORM', 'bus_code', 'FORM.bus_code', '568b508eec00d80'),
-('568b508eec00d80', 'FORM', 'bus_description', 'FORM.bus_description', '568b508eec00d80'),
-('568b508eec00d80', 'FORM', 'bus_check', 'FORM.bus_check', '568b508eec00d80'),
-('nuform', 'FORM', 'sfo_code', 'FORM.sfo_code', 'nuform'),
-('nuform', 'FORM', 'sfo_description', 'FORM.sfo_description', 'nuform'),
-('nuform', 'FORM', 'sfo_table', 'FORM.sfo_table', 'nuform'),
-('nuform', 'FORM', 'sfo_primary_key', 'FORM.sfo_primary_key', 'nuform'),
-('nuform', 'FORM', 'sfo_row_height', 'FORM.sfo_row_height', 'nuform'),
-('nuform', 'FORM', 'sfo_rows_per_page', 'FORM.sfo_rows_per_page', 'nuform'),
-('nuform', 'FORM', 'sfo_add_title', 'FORM.sfo_add_title', 'nuform'),
-('nuform', 'FORM', 'sfo_print_title', 'FORM.sfo_print_title', 'nuform'),
-('nubrowse', 'FORM', 'sbr_title', 'FORM.sbr_title', 'nubrowse'),
-('nubrowse', 'FORM', 'sbr_display', 'FORM.sbr_display', 'nubrowse'),
-('nubrowse', 'FORM', 'sbr_sort', 'FORM.sbr_sort', 'nubrowse'),
-('nubrowse', 'FORM', 'sbr_width', 'FORM.sbr_width', 'nubrowse'),
-('nubrowse', 'FORM', 'sbr_order', 'FORM.sbr_order', 'nubrowse'),
-('nutab', 'FORM', 'syt_title', 'FORM.syt_title', 'nutab'),
-('nutab', 'FORM', 'syt_order', 'FORM.syt_order', 'nutab'),
-('nuform', 'FORM', 'sfo_save_title', 'FORM.sfo_save_title', 'nuform'),
-('nuform', 'FORM', 'sfo_clone_title', 'FORM.sfo_clone_title', 'nuform'),
-('nuform', 'FORM', 'sfo_delete_title', 'FORM.sfo_delete_title', 'nuform'),
-('nuform', 'FORM', 'sfo_new_title', 'FORM.sfo_new_title', 'nuform'),
-('nuform', 'FORM', 'bb_event', 'FORM.bb_event', 'nuform'),
-('nubuildreport', 'FORM', 'open_builder', 'FORM.open_builder', 'nubuildreport'),
-('nuobject', 'FORM', 'sob_all_id', 'FORM.sob_all_id', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_label', 'FORM.sob_all_label', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_order', 'FORM.sob_all_order', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_top', 'FORM.sob_all_top', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_left', 'FORM.sob_all_left', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_width', 'FORM.sob_all_width', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_height', 'FORM.sob_all_height', 'nuobject'),
-('nuobject', 'FORM', 'sob_subform_foreign_key', 'FORM.sob_subform_foreign_key', 'nuobject'),
-('nuobject', 'FORM', 'sob_run_filter', 'FORM.sob_run_filter', 'nuobject'),
-('nuobject', 'FORM', 'sob_run_id', 'FORM.sob_run_id', 'nuobject'),
-('nuobject', 'FORM', 'sob_lookup_code', 'FORM.sob_lookup_code', 'nuobject'),
-('nuobject', 'FORM', 'sob_lookup_description', 'FORM.sob_lookup_description', 'nuobject'),
-('nuobject', 'FORM', 'sob_lookup_description_width', 'FORM.sob_lookup_description_width', 'nuobject'),
-('nulookup', 'FORM', 'zzzzsys_slo_object_name', 'FORM.zzzzsys_slo_object_name', 'nulookup'),
-('nulookup', 'FORM', 'zzzzsys_slo_field_function_name', 'FORM.zzzzsys_slo_field_function_name', 'nulookup'),
-('nuevent', 'FORM', 'sev_event', 'FORM.sev_event', 'nuevent'),
-('nuaccess', 'FORM', 'sal_description', 'FORM.sal_description', 'nuaccess'),
-('nuobject', 'FORM', 'sob_all_zzzzsys_form_id', 'FORM.sob_all_zzzzsys_form_id', 'nuobject'),
-('nuaccess', 'FORM', 'sal_code', 'FORM.sal_code', 'nuaccess'),
-('574665a15bbc1a1', 'FORM', 'sug_code', 'FORM.sug_code', '574665a15bbc1a1'),
-('574665a15bbc1a1', 'FORM', 'sug_description', 'FORM.sug_description', '574665a15bbc1a1'),
-('nuuser', 'FORM', 'sus_name', 'FORM.sus_name', 'nuuser'),
-('nuuser', 'FORM', 'sus_email', 'FORM.sus_email', 'nuuser'),
-('nuuser', 'FORM', 'sus_login_name', 'FORM.sus_login_name', 'nuuser'),
-('nuuser', 'FORM', 'new_password', 'FORM.new_password', 'nuuser'),
-('nuuser', 'FORM', 'check_password', 'FORM.check_password', 'nuuser'),
-('nuphp', 'FORM', 'sph_code', 'FORM.sph_code', 'nuphp'),
-('nuphp', 'FORM', 'sph_description', 'FORM.sph_description', 'nuphp'),
-('nublank', 'FORM', 'bla_html', 'FORM.bla_html', 'nublank'),
-('nubuildreport', 'FORM', 'sre_code', 'FORM.sre_code', 'nubuildreport'),
-('nubuildreport', 'FORM', 'sre_description', 'FORM.sre_description', 'nubuildreport'),
-('nubuildreport', 'FORM', 'sre_group', 'FORM.sre_group', 'nubuildreport'),
-('577b4d78ef9a2a0', 'FORM', 'steven', 'FORM.steven', '577b4d78ef9a2a0'),
-('577b4d78ef9a2a0', 'FORM', 'com_address', 'FORM.com_address', '577b4d78ef9a2a0'),
-('nulaunchdates', 'FORM', 'from_date', 'FORM.from_date', 'nulaunchdates'),
-('nulaunchdates', 'FORM', 'to_date', 'FORM.to_date', 'nulaunchdates'),
-('nuphp', 'FORM', 'sph_group', 'FORM.sph_group', 'nuphp'),
-('57a29441f16c351', 'FORM', 'set_time_out_minutes', 'FORM.set_time_out_minutes', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_username', 'FORM.set_smtp_username', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_password', 'FORM.set_smtp_password', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_host', 'FORM.set_smtp_host', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_from_address', 'FORM.set_smtp_from_address', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_from_name', 'FORM.set_smtp_from_name', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_port', 'FORM.set_smtp_port', '57a29441f16c351'),
-('57a7c1cb78bf3a3', 'FORM', 'trl_language', 'FORM.trl_language', '57a7c1cb78bf3a3'),
-('57a7c1cb78bf3a3', 'FORM', 'trl_english', 'FORM.trl_english', '57a7c1cb78bf3a3'),
-('57a7c1cb78bf3a3', 'FORM', 'trl_translation', 'FORM.trl_translation', '57a7c1cb78bf3a3'),
-('nupassword', 'FORM', 'new_password_check', 'FORM.new_password_check', 'nupassword'),
-('nuobject', 'FORM', 'sob_all_fast_form_description', 'FORM.sob_all_fast_form_description', 'nuobject'),
-('nupassword', 'FORM', 'new_password', 'FORM.new_password', 'nupassword'),
-('nupassword', 'FORM', 'old_password', 'FORM.old_password', 'nupassword'),
-('nuobject', 'FORM', 'ab_event', 'FORM.ab_event', 'nuobject'),
-('nuerror', 'FORM', 'error', 'FORM.error', 'nuerror'),
-('nuform', 'FORM', 'bo_event', 'FORM.bo_event', 'nuform'),
-('nuform', 'FORM', 'bs_event', 'FORM.bs_event', 'nuform'),
-('nuform', 'FORM', 'as_event', 'FORM.as_event', 'nuform'),
-('nuform', 'FORM', 'bd_event', 'FORM.bd_event', 'nuform'),
-('nuform', 'FORM', 'ad_event', 'FORM.ad_event', 'nuform'),
-('nuform', 'FORM', 'preiviewbtn', 'FORM.preiviewbtn', 'nuform'),
-('nuobject', 'FORM', 'sob_lookup_table', 'FORM.sob_lookup_table', 'nuobject'),
-('583f372b53b972c', 'FORM', 'sob_all_id', 'FORM.sob_all_id', '583f372b53b972c'),
-('583f372b53b972c', 'FORM', 'sob_all_label', 'FORM.sob_all_label', '583f372b53b972c'),
-('583f372b53b972c', 'FORM', 'custom_id', 'FORM.custom_id', '583f372b53b972c'),
-('nuobject', 'FORM', 'javascriptbtn', 'FORM.javascriptbtn', 'nuobject'),
-('nuobject', 'FORM', 'sob_calc_formula', 'FORM.sob_calc_formula', 'nuobject'),
-('56773cb405f4913', 'employee_sf', 'emp_name', 'employee_sf.emp_name', '56773cb405f4913'),
-('56773cb405f4913', 'employee_sf', 'emp_mobile', 'employee_sf.emp_mobile', '56773cb405f4913'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_title', 'zzzzsys_browse_sf.sbr_title', 'nuform'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_display', 'zzzzsys_browse_sf.sbr_display', 'nuform'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_sort', 'zzzzsys_browse_sf.sbr_sort', 'nuform'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_width', 'zzzzsys_browse_sf.sbr_width', 'nuform'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_order', 'zzzzsys_browse_sf.sbr_order', 'nuform'),
-('nuform', 'zzzzsys_tab_sf', 'syt_title', 'zzzzsys_tab_sf.syt_title', 'nuform'),
-('nuform', 'zzzzsys_tab_sf', 'syt_order', 'zzzzsys_tab_sf.syt_order', 'nuform'),
-('nuobject', 'lookup_sf', 'zzzzsys_slo_object_name', 'lookup_sf.zzzzsys_slo_object_name', 'nuobject'),
-('nuobject', 'lookup_sf', 'zzzzsys_slo_field_function_name', 'lookup_sf.zzzzsys_slo_field_function_name', 'nuobject'),
-('nuobject', 'zzzzsys_event_sf', 'sev_event', 'zzzzsys_event_sf.sev_event', 'nuobject'),
-('583361606250b6e', 'obj_sf', 'sob_all_id', 'obj_sf.sob_all_id', '583361606250b6e'),
-('583361606250b6e', 'obj_sf', 'sob_all_label', 'obj_sf.sob_all_label', '583361606250b6e'),
-('583361606250b6e', 'obj_sf', 'custom_id', 'obj_sf.custom_id', '583361606250b6e');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `___nu1587eb3814f369___`
---
-
-CREATE TABLE `___nu1587eb3814f369___` (
-  `theform` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `theparent` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `thechild` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `thevalue` text CHARACTER SET utf8 NOT NULL,
-  `thefilter` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `___nu1587eb3814f369___`
---
-
-INSERT INTO `___nu1587eb3814f369___` (`theform`, `theparent`, `thechild`, `thevalue`, `thefilter`) VALUES
-('56773cb405f4913', 'FORM', 'com_name', 'FORM.com_name', '56773cb405f4913'),
-('56773cb405f4913', 'FORM', 'com_address', 'FORM.com_address', '56773cb405f4913'),
-('56773cb405f4913', 'FORM', 'com_suburb', 'FORM.com_suburb', '56773cb405f4913'),
-('5678ab2c48c5c41', 'FORM', 'emp_name', 'FORM.emp_name', '5678ab2c48c5c41'),
-('5678ab2c48c5c41', 'FORM', 'emp_mobile', 'FORM.emp_mobile', '5678ab2c48c5c41'),
-('568b508eec00d80', 'FORM', 'bus_code', 'FORM.bus_code', '568b508eec00d80'),
-('568b508eec00d80', 'FORM', 'bus_description', 'FORM.bus_description', '568b508eec00d80'),
-('568b508eec00d80', 'FORM', 'bus_check', 'FORM.bus_check', '568b508eec00d80'),
-('nuform', 'FORM', 'sfo_code', 'FORM.sfo_code', 'nuform'),
-('nuform', 'FORM', 'sfo_description', 'FORM.sfo_description', 'nuform'),
-('nuform', 'FORM', 'sfo_table', 'FORM.sfo_table', 'nuform'),
-('nuform', 'FORM', 'sfo_primary_key', 'FORM.sfo_primary_key', 'nuform'),
-('nuform', 'FORM', 'sfo_row_height', 'FORM.sfo_row_height', 'nuform'),
-('nuform', 'FORM', 'sfo_rows_per_page', 'FORM.sfo_rows_per_page', 'nuform'),
-('nuform', 'FORM', 'sfo_add_title', 'FORM.sfo_add_title', 'nuform'),
-('nuform', 'FORM', 'sfo_print_title', 'FORM.sfo_print_title', 'nuform'),
-('nubrowse', 'FORM', 'sbr_title', 'FORM.sbr_title', 'nubrowse'),
-('nubrowse', 'FORM', 'sbr_display', 'FORM.sbr_display', 'nubrowse'),
-('nubrowse', 'FORM', 'sbr_sort', 'FORM.sbr_sort', 'nubrowse'),
-('nubrowse', 'FORM', 'sbr_width', 'FORM.sbr_width', 'nubrowse'),
-('nubrowse', 'FORM', 'sbr_order', 'FORM.sbr_order', 'nubrowse'),
-('nutab', 'FORM', 'syt_title', 'FORM.syt_title', 'nutab'),
-('nutab', 'FORM', 'syt_order', 'FORM.syt_order', 'nutab'),
-('nuform', 'FORM', 'sfo_save_title', 'FORM.sfo_save_title', 'nuform'),
-('nuform', 'FORM', 'sfo_clone_title', 'FORM.sfo_clone_title', 'nuform'),
-('nuform', 'FORM', 'sfo_delete_title', 'FORM.sfo_delete_title', 'nuform'),
-('nuform', 'FORM', 'sfo_new_title', 'FORM.sfo_new_title', 'nuform'),
-('nuform', 'FORM', 'bb_event', 'FORM.bb_event', 'nuform'),
-('nubuildreport', 'FORM', 'open_builder', 'FORM.open_builder', 'nubuildreport'),
-('nuobject', 'FORM', 'sob_all_id', 'FORM.sob_all_id', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_label', 'FORM.sob_all_label', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_order', 'FORM.sob_all_order', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_top', 'FORM.sob_all_top', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_left', 'FORM.sob_all_left', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_width', 'FORM.sob_all_width', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_height', 'FORM.sob_all_height', 'nuobject'),
-('nuobject', 'FORM', 'sob_subform_foreign_key', 'FORM.sob_subform_foreign_key', 'nuobject'),
-('nuobject', 'FORM', 'sob_run_filter', 'FORM.sob_run_filter', 'nuobject'),
-('nuobject', 'FORM', 'sob_run_id', 'FORM.sob_run_id', 'nuobject'),
-('nuobject', 'FORM', 'sob_lookup_code', 'FORM.sob_lookup_code', 'nuobject'),
-('nuobject', 'FORM', 'sob_lookup_description', 'FORM.sob_lookup_description', 'nuobject'),
-('nuobject', 'FORM', 'sob_lookup_description_width', 'FORM.sob_lookup_description_width', 'nuobject'),
-('nulookup', 'FORM', 'zzzzsys_slo_object_name', 'FORM.zzzzsys_slo_object_name', 'nulookup'),
-('nulookup', 'FORM', 'zzzzsys_slo_field_function_name', 'FORM.zzzzsys_slo_field_function_name', 'nulookup'),
-('nuevent', 'FORM', 'sev_event', 'FORM.sev_event', 'nuevent'),
-('nuaccess', 'FORM', 'sal_description', 'FORM.sal_description', 'nuaccess'),
-('nuobject', 'FORM', 'sob_all_zzzzsys_form_id', 'FORM.sob_all_zzzzsys_form_id', 'nuobject'),
-('nuaccess', 'FORM', 'sal_code', 'FORM.sal_code', 'nuaccess'),
-('574665a15bbc1a1', 'FORM', 'sug_code', 'FORM.sug_code', '574665a15bbc1a1'),
-('574665a15bbc1a1', 'FORM', 'sug_description', 'FORM.sug_description', '574665a15bbc1a1'),
-('nuuser', 'FORM', 'sus_name', 'FORM.sus_name', 'nuuser'),
-('nuuser', 'FORM', 'sus_email', 'FORM.sus_email', 'nuuser'),
-('nuuser', 'FORM', 'sus_login_name', 'FORM.sus_login_name', 'nuuser'),
-('nuuser', 'FORM', 'new_password', 'FORM.new_password', 'nuuser'),
-('nuuser', 'FORM', 'check_password', 'FORM.check_password', 'nuuser'),
-('nuphp', 'FORM', 'sph_code', 'FORM.sph_code', 'nuphp'),
-('nuphp', 'FORM', 'sph_description', 'FORM.sph_description', 'nuphp'),
-('nublank', 'FORM', 'bla_html', 'FORM.bla_html', 'nublank'),
-('nubuildreport', 'FORM', 'sre_code', 'FORM.sre_code', 'nubuildreport'),
-('nubuildreport', 'FORM', 'sre_description', 'FORM.sre_description', 'nubuildreport'),
-('nubuildreport', 'FORM', 'sre_group', 'FORM.sre_group', 'nubuildreport'),
-('577b4d78ef9a2a0', 'FORM', 'steven', 'FORM.steven', '577b4d78ef9a2a0'),
-('577b4d78ef9a2a0', 'FORM', 'com_address', 'FORM.com_address', '577b4d78ef9a2a0'),
-('nulaunchdates', 'FORM', 'from_date', 'FORM.from_date', 'nulaunchdates'),
-('nulaunchdates', 'FORM', 'to_date', 'FORM.to_date', 'nulaunchdates'),
-('nuphp', 'FORM', 'sph_group', 'FORM.sph_group', 'nuphp'),
-('57a29441f16c351', 'FORM', 'set_time_out_minutes', 'FORM.set_time_out_minutes', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_username', 'FORM.set_smtp_username', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_password', 'FORM.set_smtp_password', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_host', 'FORM.set_smtp_host', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_from_address', 'FORM.set_smtp_from_address', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_from_name', 'FORM.set_smtp_from_name', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_port', 'FORM.set_smtp_port', '57a29441f16c351'),
-('57a7c1cb78bf3a3', 'FORM', 'trl_language', 'FORM.trl_language', '57a7c1cb78bf3a3'),
-('57a7c1cb78bf3a3', 'FORM', 'trl_english', 'FORM.trl_english', '57a7c1cb78bf3a3'),
-('57a7c1cb78bf3a3', 'FORM', 'trl_translation', 'FORM.trl_translation', '57a7c1cb78bf3a3'),
-('nupassword', 'FORM', 'new_password_check', 'FORM.new_password_check', 'nupassword'),
-('nuobject', 'FORM', 'sob_all_fast_form_description', 'FORM.sob_all_fast_form_description', 'nuobject'),
-('nupassword', 'FORM', 'new_password', 'FORM.new_password', 'nupassword'),
-('nupassword', 'FORM', 'old_password', 'FORM.old_password', 'nupassword'),
-('nuobject', 'FORM', 'ab_event', 'FORM.ab_event', 'nuobject'),
-('nuerror', 'FORM', 'error', 'FORM.error', 'nuerror'),
-('nuform', 'FORM', 'bo_event', 'FORM.bo_event', 'nuform'),
-('nuform', 'FORM', 'bs_event', 'FORM.bs_event', 'nuform'),
-('nuform', 'FORM', 'as_event', 'FORM.as_event', 'nuform'),
-('nuform', 'FORM', 'bd_event', 'FORM.bd_event', 'nuform'),
-('nuform', 'FORM', 'ad_event', 'FORM.ad_event', 'nuform'),
-('nuform', 'FORM', 'preiviewbtn', 'FORM.preiviewbtn', 'nuform'),
-('nuobject', 'FORM', 'sob_lookup_table', 'FORM.sob_lookup_table', 'nuobject'),
-('583f372b53b972c', 'FORM', 'sob_all_id', 'FORM.sob_all_id', '583f372b53b972c'),
-('583f372b53b972c', 'FORM', 'sob_all_label', 'FORM.sob_all_label', '583f372b53b972c'),
-('583f372b53b972c', 'FORM', 'custom_id', 'FORM.custom_id', '583f372b53b972c'),
-('nuobject', 'FORM', 'javascriptbtn', 'FORM.javascriptbtn', 'nuobject'),
-('nuobject', 'FORM', 'sob_calc_formula', 'FORM.sob_calc_formula', 'nuobject'),
-('56773cb405f4913', 'employee_sf', 'emp_name', 'employee_sf.emp_name', '56773cb405f4913'),
-('56773cb405f4913', 'employee_sf', 'emp_mobile', 'employee_sf.emp_mobile', '56773cb405f4913'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_title', 'zzzzsys_browse_sf.sbr_title', 'nuform'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_display', 'zzzzsys_browse_sf.sbr_display', 'nuform'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_sort', 'zzzzsys_browse_sf.sbr_sort', 'nuform'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_width', 'zzzzsys_browse_sf.sbr_width', 'nuform'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_order', 'zzzzsys_browse_sf.sbr_order', 'nuform'),
-('nuform', 'zzzzsys_tab_sf', 'syt_title', 'zzzzsys_tab_sf.syt_title', 'nuform'),
-('nuform', 'zzzzsys_tab_sf', 'syt_order', 'zzzzsys_tab_sf.syt_order', 'nuform'),
-('nuobject', 'lookup_sf', 'zzzzsys_slo_object_name', 'lookup_sf.zzzzsys_slo_object_name', 'nuobject'),
-('nuobject', 'lookup_sf', 'zzzzsys_slo_field_function_name', 'lookup_sf.zzzzsys_slo_field_function_name', 'nuobject'),
-('nuobject', 'zzzzsys_event_sf', 'sev_event', 'zzzzsys_event_sf.sev_event', 'nuobject'),
-('583361606250b6e', 'obj_sf', 'sob_all_id', 'obj_sf.sob_all_id', '583361606250b6e'),
-('583361606250b6e', 'obj_sf', 'sob_all_label', 'obj_sf.sob_all_label', '583361606250b6e'),
-('583361606250b6e', 'obj_sf', 'custom_id', 'obj_sf.custom_id', '583361606250b6e');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `___nu1587eb9594fe36___`
---
-
-CREATE TABLE `___nu1587eb9594fe36___` (
-  `theform` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `theparent` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `thechild` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `thevalue` text CHARACTER SET utf8 NOT NULL,
-  `thefilter` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `___nu1587eb9594fe36___`
---
-
-INSERT INTO `___nu1587eb9594fe36___` (`theform`, `theparent`, `thechild`, `thevalue`, `thefilter`) VALUES
-('56773cb405f4913', 'FORM', 'com_name', 'FORM.com_name', '56773cb405f4913'),
-('56773cb405f4913', 'FORM', 'com_address', 'FORM.com_address', '56773cb405f4913'),
-('56773cb405f4913', 'FORM', 'com_suburb', 'FORM.com_suburb', '56773cb405f4913'),
-('5678ab2c48c5c41', 'FORM', 'emp_name', 'FORM.emp_name', '5678ab2c48c5c41'),
-('5678ab2c48c5c41', 'FORM', 'emp_mobile', 'FORM.emp_mobile', '5678ab2c48c5c41'),
-('568b508eec00d80', 'FORM', 'bus_code', 'FORM.bus_code', '568b508eec00d80'),
-('568b508eec00d80', 'FORM', 'bus_description', 'FORM.bus_description', '568b508eec00d80'),
-('568b508eec00d80', 'FORM', 'bus_check', 'FORM.bus_check', '568b508eec00d80'),
-('nuform', 'FORM', 'sfo_code', 'FORM.sfo_code', 'nuform'),
-('nuform', 'FORM', 'sfo_description', 'FORM.sfo_description', 'nuform'),
-('nuform', 'FORM', 'sfo_table', 'FORM.sfo_table', 'nuform'),
-('nuform', 'FORM', 'sfo_primary_key', 'FORM.sfo_primary_key', 'nuform'),
-('nuform', 'FORM', 'sfo_row_height', 'FORM.sfo_row_height', 'nuform'),
-('nuform', 'FORM', 'sfo_rows_per_page', 'FORM.sfo_rows_per_page', 'nuform'),
-('nuform', 'FORM', 'sfo_add_title', 'FORM.sfo_add_title', 'nuform'),
-('nuform', 'FORM', 'sfo_print_title', 'FORM.sfo_print_title', 'nuform'),
-('nubrowse', 'FORM', 'sbr_title', 'FORM.sbr_title', 'nubrowse'),
-('nubrowse', 'FORM', 'sbr_display', 'FORM.sbr_display', 'nubrowse'),
-('nubrowse', 'FORM', 'sbr_sort', 'FORM.sbr_sort', 'nubrowse'),
-('nubrowse', 'FORM', 'sbr_width', 'FORM.sbr_width', 'nubrowse'),
-('nubrowse', 'FORM', 'sbr_order', 'FORM.sbr_order', 'nubrowse'),
-('nutab', 'FORM', 'syt_title', 'FORM.syt_title', 'nutab'),
-('nutab', 'FORM', 'syt_order', 'FORM.syt_order', 'nutab'),
-('nuform', 'FORM', 'sfo_save_title', 'FORM.sfo_save_title', 'nuform'),
-('nuform', 'FORM', 'sfo_clone_title', 'FORM.sfo_clone_title', 'nuform'),
-('nuform', 'FORM', 'sfo_delete_title', 'FORM.sfo_delete_title', 'nuform'),
-('nuform', 'FORM', 'sfo_new_title', 'FORM.sfo_new_title', 'nuform'),
-('nuform', 'FORM', 'bb_event', 'FORM.bb_event', 'nuform'),
-('nubuildreport', 'FORM', 'open_builder', 'FORM.open_builder', 'nubuildreport'),
-('nuobject', 'FORM', 'sob_all_id', 'FORM.sob_all_id', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_label', 'FORM.sob_all_label', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_order', 'FORM.sob_all_order', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_top', 'FORM.sob_all_top', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_left', 'FORM.sob_all_left', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_width', 'FORM.sob_all_width', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_height', 'FORM.sob_all_height', 'nuobject'),
-('nuobject', 'FORM', 'sob_subform_foreign_key', 'FORM.sob_subform_foreign_key', 'nuobject'),
-('nuobject', 'FORM', 'sob_run_filter', 'FORM.sob_run_filter', 'nuobject'),
-('nuobject', 'FORM', 'sob_run_id', 'FORM.sob_run_id', 'nuobject'),
-('nuobject', 'FORM', 'sob_lookup_code', 'FORM.sob_lookup_code', 'nuobject'),
-('nuobject', 'FORM', 'sob_lookup_description', 'FORM.sob_lookup_description', 'nuobject'),
-('nuobject', 'FORM', 'sob_lookup_description_width', 'FORM.sob_lookup_description_width', 'nuobject'),
-('nulookup', 'FORM', 'zzzzsys_slo_object_name', 'FORM.zzzzsys_slo_object_name', 'nulookup'),
-('nulookup', 'FORM', 'zzzzsys_slo_field_function_name', 'FORM.zzzzsys_slo_field_function_name', 'nulookup'),
-('nuevent', 'FORM', 'sev_event', 'FORM.sev_event', 'nuevent'),
-('nuaccess', 'FORM', 'sal_description', 'FORM.sal_description', 'nuaccess'),
-('nuobject', 'FORM', 'sob_all_zzzzsys_form_id', 'FORM.sob_all_zzzzsys_form_id', 'nuobject'),
-('nuaccess', 'FORM', 'sal_code', 'FORM.sal_code', 'nuaccess'),
-('574665a15bbc1a1', 'FORM', 'sug_code', 'FORM.sug_code', '574665a15bbc1a1'),
-('574665a15bbc1a1', 'FORM', 'sug_description', 'FORM.sug_description', '574665a15bbc1a1'),
-('nuuser', 'FORM', 'sus_name', 'FORM.sus_name', 'nuuser'),
-('nuuser', 'FORM', 'sus_email', 'FORM.sus_email', 'nuuser'),
-('nuuser', 'FORM', 'sus_login_name', 'FORM.sus_login_name', 'nuuser'),
-('nuuser', 'FORM', 'new_password', 'FORM.new_password', 'nuuser'),
-('nuuser', 'FORM', 'check_password', 'FORM.check_password', 'nuuser'),
-('nuphp', 'FORM', 'sph_code', 'FORM.sph_code', 'nuphp'),
-('nuphp', 'FORM', 'sph_description', 'FORM.sph_description', 'nuphp'),
-('nublank', 'FORM', 'bla_html', 'FORM.bla_html', 'nublank'),
-('nubuildreport', 'FORM', 'sre_code', 'FORM.sre_code', 'nubuildreport'),
-('nubuildreport', 'FORM', 'sre_description', 'FORM.sre_description', 'nubuildreport'),
-('nubuildreport', 'FORM', 'sre_group', 'FORM.sre_group', 'nubuildreport'),
-('577b4d78ef9a2a0', 'FORM', 'steven', 'FORM.steven', '577b4d78ef9a2a0'),
-('577b4d78ef9a2a0', 'FORM', 'com_address', 'FORM.com_address', '577b4d78ef9a2a0'),
-('nulaunchdates', 'FORM', 'from_date', 'FORM.from_date', 'nulaunchdates'),
-('nulaunchdates', 'FORM', 'to_date', 'FORM.to_date', 'nulaunchdates'),
-('nuphp', 'FORM', 'sph_group', 'FORM.sph_group', 'nuphp'),
-('57a29441f16c351', 'FORM', 'set_time_out_minutes', 'FORM.set_time_out_minutes', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_username', 'FORM.set_smtp_username', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_password', 'FORM.set_smtp_password', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_host', 'FORM.set_smtp_host', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_from_address', 'FORM.set_smtp_from_address', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_from_name', 'FORM.set_smtp_from_name', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_port', 'FORM.set_smtp_port', '57a29441f16c351'),
-('57a7c1cb78bf3a3', 'FORM', 'trl_language', 'FORM.trl_language', '57a7c1cb78bf3a3'),
-('57a7c1cb78bf3a3', 'FORM', 'trl_english', 'FORM.trl_english', '57a7c1cb78bf3a3'),
-('57a7c1cb78bf3a3', 'FORM', 'trl_translation', 'FORM.trl_translation', '57a7c1cb78bf3a3'),
-('nupassword', 'FORM', 'new_password_check', 'FORM.new_password_check', 'nupassword'),
-('nuobject', 'FORM', 'sob_all_fast_form_description', 'FORM.sob_all_fast_form_description', 'nuobject'),
-('nupassword', 'FORM', 'new_password', 'FORM.new_password', 'nupassword'),
-('nupassword', 'FORM', 'old_password', 'FORM.old_password', 'nupassword'),
-('nuobject', 'FORM', 'ab_event', 'FORM.ab_event', 'nuobject'),
-('nuerror', 'FORM', 'error', 'FORM.error', 'nuerror'),
-('nuform', 'FORM', 'bo_event', 'FORM.bo_event', 'nuform'),
-('nuform', 'FORM', 'bs_event', 'FORM.bs_event', 'nuform'),
-('nuform', 'FORM', 'as_event', 'FORM.as_event', 'nuform'),
-('nuform', 'FORM', 'bd_event', 'FORM.bd_event', 'nuform'),
-('nuform', 'FORM', 'ad_event', 'FORM.ad_event', 'nuform'),
-('nuform', 'FORM', 'preiviewbtn', 'FORM.preiviewbtn', 'nuform'),
-('nuobject', 'FORM', 'sob_lookup_table', 'FORM.sob_lookup_table', 'nuobject'),
-('583f372b53b972c', 'FORM', 'sob_all_id', 'FORM.sob_all_id', '583f372b53b972c'),
-('583f372b53b972c', 'FORM', 'sob_all_label', 'FORM.sob_all_label', '583f372b53b972c'),
-('583f372b53b972c', 'FORM', 'custom_id', 'FORM.custom_id', '583f372b53b972c'),
-('nuobject', 'FORM', 'javascriptbtn', 'FORM.javascriptbtn', 'nuobject'),
-('nuobject', 'FORM', 'sob_calc_formula', 'FORM.sob_calc_formula', 'nuobject'),
-('56773cb405f4913', 'employee_sf', 'emp_name', 'employee_sf.emp_name', '56773cb405f4913'),
-('56773cb405f4913', 'employee_sf', 'emp_mobile', 'employee_sf.emp_mobile', '56773cb405f4913'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_title', 'zzzzsys_browse_sf.sbr_title', 'nuform'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_display', 'zzzzsys_browse_sf.sbr_display', 'nuform'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_sort', 'zzzzsys_browse_sf.sbr_sort', 'nuform'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_width', 'zzzzsys_browse_sf.sbr_width', 'nuform'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_order', 'zzzzsys_browse_sf.sbr_order', 'nuform'),
-('nuform', 'zzzzsys_tab_sf', 'syt_title', 'zzzzsys_tab_sf.syt_title', 'nuform'),
-('nuform', 'zzzzsys_tab_sf', 'syt_order', 'zzzzsys_tab_sf.syt_order', 'nuform'),
-('nuobject', 'lookup_sf', 'zzzzsys_slo_object_name', 'lookup_sf.zzzzsys_slo_object_name', 'nuobject'),
-('nuobject', 'lookup_sf', 'zzzzsys_slo_field_function_name', 'lookup_sf.zzzzsys_slo_field_function_name', 'nuobject'),
-('nuobject', 'zzzzsys_event_sf', 'sev_event', 'zzzzsys_event_sf.sev_event', 'nuobject'),
-('583361606250b6e', 'obj_sf', 'sob_all_id', 'obj_sf.sob_all_id', '583361606250b6e'),
-('583361606250b6e', 'obj_sf', 'sob_all_label', 'obj_sf.sob_all_label', '583361606250b6e'),
-('583361606250b6e', 'obj_sf', 'custom_id', 'obj_sf.custom_id', '583361606250b6e');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `___nu1587eb361094df___`
---
-
-CREATE TABLE `___nu1587eb361094df___` (
-  `theform` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `theparent` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `thechild` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `thevalue` text CHARACTER SET utf8 NOT NULL,
-  `thefilter` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `___nu1587eb361094df___`
---
-
-INSERT INTO `___nu1587eb361094df___` (`theform`, `theparent`, `thechild`, `thevalue`, `thefilter`) VALUES
-('56773cb405f4913', 'FORM', 'com_name', 'FORM.com_name', '56773cb405f4913'),
-('56773cb405f4913', 'FORM', 'com_address', 'FORM.com_address', '56773cb405f4913'),
-('56773cb405f4913', 'FORM', 'com_suburb', 'FORM.com_suburb', '56773cb405f4913'),
-('5678ab2c48c5c41', 'FORM', 'emp_name', 'FORM.emp_name', '5678ab2c48c5c41'),
-('5678ab2c48c5c41', 'FORM', 'emp_mobile', 'FORM.emp_mobile', '5678ab2c48c5c41'),
-('568b508eec00d80', 'FORM', 'bus_code', 'FORM.bus_code', '568b508eec00d80'),
-('568b508eec00d80', 'FORM', 'bus_description', 'FORM.bus_description', '568b508eec00d80'),
-('568b508eec00d80', 'FORM', 'bus_check', 'FORM.bus_check', '568b508eec00d80'),
-('nuform', 'FORM', 'sfo_code', 'FORM.sfo_code', 'nuform'),
-('nuform', 'FORM', 'sfo_description', 'FORM.sfo_description', 'nuform'),
-('nuform', 'FORM', 'sfo_table', 'FORM.sfo_table', 'nuform'),
-('nuform', 'FORM', 'sfo_primary_key', 'FORM.sfo_primary_key', 'nuform'),
-('nuform', 'FORM', 'sfo_row_height', 'FORM.sfo_row_height', 'nuform'),
-('nuform', 'FORM', 'sfo_rows_per_page', 'FORM.sfo_rows_per_page', 'nuform'),
-('nuform', 'FORM', 'sfo_add_title', 'FORM.sfo_add_title', 'nuform'),
-('nuform', 'FORM', 'sfo_print_title', 'FORM.sfo_print_title', 'nuform'),
-('nubrowse', 'FORM', 'sbr_title', 'FORM.sbr_title', 'nubrowse'),
-('nubrowse', 'FORM', 'sbr_display', 'FORM.sbr_display', 'nubrowse'),
-('nubrowse', 'FORM', 'sbr_sort', 'FORM.sbr_sort', 'nubrowse'),
-('nubrowse', 'FORM', 'sbr_width', 'FORM.sbr_width', 'nubrowse'),
-('nubrowse', 'FORM', 'sbr_order', 'FORM.sbr_order', 'nubrowse'),
-('nutab', 'FORM', 'syt_title', 'FORM.syt_title', 'nutab'),
-('nutab', 'FORM', 'syt_order', 'FORM.syt_order', 'nutab'),
-('nuform', 'FORM', 'sfo_save_title', 'FORM.sfo_save_title', 'nuform'),
-('nuform', 'FORM', 'sfo_clone_title', 'FORM.sfo_clone_title', 'nuform'),
-('nuform', 'FORM', 'sfo_delete_title', 'FORM.sfo_delete_title', 'nuform'),
-('nuform', 'FORM', 'sfo_new_title', 'FORM.sfo_new_title', 'nuform'),
-('nuform', 'FORM', 'bb_event', 'FORM.bb_event', 'nuform'),
-('nubuildreport', 'FORM', 'open_builder', 'FORM.open_builder', 'nubuildreport'),
-('nuobject', 'FORM', 'sob_all_id', 'FORM.sob_all_id', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_label', 'FORM.sob_all_label', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_order', 'FORM.sob_all_order', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_top', 'FORM.sob_all_top', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_left', 'FORM.sob_all_left', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_width', 'FORM.sob_all_width', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_height', 'FORM.sob_all_height', 'nuobject'),
-('nuobject', 'FORM', 'sob_subform_foreign_key', 'FORM.sob_subform_foreign_key', 'nuobject'),
-('nuobject', 'FORM', 'sob_run_filter', 'FORM.sob_run_filter', 'nuobject'),
-('nuobject', 'FORM', 'sob_run_id', 'FORM.sob_run_id', 'nuobject'),
-('nuobject', 'FORM', 'sob_lookup_code', 'FORM.sob_lookup_code', 'nuobject'),
-('nuobject', 'FORM', 'sob_lookup_description', 'FORM.sob_lookup_description', 'nuobject'),
-('nuobject', 'FORM', 'sob_lookup_description_width', 'FORM.sob_lookup_description_width', 'nuobject'),
-('nulookup', 'FORM', 'zzzzsys_slo_object_name', 'FORM.zzzzsys_slo_object_name', 'nulookup'),
-('nulookup', 'FORM', 'zzzzsys_slo_field_function_name', 'FORM.zzzzsys_slo_field_function_name', 'nulookup'),
-('nuevent', 'FORM', 'sev_event', 'FORM.sev_event', 'nuevent'),
-('nuaccess', 'FORM', 'sal_description', 'FORM.sal_description', 'nuaccess'),
-('nuobject', 'FORM', 'sob_all_zzzzsys_form_id', 'FORM.sob_all_zzzzsys_form_id', 'nuobject'),
-('nuaccess', 'FORM', 'sal_code', 'FORM.sal_code', 'nuaccess'),
-('574665a15bbc1a1', 'FORM', 'sug_code', 'FORM.sug_code', '574665a15bbc1a1'),
-('574665a15bbc1a1', 'FORM', 'sug_description', 'FORM.sug_description', '574665a15bbc1a1'),
-('nuuser', 'FORM', 'sus_name', 'FORM.sus_name', 'nuuser'),
-('nuuser', 'FORM', 'sus_email', 'FORM.sus_email', 'nuuser'),
-('nuuser', 'FORM', 'sus_login_name', 'FORM.sus_login_name', 'nuuser'),
-('nuuser', 'FORM', 'new_password', 'FORM.new_password', 'nuuser'),
-('nuuser', 'FORM', 'check_password', 'FORM.check_password', 'nuuser'),
-('nuphp', 'FORM', 'sph_code', 'FORM.sph_code', 'nuphp'),
-('nuphp', 'FORM', 'sph_description', 'FORM.sph_description', 'nuphp'),
-('nublank', 'FORM', 'bla_html', 'FORM.bla_html', 'nublank'),
-('nubuildreport', 'FORM', 'sre_code', 'FORM.sre_code', 'nubuildreport'),
-('nubuildreport', 'FORM', 'sre_description', 'FORM.sre_description', 'nubuildreport'),
-('nubuildreport', 'FORM', 'sre_group', 'FORM.sre_group', 'nubuildreport'),
-('577b4d78ef9a2a0', 'FORM', 'steven', 'FORM.steven', '577b4d78ef9a2a0'),
-('577b4d78ef9a2a0', 'FORM', 'com_address', 'FORM.com_address', '577b4d78ef9a2a0'),
-('nulaunchdates', 'FORM', 'from_date', 'FORM.from_date', 'nulaunchdates'),
-('nulaunchdates', 'FORM', 'to_date', 'FORM.to_date', 'nulaunchdates'),
-('nuphp', 'FORM', 'sph_group', 'FORM.sph_group', 'nuphp'),
-('57a29441f16c351', 'FORM', 'set_time_out_minutes', 'FORM.set_time_out_minutes', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_username', 'FORM.set_smtp_username', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_password', 'FORM.set_smtp_password', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_host', 'FORM.set_smtp_host', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_from_address', 'FORM.set_smtp_from_address', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_from_name', 'FORM.set_smtp_from_name', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_port', 'FORM.set_smtp_port', '57a29441f16c351'),
-('57a7c1cb78bf3a3', 'FORM', 'trl_language', 'FORM.trl_language', '57a7c1cb78bf3a3'),
-('57a7c1cb78bf3a3', 'FORM', 'trl_english', 'FORM.trl_english', '57a7c1cb78bf3a3'),
-('57a7c1cb78bf3a3', 'FORM', 'trl_translation', 'FORM.trl_translation', '57a7c1cb78bf3a3'),
-('nupassword', 'FORM', 'new_password_check', 'FORM.new_password_check', 'nupassword'),
-('nuobject', 'FORM', 'sob_all_fast_form_description', 'FORM.sob_all_fast_form_description', 'nuobject'),
-('nupassword', 'FORM', 'new_password', 'FORM.new_password', 'nupassword'),
-('nupassword', 'FORM', 'old_password', 'FORM.old_password', 'nupassword'),
-('nuobject', 'FORM', 'ab_event', 'FORM.ab_event', 'nuobject'),
-('nuerror', 'FORM', 'error', 'FORM.error', 'nuerror'),
-('nuform', 'FORM', 'bo_event', 'FORM.bo_event', 'nuform'),
-('nuform', 'FORM', 'bs_event', 'FORM.bs_event', 'nuform'),
-('nuform', 'FORM', 'as_event', 'FORM.as_event', 'nuform'),
-('nuform', 'FORM', 'bd_event', 'FORM.bd_event', 'nuform'),
-('nuform', 'FORM', 'ad_event', 'FORM.ad_event', 'nuform'),
-('nuform', 'FORM', 'preiviewbtn', 'FORM.preiviewbtn', 'nuform'),
-('nuobject', 'FORM', 'sob_lookup_table', 'FORM.sob_lookup_table', 'nuobject'),
-('583f372b53b972c', 'FORM', 'sob_all_id', 'FORM.sob_all_id', '583f372b53b972c'),
-('583f372b53b972c', 'FORM', 'sob_all_label', 'FORM.sob_all_label', '583f372b53b972c'),
-('583f372b53b972c', 'FORM', 'custom_id', 'FORM.custom_id', '583f372b53b972c'),
-('nuobject', 'FORM', 'javascriptbtn', 'FORM.javascriptbtn', 'nuobject'),
-('nuobject', 'FORM', 'sob_calc_formula', 'FORM.sob_calc_formula', 'nuobject'),
-('56773cb405f4913', 'employee_sf', 'emp_name', 'employee_sf.emp_name', '56773cb405f4913'),
-('56773cb405f4913', 'employee_sf', 'emp_mobile', 'employee_sf.emp_mobile', '56773cb405f4913'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_title', 'zzzzsys_browse_sf.sbr_title', 'nuform'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_display', 'zzzzsys_browse_sf.sbr_display', 'nuform'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_sort', 'zzzzsys_browse_sf.sbr_sort', 'nuform'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_width', 'zzzzsys_browse_sf.sbr_width', 'nuform'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_order', 'zzzzsys_browse_sf.sbr_order', 'nuform'),
-('nuform', 'zzzzsys_tab_sf', 'syt_title', 'zzzzsys_tab_sf.syt_title', 'nuform'),
-('nuform', 'zzzzsys_tab_sf', 'syt_order', 'zzzzsys_tab_sf.syt_order', 'nuform'),
-('nuobject', 'lookup_sf', 'zzzzsys_slo_object_name', 'lookup_sf.zzzzsys_slo_object_name', 'nuobject'),
-('nuobject', 'lookup_sf', 'zzzzsys_slo_field_function_name', 'lookup_sf.zzzzsys_slo_field_function_name', 'nuobject'),
-('nuobject', 'zzzzsys_event_sf', 'sev_event', 'zzzzsys_event_sf.sev_event', 'nuobject'),
-('583361606250b6e', 'obj_sf', 'sob_all_id', 'obj_sf.sob_all_id', '583361606250b6e'),
-('583361606250b6e', 'obj_sf', 'sob_all_label', 'obj_sf.sob_all_label', '583361606250b6e'),
-('583361606250b6e', 'obj_sf', 'custom_id', 'obj_sf.custom_id', '583361606250b6e');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `___nu1587402a738d3f___`
---
-
-CREATE TABLE `___nu1587402a738d3f___` (
-  `theform` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `theparent` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `thechild` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `thevalue` text CHARACTER SET utf8 NOT NULL,
-  `thefilter` varchar(300) CHARACTER SET utf8 NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `___nu1587402a738d3f___`
---
-
-INSERT INTO `___nu1587402a738d3f___` (`theform`, `theparent`, `thechild`, `thevalue`, `thefilter`) VALUES
-('56773cb405f4913', 'FORM', 'com_name', 'FORM.com_name', '56773cb405f4913'),
-('56773cb405f4913', 'FORM', 'com_address', 'FORM.com_address', '56773cb405f4913'),
-('56773cb405f4913', 'FORM', 'com_suburb', 'FORM.com_suburb', '56773cb405f4913'),
-('5678ab2c48c5c41', 'FORM', 'emp_name', 'FORM.emp_name', '5678ab2c48c5c41'),
-('5678ab2c48c5c41', 'FORM', 'emp_mobile', 'FORM.emp_mobile', '5678ab2c48c5c41'),
-('568b508eec00d80', 'FORM', 'bus_code', 'FORM.bus_code', '568b508eec00d80'),
-('568b508eec00d80', 'FORM', 'bus_description', 'FORM.bus_description', '568b508eec00d80'),
-('568b508eec00d80', 'FORM', 'bus_check', 'FORM.bus_check', '568b508eec00d80'),
-('nuform', 'FORM', 'sfo_code', 'FORM.sfo_code', 'nuform'),
-('nuform', 'FORM', 'sfo_description', 'FORM.sfo_description', 'nuform'),
-('nuform', 'FORM', 'sfo_table', 'FORM.sfo_table', 'nuform'),
-('nuform', 'FORM', 'sfo_primary_key', 'FORM.sfo_primary_key', 'nuform'),
-('nuform', 'FORM', 'sfo_row_height', 'FORM.sfo_row_height', 'nuform'),
-('nuform', 'FORM', 'sfo_rows_per_page', 'FORM.sfo_rows_per_page', 'nuform'),
-('nuform', 'FORM', 'sfo_add_title', 'FORM.sfo_add_title', 'nuform'),
-('nuform', 'FORM', 'sfo_print_title', 'FORM.sfo_print_title', 'nuform'),
-('nubrowse', 'FORM', 'sbr_title', 'FORM.sbr_title', 'nubrowse'),
-('nubrowse', 'FORM', 'sbr_display', 'FORM.sbr_display', 'nubrowse'),
-('nubrowse', 'FORM', 'sbr_sort', 'FORM.sbr_sort', 'nubrowse'),
-('nubrowse', 'FORM', 'sbr_width', 'FORM.sbr_width', 'nubrowse'),
-('nubrowse', 'FORM', 'sbr_order', 'FORM.sbr_order', 'nubrowse'),
-('nutab', 'FORM', 'syt_title', 'FORM.syt_title', 'nutab'),
-('nutab', 'FORM', 'syt_order', 'FORM.syt_order', 'nutab'),
-('nuform', 'FORM', 'sfo_save_title', 'FORM.sfo_save_title', 'nuform'),
-('nuform', 'FORM', 'sfo_clone_title', 'FORM.sfo_clone_title', 'nuform'),
-('nuform', 'FORM', 'sfo_delete_title', 'FORM.sfo_delete_title', 'nuform'),
-('nuform', 'FORM', 'sfo_new_title', 'FORM.sfo_new_title', 'nuform'),
-('nuform', 'FORM', 'bb_event', 'FORM.bb_event', 'nuform'),
-('nubuildreport', 'FORM', 'open_builder', 'FORM.open_builder', 'nubuildreport'),
-('nuobject', 'FORM', 'sob_all_id', 'FORM.sob_all_id', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_label', 'FORM.sob_all_label', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_order', 'FORM.sob_all_order', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_top', 'FORM.sob_all_top', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_left', 'FORM.sob_all_left', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_width', 'FORM.sob_all_width', 'nuobject'),
-('nuobject', 'FORM', 'sob_all_height', 'FORM.sob_all_height', 'nuobject'),
-('nuobject', 'FORM', 'sob_subform_foreign_key', 'FORM.sob_subform_foreign_key', 'nuobject'),
-('nuobject', 'FORM', 'sob_run_filter', 'FORM.sob_run_filter', 'nuobject'),
-('nuobject', 'FORM', 'sob_run_id', 'FORM.sob_run_id', 'nuobject'),
-('nuobject', 'FORM', 'sob_lookup_code', 'FORM.sob_lookup_code', 'nuobject'),
-('nuobject', 'FORM', 'sob_lookup_description', 'FORM.sob_lookup_description', 'nuobject'),
-('nuobject', 'FORM', 'sob_lookup_description_width', 'FORM.sob_lookup_description_width', 'nuobject'),
-('nulookup', 'FORM', 'zzzzsys_slo_object_name', 'FORM.zzzzsys_slo_object_name', 'nulookup'),
-('nulookup', 'FORM', 'zzzzsys_slo_field_function_name', 'FORM.zzzzsys_slo_field_function_name', 'nulookup'),
-('nuevent', 'FORM', 'sev_event', 'FORM.sev_event', 'nuevent'),
-('nuaccess', 'FORM', 'sal_description', 'FORM.sal_description', 'nuaccess'),
-('nuobject', 'FORM', 'sob_all_zzzzsys_form_id', 'FORM.sob_all_zzzzsys_form_id', 'nuobject'),
-('nuaccess', 'FORM', 'sal_code', 'FORM.sal_code', 'nuaccess'),
-('574665a15bbc1a1', 'FORM', 'sug_code', 'FORM.sug_code', '574665a15bbc1a1'),
-('574665a15bbc1a1', 'FORM', 'sug_description', 'FORM.sug_description', '574665a15bbc1a1'),
-('nuuser', 'FORM', 'sus_name', 'FORM.sus_name', 'nuuser'),
-('nuuser', 'FORM', 'sus_email', 'FORM.sus_email', 'nuuser'),
-('nuuser', 'FORM', 'sus_login_name', 'FORM.sus_login_name', 'nuuser'),
-('nuuser', 'FORM', 'new_password', 'FORM.new_password', 'nuuser'),
-('nuuser', 'FORM', 'check_password', 'FORM.check_password', 'nuuser'),
-('nuphp', 'FORM', 'sph_code', 'FORM.sph_code', 'nuphp'),
-('nuphp', 'FORM', 'sph_description', 'FORM.sph_description', 'nuphp'),
-('nublank', 'FORM', 'bla_html', 'FORM.bla_html', 'nublank'),
-('nubuildreport', 'FORM', 'sre_code', 'FORM.sre_code', 'nubuildreport'),
-('nubuildreport', 'FORM', 'sre_description', 'FORM.sre_description', 'nubuildreport'),
-('nubuildreport', 'FORM', 'sre_group', 'FORM.sre_group', 'nubuildreport'),
-('577b4d78ef9a2a0', 'FORM', 'steven', 'FORM.steven', '577b4d78ef9a2a0'),
-('577b4d78ef9a2a0', 'FORM', 'com_address', 'FORM.com_address', '577b4d78ef9a2a0'),
-('nulaunchdates', 'FORM', 'from_date', 'FORM.from_date', 'nulaunchdates'),
-('nulaunchdates', 'FORM', 'to_date', 'FORM.to_date', 'nulaunchdates'),
-('nuphp', 'FORM', 'sph_group', 'FORM.sph_group', 'nuphp'),
-('57a29441f16c351', 'FORM', 'set_time_out_minutes', 'FORM.set_time_out_minutes', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_username', 'FORM.set_smtp_username', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_password', 'FORM.set_smtp_password', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_host', 'FORM.set_smtp_host', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_from_address', 'FORM.set_smtp_from_address', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_from_name', 'FORM.set_smtp_from_name', '57a29441f16c351'),
-('57a29441f16c351', 'FORM', 'set_smtp_port', 'FORM.set_smtp_port', '57a29441f16c351'),
-('57a7c1cb78bf3a3', 'FORM', 'trl_language', 'FORM.trl_language', '57a7c1cb78bf3a3'),
-('57a7c1cb78bf3a3', 'FORM', 'trl_english', 'FORM.trl_english', '57a7c1cb78bf3a3'),
-('57a7c1cb78bf3a3', 'FORM', 'trl_translation', 'FORM.trl_translation', '57a7c1cb78bf3a3'),
-('nupassword', 'FORM', 'new_password_check', 'FORM.new_password_check', 'nupassword'),
-('nuobject', 'FORM', 'sob_all_fast_form_description', 'FORM.sob_all_fast_form_description', 'nuobject'),
-('nupassword', 'FORM', 'new_password', 'FORM.new_password', 'nupassword'),
-('nupassword', 'FORM', 'old_password', 'FORM.old_password', 'nupassword'),
-('nuobject', 'FORM', 'ab_event', 'FORM.ab_event', 'nuobject'),
-('nuerror', 'FORM', 'error', 'FORM.error', 'nuerror'),
-('nuform', 'FORM', 'bo_event', 'FORM.bo_event', 'nuform'),
-('nuform', 'FORM', 'bs_event', 'FORM.bs_event', 'nuform'),
-('nuform', 'FORM', 'as_event', 'FORM.as_event', 'nuform'),
-('nuform', 'FORM', 'bd_event', 'FORM.bd_event', 'nuform'),
-('nuform', 'FORM', 'ad_event', 'FORM.ad_event', 'nuform'),
-('nuform', 'FORM', 'preiviewbtn', 'FORM.preiviewbtn', 'nuform'),
-('nuobject', 'FORM', 'sob_lookup_table', 'FORM.sob_lookup_table', 'nuobject'),
-('583f372b53b972c', 'FORM', 'sob_all_id', 'FORM.sob_all_id', '583f372b53b972c'),
-('583f372b53b972c', 'FORM', 'sob_all_label', 'FORM.sob_all_label', '583f372b53b972c'),
-('583f372b53b972c', 'FORM', 'custom_id', 'FORM.custom_id', '583f372b53b972c'),
-('nuobject', 'FORM', 'javascriptbtn', 'FORM.javascriptbtn', 'nuobject'),
-('nuobject', 'FORM', 'sob_calc_formula', 'FORM.sob_calc_formula', 'nuobject'),
-('56773cb405f4913', 'employee_sf', 'emp_name', 'employee_sf.emp_name', '56773cb405f4913'),
-('56773cb405f4913', 'employee_sf', 'emp_mobile', 'employee_sf.emp_mobile', '56773cb405f4913'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_title', 'zzzzsys_browse_sf.sbr_title', 'nuform'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_display', 'zzzzsys_browse_sf.sbr_display', 'nuform'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_sort', 'zzzzsys_browse_sf.sbr_sort', 'nuform'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_width', 'zzzzsys_browse_sf.sbr_width', 'nuform'),
-('nuform', 'zzzzsys_browse_sf', 'sbr_order', 'zzzzsys_browse_sf.sbr_order', 'nuform'),
-('nuform', 'zzzzsys_tab_sf', 'syt_title', 'zzzzsys_tab_sf.syt_title', 'nuform'),
-('nuform', 'zzzzsys_tab_sf', 'syt_order', 'zzzzsys_tab_sf.syt_order', 'nuform'),
-('nuobject', 'lookup_sf', 'zzzzsys_slo_object_name', 'lookup_sf.zzzzsys_slo_object_name', 'nuobject'),
-('nuobject', 'lookup_sf', 'zzzzsys_slo_field_function_name', 'lookup_sf.zzzzsys_slo_field_function_name', 'nuobject'),
 ('nuobject', 'zzzzsys_event_sf', 'sev_event', 'zzzzsys_event_sf.sev_event', 'nuobject'),
 ('583361606250b6e', 'obj_sf', 'sob_all_id', 'obj_sf.sob_all_id', '583361606250b6e'),
 ('583361606250b6e', 'obj_sf', 'sob_all_label', 'obj_sf.sob_all_label', '583361606250b6e'),

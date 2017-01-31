@@ -1,8 +1,8 @@
 
 function nuBuildForm(f){
 	
-	var d = new Date();
-	console.log(d.getTime());
+//	var d = new Date();
+//	console.log(d.getTime());
 
 	//nuCheckFormProperties(f);
 
@@ -72,8 +72,8 @@ function nuBuildForm(f){
         nuCreateDragOptionsBox(f);
 	}
 	
-	var d = new Date();
-	console.log(d.getTime());
+//	var d = new Date();
+//	console.log(d.getTime());
 	
 }
 
@@ -487,7 +487,7 @@ function nuINPUT(w, i, l, p, prop){
 		.addClass('nuReadonly')
 		.prop('readonly', true);
 		
-		nuPopulateLookup3(w.objects[i].values);
+		nuPopulateLookup3(w.objects[i].values, p);
 		
 		return Number(prop.objects[i].width) + Number(prop.objects[i].description_width) + 30;
 		
@@ -974,10 +974,13 @@ function nuLabel(w, i, p, prop){
 	
 }
 
-function nuPopulateLookup3(v){
+function nuPopulateLookup3(v, p){
 	
 		for(var i = 0 ; i < v.length ; i++){
-			$('#' + v[i][0]).val(v[i][1]);
+
+			var fieldname	= String(v[i][0]).replace('#ROW#', p);
+			
+			$('#' + fieldname).val(v[i][1]);
 		}
 		
 }
@@ -1818,8 +1821,10 @@ function nuPopulateLookup(fm, target){
 
 	for(var i = 0 ; i < f.length ; i++){
 		
-		$('#' + p + f[i][0]).addClass('nuEdited');
-		$('#' + p + f[i][0]).val(f[i][1]);
+		fieldname	= String(f[i][0]).replace('#ROW#', p);
+		
+		$('#' + fieldname).addClass('nuEdited');
+		$('#' + fieldname).val(f[i][1]);
 
 	}
 	

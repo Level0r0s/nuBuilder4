@@ -664,7 +664,7 @@ function nuPreview(){
 }
 
 
-function nuPopPHP(ev){
+function nuPopPHP(e, nuE){
 
     var i   = nuFORM.getProperty('record_id');
 
@@ -672,9 +672,10 @@ function nuPopPHP(ev){
         
         alert('Cannot create Event Until This Form Has Been Saved..')
         return;
+		
     }
-    
-    nuPopup('nuphp', i + '_' + ev, 'justphp');
+	
+    nuPopup('nuphp', i + '_' + nuE, 'justphp');
 
 }
 

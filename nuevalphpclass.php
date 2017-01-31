@@ -27,7 +27,7 @@
 				WHERE spl_zzzzsys_php_id = '$this->parentID'
 			";
 			
-			$nuT							= nuRunQuery($s);
+			$nuT						= nuRunQuery($s);
 							
 			while($nuA = db_fetch_object($nuT)) {
 
