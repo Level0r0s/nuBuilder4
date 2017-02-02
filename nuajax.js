@@ -13,7 +13,7 @@ function nuAjax(w,successCallback,errorCallback){
 		success	 : function(data,textStatus,jqXHR){
 				successCallback(data,textStatus,jqXHR);
 		},
-		error: function(jqXHR,textStatus,errorThrown){
+		error    : function(jqXHR,textStatus,errorThrown){
 			
 			console.log('jqXHR : ', jqXHR);
  			console.log('textStatus : ', textStatus);
@@ -250,6 +250,7 @@ function nuGetLookupId(pk, id){
 	last.call_type 		= 'getlookupid';
 	last.object_id		= l.attr('data-nu-object-id');
 	last.target			= l.attr('data-nu-target');
+	last.prefix			= l.attr('data-nu-prefix');
 	last.primary_key 	= pk;
 
 	var successCallback = function(data,textStatus,jqXHR){		

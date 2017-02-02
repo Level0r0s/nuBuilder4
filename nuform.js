@@ -1821,10 +1821,8 @@ function nuPopulateLookup(fm, target){
 
 	for(var i = 0 ; i < f.length ; i++){
 		
-		fieldname	= String(f[i][0]).replace('#ROW#', p);
-		
-		$('#' + fieldname).addClass('nuEdited');
-		$('#' + fieldname).val(f[i][1]);
+		$('#' + f[i][0]).addClass('nuEdited');
+		$('#' + f[i][0]).val(f[i][1]);
 
 	}
 	

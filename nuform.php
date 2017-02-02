@@ -411,7 +411,7 @@ function nuGetLookupValues($R, $O){
 
     $t 			= nuRunQuery($s);
     $l 			= db_fetch_row($t);
-	$f			= '#ROW#' . $O->id;
+	$f			= $_POST['nuSTATE']['prefix'] . $O->id;
 	
 	$v			= array();
 	$v[]		= array($f, 				isset($l[0]) ? $l[0] : '');
@@ -435,7 +435,9 @@ function nuGetOtherLookupValues($nuO){
 
 
 function nuSetFormValue($f, $v){
-	
+
+	$f			=  str_replace('#ROW#', $_POST['nuSTATE']['prefix'], $f);
+
 	$_POST['lookup_values'][]	= array($f, $v);
 	
 }
@@ -672,7 +674,6 @@ function nuBrowseRows($f){
 	$t 				= nuRunQuery($s);
 	$rows			= db_num_rows($t);
 	$s				.= " LIMIT $start, $rows";
-	nudebug($s);
 	$t 				= nuRunQuery($s);
 
 	while($r = db_fetch_row($t)){
@@ -1134,7 +1135,7 @@ function nuFormDimensions($f){
 
 	}
 	
-	$d[]	= $h  + 200;			//-- lookup form height
+	$d[]	= $h  + 200;		//-- lookup form height
 	$d[]	= $w  + 20;			//-- lookup form width
 	$d[]	= $h  + 25;			//-- form height
 	$d[]	= $w  + 50;			//-- form width
@@ -1147,7 +1148,7 @@ function nuFormDimensions($f){
 
 
 function nuGetAllLookupValues(){
-
+	
 	$a						= array();
 	$OID					= $_POST['nuSTATE']['object_id'];
 	$PK						= $_POST['nuSTATE']['primary_key'];
@@ -1161,10 +1162,6 @@ function nuGetAllLookupValues(){
 	$l						= nuGetLookupValues($r, $o);
 	$e						= nuGetOtherLookupValues($o);
 	$m						= array_merge($l, $e);
-
-	nudebug('eeee ' . print_r($e,1));
-	nudebug('llll ' . print_r($l,1));
-	nudebug('mmmm ' . print_r($m,1));
 
 	return $m;
 	

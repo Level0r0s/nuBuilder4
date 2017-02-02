@@ -5,7 +5,7 @@
 	require_once('nuform.php');
 	require_once('nudata.php');
     require_once('nudrag.php');
-
+	
 	if(!isset($_SESSION['SESSIONID'])){
 		$_SESSION['SESSIONID'] 				= nuID();
 	}
@@ -49,8 +49,7 @@
 	$f->forms[0]->javascript				= $GLOBALS['EXTRAJS'];
 
 	$j								    	= json_encode($f->forms[0]);
-nudebug($j);
-
+//  nudebug($j);
 //	print ;
 print $j;
 	
