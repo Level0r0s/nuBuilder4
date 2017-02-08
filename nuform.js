@@ -1,11 +1,6 @@
 
 function nuBuildForm(f){
 	
-//	var d = new Date();
-//	console.log(d.getTime());
-
-	//nuCheckFormProperties(f);
-
 	if(f.form_id == ''){
 		
 		nuLogin();
@@ -40,6 +35,7 @@ function nuBuildForm(f){
 	b.row_height 			= f.row_height;
 	b.rows 					= f.rows;
 	b.browse_columns 		= f.browse_columns;
+	b.browse_sql			= f.browse_sql;
 	b.browse_rows 			= f.browse_rows;
 	b.pages 				= f.pages;
 	
@@ -71,9 +67,6 @@ function nuBuildForm(f){
     if(f.record_id == '-2'){
         nuCreateDragOptionsBox(f);
 	}
-	
-//	var d = new Date();
-//	console.log(d.getTime());
 	
 }
 
@@ -264,7 +257,7 @@ function nuRecordProperties(w, p, l){
 	chk.setAttribute('id', de);
 	chk.setAttribute('title', 'Delete This Row When Saved');
 	chk.setAttribute('type', 'checkbox');
-	chk.setAttribute('onclick', 'nuChange()');
+	chk.setAttribute('onclick', 'nuChange(event)');
 
 	$('#' + fh)
 	.append(chk)
@@ -355,7 +348,11 @@ function nuINPUT(w, i, l, p, prop){
 
 	if(ty == 'input'){														//-- Input Object
 
-		inp.setAttribute('type', prop.objects[i].input);
+		if(prop.objects[i].input === undefined){
+			inp.setAttribute('type', 'text');
+		}else{
+			inp.setAttribute('type', prop.objects[i].input);
+		}
 
 		if(input_type == 'button'){
 			$('#' + id).addClass('nuButton');
@@ -374,11 +371,12 @@ function nuINPUT(w, i, l, p, prop){
 	})
 	
 	.attr('onchange', 'nuChange(event)')
-	.attr('data-nu-field', input_type == 'button' ? null :prop.objects[i].id)
+	.attr('data-nu-field', input_type == 'button' ? null : prop.objects[i].id)
 	.attr('data-nu-object-id', w.objects[i].object_id)
 	.attr('data-nu-format', w.objects[i].format)
 	.attr('data-nu-prefix', p)
-	.attr('data-nu-type', 'input')
+	.attr('data-nu-type', w.objects[i].type)
+	.attr('data-nu-formula', w.objects[i].formula)
 	.attr('data-nu-subform-sort', 1)
 	.prop('readonly', prop.objects[i].read == '1' ? 'readonly' : '');
 	
@@ -386,7 +384,6 @@ function nuINPUT(w, i, l, p, prop){
 		$('#' + id).attr('data-nu-data', '');
 	}
 		
-	
 	if(w.objects[i].value == ''){             //== check for Cannot be left blank
 		$('#' + id).addClass('nuEdited');
 	}
@@ -406,6 +403,13 @@ function nuINPUT(w, i, l, p, prop){
 	if(prop.objects[i].type == 'display'){
 		
 		$('#' + id).addClass('nuReadonly');
+		$('#' + id).prop('readonly', true);
+		
+	}
+
+	if(prop.objects[i].type == 'calc'){
+		
+		$('#' + id).addClass('nuCalculator');
 		$('#' + id).prop('readonly', true);
 		
 	}
@@ -2205,27 +2209,6 @@ function nuFormClass(frm){
 	this.v	= values;
 
 }
-/*
-
-function nuSetFORM(F){
-	
-	for(var o = 0 ; o < F.objects.length ; o++){
-		
-		if(F.objects[o].type == 'subform'){
-			
-			for(var s = 0 ; s < F.objects[o].forms.length ; s++){
-				
-				nuSetFORM(F.objects[o].forms[s]);
-				
-			}
-			
-		}
-		
-	}
-	
-}
-
-*/
 
 function nuFormatObject(t){
 	
@@ -2237,6 +2220,13 @@ function nuFormatObject(t){
 
 function nuChange(e){
 
+	if(e.target.id.substr(-8) == 'nuDelete'){
+		
+		nuHasBeenEdited();
+		return;
+		
+	}
+		
 	var t	= $('#' + e.target.id)[0];
 	var f	= $('#' + t.id).attr('data-nu-format');
 	var p	= $('#' + t.id).attr('data-nu-prefix');
@@ -2679,6 +2669,10 @@ function nuGetSearchList(){
 	
 }
 
+function nuTotal(f){
+		return nuFORM.calc(f);
+}
+
 
 function nuAlert(o){
 
@@ -2712,6 +2706,5 @@ function nuAlert(o){
 }
 
 function nuLister(){}
-
 
 

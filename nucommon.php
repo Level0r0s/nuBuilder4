@@ -1062,38 +1062,33 @@ function nuAddToHashList($J, $run){
 
 }
 
-function nuSchema($p = ''){
+function nuSchema(){
 	
-	$S				= array();
+	$a			= array();
+	$t			= nuRunQuery("SELECT table_name FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = DATABASE()");
 
-	if($_POST['nuSTATE']['session_id'] == '' or $p == '1'){
-		
-		$t			= nuRunQuery("SELECT table_name FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = DATABASE()");
+	while($r = db_fetch_object($t)){
 
-		while($r = db_fetch_object($t)){
+		$tn		= $r->table_name; 
+		$a[$tn]	= db_columns($tn);
 
-			$tn		= $r->table_name; 
-			$S[$tn]	= db_columns($tn);
-
-		}
-		
 	}
 
-	return $S;
+	return $a;
 
 }
 
 
 function nuTranslate($l){
 
-	$t	= nuRunQuery("SELECT * FROM zzzzsys_translate WHERE trl_language = '$l' ORDER BY trl_english");
-	$S	= array();
+	$t			= nuRunQuery("SELECT * FROM zzzzsys_translate WHERE trl_language = '$l' ORDER BY trl_english");
+	$S			= array();
 
 	if(db_num_rows($t) == 0){return $S;}
 	
 	while($r = db_fetch_object($t)){
 
-		$S[]		= $r;
+		$S[]	= $r;
 
 	}
 

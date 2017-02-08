@@ -12,6 +12,7 @@
 	
 	
 	$_POST['nuErrors']						= array();
+	$_POST['nuSchema']						= nuSchema();
 	$s										= nuCheckSession();
 	$P										= $_POST['nuSTATE'];
 	$_POST['nuHash']						= nuSetHashList($P);

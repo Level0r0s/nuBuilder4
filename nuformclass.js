@@ -193,24 +193,15 @@ class nuFormObject {
 	
 	calc(field){
 		
-		if(field.split('.').length == 2){
-			
-			var subform_name	= field.split('.')[0];
-			var field_name		= field.split('.')[1];
-			
-		}else{
-			
-			var subform_name	= '';
-			var field_name		= field;
-		
-		}
+		var subform_name	= field.split('.')[0];
+		var field_name		= field.split('.')[1];
 		
 		var d	= this.data();											//-- an array of all data as subforms (the mainform is the first element)
 		var v	= 0;
 		
 		for(var i =  0 ; i < d.length ; i++){
 			
-			var SF	= d[i];
+			var SF		= d[i];
 			
 			if(SF.id == subform_name){									//-- i've got the right subform
 				
@@ -262,8 +253,9 @@ class nuFormObject {
 
 		var id			= sf;
 		
-		if(sf == '' || arguments.lemgth == 0){
+		if(sf == ''){
 			
+			id			= 'nuFORM';
 			var sel		= '#nuRECORD';
 			var sf		= 'nuRECORD';
 			var oi		= '';
@@ -278,40 +270,50 @@ class nuFormObject {
 		}
 		
 		var o			= {'id':id, 'html_id':sf, 'foreign_key':fk, 'object_id':oi};
+		var F			= ['ID'];
 		o.rows			= [];
 		o.edited		= [];
-		var F			= ['ID'];
 		
 		$(sel).each(function(index){
 			
-			var $this	= $(this);
-			
+			var THIS	= $(this);
 			var V		= [$(this).attr('data-nu-primary-key')];
 			var E		= [0];
-
-			$this.children('[data-nu-data]').each(function(index){
+			var C		= 1;
+			var	addrow	= true;
 				
-				if(sf == 'nuRECORD'){						//-- the main Form
-					F[index+1]	= this.id;
-				}else{
-					F[index+1]	= this.id.substr(sf.length + 3);
+			THIS.children('[data-nu-data]').each(function(){
+				
+				var addfld	= true;
+					
+				if(this.id.substr(-8) == 'nuDelete'){
+					addrow = !$('#' + this.id).prop("checked");
+					addfld = false;
 				}
-				
-				V[index+1]		= $('#' + this.id).val();
-				E[index+1]		= $('#' + this.id).hasClass('nuEdited') ? 1 : 0 ;
-				
-				if(F[index+1] == 'nuDelete'){
+
+				if(addfld){
 					
-					F[index+1]	= 'DELETE';
-					V[index+1]	= $('#' + this.id).prop("checked");
+					if(sf == 'nuRECORD'){						//-- the main Form
+						F[C]	= this.id;
+					}else{
+						F[C]	= this.id.substr(sf.length + 3);
+					}
 					
+					V[C]		= $('#' + this.id).val();
+					E[C]		= $('#' + this.id).hasClass('nuEdited') ? 1 : 0 ;
+
+					C++;
+				
 				}
 				
 			});
 			
-			o.rows.push(V);
-			o.edited.push(E);
-			
+			if(addrow){
+				
+				o.rows.push(V);
+				o.edited.push(E);
+				
+			}
 			
 		});
 

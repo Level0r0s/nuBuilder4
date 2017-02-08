@@ -42,8 +42,8 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
     $f				= nuGetEditForm($F, $R);
     $f->form_id		= $F;
     $f->record_id	= $R;
-
-	if(!array_key_exists($f->table, nuSchema(1))){
+	
+	if(!array_key_exists($f->table, $_POST['nuSchema'])){
 		
 		$A			= array();
 		
@@ -81,6 +81,14 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 				$o->value	= $A[$r->sob_all_id];
 			}
 
+			if($r->sob_all_type == 'calc'){
+				$o->formula	= $r->sob_calc_formula;
+			}
+				
+			if($r->sob_all_type == 'textarea'){
+				$o->align 	= $r->sob_all_align;
+			}
+				
 			if($r->sob_all_type == 'input' || $r->sob_all_type == 'display'){
 
 				$o->align 	= $r->sob_all_align;
@@ -89,7 +97,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 				$o->read 	= $r->sob_all_readonly;
 
 				if($r->sob_input_type == 'button' && $r->sob_all_type == 'input'){
-					$o->value= $r->sob_all_label;
+					$o->value	= $r->sob_all_label;
 				}
 
 				if($r->sob_all_type == 'display'){
@@ -474,7 +482,7 @@ function nuSelectOptions($sql) {
         }
 
     }
-
+	
     return $a;
 }
 
@@ -680,6 +688,8 @@ function nuBrowseRows($f){
 		$a[] 		= $r;
 	}
 	
+	nuRunQuery(nuReplaceHashVariables('DROP TABLE if EXISTS #TABLE_ID#'));
+	
 	return array($a, $rows, $S->SQL);
 	
 }
@@ -837,7 +847,7 @@ function nuCheckSession(){
 				$c->session_id			= $s;
 				$c->form_id				= 'nuhome';
 				$c->record_id			= '-1';
-				$c->schema				= nuSchema();
+				$c->schema				= $_POST['nuSchema'];
 				$c->translation			= nuTranslate('');
 
 			}else{
@@ -864,7 +874,7 @@ function nuCheckSession(){
 				$c->session_id		= $s;
 				$c->form_id			= $r->sug_zzzzsys_form_id;			//-- home Form
 				$c->record_id		= '-1';
-				$c->schema			= nuSchema();	
+				$c->schema			= $_POST['nuSchema'];
 				$c->translation		= nuTranslate($r->sus_language);
 
 			}else{
@@ -891,7 +901,7 @@ function nuCheckSession(){
 				$c->session_id		= $_SESSION['SESSIONID'];
 				$c->form_id			= $_POST['nuSTATE']['form_id'];
 				$c->record_id		= $_POST['nuSTATE']['record_id'];
-				$c->schema			= nuSchema();	
+				$c->schema			= $_POST['nuSchema'];	
 				$c->translation		= nuTranslate($r->sus_language);
 				
 			} else {

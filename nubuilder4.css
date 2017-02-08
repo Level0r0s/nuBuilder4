@@ -549,13 +549,12 @@ input {
   border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-.nuCalculator {
-	border:1px solid black;
-	text-align:center;
-	width:30px;
-	height:20px;
-	font: 16px bold;
+.nuFormula{
 	font-family:monospace;
+	padding:6px;
+}
+
+.nuCalculator {
 	background-color:lightgray;
 }
 
