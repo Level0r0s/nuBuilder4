@@ -41,11 +41,17 @@ class nuFormObject {
 		}
 	
 		var k	= e.keyCode;
+		console.log(k);
 		var o	= this.lists[e.target.id];
 		var c 	= $.inArray($('#'+e.target.id).val(), o.boxList);
 
+		if(k == 39){return;}												//-- right
+		if(k == 37){return;}												//-- left
+		if(k == 16){return;}												//-- shift
+		if(k == 9){return;}													//-- tab
+
 		if($('#nuListerListBox').length > 0 && $('#nuListerListBox').children().length > 0) {
-			
+
 			if(k == 38){														//-- up
 				o.up();
 			}else if(k == 40){													//-- down
@@ -193,9 +199,17 @@ class nuFormObject {
 	
 	calc(field){
 		
-		var subform_name	= field.split('.')[0];
-		var field_name		= field.split('.')[1];
-		
+		if(field.split('.').length == 2){
+			
+			var subform_name	= field.split('.')[0];
+			var field_name		= field.split('.')[1];
+			
+		}else{
+			
+			return Number($('#' + field).val());
+			
+		}
+
 		var d	= this.data();											//-- an array of all data as subforms (the mainform is the first element)
 		var v	= 0;
 		
@@ -215,7 +229,7 @@ class nuFormObject {
 					
 				}
 				
-				return v;
+				return Number(v);
 				
 			}
 		}
@@ -255,7 +269,7 @@ class nuFormObject {
 		
 		if(sf == ''){
 			
-			id			= 'nuFORM';
+			id			= 'nuBuilder4Form';
 			var sel		= '#nuRECORD';
 			var sf		= 'nuRECORD';
 			var oi		= '';

@@ -51,6 +51,7 @@
 
 	$j								    	= json_encode($f->forms[0]);
 //  nudebug($j);
+//	nudebug('HASH: ' . print_r($_POST['nuHash'],1));
 //	print ;
 print $j;
 	

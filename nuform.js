@@ -9,6 +9,7 @@ function nuBuildForm(f){
 	}
 	
 	window.nuSESSION				= f.session_id;
+	window.nuLastChange				= null;
 	window.onbeforeunload			= null;
 	window.nuSUBFORMROW				= [];
 	window.nuSUBFORMJSON			= [];
@@ -239,9 +240,9 @@ function nuAddJSObjectEvents(i, j){
 	for(var J = 0 ; J < j.length ; J++){
 
 		var code 	= o.getAttribute(j[J].event);
-		code		= code === null ? '' : code;
+		code		= code === null ? '' : code + ';' ;
 		
-		o.setAttribute(j[J].event, code + ';' + j[J].js);
+		o.setAttribute(j[J].event, code+ j[J].js);
 
 	}
 
@@ -297,11 +298,11 @@ function nuDRAG(w, i, l, p, prop){
 	
 	$('#' + ef).append(drg);
 	
-	$('#' + id).css({'top'       	: Number(prop.objects[i].top),
+	$('#' + id).css({'top'      : Number(prop.objects[i].top),
 					'left'		: Number(prop.objects[i].left),
 					'width'		: Number(prop.objects[i].width),
-					'height'		: Number(prop.objects[i].height),
-					'text-align'	: prop.objects[i].align,
+					'height'	: Number(prop.objects[i].height),
+					'text-align': prop.objects[i].align,
 					'position'	: 'absolute',
 					'overflow': 'hidden'
 	}).addClass('nuDragOptionsField');
@@ -376,10 +377,9 @@ function nuINPUT(w, i, l, p, prop){
 	.attr('data-nu-format', w.objects[i].format)
 	.attr('data-nu-prefix', p)
 	.attr('data-nu-type', w.objects[i].type)
-	.attr('data-nu-formula', w.objects[i].formula)
 	.attr('data-nu-subform-sort', 1)
 	.prop('readonly', prop.objects[i].read == '1' ? 'readonly' : '');
-	
+
 	if(input_type != 'button'){
 		$('#' + id).attr('data-nu-data', '');
 	}
@@ -408,9 +408,10 @@ function nuINPUT(w, i, l, p, prop){
 	}
 
 	if(prop.objects[i].type == 'calc'){
-		
-		$('#' + id).addClass('nuCalculator');
-		$('#' + id).prop('readonly', true);
+
+		$('#' + id).addClass('nuCalculator')
+		.prop('readonly', true).prop('tabindex',-1)
+		.attr('data-nu-formula', nuBuildFormula(p, w.objects[i].formula));
 		
 	}
 
@@ -2220,6 +2221,8 @@ function nuFormatObject(t){
 
 function nuChange(e){
 
+	window.nuLastChange	= e;
+	
 	if(e.target.id.substr(-8) == 'nuDelete'){
 		
 		nuHasBeenEdited();
@@ -2241,12 +2244,26 @@ function nuChange(e){
 	
 	$('#nuCalendar').remove();
 	$('#' + t.id).removeClass('nuValidate');
+	nuCalculateForm();
 
 	if(p == ''){return;}
 	
 	nuAddSubformRow(t, event);
 	
 }
+
+function nuCalculateForm(){
+	
+	$("[data-nu-formula]").each(function( index ) {
+		console.log($(this).id);
+		$(this).addClass('nuEdited');
+		var f 	= $(this).attr('data-nu-formula');
+		eval('$(this).val(' + f + ')');
+		
+	});	
+	
+}
+
 
 function nuHasBeenEdited(){
 	
@@ -2670,6 +2687,7 @@ function nuGetSearchList(){
 }
 
 function nuTotal(f){
+	console.log('nuFORM.calc(f)', f, nuFORM.calc(f))
 		return nuFORM.calc(f);
 }
 
@@ -2706,5 +2724,48 @@ function nuAlert(o){
 }
 
 function nuLister(){}
+
+
+function nuBuildFormula(p, f){
+
+	var bits		= f.split(' ');
+	
+	for(var i = 0 ; i < bits.length ; i++){
+		
+		var bit		= String(bits[i]);
+		
+		if(bit.substr(0,7) == 'nuTotal'){
+			bits[i]	= nuRebuild_nuTotal(p, bit);
+		}
+		
+	}	
+	
+	return bits.join(' ');
+	
+}
+
+
+function nuRebuild_nuTotal(p, s){
+	
+	var t	= s.trim();
+	t		= t.substr(0, t.length-2)
+	t		= t.substr(9)
+	t		= t.split('.');
+				
+	if(t.length == 1){
+
+		var n	= 'nuTotal("' + p + t[0] + '")';
+		
+	}else{
+		
+		var n	= 'nuTotal("' + t[0] + '.' + t[1] + '")';
+		
+	}
+	
+	return n;
+	
+}
+
+
 
 

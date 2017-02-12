@@ -198,9 +198,8 @@ class nuListObject{
 			var datac	= ' data-nu-code="' 		+ chopc + '" ';
 			var datad	= ' data-nu-description="'	+ chopd + '" ';
 			var datal	= this.isLookup ? 'event, ' + '1, "' + this.OBJECT[0].id + '"' : 'event, ' + '0, "' + this.OBJECT[0].id + '"';
-
 			var rw		= "<div " + uid + ">";
-			rw			+= "   <div id='code_" + i + "' style='display:inline-block;width:" + this.widths[0] + "px;height:20px' " + " onclick='nuClickLister(" + datal + ")' class='" + cl + "' " + datan + datai + datac + datad + ">" + chopc + "</div>";
+			rw			+= "   <div id='code_" + i + "' style='padding:0px 0px 0px 2px;display:inline-block;width:" + this.widths[0] + "px;height:20px' " + " onclick='nuClickLister(" + datal + ")' class='" + cl + "' " + datan + datai + datac + datad + ">" + chopc + "</div>";
 			rw			+= chopd;
 			rw			+= "</div>";
 

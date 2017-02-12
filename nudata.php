@@ -175,7 +175,6 @@ function nuUpdateData(){
 		$event	= $FORM->zzzzsys_form_id . '_AS';
 	}
 
-	//eval($after);
 	if(trim($event) != '') {
 		$evalPHP = new nuEvalPHPClass($event);
 	}

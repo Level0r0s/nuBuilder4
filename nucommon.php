@@ -677,8 +677,10 @@ function nuSetHashList($p){
 		$ha['PREVIOUS_RECORD_ID']	= addslashes($rid);
 		$ha['RECORD_ID']			= addslashes($rid);
 		$ha['FORM_ID']				= addslashes($fid);
-		$ha['FORM_ID']				= addslashes($fid);
-		
+		$ha['SUBFORM_ID']			= addslashes($_POST['nuSTATE']['object_id']);
+		$ha['ID']					= addslashes($_POST['nuSTATE']['primary_key']);
+		$ha['CODE']					= addslashes($_POST['nuSTATE']['code']);
+
 	}
 
 	return array_merge($r, $ha);

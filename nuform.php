@@ -83,6 +83,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 
 			if($r->sob_all_type == 'calc'){
 				$o->formula	= $r->sob_calc_formula;
+				$o->align 	= $r->sob_all_align;
 			}
 				
 			if($r->sob_all_type == 'textarea'){
@@ -366,7 +367,7 @@ function nuGetEditForm($F, $R){
 	}
     
 	if(intval($r->sfo_rows_per_page) == 0){
-		$f->rows	= 25;
+		$f->rows	= 20;
 	}else{
 		$f->rows	= intval($r->sfo_rows_per_page);
 	}
@@ -689,7 +690,7 @@ function nuBrowseRows($f){
 	}
 	
 	nuRunQuery(nuReplaceHashVariables('DROP TABLE if EXISTS #TABLE_ID#'));
-	
+
 	return array($a, $rows, $S->SQL);
 	
 }
