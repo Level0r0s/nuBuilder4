@@ -711,7 +711,6 @@ function nuRunReport($nuRID){
 	
 }
 
-
 function nuRunPHP($nuRID){
 
 	$nuID								= nuID();
@@ -729,60 +728,6 @@ function nuRunPHP($nuRID){
 	return $nuID;
 	
 }
-
-/*function nuBuildPHPandData($PHP) {
-	
-	$php 								= '';
-	$lines 								= [];
-	
-	try {
-
-		$s 								= "
-			SELECT * 
-			FROM zzzzsys_php_library 
-			LEFT JOIN zzzzsys_php ON zzzzsys_php_id = spl_library_zzzzsys_php_id 
-			WHERE spl_zzzzsys_php_id = '$PHP->zzzzsys_php_id'
-		";
-			
-		$nuT							= nuRunQuery($s);
-		$i 								= 0;
-		$line 							= 0;
-
-		while($nuA = db_fetch_object($nuT)) {
-
-			$lines[$i]['code']			= $nuA->sph_code;
-			$lines[$i]['start']			= $line;
-
-			if($php == '') {
-				$php = $nuA->sph_php;
-			} else {
-				$php .= "\n".$nuA->sph_php;
-			}
-
-			$lines[$i]['length']		= substr_count($nuA->sph_php, "\n" ) + 1;
-			$line 						= $line + substr_count($nuA->sph_php, "\n" ) + 1;
-			$i++;
-
-		}
-			
-		$php							.= "\n".$PHP->sph_php;
-		$lines[$i]['code']				= $PHP->sph_code;
-		$lines[$i]['start']				= $line;
-		$lines[$i]['length']			= substr_count($PHP->sph_php, "\n" ) + 1;
-
-	}catch(Throwable $e) {
-		nuException("Error Building PHP",0);       
-	}catch(Exception $e) {
-		nuException("Error Building PHP",0);
-	}
-	
-	$phpinfo 							= [];
-	$phpinfo['php'] 					= $php;
-	$phpinfo['lines'] 					= $lines;
-
-	return $phpinfo;
-	
-}*/
 
 function nuGetProcedure($i){
 	

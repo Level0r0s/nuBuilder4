@@ -15,8 +15,7 @@ function nuBuildForm(f){
 	window.nuSUBFORMJSON			= [];
 	window.nuHASH					= [];                       //-- remove any hash variables previously set.
 	nuFORM.edited					= false;
-	nuFORM.lists					= [];
-	
+	nuFORM.scroll					= [];
 	nuSetBODY(f);
 	
 	if(f.schema.length != 0){  						//-- its an Object (load these once,  at login)
@@ -410,8 +409,13 @@ function nuINPUT(w, i, l, p, prop){
 	if(prop.objects[i].type == 'calc'){
 
 		$('#' + id).addClass('nuCalculator')
+		
 		.prop('readonly', true).prop('tabindex',-1)
 		.attr('data-nu-formula', nuBuildFormula(p, w.objects[i].formula));
+		
+		if(p != ''){
+			$('#' + id).addClass('nuSubformObject');
+		}
 		
 	}
 
@@ -2252,13 +2256,21 @@ function nuChange(e){
 	
 }
 
-function nuCalculateForm(){
+function nuCalculateForm(){	//-- calculate subform 'calcs' first
 	
-	$("[data-nu-formula]").each(function( index ) {
-		console.log($(this).id);
+	
+    var subformFirst = function(a, b) {
+        return $('#' + a.id).hasClass('nuSubformObject') - $('#' + b.id).hasClass('nuSubformObject');
+    }
+
+	var f	= $("[data-nu-formula]");
+	
+    f.sort(subformFirst);
+	f.each(function( index ) {		//-- start with calculations inside a subform
+		
 		$(this).addClass('nuEdited');
-		var f 	= $(this).attr('data-nu-formula');
-		eval('$(this).val(' + f + ')');
+		var formula 	= $(this).attr('data-nu-formula');
+		eval('$(this).val(' + formula + ')');
 		
 	});	
 	
@@ -2511,22 +2523,6 @@ function nuDetach(){
 		
 }
 
-/*
-function nuCheckFormProperties(f){
-	
-	window.nuFORMPROPERTIES	= f;
-	
-	var J					= [];
-	
-	J.push(f.browse_columns);
-	J.push(f.browse_sql);
-	
-	window.nuFORMPROPERTIES.nuPrintBrowse	= encodeURI(JSON.stringify(J));
-	window.nuFORMPROPERTIES.nuPrintBrowse	= JSON.stringify(J);
-		
-}
-*/
-
 function nuSearchableList(){
 
 	var bc				= window.nuFORM.getCurrent();
@@ -2687,7 +2683,6 @@ function nuGetSearchList(){
 }
 
 function nuTotal(f){
-	console.log('nuFORM.calc(f)', f, nuFORM.calc(f))
 		return nuFORM.calc(f);
 }
 

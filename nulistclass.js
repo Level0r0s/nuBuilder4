@@ -56,9 +56,9 @@ class nuListObject{
 		
 	}
 	
-	setList(a){
+	setList(e, a){
 
-		this.list				= this.formatList(a);
+		this.list				= this.formatList(e, a);
 		this.boxRows			= a.slice(0, 10).length;
 		this.boxHighlight 		= 0;
 		this.boxTop				= 0;
@@ -67,11 +67,12 @@ class nuListObject{
 		
 	}
 	
-	formatList(a){
+	formatList(e, a){
 		
 		var arr		= [];
 		var A		= [];
-		
+		var ele		= [];
+		var len 	= e.target.value.length;
 		
 		if(typeof(a[0]) != 'array'){
 			
@@ -87,12 +88,19 @@ class nuListObject{
 
 		var cols	= a[0].length;
 		
+		
 		for(var i = 0 ; i < a.length ; i++){
 			
-			if(cols == 1){arr.push([a[i], a[i], a[i]]);}
-			if(cols == 2){arr.push([a[i][0], a[i][1], a[i][1]]);}
-			if(cols == 3){arr.push([a[i][0], a[i][1], a[i][2]]);}
+			if(cols == 1){ele	= [a[i],		a[i], 		a[i]];}
+			if(cols == 2){ele	= [a[i][0],		a[i][1],	a[i][1]];}
+			if(cols == 3){ele	= [a[i][0],		a[i][1],	a[i][2]];}
+				
+			var match	= String(ele[0]).substr(0, len);
 			
+			if(e.target.value == match){
+				arr.push(ele);
+			}
+
 		}
 		
 		return arr;

@@ -7,7 +7,7 @@ class nuFormObject {
 		
 		this.schema					= [];
 		this.breadcrumbs 			= [];
-		this.lists		 			= [];
+		this.scroll		 			= [];
 		this.edited					= false;
 		
 	}
@@ -34,43 +34,49 @@ class nuFormObject {
 	
 	scrollList(e, l){
 
-		if(typeof this.lists[e.target.id] == 'undefined'){
+		if(this.scroll[e.target.id] === undefined){
 			
-			this.lists[e.target.id]	= new nuListObject(e);
-			this.lists[e.target.id].setList(l);				
-		}
-	
-		var k	= e.keyCode;
-		console.log(k);
-		var o	= this.lists[e.target.id];
-		var c 	= $.inArray($('#'+e.target.id).val(), o.boxList);
-
-		if(k == 39){return;}												//-- right
-		if(k == 37){return;}												//-- left
-		if(k == 16){return;}												//-- shift
-		if(k == 9){return;}													//-- tab
-
-		if($('#nuListerListBox').length > 0 && $('#nuListerListBox').children().length > 0) {
-
-			if(k == 38){														//-- up
-				o.up();
-			}else if(k == 40){													//-- down
-				o.down();
-			}else if(k == 9 || k == 13){										//-- tab or enter;
+			this.scroll[e.target.id]	= {'list' : l, 'index' : 0};
 			
-				$('#nuListerListBox').remove();
-				return;
+			for(var i = 0 ; i < l.length ; i++){
 				
-			}else {
-				return;
+				if(e.target.value == l[i]){
+					this.scroll[e.target.id].index = i;
+				}
+			}
+		}
+
+
+		this.scroll[e.target.id].list	= l;
+		
+		var s	= this.scroll[e.target.id];
+		
+		if(event.keyCode == 38){
+			
+			s.index --;
+			
+			if(s.index == -1){
+				this.scroll[e.target.id].index = s.list.length -1;
 			}
 			
-		}else {
-			o.boxHighlight = c;
+		}else if(event.keyCode == 40){
+			
+			s.index ++;
+
+			if(s.index == s.list.length - 1){
+				this.scroll[e.target.id].index = 0;
+			}
+			
+		}else{
+			return false;
 		}
 		
-		o.buildList();
-	
+		$('#' + e.target.id)
+		.val(s.list[this.scroll[e.target.id].index])
+		.addClass('nuEdited');
+
+		nuHasBeenEdited();
+		
 	}
 	
 	addBreadcrumb(){

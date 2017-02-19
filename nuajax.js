@@ -134,7 +134,7 @@ function nuGetPHP(f, r){
 		}
 	}
 	
-	nuAjax(w,successCallback);
+	nuAjax(last, successCallback);
 	
 }
 
@@ -152,19 +152,19 @@ function nuGetPDF(f, r){
 	last.hash 			= parent.nuHashFromEditForm();
 
 	var successCallback = function(data,textStatus,jqXHR){
+	
+		var fm  = data;
 		
-                var fm  = data;
-				
-                if(!nuDisplayError(fm)){
-					
-					nuFORM.setProperty('record_id', fm.record_id);
-				   nuBuildForm(fm);
-				   
-                }
-				
-        }
+		if(!nuDisplayError(fm)){
+			
+			nuFORM.setProperty('record_id', fm.record_id);
+			nuBuildForm(fm);
+		   
+		}
+			
+	}
 		
-        nuAjax(w,successCallback);
+     nuAjax(last, successCallback);
 		
 }
 

@@ -489,8 +489,7 @@ function nuSelectOptions($sql) {
 
 function nuRemoveNonCharacters($s){
 
-	$snip = str_replace('.', '', $s); // remove dots
-	$snip = str_replace("\t", '', $snip); // remove tabs
+	$snip = str_replace("\t", '', $s); // remove tabs
 	$snip = str_replace("\n", '', $snip); // remove new lines
 	$snip = str_replace("\r", '', $snip); // remove carriage returns	
 	
