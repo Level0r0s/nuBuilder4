@@ -199,7 +199,7 @@ function nuRunReport(f, iframe){
 		
 	}
 	
-	nuAjax(w,successCallback);
+	nuAjax(last,successCallback);
 	
 }
 
@@ -233,7 +233,7 @@ function nuRunPHP(f, iframe){
 		
 	};
 	
-	nuAjax(w,successCallback);
+	nuAjax(last,successCallback);
 	
 }
 
