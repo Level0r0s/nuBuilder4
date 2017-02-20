@@ -15,6 +15,7 @@ function nuBuildForm(f){
 	window.nuSUBFORMROW				= [];
 	window.nuSUBFORMJSON			= [];
 	window.nuHASH					= [];                       //-- remove any hash variables previously set.
+	window.nuTYPE 					= 'browse';
 	nuFORM.edited					= false;
 	nuFORM.scroll					= [];
 	nuSetBODY(f);
