@@ -271,7 +271,7 @@ function nuGetLookupId(pk, id){
 }
 
 
-function nuGetLookupCode(e, buildLookupList){
+function nuGetLookupCode(e){
 
 	var last			= window.nuFORM.getCurrent();
 
@@ -288,12 +288,7 @@ function nuGetLookupCode(e, buildLookupList){
 		if(!nuDisplayError(fm)){
 			
 			$('#nuLookupList').remove();
-			
-			if(buildLookupList){
-				nuBuildLookupList(e, fm);
-			}else{
-				nuChooseOneLookupRecord(e, fm);
-			}
+			nuChooseOneLookupRecord(e, fm);
 			
 		}
 			

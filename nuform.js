@@ -15,7 +15,7 @@ function nuBuildForm(f){
 	window.nuSUBFORMROW				= [];
 	window.nuSUBFORMJSON			= [];
 	window.nuHASH					= [];                       //-- remove any hash variables previously set.
-	window.nuTYPE 					= 'browse';
+//	window.nuTYPE 					= 'browse';
 	nuFORM.edited					= false;
 	nuFORM.scroll					= [];
 	nuSetBODY(f);
@@ -69,6 +69,7 @@ function nuBuildForm(f){
     if(f.record_id == '-2'){
         nuCreateDragOptionsBox(f);
 	}
+	window.nuTYPE 					= 'browse';
 	
 }
 
@@ -447,11 +448,13 @@ function nuINPUT(w, i, l, p, prop){
 		.attr('data-nu-target', target)
 		.attr('data-nu-type', 'lookup')
 		.attr('data-nu-subform-sort', 1)
-		.attr('onfocus', 'nuLookupFocus(event)')
-		.attr('onkeyup', 'nuLookupKeyUp(event)')
-		.attr('onkeydown', 'nuLookupKeyDown(event)')
 		.css('visibility', vis)
-		.addClass('nuLookupCode');
+		.addClass('nuLookupCode')
+		.attr('onchange', 'nuGetLookupCode(event)');
+		//nuGetLookupCode(e);
+//		.attr('onfocus', 'nuLookupFocus(event)')
+//		.attr('onkeyup', 'nuLookupKeyUp(event)')
+//		.attr('onkeydown', 'nuLookupKeyDown(event)')
 		
 		w.objects[i].values[0][0]	= p + w.objects[i].values[0][0];
 		w.objects[i].values[1][0]	= p + w.objects[i].values[1][0];
@@ -1982,7 +1985,7 @@ function nuLookupKeyDown(e){
 		if(window.nuLookupWas != e.target.value && window.nuChangeLookup){
 		
 			if($('.nuLookupListSelect').length == 0){				//-- nothing selected from Lookup List
-				nuGetLookupCode(e, false);
+				nuGetLookupCode(e);
 			}else{
 				
 				var l = new nuLookupObject(e.target.id);
@@ -2004,7 +2007,7 @@ function nuLookupBlur(e){
 	if(window.nuLookupWas != e.target.value && window.nuChangeLookup){
 	
 		if($('.nuLookupListSelect').length == 0){				//-- nothing selected from Lookup List
-			nuGetLookupCode(e, false);
+			nuGetLookupCode(e);
 		}else{
 			
 			var l = new nuLookupObject(e.target.id);
@@ -2025,7 +2028,7 @@ function nuLookupKeyUp(e){
 
 	if(a.indexOf(e.keyCode) == -1){
 
-		nuGetLookupCode(e, true);
+		nuGetLookupCode(e);
 		
 	}
 
