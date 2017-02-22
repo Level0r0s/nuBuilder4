@@ -15,7 +15,6 @@ function nuBuildForm(f){
 	window.nuSUBFORMROW				= [];
 	window.nuSUBFORMJSON			= [];
 	window.nuHASH					= [];                       //-- remove any hash variables previously set.
-//	window.nuTYPE 					= 'browse';
 	nuFORM.edited					= false;
 	nuFORM.scroll					= [];
 	nuSetBODY(f);
@@ -69,7 +68,7 @@ function nuBuildForm(f){
     if(f.record_id == '-2'){
         nuCreateDragOptionsBox(f);
 	}
-	window.nuTYPE 					= 'browse';
+	//window.nuTYPE 					= 'browse';
 	
 }
 
@@ -451,10 +450,6 @@ function nuINPUT(w, i, l, p, prop){
 		.css('visibility', vis)
 		.addClass('nuLookupCode')
 		.attr('onchange', 'nuGetLookupCode(event)');
-		//nuGetLookupCode(e);
-//		.attr('onfocus', 'nuLookupFocus(event)')
-//		.attr('onkeyup', 'nuLookupKeyUp(event)')
-//		.attr('onkeydown', 'nuLookupKeyDown(event)')
 		
 		w.objects[i].values[0][0]	= p + w.objects[i].values[0][0];
 		w.objects[i].values[1][0]	= p + w.objects[i].values[1][0];
@@ -479,7 +474,7 @@ function nuINPUT(w, i, l, p, prop){
 		.attr('data-nu-object-id', w.objects[i].object_id)
 		.attr('data-nu-target', target)
 		.attr('data-nu-subform-sort', 1)
-		.attr('onclick', 'nuBuildLookup(this,[])')
+		.attr('onclick', 'nuBuildLookup(this,"")')
 		.addClass('nuLookupButton')
 		.html('<img border="0" src="magnify.png" class="nuLookupImg">')
 		.css('visibility', vis);
@@ -621,7 +616,7 @@ function nuRUN(w, i, l, p, prop){
 		$('#' + id).attr({
 					'type'		: 'button',
 					'value'		: prop.objects[i].label,
-					'onclick'	: "nuForm('" + prop.objects[i].form_id + "','" + prop.objects[i].record_id + "','" + prop.objects[i].filter + "')"
+					'onclick'	: "nuForm('" + prop.objects[i].form_id + "','" + prop.objects[i].record_id + "','" + prop.objects[i].filter + "', '')"
 		})
 		.addClass('nuButton');
 		
@@ -1814,7 +1809,6 @@ function nuSelectBrowse(e){
 	if(y == 'browse'){
 		
 		nuForm(f, p);
-		window.nuTYPE = 'browse';
 		
 	}else if(y == 'lookup'){
 		window.parent.nuGetLookupId(p, i);			//-- called from parent window
@@ -1929,120 +1923,6 @@ function nuSelectLookupList(t, e){
 	
 }
 
-function nuLookupKeyDown(e){
-
-	var c		= e.target.id;
-	var i		= c.substr(0, c.length - 4);
-	var d		= i + 'description';
-	var next	= '';
-	
-	if(e.keyCode == 40 || e.keyCode == 38){
-	
-		if($('#nuLookupList').length == 0){return;}
-		
-		if(e.keyCode == 40){
-			if($('.nuLookupListSelect').length == 0){
-				next	= 0;
-			}else{
-				next	= $('.nuLookupListSelect').attr('data-nu-down');
-			}
-		}
-		if(e.keyCode == 38){
-			if($('.nuLookupListSelect').length == 0){
-				next	= $('.nuLookupList').length - 1;
-			}else{
-				next	= $('.nuLookupListSelect').attr('data-nu-up');
-			}
-		}
-		
-		window.nuChangeLookup = false;
-		
-		$('.nuLookupListSelect').removeClass('nuLookupListSelect');
-		$('#nuLookupList' + next).addClass('nuLookupListSelect');
-		
-		$('#nuListFocus' + next)
-		.css('visibility', 'visible')
-		.focus()
-		.css('visibility', 'hidden');
-
-		$('#' + d).val($('#nuLookupList' + next).attr('data-nu-description'));
-		$('#' + i).val($('#nuLookupList' + next).attr('data-nu-id'));
-		$('#' + c).val($('#nuLookupList' + next).attr('data-nu-code'))
-		.focus();
-
-		window.nuChangeLookup = true;
-	
-	}else if(e.keyCode == 13){									//-- enter key
-
-		if($('.nuLookupListSelect').length == 0){return;}		//-- nothing selected from Lookup List
-
-		var l 		= new nuLookupObject(i);
-		nuGetLookupId($('#' + i).val(), l.id_id);
-		$('#nuLookupList').remove();
-
-	}else if(e.keyCode == 9){									//-- tab key
-
-		if(window.nuLookupWas != e.target.value && window.nuChangeLookup){
-		
-			if($('.nuLookupListSelect').length == 0){				//-- nothing selected from Lookup List
-				nuGetLookupCode(e);
-			}else{
-				
-				var l = new nuLookupObject(e.target.id);
-				nuGetLookupId($('#' + l.id_id).val(), l.id_id);
-				$('#nuLookupList').remove();
-				
-			}
-
-		}
-		
-		window.nuChangeLookup	= false;
-		
-	}
-	
-}
-
-function nuLookupBlur(e){
-	
-	if(window.nuLookupWas != e.target.value && window.nuChangeLookup){
-	
-		if($('.nuLookupListSelect').length == 0){				//-- nothing selected from Lookup List
-			nuGetLookupCode(e);
-		}else{
-			
-			var l = new nuLookupObject(e.target.id);
-			
-			nuGetLookupId($('#' + l.id_id).val(), l.id_id);
-			
-			$('#nuLookupList').remove();
-			
-		}
-
-	}
-
-}
-
-function nuLookupKeyUp(e){
-	
-	var a = [7,9,13,37,38,39,40]; 	//-- arrows,tab,enter
-
-	if(a.indexOf(e.keyCode) == -1){
-
-		nuGetLookupCode(e);
-		
-	}
-
-}
-
-function nuLookupFocus(e){
-
-	if(window.nuChangeLookup || window.nuChangeLookup === undefined){
-		window.nuLookupWas		= e.target.value;
-	}
-	
-	window.nuChangeLookup		= true;
-	
-}
 
 function nuChooseOneLookupRecord(e, fm){
 	
@@ -2052,7 +1932,7 @@ function nuChooseOneLookupRecord(e, fm){
 
 	if(fm.lookup_values.length	== 0){nuGetLookupId('', i);}
 	if(fm.lookup_values.length	== 1){nuGetLookupId(fm.lookup_values[0][0], i);}
-	if(fm.lookup_values.length	 > 1){nuBuildLookup(t,[['search',e.target.value]]);}
+	if(fm.lookup_values.length	 > 1){nuBuildLookup(t, e.target.value);}
 
 }
 

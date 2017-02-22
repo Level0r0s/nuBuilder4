@@ -54,6 +54,7 @@ window.nuHASH			= [];
 <?php
 
 	$opener		= $_GET['opener'];
+	$search		= $_GET['search'];
 	$iframe		= $_GET['iframe'];
 	$target		= $_GET['target'];
 	$type		= $_GET['type'];
@@ -95,9 +96,12 @@ window.nuHASH			= [];
 			window.nuSESSION		= from.nuSESSION;
 			
 			if('$opener' != '') {
+				
 				var p				= getOpenerById(from.nuOPENER, Number($opener));
 				removeOpenerById(from.nuOPENER, Number($opener));
+
 			} else {
+				
 				var p				= from.nuOPENER[from.nuOPENER.length -1];
 				removeOpenerById(from.nuOPENER, from.nuOPENER[from.nuOPENER.length -1]);
 			}
@@ -110,7 +114,7 @@ window.nuHASH			= [];
 			} else if(p.type == 'getphp') {
 				nuGetPHP(p.form_id, p.record_id)
 			} else {
-				nuForm(p.form_id, p.record_id, p.filter);
+				nuForm(p.form_id, p.record_id, p.filter, '$search');
 			}
 			
 			if(p.record_id == '-2'){
