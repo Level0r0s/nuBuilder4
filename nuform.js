@@ -2167,7 +2167,7 @@ function nuChange(e){
 function nuCalculateForm(){	//-- calculate subform 'calcs' first
 	
 	
-    var subformFirst = function(a, b) {
+    var subformFirst = function(b, a) {
         return $('#' + a.id).hasClass('nuSubformObject') - $('#' + b.id).hasClass('nuSubformObject');
     }
 
