@@ -367,7 +367,7 @@ function nuUpdateData(){
 				
 			}else{
 				
-				nuForm(f, fm.record_id, fm.filter, 1);		//-- go to saved or created record
+				nuForm(f, fm.record_id, fm.filter, fm.search, 1);		//-- go to saved or created record
 				
 			}
 			
@@ -383,7 +383,6 @@ function nuUpdateData(){
 function nuSaveAfterDrag() {
 	
 	var f				= $('#nuDragDialog iframe')[0].contentWindow.nuFORM;
-//	var last			= f.breadcrumbs[f.breadcrumbs.length - 1];
 
 	var last			= f.getCurrent();
 

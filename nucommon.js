@@ -152,7 +152,6 @@ function nuLogin(){
 
 function nuBuildLookup(t, s){
 
-	window.nuTYPE	= 'lookup';
 	var f			= $('#' + t.id).attr('data-nu-form-id');
 	var tar			= $('#' + t.id).attr('data-nu-target');
 	

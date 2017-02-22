@@ -613,10 +613,12 @@ function nuRUN(w, i, l, p, prop){
 
 	if(prop.objects[i].run_method == 'b'){
 	
+		var O	= prop.objects[i];
+		
 		$('#' + id).attr({
 					'type'		: 'button',
-					'value'		: prop.objects[i].label,
-					'onclick'	: "nuForm('" + prop.objects[i].form_id + "','" + prop.objects[i].record_id + "','" + prop.objects[i].filter + "', '')"
+					'value'		: O.label,
+					'onclick'	: "nuForm('" + O.form_id + "','" + O.record_id + "','" + O.filter + "', '')"
 		})
 		.addClass('nuButton');
 		
@@ -1811,6 +1813,7 @@ function nuSelectBrowse(e){
 		nuForm(f, p);
 		
 	}else if(y == 'lookup'){
+		
 		window.parent.nuGetLookupId(p, i);			//-- called from parent window
 		
 	}else{
@@ -1930,9 +1933,29 @@ function nuChooseOneLookupRecord(e, fm){
 	var i						= o.id_id;
 	var t						= document.getElementById(e.target.id);
 
-	if(fm.lookup_values.length	== 0){nuGetLookupId('', i);}
-	if(fm.lookup_values.length	== 1){nuGetLookupId(fm.lookup_values[0][0], i);}
-	if(fm.lookup_values.length	 > 1){nuBuildLookup(t, e.target.value);}
+	if(fm.lookup_values.length	== 0){
+		nuGetLookupId('', i);
+	}
+	
+	if(fm.lookup_values.length	== 1){
+		
+		if(e.target.value == fm.lookup_values[0][1]){
+			nuGetLookupId(fm.lookup_values[0][0], i);
+		}else{
+			
+			var id			= e.target.id.substr(0, e.target.id.length - 4);
+			
+			$('#' + id).val('');
+			$('#' + id + 'code').val('');
+			$('#' + id + 'description').val('');
+			
+		}	
+		
+	}
+	
+	if(fm.lookup_values.length	 > 1){
+		nuBuildLookup(t, e.target.value);
+	}
 
 }
 
@@ -2208,7 +2231,6 @@ function nuCloneAction(){
 
 function nuSaveAction(){
 	
-	//nuSavingProgressMessage();
 	nuUpdateData();
 
 }
