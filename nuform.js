@@ -150,7 +150,7 @@ function nuAddActionButtons(f){
 		var s 	= nuDefine(nuFORM.getProperty('search'));
 		var f 	= nuDefine(nuFORM.getProperty('filter'));
 		
-		$('#nuActionHolder').append("<input id='nuSearchField' type='text' class='nuSearch' onkeypress='nuSearchPressed(event)' value='" + s + "'>&nbsp;");
+		$('#nuActionHolder').append("<input id='nuSearchField' type='text' class='nuSearch' onfocus='this.value = this.value;' onkeypress='nuSearchPressed(event)' value='" + s + "'>&nbsp;");
 		$('#nuActionHolder').append("<input id='nuFilter' style='visibility:hidden;width:0px' value='" + f + "'>");
 		$('#nuActionHolder').append("<input id='nuSearchButton' type='button' class='nuActionButton ' value='Search' onclick='nuSearchAction()'>&nbsp;");
 		
