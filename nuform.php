@@ -1170,6 +1170,9 @@ function nuGetAllLookupValues(){
 	$o->form_id				= $r->sob_lookup_zzzzsys_form_id;
 	$o->value				= $PK;
 	$l						= nuGetLookupValues($r, $o);
+	
+	$_POST['nuHash']['LOOKUP_RECORD_ID'] = $l[0][1];
+
 	$e						= nuGetOtherLookupValues($o);
 	$m						= array_merge($l, $e);
 

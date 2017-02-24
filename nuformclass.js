@@ -5,11 +5,12 @@ class nuFormObject {
 	
 	constructor() {
 		
-		this.schema					= [];
-		this.breadcrumbs 			= [];
-		this.scroll		 			= [];
-		this.edited					= false;
-		
+		this.schema				= [];
+		this.breadcrumbs 		= [];
+		this.scroll		 		= [];
+		this.edited				= false;
+		this.deleteForm			= false;
+		this.formats			= this.setFormats();
 	}
 	
 	getCurrent(){
@@ -244,13 +245,13 @@ class nuFormObject {
 	
 	}
 	
-	data(){
+	data(action = 'save'){
 		
 		var d	= [];
 		var sf	= this.subforms();
-		
+
 		for(var i = 0 ; i < sf.length ; i++){
-			d.push(this.subform(sf[i]));
+			d.push(this.subform(sf[i], action));
 		}
 		
 		return d;
@@ -269,9 +270,10 @@ class nuFormObject {
 
 	}
 
-	subform(sf){
+	subform(sf, action = 'save'){
 
 		var id			= sf;
+		var deleteAll	= action == 'delete';
 		
 		if(sf == ''){
 			
@@ -293,11 +295,13 @@ class nuFormObject {
 		var F			= ['ID'];
 		o.rows			= [];
 		o.edited		= [];
+		o.deleted		= [];
 		
 		$(sel).each(function(index){
 			
 			var THIS	= $(this);
-			var V		= [$(this).attr('data-nu-primary-key')];
+			var dnpk	= $(this).attr('data-nu-primary-key')
+			var V		= [dnpk];
 			var E		= [0];
 			var C		= 1;
 			var	addrow	= true;
@@ -307,8 +311,10 @@ class nuFormObject {
 				var addfld	= true;
 					
 				if(this.id.substr(-8) == 'nuDelete'){
-					addrow = !$('#' + this.id).prop("checked");
-					addfld = false;
+					
+					addrow	= !$('#' + this.id).prop("checked");
+					addfld	= false;
+					
 				}
 
 				if(addfld){
@@ -328,11 +334,13 @@ class nuFormObject {
 				
 			});
 			
-			if(addrow){
+			if(addrow && !deleteAll){
 				
 				o.rows.push(V);
 				o.edited.push(E);
 				
+			}else{
+				o.deleted.push(dnpk);
 			}
 			
 		});
@@ -343,5 +351,33 @@ class nuFormObject {
 		
 	}	
 	
+	setFormats(){
+		
+		var f	= {};
+
+		f.Jan	= {'MMM' : 'Jan', 'MMMM' : 'January',	'mm' : '01' , 'm' : '1'};
+		f.Feb	= {'MMM' : 'Feb', 'MMMM' : 'February',	'mm' : '02' , 'm' : '2'};
+		f.Mar	= {'MMM' : 'Mar', 'MMMM' : 'March', 	'mm' : '03' , 'm' : '3'};
+		f.Apr	= {'MMM' : 'Apr', 'MMMM' : 'April', 	'mm' : '04' , 'm' : '4'};
+		f.May	= {'MMM' : 'May', 'MMMM' : 'May',		'mm' : '05' , 'm' : '5'};
+		f.Jun	= {'MMM' : 'Jun', 'MMMM' : 'June',		'mm' : '06' , 'm' : '6'};
+		f.Jul	= {'MMM' : 'Jul', 'MMMM' : 'July',		'mm' : '07' , 'm' : '7'};
+		f.Aug	= {'MMM' : 'Aug', 'MMMM' : 'August', 	'mm' : '08' , 'm' : '8'};
+		f.Sep	= {'MMM' : 'Sep', 'MMMM' : 'September',	'mm' : '09' , 'm' : '9'};
+		f.Oct	= {'MMM' : 'Oct', 'MMMM' : 'October', 	'mm' : '10' , 'm' : '10'};
+		f.Nov	= {'MMM' : 'Nov', 'MMMM' : 'November', 	'mm' : '11' , 'm' : '11'};
+		f.Dec	= {'MMM' : 'Dec', 'MMMM' : 'December', 	'mm' : '12' , 'm' : '12'};
+
+		f.Sun	= {'WWW' : 'Sun', 'WWWW' : 'Sunday', 	'w' : '1'};
+		f.Mon	= {'WWW' : 'Mon', 'WWWW' : 'Monday', 	'w' : '2'};
+		f.Tue	= {'WWW' : 'Tue', 'WWWW' : 'Tueday', 	'w' : '3'};
+		f.Wed	= {'WWW' : 'Wed', 'WWWW' : 'Wednesday',	'w' : '4'};
+		f.Thu	= {'WWW' : 'Thu', 'WWWW' : 'Thursday', 	'w' : '6'};
+		f.Fri	= {'WWW' : 'Fri', 'WWWW' : 'Friday', 	'w' : '6'};
+		f.Sat	= {'WWW' : 'Sat', 'WWWW' : 'Saturday', 	'w' : '7'};
+
+		return f;
+		
+	}
 	
 }

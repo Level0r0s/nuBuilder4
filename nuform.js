@@ -2198,7 +2198,7 @@ function nuDeleteAction(){
 
 		$("[id$='nuDelete']").prop('checked', true);
 		
-		nuUpdateData();
+		nuUpdateData('delete');
 		
     }
 	
@@ -2231,7 +2231,7 @@ function nuCloneAction(){
 
 function nuSaveAction(){
 	
-	nuUpdateData();
+	nuUpdateData('save');
 
 }
 
@@ -2669,5 +2669,34 @@ function nuRebuild_nuTotal(p, s){
 }
 
 
+function nuFormatDate(s){
+	
+	var d	= new Date(s)
+	.toString()
+	.split(' ', 6);
+
+	//["Sat", "Jan", "13", "2007", "10:30:00", "GMT+1030"]
+
+	var f	= {};
+
+	f.WWW	= [d[0], 'Fri'];
+	f.WWWW	= [nuFORM.formats[d[0]]['WWWW'], 'Friday'];
+	f.w		= [nuFORM.formats[d[0]]['w'], '6'];
+	f.MMM	= [d[1], 'Jan'];
+	f.MMMM	= [nuFORM.formats[d[1]]['MMMM'], 'January'];
+	f.mm	= [nuFORM.formats[d[1]]['mm'], '01'];
+	f.m		= [nuFORM.formats[d[1]]['m'], '1'];
+	f.dd	= [d[2], '13'];
+	f.d		= [String(Number(d[2])), '13'];
+	f.yyyy	= [d[3], '2007'];
+	f.yy	= [String(d[3]).substr(2), '07'];
+	f.y		= [String(d[3]).substr(3), '7'];
+	f.th	= [String(d[4]).split(':')[0], '10'];
+	f.tm	= [String(d[4]).split(':')[1], '30'];
+	f.ts	= [String(d[4]).split(':')[2], '00'];
+	
+	return f;
+	
+}
 
 

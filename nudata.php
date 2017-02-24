@@ -6,10 +6,11 @@ function nuUpdateData(){
 	$ID		= $_POST['nuSTATE']['record_id'];
 	$DEL	= $_POST['nuSTATE']['deleteAll'];	
 	$fid	= $_POST['nuSTATE']['form_id'];
-	$rid	= $_POST['nuSTATE']['record_id'];
 
+nudebug('data ' . print_r($_POST['nuSTATE']['data'], 1));
+nudebug('nuFORMdata ' . print_r($_POST['nuSTATE']['nuFORMdata'], 1));
 
-	if($rid == -3){
+	if($ID == -3){
 		
 		nuDisplayError('Cannot be Saved..');
 		return;
