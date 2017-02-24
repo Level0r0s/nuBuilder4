@@ -74,7 +74,7 @@ function nuGetBreadcrumb(b){
 	
 	var c				= window.nuFORM.getCurrent();
 	
-	nuForm(c.form_id, c.record_id, c.filter,  1);
+	nuForm(c.form_id, c.record_id, c.filter, c.search, 1);
 	
 }
 
@@ -150,28 +150,20 @@ function nuLogin(){
 }
 
 
-function nuBuildLookup(t, p){
+function nuBuildLookup(t, s){
 
-	var f	= $('#' + t.id).attr('data-nu-form-id');
-	var tar	= $('#' + t.id).attr('data-nu-target');
+	var f			= $('#' + t.id).attr('data-nu-form-id');
+	var tar			= $('#' + t.id).attr('data-nu-target');
 	
 	window.nuOPENER.push(new nuOpener(f, ''));
 	
-	var l 	= window.nuOPENER.length -1;
-	
-	for(var i = 0 ; i < p.length ; i++){
-		
-		window.nuOPENER[l][p[i][0]]	= p[i][1];
-	
-	}
-	
-	var open = window.nuOPENER[window.nuOPENER.length - 1];
+	var open 		= window.nuOPENER[window.nuOPENER.length - 1];
 	
 	window.nuDialog.createDialog(50, 50, 50, 50, '');
 	
 	$('#nuDragDialog')
 	.css('visibility', 'hidden')
-	.append('<iframe style="right:5px;top:35px;width:400px;height:400px;position:absolute" id="nuLookup" src="index.php?&opener=' +open.id + '&target=' + tar + '&type=lookup&iframe=1"></iframe>');
+	.append('<iframe style="right:5px;top:35px;width:400px;height:400px;position:absolute" id="nuLookup" src="index.php?&opener=' +open.id + '&target=' + tar + '&search=' + s + '&type=lookup&iframe=1"></iframe>');
 
 }
 

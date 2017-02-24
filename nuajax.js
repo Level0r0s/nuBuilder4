@@ -43,9 +43,7 @@ function nuAjax(w,successCallback,errorCallback){
 
 }
 
-function nuForm(f, r, filter, n){
-
-	filter	= (filter === undefined ? filter = '' : filter);
+function nuForm(f, r, filter, search, n){
 
 	if(nuOpenNewBrowserTab('getform', f, r, filter)){return;}
 
@@ -64,7 +62,7 @@ function nuForm(f, r, filter, n){
 		
 		s			= window.nuSESSION;
 		
-		if(arguments.length != 4){   //-- add a new breadcrumb
+		if(arguments.length != 5){   //-- add a new breadcrumb
 			window.nuFORM.addBreadcrumb();
 		}
 		
@@ -77,6 +75,7 @@ function nuForm(f, r, filter, n){
 	last.form_id 		= f;
 	last.record_id		= r;
 	last.filter 		= filter;
+	last.search 		= search;
 	
     if(f != 'nuerror'){
         last.hash 			= parent.nuHashFromEditForm();
@@ -273,6 +272,18 @@ function nuGetLookupId(pk, id){
 
 function nuGetLookupCode(e){
 
+	if(e.target.value == ''){			//-- set to blank
+		
+		var id			= e.target.id.substr(0, e.target.id.length - 4);
+		
+		$('#' + id).val('');
+		$('#' + id + 'code').val('');
+		$('#' + id + 'description').val('');
+		
+		return;
+		
+	}
+	
 	var last			= window.nuFORM.getCurrent();
 
 	last.session_id		= window.nuSESSION;
@@ -287,7 +298,6 @@ function nuGetLookupCode(e){
 
 		if(!nuDisplayError(fm)){
 			
-			$('#nuLookupList').remove();
 			nuChooseOneLookupRecord(e, fm);
 			
 		}
@@ -357,7 +367,7 @@ function nuUpdateData(){
 				
 			}else{
 				
-				nuForm(f, fm.record_id, fm.filter, 1);		//-- go to saved or created record
+				nuForm(f, fm.record_id, fm.filter, fm.search, 1);		//-- go to saved or created record
 				
 			}
 			
@@ -373,7 +383,6 @@ function nuUpdateData(){
 function nuSaveAfterDrag() {
 	
 	var f				= $('#nuDragDialog iframe')[0].contentWindow.nuFORM;
-//	var last			= f.breadcrumbs[f.breadcrumbs.length - 1];
 
 	var last			= f.getCurrent();
 
