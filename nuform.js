@@ -292,9 +292,10 @@ function nuRecordProperties(w, p, l){
 
 function nuDRAG(w, i, l, p, prop){
 
-	var id   = p + prop.objects[i].id;
-	var ef   = p + 'nuRECORD';
-	var drg 		= document.createElement('div');
+	var id           = p + prop.objects[i].id;
+	var ef           = p + 'nuRECORD';
+	var nuObjectType = p + prop.objects[i].type;
+	var drg          = document.createElement('div');
 	drg.setAttribute('id', id);
 	
 	$('#' + ef).append(drg);
@@ -306,8 +307,8 @@ function nuDRAG(w, i, l, p, prop){
 					'text-align': prop.objects[i].align,
 					'position'	: 'absolute',
 					'overflow': 'hidden'
-	}).addClass('nuDragOptionsField');
-	
+	}).addClass('nu_'+ nuObjectType);
+
 	$('#' + id).text(id);
 	$('#' + id).attr('data-drag',1);
     $('#' + id).attr('data-nu-object-id', prop.objects[i].object_id)

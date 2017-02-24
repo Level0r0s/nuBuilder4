@@ -196,13 +196,14 @@ function nuUnbindDragEvents(){
 
 function nuUpdateDragFieldsListbox(){
 	
-    $('#nuDragOptionsFields option:selected',window.parent.document.body).removeAttr('selected');
-	
+    $('#nuDragOptionsFields option:selected',window.parent.document.body).prop('selected',false);
+
     $('.nuDragSelected').each(function(){
         $('#nuDragOptionsFields option[id="drag_'+$(this).prop('id')+'"]',window.parent.document.body).prop('selected','selected');
     });
 	
     nuCheckIfMovingTabOrderAllowed($('#nuDragOptionsFields',window.parent.document.body));
+	nuCheckIfMovingFieldToOtherTabAllowed($('#nuDragOptionsFields',window.parent.document.body));
 }
 
 function nuCreateBox(event){
@@ -515,6 +516,14 @@ function nuCreateDragOptionsBox(form){
                             '<td><button class="nuDragOptionsButton nuButton" onclick="nuResizeToHighest();">Resize To Tallest</button></td>'+
                             '<td><button class="nuDragOptionsButton nuButton" onclick="nuResizeToWidest();">Resize To Widest</button></td>'+
                         '</tr>'+
+						'<tr>'+
+                            '<td><select id="nuDragOptionsTabsDropdown"></select></td>'+
+                            '<td></td>'+
+                        '</tr>'+
+						'<tr>'+
+                            '<td>&nbsp;</td>'+
+                            '<td>&nbsp;</td>'+
+                        '</tr>'+
                         '<tr>'+
                             '<td></td>'+
                             '<td><button class="nuDragOptionsButton nuButton nuSaveButtonEdited" style="font-weight: bold;" onclick="nuSaveNuDrag();">Save</button></td>'+
@@ -527,6 +536,7 @@ function nuCreateDragOptionsBox(form){
     $('#nuDragDialog',window.parent.document.body).prepend(optionsBoxHTML);
     nuInitialiseDragState();
     nuPopulateFieldsList(0);
+	nuPopulateTabDropdown(0);
 	
     $('.nuTab[id^="nuTab"]').prop('onclick','');
     $('.nuTab[id^="nuTab"]').click(function(){
@@ -538,12 +548,14 @@ function nuCreateDragOptionsBox(form){
         nuUnselectAllDragObjects();
         nuSelectTab(this);
         nuPopulateFieldsList(Number($(this).attr('data-nu-tab-filter')));
+		nuPopulateTabDropdown(Number($(this).attr('data-nu-tab-filter')));
         nuCheckIfMovingTabOrderAllowed($('#nuDragOptionsFields',window.parent.document.body));
+		nuCheckIfMovingFieldToOtherTabAllowed($('#nuDragOptionsFields',window.parent.document.body));
 		
     });
 	
     nuCheckIfMovingTabOrderAllowed($('#nuDragOptionsFields'));
-	
+	nuCheckIfMovingFieldToOtherTabAllowed($('#nuDragOptionsFields'));
 }
 
 function nuResizeToLowest(){
@@ -857,6 +869,7 @@ function nuUpdateDragSelections(fieldsSelectBox){
 	
     nuUnselectAllDragObjects();
     nuCheckIfMovingTabOrderAllowed(fieldsSelectBox);
+	nuCheckIfMovingFieldToOtherTabAllowed(fieldsSelectBox);
 	
     $('option:selected', fieldsSelectBox).each(function(){
         $('#'+$(this).prop('id').replace('drag_',''),$('#nuDragDialog iframe').contents()).addClass('nuDragSelected');
@@ -865,7 +878,7 @@ function nuUpdateDragSelections(fieldsSelectBox){
 }
 
 function nuCheckIfMovingTabOrderAllowed(fieldsSelectBox){
-	
+
     if($('option:selected', fieldsSelectBox).length == 1){
 		
         $('#move_down_btn, #move_up_btn').removeAttr('disabled');
@@ -884,6 +897,21 @@ function nuCheckIfMovingTabOrderAllowed(fieldsSelectBox){
 	
 }
 
+function nuCheckIfMovingFieldToOtherTabAllowed(fieldsSelectBox){
+	
+	var currentTabNo = $('div.nuTabSelected[id^="nuTab"]').attr('data-nu-tab-filter');
+	var tabDropdown = $('#nuDragOptionsTabsDropdown',window.parent.document.body);
+
+    if($('option:selected', fieldsSelectBox).length >= 1){
+		tabDropdown.removeAttr('disabled');
+    } else {
+		tabDropdown.prop('disabled','disabled');
+		$("#nuDragOptionsTabsDropdown",window.parent.document.body).val('nuTab'+currentTabNo);
+    }
+	
+}
+
+
 function nuUnselectAllDragObjects(){
 	
     $('.nuDragSelected').each(function(){
@@ -899,6 +927,7 @@ function nuUnselectAllDragObjects(){
 function nuClearFieldsList(){
 	
     $('#nuDragOptionsFields',window.parent.document.body).html('');
+	$('#nuDragOptionsTabsDropdown',window.parent.document.body).html('');
 	
 }
 
@@ -995,3 +1024,17 @@ function nuGetTopArea() {
 	return 115; //need to do this more accurately
 	
 }
+
+function nuPopulateTabDropdown(currentlySelectedTabNo){
+	// Create a dropdown with the values of the tabs
+	$('div.nuTab[id^="nuTab"]').each(function(){
+
+		var tabNumber = $(this).attr('data-nu-tab-filter');
+		var tabName = $(this).text();	
+
+		$('#nuDragOptionsTabsDropdown',window.parent.document.body).append('<option value="nuTab'+tabNumber+'">'+tabName+'</option>');
+		
+    });
+	// Select the current tab
+	$("#nuDragOptionsTabsDropdown",window.parent.document.body).val('nuTab'+currentlySelectedTabNo);
+}    
