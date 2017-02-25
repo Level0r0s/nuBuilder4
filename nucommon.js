@@ -713,3 +713,36 @@ function  nuGetLookupFields(id){
 }
 
 
+function nuEnable(i){                 //-- enable Edit Form Object
+
+	var o	= [i, i + 'code', i + 'button', i + 'description'];
+	
+	for(var c = 0 ; c < o.length ; c++){
+			
+		$('#' + o[c])
+		.removeClass('nuReadOnly')
+		.prop('readonly', false)
+		.prop('disabled', false);
+		
+	}
+
+}
+
+
+function nuDisable(i){                 //-- disable Edit Form Object
+
+	var o	= [i, i + 'code', i + 'button', i + 'description'];
+	
+	for(var c = 0 ; c < o.length ; c++){
+			
+		$('#' + o[c])
+		.addClass('nuReadOnly')
+		.prop('readonly', true)
+		.prop('disabled', true);
+		
+	}
+
+}
+
+
+
