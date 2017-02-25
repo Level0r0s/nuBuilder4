@@ -101,6 +101,10 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 					$o->value	= $r->sob_all_label;
 				}
 
+				if($r->sob_input_type == 'nuScroll' && $r->sob_all_type == 'input'){
+					$o->scroll	= $r->sob_input_javascript;
+				}
+
 				if($r->sob_all_type == 'display'){
 					
 					$disS	= nuReplaceHashVariables($r->sob_display_sql);

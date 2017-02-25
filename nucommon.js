@@ -712,8 +712,7 @@ function  nuGetLookupFields(id){
 	
 }
 
-
-function nuEnable(i){                 //-- enable Edit Form Object
+function nuEnable(i){                 //-- Enable Edit Form Object
 
 	var o	= [i, i + 'code', i + 'button', i + 'description'];
 	
@@ -728,8 +727,7 @@ function nuEnable(i){                 //-- enable Edit Form Object
 
 }
 
-
-function nuDisable(i){                 //-- disable Edit Form Object
+function nuDisable(i){                 //-- Disable Edit Form Object
 
 	var o	= [i, i + 'code', i + 'button', i + 'description'];
 	
@@ -740,6 +738,28 @@ function nuDisable(i){                 //-- disable Edit Form Object
 		.prop('readonly', true)
 		.prop('disabled', true);
 		
+	}
+
+}
+
+
+function nuShow(i){                 //-- Show Edit Form Object
+
+	var o	= [i, i + 'code', i + 'button', i + 'description', 'label_' + i];
+	
+	for(var c = 0 ; c < o.length ; c++){
+		$('#' + o[c]).css('visibility', 'visible');
+	}
+
+}
+
+
+function nuHide(i){                 //-- Hide Edit Form Object
+
+	var o	= [i, i + 'code', i + 'button', i + 'description', 'label_' + i];
+	
+	for(var c = 0 ; c < o.length ; c++){
+		$('#' + o[c]).css('visibility', 'hidden');
 	}
 
 }

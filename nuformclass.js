@@ -2,7 +2,6 @@
 
 class nuFormObject {
 	
-	
 	constructor() {
 		
 		this.schema				= [];
@@ -47,12 +46,11 @@ class nuFormObject {
 			}
 		}
 
-
 		this.scroll[e.target.id].list	= l;
 		
 		var s	= this.scroll[e.target.id];
 		
-		if(event.keyCode == 38){
+		if(event.keyCode == 38 || event.wheelDelta > 0){
 			
 			s.index --;
 			
@@ -60,7 +58,7 @@ class nuFormObject {
 				this.scroll[e.target.id].index = s.list.length -1;
 			}
 			
-		}else if(event.keyCode == 40){
+		}else if(event.keyCode == 40 || event.wheelDelta < 0){
 			
 			s.index ++;
 

@@ -382,6 +382,16 @@ function nuINPUT(w, i, l, p, prop){
 	.attr('data-nu-subform-sort', 1)
 	.prop('readonly', prop.objects[i].read == '1' ? 'readonly' : '');
 
+	if(input_type == 'nuScroll'){
+		
+		var input_js	= 'nuFORM.scrollList(event, ' + w.objects[i].scroll + ')';
+		
+		$('#' + id)
+		.attr('onwheel', input_js)
+		.attr('onkeydown', input_js);
+		
+	}
+
 	if(input_type != 'button'){
 		$('#' + id).attr('data-nu-data', '');
 	}
