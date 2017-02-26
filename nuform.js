@@ -387,8 +387,11 @@ function nuINPUT(w, i, l, p, prop){
 		var input_js	= 'nuFORM.scrollList(event, ' + w.objects[i].scroll + ')';
 		
 		$('#' + id)
+		.addClass('nuScroll')
 		.attr('onwheel', input_js)
-		.attr('onkeydown', input_js);
+		.attr('onkeydown', input_js)
+		.attr('onblur', '$("#" + this.id).removeClass("nuScroll")')
+		.attr('onfocus', '$("#" + this.id).addClass("nuScroll")');
 		
 	}
 
