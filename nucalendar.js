@@ -378,6 +378,7 @@ function nuCalChoice(t){
 
 	var o	= $('#' + window.nuCalendarCaller);
 	var f	= o.attr('data-nu-format');
+	var a	= o.attr('data-nu-formata');
 	var d	= nuPad2('0' + t.innerHTML);
 	var M	= String($('#nuCalMonth').html()).substr(0,3);
 	var m	= nu2Month(M);
@@ -385,15 +386,16 @@ function nuCalChoice(t){
 	var y	= nuPad2(Y);
 	var dt	= new Date(m + ' ' + d + ' ' + y);
 	var v	= '';
-	if(f == 6){v 		= d + '-' + M + '-' + Y;}
-	if(f == 7){v 		= d + '-' + m + '-' + Y;}
-	if(f == 8){v 		= M + '-' + d + '-' + Y;}
-	if(f == 9){v 		= m + '-' + d + '-' + Y;}
-	if(f == 10){v 	= d + '-' + M + '-' + y;}
-	if(f == 11){v 	= d + '-' + m + '-' + y;}
-	if(f == 12){v 	= M + '-' + d + '-' + y;}
-	if(f == 13){v 	= m + '-' + d + '-' + y;}
-	if(f == 32){v 	= Y + '-' + m + '-' + d;}
+
+	if(f == 6){	v = d + '-' + M + '-' + Y;}
+	if(f == 7){	v = d + '-' + m + '-' + Y;}
+	if(f == 8){	v = M + '-' + d + '-' + Y;}
+	if(f == 9){	v = m + '-' + d + '-' + Y;}
+	if(f == 10){v = d + '-' + M + '-' + y;}
+	if(f == 11){v = d + '-' + m + '-' + y;}
+	if(f == 12){v = M + '-' + d + '-' + y;}
+	if(f == 13){v = m + '-' + d + '-' + y;}
+	if(f == 32){v = Y + '-' + m + '-' + d;}
 	
 	o.val(v);
 	o.change();

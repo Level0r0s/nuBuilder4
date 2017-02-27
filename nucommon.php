@@ -1074,26 +1074,6 @@ function nuGetUserAccess(){
 	
 }
 
-/*function nuEvalPHP($JSON) {
-
-	$PHP 				= nuReplaceHashVariables($JSON->sph_php);
-	$PHPData			= $JSON->lines;
-
-	try {
-		
-		eval($PHP); 
-		
-	} catch(Throwable $e) {
-
-		nuException("Error Running PHP ",1,array($e,$PHPData));   
-		 
-	} catch (Exception $e) {
-
-		nuException("Error Running PHP",1,array($e,$PHPData));
-		
-	}
-	
-}*/
 
 function nuDisplayHeaderHTML() {
 	

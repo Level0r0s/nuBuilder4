@@ -355,18 +355,18 @@ class nuFormObject {
 		
 		var f	= {};
 
-		f.Jan	= {'MMM' : 'Jan', 'MMMM' : 'January',	'mm' : '01' , 'm' : '1'};
-		f.Feb	= {'MMM' : 'Feb', 'MMMM' : 'February',	'mm' : '02' , 'm' : '2'};
-		f.Mar	= {'MMM' : 'Mar', 'MMMM' : 'March', 	'mm' : '03' , 'm' : '3'};
-		f.Apr	= {'MMM' : 'Apr', 'MMMM' : 'April', 	'mm' : '04' , 'm' : '4'};
-		f.May	= {'MMM' : 'May', 'MMMM' : 'May',		'mm' : '05' , 'm' : '5'};
-		f.Jun	= {'MMM' : 'Jun', 'MMMM' : 'June',		'mm' : '06' , 'm' : '6'};
-		f.Jul	= {'MMM' : 'Jul', 'MMMM' : 'July',		'mm' : '07' , 'm' : '7'};
-		f.Aug	= {'MMM' : 'Aug', 'MMMM' : 'August', 	'mm' : '08' , 'm' : '8'};
-		f.Sep	= {'MMM' : 'Sep', 'MMMM' : 'September',	'mm' : '09' , 'm' : '9'};
-		f.Oct	= {'MMM' : 'Oct', 'MMMM' : 'October', 	'mm' : '10' , 'm' : '10'};
-		f.Nov	= {'MMM' : 'Nov', 'MMMM' : 'November', 	'mm' : '11' , 'm' : '11'};
-		f.Dec	= {'MMM' : 'Dec', 'MMMM' : 'December', 	'mm' : '12' , 'm' : '12'};
+		f.Jan	= {'MMM' : 'Jan', 'MMMM' : 'January',	'mm' : '01' , 'm' : '1',  'jsmonth' : 0};
+		f.Feb	= {'MMM' : 'Feb', 'MMMM' : 'February',	'mm' : '02' , 'm' : '2',  'jsmonth' : 1};
+		f.Mar	= {'MMM' : 'Mar', 'MMMM' : 'March', 	'mm' : '03' , 'm' : '3',  'jsmonth' : 2};
+		f.Apr	= {'MMM' : 'Apr', 'MMMM' : 'April', 	'mm' : '04' , 'm' : '4',  'jsmonth' : 3};
+		f.May	= {'MMM' : 'May', 'MMMM' : 'May',		'mm' : '05' , 'm' : '5',  'jsmonth' : 4};
+		f.Jun	= {'MMM' : 'Jun', 'MMMM' : 'June',		'mm' : '06' , 'm' : '6',  'jsmonth' : 5};
+		f.Jul	= {'MMM' : 'Jul', 'MMMM' : 'July',		'mm' : '07' , 'm' : '7',  'jsmonth' : 6};
+		f.Aug	= {'MMM' : 'Aug', 'MMMM' : 'August', 	'mm' : '08' , 'm' : '8',  'jsmonth' : 7};
+		f.Sep	= {'MMM' : 'Sep', 'MMMM' : 'September',	'mm' : '09' , 'm' : '9',  'jsmonth' : 8};
+		f.Oct	= {'MMM' : 'Oct', 'MMMM' : 'October', 	'mm' : '10' , 'm' : '10', 'jsmonth' : 9};
+		f.Nov	= {'MMM' : 'Nov', 'MMMM' : 'November', 	'mm' : '11' , 'm' : '11', 'jsmonth' : 10};
+		f.Dec	= {'MMM' : 'Dec', 'MMMM' : 'December', 	'mm' : '12' , 'm' : '12', 'jsmonth' : 11};
 
 		f.Sun	= {'WWW' : 'Sun', 'WWWW' : 'Sunday', 	'w' : '1'};
 		f.Mon	= {'WWW' : 'Mon', 'WWWW' : 'Monday', 	'w' : '2'};
@@ -379,5 +379,103 @@ class nuFormObject {
 		return f;
 		
 	}
+	
+	addFormatting(v, f){
+		
+		if(f[0] == 'N'){	//-- number
+			
+		}
+		
+		if(f[0] == 'D'){	//-- date
+			
+			var FMT		= this.setFormats();
+			var dt		= String(v).split(' ');
+			var d		= dt[0].split('-');
+			
+			if(dt.length == 1){
+				var t	= [0, 0, 0];
+			}else{
+				var t	= dt[1].split(':');
+			}
+
+			var o 		= new Date(d[0], d[1], d[2], t[0], t[1], t[2], 0);			//-- (year, month, day, hours, minutes, seconds, milliseconds)
+			
+			var wee		= o.toString().split(' ')[0];								//-- Tue Sep 07 2004 11:11:12 GMT+0930 (Cen. Australia Standard Time)
+			var mth		= o.toString().split(' ')[1];
+			var day		= o.toString().split(' ')[2];
+			var yea		= o.toString().split(' ')[3];
+			var hou		= o.toString().split(' ')[4].split(':')[0];
+			var min		= o.toString().split(' ')[4].split(':')[1];
+			var sec		= o.toString().split(' ')[4].split(':')[2];
+			var s		= String(f);
+			s			= s.replaceAll('th', 	hou);
+			s			= s.replaceAll('tm', 	min);
+			s			= s.replaceAll('th', 	sec);
+			s			= s.replaceAll('MMMM',	FMT[mth]['MMMM']);
+			s			= s.replaceAll('MMM',	FMT[mth]['MMM']);
+			s			= s.replaceAll('mm',	FMT[mth]['mm']);
+			s			= s.replaceAll('m', 	FMT[mth]['m']);
+			s			= s.replaceAll('WWWW',	FMT[wee]['WWWW']);
+			s			= s.replaceAll('WWW',	FMT[wee]['WWW']);
+			s			= s.replaceAll('w',		FMT[wee]['w']);
+			s			= s.replaceAll('yyyy',	yea);
+			s			= s.replaceAll('yy',	String(yea).substr(2));
+			
+			return s.substr(2);
+			
+		}
+		
+	}
+
+	
+	removeFormatting(v, f){
+		
+//'Feb 02 23:50 Feb','D|MMM mm th:tm MMM'
+		
+		if(f[0] == 'N'){	//-- number
+			
+		}
+
+		if(f[0] == 'D'){	//-- date
+			
+			var FMT		= this.setFormats();
+			var dt		= String(v).split(' ');
+			var d		= dt[0].split('-');
+			
+			if(dt.length == 1){
+				var t	= [0, 0, 0];
+			}else{
+				var t	= dt[1].split(':');
+			}
+
+			var o 		= new Date(d[0], d[1], d[2], t[0], t[1], t[2], 0);			//-- (year, month, day, hours, minutes, seconds, milliseconds)
+			
+			var wee		= o.toString().split(' ')[0];								//-- Tue Sep 07 2004 11:11:12 GMT+0930 (Cen. Australia Standard Time)
+			var mth		= o.toString().split(' ')[1];
+			var day		= o.toString().split(' ')[2];
+			var yea		= o.toString().split(' ')[3];
+			var hou		= o.toString().split(' ')[4].split(':')[0];
+			var min		= o.toString().split(' ')[4].split(':')[1];
+			var sec		= o.toString().split(' ')[4].split(':')[2];
+			var s		= String(f);
+			s			= s.replaceAll('WWWW',	FMT[wee]['WWWW']);
+			s			= s.replaceAll('WWW',	FMT[wee]['WWW']);
+			s			= s.replaceAll('w',		FMT[wee]['w']);
+			s			= s.replaceAll('MMMM',	FMT[mth]['MMMM']);
+			s			= s.replaceAll('MMM',	FMT[mth]['MMM']);
+			s			= s.replaceAll('mm',	FMT[mth]['mm']);
+			s			= s.replaceAll('m', 	FMT[mth]['m']);
+			s			= s.replaceAll('th', 	hou);
+			s			= s.replaceAll('tm', 	min);
+			s			= s.replaceAll('th', 	sec);
+			s			= s.replaceAll('yyyy',	yea);
+			s			= s.replaceAll('yy',	String(yea).substr(2));
+			
+			return s.substr(2);
+			
+		}
+		
+	}
+
 	
 }
