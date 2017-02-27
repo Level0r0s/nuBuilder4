@@ -57,7 +57,6 @@ window.nuHASH			= [];
 	$search		= $_GET['search'];
 	$iframe		= $_GET['iframe'];
 	$target		= $_GET['target'];
-	$type		= $_GET['type'];
 	$type		= $_GET['type'] == '' ? 'browse' : $_GET['type'];
 
 	$nuFormats	= json_encode(nuTextFormats(true));

@@ -5,11 +5,13 @@ class nuFormObject {
 	constructor() {
 		
 		this.schema				= [];
+		this.formats			= this.setFormats();
+		this.formata			= []
 		this.breadcrumbs 		= [];
 		this.scroll		 		= [];
 		this.edited				= false;
 		this.deleteForm			= false;
-		this.formats			= this.setFormats();
+		
 	}
 	
 	getCurrent(){
@@ -72,7 +74,7 @@ class nuFormObject {
 		
 		$('#' + e.target.id)
 		.val(s.list[this.scroll[e.target.id].index])
-		.addClass('nuEdited');
+		.change();
 
 		nuHasBeenEdited();
 		

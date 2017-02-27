@@ -347,12 +347,7 @@ function nuUpdateData(action){
 	last.call_type 		= 'update';
 	last.deleteAll 		= $('#nuDelete').is(":checked") ? 'Yes' : 'No';
 	last.data 			= nuGetFormData();
-	
-	if(action == 'delete'){
-		nuFORM.deleting	= true;
-	}
-	
-	last.nuFORMdata		= nuFORM.data();
+	last.nuFORMdata		= nuFORM.data(action);
 	last.hash 			= nuHashFromEditForm();
 	last.subforms		= nuGetSFArrays();
 	last.session_id 	= window.nuSESSION;

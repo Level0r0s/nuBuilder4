@@ -852,6 +852,7 @@ function nuCheckSession(){
 				$c->form_id				= 'nuhome';
 				$c->record_id			= '-1';
 				$c->schema				= $_POST['nuSchema'];
+				$c->formata				= nuFormata();
 				$c->translation			= nuTranslate('');
 
 			}else{
@@ -879,6 +880,7 @@ function nuCheckSession(){
 				$c->form_id			= $r->sug_zzzzsys_form_id;			//-- home Form
 				$c->record_id		= '-1';
 				$c->schema			= $_POST['nuSchema'];
+				$c->formata			= nuFormata();
 				$c->translation		= nuTranslate($r->sus_language);
 
 			}else{
@@ -906,6 +908,7 @@ function nuCheckSession(){
 				$c->form_id			= $_POST['nuSTATE']['form_id'];
 				$c->record_id		= $_POST['nuSTATE']['record_id'];
 				$c->schema			= $_POST['nuSchema'];	
+				$c->formata			= nuFormata();
 				$c->translation		= nuTranslate($r->sus_language);
 				
 			} else {

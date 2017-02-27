@@ -22,6 +22,7 @@ function nuBuildForm(f){
 	if(f.schema.length != 0){  						//-- its an Object (load these once,  at login)
 
 		nuFORM.schema		= f.schema;
+		nuFORM.formata		= f.formata;
 		window.nuLANGUAGE	= f.translation;
 		
 	}
