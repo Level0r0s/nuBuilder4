@@ -336,16 +336,18 @@ function nuPrintAction(){
 
 }
 
-function nuUpdateData(){
+function nuUpdateData(action){
 
 	var last			= window.nuFORM.getCurrent();
 
 	var f				= last.form_id;
 	var r				= last.record_id;
+	var d				= 
 
 	last.call_type 		= 'update';
 	last.deleteAll 		= $('#nuDelete').is(":checked") ? 'Yes' : 'No';
 	last.data 			= nuGetFormData();
+	last.nuFORMdata		= nuFORM.data(action);
 	last.hash 			= nuHashFromEditForm();
 	last.subforms		= nuGetSFArrays();
 	last.session_id 	= window.nuSESSION;

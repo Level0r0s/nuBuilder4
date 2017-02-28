@@ -22,6 +22,7 @@ function nuBuildForm(f){
 	if(f.schema.length != 0){  						//-- its an Object (load these once,  at login)
 
 		nuFORM.schema		= f.schema;
+		nuFORM.formata		= f.formata;
 		window.nuLANGUAGE	= f.translation;
 		
 	}
@@ -382,6 +383,19 @@ function nuINPUT(w, i, l, p, prop){
 	.attr('data-nu-subform-sort', 1)
 	.prop('readonly', prop.objects[i].read == '1' ? 'readonly' : '');
 
+	if(input_type == 'nuScroll'){
+		
+		var input_js	= 'nuFORM.scrollList(event, ' + w.objects[i].scroll + ')';
+		
+		$('#' + id)
+		.addClass('nuScroll')
+		.attr('onwheel', input_js)
+		.attr('onkeydown', input_js)
+		.attr('onblur', '$("#" + this.id).removeClass("nuScroll")')
+		.attr('onfocus', '$("#" + this.id).addClass("nuScroll")');
+		
+	}
+
 	if(input_type != 'button'){
 		$('#' + id).attr('data-nu-data', '');
 	}
@@ -414,7 +428,8 @@ function nuINPUT(w, i, l, p, prop){
 		$('#' + id).addClass('nuCalculator')
 		
 		.prop('readonly', true).prop('tabindex',-1)
-		.attr('data-nu-formula', nuBuildFormula(p, w.objects[i].formula));
+		.attr('data-nu-formula', nuBuildFormula(p, w.objects[i].formula))
+		.attr('data-nu-formata', w.objects[i].formata);
 		
 		if(p != ''){
 			$('#' + id).addClass('nuSubformObject');
@@ -2200,7 +2215,7 @@ function nuDeleteAction(){
 
 		$("[id$='nuDelete']").prop('checked', true);
 		
-		nuUpdateData();
+		nuUpdateData('delete');
 		
     }
 	
@@ -2233,7 +2248,7 @@ function nuCloneAction(){
 
 function nuSaveAction(){
 	
-	nuUpdateData();
+	nuUpdateData('save');
 
 }
 
@@ -2671,5 +2686,34 @@ function nuRebuild_nuTotal(p, s){
 }
 
 
+function nuFormatDate(s){
+	
+	var d	= new Date(s)
+	.toString()
+	.split(' ', 6);
+
+	//["Sat", "Jan", "13", "2007", "10:30:00", "GMT+1030"]
+
+	var f	= {};
+
+	f.WWW	= [d[0], 'Fri'];
+	f.WWWW	= [nuFORM.formats[d[0]]['WWWW'], 'Friday'];
+	f.w		= [nuFORM.formats[d[0]]['w'], '6'];
+	f.MMM	= [d[1], 'Jan'];
+	f.MMMM	= [nuFORM.formats[d[1]]['MMMM'], 'January'];
+	f.mm	= [nuFORM.formats[d[1]]['mm'], '01'];
+	f.m		= [nuFORM.formats[d[1]]['m'], '1'];
+	f.dd	= [d[2], '13'];
+	f.d		= [String(Number(d[2])), '13'];
+	f.yyyy	= [d[3], '2007'];
+	f.yy	= [String(d[3]).substr(2), '07'];
+	f.y		= [String(d[3]).substr(3), '7'];
+	f.th	= [String(d[4]).split(':')[0], '10'];
+	f.tm	= [String(d[4]).split(':')[1], '30'];
+	f.ts	= [String(d[4]).split(':')[2], '00'];
+	
+	return f;
+	
+}
 
 

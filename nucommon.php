@@ -1025,6 +1025,19 @@ function nuSchema(){
 
 }
 
+function nuFormata(){
+	
+	$a			= array();
+	$t			= nuRunQuery("SELECT * FROM zzzzsys_format");
+
+	while($r = db_fetch_object($t)){
+		$a[]		= array($r->srm_type, $r->srm_format);
+	}
+
+	return $a;
+
+}
+
 
 function nuTranslate($l){
 
@@ -1061,26 +1074,6 @@ function nuGetUserAccess(){
 	
 }
 
-/*function nuEvalPHP($JSON) {
-
-	$PHP 				= nuReplaceHashVariables($JSON->sph_php);
-	$PHPData			= $JSON->lines;
-
-	try {
-		
-		eval($PHP); 
-		
-	} catch(Throwable $e) {
-
-		nuException("Error Running PHP ",1,array($e,$PHPData));   
-		 
-	} catch (Exception $e) {
-
-		nuException("Error Running PHP",1,array($e,$PHPData));
-		
-	}
-	
-}*/
 
 function nuDisplayHeaderHTML() {
 	

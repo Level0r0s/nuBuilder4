@@ -83,6 +83,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 
 			if($r->sob_all_type == 'calc'){
 				$o->formula	= $r->sob_calc_formula;
+				$o->formata	= $r->sob_calc_format;
 				$o->align 	= $r->sob_all_align;
 			}
 				
@@ -99,6 +100,10 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 
 				if($r->sob_input_type == 'button' && $r->sob_all_type == 'input'){
 					$o->value	= $r->sob_all_label;
+				}
+
+				if($r->sob_input_type == 'nuScroll' && $r->sob_all_type == 'input'){
+					$o->scroll	= $r->sob_input_javascript;
 				}
 
 				if($r->sob_all_type == 'display'){
@@ -848,6 +853,7 @@ function nuCheckSession(){
 				$c->form_id				= 'nuhome';
 				$c->record_id			= '-1';
 				$c->schema				= $_POST['nuSchema'];
+				$c->formata				= nuFormata();
 				$c->translation			= nuTranslate('');
 
 			}else{
@@ -875,6 +881,7 @@ function nuCheckSession(){
 				$c->form_id			= $r->sug_zzzzsys_form_id;			//-- home Form
 				$c->record_id		= '-1';
 				$c->schema			= $_POST['nuSchema'];
+				$c->formata			= nuFormata();
 				$c->translation		= nuTranslate($r->sus_language);
 
 			}else{
@@ -902,6 +909,7 @@ function nuCheckSession(){
 				$c->form_id			= $_POST['nuSTATE']['form_id'];
 				$c->record_id		= $_POST['nuSTATE']['record_id'];
 				$c->schema			= $_POST['nuSchema'];	
+				$c->formata			= nuFormata();
 				$c->translation		= nuTranslate($r->sus_language);
 				
 			} else {
@@ -1170,6 +1178,9 @@ function nuGetAllLookupValues(){
 	$o->form_id				= $r->sob_lookup_zzzzsys_form_id;
 	$o->value				= $PK;
 	$l						= nuGetLookupValues($r, $o);
+	
+	$_POST['nuHash']['LOOKUP_RECORD_ID'] = $l[0][1];
+
 	$e						= nuGetOtherLookupValues($o);
 	$m						= array_merge($l, $e);
 

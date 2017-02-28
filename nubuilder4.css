@@ -339,6 +339,7 @@ input {
     color:#00ADEF;
 }
 
+
 .nuDuplicate:before{ 
     font-size:20px;
     content: ' *';
@@ -899,7 +900,12 @@ input {
 	
 }
 
+.nuWord {
+	
+    font-family:Tahoma,Geneva,Arial,sans-serif;
+    font-style:bold;
 
+}
 
 
 .nuErrorPHP {
@@ -909,6 +915,9 @@ input {
 
 .nuErrorValidate {
 	color: black;
+}
+
+.nuScroll{
 }
 
 #close_error {

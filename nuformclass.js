@@ -2,13 +2,15 @@
 
 class nuFormObject {
 	
-	
 	constructor() {
 		
-		this.schema					= [];
-		this.breadcrumbs 			= [];
-		this.scroll		 			= [];
-		this.edited					= false;
+		this.schema				= [];
+		this.formats			= this.setFormats();
+		this.formata			= []
+		this.breadcrumbs 		= [];
+		this.scroll		 		= [];
+		this.edited				= false;
+		this.deleteForm			= false;
 		
 	}
 	
@@ -46,12 +48,11 @@ class nuFormObject {
 			}
 		}
 
-
 		this.scroll[e.target.id].list	= l;
 		
 		var s	= this.scroll[e.target.id];
 		
-		if(event.keyCode == 38){
+		if(event.keyCode == 38 || event.wheelDelta > 0){
 			
 			s.index --;
 			
@@ -59,7 +60,7 @@ class nuFormObject {
 				this.scroll[e.target.id].index = s.list.length -1;
 			}
 			
-		}else if(event.keyCode == 40){
+		}else if(event.keyCode == 40 || event.wheelDelta < 0){
 			
 			s.index ++;
 
@@ -73,7 +74,7 @@ class nuFormObject {
 		
 		$('#' + e.target.id)
 		.val(s.list[this.scroll[e.target.id].index])
-		.addClass('nuEdited');
+		.change();
 
 		nuHasBeenEdited();
 		
@@ -244,13 +245,13 @@ class nuFormObject {
 	
 	}
 	
-	data(){
+	data(action = 'save'){
 		
 		var d	= [];
 		var sf	= this.subforms();
-		
+
 		for(var i = 0 ; i < sf.length ; i++){
-			d.push(this.subform(sf[i]));
+			d.push(this.subform(sf[i], action));
 		}
 		
 		return d;
@@ -269,9 +270,10 @@ class nuFormObject {
 
 	}
 
-	subform(sf){
+	subform(sf, action = 'save'){
 
 		var id			= sf;
+		var deleteAll	= action == 'delete';
 		
 		if(sf == ''){
 			
@@ -293,11 +295,13 @@ class nuFormObject {
 		var F			= ['ID'];
 		o.rows			= [];
 		o.edited		= [];
+		o.deleted		= [];
 		
 		$(sel).each(function(index){
 			
 			var THIS	= $(this);
-			var V		= [$(this).attr('data-nu-primary-key')];
+			var dnpk	= $(this).attr('data-nu-primary-key')
+			var V		= [dnpk];
 			var E		= [0];
 			var C		= 1;
 			var	addrow	= true;
@@ -307,8 +311,10 @@ class nuFormObject {
 				var addfld	= true;
 					
 				if(this.id.substr(-8) == 'nuDelete'){
-					addrow = !$('#' + this.id).prop("checked");
-					addfld = false;
+					
+					addrow	= !$('#' + this.id).prop("checked");
+					addfld	= false;
+					
 				}
 
 				if(addfld){
@@ -328,11 +334,13 @@ class nuFormObject {
 				
 			});
 			
-			if(addrow){
+			if(addrow && !deleteAll){
 				
 				o.rows.push(V);
 				o.edited.push(E);
 				
+			}else{
+				o.deleted.push(dnpk);
 			}
 			
 		});
@@ -343,5 +351,131 @@ class nuFormObject {
 		
 	}	
 	
+	setFormats(){
+		
+		var f	= {};
+
+		f.Jan	= {'MMM' : 'Jan', 'MMMM' : 'January',	'mm' : '01' , 'm' : '1',  'jsmonth' : 0};
+		f.Feb	= {'MMM' : 'Feb', 'MMMM' : 'February',	'mm' : '02' , 'm' : '2',  'jsmonth' : 1};
+		f.Mar	= {'MMM' : 'Mar', 'MMMM' : 'March', 	'mm' : '03' , 'm' : '3',  'jsmonth' : 2};
+		f.Apr	= {'MMM' : 'Apr', 'MMMM' : 'April', 	'mm' : '04' , 'm' : '4',  'jsmonth' : 3};
+		f.May	= {'MMM' : 'May', 'MMMM' : 'May',		'mm' : '05' , 'm' : '5',  'jsmonth' : 4};
+		f.Jun	= {'MMM' : 'Jun', 'MMMM' : 'June',		'mm' : '06' , 'm' : '6',  'jsmonth' : 5};
+		f.Jul	= {'MMM' : 'Jul', 'MMMM' : 'July',		'mm' : '07' , 'm' : '7',  'jsmonth' : 6};
+		f.Aug	= {'MMM' : 'Aug', 'MMMM' : 'August', 	'mm' : '08' , 'm' : '8',  'jsmonth' : 7};
+		f.Sep	= {'MMM' : 'Sep', 'MMMM' : 'September',	'mm' : '09' , 'm' : '9',  'jsmonth' : 8};
+		f.Oct	= {'MMM' : 'Oct', 'MMMM' : 'October', 	'mm' : '10' , 'm' : '10', 'jsmonth' : 9};
+		f.Nov	= {'MMM' : 'Nov', 'MMMM' : 'November', 	'mm' : '11' , 'm' : '11', 'jsmonth' : 10};
+		f.Dec	= {'MMM' : 'Dec', 'MMMM' : 'December', 	'mm' : '12' , 'm' : '12', 'jsmonth' : 11};
+
+		f.Sun	= {'WWW' : 'Sun', 'WWWW' : 'Sunday', 	'w' : '1'};
+		f.Mon	= {'WWW' : 'Mon', 'WWWW' : 'Monday', 	'w' : '2'};
+		f.Tue	= {'WWW' : 'Tue', 'WWWW' : 'Tueday', 	'w' : '3'};
+		f.Wed	= {'WWW' : 'Wed', 'WWWW' : 'Wednesday',	'w' : '4'};
+		f.Thu	= {'WWW' : 'Thu', 'WWWW' : 'Thursday', 	'w' : '6'};
+		f.Fri	= {'WWW' : 'Fri', 'WWWW' : 'Friday', 	'w' : '6'};
+		f.Sat	= {'WWW' : 'Sat', 'WWWW' : 'Saturday', 	'w' : '7'};
+
+		return f;
+		
+	}
+	
+	addFormatting(v, f){
+		
+		if(f[0] == 'N'){	//-- number
+			
+		}
+		
+		if(f[0] == 'D'){	//-- date
+			
+			var FMT		= this.setFormats();
+			var dt		= String(v).split(' ');
+			var d		= dt[0].split('-');
+			
+			if(dt.length == 1){
+				var t	= [0, 0, 0];
+			}else{
+				var t	= dt[1].split(':');
+			}
+
+			var o 		= new Date(d[0], d[1], d[2], t[0], t[1], t[2], 0);			//-- (year, month, day, hours, minutes, seconds, milliseconds)
+			
+			var wee		= o.toString().split(' ')[0];								//-- Tue Sep 07 2004 11:11:12 GMT+0930 (Cen. Australia Standard Time)
+			var mth		= o.toString().split(' ')[1];
+			var day		= o.toString().split(' ')[2];
+			var yea		= o.toString().split(' ')[3];
+			var hou		= o.toString().split(' ')[4].split(':')[0];
+			var min		= o.toString().split(' ')[4].split(':')[1];
+			var sec		= o.toString().split(' ')[4].split(':')[2];
+			var s		= String(f);
+			s			= s.replaceAll('th', 	hou);
+			s			= s.replaceAll('tm', 	min);
+			s			= s.replaceAll('th', 	sec);
+			s			= s.replaceAll('MMMM',	FMT[mth]['MMMM']);
+			s			= s.replaceAll('MMM',	FMT[mth]['MMM']);
+			s			= s.replaceAll('mm',	FMT[mth]['mm']);
+			s			= s.replaceAll('m', 	FMT[mth]['m']);
+			s			= s.replaceAll('WWWW',	FMT[wee]['WWWW']);
+			s			= s.replaceAll('WWW',	FMT[wee]['WWW']);
+			s			= s.replaceAll('w',		FMT[wee]['w']);
+			s			= s.replaceAll('yyyy',	yea);
+			s			= s.replaceAll('yy',	String(yea).substr(2));
+			
+			return s.substr(2);
+			
+		}
+		
+	}
+
+	
+	removeFormatting(v, f){
+		
+//'Feb 02 23:50 Feb','D|MMM mm th:tm MMM'
+		
+		if(f[0] == 'N'){	//-- number
+			
+		}
+
+		if(f[0] == 'D'){	//-- date
+			
+			var FMT		= this.setFormats();
+			var dt		= String(v).split(' ');
+			var d		= dt[0].split('-');
+			
+			if(dt.length == 1){
+				var t	= [0, 0, 0];
+			}else{
+				var t	= dt[1].split(':');
+			}
+
+			var o 		= new Date(d[0], d[1], d[2], t[0], t[1], t[2], 0);			//-- (year, month, day, hours, minutes, seconds, milliseconds)
+			
+			var wee		= o.toString().split(' ')[0];								//-- Tue Sep 07 2004 11:11:12 GMT+0930 (Cen. Australia Standard Time)
+			var mth		= o.toString().split(' ')[1];
+			var day		= o.toString().split(' ')[2];
+			var yea		= o.toString().split(' ')[3];
+			var hou		= o.toString().split(' ')[4].split(':')[0];
+			var min		= o.toString().split(' ')[4].split(':')[1];
+			var sec		= o.toString().split(' ')[4].split(':')[2];
+			var s		= String(f);
+			s			= s.replaceAll('WWWW',	FMT[wee]['WWWW']);
+			s			= s.replaceAll('WWW',	FMT[wee]['WWW']);
+			s			= s.replaceAll('w',		FMT[wee]['w']);
+			s			= s.replaceAll('MMMM',	FMT[mth]['MMMM']);
+			s			= s.replaceAll('MMM',	FMT[mth]['MMM']);
+			s			= s.replaceAll('mm',	FMT[mth]['mm']);
+			s			= s.replaceAll('m', 	FMT[mth]['m']);
+			s			= s.replaceAll('th', 	hou);
+			s			= s.replaceAll('tm', 	min);
+			s			= s.replaceAll('th', 	sec);
+			s			= s.replaceAll('yyyy',	yea);
+			s			= s.replaceAll('yy',	String(yea).substr(2));
+			
+			return s.substr(2);
+			
+		}
+		
+	}
+
 	
 }

@@ -712,4 +712,86 @@ function  nuGetLookupFields(id){
 	
 }
 
+function nuEnable(i){                 //-- Enable Edit Form Object
 
+	var o	= [i, i + 'code', i + 'button', i + 'description'];
+	
+	for(var c = 0 ; c < o.length ; c++){
+			
+		$('#' + o[c])
+		.removeClass('nuReadOnly')
+		.prop('readonly', false)
+		.prop('disabled', false);
+		
+	}
+
+}
+
+function nuDisable(i){                 //-- Disable Edit Form Object
+
+	var o	= [i, i + 'code', i + 'button', i + 'description'];
+	
+	for(var c = 0 ; c < o.length ; c++){
+			
+		$('#' + o[c])
+		.addClass('nuReadOnly')
+		.prop('readonly', true)
+		.prop('disabled', true);
+		
+	}
+
+}
+
+
+function nuShow(i){                 //-- Show Edit Form Object
+
+	var o	= [i, i + 'code', i + 'button', i + 'description', 'label_' + i];
+	
+	for(var c = 0 ; c < o.length ; c++){
+		$('#' + o[c]).css('visibility', 'visible');
+	}
+
+}
+
+
+function nuHide(i){                 //-- Hide Edit Form Object
+
+	var o	= [i, i + 'code', i + 'button', i + 'description', 'label_' + i];
+	
+	for(var c = 0 ; c < o.length ; c++){
+		$('#' + o[c]).css('visibility', 'hidden');
+	}
+
+}
+
+
+
+function nuFormat(v, f){
+
+
+
+    var a   = [];
+/*    
+    a.push(['WWW', 'Fri']);
+    a.push(['WWWW', 'Friday']);
+    a.push(['w', '6']);
+    a.push(['MMM', 'Jan']);
+    a.push(['MMMM', 'January']);
+    a.push(['mm', '01']);
+    a.push(['m', '1']);
+    a.push(['dd', '13']);
+    a.push(['d', '13']);
+    a.push(['yyyy', '2007']);
+    a.push(['yy', '07']);
+    a.push(['y', '7']);
+    a.push(['th', '10']);
+    a.push(['tm', '30']);
+    a.push(['ts', '00']);
+    
+    a.push(['[,.]',   '1,000.']);
+    a.push(['[.]',    '1000.']);
+    a.push(['[.,]',   '1.000,']);
+    a.push(['[,]',   '1000,']);
+    
+*/
+}
