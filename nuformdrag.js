@@ -289,13 +289,13 @@ function nuResizeDrag(event) {
 }
 
 function nuRemoveBox(ctrlKey) {
-	
+
 	var L = parseInt($('#nuSelectBox').css('left'));
 	var T = parseInt($('#nuSelectBox').css('top')) - nuGetTopArea();
 	var B = T + parseInt($('#nuSelectBox').css('height'));
 	var R = L + parseInt($('#nuSelectBox').css('width'));
 	$('#nuSelectBox').remove();
-		
+
 	var o = $('[data-drag]');
 	
 	if(!ctrlKey) {
@@ -307,7 +307,6 @@ function nuRemoveBox(ctrlKey) {
 	o.each(function(index) {
 		
 		if($(this).attr('data-nu-tab') == selectedTab) {
-			
 			var l =     parseInt($(this).css('left'));
 			var t =     parseInt($(this).css('top'));
 			var b = t + parseInt($(this).css('height'));
@@ -337,6 +336,8 @@ function nuRemoveBox(ctrlKey) {
 			
 			//drag through object but not through any points
 			if(L >= l && L <= r && T <= t && B >= b) {
+				$(this).addClass('nuDragSelected');
+			} else if(L <= l && R >= r && T >= t && B <= b) {
 				$(this).addClass('nuDragSelected');
 			}
 			
@@ -1060,9 +1061,13 @@ function nuCanMove() {
 }
 
 function nuGetTopArea() {
-	
-	return 115; //need to do this more accurately
-	
+	var nuActionHolder = parseInt($('#nuActionHolder').css('height'));
+	var nuBreadcrumbHolder = parseInt($('#nuBreadcrumbHolder').css('height'));
+	var nuTabHolder = parseInt($('#nuTabHolder').css('height'));
+	$p = parent.window.$;
+	var dialogTitle = parseInt($p('#dialogTitle').css('height'));
+
+	return parseInt(nuActionHolder) + parseInt(nuBreadcrumbHolder) + parseInt(nuTabHolder) + parseInt(dialogTitle);	
 }
 
 function nuPopulateTabDropdown(currentlySelectedTabNo){
