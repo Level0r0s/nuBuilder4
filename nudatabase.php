@@ -135,8 +135,7 @@ function db_fetch_object($o){
 	if (is_object($o)) {
 		return $o->fetch(PDO::FETCH_OBJ);
 	} else {
-		$o  = new stdClass;
-		return $o;
+		return false;
 	}
 
 }
@@ -146,7 +145,7 @@ function db_fetch_row($o){
 	if (is_object($o)) {
 		return $o->fetch(PDO::FETCH_NUM);
 	} else {
-		return array();
+		return false;
 	}
 
 }
