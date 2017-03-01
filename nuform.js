@@ -1114,7 +1114,7 @@ function nuAddBreadcrumbs(){
 function nuAddEditTabs(p, w){
 	
 	nuSetStartingTab(p);
-	
+
     for(var i = 0 ; i < w.tabs.length ; i++){
 
 		nuEditTab(p, w.tabs[i], i);
@@ -1242,6 +1242,7 @@ function nuEditTab(p, t, i){
 	.addClass('nuTab')
 	.attr('data-nu-tab-filter', i)
 	.attr('data-nu-form-filter', p)
+	.attr('data-nu-tab-id', t.id)
 	.attr('onclick','nuSelectTab(this)');
 	
 

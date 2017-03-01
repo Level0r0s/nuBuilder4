@@ -289,13 +289,13 @@ function nuResizeDrag(event) {
 }
 
 function nuRemoveBox(ctrlKey) {
-	
+
 	var L = parseInt($('#nuSelectBox').css('left'));
 	var T = parseInt($('#nuSelectBox').css('top')) - nuGetTopArea();
 	var B = T + parseInt($('#nuSelectBox').css('height'));
 	var R = L + parseInt($('#nuSelectBox').css('width'));
 	$('#nuSelectBox').remove();
-		
+
 	var o = $('[data-drag]');
 	
 	if(!ctrlKey) {
@@ -307,7 +307,6 @@ function nuRemoveBox(ctrlKey) {
 	o.each(function(index) {
 		
 		if($(this).attr('data-nu-tab') == selectedTab) {
-			
 			var l =     parseInt($(this).css('left'));
 			var t =     parseInt($(this).css('top'));
 			var b = t + parseInt($(this).css('height'));
@@ -338,6 +337,8 @@ function nuRemoveBox(ctrlKey) {
 			//drag through object but not through any points
 			if(L >= l && L <= r && T <= t && B >= b) {
 				$(this).addClass('nuDragSelected');
+			} else if(L <= l && R >= r && T >= t && B <= b) {
+				$(this).addClass('nuDragSelected');
 			}
 			
 		}
@@ -355,8 +356,9 @@ function nuInitialiseDragState(){
     var tabOrderCounter = 10;
 	
     $('div.nuTab[id^="nuTab"]').each(function(){
-		
+
         var objects = {
+			'tab_id': $(this).attr('data-nu-tab-id'),
             'objects': []
         };
 		
@@ -518,7 +520,7 @@ function nuCreateDragOptionsBox(form){
                         '</tr>'+
 						'<tr>'+
                             '<td><select id="nuDragOptionsTabsDropdown"></select></td>'+
-                            '<td></td>'+
+                            '<td><button class="nuDragOptionsButton nuButton nuSaveButtonEdited" style="font-weight: bold;" onclick="nuMoveNuDrag();">Move to Tab</button></td>'+
                         '</tr>'+
 						'<tr>'+
                             '<td>&nbsp;</td>'+
@@ -815,6 +817,45 @@ function nuAlignBottom(){
     });
 }
 
+function nuMoveNuDrag() {
+	
+	//find tab we are moving objects to
+	var moveToTab = $('#nuDragOptionsTabsDropdown').val().substring($('#nuDragOptionsTabsDropdown').val().length-1);
+	
+	$('#nuDragOptionsFields :selected').each(function(i, selected){
+		var fieldToMove = $(selected).text();
+		var initialTab = $('#nuLookup').contents().find('#'+fieldToMove).attr('data-nu-tab');
+		
+		//hide objects on screen so they can be redrawn on correct tab.
+		$('#nuLookup').contents().find('#'+fieldToMove).attr('data-nu-tab',moveToTab).hide();
+		
+		//get tab objects array
+		var tabObjects = $("#nuLookup")[0].contentWindow.nuDragOptionsState.tabs[initialTab];
+		var index = 0;
+		var foundField = false;
+		for(var i = 0; i < tabObjects.objects.length; i++) {	
+			if(tabObjects.objects[i].id == fieldToMove) {
+				var fieldObject = $("#nuLookup")[0].contentWindow.nuDragOptionsState.tabs[initialTab].objects[i];
+				foundField = true;
+				$("#nuLookup")[0].contentWindow.nuDragOptionsState.tabs[moveToTab].objects.push(fieldObject);
+				$("#nuLookup")[0].contentWindow.nuDragOptionsState.tabs[initialTab].objects.splice(i,1);
+				i--;
+			} else if(foundField) {
+				$("#nuLookup")[0].contentWindow.nuDragOptionsState.tabs[initialTab].objects[i].tab_order -= 10;
+			}
+		}
+		
+		//update orders
+		var tabObjects = $("#nuLookup")[0].contentWindow.nuDragOptionsState.tabs[moveToTab];
+		for(var j = 0; j < tabObjects.objects.length; j++) {
+			tabObjects.objects[j].tab_order = Number(j * 10) + Number(moveToTab * 100);
+		}
+	});
+	
+	//go to new tab
+	$('#nuLookup').contents().find('#nuTab'+moveToTab).click();
+}
+
 function nuSaveNuDrag(){
 	
     $("body").append('<div id="overlay" style="background-color:grey;position:absolute;top:0;left:0;height:100%;width:100%;z-index:999;"></div>');
@@ -906,7 +947,7 @@ function nuCheckIfMovingFieldToOtherTabAllowed(fieldsSelectBox){
 		tabDropdown.removeAttr('disabled');
     } else {
 		tabDropdown.prop('disabled','disabled');
-		$("#nuDragOptionsTabsDropdown",window.parent.document.body).val('nuTab'+currentTabNo);
+		//$("#nuDragOptionsTabsDropdown",window.parent.document.body).val('nuTab'+currentTabNo);
     }
 	
 }
@@ -1020,9 +1061,13 @@ function nuCanMove() {
 }
 
 function nuGetTopArea() {
-	
-	return 115; //need to do this more accurately
-	
+	var nuActionHolder = parseInt($('#nuActionHolder').css('height'));
+	var nuBreadcrumbHolder = parseInt($('#nuBreadcrumbHolder').css('height'));
+	var nuTabHolder = parseInt($('#nuTabHolder').css('height'));
+	$p = parent.window.$;
+	var dialogTitle = parseInt($p('#dialogTitle').css('height'));
+
+	return parseInt(nuActionHolder) + parseInt(nuBreadcrumbHolder) + parseInt(nuTabHolder) + parseInt(dialogTitle);	
 }
 
 function nuPopulateTabDropdown(currentlySelectedTabNo){
@@ -1031,10 +1076,11 @@ function nuPopulateTabDropdown(currentlySelectedTabNo){
 
 		var tabNumber = $(this).attr('data-nu-tab-filter');
 		var tabName = $(this).text();	
-
-		$('#nuDragOptionsTabsDropdown',window.parent.document.body).append('<option value="nuTab'+tabNumber+'">'+tabName+'</option>');
-		
+		if(tabNumber != currentlySelectedTabNo) {
+			$('#nuDragOptionsTabsDropdown',window.parent.document.body).append('<option value="nuTab'+tabNumber+'">'+tabName+'</option>');
+		}
     });
+	
 	// Select the current tab
-	$("#nuDragOptionsTabsDropdown",window.parent.document.body).val('nuTab'+currentlySelectedTabNo);
+	$('#nuDragOptionsTabsDropdown').find('option:first').prop('selected', 'selected');
 }    
