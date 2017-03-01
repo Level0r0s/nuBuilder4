@@ -1956,16 +1956,15 @@ function nuChooseOneLookupRecord(e, fm){
 	
 	if(fm.lookup_values.length	== 1){
 		
-		if(e.target.value == fm.lookup_values[0][1]){
+		if(e.target.value.toUpperCase() == fm.lookup_values[0][1].toUpperCase()){
 			nuGetLookupId(fm.lookup_values[0][0], i);
 		}else{
-			
-			var id			= e.target.id.substr(0, e.target.id.length - 4);
+			nuBuildLookup(t, e.target.value);
+			/*var id			= e.target.id.substr(0, e.target.id.length - 4);
 			
 			$('#' + id).val('');
 			$('#' + id + 'code').val('');
-			$('#' + id + 'description').val('');
-			
+			$('#' + id + 'description').val('');*/
 		}	
 		
 	}

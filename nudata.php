@@ -231,7 +231,6 @@ function nuUpdateRow($r, $p, $row, $FK){
 		
 		$q[]		= $p;
 		$s	= "UPDATE `$r->sfo_table` SET " . implode(', ', $set) . " WHERE `$r->sfo_primary_key` = ? ";
-
 		nuRunQuery($s, $q);
 		
 	}
