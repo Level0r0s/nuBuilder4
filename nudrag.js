@@ -389,6 +389,8 @@ function nuCreateDrag(){
 			//drag through object but not through any points
 			if(L >= l && L <= r && T <= t && B >= b) {
 				$(this).addClass('nuDragSelected');
+			} else if(L <= l && R >= r && T >= t && B <= b) {
+				$(this).addClass('nuDragSelected');
 			}
 		});
 		

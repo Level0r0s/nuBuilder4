@@ -860,7 +860,6 @@ function nuCheckSession(){
 				nuDisplayError('Invalid Login..');
 				$_POST['nuLogAgain']	= 1;
 				return;
-				
 			}
 
 		}else{                                       //-- normal user
@@ -888,7 +887,6 @@ function nuCheckSession(){
 				
 				nuDisplayError('Invalid Login..');
 				$_POST['nuLogAgain']	= 1;
-				
 				return;
 				
 			}

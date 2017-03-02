@@ -279,6 +279,9 @@ function nuGetLookupCode(e){
 		$('#' + id + 'code').val('');
 		$('#' + id + 'description').val('');
 		
+		$('#' + id).addClass('nuEdited');
+		$('#nuSaveButton').addClass('nuSaveButtonEdited');
+		
 		return;
 		
 	}
@@ -294,9 +297,9 @@ function nuGetLookupCode(e){
 	var successCallback = function(data,textStatus,jqXHR){		
 		
 		var fm 			= data;
-
+	
 		if(!nuDisplayError(fm)){
-			
+
 			nuChooseOneLookupRecord(e, fm);
 			
 		}
