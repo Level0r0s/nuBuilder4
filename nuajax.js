@@ -3,7 +3,6 @@ function nuAjax(w,successCallback,errorCallback){
 
  	$.ajax({
 
-		timeout  : 3000,
 		async    : true,  
 		dataType : "json",
 		url      : "nuapi.php",
