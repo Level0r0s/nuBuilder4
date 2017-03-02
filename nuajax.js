@@ -124,12 +124,14 @@ function nuGetPHP(f, r){
 	var successCallback = function(data,textStatus,jqXHR){
 		
 		var fm  		= data;
-
+		
 		if(!nuDisplayError(fm)){
-			
+
 			nuFORM.setProperty('record_id', fm.record_id);
 			nuBuildForm(fm);
 			
+		} else {
+			window.nuFORM.breadcrumbs.pop();
 		}
 	}
 	

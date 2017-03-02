@@ -210,6 +210,8 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 
 			$a[]    			= $o;
 		}
+	} else {
+		nuDisplayError('Form ID not found');
 	}
 
     $f->buttons				= nuButtonList($f);
