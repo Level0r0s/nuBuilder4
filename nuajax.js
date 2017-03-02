@@ -44,7 +44,7 @@ function nuAjax(w,successCallback,errorCallback){
 
 function nuForm(f, r, filter, search, n){
 	
-	window.nuTYPE = 'browse';
+	//window.nuTYPE = 'browse';
 	
 	if(nuOpenNewBrowserTab('getform', f, r, filter)){return;}
 
