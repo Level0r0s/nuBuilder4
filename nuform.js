@@ -1836,7 +1836,7 @@ function nuSelectBrowse(e){
 	}else{
 
 		window[y](e);
-
+		window.nuTYPE = "browse";
 	}
 	
 }
