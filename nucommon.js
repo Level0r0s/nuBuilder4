@@ -618,9 +618,10 @@ function testsql(){
 
 
 
-function nuPreview(){
+function nuPreview(a){
 
-    var t   = $('#sfo_type').val();
+	var	t	= String($('#sfo_type').val());
+	var b	= t.indexOf('browse') != -1;
     var f   = nuFORM.getProperty('form_id');
     var r   = nuFORM.getProperty('record_id');
     
@@ -631,25 +632,11 @@ function nuPreview(){
         
     }
     
-    if(t == 'browse'){
+    if(arguments.length == 1){
         nuPopup(r, '');
-    }
-    
-    if(t == 'edit'){
+    }else{
         nuPopup(r, '-3');
-    }
-    
-    if(t == 'browseedit'){
-        nuPopup(r, '');
-    }
-    
-    if(t == 'subform'){
-        nuPopup(r, '-3');
-    }
-    
-    if(t == 'launch'){
-        nuPopup(r, '-3');
-    }
+	}
     
 }
 
