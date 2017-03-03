@@ -2338,7 +2338,9 @@ function nuHashFromEditForm(){
 	var val 		= '';
 	
 	for (var key in b) {
-		a.push([key, b[key]]);
+		if(key != 'hash') {
+			a.push([key, b[key]]);
+		}
 	}	
 		
 	a.push([b.form_id, b.record_id]);		//-- first element is Form and Record ID

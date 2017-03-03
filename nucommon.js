@@ -73,7 +73,7 @@ function nuGetBreadcrumb(b){
 	window.nuFORM.removeAfter(b);
 	
 	var c				= window.nuFORM.getCurrent();
-	
+
 	nuForm(c.form_id, c.record_id, c.filter, c.search, 1);
 	
 }
