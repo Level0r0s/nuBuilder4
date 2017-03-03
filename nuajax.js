@@ -69,7 +69,7 @@ function nuForm(f, r, filter, search, n){
 		
 	}
 
-	var last			= window.nuFORM.getCurrent();;
+	var last			= window.nuFORM.getCurrent();
 
 	last.session_id 	= window.nuSESSION;
 	last.call_type		= 'getform';
@@ -87,7 +87,7 @@ function nuForm(f, r, filter, search, n){
 	var successCallback = function(data,textStatus,jqXHR){
 
 		var fm = data;
-	
+
 		if(nuDisplayError(fm)){
 
 			if(fm.log_again == 1){nuLogin();}
@@ -97,7 +97,7 @@ function nuForm(f, r, filter, search, n){
 			var last		= window.nuFORM.getCurrent();
 			last.record_id	= fm.record_id;
 			last.FORM 		= fm.form;
-			
+
 			nuBuildForm(fm);
 			
 		}
