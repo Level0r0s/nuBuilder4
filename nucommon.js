@@ -751,7 +751,25 @@ function nuHide(i){                 //-- Hide Edit Form Object
 
 }
 
+function nuAddThousandSpaces(s, c){
 
+	var a	= String(s).split('');
+	var r	= [];
+
+	r	= a.reverse();
+		
+	if(r.length > 3){r.splice(3, 0, c);}
+	if(r.length > 7){r.splice(7, 0, c);}
+	if(r.length > 11){r.splice(11, 0, c);}
+	if(r.length > 15){r.splice(15, 0, c);}
+	if(r.length > 19){r.splice(19, 0, c);}
+	if(r.length > 23){r.splice(23, 0, c);}
+
+	r	= r.reverse();
+	
+	return r.join('');
+	
+}
 
 function nuFormat(v, f){
 

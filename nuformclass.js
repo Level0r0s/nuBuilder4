@@ -406,9 +406,25 @@ class nuFormObject {
 		v	= String(v);
 		f	= String(f);
 		
-		if(f[0] == 'N'){	//-- number
+		if(f[0] == 'N'){							//-- number  '456.789','N|€ 1,000.00'
 
-			console.log(v,f);
+			f			= f.substr(2);
+			var s		= String(f.split(' ')[0]);			//-- sign
+			var n		= String(f.split(' ')[1]);			//-- number
+			var c		= n[1] == '0' ? '' : n[1];			//-- comma
+			
+			if(c == ''){
+				var d	= n[4];								//-- decimal
+				var p	= n.length - 5;						//-- places
+			}else{
+				var d	= n[5];								//-- decimal
+				var p	= n.length - 6;						//-- places
+			}
+
+			var o	= v.split('.');
+			var m	= s + ' ' + nuAddThousandSpaces(o[0], c) + d + String(o[1]).substr(0, p)
+			
+			return m;
 		
 		}
 		
