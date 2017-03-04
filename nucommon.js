@@ -669,7 +669,7 @@ function nuPopJS(){
 		
 	}
 	
-	nuPopup('nuobject', i, 'justjs');
+	nuPopup('nuform', i, 'justjs');
 	
 }
 

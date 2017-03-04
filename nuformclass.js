@@ -403,14 +403,19 @@ class nuFormObject {
 	
 	addFormatting(v, f){
 		
+		v	= String(v);
+		f	= String(f);
+		
 		if(f[0] == 'N'){	//-- number
-			
+
+			console.log(v,f);
+		
 		}
 		
 		if(f[0] == 'D'){	//-- date
 			
 			var FMT		= this.setFormats();
-			var dt		= String(v).split(' ');
+			var dt		= v.split(' ');
 			var d		= dt[0].split('-');
 			
 			if(dt.length == 1){
@@ -418,7 +423,7 @@ class nuFormObject {
 			}else{
 				var t	= dt[1].split(':');
 			}
-
+			
 			var o 		= new Date(d[0], d[1], d[2], t[0], t[1], t[2], 0);			//-- (year, month, day, hours, minutes, seconds, milliseconds)
 			
 			var wee		= o.toString().split(' ')[0];								//-- Tue Sep 07 2004 11:11:12 GMT+0930 (Cen. Australia Standard Time)
@@ -431,27 +436,31 @@ class nuFormObject {
 			var s		= String(f);
 			
 			if(Number(hou) > 11){
-				s		= s.replaceAll('AMPM', 	'pm');
+				
+				s		= s.replaceAll('pp', 	'pm');
+				s		= s.replaceAll('PP', 	'PM');
+				
 			}else{
-				s		= s.replaceAll('AMPM', 	'am');
+				
+				s		= s.replaceAll('pp', 	'am');
+				s		= s.replaceAll('PP', 	'AM');
+
 			}
 			
-			s			= s.replaceAll('hh',	 	hou);
-			s			= s.replaceAll('nn',		min);
-			s			= s.replaceAll('ss', 		sec);
+			s			= s.replaceAll('yyyy',		yea);
+			s			= s.replaceAll('yy',		String(yea).substr(2));
+//			s			= s.replaceAll('y',			Number(String(yea).substr(2)));
 			s			= s.replaceAll('mmmm',		FMT[mth]['mmmm']);
 			s			= s.replaceAll('mmm',		FMT[mth]['mmm']);
 			s			= s.replaceAll('mm',		FMT[mth]['mm']);
-			s			= s.replaceAll('m', 		FMT[mth]['m']);
+//			s			= s.replaceAll('m', 		FMT[mth]['m']);
 			s			= s.replaceAll('dddd',		FMT[wee]['dddd']);
 			s			= s.replaceAll('ddd',		FMT[wee]['ddd']);
 			s			= s.replaceAll('dd',		FMT[wee]['dd']);
-			s			= s.replaceAll('w',			FMT[wee]['w']);
-			s			= s.replaceAll('yyyy',		yea);
-			s			= s.replaceAll('yy',		String(yea).substr(2));
-			s			= s.replaceAll('y',			Number(String(yea).substr(2)));
-			s			= s.replaceAll('dd',		day);
-			s			= s.replaceAll('d',			Number(day));
+//			s			= s.replaceAll('d',			Number(day));
+			s			= s.replaceAll('hh',	 	hou);
+			s			= s.replaceAll('nn',		min);
+			s			= s.replaceAll('ss', 		sec);
 			
 			return s.substr(2);
 			
@@ -471,7 +480,8 @@ class nuFormObject {
 		if(f[0] == 'D'){	//-- date
 			
 			var FMT		= this.setFormats();
-			var hasTime	= String(v).indexOf(':') != -1; 	//-- looking for the time
+			f			= String(f);
+			var hasTime	= f.indexOf('hh') != -1 || f.indexOf('nn') != -1 || f.indexOf('ss') != -1; 	//-- looking for the time
 			
 			v			= String(v)
 							.replaceAll(':', ' ')
