@@ -403,8 +403,8 @@ class nuFormObject {
 	
 	addFormatting(v, f){
 		
-		v	= String(v);
-		f	= String(f);
+		v				= String(v);
+		f				= String(f);
 		
 		if(f[0] == 'N'){							//-- number  '456.789','N|€ 1,000.00'
 
@@ -421,8 +421,8 @@ class nuFormObject {
 				var p	= n.length - 6;						//-- places
 			}
 
-			var o	= v.split('.');
-			var m	= s + ' ' + nuAddThousandSpaces(o[0], c) + d + String(o[1]).substr(0, p)
+			var o		= v.split('.');
+			var m		= s + ' ' + nuAddThousandSpaces(o[0], c) + d + String(o[1]).substr(0, p)
 			
 			return m;
 		
@@ -487,16 +487,36 @@ class nuFormObject {
 	
 	removeFormatting(v, f){
 		
-//'Feb 02 23:50 Feb','D|mmm mm hh:nn mmm'
-		
+		v				= String(v);
+		f				= String(f);
+
 		if(f[0] == 'N'){	//-- number
+
+			f			= f.substr(2);
+			var s		= String(f.split(' ')[0]);			//-- sign
+			var n		= String(f.split(' ')[1]);			//-- number
+			var c		= n[1] == '0' ? '' : n[1];			//-- comma
 			
+			if(c == ''){
+				var d	= n[4];								//-- decimal
+				var p	= n.length - 5;						//-- places
+			}else{
+				var d	= n[5];								//-- decimal
+				var p	= n.length - 6;						//-- places
+			}
+
+			var num		= v
+						.replaceAll(c, '')
+						.replaceAll(s, '')
+						.replaceAll(d, '.');
+						
+			return Number(num);
+		
 		}
 
 		if(f[0] == 'D'){	//-- date
 			
 			var FMT		= this.setFormats();
-			f			= String(f);
 			var hasTime	= f.indexOf('hh') != -1 || f.indexOf('nn') != -1 || f.indexOf('ss') != -1; 	//-- looking for the time
 			
 			v			= String(v)

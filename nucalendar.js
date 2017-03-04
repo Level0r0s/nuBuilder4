@@ -188,9 +188,6 @@ function nuPopupCalendar(pThis){
 		}
 		
 	}
-	
-
-
 
 	var caller	= document.getElementById(window.nuCalendarCaller);
 

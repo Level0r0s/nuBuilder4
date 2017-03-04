@@ -267,63 +267,8 @@ function nuReformat(t){
 	var v			= String(o.val());
 	
 	if(f == '' || v == ''){return v;}
-	
-	var F			= nuFormats[f];
-	
-	if(F.type == 'number'){
-		
-		var n		= v.split(F.decimal);
-		n[1]		= n.length == 1 ? '0' : n[1];
-		n[0] 		= String(Number(String(n[0]).replaceAll(',', '', true).replaceAll('.', '', true)));
-		n[1]		= String(n[1] + '0000000').substr(0, F.format);
-		
-		if(isNaN(n[0] + F.decimal + n[1])){
-			
-			alert("Invalid Number");
-			o.val('');
-			return;
-			
-		}
 
-		n[0] = n[0].replace(/\B(?=(\d{3})+(?!\d))/g, F.separator);
-		
-		if(F.format == 0){
-			o.val(n[0]);
-		}else{
-			
-			if(n[0] == ''){
-				o.val('0' + F.decimal + n[1]);
-			}else{
-				o.val(n[0] + F.decimal + n[1]);
-			}
-			
-		}
-		
-	}else if(F.type == 'date'){
-
-		var vd	= nuJavascriptDateParse(v, F.format);
-
-		if(vd === null){
-			
-			alert("Invalid Format (expecting '" + F.sample + "')");
-			o.val('');
-			return;
-			
-		}
-
-		var nd		= String(F.format);
-		var full	= String(vd).split(' ');
-		var mthno	= ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
-		
-		nd	= nd.replace('yyyy', full[3])
-		nd	= nd.replace('yy', String(full[3]).substr(-2))
-		nd	= nd.replace('mmm', full[1])
-		nd	= nd.replace('mm', mthno[full[1]])
-		nd	= nd.replace('dd', String('0' + '' + vd.getDate()).substr(-2))
-		
-		o.val(nd);
-		
-	}
+	o.val(nuFORM.addFormatting(v, f));
 	
 }
 
