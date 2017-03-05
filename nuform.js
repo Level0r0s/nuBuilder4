@@ -399,8 +399,9 @@ function nuINPUT(w, i, l, p, prop){
 	if(input_type != 'button'){
 		$('#' + id).attr('data-nu-data', '');
 	}
-		
-	if(w.objects[i].value == ''){             //== check for Cannot be left blank
+	
+	//if(w.objects[i].value == ''){             //== check for Cannot be left blank
+	if(w.objects[i].value != '' && window.nuFORM.getCurrent().record_id == '-1'){             //== check for Cannot be left blank
 		$('#' + id).addClass('nuEdited');
 	}
 	
@@ -673,13 +674,17 @@ function nuSELECT(w, i, l, p, prop){
 	}else{
 		nuLabel(w, i, p, prop);
 	}
-
+	
 	var sel = document.createElement('select');
 	
 	sel.setAttribute('id', id);
 
 	$('#' + ef).append(sel);
 
+	if(w.objects[i].value != '' && window.nuFORM.getCurrent().record_id == '-1'){
+		$('#' + id).addClass('nuEdited');
+	}
+	
 	nuAddDataTab(id, prop.objects[i].tab, p);
 
 	$('#' + id).css({'top'     : Number(prop.objects[i].top),
