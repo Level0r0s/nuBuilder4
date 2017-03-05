@@ -63,12 +63,16 @@ function nuBuildForm(f){
 	}
 
 	nuGetStartingTab();
-	nuAddJavascript(f);
+	
 	$('#nuSearchField').focus();
 
     if(f.record_id == '-2'){
         nuCreateDragOptionsBox(f);
+	}else{
+		nuAddJavascript(f);
 	}
+
+
 	//window.nuTYPE 					= 'browse';
 	
 }
@@ -1116,6 +1120,46 @@ function nuAddBreadcrumbs(){
     
 }
 
+
+function nuAddBreadcrumb(i){
+
+	var last 	= (i + 1 == window.nuFORM.breadcrumbs.length);                 //-- last breadcrumb
+
+	var bc 		= window.nuFORM.breadcrumbs[i];
+	var bcId 	= 'nu_bc_' + i;
+	
+	var div		= document.createElement('div');
+	div.setAttribute('id', bcId);
+
+	$('#' + 'nuBreadcrumbHolder').append(div);
+	
+	if(last){
+		
+		$('#' + bcId)
+		.addClass('nuNotBreadcrumb')
+		.html(nuTranslate(bc.title));
+		
+	}else{
+		
+		$('#' + bcId)
+		.attr('onclick', 'nuGetBreadcrumb(' + i + ')')
+		.addClass('nuBreadcrumb')
+		.html(nuTranslate(bc.title) + '<div id="nuarrow'+i+'" class="nuBreadcrumbArrow">&nbsp;&#x25BA;&nbsp;<div>');
+		
+	}
+	
+}
+
+function nuSetTitle(t){
+	
+	if(nuFORM.getCurrent().record_id == ''){return;}
+
+	nuFORM.setProperty('title', t);
+	nuAddBreadcrumbs();
+	
+}
+
+
 function nuAddEditTabs(p, w){
 	
 	nuSetStartingTab(p);
@@ -1204,35 +1248,6 @@ function nuStartingTab(p){
 		this.prefix 		= p;
 		this.tabNumber 	= 0;
 		
-}
-
-function nuAddBreadcrumb(i){
-
-	var last 	= (i + 1 == window.nuFORM.breadcrumbs.length);                 //-- last breadcrumb
-
-	var bc 		= window.nuFORM.breadcrumbs[i];
-	var bcId 	= 'nu_bc_' + i;
-	
-	var div		= document.createElement('div');
-	div.setAttribute('id', bcId);
-
-	$('#' + 'nuBreadcrumbHolder').append(div);
-	
-	if(last){
-		
-		$('#' + bcId)
-		.addClass('nuNotBreadcrumb')
-		.html(nuTranslate(bc.title));
-		
-	}else{
-		
-		$('#' + bcId)
-		.attr('onclick', 'nuGetBreadcrumb(' + i + ')')
-		.addClass('nuBreadcrumb')
-		.html(nuTranslate(bc.title) + '<div id="nuarrow'+i+'" class="nuBreadcrumbArrow">&nbsp;&#x25BA;&nbsp;<div>');
-		
-	}
-	
 }
 
 function nuEditTab(p, t, i){

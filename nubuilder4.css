@@ -569,6 +569,18 @@ input {
 	background-color:lightgray;
 }
 
+.nuCalculatorCurrency {
+	
+	border:1px solid black;
+	text-align:center;
+	width:30px;
+	height:30px;
+	font: 16px bold;
+	font-family:monospace;
+	background-color:lightgray;
+	
+}
+
 .nuCalculatorButton:hover {
 	background-color:darkgray;
 	cursor:pointer;
