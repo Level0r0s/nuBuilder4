@@ -1,62 +1,73 @@
 
-window.nuCalColor = '#F0F0F0';
-window.nuCalTop   =  - 30;
+window.nuCalColor	= '#F0F0F0';
+window.nuCalTop		=  - 30;
 
 function nuAppendChild(p,t,i){
 
-	var o		= document.createElement(t);
+	var o			= document.createElement(t);
+
 	o.setAttribute('id',i);
-	$(p).append(o)
+	
+	$(p)
+	.append(o)
 	.css('zIndex', 3000);
+	
 	return document.getElementById(i);
 	
 }
 
 function nuPopupCalendar(pThis){
 
-	if(pThis===null){return;}
+	if(pThis === null){return;}
 
 	$('#nuCalendar').remove();
 	$('#nuLookupList').remove();
 
-	window.nuCalendarCaller  = pThis.id;
+	window.nuCalendarCaller	= pThis.id;
 	
-
-	var i	= pThis.id; //fm.target;
-	var tar	= $('#' + i);
-	var off	= $('#' + i).offset();
-	var top	= off.top;
-	var left	= off.left;
-	var h	= parseInt(tar.css('height'));
+	var o	= $('#' + window.nuCalendarCaller);
+	var f	= o.attr('data-nu-format');
+	var v	= o.val();
+	var u	= nuFORM.removeFormatting(v, f);
+	console.log(u,v, f);
+	var i					= pThis.id; 					//-- Object ID;
+	var tar					= $('#' + i);
+	var off					= $('#' + i).offset();
+	var top					= off.top;
+	var left				= off.left;
+	var h					= parseInt(tar.css('height'));
 
 	
 	window.nuOnCalendar		= 0;          //-- cursor not in calendar
 	
 	var c					= nuAppendChild('body','div','nuCalendar');
 	c						= $('#nuCalendar');
-	c.attr('onmouseover', 'window.nuOnCalendar = 1');
-	c.attr('onmouseout', 'window.nuOnCalendar = 0');
-	c.css({'top':(top + h + 3), left: left})
+
+	c
+	.attr('onmouseover', 'window.nuOnCalendar = 1')
+	.attr('onmouseout', 'window.nuOnCalendar = 0')
+	.css({'top':(top + h + 3), left: left})
 	.addClass('nuCalendar nuCalendarColor')
 	.html('<img id="dialogCalClose" src="close.png" style="position: absolute; top: 0px; right: 0px;" onclick="$(\'#nuCalendar\').remove()">');
 	
-	var c = nuAppendChild('#nuTabAreaHolder','div','nuCalCloser');
+	var c 					= nuAppendChild('#nuTabAreaHolder','div','nuCalCloser');
 
-	c					= $('#nuCalCloser');
-	
-	c.html('&#x2716;')
+	c						= $('#nuCalCloser');
+
+	c
+	.html('&#x2716;')
 	.attr('onclick', "document.getElementById('nuCalendar').remove();")
 	.css({'background-color'	: 'lightgrey',
 			'position'		: 'absolute',
 			'top'			: (window.nuCalTop + 32),
 			'left'			: 2,
 			'width'			: 20,
-			'height'			: 20,
-			'text-align'		: 'center',
+			'height'		: 20,
+			'text-align'	: 'center',
 			'font-size'		: 14,
-			'font-style'		: 'bold',
+			'font-style'	: 'bold',
 			'color'			: '#000000',
-			'cursor'			: 'pointer',
+			'cursor'		: 'pointer',
 			'border-style'	: 'solid',
 			'border-width'	: 1,
 			'border-color'	: 'grey', 
@@ -66,33 +77,33 @@ function nuPopupCalendar(pThis){
 
 	var c = nuAppendChild('#nuCalendar','div','nuCalYear');
 	
-	c					= $('#nuCalYear');
+	c						= $('#nuCalYear');
 
-	c.css({'position'			: 'absolute',
+	c.css({'position'		: 'absolute',
 			'top'			: (window.nuCalTop + 55),
 			'left'			: 60,
 			'width'			: 90,
-			'height'			: 25,
-			'text-align'		: 'center',
+			'height'		: 25,
+			'text-align'	: 'center',
 			'font-size'		: 14,
 			'color'			: '#000000',
-			'cursor'			: 'pointer',
+			'cursor'		: 'pointer',
 	})
 	.addClass('nuCalendarColor');
 
 
 	var c = nuAppendChild('#nuCalendar','div','nuCalYearLess');
 
-	c					= $('#nuCalYearLess');
+	c						= $('#nuCalYearLess');
 
 	c.attr('onclick', "window.nuCalYear--;nuPopulateCalendar('')")
 	.css({'position'			: 'absolute',
 			'top'			: (window.nuCalTop + 55),
 			'left'			: 40,
 			'width'			: 30,
-			'height'			: 25,
-			'cursor'			: 'pointer',
-			'text-align'		: 'center',
+			'height'		: 25,
+			'cursor'		: 'pointer',
+			'text-align'	: 'center',
 			'font-size'		: 14,
 			'color'			: '#000000',
 	})
@@ -100,19 +111,19 @@ function nuPopupCalendar(pThis){
 	.addClass('nuCalendarSelected nuCalendar');
 
 
-	var c = nuAppendChild('#nuCalendar','div','nuCalYearMore');
+	var c 					= nuAppendChild('#nuCalendar','div','nuCalYearMore');
 
-	c					= $('#nuCalYearMore');
+	c						= $('#nuCalYearMore');
 
-	c.attr('onclick', "window.nuCalYear++;nuPopulateCalendar('')")
-
+	c
+	.attr('onclick', "window.nuCalYear++;nuPopulateCalendar('')")
 	.css({'position'			: 'absolute',
 			'top'			: (window.nuCalTop + 55),
 			'left'			: 140,
 			'width'			: 30,
-			'height'			: 25,
-			'cursor'			: 'pointer',
-			'text-align'		: 'center',
+			'height'		: 25,
+			'cursor'		: 'pointer',
+			'text-align'	: 'center',
 			'font-size'		: 14,
 			'color'			: '#000000',
 	})
@@ -123,12 +134,13 @@ function nuPopupCalendar(pThis){
 	
 	c					= $('#nuCalMonth');
 
-	c.css({'position'			: 'absolute',
+	c
+	.css({'position'			: 'absolute',
 			'top'			: window.nuCalTop + 75,
 			'left'			: 60,
 			'width'			: 90,
-			'height'			: 25,
-			'text-align'		: 'center',
+			'height'		: 25,
+			'text-align'	: 'center',
 			'font-size'		: 14,
 			'color'			: '#000000',
 	})
@@ -138,14 +150,15 @@ function nuPopupCalendar(pThis){
 
 	c					= $('#nuCalMonthLess');
 
-	c.attr('onclick', "window.nuCalMonth--;nuPopulateCalendar(this.id)")
+	c
+	.attr('onclick', "window.nuCalMonth--;nuPopulateCalendar(this.id)")
 	.css({'position'			: 'absolute',
 			'top'			: (window.nuCalTop + 75),
 			'left'			: 40,
 			'width'			: 30,
-			'height'			: 25,
-			'cursor'			: 'pointer',
-			'text-align'		: 'center',
+			'height'		: 25,
+			'cursor'		: 'pointer',
+			'text-align'	: 'center',
 			'font-size'		: 14,
 			'color'			: '#000000',
 	})
@@ -153,26 +166,26 @@ function nuPopupCalendar(pThis){
 	.addClass('nuCalendarSelected nuCalendar');
 
 
-	var c = nuAppendChild('#nuCalendar','div','nuCalMonthMore');
+	var c 					= nuAppendChild('#nuCalendar','div','nuCalMonthMore');
 
-	c					= $('#nuCalMonthMore');
+	c						= $('#nuCalMonthMore');
 
 	c.attr('onclick', "window.nuCalMonth++;nuPopulateCalendar(this.id)")
 	.css({'position'			: 'absolute',
 			'top'			: (window.nuCalTop + 75),
 			'left'			: 140,
 			'width'			: 30,
-			'height'			: 25,
-			'cursor'			: 'pointer',
-			'text-align'		: 'center',
+			'height'		: 25,
+			'cursor'		: 'pointer',
+			'text-align'	: 'center',
 			'font-size'		: 14,
 			'color'			: '#000000',
 	})
 	.html('&#9658;')
 	.addClass('nuCalendarSelected nuCalendar');
 	
-	var t                    = 90; 
-	var l                    = 0;
+	var t					= 90; 
+	var l					= 0;
 
 	for(var i = 0 ; i < 42 ; i++){
 	
@@ -181,47 +194,49 @@ function nuPopupCalendar(pThis){
 		nuDayBox(i, l, t)
 		
 		if(l == 180){
+			
 			l	= 0;
 			t	= t + 20;
+			
 		}else{
 			l	= l + 30;
 		}
 		
 	}
 
-	var caller	= document.getElementById(window.nuCalendarCaller);
-
-	nuReformat(caller);
+	var d		= String(u).split('-');
 	
-	var fd                   = nuJavascriptDate(caller)
+	if(u == ''){
+		
+		var n	= new Date();
+		d		= [n.getFullYear(), n.getMonth() + 1, n.getDate()];
+		
+	}
 
-	var d                    = new Date();
-
-	if(fd != ''){d = fd;}
-
-	nuPopulateCalendar('', d.getFullYear(), d.getMonth(), d.getDate());
+	nuPopulateCalendar('', Number(d[0]), Number(d[1]), Number(d[2]));
 	
 }
 
 function nuTitleBox(n, l){
 
-	var t                    = nuTranslate('SMTWTFS');
-	var c                    = nuAppendChild('#nuCalendar','div','nuCalTitle' + n);
+	var t					= nuTranslate('SMTWTFS');
+	var c					= nuAppendChild('#nuCalendar','div','nuCalTitle' + n);
 
-	c					= $('#nuCalTitle' + n);
+	c						= $('#nuCalTitle' + n);
 
-	c.css({'position'			: 'absolute',
+	c
+	.css({'position'		: 'absolute',
 			'top'			: (window.nuCalTop + 97),
 			'left'			: l,
 			'width'			: 28,
-			'height'			: 18,
-			'cursor'			: 'pointer',
+			'height'		: 18,
+			'cursor'		: 'pointer',
 			'color'			: '#000000',
 			'border-color'	: '#D3D3D3',
 			'border-style'	: 'none',
 			'border-width'	: 1,
-			'text-align'		: 'center',
-			'font-style'		: 'bold',
+			'text-align'	: 'center',
+			'font-style'	: 'bold',
 			'font-size'		: 14,
 	})
 	.html(t.substr(n, 1))
@@ -231,14 +246,13 @@ function nuTitleBox(n, l){
 
 function nuDayBox(n, l, t){
 
-	var c                    = nuAppendChild('#nuCalendar','div','nuCalDay'+n);
-	var today                =  new Date();
-	
+	var c					= nuAppendChild('#nuCalendar','div','nuCalDay'+n);
+	var today				=  new Date();
 
+	c						= $('#nuCalDay' + n);
 
-	c					= $('#nuCalDay' + n);
-
-	c.attr('onclick', "window.nuCalDay=this.innerHTML;nuCalChoice(this)")
+	c
+	.attr('onclick', "window.nuCalDay=this.innerHTML;nuCalChoice(this)")
 	.css({'position'			: 'absolute',
 			'top'			: (window.nuCalTop + t + 30),
 			'left'			: Number(l),
@@ -256,10 +270,13 @@ function nuDayBox(n, l, t){
 function nuPopulateCalendar(id, y, m, d){
 
 	if(arguments.length != 1){
+		
 		window.nuCalDay                                   = d;
-		window.nuCalMonth                                 = m;
+		window.nuCalMonth                                 = m - 1;
 		window.nuCalYear                                  = y;
+		
 	}
+
 	window.nuCalMonth = nuMonthScope(window.nuCalMonth);
 	
 	if(id == 'nuCalMonthLess' && window.nuCalMonth == 11){
@@ -272,33 +289,33 @@ function nuPopulateCalendar(id, y, m, d){
 	
 	document.getElementById('nuCalYear').innerHTML        = window.nuCalYear;
 	document.getElementById('nuCalMonth').innerHTML       = nuTranslate(nuFullMonth(window.nuCalMonth));
+	
 	var s                                                 = new Date(window.nuCalYear, window.nuCalMonth, 1);
 	var today                                             = new Date();
 	var day                                               = 0;
 	var nextmonth                                         = 0;
 	
 	for(var i = 0 ; i < 42 ; i++){
-	
 		document.getElementById('nuCalDay' + i).innerHTML = '';
-		
 	}
 	
 	for(var i = s.getDay() ; i < 42 ; i++){
 		
 		day++;
 		s.setDate(day);
-		c = document.getElementById('nuCalDay' + i);
+		c													= document.getElementById('nuCalDay' + i);
 		
 		if(s.getDate() != day){
 			return;
 		}
 		
 		if(today.getDate() == day && today.getMonth() == window.nuCalMonth && today.getFullYear() == window.nuCalYear){
-			c.style.color            = 'red';
+			c.style.color									= 'red';
 		}else{
-			c.style.color            = '#000000';
+			c.style.color									= '#000000';
 		}
-		c.innerHTML = day;
+		
+		c.innerHTML											= day;
 		
 	}
 
@@ -307,12 +324,11 @@ function nuPopulateCalendar(id, y, m, d){
 
 function nuPreviousMonth(y, m, d){
 
-	m = nuMonthScope(m-1);
-	
-	var d   = new Date(y, m, 1);
-	
-	var p   = Array();
-	var day = 1;
+	m 				= nuMonthScope(m-1);
+
+	var d   		= new Date(y, m, 1);
+	var p   		= Array();
+	var day 		= 1;
 
 	while (d.getDate() == day) {
 	
@@ -349,7 +365,7 @@ function nuFullMonth(n){
 
 function nu2Month(n){
 	
-	var mth  = Array();
+	var mth		= Array();
 	
 	mth['Jan']	= '01';
 	mth['Feb']	= '02';
@@ -373,30 +389,22 @@ function nuCalChoice(t){
 
 	if(t.innerHTML == ''){return;}
 
+	var FMT	= nuFORM.setFormats();
 	var o	= $('#' + window.nuCalendarCaller);
 	var f	= o.attr('data-nu-format');
-	var a	= o.attr('data-nu-formata');
-	var d	= nuPad2('0' + t.innerHTML);
-	var M	= String($('#nuCalMonth').html()).substr(0,3);
-	var m	= nu2Month(M);
-	var Y	= $('#nuCalYear').html();
-	var y	= nuPad2(Y);
-	var dt	= new Date(m + ' ' + d + ' ' + y);
-	var v	= '';
 
-	if(f == 6){	v = d + '-' + M + '-' + Y;}
-	if(f == 7){	v = d + '-' + m + '-' + Y;}
-	if(f == 8){	v = M + '-' + d + '-' + Y;}
-	if(f == 9){	v = m + '-' + d + '-' + Y;}
-	if(f == 10){v = d + '-' + M + '-' + y;}
-	if(f == 11){v = d + '-' + m + '-' + y;}
-	if(f == 12){v = M + '-' + d + '-' + y;}
-	if(f == 13){v = m + '-' + d + '-' + y;}
-	if(f == 32){v = Y + '-' + m + '-' + d;}
+	var D	= Number(t.innerHTML);
+	var M	= Number(FMT[String($('#nuCalMonth').html()).substr(0,3)]['jsmonth']);
+	var Y	= Number($('#nuCalYear').html());
 	
-	o.val(v);
-	o.change();
-	o.focus();
+	var dt	= new Date(Y, M, D, 0, 0, 0, 0);
+	var b	= dt.getFullYear() + '-' + nuPad2(dt.getMonth()+1) + '-' + dt.getDate();
+
+	o
+	.val(b)
+	.change()
+	.focus();
+	
 	$('#nuCalendar').remove();
 
 }
@@ -415,9 +423,12 @@ function nuBuildDate(){
 
 function nuMonthScope(m){
 
-	if(m<0){m=11;}
-	if(m>11){m=0;}
+	if(m < 0)	{m =11;}
+	if(m > 11)	{m =0;}
 	
 	return m;
 
 }
+
+
+

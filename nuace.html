@@ -130,8 +130,12 @@ window.onbeforeunload = nuWarning;
 <body style='background-color:#000000' onload='nuLoad()' onresize='nuResize()'>
 
 	<span id='nuTool0' onclick='nuAceSave()' class='nuTool' style=''>Copy Changes</span>
-	<span style='margin:8px;color:white;font-family:helvetica;font-size:14px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tables </span><select id="nuTable" onchange='nuPopFields()' style='margin:8px;top:10px;width:200px'></select>
-	<span style='margin:8px;color:white;font-family:helvetica;font-size:14px;'> Fields </span><select id="nuField" onfocus='nuUpdateDrag(this)' onchange='nuChooseFields()'              style='margin:8px;width:200px'></select>
+	<span style='margin:8px;color:white;font-family:helvetica;font-size:14px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tables </span>
+	<input id="nuTable" onkeydown='opener.nuFORM.scrollList(event, opener.nuFORM.getTables())' style='margin:8px;top:10px;width:200px'></input>
+	<span style='margin:8px;color:white;font-family:helvetica;font-size:14px;'> Fields </span>
+	
+	<input id="nuField" onkeydown='opener.nuFORM.scrollList(event, opener.nuFORM.tableFields(document.getElementById('nuTable').value)' style='margin:8px;width:200px'></input>
+	
 	<span style='margin:8px;color:white;font-family:helvetica;font-size:14px;'> Snippets/Functions </span><select id="nuSnip" onfocus='nuUpdateDrag(this)' onchange='nuChooseSnips(this)' style='margin:8px;width:200px'></select>
 	<span style='margin:8px;color:white;font-family:helvetica;font-size:14px;'> Copy/Drag </span><input type='text' onfocus='this.select()' onclick='this.select()' readonly id="nuDrag" style='margin:8px;background-color:lightblue;width:200px'>
 	<span id='nu_code_type'   class='nuAce' style='left:10px;text-align:left;color:lightblue'></span>
