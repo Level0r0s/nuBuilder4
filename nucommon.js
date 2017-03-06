@@ -264,13 +264,15 @@ function nuReformat(t){
 
 	var o			= $('#' + t.id);
 	var f			= o.attr('data-nu-format');
-	var v			= String(o.val());
+//	var v			= nuFORM.removeFormatting(String(o.val()), f);
+	var v			= o.val();
 	
 	if(f == '' || v == ''){return v;}
 
 	o.val(nuFORM.addFormatting(v, f));
 	
 }
+
 
 function nuJavascriptDate(t){
 
@@ -279,43 +281,10 @@ function nuJavascriptDate(t){
 	var v	= String(o.val());
 	var F   = nuFormats[f];
 
-    if(v == ''){return v;}
-
-    return nuJavascriptDateParse(v, F.format);
+    return nuFORM.addFormatting(v, f);
 
 }
 
-function nuJavascriptDateParse(valueStr, FormatStr){
-
-    var msk = FormatStr.split('-');
-    var s   = [];
-    var d   = valueStr.split('-');
-
-    if(msk[0] == 'mm'){s[0] = d[0];}
-    if(msk[1] == 'mm'){s[0] = d[1];}
-    if(msk[2] == 'mm'){s[0] = d[2];}
-    if(msk[0] == 'mmm'){s[0] = nu2Month(d[0]);}
-    if(msk[1] == 'mmm'){s[0] = nu2Month(d[1]);}
-    if(msk[2] == 'mmm'){s[0] = nu2Month(d[2]);}
-    
-    if(msk[0] == 'dd'){s[1] = d[0];}
-    if(msk[1] == 'dd'){s[1] = d[1];}
-    if(msk[2] == 'dd'){s[1] = d[2];}
-    
-    if(msk[0] == 'yy'){s[2] = d[0] >= 50 ? ((new Date().getFullYear())-1).toString().substr(0,2) + d[0] : new Date().getFullYear().toString().substr(0,2) + d[0];}
-    if(msk[1] == 'yy'){s[2] = d[1] >= 50 ? ((new Date().getFullYear())-1).toString().substr(0,2) + d[1] : new Date().getFullYear().toString().substr(0,2) + d[1];}
-    if(msk[2] == 'yy'){s[2] = d[2] >= 50 ? ((new Date().getFullYear())-1).toString().substr(0,2) + d[2] : new Date().getFullYear().toString().substr(0,2) + d[2];}
-    if(msk[0] == 'yyyy'){s[2] = d[0];}
-    if(msk[1] == 'yyyy'){s[2] = d[1];}
-    if(msk[2] == 'yyyy'){s[2] = d[2];}
-
-    var returnDate = new Date(s[2] + '-' + s[0] + '-' + s[1]);
-	
-    if(returnDate == 'Invalid Date'){returnDate = null;}
-	
-    return returnDate;
-
-}
 
 
 function nuOpenAce(lang, obj){
@@ -708,7 +677,7 @@ function nuAddThousandSpaces(s, c){
 	if(r.length > 11){r.splice(11, 0, c);}
 	if(r.length > 15){r.splice(15, 0, c);}
 	if(r.length > 19){r.splice(19, 0, c);}
-	if(r.length > 23){r.splice(23, 0, c);}
+	if(r.length > 23){return -1;}
 
 	r	= r.reverse();
 	

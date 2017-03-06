@@ -213,7 +213,11 @@ class nuFormObject {
 			
 		}else{
 			
-			return Number($('#' + field).val());
+			var o				= $('#' + field);
+			var f				= o.attr('data-nu-format');
+			var v				= o.val();
+			
+			return nuFORM.removeFormatting(v, f);
 			
 		}
 
@@ -325,7 +329,10 @@ class nuFormObject {
 						F[C]	= this.id.substr(sf.length + 3);
 					}
 					
-					V[C]		= $('#' + this.id).val();
+					var dnf		= $('#' + this.id).attr('data-nu-format');
+					var val		= $('#' + this.id).val();
+					
+					V[C]		= nuFORM.removeFormatting(val, dnf);
 					E[C]		= $('#' + this.id).hasClass('nuEdited') ? 1 : 0 ;
 
 					C++;
@@ -402,7 +409,7 @@ class nuFormObject {
 	}
 	
 	addFormatting(v, f){
-		
+
 		v				= String(v);
 		f				= String(f);
 		
@@ -422,33 +429,44 @@ class nuFormObject {
 			}
 
 			var o		= v.split('.');
-			var m		= s + ' ' + nuAddThousandSpaces(o[0], c) + d + String(o[1]).substr(0, p)
+			var h		= nuAddThousandSpaces(o[0], c);
+			
+			if(h == -1){
+				return "Man! That's a BIG number, stop showing off.";
+			}
+			
+			if(o.length == 1 || o[1] == ''){ 				//-- no decimal numbers even if it has a decimal place
+				var m		= s + ' ' + h;
+			}else{
+				
+				var dnum	= String(o[1]);
+				var m		= s + ' ' + h + d + String(dnum + String(0).repeat(p - dnum.length)).substr(0, p)
+				
+			}
 			
 			return m;
 		
 		}
 		
 		if(f[0] == 'D'){	//-- date
-			
+
 			var FMT		= this.setFormats();
-			var dt		= v.split(' ');
-			var d		= dt[0].split('-');
-			
-			if(dt.length == 1){
+			var d		= String(v.split(' ')[0]).split('-');
+			var t		= String(v.split(' ')[1]).split(':');
+
+			if(t[0] == 'undefined'){
 				var t	= [0, 0, 0];
-			}else{
-				var t	= dt[1].split(':');
 			}
 			
-			var o 		= new Date(d[0], d[1], d[2], t[0], t[1], t[2], 0);			//-- (year, month, day, hours, minutes, seconds, milliseconds)
+			var o 		= new Date(d[0], d[1]-1, d[2], t[0], t[1], t[2], 0);			//-- (year, month, day, hours, minutes, seconds, milliseconds)
 			
 			var wee		= o.toString().split(' ')[0];								//-- Tue Sep 07 2004 11:11:12 GMT+0930 (Cen. Australia Standard Time)
 			var mth		= o.toString().split(' ')[1];
 			var day		= o.toString().split(' ')[2];
 			var yea		= o.toString().split(' ')[3];
-			var hou		= o.toString().split(' ')[4].split(':')[0];
-			var min		= o.toString().split(' ')[4].split(':')[1];
-			var sec		= o.toString().split(' ')[4].split(':')[2];
+			var hou		= String(o.toString().split(' ')[4]).split(':')[0];
+			var min		= String(o.toString().split(' ')[4]).split(':')[1];
+			var sec		= String(o.toString().split(' ')[4]).split(':')[2];
 			var s		= String(f);
 			
 			if(Number(hou) > 11){
@@ -472,7 +490,7 @@ class nuFormObject {
 //			s			= s.replaceAll('m', 		FMT[mth]['m']);
 			s			= s.replaceAll('dddd',		FMT[wee]['dddd']);
 			s			= s.replaceAll('ddd',		FMT[wee]['ddd']);
-			s			= s.replaceAll('dd',		FMT[wee]['dd']);
+			s			= s.replaceAll('dd',		day);
 //			s			= s.replaceAll('d',			Number(day));
 			s			= s.replaceAll('hh',	 	hou);
 			s			= s.replaceAll('nn',		min);
@@ -487,10 +505,12 @@ class nuFormObject {
 	
 	removeFormatting(v, f){
 		
+		if(v == ''){return v;}
+		
 		v				= String(v);
 		f				= String(f);
 
-		if(f[0] == 'N'){	//-- number
+		if(f[0] == 'N'){									//-- number
 
 			f			= f.substr(2);
 			var s		= String(f.split(' ')[0]);			//-- sign
@@ -514,7 +534,7 @@ class nuFormObject {
 		
 		}
 
-		if(f[0] == 'D'){	//-- date
+		if(f[0] == 'D'){									//-- date
 			
 			var FMT		= this.setFormats();
 			var hasTime	= f.indexOf('hh') != -1 || f.indexOf('nn') != -1 || f.indexOf('ss') != -1; 	//-- looking for the time
@@ -548,7 +568,7 @@ class nuFormObject {
 				if(fmt.length > 2){
 					
 					if(l == 'm' && FMT[v[i]] !== undefined){
-						d.m		= FMT[v[i]]['jsmonth'];					//-- javascript date
+						d.m		= FMT[v[i]]['mm'];					//-- javascript date
 					}
 					
 					if(l == 'd' && FMT[v[i]] !== undefined){
@@ -572,12 +592,12 @@ class nuFormObject {
 			
 			var o 	= new Date(d.y, d.m, d.d, Number(d.h), Number(d.n), Number(d.s), 0);
 			var y	= String(o.getFullYear()) 	+ '-';
-			var m	= nuPad2(o.getMonth()+ 1)	+ '-';
+			var m	= nuPad2(o.getMonth())		+ '-';
 			var d	= nuPad2(o.getDate())		+ ' ';
 			var h	= nuPad2(o.getHours()) 		+ ':';
 			var n	= nuPad2(o.getMinutes()) 	+ ':';
 			var s	= nuPad2(o.getSeconds());
-			
+
 			if(hasTime){
 				return  String(y+m+d+h+n+s);
 			}else{

@@ -10,7 +10,6 @@ function nuBuildForm(f){
 	}
 	
 	window.nuSESSION				= f.session_id;
-	window.nuLastChange				= null;
 	window.onbeforeunload			= null;
 	window.nuSUBFORMROW				= [];
 	window.nuSUBFORMJSON			= [];
@@ -69,11 +68,14 @@ function nuBuildForm(f){
     if(f.record_id == '-2'){
         nuCreateDragOptionsBox(f);
 	}else{
+		
 		nuAddJavascript(f);
+		
+		$('input').focus(function() {
+		  $( this ).select();
+		});
+		
 	}
-
-
-	//window.nuTYPE 					= 'browse';
 	
 }
 
@@ -413,7 +415,7 @@ function nuINPUT(w, i, l, p, prop){
 
 	if(w.objects[i].format != ''){
 		
-		if(nuFormats[w.objects[i].format].type == 'date'){
+		if(String(w.objects[i].format)[0] == 'D'){
 			$('#' + id).attr('onclick', 'nuPopupCalendar(this);');
 		}
 		
@@ -434,7 +436,6 @@ function nuINPUT(w, i, l, p, prop){
 		
 		.prop('readonly', true).prop('tabindex',-1)
 		.attr('data-nu-formula', nuBuildFormula(p, w.objects[i].formula))
-		.attr('data-nu-formata', w.objects[i].formata);
 		
 		if(p != ''){
 			$('#' + id).addClass('nuSubformObject');
@@ -2159,18 +2160,9 @@ function nuFormClass(frm){
 
 }
 
-function nuFormatObject(t){
-	
-	var f	= $('#' + t.id).attr('data-nu-format');
-	
-	if(f == ''){return;}
-	
-}
 
 function nuChange(e){
 
-	window.nuLastChange	= e;
-	
 	if(e.target.id.substr(-8) == 'nuDelete'){
 		
 		nuHasBeenEdited();
@@ -2179,12 +2171,9 @@ function nuChange(e){
 	}
 		
 	var t	= $('#' + e.target.id)[0];
-	var f	= $('#' + t.id).attr('data-nu-format');
 	var p	= $('#' + t.id).attr('data-nu-prefix');
 	
-	if(f != ''){
-		nuReformat(t)
-	}
+	nuReformat(t);
 	
 	$('#' + p + 'nuDelete').prop('checked', false);
 	$('#' + t.id).addClass('nuEdited');
@@ -2379,10 +2368,9 @@ function nuHashFromEditForm(){
 
 		}else{
 
-			var format	= o.attr('data-nu-format');
-			var F		= nuFormats[format == '' ? '0' : format];
-
-			if(F.type == 'date' && val != ''){
+			var format	= String(o.attr('data-nu-format'))[0];
+			
+			if(format == 'D' && val != ''){
 
 				var d	= new Date(val);
 				val		= d.getFullYear() + '-' + nuPad2(Number(Number(d.getMonth())+Number(1))) + '-' + nuPad2(d.getDate());
@@ -2706,35 +2694,5 @@ function nuRebuild_nuTotal(p, s){
 	
 }
 
-
-function nuFormatDate(s){
-	
-	var d	= new Date(s)
-	.toString()
-	.split(' ', 6);
-
-	//["Sat", "Jan", "13", "2007", "10:30:00", "GMT+1030"]
-
-	var f	= {};
-
-	f.WWW	= [d[0], 'Fri'];
-	f.WWWW	= [nuFORM.formats[d[0]]['WWWW'], 'Friday'];
-	f.w		= [nuFORM.formats[d[0]]['w'], '6'];
-	f.MMM	= [d[1], 'Jan'];
-	f.MMMM	= [nuFORM.formats[d[1]]['MMMM'], 'January'];
-	f.mm	= [nuFORM.formats[d[1]]['mm'], '01'];
-	f.m		= [nuFORM.formats[d[1]]['m'], '1'];
-	f.dd	= [d[2], '13'];
-	f.d		= [String(Number(d[2])), '13'];
-	f.yyyy	= [d[3], '2007'];
-	f.yy	= [String(d[3]).substr(2), '07'];
-	f.y		= [String(d[3]).substr(3), '7'];
-	f.th	= [String(d[4]).split(':')[0], '10'];
-	f.tm	= [String(d[4]).split(':')[1], '30'];
-	f.ts	= [String(d[4]).split(':')[2], '00'];
-	
-	return f;
-	
-}
 
 
