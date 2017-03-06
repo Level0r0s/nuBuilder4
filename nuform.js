@@ -1627,7 +1627,7 @@ function nuBrowseTable(){
 	var h				= bc.row_height;
 	var t				= 57 - h;
 	var l				= 13;
-	
+
 	for(r = 0 ; r < rows ; r++){
 	
 		l				= 7;

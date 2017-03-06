@@ -94,7 +94,7 @@ class nuFormObject {
 		b.object_id        	= '1';
 		b.page_number      	= 0;
 		b.password     		= '';
-		b.rows        		= 25;
+		b.rows        		= 20;
 		b.row_height		= 25;
 		b.search           	= '';	
 		b.session_id		= '';
