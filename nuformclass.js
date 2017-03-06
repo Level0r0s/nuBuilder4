@@ -213,7 +213,11 @@ class nuFormObject {
 			
 		}else{
 			
-			return Number($('#' + field).val());
+			var o				= $('#' + field);
+			var f				= o.attr('data-nu-format');
+			var v				= o.val();
+			
+			return nuFORM.removeFormatting(v, f);
 			
 		}
 
@@ -325,7 +329,10 @@ class nuFormObject {
 						F[C]	= this.id.substr(sf.length + 3);
 					}
 					
-					V[C]		= $('#' + this.id).val();
+					var dnf		= $('#' + this.id).attr('data-nu-format');
+					var val		= $('#' + this.id).val();
+					
+					V[C]		= nuFORM.removeFormatting(val, dnf);
 					E[C]		= $('#' + this.id).hasClass('nuEdited') ? 1 : 0 ;
 
 					C++;
@@ -428,7 +435,14 @@ class nuFormObject {
 				return "Man! That's a BIG number, stop showing off.";
 			}
 			
-			var m		= s + ' ' + h + d + String(o[1]).substr(0, p)
+			if(o.length == 1 || o[1] == ''){ 				//-- no decimal numbers even if it has a decimal place
+				var m		= s + ' ' + h;
+			}else{
+				
+				var dnum	= String(o[1]);
+				var m		= s + ' ' + h + d + String(dnum + String(0).repeat(p - dnum.length)).substr(0, p)
+				
+			}
 			
 			return m;
 		
@@ -496,7 +510,7 @@ class nuFormObject {
 		v				= String(v);
 		f				= String(f);
 
-		if(f[0] == 'N'){	//-- number
+		if(f[0] == 'N'){									//-- number
 
 			f			= f.substr(2);
 			var s		= String(f.split(' ')[0]);			//-- sign
@@ -520,7 +534,7 @@ class nuFormObject {
 		
 		}
 
-		if(f[0] == 'D'){	//-- date
+		if(f[0] == 'D'){									//-- date
 			
 			var FMT		= this.setFormats();
 			var hasTime	= f.indexOf('hh') != -1 || f.indexOf('nn') != -1 || f.indexOf('ss') != -1; 	//-- looking for the time

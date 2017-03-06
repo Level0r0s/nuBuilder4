@@ -264,7 +264,8 @@ function nuReformat(t){
 
 	var o			= $('#' + t.id);
 	var f			= o.attr('data-nu-format');
-	var v			= String(o.val());
+//	var v			= nuFORM.removeFormatting(String(o.val()), f);
+	var v			= o.val();
 	
 	if(f == '' || v == ''){return v;}
 

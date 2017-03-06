@@ -10,7 +10,6 @@ function nuBuildForm(f){
 	}
 	
 	window.nuSESSION				= f.session_id;
-	window.nuLastChange				= null;
 	window.onbeforeunload			= null;
 	window.nuSUBFORMROW				= [];
 	window.nuSUBFORMJSON			= [];
@@ -69,11 +68,14 @@ function nuBuildForm(f){
     if(f.record_id == '-2'){
         nuCreateDragOptionsBox(f);
 	}else{
+		
 		nuAddJavascript(f);
+		
+		$('input').focus(function() {
+		  $( this ).select();
+		});
+		
 	}
-
-
-	//window.nuTYPE 					= 'browse';
 	
 }
 
@@ -2161,8 +2163,6 @@ function nuFormClass(frm){
 
 function nuChange(e){
 
-	window.nuLastChange	= e;
-	
 	if(e.target.id.substr(-8) == 'nuDelete'){
 		
 		nuHasBeenEdited();
