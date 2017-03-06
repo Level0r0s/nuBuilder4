@@ -519,7 +519,7 @@ function nuCreateDragOptionsBox(form){
                             '<td><button class="nuDragOptionsButton nuButton" onclick="nuResizeToWidest();">Resize To Widest</button></td>'+
                         '</tr>'+
 						'<tr>'+
-                            '<td><select id="nuDragOptionsTabsDropdown"></select></td>'+
+                            '<td><select id="nuDragOptionsTabsDropdown" class="nuDragOptionsButton"></select></td>'+
                             '<td><button class="nuDragOptionsButton nuButton nuSaveButtonEdited" style="font-weight: bold;" onclick="nuMoveNuDrag();">Move to Tab</button></td>'+
                         '</tr>'+
 						'<tr>'+
