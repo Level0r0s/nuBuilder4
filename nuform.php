@@ -639,6 +639,7 @@ function nuBrowseRows($f){
 	
 	$P				= $_POST['nuSTATE'];
 	$rows			= $P['rows'];
+
 	$page_number	= $P['page_number'];
 	$start			= $page_number * $rows;
 	$search			= str_replace('&#39;', "'", $P['search']);
@@ -687,7 +688,7 @@ function nuBrowseRows($f){
 	$a				= array();
 	$s				= nuReplaceHashVariables($S->SQL);
 	$t 				= nuRunQuery($s);
-	$rows			= db_num_rows($t);
+	$rowData		= db_num_rows($t);
 	$s				.= " LIMIT $start, $rows";
 	$t 				= nuRunQuery($s);
 
@@ -697,7 +698,7 @@ function nuBrowseRows($f){
 	
 	nuRunQuery(nuReplaceHashVariables('DROP TABLE if EXISTS #TABLE_ID#'));
 
-	return array($a, $rows, $S->SQL);
+	return array($a, $rowData, $S->SQL);
 	
 }
 
