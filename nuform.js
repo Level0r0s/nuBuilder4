@@ -471,9 +471,9 @@ function nuINPUT(w, i, l, p, prop){
 		.addClass('nuLookupCode')
 		.attr('onchange', 'nuGetLookupCode(event)');
 		
-		w.objects[i].values[0][0]	= p + w.objects[i].values[0][0];
-		w.objects[i].values[1][0]	= p + w.objects[i].values[1][0];
-		w.objects[i].values[2][0]	= p + w.objects[i].values[2][0];
+		w.objects[i].values[0][0]	= p + prop.objects[i].id;
+		w.objects[i].values[1][0]	= p + prop.objects[i].id + 'code';
+		w.objects[i].values[2][0]	= p + prop.objects[i].id + 'description';
 		
 		id 				= target + 'button';
 		var inp 		= document.createElement('div');
