@@ -1654,7 +1654,7 @@ function nuBrowseTable(){
 			.addClass('nuDragNoSelect')
 			.css({	'text-align'	: a,
 					'overflow'	: 'hidden',
-					'width'		: w-7,
+					'width'		: w-8,
 					'top'		: t,
 					'left'		: l,
 					'height'	: h-7
@@ -1713,7 +1713,7 @@ function nuBrowseTable(){
 	.addClass('nuBrowseTitle')
 	.html(la+pg+cu+of+ne)
 	.css({	'text-align'	: 'center',
-			'width'			: l - 6,
+			'width'			: l - 7,
 			'top'			: t + h,
 			'left'			: 7,
 			'height'		: 25,
