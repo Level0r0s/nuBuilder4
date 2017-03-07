@@ -275,9 +275,9 @@ function nuChangeHashVariable($h, $v){
 }
 
 
-function nuDisplayError($m, $f = '', $s = 0){ //m = message, f = field, s = show validation class
+function nuDisplayError($m){
 
-	$_POST['nuErrors'][]	= array($m, $f, $s);
+	$_POST['nuErrors'][]	= $m;
 
 }
 

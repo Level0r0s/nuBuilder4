@@ -71,10 +71,6 @@ function nuBuildForm(f){
 		
 		nuAddJavascript(f);
 		
-		$('input').focus(function() {
-		  $( this ).select();
-		});
-		
 	}
 	
 }
@@ -387,6 +383,7 @@ function nuINPUT(w, i, l, p, prop){
 	.attr('data-nu-prefix', p)
 	.attr('data-nu-type', w.objects[i].type)
 	.attr('data-nu-subform-sort', 1)
+	.focus(function(){$( this ).select();})
 	.prop('readonly', prop.objects[i].read == '1' ? 'readonly' : '');
 
 	if(input_type == 'nuScroll'){
@@ -471,6 +468,7 @@ function nuINPUT(w, i, l, p, prop){
 		.attr('data-nu-subform-sort', 1)
 		.css('visibility', vis)
 		.addClass('nuLookupCode')
+		.focus(function(){$( this ).select();})
 		.attr('onchange', 'nuGetLookupCode(event)');
 		
 		w.objects[i].values[0][0]	= p + prop.objects[i].id;
@@ -1171,15 +1169,15 @@ function nuAddEditTabs(p, w){
 
     }
 	
-	var l = 7;
+	var l 		= 7;
 	
     for(var i = 0 ; i < w.browse_columns.length ; i++){
 
-		l = nuBrowseTitle(w.browse_columns, i, l);
+		l 		= nuBrowseTitle(w.browse_columns, i, l);
 
     }
 
-	var f = nuFORM.getProperty('nosearch_columns');
+	var f 		= nuFORM.getProperty('nosearch_columns');
 
 	for(var i = 0 ; i < f.length ; i++){
 		$('#nusort_' + f[i]).addClass('nuNoSearch');
@@ -1187,7 +1185,6 @@ function nuAddEditTabs(p, w){
 	
 	window.nuBrowseWidth	= l;
 	
-//	nuDetach(event);
 	nuDetach();
 
 	if(w.browse_columns.length > 0){
@@ -1638,6 +1635,7 @@ function nuBrowseTable(){
 		
 			var w		= Number(col[c].width);
 			var a		= nuAlign(col[c].align);
+			var f		= col[c].format;
 			var rw		= 'nurow'    + String('00' + r).substr(-3);
 			var column	= 'nucolumn' + String('00' + c).substr(-3);
 			var id		= rw + String('00' + c).substr(-3);
@@ -1654,7 +1652,7 @@ function nuBrowseTable(){
 			.addClass('nuDragNoSelect')
 			.css({	'text-align'	: a,
 					'overflow'	: 'hidden',
-					'width'		: w-7,
+					'width'		: w-8,
 					'top'		: t,
 					'left'		: l,
 					'height'	: h-7
@@ -1671,7 +1669,7 @@ function nuBrowseTable(){
 			if(r < row.length){
 				
 				$('#' + id)
-				.html(row[r][c+1])
+				.html(nuFORM.addFormatting(row[r][c+1], f))
 				.attr('data-nu-primary-key', row[r][0])
 				.attr('onclick', 'nuSelectBrowse(event)')
 				.hover(
@@ -1713,7 +1711,7 @@ function nuBrowseTable(){
 	.addClass('nuBrowseTitle')
 	.html(la+pg+cu+of+ne)
 	.css({	'text-align'	: 'center',
-			'width'			: l - 6,
+			'width'			: l - 7,
 			'top'			: t + h,
 			'left'			: 7,
 			'height'		: 25,
@@ -2630,21 +2628,20 @@ function nuAlert(o){
 	
 	var c		= " onclick=\"$('#nuErrorAlert').remove();\"";
 	var widest	= 5;
-	var cla		= o[0][1];
 
 	for(var i = 0 ; i < o.length ; i++){
-		widest	= Math.max(widest, nuGetWordWidth(o[i][0]));
+		widest	= Math.max(widest, nuGetWordWidth(o[i]));
 	}
 
 	widest		= widest + 200;
 	
 	var l		= (screen.width - widest) / 2;
 
-	$('body', par).append("<div id='nuErrorAlert' class='" + cla + "' style='width:" + widest + "px;left:" + l + "px' " + c + "></div>")
+	$('body', par).append("<div id='nuErrorAlert' style='text-align:center;width:" + widest + "px;left:" + l + "px' " + c + "></div>")
 	
 	for(var i = 0 ; i < o.length ; i++){
 		
-		$('#nuErrorAlert', par).append(o[i][0]);
+		$('#nuErrorAlert', par).append(o[i]);
 		$('#nuErrorAlert', par).append('<br>');
 		
 	}
