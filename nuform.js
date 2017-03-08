@@ -408,7 +408,7 @@ function nuINPUT(w, i, l, p, prop){
 		$('#' + id).addClass('nuEdited');
 	}
 	
-	$('#' + id).val(w.objects[i].value);
+	$('#' + id).val(nuFORM.addFormatting(w.objects[i].value, w.objects[i].format));
 
 	if(w.objects[i].format != ''){
 		
@@ -932,7 +932,7 @@ function nuRecordHolderObject(t){
 	while ($('#' + this.form + nuPad3(this.intNo + c) + h).length != 0){c++;}
 	
 	this.rows	= this.intNo + c;
-	this.top		= parseInt(p.css('height')) * this.rows;
+	this.top	= parseInt(p.css('height')) * this.rows;
 	var s		= this.form  + nuPad3(this.intNo + 1) + h;
 	this.last	= $('#' + s).length == 0;
 	var s		= this.form  + nuPad3(this.rows - 1);
@@ -1667,9 +1667,9 @@ function nuBrowseTable(){
 			}
 
 			if(r < row.length){
-				
+console.log(row[r][c+1], col[c].format, nuFORM.addFormatting(row[r][c+1], col[c].format));
 				$('#' + id)
-				.html(nuFORM.addFormatting(row[r][c+1], f))
+				.html(nuFORM.addFormatting(row[r][c+1], col[c].format))
 				.attr('data-nu-primary-key', row[r][0])
 				.attr('onclick', 'nuSelectBrowse(event)')
 				.hover(
@@ -2139,10 +2139,14 @@ function nuFormClass(frm){
 		var rw			= String($(this).attr('data-nu-prefix'));
 		var rowno		= parseInt(rw.substr(rw.length - 3));
 		var f			= $(this).attr('data-nu-field');
+		var fmt			= $(this).attr('data-nu-format');
 		var v			= $(this).val();
 
 		fields.push(f);
-		values.push(v);
+		
+		console.log(nuFORM.removeFormatting(v, fmt), v, fmt)
+		
+		values.push(nuFORM.removeFormatting(v, fmt));
 		rows.push(rw != '' ? rowno + 1 : 0);
 		
 	});

@@ -65,7 +65,7 @@ function nuUpdateData(){
 						$f 		= addslashes($O->sob_all_id);
 
 						if($o['fk'] == ''){
-							$m	= "<b>$lab</b> on tab <b>$tab</b> cannot be left blank..";
+							$m	= "<b>$lab</b> on tab <b>$tab</b> cannot be left blank...";
 						}else{
 							$m	= "$lab (on row " . $o['r'][$ii] . ")  of $O->label cannot be left blank..";
 						}

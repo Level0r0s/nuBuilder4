@@ -443,7 +443,7 @@ class nuFormObject {
 			}else{
 				
 				var dnum	= String(o[1]);
-				var m		= s + ' ' + h + d + String(dnum + String(0).repeat(p - dnum.length)).substr(0, p)
+				var m		= s + ' ' + h + d + String(dnum + String(0).repeat(1000)).substr(0, p)
 				
 			}
 			
@@ -513,7 +513,7 @@ class nuFormObject {
 	
 	removeFormatting(v, f){
 		
-		if(v == ''){return v;}
+		if(v == '' || f == ''){return v;}
 		
 		v				= String(v);
 		f				= String(f);
@@ -543,6 +543,10 @@ class nuFormObject {
 		}
 
 		if(f[0] == 'D'){									//-- date
+			
+			if(f.substr(0, 10) == '0000-00-00'){
+				return '';
+			}
 			
 			var FMT		= this.setFormats();
 			var hasTime	= f.indexOf('hh') != -1 || f.indexOf('nn') != -1 || f.indexOf('ss') != -1; 	//-- looking for the time
