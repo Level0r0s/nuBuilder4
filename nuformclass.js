@@ -223,20 +223,25 @@ class nuFormObject {
 
 		var d	= this.data();											//-- an array of all data as subforms (the mainform is the first element)
 		var v	= 0;
+		var u	= 0;
 		
 		for(var i =  0 ; i < d.length ; i++){
 			
 			var SF		= d[i];
 			
 			if(SF.id == subform_name){									//-- i've got the right subform
-				
+			
+				var fmt	= $("[id$='" + field_name + "']input[id^='" + subform_name + "']").attr('data-nu-format')			
 				var f	= SF.fields.indexOf(field_name);				//-- check for valid field(column)
 				
 				if(f == -1){return 0;}
 				
 				for(var c = 0 ; c < SF.rows.length ; c++){
+
+					u	= nuFORM.removeFormatting(SF.rows[c][f], fmt);
+					v	= v + Number(u);
 					
-					v	= v + Number(SF.rows[c][f]);
+//					v	= v + Number(SF.rows[c][f]);
 					
 				}
 				

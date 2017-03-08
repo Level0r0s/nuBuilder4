@@ -1667,7 +1667,7 @@ function nuBrowseTable(){
 			}
 
 			if(r < row.length){
-console.log(row[r][c+1], col[c].format, nuFORM.addFormatting(row[r][c+1], col[c].format));
+
 				$('#' + id)
 				.html(nuFORM.addFormatting(row[r][c+1], col[c].format))
 				.attr('data-nu-primary-key', row[r][0])
@@ -2143,8 +2143,6 @@ function nuFormClass(frm){
 		var v			= $(this).val();
 
 		fields.push(f);
-		
-		console.log(nuFORM.removeFormatting(v, fmt), v, fmt)
 		
 		values.push(nuFORM.removeFormatting(v, fmt));
 		rows.push(rw != '' ? rowno + 1 : 0);
