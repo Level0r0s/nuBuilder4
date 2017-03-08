@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 08, 2017 at 06:14 AM
+-- Generation Time: Mar 08, 2017 at 04:56 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -164,7 +164,7 @@ CREATE TABLE `employee` (
 CREATE TABLE `invoice` (
   `invoice_id` varchar(25) NOT NULL,
   `inv_number` int(11) NOT NULL,
-  `inv_total` int(11) NOT NULL,
+  `inv_total` decimal(11,7) NOT NULL,
   `thedate` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -173,8 +173,8 @@ CREATE TABLE `invoice` (
 --
 
 INSERT INTO `invoice` (`invoice_id`, `inv_number`, `inv_total`, `thedate`) VALUES
-('58ae12b19cd86fe', 77, 1118, '2017-03-14'),
-('58ae1472d99c39e', 3, 144, '2017-04-14');
+('58ae12b19cd86fe', 77, '968.0600000', '2017-03-14'),
+('58ae1472d99c39e', 3, '144.0000000', '2017-04-14');
 
 -- --------------------------------------------------------
 
@@ -202,10 +202,10 @@ INSERT INTO `invoice_item` (`invoice_item_id`, `ite_invoice_id`, `ite_thing`, `i
 ('58adbffbb0f42da', '58adbffbb0f32a7', 'dgbrtg', 0.0000, 0.0000, 0.0000),
 ('58adc0c4be09385', '55', 'from 55', 22.0000, 44.0000, 968.0000),
 ('58ae119864fb13c', '58ae119864fa88e', 'test', 43.0000, 5.0000, 215.0000),
-('58ae12b19cd8ecf', '58ae12b19cd86fe', 'egyh', 3.0000, 4.0000, 12.0000),
+('58ae12b19cd8ecf', '58ae12b19cd86fe', 'egyh', 6.0000, 4.5100, 27.0600),
 ('58ae1472d99cbe8', '58ae1472d99c39e', '12', 12.0000, 12.0000, 144.0000),
 ('58bf8fbec518c94', '58ae12b19cd86fe', 'tyntyh', 33.0000, 22.0000, 726.0000),
-('58bf8fbec51935c', '58ae12b19cd86fe', '321', 76.0000, 5.0000, 380.0000);
+('58bf8fbec51935c', '58ae12b19cd86fe', '321', 43.0000, 5.0000, 215.0000);
 
 -- --------------------------------------------------------
 
@@ -229,7 +229,7 @@ INSERT INTO `test_table` (`test_table_id`, `number1`, `number2`, `date1`, `date2
 ('58bf0d9765e2881', '0.000000', '0.0000', '0000-00-00', '0000-00-00'),
 ('58bf11c9802abf8', '0.000000', '0.0000', '2017-06-17', '2017-04-13'),
 ('58bf3e9de095116', '2.000000', '3.0000', '2017-02-06', '2017-02-06'),
-('58bf3fe03563ccd', '1234.560000', '1234.5000', '2017-03-08', '2017-03-12'),
+('58bf3fe03563ccd', '77.000000', '1234.5000', '2017-03-08', '2017-03-12'),
 ('58bf48f1e6245ea', '4.890000', '444.4000', '2018-00-08', '2011-01-09');
 
 -- --------------------------------------------------------
@@ -935,7 +935,7 @@ INSERT INTO `zzzzsys_object` (`zzzzsys_object_id`, `sob_all_zzzzsys_form_id`, `s
 ('58a09448e54ff6f', '58a08a91c9b59a9', 'invoice_item', 'input', 'ite_units', 'Units', '58a08a91c9b6df4', 20, 21, 177, 70, 18, '1', 'right', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'N|€ 1,000.00', 'nuNumber', '', ''),
 ('58a0949b9e9922a', '58a08a91c9b59a9', 'invoice_item', 'input', 'ite_unit_price', 'Unit Cost', '58a08a91c9b6df4', 30, 21, 290, 70, 18, '1', 'right', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'N|$ 1,000.00', 'nuNumber', '', ''),
 ('58a094d695573f2', '58a08a91c9b59a9', 'invoice_item', 'calc', 'ite_total', 'Total', '58a08a91c9b6df4', 40, 22, 390, 76, 18, '1', 'right', '0', '0', '', '', '', 'nuTotal("ite_units") * nuTotal("ite_unit_price")', 'N|$ 1,000.00', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-('58a0c22bc011b1c', '58a08a1abc4782c', 'invoice', 'calc', 'inv_total', 'Grand Total', '58a08a1abc48c9a', 20, 286, 325, 76, 25, '1', 'right', '0', '0', '', '', '', 'nuTotal("invoice_item.ite_total")', 'N|£ 1000.0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+('58a0c22bc011b1c', '58a08a1abc4782c', 'invoice', 'calc', 'inv_total', 'Grand Total', '58a08a1abc48c9a', 20, 286, 325, 76, 25, '1', 'right', '0', '0', '', '', '', 'nuTotal("invoice_item.ite_total")', 'N|$ 1,000.00', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('58a0c3d66b2daa7', '58a08a1abc4782c', 'invoice', 'input', 'inv_number', 'Invoice Number', '58a08a1abc48c9a', 30, 11, 94, 50, 25, '1', 'right', '0', '0', '', '', '', 'nuTotal("invoice_item.ite_total")', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('58a680c21664405', 'nuobject', 'zzzzsys_object', 'input', 'sob_all_table', 'Table', '570d90df5ce8e1a', 180, 0, 100, 100, 18, '1', 'left', '0', '1', 'SELECT ''0''', '', 'sob_all_zzzzsys_form_id', '', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', '', '', '', ''),
 ('58afef1eacbcf15', 'nuhome', '', 'run', 'run_format', 'Formats', '569dc4ed270f08a', 130, 400, 622, 150, 30, '1', 'left', '1', '0', '', '', 'run_debug', '', '', 'nuformat', '', 'b', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
