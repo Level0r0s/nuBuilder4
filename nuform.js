@@ -1341,7 +1341,8 @@ function nuGetOptionsList(f, t, p, a){
 	}
 
 	if(nuFORM.getProperty('record_id') != ''){
-		list.push(['Refresh', 	'nuGetBreadcrumb()', 						'nurefresh_black.png', 	'Ctrl+Shft+R']);
+		list.push(['Save Form', 			'nuSaveAction();', 							'nusaveicon.png',		'Ctrl+Shft+S']);
+		list.push(['Refresh', 				'nuGetBreadcrumb()', 						'nurefresh_black.png', 	'Ctrl+Shft+R']);
 	}
 	
 	//hide all other listboxes

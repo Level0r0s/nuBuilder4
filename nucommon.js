@@ -376,9 +376,16 @@ function nuBindCtrlEvents(){
 			} else if(e.keyCode == 79) {//O
 				e.preventDefault();
 				nuPopup("nuobject", "", window.nuFORM.getCurrent().form_id);
-			} else if(e.keyCode == 82) {//R
-				e.preventDefault();
-				nuGetBreadcrumb();
+			} 
+			
+			if(window.nuFORM.getCurrent().record_id != '') {
+				if(e.keyCode == 82) {//R
+					e.preventDefault();
+					nuGetBreadcrumb();
+				} else if(e.keyCode == 83) {//S
+					e.preventDefault();
+					nuSaveAction();
+				}
 			}
         }
     });
