@@ -1327,21 +1327,25 @@ function nuGetOptionsList(f, t, p, a){
 	var ul		= '<ul>';
 	
 	if(nuFORM.getProperty('record_id') == ''){
-		list.push(['Searchable Columns', 	'nuGetSearchList()', 						'nusearchcolumns.png']);
+		list.push(['Searchable Columns', 	'nuGetSearchList()', 						'nusearchcolumns.png', 	'Ctrl+Shft+S']);
 	}
 
 	if(a == 1){
 		
-		list.push(['Arrange Objects', 		'nuPopup("' + f + '", "-2")', 				'nuarrange.png']);
-		list.push(['Form Properties', 		'nuPopup("nuform", "' + f + '")', 			'nuformprop.png']);
-		list.push(['Form Object List', 		'nuPopup("nuobject", "", "' + f + '")', 	'nuobjectlist.png']);
+		list.push(['Arrange Objects', 		'nuPopup("' + f + '", "-2")', 				'nuarrange.png', 		'Ctrl+Shft+A']);
+		list.push(['Form Properties', 		'nuPopup("nuform", "' + f + '")', 			'nuformprop.png',		'Ctrl+Shft+F']);
+		list.push(['Form Object List', 		'nuPopup("nuobject", "", "' + f + '")', 	'nuobjectlist.png',		'Ctrl+Shft+O']);
 		
 	}else{
 		
-		list.push(['Change Login', 			'nuPopup("nupassword", "' + u + '", "")', 	'nuobjectlist.png']);
+		list.push(['Change Login', 			'nuPopup("nupassword", "' + u + '", "")', 	'nuobjectlist.png', 	'Ctrl+Shft+L']);
 		
 	}
 
+	if(nuFORM.getProperty('record_id') != ''){
+		list.push(['Refresh', 	'nuGetBreadcrumb()', 						'nurefresh_black.png', 	'Ctrl+Shft+R']);
+	}
+	
 	//hide all other listboxes
 	$('#nuOptionsListBox').remove();
 	$('.nuIframe').contents().find('#nuOptionsListBox').remove();
@@ -1406,7 +1410,7 @@ function nuBuildOptionsList(l, p){												//-- loop through adding options t
 	var height		= 30 + (l.length * 30);
 	
 	for(var i = 0 ; i < l.length ; i++){
-		var width	= Math.max(nuGetWordWidth(l[i][0]), width);
+		var width	= Math.max((nuGetWordWidth(l[i][0]) + nuGetWordWidth(l[i][3])), width);
 	}
 
 	for(var i = 0 ; i < l.length ; i++){
@@ -1414,6 +1418,7 @@ function nuBuildOptionsList(l, p){												//-- loop through adding options t
 		var t			= l[i][0];
 		var f			= l[i][1];
 		var c			= l[i][2];
+		var k			= l[i][3];
 		var itemtop 	= 30 + (i * 20);
 		
 		var icon 	= document.createElement('img');
@@ -1435,12 +1440,27 @@ function nuBuildOptionsList(l, p){												//-- loop through adding options t
 		desc.setAttribute('id', desc_id);
 
 		$('#nuOptionsListBox').append(desc);
-	var	prop		= {'position' : 'absolute', 'text-align' : 'left', 'height' : 15};
+		var	prop		= {'position' : 'absolute', 'text-align' : 'left', 'height' : 15};
 
 		$('#' + desc.id)
 		.css(prop)
 		.css({'top'	: itemtop,'left' : 30})
 		.html(t)
+		.attr('onclick', f)
+		.addClass('nuOptionsItem');
+		
+		var shortcut_key = document.createElement('div');
+		var shortcut_key_id 		= 'nuOptionTextShortcutKey' + i.toString();
+		
+		shortcut_key.setAttribute('id', shortcut_key_id);
+
+		$('#nuOptionsListBox').append(shortcut_key);
+		var	prop		= {'position' : 'absolute', 'text-align' : 'left', 'height' : 15};
+
+		$('#' + shortcut_key.id)
+		.css(prop)
+		.css({'top'	: itemtop,'left' : width - 40})
+		.html(k)
 		.attr('onclick', f)
 		.addClass('nuOptionsItem');
 		

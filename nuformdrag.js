@@ -1,5 +1,5 @@
 function nuBindDragEvents(){
-	
+		
     $(document).on('mousemove.nuformdrag', function(e) {
 		
         var draggable = 0;
