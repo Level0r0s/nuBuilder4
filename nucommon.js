@@ -122,6 +122,7 @@ function loginInputKeyup(event){
 function nuLogin(){
 	
 	window.nuSESSION = '';
+	window.nuFORM = new nuFormObject();
 	
 	$('body').html('');
 	

@@ -913,6 +913,7 @@ function nuCheckSession(){
 				$c->schema			= $_POST['nuSchema'];	
 				$c->formata			= nuFormata();
 				$c->translation		= nuTranslate($r->sus_language);
+				nuUpdateSession();
 				
 			} else {
 			
@@ -984,6 +985,14 @@ function nuCheckSession(){
 	
 }
 
+function nuUpdateSession() {
+	
+	$today 						= strtotime('now');
+	$timeout 					= date("Y-m-d H:i:s", strtotime('+'.$_SESSION['Timeout'].' min', $today));
+
+	nuRunQuery("UPDATE zzzzsys_session SET sss_timeout = '$timeout'WHERE zzzzsys_session_id = ?", array($_SESSION['SESSIONID']));
+}
+
 function nuHasSessionTimedOut($timeout) {
 	
 	$currentTime				= time();
@@ -1000,7 +1009,7 @@ function nuDisplayTimeout() {
 
 	nuRunQuery("DELETE FROM zzzzsys_session WHERE zzzzsys_session_id = ?",array($_SESSION['SESSIONID']));
 	
-	nuDisplayError('Timeout..');
+	//nuDisplayError('Timeout..');
 	$_POST['nuLogAgain']	= 1;
 	
 	return;
