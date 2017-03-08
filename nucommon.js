@@ -363,6 +363,25 @@ function nuBindCtrlEvents(){
 		}
 	}
 	
+	$(document).keydown(function(e) {
+        if (e.ctrlKey && e.shiftKey) {
+			window.nuNEW = 0;
+            if(e.keyCode == 65) {//A
+				e.preventDefault();
+				nuPopup(window.nuFORM.getCurrent().form_id, "-2");
+			} else if(e.keyCode == 70) {//F
+				e.preventDefault();
+				nuPopup("nuform", window.nuFORM.getCurrent().form_id);
+			} else if(e.keyCode == 79) {//O
+				e.preventDefault();
+				nuPopup("nuobject", "", window.nuFORM.getCurrent().form_id);
+			} else if(e.keyCode == 82) {//R
+				e.preventDefault();
+				nuGetBreadcrumb();
+			}
+        }
+    });
+	
 	var nuCtrlKeyupListener = function(e){	
 		
 		window.nuNEW = 0;
