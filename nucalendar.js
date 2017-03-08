@@ -29,7 +29,7 @@ function nuPopupCalendar(pThis){
 	var f	= o.attr('data-nu-format');
 	var v	= o.val();
 	var u	= nuFORM.removeFormatting(v, f);
-	console.log(u,v, f);
+
 	var i					= pThis.id; 					//-- Object ID;
 	var tar					= $('#' + i);
 	var off					= $('#' + i).offset();

@@ -41,7 +41,6 @@
 	$f->forms[0]->user_id					= $u['USER_ID'];
 	$f->forms[0]->dimensions				= $s->dimensions;
 	$f->forms[0]->schema					= $s->schema;
-//	$f->forms[0]->formata					= $s->formata;
 	$f->forms[0]->translation				= $s->translation;
 	$f->forms[0]->session_id				= $_SESSION['SESSIONID'];
 	$f->forms[0]->errors					= $_POST['nuErrors'];

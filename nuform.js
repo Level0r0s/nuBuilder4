@@ -21,7 +21,6 @@ function nuBuildForm(f){
 	if(f.schema.length != 0){  						//-- its an Object (load these once,  at login)
 
 		nuFORM.schema		= f.schema;
-		nuFORM.formata		= f.formata;
 		window.nuLANGUAGE	= f.translation;
 		
 	}
@@ -1289,15 +1288,17 @@ function nuOptions(p, f, t, access){
 		.attr('onclick', 'nuGetOptionsList("' + f + '", this, "' + p + '", "' + access + '")')
 		.css({'top'			: 5, 
 		'right' 			: 5, 
+		'width' 			: 15, 
+		'height' 			: 15, 
 		'position' 			: 'absolute', 
 		'opacity'			: 0.5,
 		'border-style' 		: 'none'})
 		.addClass('nuIcon')
-		.hover(function(){
-			$( this ).attr('src', 'nuoptions_red.png');
-		}, function(){
-			$( this ).attr('src', 'nuoptions.png');
-		});
+//		.hover(function(){
+//			$( this ).attr('src', 'nuoptions_red.png');
+//		}, function(){
+//			$( this ).attr('src', 'nuoptions.png');
+//		});
 		
 		if(t == 'form'){
 			$('#' + id)
@@ -1459,7 +1460,7 @@ function nuBuildOptionsList(l, p){												//-- loop through adding options t
 		.css({'top'	: itemtop,'left' : width - 40})
 		.html(k)
 		.attr('onclick', f)
-		.addClass('nuOptionsItem');
+		.addClass('nuOptionsItemShortcutKey');
 		
 	}
 
@@ -1687,7 +1688,7 @@ function nuBrowseTable(){
 			}
 
 			if(r < row.length){
-console.log(row[r][c+1], col[c].format, nuFORM.addFormatting(row[r][c+1], col[c].format));
+
 				$('#' + id)
 				.html(nuFORM.addFormatting(row[r][c+1], col[c].format))
 				.attr('data-nu-primary-key', row[r][0])
@@ -2164,8 +2165,6 @@ function nuFormClass(frm){
 
 		fields.push(f);
 		
-		console.log(nuFORM.removeFormatting(v, fmt), v, fmt)
-		
 		values.push(nuFORM.removeFormatting(v, fmt));
 		rows.push(rw != '' ? rowno + 1 : 0);
 		
@@ -2224,8 +2223,15 @@ function nuCalculateForm(){	//-- calculate subform 'calcs' first
 	f.each(function( index ) {		//-- start with calculations inside a subform
 		
 		$(this).addClass('nuEdited');
+		
 		var formula 	= $(this).attr('data-nu-formula');
-		eval('$(this).val(' + formula + ')');
+		var fmt			= $(this).attr('data-nu-format');
+		
+		eval('var v = ' + formula);
+		
+		var fixed		= nuFORM.addFormatting(v, fmt);
+		
+		$(this).val(fixed);
 		
 	});	
 	
@@ -2630,7 +2636,7 @@ function nuGetSearchList(){
 			nuSetSearchColumn();
 			
 		})
-		.addClass('nuOptionItem')
+		.addClass('nuOptionsItem')
 		.html(c[i].title);
 	
 	}

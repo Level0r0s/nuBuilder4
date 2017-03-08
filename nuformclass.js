@@ -6,7 +6,6 @@ class nuFormObject {
 		
 		this.schema				= [];
 		this.formats			= this.setFormats();
-		this.formata			= []
 		this.breadcrumbs 		= [];
 		this.scroll		 		= [];
 		this.edited				= false;
@@ -223,20 +222,25 @@ class nuFormObject {
 
 		var d	= this.data();											//-- an array of all data as subforms (the mainform is the first element)
 		var v	= 0;
+		var u	= 0;
 		
 		for(var i =  0 ; i < d.length ; i++){
 			
 			var SF		= d[i];
 			
 			if(SF.id == subform_name){									//-- i've got the right subform
-				
+			
+				var fmt	= $("[id$='" + field_name + "']input[id^='" + subform_name + "']").attr('data-nu-format')			
 				var f	= SF.fields.indexOf(field_name);				//-- check for valid field(column)
 				
 				if(f == -1){return 0;}
 				
 				for(var c = 0 ; c < SF.rows.length ; c++){
+
+					u	= nuFORM.removeFormatting(SF.rows[c][f], fmt);
+					v	= v + Number(u);
 					
-					v	= v + Number(SF.rows[c][f]);
+//					v	= v + Number(SF.rows[c][f]);
 					
 				}
 				
@@ -473,6 +477,7 @@ class nuFormObject {
 			var hou		= String(o.toString().split(' ')[4]).split(':')[0];
 			var min		= String(o.toString().split(' ')[4]).split(':')[1];
 			var sec		= String(o.toString().split(' ')[4]).split(':')[2];
+			
 			var s		= String(f);
 			
 			if(Number(hou) > 11){
@@ -489,15 +494,12 @@ class nuFormObject {
 			
 			s			= s.replaceAll('yyyy',		yea);
 			s			= s.replaceAll('yy',		String(yea).substr(2));
-//			s			= s.replaceAll('y',			Number(String(yea).substr(2)));
 			s			= s.replaceAll('mmmm',		FMT[mth]['mmmm']);
 			s			= s.replaceAll('mmm',		FMT[mth]['mmm']);
 			s			= s.replaceAll('mm',		FMT[mth]['mm']);
-//			s			= s.replaceAll('m', 		FMT[mth]['m']);
 			s			= s.replaceAll('dddd',		FMT[wee]['dddd']);
 			s			= s.replaceAll('ddd',		FMT[wee]['ddd']);
 			s			= s.replaceAll('dd',		day);
-//			s			= s.replaceAll('d',			Number(day));
 			s			= s.replaceAll('hh',	 	hou);
 			s			= s.replaceAll('nn',		min);
 			s			= s.replaceAll('ss', 		sec);
@@ -556,6 +558,7 @@ class nuFormObject {
 							.replaceAll('/', ' ')
 							.replaceAll('.', ' ')
 							.replaceAll('-', ' ')
+							.replaceAll(',', ' ')
 							.split(' ');
 							
 			f			= String(f)
@@ -564,6 +567,7 @@ class nuFormObject {
 							.replaceAll('/', ' ')
 							.replaceAll('.', ' ')
 							.replaceAll('-', ' ')
+							.replaceAll(',', ' ')
 							.split(' ');
 							
 							
@@ -577,28 +581,21 @@ class nuFormObject {
 				var fmt	= String(f[i]);
 				var l	= fmt[0];
 				
-				if(fmt.length > 2){
-					
-					if(l == 'm' && FMT[v[i]] !== undefined){
-						d.m		= FMT[v[i]]['mm'];					//-- javascript date
-					}
-					
-					if(l == 'd' && FMT[v[i]] !== undefined){
-						d.d		= FMT[v[i]][fmt];
-					}
-					if(l == 'y'){
-						if(fmt == 'yyyy'){d.y = v[i];}
-						if(fmt == 'yy'){d.y = String(v[i]).substr(2);}
-						if(fmt == 'y'){d.y = Number(v[i]);}
-					}
-					
-					if(l == 'h'){d.h = v[i];}
-					if(l == 'n'){d.n = v[i];}
-					if(l == 's'){d.s = v[i];}
-					
-				}else{
-					d[l]		= Number(v[i]);
+				if(l == 'm' && FMT[v[i]] !== undefined){
+					d.m		= FMT[v[i]]['mm'];					//-- javascript date
 				}
+				
+				if(fmt == 'dd'){
+					d.d		= v[i];
+				}
+				if(l == 'y'){
+					if(fmt == 'yyyy'){d.y = v[i];}
+					if(fmt == 'yy'){d.y = String(v[i]).substr(2);}
+				}
+				
+				if(l == 'h'){d.h = v[i];}
+				if(l == 'n'){d.n = v[i];}
+				if(l == 's'){d.s = v[i];}
 				
 			}
 			

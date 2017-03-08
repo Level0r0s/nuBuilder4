@@ -83,7 +83,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 
 			if($r->sob_all_type == 'calc'){
 				$o->formula	= $r->sob_calc_formula;
-				$o->formata	= $r->sob_calc_format;
+				$o->format	= $r->sob_calc_format;
 				$o->align 	= $r->sob_all_align;
 			}
 				
