@@ -798,6 +798,8 @@ input {
 
 .nuSelectBrowse {
   background-color: #9ED374 !important;
+  border-color: #9ED374 !important;
+  border-width: 1px;
 }
 
 
