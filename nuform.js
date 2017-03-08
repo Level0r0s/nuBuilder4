@@ -71,10 +71,6 @@ function nuBuildForm(f){
 		
 		nuAddJavascript(f);
 		
-		$('input').focus(function() {
-		  $( this ).select();
-		});
-		
 	}
 	
 }
@@ -387,6 +383,7 @@ function nuINPUT(w, i, l, p, prop){
 	.attr('data-nu-prefix', p)
 	.attr('data-nu-type', w.objects[i].type)
 	.attr('data-nu-subform-sort', 1)
+	.focus(function(){$( this ).select();})
 	.prop('readonly', prop.objects[i].read == '1' ? 'readonly' : '');
 
 	if(input_type == 'nuScroll'){
@@ -411,7 +408,7 @@ function nuINPUT(w, i, l, p, prop){
 		$('#' + id).addClass('nuEdited');
 	}
 	
-	$('#' + id).val(w.objects[i].value);
+	$('#' + id).val(nuFORM.addFormatting(w.objects[i].value, w.objects[i].format));
 
 	if(w.objects[i].format != ''){
 		
@@ -471,6 +468,7 @@ function nuINPUT(w, i, l, p, prop){
 		.attr('data-nu-subform-sort', 1)
 		.css('visibility', vis)
 		.addClass('nuLookupCode')
+		.focus(function(){$( this ).select();})
 		.attr('onchange', 'nuGetLookupCode(event)');
 		
 		w.objects[i].values[0][0]	= p + prop.objects[i].id;
@@ -934,7 +932,7 @@ function nuRecordHolderObject(t){
 	while ($('#' + this.form + nuPad3(this.intNo + c) + h).length != 0){c++;}
 	
 	this.rows	= this.intNo + c;
-	this.top		= parseInt(p.css('height')) * this.rows;
+	this.top	= parseInt(p.css('height')) * this.rows;
 	var s		= this.form  + nuPad3(this.intNo + 1) + h;
 	this.last	= $('#' + s).length == 0;
 	var s		= this.form  + nuPad3(this.rows - 1);
@@ -1171,15 +1169,15 @@ function nuAddEditTabs(p, w){
 
     }
 	
-	var l = 7;
+	var l 		= 7;
 	
     for(var i = 0 ; i < w.browse_columns.length ; i++){
 
-		l = nuBrowseTitle(w.browse_columns, i, l);
+		l 		= nuBrowseTitle(w.browse_columns, i, l);
 
     }
 
-	var f = nuFORM.getProperty('nosearch_columns');
+	var f 		= nuFORM.getProperty('nosearch_columns');
 
 	for(var i = 0 ; i < f.length ; i++){
 		$('#nusort_' + f[i]).addClass('nuNoSearch');
@@ -1187,7 +1185,6 @@ function nuAddEditTabs(p, w){
 	
 	window.nuBrowseWidth	= l;
 	
-//	nuDetach(event);
 	nuDetach();
 
 	if(w.browse_columns.length > 0){
@@ -1658,6 +1655,7 @@ function nuBrowseTable(){
 		
 			var w		= Number(col[c].width);
 			var a		= nuAlign(col[c].align);
+			var f		= col[c].format;
 			var rw		= 'nurow'    + String('00' + r).substr(-3);
 			var column	= 'nucolumn' + String('00' + c).substr(-3);
 			var id		= rw + String('00' + c).substr(-3);
@@ -1689,9 +1687,9 @@ function nuBrowseTable(){
 			}
 
 			if(r < row.length){
-				
+console.log(row[r][c+1], col[c].format, nuFORM.addFormatting(row[r][c+1], col[c].format));
 				$('#' + id)
-				.html(row[r][c+1])
+				.html(nuFORM.addFormatting(row[r][c+1], col[c].format))
 				.attr('data-nu-primary-key', row[r][0])
 				.attr('onclick', 'nuSelectBrowse(event)')
 				.hover(
@@ -2161,10 +2159,14 @@ function nuFormClass(frm){
 		var rw			= String($(this).attr('data-nu-prefix'));
 		var rowno		= parseInt(rw.substr(rw.length - 3));
 		var f			= $(this).attr('data-nu-field');
+		var fmt			= $(this).attr('data-nu-format');
 		var v			= $(this).val();
 
 		fields.push(f);
-		values.push(v);
+		
+		console.log(nuFORM.removeFormatting(v, fmt), v, fmt)
+		
+		values.push(nuFORM.removeFormatting(v, fmt));
 		rows.push(rw != '' ? rowno + 1 : 0);
 		
 	});
@@ -2650,21 +2652,20 @@ function nuAlert(o){
 	
 	var c		= " onclick=\"$('#nuErrorAlert').remove();\"";
 	var widest	= 5;
-	var cla		= o[0][1];
 
 	for(var i = 0 ; i < o.length ; i++){
-		widest	= Math.max(widest, nuGetWordWidth(o[i][0]));
+		widest	= Math.max(widest, nuGetWordWidth(o[i]));
 	}
 
 	widest		= widest + 200;
 	
 	var l		= (screen.width - widest) / 2;
 
-	$('body', par).append("<div id='nuErrorAlert' class='" + cla + "' style='width:" + widest + "px;left:" + l + "px' " + c + "></div>")
+	$('body', par).append("<div id='nuErrorAlert' style='text-align:center;width:" + widest + "px;left:" + l + "px' " + c + "></div>")
 	
 	for(var i = 0 ; i < o.length ; i++){
 		
-		$('#nuErrorAlert', par).append(o[i][0]);
+		$('#nuErrorAlert', par).append(o[i]);
 		$('#nuErrorAlert', par).append('<br>');
 		
 	}

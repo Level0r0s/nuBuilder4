@@ -410,7 +410,7 @@ class nuFormObject {
 	
 	addFormatting(v, f){
 
-		v				= String(v);
+		v				= String(v) == 'null' ? '' : String(v);
 		f				= String(f);
 		
 		if(f[0] == 'N'){							//-- number  '456.789','N|€ 1,000.00'
@@ -432,7 +432,10 @@ class nuFormObject {
 			var h		= nuAddThousandSpaces(o[0], c);
 			
 			if(h == -1){
-				return "Man! That's a BIG number, stop showing off.";
+				
+				nuAlert(["Man! That's a BIG number, stop showing off."]);
+				return "";
+				
 			}
 			
 			if(o.length == 1 || o[1] == ''){ 				//-- no decimal numbers even if it has a decimal place
@@ -440,7 +443,7 @@ class nuFormObject {
 			}else{
 				
 				var dnum	= String(o[1]);
-				var m		= s + ' ' + h + d + String(dnum + String(0).repeat(p - dnum.length)).substr(0, p)
+				var m		= s + ' ' + h + d + String(dnum + String(0).repeat(1000)).substr(0, p)
 				
 			}
 			
@@ -450,6 +453,9 @@ class nuFormObject {
 		
 		if(f[0] == 'D'){	//-- date
 
+			if(String(v.split(' ')[0]) == '0000-00-00'){return '';}
+			if(v == ''){return '';}
+			
 			var FMT		= this.setFormats();
 			var d		= String(v.split(' ')[0]).split('-');
 			var t		= String(v.split(' ')[1]).split(':');
@@ -500,12 +506,14 @@ class nuFormObject {
 			
 		}
 		
+		return v;
+		
 	}
 
 	
 	removeFormatting(v, f){
 		
-		if(v == ''){return v;}
+		if(v == '' || f == ''){return v;}
 		
 		v				= String(v);
 		f				= String(f);
@@ -535,6 +543,10 @@ class nuFormObject {
 		}
 
 		if(f[0] == 'D'){									//-- date
+			
+			if(f.substr(0, 10) == '0000-00-00'){
+				return '';
+			}
 			
 			var FMT		= this.setFormats();
 			var hasTime	= f.indexOf('hh') != -1 || f.indexOf('nn') != -1 || f.indexOf('ss') != -1; 	//-- looking for the time

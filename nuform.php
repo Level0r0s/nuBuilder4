@@ -613,6 +613,7 @@ function nuBrowseColumns($f){
 		$r->align	= $r->sbr_align;
 		$r->width	= $r->sbr_width;
 		$r->order	= $r->sbr_order;
+		$r->format	= $r->sbr_format;
 
 		unset($r->zzzzsys_browse_id);
 		unset($r->sbr_zzzzsys_form_id);
