@@ -2601,6 +2601,11 @@ function nuGetSearchList(){
 	
 	for(var i = 0 ; i < c.length ; i++){
 		
+		var isChecked = true;
+		if($.inArray(i,nuFORM.getCurrent().nosearch_columns) != '-1') {
+			isChecked = false;
+		}
+		
 		var p = document.createElement('input');
 		p.setAttribute('id', 'nuSearchList' + i);
 		p.setAttribute('type', 'checkbox');
@@ -2613,7 +2618,7 @@ function nuGetSearchList(){
 			'position'		: 'absolute',
 			'text-align'    : 'left'
 		})
-		.prop('checked', true)
+		.prop('checked', isChecked)
 		.attr('onclick', 'nuSetSearchColumn();')
 		.addClass('nuSearchCheckbox');
 		
