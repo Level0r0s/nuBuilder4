@@ -386,6 +386,9 @@ function nuBindCtrlEvents(){
 					e.preventDefault();
 					nuSaveAction();
 				}
+			} else {
+				//stops refresh on browse
+				e.preventDefault();
 			}
         }
     });
