@@ -1774,7 +1774,7 @@ function nuSetSearchColumn(){
 		
 	});
 
-	window.nuFORM.setField('nosearch_columns', nosearch);
+	window.nuFORM.setProperty('nosearch_columns', nosearch);
 
 }
 

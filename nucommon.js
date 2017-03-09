@@ -377,19 +377,21 @@ function nuBindCtrlEvents(){
 				e.preventDefault();
 				nuPopup("nuobject", "", window.nuFORM.getCurrent().form_id);
 			} 
-			
-			if(window.nuFORM.getCurrent().record_id != '') {
-				if(e.keyCode == 82) {//R
-					e.preventDefault();
-					nuGetBreadcrumb();
-				} else if(e.keyCode == 83) {//S
-					e.preventDefault();
-					nuSaveAction();
-				}
-			} else {
-				//stops refresh on browse
+		
+			if(e.keyCode == 82) {//R
 				e.preventDefault();
+				if(window.nuFORM.getCurrent().record_id != '') {
+					nuGetBreadcrumb();
+				}
+			} else if(e.keyCode == 83) {//S
+				e.preventDefault();
+				if(window.nuFORM.getCurrent().record_id != '') {
+					nuSaveAction();
+				} else {
+					nuGetSearchList();
+				}				
 			}
+
         }
     });
 	
