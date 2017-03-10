@@ -269,7 +269,7 @@ function nuObjectEvents($i){
 
 
 function nuButtonList($f){
-	
+
 	$s = "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$f->id'";
 	$t = nuRunQuery($s);
 	$a = db_fetch_array($t);
@@ -278,47 +278,23 @@ function nuButtonList($f){
 	if($f->record_id == ''){
 		
 		if($f->id != 'nurunreport' && $f->id != 'nurunphp'){
-			
-			$b = nuGetButton('add', $a);	if(count($b) == 2){$A[] = $b;}
-			$b = nuGetButton('print', $a);	if(count($b) == 2){$A[] = $b;}
+
+			if(1){$A[]	= 'Add';}
+			if(1){$A[]	= 'Print';}
 			
 		}
 		
 	}else{
-		
-		$b = nuGetButton('save', $a);	if(count($b) == 2){$A[] = $b;}
-		$b = nuGetButton('new', $a);	if(count($b) == 2){$A[] = $b;}
-		$b = nuGetButton('clone', $a);	if(count($b) == 2){$A[] = $b;}
-		$b = nuGetButton('delete', $a);if(count($b) == 2){$A[] = $b;}
+	
+		if(1){$A[]		= 'Save';}
+		if(1){$A[]		= 'Clone';}
+		if(1){$A[]		= 'Delete';}
 		
 	}
 
 	return $A;
+
 }
-
-
-
-function nuGetButton($b, $a){
-
-	if($a['sfo_' . $b . '_button'] == '1'){
-		
-		if(nuGetSQLValue($a['sfo_' . $b . '_display_condition']) != '0'){
-
-			$t = $a['sfo_' . $b . '_title'];
-			$T = ucfirst($b);
-			
-			return array($t == '' ? $T : $t, $T);
-			
-		}
-		
-	}
-	
-	return array();
-	
-}
-
-
-
 
 function nuDefaultObject($r, $t){
     
@@ -913,6 +889,7 @@ function nuCheckSession(){
 				$c->schema			= $_POST['nuSchema'];	
 				$c->formata			= nuFormata();
 				$c->translation		= nuTranslate($r->sus_language);
+				nuUpdateSession();
 				
 			} else {
 			
@@ -938,6 +915,7 @@ function nuCheckSession(){
 	$_POST['procedures']	= $nuJ->procedures;
 	$_POST['session']		= $nuJ->session;
 	$c->translation			= nuTranslate($nuJ->language);
+nudebug("$_POSTforms " . print_r($_POST['forms'],1));
 
 	if($nuJ->session->zzzzsys_user_id != $_SESSION['DBGlobeadminUsername'] && $c->form_id != 'nuhome') {
 
@@ -966,6 +944,7 @@ function nuCheckSession(){
 			}
 				
 		}
+		
 
 		if(!in_array($c->form_id, $_POST['forms']) && $c->call_type == 'getform'){
 
@@ -974,6 +953,8 @@ function nuCheckSession(){
 
 			nuDisplayError("Access To Form Denied... ($nuR->sfo_code)");
 			
+		}else{
+			$_POST['buttons'] = '';
 		}
 		
 	}
@@ -982,6 +963,14 @@ function nuCheckSession(){
 
 	return $c;
 	
+}
+
+function nuUpdateSession() {
+	
+	$today 						= strtotime('now');
+	$timeout 					= date("Y-m-d H:i:s", strtotime('+'.$_SESSION['Timeout'].' min', $today));
+
+	nuRunQuery("UPDATE zzzzsys_session SET sss_timeout = '$timeout'WHERE zzzzsys_session_id = ?", array($_SESSION['SESSIONID']));
 }
 
 function nuHasSessionTimedOut($timeout) {
@@ -1000,7 +989,7 @@ function nuDisplayTimeout() {
 
 	nuRunQuery("DELETE FROM zzzzsys_session WHERE zzzzsys_session_id = ?",array($_SESSION['SESSIONID']));
 	
-	nuDisplayError('Timeout..');
+	//nuDisplayError('Timeout..');
 	$_POST['nuLogAgain']	= 1;
 	
 	return;
@@ -1016,7 +1005,13 @@ function nuAccessForms($session){
 		
 		$s	= "
 		
-			SELECT slf_zzzzsys_form_id AS id 
+			SELECT slf_zzzzsys_form_id 	AS id,
+				slf_add_button 			AS a, 
+				slf_save_button 		AS s, 
+				slf_delete_button 		AS d,
+				slf_clone_button 		AS c,
+				slf_print_button 		AS p
+
 			FROM zzzzsys_user_group
 			JOIN zzzzsys_user_group_access_level ON gal_zzzzsys_user_group_id = zzzzsys_user_group_id
 			JOIN zzzzsys_access_level ON zzzzsys_access_level_id = gal_zzzzsys_access_level_id
@@ -1031,8 +1026,8 @@ function nuAccessForms($session){
 	$t	= nuRunQuery($s);
 	$a	= Array();
 
-	while($r	= db_fetch_row($t)){
-		$a[]	= $r[0];
+	while($r	= db_fetch_object($t)){
+		$a[]	= [$r->id, $r->a, $r->s, $r->d, $r->c, $r->p];
 	}
 
 	return $a;
@@ -1239,8 +1234,9 @@ function nuSetAccessibility($userid = ''){
 	$nuJ						= json_encode($access);
 	$today 						= strtotime('now');
 	$timeout 					= date("Y-m-d H:i:s", strtotime('+'.$_SESSION['Timeout'].' min', $today));
+	$ses						= $_SESSION['SESSIONID'];
 
-	nuRunQuery("INSERT INTO zzzzsys_session SET sss_timeout = '$timeout', sss_access = ?, zzzzsys_session_id = ?", array($nuJ, $_SESSION['SESSIONID']));
+	nuRunQuery("INSERT INTO zzzzsys_session SET sss_timeout = '$timeout', sss_access = ?, zzzzsys_session_id = ?", array($nuJ, $ses));
 	
 	return $i;
 

@@ -47,9 +47,6 @@ window.nuVersion 		= 'nuBuilder4';
 window.onbeforeunload	= nuHomeWarning;
 window.nuHASH			= [];
 
-
-
-
 <?php
 
 	$opener		= $_GET['opener'];

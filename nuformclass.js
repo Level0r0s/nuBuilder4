@@ -334,7 +334,13 @@ class nuFormObject {
 					}
 					
 					var dnf		= $('#' + this.id).attr('data-nu-format');
+					var typ		= $('#' + this.id).attr('type');
 					var val		= $('#' + this.id).val();
+
+					if(typ == 'checkbox'){
+						val		= $('#' + this.id).prop("checked") ? 1 : 0;
+					}
+						
 					
 					V[C]		= nuFORM.removeFormatting(val, dnf);
 					E[C]		= $('#' + this.id).hasClass('nuEdited') ? 1 : 0 ;

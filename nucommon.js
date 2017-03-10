@@ -122,6 +122,7 @@ function loginInputKeyup(event){
 function nuLogin(){
 	
 	window.nuSESSION = '';
+	window.nuFORM = new nuFormObject();
 	
 	$('body').html('');
 	
@@ -375,10 +376,22 @@ function nuBindCtrlEvents(){
 			} else if(e.keyCode == 79) {//O
 				e.preventDefault();
 				nuPopup("nuobject", "", window.nuFORM.getCurrent().form_id);
-			} else if(e.keyCode == 82) {//R
+			} 
+		
+			if(e.keyCode == 82) {//R
 				e.preventDefault();
-				nuGetBreadcrumb();
+				if(window.nuFORM.getCurrent().record_id != '') {
+					nuGetBreadcrumb();
+				}
+			} else if(e.keyCode == 83) {//S
+				e.preventDefault();
+				if(window.nuFORM.getCurrent().record_id != '') {
+					nuSaveAction();
+				} else {
+					nuGetSearchList();
+				}				
 			}
+
         }
     });
 	
