@@ -357,10 +357,14 @@ function nuUpdateData(action){
 	last.subforms		= nuGetSFArrays();
 	last.session_id 	= window.nuSESSION;
 	
+	$('.nuactionbutton').hide();
+	
 	var successCallback = function(data,textStatus,jqXHR){
 		
 		var fm 	= data;
 
+		$('.nuactionbutton').show();
+		
 		if(nuDisplayError(fm)){
 			
 			nuAbortSave();
