@@ -400,8 +400,15 @@ function nuINPUT(w, i, l, p, prop){
 	.attr('data-nu-prefix', p)
 	.attr('data-nu-type', w.objects[i].type)
 	.attr('data-nu-subform-sort', 1)
-	.focus(function(){$( this ).select();})
 	.prop('readonly', prop.objects[i].read == '1' ? 'readonly' : '');
+
+	if(prop.objects[i].type != 'textarea'){
+
+		$('#' + id)
+		.focus(function(){$( this ).select();})
+		
+	}
+
 
 	if(input_type == 'nuScroll'){
 		
@@ -439,8 +446,6 @@ function nuINPUT(w, i, l, p, prop){
 	if(w.objects[i].input == 'checkbox'){
 		
 		document.getElementById(id).checked	= (w.objects[i].value == '1');
-		
-		console.log(w.objects[i].value, prop.objects[i].value);
 		
 	}
 

@@ -19,11 +19,11 @@ function nuBeforeBrowse($f){
 }
 
 
-function nuBeforeOpen($f, $o){
+function nuBeforeEdit($f, $o){
 	
 	$r					= nuFormProperties($f);
     $GLOBALS['EXTRAJS']	= $r->sfo_javascript;
-	$evalPHP 			= new nuEvalPHPClass($f . '_BO');
+	$evalPHP 			= new nuEvalPHPClass($f . '_BE');
 	
 }
 
@@ -1066,7 +1066,7 @@ function nuAccessForms($session){
 	$a	= Array();
 
 	while($r	= db_fetch_object($t)){
-		$a[]	= [$r->id, $r->a, $r->s, $r->d, $r->c, $r->p];
+		$a[]	= [$r->id, $r->a, $r->p, $r->s, $r->c, $r->d];
 	}
 
 	return $a;
@@ -1377,7 +1377,7 @@ function nuAddPrintButtons($f, $t, $a){
 function nuAddSystemEvent($event){
 	
 	$F			= $_POST['nuHash']['RECORD_ID'];
-	$events		= ['BB' => 'Before Browse','BO' => 'Before Open','BS' => 'Before Save','AS' => 'After Save','BD' => 'Before Delete','AD' => 'After Delete'];
+	$events		= ['BB' => 'Before Browse','BE' => 'Before Edit','BS' => 'Before Save','AS' => 'After Save','BD' => 'Before Delete','AD' => 'After Delete'];
 	
 	foreach ($events as $key => $value) {
 		
