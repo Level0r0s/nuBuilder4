@@ -315,16 +315,16 @@ function nuGetEditForm($F, $R){
     $f->from			= $SQL->from;
     $f->javascript		= $r->sfo_javascript;
 	
-	if(intval($r->sfo_row_height) == 0){
+	if(intval($r->sfo_browse_row_height) == 0){
 		$f->row_height	= 25;
 	}else{
-		$f->row_height	= intval($r->sfo_row_height);
+		$f->row_height	= intval($r->sfo_browse_row_height);
 	}
     
-	if(intval($r->sfo_rows_per_page) == 0){
+	if(intval($r->sfo_browse_rows_per_page) == 0){
 		$f->rows	= 20;
 	}else{
-		$f->rows	= intval($r->sfo_rows_per_page);
+		$f->rows	= intval($r->sfo_browse_rows_per_page);
 	}
 
     $f->title		= nuBreadcrumbDescription($r, $R);
@@ -861,7 +861,8 @@ function nuCheckSession(){
 				$c->session_id		= $_SESSION['SESSIONID'];
 				$c->form_id			= $_POST['nuSTATE']['form_id'];
 				$c->record_id		= $_POST['nuSTATE']['record_id'];
-				$c->schema			= $_POST['nuSchema'];	
+				$c->schema			= array();	
+//				$c->schema			= $_POST['nuSchema'];	
 				$c->translation		= nuTranslate($r->sus_language);
 				nuUpdateSession();
 				
@@ -1153,8 +1154,8 @@ function nuFormDimensions($f){
 	$t			= nuRunQuery("SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$f'");
 	$r			= db_fetch_object($t);
 	
-	$rh			= intval($r->sfo_row_height)    == 0 ? 25 : $r->sfo_row_height;
-	$rs			= intval($r->sfo_rows_per_page) == 0 ? 25 : $r->sfo_rows_per_page;
+	$rh			= intval($r->sfo_browse_row_height)    == 0 ? 25 : $r->sfo_browse_row_height;
+	$rs			= intval($r->sfo_browse_rows_per_page) == 0 ? 25 : $r->sfo_browse_rows_per_page;
 	
 	$d[]		= ($rs * $rh) + 225;    //-- lookup browse height
 	
