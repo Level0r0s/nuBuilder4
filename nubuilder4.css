@@ -383,6 +383,22 @@ input {
 }
 
 
+
+.nuSelectBrowse {
+  height: 70px;
+  border-style: solid;
+  border-width: 1px 2px 1px 1px;
+  padding: 3px;
+  position:absolute;
+  top:75px;
+  font-size:14px;
+  background-color: #9ED374 !important;
+  border-color: #9ED374 !important;
+}
+
+
+
+
 .nuBrowseSearch {
   color: red;
 }
@@ -795,13 +811,6 @@ input {
 .nuDragOptionsButtonDisabled {
     color: gray !important;
 }
-
-.nuSelectBrowse {
-  background-color: #9ED374 !important;
-  border-color: #9ED374 !important;
-  border-width: 1px;
-}
-
 
 .nuValidate {
   background-color: yellow !important;

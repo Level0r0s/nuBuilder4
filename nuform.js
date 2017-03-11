@@ -9,6 +9,7 @@ function nuBuildForm(f){
 		
 	}
 	
+	window.nuSERVERRESPONSE			= f;
 	window.nuSESSION				= f.session_id;
 	window.onbeforeunload			= null;
 	window.nuSUBFORMROW				= [];
@@ -145,7 +146,7 @@ function nuAddActionButtons(f){
 		draggable = 1;
 	}
 
-	var b		= f.buttons;
+	var button	= f.buttons;
 
 	if(f.record_id == ''){
 
@@ -156,27 +157,43 @@ function nuAddActionButtons(f){
 		$('#nuActionHolder').append("<input id='nuFilter' style='visibility:hidden;width:0px' value='" + f + "'>");
 		$('#nuActionHolder').append("<input id='nuSearchButton' type='button' class='nuActionButton ' value='Search' onclick='nuSearchAction()'>&nbsp;");
 		
+		if(button.Add == 1){nuAddActionButton('Add');}
+		if(button.Print == 1){nuAddActionButton('Print');}
+			
+	}else{
+		
+		if(!draggable){
+			
+			if(button.Save == 1){nuAddActionButton('Save');}
+			if(button.Clone == 1){nuAddActionButton('Clone');}
+			if(button.Delete == 1){nuAddActionButton('Delete');}
+			
+		}
+		
 	}
 
-	for(var i = 0 ; i < b.length ; i++){
-		
-		var reportID = '';
-		
-		if(b[i] == 'Run' || b[i] == 'Email') {
-			reportID = '\"' + window.nuFORM.getProperty('record_id') + '\"';
-		}
-		
-		if(!draggable) {
-			$('#nuActionHolder').append("<input id='nu" + b[i] + "Button' type='button' class='nuActionButton' value='" + b[i] + "' onclick='nu" + b[i] + "Action(" + reportID + ")'>&nbsp;");
-		}
-		
-	}
-	
 	if(window.parent.length == 0){ //-- only if Main Form
 		$('#nuActionHolder').append("<img id='thelogo' src='logo.png' style='position:absolute;right:20px'>");
 	}
 	
 }
+
+
+function nuAddActionButton(i, v, f){
+	
+	if(arguments.length == 1){
+		
+		v	= i;
+		f	= 'nu' + v + 'Action()';
+		
+	}
+	
+	$('#nuActionHolder').append("<input id='nu" + i + "Button' type='button' class='nuActionButton' value='" + v + "' onclick='" + f + "'>&nbsp;");
+
+}
+
+
+
 
 function nuBuildEditObjects(f, p, o, prop){
 
@@ -1563,6 +1580,10 @@ function nuBrowseTitle(b, i, l){
 			'left'			: l
 	});
 
+	if(w == 0){
+		$('#' + id).hide();
+	}
+
 	$('#nusearch_' + i).attr('checked', un == -1);
 	
 	return l + w;
@@ -1686,9 +1707,14 @@ function nuBrowseTable(){
 					'width'		: w-8,
 					'top'		: t,
 					'left'		: l,
-					'height'	: h-7
+					'height'	: h-7,
+					'position'	: 'absolute'
 			});
 
+			if(w == 0){
+				$('#' + id).hide();
+			}
+			
 			if(w < 8){
 				
 				$('#' + id)
@@ -1709,10 +1735,13 @@ function nuBrowseTable(){
 						
 						var rw = $( this ).attr('data-nu-row');
 						$("[data-nu-row='"+rw+"']").addClass('nuSelectBrowse');
+						$("[data-nu-row='"+rw+"']").removeClass('nuBrowseTable');
+						 
 						
 					}, function() {
 						
 						var rw = $( this ).attr('data-nu-row');
+						$("[data-nu-row='"+rw+"']").addClass('nuBrowseTable');
 						$("[data-nu-row='"+rw+"']").removeClass('nuSelectBrowse');
 						
 					}

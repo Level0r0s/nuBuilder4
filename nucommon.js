@@ -359,37 +359,54 @@ function nuRunIt(t, email, type){
 function nuBindCtrlEvents(){
 
 	var nuCtrlKeydownListener = function(e){	
+	
 		if(e.keyCode == 17) { //Ctrl
 			window.nuNEW = 1;
 		}
+		
 	}
 	
 	$(document).keydown(function(e) {
+		
         if (e.ctrlKey && e.shiftKey) {
+			
 			window.nuNEW = 0;
+			
             if(e.keyCode == 65) {//A
+			
 				e.preventDefault();
 				nuPopup(window.nuFORM.getCurrent().form_id, "-2");
+
 			} else if(e.keyCode == 70) {//F
+
 				e.preventDefault();
 				nuPopup("nuform", window.nuFORM.getCurrent().form_id);
+				
 			} else if(e.keyCode == 79) {//O
+			
 				e.preventDefault();
 				nuPopup("nuobject", "", window.nuFORM.getCurrent().form_id);
+				
 			} 
 		
 			if(e.keyCode == 82) {//R
+			
 				e.preventDefault();
+				
 				if(window.nuFORM.getCurrent().record_id != '') {
 					nuGetBreadcrumb();
 				}
+				
 			} else if(e.keyCode == 83) {//S
+			
 				e.preventDefault();
+				
 				if(window.nuFORM.getCurrent().record_id != '') {
 					nuSaveAction();
 				} else {
 					nuGetSearchList();
 				}				
+
 			}
 
         }
@@ -702,7 +719,7 @@ function nuAddThousandSpaces(s, c){
 	var a	= String(s).split('');
 	var r	= [];
 
-	r	= a.reverse();
+	r		= a.reverse();
 		
 	if(r.length > 3){r.splice(3, 0, c);}
 	if(r.length > 7){r.splice(7, 0, c);}
@@ -711,38 +728,9 @@ function nuAddThousandSpaces(s, c){
 	if(r.length > 19){r.splice(19, 0, c);}
 	if(r.length > 23){return -1;}
 
-	r	= r.reverse();
+	r		= r.reverse();
 	
 	return r.join('');
 	
 }
 
-function nuFormat(v, f){
-
-
-
-    var a   = [];
-/*    
-    a.push(['WWW', 'Fri']);
-    a.push(['WWWW', 'Friday']);
-    a.push(['w', '6']);
-    a.push(['MMM', 'Jan']);
-    a.push(['MMMM', 'January']);
-    a.push(['mm', '01']);
-    a.push(['m', '1']);
-    a.push(['dd', '13']);
-    a.push(['d', '13']);
-    a.push(['yyyy', '2007']);
-    a.push(['yy', '07']);
-    a.push(['y', '7']);
-    a.push(['th', '10']);
-    a.push(['tm', '30']);
-    a.push(['ts', '00']);
-    
-    a.push(['[,.]',   '1,000.']);
-    a.push(['[.]',    '1000.']);
-    a.push(['[.,]',   '1.000,']);
-    a.push(['[,]',   '1000,']);
-    
-*/
-}

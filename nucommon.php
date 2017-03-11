@@ -1025,19 +1025,6 @@ function nuSchema(){
 
 }
 
-function nuFormata(){
-	
-	$a			= array();
-	$t			= nuRunQuery("SELECT * FROM zzzzsys_format");
-
-	while($r = db_fetch_object($t)){
-		$a[]		= array($r->srm_type, $r->srm_format);
-	}
-
-	return $a;
-
-}
-
 
 function nuTranslate($l){
 

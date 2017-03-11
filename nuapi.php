@@ -48,12 +48,12 @@
 	$f->forms[0]->target					= $P['target'];
 	$f->forms[0]->global_access				= $_POST['nuHash']['global_access'];
 	$f->forms[0]->javascript				= $GLOBALS['EXTRAJS'];
+	$f->forms[0]->buttons					= nuButtons($s->form_id);
 
 	$j								    	= json_encode($f->forms[0]);
 //  nudebug($j);
-//	nudebug('HASH: ' . print_r($_POST['nuHash'],1));
+//	nudebug('BUTYON: ' . $s->form_id . '   ' . print_r(nuButtons($s->form_id),1));
 //	print ;
 print $j;
-	
 	
 ?>
