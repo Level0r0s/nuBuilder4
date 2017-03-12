@@ -260,9 +260,13 @@ function nuAddJSObjectEvents(i, j){
 	for(var J = 0 ; J < j.length ; J++){
 
 		var code 	= o.getAttribute(j[J].event);
+		var ev		= j[J].event;
 		code		= code === null ? '' : code + ';' ;
 		
-		o.setAttribute(j[J].event, code+ j[J].js);
+		if(ev == 'beforeinsertrow')		{ev	= 'data-nu-' + ev;}
+		if(ev == 'afterinsertrow')		{ev	= 'data-nu-' + ev;}
+		
+		o.setAttribute(ev, code + j[J].js);
 
 	}
 
@@ -811,6 +815,7 @@ function nuSUBFORM(w, i, l, p, prop){
 	.attr('data-nu-subform', 'true')
 	.addClass('nuSubform');
 
+	nuAddJSObjectEvents(id, SF.js);
 	nuGetSubformRowSize(SF.forms[0].objects, SF, id);
 	nuBuildSubformArray(id);
 
@@ -931,7 +936,10 @@ function nuNewRowObject(p){
 	if($('#' + p + 'nuRECORD').length == 0){return;}
 	
 	var h	= document.getElementById(p + 'nuRECORD').outerHTML;
+	
 	window.nuSUBFORMROW[sf]	= String(h.replaceAll(p, '#nuSubformRowNumber#', true));
+	
+	$("[id^='" + p + "']").addClass('nuEdit')
 	
 }
 
@@ -973,6 +981,16 @@ function nuRecordHolderObject(t){
 
 function nuAddSubformRow(t, e){
 	
+	var sfid	= $('#' + t.id).parent().parent().parent()[0].id;
+	var before	= $('#' + sfid).attr('data-nu-beforeinsertrow');
+	var after	= $('#' + sfid).attr('data-nu-afterinsertrow');
+	
+	var nuCancel = false;
+	
+	eval(before);
+	
+	if(nuCancel){return;}
+	
 	e.stopPropagation();
 
 	var o = new nuRecordHolderObject(t);
@@ -989,9 +1007,18 @@ function nuAddSubformRow(t, e){
 	$('#' + o.form + nuPad3(o.rows) + 'nuDelete').prop('checked', true);
 	$('#' + o.form + nuPad3(o.rows-1) + 'nuDelete').prop('checked', false);
 	
+	$("[id^='" + o.form + nuPad3(o.rows) + "']").addClass('nuEdited')
+	
 	$('.nuTabSelected').click();
+
+	eval(after);
 	
 }
+
+
+
+
+
 
 
 function nuPad3(i){
@@ -1927,14 +1954,32 @@ function nuSelectBrowse(e){
 
 
 function nuPopulateLookup(fm, target){
-
-	var p 	= $('#' + target).attr('data-nu-prefix');
+	
+	var p 	= String($('#' + target).attr('data-nu-prefix'));
 	var f	= fm.lookup_values;
 
 	for(var i = 0 ; i < f.length ; i++){
 		
-		$('#' + f[i][0]).addClass('nuEdited');
-		$('#' + f[i][0]).val(f[i][1]);
+		var	id	= String(f[i][0]);
+
+		if(id.substr(0, p.length) != p){
+			id	= p + id;
+		}
+		
+		$('#' + id).addClass('nuEdited');
+		
+		if($('#' + id).attr('type') == 'checkbox'){
+			
+			if(f[i][1] == '1'){
+				$('#' + id).prop('checked', true); 
+			}else{
+				$('#' + id).prop('checked', true);
+			}
+			
+		}else{
+			$('#' + id).val(f[i][1]);
+		}
+		
 
 	}
 	
@@ -2256,13 +2301,12 @@ function nuChange(e){
 	nuCalculateForm();
 
 	if(p == ''){return;}
-	
+
 	nuAddSubformRow(t, event);
 	
 }
 
 function nuCalculateForm(){	//-- calculate subform 'calcs' first
-	
 	
     var subformFirst = function(b, a) {
         return $('#' + a.id).hasClass('nuSubformObject') - $('#' + b.id).hasClass('nuSubformObject');
@@ -2271,6 +2315,7 @@ function nuCalculateForm(){	//-- calculate subform 'calcs' first
 	var f	= $("[data-nu-formula]");
 	
     f.sort(subformFirst);
+	
 	f.each(function( index ) {		//-- start with calculations inside a subform
 		
 		$(this).addClass('nuEdited');

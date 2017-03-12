@@ -82,9 +82,11 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 			}
 
 			if($r->sob_all_type == 'calc'){
+				
 				$o->formula	= $r->sob_calc_formula;
 				$o->format	= $r->sob_calc_format;
 				$o->align 	= $r->sob_all_align;
+				
 			}
 				
 			if($r->sob_all_type == 'textarea'){
@@ -862,7 +864,6 @@ function nuCheckSession(){
 				$c->form_id			= $_POST['nuSTATE']['form_id'];
 				$c->record_id		= $_POST['nuSTATE']['record_id'];
 				$c->schema			= array();	
-//				$c->schema			= $_POST['nuSchema'];	
 				$c->translation		= nuTranslate($r->sus_language);
 				nuUpdateSession();
 				
@@ -1427,6 +1428,7 @@ function nuAddSystemEvent($event){
 function nuAddJavascript($js){
 	$GLOBALS['EXTRAJS'] = $GLOBALS['EXTRAJS'] . "\n\n" . $js;
 }
+
 
 
 
