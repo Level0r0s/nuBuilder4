@@ -43,7 +43,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
     $f->form_id		= $F;
     $f->record_id	= $R;
 	
-	if(!array_key_exists($f->table, $_POST['nuSchema'])){
+	if(!array_key_exists($f->table, $_POST['nuTableSchema'])){
 		
 		$A			= array();
 		
@@ -402,7 +402,7 @@ function nuGetOtherLookupValues($nuO){
 
 function nuSetFormValue($f, $v){
 
-	$f			=  str_replace('#ROW#', $_POST['nuSTATE']['prefix'], $f);
+	$f							=  str_replace('#ROW#', $_POST['nuSTATE']['prefix'], $f);
 
 	$_POST['lookup_values'][]	= array($f, $v);
 	
@@ -793,7 +793,8 @@ function nuCheckSession(){
 	$c->call_type			= $ct;
 	$c->filter				= $_POST['nuFilter'];
 	$c->errors				= array();
-	$c->schema				= array();
+	$c->tableSchema			= array();
+	$c->formSchema			= array();
 	$c->translation			= array();
 
     if($s == ''){											//-- no session id yet
@@ -806,7 +807,8 @@ function nuCheckSession(){
 				$c->session_id			= $s;
 				$c->form_id				= 'nuhome';
 				$c->record_id			= '-1';
-				$c->schema				= $_POST['nuSchema'];
+				$c->tableSchema			= $_POST['nuTableSchema'];
+				$c->formSchema			= nuFormSchema();
 				$c->translation			= nuTranslate('');
 
 			}else{
@@ -835,7 +837,8 @@ function nuCheckSession(){
 				$c->session_id		= $s;
 				$c->form_id			= $r->sug_zzzzsys_form_id;			//-- home Form
 				$c->record_id		= '-1';
-				$c->schema			= $_POST['nuSchema'];
+				$c->tableSchema		= $_POST['nuTableSchema'];
+				$c->formSchema		= nuFormSchema();
 				$c->translation		= nuTranslate($r->sus_language);
 
 			}else{
@@ -863,8 +866,10 @@ function nuCheckSession(){
 				$c->session_id		= $_SESSION['SESSIONID'];
 				$c->form_id			= $_POST['nuSTATE']['form_id'];
 				$c->record_id		= $_POST['nuSTATE']['record_id'];
-				$c->schema			= array();	
+				$c->tableSchema		= array();	
+				$c->formSchema		= array();	
 				$c->translation		= nuTranslate($r->sus_language);
+				
 				nuUpdateSession();
 				
 			} else {

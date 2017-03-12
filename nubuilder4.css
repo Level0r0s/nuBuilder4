@@ -31,21 +31,25 @@
 .php {
    background-color: #B9BCD6;
    font-family:Lucida Console;
+   padding 2px;
 }
 
 .js {
    background-color: #F8DC3D;
    font-family:Lucida Console;
+   padding: 2px;
 }
 
 .html {
    background-color: #F48453;
    font-family:Lucida Console;
+   padding: 2px;
 }
 
 .sql {
    background-color: #B4C5D1;
    font-family:Lucida Console;
+   padding: 2px;
 }
 
 

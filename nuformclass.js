@@ -4,7 +4,8 @@ class nuFormObject {
 	
 	constructor() {
 		
-		this.schema				= [];
+		this.tableSchema		= [];
+		this.formSchema			= {};
 		this.formats			= this.setFormats();
 		this.breadcrumbs 		= [];
 		this.scroll		 		= [];
@@ -122,7 +123,7 @@ class nuFormObject {
 	
 	dataType(t, f){
 		
-		var tab	= this.schema[t];
+		var tab	= this.tableSchema[t];
 		
 		for(var i = 0 ; i < tab.length ; i++){
 			
@@ -153,7 +154,7 @@ class nuFormObject {
 	
 	tableFields(t){
 		
-		var tab	= this.schema[t];
+		var tab	= this.tableSchema[t];
 		var fld	= [];
 		
 		if(tab === undefined){
@@ -191,9 +192,9 @@ class nuFormObject {
 	
 		var tables	= [];
 		
-		for (var key in nuFORM.schema) {
+		for (var key in nuFORM.tableSchema) {
 
-			if (nuFORM.schema.hasOwnProperty(key)) {
+			if (nuFORM.tableSchema.hasOwnProperty(key)) {
 				tables.push(key) 
 			}
 			

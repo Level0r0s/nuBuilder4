@@ -12,7 +12,7 @@
 	
 	
 	$_POST['nuErrors']						= array();
-	$_POST['nuSchema']						= nuSchema();
+	$_POST['nuTableSchema']					= nuTableSchema();
 	$s										= nuCheckSession();
 	$P										= $_POST['nuSTATE'];
 	$_POST['nuHash']						= nuSetHashList($P);
@@ -41,7 +41,8 @@
 
 	$f->forms[0]->user_id					= $u['USER_ID'];
 	$f->forms[0]->dimensions				= $s->dimensions;
-	$f->forms[0]->schema					= $s->schema;
+	$f->forms[0]->tableSchema				= $s->tableSchema;
+	$f->forms[0]->formSchema				= $s->formSchema;
 	$f->forms[0]->translation				= $s->translation;
 	$f->forms[0]->session_id				= $_SESSION['SESSIONID'];
 	$f->forms[0]->errors					= $_POST['nuErrors'];
