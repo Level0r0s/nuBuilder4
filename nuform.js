@@ -1599,6 +1599,7 @@ function nuSelectTab(tab){
 
 }
 
+
 function nuAddDataTab(i, t, p){
 
     var P = String(p);
@@ -1606,6 +1607,7 @@ function nuAddDataTab(i, t, p){
     $('#' + i).attr('data-nu-tab', t).attr('data-nu-form', f);
 
 }
+
 
 function nuBrowseTitle(b, i, l){
 
