@@ -19,11 +19,11 @@ function nuBeforeBrowse($f){
 }
 
 
-function nuBeforeOpen($f, $o){
+function nuBeforeEdit($f, $o){
 	
 	$r					= nuFormProperties($f);
     $GLOBALS['EXTRAJS']	= $r->sfo_javascript;
-	$evalPHP 			= new nuEvalPHPClass($f . '_BO');
+	$evalPHP 			= new nuEvalPHPClass($f . '_BE');
 	
 }
 
@@ -43,7 +43,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
     $f->form_id		= $F;
     $f->record_id	= $R;
 	
-	if(!array_key_exists($f->table, $_POST['nuSchema'])){
+	if(!array_key_exists($f->table, $_POST['nuTableSchema'])){
 		
 		$A			= array();
 		
@@ -82,9 +82,11 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 			}
 
 			if($r->sob_all_type == 'calc'){
+				
 				$o->formula	= $r->sob_calc_formula;
 				$o->format	= $r->sob_calc_format;
 				$o->align 	= $r->sob_all_align;
+				
 			}
 				
 			if($r->sob_all_type == 'textarea'){
@@ -214,7 +216,8 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 		nuDisplayError('Form ID not found');
 	}
 
-    $f->buttons				= nuButtonList($f);
+//    $f->buttons				= nuButtonList($f);
+    $f->buttons				= $_POST['buttons'];
     $f->tabs 				= nuRefineTabList($tabs);
     $f->browse_columns		= nuBrowseColumns($f);
     $B						= nuBrowseRows($f);
@@ -267,59 +270,6 @@ function nuObjectEvents($i){
 }
 
 
-
-function nuButtonList($f){
-	
-	$s = "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$f->id'";
-	$t = nuRunQuery($s);
-	$a = db_fetch_array($t);
-	$A = array();
-	
-	if($f->record_id == ''){
-		
-		if($f->id != 'nurunreport' && $f->id != 'nurunphp'){
-			
-			$b = nuGetButton('add', $a);	if(count($b) == 2){$A[] = $b;}
-			$b = nuGetButton('print', $a);	if(count($b) == 2){$A[] = $b;}
-			
-		}
-		
-	}else{
-		
-		$b = nuGetButton('save', $a);	if(count($b) == 2){$A[] = $b;}
-		$b = nuGetButton('new', $a);	if(count($b) == 2){$A[] = $b;}
-		$b = nuGetButton('clone', $a);	if(count($b) == 2){$A[] = $b;}
-		$b = nuGetButton('delete', $a);if(count($b) == 2){$A[] = $b;}
-		
-	}
-
-	return $A;
-}
-
-
-
-function nuGetButton($b, $a){
-
-	if($a['sfo_' . $b . '_button'] == '1'){
-		
-		if(nuGetSQLValue($a['sfo_' . $b . '_display_condition']) != '0'){
-
-			$t = $a['sfo_' . $b . '_title'];
-			$T = ucfirst($b);
-			
-			return array($t == '' ? $T : $t, $T);
-			
-		}
-		
-	}
-	
-	return array();
-	
-}
-
-
-
-
 function nuDefaultObject($r, $t){
     
 	$o					= new stdClass();
@@ -367,16 +317,16 @@ function nuGetEditForm($F, $R){
     $f->from			= $SQL->from;
     $f->javascript		= $r->sfo_javascript;
 	
-	if(intval($r->sfo_row_height) == 0){
+	if(intval($r->sfo_browse_row_height) == 0){
 		$f->row_height	= 25;
 	}else{
-		$f->row_height	= intval($r->sfo_row_height);
+		$f->row_height	= intval($r->sfo_browse_row_height);
 	}
     
-	if(intval($r->sfo_rows_per_page) == 0){
+	if(intval($r->sfo_browse_rows_per_page) == 0){
 		$f->rows	= 20;
 	}else{
-		$f->rows	= intval($r->sfo_rows_per_page);
+		$f->rows	= intval($r->sfo_browse_rows_per_page);
 	}
 
     $f->title		= nuBreadcrumbDescription($r, $R);
@@ -452,7 +402,7 @@ function nuGetOtherLookupValues($nuO){
 
 function nuSetFormValue($f, $v){
 
-	$f			=  str_replace('#ROW#', $_POST['nuSTATE']['prefix'], $f);
+	$f							=  str_replace('#ROW#', $_POST['nuSTATE']['prefix'], $f);
 
 	$_POST['lookup_values'][]	= array($f, $v);
 	
@@ -843,7 +793,8 @@ function nuCheckSession(){
 	$c->call_type			= $ct;
 	$c->filter				= $_POST['nuFilter'];
 	$c->errors				= array();
-	$c->schema				= array();
+	$c->tableSchema			= array();
+	$c->formSchema			= array();
 	$c->translation			= array();
 
     if($s == ''){											//-- no session id yet
@@ -856,17 +807,20 @@ function nuCheckSession(){
 				$c->session_id			= $s;
 				$c->form_id				= 'nuhome';
 				$c->record_id			= '-1';
-				$c->schema				= $_POST['nuSchema'];
-				$c->formata				= nuFormata();
+				$c->tableSchema			= $_POST['nuTableSchema'];
+				$c->formSchema			= nuFormSchema();
 				$c->translation			= nuTranslate('');
 
 			}else{
+				
 				nuDisplayError('Invalid Login..');
 				$_POST['nuLogAgain']	= 1;
 				return;
+				
 			}
 
 		}else{                                       //-- normal user
+		
 			$q	= "
 				SELECT * 
 				FROM zzzzsys_user 
@@ -883,14 +837,16 @@ function nuCheckSession(){
 				$c->session_id		= $s;
 				$c->form_id			= $r->sug_zzzzsys_form_id;			//-- home Form
 				$c->record_id		= '-1';
-				$c->schema			= $_POST['nuSchema'];
-				$c->formata			= nuFormata();
+				$c->tableSchema		= $_POST['nuTableSchema'];
+				$c->formSchema		= nuFormSchema();
 				$c->translation		= nuTranslate($r->sus_language);
 
 			}else{
 				
 				nuDisplayError('Invalid Login..');
+				
 				$_POST['nuLogAgain']	= 1;
+				
 				return;
 				
 			}
@@ -910,9 +866,10 @@ function nuCheckSession(){
 				$c->session_id		= $_SESSION['SESSIONID'];
 				$c->form_id			= $_POST['nuSTATE']['form_id'];
 				$c->record_id		= $_POST['nuSTATE']['record_id'];
-				$c->schema			= $_POST['nuSchema'];	
-				$c->formata			= nuFormata();
+				$c->tableSchema		= array();	
+				$c->formSchema		= array();	
 				$c->translation		= nuTranslate($r->sus_language);
+				
 				nuUpdateSession();
 				
 			} else {
@@ -967,11 +924,15 @@ function nuCheckSession(){
 			}
 				
 		}
+		
+		$f				= nuAddOtherFormsUsed($nuJ);		//-- form list including forms id used in reports and procedures
+		
+		nudebug($_POST['nuSTATE']['form_id']. ' ' . print_r($f,1));
+		
+		if(!in_array($_POST['nuSTATE']['form_id'], $f) && $c->call_type == 'getform'){
 
-		if(!in_array($c->form_id, $_POST['forms']) && $c->call_type == 'getform'){
-
-			$nuT	= nuRunQuery("SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$c->form_id'");
-			$nuR	= db_fetch_object($nuT);
+			$nuT		= nuRunQuery("SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$c->form_id'");
+			$nuR		= db_fetch_object($nuT);
 
 			nuDisplayError("Access To Form Denied... ($nuR->sfo_code)");
 			
@@ -985,12 +946,77 @@ function nuCheckSession(){
 	
 }
 
+function nuAddOtherFormsUsed($j){
+	
+	$a			= array();
+	
+	for($i = 0 ; $i < count($j->forms) ; $i++){
+		$a[]	= $j->forms[$i][0];
+	}
+
+	for($i = 0 ; $i < count($j->reports) ; $i++){
+		$a[]	= $j->reports[$i][1];
+	}
+
+	for($i = 0 ; $i < count($j->procedures) ; $i++){
+		$a[]	= $j->procedures[$i][1];
+	}
+	
+	return $a;
+	
+}
+
+
+function nuButtons($formid){
+	
+	$t						= nuRunQuery("SELECT * FROM zzzzsys_session WHERE zzzzsys_session_id = ? ", array($_SESSION['SESSIONID']));		
+	$r 						= db_fetch_object($t);
+	$nuJ 					= json_decode($r->sss_access);
+	$_POST['forms']			= $nuJ->forms;
+	$_POST['reports']		= $nuJ->reports;
+	$_POST['procedures']	= $nuJ->procedures;
+	$_POST['session']		= $nuJ->session;
+
+	$access					= nuFormAccess($formid, $nuJ->forms);
+	
+	return array('Add' => $access[0], 'Print' => $access[1], 'Save' => $access[2], 'Clone' => $access[3], 'Delete' => $access[4]);
+	
+}
+
+
+
+
+
+
+function nuFormAccess($s, $a){
+
+	if($_POST['session']->zzzzsys_user_id == $_SESSION['DBGlobeadminUsername']){
+		return array('1', '1', '1', '1', '1');
+	}
+
+	for($i = 0 ; $i < count($a) ; $i++){
+		
+		$F	= $a[$i];
+//nudebug('ffff ' . print_r($F, 1));
+		if($s == $F[0]){
+			return array($F[1], $F[2], $F[3], $F[4], $F[5]);		//-- Add Print Save Clone Delete
+		}
+		
+	}
+	
+	return array('0', '0', '0', '0', '0');
+
+}
+
+
+
+
 function nuUpdateSession() {
 	
 	$today 						= strtotime('now');
 	$timeout 					= date("Y-m-d H:i:s", strtotime('+'.$_SESSION['Timeout'].' min', $today));
 
-	nuRunQuery("UPDATE zzzzsys_session SET sss_timeout = '$timeout'WHERE zzzzsys_session_id = ?", array($_SESSION['SESSIONID']));
+	nuRunQuery("UPDATE zzzzsys_session SET sss_timeout = '$timeout' WHERE zzzzsys_session_id = ?", array($_SESSION['SESSIONID']));
 }
 
 function nuHasSessionTimedOut($timeout) {
@@ -1025,7 +1051,13 @@ function nuAccessForms($session){
 		
 		$s	= "
 		
-			SELECT slf_zzzzsys_form_id AS id 
+			SELECT slf_zzzzsys_form_id 	AS id,
+				slf_add_button 			AS a, 
+				slf_save_button 		AS s, 
+				slf_delete_button 		AS d,
+				slf_clone_button 		AS c,
+				slf_print_button 		AS p
+
 			FROM zzzzsys_user_group
 			JOIN zzzzsys_user_group_access_level ON gal_zzzzsys_user_group_id = zzzzsys_user_group_id
 			JOIN zzzzsys_access_level ON zzzzsys_access_level_id = gal_zzzzsys_access_level_id
@@ -1040,8 +1072,8 @@ function nuAccessForms($session){
 	$t	= nuRunQuery($s);
 	$a	= Array();
 
-	while($r	= db_fetch_row($t)){
-		$a[]	= $r[0];
+	while($r	= db_fetch_object($t)){
+		$a[]	= [$r->id, $r->a, $r->p, $r->s, $r->c, $r->d];
 	}
 
 	return $a;
@@ -1053,19 +1085,20 @@ function nuAccessReports($session){
 	
 	if($session->global_access == '1'){
 		
-		$s	= "SELECT zzzzsys_report_id AS id FROM zzzzsys_report";
+		$s	= "SELECT zzzzsys_report_id AS id, sre_zzzzsys_form_id AS form_id FROM zzzzsys_report";
 		
 	}else{
 
 		$s	= "
 		
-			SELECT sre_zzzzsys_report_id AS id 
-			FROM zzzzsys_user_group
-			JOIN zzzzsys_user_group_access_level ON gal_zzzzsys_user_group_id = zzzzsys_user_group_id
-			JOIN zzzzsys_access_level ON zzzzsys_access_level_id = gal_zzzzsys_access_level_id
-			JOIN zzzzsys_access_level_report ON zzzzsys_access_level_id = sre_zzzzsys_access_level_id
-			WHERE zzzzsys_user_group_id = '$session->zzzzsys_user_group_id'
-			GROUP BY sre_zzzzsys_report_id
+		SELECT sre_zzzzsys_report_id AS id, sre_zzzzsys_form_id AS form_id
+		FROM zzzzsys_user_group
+		JOIN zzzzsys_user_group_access_level ON gal_zzzzsys_user_group_id = zzzzsys_user_group_id
+		JOIN zzzzsys_access_level ON zzzzsys_access_level_id = gal_zzzzsys_access_level_id
+		JOIN zzzzsys_access_level_report ON zzzzsys_access_level_id = sre_zzzzsys_access_level_id
+		JOIN zzzzsys_report ON zzzzsys_report_id = sre_zzzzsys_report_id
+		WHERE zzzzsys_user_group_id = '$session->zzzzsys_user_group_id'
+		GROUP BY sre_zzzzsys_report_id
 				
 		";
 		
@@ -1075,7 +1108,7 @@ function nuAccessReports($session){
 	$a	= Array();
 
 	while($r	= db_fetch_row($t)){
-		$a[]	= $r[0];
+		$a[]	= array($r[0],$r[1]);
 	}
 
 	return $a;
@@ -1087,18 +1120,20 @@ function nuAccessProcedures($session){
 
 	if($session->global_access == '1'){
 		
-		$s	= "SELECT zzzzsys_php_id AS id FROM zzzzsys_php";
+		$s	= "SELECT zzzzsys_php_id AS id, sph_zzzzsys_form_id AS form_id FROM zzzzsys_php";
 		
 	}else{
 
 		$s	= "
 		
 			SELECT 
-				slp_zzzzsys_php_id AS id
+				slp_zzzzsys_php_id AS id,
+				sph_zzzzsys_form_id AS form_id
 			FROM zzzzsys_user_group
 			JOIN zzzzsys_user_group_access_level ON gal_zzzzsys_user_group_id = zzzzsys_user_group_id
 			JOIN zzzzsys_access_level ON zzzzsys_access_level_id = gal_zzzzsys_access_level_id
 			JOIN zzzzsys_access_level_php ON zzzzsys_access_level_id = slp_zzzzsys_access_level_id
+			JOIN zzzzsys_php ON zzzzsys_php_id = slp_zzzzsys_php_id
 			WHERE 
 				zzzzsys_user_group_id = '$session->zzzzsys_user_group_id'
 			GROUP BY 
@@ -1112,7 +1147,7 @@ function nuAccessProcedures($session){
 	$a	= Array();
 
 	while($r	= db_fetch_row($t)){
-		$a[]	= $r[0];
+		$a[]	= array($r[0], $r[1]);
 	}
 
 	return $a;
@@ -1125,8 +1160,8 @@ function nuFormDimensions($f){
 	$t			= nuRunQuery("SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$f'");
 	$r			= db_fetch_object($t);
 	
-	$rh			= intval($r->sfo_row_height)    == 0 ? 25 : $r->sfo_row_height;
-	$rs			= intval($r->sfo_rows_per_page) == 0 ? 25 : $r->sfo_rows_per_page;
+	$rh			= intval($r->sfo_browse_row_height)    == 0 ? 25 : $r->sfo_browse_row_height;
+	$rs			= intval($r->sfo_browse_rows_per_page) == 0 ? 25 : $r->sfo_browse_rows_per_page;
 	
 	$d[]		= ($rs * $rh) + 225;    //-- lookup browse height
 	
@@ -1248,8 +1283,9 @@ function nuSetAccessibility($userid = ''){
 	$nuJ						= json_encode($access);
 	$today 						= strtotime('now');
 	$timeout 					= date("Y-m-d H:i:s", strtotime('+'.$_SESSION['Timeout'].' min', $today));
+	$ses						= $_SESSION['SESSIONID'];
 
-	nuRunQuery("INSERT INTO zzzzsys_session SET sss_timeout = '$timeout', sss_access = ?, zzzzsys_session_id = ?", array($nuJ, $_SESSION['SESSIONID']));
+	nuRunQuery("INSERT INTO zzzzsys_session SET sss_timeout = '$timeout', sss_access = ?, zzzzsys_session_id = ?", array($nuJ, $ses));
 	
 	return $i;
 
@@ -1348,7 +1384,7 @@ function nuAddPrintButtons($f, $t, $a){
 function nuAddSystemEvent($event){
 	
 	$F			= $_POST['nuHash']['RECORD_ID'];
-	$events		= ['BB' => 'Before Browse','BO' => 'Before Open','BS' => 'Before Save','AS' => 'After Save','BD' => 'Before Delete','AD' => 'After Delete'];
+	$events		= ['BB' => 'Before Browse','BE' => 'Before Edit','BS' => 'Before Save','AS' => 'After Save','BD' => 'Before Delete','AD' => 'After Delete'];
 	
 	foreach ($events as $key => $value) {
 		
@@ -1397,6 +1433,7 @@ function nuAddSystemEvent($event){
 function nuAddJavascript($js){
 	$GLOBALS['EXTRAJS'] = $GLOBALS['EXTRAJS'] . "\n\n" . $js;
 }
+
 
 
 

@@ -31,21 +31,25 @@
 .php {
    background-color: #B9BCD6;
    font-family:Lucida Console;
+   padding 2px;
 }
 
 .js {
    background-color: #F8DC3D;
    font-family:Lucida Console;
+   padding: 2px;
 }
 
 .html {
    background-color: #F48453;
    font-family:Lucida Console;
+   padding: 2px;
 }
 
 .sql {
    background-color: #B4C5D1;
    font-family:Lucida Console;
+   padding: 2px;
 }
 
 
@@ -108,7 +112,7 @@ body {
 
 input {
   border: 1px solid rgba(0, 0, 0, 0.2);
-  padding: 0px;
+  padding: 0px 2px 0px 2px;
 }
 
 .nuIframe {
@@ -183,6 +187,19 @@ input {
    border-width: 4px;
    border-style: dotted;
    cursor: pointer;
+}
+
+
+.nuScroll {
+  background-color: #ECE6F7;
+}
+
+.nuDate {
+  background-color: #EAE1F9;
+}
+
+.nuNumber {
+  background-color: #EAE1F9;
 }
 
 .nuNotBreadcrumb {
@@ -381,6 +398,22 @@ input {
   top:75px;
   font-size:14px;
 }
+
+
+
+.nuSelectBrowse {
+  height: 70px;
+  border-style: solid;
+  border-width: 1px 2px 1px 1px;
+  padding: 3px;
+  position:absolute;
+  top:75px;
+  font-size:14px;
+  background-color: #9ED374 !important;
+  border-color: #9ED374 !important;
+}
+
+
 
 
 .nuBrowseSearch {
@@ -796,13 +829,6 @@ input {
     color: gray !important;
 }
 
-.nuSelectBrowse {
-  background-color: #9ED374 !important;
-  border-color: #9ED374 !important;
-  border-width: 1px;
-}
-
-
 .nuValidate {
   background-color: yellow !important;
   border-color: red !important;
@@ -942,9 +968,6 @@ input {
 
 .nuErrorValidate {
 	color: black;
-}
-
-.nuScroll{
 }
 
 #close_error {

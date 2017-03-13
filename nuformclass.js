@@ -4,7 +4,8 @@ class nuFormObject {
 	
 	constructor() {
 		
-		this.schema				= [];
+		this.tableSchema		= [];
+		this.formSchema			= [];
 		this.formats			= this.setFormats();
 		this.breadcrumbs 		= [];
 		this.scroll		 		= [];
@@ -122,7 +123,7 @@ class nuFormObject {
 	
 	dataType(t, f){
 		
-		var tab	= this.schema[t];
+		var tab	= this.tableSchema[t];
 		
 		for(var i = 0 ; i < tab.length ; i++){
 			
@@ -151,9 +152,27 @@ class nuFormObject {
 	
 	}
 	
+	formFields(t){
+		
+		var tab	= this.formSchema[t];
+		var fld	= [];
+		
+		if(tab === undefined){
+			return fld;
+		}
+		
+		
+		for(var i = 0 ; i < tab.length ; i++){
+			fld.push(tab[i]);
+		}
+		
+		return fld;
+	
+	}
+	
 	tableFields(t){
 		
-		var tab	= this.schema[t];
+		var tab	= this.tableSchema[t];
 		var fld	= [];
 		
 		if(tab === undefined){
@@ -187,13 +206,29 @@ class nuFormObject {
 	
 	}
 	
+	getForms(){
+	
+		var forms	= [];
+		
+		for (var key in nuFORM.formSchema) {
+
+			if (nuFORM.formSchema.hasOwnProperty(key)) {
+				forms.push(key) 
+			}
+			
+		}
+		
+		return forms;
+		
+	}
+	
 	getTables(){
 	
 		var tables	= [];
 		
-		for (var key in nuFORM.schema) {
+		for (var key in nuFORM.tableSchema) {
 
-			if (nuFORM.schema.hasOwnProperty(key)) {
+			if (nuFORM.tableSchema.hasOwnProperty(key)) {
 				tables.push(key) 
 			}
 			
@@ -334,7 +369,13 @@ class nuFormObject {
 					}
 					
 					var dnf		= $('#' + this.id).attr('data-nu-format');
+					var typ		= $('#' + this.id).attr('type');
 					var val		= $('#' + this.id).val();
+
+					if(typ == 'checkbox'){
+						val		= $('#' + this.id).prop("checked") ? 1 : 0;
+					}
+						
 					
 					V[C]		= nuFORM.removeFormatting(val, dnf);
 					E[C]		= $('#' + this.id).hasClass('nuEdited') ? 1 : 0 ;

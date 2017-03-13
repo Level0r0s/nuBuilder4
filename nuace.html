@@ -1,13 +1,35 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
-<title>nuBuilder Code Editor</title>
+<title>nuBuilder's Ace Code Editor</title>
 
 <style>
-   .nuAce        {position:absolute;border-style:none;font-family:helvetica;font-size:14px;font-weight:bold;background-color:black;width:300px;height:20px;top:40px;}
-   .nuTool       {padding:4px;border-style:none;font-family:helvetica;font-size:14px;color:white;background-color:grey;}
-   .nuTool:hover {background-color:orange;cursor:default}
+.nuAce {
+	position:absolute;
+	border-style:none;
+	font-family:helvetica;
+	font-size:14px;
+	font-weight:bold;
+	background-color:black;
+	width:300px;
+	height:20px;
+	top:40px;
 }
+
+.nuTool {
+	padding:4px;
+	border-style:none;
+	font-family:helvetica;
+	font-size:14px;
+	color:white;
+	background-color:grey;
+}
+
+.nuTool:hover {
+	background-color:orange;
+	cursor:default;
+}
+
 </style>
 
 <script src="ace/ace.js" type="text/javascript" charset="utf-8"></script>
@@ -16,11 +38,14 @@
 
 window.c = opener.window.nuAce[0];
 window.o = opener.window.nuAce[1];
+window.t = opener.window.nuFORM.tableSchema;
+window.f = opener.window.nuFORM.formSchema;
 
 function nuLoad(){
 
 	window.editor     = ace.edit('nu_editor');
 	window.startValue = opener.window.document.getElementById(window.o).value;
+	
 	editor.setTheme("ace/theme/monokai");
 	editor.setFontSize(16);
 
@@ -57,7 +82,9 @@ function nuLoad(){
 
 	document.getElementById('nu_code_type').innerHTML   = window.c;
 	document.getElementById('nu_field_title').innerHTML = window.o;
+	
 	nuResize();
+	
 	editor.setValue(window.startValue);
 	editor.focus();
 	editor.navigateFileStart();

@@ -12,7 +12,7 @@
 	
 	
 	$_POST['nuErrors']						= array();
-	$_POST['nuSchema']						= nuSchema();
+	$_POST['nuTableSchema']					= nuTableSchema();
 	$s										= nuCheckSession();
 	$P										= $_POST['nuSTATE'];
 	$_POST['nuHash']						= nuSetHashList($P);
@@ -21,13 +21,14 @@
 	$_POST['nuHash']['PREVIOUS_RECORD_ID'] 	= $s->record_id;
 	$_POST['nuHash']['RECORD_ID'] 			= $s->record_id;
 	$_POST['nuHash']['FORM_ID'] 			= $s->form_id;
+	$_POST['FORM_ID'] 						= $s->form_id;
 	$_POST['nuHash']['TABLE_ID'] 			= nuTT();
 	$_POST['nuHash']['SESSION_ID'] 			= $s->session_id;
 	$_POST['nuValidate']					= array();
 
 	$f->forms[0]							= new stdClass;
 
-	if($P['call_type'] == 'getform')		{nuBeforeOpen($s->form_id, $s->record_id);$f->forms[0] = nuGetFormObject($s->form_id, $s->record_id, 0, $P);}
+	if($P['call_type'] == 'getform')		{nuBeforeEdit($s->form_id, $s->record_id);$f->forms[0] = nuGetFormObject($s->form_id, $s->record_id, 0, $P);}
 	if($P['call_type'] == 'update')			{$f->forms[0]->record_id		= nuUpdateData();}
 	if($P['call_type'] == 'getlookupid')	{$f->forms[0]->lookup_values 	= nuGetAllLookupValues();}
 	if($P['call_type'] == 'getlookupcode')	{$f->forms[0]->lookup_values 	= nuGetAllLookupList();}
@@ -40,7 +41,8 @@
 
 	$f->forms[0]->user_id					= $u['USER_ID'];
 	$f->forms[0]->dimensions				= $s->dimensions;
-	$f->forms[0]->schema					= $s->schema;
+	$f->forms[0]->tableSchema				= $s->tableSchema;
+	$f->forms[0]->formSchema				= $s->formSchema;
 	$f->forms[0]->translation				= $s->translation;
 	$f->forms[0]->session_id				= $_SESSION['SESSIONID'];
 	$f->forms[0]->errors					= $_POST['nuErrors'];
@@ -48,12 +50,12 @@
 	$f->forms[0]->target					= $P['target'];
 	$f->forms[0]->global_access				= $_POST['nuHash']['global_access'];
 	$f->forms[0]->javascript				= $GLOBALS['EXTRAJS'];
+	$f->forms[0]->buttons					= nuButtons($s->form_id);
 
 	$j								    	= json_encode($f->forms[0]);
 //  nudebug($j);
-//	nudebug('HASH: ' . print_r($_POST['nuHash'],1));
+//	nudebug('BUTYON: ' . $s->form_id . '   ' . print_r(nuButtons($s->form_id),1));
 //	print ;
 print $j;
-	
 	
 ?>
