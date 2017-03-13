@@ -44,24 +44,22 @@ function nuAjax(w,successCallback,errorCallback){
 
 function nuForm(f, r, filter, search, n){
 	
-	//window.nuTYPE = 'browse';
-	
 	if(nuOpenNewBrowserTab('getform', f, r, filter)){return;}
 
-	var u 			= '';
-	var p 			= '';
-	var s			= '';
+	var u 				= '';
+	var p 				= '';
+	var s				= '';
 	
 	if($('#nuusername').length == 1){
 		
-		var last	= window.nuFORM.addBreadcrumb();
+		var last		= window.nuFORM.addBreadcrumb();
 		
 		last.username	= $('#nuusername').val();
 		last.password	= $('#nupassword').val();
 		
 	}else{
 		
-		s			= window.nuSESSION;
+		s				= window.nuSESSION;
 		
 		if(arguments.length != 5){   //-- add a new breadcrumb
 			window.nuFORM.addBreadcrumb();
@@ -79,14 +77,14 @@ function nuForm(f, r, filter, search, n){
 	last.search 		= search;
 	
     if(f != 'nuerror'){
-        last.hash 			= parent.nuHashFromEditForm();
+        last.hash 		= parent.nuHashFromEditForm();
     } else {
-        last.hash = [];
+        last.hash 		= [];
     }
 
 	var successCallback = function(data,textStatus,jqXHR){
 
-		var fm = data;
+		var fm 			= data;
 
 		if(nuDisplayError(fm)){
 

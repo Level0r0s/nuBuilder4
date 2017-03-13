@@ -1009,7 +1009,7 @@ function nuAddToHashList($J, $run){
 
 }
 
-function nuSchema(){
+function nuTableSchema(){
 	
 	$a			= array();
 	$t			= nuRunQuery("SELECT table_name FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = DATABASE()");
@@ -1025,18 +1025,42 @@ function nuSchema(){
 
 }
 
-function nuFormata(){
-	
+
+function nuFormSchema(){
+
 	$a			= array();
-	$t			= nuRunQuery("SELECT * FROM zzzzsys_format");
+	$t			= nuRunQuery("SELECT * FROM zzzzsys_form ORDER BY sfo_code");
 
 	while($r = db_fetch_object($t)){
-		$a[]		= array($r->srm_type, $r->srm_format);
+
+		$i		= $r->zzzzsys_form_id;
+		$a[$i]	= nuObjectSchema($i); 
+
 	}
 
 	return $a;
 
 }
+
+
+
+function nuObjectSchema($f){
+	
+	$a				= array();
+	$t				= nuRunQuery("SELECT * FROM zzzzsys_object WHERE sob_all_zzzzsys_form_id = '$f' ORDER BY sob_all_id");
+
+	while($r = db_fetch_object($t)){
+
+		if(in_array($r->sob_all_type, Array('input', 'lookup', 'select', 'textarea'))){
+			$a[]	= Array($r->zzzzsys_object_id, $r->sob_all_id, $r->sob_all_label, $r->sob_all_type, $r->sob_input_type); 
+		}
+
+	}
+	
+	return $a;
+
+}
+
 
 
 function nuTranslate($l){
