@@ -422,9 +422,35 @@ function nuINPUT(w, i, l, p, prop){
 		$('#' + id)
 		.addClass('nuScroll')
 		.attr('onwheel', input_js)
-		.attr('onkeydown', input_js)
-		.attr('onblur', '$("#" + this.id).removeClass("nuScroll")')
-		.attr('onfocus', '$("#" + this.id).addClass("nuScroll")');
+		.attr('onkeydown', input_js);
+		
+	}
+
+
+	if(input_type == 'nuDate'){
+		
+		$('#' + id)
+		.addClass('nuDate')
+		
+	}
+
+
+	if(input_type == 'nuNumber'){
+		
+		$('#' + id)
+		.addClass('nuNumber')
+		
+	}
+
+
+	if(input_type == 'nuScroll'){
+		
+		var input_js	= 'nuFORM.scrollList(event, ' + w.objects[i].scroll + ')';
+		
+		$('#' + id)
+		.addClass('nuScroll')
+		.attr('onwheel', input_js)
+		.attr('onkeydown', input_js);
 		
 	}
 
@@ -1360,13 +1386,17 @@ function nuOptions(p, f, t, access){
 //		});
 		
 		if(t == 'form'){
+			
 			$('#' + id)
 			.css('top', 66)
 			.css('right', 10);
+			
 		} else {
+			
 			$('#' + id)
 			.css('top', 5)
 			.css('right', 5);
+			
 		}
 		
 	}
@@ -1569,6 +1599,7 @@ function nuSelectTab(tab){
 
 }
 
+
 function nuAddDataTab(i, t, p){
 
     var P = String(p);
@@ -1576,6 +1607,7 @@ function nuAddDataTab(i, t, p){
     $('#' + i).attr('data-nu-tab', t).attr('data-nu-form', f);
 
 }
+
 
 function nuBrowseTitle(b, i, l){
 

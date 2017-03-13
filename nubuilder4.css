@@ -189,6 +189,19 @@ input {
    cursor: pointer;
 }
 
+
+.nuScroll {
+  background-color: #ECE6F7;
+}
+
+.nuDate {
+  background-color: #EAE1F9;
+}
+
+.nuNumber {
+  background-color: #EAE1F9;
+}
+
 .nuNotBreadcrumb {
   color: orange;
   display: inline-block;
@@ -955,9 +968,6 @@ input {
 
 .nuErrorValidate {
 	color: black;
-}
-
-.nuScroll{
 }
 
 #close_error {
