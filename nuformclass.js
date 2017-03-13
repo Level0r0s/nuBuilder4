@@ -5,11 +5,7 @@ class nuFormObject {
 	constructor() {
 		
 		this.tableSchema		= [];
-<<<<<<< HEAD
 		this.formSchema			= [];
-=======
-		this.formSchema			= {};
->>>>>>> 8481962ae0686725842ef3bf4d79be01709c6d79
 		this.formats			= this.setFormats();
 		this.breadcrumbs 		= [];
 		this.scroll		 		= [];
