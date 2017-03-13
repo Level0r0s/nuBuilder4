@@ -367,6 +367,8 @@ function nuBindCtrlEvents(){
 	$(document).keydown(function(e) {
         if (e.ctrlKey && e.shiftKey) {
 			window.nuNEW = 0;
+			
+			//Letters
             if(e.keyCode == 65) {//A
 				e.preventDefault();
 				nuPopup(window.nuFORM.getCurrent().form_id, "-2");
@@ -376,9 +378,7 @@ function nuBindCtrlEvents(){
 			} else if(e.keyCode == 79) {//O
 				e.preventDefault();
 				nuPopup("nuobject", "", window.nuFORM.getCurrent().form_id);
-			} 
-		
-			if(e.keyCode == 82) {//R
+			} else if (e.keyCode == 82) {//R
 				e.preventDefault();
 				if(window.nuFORM.getCurrent().record_id != '') {
 					nuGetBreadcrumb();
@@ -392,6 +392,24 @@ function nuBindCtrlEvents(){
 				}				
 			}
 
+			var nosearch = window.nuFORM.getProperty('nosearch_columns');
+			var searchIndex = -1;
+			
+			//Numbers
+			if(e.keyCode >= 49 && e.keyCode <= 57) {
+				searchIndex = Math.abs(49 - e.keyCode);
+			}
+
+			if(searchIndex != -1) {
+				if($.inArray(searchIndex,nosearch) != '-1') {
+					nosearch.pop(searchIndex);
+				} else {
+					nosearch.push(searchIndex);
+				}
+			}
+			
+			window.nuFORM.setProperty('nosearch_columns', nosearch);
+			//nuSearchAction();
         }
     });
 	
