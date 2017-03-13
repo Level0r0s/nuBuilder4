@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 13, 2017 at 01:37 AM
+-- Generation Time: Mar 13, 2017 at 09:09 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -392,7 +392,7 @@ INSERT INTO `zzzzsys_browse` (`zzzzsys_browse_id`, `sbr_zzzzsys_form_id`, `sbr_t
 ('574b960d4421185', 'nubuildreport', 'Code', 'sre_code', 'l', '', 10, 150),
 ('574b960d442238f', 'nubuildreport', 'Description', 'sre_description', 'l', '', 20, 250),
 ('578835e91a3f8fa', 'nuobject', 'i', 'zzzzsys_form_id', NULL, '', 40, 0),
-('575605492d24cdb', 'nuform', 'Type', 'sfo_type', 'l', '', 10, 100),
+('575605492d24cdb', 'nuform', 'Type', 'sfo_type', 'l', '', 10, 80),
 ('575a31897e90566', 'nudebug', 'Message', 'deb_message', 'l', '', 10, 600),
 ('57579dd5098d938', 'nubuildreport', 'Launch From', 'CONCAT(sfo_code, '' - '', sfo_description)', 'l', '', 40, 300),
 ('5757a4b7181f4c7', 'nurun', 'Type', 'type', 'l', '', 10, 100),
@@ -580,7 +580,7 @@ INSERT INTO `zzzzsys_form` (`zzzzsys_form_id`, `sfo_type`, `sfo_code`, `sfo_desc
 ('nutranslate', 'browseedit', 'LANG', 'Language Translation', 'zzzzsys_translate', 'zzzzsys_translate_id', '', 0, 0, 'SELECT * \nFROM zzzzsys_translate\nORDER BY trl_language, trl_english', ''),
 ('nupassword', 'edit', 'PASS', 'Change Password', 'zzzzsys_user', 'zzzzsys_user_id', '', 0, 0, 'SELECT * FROM zzzzsys_user\nJOIN zzzzsys_user_group ON sus_zzzzsys_user_group_id = zzzzsys_user_group_id\nORDER BY sus_name', '$(''#nuTab0'').hide();'),
 ('nuphplibrary', 'subform', 'PHPLIB', 'PHP Code Library', 'zzzzsys_php_library', 'zzzzsys_php_library_id', '', 0, 0, 'SELECT * FROM zzzzsys_php_library\nLEFT JOIN zzzzsys_php ON zzzzsys_php_id = spl_zzzzsys_php_id\nORDER BY sph_code\n', '$(''#sph_php'').addClass(''php'');\n\n$(''.php'').dblclick(function() {\n	nuOpenAce(''PHP'', this.id);\n});\n'),
-('57edbac65e1c52a', 'launch', 'company_report', 'company_report', 'company', 'company_id', '', 0, 0, '', ''),
+('57edbac65e1c52a', 'launch', 'CR', 'company_report', 'company', 'company_id', '', 0, 0, '', ''),
 ('nuerror', 'edit', 'ERROR', 'Error Form', 'zzzzsys_form', 'zzzzsys_form_id', '', 0, 0, '', '$(''#error'').hide(); \n$(''#nuTabHolder'').hide(); \n$(''#nuBreadcrumbHolder'').hide(); \n$(''#nuActionHolder'').hide();  \n\nfor(i = 0; i < window.nuFORM.getCurrent().filter.length; i++) {  	\n\n	$(''#nuRECORD'').append(''<div id="errorMessage'' + i + ''" style="margin: 10px"><span class="fake-link">''+window.nuFORM.getCurrent().filter[i][0]+''</span></div>''); 	\n	\n	$(''#errorMessage'' + i).click({\n		param1: window.nuFORM.getCurrent().filter[i][1]}, nuCloseAndFocus\n	); 	 \n	\n}  \n\nfunction nuCloseAndFocus(event) {  	\n\n	if(event.data.param1 != '''') {\n		$(''#'' + event.data.param1, window.parent.document).focus(); 	\n	}\n	\n	$(''#dialogClose'', window.parent.document).click(); \n	\n}'),
 ('nuffcustomobjects', 'browse', 'FFCO', 'Fast Form Custom Objects', 'zzzzsys_object', 'zzzzsys_object_id', '', 0, 10, 'SELECT *\nFROM zzzzsys_object\nWHERE sob_all_fast_form_description != ''''\n', '\n$("[data-nu-column=''nucolumn003'']").each(function() {\n    $(this).addClass(''nu_'' + this.textContent);\n});\n\n$(''.nuBrowseTable'').attr(''draggable'', ''true'');\n\n$(''#nuBreadcrumbHolder'').remove();\n\nwindow.nuTYPE = ''nuSelectCustomObject'';\n\n\n//$(''.nuBrowseTable'').on(''dragstart'', ''nuSetDataTransfer'');\n\n$(''.nuBrowseTable'').on(''dragstart'', function(event){\n    nuSetDataTransfer(event);\n});\n\n\n$(''.nuBrowseTable'').on(''drag'', function(event){\n    console.log(event.currentTarget.id);\n});\n\n\nfunction nuSetDataTransfer(e){\n    \n	var row                         = $(''#'' + e.target.id).attr(''data-nu-row'');\n	var field_name                  = $(''#'' + row + ''001'').html();\n	var label                       = $(''#'' + row + ''002'').html();\n	var Class                       = $(''#'' + row + ''003'').html();\n	var id                          = $(''#'' + e.target.id).attr(''data-nu-primary-key'');\n\n    e.dataTransfer                  = e.originalEvent.dataTransfer;\n	e.dataTransfer.effectAllowed    = ''copy''; \n	e.dataTransfer.setData(''id'', id);\n    e.dataTransfer.setData(''label'', label);\n    e.dataTransfer.setData(''field_name'', field_name);\n    e.dataTransfer.setData(''Class'', Class);\n\n	var i                           = document.createElement(''img'');\n    i.src                           = Class + ''.png'';\n    i.width                         = 20;\n    \n    e.dataTransfer.setDragImage(i,3,3);\n    \n}\n\n\n\n'),
 ('nuffobjects', 'subform', 'FFO', 'Fast Form Objects', 'zzzzsys_object', 'zzzzsys_object_id', '', 0, 0, 'SELECT * FROM zzzzsys_object\nJOIN zzzzsys_tab ON zzzzsys_tab_id = sob_all_zzzzsys_tab_id\nJOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id\n', ''),
@@ -788,7 +788,7 @@ INSERT INTO `zzzzsys_object` (`zzzzsys_object_id`, `sob_all_zzzzsys_form_id`, `s
 ('5742b06d956c254', 'nuobject', 'zzzzsys_object', 'input', 'sob_all_zzzzsys_form_id', 'Form ID', '570d90df5ce8e1a', 170, 0, 0, 100, 18, '1', 'left', '0', '1', 'SELECT ''1''', '', 'sob_all_zzzzsys_form_id', '', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', '', '', '', ''),
 ('5743da6ab90d89b', 'nuaccess', 'zzzzsys_access_level', 'input', 'sal_code', 'Code', '5743d509312c4bc', 20, 50, 100, 100, 18, '1', 'left', '1', '0', '', '', 'sal_code', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('57452c417370475', 'nuaccessforms', 'employee ', 'lookup', 'slf_zzzzsys_form_id', 'Form', '5746616ea8ead0c', 10, 20, 100, 100, 18, '1', 'left', '1', '0', '', '', 'slf_zzzzsys_form_id', '', '', '', '', '', '', '', '0', 'SELECT zzzzsys_form_id, CONCAT(sfo_code, '' - '', sfo_description)\nFROM zzzzsys_form\nORDER BY sfo_code', 'sfo_code', 'sfo_description', '200', '', 'nunonsystemform', '', '', 'zzzzsys_form', '', '', '1', '', '', '', '', '', '', ''),
-('57452d00100e37b', 'nuaccess', 'zzzzsys_access_level', 'subform', 'accform', ' ', '5743d509312ce9c', 40, 20, 50, 659, 300, '1', 'left', '0', '0', '', '', 'accform', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'nuaccessforms', 'slf_zzzzsys_access_level_id', '1', '1', 'g', '', '', '', '', ''),
+('57452d00100e37b', 'nuaccess', 'zzzzsys_access_level', 'subform', 'accform', ' ', '5743d509312ce9c', 40, 20, 50, 664, 300, '1', 'left', '0', '0', '', '', 'accform', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'nuaccessforms', 'slf_zzzzsys_access_level_id', '1', '1', 'g', '', '', '', '', ''),
 ('57464b254128724', 'nuaccessforms', 'employee ', 'input', 'slf_add_button', '<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<span class=''nuActionButton''>Add</span>', '5746616ea8ead0c', 20, 90, 104, 53, 15, '1', 'left', '0', '0', '', '', 'slf_add_button', '', '', '', '', '', '', '', '0', '0|No|1|Yes', 'sfo_code', 'sfo_description', '200', '', 'nuform', '', '', 'zzzzsys_form', 'nuform', '', '1', '', '', '', '', 'checkbox', '', ''),
 ('57464b8ac424381', 'nuaccessforms', 'employee ', 'input', 'slf_save_button', '<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class=''nuActionButton''>Save</span>', '5746616ea8ead0c', 40, 18, 252, 53, 15, '1', 'left', '0', '0', '', '', 'slf_save_button', '', '', '', '', '', '', '', '0', '0|No|1|Yes', 'sfo_code', 'sfo_description', '200', '', 'nuform', '', '', 'zzzzsys_form', 'nuform', '', '1', '', '', '', '', 'checkbox', '', ''),
 ('57464b99c32e7a9', 'nuaccessforms', 'employee ', 'input', 'slf_delete_button', '<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class=''nuActionButton''>Delete</span>', '5746616ea8ead0c', 60, 74, 214, 53, 15, '1', 'left', '0', '0', '', '', 'slf_delete_button', '', '', '', '', '', '', '', '0', '0|No|1|Yes', 'sfo_code', 'sfo_description', '200', '', 'nuform', '', '', 'zzzzsys_form', 'nuform', '', '1', '', '', '', '', 'checkbox', '', ''),
@@ -1146,7 +1146,8 @@ INSERT INTO `zzzzsys_tab` (`zzzzsys_tab_id`, `syt_zzzzsys_form_id`, `syt_title`,
 ('58b74d9dbd80af7', 'nuformatcurrency', 'Currency', 10),
 ('58be4c05188661c', 'nuhome', 'Testing', 30),
 ('58bf0b972c2c7a3', '58bf0b972c2a447', 'test formatting', 10),
-('58c19d9bc559aca', 'nuform', 'Custom Code', 30);
+('58c19d9bc559aca', 'nuform', 'Custom Code', 30),
+('58c63d38b88dbab', 'nuobject', 'Custom Code', 110);
 
 -- --------------------------------------------------------
 
