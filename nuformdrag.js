@@ -835,13 +835,10 @@ function nuAlignBottom(){
 
 function nuMoveNuDrag() {
 	
-<<<<<<< HEAD
-	//find tab we are moving objects to  - nuTab01
-	var moveToTab 				= $('#nuDragOptionsTabsDropdown').val().substring(5);
-=======
+	
 	//find tab we are moving objects to
 	var moveToTab 				= $('#nuDragOptionsTabsDropdown').val().substring($('#nuDragOptionsTabsDropdown').val().length-1);
->>>>>>> 04aeb7b6f314232089786e46477d0a0cbe96ddc0
+	var moveToTab 				= $('#nuDragOptionsTabsDropdown').val().substring(5);
 	
 	$('#nuDragOptionsFields :selected').each(function(i, selected){
 		
