@@ -835,7 +835,6 @@ function nuAlignBottom(){
 
 function nuMoveNuDrag() {
 	
-	
 	//find tab we are moving objects to
 	var moveToTab 				= $('#nuDragOptionsTabsDropdown').val().substring($('#nuDragOptionsTabsDropdown').val().length-1);
 	var moveToTab 				= $('#nuDragOptionsTabsDropdown').val().substring(5);
