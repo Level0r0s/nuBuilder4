@@ -418,13 +418,14 @@ function nuBindCtrlEvents(){
 			if(searchIndex != -1) {
 				if($.inArray(searchIndex,nosearch) != '-1') {
 					nosearch.pop(searchIndex);
+					$('#nusort_' + searchIndex).removeClass('nuNoSearch');					
 				} else {
 					nosearch.push(searchIndex);
+					$('#nusort_' + searchIndex).addClass('nuNoSearch');
 				}
 			}
 			
 			window.nuFORM.setProperty('nosearch_columns', nosearch);
-			//nuSearchAction();
         }
     });
 	

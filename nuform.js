@@ -2608,7 +2608,7 @@ function nuGetSearchList(){
 	$('#nuOptionsListBox').remove();
 
 	var widest	= nuWidestTitle(c);
-
+	
 	d.setAttribute('id', 'nuSearchList');
 	$('body').append(d);
 	$('#' + d.id).css({
@@ -2682,7 +2682,20 @@ function nuGetSearchList(){
 		})
 		.addClass('nuOptionsItem')
 		.html(c[i].title);
-	
+		
+		var shortcut_key = document.createElement('div');
+		var shortcut_key_id 		= 'nuSearchTextShortcutKey' + i.toString();
+		
+		shortcut_key.setAttribute('id', shortcut_key_id);
+
+		$('#nuSearchList').append(shortcut_key);
+		var	prop		= {'position' : 'absolute', 'text-align' : 'left', 'height' : 15};
+
+		$('#' + shortcut_key.id)
+		.css(prop)
+		.css({'top'	: 33 + (i * 20),'left' : widest - 80})
+		.html('Ctrl + Shift + ' + i)
+		.addClass('nuOptionsItemShortcutKey');
 	}
 	
 }
