@@ -464,12 +464,8 @@ function nuINPUT(w, i, l, p, prop){
 	
 	$('#' + id).val(nuFORM.addFormatting(w.objects[i].value, w.objects[i].format));
 
-	if(w.objects[i].format != ''){
-		
-		if(String(w.objects[i].format)[0] == 'D'){
-			$('#' + id).attr('onclick', 'nuPopupCalendar(this);');
-		}
-		
+	if(input_type == 'nuDate'){
+		$('#' + id).attr('onclick', 'nuPopupCalendar(this);');
 	}
 
 	nuAddJSObjectEvents(id, prop.objects[i].js);

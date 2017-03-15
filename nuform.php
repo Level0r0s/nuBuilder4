@@ -96,7 +96,12 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 			if($r->sob_all_type == 'input' || $r->sob_all_type == 'display'){
 
 				$o->align 	= $r->sob_all_align;
-				$o->format 	= $r->sob_input_format;
+				$o->format 	= '';
+				
+				if($r->sob_input_type == 'nuNumber' || $r->sob_input_type == 'nuDate'){
+					$o->format 	= $r->sob_input_format;
+				}
+					
 				$o->input 	= $r->sob_input_type;
 				$o->read 	= $r->sob_all_readonly;
 
