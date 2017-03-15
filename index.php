@@ -86,6 +86,8 @@ window.nuHASH			= [];
 			}
 
 			window.nuFORM.caller	= from.nuFORM.getCurrent();
+			nuFORM.tableSchema		= from.nuFORM.tableSchema;
+			nuFORM.formSchema		= from.nuFORM.formSchema;
 			window.nuTYPE			= '$type';
 			window.nuTARGET			= '$target';
 			window.nuSESSION		= from.nuSESSION;

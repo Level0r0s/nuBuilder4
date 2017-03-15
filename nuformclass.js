@@ -138,6 +138,7 @@ class nuFormObject {
 		
 		var t		= [];
 		var tables	= this.getTables();
+		sql			= sql + ' ';
 		sql			= sql.replace(/[\n\r]/g, ' ');
 		
 		for(var i = 0 ; i < tables.length ; i++){
