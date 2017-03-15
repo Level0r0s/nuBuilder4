@@ -301,7 +301,7 @@ function nuRecordProperties(w, p, l){
 		.prop('checked', w.record_id == -1)
 		.attr('data-nu-checkbox', sf)
 		.css({'top'			: 3, 
-			'left'			: Number(l) + 5, 
+			'left'			: Number(l) + 2, 
 			'position' 		: 'absolute', 
 			'visibility'	: 'visible'})
 		
