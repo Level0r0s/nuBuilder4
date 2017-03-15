@@ -93,7 +93,7 @@ select {
 }
 
 textarea {
-  padding: 0px;
+  padding: 2px;
   margin: 0px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   border: 1px solid rgba(0, 0, 0, 0.2);
@@ -114,6 +114,12 @@ input {
   border: 1px solid rgba(0, 0, 0, 0.2);
   padding: 0px 2px 0px 2px;
 }
+
+input[type=range]::-webkit-slider-runnable-track {
+  background: darkgrey;
+  cursor: pointer;
+}
+
 
 .nuIframe {
   border-color: lightgrey;

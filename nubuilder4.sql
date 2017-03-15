@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 15, 2017 at 10:45 AM
+-- Generation Time: Mar 15, 2017 at 11:30 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -229,10 +229,10 @@ CREATE TABLE `test_table` (
 
 INSERT INTO `test_table` (`test_table_id`, `number1`, `number2`, `date1`, `date2`, `text1`, `text2`) VALUES
 ('58bf0d9765e2881', '0.000000', '0.0000', '2017-02-09', '2015-03-25', '', '#ff8040'),
-('58bf11c9802abf8', '0.000000', '0.0000', '2017-06-09', '2017-07-18', '0000-00-00', '#ff8000'),
+('58bf11c9802abf8', '0.000000', '0.0000', '2017-06-09', '2017-07-18', '81', '#ff8000'),
 ('58bf3e9de095116', '2.000000', '3.0000', '2017-05-13', '2017-02-06', '0000-00-00', 'NaN-aN-aN'),
-('58bf3fe03563ccd', '77.000000', '1234.5000', '2017-03-08', '2017-03-12', '0000-00-00', ''),
-('58bf48f1e6245ea', '4.890000', '444.4000', '2018-00-08', '2011-01-09', '0000-00-00', '');
+('58bf3fe03563ccd', '77.000000', '1234.5000', '2017-03-08', '2017-03-12', '22', ''),
+('58bf48f1e6245ea', '4.890000', '444.4000', '2018-00-08', '2011-01-09', '35', '');
 
 -- --------------------------------------------------------
 
@@ -647,7 +647,8 @@ CREATE TABLE `zzzzsys_function` (
 
 INSERT INTO `zzzzsys_function` (`zzzzsys_function_id`, `sfu_language`, `sfu_name`, `sfu_syntax`, `sfu_description`, `sfu_sample`, `sfu_see`) VALUES
 ('58c8e65c7ed6824', 'js', 'nuEnable', 'nuEnable( string )', 'Enable an Object on a nuBuilder Form.', 'if(phones == 2){\n    nuEnable(''com_phone2'');\n}\n', '[nuDisable](nuDisable)'),
-('58c8e6acb396753', 'js', 'nuDisable', 'nuDisable( string )', 'Disable an Object on a nuBuilder Form.', 'if(phones == 2){\n    nuDisable(''com_phone2'');\n}\n', '[nuDisable](nuDisable)');
+('58c8e6acb396753', 'js', 'nuDisable', 'nuDisable( string )', 'Disable an Object on a nuBuilder Form.', 'if(phones == 2){\n    nuDisable(''com_phone2'');\n}\n', '[nuDisable](nuDisable)'),
+('58c915497d0ab1b', 'js', 'nuSetTitle', 'nuSetTitle( string )', 'Changes the Title of the last breadcrumb.', 'nuSetTitle($(''#cus_name'').val());', '');
 
 -- --------------------------------------------------------
 
@@ -947,7 +948,7 @@ INSERT INTO `zzzzsys_object` (`zzzzsys_object_id`, `sob_all_zzzzsys_form_id`, `s
 ('58c8e4462798dbf', '58c86689b9af7fd', 'zzzzsys_function', 'textarea', 'sfu_sample', 'Sample', '58c86689b9b0291', 50, 237, 126, 297, 76, '1', 'left', '1', '0', '', '', 'sfo_code', '', '', '', '', '', '', '', '0', 'php|PHP|js|Javascript\n\n', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('58c8e4861081b1d', '58c86689b9af7fd', 'zzzzsys_function', 'textarea', 'sfu_see', 'See', '58c86689b9b0291', 60, 331, 126, 297, 46, '1', 'left', '0', '0', '', '', 'sfo_code', '', '', '', '', '', '', '', '0', 'php|PHP|js|Javascript\n\n', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 ('58c9038dd96de4d', '58bf0b972c2a447', 'test_table', 'input', 'text2', 'Text 2', '58bf0b972c2c7a3', 50, 68, 284, 142, 18, '1', 'left', '0', '0', '', '', 'from_date', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'D|dd-mmm-yyyy', 'color', '', ''),
-('58c903f75898ae1', '58bf0b972c2a447', 'test_table', 'input', 'text1', 'Text 1', '58bf0b972c2c7a3', 60, 151, 284, 142, 18, '1', 'left', '0', '0', '', '', 'from_date', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'D|dd-mmm-yyyy', 'search', '', '');
+('58c903f75898ae1', '58bf0b972c2a447', 'test_table', 'input', 'text1', 'Text 1', '58bf0b972c2c7a3', 60, 151, 284, 142, 18, '1', 'left', '0', '0', '', '', 'from_date', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'D|dd-mmm-yyyy', 'range', '', '');
 
 -- --------------------------------------------------------
 
