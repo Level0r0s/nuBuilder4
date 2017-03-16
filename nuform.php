@@ -416,31 +416,30 @@ function nuSetFormValue($f, $v){
 
 function nuSelectOptions($sql) {
 
-    $a = array();
+    $a 				= array();
  
     if (substr(strtoupper(trim($sql)), 0, 6) == 'SELECT') {                      //-- sql statement
-nudebug('sqql :' . $sql);
 
-        $t = nuRunQuery($sql);
+        $t			= nuRunQuery($sql);
 		
         if (nuErrorFound()) {
             return;
         }
 
         while ($r = db_fetch_row($t)) {
-            $a[] = $r;
+            $a[]	= $r;
         }
 
     } else {                                                                     //-- comma delimited string
 
-        $t = explode('|', nuRemoveNonCharacters($sql));
+        $t 			= explode('|', nuRemoveNonCharacters($sql));
 
         for ($i = 0; $i < count($t); $i++) {
 
-            $r    = array();
-            $r[0] = $t[$i];
-            $r[1] = $t[$i + 1];
-            $a[]  = $r;
+            $r    	= array();
+            $r[0] 	= $t[$i];
+            $r[1] 	= $t[$i + 1];
+            $a[]  	= $r;
             $i++;
 
         }
@@ -932,8 +931,6 @@ function nuCheckSession(){
 		}
 		
 		$f				= nuAddOtherFormsUsed($nuJ);		//-- form list including forms id used in reports and procedures
-		
-		nudebug($_POST['nuSTATE']['form_id']. ' ' . print_r($f,1));
 		
 		if(!in_array($_POST['nuSTATE']['form_id'], $f) && $c->call_type == 'getform'){
 
