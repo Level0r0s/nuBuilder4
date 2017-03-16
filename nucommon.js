@@ -171,6 +171,7 @@ function nuBuildLookup(t, s){
 function nuPopup(f, r, filter){
 
 	$('#nuOptionsListBox').remove();
+	$('#nuCalendar').remove();
 	
 	window.nuOPENER.push(new nuOpener(f, r, filter));
 
@@ -265,11 +266,12 @@ function nuReformat(t){
 
 	var o			= $('#' + t.id);
 	var f			= o.attr('data-nu-format');
-//	var v			= nuFORM.removeFormatting(String(o.val()), f);
 	var v			= o.val();
 	
-	if(f == '' || v == ''){return v;}
-
+	if(f == '' || v == ''){
+		return v;
+	}
+	
 	o.val(nuFORM.addFormatting(v, f));
 	
 }
@@ -372,6 +374,7 @@ function nuBindCtrlEvents(){
 			
 			window.nuNEW = 0;
 			
+			//Letters
             if(e.keyCode == 65) {//A
 			
 				e.preventDefault();
@@ -387,10 +390,7 @@ function nuBindCtrlEvents(){
 				e.preventDefault();
 				nuPopup("nuobject", "", window.nuFORM.getCurrent().form_id);
 				
-			} 
-		
-			if(e.keyCode == 82) {//R
-			
+			} else if (e.keyCode == 82) {//R
 				e.preventDefault();
 				
 				if(window.nuFORM.getCurrent().record_id != '') {
@@ -409,6 +409,25 @@ function nuBindCtrlEvents(){
 
 			}
 
+			var nosearch = window.nuFORM.getProperty('nosearch_columns');
+			var searchIndex = -1;
+			
+			//Numbers
+			if(e.keyCode >= 49 && e.keyCode <= 57) {
+				searchIndex = Math.abs(49 - e.keyCode);
+			}
+
+			if(searchIndex != -1) {
+				if($.inArray(searchIndex,nosearch) != '-1') {
+					nosearch.pop(searchIndex);
+					$('#nusort_' + searchIndex).removeClass('nuNoSearch');					
+				} else {
+					nosearch.push(searchIndex);
+					$('#nusort_' + searchIndex).addClass('nuNoSearch');
+				}
+			}
+			
+			window.nuFORM.setProperty('nosearch_columns', nosearch);
         }
     });
 	

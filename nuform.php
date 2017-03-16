@@ -96,7 +96,12 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 			if($r->sob_all_type == 'input' || $r->sob_all_type == 'display'){
 
 				$o->align 	= $r->sob_all_align;
-				$o->format 	= $r->sob_input_format;
+				$o->format 	= '';
+				
+				if($r->sob_input_type == 'nuNumber' || $r->sob_input_type == 'nuDate'){
+					$o->format 	= $r->sob_input_format;
+				}
+					
 				$o->input 	= $r->sob_input_type;
 				$o->read 	= $r->sob_all_readonly;
 
@@ -126,7 +131,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 			if($r->sob_all_type == 'select'){
 
 				$o->multiple	= $r->sob_select_multiple;
-				$o->options	= nuSelectOptions($r->sob_select_sql);
+				$o->options	= nuSelectOptions(nuReplaceHashVariables($r->sob_select_sql));
 				
 			}
 
@@ -411,30 +416,30 @@ function nuSetFormValue($f, $v){
 
 function nuSelectOptions($sql) {
 
-    $a = array();
+    $a 				= array();
  
     if (substr(strtoupper(trim($sql)), 0, 6) == 'SELECT') {                      //-- sql statement
 
-        $t = nuRunQuery($sql);
+        $t			= nuRunQuery($sql);
 		
         if (nuErrorFound()) {
             return;
         }
 
         while ($r = db_fetch_row($t)) {
-            $a[] = $r;
+            $a[]	= $r;
         }
 
     } else {                                                                     //-- comma delimited string
 
-        $t = explode('|', nuRemoveNonCharacters($sql));
+        $t 			= explode('|', nuRemoveNonCharacters($sql));
 
         for ($i = 0; $i < count($t); $i++) {
 
-            $r    = array();
-            $r[0] = $t[$i];
-            $r[1] = $t[$i + 1];
-            $a[]  = $r;
+            $r    	= array();
+            $r[0] 	= $t[$i];
+            $r[1] 	= $t[$i + 1];
+            $a[]  	= $r;
             $i++;
 
         }
@@ -926,8 +931,6 @@ function nuCheckSession(){
 		}
 		
 		$f				= nuAddOtherFormsUsed($nuJ);		//-- form list including forms id used in reports and procedures
-		
-		nudebug($_POST['nuSTATE']['form_id']. ' ' . print_r($f,1));
 		
 		if(!in_array($_POST['nuSTATE']['form_id'], $f) && $c->call_type == 'getform'){
 

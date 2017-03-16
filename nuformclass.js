@@ -138,6 +138,7 @@ class nuFormObject {
 		
 		var t		= [];
 		var tables	= this.getTables();
+		sql			= sql + ' ';
 		sql			= sql.replace(/[\n\r]/g, ' ');
 		
 		for(var i = 0 ; i < tables.length ; i++){
@@ -255,9 +256,9 @@ class nuFormObject {
 			
 		}
 
-		var d	= this.data();											//-- an array of all data as subforms (the mainform is the first element)
-		var v	= 0;
-		var u	= 0;
+		var d			= this.data();											//-- an array of all data as subforms (the mainform is the first element)
+		var v			= 0;
+		var u			= 0;
 		
 		for(var i =  0 ; i < d.length ; i++){
 			

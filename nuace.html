@@ -49,36 +49,16 @@ function nuLoad(){
 	editor.setTheme("ace/theme/monokai");
 	editor.setFontSize(16);
 
-	if ( window.c == 'CSS' ) {
-		editor.getSession().setMode({path:"ace/mode/css", inline:true});
-	}
-	if ( window.c == 'HTML' ) {
-		editor.getSession().setMode({path:"ace/mode/html", inline:true});
-	}
-	if ( window.c == 'Javascript' ) {
-		editor.getSession().setMode({path:"ace/mode/javascript", inline:true});
-	}
-	if ( window.c == 'JSON' ) {
-		editor.getSession().setMode({path:"ace/mode/json", inline:true});
-	}
-	if ( window.c == 'MySql' ) {
-		editor.getSession().setMode({path:"ace/mode/mysql", inline:true});
-	}
-	if ( window.c == 'PHP' ) {
-		editor.getSession().setMode({path:"ace/mode/php", inline:true});
-	}
-	if ( window.c == 'Plain Text' ) {
-		editor.getSession().setMode({path:"ace/mode/plain_text", inline:true});
-	}
-	if ( window.c == 'SQL' ) {
-		editor.getSession().setMode({path:"ace/mode/sql", inline:true});
-	}
-	if ( window.c == 'Text' ) {
-		editor.getSession().setMode({path:"ace/mode/text", inline:true});
-	}
-	if ( window.c == 'XML' ) {
-		editor.getSession().setMode({path:"ace/mode/xml", inline:true});
-	}
+	if ( window.c == 'CSS' ) 		{editor.getSession().setMode({path:"ace/mode/css", inline:true});}
+	if ( window.c == 'HTML' ) 		{editor.getSession().setMode({path:"ace/mode/html", inline:true});}
+	if ( window.c == 'Javascript' ) {editor.getSession().setMode({path:"ace/mode/javascript", inline:true});}
+	if ( window.c == 'JSON' ) 		{editor.getSession().setMode({path:"ace/mode/json", inline:true});}
+	if ( window.c == 'MySql' ) 		{editor.getSession().setMode({path:"ace/mode/mysql", inline:true});}
+	if ( window.c == 'PHP' ) 		{editor.getSession().setMode({path:"ace/mode/php", inline:true});}
+	if ( window.c == 'Plain Text' ) {editor.getSession().setMode({path:"ace/mode/plain_text", inline:true});}
+	if ( window.c == 'SQL' ) 		{editor.getSession().setMode({path:"ace/mode/sql", inline:true});}
+	if ( window.c == 'Text' ) 		{editor.getSession().setMode({path:"ace/mode/text", inline:true});}
+	if ( window.c == 'XML' ) 		{editor.getSession().setMode({path:"ace/mode/xml", inline:true});}
 
 	document.getElementById('nu_code_type').innerHTML   = window.c;
 	document.getElementById('nu_field_title').innerHTML = window.o;
@@ -93,11 +73,11 @@ function nuLoad(){
 
 function nuResize(){
 
-   document.getElementById('nu_editor').style.width     = String(Number(window.innerWidth))       + 'px';
-   document.getElementById('nu_editor').style.height    = String(Number(window.innerHeight) - 120) + 'px';
-   document.getElementById('nu_code_type').style.top    = String(Number(window.innerHeight) - 25) + 'px';
-   document.getElementById('nu_field_title').style.top  = String(Number(window.innerHeight) - 25) + 'px';
-   document.getElementById('nu_field_title').style.left = String(Number(window.innerWidth) - 310) + 'px';
+   document.getElementById('nu_editor').style.width     = String(Number(window.innerWidth)) 		+ 'px';
+   document.getElementById('nu_editor').style.height    = String(Number(window.innerHeight) - 120) 	+ 'px';
+   document.getElementById('nu_code_type').style.top    = String(Number(window.innerHeight) - 25) 	+ 'px';
+   document.getElementById('nu_field_title').style.top  = String(Number(window.innerHeight) - 25) 	+ 'px';
+   document.getElementById('nu_field_title').style.left = String(Number(window.innerWidth) 	- 310)	+ 'px';
    
 }
 

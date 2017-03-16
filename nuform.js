@@ -301,7 +301,7 @@ function nuRecordProperties(w, p, l){
 		.prop('checked', w.record_id == -1)
 		.attr('data-nu-checkbox', sf)
 		.css({'top'			: 3, 
-			'left'			: Number(l) + 5, 
+			'left'			: Number(l) + 2, 
 			'position' 		: 'absolute', 
 			'visibility'	: 'visible'})
 		
@@ -401,7 +401,7 @@ function nuINPUT(w, i, l, p, prop){
 	.attr('onchange', 'nuChange(event)')
 	.attr('data-nu-field', input_type == 'button' ? null : prop.objects[i].id)
 	.attr('data-nu-object-id', w.objects[i].object_id)
-	.attr('data-nu-format', w.objects[i].format)
+	.attr('data-nu-format', '')
 	.attr('data-nu-prefix', p)
 	.attr('data-nu-type', w.objects[i].type)
 	.attr('data-nu-subform-sort', 1)
@@ -431,6 +431,7 @@ function nuINPUT(w, i, l, p, prop){
 		
 		$('#' + id)
 		.addClass('nuDate')
+		.attr('data-nu-format', w.objects[i].format)
 		
 	}
 
@@ -439,6 +440,7 @@ function nuINPUT(w, i, l, p, prop){
 		
 		$('#' + id)
 		.addClass('nuNumber')
+		.attr('data-nu-format', w.objects[i].format)
 		
 	}
 
@@ -464,12 +466,8 @@ function nuINPUT(w, i, l, p, prop){
 	
 	$('#' + id).val(nuFORM.addFormatting(w.objects[i].value, w.objects[i].format));
 
-	if(w.objects[i].format != ''){
-		
-		if(String(w.objects[i].format)[0] == 'D'){
-			$('#' + id).attr('onclick', 'nuPopupCalendar(this);');
-		}
-		
+	if(input_type == 'nuDate'){
+		$('#' + id).attr('onclick', 'nuPopupCalendar(this);');
 	}
 
 	nuAddJSObjectEvents(id, prop.objects[i].js);
@@ -2608,7 +2606,7 @@ function nuGetSearchList(){
 	$('#nuOptionsListBox').remove();
 
 	var widest	= nuWidestTitle(c);
-
+	
 	d.setAttribute('id', 'nuSearchList');
 	$('body').append(d);
 	$('#' + d.id).css({
@@ -2682,7 +2680,20 @@ function nuGetSearchList(){
 		})
 		.addClass('nuOptionsItem')
 		.html(c[i].title);
-	
+		
+		var shortcut_key = document.createElement('div');
+		var shortcut_key_id 		= 'nuSearchTextShortcutKey' + i.toString();
+		
+		shortcut_key.setAttribute('id', shortcut_key_id);
+
+		$('#nuSearchList').append(shortcut_key);
+		var	prop		= {'position' : 'absolute', 'text-align' : 'left', 'height' : 15};
+
+		$('#' + shortcut_key.id)
+		.css(prop)
+		.css({'top'	: 33 + (i * 20),'left' : widest - 80})
+		.html('Ctrl + Shift + ' + i)
+		.addClass('nuOptionsItemShortcutKey');
 	}
 	
 }
