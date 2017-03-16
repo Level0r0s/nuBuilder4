@@ -256,9 +256,9 @@ class nuFormObject {
 			
 		}
 
-		var d	= this.data();											//-- an array of all data as subforms (the mainform is the first element)
-		var v	= 0;
-		var u	= 0;
+		var d			= this.data();											//-- an array of all data as subforms (the mainform is the first element)
+		var v			= 0;
+		var u			= 0;
 		
 		for(var i =  0 ; i < d.length ; i++){
 			

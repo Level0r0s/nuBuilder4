@@ -401,7 +401,7 @@ function nuINPUT(w, i, l, p, prop){
 	.attr('onchange', 'nuChange(event)')
 	.attr('data-nu-field', input_type == 'button' ? null : prop.objects[i].id)
 	.attr('data-nu-object-id', w.objects[i].object_id)
-	.attr('data-nu-format', w.objects[i].format)
+	.attr('data-nu-format', '')
 	.attr('data-nu-prefix', p)
 	.attr('data-nu-type', w.objects[i].type)
 	.attr('data-nu-subform-sort', 1)
@@ -431,6 +431,7 @@ function nuINPUT(w, i, l, p, prop){
 		
 		$('#' + id)
 		.addClass('nuDate')
+		.attr('data-nu-format', w.objects[i].format)
 		
 	}
 
@@ -439,6 +440,7 @@ function nuINPUT(w, i, l, p, prop){
 		
 		$('#' + id)
 		.addClass('nuNumber')
+		.attr('data-nu-format', w.objects[i].format)
 		
 	}
 

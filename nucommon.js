@@ -266,13 +266,12 @@ function nuReformat(t){
 
 	var o			= $('#' + t.id);
 	var f			= o.attr('data-nu-format');
-	var y			= o.attr('data-nu-input-type');
 	var v			= o.val();
 	
-	if(f == '' || v == ''){					return v;}
+	if(f == '' || v == ''){
+		return v;
+	}
 	
-	if(y != 'nuDate' && y != 'nuNumber'){	return v;}
-
 	o.val(nuFORM.addFormatting(v, f));
 	
 }

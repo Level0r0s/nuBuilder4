@@ -131,7 +131,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 			if($r->sob_all_type == 'select'){
 
 				$o->multiple	= $r->sob_select_multiple;
-				$o->options	= nuSelectOptions($r->sob_select_sql);
+				$o->options	= nuSelectOptions(nuReplaceHashVariables($r->sob_select_sql));
 				
 			}
 
@@ -419,6 +419,7 @@ function nuSelectOptions($sql) {
     $a = array();
  
     if (substr(strtoupper(trim($sql)), 0, 6) == 'SELECT') {                      //-- sql statement
+nudebug('sqql :' . $sql);
 
         $t = nuRunQuery($sql);
 		
