@@ -490,6 +490,7 @@ function nuINPUT(w, i, l, p, prop){
 
 		$('#' + id).addClass('nuCalculator')
 		
+		.attr('data-nu-format', w.objects[i].format)
 		.prop('readonly', true).prop('tabindex',-1)
 		.attr('data-nu-formula', nuBuildFormula(p, w.objects[i].formula))
 		

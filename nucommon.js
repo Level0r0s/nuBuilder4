@@ -745,7 +745,7 @@ function nuAddThousandSpaces(s, c){
 	if(r.length > 11){r.splice(11, 0, c);}
 	if(r.length > 15){r.splice(15, 0, c);}
 	if(r.length > 19){r.splice(19, 0, c);}
-	if(r.length > 23){return -1;}
+	if(r.length > 23){return 'toobig';}
 
 	r		= r.reverse();
 	

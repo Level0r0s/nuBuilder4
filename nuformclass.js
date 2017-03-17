@@ -477,7 +477,7 @@ class nuFormObject {
 			var o		= v.split('.');
 			var h		= nuAddThousandSpaces(o[0], c);
 			
-			if(h == -1){
+			if(String(h) == 'toobig'){
 				
 				nuAlert(["Man! That's a BIG number, stop showing off."]);
 				return "";
