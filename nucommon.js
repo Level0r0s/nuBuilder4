@@ -591,14 +591,6 @@ function nuID() {
 };
 
 
-function testsql(){
-
-		return "SELECT * FROM zzzzsys_user_group LEFT JOIN zzzzsys_form ON sug_zzzzsys_form_id = zzzzsys_form_id ORDER BY sug_code";
-
-	
-}
-
-
 
 function nuPreview(a){
 
