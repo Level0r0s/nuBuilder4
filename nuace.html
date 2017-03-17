@@ -18,7 +18,6 @@
 
 .nuTool {
 	padding:4px;
-	border-style:none;
 	font-family:helvetica;
 	font-size:14px;
 	color:white;
@@ -27,41 +26,49 @@
 
 .nuTool:hover {
 	background-color:orange;
-	cursor:default;
+	cursor:pointer;
 }
 
 </style>
 
 <script src="ace/ace.js" type="text/javascript" charset="utf-8"></script>
+<script src="ace/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+<script src="ace/src-noconflict/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>
 
 <script>
 
 window.c = opener.window.nuAce[0];
 window.o = opener.window.nuAce[1];
+window.l = opener.document.getElementById('label_' + o).innerHTML;   
 window.t = opener.window.nuFORM.tableSchema;
 window.f = opener.window.nuFORM.formSchema;
 
 function nuLoad(){
 
-	window.editor     = ace.edit('nu_editor');
-	window.startValue = opener.window.document.getElementById(window.o).value;
+	ace.require("ace/ext/language_tools");
 	
-	editor.setTheme("ace/theme/monokai");
-	editor.setFontSize(16);
+    window.editor = ace.edit("nu_editor");
+	
+    editor.setTheme("ace/theme/monokai");
+    editor.setOptions({
+        enableBasicAutocompletion: true,
+        enableSnippets: true,
+        enableLiveAutocompletion: true
+    });
+
+
+	window.startValue = opener.window.document.getElementById(window.o).value;
+	editor.setFontSize(14);
 
 	if ( window.c == 'CSS' ) 		{editor.getSession().setMode({path:"ace/mode/css", inline:true});}
 	if ( window.c == 'HTML' ) 		{editor.getSession().setMode({path:"ace/mode/html", inline:true});}
 	if ( window.c == 'Javascript' ) {editor.getSession().setMode({path:"ace/mode/javascript", inline:true});}
-	if ( window.c == 'JSON' ) 		{editor.getSession().setMode({path:"ace/mode/json", inline:true});}
 	if ( window.c == 'MySql' ) 		{editor.getSession().setMode({path:"ace/mode/mysql", inline:true});}
 	if ( window.c == 'PHP' ) 		{editor.getSession().setMode({path:"ace/mode/php", inline:true});}
-	if ( window.c == 'Plain Text' ) {editor.getSession().setMode({path:"ace/mode/plain_text", inline:true});}
 	if ( window.c == 'SQL' ) 		{editor.getSession().setMode({path:"ace/mode/sql", inline:true});}
-	if ( window.c == 'Text' ) 		{editor.getSession().setMode({path:"ace/mode/text", inline:true});}
-	if ( window.c == 'XML' ) 		{editor.getSession().setMode({path:"ace/mode/xml", inline:true});}
 
-	document.getElementById('nu_code_type').innerHTML   = window.c;
-	document.getElementById('nu_field_title').innerHTML = window.o;
+	document.getElementById('nu_details').innerHTML   = '<i>' + l + '</i>&nbsp;&nbsp;<b>' + o + '</b>';
+	document.getElementById('nu_language').innerHTML   = c;
 	
 	nuResize();
 	
@@ -74,25 +81,29 @@ function nuLoad(){
 function nuResize(){
 
    document.getElementById('nu_editor').style.width     = String(Number(window.innerWidth)) 		+ 'px';
-   document.getElementById('nu_editor').style.height    = String(Number(window.innerHeight) - 120) 	+ 'px';
-   document.getElementById('nu_code_type').style.top    = String(Number(window.innerHeight) - 25) 	+ 'px';
-   document.getElementById('nu_field_title').style.top  = String(Number(window.innerHeight) - 25) 	+ 'px';
-   document.getElementById('nu_field_title').style.left = String(Number(window.innerWidth) 	- 310)	+ 'px';
+   document.getElementById('nu_editor').style.height    = String(Number(window.innerHeight) - 60) 	+ 'px';
    
 }
 
 function nuAceSave(){
+debugger;
+	window.nuWarn      = 0;
 
-   window.nuWarn      = 0;
-   opener.window.document.getElementById(window.o).value = editor.getValue();
-    if ("createEvent" in document) {
-        var evt = document.createEvent("HTMLEvents");
-        evt.initEvent("change", false, true);
-        opener.window.document.getElementById(window.o).dispatchEvent(evt);
-    }
-    else
-        opener.window.document.getElementById(window.o).fireEvent("onchange");
-   window.close();
+	opener.window.document.getElementById(o).value = editor.getValue();
+
+	if ("createEvent" in document) {
+
+		var evt = document.createEvent("HTMLEvents");
+		
+		evt.initEvent("change", false, true);
+		
+		opener.window.document.getElementById(window.o).dispatchEvent(evt);
+		
+	}else{
+		opener.window.document.getElementById(window.o).fireEvent("onchange");
+	}
+
+	window.close();
 
 }
 
@@ -136,18 +147,11 @@ window.onbeforeunload = nuWarning;
 </head>
 <body style='background-color:#000000' onload='nuLoad()' onresize='nuResize()'>
 
-	<span id='nuTool0' onclick='nuAceSave()' class='nuTool' style=''>Copy Changes</span>
-	<span style='margin:8px;color:white;font-family:helvetica;font-size:14px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tables </span>
-	<input id="nuTable" onkeydown='opener.nuFORM.scrollList(event, opener.nuFORM.getTables())' style='margin:8px;top:10px;width:200px'></input>
-	<span style='margin:8px;color:white;font-family:helvetica;font-size:14px;'> Fields </span>
-	
-	<input id="nuField" onkeydown='opener.nuFORM.scrollList(event, opener.nuFORM.tableFields(document.getElementById('nuTable').value)' style='margin:8px;width:200px'></input>
-	
-	<span style='margin:8px;color:white;font-family:helvetica;font-size:14px;'> Snippets/Functions </span><select id="nuSnip" onfocus='nuUpdateDrag(this)' onchange='nuChooseSnips(this)' style='margin:8px;width:200px'></select>
-	<span style='margin:8px;color:white;font-family:helvetica;font-size:14px;'> Copy/Drag </span><input type='text' onfocus='this.select()' onclick='this.select()' readonly id="nuDrag" style='margin:8px;background-color:lightblue;width:200px'>
-	<span id='nu_code_type'   class='nuAce' style='left:10px;text-align:left;color:lightblue'></span>
-	<span id='nu_field_title' class='nuAce' style='left:800px;text-align:right;color:green'></span>
-	<div  id='nu_editor'       style='width:1000px;height:800px;top:80px;left:0px;text-align:left;position:absolute'></div>
+	<span id='copytonu' 	style='top:5px;left:50px;' onclick='nuAceSave()' class='nuTool'>Copy Changes</span>
+	<span id='nu_language' 	style='top:10px;right:20px;text-align:left;color:lightblue;font-family:helvetica;font-size:12px;position:absolute'></span>
+	<span id='nu_details' 	style='bottom:5px;right:20px;text-align:left;color:lightblue;font-family:helvetica;font-size:12px;position:absolute'></span>
+	<div  id='nu_editor'	style='width:1000px;height:800px;top:35px;left:0px;text-align:left;position:absolute'></div>
 
 </body>
 </html> 
+
