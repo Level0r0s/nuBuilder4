@@ -1859,6 +1859,13 @@ function nuAlign(a){
 	
 }
 
+function nuClickSearchColumn(e){
+
+	var c	= e.target.id.substr(12);
+	$('#nuSearchList' + c).click();
+	nuSetSearchColumn();
+	
+}
 
 function nuSetSearchColumn(){
 
@@ -2611,7 +2618,7 @@ function nuGetSearchList(){
 
 	$('#nuOptionsListBox').remove();
 
-	var widest	= nuWidestTitle(c);
+	var widest	= nuWidestTitle(c) + 20;
 	
 	d.setAttribute('id', 'nuSearchList');
 	$('body').append(d);
@@ -2627,8 +2634,11 @@ function nuGetSearchList(){
 	.addClass('nuOptionsList');
 	
 	var x = document.createElement('div');
+	
 	x.setAttribute('id', 'nuSearchListClose');
+	
 	$('#' + d.id).append(x);
+	
 	$('#' + x.id).css({
 		'width'				: 20,
 		'height'			: 20,
@@ -2643,15 +2653,19 @@ function nuGetSearchList(){
 	
 	for(var i = 0 ; i < c.length ; i++){
 		
-		var isChecked = true;
+		var isChecked	= true;
+		
 		if($.inArray(i,nuFORM.getCurrent().nosearch_columns) != '-1') {
-			isChecked = false;
+			isChecked	= false;
 		}
 		
-		var p = document.createElement('input');
+		var p 			= document.createElement('input');
+
 		p.setAttribute('id', 'nuSearchList' + i);
 		p.setAttribute('type', 'checkbox');
+
 		$('#' + d.id).append(p);
+
 		$('#' + p.id).css({
 			'width'			: 20,
 			'height'		: 20,
@@ -2665,8 +2679,11 @@ function nuGetSearchList(){
 		.addClass('nuSearchCheckbox');
 		
 		var t = document.createElement('div');
+
 		t.setAttribute('id', 'nuSearchText' + i);
+
 		$('#' + d.id).append(t);
+
 		$('#' + t.id).css({
 			'height'		: 20,
 			'top'			: 33 + (i * 20),
@@ -2674,7 +2691,7 @@ function nuGetSearchList(){
 			'position'		: 'absolute',
 			'text-align'    : 'left'
 		})
-		.attr('onclick', 'nuSetSearchColumn();')
+		.attr('onclick', 'nuClickSearchColumn(event);')
 		.click(function() {
 			
 			var cb = $('#nuSearchList' + i).attr('checked');
@@ -2687,18 +2704,18 @@ function nuGetSearchList(){
 		.addClass('nuOptionsItem')
 		.html(c[i].title);
 		
-		var shortcut_key = document.createElement('div');
-		var shortcut_key_id 		= 'nuSearchTextShortcutKey' + i.toString();
+		var shortcut_key 	= document.createElement('div');
+		var shortcut_key_id = 'nuSearchTextShortcutKey' + i.toString();
 		
 		shortcut_key.setAttribute('id', shortcut_key_id);
 
 		$('#nuSearchList').append(shortcut_key);
-		var	prop		= {'position' : 'absolute', 'text-align' : 'left', 'height' : 15};
+		var	prop			= {'position' : 'absolute', 'text-align' : 'left', 'height' : 15};
 
 		$('#' + shortcut_key.id)
 		.css(prop)
 		.css({'top'	: 33 + (i * 20),'left' : widest - 80})
-		.html('Ctrl + Shift + ' + i)
+		.html('Ctrl+Shift+' + i)
 		.addClass('nuOptionsItemShortcutKey');
 	}
 	
