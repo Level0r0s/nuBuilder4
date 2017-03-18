@@ -90,7 +90,10 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 			}
 				
 			if($r->sob_all_type == 'textarea'){
+				
 				$o->align 	= $r->sob_all_align;
+				$o->read 	= $r->sob_all_readonly;
+				
 			}
 				
 			if($r->sob_all_type == 'input' || $r->sob_all_type == 'display'){
