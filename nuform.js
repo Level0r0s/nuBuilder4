@@ -405,6 +405,7 @@ function nuINPUT(w, i, l, p, prop){
 	.attr('data-nu-prefix', p)
 	.attr('data-nu-type', w.objects[i].type)
 	.attr('data-nu-subform-sort', 1)
+	.attr('data-nu-label', w.objects[i].label)
 	.prop('readonly', prop.objects[i].read == '1' ? 'readonly' : '');
 
 	if(prop.objects[i].type != 'textarea'){
@@ -761,6 +762,7 @@ function nuSELECT(w, i, l, p, prop){
 	.attr('data-nu-format', '')
 	.attr('data-nu-subform-sort', 1)
 	.attr('data-nu-data', '')
+	.attr('data-nu-label', w.objects[i].label)
 	.attr('data-nu-prefix', p);
 
 	if(prop.objects[i].multiple == 1){
@@ -1169,6 +1171,7 @@ function nuBuildSubformTitle(o, l, w, id, col){
     					'position'      	: 'absolute'
     	})
 	.html(o.label)
+	.attr('data-nu-field', o.id)
 	.attr('ondblclick', 'nuPopup("nuobject", "' + o.object_id + '")')
 	.addClass('nuTabHolder');
 	

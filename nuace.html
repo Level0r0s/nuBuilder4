@@ -14,9 +14,9 @@
 
 window.c = opener.window.nuAce[0];
 window.o = opener.window.nuAce[1];
-window.l = opener.document.getElementById('label_' + o).innerHTML;   
 window.t = opener.window.nuFORM.tableSchema;
 window.f = opener.window.nuFORM.formSchema;
+window.l = $('#' + o, window.opener.document).attr('data-nu-label');
 
 function nuLoad(){
 
