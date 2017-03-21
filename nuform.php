@@ -92,7 +92,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 			if($r->sob_all_type == 'textarea'){
 				
 				$o->align 	= $r->sob_all_align;
-				$o->read 	= $r->sob_all_readonly;
+				$o->read 	= $r->sob_all_access;
 				
 			}
 				
@@ -106,7 +106,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 				}
 					
 				$o->input 	= $r->sob_input_type;
-				$o->read 	= $r->sob_all_readonly;
+				$o->read 	= $r->sob_all_access;
 
 				if($r->sob_input_type == 'button' && $r->sob_all_type == 'input'){
 					$o->value	= $r->sob_all_label;

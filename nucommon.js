@@ -706,7 +706,7 @@ function nuDisable(i){                 //-- Disable Edit Form Object
 
 function nuShow(i){                 //-- Show Edit Form Object
 
-	var o	= [i, i + 'code', i + 'button', i + 'description', i + 'nuDelete', 'label_' + i];
+	var o	= [i, i + 'code', i + 'button', i + 'description', 'label_' + i];
 	
 	for(var c = 0 ; c < o.length ; c++){
 		$('#' + o[c]).css('visibility', 'visible');
@@ -719,7 +719,7 @@ function nuShow(i){                 //-- Show Edit Form Object
 
 function nuHide(i){                 //-- Hide Edit Form Object
 
-	var o	= [i, i + 'code', i + 'button', i + 'description', i + 'nuDelete', 'label_' + i];
+	var o	= [i, i + 'code', i + 'button', i + 'description', 'label_' + i];
 	
 	for(var c = 0 ; c < o.length ; c++){
 		$('#' + o[c]).css('visibility', 'hidden');

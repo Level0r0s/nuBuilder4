@@ -407,6 +407,10 @@ function nuINPUT(w, i, l, p, prop){
 	.attr('data-nu-subform-sort', 1)
 	.attr('data-nu-label', w.objects[i].label)
 	.prop('readonly', prop.objects[i].read == '1' ? 'readonly' : '');
+	
+	if(prop.objects[i].read == 2){
+		nuHide(id);
+	}
 
 	if(prop.objects[i].type != 'textarea'){
 
