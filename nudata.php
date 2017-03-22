@@ -1,5 +1,116 @@
 <?php
 
+function nuUpdateTables(){
+
+	$nudata	= $_POST['nuSTATE']['nuFORMdata'];
+	$rid	= $_POST['nuSTATE']['record_id'];
+	$fid	= $_POST['nuSTATE']['form_id'];
+	$DEL	= $_POST['nuSTATE']['deleteAll'];	
+		$S			= array();
+
+	if($rid == -3){
+		
+		nuDisplayError('Cannot be Saved..');
+		return;
+		
+	}
+		
+	for($d = 0 ; $d < count($nudata) ; $d++){
+		
+		$sf			= $nudata[$d];
+		$rows		= $sf['rows'];
+		$edited		= $sf['edited'];
+		$deleted	= $sf['deleted'];
+		$fields		= $sf['fields'];
+		$table		= $sf['table'];
+		$pk			= $sf['primary_key'];
+		$fk			= $sf['foreign_key'];
+		$fv			= $_POST['nuHash']['RECORD_ID'];
+		
+		for($r = 0 ; $r < count($rows) ; $r++){
+
+			if(nuEditedRow($edited[$r])){
+				
+				$F			= array();
+				$I			= array();
+				$V			= array();
+				$edit		= $edits[$r];
+				$row		= $rows[$r];
+				$pv			= $row[0];
+				$nv			= nuID();
+				
+				if($pv == '-1'){
+					$id		= "'$nv'";
+				}else{
+					$id		= "'$pv'";
+				}
+				
+				$V[]		= $id;												//-- primary key id
+				$I[]		= $pk;
+
+				$V[]		= "'$fv'";
+				$I[]		= "`$fk`";
+				
+				for($R = 1 ; $R < count($row) ; $R++){
+					
+					if($edit[$R] == 0){											//-- has been edited
+							
+						$add	= addslashes($row[$R]);
+						$fld	= $fields[$R];
+						$V[]	= "'$add'";
+						$I[]	= "`$fld`";
+						$F[]	= "`$fld` = '$add'";
+						
+					}
+					
+				}
+				
+				nudebug(print_r($I,1));
+				$fs			= implode(', ', $F);								//-- update sql
+				$vs			= ' VALUES (' . implode(', ', $V) . ')';
+				$is			= '        (' . implode(', ', $I) . ')';
+
+				if($pv == '-1'){
+					$sql	= "INSERT INTO $table $is $vs;";
+				}else{
+					$sql	= "UPDATE $table SET $fs WHERE `$pk` = '$pv';";
+				}
+				
+				$S[]		= $sql;
+				
+			}
+			
+		}
+
+		for($i = 0 ; $i < count($deleted) ; $i++){
+			
+			$del	= $deleted[$i];
+			$sql	= "DELETE FROM $table WHERE `$pk` = '$del';";
+			$S[]	= $sql;
+			
+		}
+		
+	}
+	
+nudebug(print_r($S,1));
+
+}
+
+
+function nuEditedRow($e){
+	
+	$t	= 0;
+	
+	for($i = 0 ; $i < count($e) ; $i++){
+		$t	= $t + $e[$i];
+	}
+	
+	return $t > 0;			//-- something has been edited
+	
+}
+
+
+
 function nuUpdateData(){
 
 	$nudata	= $_POST['nuSTATE']['data'];

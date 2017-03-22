@@ -276,8 +276,6 @@ class nuFormObject {
 					u	= nuFORM.removeFormatting(SF.rows[c][f], fmt);
 					v	= v + Number(u);
 					
-//					v	= v + Number(SF.rows[c][f]);
-					
 				}
 				
 				return Number(v);
@@ -322,20 +320,24 @@ class nuFormObject {
 		if(sf == ''){
 			
 			id			= 'nuBuilder4Form';
+			var table	= $('#nuRECORD').attr('data-nu-table');
 			var sel		= '#nuRECORD';
 			var sf		= 'nuRECORD';
 			var oi		= '';
 			var fk		= '';
+			var pk		= $('#nuRECORD').attr('data-nu-primary-key-name');
 		
 		}else{
 			
 			var sel		= "[id*='" + sf + "'][id*='nuRECORD']";
+			var table	= $(sel).attr('data-nu-table');
 			var oi		= $('#' + sf).attr('data-nu-object-id');
 			var fk		= $('#' + sf).attr('data-nu-foreign-key-name');
+			var pk		= $('#' + sf).attr('data-nu-primary-key-name');
 			
 		}
 		
-		var o			= {'id':id, 'html_id':sf, 'foreign_key':fk, 'object_id':oi};
+		var o			= {'id':id, 'foreign_key':fk, 'primary_key':pk, 'object_id':oi, 'table':table};	//-- foreign_key id id Form's record_id (which might change if cloned.)
 		var F			= ['ID'];
 		o.rows			= [];
 		o.edited		= [];
@@ -343,62 +345,54 @@ class nuFormObject {
 		
 		$(sel).each(function(index){
 			
-			var THIS	= $(this);
-			var dnpk	= $(this).attr('data-nu-primary-key')
-			var V		= [dnpk];
-			var E		= [0];
-			var C		= 1;
-			var	addrow	= true;
+			var THIS			= $(this);
+			var dnpk			= $(this).attr('data-nu-primary-key')
+			var V				= [dnpk];
+			var E				= [0];
+			var C				= 1;
 				
 			THIS.children('[data-nu-data]').each(function(){
 				
-				var addfld	= true;
-					
 				if(this.id.substr(-8) == 'nuDelete'){
 					
-					addrow	= !$('#' + this.id).prop("checked");
-					addfld	= false;
-					
-				}
-
-				if(addfld){
-					
-					if(sf == 'nuRECORD'){						//-- the main Form
-						F[C]	= this.id;
-					}else{
-						F[C]	= this.id.substr(sf.length + 3);
-					}
-					
-					var dnf		= $('#' + this.id).attr('data-nu-format');
-					var typ		= $('#' + this.id).attr('type');
-					var val		= $('#' + this.id).val();
-
-					if(typ == 'checkbox'){
-						val		= $('#' + this.id).prop("checked") ? 1 : 0;
-					}
+					if($('#' + this.id).prop("checked") || deleteAll){
 						
+						if(dnpk != '-1'){
+							o.deleted.push(dnpk);
+						}
+						
+					}
 					
-					V[C]		= nuFORM.removeFormatting(val, dnf);
-					E[C]		= $('#' + this.id).hasClass('nuEdited') ? 1 : 0 ;
-
-					C++;
-				
 				}
+
+				
+				if(sf == 'nuRECORD'){						//-- the main Form
+					F[C]		= this.id;
+				}else{
+					F[C]		= this.id.substr(sf.length + 3);
+				}
+				
+				var dnf			= $('#' + this.id).attr('data-nu-format');
+				var typ			= $('#' + this.id).attr('type');
+				var val			= $('#' + this.id).val();
+
+				if(typ == 'checkbox'){
+					val			= $('#' + this.id).prop("checked") ? 1 : 0;
+				}
+				
+				V[C]			= nuFORM.removeFormatting(val, dnf);
+				E[C]			= $('#' + this.id).hasClass('nuEdited') ? 1 : 0 ;
+
+				C++;
 				
 			});
 			
-			if(addrow && !deleteAll){
-				
-				o.rows.push(V);
-				o.edited.push(E);
-				
-			}else{
-				o.deleted.push(dnpk);
-			}
+			o.rows.push(V);
+			o.edited.push(E);
 			
 		});
 
-		o.fields		= F;
+		o.fields				= F;
 		
 		return o;
 		
@@ -456,6 +450,8 @@ class nuFormObject {
 	
 	addFormatting(v, f){
 
+		if(v == '' || f == '' || f == undefined){return v;}
+		
 		v				= String(v) == 'null' ? '' : String(v);
 		f				= String(f);
 		
@@ -557,7 +553,7 @@ class nuFormObject {
 	
 	removeFormatting(v, f){
 		
-		if(v == '' || f == ''){return v;}
+		if(v == '' || f == '' || f == undefined){return v;}
 		
 		v				= String(v);
 		f				= String(f);

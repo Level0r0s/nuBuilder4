@@ -189,6 +189,8 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 				$o->delete          	= $r->sob_subform_delete;
 				$f->foreign_key_name 	= $r->sob_subform_foreign_key;
 				$o->foreign_key_name 	= $r->sob_subform_foreign_key;
+				$o->primary_key_name	= nuFormProperties($r->sob_subform_zzzzsys_form_id)->sfo_primary_key;
+				$f->primary_key_name	= $o->primary_key_name;
 				$o->add             	= $r->sob_subform_add;
 				$o->dimensions			= nuFormDimensions($r->sob_subform_zzzzsys_form_id);
 				$o->forms           	= nuGetSubformRecords($r, $o->add, $R);
@@ -309,12 +311,13 @@ function nuDefaultObject($r, $t){
 function nuGetEditForm($F, $R){
 	
 
-    $s = "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$F'";
+//    $s = "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$F'";
 
-    $t = nuRunQuery($s);
-    $r = db_fetch_object($t);
+//    $t = nuRunQuery($s);
+//    $r = db_fetch_object($t);
+	$r					= nuFormProperties($F);
 
-	$SQL 			= new nuSqlString($r->sfo_browse_sql);
+	$SQL 				= new nuSqlString($r->sfo_browse_sql);
 
     $f              	= new stdClass();
     $f->id          	= $r->zzzzsys_form_id;
@@ -935,10 +938,6 @@ function nuCheckSession(){
 		
 		$f				= nuAddOtherFormsUsed($nuJ);		//-- form list including forms id used in reports and procedures
 		
-nudebug($_POST['nuSTATE']['form_id']);
-nudebug(print_r($_POST['nuSTATE'],1));
-nudebug(print_r($f,1));
-
 		if(!in_array($_POST['nuSTATE']['form_id'], $f) && $c->call_type == 'getform'){
 
 			$nuT		= nuRunQuery("SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$c->form_id'");
@@ -994,10 +993,6 @@ function nuButtons($formid){
 }
 
 
-
-
-
-
 function nuFormAccess($s, $a){
 
 	if($_POST['session']->zzzzsys_user_id == $_SESSION['DBGlobeadminUsername']){
@@ -1007,7 +1002,7 @@ function nuFormAccess($s, $a){
 	for($i = 0 ; $i < count($a) ; $i++){
 		
 		$F	= $a[$i];
-//nudebug('ffff ' . print_r($F, 1));
+		
 		if($s == $F[0]){
 			return array($F[1], $F[2], $F[3], $F[4], $F[5]);		//-- Add Print Save Clone Delete
 		}
@@ -1017,8 +1012,6 @@ function nuFormAccess($s, $a){
 	return array('0', '0', '0', '0', '0');
 
 }
-
-
 
 
 function nuUpdateSession() {
@@ -1289,7 +1282,6 @@ function nuSetAccessibility($userid = ''){
 	$access->procedures			= nuAccessProcedures($access->session);
 	
 	$nuJ						= json_encode($access);
-	nudebug($nuJ);
 	$today 						= strtotime('now');
 	$timeout 					= date("Y-m-d H:i:s", strtotime('+'.$_SESSION['Timeout'].' min', $today));
 	$ses						= $_SESSION['SESSIONID'];

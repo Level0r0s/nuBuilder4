@@ -51,6 +51,9 @@ function nuBuildForm(f){
 	}
 	
 	nuAddHolder('nuRECORD');
+	$('#nuRECORD').attr('data-nu-table', f.table);
+	$('#nuRECORD').attr('data-nu-primary-key-name', f.primary_key);
+	
 	nuAddBreadcrumbs();
 	nuAddEditTabs('', f);
 	nuOptions('', f.form_id, 'form', f.global_access);
@@ -289,6 +292,7 @@ function nuRecordProperties(w, p, l){
 	.append(chk)
 	.addClass('nuSection')
 	.attr('data-nu-form-id', w.id)
+	.attr('data-nu-table', w.table)
 	.attr('data-nu-primary-key', w.record_id)
 	.attr('data-nu-foreign-key', w.foreign_key)
 	.attr('data-nu-foreign-field', p == '' ? '' : w.foreign_key_name);
@@ -846,9 +850,9 @@ function nuSUBFORM(w, i, l, p, prop){
 					'overflow-x'	: 'hidden',
 					'overflow-y'	: 'hidden'
 	})
-	.attr('data-nu-primary-key', SF.object_id)    //-- could remove this I think
 	.attr('data-nu-object-id', SF.object_id)
 	.attr('data-nu-foreign-key-name', SF.foreign_key_name)
+	.attr('data-nu-primary-key-name', SF.primary_key_name)
 	.attr('data-nu-subform', 'true')
 	.addClass('nuSubform');
 
@@ -1116,8 +1120,10 @@ function nuPopulateLookup3(v, p){
 
 function nuAddHolder(t){
 
-	var d = document.createElement('div');
+	var d 	= document.createElement('div');
+	
 	d.setAttribute('id', t);
+	
 	$('body').append(d);
 	$('#' + t).addClass(t).html('&nbsp;&nbsp;&nbsp;');
 	
