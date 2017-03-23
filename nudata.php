@@ -5,8 +5,9 @@ function nuUpdateTables(){
 	$nudata	= $_POST['nuSTATE']['nuFORMdata'];
 	$rid	= $_POST['nuSTATE']['record_id'];
 	$fid	= $_POST['nuSTATE']['form_id'];
-	$DEL	= $_POST['nuSTATE']['deleteAll'];	
-		$S			= array();
+	$DEL	= $_POST['nuSTATE']['deleteAll'];
+	$rid	= $rid == '-1' ? nuID() : $rid;
+	$S		= array();
 
 	if($rid == -3){
 		
@@ -18,6 +19,7 @@ function nuUpdateTables(){
 	for($d = 0 ; $d < count($nudata) ; $d++){
 		
 		$sf			= $nudata[$d];
+		$action		= $sf['action'];
 		$rows		= $sf['rows'];
 		$edited		= $sf['edited'];
 		$deleted	= $sf['deleted'];
@@ -25,7 +27,7 @@ function nuUpdateTables(){
 		$table		= $sf['table'];
 		$pk			= $sf['primary_key'];
 		$fk			= $sf['foreign_key'];
-		$fv			= $_POST['nuHash']['RECORD_ID'];
+		$fv			= $_POST['nuSTATE']['record_id'];
 		
 		for($r = 0 ; $r < count($rows) ; $r++){
 
@@ -34,7 +36,7 @@ function nuUpdateTables(){
 				$F			= array();
 				$I			= array();
 				$V			= array();
-				$edit		= $edits[$r];
+				$edit		= $edited[$r];
 				$row		= $rows[$r];
 				$pv			= $row[0];
 				$nv			= nuID();
@@ -47,13 +49,19 @@ function nuUpdateTables(){
 				
 				$V[]		= $id;												//-- primary key id
 				$I[]		= $pk;
-
-				$V[]		= "'$fv'";
-				$I[]		= "`$fk`";
+				
+				if($fk == ''){
+					$rec_id	= $id;
+				}else{
+					
+					$V[]	= $rec_id;
+					$I[]	= "`$fk`";
+					
+				}
 				
 				for($R = 1 ; $R < count($row) ; $R++){
-					
-					if($edit[$R] == 0){											//-- has been edited
+
+					if($edit[$R] == 1){											//-- has been edited
 							
 						$add	= addslashes($row[$R]);
 						$fld	= $fields[$R];
@@ -65,15 +73,18 @@ function nuUpdateTables(){
 					
 				}
 				
-				nudebug(print_r($I,1));
-				$fs			= implode(', ', $F);								//-- update sql
+				$fs			= implode(', ', $F);								//-- for update statement
 				$vs			= ' VALUES (' . implode(', ', $V) . ')';
 				$is			= '        (' . implode(', ', $I) . ')';
 
-				if($pv == '-1'){
-					$sql	= "INSERT INTO $table $is $vs;";
-				}else{
-					$sql	= "UPDATE $table SET $fs WHERE `$pk` = '$pv';";
+				if($action == 'save'){
+					
+					if($pv == '-1'){
+						$sql	= "INSERT INTO $table $is $vs;";
+					}else{
+						$sql	= "UPDATE $table SET $fs WHERE `$pk` = '$pv';";
+					}
+				
 				}
 				
 				$S[]		= $sql;

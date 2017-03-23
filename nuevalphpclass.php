@@ -27,12 +27,13 @@
 				WHERE spl_zzzzsys_php_id = '$this->parentID'
 			";
 			
-			$nuT						= nuRunQuery($s);
+			$nuT			= nuRunQuery($s);
 							
 			while($nuA = db_fetch_object($nuT)) {
 
-				$phpCode				= $nuA->sph_code;
-				$phpToEval				= nuReplaceHashVariables($nuA->sph_php);
+				$phpCode	= $nuA->sph_code;
+				$phpToEval	= nuReplaceHashVariables($nuA->sph_php);
+				
 				$this->evalPHP($phpCode, $phpToEval);
 				
 			}

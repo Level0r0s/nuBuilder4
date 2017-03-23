@@ -337,7 +337,7 @@ class nuFormObject {
 			
 		}
 		
-		var o			= {'id':id, 'foreign_key':fk, 'primary_key':pk, 'object_id':oi, 'table':table};	//-- foreign_key id id Form's record_id (which might change if cloned.)
+		var o			= {'id':id, 'foreign_key':fk, 'primary_key':pk, 'object_id':oi, 'table':table, 'action':action};	//-- foreign_key id id Form's record_id (which might change if cloned.)
 		var F			= ['ID'];
 		o.rows			= [];
 		o.edited		= [];
