@@ -1,25 +1,18 @@
 <?php
 
-function nuUpdateTables(){
+function nuCheckTables(){
 
 	$nudata	= $_POST['nuSTATE']['nuFORMdata'];
 	$rid	= $_POST['nuSTATE']['record_id'];
 	$fid	= $_POST['nuSTATE']['form_id'];
 	$DEL	= $_POST['nuSTATE']['deleteAll'];
-	$rid	= $rid == '-1' ? nuID() : $rid;
-	$S		= array();
-
-	if($rid == -3){
-		
-		nuDisplayError('Cannot be Saved..');
-		return;
-		
-	}
+	
+	if($nudata[0]['action'] == 'delete'){return;}
+	
 		
 	for($d = 0 ; $d < count($nudata) ; $d++){
 		
 		$sf			= $nudata[$d];
-		$action		= $sf['action'];
 		$rows		= $sf['rows'];
 		$edited		= $sf['edited'];
 		$deleted	= $sf['deleted'];
@@ -99,6 +92,123 @@ function nuUpdateTables(){
 			$sql	= "DELETE FROM $table WHERE `$pk` = '$del';";
 			$S[]	= $sql;
 			
+		}
+		
+	}
+	
+nudebug(print_r($S,1));
+
+}
+
+
+function nuUpdateTables(){
+
+	$nudata	= $_POST['nuSTATE']['nuFORMdata'];
+	$rid	= $_POST['nuSTATE']['record_id'];
+	$fid	= $_POST['nuSTATE']['form_id'];
+	$DEL	= $_POST['nuSTATE']['deleteAll'];
+	$rid	= $rid == '-1' ? nuID() : $rid;
+	$S		= array();
+
+	if($rid == -3){
+		
+		nuDisplayError('Cannot be Saved..');
+		return;
+		
+	}
+		
+	for($d = 0 ; $d < count($nudata) ; $d++){
+		
+		$sf			= $nudata[$d];
+		$action		= $sf['action'];
+		$rows		= $sf['rows'];
+		$edited		= $sf['edited'];
+		$deleted	= $sf['deleted'];
+		$fields		= $sf['fields'];
+		$table		= $sf['table'];
+		$pk			= $sf['primary_key'];
+		$fk			= $sf['foreign_key'];
+		$fv			= $_POST['nuSTATE']['record_id'];
+		
+		for($r = 0 ; $r < count($rows) ; $r++){
+
+			if(nuEditedRow($edited[$r])){
+				
+				$F			= array();
+				$I			= array();
+				$V			= array();
+				$edit		= $edited[$r];
+				$row		= $rows[$r];
+				$pv			= $row[0];
+				$nv			= nuID();
+				
+				if($pv == '-1'){
+					$id		= "'$nv'";
+				}else{
+					$id		= "'$pv'";
+				}
+				
+				$V[]		= $id;												//-- primary key id
+				$I[]		= $pk;
+				
+				if($fk == ''){
+					$rec_id	= $id;
+				}else{
+					
+					$V[]	= $rec_id;
+					$I[]	= "`$fk`";
+					
+				}
+				
+				for($R = 1 ; $R < count($row) ; $R++){
+
+					if($edit[$R] == 1){											//-- has been edited
+							
+						$add	= addslashes($row[$R]);
+						$fld	= $fields[$R];
+						$V[]	= "'$add'";
+						$I[]	= "`$fld`";
+						$F[]	= "`$fld` = '$add'";
+						
+					}
+					
+				}
+	
+				$fs				= implode(', ', $F);								//-- for update statement
+				$vs				= ' VALUES (' . implode(', ', $V) . ')';
+				$is				= '        (' . implode(', ', $I) . ')';
+
+				if($action == 'save'){
+					
+					if($pv == '-1'){
+						$sql	= "INSERT INTO $table $is $vs;";
+					}else{
+						$sql	= "UPDATE $table SET $fs WHERE `$pk` = '$pv';";
+					}
+				
+				}
+				
+				$S[]			= $sql;
+				
+			}
+			
+		}
+
+		for($i = 0 ; $i < count($deleted) ; $i++){
+			
+			$id				= $rows[$i][0];
+
+			if($action == 'delete' || $deleted[$i] == '1'){
+			
+				if($id != '-1'){
+						
+					$sql	= "DELETE FROM $table WHERE `$pk` = '$id';";
+					$S[]	= $sql;
+					
+				}
+				
+			}
+		
 		}
 		
 	}

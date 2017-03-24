@@ -342,6 +342,7 @@ class nuFormObject {
 		o.rows			= [];
 		o.edited		= [];
 		o.deleted		= [];
+		var deleteRow	= false;
 		
 		$(sel).each(function(index){
 			
@@ -350,19 +351,12 @@ class nuFormObject {
 			var V				= [dnpk];
 			var E				= [0];
 			var C				= 1;
+			var chk				= $('#' + this.id).prop("checked");
 				
 			THIS.children('[data-nu-data]').each(function(){
 				
 				if(this.id.substr(-8) == 'nuDelete'){
-					
-					if($('#' + this.id).prop("checked") || deleteAll){
-						
-						if(dnpk != '-1'){
-							o.deleted.push(dnpk);
-						}
-						
-					}
-					
+					chk			=($('#' + this.id).prop("checked") || deleteAll) ? 1 : 0 ;
 				}
 
 				
@@ -377,7 +371,7 @@ class nuFormObject {
 				var val			= $('#' + this.id).val();
 
 				if(typ == 'checkbox'){
-					val			= $('#' + this.id).prop("checked") ? 1 : 0;
+					val			= $('#' + this.id).prop("checked") ? 1 : 0 ;
 				}
 				
 				V[C]			= nuFORM.removeFormatting(val, dnf);
@@ -389,6 +383,7 @@ class nuFormObject {
 			
 			o.rows.push(V);
 			o.edited.push(E);
+			o.deleted.push(chk);
 			
 		});
 
