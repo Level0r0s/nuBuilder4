@@ -369,13 +369,13 @@ function nuBreadcrumbDescription($r, $R){
 
 function nuGetLookupValues($R, $O){
 
-    $s = "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$O->form_id'";
-    $t = nuRunQuery($s);
-    $r = db_fetch_object($t);
+    $s 			= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$O->form_id'";
+    $t 			= nuRunQuery($s);
+    $r 			= db_fetch_object($t);
 	
-	$S = new nuSqlString($r->sfo_browse_sql);
+	$S 			= new nuSqlString($r->sfo_browse_sql);
 	
-    $s = "
+    $s 			= "
 		SELECT 
 			$r->sfo_primary_key,
 			$R->sob_lookup_code,
@@ -497,9 +497,9 @@ function nuGetSubformRecords($R, $A){
 
 function nuBuildTabList($i){
 
-    $o = 0;
-    $a = array();
-    $s = "
+    $o 				= 0;
+    $a 				= array();
+    $s 				= "
     
         SELECT * 
         FROM zzzzsys_tab 
@@ -514,9 +514,9 @@ function nuBuildTabList($i){
 
     while($r = db_fetch_object($t)){
         
-        $r->number = $o;
+        $r->number	= $o;
         $o++;
-        $a[] = $r;
+        $a[]		= $r;
         
     }
 	
@@ -527,7 +527,7 @@ function nuBuildTabList($i){
 
 function nuRefineTabList($t){
 
-    $a = array();
+    $a 			= array();
 
     for($i = 0 ; $i < count($t) ; $i++){
 		
@@ -542,14 +542,14 @@ function nuRefineTabList($t){
 
 function nuGetSQLValue($s){
 	
-	$s	= nuReplaceHashVariables(trim($s));
+	$s		= nuReplaceHashVariables(trim($s));
     
     if(trim($s) == ''){
         return '';
     }else{
     
-        $t = nuRunQuery($s);
-        $r = db_fetch_row($t);
+        $t	= nuRunQuery($s);
+        $r	= db_fetch_row($t);
 		
         return $r[0];
         
@@ -563,9 +563,9 @@ function nuBrowseColumns($f){
 
 	nuBeforeBrowse($f->id);
 	
-	$s	= "SELECT * FROM zzzzsys_browse WHERE sbr_zzzzsys_form_id = '$f->id' ORDER BY sbr_order";
-	$t	= nuRunQuery($s);
-	$a	= array();
+	$s				= "SELECT * FROM zzzzsys_browse WHERE sbr_zzzzsys_form_id = '$f->id' ORDER BY sbr_order";
+	$t				= nuRunQuery($s);
+	$a				= array();
 
 	while($r = db_fetch_object($t)){
 	
@@ -586,7 +586,7 @@ function nuBrowseColumns($f){
 		unset($r->sbr_order);
 		unset($r->sbr_width);
 
-		$a[]	= $r;
+		$a[]		= $r;
 
 	}
 	

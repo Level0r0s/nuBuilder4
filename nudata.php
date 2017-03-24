@@ -141,6 +141,7 @@ function nuUpdateTables(){
 				$row		= $rows[$r];
 				$pv			= $row[0];
 				$nv			= nuID();
+				$validate	= nuValidArray($fv, $fields);
 				
 				if($pv == '-1'){
 					$id		= "'$nv'";
@@ -174,7 +175,7 @@ function nuUpdateTables(){
 					
 				}
 	
-				$fs				= implode(', ', $F);								//-- for update statement
+				$fs				= implode(', ', $F);							//-- for update statement
 				$vs				= ' VALUES (' . implode(', ', $V) . ')';
 				$is				= '        (' . implode(', ', $I) . ')';
 
@@ -215,6 +216,33 @@ function nuUpdateTables(){
 	
 nudebug(print_r($S,1));
 
+}
+
+function nuValidArray($v, $f){
+	
+	$a			= Array();
+	
+	$s			= "	
+	
+				SELECT sob_all_validate 
+				FROM zzzzsys_object 
+				WHERE sob_all_zzzzsys_form_id = ?
+				AND sob_all_id = ?
+				
+				";
+	
+	for($i = 0; $i < count($f) ; $i++){
+		
+		$t		= nuRunQuery($s, array($v, $f[$i]));
+		$r		= db_fetch_row($t);
+		$a[$i]	= $r[0];
+		
+		nudebug("$s, $v, " . $f[$i] . ' result : '. $r[0] . ' array: ' . print_r($f,1));
+		
+	}
+
+	return $a;
+	
 }
 
 

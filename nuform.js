@@ -107,7 +107,7 @@ function nuResizeiFrame(d, r){
 			'visibility' 	:	'visible'
 		});
 
-		$('#nuLookup', window.parent.document).
+		$('#nuWindow', window.parent.document).
 		css({'height'		:	(h - 40) + 'px',
 			'width' 		:	(w - 10) + 'px'
 		});
@@ -123,7 +123,7 @@ function nuResizeiFrame(d, r){
 			'visibility' 	:	'visible'
 		});
 
-		$('#nuLookup', window.parent.document).
+		$('#nuWindow', window.parent.document).
 		css({'height'		:	(h - 40) + 'px',
 			'width' 		:	(w - 10) + 'px'
 		});

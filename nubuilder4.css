@@ -594,7 +594,7 @@ input[type=range]::-webkit-slider-runnable-track {
 
 .nuText {}
 
-.nuLookup {border:1px solid #e1e8ea}
+.nuWindow {border:1px solid #e1e8ea}
 
 .nuReadonly {
   background-color:lightgrey;
