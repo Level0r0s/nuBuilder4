@@ -772,6 +772,9 @@ class nuSECTION{
         
         if($O->format != ''){                                                            //-- format value
             
+
+//--sc 25-03-2017
+/*
             $format      = nuTextFormats();
             $datatype    = $format[$O->format]->type;
 
@@ -787,7 +790,7 @@ class nuSECTION{
             }
             
         }
-
+*/
         return $value;
 
     }        

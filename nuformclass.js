@@ -401,18 +401,18 @@ class nuFormObject {
 		
 		var f	= {};
 
-		f.Jan	= {'mmm' : 'Jan', 'mmmm' : 'January',	'mm' : '01' , 'm' : '1',  'jsmonth' : 0};
-		f.Feb	= {'mmm' : 'Feb', 'mmmm' : 'February',	'mm' : '02' , 'm' : '2',  'jsmonth' : 1};
-		f.Mar	= {'mmm' : 'Mar', 'mmmm' : 'March', 	'mm' : '03' , 'm' : '3',  'jsmonth' : 2};
-		f.Apr	= {'mmm' : 'Apr', 'mmmm' : 'April', 	'mm' : '04' , 'm' : '4',  'jsmonth' : 3};
-		f.May	= {'mmm' : 'May', 'mmmm' : 'May',		'mm' : '05' , 'm' : '5',  'jsmonth' : 4};
-		f.Jun	= {'mmm' : 'Jun', 'mmmm' : 'June',		'mm' : '06' , 'm' : '6',  'jsmonth' : 5};
-		f.Jul	= {'mmm' : 'Jul', 'mmmm' : 'July',		'mm' : '07' , 'm' : '7',  'jsmonth' : 6};
-		f.Aug	= {'mmm' : 'Aug', 'mmmm' : 'August', 	'mm' : '08' , 'm' : '8',  'jsmonth' : 7};
-		f.Sep	= {'mmm' : 'Sep', 'mmmm' : 'September',	'mm' : '09' , 'm' : '9',  'jsmonth' : 8};
-		f.Oct	= {'mmm' : 'Oct', 'mmmm' : 'October', 	'mm' : '10' , 'm' : '10', 'jsmonth' : 9};
-		f.Nov	= {'mmm' : 'Nov', 'mmmm' : 'November', 	'mm' : '11' , 'm' : '11', 'jsmonth' : 10};
-		f.Dec	= {'mmm' : 'Dec', 'mmmm' : 'December', 	'mm' : '12' , 'm' : '12', 'jsmonth' : 11};
+		f.Jan		= {'mmm' : 'Jan', 'mmmm' : 'January',	'mm' : '01' , 'm' : '1',  'jsmonth' : 0};
+		f.Feb		= {'mmm' : 'Feb', 'mmmm' : 'February',	'mm' : '02' , 'm' : '2',  'jsmonth' : 1};
+		f.Mar		= {'mmm' : 'Mar', 'mmmm' : 'March', 	'mm' : '03' , 'm' : '3',  'jsmonth' : 2};
+		f.Apr		= {'mmm' : 'Apr', 'mmmm' : 'April', 	'mm' : '04' , 'm' : '4',  'jsmonth' : 3};
+		f.May		= {'mmm' : 'May', 'mmmm' : 'May',		'mm' : '05' , 'm' : '5',  'jsmonth' : 4};
+		f.Jun		= {'mmm' : 'Jun', 'mmmm' : 'June',		'mm' : '06' , 'm' : '6',  'jsmonth' : 5};
+		f.Jul		= {'mmm' : 'Jul', 'mmmm' : 'July',		'mm' : '07' , 'm' : '7',  'jsmonth' : 6};
+		f.Aug		= {'mmm' : 'Aug', 'mmmm' : 'August', 	'mm' : '08' , 'm' : '8',  'jsmonth' : 7};
+		f.Sep		= {'mmm' : 'Sep', 'mmmm' : 'September',	'mm' : '09' , 'm' : '9',  'jsmonth' : 8};
+		f.Oct		= {'mmm' : 'Oct', 'mmmm' : 'October', 	'mm' : '10' , 'm' : '10', 'jsmonth' : 9};
+		f.Nov		= {'mmm' : 'Nov', 'mmmm' : 'November', 	'mm' : '11' , 'm' : '11', 'jsmonth' : 10};
+		f.Dec		= {'mmm' : 'Dec', 'mmmm' : 'December', 	'mm' : '12' , 'm' : '12', 'jsmonth' : 11};
 
 		f.January	= {'mmm' : 'Jan', 'mmmm' : 'January',	'mm' : '01' , 'm' : '1',  'jsmonth' : 0};
 		f.February	= {'mmm' : 'Feb', 'mmmm' : 'February',	'mm' : '02' , 'm' : '2',  'jsmonth' : 1};
@@ -427,13 +427,13 @@ class nuFormObject {
 		f.November	= {'mmm' : 'Nov', 'mmmm' : 'November', 	'mm' : '11' , 'm' : '11', 'jsmonth' : 10};
 		f.December	= {'mmm' : 'Dec', 'mmmm' : 'December', 	'mm' : '12' , 'm' : '12', 'jsmonth' : 11};
 
-		f.Sun	= {'ddd' : 'Sun', 'dddd' : 'Sunday', 	'dd' : '01', 	'd' : '1'};
-		f.Mon	= {'ddd' : 'Mon', 'dddd' : 'Monday', 	'dd' : '02', 	'd' : '2'};
-		f.Tue	= {'ddd' : 'Tue', 'dddd' : 'Tueday', 	'dd' : '03', 	'd' : '3'};
-		f.Wed	= {'ddd' : 'Wed', 'dddd' : 'Wednesday',	'dd' : '04', 	'd' : '4'};
-		f.Thu	= {'ddd' : 'Thu', 'dddd' : 'Thursday', 	'dd' : '05', 	'd' : '5'};
-		f.Fri	= {'ddd' : 'Fri', 'dddd' : 'Friday', 	'dd' : '06', 	'd' : '6'};
-		f.Sat	= {'ddd' : 'Sat', 'dddd' : 'Saturday', 	'dd' : '07', 	'd' : '7'};
+		f.Sun		= {'ddd' : 'Sun', 'dddd' : 'Sunday', 	'dd' : '01', 	'd' : '1'};
+		f.Mon		= {'ddd' : 'Mon', 'dddd' : 'Monday', 	'dd' : '02', 	'd' : '2'};
+		f.Tue		= {'ddd' : 'Tue', 'dddd' : 'Tueday', 	'dd' : '03', 	'd' : '3'};
+		f.Wed		= {'ddd' : 'Wed', 'dddd' : 'Wednesday',	'dd' : '04', 	'd' : '4'};
+		f.Thu		= {'ddd' : 'Thu', 'dddd' : 'Thursday', 	'dd' : '05', 	'd' : '5'};
+		f.Fri		= {'ddd' : 'Fri', 'dddd' : 'Friday', 	'dd' : '06', 	'd' : '6'};
+		f.Sat		= {'ddd' : 'Sat', 'dddd' : 'Saturday', 	'dd' : '07', 	'd' : '7'};
 
 		f.Sunday	= {'ddd' : 'Sun', 'dddd' : 'Sunday', 	'dd' : '01', 	'd' : '1'};
 		f.Monday	= {'ddd' : 'Mon', 'dddd' : 'Monday', 	'dd' : '02', 	'd' : '2'};

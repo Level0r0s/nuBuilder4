@@ -277,19 +277,6 @@ function nuReformat(t){
 }
 
 
-function nuJavascriptDate(t){
-
-	var o	= $('#' + t.id);
-	var f	= o.attr('data-nu-format');
-	var v	= String(o.val());
-	var F   = nuFormats[f];
-
-    return nuFORM.addFormatting(v, f);
-
-}
-
-
-
 function nuOpenAce(lang, obj){
 
 	var ts			= new Date().getTime();

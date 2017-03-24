@@ -56,12 +56,10 @@ window.nuHASH			= [];
 	$target		= $_GET['target'];
 	$type		= $_GET['type'] == '' ? 'browse' : $_GET['type'];
 
-	$nuFormats	= json_encode(nuTextFormats(true));
 	$nuHeader	= nuHeader();
 	
 	print "
 	window.nuVersion		= 'nuBuilder4';
-	window.nuFormats		= $nuFormats;
 	
 	";
 
