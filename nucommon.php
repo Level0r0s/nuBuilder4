@@ -90,6 +90,46 @@ function nuDebug($t){
 }
 
 
+function nuDebug2($a0 = '][', $a1 = '][', $a2 = '][', $a3 = '][', $a4 = '][', $a5 = '][', $a6 = '][', $a7 = '][', $a8 = '][', $a9 = ']['){
+	
+	$m					= '';
+	
+	for($i = 0 ; $i < 10 ; $i++){
+
+			$p			= func_get_arg($i);
+			
+			if($p != ']['){
+							
+				$m		.= "\nParameter $i : ";
+							
+				if(gettype($p) == 'object' or gettype($p) == 'array'){
+					$m	.= print_r($p,1);
+				}else{
+					$m	.= $p;
+				}
+
+				$m	.= "\n";
+				
+			}
+			
+	}
+	
+    global $nuDB;
+	
+    $i		= nuID();
+    $d		= date('Y-m-d H:i:s');
+    $s		= $nuDB->prepare("INSERT INTO zzzzsys_debug (zzzzsys_debug_id, deb_message, deb_added) VALUES (? , ?, ?)");
+
+    $s->execute(array($i, $m, $d));
+    
+    if($nuDB->errorCode() !== '00000'){
+        error_log($nuDB->errorCode() . ": Could not establish nuBuilder database connection");
+    }
+
+	return $i;
+}
+
+
 
 function jsinclude($pfile){
 

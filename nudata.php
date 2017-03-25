@@ -96,8 +96,6 @@ function nuCheckTables(){
 		
 	}
 	
-nudebug(print_r($S,1));
-
 }
 
 
@@ -214,7 +212,7 @@ function nuUpdateTables(){
 		
 	}
 	
-nudebug(print_r($S,1));
+//nudebug(print_r($S,1));
 
 }
 
