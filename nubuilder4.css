@@ -1013,3 +1013,7 @@ input[type=range]::-webkit-slider-runnable-track {
 	cursor:pointer;
 }
 
+.nuHighlight {
+	background-color: #FFEEA6;
+}
+

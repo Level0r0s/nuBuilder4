@@ -233,7 +233,7 @@ function nuValidArray($v, $f){
 		$r		= db_fetch_row($t);
 		$a[$i]	= $r[0];
 		
-		nudebug("$s, $v, " . $f[$i] . ' result : '. $r[0] . ' array: ' . print_r($f,1));
+//		nudebug("$s, $v, " . $f[$i] . ' result : '. $r[0] . ' array: ' . print_r($f,1));
 		
 	}
 
@@ -582,6 +582,7 @@ function nuCheckAccess($f, $r = ''){
 	}
 	
 }
+
 
 
 ?>
