@@ -944,6 +944,7 @@ function nuSUBFORM(w, i, l, p, prop){
 		var prefix = id + nuPad3(c);
 		var frmId  = prefix + 'nuRECORD';
 		var frmDiv = document.createElement('div');
+		
 		frmDiv.setAttribute('id', frmId);
 		$('#' + scrId).append(frmDiv);
 		$('#' + frmId).css({'top'       : Number(rowTop),
@@ -1168,7 +1169,7 @@ function nuGetSubformRowSize(o, SF, id){
 
 function nuBuildSubformTitle(o, l, w, id, col){
     
-	var titleId  = id + o.id;
+	var titleId  = 'title_' + id + o.id;
     	var div = document.createElement('div');
     	div.setAttribute('id', titleId);
     	$('#' + id).append(div);
@@ -1189,20 +1190,23 @@ function nuBuildSubformTitle(o, l, w, id, col){
 
 function nuBuildSubformDeleteTitle(l, id, subform_id){
     
-	var titleId  = id + 'DeleteSF';
-    	var div = document.createElement('div');
-    	div.setAttribute('id', titleId);
-    	$('#' + id).append(div);
+	var titleId		= id + 'DeleteSF';
+   	var div 		= document.createElement('div');
+	
+   	div.setAttribute('id', titleId);
+	
+   	$('#' + id).append(div);
     	
-    	$('#' + titleId).css({'top'     	: 0,
-    					'left'          	: Number(l)-12,
-    					'width'         	: 52,
-    					'height'        	: 50,
-    					'text-align'    	: 'center',
-    					'font-size'     	: 10,
-    					'padding'     	: 0,
-    					'position'      	: 'absolute'
-    	}).html('<img id="nuMoveable" src="numove.png" style="padding:8px;width:12px;height:12px;" title="Arrange Objects"><br>Delete')
+	$('#' + titleId).css({'top'     	: 0,
+					'left'          	: Number(l)-12,
+					'width'         	: 52,
+					'height'        	: 50,
+					'text-align'    	: 'center',
+					'font-size'     	: 10,
+					'padding'     	: 0,
+					'position'      	: 'absolute'
+	})
+	.html('<img id="nuMoveable" src="numove.png" style="padding:8px;width:12px;height:12px;" title="Arrange Objects"><br>Delete')
 	.addClass('nuTabHolder')
 	.attr('onclick','nuPopup("'+subform_id+'", "-2");');
 
@@ -1273,9 +1277,7 @@ function nuAddEditTabs(p, w){
 	var l 		= 7;
 	
     for(var i = 0 ; i < w.browse_columns.length ; i++){
-
 		l 		= nuBrowseTitle(w.browse_columns, i, l);
-
     }
 
 	var f 		= nuFORM.getProperty('nosearch_columns');
@@ -2004,7 +2006,7 @@ function nuSelectBrowse(e){
 	}else{
 
 		window[y](e);
-		window.nuTYPE = "browse";
+		//window.nuTYPE = "browse";
 	}
 	
 }
@@ -2269,7 +2271,8 @@ function nuChange(e){
 
 	if(p == ''){return;}
 
-	nuAddSubformRow(t, event);
+//	nuAddSubformRow(t, event);
+	nuAddSubformRow(t, e);
 	
 }
 

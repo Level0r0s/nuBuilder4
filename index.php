@@ -103,6 +103,7 @@ window.nuHASH			= [];
 			}
 		
 			nuBindCtrlEvents();
+			
 			window.filter			= p.filter;
 
 			if(p.type == 'getreport') {
