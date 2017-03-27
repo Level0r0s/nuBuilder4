@@ -90,6 +90,36 @@ function nuDebug($t){
 }
 
 
+function nuBuildTable($t, $array){
+
+	$id			= $t . '_id';
+	$start		= "CREATE TABLE $t";
+	$s			= Array();
+	
+	
+	for($i = 0 ; $i < count($array) ; $i++){
+		
+		$f		= $array[$i]->name;
+		$t		= $array[$i]->type;
+		
+		if($t == 'id'){				$a[] = "$f VARCHAR(25) NOT NULL";}
+		if($t == 'varchar'){		$a[] = "$f VARCHAR(1000) NOT NULL";}
+		if($t == 'int'){			$a[] = "$f INT NOT NULL";}
+		if($t == 'text'){			$a[] = "$f TEXT NOT NULL";}
+		if($t == 'decimal'){		$a[] = "$f DECIMAL(12,4) NOT NULL";}
+		if($t == 'date'){			$a[] = "$f DATE NOT NULL";}
+		
+	}
+	
+	$a[]							= "PRIMARY KEY  ($id)";
+	$im								= implode(',', $a);
+nudebug($im)	;
+	return "$start ($im)";
+
+}
+
+
+
 function nuDebug2($a0 = '][', $a1 = '][', $a2 = '][', $a3 = '][', $a4 = '][', $a5 = '][', $a6 = '][', $a7 = '][', $a8 = '][', $a9 = ']['){
 	
 	$m					= '';

@@ -17,7 +17,8 @@ function nuBuildForm(f){
 	window.nuHASH					= [];                       //-- remove any hash variables previously set.
 	nuFORM.edited					= false;
 	nuFORM.scroll					= [];
-	nuSetBODY(f);
+	nuSetBody(f);
+	
 	
 	if(f.tableSchema.length != 0){  						//-- its an Object (load these once,  at login)
 
@@ -76,11 +77,11 @@ function nuBuildForm(f){
 		nuAddJavascript(f);
 		
 	}
-	
+
 }
 
 
-function nuSetBODY(f){
+function nuSetBody(f){
 	
 	$('body').html('');
 	$('body').removeClass('nuBrowseBody nuEditBody');
@@ -92,6 +93,7 @@ function nuSetBODY(f){
 	}
 	
 }
+
 
 
 function nuResizeiFrame(d, r){
@@ -459,7 +461,6 @@ function nuINPUT(w, i, l, p, prop){
 		
 		$('#' + id)
 		.addClass('nuScroll')
-		.attr('onwheel', input_js)
 		.attr('onkeydown', input_js);
 		
 	}
@@ -1862,6 +1863,9 @@ function nuBrowseTable(){
 	});
 	
 	nuHighlightSearch();
+
+	$('body').css('height', t + h + 100);
+
 
 }
 

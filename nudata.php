@@ -1,5 +1,6 @@
 <?php
 
+
 function nuCheckTables(){
 
 	$nudata	= $_POST['nuSTATE']['nuFORMdata'];
@@ -577,11 +578,17 @@ function nuCheckAccess($f, $r = ''){
 		}
 		
 		nuDisplayError("Access Denied..");
+		
 		return 4;
 		
 	}
 	
 }
+
+
+
+
+
 
 
 
