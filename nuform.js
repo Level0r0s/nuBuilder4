@@ -430,7 +430,6 @@ function nuINPUT(w, i, l, p, prop){
 		
 		$('#' + id)
 		.addClass('nuScroll')
-		.attr('onwheel', input_js)
 		.attr('onkeydown', input_js);
 		
 	}
