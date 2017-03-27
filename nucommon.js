@@ -164,7 +164,7 @@ function nuBuildLookup(t, s){
 	
 	$('#nuDragDialog')
 	.css('visibility', 'hidden')
-	.append('<iframe style="right:5px;top:35px;width:400px;height:400px;position:absolute" id="nuLookup" src="index.php?&opener=' +open.id + '&target=' + tar + '&search=' + s + '&type=lookup&iframe=1"></iframe>');
+	.append('<iframe style="right:5px;top:35px;width:400px;height:400px;position:absolute" id="nuWindow" src="index.php?&opener=' +open.id + '&target=' + tar + '&search=' + s + '&type=lookup&iframe=1"></iframe>');
 
 }
 
@@ -181,7 +181,7 @@ function nuPopup(f, r, filter){
 	
 	$('#nuDragDialog')
 	.css('visibility', 'hidden')
-	.append('<iframe style="right:5px;top:35px;width:400px;height:400px;position:absolute" id="nuLookup" src="index.php?opener=' + id + '&type=browse&iframe=1"></iframe>')
+	.append('<iframe style="right:5px;top:35px;width:400px;height:400px;position:absolute" id="nuWindow" src="index.php?opener=' + id + '&type=browse&iframe=1"></iframe>')
 	.prepend('<div id="nuDraggingBox" style="position:absolute; bottom:0px; right:0px; width:20px; height:20px; z-index:200"></div>');
 	
 }
@@ -275,19 +275,6 @@ function nuReformat(t){
 	o.val(nuFORM.addFormatting(v, f));
 	
 }
-
-
-function nuJavascriptDate(t){
-
-	var o	= $('#' + t.id);
-	var f	= o.attr('data-nu-format');
-	var v	= String(o.val());
-	var F   = nuFormats[f];
-
-    return nuFORM.addFormatting(v, f);
-
-}
-
 
 
 function nuOpenAce(lang, obj){
@@ -591,14 +578,6 @@ function nuID() {
 };
 
 
-function testsql(){
-
-		return "SELECT * FROM zzzzsys_user_group LEFT JOIN zzzzsys_form ON sug_zzzzsys_form_id = zzzzsys_form_id ORDER BY sug_code";
-
-	
-}
-
-
 
 function nuPreview(a){
 
@@ -720,6 +699,8 @@ function nuShow(i){                 //-- Show Edit Form Object
 		$('#' + o[c]).css('visibility', 'visible');
 	}
 
+	$("[id$='nuDelete'][id^='" + i + "']").show();
+
 }
 
 
@@ -730,6 +711,8 @@ function nuHide(i){                 //-- Hide Edit Form Object
 	for(var c = 0 ; c < o.length ; c++){
 		$('#' + o[c]).css('visibility', 'hidden');
 	}
+	
+	$("[id$='nuDelete'][id^='" + i + "']").hide();
 
 }
 
@@ -745,7 +728,7 @@ function nuAddThousandSpaces(s, c){
 	if(r.length > 11){r.splice(11, 0, c);}
 	if(r.length > 15){r.splice(15, 0, c);}
 	if(r.length > 19){r.splice(19, 0, c);}
-	if(r.length > 23){return -1;}
+	if(r.length > 23){return 'toobig';}
 
 	r		= r.reverse();
 	

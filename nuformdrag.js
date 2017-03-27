@@ -842,13 +842,13 @@ function nuMoveNuDrag() {
 	$('#nuDragOptionsFields :selected').each(function(i, selected){
 		
 		var fieldToMove 		= $(selected).text();
-		var initialTab 			= $('#nuLookup').contents().find('#'+fieldToMove).attr('data-nu-tab');
+		var initialTab 			= $('#nuWindow').contents().find('#'+fieldToMove).attr('data-nu-tab');
 		
 		//hide objects on screen so they can be redrawn on correct tab.
-		$('#nuLookup').contents().find('#'+fieldToMove).attr('data-nu-tab',moveToTab).hide();
+		$('#nuWindow').contents().find('#'+fieldToMove).attr('data-nu-tab',moveToTab).hide();
 		
 		//get tab objects array
-		var tabObjects 			= $("#nuLookup")[0].contentWindow.nuDragOptionsState.tabs[initialTab];
+		var tabObjects 			= $("#nuWindow")[0].contentWindow.nuDragOptionsState.tabs[initialTab];
 		var index 				= 0;
 		var foundField 			= false;
 		
@@ -856,22 +856,22 @@ function nuMoveNuDrag() {
 			
 			if(tabObjects.objects[i].id == fieldToMove) {
 				
-				var fieldObject = $("#nuLookup")[0].contentWindow.nuDragOptionsState.tabs[initialTab].objects[i];
+				var fieldObject = $("#nuWindow")[0].contentWindow.nuDragOptionsState.tabs[initialTab].objects[i];
 				
 				foundField = true;
 				
-				$("#nuLookup")[0].contentWindow.nuDragOptionsState.tabs[moveToTab].objects.push(fieldObject);
-				$("#nuLookup")[0].contentWindow.nuDragOptionsState.tabs[initialTab].objects.splice(i,1);
+				$("#nuWindow")[0].contentWindow.nuDragOptionsState.tabs[moveToTab].objects.push(fieldObject);
+				$("#nuWindow")[0].contentWindow.nuDragOptionsState.tabs[initialTab].objects.splice(i,1);
 				
 				i--;
 				
 			} else if(foundField) {
-				$("#nuLookup")[0].contentWindow.nuDragOptionsState.tabs[initialTab].objects[i].tab_order -= 10;
+				$("#nuWindow")[0].contentWindow.nuDragOptionsState.tabs[initialTab].objects[i].tab_order -= 10;
 			}
 		}
 		
 		//update orders
-		var tabObjects 			= $("#nuLookup")[0].contentWindow.nuDragOptionsState.tabs[moveToTab];
+		var tabObjects 			= $("#nuWindow")[0].contentWindow.nuDragOptionsState.tabs[moveToTab];
 		
 		for(var j = 0; j < tabObjects.objects.length; j++) {
 			tabObjects.objects[j].tab_order = Number(j * 10) + Number(moveToTab * 100);
@@ -880,7 +880,7 @@ function nuMoveNuDrag() {
 	});
 	
 	//go to new tab
-	$('#nuLookup').contents().find('#nuTab'+moveToTab).click();
+	$('#nuWindow').contents().find('#nuTab'+moveToTab).click();
 	
 }
 

@@ -31,7 +31,7 @@
 .php {
    background-color: #B9BCD6;
    font-family:Lucida Console;
-   padding 2px;
+   padding: 2px;
 }
 
 .js {
@@ -85,7 +85,7 @@ iframe {
 }
 
 select {
-  padding: 2px;
+  padding: 0px;
   margin: 0px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   border: 1px solid rgba(0, 0, 0, 0.2);
@@ -201,11 +201,9 @@ input[type=range]::-webkit-slider-runnable-track {
 }
 
 .nuDate {
-  background-color: #EAE1F9;
 }
 
 .nuNumber {
-  background-color: #EAE1F9;
 }
 
 .nuNotBreadcrumb {
@@ -596,7 +594,7 @@ input[type=range]::-webkit-slider-runnable-track {
 
 .nuText {}
 
-.nuLookup {border:1px solid #e1e8ea}
+.nuWindow {border:1px solid #e1e8ea}
 
 .nuReadonly {
   background-color:lightgrey;
@@ -988,5 +986,34 @@ input[type=range]::-webkit-slider-runnable-track {
 
 #close_error:hover {
 	color: red;
+}
+
+.nuAce {
+	position:absolute;
+	border-style:none;
+	font-family:helvetica;
+	font-size:14px;
+	font-weight:bold;
+	background-color:black;
+	width:300px;
+	height:20px;
+	top:40px;
+}
+
+#copy_to_nu {
+	padding:4px;
+	font-family:helvetica;
+	font-size:14px;
+	color:white;
+	background-color:grey;
+}
+
+#copy_to_nu:hover {
+	background-color:orange;
+	cursor:pointer;
+}
+
+.nuHighlight {
+	background-color: #FFEEA6;
 }
 

@@ -256,27 +256,29 @@ class nuFormObject {
 			
 		}
 
-		var d			= this.data();											//-- an array of all data as subforms (the mainform is the first element)
-		var v			= 0;
-		var u			= 0;
+		var d				= this.data();											//-- an array of all data as subforms (the mainform is the first element)
+		var v				= 0;
+		var u				= 0;
 		
 		for(var i =  0 ; i < d.length ; i++){
 			
-			var SF		= d[i];
+			var SF			= d[i];
 			
-			if(SF.id == subform_name){									//-- i've got the right subform
+			if(SF.id == subform_name){												//-- i've got the right subform
 			
-				var fmt	= $("[id$='" + field_name + "']input[id^='" + subform_name + "']").attr('data-nu-format')			
-				var f	= SF.fields.indexOf(field_name);				//-- check for valid field(column)
+				var fmt		= $("[id$='" + field_name + "']input[id^='" + subform_name + "']").attr('data-nu-format')			
+				var f		= SF.fields.indexOf(field_name);						//-- check for valid field(column)
 				
 				if(f == -1){return 0;}
 				
 				for(var c = 0 ; c < SF.rows.length ; c++){
 
-					u	= nuFORM.removeFormatting(SF.rows[c][f], fmt);
-					v	= v + Number(u);
+					if(SF.deleted[c] == 0){										//-- add up only stuff being deleted
+						
+						u	= nuFORM.removeFormatting(SF.rows[c][f], fmt);
+						v	= v + Number(u);
 					
-//					v	= v + Number(SF.rows[c][f]);
+					}
 					
 				}
 				
@@ -322,83 +324,74 @@ class nuFormObject {
 		if(sf == ''){
 			
 			id			= 'nuBuilder4Form';
+			var table	= $('#nuRECORD').attr('data-nu-table');
 			var sel		= '#nuRECORD';
 			var sf		= 'nuRECORD';
 			var oi		= '';
 			var fk		= '';
+			var pk		= $('#nuRECORD').attr('data-nu-primary-key-name');
 		
 		}else{
 			
 			var sel		= "[id*='" + sf + "'][id*='nuRECORD']";
+			var table	= $(sel).attr('data-nu-table');
 			var oi		= $('#' + sf).attr('data-nu-object-id');
 			var fk		= $('#' + sf).attr('data-nu-foreign-key-name');
+			var pk		= $('#' + sf).attr('data-nu-primary-key-name');
 			
 		}
 		
-		var o			= {'id':id, 'html_id':sf, 'foreign_key':fk, 'object_id':oi};
+		var o			= {'id':id, 'foreign_key':fk, 'primary_key':pk, 'object_id':oi, 'table':table, 'action':action};	//-- foreign_key id id Form's record_id (which might change if cloned.)
 		var F			= ['ID'];
 		o.rows			= [];
 		o.edited		= [];
 		o.deleted		= [];
+		var deleteRow	= false;
 		
 		$(sel).each(function(index){
 			
-			var THIS	= $(this);
-			var dnpk	= $(this).attr('data-nu-primary-key')
-			var V		= [dnpk];
-			var E		= [0];
-			var C		= 1;
-			var	addrow	= true;
+			var THIS			= $(this);
+			var dnpk			= $(this).attr('data-nu-primary-key')
+			var V				= [dnpk];
+			var E				= [0];
+			var C				= 1;
+			var chk				= $('#' + this.id).prop("checked");
 				
 			THIS.children('[data-nu-data]').each(function(){
 				
-				var addfld	= true;
-					
 				if(this.id.substr(-8) == 'nuDelete'){
-					
-					addrow	= !$('#' + this.id).prop("checked");
-					addfld	= false;
-					
+					chk			=($('#' + this.id).prop("checked") || deleteAll) ? 1 : 0 ;
 				}
 
-				if(addfld){
-					
-					if(sf == 'nuRECORD'){						//-- the main Form
-						F[C]	= this.id;
-					}else{
-						F[C]	= this.id.substr(sf.length + 3);
-					}
-					
-					var dnf		= $('#' + this.id).attr('data-nu-format');
-					var typ		= $('#' + this.id).attr('type');
-					var val		= $('#' + this.id).val();
-
-					if(typ == 'checkbox'){
-						val		= $('#' + this.id).prop("checked") ? 1 : 0;
-					}
-						
-					
-					V[C]		= nuFORM.removeFormatting(val, dnf);
-					E[C]		= $('#' + this.id).hasClass('nuEdited') ? 1 : 0 ;
-
-					C++;
 				
+				if(sf == 'nuRECORD'){						//-- the main Form
+					F[C]		= this.id;
+				}else{
+					F[C]		= this.id.substr(sf.length + 3);
 				}
+				
+				var dnf			= $('#' + this.id).attr('data-nu-format');
+				var typ			= $('#' + this.id).attr('type');
+				var val			= $('#' + this.id).val();
+
+				if(typ == 'checkbox'){
+					val			= $('#' + this.id).prop("checked") ? 1 : 0 ;
+				}
+				
+				V[C]			= nuFORM.removeFormatting(val, dnf);
+				E[C]			= $('#' + this.id).hasClass('nuEdited') ? 1 : 0 ;
+
+				C++;
 				
 			});
 			
-			if(addrow && !deleteAll){
-				
-				o.rows.push(V);
-				o.edited.push(E);
-				
-			}else{
-				o.deleted.push(dnpk);
-			}
+			o.rows.push(V);
+			o.edited.push(E);
+			o.deleted.push(chk);
 			
 		});
 
-		o.fields		= F;
+		o.fields				= F;
 		
 		return o;
 		
@@ -408,18 +401,18 @@ class nuFormObject {
 		
 		var f	= {};
 
-		f.Jan	= {'mmm' : 'Jan', 'mmmm' : 'January',	'mm' : '01' , 'm' : '1',  'jsmonth' : 0};
-		f.Feb	= {'mmm' : 'Feb', 'mmmm' : 'February',	'mm' : '02' , 'm' : '2',  'jsmonth' : 1};
-		f.Mar	= {'mmm' : 'Mar', 'mmmm' : 'March', 	'mm' : '03' , 'm' : '3',  'jsmonth' : 2};
-		f.Apr	= {'mmm' : 'Apr', 'mmmm' : 'April', 	'mm' : '04' , 'm' : '4',  'jsmonth' : 3};
-		f.May	= {'mmm' : 'May', 'mmmm' : 'May',		'mm' : '05' , 'm' : '5',  'jsmonth' : 4};
-		f.Jun	= {'mmm' : 'Jun', 'mmmm' : 'June',		'mm' : '06' , 'm' : '6',  'jsmonth' : 5};
-		f.Jul	= {'mmm' : 'Jul', 'mmmm' : 'July',		'mm' : '07' , 'm' : '7',  'jsmonth' : 6};
-		f.Aug	= {'mmm' : 'Aug', 'mmmm' : 'August', 	'mm' : '08' , 'm' : '8',  'jsmonth' : 7};
-		f.Sep	= {'mmm' : 'Sep', 'mmmm' : 'September',	'mm' : '09' , 'm' : '9',  'jsmonth' : 8};
-		f.Oct	= {'mmm' : 'Oct', 'mmmm' : 'October', 	'mm' : '10' , 'm' : '10', 'jsmonth' : 9};
-		f.Nov	= {'mmm' : 'Nov', 'mmmm' : 'November', 	'mm' : '11' , 'm' : '11', 'jsmonth' : 10};
-		f.Dec	= {'mmm' : 'Dec', 'mmmm' : 'December', 	'mm' : '12' , 'm' : '12', 'jsmonth' : 11};
+		f.Jan		= {'mmm' : 'Jan', 'mmmm' : 'January',	'mm' : '01' , 'm' : '1',  'jsmonth' : 0};
+		f.Feb		= {'mmm' : 'Feb', 'mmmm' : 'February',	'mm' : '02' , 'm' : '2',  'jsmonth' : 1};
+		f.Mar		= {'mmm' : 'Mar', 'mmmm' : 'March', 	'mm' : '03' , 'm' : '3',  'jsmonth' : 2};
+		f.Apr		= {'mmm' : 'Apr', 'mmmm' : 'April', 	'mm' : '04' , 'm' : '4',  'jsmonth' : 3};
+		f.May		= {'mmm' : 'May', 'mmmm' : 'May',		'mm' : '05' , 'm' : '5',  'jsmonth' : 4};
+		f.Jun		= {'mmm' : 'Jun', 'mmmm' : 'June',		'mm' : '06' , 'm' : '6',  'jsmonth' : 5};
+		f.Jul		= {'mmm' : 'Jul', 'mmmm' : 'July',		'mm' : '07' , 'm' : '7',  'jsmonth' : 6};
+		f.Aug		= {'mmm' : 'Aug', 'mmmm' : 'August', 	'mm' : '08' , 'm' : '8',  'jsmonth' : 7};
+		f.Sep		= {'mmm' : 'Sep', 'mmmm' : 'September',	'mm' : '09' , 'm' : '9',  'jsmonth' : 8};
+		f.Oct		= {'mmm' : 'Oct', 'mmmm' : 'October', 	'mm' : '10' , 'm' : '10', 'jsmonth' : 9};
+		f.Nov		= {'mmm' : 'Nov', 'mmmm' : 'November', 	'mm' : '11' , 'm' : '11', 'jsmonth' : 10};
+		f.Dec		= {'mmm' : 'Dec', 'mmmm' : 'December', 	'mm' : '12' , 'm' : '12', 'jsmonth' : 11};
 
 		f.January	= {'mmm' : 'Jan', 'mmmm' : 'January',	'mm' : '01' , 'm' : '1',  'jsmonth' : 0};
 		f.February	= {'mmm' : 'Feb', 'mmmm' : 'February',	'mm' : '02' , 'm' : '2',  'jsmonth' : 1};
@@ -434,13 +427,13 @@ class nuFormObject {
 		f.November	= {'mmm' : 'Nov', 'mmmm' : 'November', 	'mm' : '11' , 'm' : '11', 'jsmonth' : 10};
 		f.December	= {'mmm' : 'Dec', 'mmmm' : 'December', 	'mm' : '12' , 'm' : '12', 'jsmonth' : 11};
 
-		f.Sun	= {'ddd' : 'Sun', 'dddd' : 'Sunday', 	'dd' : '01', 	'd' : '1'};
-		f.Mon	= {'ddd' : 'Mon', 'dddd' : 'Monday', 	'dd' : '02', 	'd' : '2'};
-		f.Tue	= {'ddd' : 'Tue', 'dddd' : 'Tueday', 	'dd' : '03', 	'd' : '3'};
-		f.Wed	= {'ddd' : 'Wed', 'dddd' : 'Wednesday',	'dd' : '04', 	'd' : '4'};
-		f.Thu	= {'ddd' : 'Thu', 'dddd' : 'Thursday', 	'dd' : '05', 	'd' : '5'};
-		f.Fri	= {'ddd' : 'Fri', 'dddd' : 'Friday', 	'dd' : '06', 	'd' : '6'};
-		f.Sat	= {'ddd' : 'Sat', 'dddd' : 'Saturday', 	'dd' : '07', 	'd' : '7'};
+		f.Sun		= {'ddd' : 'Sun', 'dddd' : 'Sunday', 	'dd' : '01', 	'd' : '1'};
+		f.Mon		= {'ddd' : 'Mon', 'dddd' : 'Monday', 	'dd' : '02', 	'd' : '2'};
+		f.Tue		= {'ddd' : 'Tue', 'dddd' : 'Tueday', 	'dd' : '03', 	'd' : '3'};
+		f.Wed		= {'ddd' : 'Wed', 'dddd' : 'Wednesday',	'dd' : '04', 	'd' : '4'};
+		f.Thu		= {'ddd' : 'Thu', 'dddd' : 'Thursday', 	'dd' : '05', 	'd' : '5'};
+		f.Fri		= {'ddd' : 'Fri', 'dddd' : 'Friday', 	'dd' : '06', 	'd' : '6'};
+		f.Sat		= {'ddd' : 'Sat', 'dddd' : 'Saturday', 	'dd' : '07', 	'd' : '7'};
 
 		f.Sunday	= {'ddd' : 'Sun', 'dddd' : 'Sunday', 	'dd' : '01', 	'd' : '1'};
 		f.Monday	= {'ddd' : 'Mon', 'dddd' : 'Monday', 	'dd' : '02', 	'd' : '2'};
@@ -456,6 +449,8 @@ class nuFormObject {
 	
 	addFormatting(v, f){
 
+		if(v == '' || f == '' || f == undefined){return v;}
+		
 		v				= String(v) == 'null' ? '' : String(v);
 		f				= String(f);
 		
@@ -477,7 +472,7 @@ class nuFormObject {
 			var o		= v.split('.');
 			var h		= nuAddThousandSpaces(o[0], c);
 			
-			if(h == -1){
+			if(String(h) == 'toobig'){
 				
 				nuAlert(["Man! That's a BIG number, stop showing off."]);
 				return "";
@@ -557,7 +552,7 @@ class nuFormObject {
 	
 	removeFormatting(v, f){
 		
-		if(v == '' || f == ''){return v;}
+		if(v == '' || f == '' || f == undefined){return v;}
 		
 		v				= String(v);
 		f				= String(f);

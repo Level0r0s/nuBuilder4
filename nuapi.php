@@ -29,7 +29,7 @@
 	$f->forms[0]							= new stdClass;
 
 	if($P['call_type'] == 'getform')		{nuBeforeEdit($s->form_id, $s->record_id);$f->forms[0] = nuGetFormObject($s->form_id, $s->record_id, 0, $P);}
-	if($P['call_type'] == 'update')			{$f->forms[0]->record_id		= nuUpdateData();}
+	if($P['call_type'] == 'update')			{$f->forms[0]->record_id		= nuUpdateData();nuUpdateTables();}
 	if($P['call_type'] == 'getlookupid')	{$f->forms[0]->lookup_values 	= nuGetAllLookupValues();}
 	if($P['call_type'] == 'getlookupcode')	{$f->forms[0]->lookup_values 	= nuGetAllLookupList();}
 	if($P['call_type'] == 'getphp')			{$f->forms[0] 					= nuGetFormObject($s->form_id, $s->record_id, 0, $P); nuSetupButtons($f, 'PHP');}
@@ -53,9 +53,7 @@
 	$f->forms[0]->buttons					= nuButtons($s->form_id);
 
 	$j								    	= json_encode($f->forms[0]);
-//  nudebug($j);
-//	nudebug('BUTYON: ' . $s->form_id . '   ' . print_r(nuButtons($s->form_id),1));
-//	print ;
-print $j;
+	
+	print $j;
 	
 ?>

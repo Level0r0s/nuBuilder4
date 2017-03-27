@@ -1,6 +1,7 @@
 <html>
 
 <head>
+<title>nuBuilder 4</title>
 <meta http-equiv='Content-type' content='text/html;charset=UTF-8'>
 
 <?php
@@ -55,12 +56,10 @@ window.nuHASH			= [];
 	$target		= $_GET['target'];
 	$type		= $_GET['type'] == '' ? 'browse' : $_GET['type'];
 
-	$nuFormats	= json_encode(nuTextFormats(true));
 	$nuHeader	= nuHeader();
 	
 	print "
 	window.nuVersion		= 'nuBuilder4';
-	window.nuFormats		= $nuFormats;
 	
 	";
 
@@ -104,6 +103,7 @@ window.nuHASH			= [];
 			}
 		
 			nuBindCtrlEvents();
+			
 			window.filter			= p.filter;
 
 			if(p.type == 'getreport') {
