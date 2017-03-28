@@ -45,6 +45,7 @@ function nuHomeWarning(){
 }
 
 window.nuVersion 		= 'nuBuilder4';
+window.nuDocumentID		= Date.now();
 window.onbeforeunload	= nuHomeWarning;
 window.nuHASH			= [];
 

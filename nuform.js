@@ -1863,8 +1863,10 @@ function nuBrowseTable(){
 	});
 	
 	nuHighlightSearch();
-
-	$('body').css('height', t + h + 100);
+	
+	if(window.parent.nuDocumentID == window.nuDocumentID){
+		$('body').css('height', t + h + 100);
+	}
 
 
 }
