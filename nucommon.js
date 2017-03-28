@@ -736,3 +736,21 @@ function nuAddThousandSpaces(s, c){
 	
 }
 
+function nuDuplicates(arr){
+
+	var s	= arr.slice().sort();
+	var d	= [];
+	
+	for (var i = 0; i < arr.length - 1; i++) {
+		
+		if (s[i + 1] == s[i]) {
+			d.push(s[i]);
+		}
+		
+	}
+	
+	return d;
+
+}
+
+

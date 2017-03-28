@@ -341,6 +341,10 @@ function nuPrintAction(){
 
 function nuUpdateData(action){
 
+	if(window.nuBeforeSave){
+		if(!nuBeforeSave()){return;}
+	}
+
 	var last			= window.nuFORM.getCurrent();
 
 	var f				= last.form_id;
