@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 28, 2017 at 06:50 PM
+-- Generation Time: Mar 28, 2017 at 06:54 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -584,6 +584,13 @@ CREATE TABLE `zzzzsys_debug` (
   `deb_order` varchar(25) NOT NULL,
   `deb_added` datetime NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `zzzzsys_debug`
+--
+
+INSERT INTO `zzzzsys_debug` (`zzzzsys_debug_id`, `deb_message`, `deb_order`, `deb_added`) VALUES
+('11111', 'fhjmzd', '', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
