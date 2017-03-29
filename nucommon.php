@@ -98,10 +98,10 @@ function nuBuildTable($t, $array){
 	$a[] 		= "$id VARCHAR(25) NOT NULL";
 	
 	for($i = 0 ; $i < count($array) ; $i++){
-		
+
 		$f		= $array[$i]['name'];
 		$t		= $array[$i]['type'];
-
+		
 		if($t == 'id'){				$a[] = "$f VARCHAR(25) NOT NULL";}
 		if($t == 'varchar'){		$a[] = "$f VARCHAR(1000) NOT NULL";}
 		if($t == 'int'){			$a[] = "$f INT NOT NULL";}
@@ -113,7 +113,6 @@ function nuBuildTable($t, $array){
 	
 	$a[]							= "PRIMARY KEY  ($id)";
 	$im								= implode(',', $a);
-	
 	return "$start ($im)";
 
 }

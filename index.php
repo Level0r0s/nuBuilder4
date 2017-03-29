@@ -59,10 +59,10 @@ window.nuHASH			= [];
 
 	$nuHeader	= nuHeader();
 	
-	print "
-	window.nuVersion		= 'nuBuilder4';
-	
-	";
+//	print "
+//	window.nuVersion		= 'nuBuilder4';
+//	
+//	";
 
 	$h	= "
 
