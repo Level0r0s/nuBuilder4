@@ -213,6 +213,7 @@ function nuRunPHP(f, iframe){
 	last.form_id  	= f;
 	last.record_id	= 'php';
 	last.data 		= nuGetFormData();
+	last.nuFORMdata	= nuFORM.data();
 	last.hash  		= nuHashFromEditForm();
 	
 	var successCallback = function(data,textStatus,jqXHR){

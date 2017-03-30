@@ -96,7 +96,7 @@ function nuBuildTable($t, $array){
 	$start		= "CREATE TABLE $t";
 	$a			= Array();
 	$a[] 		= "$id VARCHAR(25) NOT NULL";
-	
+
 	for($i = 0 ; $i < count($array) ; $i++){
 
 		$f		= $array[$i]['name'];
@@ -474,7 +474,7 @@ function nuRunPHP($nuRID){
 	$_POST['nuHash']['code']			= $nuA->sph_code;
 	$_POST['nuHash']['description']		= $nuA->sph_description;
 	$_POST['nuHash']['parentID']		= $nuRID;
-	
+
 	$nuJ								= json_encode($_POST['nuHash']);
 	$nuS								= "INSERT INTO zzzzsys_debug (zzzzsys_debug_id, deb_message) VALUES (?, ?)";
 

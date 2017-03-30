@@ -173,6 +173,7 @@ function nuAddActionButtons(f){
 			if(button.Save == 1){nuAddActionButton('Save');}
 			if(button.Clone == 1){nuAddActionButton('Clone');}
 			if(button.Delete == 1){nuAddActionButton('Delete');}
+			if(button.Run != ''){nuAddActionButton('run', 'Run', button.Run);}
 			
 		}
 		
@@ -2401,23 +2402,6 @@ function nuAbortSave(){
     $('#nuActionHolder .nuButton').show();
 	
 }
-
-
-/*
-function nuAddJavascript(o){
-        
-    window.nuLoadBrowse       = null;
-    window.nuLoadEdit         = null;
-    window.nuOnSave           = null;
-    window.nuDraggableObjects = Array();
-    window.nuDraggableObjects = o.draggable_objects;
-
-    $('#nuHolder').append('<script type="text/javascript">'+o.javascript+'</script>');
-        
-}
-
-*/
-
 
 
 function nuAddJavascript(o){

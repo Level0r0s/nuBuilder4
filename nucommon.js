@@ -360,25 +360,25 @@ function nuBindCtrlEvents(){
         if (e.ctrlKey && e.shiftKey) {
 			
 			window.nuNEW = 0;
+			e.preventDefault();
 			
-			//Letters
             if(e.keyCode == 65) {//A
 			
-				e.preventDefault();
+//				e.preventDefault();
 				nuPopup(window.nuFORM.getCurrent().form_id, "-2");
 
 			} else if(e.keyCode == 70) {//F
 
-				e.preventDefault();
+//				e.preventDefault();
 				nuPopup("nuform", window.nuFORM.getCurrent().form_id);
 				
 			} else if(e.keyCode == 79) {//O
 			
-				e.preventDefault();
+//				e.preventDefault();
 				nuPopup("nuobject", "", window.nuFORM.getCurrent().form_id);
 				
 			} else if (e.keyCode == 82) {//R
-				e.preventDefault();
+//				e.preventDefault();
 				
 				if(window.nuFORM.getCurrent().record_id != '') {
 					nuGetBreadcrumb();
@@ -386,7 +386,7 @@ function nuBindCtrlEvents(){
 				
 			} else if(e.keyCode == 83) {//S
 			
-				e.preventDefault();
+//				e.preventDefault();
 				
 				if(window.nuFORM.getCurrent().record_id != '') {
 					nuSaveAction();

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 29, 2017 at 06:18 AM
+-- Generation Time: Mar 30, 2017 at 09:38 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -313,7 +313,8 @@ CREATE TABLE `zzzzsys_access_level_php` (
 --
 
 INSERT INTO `zzzzsys_access_level_php` (`zzzzsys_access_level_php_id`, `slp_zzzzsys_access_level_id`, `slp_zzzzsys_php_id`) VALUES
-('57678f1c543cb0a', '57678e7dc00c099', '57578be0057a49f');
+('57678f1c543cb0a', '57678e7dc00c099', '57578be0057a49f'),
+('58dba51902ac30b', '57678e7dc00c099', '58db9b26706b451');
 
 -- --------------------------------------------------------
 
@@ -457,7 +458,11 @@ INSERT INTO `zzzzsys_browse` (`zzzzsys_browse_id`, `sbr_zzzzsys_form_id`, `sbr_t
 ('58d6c1c8a30ae06', 'nubrowse', 'join', 'sbr_zzzzsys_form_id', NULL, NULL, 10, 0),
 ('58d7fd8145b09f0', '58d7fd8145ac3ba', 'Code', 'sal_code', 'l', '', 10, 100),
 ('58d7fd8145b0fd7', '58d7fd8145ac3ba', 'Description', 'sal_description', 'l', '', 20, 300),
-('58d7fd8145b139d', '58d7fd8145ac3ba', 'dddd', 'dddd', 'l', '', 30, 222);
+('58d7fd8145b139d', '58d7fd8145ac3ba', 'dddd', 'dddd', 'l', '', 30, 222),
+('58dcb5cbed6a19f', '58dcb5cbd021cdf', 'Company Name', 'com_name', 'l', '', 20, 200),
+('58dcb5cbed885a1', '58dcb5cbd021cdf', 'Suburb', 'com_suburb', 'l', '', 30, 200),
+('58dcb5cbed9775a', '58dcb5cbd021cdf', 'Mobile', 'emp_mobile', 'l', '', 40, 200),
+('58dcb5cbeda70bf', '58dcb5cbd021cdf', 'aaaaaaaas', 'FF102', 'l', '', 50, 200);
 
 -- --------------------------------------------------------
 
@@ -520,7 +525,6 @@ INSERT INTO `zzzzsys_event` (`zzzzsys_event_id`, `sev_zzzzsys_object_id`, `sev_e
 ('58d08322022b7e2', '58d08322022ad15', 'onclick', 'nuPopPHP(event, ''BB'');'),
 ('58d6f5396f6c778', '58d6f5396f6bd38', 'onclick', 'nuPopPHP(event, ''BB'');'),
 ('58d6f5a644bb933', '58d6f5a644bae0c', 'onclick', 'nuPopPHP(event, ''BB'');'),
-('58d6fdd15c78dc1', '58d6fbc151d152f', 'onchange', 'nuCreateSQLPrefix()'),
 ('58d76b89aeb07d6', '58d76b89aeafcea', 'onkeydown', 'nuFORM.scrollList(event, window.nuObjectFields);'),
 ('58d77876b3e8944', '58d700e66eab5aa', 'onclick', 'nuShowFFO(event)');
 
@@ -662,7 +666,54 @@ INSERT INTO `zzzzsys_form` (`zzzzsys_form_id`, `sfo_type`, `sfo_code`, `sfo_desc
 ('58db316497d9d9a', 'browseedit', 'FF52', 'Fast Form 52', 'aaaaaaaaaaazza', 'aaaaaaaaaaazza_id', '', 0, 0, 'SELECT * FROM aaaaaaaaaaazza', ''),
 ('58db32783cdc57f', 'browseedit', 'FF53', 'Fast Form 53', 'aaaaaafrfgt', 'aaaaaafrfgt_id', '', 0, 0, 'SELECT * FROM aaaaaafrfgt', ''),
 ('58db32f88ceb668', 'browseedit', 'FF54', 'Fast Form 54', 'aaaaaaaqqqq', 'aaaaaaaqqqq_id', '', 0, 0, 'SELECT * FROM aaaaaaaqqqq', ''),
-('58db3426b8c8f4f', 'browseedit', 'FF55', 'Fast Form 55', 'a', 'a_id', '', 0, 0, 'SELECT * FROM a', '');
+('58db3426b8c8f4f', 'browseedit', 'FF55', 'Fast Form 55', 'a', 'a_id', '', 0, 0, 'SELECT * FROM a', ''),
+('58db81df6a8a85d', 'browseedit', 'FF56', 'Fast Form 56', 'aaaaaaau', 'aaaaaaau_id', '', 0, 0, 'SELECT * FROM aaaaaaau', ''),
+('58db8217dd552ee', 'browseedit', 'FF57', 'Fast Form 57', 'aaaaaz', 'aaaaaz_id', '', 0, 0, 'SELECT * FROM aaaaaz', ''),
+('58db82a13a9d4ac', 'browseedit', 'FF58', 'Fast Form 58', 'aaaaaaaa', 'aaaaaaaa_id', '', 0, 0, 'SELECT * FROM aaaaaaaa', ''),
+('58dc43a47b9c844', 'browseedit', 'FF59', 'Fast Form 59', 'aaaaaadd', 'aaaaaadd_id', '', 0, 0, 'SELECT * FROM aaaaaadd', ''),
+('58dc43f9b32b663', 'browseedit', 'FF60', 'Fast Form 60', 'aaaaaaddg', 'aaaaaaddg_id', '', 0, 0, 'SELECT * FROM aaaaaaddg', ''),
+('58dc87ccaa86369', 'browseedit', 'FF61', 'Fast Form 61', 'aaaaaaaaafe', 'aaaaaaaaafe_id', '', 0, 0, 'SELECT * FROM aaaaaaaaafe', ''),
+('58dc893189f9c41', 'browseedit', 'FF62', 'Fast Form 62', 'aaaaaaaaafe', 'aaaaaaaaafe_id', '', 0, 0, 'SELECT * FROM aaaaaaaaafe', ''),
+('58dc894ab9d4c3a', 'browseedit', 'FF63', 'Fast Form 63', 'aaaaaaaa', 'aaaaaaaa_id', '', 0, 0, 'SELECT * FROM aaaaaaaa', ''),
+('58dc897a912f7dc', 'browseedit', 'FF64', 'Fast Form 64', 'aaaaaaaatjyu', 'aaaaaaaatjyu_id', '', 0, 0, 'SELECT * FROM aaaaaaaatjyu', ''),
+('58dc89cb96d9c98', 'browseedit', 'FF65', 'Fast Form 65', 'aaaaaaaatjyuyujfk', 'aaaaaaaatjyuyujfk_id', '', 0, 0, 'SELECT * FROM aaaaaaaatjyuyujfk', ''),
+('58dc8a3ead67587', 'browseedit', 'FF66', 'Fast Form 66', 'aaaaaaaatjyuyujfk', 'aaaaaaaatjyuyujfk_id', '', 0, 0, 'SELECT * FROM aaaaaaaatjyuyujfk', ''),
+('58dc8b6d2b0888e', 'browseedit', 'FF67', 'Fast Form 67', 'aaaaaaaatjyuyujfk', 'aaaaaaaatjyuyujfk_id', '', 0, 0, 'SELECT * FROM aaaaaaaatjyuyujfk', ''),
+('58dc8b7d60ecd00', 'browseedit', 'FF68', 'Fast Form 68', 'aaaaaaaatjyu', 'aaaaaaaatjyu_id', '', 0, 0, 'SELECT * FROM aaaaaaaatjyu', ''),
+('58dc8b9a9d0d5b9', 'browseedit', 'FF69', 'Fast Form 69', 'aaaaaaaatjyu', 'aaaaaaaatjyu_id', '', 0, 0, 'SELECT * FROM aaaaaaaatjyu', ''),
+('58dc91069ccec21', 'browseedit', 'FF70', 'Fast Form 70', 'aaaaaaaatllll', 'aaaaaaaatllll_id', '', 0, 0, 'SELECT * FROM aaaaaaaatllll', ''),
+('58dc91ac41e429b', 'browseedit', 'FF71', 'Fast Form 71', 'aaaaaaafghgj', 'aaaaaaafghgj_id', '', 0, 0, 'SELECT * FROM aaaaaaafghgj', ''),
+('58dc922f3bad84f', 'browseedit', 'FF72', 'Fast Form 72', 'aaaaaaafghgj', 'aaaaaaafghgj_id', '', 0, 0, 'SELECT * FROM aaaaaaafghgj', ''),
+('58dc92c39c0d38e', 'browseedit', 'FF73', 'Fast Form 73', 'aaaaaaafghgjdfbh', 'aaaaaaafghgjdfbh_id', '', 0, 0, 'SELECT * FROM aaaaaaafghgjdfbh', ''),
+('58dc92d9cf46293', 'browseedit', 'FF74', 'Fast Form 74', 'aaaaaaafghgjdfbh', 'aaaaaaafghgjdfbh_id', '', 0, 0, 'SELECT * FROM aaaaaaafghgjdfbh', ''),
+('58dc93176d893d1', 'browseedit', 'FF75', 'Fast Form 75', 'aaaaaaafu', 'aaaaaaafu_id', '', 0, 0, 'SELECT * FROM aaaaaaafu', ''),
+('58dc932d1b2a896', 'browseedit', 'FF76', 'Fast Form 76', 'aaaaaaafu', 'aaaaaaafu_id', '', 0, 0, 'SELECT * FROM aaaaaaafu', ''),
+('58dc93ad3bfaecf', 'browseedit', 'FF77', 'Fast Form 77', 'aaaaaacggh', 'aaaaaacggh_id', '', 0, 0, 'SELECT * FROM aaaaaacggh', ''),
+('58dc9411123a185', 'browseedit', 'FF78', 'Fast Form 78', 'aaaaaacggh', 'aaaaaacggh_id', '', 0, 0, 'SELECT * FROM aaaaaacggh', ''),
+('58dca8141f527f3', 'browseedit', 'FF79', 'Fast Form 79', 'aaaaaac', 'aaaaaac_id', '', 0, 0, 'SELECT * FROM aaaaaac', ''),
+('58dca8424141e9f', 'browseedit', 'FF80', 'Fast Form 80', 'aaaaaac', 'aaaaaac_id', '', 0, 0, 'SELECT * FROM aaaaaac', ''),
+('58dca88926f7226', 'browseedit', 'FF81', 'Fast Form 81', 'aaaaaac', 'aaaaaac_id', '', 0, 0, 'SELECT * FROM aaaaaac', ''),
+('58dca8a9ca0693f', 'browseedit', 'FF82', 'Fast Form 82', 'aaaaaac', 'aaaaaac_id', '', 0, 0, 'SELECT * FROM aaaaaac', ''),
+('58dca8c219bd140', 'browseedit', 'FF83', 'Fast Form 83', 'aaaaaac', 'aaaaaac_id', '', 0, 0, 'SELECT * FROM aaaaaac', ''),
+('58dcab4851cac65', 'browseedit', 'FF84', 'Fast Form 84', 'aaaaaac', 'aaaaaac_id', '', 0, 0, 'SELECT * FROM aaaaaac', ''),
+('58dcaf96f0a4b52', 'browseedit', 'FF85', 'Fast Form 85', 'aaaaahjikl', 'aaaaahjikl_id', '', 0, 0, 'SELECT * FROM aaaaahjikl', ''),
+('58dcb0829395df8', 'browseedit', 'FF86', 'Fast Form 86', 'aaaaahjiklkjuy', 'aaaaahjiklkjuy_id', '', 0, 0, 'SELECT * FROM aaaaahjiklkjuy', ''),
+('58dcb1601d185fb', 'browseedit', 'FF87', 'Fast Form 87', 'aaaaahjiklkjuydddd', 'aaaaahjiklkjuydddd_id', '', 0, 0, 'SELECT * FROM aaaaahjiklkjuydddd', ''),
+('58dcb1ee583aa6b', 'browseedit', 'FF88', 'Fast Form 88', 'aaaaaa', 'aaaaaa_id', '', 0, 0, 'SELECT * FROM aaaaaa', ''),
+('58dcb2699543f63', 'browseedit', 'FF89', 'Fast Form 89', 'aaaaaa', 'aaaaaa_id', '', 0, 0, 'SELECT * FROM aaaaaa', ''),
+('58dcb28d22bf539', 'browseedit', 'FF90', 'Fast Form 90', 'aaaaaa', 'aaaaaa_id', '', 0, 0, 'SELECT * FROM aaaaaa', ''),
+('58dcb2c083d23e5', 'browseedit', 'FF91', 'Fast Form 91', 'aaaaaa', 'aaaaaa_id', '', 0, 0, 'SELECT * FROM aaaaaa', ''),
+('58dcb33f4701aa6', 'browseedit', 'FF92', 'Fast Form 92', 'aaaaaa', 'aaaaaa_id', '', 0, 0, 'SELECT * FROM aaaaaa', ''),
+('58dcb3b0e4a96be', 'browseedit', 'FF93', 'Fast Form 93', 'aaaaaa', 'aaaaaa_id', '', 0, 0, 'SELECT * FROM aaaaaa', ''),
+('58dcb3c5dd4f6d3', 'browseedit', 'FF94', 'Fast Form 94', 'aaaaaa', 'aaaaaa_id', '', 0, 0, 'SELECT * FROM aaaaaa', ''),
+('58dcb4328002b96', 'browseedit', 'FF95', 'Fast Form 95', 'aaaaaa', 'aaaaaa_id', '', 0, 0, 'SELECT * FROM aaaaaa', ''),
+('58dcb4637f2915e', 'browseedit', 'FF96', 'Fast Form 96', 'aaaaaa', 'aaaaaa_id', '', 0, 0, 'SELECT * FROM aaaaaa', ''),
+('58dcb47c7a22fc2', 'browseedit', 'FF97', 'Fast Form 97', 'aaaaaa', 'aaaaaa_id', '', 0, 0, 'SELECT * FROM aaaaaa', ''),
+('58dcb497452660d', 'browseedit', 'FF98', 'Fast Form 98', 'aaaaaa', 'aaaaaa_id', '', 0, 0, 'SELECT * FROM aaaaaa', ''),
+('58dcb4c021b05a7', 'browseedit', 'FF99', 'Fast Form 99', 'aaaaaa', 'aaaaaa_id', '', 0, 0, 'SELECT * FROM aaaaaa', ''),
+('58dcb4d7b91cf19', 'browseedit', 'FF100', 'Fast Form 100', 'aaaaaa', 'aaaaaa_id', '', 0, 0, 'SELECT * FROM aaaaaa', ''),
+('58dcb4f3066d13b', 'browseedit', 'FF101', 'Fast Form 101', 'aaaaaa', 'aaaaaa_id', '', 0, 0, 'SELECT * FROM aaaaaa', ''),
+('58dcb5cbd021cdf', 'browseedit', 'FF102', 'Fast Form 102', 'aaaaaaaas', 'aaaaaaaas_id', '', 0, 0, 'SELECT * FROM aaaaaaaas', '');
 
 -- --------------------------------------------------------
 
@@ -715,7 +766,9 @@ INSERT INTO `zzzzsys_function` (`zzzzsys_function_id`, `sfu_language`, `sfu_name
 ('58c915497d0ab1b', 'js', 'nuSetTitle', 'nuSetTitle( string )', 'Changes the Title of the last breadcrumb.', 'nuSetTitle($(''#cus_name'').val());', ''),
 ('58c99a3bcf96e31', 'js', 'nuTotal', 'number = nuTotal( string )', 'string must be the id of a number Object on a Form eg. ''cus_total''.\n or\nTo add up a whole column on a subform, string join the subform id and the number field with a dot. eg ''invoice.ite_total''\n', 'var sale_total = nuTotal(''invoice.ite_total'');', ''),
 ('58d87b4a1eafe61', 'php', 'nuID', 'string = nuID()', 'Creates a new unique ID', '$id = nuID();', '[nuTT](nuTT)'),
-('58d87beb5b68ce8', 'php', 'nuTT', 'string = nuTT()', 'Creates a new unique ID used for creating a temp table name. Prefixed with __nu', '$tt = nuTT();\n\n$sql = "CREATE TABLE $tt SELECT * FROM customer";\n', '[nuID](nuID)');
+('58d87beb5b68ce8', 'php', 'nuTT', 'string = nuTT()', 'Creates a new unique ID used for creating a temp table name. Prefixed with __nu', '$tt = nuTT();\n\n$sql = "CREATE TABLE $tt SELECT * FROM customer";\n', '[nuID](nuID)'),
+('58dc29359d5c185', 'js', 'nuAlert', 'nuAlert(string)', 'nuBuilder Popup message.', 'if(cus_name){\n   nuAlert(''No Customer!'');\n}', ''),
+('58dc2a78c53adfd', 'js', 'nuBeforeSave', 'boolean = nuBeforeSave()', 'The name of a custom javascript function, that will run before saving an Edit Form', 'function nuBeforeSave(){\n\nif(cus_name){\n\n   nuAlert(''No Customer!'');\n   return false;\n\n}else{\n   return true;\n}', '');
 
 -- --------------------------------------------------------
 
@@ -1063,7 +1116,7 @@ INSERT INTO `zzzzsys_php` (`zzzzsys_php_id`, `sph_code`, `sph_description`, `sph
 ('57452c417370475_AB', '', '', '', 'nuSetFormValue(''slf_add_button'', ''1'');\nnuSetFormValue(''slf_print_button'', ''1'');\nnuSetFormValue(''slf_save_button'', ''1'');\nnuSetFormValue(''slf_clone_button'', ''1'');\nnuSetFormValue(''slf_delete_button'', ''1'');\n', '', '', '', ''),
 ('574671cdcc77367_AB', '', '', '', '\n$s  = "\n        SELECT * \n        FROM zzzzsys_tab \n        JOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id\n        WHERE zzzzsys_tab_id = ''#LOOKUP_RECORD_ID#''\n        \n        ";\n\n$t  = nuRunQuery($s);\n$r  = db_fetch_object($t);\n\nnuSetFormValue(''sob_lookup_table'', $r->sfo_table);\n', '', '', '', ''),
 ('570dab25164b394_AB', '', '', '', '\n$s  = "\n        SELECT * \n        FROM zzzzsys_form\n        WHERE zzzzsys_form_id = ''#LOOKUP_RECORD_ID#''\n        \n        ";\n\n$t  = nuRunQuery($s);\n$r  = db_fetch_object($t);\n\nnuSetFormValue(''sob_lookup_table'', $r->sfo_table);\n', '', '', '', ''),
-('nuff_BS', '', '', '', '\n$table          = ''#fastform_table#'';\n$form_id        = nuID();\n$tab_id         = nuID();\n$t              = nuRunQuery("SELECT COUNT(*) FROM zzzzsys_form WHERE SUBSTRING(sfo_code, 1, 2) = ''FF''");\n$r              = db_fetch_row($t);\n$form_code      = ''FF'' . $r[0];\n$form_desc      = ''Fast Form '' . $r[0];\n$s              = Array();\n$d	            = $_POST[''nuSTATE''][''nuFORMdata''][1];\n\nfor($i = 0 ; $i < count($d[''rows'']) ; $i++){\n    \n    $r          = $d[''rows''][$i][3];\n    $s[]        = "''$r''";\n\n}\n\n\n//----------add tab--------------------\n$sql            = "\n\n                INSERT \n                INTO zzzzsys_tab\n                (zzzzsys_tab_id,\n                syt_zzzzsys_form_id,\n                syt_title,\n                syt_order)\n                VALUES\n                (?, ?, ?, ?)\n\n";\n\n$array          = Array($tab_id, $form_id, ''Main'', 10);\n\nnuRunQuery($sql, $array);\n\n\n//----------add form--------------------\n\n$sql            = "\n\n                INSERT \n                INTO zzzzsys_form\n                (zzzzsys_form_id,\n                sfo_type,\n                sfo_code,\n                sfo_description,\n                sfo_table,\n                sfo_primary_key,\n                sfo_browse_sql)\n                VALUES\n                (?, ?, ?, ?, ?, ?, ?)\n\n";\n\n$array          = Array($form_id, ''browseedit'', $form_code, $form_desc, $table, $table.''_id'', "SELECT * FROM $table");\n\nnuRunQuery($sql, $array);\n\nnuRunQuery("drop table if exists aaa");\n\n$in             = implode('', '', $s);\n$sql            = "\n\n                CREATE TABLE aaa\n                SELECT * FROM zzzzsys_object\n                WHERE zzzzsys_object_id IN ($in)\n\n";\n\nnuRunQuery($sql);\n\n$sql            = "\n\n                UPDATE aaa\n                SET \n                    sob_all_id                  = ?,\n                    sob_all_label               = ?,\n                    sob_all_order               = ?,\n                    sob_all_top                 = ?,\n                    sob_all_left                = ?,\n                    sob_all_table               = ?,\n                    sob_all_zzzzsys_form_id     = ?,\n                    sob_all_zzzzsys_tab_id      = ?,\n                    zzzzsys_object_id           = ?\n                WHERE \n                    zzzzsys_object_id           = ?\n\n";\n\n$pix            = 20;\n\nfor($i = 0 ; $i < count($d[''rows'']) ; $i++){\n    \n    $newid      = nuID();\n    $label      = $d[''rows''][$i][1];\n    $field      = $d[''rows''][$i][2];\n    $oldid      = $d[''rows''][$i][3];\n\n    $array      = Array($field, $label, (10*(1+$i)), ($pix*(1+$i)), ($pix*(1+$i)), $table, $form_id, $tab_id, $newid, $oldid);\n\n    nuRunQuery($sql, $array);\n\n}\n\n\n\n//----------add run button--------------------\n\n$sql            = "\n\n                INSERT \n                INTO aaa\n                (zzzzsys_object_id,\n                sob_all_zzzzsys_form_id,\n                sob_all_zzzzsys_tab_id,\n                sob_all_id,\n                sob_all_label,\n                sob_all_table,\n                sob_all_order,\n                sob_all_top,\n                sob_all_left,\n                sob_all_width,\n                sob_all_height,\n                sob_run_zzzzsys_form_id,\n                sob_run_method,\n                sob_all_type)\n                VALUES\n                (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)\n\n";\n\n$array          = Array(nuID(), $form_id, ''58be4c05188661c'', $form_code, $table, $table, 11, 100, 100, 100, 100, $form_id, ''b'', ''run'');\n//-- 58be4c05188661c   is the Tesing Tab on Home\nnuRunQuery($sql, $array);\n\n\n$t              = nuRunQuery("SELECT * FROM aaa");\n$a              = Array();\n$n              = ''number date'';\n\nwhile($r = db_fetch_object($t)){\n    \n\n    \n    $y          = $r->sob_all_type;\n    $i          = $r->sob_input_type;\n    $id         = $r->sob_all_id;\n    $l          = count($a);\n    \n    $date       = ($i == ''date'' || $i == ''nuDate'');\n    $norm       = ($y == ''input'' && $i != ''date'' && $i != ''nuDate'' && $i != ''nuNumber'' && $i != ''number'');\n    \n    if($y == ''lookup''){                         $a[] = Array(''name''=>$id, ''type''=>''id'');}\n    if($y == ''select''){                         $a[] = Array(''name''=>$id, ''type''=>''varchar'');}\n    if($y == ''calc''){                           $a[] = Array(''name''=>$id, ''type''=>''varchar'');}\n    if($y == ''text''){                           $a[] = Array(''name''=>$id, ''type''=>''text'');}\n    if($y == ''input'' && $norm){                 $a[] = Array(''name''=>$id, ''type''=>''varchar'');}\n    if($y == ''input'' && $date){                 $a[] = Array(''name''=>$id, ''type''=>''date'');}\n    if($y == ''input'' && $i == ''number''){        $a[] = Array(''name''=>$id, ''type''=>''int'');}\n    if($y == ''input'' && $i == ''nuNumber''){      $a[] = Array(''name''=>$id, ''type''=>''decimal'');}\n    \n}\n\n    \n$s              = nuBuildTable($table, $a);\n    \nnuRunQuery($s);\n\n', '', '', '', '');
+('58db9b26706b451', 'RUNFF', 'Run FastForm', 'nubuilder', '\n$SF             = nuSubformObject(''obj_sf'');\n$table          = ''#fastform_table#'';\n$form_id        = nuID();\n$tab_id         = nuID();\n$t              = nuRunQuery("SELECT COUNT(*) FROM zzzzsys_form WHERE SUBSTRING(sfo_code, 1, 2) = ''FF''");\n$r              = db_fetch_row($t);\n$form_code      = ''FF'' . $r[0];\n$form_desc      = ''Fast Form '' . $r[0];\n$s              = Array();\n\n//----------add tab--------------------\n$sql            = "\n\n                INSERT \n                INTO zzzzsys_tab\n                (zzzzsys_tab_id,\n                syt_zzzzsys_form_id,\n                syt_title,\n                syt_order)\n                VALUES\n                (?, ?, ?, ?)\n\n";\n\n$array          = Array($tab_id, $form_id, ''Main'', 10);\n\nnuRunQuery($sql, $array);\n\n//----------add form--------------------\n\n$sql            = "\n\n                INSERT \n                INTO zzzzsys_form\n                (zzzzsys_form_id,\n                sfo_type,\n                sfo_code,\n                sfo_description,\n                sfo_table,\n                sfo_primary_key,\n                sfo_browse_sql)\n                VALUES\n                (?, ?, ?, ?, ?, ?, ?)\n\n";\n\n$array          = Array($form_id, ''browseedit'', $form_code, $form_desc, $table, $table.''_id'', "SELECT * FROM $table");\n\nnuRunQuery($sql, $array);\n\nnuRunQuery("drop table if exists aaa");\n\nfor($i = 0 ; $i < count($SF->rows) ; $i++){\n    \n    $r          = $SF->rows[$i][3];\n    $s[]        = "''$r''";\n\n}\n\n$in             = implode('', '', $s);\n$sql            = "\n\n                CREATE TABLE aaa\n                SELECT * FROM zzzzsys_object\n                WHERE zzzzsys_object_id IN ($in)\n\n";\n\nnuRunQuery($sql);\n\n$sql            = "\n\n                UPDATE aaa\n                SET \n                    sob_all_id                  = ?,\n                    sob_all_label               = ?,\n                    sob_all_order               = ?,\n                    sob_all_top                 = ?,\n                    sob_all_left                = ?,\n                    sob_all_table               = ?,\n                    sob_all_zzzzsys_form_id     = ?,\n                    sob_all_zzzzsys_tab_id      = ?,\n                    zzzzsys_object_id           = ?\n                WHERE \n                    zzzzsys_object_id           = ?\n\n";\n\n$pix            = 20;\n\nfor($i = 0 ; $i < count($SF->rows) ; $i++){\n    \n    $newid      = nuID();\n    $label      = $SF->rows[$i][1];\n    $field      = $SF->rows[$i][2];\n    $oldid      = $SF->rows[$i][3];\n\n    $array      = Array($field, $label, (10*(1+$i)), ($pix*(1+$i)), ($pix*(1+$i)), $table, $form_id, $tab_id, $newid, $oldid);\n\n    nuRunQuery($sql, $array);\n\n}\n\n\n\n//----------add run button--------------------\n\n$sql            = "\n\n                INSERT \n                INTO aaa\n                (zzzzsys_object_id,\n                sob_all_zzzzsys_form_id,\n                sob_all_zzzzsys_tab_id,\n                sob_all_id,\n                sob_all_label,\n                sob_all_table,\n                sob_all_order,\n                sob_all_top,\n                sob_all_left,\n                sob_all_width,\n                sob_all_height,\n                sob_run_zzzzsys_form_id,\n                sob_run_method,\n                sob_all_type)\n                VALUES\n                (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)\n\n";\n\n$array          = Array(nuID(), $form_id, ''58be4c05188661c'', $form_code, $table, $table, 11, 100, 100, 100, 100, $form_id, ''b'', ''run'');\n//-- 58be4c05188661c   is the Tesing Tab on Home\nnuRunQuery($sql, $array);\n\n\n$t              = nuRunQuery("SELECT * FROM aaa");\n$a              = Array();\n$n              = ''number date'';\n\nwhile($r = db_fetch_object($t)){\n    \n\n    \n    $y          = $r->sob_all_type;\n    $i          = $r->sob_input_type;\n    $id         = $r->sob_all_id;\n    $l          = count($a);\n    \n    $date       = ($i == ''date'' || $i == ''nuDate'');\n    $norm       = ($y == ''input'' && $i != ''date'' && $i != ''nuDate'' && $i != ''nuNumber'' && $i != ''number'');\n    \n    if($y == ''lookup''){                         $a[] = Array(''name''=>$id, ''type''=>''id'');}\n    if($y == ''select''){                         $a[] = Array(''name''=>$id, ''type''=>''varchar'');}\n    if($y == ''calc''){                           $a[] = Array(''name''=>$id, ''type''=>''varchar'');}\n    if($y == ''text''){                           $a[] = Array(''name''=>$id, ''type''=>''text'');}\n    if($y == ''input'' && $norm){                 $a[] = Array(''name''=>$id, ''type''=>''varchar'');}\n    if($y == ''input'' && $date){                 $a[] = Array(''name''=>$id, ''type''=>''date'');}\n    if($y == ''input'' && $i == ''number''){        $a[] = Array(''name''=>$id, ''type''=>''int'');}\n    if($y == ''input'' && $i == ''nuNumber''){      $a[] = Array(''name''=>$id, ''type''=>''decimal'');}\n    \n}\n\n\n$s              = nuBuildTable($table, $a);\n    \nnuRunQuery($s);\n\nprint 33333;\n$t              = nuRunQuery("SELECT * FROM aaa");\n$ord            = 1;\n\nwhile($r = db_fetch_object($t)){\n    \n$ord++;\n    \n    $y          = $r->sob_all_type;\n    $i          = $r->sob_input_type;\n    $id         = $r->sob_all_id;\n    $lab        = $r->sob_all_label;\n\n    $sql            = "\n    \n                    INSERT \n                    INTO zzzzsys_browse\n                    (zzzzsys_browse_id,\n                    sbr_zzzzsys_form_id,\n                    sbr_title,\n                    sbr_display,\n                    sbr_align,\n                    sbr_format,\n                    sbr_order,\n                    sbr_width)\n                    VALUES\n                    (?, ?, ?, ?, ?, ?, ?, ?)\n    \n    ";\n    \n    $array          = Array(nuID(), $form_id, $lab, $id, ''left'', '''', $ord * 10, 200);\n    \n    nuRunQuery($sql, $array);\n    \n}\n\n\nprint print_r($SF, 1);\n', '', 'nuff', '', '');
 
 -- --------------------------------------------------------
 
@@ -1327,7 +1380,54 @@ INSERT INTO `zzzzsys_tab` (`zzzzsys_tab_id`, `syt_zzzzsys_form_id`, `syt_title`,
 ('58db316497da39f', '58db316497d9d9a', 'Main', 10),
 ('58db32783cdcb77', '58db32783cdc57f', 'Main', 10),
 ('58db32f88cebb1e', '58db32f88ceb668', 'Main', 10),
-('58db3426b8c9409', '58db3426b8c8f4f', 'Main', 10);
+('58db3426b8c9409', '58db3426b8c8f4f', 'Main', 10),
+('58db81df6a8adf0', '58db81df6a8a85d', 'Main', 10),
+('58db8217dd55a70', '58db8217dd552ee', 'Main', 10),
+('58db82a13a9d865', '58db82a13a9d4ac', 'Main', 10),
+('58dc43a47b9cc71', '58dc43a47b9c844', 'Main', 10),
+('58dc43f9b32be8a', '58dc43f9b32b663', 'Main', 10),
+('58dc87ccaa8685e', '58dc87ccaa86369', 'Main', 10),
+('58dc893189fa354', '58dc893189f9c41', 'Main', 10),
+('58dc894ab9d55d9', '58dc894ab9d4c3a', 'Main', 10),
+('58dc897a912ff73', '58dc897a912f7dc', 'Main', 10),
+('58dc89cb96da864', '58dc89cb96d9c98', 'Main', 10),
+('58dc8a3ead67a41', '58dc8a3ead67587', 'Main', 10),
+('58dc8b6d2b09239', '58dc8b6d2b0888e', 'Main', 10),
+('58dc8b7d60ed228', '58dc8b7d60ecd00', 'Main', 10),
+('58dc8b9a9d0da49', '58dc8b9a9d0d5b9', 'Main', 10),
+('58dc91069ccf0bd', '58dc91069ccec21', 'Main', 10),
+('58dc91ac41e48b4', '58dc91ac41e429b', 'Main', 10),
+('58dc922f3baddec', '58dc922f3bad84f', 'Main', 10),
+('58dc92c39c0dc5b', '58dc92c39c0d38e', 'Main', 10),
+('58dc92d9cf46692', '58dc92d9cf46293', 'Main', 10),
+('58dc93176d89a58', '58dc93176d893d1', 'Main', 10),
+('58dc932d1b2b010', '58dc932d1b2a896', 'Main', 10),
+('58dc93ad3bfb634', '58dc93ad3bfaecf', 'Main', 10),
+('58dc9411123a899', '58dc9411123a185', 'Main', 10),
+('58dca8141f52b06', '58dca8141f527f3', 'Main', 10),
+('58dca8424142550', '58dca8424141e9f', 'Main', 10),
+('58dca88926f7b00', '58dca88926f7226', 'Main', 10),
+('58dca8a9ca071bf', '58dca8a9ca0693f', 'Main', 10),
+('58dca8c219bd845', '58dca8c219bd140', 'Main', 10),
+('58dcab4851cb087', '58dcab4851cac65', 'Main', 10),
+('58dcaf96f0a4fa4', '58dcaf96f0a4b52', 'Main', 10),
+('58dcb0829396282', '58dcb0829395df8', 'Main', 10),
+('58dcb1601d18acf', '58dcb1601d185fb', 'Main', 10),
+('58dcb1ee583b323', '58dcb1ee583aa6b', 'Main', 10),
+('58dcb2699544942', '58dcb2699543f63', 'Main', 10),
+('58dcb28d22bf920', '58dcb28d22bf539', 'Main', 10),
+('58dcb2c083d2798', '58dcb2c083d23e5', 'Main', 10),
+('58dcb33f4701f35', '58dcb33f4701aa6', 'Main', 10),
+('58dcb3b0e4a9bc5', '58dcb3b0e4a96be', 'Main', 10),
+('58dcb3c5dd4fb6c', '58dcb3c5dd4f6d3', 'Main', 10),
+('58dcb43280034e2', '58dcb4328002b96', 'Main', 10),
+('58dcb4637f29a08', '58dcb4637f2915e', 'Main', 10),
+('58dcb47c7a241df', '58dcb47c7a22fc2', 'Main', 10),
+('58dcb4974526d5a', '58dcb497452660d', 'Main', 10),
+('58dcb4c021b0957', '58dcb4c021b05a7', 'Main', 10),
+('58dcb4d7b91da9c', '58dcb4d7b91cf19', 'Main', 10),
+('58dcb4f3066d67e', '58dcb4f3066d13b', 'Main', 10),
+('58dcb5cbd022263', '58dcb5cbd021cdf', 'Main', 10);
 
 -- --------------------------------------------------------
 
