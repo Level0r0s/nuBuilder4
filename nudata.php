@@ -571,11 +571,11 @@ function nuCheckAccess($f, $r = ''){
 }
 
 function nuSubformObject($id){
-	
-	$sfs	= $_POST['nuHash']['nuFORMdata'];
-	
+
+	$sfs	= $_POST['nuSTATE']['nuFORMdata'];
+
 	for($i = 0 ; $i < count($sfs) ; $i++){
-	
+NUDEBUG($sfs[$i]['id'] . " == $id");		
 		if($sfs[$i]->id == $id){
 			return $sfs[$i];
 		}

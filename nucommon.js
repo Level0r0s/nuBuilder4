@@ -18,7 +18,7 @@ window.nuNEW					= '';
 
 function nuOpener(f, r, filter){
 	
-	this.id					= nuID();
+	this.id					= Date.now();
 	this.form_id			= f;
 	this.record_id			= r;
 	
@@ -499,54 +499,6 @@ function nuCloseAllnuOptionsLists(){
 
 
 
-function nuSubformArray(sf){
-
-    var a 	= Array();
-    var i 	= 0;
-    var p 	= '';
-	var c	= true;
-
-    while($('#' + sf + nuPad3(i) + 'nuDelete').length == 1){
-    
-        p 	= sf + nuPad3(i);
-		c	= !$('#' + p + 'nuDelete').is(':checked');
-	
-		a.push(p, c);
-		
-        i++;
-		
-    }
-    
-    return a;
-
-}
-
-function nuSubformRecordValues(i, r){
-
-	this.old_id = i;
-	this.new_id = '';
-	this.new_value = $('#' + i).val();
-
-}
-
-
-
-function nuSortSubformBy(row, col){
-
-
-	
-	for(var i = 0 ; i < col.length ; i++){
-		
-	}
-	
-		return function(a, b) {
-			
-			return a[col] - b[col];
-			
-		}
-	
-}
-
 function nuEditPHP(ev){
 
 	var r	= window.nuFORM.getProperty('record_id');
@@ -567,16 +519,6 @@ function nuEditPHP(ev){
 	nuPopup("nuphp", i);
 
 }
-
-function nuID() {
-
-    var ts 		= +new Date;
-    var tsStr	= ts.toString();
-
-    return tsStr;
-
-};
-
 
 
 function nuPreview(a){
@@ -602,7 +544,7 @@ function nuPreview(a){
 }
 
 
-function nuPopPHP(e, nuE){
+function nuPopPHP(e, nuE){			//-- used in database
 
     var i   = nuFORM.getProperty('record_id');
 
