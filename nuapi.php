@@ -9,8 +9,8 @@
 	if(!isset($_SESSION['SESSIONID'])){
 		$_SESSION['SESSIONID'] 				= nuID();
 	}
-	
-	
+		
+	$_POST['nuCounter']						= rand(0, 999);
 	$_POST['nuErrors']						= array();
 	$_POST['nuTableSchema']					= nuTableSchema();
 	$s										= nuCheckSession();
