@@ -45,6 +45,7 @@ function nuHomeWarning(){
 }
 
 window.nuVersion 		= 'nuBuilder4';
+window.nuDocumentID		= Date.now();
 window.onbeforeunload	= nuHomeWarning;
 window.nuHASH			= [];
 
@@ -58,10 +59,10 @@ window.nuHASH			= [];
 
 	$nuHeader	= nuHeader();
 	
-	print "
-	window.nuVersion		= 'nuBuilder4';
-	
-	";
+//	print "
+//	window.nuVersion		= 'nuBuilder4';
+//	
+//	";
 
 	$h	= "
 

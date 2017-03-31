@@ -18,7 +18,7 @@ window.nuNEW					= '';
 
 function nuOpener(f, r, filter){
 	
-	this.id					= nuID();
+	this.id					= Date.now();
 	this.form_id			= f;
 	this.record_id			= r;
 	
@@ -285,7 +285,7 @@ function nuOpenAce(lang, obj){
 	window.open('nuace.html?' + ts);
 
 }
-
+/*
 function nuGetSFArrays(){
 
 	var s 	= window.nuSUBFORMJSON;
@@ -297,7 +297,7 @@ function nuGetSFArrays(){
 	
 	return j;
 }
-
+*/
 
 
 function nuRunIt(t, email, type){
@@ -360,25 +360,25 @@ function nuBindCtrlEvents(){
         if (e.ctrlKey && e.shiftKey) {
 			
 			window.nuNEW = 0;
+			e.preventDefault();
 			
-			//Letters
             if(e.keyCode == 65) {//A
 			
-				e.preventDefault();
+//				e.preventDefault();
 				nuPopup(window.nuFORM.getCurrent().form_id, "-2");
 
 			} else if(e.keyCode == 70) {//F
 
-				e.preventDefault();
+//				e.preventDefault();
 				nuPopup("nuform", window.nuFORM.getCurrent().form_id);
 				
 			} else if(e.keyCode == 79) {//O
 			
-				e.preventDefault();
+//				e.preventDefault();
 				nuPopup("nuobject", "", window.nuFORM.getCurrent().form_id);
 				
 			} else if (e.keyCode == 82) {//R
-				e.preventDefault();
+//				e.preventDefault();
 				
 				if(window.nuFORM.getCurrent().record_id != '') {
 					nuGetBreadcrumb();
@@ -386,7 +386,7 @@ function nuBindCtrlEvents(){
 				
 			} else if(e.keyCode == 83) {//S
 			
-				e.preventDefault();
+//				e.preventDefault();
 				
 				if(window.nuFORM.getCurrent().record_id != '') {
 					nuSaveAction();
@@ -499,54 +499,6 @@ function nuCloseAllnuOptionsLists(){
 
 
 
-function nuSubformArray(sf){
-
-    var a 	= Array();
-    var i 	= 0;
-    var p 	= '';
-	var c	= true;
-
-    while($('#' + sf + nuPad3(i) + 'nuDelete').length == 1){
-    
-        p 	= sf + nuPad3(i);
-		c	= !$('#' + p + 'nuDelete').is(':checked');
-	
-		a.push(p, c);
-		
-        i++;
-		
-    }
-    
-    return a;
-
-}
-
-function nuSubformRecordValues(i, r){
-
-	this.old_id = i;
-	this.new_id = '';
-	this.new_value = $('#' + i).val();
-
-}
-
-
-
-function nuSortSubformBy(row, col){
-
-
-	
-	for(var i = 0 ; i < col.length ; i++){
-		
-	}
-	
-		return function(a, b) {
-			
-			return a[col] - b[col];
-			
-		}
-	
-}
-
 function nuEditPHP(ev){
 
 	var r	= window.nuFORM.getProperty('record_id');
@@ -567,16 +519,6 @@ function nuEditPHP(ev){
 	nuPopup("nuphp", i);
 
 }
-
-function nuID() {
-
-    var ts 		= +new Date;
-    var tsStr	= ts.toString();
-
-    return tsStr;
-
-};
-
 
 
 function nuPreview(a){
@@ -602,7 +544,7 @@ function nuPreview(a){
 }
 
 
-function nuPopPHP(e, nuE){
+function nuPopPHP(e, nuE){			//-- used in database
 
     var i   = nuFORM.getProperty('record_id');
 
@@ -735,4 +677,22 @@ function nuAddThousandSpaces(s, c){
 	return r.join('');
 	
 }
+
+function nuDuplicates(arr){
+
+	var s	= arr.slice().sort();
+	var d	= [];
+	
+	for (var i = 0; i < arr.length - 1; i++) {
+		
+		if (s[i + 1] == s[i]) {
+			d.push(s[i]);
+		}
+		
+	}
+	
+	return d;
+
+}
+
 

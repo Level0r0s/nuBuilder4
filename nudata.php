@@ -3,7 +3,8 @@
 
 function nuCheckTables(){
 
-	$nudata	= $_POST['nuSTATE']['nuFORMdata'];
+//	$nudata	= $_POST['nuSTATE']['nuFORMdata'];
+	$nudata	= $_POST['nuHash']['nuFORMdata'];
 	$rid	= $_POST['nuSTATE']['record_id'];
 	$fid	= $_POST['nuSTATE']['form_id'];
 	$DEL	= $_POST['nuSTATE']['deleteAll'];
@@ -102,7 +103,8 @@ function nuCheckTables(){
 
 function nuUpdateTables(){
 
-	$nudata	= $_POST['nuSTATE']['nuFORMdata'];
+//	$nudata	= $_POST['nuSTATE']['nuFORMdata'];
+	$nudata	= $_POST['nuHash']['nuFORMdata'];
 	$rid	= $_POST['nuSTATE']['record_id'];
 	$fid	= $_POST['nuSTATE']['form_id'];
 	$DEL	= $_POST['nuSTATE']['deleteAll'];
@@ -233,8 +235,6 @@ function nuValidArray($v, $f){
 		$t		= nuRunQuery($s, array($v, $f[$i]));
 		$r		= db_fetch_row($t);
 		$a[$i]	= $r[0];
-		
-//		nudebug("$s, $v, " . $f[$i] . ' result : '. $r[0] . ' array: ' . print_r($f,1));
 		
 	}
 
@@ -386,8 +386,11 @@ function nuUpdateData(){
 			$nudata[$i]['pk']	= nuID();
 			
 			if($nudata[$i]['fk'] == ''){				//-- main Edit For record
-				$ID	= $nudata[$i]['pk'];
+			
+				$ID				= $nudata[$i]['pk'];
+				
 				nuChangeHashVariable('RECORD_ID', $ID);
+				
 			}
 			
 		}
@@ -424,6 +427,8 @@ function nuUpdateData(){
 		
 	}
 	
+	$nuRecordID	= $ID;							//--
+	
 	if($DEL == 'Yes'){
 		$event	= $FORM->zzzzsys_form_id . '_AD';
 	}else{
@@ -434,7 +439,7 @@ function nuUpdateData(){
 		$evalPHP = new nuEvalPHPClass($event);
 	}
 
-	return $ID;
+	return $nuRecordID;
 	
 }
 
@@ -538,24 +543,6 @@ function nuDisplayError($m){
 
 }
 
-function nuSubformObject($sf){
-	
-	$s	= $_POST['nuSTATE']['subforms'];
-
-	for($i = 0 ; $i < count($s) ; $i++){
-
-		if($s[$i]['name'] == $sf){
-			
-			return $s[$i];
-		
-		}
-		
-	}
-	
-	return array();
-	
-}
-
 function nuCheckAccess($f, $r = ''){
 	
 	if(in_array($f, $_POST['forms'])){
@@ -585,8 +572,20 @@ function nuCheckAccess($f, $r = ''){
 	
 }
 
+function nuSubformObject($id){
 
+	$sfs	= $_POST['nuHash']['nuFORMdata'];
+nudebug('33  ' . gettype ($sfs) . ' ' . print_r($sfs, 1));
+	for($i = 0 ; $i < count($sfs) ; $i++){
 
+		if($sfs[$i]['id'] == $id){
+			return $sfs[$i];
+		}
+		
+	}
+	return false;
+	
+}
 
 
 

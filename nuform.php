@@ -226,8 +226,11 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 		nuDisplayError('Form ID not found');
 	}
 
+	
+//	$f->buttons					= nuButtons($F, $P);
+	
 //    $f->buttons				= nuButtonList($f);
-    $f->buttons				= $_POST['buttons'];
+//    $f->buttons				= $_POST['buttons'];
     $f->tabs 				= nuRefineTabList($tabs);
     $f->browse_columns		= nuBrowseColumns($f);
     $B						= nuBrowseRows($f);
@@ -310,11 +313,6 @@ function nuDefaultObject($r, $t){
 
 function nuGetEditForm($F, $R){
 	
-
-//    $s = "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$F'";
-
-//    $t = nuRunQuery($s);
-//    $r = db_fetch_object($t);
 	$r					= nuFormProperties($F);
 
 	$SQL 				= new nuSqlString($r->sfo_browse_sql);
@@ -976,7 +974,7 @@ function nuAddOtherFormsUsed($j){
 }
 
 
-function nuButtons($formid){
+function nuButtons($formid, $P){
 	
 	$t						= nuRunQuery("SELECT * FROM zzzzsys_session WHERE zzzzsys_session_id = ? ", array($_SESSION['SESSIONID']));		
 	$r 						= db_fetch_object($t);
@@ -986,9 +984,19 @@ function nuButtons($formid){
 	$_POST['procedures']	= $nuJ->procedures;
 	$_POST['session']		= $nuJ->session;
 
-	$access					= nuFormAccess($formid, $nuJ->forms);
+	$a						= nuFormAccess($formid, $nuJ->forms);
+	$f						= nuFormProperties($formid);
+	$c						= $P['call_type'];
+	$rid					= $P['record_id'];
 	
-	return array('Add' => $access[0], 'Print' => $access[1], 'Save' => $access[2], 'Clone' => $access[3], 'Delete' => $access[4]);
+	if($c == 'getphp'){
+		return array('Add' => 0, 'Print' => 0, 'Save' => 0, 'Clone' => 0, 'Delete' => 0, 'Run' => 'nuRunPHP("'.$rid.'")');
+	}else if($c == 'getreport'){
+		return array('Add' => 0, 'Print' => 0, 'Save' => 0, 'Clone' => 0, 'Delete' => 0, 'Run' => "nuPrintPDF('$rid')");
+	}else{
+		return array('Add' => $a[0], 'Print' => $a[1], 'Save' => $a[2], 'Clone' => $a[3], 'Delete' => $a[4], 'Run' => '');
+	}
+	
 	
 }
 
@@ -1375,6 +1383,7 @@ function nuSetupButtons($f, $t) {
 function nuAddPrintButtons($f, $t, $a){
 	
 	$i = sizeof($f->forms[0]->buttons);
+	
 	$f->forms[0]->buttons[$i][0] = $t;
 	$f->forms[0]->buttons[$i][1] = $t.$a;
 	

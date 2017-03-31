@@ -273,7 +273,7 @@ class nuFormObject {
 				
 				for(var c = 0 ; c < SF.rows.length ; c++){
 
-					if(SF.deleted[c] == 0){										//-- add up only stuff being deleted
+					if(SF.deleted[c] == 0){										//-- add up only stuff not being deleted
 						
 						u	= nuFORM.removeFormatting(SF.rows[c][f], fmt);
 						v	= v + Number(u);

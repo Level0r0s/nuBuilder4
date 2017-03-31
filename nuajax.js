@@ -213,6 +213,7 @@ function nuRunPHP(f, iframe){
 	last.form_id  	= f;
 	last.record_id	= 'php';
 	last.data 		= nuGetFormData();
+	last.nuFORMdata	= nuFORM.data();
 	last.hash  		= nuHashFromEditForm();
 	
 	var successCallback = function(data,textStatus,jqXHR){
@@ -341,6 +342,10 @@ function nuPrintAction(){
 
 function nuUpdateData(action){
 
+	if(window.nuBeforeSave){
+		if(!nuBeforeSave()){return;}
+	}
+
 	var last			= window.nuFORM.getCurrent();
 
 	var f				= last.form_id;
@@ -352,7 +357,7 @@ function nuUpdateData(action){
 	last.data 			= nuGetFormData();
 	last.nuFORMdata		= nuFORM.data(action);
 	last.hash 			= nuHashFromEditForm();
-	last.subforms		= nuGetSFArrays();
+	//last.subforms		= nuGetSFArrays();
 	last.session_id 	= window.nuSESSION;
 	
 	$('.nuactionbutton').hide();

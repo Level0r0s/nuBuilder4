@@ -94,13 +94,13 @@ function nuBuildTable($t, $array){
 
 	$id			= $t . '_id';
 	$start		= "CREATE TABLE $t";
-	$s			= Array();
-	
-	
+	$a			= Array();
+	$a[] 		= "$id VARCHAR(25) NOT NULL";
+
 	for($i = 0 ; $i < count($array) ; $i++){
-		
-		$f		= $array[$i]->name;
-		$t		= $array[$i]->type;
+
+		$f		= $array[$i]['name'];
+		$t		= $array[$i]['type'];
 		
 		if($t == 'id'){				$a[] = "$f VARCHAR(25) NOT NULL";}
 		if($t == 'varchar'){		$a[] = "$f VARCHAR(1000) NOT NULL";}
@@ -113,7 +113,6 @@ function nuBuildTable($t, $array){
 	
 	$a[]							= "PRIMARY KEY  ($id)";
 	$im								= implode(',', $a);
-nudebug($im)	;
 	return "$start ($im)";
 
 }
@@ -475,7 +474,7 @@ function nuRunPHP($nuRID){
 	$_POST['nuHash']['code']			= $nuA->sph_code;
 	$_POST['nuHash']['description']		= $nuA->sph_description;
 	$_POST['nuHash']['parentID']		= $nuRID;
-	
+
 	$nuJ								= json_encode($_POST['nuHash']);
 	$nuS								= "INSERT INTO zzzzsys_debug (zzzzsys_debug_id, deb_message) VALUES (?, ?)";
 
@@ -888,7 +887,7 @@ function nuGetFormProperties($i){
 }
 
 
-
+/*
 function nuSubformArray($sf){
 
     $a 	= array();
@@ -900,7 +899,7 @@ function nuSubformArray($sf){
 }
 
 
-
+*/
 
 
 ?>
