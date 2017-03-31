@@ -575,14 +575,20 @@ function nuCheckAccess($f, $r = ''){
 function nuSubformObject($id){
 
 	$sfs	= $_POST['nuHash']['nuFORMdata'];
+	
 nudebug('33  ' . gettype ($sfs) . ' ' . print_r($sfs, 1));
-	for($i = 0 ; $i < count($sfs) ; $i++){
 
+	for($i = 0 ; $i < count($sfs) ; $i++){
 		if($sfs[$i]['id'] == $id){
+	$sfs	= $_POST['nuSTATE']['nuFORMdata'];
+
+	for($i = 0 ; $i < count($sfs) ; $i++){
+		if($sfs[$i]->id == $id){
 			return $sfs[$i];
 		}
 		
 	}
+	
 	return false;
 	
 }
