@@ -3,11 +3,19 @@
 
 function nuCheckTables(){
 
+<<<<<<< HEAD
 //	$nudata	= $_POST['nuHash']['nuFORMdata'];
 	$nudata	= $_POST['nuHash']['nuFORMdata'];
 	$rid	= $_POST['nuHash']['record_id'];
 	$fid	= $_POST['nuHash']['form_id'];
 	$DEL	= $_POST['nuHash']['deleteAll'];
+=======
+//	$nudata	= $_POST['nuSTATE']['nuFORMdata'];
+	$nudata	= $_POST['nuHash']['nuFORMdata'];
+	$rid	= $_POST['nuSTATE']['record_id'];
+	$fid	= $_POST['nuSTATE']['form_id'];
+	$DEL	= $_POST['nuSTATE']['deleteAll'];
+>>>>>>> bc9a3d08723c80c1360df9b5a6e7c1d1597ac610
 	
 	if($nudata[0]->action == 'delete'){return;}
 	
@@ -103,10 +111,18 @@ function nuCheckTables(){
 
 function nuUpdateTables(){
 
+<<<<<<< HEAD
 	$nudata	= $_POST['nuHash']['nuFORMdata'];
 	$rid	= $_POST['nuHash']['record_id'];
 	$fid	= $_POST['nuHash']['form_id'];
 	$DEL	= $_POST['nuHash']['deleteAll'];
+=======
+//	$nudata	= $_POST['nuSTATE']['nuFORMdata'];
+	$nudata	= $_POST['nuHash']['nuFORMdata'];
+	$rid	= $_POST['nuSTATE']['record_id'];
+	$fid	= $_POST['nuSTATE']['form_id'];
+	$DEL	= $_POST['nuSTATE']['deleteAll'];
+>>>>>>> bc9a3d08723c80c1360df9b5a6e7c1d1597ac610
 	$rid	= $rid == '-1' ? nuID() : $rid;
 	$S		= array();
 
@@ -575,8 +591,18 @@ function nuSubformObject($id){
 
 	$sfs	= $_POST['nuHash']['nuFORMdata'];
 	
+<<<<<<< HEAD
 	for($i = 0 ; $i < count($sfs) ; $i++){
 		
+=======
+nudebug('33  ' . gettype ($sfs) . ' ' . print_r($sfs, 1));
+
+	for($i = 0 ; $i < count($sfs) ; $i++){
+		if($sfs[$i]['id'] == $id){
+	$sfs	= $_POST['nuSTATE']['nuFORMdata'];
+
+	for($i = 0 ; $i < count($sfs) ; $i++){
+>>>>>>> bc9a3d08723c80c1360df9b5a6e7c1d1597ac610
 		if($sfs[$i]->id == $id){
 			return $sfs[$i];
 		}
