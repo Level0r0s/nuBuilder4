@@ -887,7 +887,7 @@ function nuGetFormProperties($i){
 }
 
 
-
+/*
 function nuSubformArray($sf){
 
     $a 	= array();
@@ -899,7 +899,7 @@ function nuSubformArray($sf){
 }
 
 
-
+*/
 
 
 ?>

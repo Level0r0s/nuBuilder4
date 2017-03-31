@@ -9,21 +9,21 @@ function nuBuildForm(f){
 		
 	}
 	
-	window.nuSERVERRESPONSE			= f;
-	window.nuSESSION				= f.session_id;
-	window.onbeforeunload			= null;
-	window.nuSUBFORMROW				= [];
-	window.nuSUBFORMJSON			= [];
-	window.nuHASH					= [];                       //-- remove any hash variables previously set.
-	nuFORM.edited					= false;
-	nuFORM.scroll					= [];
+	window.nuSERVERRESPONSE	= f;
+	window.nuSESSION		= f.session_id;
+	window.onbeforeunload	= null;
+	window.nuSUBFORMROW		= [];
+	//window.nuSUBFORMJSON	= [];
+	window.nuHASH			= [];                       //-- remove any hash variables previously set.
+	nuFORM.edited			= false;
+	nuFORM.scroll			= [];
 	nuSetBody(f);
 	
 	
 	if(f.tableSchema.length != 0){  						//-- its an Object (load these once,  at login)
 
-		nuFORM.tableSchema		= f.tableSchema;
-		nuFORM.formSchema		= f.formSchema;
+		nuFORM.tableSchema	= f.tableSchema;
+		nuFORM.formSchema	= f.formSchema;
 		window.nuLANGUAGE	= f.translation;
 		
 	}
@@ -859,7 +859,7 @@ function nuSUBFORM(w, i, l, p, prop){
 
 	nuAddJSObjectEvents(id, SF.js);
 	nuGetSubformRowSize(SF.forms[0].objects, SF, id);
-	nuBuildSubformArray(id);
+	//nuBuildSubformArray(id);
 
 	if(SF.subform_type == 'f'){
 		
@@ -2188,17 +2188,16 @@ function nuGetFormData(){
 	var r		= [];
 	
 	for(var i = 0 ; i < a.length ; i++){
-
+		
 		var rw	= new nuFormClass(a[i]);
 
 		if(rw.d == 'Yes' || rw.pk == '-1' || rw.f.length > 0 || rw.fk === undefined){
-			
 			r.push(rw);
 			
 		}
 		
 	}
-	
+
 	return r;
 
 }
@@ -2218,7 +2217,7 @@ function nuFormClass(frm){
 	var rows			= [];
 
 	var o				= $("[data-nu-prefix='" + frm + "'][data-nu-field].nuEdited");
-	
+
 	o.each(function(index){
 
 		var rw			= String($(this).attr('data-nu-prefix'));

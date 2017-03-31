@@ -15,17 +15,18 @@
 	$_POST['nuTableSchema']					= nuTableSchema();
 	$s										= nuCheckSession();
 	$P										= $_POST['nuSTATE'];
-	$_POST['nuHash']						= nuSetHashList($P);
+	//$_POST['nuHash']						= nuSetHashList($P);
 	$u										= nuGetUserAccess();
 
 	$_POST['FORM_ID'] 						= $s->form_id;
-	$_POST['nuHash']						= array_merge($u, $_POST['nuHash']);
+	$_POST['nuHash']						= array_merge($u, nuSetHashList($P));
 	$_POST['nuHash']['PREVIOUS_RECORD_ID'] 	= $s->record_id;
 	$_POST['nuHash']['RECORD_ID'] 			= $s->record_id;
 	$_POST['nuHash']['FORM_ID'] 			= $s->form_id;
-	$_POST['nuHash']['nuFORMdata']			= $_POST['nuSTATE']['nuFORMdata'];
+	$_POST['nuHash']['nuFORMdata']			= json_decode(json_encode($_POST['nuSTATE']['nuFORMdata']));
 	$_POST['nuHash']['TABLE_ID'] 			= nuTT();
 	$_POST['nuHash']['SESSION_ID'] 			= $s->session_id;
+	$_POST['nuHash']['data']				= $_POST['nuSTATE']['data'];
 	$_POST['nuValidate']					= array();
 
 	$CT										= $P['call_type'];

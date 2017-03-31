@@ -13,7 +13,7 @@ function nuAjax(w,successCallback,errorCallback){
 				successCallback(data,textStatus,jqXHR);
 		},
 		error    : function(jqXHR,textStatus,errorThrown){
-			
+/*			
 			console.log('jqXHR : ', jqXHR);
  			console.log('textStatus : ', textStatus);
  			console.log('errorThrown : ', errorThrown);
@@ -23,8 +23,10 @@ function nuAjax(w,successCallback,errorCallback){
  			errorLog[0][0] 	= jqXHR.responseText;
  			errorLog[0][1] 	= "";
  			errorLog[0][2] 	= 0;
-            
- 			nuPopup("nuerror", "-1", errorLog);
+*/
+			var msg			= String(jqXHR.responseText).split("\n");
+ 			nuAlert(msg);
+			window.test = jqXHR.responseText;
 
 			if (errorCallback !== undefined) {
 				errorCallback(jqXHR,textStatus,errorThrown);
@@ -75,13 +77,14 @@ function nuForm(f, r, filter, search, n){
 	last.record_id		= r;
 	last.filter 		= filter;
 	last.search 		= search;
-	
+    last.hash	 		= parent.nuHashFromEditForm();
+/*	
     if(f != 'nuerror'){
         last.hash 		= parent.nuHashFromEditForm();
     } else {
         last.hash 		= [];
     }
-
+*/
 	var successCallback = function(data,textStatus,jqXHR){
 
 		var fm 			= data;
@@ -357,7 +360,7 @@ function nuUpdateData(action){
 	last.data 			= nuGetFormData();
 	last.nuFORMdata		= nuFORM.data(action);
 	last.hash 			= nuHashFromEditForm();
-	last.subforms		= nuGetSFArrays();
+	//last.subforms		= nuGetSFArrays();
 	last.session_id 	= window.nuSESSION;
 	
 	$('.nuactionbutton').hide();

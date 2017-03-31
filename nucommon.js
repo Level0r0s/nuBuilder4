@@ -285,7 +285,7 @@ function nuOpenAce(lang, obj){
 	window.open('nuace.html?' + ts);
 
 }
-
+/*
 function nuGetSFArrays(){
 
 	var s 	= window.nuSUBFORMJSON;
@@ -297,7 +297,7 @@ function nuGetSFArrays(){
 	
 	return j;
 }
-
+*/
 
 
 function nuRunIt(t, email, type){

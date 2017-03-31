@@ -3,25 +3,26 @@
 
 function nuCheckTables(){
 
-	$nudata	= $_POST['nuSTATE']['nuFORMdata'];
-	$rid	= $_POST['nuSTATE']['record_id'];
-	$fid	= $_POST['nuSTATE']['form_id'];
-	$DEL	= $_POST['nuSTATE']['deleteAll'];
+//	$nudata	= $_POST['nuHash']['nuFORMdata'];
+	$nudata	= $_POST['nuHash']['nuFORMdata'];
+	$rid	= $_POST['nuHash']['record_id'];
+	$fid	= $_POST['nuHash']['form_id'];
+	$DEL	= $_POST['nuHash']['deleteAll'];
 	
-	if($nudata[0]['action'] == 'delete'){return;}
+	if($nudata[0]->action == 'delete'){return;}
 	
 		
 	for($d = 0 ; $d < count($nudata) ; $d++){
 		
 		$sf			= $nudata[$d];
-		$rows		= $sf['rows'];
-		$edited		= $sf['edited'];
-		$deleted	= $sf['deleted'];
-		$fields		= $sf['fields'];
-		$table		= $sf['table'];
-		$pk			= $sf['primary_key'];
-		$fk			= $sf['foreign_key'];
-		$fv			= $_POST['nuSTATE']['record_id'];
+		$rows		= $sf->rows;
+		$edited		= $sf->edited;
+		$deleted	= $sf->deleted;
+		$fields		= $sf->fields;
+		$table		= $sf->table;
+		$pk			= $sf->primary_key;
+		$fk			= $sf->foreign_key;
+		$fv			= $_POST['nuHash']['record_id'];
 		
 		for($r = 0 ; $r < count($rows) ; $r++){
 
@@ -102,10 +103,10 @@ function nuCheckTables(){
 
 function nuUpdateTables(){
 
-	$nudata	= $_POST['nuSTATE']['nuFORMdata'];
-	$rid	= $_POST['nuSTATE']['record_id'];
-	$fid	= $_POST['nuSTATE']['form_id'];
-	$DEL	= $_POST['nuSTATE']['deleteAll'];
+	$nudata	= $_POST['nuHash']['nuFORMdata'];
+	$rid	= $_POST['nuHash']['record_id'];
+	$fid	= $_POST['nuHash']['form_id'];
+	$DEL	= $_POST['nuHash']['deleteAll'];
 	$rid	= $rid == '-1' ? nuID() : $rid;
 	$S		= array();
 
@@ -119,15 +120,15 @@ function nuUpdateTables(){
 	for($d = 0 ; $d < count($nudata) ; $d++){
 		
 		$sf			= $nudata[$d];
-		$action		= $sf['action'];
-		$rows		= $sf['rows'];
-		$edited		= $sf['edited'];
-		$deleted	= $sf['deleted'];
-		$fields		= $sf['fields'];
-		$table		= $sf['table'];
-		$pk			= $sf['primary_key'];
-		$fk			= $sf['foreign_key'];
-		$fv			= $_POST['nuSTATE']['record_id'];
+		$action		= $sf->action;
+		$rows		= $sf->rows;
+		$edited		= $sf->edited;
+		$deleted	= $sf->deleted;
+		$fields		= $sf->fields;
+		$table		= $sf->table;
+		$pk			= $sf->primary_key;
+		$fk			= $sf->foreign_key;
+		$fv			= $_POST['nuHash']['record_id'];
 		
 		for($r = 0 ; $r < count($rows) ; $r++){
 
@@ -572,10 +573,10 @@ function nuCheckAccess($f, $r = ''){
 
 function nuSubformObject($id){
 
-	$sfs	= $_POST['nuSTATE']['nuFORMdata'];
-
+	$sfs	= $_POST['nuHash']['nuFORMdata'];
+	
 	for($i = 0 ; $i < count($sfs) ; $i++){
-NUDEBUG($sfs[$i]['id'] . " == $id");		
+		
 		if($sfs[$i]->id == $id){
 			return $sfs[$i];
 		}

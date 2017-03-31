@@ -15,13 +15,13 @@ function nuAppendActionButton(t, f){
 	
 }
 
-
+/*
 function nuBuildSubformArray(s){				//-- add this subform to the list of subforms that will have their details sent to the server
 
 	window.nuSUBFORMJSON.push(s);
 	
 }
-
+*/
 
 function nuSetHash(n, v){ 						//-- set hash variable to be used on server side	
 
