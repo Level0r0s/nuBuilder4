@@ -704,12 +704,17 @@ function nuRUN(w, i, l, p, prop){
 
 	if(prop.objects[i].run_method == 'b'){
 	
-		var O	= prop.objects[i];
+		var O			= prop.objects[i];
+		var clicker		= '';
+		
+		if(O.run_type == 'R'){clicker = "nuPrintPDF('" + O.form_id + "')";}
+		if(O.run_type == 'P'){clicker = "nuRunPHP('" + O.form_id + "')"}
+		if(O.run_type == 'F'){clicker = "nuForm('" + O.form_id + "','" + O.record_id + "','" + O.filter + "', '')"}
 		
 		$('#' + id).attr({
 					'type'		: 'button',
 					'value'		: O.label,
-					'onclick'	: "nuForm('" + O.form_id + "','" + O.record_id + "','" + O.filter + "', '')"
+					'onclick'	: clicker
 		})
 		.addClass('nuButton');
 		

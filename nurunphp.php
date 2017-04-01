@@ -12,7 +12,7 @@ if(db_num_rows($t) == 0){
 	return;
 	
 }
-
+nudebug('json ' . print_r($r,1));
 $r						= db_fetch_object($t);
 $JSON					= json_decode($r->json);
 $TABLE_ID				= nuTT();

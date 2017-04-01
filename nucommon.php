@@ -214,30 +214,30 @@ function nuHeader(){
 }
 
 
+
 function nuID(){
 
-	if(!isset($_POST['nuCounter'])){
+	if(!isset($_POST['nuCounter2'])){
 		
-		$_POST['nuCounter']		= rand(0, 9999);
-		$_POST['nuCounterID']	= uniqid();
+		$_POST['nuCounter2']	= rand(1, 9999);
+		$_POST['nuCounter2ID']	= uniqid();
 		
 	}
 
-
-	if($_POST['nuCounter'] == 9999){
+	if($_POST['nuCounter2'] == 9999){
 		
-		$_POST['nuCounter']	= 0;
-		$_POST['nuCounterID']	= uniqid();
+		$_POST['nuCounter2']	= 0;
+		$_POST['nuCounter2ID']	= uniqid();
 		
 	}else{
-		$_POST['nuCounter']++;
+		$_POST['nuCounter2']++;
 	}
 	
     while($i == uniqid()){}
 
-	$suf				= str_pad($_POST['nuCounter'], 4, '0', STR_PAD_LEFT);
+	$id							= $_POST['nuCounter2ID'] . str_pad($_POST['nuCounter2'], 4, '0', STR_PAD_LEFT);
 		
-	return $_POST['nuCounterID'].$suf;
+	return $id;
 
 }
 
