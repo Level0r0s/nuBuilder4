@@ -11,12 +11,12 @@ window.nuHASH					= [];
 window.nuBEFORE					= [];
 window.nuAFTER					= [];
 window.nuSESSION				= '';
-window.nuTYPE 					= 'browse';
+window.nuBrowseFunction 					= 'browse';
 window.nuDRAGLINEVSTART			= '';
 window.nuDRAGLINEVID			= '';
 window.nuNEW					= '';
 
-function nuOpener(f, r, filter){
+function nuOpener(f, r, filter, parameters){
 	
 	this.id					= Date.now();
 	this.form_id			= f;
@@ -26,6 +26,12 @@ function nuOpener(f, r, filter){
 		this.filter			= filter;
 	}else{
 		this.filter			= '';
+	}
+	
+	if(arguments.length 	= 4){
+		this.parameters		= parameters;
+	}else{
+		this.parameters		= '';
 	}
 	
 }
@@ -60,7 +66,7 @@ function removeOpenerById(o, pid) {
 function nuGetBreadcrumb(b){
 	
 	b		= arguments.length == 0 ? nuFORM.breadcrumbs.length -1 : b;
-	var y	= window.nuTYPE;
+	var y	= window.nuBrowseFunction;
 	
 	if(nuFORM.edited && y != 'runreport' && y != 'getphp'){
 		
