@@ -5,7 +5,7 @@ function nuBuildForm(f){
 	if(f.form_id == ''){
 		
 		nuLogin();
-		return;
+		return;found
 		
 	}
 	
@@ -16,6 +16,8 @@ function nuBuildForm(f){
 	window.nuSUBFORMROW		= [];
 	//window.nuSUBFORMJSON	= [];
 	window.nuHASH			= [];                       //-- remove any hash variables previously set.
+	window.nuUniqueID		= 'c' + String(Date.now());
+	window.nuSuffix			= Number(String(Math.random()).substr(-4));
 	nuFORM.edited			= false;
 	nuFORM.scroll			= [];
 	nuSetBody(f);
@@ -736,6 +738,8 @@ function nuRUN(w, i, l, p, prop){
 
 	}
 
+	nuAddJSObjectEvents(id, prop.objects[i].js);
+
 	return Number(prop.objects[i].width);
 	
 }
@@ -1068,6 +1072,13 @@ function nuAddSubformRow(t, e){
 
 
 
+
+
+function nuPad4(i){
+	
+	return String('000' + Number(i)).substr(-4);
+
+}
 
 
 function nuPad3(i){

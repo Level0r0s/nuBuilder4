@@ -1089,9 +1089,12 @@ function nuObjectDialog(){
 	nuBlankMultipleValues(S);
 	$('#nuDragDialog').css('height', top + 20);
 
-    $("#dialogTitleWords").append('<img src="./trash_can.png" height="17px" width="17px" id="deleteObject" value="Delete" onclick="deleteSelectedObjects()"/>');
-	$("#deleteObject").css('position','relative');
-	$("#deleteObject").css('left','270px');
+    $("#dialogTitleWords")
+	.append('<img src="./trash_can.png" height="17px" width="17px" id="deleteObject" value="Delete" onclick="deleteSelectedObjects()"/>');
+	
+	$("#deleteObject")
+	.css('position','relative')
+	.css('left','270px');
 }
 
 function deleteSelectedObjects(){
