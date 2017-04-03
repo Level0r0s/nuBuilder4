@@ -11,7 +11,6 @@ window.nuHASH					= [];
 window.nuBEFORE					= [];
 window.nuAFTER					= [];
 window.nuSESSION				= '';
-//window.nuBrowseFunction 					= 'browse';
 window.nuDRAGLINEVSTART			= '';
 window.nuDRAGLINEVID			= '';
 window.nuNEW					= '';

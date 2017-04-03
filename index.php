@@ -87,7 +87,6 @@ window.nuHASH			= [];
 			nuFORM.tableSchema		= from.nuFORM.tableSchema;
 			nuFORM.formSchema		= from.nuFORM.formSchema;
 			window.nuBrowseFunction	= '$type';
-			console.log(window.nuBrowseFunction);
 			window.nuTARGET			= '$target';
 			window.nuSESSION		= from.nuSESSION;
 			

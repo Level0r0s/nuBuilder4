@@ -2033,6 +2033,7 @@ function nuSelectBrowse(e){
 	}else{
 
 		window[y](e);
+		
 	}
 	
 }
