@@ -725,21 +725,33 @@ function nuID(){
 function nuResizeWindow(e){
 
 	var d	= $('#nuDragDialog');
+	var D	= $('.nuDragOptionsBox');
+	var W	= 0;
 	var w	= $('#nuWindow');
 	var f	= $('#nuDragDialog iframe')[0].contentWindow;
 	var l	= parseInt(d.css('left'));
-	
-	if(l == 0){
-		
-		d.css(f.nuDialogSize);
-		w.css(f.nuWindowSize);
-		
-	}else{
-		
-		d.css({top:0, left:0, height:window.innerHeight, width:window.innerWidth - 20});
-		w.css({top:30, left:0, height:window.innerHeight - 10, width:window.innerWidth - 20});
-		
+
+	if(D.length != 0){
+		W	= parseInt(D.css('width'));
 	}
 	
+	if(l == 2){
+
+		if(D.length == 0){
+			d.css(f.nuDialogSize);
+			w.css(f.nuWindowSize);
+		}
+		
+	}else{
+
+		d.css({top:0, left:2, width:window.innerWidth - 30, height:window.innerHeight});
+		
+		var dh	= parseInt(d.css('height')) - 50;
+		var dw	= parseInt(d.css('width')) - W - 10;
+		
+		w.css({top:30, width:dw, height:dh});
+		
+	}
+		
 }
 

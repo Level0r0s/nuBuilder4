@@ -2833,15 +2833,13 @@ function nuWindowPosition(){
 	var w						= parseInt(d.css('width'));
 	var h						= parseInt(d.css('height'));
 
-	window.nuDialogSize	= {left:l, top:t, width:w, height:h};
+	window.nuDialogSize			= {left:l, top:t, width:w, height:h};
 
 	var d						= $('#nuWindow', window.parent.document);
 	
-	var l						= parseInt(d.css('left'));
-	var t						= parseInt(d.css('top'));
 	var w						= parseInt(d.css('width'));
 	var h						= parseInt(d.css('height'));
 
-	window.nuWindowSize	= {left:l, top:t, width:w, height:h};
+	window.nuWindowSize			= {width:w, height:h};
 	
 }
