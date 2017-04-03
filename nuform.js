@@ -5,42 +5,45 @@ function nuBuildForm(f){
 	if(f.form_id == ''){
 		
 		nuLogin();
-		return;
+		return;found
 		
 	}
 	
-	window.nuSERVERRESPONSE	= f;
-	window.nuSESSION		= f.session_id;
-	window.onbeforeunload	= null;
-	window.nuSUBFORMROW		= [];
-	//window.nuSUBFORMJSON	= [];
-	window.nuHASH			= [];                       //-- remove any hash variables previously set.
-	nuFORM.edited			= false;
-	nuFORM.scroll			= [];
+	window.nuSERVERRESPONSE		= f;
+	window.nuSESSION			= f.session_id;
+	window.onbeforeunload		= null;
+	window.nuSUBFORMROW			= [];
+	//window.nuSUBFORMJSON		= [];
+	window.nuHASH				= [];                       //-- remove any hash variables previously set.
+	window.nuUniqueID			= 'c' + String(Date.now());
+	window.nuSuffix				= Number(String(Math.random()).substr(-4));
+	nuFORM.edited				= false;
+	nuFORM.scroll				= [];
 	nuSetBody(f);
 	
 	
 	if(f.tableSchema.length != 0){  						//-- its an Object (load these once,  at login)
 
-		nuFORM.tableSchema	= f.tableSchema;
-		nuFORM.formSchema	= f.formSchema;
-		window.nuLANGUAGE	= f.translation;
+		nuFORM.tableSchema		= f.tableSchema;
+		nuFORM.formSchema		= f.formSchema;
+		window.nuLANGUAGE		= f.translation;
+		window.nuBrowseFunction = 'browse';
 		
 	}
 	
-	var b 					= window.nuFORM.getCurrent();
+	var b 						= window.nuFORM.getCurrent();
 
-	b.form_id 				= f.form_id;
-	b.record_id 			= f.record_id;
-	b.session_id 			= f.session_id;
-	b.user_id 				= f.user_id;
-	b.title 				= f.title;
-	b.row_height 			= f.row_height;
-	b.rows 					= f.rows;
-	b.browse_columns 		= f.browse_columns;
-	b.browse_sql			= f.browse_sql;
-	b.browse_rows 			= f.browse_rows;
-	b.pages 				= f.pages;
+	b.form_id 					= f.form_id;
+	b.record_id 				= f.record_id;
+	b.session_id 				= f.session_id;
+	b.user_id 					= f.user_id;
+	b.title 					= f.title;
+	b.row_height 				= f.row_height;
+	b.rows 						= f.rows;
+	b.browse_columns 			= f.browse_columns;
+	b.browse_sql				= f.browse_sql;
+	b.browse_rows 				= f.browse_rows;
+	b.pages 					= f.pages;
 	
 	nuResizeiFrame(f.dimensions, f.record_id);
 
@@ -131,6 +134,9 @@ function nuResizeiFrame(d, r){
 		});
 			
 	}
+	
+	nuWindowPosition();
+	
 }
 
 
@@ -703,12 +709,17 @@ function nuRUN(w, i, l, p, prop){
 
 	if(prop.objects[i].run_method == 'b'){
 	
-		var O	= prop.objects[i];
+		var O			= prop.objects[i];
+		var clicker		= '';
+		
+		if(O.run_type == 'R'){clicker = "nuPrintPDF('" + O.form_id + "')";}
+		if(O.run_type == 'P'){clicker = "nuRunPHP('" + O.form_id + "')"}
+		if(O.run_type == 'F'){clicker = "nuForm('" + O.form_id + "','" + O.record_id + "','" + O.filter + "', '')"}
 		
 		$('#' + id).attr({
 					'type'		: 'button',
 					'value'		: O.label,
-					'onclick'	: "nuForm('" + O.form_id + "','" + O.record_id + "','" + O.filter + "', '')"
+					'onclick'	: clicker
 		})
 		.addClass('nuButton');
 		
@@ -729,6 +740,8 @@ function nuRUN(w, i, l, p, prop){
 		$('#' + id).attr('src', u).removeClass('').addClass('nuIframe');
 
 	}
+
+	nuAddJSObjectEvents(id, prop.objects[i].js);
 
 	return Number(prop.objects[i].width);
 	
@@ -859,7 +872,6 @@ function nuSUBFORM(w, i, l, p, prop){
 
 	nuAddJSObjectEvents(id, SF.js);
 	nuGetSubformRowSize(SF.forms[0].objects, SF, id);
-	//nuBuildSubformArray(id);
 
 	if(SF.subform_type == 'f'){
 		
@@ -1062,6 +1074,13 @@ function nuAddSubformRow(t, e){
 
 
 
+
+
+function nuPad4(i){
+	
+	return String('000' + Number(i)).substr(-4);
+
+}
 
 
 function nuPad3(i){
@@ -1840,11 +1859,11 @@ function nuBrowseTable(){
 		
 	}
 
-	var la	= '<span id="nuLast" onclick="nuGetPage(' + (bc.page_number) + ', \'' + window.nuTYPE + '\')" class="nuBrowsePage">&#9668;</span>';
+	var la	= '<span id="nuLast" onclick="nuGetPage(' + (bc.page_number) + ', \'' + window.nuBrowseFunction + '\')" class="nuBrowsePage">&#9668;</span>';
 	var pg	= '&nbsp;Page&nbsp;';
-	var cu	= '<input id="browsePage" style="text-align:center;margin:3px 0px 0px 0px;width:40px" onchange="nuGetPage(this.value, \'' + window.nuTYPE + '\')" value="' + (bc.page_number + 1) + '" class="browsePage"/>';
+	var cu	= '<input id="browsePage" style="text-align:center;margin:3px 0px 0px 0px;width:40px" onchange="nuGetPage(this.value, \'' + window.nuBrowseFunction + '\')" value="' + (bc.page_number + 1) + '" class="browsePage"/>';
 	var of	= '&nbsp;/&nbsp;' + bc.pages + '&nbsp;';
-	var ne	= '<span id="nuNext" onclick="nuGetPage(' + (bc.page_number + 2) + ',\'' + window.nuTYPE + '\')" class="nuBrowsePage">&#9658;</span>';
+	var ne	= '<span id="nuNext" onclick="nuGetPage(' + (bc.page_number + 2) + ',\'' + window.nuBrowseFunction + '\')" class="nuBrowsePage">&#9658;</span>';
 
 	var id	= 'nuBrowseFooter';
 	var div = document.createElement('div');
@@ -1996,7 +2015,7 @@ function nuGetPage(p, t){
 
 function nuSelectBrowse(e){
 
-	var y 				= window.nuTYPE;					//-- browse, lookup or custom function name
+	var y 				= window.nuBrowseFunction;					//-- browse, lookup or custom function name
 	var i 				= window.nuTARGET;
 	var p				= $('#' + e.target.id).attr('data-nu-primary-key');
 	var f				= window.nuFORM.getProperty('form_id');
@@ -2009,10 +2028,11 @@ function nuSelectBrowse(e){
 		
 		window.parent.nuGetLookupId(p, i);			//-- called from parent window
 		
+		window.nuBrowseFunction = "browse";
+		
 	}else{
 
 		window[y](e);
-		//window.nuTYPE = "browse";
 	}
 	
 }
@@ -2188,17 +2208,16 @@ function nuGetFormData(){
 	var r		= [];
 	
 	for(var i = 0 ; i < a.length ; i++){
-
+		
 		var rw	= new nuFormClass(a[i]);
 
 		if(rw.d == 'Yes' || rw.pk == '-1' || rw.f.length > 0 || rw.fk === undefined){
-			
 			r.push(rw);
 			
 		}
 		
 	}
-	
+
 	return r;
 
 }
@@ -2218,7 +2237,7 @@ function nuFormClass(frm){
 	var rows			= [];
 
 	var o				= $("[data-nu-prefix='" + frm + "'][data-nu-field].nuEdited");
-	
+
 	o.each(function(index){
 
 		var rw			= String($(this).attr('data-nu-prefix'));
@@ -2806,3 +2825,22 @@ function nuRebuild_nuTotal(p, s){
 
 
 
+function nuWindowPosition(){
+	
+	var d						= $('#nuDragDialog', window.parent.document);
+	
+	var l						= parseInt(d.css('left'));
+	var t						= parseInt(d.css('top'));
+	var w						= parseInt(d.css('width'));
+	var h						= parseInt(d.css('height'));
+
+	window.nuDialogSize			= {left:l, top:t, width:w, height:h};
+
+	var d						= $('#nuWindow', window.parent.document);
+	
+	var w						= parseInt(d.css('width'));
+	var h						= parseInt(d.css('height'));
+
+	window.nuWindowSize			= {width:w, height:h};
+	
+}

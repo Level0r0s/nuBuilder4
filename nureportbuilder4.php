@@ -12,7 +12,7 @@ jsinclude('nuform.js');
 jsinclude('nuformdrag.js');
 jsinclude('nudrag.js');
 jsinclude('nudragreport.js');
-jsinclude('nudragdialog.js');
+//jsinclude('nudragdialog.js');  now in common.js
 jsinclude('nucalendar.js');
 jsinclude('nucommon.js');
 jsinclude('nuajax.js');       //-- calls to server

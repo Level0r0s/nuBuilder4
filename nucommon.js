@@ -11,12 +11,12 @@ window.nuHASH					= [];
 window.nuBEFORE					= [];
 window.nuAFTER					= [];
 window.nuSESSION				= '';
-window.nuTYPE 					= 'browse';
+//window.nuBrowseFunction 					= 'browse';
 window.nuDRAGLINEVSTART			= '';
 window.nuDRAGLINEVID			= '';
 window.nuNEW					= '';
 
-function nuOpener(f, r, filter){
+function nuOpener(f, r, filter, parameters){
 	
 	this.id					= Date.now();
 	this.form_id			= f;
@@ -26,6 +26,12 @@ function nuOpener(f, r, filter){
 		this.filter			= filter;
 	}else{
 		this.filter			= '';
+	}
+	
+	if(arguments.length 	= 4){
+		this.parameters		= parameters;
+	}else{
+		this.parameters		= '';
 	}
 	
 }
@@ -60,7 +66,7 @@ function removeOpenerById(o, pid) {
 function nuGetBreadcrumb(b){
 	
 	b		= arguments.length == 0 ? nuFORM.breadcrumbs.length -1 : b;
-	var y	= window.nuTYPE;
+	var y	= window.nuBrowseFunction;
 	
 	if(nuFORM.edited && y != 'runreport' && y != 'getphp'){
 		
@@ -195,6 +201,7 @@ function nuCreateDialog(t){
 	this.moveX      = 0;
 	this.moveY      = 0;
 	this.title      = t;
+	this.pos		= {};
 	
 	this.move = function(event) {
 	
@@ -202,10 +209,9 @@ function nuCreateDialog(t){
 		this.moveY  = event.clientY - this.startY;
 		this.startX = event.clientX;
 		this.startY = event.clientY;
+		
 		if(event.buttons == 1 && event.target.id == 'dialogTitleWords'){
-
 			this.moveDialog();
-			
 		}
 		
 		if(event.target.id == 'dialogClose'){
@@ -219,18 +225,20 @@ function nuCreateDialog(t){
 	this.click = function(event) {
 	
 		if(event.target.id == 'dialogClose'){
+			
 			$('#nuDragDialog').remove();
 			$('#nuModal').remove();
+			
 		}
 		
 	}
 
 	this.moveDialog = function() {
 
-		var s = document.getElementById('nuDragDialog');
-		var o = s.style;
-		var l = parseInt(o.left) + this.moveX;
-		var t = parseInt(o.top)  + this.moveY;
+		var s 	= document.getElementById('nuDragDialog');
+		var o 	= s.style;
+		var l 	= parseInt(o.left) + this.moveX;
+		var t 	= parseInt(o.top)  + this.moveY;
 		
 		o.left  = l + 'px';
 		o.top   = t + 'px';
@@ -250,7 +258,7 @@ function nuCreateDialog(t){
 
 		$('#nuDragDialog').addClass('nuDragDialog nuDragNoSelect')
 		.css({'left':l, 'top':t, 'width':w, 'height':h, 'background-color':'#E0E0E0', 'z-index': 3000, 'position':'absolute'})
-		.html('<div id="dialogTitle" style="background-color:#CCCCCC ;position:absolute;width:100%;height:35px;font-size:16px;font-family:Helvetica"><div id="dialogTitleWords" style="padding-top: 6px;height:30px;">&nbsp;&nbsp;'+title+'</div><img id="dialogClose" src="close.png" style="position:absolute; top:0px; left:0px"></div>')
+		.html('<div id="dialogTitle" ondblclick="nuResizeWindow(event)" style="background-color:#CCCCCC ;position:absolute;width:100%;height:35px;font-size:16px;font-family:Helvetica"><div id="dialogTitleWords" style="padding-top: 6px;height:30px;">&nbsp;&nbsp;'+title+'</div><img id="dialogClose" src="close.png" style="position:absolute; top:0px; left:0px"></div>')
 		.on('mousemove', 	function(event){nuDialog.move(event);})
 		.on('mouseout', 	function(event){$('#dialogClose').css('background-color','');})
 		.on('click',     	function(event){nuDialog.click(event);});
@@ -695,4 +703,55 @@ function nuDuplicates(arr){
 
 }
 
+
+
+function nuID(){
+
+	if(window.nuSuffix == 9999){
+		
+		window.nuSuffix		= 0
+		window.nuUniqueID	= 'c' + String(Date.now());
+		
+	}else{
+		window.nuSuffix	++;
+	}
+	
+	id						= window.nuUniqueID + nuPad4(window.nuSuffix);
+		
+	return id;
+
+}
+
+function nuResizeWindow(e){
+
+	var d	= $('#nuDragDialog');
+	var D	= $('.nuDragOptionsBox');
+	var W	= 0;
+	var w	= $('#nuWindow');
+	var f	= $('#nuDragDialog iframe')[0].contentWindow;
+	var l	= parseInt(d.css('left'));
+
+	if(D.length != 0){
+		W	= parseInt(D.css('width'));
+	}
+	
+	if(l == 2){
+
+		if(D.length == 0){
+			d.css(f.nuDialogSize);
+			w.css(f.nuWindowSize);
+		}
+		
+	}else{
+
+		d.css({top:0, left:2, width:window.innerWidth - 30, height:window.innerHeight});
+		
+		var dh	= parseInt(d.css('height')) - 50;
+		var dw	= parseInt(d.css('width')) - W - 10;
+		
+		w.css({top:30, width:dw, height:dh});
+		
+	}
+		
+}
 
