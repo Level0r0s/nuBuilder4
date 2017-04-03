@@ -201,6 +201,7 @@ function nuCreateDialog(t){
 	this.moveX      = 0;
 	this.moveY      = 0;
 	this.title      = t;
+	this.pos		= {};
 	
 	this.move = function(event) {
 	
@@ -208,10 +209,9 @@ function nuCreateDialog(t){
 		this.moveY  = event.clientY - this.startY;
 		this.startX = event.clientX;
 		this.startY = event.clientY;
+		
 		if(event.buttons == 1 && event.target.id == 'dialogTitleWords'){
-
 			this.moveDialog();
-			
 		}
 		
 		if(event.target.id == 'dialogClose'){
@@ -225,18 +225,20 @@ function nuCreateDialog(t){
 	this.click = function(event) {
 	
 		if(event.target.id == 'dialogClose'){
+			
 			$('#nuDragDialog').remove();
 			$('#nuModal').remove();
+			
 		}
 		
 	}
 
 	this.moveDialog = function() {
 
-		var s = document.getElementById('nuDragDialog');
-		var o = s.style;
-		var l = parseInt(o.left) + this.moveX;
-		var t = parseInt(o.top)  + this.moveY;
+		var s 	= document.getElementById('nuDragDialog');
+		var o 	= s.style;
+		var l 	= parseInt(o.left) + this.moveX;
+		var t 	= parseInt(o.top)  + this.moveY;
 		
 		o.left  = l + 'px';
 		o.top   = t + 'px';
@@ -714,15 +716,30 @@ function nuID(){
 		window.nuSuffix	++;
 	}
 	
-	id						=  window.nuUniqueID + nuPad4(window.nuSuffix);
+	id						= window.nuUniqueID + nuPad4(window.nuSuffix);
 		
 	return id;
 
 }
 
 function nuResizeWindow(e){
+
+	var d	= $('#nuDragDialog');
+	var w	= $('#nuWindow');
+	var f	= $('#nuDragDialog iframe')[0].contentWindow;
+	var l	= parseInt(d.css('left'));
 	
-	console.log(window.innerWidth,window.innerHeight, e);
+	if(l == 0){
+		
+		d.css(f.nuDialogSize);
+		w.css(f.nuWindowSize);
+		
+	}else{
+		
+		d.css({top:0, left:0, height:window.innerHeight, width:window.innerWidth - 20});
+		w.css({top:30, left:0, height:window.innerHeight - 10, width:window.innerWidth - 20});
+		
+	}
 	
 }
 

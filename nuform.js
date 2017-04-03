@@ -134,6 +134,9 @@ function nuResizeiFrame(d, r){
 		});
 			
 	}
+	
+	nuWindowPosition();
+	
 }
 
 
@@ -869,7 +872,6 @@ function nuSUBFORM(w, i, l, p, prop){
 
 	nuAddJSObjectEvents(id, SF.js);
 	nuGetSubformRowSize(SF.forms[0].objects, SF, id);
-	//nuBuildSubformArray(id);
 
 	if(SF.subform_type == 'f'){
 		
@@ -2822,3 +2824,24 @@ function nuRebuild_nuTotal(p, s){
 
 
 
+function nuWindowPosition(){
+	
+	var d						= $('#nuDragDialog', window.parent.document);
+	
+	var l						= parseInt(d.css('left'));
+	var t						= parseInt(d.css('top'));
+	var w						= parseInt(d.css('width'));
+	var h						= parseInt(d.css('height'));
+
+	window.nuDialogSize	= {left:l, top:t, width:w, height:h};
+
+	var d						= $('#nuWindow', window.parent.document);
+	
+	var l						= parseInt(d.css('left'));
+	var t						= parseInt(d.css('top'));
+	var w						= parseInt(d.css('width'));
+	var h						= parseInt(d.css('height'));
+
+	window.nuWindowSize	= {left:l, top:t, width:w, height:h};
+	
+}
