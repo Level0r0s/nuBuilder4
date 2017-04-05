@@ -51,17 +51,15 @@ window.nuHASH			= [];
 
 <?php
 
-	$opener		= $_GET['opener'];
-	$search		= $_GET['search'];
-	$iframe		= $_GET['iframe'];
-	$target		= $_GET['target'];
+	$nuHeader			= nuHeader();
+	$opener				= $_GET['opener'];
+	$search				= $_GET['search'];
+	$iframe				= $_GET['iframe'];
+	$target				= $_GET['target'];
 	
 	
-	nudebug("1type: " . $_GET['type']);
-	$type		= $_GET['type'] == '' ? 'browse' : $_GET['type'];
-	nudebug("2type: " . $_GET['type']);
+	$nuBrowseFunction	= $_GET['browsefunction'] == '' ? 'browse' : $_GET['browsefunction'];
 
-	$nuHeader	= nuHeader();
 	$h			= "
 
 	if('$opener' == ''){
@@ -69,6 +67,8 @@ window.nuHASH			= [];
 		function nuLoad(){
 			
 			nuBindCtrlEvents();
+			window.nuDefaultBrowseFunction	= '$nuBrowseFunction';
+			window.nuBrowseFunction			= '$nuBrowseFunction';
 			nuLogin();
 
 		}
@@ -77,33 +77,34 @@ window.nuHASH			= [];
 		function nuLoad(){
 
 			if(nuIsOpener(window)){
-				var from			= window.opener;
+				var from					= window.opener;
 
 			}else{
-				var from			= window.parent;
+				var from					= window.parent;
 			}
 
-			window.nuFORM.caller	= from.nuFORM.getCurrent();
-			nuFORM.tableSchema		= from.nuFORM.tableSchema;
-			nuFORM.formSchema		= from.nuFORM.formSchema;
-			window.nuBrowseFunction	= '$type';
-			window.nuTARGET			= '$target';
-			window.nuSESSION		= from.nuSESSION;
+			window.nuFORM.caller			= from.nuFORM.getCurrent();
+			nuFORM.tableSchema				= from.nuFORM.tableSchema;
+			nuFORM.formSchema				= from.nuFORM.formSchema;
+			window.nuDefaultBrowseFunction	= '$nuBrowseFunction';
+			window.nuBrowseFunction			= '$nuBrowseFunction';
+			window.nuTARGET					= '$target';
+			window.nuSESSION				= from.nuSESSION;
 			
 			if('$opener' != '') {
 				
-				var p				= getOpenerById(from.nuOPENER, Number($opener));
+				var p						= getOpenerById(from.nuOPENER, Number($opener));
 				removeOpenerById(from.nuOPENER, Number($opener));
 
 			} else {
 				
-				var p				= from.nuOPENER[from.nuOPENER.length -1];
+				var p						= from.nuOPENER[from.nuOPENER.length -1];
 				removeOpenerById(from.nuOPENER, from.nuOPENER[from.nuOPENER.length -1]);
 			}
 		
 			nuBindCtrlEvents();
 			
-			window.filter			= p.filter;
+			window.filter					= p.filter;
 
 			if(p.type == 'getreport') {
 				nuGetPDF(p.form_id, p.record_id)

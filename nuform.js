@@ -9,6 +9,7 @@ function nuBuildForm(f){
 		
 	}
 	
+	window.nuBrowseFunction		= window.nuDefaultBrowseFunction;
 	window.nuSERVERRESPONSE		= f;
 	window.nuSESSION			= f.session_id;
 	window.onbeforeunload		= null;
@@ -27,7 +28,6 @@ function nuBuildForm(f){
 		nuFORM.tableSchema		= f.tableSchema;
 		nuFORM.formSchema		= f.formSchema;
 		window.nuLANGUAGE		= f.translation;
-		window.nuBrowseFunction = 'browse';
 		
 	}
 	
@@ -1857,11 +1857,12 @@ function nuBrowseTable(){
 		
 	}
 
-	var la	= '<span id="nuLast" onclick="nuGetPage(' + (bc.page_number) + ', \'' + window.nuBrowseFunction + '\')" class="nuBrowsePage">&#9668;</span>';
+	var la	= '<span id="nuLast" onclick="nuGetPage(' + (bc.page_number)     + ')" class="nuBrowsePage">&#9668;</span>';
+	var ne	= '<span id="nuNext" onclick="nuGetPage(' + (bc.page_number + 2) + ')" class="nuBrowsePage">&#9658;</span>';
+
 	var pg	= '&nbsp;Page&nbsp;';
-	var cu	= '<input id="browsePage" style="text-align:center;margin:3px 0px 0px 0px;width:40px" onchange="nuGetPage(this.value, \'' + window.nuBrowseFunction + '\')" value="' + (bc.page_number + 1) + '" class="browsePage"/>';
+	var cu	= '<input id="browsePage" style="text-align:center;margin:3px 0px 0px 0px;width:40px" onchange="nuGetPage(this.value)" value="' + (bc.page_number + 1) + '" class="browsePage"/>';
 	var of	= '&nbsp;/&nbsp;' + bc.pages + '&nbsp;';
-	var ne	= '<span id="nuNext" onclick="nuGetPage(' + (bc.page_number + 2) + ',\'' + window.nuBrowseFunction + '\')" class="nuBrowsePage">&#9658;</span>';
 
 	var id	= 'nuBrowseFooter';
 	var div = document.createElement('div');
@@ -1990,7 +1991,7 @@ function nuSortBrowse(c){
 	
 }
 
-function nuGetPage(p, t){
+function nuGetPage(p){
 
 	var P = parseInt('00' + p);
 	var B = window.nuFORM.getCurrent();
@@ -2005,7 +2006,7 @@ function nuGetPage(p, t){
 	
 	B.page_number = P - 1;
 	
-	nuSearchAction(t);
+	nuSearchAction();
 	
 	
 }
@@ -2025,8 +2026,6 @@ function nuSelectBrowse(e){
 	}else if(y == 'lookup'){
 		
 		window.parent.nuGetLookupId(p, i);			//-- called from parent window
-		
-		window.nuBrowseFunction = "browse";
 		
 	}else{
 
