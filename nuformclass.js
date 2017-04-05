@@ -472,21 +472,21 @@ class nuFormObject {
 			var o		= v.split('.');
 			var h		= nuAddThousandSpaces(o[0], c);
 			
-			if(String(h) == 'toobig'){
-				
-				nuAlert(["Man! That's a BIG number, stop showing off."]);
-				return "";
-				
-			}
-			
-			if(o.length == 1 || o[1] == ''){ 				//-- no decimal numbers even if it has a decimal place
+			if(p == 0){ 									//-- no decimal numbers even if it has a decimal place
 				var m		= s + ' ' + h;
 			}else{
 				
-				var dnum	= String(o[1]);
-				var m		= s + ' ' + h + d + String(dnum + String(0).repeat(1000)).substr(0, p)
+				if(o.length == 2){							//-- this number had decimals
+					var suf	= d + String(o[1] + String(0).repeat(1000)).substr(0, p)
+				}else{
+					var suf	= d + String(String(0).repeat(1000)).substr(0, p)
+				}
+				
+				var m		= s + ' ' + h + suf
 				
 			}
+			
+			if(String(h) == 'toobig'){nuAlert(["Man! That's a BIG number, stop showing off.",'','<img id="thebig" src="fpdf\\big.png">']);return '';}
 			
 			return m;
 		

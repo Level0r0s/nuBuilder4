@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 03, 2017 at 10:23 AM
+-- Generation Time: Apr 04, 2017 at 01:18 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -19,6 +19,19 @@ SET time_zone = "+00:00";
 --
 -- Database: `nubuilder4`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `aaaaah`
+--
+
+CREATE TABLE `aaaaah` (
+  `aaaaah_id` varchar(25) NOT NULL,
+  `com_test` varchar(1000) NOT NULL,
+  `emp_name1` int(11) NOT NULL,
+  `com_color_id` varchar(1000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -758,7 +771,13 @@ INSERT INTO `zzzzsys_browse` (`zzzzsys_browse_id`, `sbr_zzzzsys_form_id`, `sbr_t
 ('s14911434706597', 'c14911434241195505', 'Suburb', 'com_suburb', 'l', '', 30, 200),
 ('s14911434706598', 'c14911434241195505', 'Name', 'emp_name1', 'l', '', 40, 200),
 ('s14911434706599', 'c14911434241195505', 'Color', 'com_color_id', 'l', '', 50, 200),
-('s14911434706600', 'c14911434241195505', 'aaaaaaaaaafrr', 'FF201', 'l', '', 60, 200);
+('s14911434706600', 'c14911434241195505', 'aaaaaaaaaafrr', 'FF201', 'l', '', 60, 200),
+('s14912555050088', 'c14912554944705938', 'Test', 'com_test', 'l', '', 20, 200),
+('s14912555050089', 'c14912554944705938', 'Calc this', 'com_phone', 'l', '', 30, 200),
+('s14912555050090', 'c14912554944705938', 'Mobile', 'emp_mobile', 'l', '', 40, 200),
+('s14912555438085', 'c14912555227328240', 'Test', 'com_test', 'l', '', 20, 200),
+('s14912555438086', 'c14912555227328240', 'Name', 'emp_name1', 'l', '', 30, 200),
+('s14912555438087', 'c14912555227328240', 'Color', 'com_color_id', 'l', '', 40, 200);
 
 -- --------------------------------------------------------
 
@@ -1110,7 +1129,9 @@ INSERT INTO `zzzzsys_form` (`zzzzsys_form_id`, `sfo_type`, `sfo_code`, `sfo_desc
 ('c1491141359618919', 'browseedit', 'FF198', 'Fast Form 198', 'aaaaaaaadrfg', 'aaaaaaaadrfg_id', '', 0, 0, 'SELECT * FROM aaaaaaaadrfg', ''),
 ('c14911421694186984', 'browseedit', 'FF199', 'Fast Form 199', 'aaaaagtd', 'aaaaagtd_id', '', 0, 0, 'SELECT * FROM aaaaagtd', ''),
 ('c14911427688048299', 'browseedit', 'FF200', 'Fast Form 200', 'aaaaaaaagh', 'aaaaaaaagh_id', '', 0, 0, 'SELECT * FROM aaaaaaaagh', ''),
-('c14911434241195505', 'browseedit', 'FF201', 'Fast Form 201', 'aaaaaaaaaafrr', 'aaaaaaaaaafrr_id', '', 0, 0, 'SELECT * FROM aaaaaaaaaafrr', '');
+('c14911434241195505', 'browseedit', 'FF201', 'Fast Form 201', 'aaaaaaaaaafrr', 'aaaaaaaaaafrr_id', '', 0, 0, 'SELECT * FROM aaaaaaaaaafrr', ''),
+('c14912554944705938', 'browseedit', 'FF202', 'Fast Form 202', '', '_id', '', 0, 0, 'SELECT * FROM ', ''),
+('c14912555227328240', 'browseedit', 'FF203', 'Fast Form 203', 'aaaaah', 'aaaaah_id', '', 0, 0, 'SELECT * FROM aaaaah', '');
 
 -- --------------------------------------------------------
 
@@ -1501,7 +1522,15 @@ INSERT INTO `zzzzsys_object` (`zzzzsys_object_id`, `sob_all_zzzzsys_form_id`, `s
 ('s14911434706590', 'c14911434241195505', 'aaaaaaaaaafrr', 'input', 'com_suburb', 'Suburb', 's14911434706588', 20, 40, 40, 90, 18, '1', 'left', '0', '0', '', 'nuTotal(''com_phone'') + nuTotal(''employee_sf.thecalc'')', 'N|$ 1,000.00', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'D|mmmm', 'nuDate', '', ''),
 ('s14911434706591', 'c14911434241195505', 'aaaaaaaaaafrr', 'input', 'emp_name1', 'Name', 's14911434706588', 30, 60, 60, 100, 18, '1', 'right', '2', '0', '', '', '', 'nuuser', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'number', '', ''),
 ('s14911434706592', 'c14911434241195505', 'aaaaaaaaaafrr', 'select', 'com_color_id', 'Color', 's14911434706588', 40, 112, 241, 100, 159, '1', 'left', '1', '0', '', '', '', '', '', '', '', '', '1', 'SELECT \ncolor_id,\ncol_description\nFROM color\nORDER BY col_description', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-('s14911434706594', 'nuhome', 'aaaaaaaaaafrr', 'run', 'FF201', 'aaaaaaaaaafrr', '58be4c05188661c', 11, 10, 10, 150, 30, '', '', '', '', '', '', '', 'c14911434241195505', '', 'b', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
+('s14911434706594', 'nuhome', 'aaaaaaaaaafrr', 'run', 'FF201', 'aaaaaaaaaafrr', '58be4c05188661c', 11, 10, 10, 150, 30, '', '', '', '', '', '', '', 'c14911434241195505', '', 'b', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+('s14912555050083', 'c14912554944705938', '', 'input', 'com_test', 'Test', 's14912555050082', 10, 20, 20, 200, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'text', '', ''),
+('s14912555050084', 'c14912554944705938', '', 'calc', 'com_phone', 'Calc this', 's14912555050082', 20, 40, 40, 111, 18, '1', 'right', '0', '0', '', 'nuTotal("employee_sf.emp_name") + nuTotal("employee_sf.emp_cost")', '$ 1,000.00', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'number', '', ''),
+('s14912555050085', 'c14912554944705938', '', 'input', 'emp_mobile', 'Mobile', 's14912555050082', 30, 60, 60, 136, 17, '1', 'left', '0', '0', '', '', 'N:$ 1,000.00', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'text', '', ''),
+('s14912555050091', 'c14912554944705938', '', 'run', 'FF202', '', '58be4c05188661c', 11, 100, 100, 100, 100, '', '', '', '', '', '', '', 'c14912554944705938', '', 'b', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+('s14912555438081', 'c14912555227328240', 'aaaaah', 'input', 'com_test', 'Test', 's14912555438080', 10, 20, 20, 200, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'text', '', ''),
+('s14912555438082', 'c14912555227328240', 'aaaaah', 'input', 'emp_name1', 'Name', 's14912555438080', 20, 40, 40, 100, 18, '1', 'right', '2', '0', '', '', '', 'nuuser', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'number', '', ''),
+('s14912555438083', 'c14912555227328240', 'aaaaah', 'select', 'com_color_id', 'Color', 's14912555438080', 30, 60, 60, 100, 159, '1', 'left', '1', '0', '', '', '', '', '', '', '', '', '1', 'SELECT \ncolor_id,\ncol_description\nFROM color\nORDER BY col_description', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+('s14912555438088', 'c14912555227328240', 'aaaaah', 'run', 'FF203', 'aaaaah', '58be4c05188661c', 11, 100, 100, 100, 100, '', '', '', '', '', '', '', 'c14912555227328240', '', 'b', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -1955,7 +1984,9 @@ INSERT INTO `zzzzsys_tab` (`zzzzsys_tab_id`, `syt_zzzzsys_form_id`, `syt_title`,
 ('s14911413795577', 'c1491141359618919', 'Main', 10),
 ('s14911421895219', 'c14911421694186984', 'Main', 10),
 ('s14911427843854', 'c14911427688048299', 'Main', 10),
-('s14911434706588', 'c14911434241195505', 'Main', 10);
+('s14911434706588', 'c14911434241195505', 'Main', 10),
+('s14912555050082', 'c14912554944705938', 'Main', 10),
+('s14912555438080', 'c14912555227328240', 'Main', 10);
 
 -- --------------------------------------------------------
 
@@ -2029,6 +2060,12 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `aaaaah`
+--
+ALTER TABLE `aaaaah`
+  ADD PRIMARY KEY (`aaaaah_id`);
 
 --
 -- Indexes for table `business`

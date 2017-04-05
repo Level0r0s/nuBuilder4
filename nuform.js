@@ -9,41 +9,41 @@ function nuBuildForm(f){
 		
 	}
 	
-	window.nuSERVERRESPONSE	= f;
-	window.nuBrowseFunction = 'browse';
-	window.nuSESSION		= f.session_id;
-	window.onbeforeunload	= null;
-	window.nuSUBFORMROW		= [];
-	//window.nuSUBFORMJSON	= [];
-	window.nuHASH			= [];                       //-- remove any hash variables previously set.
-	window.nuUniqueID		= 'c' + String(Date.now());
-	window.nuSuffix			= Number(String(Math.random()).substr(-4));
-	nuFORM.edited			= false;
-	nuFORM.scroll			= [];
+	window.nuSERVERRESPONSE		= f;
+	window.nuSESSION			= f.session_id;
+	window.onbeforeunload		= null;
+	window.nuSUBFORMROW			= [];
+	//window.nuSUBFORMJSON		= [];
+	window.nuHASH				= [];                       //-- remove any hash variables previously set.
+	window.nuUniqueID			= 'c' + String(Date.now());
+	window.nuSuffix				= Number(String(Math.random()).substr(-4));
+	nuFORM.edited				= false;
+	nuFORM.scroll				= [];
 	nuSetBody(f);
 	
 	
 	if(f.tableSchema.length != 0){  						//-- its an Object (load these once,  at login)
 
-		nuFORM.tableSchema	= f.tableSchema;
-		nuFORM.formSchema	= f.formSchema;
-		window.nuLANGUAGE	= f.translation;
+		nuFORM.tableSchema		= f.tableSchema;
+		nuFORM.formSchema		= f.formSchema;
+		window.nuLANGUAGE		= f.translation;
+		window.nuBrowseFunction = 'browse';
 		
 	}
 	
-	var b 					= window.nuFORM.getCurrent();
+	var b 						= window.nuFORM.getCurrent();
 
-	b.form_id 				= f.form_id;
-	b.record_id 			= f.record_id;
-	b.session_id 			= f.session_id;
-	b.user_id 				= f.user_id;
-	b.title 				= f.title;
-	b.row_height 			= f.row_height;
-	b.rows 					= f.rows;
-	b.browse_columns 		= f.browse_columns;
-	b.browse_sql			= f.browse_sql;
-	b.browse_rows 			= f.browse_rows;
-	b.pages 				= f.pages;
+	b.form_id 					= f.form_id;
+	b.record_id 				= f.record_id;
+	b.session_id 				= f.session_id;
+	b.user_id 					= f.user_id;
+	b.title 					= f.title;
+	b.row_height 				= f.row_height;
+	b.rows 						= f.rows;
+	b.browse_columns 			= f.browse_columns;
+	b.browse_sql				= f.browse_sql;
+	b.browse_rows 				= f.browse_rows;
+	b.pages 					= f.pages;
 	
 	nuResizeiFrame(f.dimensions, f.record_id);
 
@@ -2028,10 +2028,12 @@ function nuSelectBrowse(e){
 		
 		window.parent.nuGetLookupId(p, i);			//-- called from parent window
 		
+		window.nuBrowseFunction = "browse";
+		
 	}else{
 
 		window[y](e);
-		//window.nuBrowseFunction = "browse";
+		
 	}
 	
 }

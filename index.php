@@ -55,16 +55,14 @@ window.nuHASH			= [];
 	$search		= $_GET['search'];
 	$iframe		= $_GET['iframe'];
 	$target		= $_GET['target'];
+	
+	
+	nudebug("1type: " . $_GET['type']);
 	$type		= $_GET['type'] == '' ? 'browse' : $_GET['type'];
+	nudebug("2type: " . $_GET['type']);
 
 	$nuHeader	= nuHeader();
-	
-//	print "
-//	window.nuVersion		= 'nuBuilder4';
-//	
-//	";
-
-	$h	= "
+	$h			= "
 
 	if('$opener' == ''){
 		
@@ -88,7 +86,7 @@ window.nuHASH			= [];
 			window.nuFORM.caller	= from.nuFORM.getCurrent();
 			nuFORM.tableSchema		= from.nuFORM.tableSchema;
 			nuFORM.formSchema		= from.nuFORM.formSchema;
-			window.nuBrowseFunction			= '$type';
+			window.nuBrowseFunction	= '$type';
 			window.nuTARGET			= '$target';
 			window.nuSESSION		= from.nuSESSION;
 			
