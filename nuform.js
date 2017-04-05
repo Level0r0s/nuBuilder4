@@ -4,7 +4,7 @@ function nuBuildForm(f){
 	
 	if(f.form_id == ''){
 		
-		nuLogin();
+		console.log(7);nuLogin();
 		return;found
 		
 	}

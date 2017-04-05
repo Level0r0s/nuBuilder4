@@ -78,20 +78,14 @@ function nuForm(f, r, filter, search, n){
 	last.filter 		= filter;
 	last.search 		= search;
     last.hash	 		= parent.nuHashFromEditForm();
-/*	
-    if(f != 'nuerror'){
-        last.hash 		= parent.nuHashFromEditForm();
-    } else {
-        last.hash 		= [];
-    }
-*/
+
 	var successCallback = function(data,textStatus,jqXHR){
 
 		var fm 			= data;
 
 		if(nuDisplayError(fm)){
 
-			if(fm.log_again == 1){nuLogin();}
+			if(fm.log_again == 1){location.reload();}
 		
 		}else{
 			
