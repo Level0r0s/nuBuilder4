@@ -64,8 +64,9 @@ function removeOpenerById(o, pid) {
 
 function nuGetBreadcrumb(b){
 	
-	b		= arguments.length == 0 ? nuFORM.breadcrumbs.length -1 : b;
-	var y	= window.nuBrowseFunction;
+	b						= arguments.length == 0 ? nuFORM.breadcrumbs.length -1 : b;
+	var y					= window.nuBrowseFunction;
+	window.nuBrowseFunction	= 'browse';
 	
 	if(nuFORM.edited && y != 'runreport' && y != 'getphp'){
 		

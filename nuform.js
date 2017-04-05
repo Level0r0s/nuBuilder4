@@ -76,9 +76,7 @@ function nuBuildForm(f){
     if(f.record_id == '-2'){
         nuCreateDragOptionsBox(f);
 	}else{
-		
 		nuAddJavascript(f);
-		
 	}
 
 }
