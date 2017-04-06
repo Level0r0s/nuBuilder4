@@ -9,7 +9,7 @@
 .nu_lookup                   {background-color : #EDDA74 !important}
 .nu_subform                  {background-color : #fa9b96 !important}
 .nu_run                      {background-color : #cbc287 !important}
-.nu_textarea                 {background-color : #a0a7d6 !important}
+.nu_textarea                 {background-color : #babedb !important}
 .nu_select                   {background-color : #ffc082 !important}   
 .nu_calc                     {background-color : #B6B6B4 !important}   
 
@@ -289,7 +289,7 @@ input[type=range]::-webkit-slider-runnable-track {
 }
 
 .nuLookupCode {
-  background-color: #9ED374;
+  background-color: #c8e2c5;
   border: 1px solid rgba(0, 0, 0, 0.05);
   text-align: left;
   position: absolute;
