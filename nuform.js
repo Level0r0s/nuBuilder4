@@ -14,13 +14,12 @@ function nuBuildForm(f){
 	window.nuSESSION			= f.session_id;
 	window.onbeforeunload		= null;
 	window.nuSUBFORMROW			= [];
-	//window.nuSUBFORMJSON		= [];
 	window.nuHASH				= [];                       //-- remove any hash variables previously set.
 	window.nuUniqueID			= 'c' + String(Date.now());
 	window.nuSuffix				= Number(String(Math.random()).substr(-4));
 	nuFORM.edited				= false;
 	nuFORM.scroll				= [];
-	nuSetBody(f);
+	nuSetBody(f, f.dimensions[2]);
 	
 	
 	if(f.tableSchema.length != 0){  						//-- its an Object (load these once,  at login)
@@ -82,7 +81,7 @@ function nuBuildForm(f){
 }
 
 
-function nuSetBody(f){
+function nuSetBody(f, h){
 	
 	$('body').html('');
 	$('body').removeClass('nuBrowseBody nuEditBody');
@@ -90,7 +89,7 @@ function nuSetBody(f){
 	if(f.record_id == ''){
 		$('body').addClass('nuBrowseBody');
 	}else{
-		$('body').addClass('nuEditBody');
+		$('body').addClass('nuEditBody').css('height', h);;
 	}
 	
 }

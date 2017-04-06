@@ -3,8 +3,8 @@
 .nu_button                   {background-color : #98AFC7 !important}
 .nu_display                  {background-color : #C7B097 !important}
 .nu_dropdown                 {background-color : #7bce98 !important}
-.nu_html                     {background-color : #c497a6 !important}
-.nu_input                    {background-color : #99D9EA !important}
+.nu_html                     {background-color : #ddadbd !important}
+.nu_input                    {background-color : #a3d3e0 !important}
 .nu_word                     {background-color : #caa5f6 !important}
 .nu_lookup                   {background-color : #EDDA74 !important}
 .nu_subform                  {background-color : #fa9b96 !important}
@@ -289,7 +289,7 @@ input[type=range]::-webkit-slider-runnable-track {
 }
 
 .nuLookupCode {
-  background-color: #c8e2c5;
+  background-color: #d9ead7;
   border: 1px solid rgba(0, 0, 0, 0.05);
   text-align: left;
   position: absolute;
