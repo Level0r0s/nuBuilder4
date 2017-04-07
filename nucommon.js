@@ -64,10 +64,10 @@ function removeOpenerById(o, pid) {
 
 function nuGetBreadcrumb(b){
 	
-	b		= arguments.length == 0 ? nuFORM.breadcrumbs.length -1 : b;
-	var y	= window.nuBrowseFunction;
+	b						= arguments.length == 0 ? nuFORM.breadcrumbs.length -1 : b;
+	var bf					= window.nuBrowseFunction;
 	
-	if(nuFORM.edited && y != 'runreport' && y != 'getphp'){
+	if(nuFORM.edited && bf != 'runreport' && bf != 'getphp'){
 		
 		if(!confirm(nuTranslate('Leave this form without saving?'))){
 			return;
@@ -169,7 +169,7 @@ function nuBuildLookup(t, s){
 	
 	$('#nuDragDialog')
 	.css('visibility', 'hidden')
-	.append('<iframe style="right:5px;top:35px;width:400px;height:400px;position:absolute" id="nuWindow" src="index.php?&opener=' +open.id + '&target=' + tar + '&search=' + s + '&type=lookup&iframe=1"></iframe>');
+	.append('<iframe style="right:5px;top:35px;width:400px;height:400px;position:absolute" id="nuWindow" src="index.php?&opener=' +open.id + '&target=' + tar + '&search=' + s + '&browsefunction=lookup&iframe=1"></iframe>');
 
 }
 
@@ -186,7 +186,7 @@ function nuPopup(f, r, filter){
 	
 	$('#nuDragDialog')
 	.css('visibility', 'hidden')
-	.append('<iframe style="right:5px;top:35px;width:400px;height:400px;position:absolute" id="nuWindow" src="index.php?opener=' + id + '&type=browse&iframe=1"></iframe>')
+	.append('<iframe style="right:5px;top:35px;width:400px;height:400px;position:absolute" id="nuWindow" src="index.php?opener=' + id + '&browsefunction=browse&iframe=1"></iframe>')
 	.prepend('<div id="nuDraggingBox" style="position:absolute; bottom:0px; right:0px; width:20px; height:20px; z-index:200"></div>');
 	
 }

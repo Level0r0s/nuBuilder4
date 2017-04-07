@@ -321,7 +321,7 @@ function nuGetEditForm($F, $R){
     $f->order			= $SQL->orderBy;
     $f->from			= $SQL->from;
     $f->javascript		= $r->sfo_javascript;
-	
+
 	if(intval($r->sfo_browse_row_height) == 0){
 		$f->row_height	= 25;
 	}else{
