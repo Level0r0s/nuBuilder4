@@ -4,7 +4,7 @@ function nuBuildForm(f){
 	
 	if(f.form_id == ''){
 		
-		nuLogin();
+		console.log(7);nuLogin();
 		return;found
 		
 	}
@@ -95,8 +95,7 @@ function nuSetBody(f, h){
 		}
 		
 	}else{
-		
-		$('body').addClass('nuEditBody');
+		$('body').addClass('nuEditBody').css('height', h);;
 
 		if(window.parent.nuDocumentID == window.nuDocumentID){
 			$('body').css('height', Number(h));
