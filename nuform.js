@@ -87,9 +87,20 @@ function nuSetBody(f, h){
 	$('body').removeClass('nuBrowseBody nuEditBody');
 	
 	if(f.record_id == ''){
+		
 		$('body').addClass('nuBrowseBody');
+		
+		if(window.parent.nuDocumentID == window.nuDocumentID){
+			$('body').css('height', Number(h) + 250);
+		}
+		
 	}else{
 		$('body').addClass('nuEditBody').css('height', h);;
+
+		if(window.parent.nuDocumentID == window.nuDocumentID){
+			$('body').css('height', Number(h));
+		}
+		
 	}
 	
 }
@@ -1882,9 +1893,9 @@ function nuBrowseTable(){
 	
 	nuHighlightSearch();
 	
-	if(window.parent.nuDocumentID == window.nuDocumentID){
-		$('body').css('height', t + h + 100);
-	}
+	//if(window.parent.nuDocumentID == window.nuDocumentID){
+		//$('body').css('height', t + h + 100);
+	//}
 
 
 }

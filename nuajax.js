@@ -347,7 +347,6 @@ function nuUpdateData(action){
 
 	var f				= last.form_id;
 	var r				= last.record_id;
-	var d				= 
 
 	last.call_type 		= 'update';
 	last.deleteAll 		= $('#nuDelete').is(":checked") ? 'Yes' : 'No';
