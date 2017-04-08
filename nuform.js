@@ -605,6 +605,10 @@ function nuINPUT(w, i, l, p, prop){
 		return Number(prop.objects[i].width) + Number(prop.objects[i].description_width) + 30;
 		
 	}else{
+	
+		if(prop.objects[i].type == 'input' && input_type == 'nuAutoNumber'){
+			$('#' + id).val(prop.objects[i].counter);
+		}
 		
 		return Number(prop.objects[i].width);
 		

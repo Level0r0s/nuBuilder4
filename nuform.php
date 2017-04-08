@@ -66,13 +66,13 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 
     ";
 
-	if($F != ''){
+	if($R != ''){
 
 		$t 					= nuRunQuery($s, array($F));
 		$a 					= array();
 		
 		while($r = db_fetch_object($t)){
-
+			
 			$o 				= nuDefaultObject($r, $tabs);
 			
 			if($R == '-1'){
@@ -103,6 +103,16 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 				
 				if($r->sob_input_type == 'nuNumber' || $r->sob_input_type == 'nuDate'){
 					$o->format 	= $r->sob_input_format;
+				}
+					
+				if($r->sob_input_type == 'nuAutoNumber'){
+					
+					if($R == -1){
+						$o->counter 	= nuUpdateCounter($r->zzzzsys_object_id);
+					}else{
+						$o->counter 	= $r->sob_input_count;
+					}
+					
 				}
 					
 				$o->input 	= $r->sob_input_type;
@@ -216,17 +226,12 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 				
 			}
 
-			$a[]    			= $o;
+			$a[]    		= $o;
+			
 		}
-	} else {
-		nuDisplayError('Form ID not found');
+		
 	}
 
-	
-//	$f->buttons					= nuButtons($F, $P);
-	
-//    $f->buttons				= nuButtonList($f);
-//    $f->buttons				= $_POST['buttons'];
     $f->tabs 				= nuRefineTabList($tabs);
     $f->browse_columns		= nuBrowseColumns($f);
     $B						= nuBrowseRows($f);
@@ -241,6 +246,24 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
     return $O->forms[0];
 
 }
+
+function nuUpdateCounter($i){
+	
+ 	$t	= nuRunQuery('SELECT * FROM zzzzsys_object WHERE zzzzsys_object_id = ? ', [$i]);
+	$r	= db_fetch_object($t);
+	$c	= $r->sob_input_count;
+	
+	if($c == ''){$c = 0;}
+	
+	$n	= $c + 1;
+	
+	nuRunQuery('UPDATE zzzzsys_object SET sob_input_count = ? WHERE zzzzsys_object_id = ? ', [$c + 1, $i]);
+	nudebug('UPDATE zzzzsys_object SET sob_input_count = ? WHERE zzzzsys_object_id = ? ' . ($c + 1) . ' ' .  $i);
+	
+	return $c + 1;
+	
+}
+
 
 
 function nuDisplay($s){
