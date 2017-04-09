@@ -909,15 +909,15 @@ function nuSUBFORM(w, i, l, p, prop){
 		
 //		var rowHeight   	= Number(SF.dimensions[4]);
 //		var rowWidth    	= Number(SF.dimensions[5]);
-		var rowHeight   	= Number(SF.dimensions.edit.height);
-		var rowWidth    	= Number(SF.dimensions.edit.width);
+		var rowHeight   	= Number(SF.dimensions.edit.height + 10);
+		var rowWidth    	= Number(SF.dimensions.edit.width  + 10);
 		
 	}else{
 		
 //		var rowHeight   	= Number(SF.dimensions[6]);
 //		var rowWidth    	= Number(SF.dimensions[7]);
 		var rowHeight   	= Number(SF.dimensions.grid.height);
-		var rowWidth    	= Number(SF.dimensions.grid.width);
+		var rowWidth    	= Number(SF.dimensions.grid.width + 55);
 		
 	}
 	
