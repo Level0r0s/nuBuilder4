@@ -207,9 +207,9 @@ nudebug('gh2');
 	nuRunQuery("INSERT INTO zzzzsys_object SELECT * FROM $TT");
 	nuRunQuery("DROP TABLE $TT");
 
-
-
-	print $create;
+	$html	= "<!DOCTYPE html><html><head><link rel='stylesheet' href='nubuilder4.css'></head><body><h1>My First Heading</h1><p>My first paragraph.</p></body></html>";
+	
+	print $html;
 
 }
 

@@ -256,11 +256,19 @@ function nuCreateDialog(t){
 		.append(e);
 
 		$('#nuDragDialog').addClass('nuDragDialog nuDragNoSelect')
-		.css({'left':l, 'top':t, 'width':w, 'height':h, 'background-color':'#E0E0E0', 'z-index': 3000, 'position':'absolute'})
-		.html('<div id="dialogTitle" ondblclick="nuResizeWindow(event)" style="background-color:#CCCCCC ;position:absolute;width:100%;height:35px;font-size:16px;font-family:Helvetica"><div id="dialogTitleWords" style="padding-top: 6px;height:30px;">&nbsp;&nbsp;'+title+'</div><img id="dialogClose" src="close.png" style="position:absolute; top:0px; left:0px"></div>')
+		.css({
+			'left'				: l, 
+			'top'				: t, 
+			'width'				: w, 
+			'height'			: h, 
+			'background-color'	: '#E0E0E0', 
+			'z-index'			: 3000, 
+			'position'			: 'absolute'
+		})
 		.on('mousemove', 	function(event){nuDialog.move(event);})
 		.on('mouseout', 	function(event){$('#dialogClose').css('background-color','');})
-		.on('click',     	function(event){nuDialog.click(event);});
+		.on('click',     	function(event){nuDialog.click(event);})
+		.html('<div id="dialogTitle" ondblclick="nuResizeWindow(event)" style="background-color:#CCCCCC ;position:absolute;width:100%;height:35px;font-size:16px;font-family:Helvetica"><div id="dialogTitleWords" style="padding-top: 6px;height:30px;">&nbsp;&nbsp;'+title+'</div><img id="dialogClose" src="close.png" style="position:absolute; top:0px; left:0px"></div>')
 
 		this.startX = l;
 		this.startY = t;

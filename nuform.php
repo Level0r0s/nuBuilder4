@@ -824,6 +824,7 @@ function nuCheckSession(){
 	$c->tableSchema			= array();
 	$c->formSchema			= array();
 	$c->translation			= array();
+	$c->dimensions			= nuFormDimensions($c->form_id);
 
     if($s == ''){										//-- no session id yet
 
@@ -966,7 +967,7 @@ function nuCheckSession(){
 		
 	}
 
-	$c->dimensions		= nuFormDimensions($c->form_id);
+//	$c->dimensions		= nuFormDimensions($c->form_id);
 
 	return $c;
 	
@@ -1188,25 +1189,16 @@ function nuFormDimensions($f){
 	$t			= nuRunQuery("SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$f'");
 	$r			= db_fetch_object($t);
 	
+	$bt			= 57; 	//-- browse title
 	$rh			= intval($r->sfo_browse_row_height)    == 0 ? 25 : $r->sfo_browse_row_height;
 	$rs			= intval($r->sfo_browse_rows_per_page) == 0 ? 25 : $r->sfo_browse_rows_per_page;
+	$bb			= 25;   //-- browse footer
 	
-	$d[]		= ($rs * $rh) + 225;    //-- lookup browse height
-	
-	$t			= nuRunQuery("SELECT * FROM zzzzsys_browse WHERE sbr_zzzzsys_form_id = '$f'");
+	$t			= nuRunQuery("SELECT * FROM zzzzsys_object WHERE sob_all_zzzzsys_form_id = '$f'");
+	$h			= 0;
 	$w			= 0;
-	
-	while($r	= db_fetch_object($t)){
-		$w = $w + $r->sbr_width;
-	}
-	
-	$d[]		= $w + 40;             //-- lookup browse width
-	
-	$t	= nuRunQuery("SELECT * FROM zzzzsys_object WHERE sob_all_zzzzsys_form_id = '$f'");
-	$h	= 0;
-	$w	= 0;
-	$gh	= 0;
-	$gw	= 0;
+	$gh			= 0;
+	$gw			= 0;
 	
 	while($r	= db_fetch_object($t)){
 		
@@ -1226,17 +1218,49 @@ function nuFormDimensions($f){
 		$gh 	= max($r->sob_all_height, 25);
 
 	}
-	
-	$d[]	= $h  + 200;		//-- lookup form height
-	$d[]	= $w  + 20;			//-- lookup form width
-	$d[]	= $h  + 25;			//-- form height
-	$d[]	= $w  + 50;			//-- form width
-	$d[]	= $gh + 0;			//-- grid height
-	$d[]	= $gw + 55;			//-- grid width
 
+
+
+	$bh			= $bt + ($rs * $rh) + $bb;
+	$bw			= nuGetBrowseWidth($f);	
+
+	$grid		= ['height'=>$gh, 'width'=> $gw];
+	$browse		= ['height'=>$bh, 'width'=> $bw];
+	$edit		= ['height'=>$h,  'width'=> $w];
+
+
+	
+	$d[]		= $bt + ($rs * $rh) + $bb;    		//-- lookup browse height (0)
+	$d[]		= nuGetBrowseWidth($f);	
+	$d[]		= $h  + 0;		//-- lookup form height 	(2)
+	$d[]		= $w  + 0;		//-- lookup form width		(3)
+	$d[]		= $h  + 0;		//-- form height			(4)
+	$d[]		= $w  + 50;			//-- form width				(5)
+	$d[]		= $gh + 0;			//-- grid height			(6)
+	$d[]		= $gw + 55;			//-- grid width				(7)
+	
+	$d[]		= ['browse'=>$browse, 'edit'=>$edit, 'grid'=>$grid];
+	return ['browse'=>$browse, 'edit'=>$edit, 'grid'=>$grid];
+	
 	return $d;
 	
 }
+
+
+function nuGetBrowseWidth($f){
+	
+	$w			= 0;
+	$t			= nuRunQuery("SELECT * FROM zzzzsys_browse WHERE sbr_zzzzsys_form_id = ? ", [$f]);
+	
+	while($r	= db_fetch_object($t)){
+		$w = $w + $r->sbr_width;
+	}
+	
+	return $w;
+
+	
+}
+
 
 
 function nuGetAllLookupValues(){
