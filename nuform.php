@@ -248,19 +248,47 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 }
 
 function nuUpdateCounter($i){
+
+	$times	= 0;
+
+	while($r->sob_input_count == ''){
+		
+		$times++;
+		
+		if($times > 10){
+			
+			nuDisplayError("AutoNumber for <b>$r->sob_all_id</b>) cannot be updated");
+			return 0;
+			
+		}
+		
+		$u	= $_SESSION['SESSIONID'];
+		
+		$s	= "
+		
+			UPDATE zzzzsys_object 
+			SET 
+				sob_input_javascript = ?, 
+				sob_input_count = IF(sob_input_count IS NULL OR sob_input_count = '', 0, sob_input_count + 1)
+			WHERE zzzzsys_object_id = ? 
+		
+		";
+		
+		nuRunQuery($s, [$u, $i]);
+		
+		$s	= "
+		
+			SELECT *
+			FROM zzzzsys_object
+			WHERE sob_input_javascript = ?
+		
+		";
+
+		$t	= nuRunQuery($s, [$u]);
+		$r	= db_fetch_object($t);
+	}
 	
- 	$t	= nuRunQuery('SELECT * FROM zzzzsys_object WHERE zzzzsys_object_id = ? ', [$i]);
-	$r	= db_fetch_object($t);
-	$c	= $r->sob_input_count;
-	
-	if($c == ''){$c = 0;}
-	
-	$n	= $c + 1;
-	
-	nuRunQuery('UPDATE zzzzsys_object SET sob_input_count = ? WHERE zzzzsys_object_id = ? ', [$c + 1, $i]);
-	nudebug('UPDATE zzzzsys_object SET sob_input_count = ? WHERE zzzzsys_object_id = ? ' . ($c + 1) . ' ' .  $i);
-	
-	return $c + 1;
+	return $r->sob_input_count;
 	
 }
 
