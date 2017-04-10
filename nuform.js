@@ -2267,7 +2267,10 @@ function nuFormClass(frm){
 	var values			= [];
 	var rows			= [];
 
-	var o				= $("[data-nu-prefix='" + frm + "'][data-nu-field].nuEdited");
+    var field_selector = "[data-nu-prefix='" + frm + "'][data-nu-field].nuEdited";
+    if(primary_key == '-1')
+        field_selector = "[data-nu-prefix='" + frm + "'][data-nu-field]";
+	var o				= $(field_selector);
 
 	o.each(function(index){
 
