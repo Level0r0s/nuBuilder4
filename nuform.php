@@ -110,7 +110,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 					if($R == -1){
 						$o->counter 	= nuUpdateCounter($r->zzzzsys_object_id);
 					}else{
-						$o->counter 	= $r->sob_input_count;
+						$o->counter 	= $o->value;
 					}
 					
 				}

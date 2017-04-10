@@ -86,7 +86,8 @@ function nuBuildFastForm($table, $form_id){
 
 	";
 
-	$pix            = 20;
+	$gap            = 30;
+	$left			= 150;
 
 	for($i = 0 ; $i < count($SF->rows) ; $i++){
 		
@@ -94,8 +95,9 @@ function nuBuildFastForm($table, $form_id){
 		$label      = $SF->rows[$i][1];
 		$field      = $SF->rows[$i][2];
 		$oldid      = $SF->rows[$i][3];
+		$corner		= $left + ($gap * $i);
 
-		$array      = Array($field, $label, (10*(1+$i)), ($pix*(1+$i)+50), ($pix*(1+$i)), $table, $form_id, $tab_id, $newid, $oldid);
+		$array      = Array($field, $label, $corner, $corner, $corner, $table, $form_id, $tab_id, $newid, $oldid);
 
 		nuRunQuery($sql, $array);
 
@@ -136,11 +138,9 @@ function nuBuildFastForm($table, $form_id){
 	$t              = nuRunQuery("SELECT * FROM $TT");
 	$ord            = 1;
 
-nudebug('gh1');
 	while($r = db_fetch_object($t)){
-nudebug('gh2');
 
-	$ord++;
+		$ord++;
 		
 		$y          = $r->sob_all_type;
 		$i          = $r->sob_input_type;
@@ -199,15 +199,24 @@ nudebug('gh2');
 
 	";
 
-	$array          = Array(nuID(), 'nuhome', '58be4c05188661c', "ff$form_id", $table, $table, 11, 100, 200, 100, 30, $form_id, 'b', 0, 0, 0, 'run');
-	//-- 58be4c05188661c   is the Tesing Tab on Home
+	$array          = Array(nuID(), 'nuhome', 'nutesttab', "ff$form_id", $table, $table, 11, 63, 250, 150, 30, $form_id, 'b', 0, 0, 0, 'run');
 	nuRunQuery($sql, $array);
-
 
 	nuRunQuery("INSERT INTO zzzzsys_object SELECT * FROM $TT");
 	nuRunQuery("DROP TABLE $TT");
 
-	$html	= "<!DOCTYPE html><html><head><link rel='stylesheet' href='nubuilder4.css'></head><body><h1>My First Heading</h1><p>My first paragraph.</p></body></html>";
+	$html	= "<!DOCTYPE html>
+		<html>
+			<head>
+				<link rel='stylesheet' href='nubuilder4.css'>
+			</head>
+			<body class='nuEditBody' style='padding:20px'>
+				<h1>A Table and Form have been created!</h1>
+				<p>(There is now a Button called <b>$table</b> on the Testing tab of the Home Form)</p>
+			</body>
+		</html>
+		
+		";
 	
 	print $html;
 
