@@ -4,20 +4,21 @@ function nuBuildForm(f){
 	
 	if(f.form_id == ''){
 		
-		console.log(7);nuLogin();
-		return;found
+		nuLogin();
+		return
 		
 	}
 	
+	window.onbeforeunload		= null;
 	window.nuBrowseFunction		= window.nuDefaultBrowseFunction;
 	window.nuSERVERRESPONSE		= f;
 	window.nuSESSION			= f.session_id;
-	window.onbeforeunload		= null;
 	window.nuSUBFORMROW			= [];
 	window.nuHASH				= [];                       //-- remove any hash variables previously set.
 	window.nuUniqueID			= 'c' + String(Date.now());
 	window.nuSuffix				= Number(String(Math.random()).substr(-4));
 	nuFORM.edited				= false;
+	nuFORM.formType				= f.type;
 	nuFORM.scroll				= [];
 	nuSetBody(f);
 	
@@ -907,15 +908,11 @@ function nuSUBFORM(w, i, l, p, prop){
 
 	if(SF.subform_type == 'f'){
 		
-//		var rowHeight   	= Number(SF.dimensions[4]);
-//		var rowWidth    	= Number(SF.dimensions[5]);
 		var rowHeight   	= Number(SF.dimensions.edit.height + 10);
 		var rowWidth    	= Number(SF.dimensions.edit.width  + 10);
 		
 	}else{
 		
-//		var rowHeight   	= Number(SF.dimensions[6]);
-//		var rowWidth    	= Number(SF.dimensions[7]);
 		var rowHeight   	= Number(SF.dimensions.grid.height);
 		var rowWidth    	= Number(SF.dimensions.grid.width + 55);
 		
@@ -923,7 +920,7 @@ function nuSUBFORM(w, i, l, p, prop){
 	
     if(SF.delete == '1'){
 
-		rowWidth 		= rowWidth - 3;
+		rowWidth 			= rowWidth - 3;
 		
     }else{
 		

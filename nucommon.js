@@ -64,10 +64,9 @@ function removeOpenerById(o, pid) {
 
 function nuGetBreadcrumb(b){
 	
-	b						= arguments.length == 0 ? nuFORM.breadcrumbs.length -1 : b;
-	var bf					= window.nuBrowseFunction;
-	
-	if(nuFORM.edited && bf != 'runreport' && bf != 'getphp'){
+	b					= arguments.length == 0 ? nuFORM.breadcrumbs.length -1 : b;
+
+	if(nuFORM.edited && nuFORM.formType != 'launch'){
 		
 		if(!confirm(nuTranslate('Leave this form without saving?'))){
 			return;
@@ -78,8 +77,13 @@ function nuGetBreadcrumb(b){
 	window.nuFORM.removeAfter(b);
 	
 	var c				= window.nuFORM.getCurrent();
+	
+	if(c === undefined){
+		$('#nuDragDialog iframe').remove();
+	}else{
+		nuForm(c.form_id, c.record_id, c.filter, c.search, 1);
+	}
 
-	nuForm(c.form_id, c.record_id, c.filter, c.search, 1);
 	
 }
 

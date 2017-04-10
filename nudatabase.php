@@ -112,6 +112,7 @@ function db_is_auto_id($t, $p){
 
 	$t       = nuRunQuery("SHOW COLUMNS FROM $t WHERE `Field` = '$p'");   //-- mysql's way of checking if its an auto-incrementing id primary key
 	$r       = db_fetch_object($t);
+	
 	return $r->Extra == 'auto_increment';
 
 }
