@@ -6,7 +6,7 @@ error_reporting( error_reporting() & ~E_NOTICE );
 
 require_once('config.php'); 
 require_once('nubuilders.php'); 
-require_once('nuexception.php'); 
+//require_once('nuexception.php'); 
 require_once('nuevalphpclass.php'); 
 require_once dirname(__FILE__) . '/sql-parser/src/PHPSQLParser.php';
 require_once dirname(__FILE__) . '/sql-parser/src/PHPSQLCreator.php';

@@ -528,7 +528,7 @@ function nuFormatValue($row, $i){
 		
 	}else if($r->sob_all_type == 'input' and $r->sob_input_type == 'nuAutoNumber'){
 		
-		if($_POST['nuHash']['PREVIOUS_RECORD_ID'] != $_POST['nuHash']['RECORD_ID']){
+		if(nuHasNewRecordID()){
 			return nuUpdateCounter($r->zzzzsys_object_id);
 		}
 		
@@ -540,9 +540,14 @@ function nuFormatValue($row, $i){
 
 }
 
+
+function nuHasNewRecordID(){
+	return $_POST['nuHash']['PREVIOUS_RECORD_ID'] != $_POST['nuHash']['RECORD_ID'];
+}
+
 function nuChangeHashVariable($h, $v){
 	
-	$_POST['nuHash'][$h] = $v;
+	$_POST['nuHash'][$h]	= $v;
 	
 }
 
@@ -556,20 +561,16 @@ function nuDisplayError($m){
 function nuCheckAccess($f, $r = ''){
 	
 	if(in_array($f, $_POST['forms'])){
-		
 		return 1;
-		
 	}else{
 
 	
 		if($r == '' or $r == '-1' or in_array($r, array_merge($_POST['reports'], $_POST['procedures']))){
-
 			return 2;
-			
 		}else{
 
-
 			nuDisplayError("Access Denied..");
+			
 			return 3;
 			
 		}

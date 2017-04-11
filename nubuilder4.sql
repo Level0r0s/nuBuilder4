@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 11, 2017 at 11:36 PM
+-- Generation Time: Apr 12, 2017 at 01:18 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -184,7 +184,9 @@ CREATE TABLE `invoice` (
 
 INSERT INTO `invoice` (`invoice_id`, `inv_number`, `inv_total`, `inv_date`) VALUES
 ('58ae12b19cd86fe', 77, '215.3000000', '2017-03-19'),
-('58dd85c34768b7b', 222, '1.8000000', '2017-03-15');
+('58dd85c34768b7b', 222, '1.8000000', '2017-03-15'),
+('s14919516899490', 53, '215.3000000', '2017-03-19'),
+('s14919517022910', 54, '0.0000000', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -215,7 +217,10 @@ INSERT INTO `invoice_item` (`invoice_item_id`, `ite_invoice_id`, `ite_thing`, `i
 ('58ae12b19cd8ecf', '58ae12b19cd86fe', 'egyh', 4.0000, 2.0000, 8.0000),
 ('58bf8fbec518c94', '58ae12b19cd86fe', 'tyntyh', 33.0000, 22.0000, 726.0000),
 ('58bf8fbec51935c', '58ae12b19cd86fe', '321', 43.0000, 33.0000, 1419.0000),
-('58dd85c34769469', '58dd85c34768b7b', 'dfb', 6.0000, 3.0000, 18.0000);
+('58dd85c34769469', '58dd85c34768b7b', 'dfb', 6.0000, 3.0000, 18.0000),
+('s14919516899491', 's14919516899490', 'egyh', 4.0000, 2.0000, 8.0000),
+('s14919516899492', 's14919516899490', 'tyntyh', 33.0000, 22.0000, 726.0000),
+('s14919516899493', 's14919516899490', '321', 43.0000, 33.0000, 1419.0000);
 
 -- --------------------------------------------------------
 
@@ -661,7 +666,8 @@ INSERT INTO `zzzzsys_function` (`zzzzsys_function_id`, `sfu_language`, `sfu_name
 ('58dc2a78c53adfd', 'js', 'nuBeforeSave', 'boolean = nuBeforeSave()', 'The name of a custom javascript function, that will run before saving an Edit Form', 'function nuBeforeSave(){\n\nif(cus_name){\n\n   nuAlert(''No Customer!'');\n   return false;\n\n}else{\n   return true;\n}', ''),
 ('58dcb8edeebbe38', 'php', 'nuSubformObject', 'object = nuSubformObject(subformID)', 'An object defining a Subform.', '\n$SF             = nuSubformObject(''obj_sf'');\n\n$sql            = "\n\n                UPDATE aaa\n                SET \n                    sob_all_id                  = ?,\n                    sob_all_label               = ?,\n                    sob_all_order               = ?,\n                    sob_all_table               = ?,\n                    sob_all_zzzzsys_form_id     = ?,\n                    sob_all_zzzzsys_tab_id      = ?,\n                    zzzzsys_object_id           = ?\n                WHERE \n                    zzzzsys_object_id           = ?\n\n";\n\nfor($i = 0 ; $i < count($SF->rows) ; $i++){\n    \n    $newid      = nuID();\n    $label      = $SF->rows[$i][1];\n    $field      = $SF->rows[$i][2];\n    $oldid      = $SF->rows[$i][3];\n\n    $array      = Array($field, $label, (10*(1+$i)), $table, $form_id, $tab_id, $newid, $oldid);\n\n    nuRunQuery($sql, $array);\n\n}\n\n\n', ''),
 ('s14919452896598', 'js', 'nuGetBreadcrumb', 'nuGetBreadcrumb(integer1, integer2)', 'Open a specific Form and/or Tab.', '//-- open the first breadcrumb and the 2nd tab.\n\nnuGetBreadcrumb(0,1)  ', 'nuSelectTab'),
-('s14919465746468', 'js', 'nuSelectTab', 'nuSelectTab(TabObject)', 'Open a specific Tab.', 'nuSelectTab(document.getElementById(''nuTab2''));\n', 'nuGetBreadcrumb');
+('s14919465746468', 'js', 'nuSelectTab', 'nuSelectTab(TabObject)', 'Open a specific Tab.', 'nuSelectTab(document.getElementById(''nuTab2''));\n', 'nuGetBreadcrumb'),
+('s14919525135898', 'php', 'nuHasNewRecordID', 'boolean = nuHasNewRecordID()', 'Returns true if New or Cloned record.', 'if(nuHasNewRecordID()){\n   do something ..\n}', '');
 
 -- --------------------------------------------------------
 
@@ -908,7 +914,7 @@ INSERT INTO `zzzzsys_object` (`zzzzsys_object_id`, `sob_all_zzzzsys_form_id`, `s
 ('58a0949b9e9922a', '58a08a91c9b59a9', 'invoice_item', 'input', 'ite_unit_price', 'Unit Cost', '58a08a91c9b6df4', 30, 21, 290, 70, 18, '1', 'right', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 'N|$ 1,000.00', 'nuNumber', '', ''),
 ('58a094d695573f2', '58a08a91c9b59a9', 'invoice_item', 'calc', 'ite_total', 'Total', '58a08a91c9b6df4', 40, 22, 390, 76, 18, '1', 'right', '0', '0', '', 'nuTotal("ite_units") * nuTotal("ite_unit_price")', 'N|$ 1,000.00', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', ''),
 ('58a0c22bc011b1c', '58a08a1abc4782c', 'invoice', 'calc', 'inv_total', 'Grand Total', '58a08a1abc48c9a', 20, 307, 490, 76, 25, '1', 'right', '0', '0', '', 'nuTotal("invoice_item.ite_total") * .1', 'N|$ 1,000.00', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', ''),
-('58a0c3d66b2daa7', '58a08a1abc4782c', 'invoice', 'input', 'inv_number', 'Invoice Number', '58a08a1abc48c9a', 30, 32, 168, 50, 25, '0', 'right', '0', '0', '', 'nuTotal("invoice_item.ite_total")', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 52, '', 'nuAutoNumber', 's14917826216026', ''),
+('58a0c3d66b2daa7', '58a08a1abc4782c', 'invoice', 'input', 'inv_number', 'Invoice Number', '58a08a1abc48c9a', 30, 32, 168, 50, 25, '0', 'right', '0', '0', '', 'nuTotal("invoice_item.ite_total")', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 54, '', 'nuAutoNumber', 's14919504214243', ''),
 ('58a680c21664405', 'nuobject', 'zzzzsys_object', 'input', 'sob_all_table', 'Table', '570d90df5ce8e1a', 10, 20, 0, 72, 18, '1', 'left', '0', '2', '', '', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', 0, '', 'text', '', ''),
 ('58afef1eacbcf15', 'nuhome', '', 'run', 'run_format', 'Formats', '581288bcd699493', 140, 162, 101, 150, 30, '1', 'left', '1', '0', '', '', '', 'nuformat', '', 'b', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', ''),
 ('58aff2b35cd9963', 'nuformat', 'zzzzsys_format', 'select', 'srm_type', 'Input Type', '58af6b019f658f4', 10, 18, 86, 85, 18, '1', 'left', '1', '0', '', '', '', '', '', '', '', '', '0', 'Number|Number|\nDate|Date', 'syt_title', 'sfo_description', '200', '', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', 0, '', 'text', '', ''),
