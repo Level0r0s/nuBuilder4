@@ -427,9 +427,9 @@ function nuOpenNewBrowserTab(c, f, r, filter){
 
 		nuOpenerAppend('type', c);
 		
-	    var len   	= window.nuOPENER.length - 1;
-		var id 	    = window.nuOPENER[window.nuOPENER.length - 1].id;
-		var u		= window.location.origin + window.location.pathname + '?i=' + len + '&opener=' + id ;
+	    var len 	  	= window.nuOPENER.length - 1;
+		var id 	    	= window.nuOPENER[window.nuOPENER.length - 1].id;
+		var u			= window.location.origin + window.location.pathname + '?i=' + len + '&opener=' + id ;
 		
 		window.open(u);
 

@@ -589,7 +589,34 @@ function nuSubformObject($id){
 }
 
 
+function nuDeleteForm($f){
+	
+	$s		= "DELETE FROM zzzzsys_browse WHERE sbr_zzzzsys_form_id = ? ";
+	$t		= nuRunQuery($s, [$f]);
+	$s		= "DELETE FROM zzzzsys_tab WHERE syt_zzzzsys_form_id = ? ";
+	$t		= nuRunQuery($s, [$f]);
+	$s		= "DELETE FROM zzzzsys_php WHERE zzzzsys_php_id LIKE CONCAT(?, '_') ";
+	$t		= nuRunQuery($s, [$f]);
+	$s		= "DELETE FROM zzzzsys_object WHERE sob_all_type = 'run' AND sob_run_zzzzsys_form_id = ? ";
+	$t		= nuRunQuery($s, [$f]);
+	$s		= "SELECT * FROM zzzzsys_object WHERE sob_all_zzzzsys_form_id = ? ";
+	$t		= nuRunQuery($s);
 
+
+	while($r = db_fetch_object($t)){
+		
+		$i	= $r->zzzzsys_object;
+		$s	= "DELETE FROM zzzzsys_event WHERE sev_zzzzsys_object_id = ? ";
+		$t	= nuRunQuery($s, [$i]);
+		$s	= "DELETE FROM zzzzsys_php WHERE zzzzsys_php_id  LIKE CONCAT(?, '_')";
+		$t	= nuRunQuery($s, [$i]);
+
+	}
+
+	$s		= "DELETE FROM zzzzsys_object WHERE sob_all_type = 'run' AND sob_run_zzzzsys_form_id = ? ";
+	$t		= nuRunQuery($s, [$f]);
+	
+}
 
 
 ?>

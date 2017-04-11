@@ -62,6 +62,8 @@ window.nuHASH			= [];
 
 	$h			= "
 
+	window.nuIsWindow						= '$iframe';
+	
 	if('$opener' == ''){
 		
 		function nuLoad(){
