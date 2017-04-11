@@ -62,11 +62,25 @@ function removeOpenerById(o, pid) {
 
 }
 
-function nuGetBreadcrumb(b){
+function nuGetBreadcrumb(bc, ind){
 	
-	b					= arguments.length == 0 ? nuFORM.breadcrumbs.length -1 : b;
-
-	if(nuFORM.edited && nuFORM.formType != 'launch'){
+	var a			= arguments.length;
+	var e			= nuFORM.edited;
+	var f			= nuFORM.formType;
+	
+	if(a == 0){
+		var b		= nuFORM.breadcrumbs.length -1;
+	}else{
+		
+		var b		= bc;
+		
+		if(a == 2){
+			nuFORM.breadcrumbs[b].tab_start[0].tabNumber	= String(ind);
+		}
+		
+	}
+	
+	if(e && f != 'launch'){
 		
 		if(!confirm(nuTranslate('Leave this form without saving?'))){
 			return;

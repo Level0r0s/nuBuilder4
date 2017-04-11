@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 11, 2017 at 03:12 AM
+-- Generation Time: Apr 11, 2017 at 11:36 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -518,8 +518,7 @@ INSERT INTO `zzzzsys_event` (`zzzzsys_event_id`, `sev_zzzzsys_object_id`, `sev_e
 ('58d77876b3e8944', '58d700e66eab5aa', 'onclick', 'nuShowFFO(event)'),
 ('p14911023476093', '58dfee3c5b0286944', 'onclick', '$(''#'' + this.id).remove();'),
 ('s14913709691917', '583387f044052c5', 'onclick', 'nuGetPHP(''nufflaunch'', ''nufastform'')'),
-('s14914326016500', 's14914319287342', 'onclick', 'nuPopup(''nusample'',''-1'');'),
-('s14917719387760', 's14917719387759', 'onclick', 'nuPopup(''c14916355747536919'',''-1'');');
+('s14914326016500', 's14914319287342', 'onclick', 'nuPopup(''nusample'',''-1'');');
 
 -- --------------------------------------------------------
 
@@ -660,7 +659,9 @@ INSERT INTO `zzzzsys_function` (`zzzzsys_function_id`, `sfu_language`, `sfu_name
 ('58d87beb5b68ce8', 'php', 'nuTT', 'string = nuTT()', 'Creates a new unique ID used for creating a temp table name. Prefixed with __nu', '$tt = nuTT();\n\n$sql = "CREATE TABLE $tt SELECT * FROM customer";\n', '[nuID](nuID)'),
 ('58dc29359d5c185', 'js', 'nuAlert', 'nuAlert(string)', 'nuBuilder Popup message.', 'if(cus_name){\n   nuAlert(''No Customer!'');\n}', ''),
 ('58dc2a78c53adfd', 'js', 'nuBeforeSave', 'boolean = nuBeforeSave()', 'The name of a custom javascript function, that will run before saving an Edit Form', 'function nuBeforeSave(){\n\nif(cus_name){\n\n   nuAlert(''No Customer!'');\n   return false;\n\n}else{\n   return true;\n}', ''),
-('58dcb8edeebbe38', 'php', 'nuSubformObject', 'object = nuSubformObject(subformID)', 'An object defining a Subform.', '\n$SF             = nuSubformObject(''obj_sf'');\n\n$sql            = "\n\n                UPDATE aaa\n                SET \n                    sob_all_id                  = ?,\n                    sob_all_label               = ?,\n                    sob_all_order               = ?,\n                    sob_all_table               = ?,\n                    sob_all_zzzzsys_form_id     = ?,\n                    sob_all_zzzzsys_tab_id      = ?,\n                    zzzzsys_object_id           = ?\n                WHERE \n                    zzzzsys_object_id           = ?\n\n";\n\nfor($i = 0 ; $i < count($SF->rows) ; $i++){\n    \n    $newid      = nuID();\n    $label      = $SF->rows[$i][1];\n    $field      = $SF->rows[$i][2];\n    $oldid      = $SF->rows[$i][3];\n\n    $array      = Array($field, $label, (10*(1+$i)), $table, $form_id, $tab_id, $newid, $oldid);\n\n    nuRunQuery($sql, $array);\n\n}\n\n\n', '');
+('58dcb8edeebbe38', 'php', 'nuSubformObject', 'object = nuSubformObject(subformID)', 'An object defining a Subform.', '\n$SF             = nuSubformObject(''obj_sf'');\n\n$sql            = "\n\n                UPDATE aaa\n                SET \n                    sob_all_id                  = ?,\n                    sob_all_label               = ?,\n                    sob_all_order               = ?,\n                    sob_all_table               = ?,\n                    sob_all_zzzzsys_form_id     = ?,\n                    sob_all_zzzzsys_tab_id      = ?,\n                    zzzzsys_object_id           = ?\n                WHERE \n                    zzzzsys_object_id           = ?\n\n";\n\nfor($i = 0 ; $i < count($SF->rows) ; $i++){\n    \n    $newid      = nuID();\n    $label      = $SF->rows[$i][1];\n    $field      = $SF->rows[$i][2];\n    $oldid      = $SF->rows[$i][3];\n\n    $array      = Array($field, $label, (10*(1+$i)), $table, $form_id, $tab_id, $newid, $oldid);\n\n    nuRunQuery($sql, $array);\n\n}\n\n\n', ''),
+('s14919452896598', 'js', 'nuGetBreadcrumb', 'nuGetBreadcrumb(integer1, integer2)', 'Open a specific Form and/or Tab.', '//-- open the first breadcrumb and the 2nd tab.\n\nnuGetBreadcrumb(0,1)  ', 'nuSelectTab'),
+('s14919465746468', 'js', 'nuSelectTab', 'nuSelectTab(TabObject)', 'Open a specific Tab.', 'nuSelectTab(document.getElementById(''nuTab2''));\n', 'nuGetBreadcrumb');
 
 -- --------------------------------------------------------
 
@@ -982,7 +983,6 @@ INSERT INTO `zzzzsys_object` (`zzzzsys_object_id`, `sob_all_zzzzsys_form_id`, `s
 ('s14916037909948', 'c14916037794595383', 'aaaaakl', 'lookup', 'Field004', 'Label004', 's14916037909943', 50, 154, 334, 117, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', 'SELECT COUNT(*) FROM zzzzsys_debug', '', '', 'deb_order', 'deb_message', '50', '', 'nudebug', '', '', 'zzzzsys_debug', '', '', '', '', '', '', 0, 'N|$ 1,000.00', 'nuScroll', '[''North'',''South'',''East'',''West'']', ''),
 ('s14916064971283', 'nuobject', 'zzzzsys_object', 'input', 'sob_input_count', 'Next Number', '570d90df707867b', 360, 83, 175, 50, 18, '1', 'right', '0', '0', '', '', '', '', '', '', '', '', '0', 'SELECT \n   CONCAT(LEFT(srm_type, 1), ''|'', TRIM(srm_format)) AS a, \n   srm_format AS b \nFROM zzzzsys_format\nORDER BY srm_type\n', 'syt_title', 'sfo_description', '200', '', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', 0, '', 'number', '', ''),
 ('s14916779556963', 'c14916774251882136', 'aaaaaall', 'input', 'Field000', 'text000', 's14916779556962', 10, 79, 158, 117, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', ''),
-('s14917719387759', 'nuhome', '', 'input', 'run_aaa', 'aaa', '581288bcd699493', 120, 137, 368, 150, 30, '1', 'center', '1', '0', '', '', '', '', '', 'b', '-1', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'button', '', ''),
 ('s14918669403872', 'c14918667964113855', 'aaaaaaaaaaafg', 'input', 'field01', 'button01', 's14918669403870', 180, 180, 180, 117, 23, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 'N|$ 1,000.00', 'button', '', ''),
 ('s14918669403874', 'c14918667964113855', 'aaaaaaaaaaafg', 'input', 'field03', 'nuNumber03', 's14918669403870', 240, 240, 240, 117, 18, '1', 'right', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 'N|$ 1,000.00', 'nuNumber', '', ''),
 ('s14918669403871', 'c14918667964113855', 'aaaaaaaaaaafg', 'input', 'field00', 'nuAutoNumber00', 's14918669403870', 150, 150, 150, 117, 18, '1', 'right', '0', '0', '', '', '', '', '', '', '', 'SELECT COUNT(*) FROM zzzzsys_debug', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 87, 'N|$ 1,000.00', 'nuAutoNumber', 's14918667902409', ''),
@@ -1108,13 +1108,6 @@ CREATE TABLE `zzzzsys_session` (
   `sss_timeout` datetime NOT NULL,
   `sss_access` mediumtext NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `zzzzsys_session`
---
-
-INSERT INTO `zzzzsys_session` (`zzzzsys_session_id`, `sss_timeout`, `sss_access`) VALUES
-('s14918727570027', '2017-04-11 12:37:38', '{"session":{"zzzzsys_access_level_id":"","zzzzsys_user_id":"globeadmin","zzzzsys_form_id":"nuhome","global_access":"1"},"forms":[["56773cb405f4913",null,null,null,null,null],["5678ab2c48c5c41",null,null,null,null,null],["568b508eec00d80",null,null,null,null,null],["56c513162acd102",null,null,null,null,null],["57edbac65e1c52a",null,null,null,null,null],["58a08a1abc4782c",null,null,null,null,null],["58a08a91c9b59a9",null,null,null,null,null],["58bf0b972c2a447",null,null,null,null,null],["58c86689b9af7fd",null,null,null,null,null],["58d3719f55819e7",null,null,null,null,null],["nuaccess",null,null,null,null,null],["nuaccessforms",null,null,null,null,null],["nuaccessgroup",null,null,null,null,null],["nuaccesslevelreport",null,null,null,null,null],["nuaccessreport",null,null,null,null,null],["nublank",null,null,null,null,null],["nubrowse",null,null,null,null,null],["nubuildreport",null,null,null,null,null],["nucalcobjects",null,null,null,null,null],["nudebug",null,null,null,null,null],["nuevent",null,null,null,null,null],["nufflaunch",null,null,null,null,null],["nuffobjects",null,null,null,null,null],["nuform",null,null,null,null,null],["nuformat",null,null,null,null,null],["nuformatcurrency",null,null,null,null,null],["nuhome",null,null,null,null,null],["nulaunchdates",null,null,null,null,null],["nunonsystemform",null,null,null,null,null],["nuobject",null,null,null,null,null],["nupassword",null,null,null,null,null],["nuphp",null,null,null,null,null],["nuphplibrary",null,null,null,null,null],["nurunlist",null,null,null,null,null],["nurunphp",null,null,null,null,null],["nurunreport",null,null,null,null,null],["nusample",null,null,null,null,null],["nusetup",null,null,null,null,null],["nutab",null,null,null,null,null],["nutimezone",null,null,null,null,null],["nutranslate",null,null,null,null,null],["nuuser",null,null,null,null,null]],"reports":[["574b9845a681d27","nulaunchdates"]],"procedures":[["57578be0057a49f","nulaunchdates"],["57db70b7aa22cda","57edbac65e1c52a"],["57f6e1f954955c1","nublank"],["581135daea4f878","nublank"],["nulaunchdates_BE","nublank"],["nuform_BS",""],["nuphp_AS",""],["nuphp_BS",""],["568b50020fc7a62_AB",""],["nupassword_BS",""],["nuuser_AS",""],["nurunlist_BB",""],["nudebug_BD",""],["nuobject_BS",""],["nuform_AS",""],["nucalcobjects_BB",""],["570d9046964038e_AB",""],["nuform_AD",""],["570da52f2828508_AB",""],["57452c417370475_AB",""],["574671cdcc77367_AB",""],["570dab25164b394_AB",""],["nufastform","nufflaunch"],["58db9b26706b451",""]]}');
 
 -- --------------------------------------------------------
 
