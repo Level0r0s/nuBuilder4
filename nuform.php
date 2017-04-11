@@ -68,92 +68,87 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 
 	if($R != ''){
 
-		$t 					= nuRunQuery($s, array($F));
-		$a 					= array();
+		$t 							= nuRunQuery($s, array($F));
+		$a 							= array();
 		
 		while($r = db_fetch_object($t)){
 			
-			$o 				= nuDefaultObject($r, $tabs);
+			$o 						= nuDefaultObject($r, $tabs);
 			
 			if($R == '-1'){
-				$o->value	= nuGetSQLValue($r->sob_all_default_value_sql);
+				$o->value			= nuGetSQLValue($r->sob_all_default_value_sql);
 			}else{
-				$o->value	= $A[$r->sob_all_id];
+				$o->value			= $A[$r->sob_all_id];
 			}
 
 			if($r->sob_all_type == 'calc'){
 				
-				$o->formula	= $r->sob_calc_formula;
-				$o->format	= $r->sob_calc_format;
-				$o->align 	= $r->sob_all_align;
+				$o->formula			= $r->sob_calc_formula;
+				$o->format			= $r->sob_calc_format;
+				$o->align 			= $r->sob_all_align;
 				
 			}
 				
 			if($r->sob_all_type == 'textarea'){
 				
-				$o->align 	= $r->sob_all_align;
-				$o->read 	= $r->sob_all_access;
+				$o->align 			= $r->sob_all_align;
+				$o->read 			= $r->sob_all_access;
 				
 			}
 				
 			if($r->sob_all_type == 'input' || $r->sob_all_type == 'display'){
 
-				$o->align 	= $r->sob_all_align;
-				$o->format 	= '';
+				$o->align 			= $r->sob_all_align;
+				$o->format 			= '';
 				
 				if($r->sob_input_type == 'nuNumber' || $r->sob_input_type == 'nuDate'){
-					$o->format 	= $r->sob_input_format;
+					$o->format 		= $r->sob_input_format;
 				}
 					
 				if($r->sob_input_type == 'nuAutoNumber'){
 					
-					if($R == -1){
-						$o->counter 	= nuUpdateCounter($r->zzzzsys_object_id);
-					}else{
-						$o->counter 	= $o->value;
-					}
+					$o->counter 	= $o->value;
 					
 				}
 					
-				$o->input 	= $r->sob_input_type;
-				$o->read 	= $r->sob_all_access;
+				$o->input 			= $r->sob_input_type;
+				$o->read 			= $r->sob_all_access;
 
 				if($r->sob_input_type == 'button' && $r->sob_all_type == 'input'){
-					$o->value	= $r->sob_all_label;
+					$o->value		= $r->sob_all_label;
 				}
 
 				if($r->sob_input_type == 'nuScroll' && $r->sob_all_type == 'input'){
-					$o->scroll	= $r->sob_input_javascript;
+					$o->scroll		= $r->sob_input_javascript;
 				}
 
 				if($r->sob_all_type == 'display'){
 					
-					$disS	= nuReplaceHashVariables($r->sob_display_sql);
-					$disT	= nuRunQuery($disS);
-					$disR	= db_fetch_row($disT);
-					$o->value= $disR[0];
+					$disS			= nuReplaceHashVariables($r->sob_display_sql);
+					$disT			= nuRunQuery($disS);
+					$disR			= db_fetch_row($disT);
+					$o->value		= $disR[0];
 					
 				}
 
 			}
 			
 			if($r->sob_all_type == 'html'){
-				$o->html = $r->sob_html_code;
+				$o->html 			= $r->sob_html_code;
 			}
 
 			if($r->sob_all_type == 'select'){
 
-				$o->multiple	= $r->sob_select_multiple;
-				$o->options	= nuSelectOptions(nuReplaceHashVariables($r->sob_select_sql));
+				$o->multiple		= $r->sob_select_multiple;
+				$o->options			= nuSelectOptions(nuReplaceHashVariables($r->sob_select_sql));
 				
 			}
 
 			if($r->sob_all_type == 'run'){
 				
-				$type			= $r->sob_run_zzzzsys_form_id;
-//				$o->record_id	= -1;
-				$o->form_id		= $type;
-				$o->record_id	= $r->sob_run_id;
+				$type				= $r->sob_run_zzzzsys_form_id;
+				$o->form_id			= $type;
+				$o->record_id		= $r->sob_run_id;
 				
 				if(isProcedure($type)){
 					

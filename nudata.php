@@ -523,9 +523,19 @@ function nuFormatValue($row, $i){
 	$r			= db_fetch_object($t);
 	
 	if($r->sob_all_type == 'select' and $r->sob_select_multiple == '1' and $row['v'][$i] != ''){
+		
 		return implode('#nuSep#', $row['v'][$i]);
+		
+	}else if($r->sob_all_type == 'input' and $r->sob_input_type == 'nuAutoNumber'){
+		
+		if($_POST['nuHash']['PREVIOUS_RECORD_ID'] != $_POST['nuHash']['RECORD_ID']){
+			return nuUpdateCounter($r->zzzzsys_object_id);
+		}
+		
 	}else{
+		
 		return $row['v'][$i];
+		
 	}
 
 }
