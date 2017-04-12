@@ -13,17 +13,7 @@ function nuAjax(w,successCallback,errorCallback){
 				successCallback(data,textStatus,jqXHR);
 		},
 		error    : function(jqXHR,textStatus,errorThrown){
-/*			
-			console.log('jqXHR : ', jqXHR);
- 			console.log('textStatus : ', textStatus);
- 			console.log('errorThrown : ', errorThrown);
- 				
- 			var errorLog 	= [];
- 			errorLog[0] 	= [];
- 			errorLog[0][0] 	= jqXHR.responseText;
- 			errorLog[0][1] 	= "";
- 			errorLog[0][2] 	= 0;
-*/
+			
 			var msg			= String(jqXHR.responseText).split("\n");
  			nuAlert(msg);
 			window.test = jqXHR.responseText;
@@ -203,23 +193,23 @@ function nuRunReport(f, iframe){
 
 function nuRunPHP(f, iframe){
 
-	var last			= window.nuFORM.addBreadcrumb();
+	var last				= window.nuFORM.addBreadcrumb();
 
-	last.session_id		= window.nuSESSION;
-	last.call_type 		= 'runphp';
-	last.form_id  		= f;
-	last.record_id		= 'php';
-	last.data 			= nuGetFormData();
-	last.nuFORMdata		= nuFORM.data();
-	last.hash  			= nuHashFromEditForm();
+	last.session_id			= window.nuSESSION;
+	last.call_type 			= 'runphp';
+	last.form_id  			= f;
+	last.record_id			= 'php';
+	last.data 				= nuGetFormData();
+	last.nuFORMdata			= nuFORM.data();
+	last.hash  				= nuHashFromEditForm();
 	
-	var successCallback = function(data,textStatus,jqXHR){
+	var successCallback 	= function(data,textStatus,jqXHR){
 		
-		var fm 			= data;
+		var fm				= data;
 		
 		if(!nuDisplayError(fm)){
 			
-			var pdfUrl   = 'nurunphp.php?i=' + fm.id;
+			var pdfUrl		= 'nurunphp.php?i=' + fm.id;
 			
 			if(iframe === undefined){
 				window.open(pdfUrl);
