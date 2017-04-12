@@ -51,22 +51,25 @@ function nuBuildFastForm($table, $form_id){
 
 	nuRunQuery($sql, $array);
 
+	$sql            = "CREATE TABLE $TT SELECT * FROM zzzzsys_object WHERE false";
+	nuRunQuery($sql);
+	
+	
+	
+	
 	for($i = 0 ; $i < count($SF->rows) ; $i++){
 		
-		$r          = $SF->rows[$i][3];
-		$s[]        = "'$r'";
+		$r          		= $SF->rows[$i][3];
+		$newid				= nuID();
+		$SF->rows[$i][3]	= $newid;
+		$sql				= "INSERT INTO $TT SELECT * FROM zzzzsys_object WHERE zzzzsys_object_id = '$r'";
+		
+		nuRunQuery($sql);
+		$sql				= "UPDATE $TT SET zzzzsys_object_id = '$newid' WHERE zzzzsys_object_id = '$r'";
+		
+		nuRunQuery($sql);
 
 	}
-
-	$in             = implode(', ', $s);
-	$sql            = "
-
-					CREATE TABLE $TT
-					SELECT * FROM zzzzsys_object
-					WHERE zzzzsys_object_id IN ($in)
-
-	";
-	nuRunQuery($sql);
 
 	$sql            = "
 
@@ -203,23 +206,33 @@ function nuBuildFastForm($table, $form_id){
 	nuRunQuery($sql, $array);
 
 	nuRunQuery("INSERT INTO zzzzsys_object SELECT * FROM $TT");
-	nuRunQuery("DROP TABLE $TT");
-
-	$html	= "<!DOCTYPE html>
-		<html>
-			<head>
-				<link rel='stylesheet' href='nubuilder4.css'>
-			</head>
-			<body class='nuEditBody' style='padding:20px'>
-				<h1>A Table and Form have been created!</h1>
-				<p>(There is now a Button called <b>$table</b> on the Testing tab of the Home Form)</p>
-			</body>
-		</html>
-		
-		";
+	//nuRunQuery("DROP TABLE $TT");
 	
-	print $html;
 
+
+
+
+$html				= <<<EOT
+<!DOCTYPE html>
+	<html>
+		<head>
+		</head>
+		<body class='nuEditBody' style='padding:20px' onloaid='document.body.innerHTML'>
+			<h1>A Table and Form have been created!</h1>
+			<p>(There is now a Button called <b>$table</b> on the Testing tab of the Home Form)</p>
+		</body>
+	</html>
+EOT;
+
+print $html;
+
+
+
+
+
+
+	
+	
 }
 
 ?>
