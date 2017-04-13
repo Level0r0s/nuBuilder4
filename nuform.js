@@ -758,9 +758,10 @@ function nuRUN(w, i, l, p, prop){
 		
 	}else{
 
-		var F		= prop.objects[i].form_id;
-		var R		= prop.objects[i].record_id;
-		var L		= prop.objects[i].filter;
+		var O		= prop.objects[i];
+		var F		= O.form_id;
+		var R		= O.record_id;
+		var L		= O.filter;
 		var P		= window.location.pathname;
 		var f		= P.substring(0,P.lastIndexOf('/') + 1)
 
@@ -768,15 +769,15 @@ function nuRUN(w, i, l, p, prop){
 
 		var open 	= window.nuOPENER[window.nuOPENER.length - 1];
 		
-		var u		= window.location.origin + f + prop.objects[i].src + '&opener=' + open.id;
-		
+		var u		= window.location.origin + f + O.src + '&opener=' + open.id;
+
 		$('#' + id).attr('src', u).removeClass('').addClass('nuIframe');
 
 	}
 
-	nuAddJSObjectEvents(id, prop.objects[i].js);
+	nuAddJSObjectEvents(id, O.js);
 
-	return Number(prop.objects[i].width);
+	return Number(O.width);
 	
 }
 
