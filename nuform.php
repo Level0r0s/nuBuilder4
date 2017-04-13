@@ -979,7 +979,7 @@ function nuCheckSession(){
 		
 		$f				= nuAddOtherFormsUsed($nuJ);		//-- form list including forms id used in reports and procedures
 		
-		if(!in_array($_POST['nuSTATE']['form_id'], $f) && $c->call_type == 'getform'){
+		if(!in_array($c->form_id, $f) && $c->call_type == 'getform'){
 
 			$nuT		= nuRunQuery("SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$c->form_id'");
 			$nuR		= db_fetch_object($nuT);
