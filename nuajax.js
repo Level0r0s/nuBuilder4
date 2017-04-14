@@ -437,7 +437,7 @@ function nuOpenNewBrowserTab(c, f, r, filter){
 function nuAbortSave(){
 	
     $("#nuProgressSaved").hide();
-    $('#nuActionHolder .nuButton').show();
+    $('.nuActionButton').show();
 	
 }
 

@@ -24,6 +24,11 @@
 .nu_Report                   {background-color : #62D3FF !important}   
 .nu_Procedure                {background-color : #9FD275 !important}   
 
+
+.input_file { 
+   background-color : tan;
+}
+
 .nuRelatedTab {
    color: red;
 }
@@ -557,7 +562,7 @@ input[type=range]::-webkit-slider-runnable-track {
   background-color: #DEDEDE;
 }
 
-.nuButton {
+.nuButton, .input_button {
   color: white;
   background-color: #00ADEF;
   font-size: 13px;

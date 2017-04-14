@@ -131,14 +131,14 @@ function nuResizeBody(f){
 		var w			= Number(d.browse.width);
 
 		$('#nuDragDialog', window.parent.document).
-		css({'height'		:	(h + 20) + 'px',
-			'width' 		:	(w + 33) + 'px',
+		css({'height'		:	(h + 110) + 'px',
+			'width' 		:	(w + 43) + 'px',
 			'visibility' 	:	'visible'
 		});
 
 		$('#nuWindow', window.parent.document).
-		css({'height'		:	(h - 23) + 'px',
-			'width' 		:	(w + 20) + 'px'
+		css({'height'		:	(h + 67) + 'px',
+			'width' 		:	(w + 30) + 'px'
 		});
 			
 		$('body').css('height', h - 50);
@@ -387,6 +387,7 @@ function nuDRAG(w, i, l, p, prop){
 	nuAddDataTab(id, prop.objects[i].tab, p);
 		
 	return Number(prop.objects[i].width);
+	
 }
 
 function nuINPUT(w, i, l, p, prop){
@@ -428,9 +429,7 @@ function nuINPUT(w, i, l, p, prop){
 			inp.setAttribute('type', prop.objects[i].input);
 		}
 
-		if(input_type == 'button'){
-			$('#' + id).addClass('nuButton');
-		}
+		$('#' + id).addClass('input_' + input_type);
 
 	}
 	
@@ -2467,7 +2466,7 @@ function nuSavingProgressMessage(){
 	$('#' + e.id).css('left',(($('#nuActionHolder').width() / 2) - ($('#nuProgressSaved').width() / 2))+ 'px');
     $('#' + e.id).show();
 	
-	$('#nuActionHolder .nuButton').hide();
+	$('.nuActionButton').hide();
 	
 }  
 
@@ -2486,14 +2485,14 @@ function nuSavingMessage(){
 	$('#' + e.id).css('left',(($('#nuActionHolder').width() / 2) - ($('#nuNowSaved').width() / 2))+ 'px');
     $("#nuNowSaved").fadeToggle(3000);
 	
-	$('#nuActionHolder .nuButton').show();
+	$('.nuActionButton').show();
 	
 } 
 
 function nuAbortSave(){
 	
     $("#nuProgressSaved").hide();
-    $('#nuActionHolder .nuButton').show();
+    $('.nuActionButton').show();
 	
 }
 
