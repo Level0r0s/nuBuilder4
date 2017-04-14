@@ -137,6 +137,10 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 				$o->html 			= $r->sob_html_code;
 			}
 
+			if($r->sob_all_type == 'image'){
+				$o->src 			= nuGetSrc($r->sob_image_zzzzsys_file_id);
+			}
+
 			if($r->sob_all_type == 'select'){
 
 				$o->multiple		= $r->sob_select_multiple;
@@ -241,6 +245,20 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
     return $O->forms[0];
 
 }
+
+
+function nuGetSrc($i){
+	
+	$s	= "SELECT * FROM zzzzsys_file WHERE zzzzsys_file_id = ? ";
+nudebug("$s    $i");	
+	$t	= nuRunQuery($s, [$i]);
+	$r	= db_fetch_object($t);
+	$j	= JSON_decode($r->sfi_json);
+	
+	return $j->file;
+	
+}
+
 
 function nuUpdateCounter($i){
 

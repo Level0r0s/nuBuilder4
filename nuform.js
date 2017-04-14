@@ -267,6 +267,10 @@ function nuBuildEditObjects(f, p, o, prop){
 				
 				l = l + nuHTML(f, i, l, p, prop);
 				
+			}else if(t == 'image'){
+				
+				l = l + nuIMAGE(f, i, l, p, prop);
+				
 			}else if(t == 'select'){
 				
 				l = l + nuSELECT(f, i, l, p, prop);
@@ -667,6 +671,42 @@ function nuHTML(w, i, l, p, prop){
 					'position' : 'absolute'
 	})
 	.html(w.objects[i].html);
+	
+	return Number(prop.objects[i].width);
+
+}
+
+
+function nuIMAGE(w, i, l, p, prop){
+
+	var id  = p + prop.objects[i].id;
+	var ef  = p + 'nuRECORD';                       //-- Edit Form Id
+	var inp = document.createElement('img');
+	
+	inp.setAttribute('id', id);
+	
+	if(prop.objects[i].parent_type == 'g'){
+		
+		prop.objects[i].left = l;
+		prop.objects[i].top = 3;
+		
+	}else{
+		
+		nuLabel(w, i, p, prop);
+		
+	}
+	
+	$('#' + ef).append(inp);
+	
+	nuAddDataTab(id, prop.objects[i].tab, p);
+	
+	$('#' + id).css({'top'     : Number(prop.objects[i].top),
+					'left'     : Number(prop.objects[i].left),
+					'width'    : Number(prop.objects[i].width),
+					'height'   : Number(prop.objects[i].height),
+					'position' : 'absolute'
+	})
+	.attr('src', atob(w.objects[i].src));
 	
 	return Number(prop.objects[i].width);
 
