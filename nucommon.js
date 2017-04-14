@@ -763,8 +763,10 @@ function nuResizeWindow(e){
 	if(l == 2){
 
 		if(D.length == 0){
+			
 			d.css(f.nuDialogSize);
 			w.css(f.nuWindowSize);
+			
 		}
 		
 	}else{
@@ -779,4 +781,3 @@ function nuResizeWindow(e){
 	}
 		
 }
-
