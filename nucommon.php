@@ -69,7 +69,7 @@ function nuClientTimeZone(){
 }
 
 
-function nuDebug($t){
+function nuDebugResult($t){
 	
     global $nuDB;
 	
@@ -109,6 +109,7 @@ function nuBuildTable($t, $array){
 		if($t == 'text'){			$a[] = "$f TEXT NOT NULL";}
 		if($t == 'decimal'){		$a[] = "$f DECIMAL(12,4) NOT NULL";}
 		if($t == 'date'){			$a[] = "$f DATE NOT NULL";}
+		if($t == 'longtext'){		$a[] = "$f LONGTEXT NOT NULL";}
 		
 	}
 	
@@ -120,17 +121,18 @@ function nuBuildTable($t, $array){
 
 
 
-function nuDebug2($a0 = '][', $a1 = '][', $a2 = '][', $a3 = '][', $a4 = '][', $a5 = '][', $a6 = '][', $a7 = '][', $a8 = '][', $a9 = ']['){
+function nuDebug($a0 = '^', $a1 = '^', $a2 = '^', $a3 = '^', $a4 = '^', $a5 = '^', $a6 = '^', $a7 = '^', $a8 = '^', $a9 = '^'){
 	
 	$m					= '';
 	
-	for($i = 0 ; $i < 10 ; $i++){
+	for($i = 0 ; $i < func_num_args() ; $i++){
 
 			$p			= func_get_arg($i);
-			
-			if($p != ']['){
+print "out $p <br>";			
+			if($p != '^'){
+print "in $p <br>";			
 							
-				$m		.= "\nParameter $i : ";
+				$m		.= "\nPARAMETER $i : ";
 							
 				if(gettype($p) == 'object' or gettype($p) == 'array'){
 					$m	.= print_r($p,1);
@@ -144,19 +146,8 @@ function nuDebug2($a0 = '][', $a1 = '][', $a2 = '][', $a3 = '][', $a4 = '][', $a
 			
 	}
 	
-    global $nuDB;
-	
-    $i		= nuID();
-    $d		= date('Y-m-d H:i:s');
-    $s		= $nuDB->prepare("INSERT INTO zzzzsys_debug (zzzzsys_debug_id, deb_message, deb_added) VALUES (? , ?, ?)");
+	nuDebugResult($m);
 
-    $s->execute(array($i, $m, $d));
-    
-    if($nuDB->errorCode() !== '00000'){
-        error_log($nuDB->errorCode() . ": Could not establish nuBuilder database connection");
-    }
-
-	return $i;
 }
 
 
@@ -900,21 +891,6 @@ function nuGetFormProperties($i){
 	return db_fetch_object($t);
 	
 }
-
-
-/*
-function nuSubformArray($sf){
-
-    $a 	= array();
-    $i 	= 0;
-    $p 	= '';
-	
-	return $_POST['nuSTATE']['subforms'][$sf];
-
-}
-
-
-*/
 
 
 ?>

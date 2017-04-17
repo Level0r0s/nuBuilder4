@@ -390,19 +390,38 @@ function nuDRAG(w, i, l, p, prop){
 	
 }
 
+
 function nuINPUT(w, i, l, p, prop){
 	
 	var id			= p + prop.objects[i].id;
 	var ef			= p + 'nuRECORD';                 						//-- Edit Form Id
 	var ty			= 'textarea';
 	var vis			= prop.objects[i].display == 0 ? 'hidden' : 'visible';
-
+	var input_type	= prop.objects[i].input;
+	var hideSF		= '';
+	
 	if(prop.objects[i].type != 'textarea'){         						//-- Input Object
 		ty			= 'input';
 	}
 
+	if(prop.objects[i].input == 'file'){
+		
+		var inp  	= document.createElement('textarea');
+
+		inp.setAttribute('id', id);
+
+		$('#' + ef).append(inp);
+
+		$('#' + id)
+		.css('visibility', 'hidden')
+		.attr('data-nu-field', id)
+		.attr('onchange', 'nuChangeFile(event)');
+
+		id			= id + '_file';
+		
+	}
+	
 	var inp  		= document.createElement(ty);
-	var input_type	= prop.objects[i].input;
 
 	inp.setAttribute('id', id);
 
@@ -423,11 +442,11 @@ function nuINPUT(w, i, l, p, prop){
 
 	if(ty == 'input'){														//-- Input Object
 
-		if(prop.objects[i].input === undefined){
-			inp.setAttribute('type', 'text');
-		}else{
+//		if(prop.objects[i].input === undefined){
+//			inp.setAttribute('type', 'text');
+//		}else{
 			inp.setAttribute('type', prop.objects[i].input);
-		}
+//		}
 
 		$('#' + id).addClass('input_' + input_type);
 
@@ -512,12 +531,14 @@ function nuINPUT(w, i, l, p, prop){
 		$('#' + id).addClass('nuEdited');
 	}
 	
-	$('#' + id).val(nuFORM.addFormatting(w.objects[i].value, w.objects[i].format));
-
 	if(input_type == 'nuDate'){
 		$('#' + id).attr('onclick', 'nuPopupCalendar(this);');
 	}
 
+	if(input_type != 'file'){
+		$('#' + id).val(nuFORM.addFormatting(w.objects[i].value, w.objects[i].format));
+	}
+	
 	nuAddJSObjectEvents(id, prop.objects[i].js);
 	
 	if(w.objects[i].input == 'checkbox'){
@@ -1177,6 +1198,13 @@ function nuLabel(w, i, p, prop){
 	
 	var id     = 'label_' + p + prop.objects[i].id;
 	var ef     = p + 'nuRECORD';                       //-- Edit Form Id
+	
+	if(prop.objects[i].input == 'file'){
+		var lab    = document.createElement('div');
+	}else{
+		var lab    = document.createElement('label');
+	}
+	
 	var lab    = document.createElement('label');
 	var lwidth = nuGetWordWidth(nuTranslate(prop.objects[i].label));
 	
@@ -2367,7 +2395,34 @@ function nuChange(e){
 
 	if(p == ''){return;}
 
-//	nuAddSubformRow(t, event);
+	nuAddSubformRow(t, e);
+	
+}
+
+function nuChangeFile(e){
+
+	if(e.target.id.substr(-8) == 'nuDelete'){
+		
+		nuHasBeenEdited();
+		return;
+		
+	}
+		
+	var t	= $('#' + e.target.id)[0];
+	var p	= $('#' + t.id).attr('data-nu-prefix');
+	
+	nuReformat(t);
+	
+	$('#' + p + 'nuDelete').prop('checked', false);
+	$('#' + t.id).addClass('nuEdited');
+	nuHasBeenEdited();
+	
+	$('#nuCalendar').remove();
+	$('#' + t.id).removeClass('nuValidate');
+	nuCalculateForm();
+
+	if(p == ''){return;}
+
 	nuAddSubformRow(t, e);
 	
 }
@@ -2565,56 +2620,6 @@ function nuHashFromEditForm(){
 }
 
 
-// function nuSubformToArray(sf, includeDeleted){
-
-	// var s			= {};
-	// var c			= [];
-	// var r			= [];
-	// var f			= [];
-	// var v			= [];
-	// var p			= '';
-	
-	// includeDeleted	= arguments.length == 2 ? includeDeleted : 1;
-	
-	// f.push('nuRECORD');
-	
-	// $("[id^='" + sf + "000'][data-nu-field]").each(function( index ) {
-		
-		// f.push(String(this.id).substr(sf.length + 3));
-		
-	// });
-
-	// f.push('nuDelete');
-	
-	// var cb		= $("[data-nu-checkbox='" + sf + "']");
-	
-	// cb.each(function( index ) {
-		
-		// c		= [];
-		// p		= this.id.substr(0, this.id.length - 8);
-
-		// if(!$('#' + p + 'nuDelete').prop('checked') || includeDeleted == 1){
-
-			// c.push($('#' + p + 'nuRECORD').attr('data-nu-primary-key'));
-			
-			// for(var i = 1 ; i < f.length - 1 ; i++){
-				// c.push($('#' + p + f[i]).val());
-			// }
-			
-			// c.push($('#' + p + 'nuDelete').prop('checked') ? 1 : 0);
-			// r.push(c);
-		
-		// }
-	
-	// });
-	
-	// s.name		= p.substr(0, p.length - 3);
-	// s.rows		= r;
-	// s.columns	= f;
-
-	// return s;
-	
-// }
 
 
 function nuDetach(){
@@ -2918,3 +2923,4 @@ function nuWindowPosition(){
 	window.nuWindowSize			= {width:w, height:h};
 	
 }
+

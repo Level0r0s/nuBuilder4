@@ -250,7 +250,6 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 function nuGetSrc($i){
 	
 	$s	= "SELECT * FROM zzzzsys_file WHERE zzzzsys_file_id = ? ";
-nudebug("$s    $i");	
 	$t	= nuRunQuery($s, [$i]);
 	$r	= db_fetch_object($t);
 	$j	= JSON_decode($r->sfi_json);
