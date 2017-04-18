@@ -41,6 +41,7 @@
 	if($CT == 'update')			{$f->forms[0]->record_id			= nuUpdateData();nuUpdateTables();}
 	if($CT == 'getlookupid')	{$f->forms[0]->lookup_values 		= nuGetAllLookupValues();}
 	if($CT == 'getlookupcode')	{$f->forms[0]->lookup_values 		= nuGetAllLookupList();}
+	if($CT == 'runhiddenphp')	{$f->forms[0]->id					= nuRunHiddenPHP($R);}
 	if($CT == 'runphp')			{$f->forms[0]->id					= nuRunPHP($F);}
 	if($CT == 'runreport')		{$f->forms[0]->id					= nuRunReport($F);}
 	if($CT == 'runhtml')		{$f->forms[0]->id					= nuRunHTML();}
@@ -53,6 +54,7 @@
 	$f->forms[0]->translation				= $s->translation;
 	$f->forms[0]->session_id				= $_SESSION['SESSIONID'];
 	$f->forms[0]->errors					= $_POST['nuErrors'];
+	$f->forms[0]->messages					= $_POST['nuMessages'];
 	$f->forms[0]->log_again				    = $_POST['nuLogAgain'];
 	$f->forms[0]->global_access				= $_POST['nuHash']['global_access'];
 	$f->forms[0]->target					= $P['target'];
@@ -61,6 +63,7 @@
 
 	$j								    	= json_encode($f->forms[0]);
 	
+	nudebug($f->forms[0]);
 	print $j;
 	
 ?>

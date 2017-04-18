@@ -560,7 +560,7 @@ function nuDisplayError($m){
 
 
 function nuDisplayMessages($m){
-
+	
 	$_POST['nuMessages'][]	= $m;
 
 }

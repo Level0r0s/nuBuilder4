@@ -102,14 +102,38 @@ function nuGetBreadcrumb(bc, ind){
 }
 
 
-function nuDisplayError(er){
+function nuDisplayError(e){
 
-	if(typeof(er.errors) == 'undefined') {return false;}
-	nuAlert(er.errors);
+	if(e.errors.length == 0){			//-- no error messages
+		return false;
+	}
+	
+	nuAlert(e.errors);
 
-	return er.errors.length > 0;
+	return true;
 	
 }
+
+
+function nuDtyiuisplayError(e){
+
+	if(typeof(e.errors) == 'undefined'){			//-- no error messages
+
+		if(typeof(e.messages) != 'undefined'){
+			nuAlert(e.messages);
+		}
+
+		return false;
+		
+	}
+	
+	nuAlert(e.errors);
+
+	return true;
+	
+}
+
+
 
 function nuFormatAjaxErrorMessage(jqXHR, exception) {
 

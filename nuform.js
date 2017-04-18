@@ -78,6 +78,13 @@ function nuBuildForm(f){
 	}else{
 		nuAddJavascript(f);
 	}
+	
+
+	if(f.messages.length > 0){
+		nuAlert(f.messages);
+	}
+
+	
 
 }
 
