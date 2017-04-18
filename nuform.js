@@ -2960,7 +2960,6 @@ function nuRebuild_nuTotal(p, s){
 }
 
 
-
 function nuWindowPosition(){
 	
 	var d						= $('#nuDragDialog', window.parent.document);
