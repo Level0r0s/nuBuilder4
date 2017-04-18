@@ -415,7 +415,8 @@ function nuINPUT(w, i, l, p, prop){
 		$('#' + id)
 		.css('visibility', 'hidden')
 		.attr('data-nu-field', id)
-		.attr('onchange', 'nuChangeFile(event)');
+		.attr('data-nu-prefix', p)
+		.attr('onchange', 'this.className = "nuEdited"');
 
 		id			= id + '_file';
 		
@@ -442,11 +443,7 @@ function nuINPUT(w, i, l, p, prop){
 
 	if(ty == 'input'){														//-- Input Object
 
-//		if(prop.objects[i].input === undefined){
-//			inp.setAttribute('type', 'text');
-//		}else{
-			inp.setAttribute('type', prop.objects[i].input);
-//		}
+		inp.setAttribute('type', prop.objects[i].input);
 
 		$('#' + id).addClass('input_' + input_type);
 
@@ -462,8 +459,8 @@ function nuINPUT(w, i, l, p, prop){
 					'position'	: 'absolute'
 	})
 	
-	.attr('onchange', 'nuChange(event)')
-	.attr('data-nu-field', input_type == 'button' ? null : prop.objects[i].id)
+	.attr('onchange', input_type == 'file' ? 'nuChangeFile(event)' : 'nuChange(event)')
+	.attr('data-nu-field', input_type == 'button' || input_type == 'file' ? null : prop.objects[i].id)
 	.attr('data-nu-object-id', w.objects[i].object_id)
 	.attr('data-nu-format', '')
 	.attr('data-nu-prefix', p)
@@ -2427,6 +2424,51 @@ function nuChangeFile(e){
 	
 }
 
+
+function nuChangeFile(e){
+
+	if(e.target.id.substr(-8) == 'nuDelete'){
+		
+		nuHasBeenEdited();
+		return;
+		
+	}
+
+	var theFile			= e.target.id;
+	var theTextarea		= theFile.substr(0, theFile.length - 5);
+	
+    if($('#' + theFile).val()==''){return;}
+    
+	var a		= $('#' + theFile)[0].files[0];
+	var r		= new FileReader();
+
+	r.onload 	= function(e) {
+	    
+		var f	= btoa(r.result);
+		var o	= {'file' : f, 'name' : a.name, 'size' : a.size, 'type' : a.type};
+		var j	= JSON.stringify(o);
+
+    	$('#' + theTextarea).val(j).addClass('nuEdited');
+
+	}
+
+	r.readAsDataURL(a);
+	
+	var t	= $('#' + theFile)[0];
+	var p	= $('#' + theTextarea).attr('data-nu-prefix');
+	
+	$('#' + p + 'nuDelete').prop('checked', false);
+	$('#' + theTextarea).addClass('nuEdited');
+
+	nuHasBeenEdited();
+	
+	if(p == ''){return;}
+
+	nuAddSubformRow(t, e);
+	
+}
+
+
 function nuCalculateForm(){	//-- calculate subform 'calcs' first
 	
     var subformFirst = function(b, a) {
@@ -2901,7 +2943,6 @@ function nuRebuild_nuTotal(p, s){
 	return n;
 	
 }
-
 
 
 function nuWindowPosition(){
