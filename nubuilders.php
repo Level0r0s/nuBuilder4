@@ -170,10 +170,18 @@ function nuBuildFastForm($table, $form_id){
 		
 		";
 		
-		$array          = Array(nuID(), $form_id, $lab, $id, 'left', '', $ord * 10, 200);
-		
-		nuRunQuery($sql, $array);
-		
+		$array      = Array(nuID(), $form_id, $lab, $id, 'left', '', $ord * 10, 200);
+
+		if($y == 'input'){
+			
+			if($i != 'file' && $i != 'button'){
+				nuRunQuery($sql, $array);
+			}
+			
+		}else{
+			nuRunQuery($sql, $array);
+		}
+
 	}
 
 
