@@ -104,7 +104,7 @@ function nuGetBreadcrumb(bc, ind){
 
 function nuDisplayError(e){
 
-	if(e.errors.length == 0){			//-- no error messages
+	if(e.error === undefined || se.errors.length == 0){			//-- no error messages
 		return false;
 	}
 	

@@ -63,7 +63,6 @@
 
 	$j								    	= json_encode($f->forms[0]);
 	
-	nudebug($f->forms[0]);
 	print $j;
 	
 ?>
