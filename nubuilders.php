@@ -1,7 +1,7 @@
 <?php
 
 function nuBuildFastForm($table, $form_id){
-nudebug("table: $nutable");
+
 	if($table[0] == '#'){return;}			//-- no table name (still #fastform_table)
 	
 	
@@ -211,29 +211,9 @@ nudebug("table: $nutable");
 	nuRunQuery("INSERT INTO zzzzsys_object SELECT * FROM $TT");
 	nuRunQuery("DROP TABLE $TT");
 
+	nuDisplayMessage('<h1>A Table and Form have been created!</h1>');
+	nuDisplayMessage('<p>(There is now a Button called <b>$table</b> on the Testing tab of the Home Form)</p>');
 
-
-$html				= <<<EOT
-<!DOCTYPE html>
-	<html>
-		<head>
-		</head>
-		<body class='nuEditBody' style='padding:20px' onload='parent.nuAlert([document.body.innerHTML])'>
-			<h1>A Table and Form have been created!</h1>
-			<p>(There is now a Button called <b>$table</b> on the Testing tab of the Home Form)</p>
-		</body>
-	</html>
-EOT;
-
-print $html;
-
-
-
-
-
-
-	
-	
 }
 
 ?>

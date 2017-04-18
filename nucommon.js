@@ -108,31 +108,16 @@ function nuDisplayError(e){
 		return false;
 	}
 	
+
+	var im	= '<img src="nuerror.png" width="30px" height="30px" style="position:absolute;left:10px;top:10px"><br>';
+
+	e.errors.splice(0, 0, im);
+
 	nuAlert(e.errors);
 
 	return true;
 	
 }
-
-
-function nuDtyiuisplayError(e){
-
-	if(typeof(e.errors) == 'undefined'){			//-- no error messages
-
-		if(typeof(e.messages) != 'undefined'){
-			nuAlert(e.messages);
-		}
-
-		return false;
-		
-	}
-	
-	nuAlert(e.errors);
-
-	return true;
-	
-}
-
 
 
 function nuFormatAjaxErrorMessage(jqXHR, exception) {
