@@ -5,6 +5,7 @@
 .nu_dropdown                 {background-color : #7bce98 !important}
 .nu_html                     {background-color : #dd6eb3 !important}
 .nu_input                    {background-color : #8db3dd !important}
+.nu_image                    {background-color : #acc637 !important}
 .nu_word                     {background-color : #68c994 !important}
 .nu_lookup                   {background-color : #EDDA74 !important}
 .nu_subform                  {background-color : #fa9b96 !important}
@@ -22,6 +23,11 @@
 .nu_Form                     {background-color : #FABA74 !important}   
 .nu_Report                   {background-color : #62D3FF !important}   
 .nu_Procedure                {background-color : #9FD275 !important}   
+
+
+.input_file { 
+   background-color : tan;
+}
 
 .nuRelatedTab {
    color: red;
@@ -556,7 +562,7 @@ input[type=range]::-webkit-slider-runnable-track {
   background-color: #DEDEDE;
 }
 
-.nuButton {
+.nuButton, .input_button {
   color: white;
   background-color: #00ADEF;
   font-size: 13px;

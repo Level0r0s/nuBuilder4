@@ -13,17 +13,7 @@ function nuAjax(w,successCallback,errorCallback){
 				successCallback(data,textStatus,jqXHR);
 		},
 		error    : function(jqXHR,textStatus,errorThrown){
-/*			
-			console.log('jqXHR : ', jqXHR);
- 			console.log('textStatus : ', textStatus);
- 			console.log('errorThrown : ', errorThrown);
- 				
- 			var errorLog 	= [];
- 			errorLog[0] 	= [];
- 			errorLog[0][0] 	= jqXHR.responseText;
- 			errorLog[0][1] 	= "";
- 			errorLog[0][2] 	= 0;
-*/
+			
 			var msg			= String(jqXHR.responseText).split("\n");
  			nuAlert(msg);
 			window.test = jqXHR.responseText;
@@ -447,7 +437,7 @@ function nuOpenNewBrowserTab(c, f, r, filter){
 function nuAbortSave(){
 	
     $("#nuProgressSaved").hide();
-    $('#nuActionHolder .nuButton').show();
+    $('.nuActionButton').show();
 	
 }
 

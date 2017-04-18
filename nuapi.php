@@ -12,6 +12,7 @@
 		
 	$_POST['nuCounter']						= rand(0, 999);
 	$_POST['nuErrors']						= array();
+	$_POST['nuMessages']					= array();
 	$_POST['nuTableSchema']					= nuTableSchema();
 	$s										= nuCheckSession();
 	$F										= $s->form_id;

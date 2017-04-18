@@ -137,6 +137,10 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 				$o->html 			= $r->sob_html_code;
 			}
 
+			if($r->sob_all_type == 'image'){
+				$o->src 			= nuGetSrc($r->sob_image_zzzzsys_file_id);
+			}
+
 			if($r->sob_all_type == 'select'){
 
 				$o->multiple		= $r->sob_select_multiple;
@@ -241,6 +245,19 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
     return $O->forms[0];
 
 }
+
+
+function nuGetSrc($i){
+	
+	$s	= "SELECT * FROM zzzzsys_file WHERE zzzzsys_file_id = ? ";
+	$t	= nuRunQuery($s, [$i]);
+	$r	= db_fetch_object($t);
+	$j	= JSON_decode($r->sfi_json);
+	
+	return $j->file;
+	
+}
+
 
 function nuUpdateCounter($i){
 
@@ -979,7 +996,7 @@ function nuCheckSession(){
 		
 		$f				= nuAddOtherFormsUsed($nuJ);		//-- form list including forms id used in reports and procedures
 		
-		if(!in_array($_POST['nuSTATE']['form_id'], $f) && $c->call_type == 'getform'){
+		if(!in_array($c->form_id, $f) && $c->call_type == 'getform'){
 
 			$nuT		= nuRunQuery("SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$c->form_id'");
 			$nuR		= db_fetch_object($nuT);

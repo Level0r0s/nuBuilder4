@@ -558,6 +558,13 @@ function nuDisplayError($m){
 
 }
 
+
+function nuDisplayMessages($m){
+
+	$_POST['nuMessages'][]	= $m;
+
+}
+
 function nuCheckAccess($f, $r = ''){
 	
 	if(in_array($f, $_POST['forms'])){
@@ -626,6 +633,9 @@ function nuDeleteForm($f){
 
 	$s		= "DELETE FROM zzzzsys_object WHERE sob_all_type = 'run' AND sob_run_zzzzsys_form_id = ? ";
 	$t		= nuRunQuery($s, [$f]);
+	
+	nuDebug("$s $f");
+	
 	
 }
 
