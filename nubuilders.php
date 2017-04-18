@@ -211,9 +211,13 @@ function nuBuildFastForm($table, $form_id){
 	nuRunQuery("INSERT INTO zzzzsys_object SELECT * FROM $TT");
 	nuRunQuery("DROP TABLE $TT");
 
-	nuDisplayMessage('<h1>A Table and Form have been created!</h1>');
-	nuDisplayMessage('<p>(There is now a Button called <b>$table</b> on the Testing tab of the Home Form)</p>');
+	nuDisplayMessage("<h1>A Table and Form have been created!</h1>");
+	nuDisplayMessage("<p>(There is now a Button called <b>$table</b> on the Testing tab of the Home Form)</p>");
+	nuDisplayMessage("<input type='button' value='Go to tab..' class='nuButton' onclick='nuGetBreadcrumb(0,2);'>");
 
+	
+	
+	
 }
 
 ?>

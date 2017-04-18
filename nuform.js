@@ -82,11 +82,12 @@ function nuBuildForm(f){
 
 	if(f.messages.length > 0){
 
-	var im	= '<img src="numessage.png" width="30px" height="30px" style="position:absolute;left:10px;top:10px"><br>';
+		var im	= '<img src="numessage.png" width="30px" height="30px" style="position:absolute;left:10px;top:10px"><br>';
 
-	f.messages.splice(0, 0, im);
+		f.messages.splice(0, 0, im);
 
-	nuAlert(f.messages);
+		nuAlert(f.messages);
+		
 	}
 
 	

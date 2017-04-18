@@ -242,7 +242,19 @@ function nuRunHiddenPHP(i){
 		
 		var fm				= data;
 		
-		nuDisplayError(fm);
+		if(nuDisplayError(fm)){return;};
+
+		if(fm.messages.length > 0){
+
+			var im	= '<img src="numessage.png" width="30px" height="30px" style="position:absolute;left:10px;top:10px"><br>';
+
+			fm.messages.splice(0, 0, im);
+
+			nuAlert(fm.messages);
+			
+		}
+
+		
 			
 	};
 	
