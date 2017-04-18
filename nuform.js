@@ -415,8 +415,12 @@ function nuINPUT(w, i, l, p, prop){
 		$('#' + id)
 		.css('visibility', 'hidden')
 		.attr('data-nu-field', id)
+<<<<<<< HEAD
 		.attr('data-nu-prefix', p)
 		.attr('onchange', 'this.className = "nuEdited"');
+=======
+		.attr('onchange', 'nuChangeFile(event)');
+>>>>>>> 9e24ea8226a6ff641f13ac7e3bc1fe53b166f3e2
 
 		id			= id + '_file';
 		
@@ -443,7 +447,15 @@ function nuINPUT(w, i, l, p, prop){
 
 	if(ty == 'input'){														//-- Input Object
 
+<<<<<<< HEAD
 		inp.setAttribute('type', prop.objects[i].input);
+=======
+//		if(prop.objects[i].input === undefined){
+//			inp.setAttribute('type', 'text');
+//		}else{
+			inp.setAttribute('type', prop.objects[i].input);
+//		}
+>>>>>>> 9e24ea8226a6ff641f13ac7e3bc1fe53b166f3e2
 
 		$('#' + id).addClass('input_' + input_type);
 
@@ -2392,6 +2404,37 @@ function nuChange(e){
 
 	if(p == ''){return;}
 
+<<<<<<< HEAD
+=======
+	nuAddSubformRow(t, e);
+	
+}
+
+function nuChangeFile(e){
+
+	if(e.target.id.substr(-8) == 'nuDelete'){
+		
+		nuHasBeenEdited();
+		return;
+		
+	}
+		
+	var t	= $('#' + e.target.id)[0];
+	var p	= $('#' + t.id).attr('data-nu-prefix');
+	
+	nuReformat(t);
+	
+	$('#' + p + 'nuDelete').prop('checked', false);
+	$('#' + t.id).addClass('nuEdited');
+	nuHasBeenEdited();
+	
+	$('#nuCalendar').remove();
+	$('#' + t.id).removeClass('nuValidate');
+	nuCalculateForm();
+
+	if(p == ''){return;}
+
+>>>>>>> 9e24ea8226a6ff641f13ac7e3bc1fe53b166f3e2
 	nuAddSubformRow(t, e);
 	
 }
@@ -2937,6 +2980,4 @@ function nuWindowPosition(){
 	window.nuWindowSize			= {width:w, height:h};
 	
 }
-
-
 
