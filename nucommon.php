@@ -128,11 +128,10 @@ function nuDebug($a0 = '^', $a1 = '^', $a2 = '^', $a3 = '^', $a4 = '^', $a5 = '^
 	for($i = 0 ; $i < func_num_args() ; $i++){
 
 			$p			= func_get_arg($i);
-print "out $p <br>";			
+			
 			if($p != '^'){
-print "in $p <br>";			
 							
-				$m		.= "\nPARAMETER $i : ";
+				$m		.= "\n[$i] : ";
 							
 				if(gettype($p) == 'object' or gettype($p) == 'array'){
 					$m	.= print_r($p,1);
@@ -489,6 +488,30 @@ function nuRunPHP($nuRID){
 	return $nuID;
 	
 }
+
+
+
+
+
+
+
+function nuRunHiddenPHP($nuCode){
+
+
+	$s						= "SELECT * FROM zzzzsys_php WHERE sph_code = ? ";
+	$t						= nuRunQuery($s, [$nuCode]);
+	$r						= db_fetch_object($t);
+
+	$evalPHP = new nuEvalPHPClass($r->zzzzsys_php_id);
+	
+	return 'doesntmatter';
+
+}
+
+
+
+
+
 
 function nuGetProcedure($i){
 	

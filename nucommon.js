@@ -102,14 +102,23 @@ function nuGetBreadcrumb(bc, ind){
 }
 
 
-function nuDisplayError(er){
+function nuDisplayError(e){
 
-	if(typeof(er.errors) == 'undefined') {return false;}
-	nuAlert(er.errors);
+	if(e.error === undefined || se.errors.length == 0){			//-- no error messages
+		return false;
+	}
+	
 
-	return er.errors.length > 0;
+	var im	= '<img src="nuerror.png" width="30px" height="30px" style="position:absolute;left:10px;top:10px"><br>';
+
+	e.errors.splice(0, 0, im);
+
+	nuAlert(e.errors);
+
+	return true;
 	
 }
+
 
 function nuFormatAjaxErrorMessage(jqXHR, exception) {
 

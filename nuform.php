@@ -13,17 +13,18 @@ function nuFormProperties($f){
 
 function nuBeforeBrowse($f){
 	
-	$r			= nuFormProperties($f);
-	$evalPHP 	= new nuEvalPHPClass($f . '_BB');
+	$_POST['nuMessages']	= [];
+	$r						= nuFormProperties($f);
+	$evalPHP 				= new nuEvalPHPClass($f . '_BB');
 	
 }
 
 
 function nuBeforeEdit($f, $o){
 	
-	$r					= nuFormProperties($f);
-    $GLOBALS['EXTRAJS']	= $r->sfo_javascript;
-	$evalPHP 			= new nuEvalPHPClass($f . '_BE');
+	$r						= nuFormProperties($f);
+    $GLOBALS['EXTRAJS']		= $r->sfo_javascript;
+	$evalPHP 				= new nuEvalPHPClass($f . '_BE');
 	
 }
 

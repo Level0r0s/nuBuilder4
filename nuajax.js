@@ -226,6 +226,43 @@ function nuRunPHP(f, iframe){
 }
 
 
+function nuRunHiddenPHP(i){
+
+	var last				= window.nuFORM.getCurrent();
+
+	last.session_id			= window.nuSESSION;
+	last.call_type 			= 'runhiddenphp';
+	last.form_id  			= 'doesntmatter';
+	last.record_id			= i;								//-- php code
+	last.data 				= nuGetFormData();
+	last.nuFORMdata			= nuFORM.data();
+	last.hash  				= nuHashFromEditForm();
+	
+	var successCallback 	= function(data,textStatus,jqXHR){
+		
+		var fm				= data;
+		
+		if(nuDisplayError(fm)){return;};
+
+		if(fm.messages.length > 0){
+
+			var im	= '<img src="numessage.png" width="30px" height="30px" style="position:absolute;left:10px;top:10px"><br>';
+
+			fm.messages.splice(0, 0, im);
+
+			nuAlert(fm.messages);
+			
+		}
+
+		
+			
+	};
+	
+	nuAjax(last,successCallback);
+	
+}
+
+
 function nuGetLookupId(pk, id){
 
 	$('#nuLookupList').remove();
