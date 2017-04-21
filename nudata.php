@@ -263,6 +263,8 @@ function nuUpdateData(){
 	$ID		= $_POST['nuSTATE']['record_id'];
 	$DEL	= $_POST['nuSTATE']['deleteAll'];	
 	$fid	= $_POST['nuSTATE']['form_id'];
+	
+nudebug('id 1',$ID);
 
 	if($ID == -3){
 		
@@ -426,6 +428,7 @@ function nuUpdateData(){
 		}
 		
 	}
+nudebug('id 3',$ID);
 	
 	$nuRecordID	= $ID;							//--
 	
@@ -434,7 +437,7 @@ function nuUpdateData(){
 	}else{
 		$event	= $FORM->zzzzsys_form_id . '_AS';
 	}
-nudebug("event: $event");
+	
 	if(trim($event) != '') {
 		$evalPHP = new nuEvalPHPClass($event);
 	}

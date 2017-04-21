@@ -104,7 +104,7 @@ function nuGetBreadcrumb(bc, ind){
 
 function nuDisplayError(e){
 
-	if(e.error === undefined || se.errors.length == 0){			//-- no error messages
+	if(e.errors === undefined || e.errors.length == 0){			//-- no error messages
 		return false;
 	}
 	
@@ -790,3 +790,4 @@ function nuResizeWindow(e){
 	}
 		
 }
+
