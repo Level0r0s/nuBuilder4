@@ -18,7 +18,6 @@ jsinclude('nuajax.js');       //-- calls to server
 jsinclude('nufunctions.js');
 
 cssinclude('nubuilder4.css');
-cssinclude('dropzone/dropzone.css');
 
 ?>
 
