@@ -107,7 +107,6 @@ function nuDisplayError(e){
 	if(e.errors === undefined || e.errors.length == 0){			//-- no error messages
 		return false;
 	}
-	
 
 	var im	= '<img src="nuerror.png" width="30px" height="30px" style="position:absolute;left:10px;top:10px"><br>';
 

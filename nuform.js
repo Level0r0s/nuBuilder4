@@ -2884,15 +2884,31 @@ function nuTotal(f){
 }
 
 
-function nuAlert(o){
+function nuAlert(o, type, yes, no){
+	
+
+	if(arguments.length > 1){
+		
+		var icon = '';
+
+		if(type = 'error')	{icon	= 'nuerror';}
+		if(type = 'message'){icon	= 'numessage';}
+
+		var im	= '<img src="' + icon + '" width="30px" height="30px" style="position:absolute;left:10px;top:10px"><br>';
+
+		o.splice(0, 0, im);
+		
+	}
 
 	var par		= window.parent.document;
 	
-	$('#nuErrorAlert', par).remove();
+	$('#nuAlertDiv', par).remove();
 
-	if(o.length == 0){return;}
+	if(o.length == 0){
+		return;
+	}
 	
-	var c		= " onclick=\"$('#nuErrorAlert').remove();\"";
+	var c		= " onclick=\"$('#nuAlertDiv').remove();\"";
 	var widest	= 5;
 
 	for(var i = 0 ; i < o.length ; i++){
@@ -2903,14 +2919,20 @@ function nuAlert(o){
 	
 	var l		= (screen.width - widest) / 2;
 
-	$('body', par).append("<div id='nuErrorAlert' style='text-align:center;width:" + widest + "px;left:" + l + "px' " + c + "></div>")
+	$('body', par).append("<div id='nuAlertDiv' style='text-align:center;width:" + widest + "px;left:" + l + "px' " + c + "></div>")
 	
 	for(var i = 0 ; i < o.length ; i++){
 		
-		$('#nuErrorAlert', par).append(o[i]);
-		$('#nuErrorAlert', par).append('<br>');
+		$('#nuAlertDiv', par).append(o[i]);
+		$('#nuAlertDiv', par).append('<br>');
 		
 	}
+
+//		$('body').append('<div id="nuModal"></div>')
+//		.append(e);
+
+
+
 	
 }
 
