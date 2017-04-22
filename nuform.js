@@ -522,17 +522,6 @@ function nuINPUT(w, i, l, p, prop){
 		
 	}
 
-
-	if(input_type == 'nuScroll'){
-		
-		var input_js	= 'nuFORM.scrollList(event, ' + w.objects[i].scroll + ')';
-		
-		$('#' + id)
-		.addClass('nuScroll')
-		.attr('onkeydown', input_js);
-		
-	}
-
 	if(input_type != 'button'){
 		$('#' + id).attr('data-nu-data', '');
 	}

@@ -26,7 +26,7 @@
 
 
 .input_file { 
-   background-color : tan;
+   background-color : #ffe0b7;
 }
 
 .nuRelatedTab {
@@ -202,14 +202,17 @@ input[type=range]::-webkit-slider-runnable-track {
 }
 
 
-.nuScroll {
+.nuScroll, .input_nuScroll {
   background-color: #ECE6F7;
 }
 
-.nuDate {
+.nuDate, .input_nuDate {
 }
 
-.nuNumber {
+.nuNumber, .input_nuNumber {
+}
+
+.nuAutoNumber, .input_nuAutoNumber {
 }
 
 .nuNotBreadcrumb {
