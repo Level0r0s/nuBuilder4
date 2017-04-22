@@ -1553,24 +1553,26 @@ function nuGetOptionsList(f, t, p, a){
 	var ul		= '<ul>';
 	
 	if(nuFORM.getProperty('record_id') == ''){
-		list.push(['Searchable Columns', 	'nuGetSearchList()', 						'nusearchcolumns.png', 	'Ctrl+Shft+S']);
+		list.push(['Searchable Columns', 	'nuGetSearchList()', 						'nu_option_search.png', 	'Ctrl+Shft+S']);
 	}
 
 	if(a == 1){
 		
-		list.push(['Arrange Objects', 		'nuPopup("' + f + '", "-2")', 				'nuarrange.png', 		'Ctrl+Shft+A']);
-		list.push(['Form Properties', 		'nuPopup("nuform", "' + f + '")', 			'nuformprop.png',		'Ctrl+Shft+F']);
-		list.push(['Form Object List', 		'nuPopup("nuobject", "", "' + f + '")', 	'nuobjectlist.png',		'Ctrl+Shft+O']);
+		list.push(['Arrange Objects', 		'nuPopup("' + f + '", "-2")', 				'nu_option_arrange.png', 		'Ctrl+Shft+A']);
+		list.push(['Form Properties', 		'nuPopup("nuform", "' + f + '")', 			'nu_option_properties.png',		'Ctrl+Shft+F']);
+		list.push(['Form Object List', 		'nuPopup("nuobject", "", "' + f + '")', 	'nu_option_objects.png',		'Ctrl+Shft+O']);
 		
 	}else{
 		
-		list.push(['Change Login', 			'nuPopup("nupassword", "' + u + '", "")', 	'nuobjectlist.png', 	'Ctrl+Shft+L']);
+		list.push(['Change Login', 			'nuPopup("nupassword", "' + u + '", "")', 	'nu_option_objects.png', 	'Ctrl+Shft+L']);
 		
 	}
 
 	if(nuFORM.getProperty('record_id') != ''){
-		list.push(['Save Form', 			'nuSaveAction();', 							'nusaveicon.png',		'Ctrl+Shft+S']);
-		list.push(['Refresh', 				'nuGetBreadcrumb()', 						'nurefresh_black.png', 	'Ctrl+Shft+R']);
+		
+		list.push(['Save Form', 			'nuSaveAction();', 							'nu_option_save.png',		'Ctrl+Shft+S']);
+		list.push(['Refresh', 				'nuGetBreadcrumb()', 						'nu_option_refresh.png', 	'Ctrl+Shft+R']);
+		
 	}
 	
 	//hide all other listboxes
