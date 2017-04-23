@@ -2882,8 +2882,8 @@ function nuAlert(o, type, yes, no){
 		
 		var icon = '';
 
-		if(type = 'error')	{icon	= 'nuerror';}
-		if(type = 'message'){icon	= 'numessage';}
+		if(type == 'error')	{icon	= 'nuerror';}
+		if(type == 'message'){icon	= 'numessage';}
 
 		var im	= '<img src="' + icon + '" width="30px" height="30px" style="position:absolute;left:10px;top:10px"><br>';
 
@@ -2910,7 +2910,7 @@ function nuAlert(o, type, yes, no){
 	
 	var l		= (screen.width - widest) / 2;
 
-	$('body', par).append("<div id='nuAlertDiv' style='text-align:center;width:" + widest + "px;left:" + l + "px' " + c + "></div>")
+	$('body', par).append("<div id='nuAlertDiv' class='nuAlert' style='width:" + widest + "px;left:" + l + "px' " + c + "></div>")
 	
 	for(var i = 0 ; i < o.length ; i++){
 		

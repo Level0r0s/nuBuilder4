@@ -215,6 +215,7 @@ input[type=range]::-webkit-slider-runnable-track {
 .nuAutoNumber, .input_nuAutoNumber {
 }
 
+
 .nuNotBreadcrumb {
   color: orange;
   display: inline-block;
@@ -940,12 +941,12 @@ input[type=range]::-webkit-slider-runnable-track {
     cursor: pointer;
 }
 
-#nuErrorAlert {
+.nuAlert {
 	
     font-family:Tahoma,Geneva,Arial,sans-serif;
 	position:absolute;
 	top:10px;
- 	text-align: left;
+ 	text-align: center;
 	padding:20px;
 	background-color: #FFEEA6;
 	box-shadow: 5px 5px 5px 0px rgba(150,147,150,1);
