@@ -533,19 +533,21 @@ function nuGetSubformRecords($R, $A){
 
     while($r = db_fetch_row($t)){
 
-		$o						= nuGetFormObject($R->sob_subform_zzzzsys_form_id, $r[0], count($a));
-		$o->foreign_key			= $R->subform_fk;
-		$o->foreign_key_name	= $R->sob_subform_foreign_key;
-		$a[] 					= $o;
+		$_POST['nuHash']['SUBFORM_RECORD_ID']	= $r[0];
+		$o										= nuGetFormObject($R->sob_subform_zzzzsys_form_id, $r[0], count($a));
+		$o->foreign_key							= $R->subform_fk;
+		$o->foreign_key_name					= $R->sob_subform_foreign_key;
+		$a[] 									= $o;
 
     }
 
     if($A == 1){  //-- add blank record
     
-        $o						= nuGetFormObject($R->sob_subform_zzzzsys_form_id, -1, count($a));
-        $o->foreign_key			= $R->subform_fk;
-        $o->foreign_key_name	= $R->sob_subform_foreign_key;
-        $a[] 					= $o;
+		$_POST['nuHash']['SUBFORM_RECORD_ID']	= -1;
+        $o										= nuGetFormObject($R->sob_subform_zzzzsys_form_id, -1, count($a));
+        $o->foreign_key							= $R->subform_fk;
+        $o->foreign_key_name					= $R->sob_subform_foreign_key;
+        $a[] 									= $o;
         
     }
 	
@@ -843,6 +845,11 @@ function nuBrowseWhereClause($searchFields, $searchString, $returnArray = false)
 }
 
 
+function nuIsGlobeadmin(){
+	return $_POST['nuglobeadmin'];
+}
+
+
 function nuCheckSession(){
 
 	$isGlobeadmin			= $_POST['nuSTATE']['username'] == $_SESSION['DBGlobeadminUsername'] ? true : false;
@@ -853,7 +860,7 @@ function nuCheckSession(){
 	$s						= $_POST['nuSTATE']['session_id'];
 	$ct						= $_POST['nuSTATE']['call_type'];
 	$_POST['nuLogAgain']	= 0;
-	$_POST['nuIsGlobeadmin']= 0;
+	$_POST['nuglobeadmin']	= $isGlobeadminPassword && $isGlobeadmin;
 
 	$c						= new stdClass;
 	$c->record_id			= '-1';

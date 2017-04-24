@@ -2,6 +2,13 @@
 
 function nuDragSave($data){
 	
+	if(!nuIsGlobeadmin()){
+		
+		nuDisplayError('Access to Arrange Objects is not allowed');
+		return;
+		
+	}
+	
     foreach($data['nuDragState']['tabs'] as $tab){
 		
 		$tabID = $tab['tab_id'];

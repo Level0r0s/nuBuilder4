@@ -1518,11 +1518,11 @@ function nuOptions(p, f, t, access){
 		'opacity'			: 0.5,
 		'border-style' 		: 'none'})
 		.addClass('nuIcon')
-//		.hover(function(){
-//			$( this ).attr('src', 'nuoptions_red.png');
-//		}, function(){
-//			$( this ).attr('src', 'nuoptions.png');
-//		});
+		.hover(function(){
+			$( this ).attr('src', 'nuoptions_red.png');
+		}, function(){
+			$( this ).attr('src', 'nuoptions.png');
+		});
 		
 		if(t == 'form'){
 			
@@ -1564,7 +1564,7 @@ function nuGetOptionsList(f, t, p, a){
 		
 	}else{
 		
-		list.push(['Change Login', 			'nuPopup("nupassword", "' + u + '", "")', 	'nu_option_objects.png', 	'Ctrl+Shft+L']);
+		list.push(['Change Login', 			'nuPopup("nupassword", "' + u + '", "")', 	'nu_option_password.png', 	'Ctrl+Shft+L']);
 		
 	}
 
