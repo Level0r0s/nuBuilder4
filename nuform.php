@@ -63,10 +63,10 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
     FROM zzzzsys_form
     INNER JOIN zzzzsys_object ON sob_all_zzzzsys_form_id = zzzzsys_form_id
     WHERE zzzzsys_form_id = ?
-    ORDER BY (sob_all_type = 'run'), sob_all_order    
+    ORDER BY (sob_all_type = 'run'), sob_all_zzzzsys_tab_id, sob_all_order    
 
     ";
-
+nudebug($s);
 	if($R != ''){
 
 		$t 							= nuRunQuery($s, array($F));
@@ -846,6 +846,7 @@ function nuBrowseWhereClause($searchFields, $searchString, $returnArray = false)
 
 
 function nuIsGlobeadmin(){
+	nudebug($_POST['nuglobeadmin'], $_POST);
 	return $_POST['nuglobeadmin'];
 }
 

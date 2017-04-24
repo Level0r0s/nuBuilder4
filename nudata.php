@@ -503,7 +503,7 @@ function nuUpdateRow($r, $p, $row, $FK){
 function nuEditObjects($id){
 
 	$a	= array();
-	$s	= "SELECT sob_all_id FROM zzzzsys_object WHERE sob_all_zzzzsys_form_id = '$id'";
+	$s	= "SELECT sob_all_id FROM zzzzsys_object WHERE sob_all_zzzzsys_form_id = '$id' ORDER BY sob_all_order";
 	$t	= nuRunQuery($s);
 	
 	while($r = db_fetch_object($t)){
