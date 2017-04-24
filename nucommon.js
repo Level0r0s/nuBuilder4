@@ -658,6 +658,22 @@ function nuEnable(i){                 //-- Enable Edit Form Object
 
 }
 
+function nuReadonly(i){  			               //-- set Edit Form Object to readonly
+
+	var o	= [i, i + 'code', i + 'button', i + 'description'];
+	
+	for(var c = 0 ; c < o.length ; c++){
+			
+		$('#' + o[c])
+		.addClass('nuReadOnly')
+		.attr('onclick','')
+		.prop('readonly', true);
+		
+	}
+
+}
+
+
 function nuDisable(i){                 //-- Disable Edit Form Object
 
 	var o	= [i, i + 'code', i + 'button', i + 'description'];

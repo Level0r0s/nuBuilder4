@@ -47,7 +47,7 @@
 	if($CT == 'runreport')		{$f->forms[0]->id					= nuRunReport($F);}
 	if($CT == 'runhtml')		{$f->forms[0]->id					= nuRunHTML();}
     if($CT == 'nudragsave')		{$f->forms[0]						= nuDragSave($P);}
-nudebug($CT, $f->forms[0]);
+
 	$f->forms[0]->user_id					= $U['USER_ID'];
 	$f->forms[0]->dimensions				= $s->dimensions;
 	$f->forms[0]->tableSchema				= $s->tableSchema;

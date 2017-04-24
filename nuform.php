@@ -66,7 +66,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
     ORDER BY (sob_all_type = 'run'), sob_all_zzzzsys_tab_id, sob_all_order    
 
     ";
-nudebug($s);
+
 	if($R != ''){
 
 		$t 							= nuRunQuery($s, array($F));
@@ -95,6 +95,10 @@ nudebug($s);
 				$o->align 			= $r->sob_all_align;
 				$o->read 			= $r->sob_all_access;
 				
+			}
+				
+			if($r->sob_all_type == 'lookup'){
+				$o->read 			= $r->sob_all_access;
 			}
 				
 			if($r->sob_all_type == 'input' || $r->sob_all_type == 'display'){
@@ -383,6 +387,7 @@ function nuGetEditForm($F, $R){
     $f->table       	= nuReplaceHashVariables($r->sfo_table);
     $f->primary_key 	= $r->sfo_primary_key;
     $f->order			= $SQL->orderBy;
+    $f->where			= $SQL->where;
     $f->from			= $SQL->from;
     $f->javascript		= $r->sfo_javascript;
 
@@ -527,7 +532,9 @@ function nuRemoveNonCharacters($s){
 function nuGetSubformRecords($R, $A){
 
     $f = nuGetEditForm($R->sob_subform_zzzzsys_form_id, '');
-    $s = "SELECT `$f->primary_key` $f->from WHeRE `$R->sob_subform_foreign_key` = '$R->subform_fk' $f->order";
+	$w = $f->where == '' ? '' : ' AND (' . substr($f->where, 6) . ')';
+    $s = "SELECT `$f->primary_key` $f->from WHeRE (`$R->sob_subform_foreign_key` = '$R->subform_fk') $w $f->order";
+
     $t = nuRunQuery($s);
     $a = array();
 
@@ -846,7 +853,6 @@ function nuBrowseWhereClause($searchFields, $searchString, $returnArray = false)
 
 
 function nuIsGlobeadmin(){
-	nudebug($_POST['nuglobeadmin'], $_POST);
 	return $_POST['nuglobeadmin'];
 }
 

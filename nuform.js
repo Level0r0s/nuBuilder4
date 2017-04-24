@@ -406,6 +406,7 @@ function nuDRAG(w, i, l, p, prop){
 
 function nuINPUT(w, i, l, p, prop){
 	
+	var ID			= p + prop.objects[i].id;
 	var id			= p + prop.objects[i].id;
 	var ef			= p + 'nuRECORD';                 						//-- Edit Form Id
 	var ty			= 'textarea';
@@ -479,12 +480,8 @@ function nuINPUT(w, i, l, p, prop){
 	.attr('data-nu-prefix', p)
 	.attr('data-nu-type', w.objects[i].type)
 	.attr('data-nu-subform-sort', 1)
-	.attr('data-nu-label', w.objects[i].label)
-	.prop('readonly', prop.objects[i].read == '1' ? 'readonly' : '');
-	
-	if(prop.objects[i].read == 2){
-		nuHide(id);
-	}
+	.attr('data-nu-label', w.objects[i].label);
+//	.prop('readonly', prop.objects[i].read == '1' ? 'readonly' : '');
 
 	if(prop.objects[i].type != 'textarea'){
 
@@ -646,6 +643,8 @@ function nuINPUT(w, i, l, p, prop){
 		
 		nuPopulateLookup3(w.objects[i].values, p);
 		
+		setAccess(ID, prop.objects[i].read);
+		
 		return Number(prop.objects[i].width) + Number(prop.objects[i].description_width) + 30;
 		
 	}else{
@@ -653,12 +652,27 @@ function nuINPUT(w, i, l, p, prop){
 		if(prop.objects[i].type == 'input' && input_type == 'nuAutoNumber'){
 			$('#' + id).val(prop.objects[i].counter);
 		}
+
+		setAccess(ID, prop.objects[i].read);
 		
 		return Number(prop.objects[i].width);
 		
 	}
 	
 }
+
+function setAccess(i, r){
+	
+	if(r == 2){
+		nuHide(i);
+	}
+
+	if(r == 1){
+		nuReadonly(i);
+	}
+
+}
+
 
 function nuHTML(w, i, l, p, prop){
 

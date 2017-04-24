@@ -281,7 +281,7 @@ class nuSqlString{
         
         $orderBy          = $orderBy_string;
         $this->from       = $from;
-        $this->where      = $where;
+        $this->where      = $where == '' ? 'WHERE 1' : $where;
         $this->groupBy    = $groupBy;
         $this->having     = $having;
         $this->orderBy    = $orderBy;
