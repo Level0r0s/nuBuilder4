@@ -2081,6 +2081,10 @@ function nuRunPHPAction(id) {
 	nuRunPHP(id);
 }
 
+function nuRunPHPHiddenAction(id) {
+	nuRunPHPHidden(id);
+}
+
 function nuRunReportAction(id) {
 	nuRunReport(id);
 }

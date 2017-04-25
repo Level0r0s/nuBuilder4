@@ -500,7 +500,7 @@ function nuRunPHP($nuRID){
 
 
 
-function nuRunHiddenPHP($nuCode){
+function nuRunPHPHidden($nuCode){
 
 
 	$s						= "SELECT * FROM zzzzsys_php WHERE sph_code = ? ";
