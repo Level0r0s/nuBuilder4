@@ -63,7 +63,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
     FROM zzzzsys_form
     INNER JOIN zzzzsys_object ON sob_all_zzzzsys_form_id = zzzzsys_form_id
     WHERE zzzzsys_form_id = ?
-    ORDER BY (sob_all_type = 'run'), sob_all_order    
+    ORDER BY (sob_all_type = 'run'), sob_all_zzzzsys_tab_id, sob_all_order    
 
     ";
 
@@ -95,6 +95,10 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 				$o->align 			= $r->sob_all_align;
 				$o->read 			= $r->sob_all_access;
 				
+			}
+				
+			if($r->sob_all_type == 'lookup'){
+				$o->read 			= $r->sob_all_access;
 			}
 				
 			if($r->sob_all_type == 'input' || $r->sob_all_type == 'display'){
@@ -383,6 +387,7 @@ function nuGetEditForm($F, $R){
     $f->table       	= nuReplaceHashVariables($r->sfo_table);
     $f->primary_key 	= $r->sfo_primary_key;
     $f->order			= $SQL->orderBy;
+    $f->where			= $SQL->where;
     $f->from			= $SQL->from;
     $f->javascript		= $r->sfo_javascript;
 
@@ -527,25 +532,29 @@ function nuRemoveNonCharacters($s){
 function nuGetSubformRecords($R, $A){
 
     $f = nuGetEditForm($R->sob_subform_zzzzsys_form_id, '');
-    $s = "SELECT `$f->primary_key` $f->from WHeRE `$R->sob_subform_foreign_key` = '$R->subform_fk' $f->order";
+	$w = $f->where == '' ? '' : ' AND (' . substr($f->where, 6) . ')';
+    $s = "SELECT `$f->primary_key` $f->from WHeRE (`$R->sob_subform_foreign_key` = '$R->subform_fk') $w $f->order";
+
     $t = nuRunQuery($s);
     $a = array();
 
     while($r = db_fetch_row($t)){
 
-		$o						= nuGetFormObject($R->sob_subform_zzzzsys_form_id, $r[0], count($a));
-		$o->foreign_key			= $R->subform_fk;
-		$o->foreign_key_name	= $R->sob_subform_foreign_key;
-		$a[] 					= $o;
+		$_POST['nuHash']['SUBFORM_RECORD_ID']	= $r[0];
+		$o										= nuGetFormObject($R->sob_subform_zzzzsys_form_id, $r[0], count($a));
+		$o->foreign_key							= $R->subform_fk;
+		$o->foreign_key_name					= $R->sob_subform_foreign_key;
+		$a[] 									= $o;
 
     }
 
     if($A == 1){  //-- add blank record
     
-        $o						= nuGetFormObject($R->sob_subform_zzzzsys_form_id, -1, count($a));
-        $o->foreign_key			= $R->subform_fk;
-        $o->foreign_key_name	= $R->sob_subform_foreign_key;
-        $a[] 					= $o;
+		$_POST['nuHash']['SUBFORM_RECORD_ID']	= -1;
+        $o										= nuGetFormObject($R->sob_subform_zzzzsys_form_id, -1, count($a));
+        $o->foreign_key							= $R->subform_fk;
+        $o->foreign_key_name					= $R->sob_subform_foreign_key;
+        $a[] 									= $o;
         
     }
 	
@@ -843,6 +852,11 @@ function nuBrowseWhereClause($searchFields, $searchString, $returnArray = false)
 }
 
 
+function nuIsGlobeadmin(){
+	return $_POST['nuglobeadmin'];
+}
+
+
 function nuCheckSession(){
 
 	$isGlobeadmin			= $_POST['nuSTATE']['username'] == $_SESSION['DBGlobeadminUsername'] ? true : false;
@@ -853,7 +867,7 @@ function nuCheckSession(){
 	$s						= $_POST['nuSTATE']['session_id'];
 	$ct						= $_POST['nuSTATE']['call_type'];
 	$_POST['nuLogAgain']	= 0;
-	$_POST['nuIsGlobeadmin']= 0;
+	$_POST['nuglobeadmin']	= $isGlobeadminPassword && $isGlobeadmin;
 
 	$c						= new stdClass;
 	$c->record_id			= '-1';

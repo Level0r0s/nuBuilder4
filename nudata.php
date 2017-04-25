@@ -263,7 +263,7 @@ function nuUpdateData(){
 	$ID		= $_POST['nuSTATE']['record_id'];
 	$DEL	= $_POST['nuSTATE']['deleteAll'];	
 	$fid	= $_POST['nuSTATE']['form_id'];
-
+	
 	if($ID == -3){
 		
 		nuDisplayError('Cannot be Saved..');
@@ -434,7 +434,7 @@ function nuUpdateData(){
 	}else{
 		$event	= $FORM->zzzzsys_form_id . '_AS';
 	}
-nudebug("event: $event");
+	
 	if(trim($event) != '') {
 		$evalPHP = new nuEvalPHPClass($event);
 	}
@@ -500,7 +500,7 @@ function nuUpdateRow($r, $p, $row, $FK){
 function nuEditObjects($id){
 
 	$a	= array();
-	$s	= "SELECT sob_all_id FROM zzzzsys_object WHERE sob_all_zzzzsys_form_id = '$id'";
+	$s	= "SELECT sob_all_id FROM zzzzsys_object WHERE sob_all_zzzzsys_form_id = '$id' ORDER BY sob_all_order";
 	$t	= nuRunQuery($s);
 	
 	while($r = db_fetch_object($t)){
@@ -609,7 +609,6 @@ function nuSubformObject($id){
 
 function nuDeleteForm($f){
 	
-	nuDebug("1 $s $f");
 	$s		= "DELETE FROM zzzzsys_browse WHERE sbr_zzzzsys_form_id = ? ";
 	$t		= nuRunQuery($s, [$f]);
 	$s		= "DELETE FROM zzzzsys_tab WHERE syt_zzzzsys_form_id = ? ";
@@ -621,10 +620,7 @@ function nuDeleteForm($f){
 	$s		= "SELECT * FROM zzzzsys_object WHERE sob_all_zzzzsys_form_id = ? ";
 	$t		= nuRunQuery($s);
 
-	nuDebug("2 $s $f");
-
 	while($r = db_fetch_object($t)){
-	nuDebug("3 $s $f");
 		
 		$i	= $r->zzzzsys_object;
 		$s	= "DELETE FROM zzzzsys_event WHERE sev_zzzzsys_object_id = ? ";
@@ -633,13 +629,9 @@ function nuDeleteForm($f){
 		$t	= nuRunQuery($s, [$i]);
 
 	}
-	nuDebug("4 $s $f");
 
 	$s		= "DELETE FROM zzzzsys_object WHERE sob_all_type = 'run' AND sob_run_zzzzsys_form_id = ? ";
 	$t		= nuRunQuery($s, [$f]);
-	
-	nuDebug("$s $f");
-	
 	
 }
 

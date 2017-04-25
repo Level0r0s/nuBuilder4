@@ -123,7 +123,12 @@ function nuBuildTable($t, $array){
 
 function nuDebug($a0 = '^', $a1 = '^', $a2 = '^', $a3 = '^', $a4 = '^', $a5 = '^', $a6 = '^', $a7 = '^', $a8 = '^', $a9 = '^'){
 	
-	$m					= '';
+	$b					= debug_backtrace();
+	$f					= $b[0]['file'];
+	$l					= $b[0]['line'];
+
+	$m					= "($f:$l)\n";
+
 	
 	for($i = 0 ; $i < func_num_args() ; $i++){
 
@@ -276,7 +281,7 @@ class nuSqlString{
         
         $orderBy          = $orderBy_string;
         $this->from       = $from;
-        $this->where      = $where;
+        $this->where      = $where == '' ? 'WHERE 1' : $where;
         $this->groupBy    = $groupBy;
         $this->having     = $having;
         $this->orderBy    = $orderBy;
@@ -877,7 +882,7 @@ function nuGetUserAccess(){
 	$A['USER_GROUP_ID']	= $j->session->zzzzsys_user_group_id;
 	$A['HOME_ID']		= $j->session->sug_zzzzsys_form_id;
 	$A['global_access']	= $j->session->global_access;
-
+	
 	return $A;
 	
 }

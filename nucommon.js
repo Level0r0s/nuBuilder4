@@ -104,10 +104,9 @@ function nuGetBreadcrumb(bc, ind){
 
 function nuDisplayError(e){
 
-	if(e.error === undefined || se.errors.length == 0){			//-- no error messages
+	if(e.errors === undefined || e.errors.length == 0){			//-- no error messages
 		return false;
 	}
-	
 
 	var im	= '<img src="nuerror.png" width="30px" height="30px" style="position:absolute;left:10px;top:10px"><br>';
 
@@ -659,6 +658,22 @@ function nuEnable(i){                 //-- Enable Edit Form Object
 
 }
 
+function nuReadonly(i){  			               //-- set Edit Form Object to readonly
+
+	var o	= [i, i + 'code', i + 'button', i + 'description'];
+	
+	for(var c = 0 ; c < o.length ; c++){
+			
+		$('#' + o[c])
+		.addClass('nuReadOnly')
+		.attr('onclick','')
+		.prop('readonly', true);
+		
+	}
+
+}
+
+
 function nuDisable(i){                 //-- Disable Edit Form Object
 
 	var o	= [i, i + 'code', i + 'button', i + 'description'];
@@ -790,3 +805,4 @@ function nuResizeWindow(e){
 	}
 		
 }
+

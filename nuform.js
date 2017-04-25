@@ -406,6 +406,7 @@ function nuDRAG(w, i, l, p, prop){
 
 function nuINPUT(w, i, l, p, prop){
 	
+	var ID			= p + prop.objects[i].id;
 	var id			= p + prop.objects[i].id;
 	var ef			= p + 'nuRECORD';                 						//-- Edit Form Id
 	var ty			= 'textarea';
@@ -479,12 +480,8 @@ function nuINPUT(w, i, l, p, prop){
 	.attr('data-nu-prefix', p)
 	.attr('data-nu-type', w.objects[i].type)
 	.attr('data-nu-subform-sort', 1)
-	.attr('data-nu-label', w.objects[i].label)
-	.prop('readonly', prop.objects[i].read == '1' ? 'readonly' : '');
-	
-	if(prop.objects[i].read == 2){
-		nuHide(id);
-	}
+	.attr('data-nu-label', w.objects[i].label);
+//	.prop('readonly', prop.objects[i].read == '1' ? 'readonly' : '');
 
 	if(prop.objects[i].type != 'textarea'){
 
@@ -519,17 +516,6 @@ function nuINPUT(w, i, l, p, prop){
 		$('#' + id)
 		.addClass('nuNumber')
 		.attr('data-nu-format', w.objects[i].format)
-		
-	}
-
-
-	if(input_type == 'nuScroll'){
-		
-		var input_js	= 'nuFORM.scrollList(event, ' + w.objects[i].scroll + ')';
-		
-		$('#' + id)
-		.addClass('nuScroll')
-		.attr('onkeydown', input_js);
 		
 	}
 
@@ -657,6 +643,8 @@ function nuINPUT(w, i, l, p, prop){
 		
 		nuPopulateLookup3(w.objects[i].values, p);
 		
+		setAccess(ID, prop.objects[i].read);
+		
 		return Number(prop.objects[i].width) + Number(prop.objects[i].description_width) + 30;
 		
 	}else{
@@ -664,12 +652,27 @@ function nuINPUT(w, i, l, p, prop){
 		if(prop.objects[i].type == 'input' && input_type == 'nuAutoNumber'){
 			$('#' + id).val(prop.objects[i].counter);
 		}
+
+		setAccess(ID, prop.objects[i].read);
 		
 		return Number(prop.objects[i].width);
 		
 	}
 	
 }
+
+function setAccess(i, r){
+	
+	if(r == 2){
+		nuHide(i);
+	}
+
+	if(r == 1){
+		nuReadonly(i);
+	}
+
+}
+
 
 function nuHTML(w, i, l, p, prop){
 
@@ -1529,11 +1532,11 @@ function nuOptions(p, f, t, access){
 		'opacity'			: 0.5,
 		'border-style' 		: 'none'})
 		.addClass('nuIcon')
-//		.hover(function(){
-//			$( this ).attr('src', 'nuoptions_red.png');
-//		}, function(){
-//			$( this ).attr('src', 'nuoptions.png');
-//		});
+		.hover(function(){
+			$( this ).attr('src', 'nuoptions_red.png');
+		}, function(){
+			$( this ).attr('src', 'nuoptions.png');
+		});
 		
 		if(t == 'form'){
 			
@@ -1564,24 +1567,26 @@ function nuGetOptionsList(f, t, p, a){
 	var ul		= '<ul>';
 	
 	if(nuFORM.getProperty('record_id') == ''){
-		list.push(['Searchable Columns', 	'nuGetSearchList()', 						'nusearchcolumns.png', 	'Ctrl+Shft+S']);
+		list.push(['Searchable Columns', 	'nuGetSearchList()', 						'nu_option_search.png', 	'Ctrl+Shft+S']);
 	}
 
 	if(a == 1){
 		
-		list.push(['Arrange Objects', 		'nuPopup("' + f + '", "-2")', 				'nuarrange.png', 		'Ctrl+Shft+A']);
-		list.push(['Form Properties', 		'nuPopup("nuform", "' + f + '")', 			'nuformprop.png',		'Ctrl+Shft+F']);
-		list.push(['Form Object List', 		'nuPopup("nuobject", "", "' + f + '")', 	'nuobjectlist.png',		'Ctrl+Shft+O']);
+		list.push(['Arrange Objects', 		'nuPopup("' + f + '", "-2")', 				'nu_option_arrange.png', 		'Ctrl+Shft+A']);
+		list.push(['Form Properties', 		'nuPopup("nuform", "' + f + '")', 			'nu_option_properties.png',		'Ctrl+Shft+F']);
+		list.push(['Form Object List', 		'nuPopup("nuobject", "", "' + f + '")', 	'nu_option_objects.png',		'Ctrl+Shft+O']);
 		
 	}else{
 		
-		list.push(['Change Login', 			'nuPopup("nupassword", "' + u + '", "")', 	'nuobjectlist.png', 	'Ctrl+Shft+L']);
+		list.push(['Change Login', 			'nuPopup("nupassword", "' + u + '", "")', 	'nu_option_password.png', 	'Ctrl+Shft+L']);
 		
 	}
 
 	if(nuFORM.getProperty('record_id') != ''){
-		list.push(['Save Form', 			'nuSaveAction();', 							'nusaveicon.png',		'Ctrl+Shft+S']);
-		list.push(['Refresh', 				'nuGetBreadcrumb()', 						'nurefresh_black.png', 	'Ctrl+Shft+R']);
+		
+		list.push(['Save Form', 			'nuSaveAction();', 							'nu_option_save.png',		'Ctrl+Shft+S']);
+		list.push(['Refresh', 				'nuGetBreadcrumb()', 						'nu_option_refresh.png', 	'Ctrl+Shft+R']);
+		
 	}
 	
 	//hide all other listboxes
@@ -1614,9 +1619,12 @@ function nuGetOptionsList(f, t, p, a){
 	
 	div.setAttribute('id', id);
 	
-	var x = document.createElement('div');
+	var x 			= document.createElement('div');
+	
 	x.setAttribute('id', 'nuSearchListClose');
+	
 	$('#nuOptionsListBox').append(x);
+	
 	$('#' + x.id).css({
 		'width'				: 20,
 		'height'			: 20,
@@ -1628,7 +1636,7 @@ function nuGetOptionsList(f, t, p, a){
 	.click(function(){
 		$( "#nuOptionsListBox" ).remove();
 	})
-	.html('X')
+	.html('<img id="nuOptionListClose" src="nuclose.png" >')
 	.addClass('nuSearchListClose');
 	
 	nuBuildOptionsList(list, p);
@@ -2806,7 +2814,7 @@ function nuGetSearchList(){
 		'text-align'    	: 'center'
 	})
 	.attr('onclick', '$("#nuSearchList").remove();;$("#nuModal").remove();')
-	.html('X')
+	.html('<img id="nuOptionListClose" src="nuclose.png" width="20px" height="20px">')
 	.addClass('nuSearchListClose');
 	
 	for(var i = 0 ; i < c.length ; i++){
@@ -2884,15 +2892,31 @@ function nuTotal(f){
 }
 
 
-function nuAlert(o){
+function nuAlert(o, type, yes, no){
+	
+
+	if(arguments.length > 1){
+		
+		var icon = '';
+
+		if(type == 'error')	{icon	= 'nuerror';}
+		if(type == 'message'){icon	= 'numessage';}
+
+		var im	= '<img src="' + icon + '" width="30px" height="30px" style="position:absolute;left:10px;top:10px"><br>';
+
+		o.splice(0, 0, im);
+		
+	}
 
 	var par		= window.parent.document;
 	
-	$('#nuErrorAlert', par).remove();
+	$('#nuAlertDiv', par).remove();
 
-	if(o.length == 0){return;}
+	if(o.length == 0){
+		return;
+	}
 	
-	var c		= " onclick=\"$('#nuErrorAlert').remove();\"";
+	var c		= " onclick=\"$('#nuAlertDiv').remove();\"";
 	var widest	= 5;
 
 	for(var i = 0 ; i < o.length ; i++){
@@ -2903,14 +2927,20 @@ function nuAlert(o){
 	
 	var l		= (screen.width - widest) / 2;
 
-	$('body', par).append("<div id='nuErrorAlert' style='text-align:center;width:" + widest + "px;left:" + l + "px' " + c + "></div>")
+	$('body', par).append("<div id='nuAlertDiv' class='nuAlert' style='width:" + widest + "px;left:" + l + "px' " + c + "></div>")
 	
 	for(var i = 0 ; i < o.length ; i++){
 		
-		$('#nuErrorAlert', par).append(o[i]);
-		$('#nuErrorAlert', par).append('<br>');
+		$('#nuAlertDiv', par).append(o[i]);
+		$('#nuAlertDiv', par).append('<br>');
 		
 	}
+
+//		$('body').append('<div id="nuModal"></div>')
+//		.append(e);
+
+
+
 	
 }
 

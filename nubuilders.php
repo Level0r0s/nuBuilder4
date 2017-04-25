@@ -179,11 +179,7 @@ function nuBuildFastForm($table, $form_id){
 			}
 			
 		}else{
-			
-			if($y != 'image'){
-				nuRunQuery($sql, $array);
-			}
-			
+			nuRunQuery($sql, $array);
 		}
 
 	}

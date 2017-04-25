@@ -9,7 +9,6 @@
 require_once('nucommon.php');	
 
 jsinclude('jquery/jquery.js');
-jsinclude('dropzone/dropzone.js');
 jsinclude('nuformclass.js');
 jsinclude('nuform.js');
 jsinclude('nuformdrag.js');
@@ -19,7 +18,6 @@ jsinclude('nuajax.js');       //-- calls to server
 jsinclude('nufunctions.js');
 
 cssinclude('nubuilder4.css');
-cssinclude('dropzone/dropzone.css');
 
 ?>
 
