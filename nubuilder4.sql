@@ -3,9 +3,6 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 27, 2017 at 01:11 AM
--- Server version: 10.1.16-MariaDB
--- PHP Version: 7.0.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -684,7 +681,6 @@ INSERT INTO `zzzzsys_form` (`zzzzsys_form_id`, `sfo_type`, `sfo_code`, `sfo_desc
 ('c14925562912403752', 'browseedit', 'FF11', 'Fast Form 11', 'aaaaaaa', 'aaaaaaa_id', '', 0, 0, 'SELECT * FROM aaaaaaa', ''),
 ('c14925426849175194', 'browseedit', 'FF13', 'Fast Form 13', 'aaaaa', 'aaaaa_id', '', 0, 0, 'SELECT * FROM aaaaa', ''),
 ('c14929786978782474', 'browseedit', 'FF12', 'Fast Form 12', 'aaaaaaaaaa', 'aaaaaaaaaa_id', '', 0, 0, 'SELECT * FROM aaaaaaaaaa', ''),
-('s14930617882373', 'browseedit', '1111fasdfgt', 'Test Form (break it if you want)', 'zzzzsys_access_level', 'zzzzsys_access_level_id', '', 0, 0, 'SELECT * FROM zzzzsys_access_level\nORDER BY sal_code\n', 'nuSetTitle($(''#sal_code'').val());'),
 ('s14930618132400', 'browseedit', '1111fasd2', 'Test Form (break it if you want)', 'zzzzsys_access_level', 'zzzzsys_access_level_id', '', 0, 0, 'SELECT * FROM zzzzsys_access_level\nORDER BY sal_code\n', 'nuSetTitle($(''#sal_code'').val());'),
 ('c14931629721841117', 'browseedit', 'FF13', 'Fast Form 13', 'aaaaa6', 'aaaaa6_id', '', 0, 0, 'SELECT * FROM aaaaa6', '');
 
@@ -1318,6 +1314,13 @@ CREATE TABLE `zzzzsys_session` (
   `sss_timeout` datetime NOT NULL,
   `sss_access` mediumtext NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `zzzzsys_session`
+--
+
+INSERT INTO `zzzzsys_session` (`zzzzsys_session_id`, `sss_timeout`, `sss_access`) VALUES
+('s14931633909616', '2017-04-26 11:06:30', '{"session":{"zzzzsys_access_level_id":"","zzzzsys_user_id":"globeadmin","zzzzsys_form_id":"nuhome","global_access":"1"},"forms":[["#new_id#",null,null,null,null,null],["56773cb405f4913",null,null,null,null,null],["5678ab2c48c5c41",null,null,null,null,null],["568b508eec00d80",null,null,null,null,null],["56c513162acd102",null,null,null,null,null],["57edbac65e1c52a",null,null,null,null,null],["58a08a1abc4782c",null,null,null,null,null],["58a08a91c9b59a9",null,null,null,null,null],["58bf0b972c2a447",null,null,null,null,null],["58c86689b9af7fd",null,null,null,null,null],["58d3719f55819e7",null,null,null,null,null],["c14919868321575624",null,null,null,null,null],["c14919869125564958",null,null,null,null,null],["c14919872883669658",null,null,null,null,null],["c14920332262837962",null,null,null,null,null],["c14920586645918085",null,null,null,null,null],["c14922090360750633",null,null,null,null,null],["c14923102442293588",null,null,null,null,null],["c14925426849175194",null,null,null,null,null],["c14925562912403752",null,null,null,null,null],["c14929786978782474",null,null,null,null,null],["c14931629721841117",null,null,null,null,null],["nuaccess",null,null,null,null,null],["nuaccessforms",null,null,null,null,null],["nuaccessgroup",null,null,null,null,null],["nuaccesslevelreport",null,null,null,null,null],["nuaccessreport",null,null,null,null,null],["nublank",null,null,null,null,null],["nubrowse",null,null,null,null,null],["nubuildreport",null,null,null,null,null],["nucalcobjects",null,null,null,null,null],["nudebug",null,null,null,null,null],["nuevent",null,null,null,null,null],["nufflaunch",null,null,null,null,null],["nuffobjects",null,null,null,null,null],["nuform",null,null,null,null,null],["nuformat",null,null,null,null,null],["nuformatcurrency",null,null,null,null,null],["nuhome",null,null,null,null,null],["nulaunchdates",null,null,null,null,null],["nunonsystemform",null,null,null,null,null],["nuobject",null,null,null,null,null],["nupassword",null,null,null,null,null],["nuphp",null,null,null,null,null],["nuphplibrary",null,null,null,null,null],["nurunlist",null,null,null,null,null],["nurunphp",null,null,null,null,null],["nurunreport",null,null,null,null,null],["nusample",null,null,null,null,null],["nusetup",null,null,null,null,null],["nutab",null,null,null,null,null],["nutimezone",null,null,null,null,null],["nutranslate",null,null,null,null,null],["nuuser",null,null,null,null,null],["s14921253336083",null,null,null,null,null],["s14930617882373",null,null,null,null,null],["s14930618132400",null,null,null,null,null]],"reports":[["574b9845a681d27","nulaunchdates"]],"procedures":[["57578be0057a49f","nulaunchdates"],["57db70b7aa22cda","57edbac65e1c52a"],["57f6e1f954955c1","nublank"],["581135daea4f878","nublank"],["nulaunchdates_BE","nublank"],["nuform_BS",""],["nuphp_AS",""],["nuphp_BS",""],["568b50020fc7a62_AB",""],["nupassword_BS",""],["nuuser_AS",""],["nurunlist_BB",""],["nudebug_BD",""],["nuobject_BS",""],["nuform_AS",""],["nucalcobjects_BB",""],["570d9046964038e_AB",""],["c14925427482771712_AD",""],["nuform_AD",""],["570da52f2828508_AB",""],["57452c417370475_AB",""],["574671cdcc77367_AB",""],["570dab25164b394_AB",""],["nufastform","nufflaunch"],["s14919851858544",""],["c14925390850522729_BB",""]]}');
 
 -- --------------------------------------------------------
 
