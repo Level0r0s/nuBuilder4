@@ -226,7 +226,7 @@ function nuRunPHP(f, iframe){
 }
 
 
-function nuRunHiddenPHP(i){
+function nuRunPHPHidden(i){
 
 	var last				= window.nuFORM.getCurrent();
 

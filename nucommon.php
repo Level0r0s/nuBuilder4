@@ -500,7 +500,7 @@ function nuRunPHP($nuRID){
 
 
 
-function nuRunHiddenPHP($nuCode){
+function nuRunPHPHidden($nuCode){
 
 
 	$s						= "SELECT * FROM zzzzsys_php WHERE sph_code = ? ";
@@ -920,5 +920,20 @@ function nuGetFormProperties($i){
 	
 }
 
+function nuGetSubformObject($id){
+
+	$sf		= $_POST['nuHash']['nuFORMdata'];
+	
+	for($i = 0 ; $i < count($sf) ; $i++){
+		
+		if($sf[$i]->id == $id){
+			return $sf[$i];
+		}
+		
+	}
+	
+	return stdClass;
+
+}
 
 ?>

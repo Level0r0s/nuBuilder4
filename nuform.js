@@ -1619,9 +1619,12 @@ function nuGetOptionsList(f, t, p, a){
 	
 	div.setAttribute('id', id);
 	
-	var x = document.createElement('div');
+	var x 			= document.createElement('div');
+	
 	x.setAttribute('id', 'nuSearchListClose');
+	
 	$('#nuOptionsListBox').append(x);
+	
 	$('#' + x.id).css({
 		'width'				: 20,
 		'height'			: 20,
@@ -1633,7 +1636,7 @@ function nuGetOptionsList(f, t, p, a){
 	.click(function(){
 		$( "#nuOptionsListBox" ).remove();
 	})
-	.html('X')
+	.html('<img id="nuOptionListClose" src="nuclose.png" >')
 	.addClass('nuSearchListClose');
 	
 	nuBuildOptionsList(list, p);
@@ -2076,6 +2079,10 @@ function nuAddAction(){
 
 function nuRunPHPAction(id) {
 	nuRunPHP(id);
+}
+
+function nuRunPHPHiddenAction(id) {
+	nuRunPHPHidden(id);
 }
 
 function nuRunReportAction(id) {
@@ -2811,7 +2818,7 @@ function nuGetSearchList(){
 		'text-align'    	: 'center'
 	})
 	.attr('onclick', '$("#nuSearchList").remove();;$("#nuModal").remove();')
-	.html('X')
+	.html('<img id="nuOptionListClose" src="nuclose.png" width="20px" height="20px">')
 	.addClass('nuSearchListClose');
 	
 	for(var i = 0 ; i < c.length ; i++){
