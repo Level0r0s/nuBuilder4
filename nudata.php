@@ -3,7 +3,6 @@
 
 function nuCheckTables(){
 
-//	$nudata	= $_POST['nuSTATE']['nuFORMdata'];
 	$nudata	= $_POST['nuHash']['nuFORMdata'];
 	$rid	= $_POST['nuSTATE']['record_id'];
 	$fid	= $_POST['nuSTATE']['form_id'];

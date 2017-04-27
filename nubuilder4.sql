@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 27, 2017 at 01:15 AM
+-- Generation Time: Apr 27, 2017 at 02:46 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -506,7 +506,8 @@ INSERT INTO `zzzzsys_browse` (`zzzzsys_browse_id`, `sbr_zzzzsys_form_id`, `sbr_t
 ('s14930618132405', 's14930618132400', 'Code', 'sal_code', 'l', 'D|yyyy-mm-dd', 10, 100),
 ('s14930618132406', 's14930618132400', 'Description', 'sal_description', 'l', 'D|dd-mmm-yyyy', 20, 300),
 ('s14930618132407', 's14930618132400', 'dddd', 'dddd', 'l', 'D|yyyy-mm-dd', 30, 222),
-('s14931629819347', 'c14931629721841117', 'text00', 'field00', 'l', '', 20, 200);
+('s14931629819347', 'c14931629721841117', 'text00', 'field00', 'l', '', 20, 200),
+('s14932506013705', '58c86689b9af7fd', 'Description', 'sfu_description', 'l', '', 40, 100);
 
 -- --------------------------------------------------------
 
@@ -753,7 +754,23 @@ INSERT INTO `zzzzsys_function` (`zzzzsys_function_id`, `sfu_language`, `sfu_name
 ('s14932447920170', 'php', 'nuDisplayMessage', 'nuDisplayMessage($)', 'Any messages created by using nuDisplayMessage() will be displayed in the browser and BUT will not halt any update to the web page.', 'nuDisplayMessage("All tables have been updated");', 'nuDisplayError'),
 ('s14932454128614', 'php', 'nuDebug', 'nuDebug(parameter1, parameter2, parameter3)', 'Creates a record in zzzzsys_debug.deb_message.\nParamrters can be number, string, object or array.\nObjects and arrays will be displayed as if print_r() was used.\n', 'nuDebug(''hello'', $_POST);', ''),
 ('s14932467957769', 'php', 'nuGetSubformObject()', '$object = nuGetSubformObject($id);', 'returns an Object containing information about a subform.\n\neg.\n\nstdClass Object\n(\n    [id] => zzzzsys_tab_sf\n    [foreign_key] => syt_zzzzsys_form_id\n    [primary_key] => zzzzsys_tab_id\n    [object_id] => 570b3915874d635\n    [table] => zzzzsys_tab\n    [action] => save\n    [rows] => Array\n        (\n            [0] => Array\n                (\n                    [0] => 58d3719f5582316\n                    [1] => User\n                    [2] => 10\n                    [3] => 0\n                )\n\n            [1] => Array\n                (\n                    [0] => 58d3719f5582b0a\n                    [1] => Procedures\n                    [2] => 20\n                    [3] => 0\n                )\n\n            [2] => Array\n                (\n                    [0] => 58d3719f5582f10\n                    [1] => Reports\n                    [2] => 30\n                    [3] => 0\n                )\n\n            [3] => Array\n                (\n                    [0] => -1\n                    [1] => \n                    [2] => \n                    [3] => 1\n                )\n\n        )\n\n    [edited] => Array\n        (\n            [0] => Array\n                (\n                    [0] => 0\n                    [1] => 0\n                    [2] => 0\n                    [3] => 0\n                )\n\n            [1] => Array\n                (\n                    [0] => 0\n                    [1] => 0\n                    [2] => 0\n                    [3] => 0\n                )\n\n            [2] => Array\n                (\n                    [0] => 0\n                    [1] => 0\n                    [2] => 0\n                    [3] => 0\n                )\n\n            [3] => Array\n                (\n                    [0] => 0\n                    [1] => 0\n                    [2] => 0\n                    [3] => 0\n                )\n\n        )\n\n    [deleted] => Array\n        (\n            [0] => 0\n            [1] => 0\n            [2] => 0\n            [3] => 1\n        )\n\n    [fields] => Array\n        (\n            [0] => ID\n            [1] => syt_title\n            [2] => syt_order\n            [3] => nuDelete\n        )\n\n)\n\n\n', '$object = nuGetSubformObject(''client_sf'');', ''),
-('s14932481809933', 'php', 'db_fetch_object', 'db_fetch_object($t)', 'Returns sql row result as an object.', '	$t	= nuRunQuery("SELECT * FROM $TT LIMIT 1, 1");\n	\n	$r 	= db_fetch_object($t);\n\n	$a	= $r->sob_all_type;\n	$b	= $r->sob_input_type;\n		\n', '');
+('s14932481809933', 'php', 'db_fetch_object', 'db_fetch_object($t)', 'Returns sql row result as an object.', '	$t	= nuRunQuery("SELECT * FROM $TT LIMIT 1, 1");\n	\n	$r 	= db_fetch_object($t);\n\n	$a	= $r->sob_all_type;\n	$b	= $r->sob_input_type;\n		\n', ''),
+('s14932498348604', 'php', 'cssinclude', 'cssinclude($pFile)', '', '', ''),
+('s14932498590353', 'php', 'db_columns', 'db_columns($table)', '', '', ''),
+('s14932498792006', 'php', 'db_fetch_array', 'db_fetch_array($qry)', '', '', ''),
+('s14932499162897', 'php', 'db_field_array', 'db_field_array($o)', '', '', ''),
+('s14932499828835', 'php', 'db_num_rows', 'db_num_rows($o)', '', '', ''),
+('s14932500041119', 'php', 'jsinclude', 'jsinclude($pFile)', '', '', ''),
+('s14932500221019', 'php', 'nuAddJavascript', 'nuAddJavascript($js)', '', '', ''),
+('s14932501649485', 'php', 'nuRunQuery', 'nuRunQuery([$sql ,$variables = array()] [,$isInsert = false])', '', '', ''),
+('s14932504017157', 'js', 'nuAddActionButton', 'nuAddActionButton(i, v, f)', '', '', ''),
+('s14932511793309', 'php', 'nuSetFormValue', 'nuSetFormValue($id, $value);', 'This function can be used in the After Browse of a Lookup.', 'nuSetFormValue(''com_phone'', 1234);', ''),
+('s14932518549479', 'js', 'nuPad4', 'nuPad4(i)', 'Adds 0s to the left of a number to make it 4 characters wide.', 'print nuPad4(78);\n\n0078', 'nuPad3 nuPad2'),
+('s14932518912522', 'js', 'nuPad3', 'nuPad3(i)', 'Adds 0s to the left of a number to make it 3 characters wide.', 'print nuPad3(78);\n\n078', 'nuPad4 nuPad2'),
+('s14932519693379', 'js', 'nuPad2', 'nuPad2(i)', 'Adds 0s to the left of a number to make it 2 characters wide.', 'print nuPad2(7);\n\n07', 'nuPad4 nuPad3'),
+('s14932528023884', 'js', 'nuPopup', 'nuPopup(f, r, filter)', '', '', ''),
+('s14932533877122', 'js', 'nuGetSubformObject', 'object = nuGetSubformObject(id)', 'Get a nuBuilder Subform as an Object', 'var o = object = nuGetSubformObject(''customer_sf'');', ''),
+('s14932539093066', 'php', 'nuIsGlobeadmin', 'boolean = nuIsGlobeadmin()', 'Returns true if user is logged in as Globeadmin', '', '');
 
 -- --------------------------------------------------------
 
@@ -1025,8 +1042,8 @@ INSERT INTO `zzzzsys_object` (`zzzzsys_object_id`, `sob_all_zzzzsys_form_id`, `s
 ('58c8dfd2afa2e8e', '58c86689b9af7fd', 'zzzzsys_function', 'input', 'sfu_name', 'Name', '58c86689b9b0291', 20, 71, 126, 250, 18, '1', 'left', '1', '0', '', '', '', '', '', '', '', '', '0', 'php|PHP|js|Javascript\n\n', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
 ('58c8dd9a1db5517', 'nuhome', '', 'run', 'run_function', 'Functions', '581288bcd699493', 120, 66, 101, 150, 30, '1', 'left', '1', '0', '', '', '', '58c86689b9af7fd', '', 'b', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', '', ''),
 ('58c8e3ca4aca5e9', '58c86689b9af7fd', 'zzzzsys_function', 'input', 'sfu_syntax', 'Syntax', '58c86689b9b0291', 30, 107, 126, 250, 18, '1', 'left', '1', '0', '', '', '', '', '', '', '', '', '0', 'php|PHP|js|Javascript\n\n', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
-('58c8e41f4e14bda', '58c86689b9af7fd', 'zzzzsys_function', 'textarea', 'sfu_description', 'Description', '58c86689b9b0291', 40, 143, 126, 390, 76, '1', 'left', '1', '0', '', '', '', '', '', '', '', '', '0', 'php|PHP|js|Javascript\n\n', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', '', ''),
-('58c8e4462798dbf', '58c86689b9af7fd', 'zzzzsys_function', 'textarea', 'sfu_sample', 'Sample', '58c86689b9b0291', 50, 237, 126, 390, 76, '1', 'left', '1', '0', '', '', '', '', '', '', '', '', '0', 'php|PHP|js|Javascript\n\n', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', '', ''),
+('58c8e41f4e14bda', '58c86689b9af7fd', 'zzzzsys_function', 'textarea', 'sfu_description', 'Description', '58c86689b9b0291', 40, 143, 126, 390, 76, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '0', 'php|PHP|js|Javascript\n\n', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', '', ''),
+('58c8e4462798dbf', '58c86689b9af7fd', 'zzzzsys_function', 'textarea', 'sfu_sample', 'Sample', '58c86689b9b0291', 50, 237, 126, 390, 76, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '0', 'php|PHP|js|Javascript\n\n', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', '', ''),
 ('58c8e4861081b1d', '58c86689b9af7fd', 'zzzzsys_function', 'textarea', 'sfu_see', 'See', '58c86689b9b0291', 60, 331, 126, 297, 46, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '0', 'php|PHP|js|Javascript\n\n', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', '', ''),
 ('58c9038dd96de4d', '58bf0b972c2a447', 'test_table', 'input', 'text2', 'Text 2', '58bf0b972c2c7a3', 50, 68, 284, 142, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 'D|dd-mmm-yyyy', 'color', '', '', ''),
 ('58c903f75898ae1', '58bf0b972c2a447', 'test_table', 'input', 'text1', 'Text 1', '58bf0b972c2c7a3', 60, 151, 284, 142, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 'D|dd-mmm-yyyy', 'range', '', '', ''),

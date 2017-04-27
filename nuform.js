@@ -2940,15 +2940,7 @@ function nuAlert(o, type, yes, no){
 		
 	}
 
-//		$('body').append('<div id="nuModal"></div>')
-//		.append(e);
-
-
-
-	
 }
-
-function nuLister(){}
 
 
 function nuBuildFormula(p, f){

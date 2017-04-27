@@ -405,21 +405,17 @@ function nuBindCtrlEvents(){
 			
             if(e.keyCode == 65) {//A
 			
-//				e.preventDefault();
 				nuPopup(window.nuFORM.getCurrent().form_id, "-2");
 
 			} else if(e.keyCode == 70) {//F
 
-//				e.preventDefault();
 				nuPopup("nuform", window.nuFORM.getCurrent().form_id);
 				
 			} else if(e.keyCode == 79) {//O
 			
-//				e.preventDefault();
 				nuPopup("nuobject", "", window.nuFORM.getCurrent().form_id);
 				
 			} else if (e.keyCode == 82) {//R
-//				e.preventDefault();
 				
 				if(window.nuFORM.getCurrent().record_id != '') {
 					nuGetBreadcrumb();
@@ -427,8 +423,6 @@ function nuBindCtrlEvents(){
 				
 			} else if(e.keyCode == 83) {//S
 			
-//				e.preventDefault();
-				
 				if(window.nuFORM.getCurrent().record_id != '') {
 					nuSaveAction();
 				} else {
@@ -602,7 +596,7 @@ function nuPopPHP(e, nuE){			//-- used in database
 
     
 
-function nuPopJS(){
+function nuPopJS(){				//-- used in database
 
 	var i  = $('#sob_all_zzzzsys_form_id').val();
 	
@@ -804,5 +798,10 @@ function nuResizeWindow(e){
 		
 	}
 		
+}
+
+
+function nuGetSubformObject(id){
+	return nuFORM.subform(id);
 }
 
