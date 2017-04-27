@@ -805,3 +805,24 @@ function nuGetSubformObject(id){
 	return nuFORM.subform(id);
 }
 
+
+function nuGetFunctionList(){
+
+	var f				= '';
+
+	for (var k in window) {
+
+		if (window.hasOwnProperty(k)){
+			
+			if(String(k).substr(0,2) === 'nu'){
+				f += k + "\n";
+			}
+		
+		}
+
+	}
+
+	return f;
+
+}
+

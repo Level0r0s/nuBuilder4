@@ -176,9 +176,6 @@ function nuResizeBody(f){
 		
 	}
 	
-	
-	//nuWindowPosition();
-	
 }
 
 
@@ -191,6 +188,7 @@ function nuDefine(v){
 	return v;
 	
 }
+
 
 function nuAddActionButtons(f){
 
@@ -232,6 +230,7 @@ function nuAddActionButtons(f){
 	}
 	
 }
+
 
 
 function nuAddActionButton(i, v, f){

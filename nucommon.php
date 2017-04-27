@@ -546,7 +546,7 @@ function nuRunHTML(){
 	$o->columns						= $P['browse_columns'];
 	$j								= json_encode($o);
 	
-	$nuS								= "INSERT INTO zzzzsys_debug (zzzzsys_debug_id, deb_message) VALUES (?, ?)";
+	$nuS							= "INSERT INTO zzzzsys_debug (zzzzsys_debug_id, deb_message) VALUES (?, ?)";
 	nuRunQuery($nuS, array($id, $j));
 
 	return $id;
