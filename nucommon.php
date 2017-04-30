@@ -936,4 +936,131 @@ function nuGetSubformObject($id){
 
 }
 
+
+function nuFormatList(){
+	
+	$f	= [];
+	$s	= "
+		SELECT 
+			CONCAT(LEFT(srm_type, 1), '|', TRIM(srm_format)) AS a, 
+			srm_format AS b 
+		FROM zzzzsys_format
+		ORDER BY srm_type
+	";
+	
+	$t 	= nuRunQuery($s);
+	
+	while($r = db_fetch_object($t)){
+		$f[] = [$r->a, $r->b];
+	}
+	
+	return json_encode($f);
+	
+}
+
+/*	
+function nuAddFormatting($v, $f){
+
+		if($v == '' || $f == ''){return $v;}
+		
+		if($f[0] == 'N'){							//-- number  '456.789','N|€ 1,000.00'
+
+			$f			= f.substr(2);
+			var s		= String(f.split(' ')[0]);			//-- sign
+			var n		= String(f.split(' ')[1]);			//-- number
+			var c		= n[1] == '0' ? '' : n[1];			//-- comma
+			
+			if(c == ''){
+				var d	= n[4];								//-- decimal
+				var p	= n.length - 5;						//-- places
+			}else{
+				var d	= n[5];								//-- decimal
+				var p	= n.length - 6;						//-- places
+			}
+
+			var o		= v.split('.');
+			var h		= nuAddThousandSpaces(o[0], c);
+			
+			if(p == 0){ 									//-- no decimal numbers even if it has a decimal place
+				var m		= s + ' ' + h;
+			}else{
+				
+				if(o.length == 2){							//-- this number had decimals
+					var suf	= d + String(o[1] + String(0).repeat(1000)).substr(0, p)
+				}else{
+					var suf	= d + String(String(0).repeat(1000)).substr(0, p)
+				}
+				
+				var m		= s + ' ' + h + suf
+				
+			}
+			
+			if(String(h) == 'toobig'){nuAlert(["Man! That's a BIG number, stop showing off.",'','<img id="thebig" src="fpdf\\big.png">']);return '';}
+			
+			return m;
+		
+		}
+		
+		if(f[0] == 'D'){	//-- date
+
+			if(String(v.split(' ')[0]) == '0000-00-00'){return '';}
+			if(v == ''){return '';}
+			
+			var FMT		= this.setFormats();
+			var d		= String(v.split(' ')[0]).split('-');
+			var t		= String(v.split(' ')[1]).split(':');
+
+			if(t[0] == 'undefined'){
+				var t	= [0, 0, 0];
+			}
+			
+			var o 		= new Date(d[0], d[1]-1, d[2], t[0], t[1], t[2], 0);			//-- (year, month, day, hours, minutes, seconds, milliseconds)
+			
+			var wee		= o.toString().split(' ')[0];								//-- Tue Sep 07 2004 11:11:12 GMT+0930 (Cen. Australia Standard Time)
+			var mth		= o.toString().split(' ')[1];
+			var day		= o.toString().split(' ')[2];
+			var yea		= o.toString().split(' ')[3];
+			var hou		= String(o.toString().split(' ')[4]).split(':')[0];
+			var min		= String(o.toString().split(' ')[4]).split(':')[1];
+			var sec		= String(o.toString().split(' ')[4]).split(':')[2];
+			
+			var s		= String(f);
+			
+			if(Number(hou) > 11){
+				
+				s		= s.replaceAll('pp', 	'pm');
+				s		= s.replaceAll('PP', 	'PM');
+				
+			}else{
+				
+				s		= s.replaceAll('pp', 	'am');
+				s		= s.replaceAll('PP', 	'AM');
+
+			}
+			
+			s			= s.replaceAll('yyyy',		yea);
+			s			= s.replaceAll('yy',		String(yea).substr(2));
+			s			= s.replaceAll('mmmm',		FMT[mth]['mmmm']);
+			s			= s.replaceAll('mmm',		FMT[mth]['mmm']);
+			s			= s.replaceAll('mm',		FMT[mth]['mm']);
+			s			= s.replaceAll('dddd',		FMT[wee]['dddd']);
+			s			= s.replaceAll('ddd',		FMT[wee]['ddd']);
+			s			= s.replaceAll('dd',		day);
+			s			= s.replaceAll('hh',	 	hou);
+			s			= s.replaceAll('nn',		min);
+			s			= s.replaceAll('ss', 		sec);
+			
+			return s.substr(2);
+			
+		}
+		
+		return v;
+		
+	}
+
+
+
+*/
+
+
 ?>
