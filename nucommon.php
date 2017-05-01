@@ -960,6 +960,7 @@ function nuFormatList(){
 
 
 
+
 function nuAddFormatting($v, $f){
 
 	if($v == '' || $f == ''){return $v;}
