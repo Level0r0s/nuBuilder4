@@ -1079,7 +1079,7 @@ function nuObjectDialog(){
 	top = nuDialogInput('Font Family', 'fontFamily', top, 200, D, fun, [['Helvetica','Helvetica'],['Arial','Arial'],['Courier','Courier'],['Times','Times'],['Symbol','Symbol']]);
 	top = nuDialogInput('Font Size', 'fontSize', top, 200, D, fun);
 	top = nuDialogInput('Font Weight', 'fontWeight', top, 200, D, fun, [['','Normal'],['b','Bold'],['i','Italic']]);
-	top = nuDialogInput('Format', 'format', top, 200, D, fun, f);
+	top = nuDialogInput('Format', 'format', top, 200, D, fun,  window.nuFormats);
 	top = nuDialogInput('Text Align', 'textAlign', top, 200, D, fun, [['left','Left'],['right','Right'],['center','Center']]);
 	top = nuDialogInput('Image', 'image', top, 200, D, fun);
 	top = nuDialogInput('Minimum Rows', 'minRows', top, 200, D, fun);

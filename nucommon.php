@@ -546,7 +546,7 @@ function nuRunHTML(){
 	$o->columns						= $P['browse_columns'];
 	$j								= json_encode($o);
 	
-	$nuS								= "INSERT INTO zzzzsys_debug (zzzzsys_debug_id, deb_message) VALUES (?, ?)";
+	$nuS							= "INSERT INTO zzzzsys_debug (zzzzsys_debug_id, deb_message) VALUES (?, ?)";
 	nuRunQuery($nuS, array($id, $j));
 
 	return $id;
@@ -919,6 +919,231 @@ function nuGetFormProperties($i){
 	return db_fetch_object($t);
 	
 }
+
+function nuGetSubformObject($id){
+
+	$sf		= $_POST['nuHash']['nuFORMdata'];
+	
+	for($i = 0 ; $i < count($sf) ; $i++){
+		
+		if($sf[$i]->id == $id){
+			return $sf[$i];
+		}
+		
+	}
+	
+	return stdClass;
+
+}
+
+
+function nuFormatList(){
+	
+	$f	= [];
+	$s	= "
+		SELECT 
+			CONCAT(LEFT(srm_type, 1), '|', TRIM(srm_format)) AS a, 
+			srm_format AS b 
+		FROM zzzzsys_format
+		ORDER BY srm_type
+	";
+	
+	$t 	= nuRunQuery($s);
+	
+	while($r = db_fetch_object($t)){
+		$f[] = [$r->a, $r->b];
+	}
+	
+	return json_encode($f);
+	
+}
+
+
+
+function nuAddFormatting($v, $f){
+
+		if($v == '' || $f == ''){return $v;}
+		
+		if($f[0] == 'N'){							//-- number  '456.789','N|€ 1,000.00'
+
+			$f			= substr($f, 2);
+			$e			= explode(' ', $f);
+			$s			= $e[0];							//-- sign
+			$n			= $e[1];							//-- number
+			$c			= $n[1] == '0' ? '' : $n[1];		//-- comma
+			
+			if($c == ''){
+				
+				$d		= $n[4];							//-- decimal
+				$p		= count($n) - 5;					//-- places
+				
+			}else{
+				
+				$d		= $n[5];							//-- decimal
+				$p		= count($n) - 6;					//-- places
+				
+			}
+
+			$o			= explode('.', $v);
+			
+			$h			= nuAddThousandSpaces($o[0], c);
+			
+			if($p == 0){ 									//-- no decimal numbers even if it has a decimal place
+				$m		= $s . ' ' . $h;
+			}else{
+				
+				if(o.length == 2){							//-- this number had decimals
+					$suf	= substr($d . $o[1] . str_repeat('0', 20), 0, $p);
+				}else{
+					$suf	= substr($d . str_repeat('0', 20), 0, $p);
+				}
+				
+				$m		= $s . ' ' . $h . $suf;
+				
+			}
+			
+			return $m;
+		
+		}
+		
+		if($f[0] == 'D'){	//-- date
+
+			if($v == '0000-00-00'){return '';}
+			if($v == ''){return '';}
+			
+			$FMT	= nuSetFormats();
+			$split	= explode(' ', $v);
+			$d		= explode('-', $split);
+			$t		= explode(':', $split);
+
+			if($t[0] == 'undefined'){
+				$t	= [0, 0, 0];
+			}
+			
+			$o 		= new Date($d[0], $d[1]-1, $d[2], $t[0], $t[1], $t[2], 0);			//-- (year, month, day, hours, minutes, seconds, milliseconds)
+			
+			$wee	= o.toString().split(' ')[0];								//-- Tue Sep 07 2004 11:11:12 GMT+0930 (Cen. Australia Standard Time)
+			$mth	= o.toString().split(' ')[1];
+			$day	= o.toString().split(' ')[2];
+			$yea	= o.toString().split(' ')[3];
+			$hou	= String(o.toString().split(' ')[4]).split(':')[0];
+			$min	= String(o.toString().split(' ')[4]).split(':')[1];
+			$sec	= String(o.toString().split(' ')[4]).split(':')[2];
+			
+			$s		= String(f);
+			
+			if(Number(hou) > 11){
+				
+				s		= s.replaceAll('pp', 	'pm');
+				s		= s.replaceAll('PP', 	'PM');
+				
+			}else{
+				
+				s		= s.replaceAll('pp', 	'am');
+				s		= s.replaceAll('PP', 	'AM');
+
+			}
+			
+			s			= s.replaceAll('yyyy',		yea);
+			s			= s.replaceAll('yy',		String(yea).substr(2));
+			s			= s.replaceAll('mmmm',		FMT[mth]['mmmm']);
+			s			= s.replaceAll('mmm',		FMT[mth]['mmm']);
+			s			= s.replaceAll('mm',		FMT[mth]['mm']);
+			s			= s.replaceAll('dddd',		FMT[wee]['dddd']);
+			s			= s.replaceAll('ddd',		FMT[wee]['ddd']);
+			s			= s.replaceAll('dd',		day);
+			s			= s.replaceAll('hh',	 	hou);
+			s			= s.replaceAll('nn',		min);
+			s			= s.replaceAll('ss', 		sec);
+			
+			return s.substr(2);
+			
+		}
+		
+		return v;
+		
+	}
+
+
+*/
+
+function nuAddThousandSpaces($s, $c){
+
+	$r			= strrev($s);
+	$a			= str_split($r, 3);
+	$n			= [];
+	
+	for($i = 0 ; $i < count($a) ; $i++){
+		
+		$n[]	= strrev($a[$i]);
+		
+		if($i < count($a) - 1){
+			
+			$n[]	= $c;
+		
+		}
+		
+	}
+		
+
+	$r			= array_reverse($n);
+	
+	return implode('', $r);
+	
+}
+
+
+	
+function nuSetFormats(){
+	
+	$s	= [
+
+	'Jan'		=> ['mmm' => 'Jan', 'mmmm' => 'January',	'mm' => '01' , 'm' => '1',  'jsmonth' => 0],
+	'Feb'		=> ['mmm' => 'Feb', 'mmmm' => 'February',	'mm' => '02' , 'm' => '2',  'jsmonth' => 1],
+	'Mar'		=> ['mmm' => 'Mar', 'mmmm' => 'March', 		'mm' => '03' , 'm' => '3',  'jsmonth' => 2],
+	'Apr'		=> ['mmm' => 'Apr', 'mmmm' => 'April', 		'mm' => '04' , 'm' => '4',  'jsmonth' => 3],
+	'May'		=> ['mmm' => 'May', 'mmmm' => 'May',		'mm' => '05' , 'm' => '5',  'jsmonth' => 4],
+	'Jun'		=> ['mmm' => 'Jun', 'mmmm' => 'June',		'mm' => '06' , 'm' => '6',  'jsmonth' => 5],
+	'Jul'		=> ['mmm' => 'Jul', 'mmmm' => 'July',		'mm' => '07' , 'm' => '7',  'jsmonth' => 6],
+	'Aug'		=> ['mmm' => 'Aug', 'mmmm' => 'August', 	'mm' => '08' , 'm' => '8',  'jsmonth' => 7],
+	'Sep'		=> ['mmm' => 'Sep', 'mmmm' => 'September',	'mm' => '09' , 'm' => '9',  'jsmonth' => 8],
+	'Oct'		=> ['mmm' => 'Oct', 'mmmm' => 'October', 	'mm' => '10' , 'm' => '10', 'jsmonth' => 9],
+	'Nov'		=> ['mmm' => 'Nov', 'mmmm' => 'November', 	'mm' => '11' , 'm' => '11', 'jsmonth' => 10],
+	'Dec'		=> ['mmm' => 'Dec', 'mmmm' => 'December', 	'mm' => '12' , 'm' => '12', 'jsmonth' => 11],
+
+	'January'	=> ['mmm' => 'Jan', 'mmmm' => 'January',	'mm' => '01' , 'm' => '1',  'jsmonth' => 0],
+	'February'	=> ['mmm' => 'Feb', 'mmmm' => 'February',	'mm' => '02' , 'm' => '2',  'jsmonth' => 1],
+	'March'		=> ['mmm' => 'Mar', 'mmmm' => 'March', 		'mm' => '03' , 'm' => '3',  'jsmonth' => 2],
+	'April'		=> ['mmm' => 'Apr', 'mmmm' => 'April', 		'mm' => '04' , 'm' => '4',  'jsmonth' => 3],
+	'May'		=> ['mmm' => 'May', 'mmmm' => 'May',		'mm' => '05' , 'm' => '5',  'jsmonth' => 4],
+	'June'		=> ['mmm' => 'Jun', 'mmmm' => 'June',		'mm' => '06' , 'm' => '6',  'jsmonth' => 5],
+	'July'		=> ['mmm' => 'Jul', 'mmmm' => 'July',		'mm' => '07' , 'm' => '7',  'jsmonth' => 6],
+	'August'	=> ['mmm' => 'Aug', 'mmmm' => 'August', 	'mm' => '08' , 'm' => '8',  'jsmonth' => 7],
+	'September'	=> ['mmm' => 'Sep', 'mmmm' => 'September',	'mm' => '09' , 'm' => '9',  'jsmonth' => 8],
+	'October'	=> ['mmm' => 'Oct', 'mmmm' => 'October', 	'mm' => '10' , 'm' => '10', 'jsmonth' => 9],
+	'November'	=> ['mmm' => 'Nov', 'mmmm' => 'November', 	'mm' => '11' , 'm' => '11', 'jsmonth' => 10],
+	'December'	=> ['mmm' => 'Dec', 'mmmm' => 'December', 	'mm' => '12' , 'm' => '12', 'jsmonth' => 11],
+
+	'Sun'		=> ['ddd' => 'Sun', 'dddd' => 'Sunday', 	'dd' => '01', 	'd' => '1'],
+	'Mon'		=> ['ddd' => 'Mon', 'dddd' => 'Monday', 	'dd' => '02', 	'd' => '2'],
+	'Tue'		=> ['ddd' => 'Tue', 'dddd' => 'Tueday', 	'dd' => '03', 	'd' => '3'],
+	'Wed'		=> ['ddd' => 'Wed', 'dddd' => 'Wednesday',	'dd' => '04', 	'd' => '4'],
+	'Thu'		=> ['ddd' => 'Thu', 'dddd' => 'Thursday', 	'dd' => '05', 	'd' => '5'],
+	'Fri'		=> ['ddd' => 'Fri', 'dddd' => 'Friday', 	'dd' => '06', 	'd' => '6'],
+	'Sat'		=> ['ddd' => 'Sat', 'dddd' => 'Saturday', 	'dd' => '07', 	'd' => '7'],
+
+	'Sunday'	=> ['ddd' => 'Sun', 'dddd' => 'Sunday', 	'dd' => '01', 	'd' => '1'],
+	'Monday'	=> ['ddd' => 'Mon', 'dddd' => 'Monday', 	'dd' => '02', 	'd' => '2'],
+	'Tuesday'	=> ['ddd' => 'Tue', 'dddd' => 'Tueday', 	'dd' => '03', 	'd' => '3'],
+	'Wednesday'	=> ['ddd' => 'Wed', 'dddd' => 'Wednesday',	'dd' => '04', 	'd' => '4'],
+	'Thursday'	=> ['ddd' => 'Thu', 'dddd' => 'Thursday', 	'dd' => '05', 	'd' => '5'],
+	'Friday'	=> ['ddd' => 'Fri', 'dddd' => 'Friday', 	'dd' => '06', 	'd' => '6'],
+	'Saturday'	=> ['ddd' => 'Sat', 'dddd' => 'Saturday', 	'dd' => '07', 	'd' => '7']];
+
+	return $f;
+	
+}
+
 
 
 ?>

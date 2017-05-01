@@ -139,7 +139,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 			}
 			
 			if($r->sob_all_type == 'html'){
-				$o->html 			= $r->sob_html_code;
+				$o->html 			= nuReplaceHashVariables($r->sob_html_code);
 			}
 
 			if($r->sob_all_type == 'image'){
@@ -1067,7 +1067,7 @@ function nuButtons($formid, $P){
 	if($c == 'getphp'){
 		return array('Add' => 0, 'Print' => 0, 'Save' => 0, 'Clone' => 0, 'Delete' => 0, 'Run' => 'nuRunPHP("'.$rid.'")');
 	}else if($c == 'getreport'){
-		return array('Add' => 0, 'Print' => 0, 'Save' => 0, 'Clone' => 0, 'Delete' => 0, 'Run' => "nuPrintPDF('$rid')");
+		return array('Add' => 0, 'Print' => 0, 'Save' => 0, 'Clone' => 0, 'Delete' => 0, 'Run' => 'nuRunReport("'.$rid.'")');
 	}else{
 		return array('Add' => $a[0], 'Print' => $a[1], 'Save' => $a[2], 'Clone' => $a[3], 'Delete' => $a[4], 'Run' => '');
 	}

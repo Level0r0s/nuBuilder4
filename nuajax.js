@@ -342,8 +342,8 @@ function nuPrintAction(){
 	var last			= window.nuFORM.getCurrent();
 
 	last.call_type 		= 'runhtml';
-	last.browse_columns	= nuFORMPROPERTIES.browse_columns;
-	last.browse_sql 	= nuFORMPROPERTIES.browse_sql;
+	last.browse_columns	= nuSERVERRESPONSE.browse_columns;
+	last.browse_sql 	= nuSERVERRESPONSE.browse_sql;
 	last.session_id 	= window.nuSESSION;
 	
 	var successCallback = function(data,textStatus,jqXHR){		

@@ -176,9 +176,6 @@ function nuResizeBody(f){
 		
 	}
 	
-	
-	//nuWindowPosition();
-	
 }
 
 
@@ -191,6 +188,7 @@ function nuDefine(v){
 	return v;
 	
 }
+
 
 function nuAddActionButtons(f){
 
@@ -232,6 +230,7 @@ function nuAddActionButtons(f){
 	}
 	
 }
+
 
 
 function nuAddActionButton(i, v, f){
@@ -818,7 +817,7 @@ function nuRUN(w, i, l, p, prop){
 		var O			= prop.objects[i];
 		var clicker		= '';
 		
-		if(O.run_type == 'R'){clicker = "nuPrintPDF('" + O.form_id + "')";}
+		if(O.run_type == 'R'){clicker = "nuRunReport('" + O.form_id + "')";}
 		if(O.run_type == 'P'){clicker = "nuRunPHP('" + O.form_id + "')"}
 		if(O.run_type == 'F'){clicker = "nuForm('" + O.form_id + "','" + O.record_id + "','" + O.filter + "', '')"}
 		
@@ -1628,7 +1627,7 @@ function nuGetOptionsList(f, t, p, a){
 	$('#' + x.id).css({
 		'width'				: 20,
 		'height'			: 20,
-		'top'				: 5,
+		'top'				: 3,
 		'right'				: 3,
 		'position'			: 'absolute',
 		'text-align'    	: 'center'
@@ -2812,7 +2811,7 @@ function nuGetSearchList(){
 	$('#' + x.id).css({
 		'width'				: 20,
 		'height'			: 20,
-		'top'				: 5,
+		'top'				: 3,
 		'right'				: 3,
 		'position'			: 'absolute',
 		'text-align'    	: 'center'
@@ -2940,15 +2939,7 @@ function nuAlert(o, type, yes, no){
 		
 	}
 
-//		$('body').append('<div id="nuModal"></div>')
-//		.append(e);
-
-
-
-	
 }
-
-function nuLister(){}
 
 
 function nuBuildFormula(p, f){

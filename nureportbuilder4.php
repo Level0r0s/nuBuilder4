@@ -20,6 +20,20 @@ jsinclude('nureportjson.js');
 cssinclude('nubuilder4.css');
 cssinclude('nudrag.css');
 
+$f	= nuFormatList();
+
+$h	= "
+<script>
+
+	window.nuFormats = $f;
+
+</script>
+
+";
+
+print $h;
+
+
 ?>
 
 
@@ -48,17 +62,17 @@ $(document).ready(function() {
 	nuLoadReport();
 	
 });
-</script>
-
-<script>
 
 function nuStringify(){
 
     if(window.opener){
 
-		window.opener.document.getElementById('sre_layout').value = JSON.stringify(window.nuREPORT);
+		window.opener.$('#sre_layout')
+		.val(JSON.stringify(window.nuREPORT))
+		.change();
+		
 		alert('Copied to Report Successfully..');
-		window.opener.nuEditedReport();
+
 		window.close();
 
 	}else{

@@ -401,14 +401,16 @@ class nuSECTION{
     }
 
     private function chopSectionOverPages(){
+		
         $sectionObjects                       = array();
         $sectionTop                           = $this->sectionTop;
         $objectParts                          = array();
         $pages                                = 0;
         $expandedSectionHeight                = $this->sectionHeight + $this->extendedHeight() - .25;
         $pageBreak                            = 0;
+		
         if( property_exists($this->LAY->groups[$this->group]->sections[$this->section], 'page_break') ) {
-            $pageBreak                            = $this->LAY->groups[$this->group]->sections[$this->section]->page_break;
+            $pageBreak                        = $this->LAY->groups[$this->group]->sections[$this->section]->page_break;
         }
 
         for($i = 0 ; $i < count($this->O) ; $i++){
@@ -1133,5 +1135,4 @@ function nuRemovePageBreak($S){
 }
 
 
-//-- was 1150 lines long
 ?>
