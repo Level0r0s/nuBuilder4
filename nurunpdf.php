@@ -759,40 +759,19 @@ class nuSECTION{
             }else{
                 
                 if($type == 'p'){
-                    
-//                    $value  = ($r[0] / $r[1]) * 100;
                     $value  = ($r[0] / $r[1]);
-                    
                 }else{
-                    
                     $value  = $r[0];
-                    
                 }
+				
             }
             
         }
         
         if($O->format != ''){                                                            //-- format value
-            
-
-//--sc 25-03-2017
-/*
-            $format      = nuTextFormats();
-            $datatype    = $format[$O->format]->type;
-
-            if ($datatype == 'date') {
-				if($value != '0000-00-00' && $value != '') {
-					$value    = 	date($format[$O->format]->phpdate,strtotime($value));
-				} else {
-					$value = '';
-				}
-            }
-            if ($datatype == 'number') {
-                $value   = number_format($value , $format[$O->format]->format ,$format[$O->format]->decimal , $format[$O->format]->separator);
-            }
-            
+			$value			= nuAddFormatting($value, $O->format);
         }
-*/
+		
         return $value;
 
     }        

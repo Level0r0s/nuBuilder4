@@ -965,44 +965,40 @@ function nuAddFormatting($v, $f){
 
 	if($v == '' || $f == ''){return $v;}
 	
-	if($f[0] == 'N'){							//-- number  '456.789','N|€ 1,000.00'
+	if($f[0] == 'N'){									//-- number  '456.789','N|€ 1,000.00'
 
 		$f			= substr($f, 2);
 		$e			= explode(' ', $f);
 		$s			= $e[0];							//-- sign
 		$n			= $e[1];							//-- number
-		$c			= $n[1] == '0' ? '' : $n[1];		//-- comma
-		
-		if($c == ''){
-			
-			$d		= $n[4];							//-- decimal
-			$p		= count($n) - 5;					//-- places
-			
-		}else{
-			
-			$d		= $n[5];							//-- decimal
-			$p		= count($n) - 6;					//-- places
-			
-		}
-
+		$p			= nuPunctuation($f);				//-- returns [comma, decimal]
+		$c			= $p[0];							//-- comma
+		$dp			= $p[1];							//-- decimal point
 		$o			= explode('.', $v);
 		
-		$h			= nuAddThousandSpaces($o[0], c);
+		if(count($o) == 1){$o[1] = '';}
+		
+		$d			= $o[1];							//-- decimal number
+
+		if($dp == ''){
+			$p		= 0;								//-- decimal places
+		}else{
+			
+			$pos	= strpos($f, $dp);					//-- decimal places
+			$p		= strlen(substr($f, $pos));
+		}
+
+		$h			= nuAddThousandSpaces($o[0], $c);
 		
 		if($p == 0){ 									//-- no decimal numbers even if it has a decimal place
 			$m		= $s . ' ' . $h;
 		}else{
 			
-			if(o.length == 2){							//-- this number had decimals
-				$suf	= substr($d . $o[1] . str_repeat('0', 20), 0, $p);
-			}else{
-				$suf	= substr($d . str_repeat('0', 20), 0, $p);
-			}
-			
-			$m		= $s . ' ' . $h . $suf;
+			$suf	= substr($d . str_repeat('0', 20), 0, $p - 1);
+			$m		= $s . ' ' . $h . $dp . $suf;
 			
 		}
-		
+
 		return $m;
 	
 	}
@@ -1011,27 +1007,23 @@ function nuAddFormatting($v, $f){
 
 		if($v == '0000-00-00' or $v == ''){return '';}
 		
-		$FMT	= nuSetFormats();
 		$split	= explode(' ', $v);
-		$d		= explode('-', $split);
-		$t		= explode(':', $split);
+		$d		= explode('-', $split[0]);
+		$t		= explode(':', $split[1]);
 
 		if($t[0] == 'undefined'){
 			$t	= [0, 0, 0];
 		}
-		
-		$o 		= new Date($d[0], $d[1]-1, $d[2], $t[0], $t[1], $t[2], 0);			//-- (year, month, day, hours, minutes, seconds, milliseconds)
 		
 		$o	 	= new DateTime();
 		
 		$o->setDate($d[0], $d[1], $d[2]);
 		$o->setTime($t[0], $t[1], $t[2]);
 		
-		echo $o->format('Y-m-d');
 		
 		$s 		= '';
 		
-		$s 		= str_replace('pp', 	$o->format('a'), $s);
+		$s 		= str_replace('pp', 	$o->format('a'), $f);
 		$s 		= str_replace('PP', 	$o->format('A'), $s);
 		$s 		= str_replace('yyyy',	$o->format('Y'), $s);
 		$s 		= str_replace('yy',		$o->format('y'), $s);
@@ -1082,57 +1074,31 @@ function nuAddThousandSpaces($s, $c){
 }
 
 
-	
-function nuSetFormats(){
-	
-	$s	= [
 
-	'Jan'		=> ['mmm' => 'Jan', 'mmmm' => 'January',	'mm' => '01' , 'm' => '1',  'jsmonth' => 0],
-	'Feb'		=> ['mmm' => 'Feb', 'mmmm' => 'February',	'mm' => '02' , 'm' => '2',  'jsmonth' => 1],
-	'Mar'		=> ['mmm' => 'Mar', 'mmmm' => 'March', 		'mm' => '03' , 'm' => '3',  'jsmonth' => 2],
-	'Apr'		=> ['mmm' => 'Apr', 'mmmm' => 'April', 		'mm' => '04' , 'm' => '4',  'jsmonth' => 3],
-	'May'		=> ['mmm' => 'May', 'mmmm' => 'May',		'mm' => '05' , 'm' => '5',  'jsmonth' => 4],
-	'Jun'		=> ['mmm' => 'Jun', 'mmmm' => 'June',		'mm' => '06' , 'm' => '6',  'jsmonth' => 5],
-	'Jul'		=> ['mmm' => 'Jul', 'mmmm' => 'July',		'mm' => '07' , 'm' => '7',  'jsmonth' => 6],
-	'Aug'		=> ['mmm' => 'Aug', 'mmmm' => 'August', 	'mm' => '08' , 'm' => '8',  'jsmonth' => 7],
-	'Sep'		=> ['mmm' => 'Sep', 'mmmm' => 'September',	'mm' => '09' , 'm' => '9',  'jsmonth' => 8],
-	'Oct'		=> ['mmm' => 'Oct', 'mmmm' => 'October', 	'mm' => '10' , 'm' => '10', 'jsmonth' => 9],
-	'Nov'		=> ['mmm' => 'Nov', 'mmmm' => 'November', 	'mm' => '11' , 'm' => '11', 'jsmonth' => 10],
-	'Dec'		=> ['mmm' => 'Dec', 'mmmm' => 'December', 	'mm' => '12' , 'm' => '12', 'jsmonth' => 11],
+function nuPunctuation($f){
 
-	'January'	=> ['mmm' => 'Jan', 'mmmm' => 'January',	'mm' => '01' , 'm' => '1',  'jsmonth' => 0],
-	'February'	=> ['mmm' => 'Feb', 'mmmm' => 'February',	'mm' => '02' , 'm' => '2',  'jsmonth' => 1],
-	'March'		=> ['mmm' => 'Mar', 'mmmm' => 'March', 		'mm' => '03' , 'm' => '3',  'jsmonth' => 2],
-	'April'		=> ['mmm' => 'Apr', 'mmmm' => 'April', 		'mm' => '04' , 'm' => '4',  'jsmonth' => 3],
-	'May'		=> ['mmm' => 'May', 'mmmm' => 'May',		'mm' => '05' , 'm' => '5',  'jsmonth' => 4],
-	'June'		=> ['mmm' => 'Jun', 'mmmm' => 'June',		'mm' => '06' , 'm' => '6',  'jsmonth' => 5],
-	'July'		=> ['mmm' => 'Jul', 'mmmm' => 'July',		'mm' => '07' , 'm' => '7',  'jsmonth' => 6],
-	'August'	=> ['mmm' => 'Aug', 'mmmm' => 'August', 	'mm' => '08' , 'm' => '8',  'jsmonth' => 7],
-	'September'	=> ['mmm' => 'Sep', 'mmmm' => 'September',	'mm' => '09' , 'm' => '9',  'jsmonth' => 8],
-	'October'	=> ['mmm' => 'Oct', 'mmmm' => 'October', 	'mm' => '10' , 'm' => '10', 'jsmonth' => 9],
-	'November'	=> ['mmm' => 'Nov', 'mmmm' => 'November', 	'mm' => '11' , 'm' => '11', 'jsmonth' => 10],
-	'December'	=> ['mmm' => 'Dec', 'mmmm' => 'December', 	'mm' => '12' , 'm' => '12', 'jsmonth' => 11],
+	$c			= '';
+	$d			= '';
+		
+	if(strpos($f , '1,' ) !== false){
+		$c		= ',';
+	}
 
-	'Sun'		=> ['ddd' => 'Sun', 'dddd' => 'Sunday', 	'dd' => '01', 	'd' => '1'],
-	'Mon'		=> ['ddd' => 'Mon', 'dddd' => 'Monday', 	'dd' => '02', 	'd' => '2'],
-	'Tue'		=> ['ddd' => 'Tue', 'dddd' => 'Tueday', 	'dd' => '03', 	'd' => '3'],
-	'Wed'		=> ['ddd' => 'Wed', 'dddd' => 'Wednesday',	'dd' => '04', 	'd' => '4'],
-	'Thu'		=> ['ddd' => 'Thu', 'dddd' => 'Thursday', 	'dd' => '05', 	'd' => '5'],
-	'Fri'		=> ['ddd' => 'Fri', 'dddd' => 'Friday', 	'dd' => '06', 	'd' => '6'],
-	'Sat'		=> ['ddd' => 'Sat', 'dddd' => 'Saturday', 	'dd' => '07', 	'd' => '7'],
+	if(strpos($f , '1.' ) !== false){
+		$c		= '.';
+	}
 
-	'Sunday'	=> ['ddd' => 'Sun', 'dddd' => 'Sunday', 	'dd' => '01', 	'd' => '1'],
-	'Monday'	=> ['ddd' => 'Mon', 'dddd' => 'Monday', 	'dd' => '02', 	'd' => '2'],
-	'Tuesday'	=> ['ddd' => 'Tue', 'dddd' => 'Tueday', 	'dd' => '03', 	'd' => '3'],
-	'Wednesday'	=> ['ddd' => 'Wed', 'dddd' => 'Wednesday',	'dd' => '04', 	'd' => '4'],
-	'Thursday'	=> ['ddd' => 'Thu', 'dddd' => 'Thursday', 	'dd' => '05', 	'd' => '5'],
-	'Friday'	=> ['ddd' => 'Fri', 'dddd' => 'Friday', 	'dd' => '06', 	'd' => '6'],
-	'Saturday'	=> ['ddd' => 'Sat', 'dddd' => 'Saturday', 	'dd' => '07', 	'd' => '7']];
+	if(strpos($f , '0,' ) !== false){
+		$d		= ',';
+	}
 
-	return $f;
+	if(strpos($f , '0.' ) !== false){
+		$d		= '.';
+	}
+
+	return [$c, $d];
 	
 }
-
 
 
 ?>
