@@ -1035,8 +1035,8 @@ function nuAddCriteriaValues($hashData, $T){
 
     foreach($hashData AS $key => $value){
     
-		if( !in_array($key, $c) and !is_array($value) and !is_object($value) ){
-			
+		if( !in_array(strtolower($key), $c) and !is_array($value) and !is_object($value)){
+
 				$v   = substr(addslashes($value),0,199);
 				
 				if(substr($v,(strlen($v)-1),1) == '\\')
@@ -1051,6 +1051,7 @@ function nuAddCriteriaValues($hashData, $T){
 				}
 				
 				$c[] = strtolower($key);
+
 			}
 
 			
