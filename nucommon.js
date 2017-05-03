@@ -747,24 +747,6 @@ function nuDuplicates(arr){
 }
 
 
-
-function nuID(){
-
-	if(window.nuSuffix == 9999){
-		
-		window.nuSuffix		= 0
-		window.nuUniqueID	= 'c' + String(Date.now());
-		
-	}else{
-		window.nuSuffix	++;
-	}
-	
-	id						= window.nuUniqueID + nuPad4(window.nuSuffix);
-		
-	return id;
-
-}
-
 function nuResizeWindow(e){
 
 	var d	= $('#nuDragDialog');

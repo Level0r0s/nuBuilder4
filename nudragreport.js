@@ -631,7 +631,7 @@ function moveToolbar(){
 }
 
 function nuNewObject(){
-
+debugger;
 	nuREPORT.selected = [];
 	var o             = JSON.parse(JSON.stringify(nuOBJECT));
 	var i             = nuDragR.newId();
