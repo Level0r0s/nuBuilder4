@@ -6,7 +6,7 @@ window.nuID                    = 1000;
 window.nuDIALOG                = {};
 window.nuDIALOG.groupNumber    = '0';
 window.nuDIALOG.sectionNumber  = '0';
-window.nuDIALOG.dialog         = '';
+//window.nuDIALOG.dialog         = '';
 window.nuDIALOG.dialogX        = 0;
 window.nuDIALOG.dialogY        = 0;
 function nuCreateDrag(){

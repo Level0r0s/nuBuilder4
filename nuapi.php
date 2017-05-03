@@ -24,7 +24,6 @@
 	$_POST['nuHash']						= array_merge($U, nuSetHashList($P));
 	$_POST['nuHash']['PREVIOUS_RECORD_ID'] 	= $R;
 	$_POST['nuHash']['RECORD_ID'] 			= $R;
-	$_POST['nuHash']['SUBFORM_RECORD_ID']	= $R;
 	$_POST['nuHash']['FORM_ID'] 			= $F;
 	$_POST['nuHash']['nuFORMdata']			= json_decode(json_encode($_POST['nuSTATE']['nuFORMdata']));
 	$_POST['nuHash']['TABLE_ID'] 			= nuTT();

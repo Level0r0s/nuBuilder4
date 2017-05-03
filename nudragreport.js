@@ -631,7 +631,7 @@ function moveToolbar(){
 }
 
 function nuNewObject(){
-
+debugger;
 	nuREPORT.selected = [];
 	var o             = JSON.parse(JSON.stringify(nuOBJECT));
 	var i             = nuDragR.newId();
@@ -677,6 +677,8 @@ function nuCloneObjects(){
 	
 
 function nuSelectDialog(){
+
+	nuDIALOG.dialog = 'nuSelectDialog';
 
 	nuDragD.createDialog(200, window.scrollY + 50, 700, 600, 'Select Objects');
 	
@@ -736,8 +738,9 @@ function nuSelectDialog(){
 
 function nuAdjustDialog(){
 
+	nuDIALOG.dialog = 'nuAdjustDialog';
+	
 	nuDragD.createDialog(400, window.scrollY + 50, 400, 350, 'Adjust Selected Objects');
-
 	nuAdjustButton(80, 10, 'nuMoverAlignLeftClick()', 'Align To Left', 'Align All Selected Objects To Left');
 	nuAdjustButton(80, 270, 'nuMoverAlignRightClick()', 'Align To Right', 'Align All Selected Objects To Right');
 	nuAdjustButton(65, 140, 'nuMoverAlignTopClick()', 'Align To Top', 'Align All Selected Objects To Top');
@@ -1089,12 +1092,13 @@ function nuObjectDialog(){
 	nuBlankMultipleValues(S);
 	$('#nuDragDialog').css('height', top + 20);
 
-    $("#dialogTitleWords")
+    $("#nuDragDialog")
 	.append('<img src="./trash_can.png" height="17px" width="17px" id="deleteObject" value="Delete" onclick="deleteSelectedObjects()"/>');
 	
 	$("#deleteObject")
-	.css('position','relative')
-	.css('left','270px');
+	.css('position','absolute')
+	.css('top','7px')
+	.css('right','5px');
 }
 
 function deleteSelectedObjects(){
@@ -1148,6 +1152,9 @@ function nuReportDialog(){
 
 	var top = 60;
 	var fun = 'nuUpdateReport';
+	
+	nuDIALOG.dialog = 'nuReportDialog';
+	
 
 	top = nuDialogInput('Width', 'width', top, 180, nuREPORT, 'nuDoNothing');
 	top = nuDialogInput('Height', 'height', top, 180, nuREPORT, 'nuDoNothing');
@@ -1164,6 +1171,8 @@ function nuReportDialog(){
 
 function nuGroupDialog(){
 
+	nuDIALOG.dialog = 'nuGroupDialog';
+	
 	nuDragD.createDialog(400, window.scrollY + 50, 650, 750, 'Group Properties');
 
 
@@ -1233,9 +1242,9 @@ function nuGroupDialog(){
 		top = nuDialogInput('Section Name', 'label', top, left, nuREPORT.groups[nuDIALOG.groupNumber].sections[1], 'nuDoNothing');
                 $('#label').attr('id', 'label1').attr('readonly', true).css('background-color','#DFDFDF');
                 top = nuDialogInput('Section Height', 'height', top-5, left, nuREPORT.groups[nuDIALOG.groupNumber].sections[1], 'nuUpdateSectionProperty');
-                $('#height').attr({'id' : 'height0', 'data-property' : 'height', 'data-section' : '1'});
+                $('#height').attr({'id' : 'height1', 'data-property' : 'height', 'data-section' : '1'});
                 top = nuDialogInput('Section Color', 'color', top-5, left, nuREPORT.groups[nuDIALOG.groupNumber].sections[1], 'nuUpdateSectionProperty');
-                $('#color').attr({'id' : 'color0', 'data-property' : 'color', 'data-section' : '1'});
+                $('#color').attr({'id' : 'color1', 'data-property' : 'color', 'data-section' : '1'});
                 top = nuDialogInput('Page Break', 'page_break', top-5, left, nuREPORT.groups[nuDIALOG.groupNumber].sections[1], 'nuUpdateSectionProperty', [['0','No'],['1','Yes']]);
                 $('#page_break').attr({'id' : 'page_break0', 'data-property' : 'page_break', 'data-section' : '1'});
 
@@ -1271,7 +1280,7 @@ function nuDialogInput(cap, id, top, left, val, fun, sel){
 
     if(cap != ''){
         var e = document.createElement('span');  
-        e.setAttribute('id', 'caption_' + id);
+        e.setAttribute('id', 'caption_' + id + top);
         $('#nuDragDialog').append(e);
 		
         $('#' + e.id).css({
@@ -1357,12 +1366,16 @@ function nuUpdateGroup(t){
 	
 function nuUpdateProperties(t){
 
-	var sel = document.getElementsByClassName('nuDragSelected');
+	var sel 		= document.getElementsByClassName('nuDragSelected');
+	nuDIALOG.dialog = 'nuObjectDialog';
+
 
 	for(var i = 0 ; i < sel.length ; i ++){
 
-		var o = nuDragR.getObject(sel[i].id);
+		var o 		= nuDragR.getObject(sel[i].id);
+		
 		o[$(t).attr('id')]  = $(t).val();
+		
 		nuDragR.setObject(o);
 		
 	}
@@ -1428,8 +1441,6 @@ function nuClickGroup(t){
 	}
 	
 	nuDIALOG.groupNumber = g;
-	
-	nuDIALOG.dialog = 'nuGroupDialog';
 	
 	nuREPORT.groups[g].sections[0].label = $(t).val() + ' Header';
 	

@@ -534,13 +534,15 @@ function nuGetSubformRecords($R, $A){
     $f = nuGetEditForm($R->sob_subform_zzzzsys_form_id, '');
 	$w = $f->where == '' ? '' : ' AND (' . substr($f->where, 6) . ')';
     $s = "SELECT `$f->primary_key` $f->from WHeRE (`$R->sob_subform_foreign_key` = '$R->subform_fk') $w $f->order";
+	$I = $_POST['nuHash']['RECORD_ID'];
+
 
     $t = nuRunQuery($s);
     $a = array();
 
     while($r = db_fetch_row($t)){
 
-		$_POST['nuHash']['SUBFORM_RECORD_ID']	= $r[0];
+		$_POST['nuHash']['RECORD_ID']			= $r[0];
 		$o										= nuGetFormObject($R->sob_subform_zzzzsys_form_id, $r[0], count($a));
 		$o->foreign_key							= $R->subform_fk;
 		$o->foreign_key_name					= $R->sob_subform_foreign_key;
@@ -550,13 +552,14 @@ function nuGetSubformRecords($R, $A){
 
     if($A == 1){  //-- add blank record
     
-		$_POST['nuHash']['SUBFORM_RECORD_ID']	= -1;
+		$_POST['nuHash']['RECORD_ID']	= -1;
         $o										= nuGetFormObject($R->sob_subform_zzzzsys_form_id, -1, count($a));
         $o->foreign_key							= $R->subform_fk;
         $o->foreign_key_name					= $R->sob_subform_foreign_key;
         $a[] 									= $o;
         
     }
+	$_POST['nuHash']['RECORD_ID'] 				= $I;
 	
     return $a;
 

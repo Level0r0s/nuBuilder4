@@ -127,7 +127,7 @@ function nuDebug($a0 = '^', $a1 = '^', $a2 = '^', $a3 = '^', $a4 = '^', $a5 = '^
 	$f					= $b[0]['file'];
 	$l					= $b[0]['line'];
 
-	$m					= "($f:$l)\n";
+	$m					= date("Y-m-d H:i:s") . " ($f:$l)\n";
 
 	
 	for($i = 0 ; $i < func_num_args() ; $i++){
@@ -1011,12 +1011,12 @@ function nuAddFormatting($v, $f){
 		$d		= explode('-', $split[0]);
 		$t		= explode(':', $split[1]);
 
-		if($t[0] == 'undefined'){
+		if($t[0] == ''){
 			$t	= [0, 0, 0];
 		}
 		
 		$o	 	= new DateTime();
-		
+
 		$o->setDate($d[0], $d[1], $d[2]);
 		$o->setTime($t[0], $t[1], $t[2]);
 		
