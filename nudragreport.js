@@ -1089,12 +1089,13 @@ function nuObjectDialog(){
 	nuBlankMultipleValues(S);
 	$('#nuDragDialog').css('height', top + 20);
 
-    $("#dialogTitleWords")
+    $("#nuDragDialog")
 	.append('<img src="./trash_can.png" height="17px" width="17px" id="deleteObject" value="Delete" onclick="deleteSelectedObjects()"/>');
 	
 	$("#deleteObject")
-	.css('position','relative')
-	.css('left','270px');
+	.css('position','absolute')
+	.css('top','7px')
+	.css('right','5px');
 }
 
 function deleteSelectedObjects(){
