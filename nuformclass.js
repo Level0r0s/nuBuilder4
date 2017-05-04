@@ -76,8 +76,6 @@ class nuFormObject {
 		.val(s.list[this.scroll[e.target.id].index])
 		.change();
 		
-		console.log(s.index);
-
 		nuHasBeenEdited();
 		
 	}

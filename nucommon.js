@@ -401,17 +401,18 @@ function nuBindCtrlEvents(){
         if (e.ctrlKey && e.shiftKey) {
 			
 			window.nuNEW = 0;
+			
 			e.preventDefault();
 			
-            if(e.keyCode == 65) {//A
+            if(e.keyCode == 65 && window.global_access) {//A
 			
 				nuPopup(window.nuFORM.getCurrent().form_id, "-2");
 
-			} else if(e.keyCode == 70) {//F
+			} else if(e.keyCode == 70 && window.global_access) {//F
 
 				nuPopup("nuform", window.nuFORM.getCurrent().form_id);
 				
-			} else if(e.keyCode == 79) {//O
+			} else if(e.keyCode == 79 && window.global_access) {//O
 			
 				nuPopup("nuobject", "", window.nuFORM.getCurrent().form_id);
 				

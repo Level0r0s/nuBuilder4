@@ -17,6 +17,7 @@ function nuBuildForm(f){
 	window.nuHASH				= [];                       //-- remove any hash variables previously set.
 	window.nuUniqueID			= 'c' + String(Date.now());
 	window.nuSuffix				= Number(String(Math.random()).substr(-4));
+	window.global_access		= f.global_access == '1';
 	nuFORM.edited				= false;
 	nuFORM.formType				= f.type;
 	nuFORM.scroll				= [];
@@ -61,6 +62,7 @@ function nuBuildForm(f){
 	nuAddBreadcrumbs();
 	nuAddEditTabs('', f);
 	nuOptions('', f.form_id, 'form', f.global_access);
+	
 
 	nuAddActionButtons(f);
 	nuRecordProperties(f, '');
