@@ -769,12 +769,13 @@ function nuAdjustButton(top, left, funct, value, title){
 	$('#' + e.id).addClass('nuButton');
 	$('#nuDrag').append(e);
 	$('#' + e.id).css({
-		'width'            : 120,
-		'height'           : 30,
-		'top'              : top,
-		'left'             : left,
-		'z-index'          : 5000,
-		'position'         : 'absolute',
+		'width'				: 120,
+		'height'			: 30,
+		'font-size'			: '12px',
+		'top'				: top,
+		'left'				: left,
+		'z-index'			: 5000,
+		'position'			: 'absolute',
 	})
 
 }
