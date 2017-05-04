@@ -2,7 +2,7 @@
 
 
 function nuLoadReport(b){
-
+	
 	window.addEventListener("keydown", function(e) {
 		
 		if([38, 40].indexOf(e.keyCode) > -1) {					// space and arrow keys
@@ -405,7 +405,7 @@ function nuDragReport(){
 		var h = parseInt($('#nuSection' + i).css('height'));
 		var m = Math.max(c, l - h);
 
-		nuREPORT.groups[g].sections[s].height = h + m + 1;
+		nuREPORT.groups[g].sections[s].height = h + m + 2;
 		
 	}
 
