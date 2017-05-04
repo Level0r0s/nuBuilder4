@@ -1952,7 +1952,7 @@ function nuBrowseTable(){
 				$('#' + id)
 				.html(nuFORM.addFormatting(row[r][c+1], col[c].format))
 				.attr('data-nu-primary-key', row[r][0])
-				.attr('onclick', 'nuSelectBrowse(event)')
+				.attr('onclick', 'nuSelectBrowse(event, this)')
 				.hover(
 				
 					function() {
@@ -2133,11 +2133,11 @@ function nuGetPage(p){
 }
 
 
-function nuSelectBrowse(e){
+function nuSelectBrowse(e, t){
 
 	var y 				= window.nuBrowseFunction;					//-- browse, lookup or custom function name
 	var i 				= window.nuTARGET;
-	var p				= $('#' + e.target.id).attr('data-nu-primary-key');
+	var p				= $('#' + t.id).attr('data-nu-primary-key');
 	var f				= window.nuFORM.getProperty('form_id');
 
 	if(y == 'browse'){
@@ -2299,7 +2299,7 @@ function nuHighlightSearch(){
 				h	= h.replaceAll(search[i],'`````' + search[i] + '````', true);
 			}
 
-			h 		= h.replaceAll('`````', '<span class="nuBrowseSearch">', true);
+			h 		= h.replaceAll('`````', '<span class="nuBrowseSearch" onclick="this.offsetParent.onclick()">', true);
 			h 		= h.replaceAll('````', '</span>', true);
 			
 			$(this).html(h);
