@@ -55,7 +55,7 @@ $(document).ready(function() {
 		}
 	}else{
 		
-		window.nuREPORT = window.nuREPORTdefault;
+		window.nuREPORT 	= window.nuREPORTdefault;
 		
      }
 	 

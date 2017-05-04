@@ -478,7 +478,9 @@ function nuDragReport(){
 		
 		if(event.keyCode == 46){
 
-			var sel = document.getElementsByClassName('nuDragSelected');
+			if($('#nuDragDialog').length == 1){return;}
+			
+			var sel 			= document.getElementsByClassName('nuDragSelected');
 			
 			for(var i = 0 ; i < sel.length ; i ++){
 				
@@ -486,7 +488,8 @@ function nuDragReport(){
 
 			}
 			
-			nuREPORT.selected = [];
+			nuREPORT.selected 	= [];
+			
 			nuLoadReport();
 			
 		}
