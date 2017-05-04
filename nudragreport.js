@@ -1099,6 +1099,7 @@ function nuObjectDialog(){
 	.css('position','absolute')
 	.css('top','7px')
 	.css('right','5px');
+	
 }
 
 function deleteSelectedObjects(){

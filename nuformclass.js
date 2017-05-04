@@ -52,7 +52,7 @@ class nuFormObject {
 		
 		var s	= this.scroll[e.target.id];
 		
-		if(event.keyCode == 38 || event.wheelDelta > 0){
+		if(event.keyCode == 38){
 			
 			s.index --;
 			
@@ -60,11 +60,11 @@ class nuFormObject {
 				this.scroll[e.target.id].index = s.list.length -1;
 			}
 			
-		}else if(event.keyCode == 40 || event.wheelDelta < 0){
+		}else if(event.keyCode == 40){
 			
 			s.index ++;
 
-			if(s.index == s.list.length - 1){
+			if(s.index == s.list.length){
 				this.scroll[e.target.id].index = 0;
 			}
 			
@@ -75,6 +75,8 @@ class nuFormObject {
 		$('#' + e.target.id)
 		.val(s.list[this.scroll[e.target.id].index])
 		.change();
+		
+		console.log(s.index);
 
 		nuHasBeenEdited();
 		
