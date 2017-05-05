@@ -2,12 +2,16 @@
 
 function nuBuildForm(f){
 	
-	if(f.form_id == ''){
-		
+	if(f.tableSchema === null){  						//-- need to login again
+	
+		$('body').addClass('nuBrowseBody')
+		$('body').removeClass('nuEditBody')
 		nuLogin();
-		return
+		nuAlert(['You have been logged out..']);
+		return;
 		
 	}
+	
 	
 	window.onbeforeunload		= null;
 	window.nuBrowseFunction		= window.nuDefaultBrowseFunction;
@@ -22,7 +26,6 @@ function nuBuildForm(f){
 	nuFORM.formType				= f.type;
 	nuFORM.scroll				= [];
 	nuSetBody(f);
-	
 	
 	if(f.tableSchema.length != 0){  						//-- its an Object (load these once,  at login)
 
