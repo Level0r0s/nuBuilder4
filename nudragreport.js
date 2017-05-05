@@ -68,6 +68,24 @@ function nuLoadReport(b){
 }
 
 
+function nuSetnuScroll(){
+
+	var flds = ['#fieldName', "[id^='sortField']"]
+	
+	for(var i = 0 ; i < flds.length ; i++){
+
+		$( flds[i] )
+		.addClass('nuScroll')
+		.keydown(function() {
+			nuFORM.scrollList(event, nuTT);
+		});	
+
+	}
+
+}
+
+
+
 function nuDragReport(){
 
 	this.groups     = [[10],[0,20],[1,19],[2,18],[3,17],[4,16],[5,15],[6,14],[7,13],[8,12],[9,11]];
@@ -588,8 +606,10 @@ function nuSetDialog(){ //-- reopen Dialog at set to last position
 		window[nuDIALOG.dialog]();
 		$('#nuDragDialog').css('left', nuDIALOG.dialogX);
 		$('#nuDragDialog').css('top', nuDIALOG.dialogY);
-		$('#' + nuREPORT.setFocus).focus()
+		$('#' + nuREPORT.setFocus).focus();
+		
 	}
+
 	
 }
 
@@ -732,7 +752,7 @@ function nuSelectDialog(){
 		var sel = o.hasClass('nuDragSelected')  ? ' selected ' : '';
 		
 		$("#nuObjectList").append("<option "+ sel +" value='"+ a[i].id +"'>"+sec + " : " + a[i].id + " : " + val +"</option>") ;
-			
+		
 	}
 		
 
@@ -760,11 +780,13 @@ function nuAdjustDialog(){
 function nuAdjustButton(top, left, funct, value, title){
 
 	var e = document.createElement('input');                           //-- create button
+	
 	e.setAttribute('id', 'bt_' + String(title).split(' ').join('_'));
 	e.setAttribute('type', 'button');
 	e.setAttribute('value',   value);
 	e.setAttribute('title',   title);
 	e.setAttribute('onclick', funct );
+	
 	$('#nuDragDialog').append(e);
 	$('#' + e.id).addClass('nuButton');
 	$('#nuDrag').append(e);
@@ -1103,12 +1125,13 @@ function nuObjectDialog(){
 	.css('position','absolute')
 	.css('top','7px')
 	.css('right','5px');
-	
+	nuSetnuScroll();
+
 }
 
 function deleteSelectedObjects(){
 	
-	var sel = document.getElementsByClassName('nuDragSelected');
+	var sel 			= document.getElementsByClassName('nuDragSelected');
 			
 	for(var i = 0 ; i < sel.length ; i ++){
 		
@@ -1116,8 +1139,9 @@ function deleteSelectedObjects(){
 
 	}
 	
-	nuREPORT.selected = [];
+	nuREPORT.selected	= [];
 	nuLoadReport();
+	
 }
 
 function findWithAttr(array, attr, value) {
@@ -1256,6 +1280,7 @@ function nuGroupDialog(){
 	}
 	nuMoveGroup();
 	$('#nuDragDialog').css('height', top + 20);
+	nuSetnuScroll();
 	
 }
 

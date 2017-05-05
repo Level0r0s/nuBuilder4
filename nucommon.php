@@ -1101,4 +1101,26 @@ function nuPunctuation($f){
 }
 
 
+function nuTTList($p, $l){
+	
+	$t		= nuRunQuery('SELECT * FROM zzzzsys_object WHERE  zzzzsys_object_id = ?' , [$l]);
+	
+	while($r = db_fetch_object($t)){						//-- add default empty hash variables
+		$_POST['nuHash'][$r->sob_all_id]	= '';
+	}
+	
+	$tt								= nuTT();
+	$_POST['nuHash']['TABLE_ID']	= $tt;
+	$e								= new nuEvalPHPClass($p);
+	$c								= json_encode(db_columns($tt));
+	
+	nuRunQuery("DROP TABLE $tt");
+	
+	return $c;
+
+	
+}
+
+
+
 ?>
