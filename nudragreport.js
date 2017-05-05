@@ -1278,6 +1278,7 @@ function nuGroupDialog(){
                 $('#page_break').attr({'id' : 'page_break0', 'data-property' : 'page_break', 'data-section' : '1'});
 
 	}
+	
 	nuMoveGroup();
 	$('#nuDragDialog').css('height', top + 20);
 	nuSetnuScroll();

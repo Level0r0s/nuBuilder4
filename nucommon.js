@@ -404,25 +404,21 @@ function nuBindCtrlEvents(){
 			
 			e.preventDefault();
 			
-            if(e.keyCode == 65 && window.global_access) {//A
-			
+            if(e.keyCode == 65 && window.global_access) {						//-- a
 				nuPopup(window.nuFORM.getCurrent().form_id, "-2");
-
-			} else if(e.keyCode == 70 && window.global_access) {//F
-
+			} else if(e.keyCode == 70 && window.global_access) {				//-- f
 				nuPopup("nuform", window.nuFORM.getCurrent().form_id);
-				
-			} else if(e.keyCode == 79 && window.global_access) {//O
-			
+			} else if(e.keyCode == 79 && window.global_access) {				//-- O
 				nuPopup("nuobject", "", window.nuFORM.getCurrent().form_id);
-				
+			} else if(e.keyCode == 68 && window.global_access) {				//-- d
+				nuPopup("nudebug", "", window.nuFORM.getCurrent().form_id);
 			} else if (e.keyCode == 82) {//R
-				
+
 				if(window.nuFORM.getCurrent().record_id != '') {
 					nuGetBreadcrumb();
 				}
 				
-			} else if(e.keyCode == 83) {//S
+			} else if(e.keyCode == 83) {										//-- s
 			
 				if(window.nuFORM.getCurrent().record_id != '') {
 					nuSaveAction();
@@ -440,14 +436,20 @@ function nuBindCtrlEvents(){
 				searchIndex = Math.abs(49 - e.keyCode);
 			}
 
-			if(searchIndex != -1) {
-				if($.inArray(searchIndex,nosearch) != '-1') {
+			if(searchIndex != -1){
+				
+				if($.inArray(searchIndex,nosearch) != '-1'){
+					
 					nosearch.pop(searchIndex);
 					$('#nusort_' + searchIndex).removeClass('nuNoSearch');					
-				} else {
+					
+				}else{
+					
 					nosearch.push(searchIndex);
 					$('#nusort_' + searchIndex).addClass('nuNoSearch');
+					
 				}
+				
 			}
 			
 			window.nuFORM.setProperty('nosearch_columns', nosearch);
