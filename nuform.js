@@ -142,21 +142,21 @@ function nuResizeBody(f){
 	
 	if(f.record_id == ''){
 		
-		var h			= Number(d.browse.height);
+		var h			= Number(d.browse.height) + headers;
 		var w			= Number(d.browse.width);
 
 		$('#nuDragDialog', window.parent.document).
-		css({'height'		:	(h + 110) + 'px',
+		css({'height'		:	(h + 90) + 'px',
 			'width' 		:	(w + 43) + 'px',
 			'visibility' 	:	'visible'
 		});
 
 		$('#nuWindow', window.parent.document).
-		css({'height'		:	(h + 67) + 'px',
+		css({'height'		:	(h + 47) + 'px',
 			'width' 		:	(w + 30) + 'px'
 		});
 			
-		$('body').css('height', h - 50);
+		$('body').css('height', h);
 		
 	}else{
 		
@@ -1576,7 +1576,7 @@ function nuGetOptionsList(f, t, p, a){
 		list.push(['Arrange Objects', 		'nuPopup("' + f + '", "-2")', 				'nu_option_arrange.png', 		'Ctrl+Shft+A']);
 		list.push(['Form Properties', 		'nuPopup("nuform", "' + f + '")', 			'nu_option_properties.png',		'Ctrl+Shft+F']);
 		list.push(['Form Object List', 		'nuPopup("nuobject", "", "' + f + '")', 	'nu_option_objects.png',		'Ctrl+Shft+O']);
-		list.push(['nuDebug Results', 		'nuPopup("nudebug", "", "' + f + '")', 		'nu_option_debug.png',			'Ctrl+Shft+D']);
+		list.push(['nuDebug', 				'nuPopup("nudebug", "", "")', 				'nu_option_debug.png',			'Ctrl+Shft+D']);
 		
 	}else{
 		

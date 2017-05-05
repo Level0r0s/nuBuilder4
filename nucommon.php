@@ -78,10 +78,9 @@ function nuDebugResult($t){
 	}
 
     $i		= nuID();
-    $d		= date('Y-m-d H:i:s');
     $s		= $nuDB->prepare("INSERT INTO zzzzsys_debug (zzzzsys_debug_id, deb_message, deb_added) VALUES (? , ?, ?)");
 
-    $s->execute(array($i, $t, $d));
+    $s->execute(array($i, $t, time()));
     
     if($nuDB->errorCode() !== '00000'){
         error_log($nuDB->errorCode() . ": Could not establish nuBuilder database connection");
@@ -127,7 +126,7 @@ function nuDebug($a0 = '^', $a1 = '^', $a2 = '^', $a3 = '^', $a4 = '^', $a5 = '^
 	$f					= $b[0]['file'];
 	$l					= $b[0]['line'];
 
-	$m					= date("Y-m-d H:i:s") . " ($f:$l)\n";
+	$m					= date("Y-m-d H:i:s") . " ($f:$l)\n\n<br>\n";
 
 	
 	for($i = 0 ; $i < func_num_args() ; $i++){

@@ -671,7 +671,6 @@ function nuBrowseRows($f){
 	
 	$P				= $_POST['nuSTATE'];
 	$rows			= $P['rows'];
-
 	$page_number	= $P['page_number'];
 	$start			= $page_number * $rows;
 	$search			= str_replace('&#39;', "'", $P['search']);
@@ -1251,7 +1250,6 @@ function nuFormDimensions($f){
 	$rh			= intval($r->sfo_browse_row_height)    == 0 ? 25 : $r->sfo_browse_row_height;
 	$rs			= intval($r->sfo_browse_rows_per_page) == 0 ? 25 : $r->sfo_browse_rows_per_page;
 	$bb			= 25;   //-- browse footer
-	
 	$t			= nuRunQuery("SELECT * FROM zzzzsys_object WHERE sob_all_zzzzsys_form_id = '$f'");
 	$h			= 0;
 	$w			= 0;
@@ -1276,8 +1274,6 @@ function nuFormDimensions($f){
 		$gh 	= max($r->sob_all_height, 25);
 
 	}
-
-
 
 	$bh			= $bt + ($rs * $rh) + $bb;
 	$bw			= nuGetBrowseWidth($f);	
