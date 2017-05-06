@@ -2549,6 +2549,32 @@ function nuDeleteAction(){
 	
 }
 
+
+function nuDeleteOneAction(){
+	
+    if (confirm("Delete This Record?")) {
+
+		$("[id$='nuDelete']").prop('checked', true);
+		
+		nuUpdateData('delete', 'one');
+		
+    }
+	
+}
+
+
+function nuDeleteAllAction(){
+	
+    if (confirm("Delete This Record?")) {
+
+		$("[id$='nuDelete']").prop('checked', true);
+		
+		nuUpdateData('delete', 'all');
+		
+    }
+	
+}
+
 function nuCloneAction(){
 	
 	$('[data-nu-primary-key]').each(function(index){
