@@ -133,7 +133,7 @@ function nuDebug($a0 = '', $a1 = '', $a2 = '', $a3 = '', $a4 = '', $a5 = '', $a6
 
 		$p			= func_get_arg($i);
 
-		$m		.= "\n[$i] : " . print_var_name($FooBar);
+		$m		.= "\n[$i] : ";
 
 		if(gettype($p) == 'object' or gettype($p) == 'array'){
 			$m	.= print_r($p,1);
