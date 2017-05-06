@@ -411,7 +411,7 @@ function nuBindCtrlEvents(){
 			} else if(e.keyCode == 79 && window.global_access) {				//-- O
 				nuPopup("nuobject", "", window.nuFORM.getCurrent().form_id);
 			} else if(e.keyCode == 68 && window.global_access) {				//-- d
-				nuPopup("nudebug", "", window.nuFORM.getCurrent().form_id);
+				nuPopup("nudebug", "");
 			} else if (e.keyCode == 82) {//R
 
 				if(window.nuFORM.getCurrent().record_id != '') {

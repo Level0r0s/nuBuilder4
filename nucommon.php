@@ -120,33 +120,29 @@ function nuBuildTable($t, $array){
 
 
 
-function nuDebug($a0 = '^', $a1 = '^', $a2 = '^', $a3 = '^', $a4 = '^', $a5 = '^', $a6 = '^', $a7 = '^', $a8 = '^', $a9 = '^'){
+function nuDebug($a0 = '', $a1 = '', $a2 = '', $a3 = '', $a4 = '', $a5 = '', $a6 = '', $a7 = '', $a8 = '', $a9 = ''){
 	
 	$b					= debug_backtrace();
 	$f					= $b[0]['file'];
 	$l					= $b[0]['line'];
 
-	$m					= date("Y-m-d H:i:s") . " ($f:$l)\n\n<br>\n";
+	$m					= date("Y-m-d H:i:s") . " ($f:$l)\n\n<br>\n" ;
 
 	
-	for($i = 0 ; $i < func_num_args() ; $i++){
+	for($i = 0 ; $i < count(func_get_args()) ; $i++){
 
-			$p			= func_get_arg($i);
-			
-			if($p != '^'){
-							
-				$m		.= "\n[$i] : ";
-							
-				if(gettype($p) == 'object' or gettype($p) == 'array'){
-					$m	.= print_r($p,1);
-				}else{
-					$m	.= $p;
-				}
+		$p			= func_get_arg($i);
 
-				$m	.= "\n";
-				
-			}
-			
+		$m		.= "\n[$i] : " . print_var_name($FooBar);
+
+		if(gettype($p) == 'object' or gettype($p) == 'array'){
+			$m	.= print_r($p,1);
+		}else{
+			$m	.= $p;
+		}
+
+		$m	.= "\n";
+
 	}
 	
 	nuDebugResult($m);
