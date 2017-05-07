@@ -8,6 +8,7 @@ function nuBuildForm(f){
 		$('body').removeClass('nuEditBody')
 		nuLogin();
 		nuAlert(['You have been logged out..']);
+		
 		return;
 		
 	}
@@ -654,7 +655,10 @@ function nuINPUT(w, i, l, p, prop){
 	}else{
 	
 		if(prop.objects[i].type == 'input' && input_type == 'nuAutoNumber'){
-			$('#' + id).val(prop.objects[i].counter);
+			$('#' + id)
+			.prop('readonly', true)
+			.addClass('nuReadonly')
+			.val(prop.objects[i].counter);
 		}
 
 		setAccess(ID, prop.objects[i].read);

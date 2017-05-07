@@ -1284,19 +1284,18 @@ function nuFormDimensions($f){
 
 
 	
-	$d[]		= $bt + ($rs * $rh) + $bb;    		//-- lookup browse height (0)
+	$d[]		= $bt + ($rs * $rh) + $bb;    		//-- lookup browse height
 	$d[]		= nuGetBrowseWidth($f);	
-	$d[]		= $h  + 0;		//-- lookup form height 	(2)
-	$d[]		= $w  + 0;		//-- lookup form width		(3)
-	$d[]		= $h  + 0;		//-- form height			(4)
-	$d[]		= $w  + 50;			//-- form width				(5)
-	$d[]		= $gh + 0;			//-- grid height			(6)
-	$d[]		= $gw + 55;			//-- grid width				(7)
+	$d[]		= $h  + 0;							//-- lookup form height
+	$d[]		= $w  + 0;							//-- lookup form width
+	$d[]		= $h  + 0;							//-- form height
+	$d[]		= $w  + 50;							//-- form width
+	$d[]		= $gh + 0;							//-- grid height
+	$d[]		= $gw + 55;							//-- grid width
 	
 	$d[]		= ['browse'=>$browse, 'edit'=>$edit, 'grid'=>$grid];
+
 	return ['browse'=>$browse, 'edit'=>$edit, 'grid'=>$grid];
-	
-	return $d;
 	
 }
 
