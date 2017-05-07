@@ -497,19 +497,15 @@ function nuRunPHP($nuRID){
 
 function nuRunPHPHidden($nuCode){
 
-
 	$s						= "SELECT * FROM zzzzsys_php WHERE sph_code = ? ";
 	$t						= nuRunQuery($s, [$nuCode]);
 	$r						= db_fetch_object($t);
-
-	$evalPHP = new nuEvalPHPClass($r->zzzzsys_php_id);
 	
-	return 'doesntmatter';
+	$evalPHP = new nuEvalPHPClass($r->zzzzsys_php_id);
+
+	return 1;
 
 }
-
-
-
 
 
 
@@ -808,6 +804,7 @@ function nuTableSchema(){
 	return $a;
 
 }
+
 
 
 function nuFormSchema(){

@@ -222,10 +222,11 @@ function nuAddActionButtons(f){
 		
 		if(!draggable){
 			
-			if(button.Save == 1){nuAddActionButton('Save');}
-			if(button.Clone == 1){nuAddActionButton('Clone');}
-			if(button.Delete == 1){nuAddActionButton('Delete');}
-			if(button.Run != ''){nuAddActionButton('run', 'Run', button.Run);}
+			if(button.Save == 1)		{nuAddActionButton('Save');}
+			if(button.Clone == 1)		{nuAddActionButton('Clone');}
+			if(button.Delete == 1)		{nuAddActionButton('Delete');}
+			if(button.RunHidden != '')	{nuAddActionButton('runhidden', 'Run', button.RunHidden);}
+			if(button.Run != '')		{nuAddActionButton('run', 'Run in new window', button.Run);}
 			
 		}
 		
@@ -1373,6 +1374,7 @@ function nuAddBreadcrumb(i){
 
 	var bc 		= window.nuFORM.breadcrumbs[i];
 	var bcId 	= 'nu_bc_' + i;
+	var bcId 	= 'nuBreadcrumb' + i;
 	
 	var div		= document.createElement('div');
 	div.setAttribute('id', bcId);
@@ -1401,7 +1403,6 @@ function nuSetTitle(t){
 	if(nuFORM.getCurrent().record_id == ''){return;}
 
 	nuFORM.setProperty('title', t);
-	nuAddBreadcrumbs();
 	
 }
 
@@ -2090,9 +2091,9 @@ function nuRunPHPAction(id) {
 	nuRunPHP(id);
 }
 
-function nuRunPHPHiddenAction(id) {
-	nuRunPHPHidden(id);
-}
+//function nuRunPHPHiddenAction(id){
+//	nuRunPHPHidden(id);
+//}
 
 function nuRunReportAction(id) {
 	nuRunReport(id);
@@ -2548,19 +2549,6 @@ function nuDeleteAction(){
 		$("[id$='nuDelete']").prop('checked', true);
 		
 		nuUpdateData('delete');
-		
-    }
-	
-}
-
-
-function nuDeleteOneAction(){
-	
-    if (confirm("Delete This Record?")) {
-
-		$("[id$='nuDelete']").prop('checked', true);
-		
-		nuUpdateData('delete', 'one');
 		
     }
 	
