@@ -14,6 +14,7 @@ window.nuSESSION				= '';
 window.nuDRAGLINEVSTART			= '';
 window.nuDRAGLINEVID			= '';
 window.nuNEW					= '';
+window.nuDragID						= 1000;
 
 function nuOpener(f, r, filter, parameters){
 	
@@ -810,4 +811,23 @@ function nuGetFunctionList(){
 	return f;
 
 }
+
+
+function nuID(){
+
+	if(window.nuSuffix == 9999){
+		
+		window.nuSuffix		= 0
+		window.nuUniqueID	= 'c' + String(Date.now());
+		
+	}else{
+		window.nuSuffix	++;
+	}
+	
+	id						= window.nuUniqueID + nuPad4(window.nuSuffix);
+		
+	return id;
+
+}
+
 

@@ -2,7 +2,6 @@
 
 window.nuBACKUP                = [];
 window.nuLastClick             = [];
-window.nuID                    = 1000;
 window.nuDIALOG                = {};
 window.nuDIALOG.groupNumber    = '0';
 window.nuDIALOG.sectionNumber  = '0';

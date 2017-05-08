@@ -30,7 +30,7 @@ function nuLoadReport(b){
 	window.nuDragD = new nuCreateDialog('');
 	window.nuDragR = new nuDragReport();
 
-	if(nuID == 1000){
+	if(nuDragID == 1000){
 		nuDragR.setIds();
 	}
 	
@@ -209,8 +209,8 @@ function nuDragReport(){
 
 	this.newId = function() {
 
-		nuID = nuID + 1;
-		return 'obj' + nuID;
+		nuDragID = nuDragID + 1;
+		return 'obj' + nuDragID;
 
 	}
 
