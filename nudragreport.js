@@ -1086,6 +1086,8 @@ function nuObjectDialog(){
 	
 	if(S.length == 0){return;}
 	
+	nuDIALOG.dialog = 'nuObjectDialog';
+	
 	nuDragD.createDialog(400, window.scrollY + 50, 450, 450, 'Object Properties');
 	
 	var D   = nuDragR.getObject(S[0].id);
