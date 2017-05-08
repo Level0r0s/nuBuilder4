@@ -151,7 +151,7 @@ function nuDebug($a0 = '', $a1 = '', $a2 = '', $a3 = '', $a4 = '', $a5 = '', $a6
 
 
 
-function jsinclude($pfile){
+function nuJSInclude($pfile){
 
 	$timestamp = date("YmdHis", filemtime($pfile));                                         //-- Add timestamp so javascript changes are effective immediately
 	print "<script src='$pfile?ts=$timestamp' type='text/javascript'></script>\n";
@@ -160,7 +160,7 @@ function jsinclude($pfile){
 
 
 
-function cssinclude($pfile){
+function nuCSSInclude($pfile){
 
 	$timestamp = date("YmdHis", filemtime($pfile));                                         //-- Add timestamp so javascript changes are effective immediately
 	print "<link rel='stylesheet' href='$pfile?ts=$timestamp' />\n";
