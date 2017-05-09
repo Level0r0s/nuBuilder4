@@ -2840,7 +2840,7 @@ function nuGetSearchList(){
 		'position'			: 'absolute',
 		'text-align'    	: 'center'
 	})
-	.attr('onclick', '$("#nuSearchList").remove();;$("#nuModal").remove();')
+	.attr('onclick', '$("#nuSearchList").remove();$("#nuModal").remove();')
 	.html('<img id="nuOptionListClose" src="nuclose.png" width="20px" height="20px">')
 	.addClass('nuSearchListClose');
 	
