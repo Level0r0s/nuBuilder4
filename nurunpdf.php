@@ -22,6 +22,7 @@ if(db_num_rows($t) == 0){
 $reportInfo                 = db_fetch_object($t);
 $JSON                       = json_decode($reportInfo->json);
 $LAYOUT						= json_decode($JSON->sre_layout);
+nudebug($JSON);
 $hashData                   = nuAddToHashList($JSON, 'report');
 $hashData['TABLE_ID']       = $TABLE_ID;
 $GLOBALS['TABLE_ID']        = $TABLE_ID;

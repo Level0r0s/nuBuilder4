@@ -451,7 +451,7 @@ function nuSetHashList($p){
 function nuRunReport($nuRID){
 	
 	$nuID								= nuID();
-	$nuT								= nuRunQuery("SELECT * FROM zzzzsys_report WHERE zzzzsys_report_id = '$nuRID'");
+	$nuT								= nuRunQuery("SELECT * FROM zzzzsys_report WHERE sre_code = '$nuRID'");
 	$nuA								= db_fetch_object($nuT);
 	$_POST['nuHash']['code']			= $nuA->sre_code;
 	$_POST['nuHash']['description']		= $nuA->sre_description;

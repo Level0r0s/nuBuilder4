@@ -214,7 +214,7 @@ function nuUpdateTables(){
 		
 	}
 	
-	nudebug($S);
+	//nudebug($S);
 	
 }
 

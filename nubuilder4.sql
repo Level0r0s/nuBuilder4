@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 09, 2017 at 08:19 PM
+-- Generation Time: May 10, 2017 at 01:02 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -19,100 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `nubuilder4`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `aaa`
---
-
-CREATE TABLE `aaa` (
-  `company_id` varchar(25) NOT NULL,
-  `com_code` varchar(50) NOT NULL,
-  `com_name` varchar(500) NOT NULL,
-  `com_business_id` varchar(25) NOT NULL,
-  `com_company_id` varchar(25) NOT NULL,
-  `com_address` varchar(500) NOT NULL,
-  `com_suburb` date DEFAULT NULL,
-  `com_phone` varchar(50) NOT NULL,
-  `com_map_coordinates` varchar(300) NOT NULL,
-  `com_sex` varchar(1) NOT NULL,
-  `com_color_id` varchar(250) NOT NULL,
-  `com_age` int(11) NOT NULL,
-  `com_notes` text NOT NULL,
-  `com_test` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `aaaa`
---
-
-CREATE TABLE `aaaa` (
-  `aaaa_id` varchar(25) NOT NULL,
-  `field00` varchar(1000) NOT NULL,
-  `field01` varchar(1000) NOT NULL,
-  `field02` varchar(1000) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `aaaa`
---
-
-INSERT INTO `aaaa` (`aaaa_id`, `field00`, `field01`, `field02`) VALUES
-('s14942625620056', '1', '2', '3');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `aaaaa6`
---
-
-CREATE TABLE `aaaaa6` (
-  `aaaaa6_id` varchar(25) NOT NULL,
-  `field00` varchar(1000) NOT NULL,
-  `field01` varchar(1000) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `aaaaa6`
---
-
-INSERT INTO `aaaaa6` (`aaaaa6_id`, `field00`, `field01`) VALUES
-('s14935061907347', '4', '');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `aaaaaaaaa`
---
-
-CREATE TABLE `aaaaaaaaa` (
-  `aaaaaaaaa_id` varchar(25) NOT NULL,
-  `field00` varchar(1000) NOT NULL,
-  `field01` varchar(1000) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `aaaaaaaaa`
---
-
-INSERT INTO `aaaaaaaaa` (`aaaaaaaaa_id`, `field00`, `field01`) VALUES
-('s14942657608282', 'sadrfv', '');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `aaaas`
---
-
-CREATE TABLE `aaaas` (
-  `aaaas_id` varchar(25) NOT NULL,
-  `field00` varchar(1000) NOT NULL,
-  `field01` varchar(1000) NOT NULL,
-  `field02` varchar(1000) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -726,7 +632,7 @@ INSERT INTO `zzzzsys_form` (`zzzzsys_form_id`, `sfo_type`, `sfo_code`, `sfo_desc
 ('nuuser', 'browseedit', 'ACCUSE', 'User', 'zzzzsys_user', 'zzzzsys_user_id', '', 0, 15, 'SELECT * \nFROM zzzzsys_user \nLEFT JOIN zzzzsys_access_level ON zzzzsys_access_level_id = sus_zzzzsys_access_level_id\nORDER BY sus_name', ''),
 ('nubuildreport', 'browseedit', 'BLDREP', 'Build Report', 'zzzzsys_report', 'zzzzsys_report_id', '', 0, 0, 'SELECT * FROM zzzzsys_report\nLEFT JOIN zzzzsys_form ON zzzzsys_form_id = sre_zzzzsys_form_id', '//-- hidden field set to class - nuEdited (generally ignored except when editing Reports)\n\n$(''#sre_layout'').addClass(''nuEdited''); \n'),
 ('nuphp', 'browseedit', 'PHPCODE', 'PHP Code', 'zzzzsys_php', 'zzzzsys_php_id', '', 0, 0, 'SELECT * FROM zzzzsys_php\nLEFT JOIN zzzzsys_form ON zzzzsys_form_id = sph_zzzzsys_form_id\nWHERE sph_system != ''1''\nORDER BY sph_code\n', '\nnuSetTitle($(''#sph_code'').val());\n\n$(''#sph_php'').addClass(''php'');\n\n\n$(''.php'')\n.prop(''readonly'', true)\n.dblclick(function() {\n	nuOpenAce(''PHP'', this.id);\n});\n\nif(window.filter == ''justphp''){\n\n    var ev      = [];\n    ev[''BB'']    = ''Before Browse'';\n    ev[''BE'']    = ''Before Edit'';\n    ev[''BS'']    = ''Before Save'';\n    ev[''AS'']    = ''After Save'';\n    ev[''BD'']    = ''Before Delete'';\n    ev[''AD'']    = ''After Delete'';\n    ev[''AB'']    = ''After Browse'';\n    \n    var e       = ev[nuFORM.getCurrent().record_id.substr(-2)];\n    var f       = $(''#sfo_description'', window.parent.document).val();\n\n    if(e == ''After Browse''){\n        var f   = $(''#sob_all_label'', window.parent.document).val();\n    }\n    \n\n    $(''#nuTab0'').remove();\n    $(''#nuTab2'').remove();\n    $(''#nuTab1'').click();\n    $(''#nu_bc_0'').html(''<b>'' + e + ''</b> for : '' + f);\n    $(''#sph_code'').val(nuFORM.getCurrent().record_id).change();\n    $(''#sph_description'').val(''System PHP'').change();\n    $(''#sph_system'').val(''1'').change();\n    $(''.nuSaveButtonEdited'').removeClass(''nuSaveButtonEdited'');\n    \n    \n    \n}\n\n'),
-('nublank', 'launch', 'BLA', 'Blank', '', '', '', 0, 0, '', '\nvar reportID    = nuFORM.getCurrent.record_id;\n\n$(''#nuTab0'').hide();\n\nnuAppendActionButton(''Print'',"nuRunReport(''" + reportID + "'');");\nnuAppendActionButton(''Email'',"nuEmailReport(''" + reportID + "'');");\n\n\n\n'),
+('nublank', 'launch', 'BLA', 'Blank', '', '', '', 0, 0, '', ''),
 ('nuaccessgroup', 'subform', 'GAL', 'Groups Access Level', 'zzzzsys_user_group_access_level', 'zzzzsys_user_group_access_level_id', '', 0, 0, 'SELECT * FROM zzzzsys_user_group_access_level', ''),
 ('nurunlist', 'browse', 'RUN', 'Run Form, Report or Procedure', 'zzzzsys_run_list', 'id', '', 0, 0, 'SELECT zzzzsys_form_id AS id, ''Form'' AS run, sfo_code AS code, sfo_description AS description FROM zzzzsys_run_list', '\n$("[data-nu-column=''nucolumn000'']").each(function() {\n\n    $(this).addClass(''nu_''+this.innerHTML);\n\n});'),
 ('nudebug', 'browseedit', 'DEBUG', 'Debug', 'zzzzsys_debug', 'zzzzsys_debug_id', '', 23, 15, 'SELECT * FROM zzzzsys_debug\nORDER BY zzzzsys_debug_id DESC', '\n$(''#delete_option'').val(0);\n$(''#nuAddButton'').remove();\n$(''#nuOptions'').remove();\n\nvar mess    = String($(''#deb_message'').val());\nvar i       = mess.indexOf(''<br>'');\nvar m       = mess.substr(i + 6);\n\nnuSetTitle(mess.substr(0, i))\n\n$(''#nuTab0'').remove();\n\n$(''#nu_bc_1'')\n.css(''text-align'', ''center'')\n.css(''width'', ''95%'')\n.css(''color'', ''black'')\n.css(''padding'', ''5px'')\n.css(''font-weight'', ''bold'')\n.appendTo("#nuTabHolder");\n\n$(''#deb_message'').val(m);\n\n\n$("[data-nu-column=''nucolumn001'']").each(function( index ) {\n    \n    if($(this).html().trim() != ''''){\n        \n        var nunow   = Date.now();\n        var numax   = (Date.now()/1000) - Number($(this).html());\n        var numin   = numax;\n        var nuhtm   = String(Math.ceil(numin)) + '' seconds ago'';\n        \n        if(numin < 21600)   {nuhtm = String(Math.ceil(numin/60/60)) + '' hours ago'';}\n        if(numin < 360)     {nuhtm = String(Math.ceil(numin/60)) + '' minutes ago'';}\n        if(numin < 60)      {nuhtm = String(Math.ceil(numin)) + '' seconds ago'';}\n    \n        $(this).html(nuhtm);\n        \n    }\n    \n});\n\nif(nuFORM.getCurrent().record_id != ''''){\n    \n    $(''.nuActionButton'').remove();\n    \n    nuAddActionButton(''Delete'');\n    nuAddActionButton(''DeleteAll'',''Delete All'', ''nuDeleteAllAction()'');\n    \n}\n\n'),
@@ -1328,14 +1234,14 @@ INSERT INTO `zzzzsys_object` (`zzzzsys_object_id`, `sob_all_zzzzsys_form_id`, `s
 ('s14941738229690', '', 'aaaa', 'input', 'field02', 'text02', 's14941738229683', 210, 210, 210, 117, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
 ('s14931629819344', 'c14931629721841117', 'aaaaa6', 'input', 'field00', 'text00', 's14931629819340', 10, 64, 148, 117, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
 ('s14931629819345', 'c14931629721841117', 'aaaaa6', 'input', 'field01', 'button01', 's14931629819340', 30, 180, 148, 117, 23, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 'N|$ 1,000.00', 'button', '', '', ''),
-('s14931629819349', 'nuhome', 'aaaaa6', 'run', 'ffc14931629721841117', 'aaaaa6', 'nutesttab', 160, 176, 64, 150, 30, '0', '', '0', '0', '', '', '', 'c14931629721841117', '', 'b', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', '', ''),
+('s14931629819349', 'nuhome', 'aaaaa6', 'run', 'ffc14931629721841117', 'aaaaa6', 'nutesttab', 160, 107, 275, 150, 30, '0', '', '0', '0', '', '', '', 'c14931629721841117', '', 'b', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', '', ''),
 ('s14933340318601', 'nuphp', 'zzzzsys_php', 'input', 'sph_system', 'Group', '574b8ee0b2a4cdf', 40, 1, 1, 100, 18, '1', 'left', '0', '2', '', '', '', '', '', '', '', '', '', 'browse|Browse|edit|Edit|browseedit|Browse and Edit|criteria|Criteria or Home|procedure|Procedure|report|Report', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
 ('s14935060331161', 'c14931629721841117', 'aaaaa6', 'html', 'fgthfgh', 'srgsdf', 's14931629819340', 20, 122, 148, 143, 100, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '<iframe src="https://docs.google.com/spreadsheets/d/1Sla5esFsj3TTx57f7Ojz_FQT9CmUN5esOoyG5ROvB5U/pubhtml?widget=true&amp;headers=false"></iframe>', ''),
 ('s14941738229688', '', 'aaaa', 'input', 'field00', 'text00', 's14941738229683', 150, 150, 150, 117, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
 ('s14941738229689', '', 'aaaa', 'input', 'field01', 'text01', 's14941738229683', 180, 180, 180, 117, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
 ('s14942650435670', '', 'aaaas', 'input', 'field02', 'text02', 's14942650435662', 210, 210, 210, 117, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
 ('s14942657473944', 'c14942657304129993', 'aaaaaaaaa', 'input', 'field01', 'text01', 's14942657473939', 180, 180, 180, 117, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
-('s14942657473948', 'nuhome', 'aaaaaaaaa', 'run', 'ffc14942657304129993', 'aaaaaaaaa', 'nutesttab', 11, 63, 250, 150, 30, '0', '', '0', '0', '', '', '', 'c14942657304129993', '', 'b', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', '', '');
+('s14942657473948', 'nuhome', 'aaaaaaaaa', 'run', 'ffc14942657304129993', 'aaaaaaaaa', 'nutesttab', 150, 46, 275, 150, 30, '0', '', '0', '0', '', '', '', 'c14942657304129993', '', 'b', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -1426,7 +1332,7 @@ CREATE TABLE `zzzzsys_report` (
 --
 
 INSERT INTO `zzzzsys_report` (`zzzzsys_report_id`, `sre_code`, `sre_description`, `sre_group`, `sre_zzzzsys_php_id`, `sre_zzzzsys_form_id`, `sre_layout`) VALUES
-('574b9845a681d27', '1', 'r', 'aaa', '57578be0057a49f', 'nublank', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"","top":110,"height":30,"label":"Detail Header","page_break":0,"margins":6,"color":"#FFFFFF","objects":[{"id":"obj1001","objectType":"field","backgroundColor":"white","borderColor":"black","borderWidth":"0","fieldName":"inv_number","fontColor":"black","fontFamily":"Arial","fontSize":"12","fontWeight":"b","format":"N|$ 1,000.00","textAlign":"right","image":"","group":0,"section":0,"left":18,"top":4,"height":22,"width":"150","zIndex":124,"minRows":0,"maxRows":0,"selected":0,"name":"obj1001"},{"id":"obj1002","objectType":"field","backgroundColor":"white","borderColor":"black","borderWidth":"0","fieldName":"inv_total","fontColor":"black","fontFamily":"Helvetica","fontSize":"12","fontWeight":"b","format":"D|dd, dddd mmmm yyyy","textAlign":"left","image":"","group":0,"section":0,"left":201,"top":3,"height":20,"width":330,"zIndex":124,"minRows":0,"maxRows":0,"selected":0,"name":"obj1002"},{"id":"obj1003","objectType":"field","backgroundColor":"white","borderColor":"black","borderWidth":"0","fieldName":"inv_total","fontColor":"black","fontFamily":"Arial","fontSize":"12","fontWeight":"b","format":"N|£ 1000.0","textAlign":"right","image":"","group":0,"section":0,"left":580,"top":5,"height":20,"width":150,"zIndex":124,"minRows":0,"maxRows":0,"selected":0,"name":"obj1003"}]}]},{"sortField":"Report","sortBy":"a","sections":[{"id":"","top":30,"height":1,"label":"Report Header","page_break":0,"margins":2,"color":"#FFFFFF","objects":[]},{"id":"","top":190,"height":1,"label":"Report Footer","page_break":0,"margins":10,"color":"#FFFFFF","objects":[]}]},{"sortField":"Page","sortBy":"a","sections":[{"id":"","top":70,"height":73,"label":"Page Header","page_break":0,"margins":4,"color":"#FFFFFF","objects":[{"id":"obj1005","objectType":"label","backgroundColor":"white","borderColor":"black","borderWidth":"0","fieldName":"Title","fontColor":"black","fontFamily":"Helvetica","fontSize":"10","fontWeight":"","format":"","textAlign":"left","image":"","group":0,"section":0,"left":67,"top":22,"height":20,"width":330,"zIndex":124,"minRows":0,"maxRows":0,"selected":0,"name":"obj1005"}]},{"id":"","top":150,"height":40,"label":"Page Footer","page_break":0,"margins":8,"color":"#FFFFFF","objects":[]}]},{"sortField":"inv_number","sortBy":"a","sections":[{"id":"","top":110,"height":0,"label":"inv_number Header","page_break":"1","margins":4,"color":"#FFFFFF","objects":[]},{"id":"","top":150,"height":0,"label":"inv_number Footer","page_break":0,"margins":6,"color":"#FFFFFF","objects":[]}],"groupBy":"a"},{"sortField":"inv_number","sortBy":"a","sections":[{"id":"","top":110,"height":0,"label":"inv_number Header","page_break":0,"margins":4,"color":"#FFFFFF","objects":[]},{"id":"","top":150,"height":0,"label":"inv_number Footer","page_break":0,"margins":6,"color":"#FFFFFF","objects":[]}],"groupBy":"a"},{"sortField":"","sortBy":"a","sections":[{"id":"","top":110,"height":0,"label":" Header","page_break":0,"margins":4,"color":"#FFFFFF","objects":[]},{"id":"","top":150,"height":0,"label":" Footer","page_break":0,"margins":6,"color":"#FFFFFF","objects":[]}]},{"sortField":"","sortBy":"a","sections":[{"id":"","top":110,"height":0,"label":" Header","page_break":0,"margins":4,"color":"#FFFFFF","objects":[]},{"id":"","top":150,"height":0,"label":" Footer","page_break":0,"margins":6,"color":"#FFFFFF","objects":[]}]},{"sortField":"","sortBy":"a","sections":[{"id":"","top":110,"height":0,"label":" Header","page_break":0,"margins":4,"color":"#FFFFFF","objects":[]},{"id":"","top":150,"height":0,"label":" Footer","page_break":0,"margins":6,"color":"#FFFFFF","objects":[]}]},{"sortField":"","sortBy":"a","sections":[{"id":"","top":110,"height":0,"label":" Header","page_break":0,"margins":4,"color":"#FFFFFF","objects":[]},{"id":"","top":150,"height":0,"label":" Footer","page_break":0,"margins":6,"color":"#FFFFFF","objects":[]}]},{"sortField":"","sortBy":"a","sections":[{"id":"","top":110,"height":0,"label":" Header","page_break":0,"margins":4,"color":"#FFFFFF","objects":[]},{"id":"","top":150,"height":0,"label":" Footer","page_break":0,"margins":6,"color":"#FFFFFF","objects":[]}]},{"sortField":"","sortBy":"a","sections":[{"id":"","top":110,"height":0,"label":" Header","page_break":0,"margins":4,"color":"#FFFFFF","objects":[]},{"id":"","top":150,"height":0,"label":" Footer","page_break":0,"margins":6,"color":"#FFFFFF","objects":[]}]}],"currentGroup":0,"selected":["obj1005"],"setFocus":"fieldName"}');
+('574b9845a681d27', '1', 'r', 'aaa', '57578be0057a49f', 'nublank', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"","top":110,"height":25,"label":"Detail Header","page_break":0,"margins":6,"color":"#FFFFFF","objects":[{"id":"obj1001","objectType":"field","backgroundColor":"white","borderColor":"black","borderWidth":"0","fieldName":"inv_date","fontColor":"black","fontFamily":"Arial","fontSize":"10","fontWeight":"","format":"D|dd-mmm-yyyy","textAlign":"left","image":"","group":0,"section":0,"left":20,"top":2,"height":17,"width":200,"zIndex":124,"minRows":0,"maxRows":0,"selected":0,"name":"obj1001"},{"id":"obj1002","objectType":"field","backgroundColor":"white","borderColor":"black","borderWidth":"0","fieldName":"inv_total","fontColor":"black","fontFamily":"Arial","fontSize":"10","fontWeight":"","format":"N|$ 1,000.00","textAlign":"right","image":"","group":0,"section":0,"left":468,"top":2,"height":17,"width":200,"zIndex":124,"minRows":0,"maxRows":0,"selected":0,"name":"obj1002"},{"id":"obj1003","objectType":"field","backgroundColor":"white","borderColor":"black","borderWidth":"0","fieldName":"inv_number","fontColor":"black","fontFamily":"Arial","fontSize":"10","fontWeight":"","format":"N|£ 1000.0","textAlign":"left","image":"","group":0,"section":0,"left":244,"top":2,"height":17,"width":100,"zIndex":124,"minRows":0,"maxRows":0,"selected":0,"name":"obj1003"}]}]},{"sortField":"Report","sortBy":"a","sections":[{"id":"","top":30,"height":1,"label":"Report Header","page_break":0,"margins":2,"color":"#FFFFFF","objects":[]},{"id":"","top":190,"height":1,"label":"Report Footer","page_break":0,"margins":10,"color":"#FFFFFF","objects":[]}]},{"sortField":"Page","sortBy":"a","sections":[{"id":"","top":70,"height":68,"label":"Page Header","page_break":0,"margins":4,"color":"#FFFFFF","objects":[{"id":"obj1004","objectType":"label","backgroundColor":"white","borderColor":"black","borderWidth":"0","fieldName":"Invoice Total","fontColor":"black","fontFamily":"Helvetica","fontSize":"12","fontWeight":"b","format":"","textAlign":"right","image":"","group":0,"section":0,"left":468,"top":38,"height":20,"width":200,"zIndex":124,"minRows":0,"maxRows":0,"selected":0,"name":"obj1004"},{"id":"obj1005","objectType":"label","backgroundColor":"white","borderColor":"black","borderWidth":"0","fieldName":"Title","fontColor":"black","fontFamily":"Helvetica","fontSize":"12","fontWeight":"b","format":"","textAlign":"left","image":"","group":0,"section":0,"left":20,"top":38,"height":20,"width":200,"zIndex":124,"minRows":0,"maxRows":0,"selected":0,"name":"obj1005"},{"id":"obj1006","objectType":"label","backgroundColor":"white","borderColor":"black","borderWidth":"0","fieldName":"Invoice No.","fontColor":"black","fontFamily":"Helvetica","fontSize":"12","fontWeight":"b","format":"","textAlign":"left","image":"","group":0,"section":0,"left":244,"top":40,"height":20,"width":100,"zIndex":124,"minRows":0,"maxRows":0,"selected":0,"name":"obj1006"}]},{"id":"","top":150,"height":40,"label":"Page Footer","page_break":0,"margins":8,"color":"#FFFFFF","objects":[]}]},{"sortField":"inv_number","sortBy":"a","sections":[{"id":"","top":110,"height":0,"label":"inv_number Header","page_break":"1","margins":4,"color":"#FFFFFF","objects":[]},{"id":"","top":150,"height":0,"label":"inv_number Footer","page_break":0,"margins":6,"color":"#FFFFFF","objects":[]}],"groupBy":"a"},{"sortField":"inv_number","sortBy":"a","sections":[{"id":"","top":110,"height":0,"label":"inv_number Header","page_break":0,"margins":4,"color":"#FFFFFF","objects":[]},{"id":"","top":150,"height":0,"label":"inv_number Footer","page_break":0,"margins":6,"color":"#FFFFFF","objects":[]}],"groupBy":"a"},{"sortField":"","sortBy":"a","sections":[{"id":"","top":110,"height":0,"label":" Header","page_break":0,"margins":4,"color":"#FFFFFF","objects":[]},{"id":"","top":150,"height":0,"label":" Footer","page_break":0,"margins":6,"color":"#FFFFFF","objects":[]}]},{"sortField":"","sortBy":"a","sections":[{"id":"","top":110,"height":0,"label":" Header","page_break":0,"margins":4,"color":"#FFFFFF","objects":[]},{"id":"","top":150,"height":0,"label":" Footer","page_break":0,"margins":6,"color":"#FFFFFF","objects":[]}]},{"sortField":"","sortBy":"a","sections":[{"id":"","top":110,"height":0,"label":" Header","page_break":0,"margins":4,"color":"#FFFFFF","objects":[]},{"id":"","top":150,"height":0,"label":" Footer","page_break":0,"margins":6,"color":"#FFFFFF","objects":[]}]},{"sortField":"","sortBy":"a","sections":[{"id":"","top":110,"height":0,"label":" Header","page_break":0,"margins":4,"color":"#FFFFFF","objects":[]},{"id":"","top":150,"height":0,"label":" Footer","page_break":0,"margins":6,"color":"#FFFFFF","objects":[]}]},{"sortField":"","sortBy":"a","sections":[{"id":"","top":110,"height":0,"label":" Header","page_break":0,"margins":4,"color":"#FFFFFF","objects":[]},{"id":"","top":150,"height":0,"label":" Footer","page_break":0,"margins":6,"color":"#FFFFFF","objects":[]}]},{"sortField":"","sortBy":"a","sections":[{"id":"","top":110,"height":0,"label":" Header","page_break":0,"margins":4,"color":"#FFFFFF","objects":[]},{"id":"","top":150,"height":0,"label":" Footer","page_break":0,"margins":6,"color":"#FFFFFF","objects":[]}]}],"currentGroup":0,"selected":[],"setFocus":"textAlign"}');
 
 -- --------------------------------------------------------
 
@@ -1882,30 +1788,6 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `aaaa`
---
-ALTER TABLE `aaaa`
-  ADD PRIMARY KEY (`aaaa_id`);
-
---
--- Indexes for table `aaaaa6`
---
-ALTER TABLE `aaaaa6`
-  ADD PRIMARY KEY (`aaaaa6_id`);
-
---
--- Indexes for table `aaaaaaaaa`
---
-ALTER TABLE `aaaaaaaaa`
-  ADD PRIMARY KEY (`aaaaaaaaa_id`);
-
---
--- Indexes for table `aaaas`
---
-ALTER TABLE `aaaas`
-  ADD PRIMARY KEY (`aaaas_id`);
 
 --
 -- Indexes for table `business`

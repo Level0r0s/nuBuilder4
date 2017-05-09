@@ -15,6 +15,7 @@
 	$_POST['nuMessages']					= array();
 	$_POST['nuTableSchema']					= nuTableSchema();
 	$s										= nuCheckSession();
+	nudebug($s);
 	$F										= $s->form_id;
 	$R										= $s->record_id;
 	$P										= $_POST['nuSTATE'];
@@ -37,7 +38,6 @@
 	if($CT == 'getform')		{nuBeforeEdit($F, $R);$f->forms[0] 	= nuGetFormObject($F, $R, 0, $P);}
 	if($CT == 'getphp')			{nuBeforeEdit($F, $R);$f->forms[0] 	= nuGetFormObject($F, $R, 0, $P);}
 	if($CT == 'getreport')		{nuBeforeEdit($F, $R);$f->forms[0] 	= nuGetFormObject($F, $R, 0, $P);}
-	nudebug($CT);
 	if($CT == 'update')			{$f->forms[0]->record_id			= nuUpdateData();nuUpdateTables();}
 	if($CT == 'getlookupid')	{$f->forms[0]->lookup_values 		= nuGetAllLookupValues();}
 	if($CT == 'getlookupcode')	{$f->forms[0]->lookup_values 		= nuGetAllLookupList();}
