@@ -148,7 +148,7 @@ function db_fetch_row($o){
 }
 
 
-function db_columns($n){
+function db_field_names($n){
     
     $a       = array();
     $s       = "DESCRIBE $n";
@@ -156,6 +156,21 @@ function db_columns($n){
 
     while($r = db_fetch_row($t)){
         $a[] = $r[0];
+    }
+    
+    return $a;
+    
+}
+
+
+function db_field_types($n){
+    
+    $a       = array();
+    $s       = "DESCRIBE $n";
+    $t       = nuRunQuery($s);
+
+    while($r = db_fetch_row($t)){
+        $a[] = $r[1];
     }
     
     return $a;

@@ -472,7 +472,7 @@ function nuUpdateRow($r, $p, $row, $FK){
 	}
 	
 	$set			= array();
-	$columns		= db_columns($r->sfo_table);
+	$columns		= db_field_names($r->sfo_table);
 	$objects		= nuEditObjects($r->zzzzsys_form_id);
 	$q				= array();
 	

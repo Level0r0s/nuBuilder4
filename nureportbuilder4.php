@@ -10,7 +10,7 @@ nuJSInclude('nuformclass.js');
 nuJSInclude('nuform.js');
 nuJSInclude('nuformdrag.js');
 nuJSInclude('nudrag.js');
-nuJSInclude('nudragreport.js');
+nuJSInclude('nureportdrag.js');
 nuJSInclude('nucalendar.js');
 nuJSInclude('nucommon.js');
 nuJSInclude('nuajax.js');       //-- calls to server

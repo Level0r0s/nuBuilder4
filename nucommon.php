@@ -797,7 +797,7 @@ function nuTableSchema(){
 	while($r = db_fetch_object($t)){
 
 		$tn		= $r->table_name; 
-		$a[$tn]	= db_columns($tn);
+		$a[$tn]	= [names => db_field_names($tn), types => db_field_types($tn)];
 
 	}
 
@@ -1104,7 +1104,7 @@ function nuTTList($p, $l){
 	$tt								= nuTT();
 	$_POST['nuHash']['TABLE_ID']	= $tt;
 	$e								= new nuEvalPHPClass($p);
-	$c								= json_encode(db_columns($tt));
+	$c								= json_encode(db_field_names($tt));
 	
 	nuRunQuery("DROP TABLE $tt");
 	
