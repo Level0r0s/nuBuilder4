@@ -72,8 +72,12 @@ class nuFormObject {
 			return false;
 		}
 		
+		var theid 		= e.target.id;
+		var theindex	= this.scroll[theid].index;
+		var thevalue	= s.list[theindex];
+		
 		$('#' + e.target.id)
-		.val(s.list[this.scroll[e.target.id].index])
+		.val(thevalue)
 		.change();
 		
 		nuHasBeenEdited();

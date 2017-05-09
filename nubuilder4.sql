@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 09, 2017 at 07:29 PM
+-- Generation Time: May 09, 2017 at 08:19 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -603,15 +603,6 @@ CREATE TABLE `zzzzsys_debug` (
   `deb_added` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `zzzzsys_debug`
---
-
-INSERT INTO `zzzzsys_debug` (`zzzzsys_debug_id`, `deb_message`, `deb_order`, `deb_added`) VALUES
-('s14943509350203', '2017-05-10 02:58:55 (C:\\xampp\\htdocs\\nuBuilder4\\nudatabase.php:89)\n\n<br>\n\n[0] : \n===USER==========\n\nglobeadmin\n\n===PDO MESSAGE=== \n\nSQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''field00,field00,field01,field01,field02,field02\n FROM aaaa\nWHERE 1'' at line 1\n\n===SQL=========== \n\nSELECT ,field00,field00,field01,field01,field02,field02\n FROM aaaa\nWHERE 1\n\n===BACK TRACE====\n\nC:\\xampp\\htdocs\\nuBuilder4\\nuform.php - line 721 (nuRunQuery)\n\nC:\\xampp\\htdocs\\nuBuilder4\\nuform.php - line 241 (nuBrowseRows)\n\nC:\\xampp\\htdocs\\nuBuilder4\\nuapi.php - line 37 (nuGetFormObject)\n\n\n\n\n', '', 1494350935),
-('s14943509350204', '2017-05-10 02:58:55 (C:\\xampp\\htdocs\\nuBuilder4\\nudatabase.php:89)\n\n<br>\n\n[0] : \n===USER==========\n\nglobeadmin\n\n===PDO MESSAGE=== \n\nSQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''field00,field00,field01,field01,field02,field02\n FROM aaaa\nWHERE 1 LIMIT 0, 20'' at line 1\n\n===SQL=========== \n\nSELECT ,field00,field00,field01,field01,field02,field02\n FROM aaaa\nWHERE 1 LIMIT 0, 20\n\n===BACK TRACE====\n\nC:\\xampp\\htdocs\\nuBuilder4\\nuform.php - line 724 (nuRunQuery)\n\nC:\\xampp\\htdocs\\nuBuilder4\\nuform.php - line 241 (nuBrowseRows)\n\nC:\\xampp\\htdocs\\nuBuilder4\\nuapi.php - line 37 (nuGetFormObject)\n\n\n\n\n', '', 1494350935),
-('s14943509350205', '2017-05-10 02:58:55 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:40)\n\n<br>\n\n[0] : getform\n', '', 1494350935);
-
 -- --------------------------------------------------------
 
 --
@@ -644,7 +635,6 @@ INSERT INTO `zzzzsys_event` (`zzzzsys_event_id`, `sev_zzzzsys_object_id`, `sev_e
 ('5811808723dc0a2', '5811808723db54b', 'onclick', 'nuPopPHP(event, ''AB'');'),
 ('581a4d665798ede', '581a4d665798263', 'onclick', 'nuPreview()'),
 ('582c013be5d3a06', '570b00aa9ff6b8d', 'onkeydo', 'nuFORM.scrollList(event, nuFORM.tableFields($(''#sfo_table'').val()))'),
-('583369e5667549f', '570dabf5a2e2b8f', 'onkeydown', 'nuFORM.scrollList(event, nuFORM.tableFields($(''#sob_lookup_table'').val()));'),
 ('583f37bc5bbb100', '583f37bc5bba917', 'onkeydown', 'nuFORM.scrollList(event, window.nuObjectFields);'),
 ('584de442bfbdd00', '584de442bfbd456', 'onclick', 'nuPopJS()'),
 ('58b0d4a60b9c172', '58aff2b35cd9963', 'onchange', 'nuSetFormatType(1)'),
@@ -1021,7 +1011,7 @@ INSERT INTO `zzzzsys_object` (`zzzzsys_object_id`, `sob_all_zzzzsys_form_id`, `s
 ('570da149b76e0e6', 'nuobject', 'zzzzsys_object', 'select', 'sob_input_type', 'Input Type (and class)', '570d90df707867b', 380, 35, 175, 120, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '0', 'nuDate|nuDate|\nnuNumber|nuNumber|\nnuScroll|nuScroll|\nnuAutoNumber|nuAutoNumber|\n\nbutton|Button|\ncheckbox|Checkbox|\ncolor|Color|\ndatetime-local|Datetime-Local|\nemail|Email|\nfile|File|\nhidden|Hidden|\nimage|Image|\nmonth|Month|\nnumber|Number|\npassword|Password|\nradio|Radio|\nrange|Range|\nreset|Reset|\nsearch|Search|\ntel|Telephone|\ntext|Text|\ntime|Time|\nurl|URL|\nweek|Week\n\n\n', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
 ('570da31addae07f', 'nuobject', 'zzzzsys_object', 'select', 'sob_input_format', 'Format', '570d90df707867b', 360, 83, 175, 120, 18, '1', 'right', '0', '0', '', '', '', '', '', '', '', '', '0', 'SELECT \n   CONCAT(LEFT(srm_type, 1), ''|'', TRIM(srm_format)) AS a, \n   srm_format AS b \nFROM zzzzsys_format\nORDER BY srm_type\n', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
 ('570da52f2828508', 'nuobject', 'zzzzsys_object', 'lookup', 'sob_subform_zzzzsys_form_id', 'Form', '570d90df6d35fde', 300, 20, 200, 100, 18, '1', 'right', '0', '0', '', '', '', '', '', '', '', '', '0', 'SELECT zzzzsys_form_id, CONCAT(sfo_code, '' - '', sfo_description)\nFROM zzzzsys_form\nORDER BY sfo_code', 'sfo_code', 'sfo_description', '200', '', 'nuform', '', '', 'zzzzsys_form', 'nuform', '', '1', '', '', '', 0, '', '', '', '', ''),
-('570da72cb4282e3', 'nuobject', 'zzzzsys_object', 'input', 'sob_subform_foreign_key', 'Foreign Key', '570d90df6d35fde', 310, 50, 200, 200, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', 0, '', 'nuScroll', 'nuFORM.tableFields($(''#sob_subform_table'').val())', '', ''),
+('570da72cb4282e3', 'nuobject', 'zzzzsys_object', 'input', 'sob_subform_foreign_key', 'Foreign Key', '570d90df6d35fde', 310, 50, 200, 200, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', 0, '', 'nuScroll', 'nuFORM.tableSchema[$("#sob_subform_table").val()].names', '', ''),
 ('570da7b07ce4d7a', 'nuobject', 'zzzzsys_object', 'select', 'sob_subform_add', 'Addable', '570d90df6d35fde', 320, 80, 200, 60, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '0', '0|No|1|Yes', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
 ('570da7d7d12aea2', 'nuobject', 'zzzzsys_object', 'select', 'sob_subform_delete', 'Deleteable', '570d90df6d35fde', 330, 110, 200, 60, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '0', '0|No|1|Yes', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
 ('570da861e15f8f6', 'nuobject', 'zzzzsys_object', 'select', 'sob_subform_type', 'Type', '570d90df6d35fde', 340, 140, 200, 60, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '0', 'g|Grid|f|Form', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
@@ -1030,8 +1020,8 @@ INSERT INTO `zzzzsys_object` (`zzzzsys_object_id`, `sob_all_zzzzsys_form_id`, `s
 ('570da986cb6807a', 'nuobject', 'zzzzsys_object', 'input', 'sob_run_id', 'Record ID', '570d90df60880c2', 180, 96, 141, 200, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
 ('570daa6277a97e1', 'nuobject', 'zzzzsys_object', 'select', 'sob_run_method', 'Method', '570d90df60880c2', 190, 126, 141, 80, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '0', 'b|Button|i|iFrame', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
 ('570dab25164b394', 'nuobject', 'zzzzsys_object', 'lookup', 'sob_lookup_zzzzsys_form_id', 'Form', '570d90df6a2c12a', 230, 29, 165, 100, 18, '1', 'right', '0', '0', '', '', '', '', '', '', '', '', '0', 'SELECT zzzzsys_form_id, CONCAT(sfo_code, '' - '', sfo_description)\nFROM zzzzsys_form\nORDER BY sfo_code', 'sfo_code', 'sfo_description', '200', '', 'nuform', '', '', 'zzzzsys_form', 'nuform', '', '1', '', '', '', 0, '', '', '', '', ''),
-('570dabca9be44fd', 'nuobject', 'zzzzsys_object', 'input', 'sob_lookup_code', 'Code', '570d90df6a2c12a', 240, 57, 165, 200, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', 0, '', 'nuScroll', 'nuFORM.tableFields($(''#sob_lookup_table'').val())', '', ''),
-('570dabf5a2e2b8f', 'nuobject', 'zzzzsys_object', 'input', 'sob_lookup_description', 'Description', '570d90df6a2c12a', 260, 85, 165, 200, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', 0, '', 'nuScroll', 'nuFORM.tableFields($(''#sob_lookup_table'').val())', '', ''),
+('570dabca9be44fd', 'nuobject', 'zzzzsys_object', 'input', 'sob_lookup_code', 'Code', '570d90df6a2c12a', 240, 57, 165, 200, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', 0, '', 'nuScroll', 'nuFORM.tableSchema[$("#sob_lookup_table").val()].names', '', ''),
+('570dabf5a2e2b8f', 'nuobject', 'zzzzsys_object', 'input', 'sob_lookup_description', 'Description', '570d90df6a2c12a', 260, 85, 165, 200, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', 0, '', 'nuScroll', 'nuFORM.tableSchema[$("#sob_lookup_table").val()].names', '', ''),
 ('570dac54b62da77', 'nuobject', 'zzzzsys_object', 'input', 'sob_lookup_description_width', 'Width', '570d90df6a2c12a', 270, 85, 434, 50, 18, '1', 'right', '0', '0', 'SELECT 0;', '', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', 0, '', 'number', '', '', ''),
 ('570dadc061c6ef5', 'nuobject', 'zzzzsys_object', 'textarea', 'sob_lookup_javascript', 'Javascript To Be Run<br>After Populating Fields', '570d90df6a2c12a', 280, 121, 165, 320, 100, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '0', '0|No|1|Yes', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
 ('570db01f6dd4d3d', 'nulookup', 'company', 'input', 'zzzzsys_slo_object_name', 'Form Object Name', '570dafc86862c1b', 0, 20, 200, 274, 18, '1', 'left', '1', '0', '', '', '', '', '', '', '', '', '', '', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
