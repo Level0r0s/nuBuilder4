@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 10, 2017 at 01:02 AM
+-- Generation Time: May 10, 2017 at 04:36 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -135,8 +135,8 @@ CREATE TABLE `company` (
 --
 
 INSERT INTO `company` (`company_id`, `com_code`, `com_name`, `com_business_id`, `com_company_id`, `com_address`, `com_suburb`, `com_phone`, `com_map_coordinates`, `com_sex`, `com_color_id`, `com_age`, `com_notes`, `com_test`) VALUES
-('5729572e6331281', '', 'Mrs Compr66r36456', '568a00e25b8d271', '', '43 Allen St', '0000-00-00', '0', '', '', '568ef59c1bd769c#nuSep#568ef931d196b3e', 0, '13132', ''),
-('57295aa5660f48b', '', 'Mrs Comuh', '568a00d504d264c', '', '43 Allen Stkh', '0000-00-00', '', '', '', '568ef59c1bd769c', 35, '13132', ''),
+('5729572e6331281', '', 'Mrs Compr66r36456', '568a00e25b8d271', '', '43 Allen St', '2017-05-10', '', '', '', '568ef59c1bd769c#nuSep#568ef931d196b3e', 0, '13132', ''),
+('57295aa5660f48b', '', 'Mrs Comuh', '568a00d504d264c', '', '43 Allen Stkh', '0000-00-00', '', '', '', '568ef5a6968322b#nuSep#568ef920846a089#nuSep#568ef59c1bd769c#nuSep#568ef931d196b3e#nuSep#568ef58fe48207a', 35, '13132', ''),
 ('58ade54dac2128b', '', '777', '568a00c77f8f709', '', 'fgtetry', NULL, '', '', '', '', 1966, '', ''),
 ('58adeabf9d82672', '', '777hhhh', '56aeffb28581f45', '', 'ttttt', NULL, '0', '', '', '', 1966, '', '');
 
@@ -635,7 +635,7 @@ INSERT INTO `zzzzsys_form` (`zzzzsys_form_id`, `sfo_type`, `sfo_code`, `sfo_desc
 ('nublank', 'launch', 'BLA', 'Blank', '', '', '', 0, 0, '', ''),
 ('nuaccessgroup', 'subform', 'GAL', 'Groups Access Level', 'zzzzsys_user_group_access_level', 'zzzzsys_user_group_access_level_id', '', 0, 0, 'SELECT * FROM zzzzsys_user_group_access_level', ''),
 ('nurunlist', 'browse', 'RUN', 'Run Form, Report or Procedure', 'zzzzsys_run_list', 'id', '', 0, 0, 'SELECT zzzzsys_form_id AS id, ''Form'' AS run, sfo_code AS code, sfo_description AS description FROM zzzzsys_run_list', '\n$("[data-nu-column=''nucolumn000'']").each(function() {\n\n    $(this).addClass(''nu_''+this.innerHTML);\n\n});'),
-('nudebug', 'browseedit', 'DEBUG', 'Debug', 'zzzzsys_debug', 'zzzzsys_debug_id', '', 23, 15, 'SELECT * FROM zzzzsys_debug\nORDER BY zzzzsys_debug_id DESC', '\n$(''#delete_option'').val(0);\n$(''#nuAddButton'').remove();\n$(''#nuOptions'').remove();\n\nvar mess    = String($(''#deb_message'').val());\nvar i       = mess.indexOf(''<br>'');\nvar m       = mess.substr(i + 6);\n\nnuSetTitle(mess.substr(0, i))\n\n$(''#nuTab0'').remove();\n\n$(''#nu_bc_1'')\n.css(''text-align'', ''center'')\n.css(''width'', ''95%'')\n.css(''color'', ''black'')\n.css(''padding'', ''5px'')\n.css(''font-weight'', ''bold'')\n.appendTo("#nuTabHolder");\n\n$(''#deb_message'').val(m);\n\n\n$("[data-nu-column=''nucolumn001'']").each(function( index ) {\n    \n    if($(this).html().trim() != ''''){\n        \n        var nunow   = Date.now();\n        var numax   = (Date.now()/1000) - Number($(this).html());\n        var numin   = numax;\n        var nuhtm   = String(Math.ceil(numin)) + '' seconds ago'';\n        \n        if(numin < 21600)   {nuhtm = String(Math.ceil(numin/60/60)) + '' hours ago'';}\n        if(numin < 360)     {nuhtm = String(Math.ceil(numin/60)) + '' minutes ago'';}\n        if(numin < 60)      {nuhtm = String(Math.ceil(numin)) + '' seconds ago'';}\n    \n        $(this).html(nuhtm);\n        \n    }\n    \n});\n\nif(nuFORM.getCurrent().record_id != ''''){\n    \n    $(''.nuActionButton'').remove();\n    \n    nuAddActionButton(''Delete'');\n    nuAddActionButton(''DeleteAll'',''Delete All'', ''nuDeleteAllAction()'');\n    \n}\n\n'),
+('nudebug', 'browseedit', 'DEBUG', 'Debug', 'zzzzsys_debug', 'zzzzsys_debug_id', '', 23, 15, 'SELECT * FROM zzzzsys_debug\nORDER BY zzzzsys_debug_id DESC', '\n$(''#delete_option'').val(0);\n$(''#nuAddButton'').remove();\n$(''#nuOptions'').remove();\n\nvar mess    = String($(''#deb_message'').val());\nvar i       = mess.indexOf(''<br>'');\nvar m       = mess.substr(i + 6);\nvar t       = mess.substr(0,i);\n\nnuSetTitle(mess.substr(0, i))\n\n$(''#nuTab0'').remove();\n\n$(''#nuBreadcrumb1'')\n.css(''text-align'', ''center'')\n.css(''width'', ''95%'')\n.css(''color'', ''black'')\n.css(''padding'', ''5px'')\n.css(''font-weight'', ''bold'')\n.html(t + '' :: '' + nuWhen($(''#deb_added'').val()))\n.appendTo("#nuTabHolder");\n\n$(''#deb_message'').val(m);\n\n\n$("[data-nu-column=''nucolumn001'']").each(function( index ) {\n    \n    if($(this).html().trim() != ''''){\n        \n        var nunow   = Date.now();\n        var nuhtm   = nuWhen(Number($(this).html()));\n        \n        $(this).html(nuhtm);\n        \n    }\n    \n});\n\nif(nuFORM.getCurrent().record_id != ''''){\n    \n    $(''.nuActionButton'').remove();\n    \n    nuAddActionButton(''Delete'');\n    nuAddActionButton(''DeleteAll'',''Delete All'', ''nuDeleteAllAction()'');\n    \n}\n\n'),
 ('nuaccessreport', 'browseedit', 'ACCPHP', 'Access To Procedures', 'zzzzsys_access_level_php', 'zzzzsys_access_level_php_id', '', 0, 0, 'SELECT * \nFROM zzzzsys_access_level_php\nJOIN zzzzsys_php ON zzzzsys_php_id = slp_zzzzsys_php_id\nORDER BY sph_code', ''),
 ('nuaccesslevelreport', 'browseedit', 'ACCREP', 'Access To Report', 'zzzzsys_access_level_report', 'zzzzsys_access_level_report_id', '', 0, 0, 'SELECT * \nFROM zzzzsys_access_level_report\nJOIN zzzzsys_report ON zzzzsys_report_id = sre_zzzzsys_report_id\nORDER BY sre_code', ''),
 ('nurunreport', 'browseedit', 'RUNREP', 'Run Report', 'zzzzsys_report', 'zzzzsys_report_id', '', 0, 0, 'SELECT * FROM zzzzsys_report\nLEFT JOIN zzzzsys_form ON zzzzsys_form_id = sre_zzzzsys_form_id', 'window.nuBrowseFunction = ''runreport'';\r\n\r\nfunction runreport(e){\r\n    \r\n    var r   = $(''#'' + e.target.id).attr(''data-nu-row'');\r\n    var c   = ''000'';\r\n    var f   = $(''#'' + r + c).html();\r\n    var p   = $(''#'' + e.target.id).attr(''data-nu-primary-key'');\r\n\r\n    nuGetPDF(f, p);\r\n    \r\n}\r\n\r\n'),
@@ -1241,7 +1241,8 @@ INSERT INTO `zzzzsys_object` (`zzzzsys_object_id`, `sob_all_zzzzsys_form_id`, `s
 ('s14941738229689', '', 'aaaa', 'input', 'field01', 'text01', 's14941738229683', 180, 180, 180, 117, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
 ('s14942650435670', '', 'aaaas', 'input', 'field02', 'text02', 's14942650435662', 210, 210, 210, 117, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
 ('s14942657473944', 'c14942657304129993', 'aaaaaaaaa', 'input', 'field01', 'text01', 's14942657473939', 180, 180, 180, 117, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
-('s14942657473948', 'nuhome', 'aaaaaaaaa', 'run', 'ffc14942657304129993', 'aaaaaaaaa', 'nutesttab', 150, 46, 275, 150, 30, '0', '', '0', '0', '', '', '', 'c14942657304129993', '', 'b', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', '', '');
+('s14942657473948', 'nuhome', 'aaaaaaaaa', 'run', 'ffc14942657304129993', 'aaaaaaaaa', 'nutesttab', 150, 46, 275, 150, 30, '0', '', '0', '0', '', '', '', 'c14942657304129993', '', 'b', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', '', ''),
+('s14944263918457', 'nudebug', 'zzzzsys_debug', 'input', 'deb_added', ' ', '575a31edccc2012', 10, 1, 1, 100, 20, '0', 'left', '0', '2', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', '');
 
 -- --------------------------------------------------------
 

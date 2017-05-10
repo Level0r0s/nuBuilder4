@@ -831,3 +831,17 @@ function nuID(){
 }
 
 
+function nuWhen(w){
+
+	var nunow   = Date.now();
+	var numax   = (Date.now()/1000) - Number(w);
+	var numin   = numax;
+	var nuhtm   = String(Math.ceil(numin)) 							+ ' seconds ago';
+
+	if(numin < 21600)   {nuhtm = String(Math.ceil(numin/60/60)) 	+ ' hours ago';}
+	if(numin < 360)     {nuhtm = String(Math.ceil(numin/60)) 		+ ' minutes ago';}
+	if(numin < 60)      {nuhtm = String(Math.ceil(numin)) 			+ ' seconds ago';}
+
+	return nuhtm;
+
+}

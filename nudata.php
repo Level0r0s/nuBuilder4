@@ -160,7 +160,7 @@ function nuUpdateTables(){
 					$I[]	= "`$fk`";
 					
 				}
-				
+nudebug($row);				
 				for($R = 1 ; $R < count($row) ; $R++){
 
 					if($edit[$R] == 1){											//-- has been edited
