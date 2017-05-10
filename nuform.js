@@ -1504,6 +1504,7 @@ function nuEditTab(p, t, i){
 	$('#' + tabId)
 	.html(nuTranslate(t.title))
 	.addClass('nuTab')
+	.addClass('nuDragNoSelect')
 	.attr('data-nu-tab-filter', i)
 	.attr('data-nu-form-filter', p)
 	.attr('data-nu-tab-id', t.id)
