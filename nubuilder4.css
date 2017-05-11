@@ -1017,3 +1017,11 @@ input[type=range]::-webkit-slider-runnable-track {
 	background-color: #FFEEA6;
 }
 
+.nuBoxHeader {
+	position			: absolute;
+	text-align   		: left;
+	background-color	: lightgrey;
+	border				: none;
+}
+
+

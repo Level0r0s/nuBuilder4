@@ -845,3 +845,10 @@ function nuWhen(w){
 	return nuhtm;
 
 }
+
+
+
+function nuSpaces(s){
+	return String('&nbsp;').repeat(s);
+}
+

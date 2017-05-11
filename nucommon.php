@@ -931,7 +931,7 @@ function nuGetSubformObject($id){
 
 function nuFormatList(){
 	
-	$f	= [];
+	$f	= [['','']];
 	$s	= "
 		SELECT 
 			CONCAT(LEFT(srm_type, 1), '|', TRIM(srm_format)) AS a, 
@@ -945,7 +945,7 @@ function nuFormatList(){
 	while($r = db_fetch_object($t)){
 		$f[] = [$r->a, $r->b];
 	}
-	
+
 	return json_encode($f);
 	
 }
