@@ -19,9 +19,7 @@ class nuSelectObject{
 		this.boxID		= 'box' + i;
 		this.scrollID	= 'scroll' + i;
 		
-		this.boxHeader();
-		
-		var box			= document.createElement('div');
+		var box			= document.createElement('div');		//-- box
 
 		box.setAttribute('id', this.boxID);
 		
@@ -38,7 +36,7 @@ class nuSelectObject{
 		})
 		.addClass('nuBoxHeader');
 
-		var scroll	= document.createElement('div');
+		var scroll	= document.createElement('div');			//-- scroll
 
 		scroll.setAttribute('id', 'scroll' + i);
 		
@@ -54,7 +52,26 @@ class nuSelectObject{
 		})
 		.addClass('nuBoxHeader');
 
+		var tbl	= document.createElement('input');				//-- tablename
 
+		tbl.setAttribute('id', 'tablename' + this.boxID);
+		
+		$('#' + this.boxID).append(tbl);
+		
+		$('#' + tbl.id)
+		.css({
+			'position'			: 'absolute',
+			'width'				: 260,
+			'top'				: 5,
+			'left'				: 23,
+			'text-align'		: 'center',
+			'border' 			: 'none',
+			'background-color'	: 'darkgrey',
+			'color'				: 'black',
+		})
+		.val(t)
+		.prop('readonly', true)
+		.addClass('nuReadonly');
 
 
 
@@ -109,6 +126,9 @@ class nuSelectObject{
 		for(this.rows = 0 ; this.rows < f ; this.rows++){
 			this.boxRow(this.rows);
 		}
+		
+		this.boxScroll('Add Field', 	(this.rows+1) * 18, 10);
+
 
 	}
 
@@ -145,6 +165,27 @@ class nuSelectObject{
 		
 	}
 	
+
+	boxScroll(v, t, l){
+
+		var col	= document.createElement('div');
+
+		col.setAttribute('id', String(v).replaceAll(' ', '_') + '_' + this.boxID);
+		
+		$('#' + this.scrollID).append(col);
+		
+		$('#' + col.id)
+		.css({
+			'position'	:  'absolute',
+			'top'		:  t,
+			'left'		:  l,
+			'height'	:  20,
+		})
+		.html(v);
+		
+		
+	}
+	
 	boxRow(i){										//--------------name row left width value
 		
 		this.boxColumn('field', i, 2,  300, '');
@@ -157,24 +198,6 @@ class nuSelectObject{
 	}
 	
 
-	boxHeader(c, t, l, w, v){
-
-		var col	= document.createElement('input');
-
-		col.setAttribute('id', c + '_' + this.boxID);
-		
-		$('#' + this.boxID).append(col);
-		
-		$('#' + col.id)
-		.css({
-			'position'	:  'absolute',
-			'width'		:  w,
-			'top'		:  t,
-			'left'		:  l,
-		});
-		
-	}
-	
 
 	boxColumn(c, t, l, w, v){
 
@@ -188,7 +211,7 @@ class nuSelectObject{
 		.css({
 			'position'	:  'absolute',
 			'width'		:  w,
-			'top'		:  t * 20,
+			'top'		:  t * 18,
 			'left'		:  l,
 		});
 		
