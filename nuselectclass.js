@@ -26,7 +26,7 @@ class nuSelectObject{
 		
 		$('body').append(box);
 		$('#' + this.boxID).css({
-			'width'        		: 914,
+			'width'        		: 934,
 			'height'       		: 200,
 			'top'				: 190,
 			'left'				: 20,
@@ -43,7 +43,7 @@ class nuSelectObject{
 		
 		$('#' + this.boxID).append(scroll);
 		$('#' + scroll.id).css({
-			'width'        		: 914,
+			'width'        		: 934,
 			'height'       		: 150,
 			'top'				: 50,
 			'left'				: 0,
@@ -62,9 +62,9 @@ class nuSelectObject{
 		$('#' + tbl.id)
 		.css({
 			'position'			: 'absolute',
-			'width'				: 260,
+			'width'				: 280,
 			'top'				: 5,
-			'left'				: 23,
+			'left'				: 43,
 			'text-align'		: 'center',
 			'border' 			: 'none',
 			'color'				: 'black',
@@ -74,6 +74,39 @@ class nuSelectObject{
 		.prop('readonly', true)
 		.addClass('nuReadonly');
 		
+
+
+
+
+
+
+
+
+
+		var bck	= document.createElement('input');				//-- tablename
+
+		bck.setAttribute('id', 'checkall' + this.boxID);
+		
+		$('#' + this.boxID).append(bck);
+		
+		$('#' + bck.id)
+		.css({
+			'position'			: 'absolute',
+			'width'				: 20,
+			'top'				: 33,
+			'left'				: 1,
+		})
+		.attr('type', 'checkbox')
+		.val(t);
+		
+
+
+
+
+
+
+
+
 		var x = document.createElement('div');
 		
 		x.setAttribute('id', 'nuBoxClose' + this.boxID);
@@ -104,7 +137,7 @@ class nuSelectObject{
 			'width'				: 15,
 			'height'			: 15,
 			'top'				: 5,
-			'left'				: 285,
+			'left'				: 305,
 			'position'			: 'absolute',
 			'text-align'    	: 'center'
 		})
@@ -123,7 +156,7 @@ class nuSelectObject{
 			'position'	:  'absolute',
 			'width'		:  100,
 			'top'		:  4,
-			'left'		:  304,
+			'left'		:  324,
 		})
 		
 		this.boxTitles();
@@ -142,12 +175,12 @@ class nuSelectObject{
 		
 		var t	= 30;
 		
-		this.boxTitle('Field', 	t, 130);
-		this.boxTitle('Alias', 	t, 335);
-		this.boxTitle('Where', 	t, 470);
-		this.boxTitle('OB', 	t, 618);
-		this.boxTitle('GB', 	t, 660);
-		this.boxTitle('Having',	t, 760);
+		this.boxTitle('Field', 	t, 150);
+		this.boxTitle('Alias', 	t, 355);
+		this.boxTitle('Where', 	t, 490);
+		this.boxTitle('OB', 	t, 638);
+		this.boxTitle('GB', 	t, 680);
+		this.boxTitle('Having',	t, 780);
 		
 	}
 	
@@ -196,15 +229,16 @@ class nuSelectObject{
 	
 	boxRow(i, v, title){										//--------------name row left width value
 		
-		this.boxColumn('field', i, 2,  	300, v, v + ' :: ' + title);
-		this.boxColumn('alias', i, 304, 100, '');
-		this.boxColumn('where', i, 406, 200, '');
-		this.boxColumn('ob', 	i, 608, 40,  '');
-		this.boxColumn('gb', 	i, 650, 40,  '');
-		this.boxColumn('having',i, 692, 170, '');
+		this.boxColumn('select',i, 2, 	18, v);
+		this.boxColumn('field', i, 22, 	300, v, v + ' :: ' + title);
+		this.boxColumn('alias', i, 324, 100, '');
+		this.boxColumn('where', i, 426, 200, '');
+		this.boxColumn('ob', 	i, 628, 40,  '');
+		this.boxColumn('gb', 	i, 670, 40,  '');
+		this.boxColumn('having',i, 712, 170, '');
 		
 		if(arguments.length == 4){
-			this.boxColumn('remove',i, 868, 100, 'nuButton');
+			this.boxColumn('remove',i, 888, 100, 'nuButton');
 			
 		}
 		
@@ -222,10 +256,11 @@ class nuSelectObject{
 		
 		$('#' + col.id)
 		.css({
-			'position'	:  'absolute',
-			'width'		:  w,
-			'top'		:  t * 18,
-			'left'		:  l,
+			'position'	: 'absolute',
+			'width'		: w,
+			'top'		: t * 18,
+			'left'		: l,
+			'padding'	: '0px 5px',
 		})
 		.val(v);
 
@@ -233,6 +268,15 @@ class nuSelectObject{
 			$('#' + col.id).attr('title', title);
 		}
 
+
+		if(c == 'select'){
+				
+			$('#' + col.id)
+			.attr('type', 'checkbox')
+			.css('padding', 0);
+			
+		}
+		
 
 		if(v == 'nuButton'){
 				
