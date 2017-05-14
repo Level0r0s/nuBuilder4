@@ -8,6 +8,7 @@ window.nuDIALOG.sectionNumber  = '0';
 window.nuDIALOG.dialog         = '';
 window.nuDIALOG.dialogX        = 0;
 window.nuDIALOG.dialogY        = 0;
+
 function nuCreateDrag(){
 
 	this.left        = 0;

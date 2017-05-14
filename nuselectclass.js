@@ -66,21 +66,12 @@ class nuSelectObject{
 			'left'				: 23,
 			'text-align'		: 'center',
 			'border' 			: 'none',
-			'background-color'	: 'darkgrey',
 			'color'				: 'black',
+			'font-weight'		: 'bold',
 		})
 		.val(t)
 		.prop('readonly', true)
 		.addClass('nuReadonly');
-
-
-
-
-
-
-
-
-
 		
 		var x = document.createElement('div');
 		
@@ -123,11 +114,11 @@ class nuSelectObject{
 		this.boxTitles();
 		
 
-		for(this.rows = 0 ; this.rows < f ; this.rows++){
-			this.boxRow(this.rows);
+		for(this.rows = 0 ; this.rows < n.length ; this.rows++){
+			this.boxRow(this.rows, n[this.rows], true);
 		}
 		
-		this.boxScroll('Add Field', 	(this.rows+1) * 18, 10);
+		this.boxAddButton('Add', 	(this.rows+1) * 18, 10);
 
 
 	}
@@ -166,9 +157,9 @@ class nuSelectObject{
 	}
 	
 
-	boxScroll(v, t, l){
+	boxAddButton(v, t, l){
 
-		var col	= document.createElement('div');
+		var col	= document.createElement('input');
 
 		col.setAttribute('id', String(v).replaceAll(' ', '_') + '_' + this.boxID);
 		
@@ -176,24 +167,31 @@ class nuSelectObject{
 		
 		$('#' + col.id)
 		.css({
-			'position'	:  'absolute',
-			'top'		:  t,
-			'left'		:  l,
-			'height'	:  20,
+			'position'	: 'absolute',
+			'top'		: t,
+			'left'		: l,
+			'height'	: 20,
 		})
-		.html(v);
+		.attr('type', 'button')
+		.addClass('nuButton')
+		.val(v);
 		
 		
 	}
 	
-	boxRow(i){										//--------------name row left width value
+	boxRow(i, v){										//--------------name row left width value
 		
-		this.boxColumn('field', i, 2,  300, '');
+		this.boxColumn('field', i, 2,  	300, v);
 		this.boxColumn('alias', i, 304, 100, '');
 		this.boxColumn('where', i, 406, 200, '');
 		this.boxColumn('ob', 	i, 608, 40,  '');
 		this.boxColumn('gb', 	i, 650, 40,  '');
-		this.boxColumn('having',i, 692, 200, '');
+		this.boxColumn('having',i, 692, 170, '');
+		
+		if(arguments.length == 3){
+			this.boxColumn('remove',i, 868, 100, 'nuButton');
+			
+		}
 		
 	}
 	
@@ -214,6 +212,20 @@ class nuSelectObject{
 			'top'		:  t * 18,
 			'left'		:  l,
 		});
+
+		if(v == 'nuButton'){
+				
+			$('#' + col.id)
+			.css('width', 15)
+			.css('height', 15)
+			.css('font-size', 12)
+			.attr('type', 'button')
+			.addClass('nuButton')
+			.val('-')
+			.prop('title', 'Remove this row..');
+			
+		}
+		
 		
 	}
 	
