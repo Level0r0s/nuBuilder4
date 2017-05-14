@@ -14,6 +14,7 @@ class nuSelectObject{
 
 		var s			= nuFORM.tableSchema
 		var n			= s[t].names;
+		var p			= s[t].types;
 		var f			= n.length;
 		var i			= nuID();
 		this.boxID		= 'box' + i;
@@ -108,14 +109,28 @@ class nuSelectObject{
 			'text-align'    	: 'center'
 		})
 		.attr('onclick', '$("#nuSearchList").remove();$("#nuModal").remove();')
-		.html('<img id="numl' + this.boxID + '" src="nu_less.png" width="10px" height="10px" style="padding:3px">')
+		.html('<img onclick="nuResizeBox(event)" id="numl' + this.boxID + '" src="nu_less.png" width="10px" height="10px" style="padding:3px">')
 		.addClass('nuSearchListClose');
 
+		var col	= document.createElement('input');
+
+		col.setAttribute('id', 'alias_' + this.boxID);
+		
+		$('#' + this.boxID).append(col);
+		
+		$('#' + col.id)
+		.css({
+			'position'	:  'absolute',
+			'width'		:  100,
+			'top'		:  4,
+			'left'		:  304,
+		})
+		
 		this.boxTitles();
 		
 
 		for(this.rows = 0 ; this.rows < n.length ; this.rows++){
-			this.boxRow(this.rows, n[this.rows], true);
+			this.boxRow(this.rows, n[this.rows], p[this.rows], true);
 		}
 		
 		this.boxAddButton('Add', 	(this.rows+1) * 18, 10);
@@ -132,7 +147,7 @@ class nuSelectObject{
 		this.boxTitle('Where', 	t, 470);
 		this.boxTitle('OB', 	t, 618);
 		this.boxTitle('GB', 	t, 660);
-		this.boxTitle('Having',	t, 765);
+		this.boxTitle('Having',	t, 760);
 		
 	}
 	
@@ -179,16 +194,16 @@ class nuSelectObject{
 		
 	}
 	
-	boxRow(i, v){										//--------------name row left width value
+	boxRow(i, v, title){										//--------------name row left width value
 		
-		this.boxColumn('field', i, 2,  	300, v);
+		this.boxColumn('field', i, 2,  	300, v, v + ' :: ' + title);
 		this.boxColumn('alias', i, 304, 100, '');
 		this.boxColumn('where', i, 406, 200, '');
 		this.boxColumn('ob', 	i, 608, 40,  '');
 		this.boxColumn('gb', 	i, 650, 40,  '');
 		this.boxColumn('having',i, 692, 170, '');
 		
-		if(arguments.length == 3){
+		if(arguments.length == 4){
 			this.boxColumn('remove',i, 868, 100, 'nuButton');
 			
 		}
@@ -197,7 +212,7 @@ class nuSelectObject{
 	
 
 
-	boxColumn(c, t, l, w, v){
+	boxColumn(c, t, l, w, v, title){
 
 		var col	= document.createElement('input');
 
@@ -211,7 +226,13 @@ class nuSelectObject{
 			'width'		:  w,
 			'top'		:  t * 18,
 			'left'		:  l,
-		});
+		})
+		.val(v);
+
+		if(arguments.length == 6){
+			$('#' + col.id).attr('title', title);
+		}
+
 
 		if(v == 'nuButton'){
 				
@@ -243,3 +264,12 @@ class nuSelectObject{
 	
 	
 }
+
+
+
+function nuResizeBox(e){
+console.log(e)	;
+}
+
+
+
