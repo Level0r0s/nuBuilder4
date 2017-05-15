@@ -122,7 +122,7 @@ class nuSelectObject{
 			'text-align'    	: 'center'
 		})
 		.attr('onclick', '$("#nuSearchList").remove();$("#nuModal").remove();')
-		.html('<span style="font-size:14px"><b>X</b></span>')
+		.html('<span style="font-size:14px" onclick="$(this).parent().parent().remove()"><b>X</b></span>')
 		.addClass('nuSearchListClose');
 		
 
@@ -134,10 +134,10 @@ class nuSelectObject{
 		$('#' + this.boxID).append(s);
 		
 		$('#' + s.id).css({
-			'width'				: 15,
+			'width'				: 20,
 			'height'			: 15,
 			'top'				: 5,
-			'left'				: 305,
+			'left'				: 300,
 			'position'			: 'absolute',
 			'text-align'    	: 'center'
 		})
@@ -312,7 +312,23 @@ class nuSelectObject{
 
 
 function nuResizeBox(e){
-console.log(e)	;
+
+	console.log(e)	;
+	
+	var b	= e.target.id.substr(4);					//-- box
+	var s	= 'scroll' + b.substr(3);					//-- scroll
+
+	var w	= parseInt($('#' + b).css('width'));
+	
+	if(w == 934){
+		$('#' + b).css('width', 320);
+		$('#' + s).css('width', 320);
+	}else{
+		$('#' + b).css('width', 934);
+		$('#' + s).css('width', 934);
+	}
+
+
 }
 
 
