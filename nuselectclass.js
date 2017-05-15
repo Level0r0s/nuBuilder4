@@ -15,7 +15,6 @@ class nuSelectObject{
 		var s			= nuFORM.tableSchema
 		var n			= s[t].names;
 		var p			= s[t].types;
-		var f			= n.length;
 		var i			= nuID();
 		this.boxID		= 'box' + i;
 		this.scrollID	= 'scroll' + i;
@@ -74,15 +73,8 @@ class nuSelectObject{
 		.prop('readonly', true)
 		.addClass('nuReadonly');
 		
-
-
-
-
-
-
-
-
-
+		
+		
 		var bck	= document.createElement('input');				//-- tablename
 
 		bck.setAttribute('id', 'checkall' + this.boxID);
@@ -99,11 +91,6 @@ class nuSelectObject{
 		.attr('type', 'checkbox')
 		.val(t);
 		
-
-
-
-
-
 
 
 
@@ -137,7 +124,7 @@ class nuSelectObject{
 			'width'				: 20,
 			'height'			: 15,
 			'top'				: 5,
-			'left'				: 300,
+			'left'				: 303,
 			'position'			: 'absolute',
 			'text-align'    	: 'center'
 		})
@@ -147,7 +134,7 @@ class nuSelectObject{
 
 		var col	= document.createElement('input');
 
-		col.setAttribute('id', 'alias_' + this.boxID);
+		col.setAttribute('id', 'alias' + this.boxID);
 		
 		$('#' + this.boxID).append(col);
 		
@@ -165,6 +152,9 @@ class nuSelectObject{
 		for(this.rows = 0 ; this.rows < n.length ; this.rows++){
 			this.boxRow(this.rows, n[this.rows], p[this.rows], true);
 		}
+		
+		this.boxRow(this.rows, n[this.rows], p[this.rows], false);
+		this.rows++;
 		
 		this.boxAddButton('Add', 	(this.rows+1) * 18, 10);
 
@@ -227,20 +217,21 @@ class nuSelectObject{
 		
 	}
 	
-	boxRow(i, v, title){										//--------------name row left width value
+	boxRow(i, v, title, isField){										//--------------name row left width value
 		
-		this.boxColumn('select',i, 2, 	18, v);
+		
+		if(isField){
+			this.boxColumn('select', i, 2, 	18, v);
+		}else{
+			this.boxColumn('select', i, 2,	18, 'nuButton');
+		}
+		
 		this.boxColumn('field', i, 22, 	300, v, v + ' :: ' + title);
 		this.boxColumn('alias', i, 324, 100, '');
 		this.boxColumn('where', i, 426, 200, '');
 		this.boxColumn('ob', 	i, 628, 40,  '');
 		this.boxColumn('gb', 	i, 670, 40,  '');
 		this.boxColumn('having',i, 712, 170, '');
-		
-		if(arguments.length == 4){
-			this.boxColumn('remove',i, 888, 100, 'nuButton');
-			
-		}
 		
 	}
 	
@@ -270,27 +261,42 @@ class nuSelectObject{
 
 
 		if(c == 'select'){
-				
-			$('#' + col.id)
-			.attr('type', 'checkbox')
-			.css('padding', 0);
-			
-		}
-		
 
-		if(v == 'nuButton'){
+			if(v == 'nuButton'){
+					
+					
+				var id	= c + '_' + t + '_' + this.boxID;
+
+				var t 	= parseInt($('#' + id).css('top'));
 				
-			$('#' + col.id)
-			.css('width', 15)
-			.css('height', 15)
-			.css('font-size', 12)
-			.attr('type', 'button')
-			.addClass('nuButton')
-			.val('-')
-			.prop('title', 'Remove this row..');
+				$('#' + id).remove();
+
+				var col	= document.createElement('span');
+
+				col.setAttribute('id', id);
+				
+				$('#' + this.scrollID).append(col);
+		
+				$('#' + col.id)
+				.css('position', 'absolute')
+				.css('height', 30)
+				.css('top', t)
+				.css('left', 10)
+				.css('font-size', 16)
+				.css('background-color', 'red')
+				.css('color', 'black')
+				.html('-----')
+				.prop('title', 'Remove this row..');
+				
+			}else{
+			
+				$('#' + col.id)
+				.attr('type', 'checkbox')
+				.css('padding', 0);
+				
+			}
 			
 		}
-		
 		
 	}
 	
@@ -313,19 +319,26 @@ class nuSelectObject{
 
 function nuResizeBox(e){
 
-	console.log(e)	;
 	
 	var b	= e.target.id.substr(4);					//-- box
 	var s	= 'scroll' + b.substr(3);					//-- scroll
-
+	var a	= 'aliasbox' + b.substr(3);					//-- scroll
 	var w	= parseInt($('#' + b).css('width'));
 	
+	console.log(a);
+	
 	if(w == 934){
-		$('#' + b).css('width', 320);
-		$('#' + s).css('width', 320);
+		
+		$('#' + b).css('width', 341);
+		$('#' + s).css('width', 341);
+		$('#' + a).hide();
+		
 	}else{
+		
 		$('#' + b).css('width', 934);
 		$('#' + s).css('width', 934);
+		$('#' + a).show();
+		
 	}
 
 
