@@ -862,7 +862,7 @@ input[type=range]::-webkit-slider-runnable-track {
 	color: #202020;
 	position:absolute;
 	font-size: 14px;
-	line-height: 20px;
+	line-height: 18px;
 	text-align: left;
 	text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
 	vertical-align: middle;

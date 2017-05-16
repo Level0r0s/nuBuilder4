@@ -48,7 +48,7 @@ class nuSelectObject{
 			'left'				: 0,
 			'overflow'			: 'scroll',
 			'overflow-x'		: 'hidden',
-			'line-height'		: 30,
+			'line-height'		: 1,
 		})
 		.addClass('nuBoxHeader');
 
@@ -63,7 +63,7 @@ class nuSelectObject{
 			'position'			: 'absolute',
 			'width'				: 280,
 			'top'				: 5,
-			'left'				: 43,
+			'left'				: 20,
 			'text-align'		: 'center',
 			'border' 			: 'none',
 			'color'				: 'black',
@@ -75,7 +75,7 @@ class nuSelectObject{
 		
 		
 		
-		var bck	= document.createElement('input');				//-- tablename
+		var bck	= document.createElement('input');				//-- checkbox all
 
 		bck.setAttribute('id', 'checkall' + this.boxID);
 		
@@ -94,7 +94,7 @@ class nuSelectObject{
 
 
 
-		var x = document.createElement('div');
+		var x = document.createElement('div');					//-- close box
 		
 		x.setAttribute('id', 'nuBoxClose' + this.boxID);
 		
@@ -114,7 +114,7 @@ class nuSelectObject{
 		
 
 		
-		var s = document.createElement('div');
+		var s = document.createElement('div');									//-- resize box
 		
 		s.setAttribute('id', 'nu_more_less' + this.boxID);
 		
@@ -132,7 +132,7 @@ class nuSelectObject{
 		.html('<img onclick="nuResizeBox(event)" id="numl' + this.boxID + '" src="nu_less.png" width="10px" height="10px" style="padding:3px">')
 		.addClass('nuSearchListClose');
 
-		var col	= document.createElement('input');
+		var col	= document.createElement('input'); 				//-- table alias
 
 		col.setAttribute('id', 'alias' + this.boxID);
 		
@@ -150,13 +150,12 @@ class nuSelectObject{
 		
 
 		for(this.rows = 0 ; this.rows < n.length ; this.rows++){
-			this.boxRow(this.rows, n[this.rows], p[this.rows], true);
+			this.boxRow(this.rows, n[this.rows], p[this.rows]);
 		}
 		
-		this.boxRow(this.rows, n[this.rows], p[this.rows], false);
-		this.rows++;
+		this.boxRow(this.rows, n[this.rows], p[this.rows], '-');this.rows++;
 		
-		this.boxAddButton('Add', 	(this.rows+1) * 18, 10);
+		this.boxRow(this.rows, n[this.rows], p[this.rows], '+');this.rows++;
 
 
 	}
@@ -217,16 +216,16 @@ class nuSelectObject{
 		
 	}
 	
-	boxRow(i, v, title, isField){										//--------------name row left width value
+	boxRow(i, v, t, s){
 		
 		
-		if(isField){
+		if(arguments.length == 3){
 			this.boxColumn('select', i, 2, 	18, v);
 		}else{
-			this.boxColumn('select', i, 2,	18, 'nuButton');
+			this.boxColumn('select', i, 2,	18, s);
 		}
 		
-		this.boxColumn('field', i, 22, 	300, v, v + ' :: ' + title);
+		this.boxColumn('field', i, 22, 	300, v, v + ' :: ' + t);
 		this.boxColumn('alias', i, 324, 100, '');
 		this.boxColumn('where', i, 426, 200, '');
 		this.boxColumn('ob', 	i, 628, 40,  '');
@@ -262,7 +261,7 @@ class nuSelectObject{
 
 		if(c == 'select'){
 
-			if(v == 'nuButton'){
+			if (v == '-' || v == '+'){
 					
 					
 				var id	= c + '_' + t + '_' + this.boxID;
@@ -281,12 +280,15 @@ class nuSelectObject{
 				.css('position', 'absolute')
 				.css('height', 30)
 				.css('top', t)
-				.css('left', 10)
-				.css('font-size', 16)
-				.css('background-color', 'red')
+				.css('left', 9)
+				.css('width', 10)
+				.css('font-size', 18)
+				.css('font-weight', 'bold')
 				.css('color', 'black')
-				.html('-----')
-				.prop('title', 'Remove this row..');
+				.html(v)
+				.prop('title', 'Remove this row..')
+				.css('text-align', 'center')
+				.css('padding', '0px 0px 2px 1px');
 				
 			}else{
 			
