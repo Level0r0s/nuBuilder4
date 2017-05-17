@@ -155,7 +155,7 @@ class nuSelectObject{
 		
 		this.boxRow(this.rows, n[this.rows], p[this.rows], '-');this.rows++;
 		
-		this.boxRow(this.rows, n[this.rows], p[this.rows], '+');this.rows++;
+		this.boxRow(this.rows, n[this.rows], p[this.rows], '+');
 
 
 	}
@@ -225,12 +225,16 @@ class nuSelectObject{
 			this.boxColumn('select', i, 2,	18, s);
 		}
 		
-		this.boxColumn('field', i, 22, 	300, v, v + ' :: ' + t);
-		this.boxColumn('alias', i, 324, 100, '');
-		this.boxColumn('where', i, 426, 200, '');
-		this.boxColumn('ob', 	i, 628, 40,  '');
-		this.boxColumn('gb', 	i, 670, 40,  '');
-		this.boxColumn('having',i, 712, 170, '');
+		if(s != '+'){
+			
+			this.boxColumn('field', i, 22, 	300, v, v + ' :: ' + t);
+			this.boxColumn('alias', i, 324, 100, '');
+			this.boxColumn('where', i, 426, 200, '');
+			this.boxColumn('ob', 	i, 628, 40,  '');
+			this.boxColumn('gb', 	i, 670, 40,  '');
+			this.boxColumn('having',i, 712, 170, '');
+		
+		}
 		
 	}
 	

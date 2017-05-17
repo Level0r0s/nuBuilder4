@@ -7,6 +7,7 @@ function nuBuildFastForm($table, $form_id){
 	
 	$TT             = nuTT();
 	$SF             = nuSubformObject('obj_sf');
+nudebug('sf', $SF);
 	$tab_id         = nuID();
 	$t              = nuRunQuery("SELECT COUNT(*) FROM zzzzsys_form WHERE SUBSTRING(sfo_code, 1, 2) = 'FF'");
 	$r              = db_fetch_row($t);
@@ -62,15 +63,19 @@ function nuBuildFastForm($table, $form_id){
 	
 	for($i = 0 ; $i < count($SF->rows) ; $i++){
 		
-		$r          		= $SF->rows[$i][3];
-		$newid				= nuID();
-		$SF->rows[$i][3]	= $newid;
-		$sql				= "INSERT INTO $TT SELECT * FROM zzzzsys_object WHERE zzzzsys_object_id = '$r'";
+		if($SF->rows[$i][4] == 0){							//-- not ticked as deleted
+			
+			$r          		= $SF->rows[$i][3];
+			$newid				= nuID();
+			$SF->rows[$i][3]	= $newid;
+			$sql				= "INSERT INTO $TT SELECT * FROM zzzzsys_object WHERE zzzzsys_object_id = '$r'";
+			
+			nuRunQuery($sql);
+			$sql				= "UPDATE $TT SET zzzzsys_object_id = '$newid' WHERE zzzzsys_object_id = '$r'";
+			
+			nuRunQuery($sql);
 		
-		nuRunQuery($sql);
-		$sql				= "UPDATE $TT SET zzzzsys_object_id = '$newid' WHERE zzzzsys_object_id = '$r'";
-		
-		nuRunQuery($sql);
+		}
 
 	}
 
@@ -97,15 +102,19 @@ function nuBuildFastForm($table, $form_id){
 
 	for($i = 0 ; $i < count($SF->rows) ; $i++){
 		
-		$newid      = nuID();
-		$label      = $SF->rows[$i][1];
-		$field      = $SF->rows[$i][2];
-		$oldid      = $SF->rows[$i][3];
-		$corner		= $left + ($gap * $i);
+		if($SF->rows[$i][4] == 0){							//-- not ticked as deleted
+			
+			$newid      = nuID();
+			$label      = $SF->rows[$i][1];
+			$field      = $SF->rows[$i][2];
+			$oldid      = $SF->rows[$i][3];
+			$corner		= $left + ($gap * $i);
 
-		$array      = Array($field, $label, $corner, $corner, $corner, $table, $form_id, $tab_id, $newid, $oldid);
+			$array      = Array($field, $label, $corner, $corner, $corner, $table, $form_id, $tab_id, $newid, $oldid);
 
-		nuRunQuery($sql, $array);
+			nuRunQuery($sql, $array);
+			
+		}
 
 	}
 
@@ -179,7 +188,11 @@ function nuBuildFastForm($table, $form_id){
 			}
 			
 		}else{
-			nuRunQuery($sql, $array);
+			
+			if($y != 'html' && $y != 'display' && $y != 'word' && $y != 'image'){
+				nuRunQuery($sql, $array);
+			}
+			
 		}
 
 	}
