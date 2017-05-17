@@ -19,13 +19,15 @@ class nuSelectObject{
 		this.boxID		= 'box' + i;
 		this.scrollID	= 'scroll' + i;
 		
+		var w			= this.nuBoxWidth(s, t);
+		
 		var box			= document.createElement('div');		//-- box
 
 		box.setAttribute('id', this.boxID);
 		
 		$('body').append(box);
 		$('#' + this.boxID).css({
-			'width'        		: 934,
+			'width'        		: w,
 			'height'       		: 200,
 			'top'				: 190,
 			'left'				: 20,
@@ -33,6 +35,7 @@ class nuSelectObject{
 			'overflow'			: 'hidden',
 			'padding-top'		: '5px',
 			'line-height'		: '20px',
+			'background-color'	: 'darkgrey',
 		})
 		.addClass('nuBoxHeader');
 
@@ -42,9 +45,9 @@ class nuSelectObject{
 		
 		$('#' + this.boxID).append(scroll);
 		$('#' + scroll.id).css({
-			'width'        		: 934,
-			'height'       		: 150,
-			'top'				: 50,
+			'width'        		: w,
+			'height'       		: 182,
+			'top'				: 21,
 			'left'				: 0,
 			'overflow'			: 'scroll',
 			'overflow-x'		: 'hidden',
@@ -62,12 +65,13 @@ class nuSelectObject{
 		.css({
 			'position'			: 'absolute',
 			'width'				: 280,
-			'top'				: 5,
-			'left'				: 20,
-			'text-align'		: 'center',
+			'top'				: 2,
+			'left'				: 22,
+			'text-align'		: 'left',
 			'border' 			: 'none',
 			'color'				: 'black',
 			'font-weight'		: 'bold',
+			'background-color'	: 'darkgrey',
 		})
 		.val(t)
 		.prop('readonly', true)
@@ -75,7 +79,7 @@ class nuSelectObject{
 		
 		
 		
-		var bck	= document.createElement('input');				//-- checkbox all
+		var bck	= document.createElement('input');						//-- checkbox all
 
 		bck.setAttribute('id', 'checkall' + this.boxID);
 		
@@ -85,14 +89,50 @@ class nuSelectObject{
 		.css({
 			'position'			: 'absolute',
 			'width'				: 20,
-			'top'				: 33,
-			'left'				: 1,
+			'top'				: 2,
+			'left'				: -1,
 		})
 		.attr('type', 'checkbox')
 		.val(t);
 		
 
 
+		var col	= document.createElement('input'); 							//-- table alias
+
+		col.setAttribute('id', 'alias' + this.boxID);
+		
+		$('#' + this.boxID).append(col);
+		
+		$('#' + col.id)
+		.css({
+			'position'	:  'absolute',
+			'width'		:  30,
+			'top'		:  2,
+			'right'		:  40,
+			'background-color'	: 'darkgrey',
+		})
+		
+		for(this.rows = 0 ; this.rows < n.length ; this.rows++){
+			this.boxRow(this.rows, n[this.rows], p[this.rows]);
+		}
+		
+		var s = document.createElement('div');									//-- resize box
+		
+		s.setAttribute('id', 'nu_box_size' + this.boxID);
+		
+		$('#' + this.boxID).append(s);
+		
+		$('#' + s.id).css({
+			'width'				: 20,
+			'height'			: 15,
+			'top'				: 5,
+			'right'				: 20,
+			'position'			: 'absolute',
+			'text-align'    	: 'center'
+		})
+		.html('<img onclick="nuResizeBox(event)" id="nbs' + this.boxID + '" src="nu_box_size.png" width="10px" height="10px">')
+		.addClass('nuSearchListClose');
+		
 
 		var x = document.createElement('div');					//-- close box
 		
@@ -102,139 +142,38 @@ class nuSelectObject{
 		
 		$('#' + x.id).css({
 			'width'				: 20,
-			'height'			: 20,
-			'top'				: 2,
-			'left'				: 2,
-			'position'			: 'absolute',
-			'text-align'    	: 'center'
-		})
-		.attr('onclick', '$("#nuSearchList").remove();$("#nuModal").remove();')
-		.html('<span style="font-size:14px" onclick="$(this).parent().parent().remove()"><b>X</b></span>')
-		.addClass('nuSearchListClose');
-		
-
-		
-		var s = document.createElement('div');									//-- resize box
-		
-		s.setAttribute('id', 'nu_more_less' + this.boxID);
-		
-		$('#' + this.boxID).append(s);
-		
-		$('#' + s.id).css({
-			'width'				: 20,
 			'height'			: 15,
 			'top'				: 5,
-			'left'				: 303,
+			'right'				: 2,
 			'position'			: 'absolute',
-			'text-align'    	: 'center'
+			'color'				: 'black',
+			'text-align'    	: 'center',
 		})
-		.attr('onclick', '$("#nuSearchList").remove();$("#nuModal").remove();')
-		.html('<img onclick="nuResizeBox(event)" id="numl' + this.boxID + '" src="nu_less.png" width="10px" height="10px" style="padding:3px">')
+		.html('<img onclick="nuResizeBox(event)" id="nbc' + this.boxID + '" src="nu_box_close.png" width="10px" height="10px">')
 		.addClass('nuSearchListClose');
+		
+	}
 
-		var col	= document.createElement('input'); 				//-- table alias
-
-		col.setAttribute('id', 'alias' + this.boxID);
+	nuBoxWidth(s, t){
 		
-		$('#' + this.boxID).append(col);
+		var s	= nuFORM.tableSchema
+		var n	= s[t].names;
 		
-		$('#' + col.id)
-		.css({
-			'position'	:  'absolute',
-			'width'		:  100,
-			'top'		:  4,
-			'left'		:  324,
-		})
+		var w	= nuGetWordWidth(t) + 150;
 		
-		this.boxTitles();
-		
-
-		for(this.rows = 0 ; this.rows < n.length ; this.rows++){
-			this.boxRow(this.rows, n[this.rows], p[this.rows]);
+		for(var i = 0 ; i < s[t].names.length ; i++){
+			w	= Math.max(w, nuGetWordWidth(s[t].names[i]));
 		}
 		
-		this.boxRow(this.rows, n[this.rows], p[this.rows], '-');this.rows++;
-		
-		this.boxRow(this.rows, n[this.rows], p[this.rows], '+');
+		return w;
 
-
-	}
-
-	boxTitles(){
-		
-		var t	= 30;
-		
-		this.boxTitle('Field', 	t, 150);
-		this.boxTitle('Alias', 	t, 355);
-		this.boxTitle('Where', 	t, 490);
-		this.boxTitle('OB', 	t, 638);
-		this.boxTitle('GB', 	t, 680);
-		this.boxTitle('Having',	t, 780);
-		
 	}
 	
 
-	boxTitle(v, t, l){
-
-		var col	= document.createElement('span');
-
-		col.setAttribute('id', String(v).replaceAll(' ', '_') + '_' + this.boxID);
-		
-		$('#' + this.boxID).append(col);
-		
-		$('#' + col.id)
-		.css({
-			'position'	:  'absolute',
-			'top'		:  t,
-			'left'		:  l,
-		})
-		.html(v);
-		
-		
-	}
-	
-
-	boxAddButton(v, t, l){
-
-		var col	= document.createElement('input');
-
-		col.setAttribute('id', String(v).replaceAll(' ', '_') + '_' + this.boxID);
-		
-		$('#' + this.scrollID).append(col);
-		
-		$('#' + col.id)
-		.css({
-			'position'	: 'absolute',
-			'top'		: t,
-			'left'		: l,
-			'height'	: 20,
-		})
-		.attr('type', 'button')
-		.addClass('nuButton')
-		.val(v);
-		
-		
-	}
-	
-	boxRow(i, v, t, s){
-		
-		
-		if(arguments.length == 3){
-			this.boxColumn('select', i, 2, 	18, v);
-		}else{
-			this.boxColumn('select', i, 2,	18, s);
-		}
-		
-		if(s != '+'){
+	boxRow(i, v, t){
 			
-			this.boxColumn('field', i, 22, 	300, v, v + ' :: ' + t);
-			this.boxColumn('alias', i, 324, 100, '');
-			this.boxColumn('where', i, 426, 200, '');
-			this.boxColumn('ob', 	i, 628, 40,  '');
-			this.boxColumn('gb', 	i, 670, 40,  '');
-			this.boxColumn('having',i, 712, 170, '');
-		
-		}
+		this.boxColumn('select', i, 0, 	18,	v, '');
+		this.boxColumn('field', i, 22, 	300,v,  t);
 		
 	}
 	
@@ -242,7 +181,11 @@ class nuSelectObject{
 
 	boxColumn(c, t, l, w, v, title){
 
-		var col	= document.createElement('input');
+		if(c == 'select'){
+			var col	= document.createElement('input');
+		}else{
+			var col	= document.createElement('span');
+		}
 
 		col.setAttribute('id', c + '_' + t + '_' + this.boxID);
 		
@@ -254,70 +197,25 @@ class nuSelectObject{
 			'width'		: w,
 			'top'		: t * 18,
 			'left'		: l,
-			'padding'	: '0px 5px',
 		})
-		.val(v);
-
-		if(arguments.length == 6){
-			$('#' + col.id).attr('title', title);
-		}
-
+		.attr('title', title);
 
 		if(c == 'select'){
 
-			if (v == '-' || v == '+'){
-					
-					
-				var id	= c + '_' + t + '_' + this.boxID;
-
-				var t 	= parseInt($('#' + id).css('top'));
-				
-				$('#' + id).remove();
-
-				var col	= document.createElement('span');
-
-				col.setAttribute('id', id);
-				
-				$('#' + this.scrollID).append(col);
-		
-				$('#' + col.id)
-				.css('position', 'absolute')
-				.css('height', 30)
-				.css('top', t)
-				.css('left', 9)
-				.css('width', 10)
-				.css('font-size', 18)
-				.css('font-weight', 'bold')
-				.css('color', 'black')
-				.html(v)
-				.prop('title', 'Remove this row..')
-				.css('text-align', 'center')
-				.css('padding', '0px 0px 2px 1px');
-				
-			}else{
+			$('#' + col.id)
+			.attr('type', 'checkbox')
+			.val(v);
 			
-				$('#' + col.id)
-				.attr('type', 'checkbox')
-				.css('padding', 0);
-				
-			}
+		}else{
+
+			$('#' + col.id)
+			.attr('type', 'checkbox')
+			.css('padding-top', 2)
+			.html(v);
 			
 		}
 		
 	}
-	
-	getCurrent(){
-		
-		return this.breadcrumbs[this.breadcrumbs.length - 1];
-		
-	}
-	
-	removeLast(){
-		
-		this.breadcrumbs.pop();
-		
-	}
-	
 	
 }
 
