@@ -28,7 +28,7 @@ class nuSelectObject{
 		$('body').append(box);
 		$('#' + this.boxID).css({
 			'width'        		: w,
-			'height'       		: 200,
+			'height'       		: Math.min(20 + (n.length * 20), 200),
 			'top'				: 190,
 			'left'				: 20,
 			'border'			: 'solid grey 1px',
@@ -46,7 +46,7 @@ class nuSelectObject{
 		$('#' + this.boxID).append(scroll);
 		$('#' + scroll.id).css({
 			'width'        		: w,
-			'height'       		: 182,
+			'height'       		: Math.min(20 + (n.length * 20), 185),
 			'top'				: 21,
 			'left'				: 0,
 			'overflow'			: 'scroll',
@@ -159,7 +159,7 @@ class nuSelectObject{
 		var s	= nuFORM.tableSchema
 		var n	= s[t].names;
 		
-		var w	= nuGetWordWidth(t) + 150;
+		var w	= nuGetWordWidth(t) + 130;
 		
 		for(var i = 0 ; i < s[t].names.length ; i++){
 			w	= Math.max(w, nuGetWordWidth(s[t].names[i]));
