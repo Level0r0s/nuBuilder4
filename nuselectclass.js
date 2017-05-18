@@ -55,6 +55,7 @@ class nuSelectObject{
 			'overflow-x'		: 'hidden',
 			'line-height'		: 1,
 		})
+		.addClass('nuDragNoSelect')
 		.addClass('nuBoxHeader');
 
 		var tbl	= document.createElement('div');				//-- tablename
@@ -77,15 +78,13 @@ class nuSelectObject{
 		})
 		.html(t)
 		.addClass('nuDragNoSelect')
-		.prop('readonly', true)
 		.mousemove(function(event){
 			nuMoveBox(event);
 		})
 		.mousedown(function(event){
 			
-			var i 		= event.target.id;
-			window.nuY	= event.clientY - parseInt($('#' + i).css('top'));
-			window.nuX	= event.clientX - parseInt($('#' + i).css('left'));
+			window.nuY	= event.clientY - $(event.target).offset().top;
+			window.nuX	= event.clientX - $(event.target).offset().left;
 
 		})
 		.addClass('nuBoxTitle');
@@ -148,7 +147,7 @@ class nuSelectObject{
 		.addClass('nuSearchListClose');
 		
 
-		var x = document.createElement('div');					//-- close box
+		var x = document.createElement('div');									//-- close box
 		
 		x.setAttribute('id', 'nuBoxClose' + this.boxID);
 		
