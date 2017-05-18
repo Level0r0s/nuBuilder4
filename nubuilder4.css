@@ -1024,6 +1024,12 @@ input[type=range]::-webkit-slider-runnable-track {
 	border				: none;
 }
 
+.nuBoxHeader {
+   -webkit-box-shadow: 5px 5px 5px 0px rgba(150,147,150,1);
+   -moz-box-shadow: 5px 5px 5px 0px rgba(150,147,150,1);
+   box-shadow: 5px 5px 5px 0px rgba(150,147,150,1);
+}
+
 .nuBoxTitle {
 	color:black;
 }
@@ -1031,3 +1037,10 @@ input[type=range]::-webkit-slider-runnable-track {
 	color:red;
 	cursor:move;
 }
+
+.nuButtonHover{
+	cursor:pointer;
+}
+
+
+

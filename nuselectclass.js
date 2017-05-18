@@ -28,16 +28,17 @@ class nuSelectObject{
 		$('body').append(box);
 		$('#' + this.boxID).css({
 			'width'        		: w,
-			'height'       		: Math.min(20 + (n.length * 20), 200),
+			'height'       		: Math.min(20 + (n.length * 20), 190),
 			'top'				: 190,
 			'left'				: 20,
 			'border'			: 'solid grey 1px',
 			'overflow'			: 'hidden',
 			'padding-top'		: '5px',
-			'line-height'		: '20px',
 			'background-color'	: 'darkgrey',
 		})
-		.addClass('nuBoxHeader');
+		.attr('data-nu-was', Math.min(20 + (n.length * 20), 190))
+		.addClass('nuBoxHeader')
+		.addClass('nuBoxShadow');
 		
 		
 		var scroll	= document.createElement('div');			//-- scroll
@@ -47,8 +48,8 @@ class nuSelectObject{
 		$('#' + this.boxID).append(scroll);
 		$('#' + scroll.id).css({
 			'width'        		: w,
-			'height'       		: Math.min(20 + (n.length * 20), 185),
-			'top'				: 21,
+			'height'       		: Math.min(20 + (n.length * 20), 175),
+			'top'				: 22,
 			'left'				: 0,
 			'overflow'			: 'scroll',
 			'overflow-x'		: 'hidden',
@@ -56,7 +57,7 @@ class nuSelectObject{
 		})
 		.addClass('nuBoxHeader');
 
-		var tbl	= document.createElement('input');				//-- tablename
+		var tbl	= document.createElement('div');				//-- tablename
 
 		tbl.setAttribute('id', 'tablename' + this.boxID);
 		
@@ -66,6 +67,7 @@ class nuSelectObject{
 		.css({
 			'position'			: 'absolute',
 			'width'				: 280,
+			'height'			: 15,
 			'top'				: 2,
 			'left'				: 22,
 			'text-align'		: 'left',
@@ -73,13 +75,13 @@ class nuSelectObject{
 			'font-weight'		: 'bold',
 			'background-color'	: 'darkgrey',
 		})
-		.val(t)
+		.html(t)
 		.addClass('nuDragNoSelect')
 		.prop('readonly', true)
 		.mousemove(function(event){
 			nuMoveBox(event);
 		})
-		.mousedown(function(event) {
+		.mousedown(function(event){
 			
 			var i 		= event.target.id;
 			window.nuY	= event.clientY - parseInt($('#' + i).css('top'));
@@ -116,10 +118,10 @@ class nuSelectObject{
 		
 		$('#' + col.id)
 		.css({
-			'position'	:  'absolute',
-			'width'		:  30,
-			'top'		:  2,
-			'right'		:  40,
+			'position'			: 'absolute',
+			'width'				: 30,
+			'top'				: 2,
+			'right'				: 40,
 			'background-color'	: 'darkgrey',
 		})
 		
@@ -142,6 +144,7 @@ class nuSelectObject{
 			'text-align'    	: 'center'
 		})
 		.html('<img onclick="nuResizeBox(event)" id="nbs' + this.boxID + '" src="nu_box_size.png" width="10px" height="10px">')
+		.addClass('nuButtonHover')
 		.addClass('nuSearchListClose');
 		
 
@@ -160,7 +163,8 @@ class nuSelectObject{
 			'color'				: 'black',
 			'text-align'    	: 'center',
 		})
-		.html('<img onclick="nuResizeBox(event)" id="nbc' + this.boxID + '" src="nu_box_close.png" width="10px" height="10px">')
+		.html('<img onclick="$(this).parent().parent().remove()" id="nbc' + this.boxID + '" src="nu_box_close.png" width="10px" height="10px">')
+		.addClass('nuButtonHover')
 		.addClass('nuSearchListClose');
 		
 	}
@@ -233,27 +237,16 @@ class nuSelectObject{
 
 
 function nuResizeBox(e){
-
 	
-	var b	= e.target.id.substr(4);					//-- box
-	var s	= 'scroll' + b.substr(3);					//-- scroll
-	var a	= 'aliasbox' + b.substr(3);					//-- scroll
-	var w	= parseInt($('#' + b).css('width'));
+	var b	= $(e.target).parent().parent();
+	var i	= parseInt(b.css('height'));
+	var w	= Number(b.attr('data-nu-was'));
+	var m	= 17;
 	
-	console.log(a);
-	
-	if(w == 934){
-		
-		$('#' + b).css('width', 341);
-		$('#' + s).css('width', 341);
-		$('#' + a).hide();
-		
+	if(w == i){
+		$('#' + b[0].id).css('height', m);
 	}else{
-		
-		$('#' + b).css('width', 934);
-		$('#' + s).css('width', 934);
-		$('#' + a).show();
-		
+		$('#' + b[0].id).css('height', w);
 	}
 
 
@@ -269,6 +262,5 @@ function nuMoveBox(e){
 	}
 	
 }
-
 
 
