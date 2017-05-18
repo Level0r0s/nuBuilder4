@@ -38,10 +38,11 @@ class nuSelectObject{
 			'background-color'	: 'darkgrey',
 		})
 		.addClass('nuBoxHeader');
-
+		
+		
 		var scroll	= document.createElement('div');			//-- scroll
 
-		scroll.setAttribute('id', 'scroll' + i);
+		scroll.setAttribute('id', this.scrollID);
 		
 		$('#' + this.boxID).append(scroll);
 		$('#' + scroll.id).css({
@@ -69,13 +70,23 @@ class nuSelectObject{
 			'left'				: 22,
 			'text-align'		: 'left',
 			'border' 			: 'none',
-			'color'				: 'black',
 			'font-weight'		: 'bold',
 			'background-color'	: 'darkgrey',
 		})
 		.val(t)
+		.addClass('nuDragNoSelect')
 		.prop('readonly', true)
-		.addClass('nuReadonly');
+		.mousemove(function(event){
+			nuMoveBox(event);
+		})
+		.mousedown(function(event) {
+			
+			var i 		= event.target.id;
+			window.nuY	= event.clientY - parseInt($('#' + i).css('top'));
+			window.nuX	= event.clientX - parseInt($('#' + i).css('left'));
+
+		})
+		.addClass('nuBoxTitle');
 		
 		
 		
@@ -246,6 +257,17 @@ function nuResizeBox(e){
 	}
 
 
+}
+
+function nuMoveBox(e){
+	
+	if(e.originalEvent.buttons == 1){
+		
+		$(e.target).parent().css('top', e.clientY - window.nuY);
+		$(e.target).parent().css('left', e.clientX - window.nuX);
+		
+	}
+	
 }
 
 

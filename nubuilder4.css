@@ -1024,4 +1024,10 @@ input[type=range]::-webkit-slider-runnable-track {
 	border				: none;
 }
 
-
+.nuBoxTitle {
+	color:black;
+}
+.nuBoxTitle:hover {
+	color:red;
+	cursor:move;
+}
