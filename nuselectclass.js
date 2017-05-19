@@ -6,6 +6,7 @@ class nuSelectObject{
 		this.boxes		= [];
 		this.boxID		= '';
 		this.rows		= 0;
+		this.frame		= $('#sqlframe').contents();
 		
 	}
 	
@@ -18,25 +19,28 @@ class nuSelectObject{
 		var i			= nuID();
 		this.boxID		= 'box' + i;
 		this.scrollID	= 'scroll' + i;
-		
+
 		var w			= this.nuBoxWidth(s, t);
 		
 		var box			= document.createElement('div');		//-- box
 
 		box.setAttribute('id', this.boxID);
-		
-		$('body').append(box);
-		$('#' + this.boxID).css({
+		this.frame.find('body').append(box);
+//		this.frame.find('#' + this.boxID).css({
+		this.frame.find('#' + this.boxID).css({
 			'width'        		: w,
 			'height'       		: Math.min(20 + (n.length * 20), 190),
-			'top'				: 190,
+			'top'				: 20,
 			'left'				: 20,
+			'position'			: 'absolute',
 			'border'			: 'solid grey 1px',
 			'overflow'			: 'hidden',
 			'padding-top'		: '5px',
 			'background-color'	: 'darkgrey',
+			'z-index'			: -1,
 		})
 		.attr('data-nu-was', Math.min(20 + (n.length * 20), 190))
+		.addClass('nuBox')
 		.addClass('nuBoxHeader')
 		.addClass('nuBoxShadow');
 		
@@ -45,8 +49,8 @@ class nuSelectObject{
 
 		scroll.setAttribute('id', this.scrollID);
 		
-		$('#' + this.boxID).append(scroll);
-		$('#' + scroll.id).css({
+		this.frame.find('#' + this.boxID).append(scroll);
+		this.frame.find('#' + scroll.id).css({
 			'width'        		: w,
 			'height'       		: Math.min(20 + (n.length * 20), 175),
 			'top'				: 22,
@@ -62,9 +66,9 @@ class nuSelectObject{
 
 		tbl.setAttribute('id', 'tablename' + this.boxID);
 		
-		$('#' + this.boxID).append(tbl);
+		this.frame.find('#' + this.boxID).append(tbl);
 		
-		$('#' + tbl.id)
+		this.frame.find('#' + tbl.id)
 		.css({
 			'position'			: 'absolute',
 			'width'				: 280,
@@ -82,22 +86,30 @@ class nuSelectObject{
 			nuMoveBox(event);
 		})
 		.mousedown(function(event){
-			
-			window.nuY	= event.clientY - $(event.target).offset().top;
-			window.nuX	= event.clientX - $(event.target).offset().left;
 
+			console.log('beforedown',nuX, nuY);
+			window.nuY	= event.clientY - parseInt($('#sqlframe').contents().find(event.target).css('top'));
+			window.nuX	= event.clientX - parseInt($('#sqlframe').contents().find(event.target).css('left'));
+			console.log('down',nuX, nuY);
+			
+		})
+		.mouseup(function(event){
+
+			window.nuY	= event.clientY - parseInt($('#sqlframe').contents().find(event.target).css('top'));
+			window.nuX	= event.clientX - parseInt($('#sqlframe').contents().find(event.target).css('left'));
+			console.log('up',nuX, nuY);
 		})
 		.addClass('nuBoxTitle');
 		
 		
 		
-		var bck	= document.createElement('input');						//-- checkbox all
+		var bck	= document.createElement('input');								//-- checkbox all
 
 		bck.setAttribute('id', 'checkall' + this.boxID);
 		
-		$('#' + this.boxID).append(bck);
+		this.frame.find('#' + this.boxID).append(bck);
 		
-		$('#' + bck.id)
+		this.frame.find('#' + bck.id)
 		.css({
 			'position'			: 'absolute',
 			'width'				: 20,
@@ -109,13 +121,13 @@ class nuSelectObject{
 		
 
 
-		var col	= document.createElement('input'); 							//-- table alias
+		var col	= document.createElement('input'); 								//-- table alias
 
 		col.setAttribute('id', 'alias' + this.boxID);
 		
-		$('#' + this.boxID).append(col);
+		this.frame.find('#' + this.boxID).append(col);
 		
-		$('#' + col.id)
+		this.frame.find('#' + col.id)
 		.css({
 			'position'			: 'absolute',
 			'width'				: 30,
@@ -132,9 +144,9 @@ class nuSelectObject{
 		
 		s.setAttribute('id', 'nu_box_size' + this.boxID);
 		
-		$('#' + this.boxID).append(s);
+		this.frame.find('#' + this.boxID).append(s);
 		
-		$('#' + s.id).css({
+		this.frame.find('#' + s.id).css({
 			'width'				: 20,
 			'height'			: 15,
 			'top'				: 5,
@@ -151,9 +163,9 @@ class nuSelectObject{
 		
 		x.setAttribute('id', 'nuBoxClose' + this.boxID);
 		
-		$('#' + this.boxID).append(x);
+		this.frame.find('#' + this.boxID).append(x);
 		
-		$('#' + x.id).css({
+		this.frame.find('#' + x.id).css({
 			'width'				: 20,
 			'height'			: 15,
 			'top'				: 5,
@@ -162,7 +174,7 @@ class nuSelectObject{
 			'color'				: 'black',
 			'text-align'    	: 'center',
 		})
-		.html('<img onclick="$(this).parent().parent().remove()" id="nbc' + this.boxID + '" src="nu_box_close.png" width="10px" height="10px">')
+		.html('<img onclick="this.frame.find(this).parent().parent().remove()" id="nbc' + this.boxID + '" src="nu_box_close.png" width="10px" height="10px">')
 		.addClass('nuButtonHover')
 		.addClass('nuSearchListClose');
 		
@@ -203,9 +215,9 @@ class nuSelectObject{
 
 		col.setAttribute('id', c + '_' + t + '_' + this.boxID);
 		
-		$('#' + this.scrollID).append(col);
+		this.frame.find('#' + this.scrollID).append(col);
 		
-		$('#' + col.id)
+		this.frame.find('#' + col.id)
 		.css({
 			'position'	: 'absolute',
 			'width'		: w,
@@ -216,13 +228,13 @@ class nuSelectObject{
 
 		if(c == 'select'){
 
-			$('#' + col.id)
+			this.frame.find('#' + col.id)
 			.attr('type', 'checkbox')
 			.val(v);
 			
 		}else{
 
-			$('#' + col.id)
+			this.frame.find('#' + col.id)
 			.attr('type', 'checkbox')
 			.css('padding-top', 2)
 			.html(v);
@@ -237,26 +249,28 @@ class nuSelectObject{
 
 function nuResizeBox(e){
 	
-	var b	= $(e.target).parent().parent();
+	var b	= this.frame.find(e.target).parent().parent();
 	var i	= parseInt(b.css('height'));
 	var w	= Number(b.attr('data-nu-was'));
 	var m	= 17;
 	
 	if(w == i){
-		$('#' + b[0].id).css('height', m);
+		this.frame.find('#' + b[0].id).css('height', m);
 	}else{
-		$('#' + b[0].id).css('height', w);
+		this.frame.find('#' + b[0].id).css('height', w);
 	}
 
 
 }
 
 function nuMoveBox(e){
+
+	var f	= $('#sqlframe').contents();
 	
 	if(e.originalEvent.buttons == 1){
-		
-		$(e.target).parent().css('top', e.clientY - window.nuY);
-		$(e.target).parent().css('left', e.clientX - window.nuX);
+		console.log('beforemove', e.clientY, window.nuY);
+		f.find(e.target).parent().css('top', e.clientY - window.nuY);
+		f.find(e.target).parent().css('left', e.clientX - window.nuX);
 		
 	}
 	
