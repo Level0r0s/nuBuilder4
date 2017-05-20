@@ -276,16 +276,33 @@ function nuMoveBox(e){
 
 function nuAngle(From, To){
 	
-	var f	= $('#' + From).offset();
-	var t	= $('#' + To).offset();
+	var f	= $('#' + From).position();
+	var t	= $('#' + To).position();
+
+	var f	= {'top' : 100,'left' : 100};
+	var t	= {'top' : 400,'left' : 500};
+
 	var d 	= Math.atan2(f.top - t.top, f.left - t.left) * 180 / Math.PI;		//-- angle in degrees
-	var a 	= Math.max(f.top - t.top, t.top - f.top) * 2;
-	var b 	= Math.max(f.left - t.left, t.left - f.left) * 2;
-	var c	= a+b;
+	var a 	= Math.max(t.top - f.top, f.top - t.top);
+	var b 	= Math.max(t.left - f.left, f.left - t.left);
+	var c	= Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
+	var i	= 'from' + nuID();
 	
+	$('body').append('<div id="black' + i + '" style="position:absolute;left:' + f.left + 'px;top:' + f.top + 'px;height:300px;width:400px;background-color:black;"><\div>')
+	$('body').append('<div id="' + i + '" style="position:absolute;left:' + f.left + 'px;top:' + f.top + 'px;border:#6495ed 1px solid;height:px;background-color:#6495ed;width:' + c + 'px;"><\div>')
+	$('body').append('<div id="a' + i + '" style="position:absolute;left:' + f.left + 'px;top:' + f.top + 'px;:1px;background-color:tan;width:' + c + 'px;"><hr><\div>')
 	
-	console.log(d, c);
-	
-	$('body').append('<div id="from' + From + '" style="position:absolute;left:' + f.left + 'px;top:' + f.top + 'px;width:'  +  c + 'px;transform: rotate(' + d + 'deg)"><hr><\div>')
+	$('#' + i).css('transform', 'rotate(' + d + 'deg)');
+
+	var F	= $('#' + i).position();
+
+	window.A = i;
+	window.F = 'a' + i;
+
+	$('#' + i)
+	.css('top', f.top + (f.top - F.top))
+	.css('left', f.left + (f.left - F.left));
 
 }
+
+
