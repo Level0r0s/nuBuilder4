@@ -380,17 +380,14 @@ input[type=range]::-webkit-slider-runnable-track {
   color: #959595;	
 }
 
-.nuBlank:before{ 
-    font-size:20px;
-    content: ' *';
-    color:#00ADEF;
+.nuBlank{ 
+    font-weight:bold;
 }
 
 
-.nuDuplicate:before{ 
-    font-size:20px;
-    content: ' *';
-    color:#7FC347;
+.nuDuplicate{ 
+    font-style:italic;
+    font-weight:900;
 }
 
 .nuBrowseTitle {

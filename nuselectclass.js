@@ -26,7 +26,6 @@ class nuSelectObject{
 
 		box.setAttribute('id', this.boxID);
 		this.frame.find('body').append(box);
-//		this.frame.find('#' + this.boxID).css({
 		this.frame.find('#' + this.boxID).css({
 			'width'        		: w,
 			'height'       		: Math.min(20 + (n.length * 20), 190),
@@ -74,7 +73,8 @@ class nuSelectObject{
 			'width'				: 280,
 			'height'			: 15,
 			'top'				: 2,
-			'left'				: 22,
+			'left'				: 0,
+			'padding-left'		: 22,
 			'text-align'		: 'left',
 			'border' 			: 'none',
 			'font-weight'		: 'bold',
@@ -87,17 +87,15 @@ class nuSelectObject{
 		})
 		.mousedown(function(event){
 
-			console.log('beforedown',nuX, nuY);
-			window.nuY	= event.clientY - parseInt($('#sqlframe').contents().find(event.target).css('top'));
-			window.nuX	= event.clientX - parseInt($('#sqlframe').contents().find(event.target).css('left'));
-			console.log('down',nuX, nuY);
+			window.nuY	= event.clientY - parseInt($(event.target).parent().css('top'));
+			window.nuX	= event.clientX - parseInt($(event.target).parent().css('left'));
 			
 		})
 		.mouseup(function(event){
 
-			window.nuY	= event.clientY - parseInt($('#sqlframe').contents().find(event.target).css('top'));
-			window.nuX	= event.clientX - parseInt($('#sqlframe').contents().find(event.target).css('left'));
-			console.log('up',nuX, nuY);
+			window.nuY	= parseInt($(event.target).parent().css('top'));
+			window.nuX	= parseInt($(event.target).parent().css('left'));
+			
 		})
 		.addClass('nuBoxTitle');
 		
@@ -174,7 +172,7 @@ class nuSelectObject{
 			'color'				: 'black',
 			'text-align'    	: 'center',
 		})
-		.html('<img onclick="this.frame.find(this).parent().parent().remove()" id="nbc' + this.boxID + '" src="nu_box_close.png" width="10px" height="10px">')
+		.html('<img onclick="$(this).parent().parent().remove()" id="nbc' + this.boxID + '" src="nu_box_close.png" width="10px" height="10px">')
 		.addClass('nuButtonHover')
 		.addClass('nuSearchListClose');
 		
@@ -268,12 +266,26 @@ function nuMoveBox(e){
 	var f	= $('#sqlframe').contents();
 	
 	if(e.originalEvent.buttons == 1){
-		console.log('beforemove', e.clientY, window.nuY);
-		f.find(e.target).parent().css('top', e.clientY - window.nuY);
-		f.find(e.target).parent().css('left', e.clientX - window.nuX);
+		
+		$(e.target).parent().css('top', e.clientY - window.nuY);
+		$(e.target).parent().css('left', e.clientX - window.nuX);
 		
 	}
 	
 }
 
+function nuAngle(From, To){
+	
+	var f	= $('#' + From).offset();
+	var t	= $('#' + To).offset();
+	var d 	= Math.atan2(f.top - t.top, f.left - t.left) * 180 / Math.PI;		//-- angle in degrees
+	var a 	= Math.max(f.top - t.top, t.top - f.top) * 2;
+	var b 	= Math.max(f.left - t.left, t.left - f.left) * 2;
+	var c	= a+b;
+	
+	
+	console.log(d, c);
+	
+	$('body').append('<div id="from' + From + '" style="position:absolute;left:' + f.left + 'px;top:' + f.top + 'px;width:'  +  c + 'px;transform: rotate(' + d + 'deg)"><hr><\div>')
 
+}
