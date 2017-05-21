@@ -14,6 +14,7 @@ function nuBuildForm(f){
 	}
 	
 	
+	window.nuRelationA			= {'id' : '', 'field' : '', 'table' : '', 'left' : 0, 'top' : 0};
 	window.onbeforeunload		= null;
 	window.nuBrowseFunction		= window.nuDefaultBrowseFunction;
 	window.nuSERVERRESPONSE		= f;

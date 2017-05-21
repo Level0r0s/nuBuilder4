@@ -153,6 +153,7 @@ class nuSelectObject{
 			'text-align'    	: 'center'
 		})
 		.html('<img onclick="nuResizeBox(event)" id="nbs' + this.boxID + '" src="nu_box_size.png" width="10px" height="10px">')
+		.addClass('nuDragNoSelect')
 		.addClass('nuButtonHover')
 		.addClass('nuSearchListClose');
 		
@@ -173,6 +174,7 @@ class nuSelectObject{
 			'text-align'    	: 'center',
 		})
 		.html('<img onclick="$(this).parent().parent().remove()" id="nbc' + this.boxID + '" src="nu_box_close.png" width="10px" height="10px">')
+		.addClass('nuDragNoSelect')
 		.addClass('nuButtonHover')
 		.addClass('nuSearchListClose');
 		
@@ -233,7 +235,9 @@ class nuSelectObject{
 		}else{
 
 			this.frame.find('#' + col.id)
-			.attr('type', 'checkbox')
+			.addClass('nuBoxTitle')
+			.addClass('nuBoxField')
+			.click(nuStartRelation(event))
 			.css('padding-top', 2)
 			.html(v);
 			
@@ -243,6 +247,39 @@ class nuSelectObject{
 	
 }
 
+
+function nuStartRelation(e){
+	
+	var p				= $(e.target).position();
+	var b				= $(e.target).parent().parent().attr('id');
+	var t				= $('#tablename' + b).html()
+	var a				= $('#alias' + b).val()
+	
+	window.nuRelationA	= {
+							'id' 	: e.target.id, 
+							'field' : $(e.target).html(), 
+							'table' : a == '' ? t : a, 
+							'left' 	: p.left - 5, 
+							'top' 	: p.top + 5
+						};
+						
+}
+
+function nuEndRelation(e){
+	
+	var b				= $(e.target).parent().parent().attr('id');
+	var c				= $(e.target).hasClass('nuBoxField');
+	var t				= $('#tablename' + b).html()
+	var a				= $('#alias' + b).val()
+	var table			= a == '' ? t : a;
+	
+	if(window.nuRelationA.table == table){		//-- in the same Box
+		window.nuRelationA.table = '';
+	}else{
+		nuAngle(window.nuRelationA.id, e.target.id);
+	}
+	
+}
 
 
 function nuResizeBox(e){
@@ -261,6 +298,7 @@ function nuResizeBox(e){
 
 }
 
+
 function nuMoveBox(e){
 
 	var f	= $('#sqlframe').contents();
@@ -274,30 +312,27 @@ function nuMoveBox(e){
 	
 }
 
-function nuAngle(From, To){
-	
-	var f	= $('#' + From).position();
-	var t	= $('#' + To).position();
 
-	var f	= {'top' : 100,'left' : 100};
-	var t	= {'top' : 400,'left' : 500};
+function nuAngle(F, T){
+
+	var o	= $('#' + F).offset();
+	var f	= {'top' : o.top, 'left' : o.left};
+	var o	= $('#' + T).offset();
+	var t	= {'top' : o.top, 'left' : o.left};
+
+	if(f.box == ''){return;}
 
 	var d 	= Math.atan2(f.top - t.top, f.left - t.left) * 180 / Math.PI;		//-- angle in degrees
-	var a 	= Math.max(t.top - f.top, f.top - t.top);
-	var b 	= Math.max(t.left - f.left, f.left - t.left);
+	var a 	= Math.max(f.top - t.top);
+	var b 	= Math.max(f.left - t.left);
 	var c	= Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
-	var i	= 'from' + nuID();
+	var i	= 'relation' + nuID();
 	
-	$('body').append('<div id="black' + i + '" style="position:absolute;left:' + f.left + 'px;top:' + f.top + 'px;height:300px;width:400px;background-color:black;"><\div>')
 	$('body').append('<div id="' + i + '" style="position:absolute;left:' + f.left + 'px;top:' + f.top + 'px;border:#6495ed 1px solid;height:px;background-color:#6495ed;width:' + c + 'px;"><\div>')
-	$('body').append('<div id="a' + i + '" style="position:absolute;left:' + f.left + 'px;top:' + f.top + 'px;:1px;background-color:tan;width:' + c + 'px;"><hr><\div>')
 	
 	$('#' + i).css('transform', 'rotate(' + d + 'deg)');
 
 	var F	= $('#' + i).position();
-
-	window.A = i;
-	window.F = 'a' + i;
 
 	$('#' + i)
 	.css('top', f.top + (f.top - F.top))
