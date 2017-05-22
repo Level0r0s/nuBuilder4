@@ -815,11 +815,10 @@ function nuGetFunctionList(){
 
 function nuID(){
 
+	window.nuUniqueID	= 'c' + String(Date.now());
+	
 	if(window.nuSuffix == 9999){
-		
 		window.nuSuffix		= 0
-		window.nuUniqueID	= 'c' + String(Date.now());
-		
 	}else{
 		window.nuSuffix	++;
 	}

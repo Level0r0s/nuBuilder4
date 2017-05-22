@@ -21,9 +21,9 @@ nuJSInclude('nureportjson.js');
 nuCSSInclude('nubuilder4.css');
 nuCSSInclude('nudrag.css');
 
-
 ?>
-
-
-</script></head><body></body></html>
+<script>
+window.nuSuffix				= Number(String(Math.random()).substr(-4));
+</script>
+</head><body></body></html>
 

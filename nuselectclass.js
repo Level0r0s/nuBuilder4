@@ -1,11 +1,12 @@
 
+window.nuRelationships	= [];
+
 class nuSelectObject{
 	
 	constructor() {
 		
 		this.boxes		= [];
 		this.boxID		= '';
-		this.rows		= 0;
 		this.frame		= $('#sqlframe').contents();
 		
 	}
@@ -133,9 +134,24 @@ class nuSelectObject{
 			'right'				: 40,
 			'background-color'	: 'darkgrey',
 		})
+		.change(function(){
+
+			var f	= $(this).val();
+			
+			if(f == ''){
+				f	= $(this).prev().prev().html();
+			}
+			
+			$(this).parent().attr('data-nu-tablename', f);
+			
+		})
+		.change()
 		
-		for(this.rows = 0 ; this.rows < n.length ; this.rows++){
-			this.boxRow(this.rows, n[this.rows], p[this.rows]);
+		
+		
+		
+		for(var rows = 0 ; rows < n.length ; rows++){
+			this.boxRow(rows, n[rows], p[rows]);
 		}
 		
 		var s = document.createElement('div');									//-- resize box
@@ -316,9 +332,21 @@ function nuMoveBox(e){
 function nuAngle(F, T){
 
 	var o	= $('#' + F).offset();
-	var f	= {'top' : o.top, 'left' : o.left};
+	var b	= {'top' : o.top, 'left' : o.left};
 	var o	= $('#' + T).offset();
-	var t	= {'top' : o.top, 'left' : o.left};
+	var a	= {'top' : o.top, 'left' : o.left};
+	
+	if(b.left > a.left){
+		
+		f	= a;
+		t	= b;
+
+	}else{
+		
+		f	= b;
+		t	= a;
+
+	}
 
 	if(f.box == ''){return;}
 
@@ -327,17 +355,32 @@ function nuAngle(F, T){
 	var b 	= Math.max(f.left - t.left);
 	var c	= Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
 	var i	= 'relation' + nuID();
-	
-	$('body').append('<div id="' + i + '" style="position:absolute;left:' + f.left + 'px;top:' + f.top + 'px;border:#6495ed 1px solid;height:px;background-color:#6495ed;width:' + c + 'px;"><\div>')
-	
-	$('#' + i).css('transform', 'rotate(' + d + 'deg)');
 
-	var F	= $('#' + i).position();
+	var R = document.createElement('div');										//-- resize box
+	
+	R.setAttribute('id', i);
+	
+	$('body').append(R);
+	
+	$('#' + R.id).css({
+		'width'				: c,
+		'height'			: 0,
+		'left'				: f.left,
+		'top'				: f.top,
+		'position'			: 'absolute',
+		'text-align'    	: 'center',
+		'border'			: 'black 1px solid',
+		'transform'			: 'rotate(' + d + 'deg)',
+	})
+
+
+	var F	= $('#' + R.id).position();
 
 	$('#' + i)
-	.css('top', f.top + (f.top - F.top))
-	.css('left', f.left + (f.left - F.left));
+	.css('top', f.top + (f.top - F.top + 5))
+	.css('left', f.left + f.left - F.left - 10);
 
 }
+
 
 
