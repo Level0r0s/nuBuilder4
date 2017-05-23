@@ -1007,6 +1007,11 @@ input[type=range]::-webkit-slider-runnable-track {
 	cursor:move;
 }
 
+.nuBoxField:hover {
+	color:red;
+	cursor:move;
+}
+
 .nuButtonHover{
 	cursor:pointer;
 }

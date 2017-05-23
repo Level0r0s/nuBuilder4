@@ -1,19 +1,22 @@
-
 window.nuRelationships	= [];
+
 
 class nuSelectObject{
 	
 	constructor() {
 		
-		this.boxes		= [];
-		this.boxID		= '';
-		this.frame		= $('#sqlframe').contents();
+		window.nuRelationships	= [];
+		this.boxes				= [];
+		this.boxID				= '';
+		this.frame				= $('#sqlframe').contents();
+		this.table				= '';
 		
 	}
 	
 
 	addBox(t){
 
+		this.table		= t;
 		var s			= nuFORM.tableSchema
 		var n			= s[t].names;
 		var p			= s[t].types;
@@ -41,6 +44,7 @@ class nuSelectObject{
 		})
 		.attr('data-nu-was', Math.min(20 + (n.length * 20), 190))
 		.addClass('nuBox')
+		.addClass('nuDragNoSelect')
 		.addClass('nuBoxHeader')
 		.addClass('nuBoxShadow');
 		
@@ -84,7 +88,7 @@ class nuSelectObject{
 		.html(t)
 		.addClass('nuDragNoSelect')
 		.mousemove(function(event){
-			nuMoveBox(event);
+			parent.nuMoveBox(event);
 		})
 		.mousedown(function(event){
 
@@ -99,8 +103,6 @@ class nuSelectObject{
 			
 		})
 		.addClass('nuBoxTitle');
-		
-		
 		
 		var bck	= document.createElement('input');								//-- checkbox all
 
@@ -118,8 +120,6 @@ class nuSelectObject{
 		.attr('type', 'checkbox')
 		.val(t);
 		
-
-
 		var col	= document.createElement('input'); 								//-- table alias
 
 		col.setAttribute('id', 'alias' + this.boxID);
@@ -136,19 +136,16 @@ class nuSelectObject{
 		})
 		.change(function(){
 
-			var f	= $(this).val();
-			
+			var f	= $(this).val();											//-- alias
+			var i	= this.id.substr(5);
+			console.log('.' + i + '.nuBoxField', $('.' + i + '.nuBoxField').length);
 			if(f == ''){
-				f	= $(this).prev().prev().html();
+				f	= $('#tablename' + i).html();								//-- table name
 			}
 			
-			$(this).parent().attr('data-nu-tablename', f);
+			$('#sqlframe').contents().find('.' + i + '.nuBoxField').attr('data-nu-table', f);
 			
 		})
-		.change()
-		
-		
-		
 		
 		for(var rows = 0 ; rows < n.length ; rows++){
 			this.boxRow(rows, n[rows], p[rows]);
@@ -200,7 +197,6 @@ class nuSelectObject{
 		
 		var s	= nuFORM.tableSchema
 		var n	= s[t].names;
-		
 		var w	= nuGetWordWidth(t) + 130;
 		
 		for(var i = 0 ; i < s[t].names.length ; i++){
@@ -216,7 +212,13 @@ class nuSelectObject{
 			
 		this.boxColumn('select', i, 0, 	18,	v, '');
 		this.boxColumn('field', i, 22, 	300,v,  t);
-		
+
+		this.frame.find('.nuBoxField')
+		.unbind()
+
+		.attr('onmousedown', 'nuFieldMouseDown(event)')
+		.attr('onmouseup', 'nuFieldMouseUp(event)')
+
 	}
 	
 
@@ -251,9 +253,12 @@ class nuSelectObject{
 		}else{
 
 			this.frame.find('#' + col.id)
+			.attr('data-nu-table', this.table)
+			//.attr('draggable', 'true')
 			.addClass('nuBoxTitle')
 			.addClass('nuBoxField')
-			.click(nuStartRelation(event))
+			.addClass(this.boxID)
+			.css('width', '')
 			.css('padding-top', 2)
 			.html(v);
 			
@@ -263,38 +268,29 @@ class nuSelectObject{
 	
 }
 
+//$('#sqlframe').contents()
 
-function nuStartRelation(e){
+function nuFieldMouseUp(e){
 	
-	var p				= $(e.target).position();
-	var b				= $(e.target).parent().parent().attr('id');
-	var t				= $('#tablename' + b).html()
-	var a				= $('#alias' + b).val()
+	console.log(window.nuRelationA, e.target.id);
 	
-	window.nuRelationA	= {
-							'id' 	: e.target.id, 
-							'field' : $(e.target).html(), 
-							'table' : a == '' ? t : a, 
-							'left' 	: p.left - 5, 
-							'top' 	: p.top + 5
-						};
-						
+	if(window.nuRelationA == ''){return;}
+	
+	var t				= $(e.target).attr('data-nu-table')
+	
+	nuAngle(window.nuRelationA, e.target.id);
+
+	window.nuRelationA	= '';
+	
 }
 
-function nuEndRelation(e){
+
+function nuFieldMouseDown(e){
 	
-	var b				= $(e.target).parent().parent().attr('id');
-	var c				= $(e.target).hasClass('nuBoxField');
-	var t				= $('#tablename' + b).html()
-	var a				= $('#alias' + b).val()
-	var table			= a == '' ? t : a;
+	var t				= $(e.target).attr('data-nu-table')
+	window.nuRelationA	= e.target.id;
 	
-	if(window.nuRelationA.table == table){		//-- in the same Box
-		window.nuRelationA.table = '';
-	}else{
-		nuAngle(window.nuRelationA.id, e.target.id);
-	}
-	
+	console.log(window.nuRelationA, e.target.id);
 }
 
 
@@ -316,25 +312,27 @@ function nuResizeBox(e){
 
 
 function nuMoveBox(e){
-
-	var f	= $('#sqlframe').contents();
 	
 	if(e.originalEvent.buttons == 1){
 		
 		$(e.target).parent().css('top', e.clientY - window.nuY);
 		$(e.target).parent().css('left', e.clientX - window.nuX);
+		nuBuildRelationships();
 		
 	}
-	
+		
 }
 
 
-function nuAngle(F, T){
+function nuAngle(F, T){									//- from, to, ID (if one)
 
 	var o	= $('#' + F).offset();
 	var b	= {'top' : o.top, 'left' : o.left};
 	var o	= $('#' + T).offset();
 	var a	= {'top' : o.top, 'left' : o.left};
+	
+	window.nuRelationships.push([[F], [T]]);
+	
 	
 	if(b.left > a.left){
 		
@@ -348,6 +346,8 @@ function nuAngle(F, T){
 
 	}
 
+
+	
 	if(f.box == ''){return;}
 
 	var d 	= Math.atan2(f.top - t.top, f.left - t.left) * 180 / Math.PI;		//-- angle in degrees
@@ -356,7 +356,7 @@ function nuAngle(F, T){
 	var c	= Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
 	var i	= 'relation' + nuID();
 
-	var R = document.createElement('div');										//-- resize box
+	var R = document.createElement('div');										//-- relationship line
 	
 	R.setAttribute('id', i);
 	
@@ -372,7 +372,7 @@ function nuAngle(F, T){
 		'border'			: 'black 1px solid',
 		'transform'			: 'rotate(' + d + 'deg)',
 	})
-
+	.addClass('nuRelationships');
 
 	var F	= $('#' + R.id).position();
 
@@ -383,4 +383,43 @@ function nuAngle(F, T){
 }
 
 
+function nuAllowDrop(e){
+	
+    e.preventDefault();
+	
+}
+
+function nuBuildRelationships(){
+	
+	var r	= window.nuRelationships;
+	
+	$('#sqlframe').contents().find('.nuRelationships').remove();
+	
+	for(var i = 0 ; i < r.length ; i++){
+		nuAngle(r[i][0], r[i][1]);
+	}
+	
+
+	
+}
+
+function nuDragField(e){
+	
+	if(e.dataTransfer !== undefined){
+		e.dataTransfer.setData("text", e.target.id);
+	}
+	
+}
+
+function nuDrop(e){
+	
+	if(e.dataTransfer !== undefined){
+		
+		e.preventDefault();
+		var data = e.dataTransfer.getData("text");
+		e.target.appendChild(document.getElementById(data));
+		
+	}
+	
+}
 
