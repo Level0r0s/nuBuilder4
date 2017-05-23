@@ -1583,9 +1583,14 @@ function nuGetOptionsList(f, t, p, a){
 
 	if(a == 1){
 		
-		list.push(['Arrange Objects', 		'nuPopup("' + f + '", "-2")', 				'nu_option_arrange.png', 		'Ctrl+Shft+A']);
-		list.push(['Form Properties', 		'nuPopup("nuform", "' + f + '")', 			'nu_option_properties.png',		'Ctrl+Shft+F']);
-		list.push(['Form Object List', 		'nuPopup("nuobject", "", "' + f + '")', 	'nu_option_objects.png',		'Ctrl+Shft+O']);
+		if(nuSERVERRESPONSE.form_access == 0 || String(f).substr(0,2) != 'nu'){
+		
+			list.push(['Arrange Objects', 		'nuPopup("' + f + '", "-2")', 				'nu_option_arrange.png', 		'Ctrl+Shft+A']);
+			list.push(['Form Properties', 		'nuPopup("nuform", "' + f + '")', 			'nu_option_properties.png',		'Ctrl+Shft+F']);
+			list.push(['Form Object List', 		'nuPopup("nuobject", "", "' + f + '")', 	'nu_option_objects.png',		'Ctrl+Shft+O']);
+			
+		}
+		
 		list.push(['nuDebug', 				'nuPopup("nudebug", "")', 					'nu_option_debug.png',			'Ctrl+Shft+D']);
 		
 	}else{

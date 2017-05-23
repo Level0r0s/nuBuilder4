@@ -7,7 +7,6 @@ function nuBuildFastForm($table, $form_id){
 	
 	$TT             = nuTT();
 	$SF             = nuSubformObject('obj_sf');
-nudebug('sf', $SF);
 	$tab_id         = nuID();
 	$t              = nuRunQuery("SELECT COUNT(*) FROM zzzzsys_form WHERE SUBSTRING(sfo_code, 1, 2) = 'FF'");
 	$r              = db_fetch_row($t);

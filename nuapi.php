@@ -15,7 +15,7 @@
 	$_POST['nuMessages']					= array();
 	$_POST['nuTableSchema']					= nuTableSchema();
 	$s										= nuCheckSession();
-	nudebug($s);
+
 	$F										= $s->form_id;
 	$R										= $s->record_id;
 	$P										= $_POST['nuSTATE'];
@@ -57,8 +57,9 @@
 	$f->forms[0]->messages					= $_POST['nuMessages'];
 	$f->forms[0]->log_again				    = $_POST['nuLogAgain'];
 	$f->forms[0]->global_access				= $_POST['nuHash']['global_access'];
-	$f->forms[0]->target					= $P['target'];
+	$f->forms[0]->form_access				= $GLOBALS['nuSetup']->set_denied;
 	$f->forms[0]->javascript				= $GLOBALS['EXTRAJS'];
+	$f->forms[0]->target					= $P['target'];
 	$f->forms[0]->buttons					= nuButtons($F, $P);
 
 	$j								    	= json_encode($f->forms[0]);

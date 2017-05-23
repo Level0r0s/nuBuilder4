@@ -20,8 +20,10 @@ function nuBeforeBrowse($f){
 }
 
 
-function nuBeforeEdit($f, $o){
-	
+function nuBeforeEdit($f, $r){
+
+	nudebug($_POST['nuSTATE']['call_type'], 'nuBeforeEdit', $f, $r);
+
 	$r						= nuFormProperties($f);
     $GLOBALS['EXTRAJS']		= $r->sfo_javascript;
 	$evalPHP 				= new nuEvalPHPClass($f . '_BE');

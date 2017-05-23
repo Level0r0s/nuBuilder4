@@ -88,7 +88,7 @@ class nuSelectObject{
 		.html(t)
 		.addClass('nuDragNoSelect')
 		.mousemove(function(event){
-			parent.nuMoveBox(event);
+			nuMoveBox(event);
 		})
 		.mousedown(function(event){
 
@@ -216,8 +216,9 @@ class nuSelectObject{
 		this.frame.find('.nuBoxField')
 		.unbind()
 
-		.attr('onmousedown', 'nuFieldMouseDown(event)')
-		.attr('onmouseup', 'nuFieldMouseUp(event)')
+		.attr('onmousedown', 	'nuFieldMouseDown(event)')
+		.attr('onmouseup', 		'nuFieldMouseUp(event)')
+		.attr('onmouseover', 	'nuFieldMouseOver(event)')
 
 	}
 	
@@ -270,9 +271,16 @@ class nuSelectObject{
 
 //$('#sqlframe').contents()
 
+function nuFieldMouseOver(e){
+	
+	e.preventDefault();	
+	
+}
+
+
 function nuFieldMouseUp(e){
 	
-	console.log(window.nuRelationA, e.target.id);
+	e.preventDefault();	
 	
 	if(window.nuRelationA == ''){return;}
 	
@@ -286,7 +294,7 @@ function nuFieldMouseUp(e){
 
 
 function nuFieldMouseDown(e){
-	
+
 	var t				= $(e.target).attr('data-nu-table')
 	window.nuRelationA	= e.target.id;
 	
@@ -312,7 +320,9 @@ function nuResizeBox(e){
 
 
 function nuMoveBox(e){
-	
+
+		console.log('nuMoveBox', parent.nuRelationships);
+
 	if(e.originalEvent.buttons == 1){
 		
 		$(e.target).parent().css('top', e.clientY - window.nuY);
@@ -377,8 +387,10 @@ function nuAngle(F, T){									//- from, to, ID (if one)
 	var F	= $('#' + R.id).position();
 
 	$('#' + i)
-	.css('top', f.top + (f.top - F.top + 5))
-	.css('left', f.left + f.left - F.left - 10);
+	.css('top', f.top + (f.top - F.top + 8))
+	.css('left', f.left + f.left - F.left - 20);
+
+
 
 }
 
@@ -391,7 +403,9 @@ function nuAllowDrop(e){
 
 function nuBuildRelationships(){
 	
-	var r	= window.nuRelationships;
+	var r	= parent.nuRelationships;
+
+	console.log('nuBuildRelationships',parent.nuRelationships);
 	
 	$('#sqlframe').contents().find('.nuRelationships').remove();
 	
