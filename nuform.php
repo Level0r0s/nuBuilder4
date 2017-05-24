@@ -452,7 +452,6 @@ function nuGetLookupValues($R, $O){
 			$S->from
 		WHERe 
 			`$r->sfo_primary_key` = '$O->value'
-        
     ";
 	
 	$s			= nuReplaceHashVariables($s);

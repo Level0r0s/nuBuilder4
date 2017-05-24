@@ -24,6 +24,7 @@ nuCSSInclude('nudrag.css');
 ?>
 <script>
 window.nuSuffix				= Number(String(Math.random()).substr(-4));
+window.nuSelect				= new nuSelectObject();
 </script>
 </head><body></body></html>
 
