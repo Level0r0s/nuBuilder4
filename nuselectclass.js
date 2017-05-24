@@ -8,7 +8,6 @@ class nuSelectObject{
 		window.nuRelationships	= [];
 		this.boxes				= [];
 		this.boxID				= '';
-		this.frame				= $('#sqlframe').contents();
 		this.table				= '';
 		
 	}
@@ -29,8 +28,8 @@ class nuSelectObject{
 		var box			= document.createElement('div');		//-- box
 
 		box.setAttribute('id', this.boxID);
-		this.frame.find('body').append(box);
-		this.frame.find('#' + this.boxID).css({
+		$('body').append(box);
+		$('#' + this.boxID).css({
 			'width'        		: w,
 			'height'       		: Math.min(20 + (n.length * 20), 190),
 			'top'				: 20,
@@ -53,8 +52,8 @@ class nuSelectObject{
 
 		scroll.setAttribute('id', this.scrollID);
 		
-		this.frame.find('#' + this.boxID).append(scroll);
-		this.frame.find('#' + scroll.id).css({
+		$('#' + this.boxID).append(scroll);
+		$('#' + scroll.id).css({
 			'width'        		: w,
 			'height'       		: Math.min(20 + (n.length * 20), 175),
 			'top'				: 22,
@@ -70,9 +69,9 @@ class nuSelectObject{
 
 		tbl.setAttribute('id', 'tablename' + this.boxID);
 		
-		this.frame.find('#' + this.boxID).append(tbl);
+		$('#' + this.boxID).append(tbl);
 		
-		this.frame.find('#' + tbl.id)
+		$('#' + tbl.id)
 		.css({
 			'position'			: 'absolute',
 			'width'				: 280,
@@ -108,9 +107,9 @@ class nuSelectObject{
 
 		bck.setAttribute('id', 'checkall' + this.boxID);
 		
-		this.frame.find('#' + this.boxID).append(bck);
+		$('#' + this.boxID).append(bck);
 		
-		this.frame.find('#' + bck.id)
+		$('#' + bck.id)
 		.css({
 			'position'			: 'absolute',
 			'width'				: 20,
@@ -124,9 +123,9 @@ class nuSelectObject{
 
 		col.setAttribute('id', 'alias' + this.boxID);
 		
-		this.frame.find('#' + this.boxID).append(col);
+		$('#' + this.boxID).append(col);
 		
-		this.frame.find('#' + col.id)
+		$('#' + col.id)
 		.css({
 			'position'			: 'absolute',
 			'width'				: 30,
@@ -143,7 +142,7 @@ class nuSelectObject{
 				f	= $('#tablename' + i).html();								//-- table name
 			}
 			
-			$('#sqlframe').contents().find('.' + i + '.nuBoxField').attr('data-nu-table', f);
+			$('.' + i + '.nuBoxField').attr('data-nu-table', f);
 			
 		})
 		
@@ -155,9 +154,9 @@ class nuSelectObject{
 		
 		s.setAttribute('id', 'nu_box_size' + this.boxID);
 		
-		this.frame.find('#' + this.boxID).append(s);
+		$('#' + this.boxID).append(s);
 		
-		this.frame.find('#' + s.id).css({
+		$('#' + s.id).css({
 			'width'				: 20,
 			'height'			: 15,
 			'top'				: 5,
@@ -175,9 +174,9 @@ class nuSelectObject{
 		
 		x.setAttribute('id', 'nuBoxClose' + this.boxID);
 		
-		this.frame.find('#' + this.boxID).append(x);
+		$('#' + this.boxID).append(x);
 		
-		this.frame.find('#' + x.id).css({
+		$('#' + x.id).css({
 			'width'				: 20,
 			'height'			: 15,
 			'top'				: 5,
@@ -213,7 +212,7 @@ class nuSelectObject{
 		this.boxColumn('select', i, 0, 	18,	v, '');
 		this.boxColumn('field', i, 22, 	300,v,  t);
 
-		this.frame.find('.nuBoxField')
+		$('.nuBoxField')
 		.unbind()
 
 		.attr('onmousedown', 	'nuFieldMouseDown(event)')
@@ -234,9 +233,9 @@ class nuSelectObject{
 
 		col.setAttribute('id', c + '_' + t + '_' + this.boxID);
 		
-		this.frame.find('#' + this.scrollID).append(col);
+		$('#' + this.scrollID).append(col);
 		
-		this.frame.find('#' + col.id)
+		$('#' + col.id)
 		.css({
 			'position'	: 'absolute',
 			'width'		: w,
@@ -247,13 +246,13 @@ class nuSelectObject{
 
 		if(c == 'select'){
 
-			this.frame.find('#' + col.id)
+			$('#' + col.id)
 			.attr('type', 'checkbox')
 			.val(v);
 			
 		}else{
 
-			this.frame.find('#' + col.id)
+			$('#' + col.id)
 			.attr('data-nu-table', this.table)
 			//.attr('draggable', 'true')
 			.addClass('nuBoxTitle')
@@ -269,12 +268,9 @@ class nuSelectObject{
 	
 }
 
-//$('#sqlframe').contents()
 
 function nuFieldMouseOver(e){
-	
 	e.preventDefault();	
-	
 }
 
 
@@ -304,15 +300,15 @@ function nuFieldMouseDown(e){
 
 function nuResizeBox(e){
 	
-	var b	= this.frame.find(e.target).parent().parent();
+	var b	= $(e.target).parent().parent();
 	var i	= parseInt(b.css('height'));
 	var w	= Number(b.attr('data-nu-was'));
 	var m	= 17;
 	
 	if(w == i){
-		this.frame.find('#' + b[0].id).css('height', m);
+		$('#' + b[0].id).css('height', m);
 	}else{
-		this.frame.find('#' + b[0].id).css('height', w);
+		$('#' + b[0].id).css('height', w);
 	}
 
 
@@ -323,7 +319,6 @@ function nuMoveBox(e){
 
 
 	if(e.originalEvent.buttons == 1){
-		console.log('nuMoveBox', $("#sqlframe")[0].contentWindow.nuRelationships, e.target.id);
 		
 		$(e.target).parent().css('top', e.clientY - window.nuY);
 		$(e.target).parent().css('left', e.clientX - window.nuX);
@@ -407,7 +402,7 @@ function nuBuildRelationships(){
 
 	console.log('nuBuildRelationships',parent.nuRelationships);
 	
-	$('#sqlframe').contents().find('.nuRelationships').remove();
+	$('.nuRelationships').remove();
 	
 	for(var i = 0 ; i < r.length ; i++){
 		nuAngle(r[i][0], r[i][1]);
