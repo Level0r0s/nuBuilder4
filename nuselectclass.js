@@ -321,9 +321,9 @@ function nuResizeBox(e){
 
 function nuMoveBox(e){
 
-		console.log('nuMoveBox', parent.nuRelationships);
 
 	if(e.originalEvent.buttons == 1){
+		console.log('nuMoveBox', $("#sqlframe")[0].contentWindow.nuRelationships, e.target.id);
 		
 		$(e.target).parent().css('top', e.clientY - window.nuY);
 		$(e.target).parent().css('left', e.clientX - window.nuX);
@@ -403,7 +403,7 @@ function nuAllowDrop(e){
 
 function nuBuildRelationships(){
 	
-	var r	= parent.nuRelationships;
+	var r	= nuRelationships;
 
 	console.log('nuBuildRelationships',parent.nuRelationships);
 	
