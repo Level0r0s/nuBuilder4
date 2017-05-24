@@ -160,7 +160,7 @@ function nuUpdateTables(){
 					$I[]	= "`$fk`";
 					
 				}
-nudebug($row);				
+
 				for($R = 1 ; $R < count($row) ; $R++){
 
 					if($edit[$R] == 1){											//-- has been edited
@@ -264,7 +264,7 @@ function nuUpdateData(){
 	$ID		= $_POST['nuSTATE']['record_id'];
 	$DEL	= $_POST['nuSTATE']['deleteAll'];	
 	$fid	= $_POST['nuSTATE']['form_id'];
-nudebug($_POST['nuSTATE']['call_type'], 'update', $fid, $ID);
+
 	if($ID == -3){
 		
 		nuDisplayError('Cannot be Saved..');

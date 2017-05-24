@@ -22,8 +22,6 @@ function nuBeforeBrowse($f){
 
 function nuBeforeEdit($f, $r){
 
-	nudebug($_POST['nuSTATE']['call_type'], 'nuBeforeEdit', $f, $r);
-
 	$r						= nuFormProperties($f);
     $GLOBALS['EXTRAJS']		= $r->sfo_javascript;
 	$evalPHP 				= new nuEvalPHPClass($f . '_BE');
@@ -434,6 +432,12 @@ function nuBreadcrumbDescription($r, $R){
 
 function nuGetLookupValues($R, $O){
 
+	$was		= $_POST['nuHash']['TABLE_ID'];
+	
+	$_POST['nuHash']['TABLE_ID'] = nuTT();
+
+	nuBeforeBrowse($O->form_id);
+	
     $s 			= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$O->form_id'";
     $t 			= nuRunQuery($s);
     $r 			= db_fetch_object($t);
@@ -450,11 +454,16 @@ function nuGetLookupValues($R, $O){
 			`$r->sfo_primary_key` = '$O->value'
         
     ";
-
+	
+	$s			= nuReplaceHashVariables($s);
     $t 			= nuRunQuery($s);
     $l 			= db_fetch_row($t);
 	$f			= $_POST['nuSTATE']['prefix'] . $O->id;
+
+	nuRunQuery(nuReplaceHashVariables('DROP TABLE if EXISTS #TABLE_ID#'));
 	
+	$_POST['nuHash']['TABLE_ID'] = $was;
+
 	$v			= array();
 	$v[]		= array($f, 				isset($l[0]) ? $l[0] : '');
 	$v[]		= array($f . 'code', 		isset($l[1]) ? $l[1] : '');
