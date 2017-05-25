@@ -2,13 +2,19 @@
 
 function nuBuildForm(f){
 	
-	if(f.form_id == ''){
-		
+	if(f.tableSchema === null){  						//-- need to login again
+	
+		$('body').addClass('nuBrowseBody')
+		$('body').removeClass('nuEditBody')
 		nuLogin();
-		return
+		nuAlert(['You have been logged out..']);
+		
+		return;
 		
 	}
 	
+	
+	window.nuRelationA			= {'id' : '', 'field' : '', 'table' : '', 'left' : 0, 'top' : 0};
 	window.onbeforeunload		= null;
 	window.nuBrowseFunction		= window.nuDefaultBrowseFunction;
 	window.nuSERVERRESPONSE		= f;
@@ -17,11 +23,11 @@ function nuBuildForm(f){
 	window.nuHASH				= [];                       //-- remove any hash variables previously set.
 	window.nuUniqueID			= 'c' + String(Date.now());
 	window.nuSuffix				= Number(String(Math.random()).substr(-4));
+	window.global_access		= f.global_access == '1';
 	nuFORM.edited				= false;
 	nuFORM.formType				= f.type;
 	nuFORM.scroll				= [];
 	nuSetBody(f);
-	
 	
 	if(f.tableSchema.length != 0){  						//-- its an Object (load these once,  at login)
 
@@ -61,6 +67,7 @@ function nuBuildForm(f){
 	nuAddBreadcrumbs();
 	nuAddEditTabs('', f);
 	nuOptions('', f.form_id, 'form', f.global_access);
+	
 
 	nuAddActionButtons(f);
 	nuRecordProperties(f, '');
@@ -140,21 +147,21 @@ function nuResizeBody(f){
 	
 	if(f.record_id == ''){
 		
-		var h			= Number(d.browse.height);
+		var h			= Number(d.browse.height) + headers;
 		var w			= Number(d.browse.width);
 
 		$('#nuDragDialog', window.parent.document).
-		css({'height'		:	(h + 110) + 'px',
+		css({'height'		:	(h + 90) + 'px',
 			'width' 		:	(w + 43) + 'px',
 			'visibility' 	:	'visible'
 		});
 
 		$('#nuWindow', window.parent.document).
-		css({'height'		:	(h + 67) + 'px',
+		css({'height'		:	(h + 47) + 'px',
 			'width' 		:	(w + 30) + 'px'
 		});
 			
-		$('body').css('height', h - 50);
+		$('body').css('height', h);
 		
 	}else{
 		
@@ -216,10 +223,11 @@ function nuAddActionButtons(f){
 		
 		if(!draggable){
 			
-			if(button.Save == 1){nuAddActionButton('Save');}
-			if(button.Clone == 1){nuAddActionButton('Clone');}
-			if(button.Delete == 1){nuAddActionButton('Delete');}
-			if(button.Run != ''){nuAddActionButton('run', 'Run', button.Run);}
+			if(button.Save == 1)		{nuAddActionButton('Save');}
+			if(button.Clone == 1)		{nuAddActionButton('Clone');}
+			if(button.Delete == 1)		{nuAddActionButton('Delete');}
+			if(button.RunHidden != '')	{nuAddActionButton('runhidden', 'Run', button.RunHidden);}
+			if(button.Run != '')		{nuAddActionButton('run', 'Run in new window', button.Run);}
 			
 		}
 		
@@ -649,7 +657,10 @@ function nuINPUT(w, i, l, p, prop){
 	}else{
 	
 		if(prop.objects[i].type == 'input' && input_type == 'nuAutoNumber'){
-			$('#' + id).val(prop.objects[i].counter);
+			$('#' + id)
+			.prop('readonly', true)
+			.addClass('nuReadonly')
+			.val(prop.objects[i].counter);
 		}
 
 		setAccess(ID, prop.objects[i].read);
@@ -1230,8 +1241,8 @@ function nuLabel(w, i, p, prop){
 	var l = String(nuTranslate(prop.objects[i].label));
 	
 	$('#' + id).css({'top'		: Number(prop.objects[i].top),
-		              'left'	: Number(prop.objects[i].left) - lwidth - 7,
-		              'width'	: Number(lwidth)
+		              'left'	: Number(prop.objects[i].left) - lwidth + -27,
+		              'width'	: Number(lwidth + 20)
 	})
 	.html(l)
 	.attr('ondblclick','nuPopup("nuobject", "' + prop.objects[i].object_id + '")');
@@ -1364,6 +1375,7 @@ function nuAddBreadcrumb(i){
 
 	var bc 		= window.nuFORM.breadcrumbs[i];
 	var bcId 	= 'nu_bc_' + i;
+	var bcId 	= 'nuBreadcrumb' + i;
 	
 	var div		= document.createElement('div');
 	div.setAttribute('id', bcId);
@@ -1392,7 +1404,6 @@ function nuSetTitle(t){
 	if(nuFORM.getCurrent().record_id == ''){return;}
 
 	nuFORM.setProperty('title', t);
-	nuAddBreadcrumbs();
 	
 }
 
@@ -1494,6 +1505,7 @@ function nuEditTab(p, t, i){
 	$('#' + tabId)
 	.html(nuTranslate(t.title))
 	.addClass('nuTab')
+	.addClass('nuDragNoSelect')
 	.attr('data-nu-tab-filter', i)
 	.attr('data-nu-form-filter', p)
 	.attr('data-nu-tab-id', t.id)
@@ -1522,7 +1534,7 @@ function nuOptions(p, f, t, access){
 		$('#' + id)
 		.attr('src', 'nuoptions.png')
 		.attr('title', 'Options')
-		.attr('onclick', 'nuGetOptionsList("' + f + '", this, "' + p + '", "' + access + '")')
+		.attr('onclick', 'nuGetOptionsList("' + f + '", this, "' + p + '", "' + access + '", "' + t + '")')
 		.css({'top'			: 5, 
 		'right' 			: 5, 
 		'width' 			: 15, 
@@ -1555,7 +1567,7 @@ function nuOptions(p, f, t, access){
    
 }
 
-function nuGetOptionsList(f, t, p, a){
+function nuGetOptionsList(f, t, p, a, type){
 
 	var icon	= $('#' + t.id);
 	var off		= icon.offset();
@@ -1571,9 +1583,17 @@ function nuGetOptionsList(f, t, p, a){
 
 	if(a == 1){
 		
-		list.push(['Arrange Objects', 		'nuPopup("' + f + '", "-2")', 				'nu_option_arrange.png', 		'Ctrl+Shft+A']);
-		list.push(['Form Properties', 		'nuPopup("nuform", "' + f + '")', 			'nu_option_properties.png',		'Ctrl+Shft+F']);
-		list.push(['Form Object List', 		'nuPopup("nuobject", "", "' + f + '")', 	'nu_option_objects.png',		'Ctrl+Shft+O']);
+		if(nuSERVERRESPONSE.form_access == 0 || String(f).substr(0,2) != 'nu'){
+		
+			list.push(['Arrange Objects', 		'nuPopup("' + f + '", "-2")', 			'nu_option_arrange.png', 		'Ctrl+Shft+A']);
+			list.push(['Form Properties', 		'nuPopup("nuform", "' + f + '")', 		'nu_option_properties.png',		'Ctrl+Shft+F']);
+			list.push(['Form Object List', 		'nuPopup("nuobject", "", "' + f + '")', 'nu_option_objects.png',		'Ctrl+Shft+O']);
+			
+		}
+		
+		if(type != 'subform'){
+			list.push(['nuDebug', 				'nuPopup("nudebug", "")', 					'nu_option_debug.png',			'Ctrl+Shft+D']);
+		}
 		
 	}else{
 		
@@ -1581,12 +1601,15 @@ function nuGetOptionsList(f, t, p, a){
 		
 	}
 
-	if(nuFORM.getProperty('record_id') != ''){
+	if(nuFORM.getProperty('record_id') != '' && type != 'subform'){
 		
 		list.push(['Save Form', 			'nuSaveAction();', 							'nu_option_save.png',		'Ctrl+Shft+S']);
 		list.push(['Refresh', 				'nuGetBreadcrumb()', 						'nu_option_refresh.png', 	'Ctrl+Shft+R']);
 		
 	}
+	
+
+	if(list.length == 0){return;}
 	
 	//hide all other listboxes
 	$('#nuOptionsListBox').remove();
@@ -1950,7 +1973,7 @@ function nuBrowseTable(){
 				$('#' + id)
 				.html(nuFORM.addFormatting(row[r][c+1], col[c].format))
 				.attr('data-nu-primary-key', row[r][0])
-				.attr('onclick', 'nuSelectBrowse(event)')
+				.attr('onclick', 'nuSelectBrowse(event, this)')
 				.hover(
 				
 					function() {
@@ -2080,9 +2103,9 @@ function nuRunPHPAction(id) {
 	nuRunPHP(id);
 }
 
-function nuRunPHPHiddenAction(id) {
-	nuRunPHPHidden(id);
-}
+//function nuRunPHPHiddenAction(id){
+//	nuRunPHPHidden(id);
+//}
 
 function nuRunReportAction(id) {
 	nuRunReport(id);
@@ -2131,11 +2154,11 @@ function nuGetPage(p){
 }
 
 
-function nuSelectBrowse(e){
+function nuSelectBrowse(e, t){
 
 	var y 				= window.nuBrowseFunction;					//-- browse, lookup or custom function name
 	var i 				= window.nuTARGET;
-	var p				= $('#' + e.target.id).attr('data-nu-primary-key');
+	var p				= $('#' + t.id).attr('data-nu-primary-key');
 	var f				= window.nuFORM.getProperty('form_id');
 
 	if(y == 'browse'){
@@ -2297,7 +2320,7 @@ function nuHighlightSearch(){
 				h	= h.replaceAll(search[i],'`````' + search[i] + '````', true);
 			}
 
-			h 		= h.replaceAll('`````', '<span class="nuBrowseSearch">', true);
+			h 		= h.replaceAll('`````', '<span class="nuBrowseSearch" onclick="this.offsetParent.onclick()">', true);
 			h 		= h.replaceAll('````', '</span>', true);
 			
 			$(this).html(h);
@@ -2538,6 +2561,19 @@ function nuDeleteAction(){
 		$("[id$='nuDelete']").prop('checked', true);
 		
 		nuUpdateData('delete');
+		
+    }
+	
+}
+
+
+function nuDeleteAllAction(){
+	
+    if (confirm("Delete This Record?")) {
+
+		$("[id$='nuDelete']").prop('checked', true);
+		
+		nuUpdateData('delete', 'all');
 		
     }
 	
@@ -2816,7 +2852,7 @@ function nuGetSearchList(){
 		'position'			: 'absolute',
 		'text-align'    	: 'center'
 	})
-	.attr('onclick', '$("#nuSearchList").remove();;$("#nuModal").remove();')
+	.attr('onclick', '$("#nuSearchList").remove();$("#nuModal").remove();')
 	.html('<img id="nuOptionListClose" src="nuclose.png" width="20px" height="20px">')
 	.addClass('nuSearchListClose');
 	

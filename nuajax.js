@@ -364,8 +364,8 @@ function nuPrintAction(){
 
 }
 
-function nuUpdateData(action){
-
+function nuUpdateData(action, instruction){
+	
 	if(window.nuBeforeSave){
 		if(!nuBeforeSave()){return;}
 	}
@@ -375,6 +375,10 @@ function nuUpdateData(action){
 	var f				= last.form_id;
 	var r				= last.record_id;
 
+	if(arguments.length == 2){
+		last.instruction= instruction;
+	}
+	
 	last.call_type 		= 'update';
 	last.deleteAll 		= $('#nuDelete').is(":checked") ? 'Yes' : 'No';
 	last.data 			= nuGetFormData();

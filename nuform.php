@@ -20,8 +20,8 @@ function nuBeforeBrowse($f){
 }
 
 
-function nuBeforeEdit($f, $o){
-	
+function nuBeforeEdit($f, $r){
+
 	$r						= nuFormProperties($f);
     $GLOBALS['EXTRAJS']		= $r->sfo_javascript;
 	$evalPHP 				= new nuEvalPHPClass($f . '_BE');
@@ -432,6 +432,12 @@ function nuBreadcrumbDescription($r, $R){
 
 function nuGetLookupValues($R, $O){
 
+	$was		= $_POST['nuHash']['TABLE_ID'];
+	
+	$_POST['nuHash']['TABLE_ID'] = nuTT();
+
+	nuBeforeBrowse($O->form_id);
+	
     $s 			= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$O->form_id'";
     $t 			= nuRunQuery($s);
     $r 			= db_fetch_object($t);
@@ -446,13 +452,17 @@ function nuGetLookupValues($R, $O){
 			$S->from
 		WHERe 
 			`$r->sfo_primary_key` = '$O->value'
-        
     ";
-
+	
+	$s			= nuReplaceHashVariables($s);
     $t 			= nuRunQuery($s);
     $l 			= db_fetch_row($t);
 	$f			= $_POST['nuSTATE']['prefix'] . $O->id;
+
+	nuRunQuery(nuReplaceHashVariables('DROP TABLE if EXISTS #TABLE_ID#'));
 	
+	$_POST['nuHash']['TABLE_ID'] = $was;
+
 	$v			= array();
 	$v[]		= array($f, 				isset($l[0]) ? $l[0] : '');
 	$v[]		= array($f . 'code', 		isset($l[1]) ? $l[1] : '');
@@ -671,7 +681,6 @@ function nuBrowseRows($f){
 	
 	$P				= $_POST['nuSTATE'];
 	$rows			= $P['rows'];
-
 	$page_number	= $P['page_number'];
 	$start			= $page_number * $rows;
 	$search			= str_replace('&#39;', "'", $P['search']);
@@ -1065,16 +1074,26 @@ function nuButtons($formid, $P){
 	$a						= nuFormAccess($formid, $nuJ->forms);
 	$f						= nuFormProperties($formid);
 	$c						= $P['call_type'];
-	$rid					= $P['record_id'];
+	
+	$s						= 'SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = ? ';
+	$t						= nuRunQuery($s,[$P['record_id']]);
+	$p						= db_fetch_object($t)->sph_code;
+	
+	$s						= 'SELECT * FROM zzzzsys_report WHERE zzzzsys_report_id = ? ';
+	$t						= nuRunQuery($s,[$P['record_id']]);
+	$r						= db_fetch_object($t)->sre_code;
 	
 	if($c == 'getphp'){
-		return array('Add' => 0, 'Print' => 0, 'Save' => 0, 'Clone' => 0, 'Delete' => 0, 'Run' => 'nuRunPHP("'.$rid.'")');
-	}else if($c == 'getreport'){
-		return array('Add' => 0, 'Print' => 0, 'Save' => 0, 'Clone' => 0, 'Delete' => 0, 'Run' => 'nuRunReport("'.$rid.'")');
-	}else{
-		return array('Add' => $a[0], 'Print' => $a[1], 'Save' => $a[2], 'Clone' => $a[3], 'Delete' => $a[4], 'Run' => '');
+		return array('Add' => 0, 'Print' => 0, 'Save' => 0, 'Clone' => 0, 'Delete' => 0, 'Run' => 'nuRunPHP("'.$p.'")', 'RunHidden' => 'nuRunPHPHidden("'.$p.'")');
 	}
 	
+	if($c == 'getreport'){
+		return array('Add' => 0, 'Print' => 0, 'Save' => 0, 'Clone' => 0, 'Delete' => 0, 'Run' => 'nuRunReport("'.$r.'")', 'RunHidden' => '');
+	}
+	
+	if($c != 'getphp' and $c != 'getreport'){
+		return array('Add' => $a[0], 'Print' => $a[1], 'Save' => $a[2], 'Clone' => $a[3], 'Delete' => $a[4], 'Run' => '', 'RunHidden' => '');
+	}
 	
 }
 
@@ -1251,7 +1270,6 @@ function nuFormDimensions($f){
 	$rh			= intval($r->sfo_browse_row_height)    == 0 ? 25 : $r->sfo_browse_row_height;
 	$rs			= intval($r->sfo_browse_rows_per_page) == 0 ? 25 : $r->sfo_browse_rows_per_page;
 	$bb			= 25;   //-- browse footer
-	
 	$t			= nuRunQuery("SELECT * FROM zzzzsys_object WHERE sob_all_zzzzsys_form_id = '$f'");
 	$h			= 0;
 	$w			= 0;
@@ -1277,8 +1295,6 @@ function nuFormDimensions($f){
 
 	}
 
-
-
 	$bh			= $bt + ($rs * $rh) + $bb;
 	$bw			= nuGetBrowseWidth($f);	
 
@@ -1288,19 +1304,18 @@ function nuFormDimensions($f){
 
 
 	
-	$d[]		= $bt + ($rs * $rh) + $bb;    		//-- lookup browse height (0)
+	$d[]		= $bt + ($rs * $rh) + $bb;    		//-- lookup browse height
 	$d[]		= nuGetBrowseWidth($f);	
-	$d[]		= $h  + 0;		//-- lookup form height 	(2)
-	$d[]		= $w  + 0;		//-- lookup form width		(3)
-	$d[]		= $h  + 0;		//-- form height			(4)
-	$d[]		= $w  + 50;			//-- form width				(5)
-	$d[]		= $gh + 0;			//-- grid height			(6)
-	$d[]		= $gw + 55;			//-- grid width				(7)
+	$d[]		= $h  + 0;							//-- lookup form height
+	$d[]		= $w  + 0;							//-- lookup form width
+	$d[]		= $h  + 0;							//-- form height
+	$d[]		= $w  + 50;							//-- form width
+	$d[]		= $gh + 0;							//-- grid height
+	$d[]		= $gw + 55;							//-- grid width
 	
 	$d[]		= ['browse'=>$browse, 'edit'=>$edit, 'grid'=>$grid];
+
 	return ['browse'=>$browse, 'edit'=>$edit, 'grid'=>$grid];
-	
-	return $d;
 	
 }
 

@@ -8,16 +8,16 @@
 
 require_once('nucommon.php');	
 
-jsinclude('jquery/jquery.js');
-jsinclude('nuformclass.js');
-jsinclude('nuform.js');
-jsinclude('nuformdrag.js');
-jsinclude('nucalendar.js');
-jsinclude('nucommon.js');
-jsinclude('nuajax.js');       //-- calls to server
-jsinclude('nufunctions.js');
+nuJSInclude('jquery/jquery.js');
+nuJSInclude('nuformclass.js');
+nuJSInclude('nuform.js');
+nuJSInclude('nuformdrag.js');
+nuJSInclude('nucalendar.js');
+nuJSInclude('nucommon.js');
+nuJSInclude('nuajax.js');       //-- calls to server
+nuJSInclude('nufunctions.js');
 
-cssinclude('nubuilder4.css');
+nuCSSInclude('nubuilder4.css');
 
 ?>
 

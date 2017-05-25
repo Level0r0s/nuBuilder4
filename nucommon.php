@@ -78,10 +78,9 @@ function nuDebugResult($t){
 	}
 
     $i		= nuID();
-    $d		= date('Y-m-d H:i:s');
     $s		= $nuDB->prepare("INSERT INTO zzzzsys_debug (zzzzsys_debug_id, deb_message, deb_added) VALUES (? , ?, ?)");
 
-    $s->execute(array($i, $t, $d));
+    $s->execute(array($i, $t, time()));
     
     if($nuDB->errorCode() !== '00000'){
         error_log($nuDB->errorCode() . ": Could not establish nuBuilder database connection");
@@ -121,33 +120,29 @@ function nuBuildTable($t, $array){
 
 
 
-function nuDebug($a0 = '^', $a1 = '^', $a2 = '^', $a3 = '^', $a4 = '^', $a5 = '^', $a6 = '^', $a7 = '^', $a8 = '^', $a9 = '^'){
+function nuDebug($a0 = '', $a1 = '', $a2 = '', $a3 = '', $a4 = '', $a5 = '', $a6 = '', $a7 = '', $a8 = '', $a9 = ''){
 	
 	$b					= debug_backtrace();
 	$f					= $b[0]['file'];
 	$l					= $b[0]['line'];
 
-	$m					= date("Y-m-d H:i:s") . " ($f:$l)\n";
+	$m					= date("Y-m-d H:i:s") . " ($f:$l)\n\n<br>\n" ;
 
 	
-	for($i = 0 ; $i < func_num_args() ; $i++){
+	for($i = 0 ; $i < count(func_get_args()) ; $i++){
 
-			$p			= func_get_arg($i);
-			
-			if($p != '^'){
-							
-				$m		.= "\n[$i] : ";
-							
-				if(gettype($p) == 'object' or gettype($p) == 'array'){
-					$m	.= print_r($p,1);
-				}else{
-					$m	.= $p;
-				}
+		$p			= func_get_arg($i);
 
-				$m	.= "\n";
-				
-			}
-			
+		$m		.= "\n[$i] : ";
+
+		if(gettype($p) == 'object' or gettype($p) == 'array'){
+			$m	.= print_r($p,1);
+		}else{
+			$m	.= $p;
+		}
+
+		$m	.= "\n";
+
 	}
 	
 	nuDebugResult($m);
@@ -156,7 +151,7 @@ function nuDebug($a0 = '^', $a1 = '^', $a2 = '^', $a3 = '^', $a4 = '^', $a5 = '^
 
 
 
-function jsinclude($pfile){
+function nuJSInclude($pfile){
 
 	$timestamp = date("YmdHis", filemtime($pfile));                                         //-- Add timestamp so javascript changes are effective immediately
 	print "<script src='$pfile?ts=$timestamp' type='text/javascript'></script>\n";
@@ -165,7 +160,7 @@ function jsinclude($pfile){
 
 
 
-function cssinclude($pfile){
+function nuCSSInclude($pfile){
 
 	$timestamp = date("YmdHis", filemtime($pfile));                                         //-- Add timestamp so javascript changes are effective immediately
 	print "<link rel='stylesheet' href='$pfile?ts=$timestamp' />\n";
@@ -456,7 +451,7 @@ function nuSetHashList($p){
 function nuRunReport($nuRID){
 	
 	$nuID								= nuID();
-	$nuT								= nuRunQuery("SELECT * FROM zzzzsys_report WHERE zzzzsys_report_id = '$nuRID'");
+	$nuT								= nuRunQuery("SELECT * FROM zzzzsys_report WHERE sre_code = '$nuRID'");
 	$nuA								= db_fetch_object($nuT);
 	$_POST['nuHash']['code']			= $nuA->sre_code;
 	$_POST['nuHash']['description']		= $nuA->sre_description;
@@ -502,19 +497,15 @@ function nuRunPHP($nuRID){
 
 function nuRunPHPHidden($nuCode){
 
-
 	$s						= "SELECT * FROM zzzzsys_php WHERE sph_code = ? ";
 	$t						= nuRunQuery($s, [$nuCode]);
 	$r						= db_fetch_object($t);
-
-	$evalPHP = new nuEvalPHPClass($r->zzzzsys_php_id);
 	
-	return 'doesntmatter';
+	$evalPHP = new nuEvalPHPClass($r->zzzzsys_php_id);
+
+	return 1;
 
 }
-
-
-
 
 
 
@@ -806,13 +797,14 @@ function nuTableSchema(){
 	while($r = db_fetch_object($t)){
 
 		$tn		= $r->table_name; 
-		$a[$tn]	= db_columns($tn);
+		$a[$tn]	= [names => db_field_names($tn), types => db_field_types($tn)];
 
 	}
 
 	return $a;
 
 }
+
 
 
 function nuFormSchema(){
@@ -939,7 +931,7 @@ function nuGetSubformObject($id){
 
 function nuFormatList(){
 	
-	$f	= [];
+	$f	= [['','']];
 	$s	= "
 		SELECT 
 			CONCAT(LEFT(srm_type, 1), '|', TRIM(srm_format)) AS a, 
@@ -953,7 +945,7 @@ function nuFormatList(){
 	while($r = db_fetch_object($t)){
 		$f[] = [$r->a, $r->b];
 	}
-	
+
 	return json_encode($f);
 	
 }
@@ -1099,6 +1091,28 @@ function nuPunctuation($f){
 	return [$c, $d];
 	
 }
+
+
+function nuTTList($p, $l){
+	
+	$t		= nuRunQuery('SELECT * FROM zzzzsys_object WHERE  zzzzsys_object_id = ?' , [$l]);
+	
+	while($r = db_fetch_object($t)){						//-- add default empty hash variables
+		$_POST['nuHash'][$r->sob_all_id]	= '';
+	}
+	
+	$tt								= nuTT();
+	$_POST['nuHash']['TABLE_ID']	= $tt;
+	$e								= new nuEvalPHPClass($p);
+	$c								= json_encode(db_field_names($tt));
+	
+	nuRunQuery("DROP TABLE $tt");
+	
+	return $c;
+
+	
+}
+
 
 
 ?>

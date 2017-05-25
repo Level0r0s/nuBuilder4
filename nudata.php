@@ -160,7 +160,7 @@ function nuUpdateTables(){
 					$I[]	= "`$fk`";
 					
 				}
-				
+
 				for($R = 1 ; $R < count($row) ; $R++){
 
 					if($edit[$R] == 1){											//-- has been edited
@@ -214,6 +214,8 @@ function nuUpdateTables(){
 		
 	}
 	
+	//nudebug($S);
+	
 }
 
 function nuValidArray($v, $f){
@@ -262,7 +264,7 @@ function nuUpdateData(){
 	$ID		= $_POST['nuSTATE']['record_id'];
 	$DEL	= $_POST['nuSTATE']['deleteAll'];	
 	$fid	= $_POST['nuSTATE']['form_id'];
-	
+
 	if($ID == -3){
 		
 		nuDisplayError('Cannot be Saved..');
@@ -470,7 +472,7 @@ function nuUpdateRow($r, $p, $row, $FK){
 	}
 	
 	$set			= array();
-	$columns		= db_columns($r->sfo_table);
+	$columns		= db_field_names($r->sfo_table);
 	$objects		= nuEditObjects($r->zzzzsys_form_id);
 	$q				= array();
 	

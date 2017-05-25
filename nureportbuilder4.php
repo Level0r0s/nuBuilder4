@@ -5,27 +5,29 @@
 
 require_once('nucommon.php');	
 
-jsinclude('jquery/jquery.js');
-jsinclude('nuformclass.js');
-jsinclude('nuform.js');
-jsinclude('nuformdrag.js');
-jsinclude('nudrag.js');
-jsinclude('nudragreport.js');
-jsinclude('nucalendar.js');
-jsinclude('nucommon.js');
-jsinclude('nuajax.js');       //-- calls to server
-jsinclude('nufunctions.js');
-jsinclude('nureportjson.js');
+nuJSInclude('jquery/jquery.js');
+nuJSInclude('nuformclass.js');
+nuJSInclude('nuform.js');
+nuJSInclude('nuformdrag.js');
+nuJSInclude('nudrag.js');
+nuJSInclude('nureportdrag.js');
+nuJSInclude('nucalendar.js');
+nuJSInclude('nucommon.js');
+nuJSInclude('nuajax.js');       //-- calls to server
+nuJSInclude('nufunctions.js');
+nuJSInclude('nureportjson.js');
 
-cssinclude('nubuilder4.css');
-cssinclude('nudrag.css');
+nuCSSInclude('nubuilder4.css');
+nuCSSInclude('nudrag.css');
 
 $f	= nuFormatList();
+$t	= nuTTList($_GET['tt'], $_GET['launch']);
 
 $h	= "
 <script>
 
-	window.nuFormats = $f;
+	window.nuFormats	= $f;
+	window.nuTT			= $t;
 
 </script>
 
@@ -45,19 +47,13 @@ $(document).ready(function() {
 	if(window.opener){
 		
 		if(String(window.opener.document.getElementById('sre_layout').value) == '') {
-			
 			window.nuREPORT = window.nuREPORTdefault;
-			
 		}else{
-			
 			window.nuREPORT = $.parseJSON(window.opener.sre_layout.value);
-			
 		}
 	}else{
-		
-		window.nuREPORT = window.nuREPORTdefault;
-		
-     }
+		window.nuREPORT 	= window.nuREPORTdefault;
+    }
 	 
 	nuLoadReport();
 	
@@ -81,6 +77,9 @@ function nuStringify(){
 		
     }
 }
+
+
+
 </script>
 
 </head>

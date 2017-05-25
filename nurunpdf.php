@@ -1029,7 +1029,7 @@ function nuMakeSummaryTable($REPORT, $TABLE_ID){
 
 function nuAddCriteriaValues($hashData, $T){
 
-    $c = db_columns($T);
+    $c = db_field_names($T);
 
     $a = array();
 

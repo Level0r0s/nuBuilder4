@@ -38,18 +38,21 @@
    background-color: #B9BCD6;
    font-family:Lucida Console;
    padding: 2px;
+   font-size: 10px;
 }
 
 .js {
    background-color: #F8DC3D;
    font-family:Lucida Console;
    padding: 2px;
+   font-size: 10px;
 }
 
 .html {
    background-color: #F48453;
    font-family:Lucida Console;
    padding: 2px;
+   font-size: 10px;
 }
 
 .sql {
@@ -111,7 +114,6 @@ body {
   margin: 0px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 13px;
-  line-height: 18px;
   color: #202020;
 }
 
@@ -378,17 +380,14 @@ input[type=range]::-webkit-slider-runnable-track {
   color: #959595;	
 }
 
-.nuBlank:before{ 
-    font-size:20px;
-    content: ' *';
-    color:#00ADEF;
+.nuBlank{ 
+    font-weight:bold;
 }
 
 
-.nuDuplicate:before{ 
-    font-size:20px;
-    content: ' *';
-    color:#7FC347;
+.nuDuplicate{ 
+    font-style:italic;
+    font-weight:900;
 }
 
 .nuBrowseTitle {
@@ -673,129 +672,127 @@ input[type=range]::-webkit-slider-runnable-track {
 }
 
 .nuDragSelected {
-			outline:1px solid red;
+	outline:1px solid red;
 }
 
 
 .nuDragSelected:hover{
-			cursor:move;
+	cursor:move;
 }
 
 
 .nuDragObject {
-			position:absolute;
-			border-style:none;
-			border-width:0px;
+	position:absolute;
+	border-style:none;
+	border-width:0px;
 }
 
 
 .nuDragNoSelect {
-			-webkit-touch-callout: none;
-			-webkit-user-select: none;
-			-khtml-user-select: none;
-			-moz-user-select: none;
-			-ms-user-select: none;
-			user-select: none;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 .nuDragArea {
-			position:absolute;
-			top:0px; 
-			left: 0px; 
-			border-style:solid; 
-			border-width:1px; 
-			border-color:black; 
-			-webkit-user-select:none; 
-			overflow:visible; 
-			background-color:white;
-			background-image: url("grid.png"); 
-			z-index: 1;
+	position:absolute;
+	top:0px; 
+	left: 0px; 
+	border-style:solid; 
+	border-width:1px; 
+	border-color:black; 
+	-webkit-user-select:none; 
+	overflow:visible; 
+	background-color:white;
+	background-image: url("grid.png"); 
+	z-index: 1;
 }
 
 .nuDragDialog{
-			-webkit-box-shadow: 5px 5px 5px 0px rgba(150,147,150,1);
-			-moz-box-shadow: 5px 5px 5px 0px rgba(150,147,150,1);
-			box-shadow: 5px 5px 5px 0px rgba(150,147,150,1);
+	-webkit-box-shadow: 5px 5px 5px 0px rgba(150,147,150,1);
+	-moz-box-shadow: 5px 5px 5px 0px rgba(150,147,150,1);
+	box-shadow: 5px 5px 5px 0px rgba(150,147,150,1);
 }
 
 
 .nuSection{
-			-webkit-touch-callout: none;
-			-webkit-user-select: none;
-			-khtml-user-select: none;
-			-moz-user-select: none;
-			-ms-user-select: none;
-			user-select: none;
-			border-width:1px;
-			font-size:12px;
-			font-family:Helvetica;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	border-width:1px;
+	font-size:12px;
+	font-family:Helvetica;
 }
 
 .nuDragLine{
-			position:absolute;
-			height:10px;
-			background-color:darkgrey;
-			border-style:none;
-			z-index:4000;
+	position:absolute;
+	height:10px;
+	background-color:darkgrey;
+	border-style:none;
+	z-index:4000;
 }
 
 .nuDragLine:hover{
-			background-color:red;
-			cursor:ns-resize;
+	background-color:red;
+	cursor:ns-resize;
 }
 .nuChanged1{
-			background-color:#F7DC6F;
+	background-color:#F7DC6F;
 }
 .nuChanged2{
-			background-color:#F5B041;
+	background-color:#F5B041;
 }
 .nuChanged3{
-			background-color:#E67E22;
+	background-color:#E67E22;
 }
 
 
 .nuDragLineV{
-			position:absolute;
-			height:10px;
-			width:10px;
-			right:0px;
-			top:0px;
-			background-color:darkgrey;
-			border-style:none;
-			z-index:4500;
+	position:absolute;
+	height:10px;
+	width:10px;
+	right:0px;
+	top:0px;
+	background-color:darkgrey;
+	border-style:none;
+	z-index:4500;
 }
 
 .nuDragLineV:hover{
-			background-color:red;
-			cursor:ew-resize;
+	background-color:red;
+	cursor:ew-resize;
 }
 
 #dialogTitle {
-			cursor: pointer; 
+	cursor: pointer; 
 }
 
 .nuDragToolbar {
-			cursor: pointer; 
-			list-style-type: none; 
-			text-align: center;
-			padding-top:4px;
-			font-family: Helvetica;
-			font-size: 14;
-			z-index: 1000;
-			
+	cursor: pointer; 
+	list-style-type: none; 
+	text-align: center;
+	padding-top:4px;
+	font-family: Helvetica;
+	font-size: 14;
+	z-index: 1000;
 }
 .nuToolbar {
-			cursor: pointer; 
-			text-align: center;
-			display: inline-block;
-			width:150px;
-			height:20px;
-			font-family: Helvetica;
-			
+	cursor: pointer; 
+	text-align: center;
+	display: inline-block;
+	width:150px;
+	height:20px;
+	font-family: Helvetica;
 }
 
 .nuToolbar:hover{
-			color:red;
+	color:red;
 }
 
 .wordwrap { 
@@ -843,9 +840,8 @@ input[type=range]::-webkit-slider-runnable-track {
 }
 
 .nuValidate {
-  background-color: yellow !important;
-  border-color: red !important;
-  
+	background-color: yellow !important;
+	border-color: red !important;
 }
 
 .nuMust:after{ 
@@ -854,73 +850,45 @@ input[type=range]::-webkit-slider-runnable-track {
 }
 
 .nuSaveMessageProgress {
-     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-     width:100px;
-     height:22px;
-     top:10px;
-     left:0px;
-     color: #202020;
-     position:absolute;
-     font-size: 14px;
-     line-height: 20px;
-     text-align: left;
-     text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
-     vertical-align: middle;
-}
-
-.nuSaveMessageWarning {
-     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-     width:110px;
-     height:20px;
-     top:10px;
-     left:0px;
-     color: #FF0000;
-     background-color: #EDEDED;
-     border-style: solid;
-     border-color: #FF0000;
-     border-width: 1px;
-     position:absolute;
-     font-size: 16px;
-     font-weight: normal;
-     line-height: 18px;
-     text-align: center;
-     vertical-align: middle;
-     text-shadow: 0 1px 1px #E1E8EA;
-     -webkit-border-radius: 4px;
-     -moz-border-radius: 4px;
-     border-radius: 4px;
-     -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
-     -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
-     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
-     opacity:0.7
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	width:100px;
+	height:22px;
+	top:10px;
+	left:0px;
+	color: #202020;
+	position:absolute;
+	font-size: 14px;
+	line-height: 18px;
+	text-align: left;
+	text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+	vertical-align: middle;
 }
 
 .nuSaveMessage {
-     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-     width:110px;
-     height:20px;
-     top:10px;
-     left:0px;
-     color: #01A6F5;
-     background-color: #EDEDED;
-     border-style: solid;
-     border-color: #01A6F5;
-     border-width: 1px;
-     position:absolute;
-     font-size: 16px;
-     font-weight: normal;
-     line-height: 18px;
-     text-align: center;
-     vertical-align: middle;
-     text-shadow: 0 1px 1px #E1E8EA;
-     -webkit-border-radius: 4px;
-     -moz-border-radius: 4px;
-     border-radius: 4px;
-     -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
-     -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
-     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
-     opacity:0.7
-
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	width:110px;
+	height:20px;
+	top:10px;
+	left:0px;
+	color: #01A6F5;
+	background-color: #EDEDED;
+	border-style: solid;
+	border-color: #01A6F5;
+	border-width: 1px;
+	position:absolute;
+	font-size: 16px;
+	font-weight: normal;
+	line-height: 18px;
+	text-align: center;
+	vertical-align: middle;
+	text-shadow: 0 1px 1px #E1E8EA;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+	-moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+	opacity:0.7
 }
 
 .nuErrorDisplay {
@@ -942,7 +910,6 @@ input[type=range]::-webkit-slider-runnable-track {
 }
 
 .nuAlert {
-	
     font-family:Tahoma,Geneva,Arial,sans-serif;
 	position:absolute;
 	top:10px;
@@ -952,25 +919,20 @@ input[type=range]::-webkit-slider-runnable-track {
 	box-shadow: 5px 5px 5px 0px rgba(150,147,150,1);
     opacity: 100;
     z-index: 5000;
-	
 }
 
 #nuErrorCode {
-	
 	position:relative;
 	height:50px;
 	background-color: black;
 	color: white;
 	overflow:scroll;
 	overflow-x: hidden;
-	
 }
 
 .nuWord {
-	
     font-family:Tahoma,Geneva,Arial,sans-serif;
     font-style:bold;
-
 }
 
 
@@ -984,13 +946,11 @@ input[type=range]::-webkit-slider-runnable-track {
 }
 
 #close_error {
-	
 	position:relative;
 	left:1px;
 	top:1px;
 	width:20px;
 	height:20px;
-	
 }
 
 #close_error:hover {
@@ -1025,4 +985,36 @@ input[type=range]::-webkit-slider-runnable-track {
 .nuHighlight {
 	background-color: #FFEEA6;
 }
+
+.nuBoxHeader {
+	position			: absolute;
+	text-align   		: left;
+	background-color	: lightgrey;
+	border				: none;
+}
+
+.nuBoxHeader {
+   -webkit-box-shadow: 5px 5px 5px 0px rgba(150,147,150,1);
+   -moz-box-shadow: 5px 5px 5px 0px rgba(150,147,150,1);
+   box-shadow: 5px 5px 5px 0px rgba(150,147,150,1);
+}
+
+.nuBoxTitle {
+	color:black;
+}
+.nuBoxTitle:hover {
+	color:red;
+	cursor:move;
+}
+
+.nuBoxField:hover {
+	color:red;
+	cursor:move;
+}
+
+.nuButtonHover{
+	cursor:pointer;
+}
+
+
 

@@ -14,6 +14,7 @@ window.nuSESSION				= '';
 window.nuDRAGLINEVSTART			= '';
 window.nuDRAGLINEVID			= '';
 window.nuNEW					= '';
+window.nuDragID						= 1000;
 
 function nuOpener(f, r, filter, parameters){
 	
@@ -401,27 +402,24 @@ function nuBindCtrlEvents(){
         if (e.ctrlKey && e.shiftKey) {
 			
 			window.nuNEW = 0;
+			
 			e.preventDefault();
 			
-            if(e.keyCode == 65) {//A
-			
+            if(e.keyCode == 65 && window.global_access) {						//-- a
 				nuPopup(window.nuFORM.getCurrent().form_id, "-2");
-
-			} else if(e.keyCode == 70) {//F
-
+			} else if(e.keyCode == 70 && window.global_access) {				//-- f
 				nuPopup("nuform", window.nuFORM.getCurrent().form_id);
-				
-			} else if(e.keyCode == 79) {//O
-			
+			} else if(e.keyCode == 79 && window.global_access) {				//-- O
 				nuPopup("nuobject", "", window.nuFORM.getCurrent().form_id);
-				
+			} else if(e.keyCode == 68 && window.global_access) {				//-- d
+				nuPopup("nudebug", "");
 			} else if (e.keyCode == 82) {//R
-				
+
 				if(window.nuFORM.getCurrent().record_id != '') {
 					nuGetBreadcrumb();
 				}
 				
-			} else if(e.keyCode == 83) {//S
+			} else if(e.keyCode == 83) {										//-- s
 			
 				if(window.nuFORM.getCurrent().record_id != '') {
 					nuSaveAction();
@@ -439,14 +437,20 @@ function nuBindCtrlEvents(){
 				searchIndex = Math.abs(49 - e.keyCode);
 			}
 
-			if(searchIndex != -1) {
-				if($.inArray(searchIndex,nosearch) != '-1') {
+			if(searchIndex != -1){
+				
+				if($.inArray(searchIndex,nosearch) != '-1'){
+					
 					nosearch.pop(searchIndex);
 					$('#nusort_' + searchIndex).removeClass('nuNoSearch');					
-				} else {
+					
+				}else{
+					
 					nosearch.push(searchIndex);
 					$('#nusort_' + searchIndex).addClass('nuNoSearch');
+					
 				}
+				
 			}
 			
 			window.nuFORM.setProperty('nosearch_columns', nosearch);
@@ -806,5 +810,44 @@ function nuGetFunctionList(){
 
 	return f;
 
+}
+
+
+function nuID(){
+
+	window.nuUniqueID	= 'c' + String(Date.now());
+	
+	if(window.nuSuffix == 9999){
+		window.nuSuffix		= 0
+	}else{
+		window.nuSuffix	++;
+	}
+	
+	id						= window.nuUniqueID + nuPad4(window.nuSuffix);
+		
+	return id;
+
+}
+
+
+function nuWhen(w){
+
+	var nunow   = Date.now();
+	var numax   = (Date.now()/1000) - Number(w);
+	var numin   = numax;
+	var nuhtm   = String(Math.ceil(numin)) 							+ ' seconds ago';
+
+	if(numin < 21600)   {nuhtm = String(Math.ceil(numin/60/60)) 	+ ' hours ago';}
+	if(numin < 360)     {nuhtm = String(Math.ceil(numin/60)) 		+ ' minutes ago';}
+	if(numin < 60)      {nuhtm = String(Math.ceil(numin)) 			+ ' seconds ago';}
+
+	return nuhtm;
+
+}
+
+
+
+function nuSpaces(s){
+	return String('&nbsp;').repeat(s);
 }
 
