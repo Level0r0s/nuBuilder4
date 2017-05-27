@@ -1534,7 +1534,7 @@ function nuOptions(p, f, t, access){
 		$('#' + id)
 		.attr('src', 'nuoptions.png')
 		.attr('title', 'Options')
-		.attr('onclick', 'nuGetOptionsList("' + f + '", this, "' + p + '", "' + access + '")')
+		.attr('onclick', 'nuGetOptionsList("' + f + '", this, "' + p + '", "' + access + '", "' + t + '")')
 		.css({'top'			: 5, 
 		'right' 			: 5, 
 		'width' 			: 15, 
@@ -1567,7 +1567,7 @@ function nuOptions(p, f, t, access){
    
 }
 
-function nuGetOptionsList(f, t, p, a){
+function nuGetOptionsList(f, t, p, a, type){
 
 	var icon	= $('#' + t.id);
 	var off		= icon.offset();
@@ -1585,13 +1585,15 @@ function nuGetOptionsList(f, t, p, a){
 		
 		if(nuSERVERRESPONSE.form_access == 0 || String(f).substr(0,2) != 'nu'){
 		
-			list.push(['Arrange Objects', 		'nuPopup("' + f + '", "-2")', 				'nu_option_arrange.png', 		'Ctrl+Shft+A']);
-			list.push(['Form Properties', 		'nuPopup("nuform", "' + f + '")', 			'nu_option_properties.png',		'Ctrl+Shft+F']);
-			list.push(['Form Object List', 		'nuPopup("nuobject", "", "' + f + '")', 	'nu_option_objects.png',		'Ctrl+Shft+O']);
+			list.push(['Arrange Objects', 		'nuPopup("' + f + '", "-2")', 			'nu_option_arrange.png', 		'Ctrl+Shft+A']);
+			list.push(['Form Properties', 		'nuPopup("nuform", "' + f + '")', 		'nu_option_properties.png',		'Ctrl+Shft+F']);
+			list.push(['Form Object List', 		'nuPopup("nuobject", "", "' + f + '")', 'nu_option_objects.png',		'Ctrl+Shft+O']);
 			
 		}
 		
-		list.push(['nuDebug', 				'nuPopup("nudebug", "")', 					'nu_option_debug.png',			'Ctrl+Shft+D']);
+		if(type != 'subform'){
+			list.push(['nuDebug', 				'nuPopup("nudebug", "")', 					'nu_option_debug.png',			'Ctrl+Shft+D']);
+		}
 		
 	}else{
 		
@@ -1599,12 +1601,15 @@ function nuGetOptionsList(f, t, p, a){
 		
 	}
 
-	if(nuFORM.getProperty('record_id') != ''){
+	if(nuFORM.getProperty('record_id') != '' && type != 'subform'){
 		
 		list.push(['Save Form', 			'nuSaveAction();', 							'nu_option_save.png',		'Ctrl+Shft+S']);
 		list.push(['Refresh', 				'nuGetBreadcrumb()', 						'nu_option_refresh.png', 	'Ctrl+Shft+R']);
 		
 	}
+	
+
+	if(list.length == 0){return;}
 	
 	//hide all other listboxes
 	$('#nuOptionsListBox').remove();

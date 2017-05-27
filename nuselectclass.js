@@ -311,6 +311,7 @@ function nuAngle(){
 		var F	= window.nuRelationships[I][0];
 		var T	= window.nuRelationships[I][1];
 		var o	= $('#' + F).offset();
+		var p	= $('#' + F).parent().parent().offset();
 		var b	= {'top' : o.top, 'left' : o.left};
 		var o	= $('#' + T).offset();
 		var a	= {'top' : o.top, 'left' : o.left};
@@ -326,6 +327,9 @@ function nuAngle(){
 			t	= a;
 
 		}
+
+			f	= a;
+			t	= b;
 
 		if(f.box == ''){return;}
 
@@ -353,11 +357,40 @@ function nuAngle(){
 		})
 		.addClass('nuRelationships');
 
-		var F	= $('#' + L.id).position();
+		var FROM	= $('#' + L.id).position();
+		var top 	= parseInt(f.top + f.top - FROM.top);
+		var left	= parseInt(f.left + f.left - FROM.left);
+
+		
 
 		$('#' + i)
-		.css('top', f.top + (f.top - F.top + 8))
-		.css('left', f.left + f.left - F.left - 20);
+		.css('top', top)
+		.css('left', left);
+		
+		var off = $('#' + i).offset();
+		var tdif	= top - parseInt(off.top);
+		var ldif	= left - parseInt(off.left);
+
+		var fbox	= $('#' + F).parent().parent().position();
+		var tbox	= $('#' + T).parent().parent().position();
+		var ffld	= $('#' + F).position();
+		var tfld	= $('#' + T).position();
+		
+
+		if(fbox.top + ffld.top < tbox.top + tfld.top){
+			$('#' + i).css('top', 	top - (tdif * 2));
+		}
+
+
+		if(fbox.left < tbox.left){
+			
+			$('#' + i).css('left', 	p.top);
+
+			console.log(p.top);
+
+		}
+		
+		
 		
 	}
 	

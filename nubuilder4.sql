@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 24, 2017 at 10:18 AM
+-- Generation Time: May 28, 2017 at 12:43 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -526,7 +526,7 @@ INSERT INTO `zzzzsys_event` (`zzzzsys_event_id`, `sev_zzzzsys_object_id`, `sev_e
 ('573d15d41e2aa8c', '573d15d41e279ba', 'onclick', 'window.open(''nureportbuilder4.php?tt='' + $("#sre_zzzzsys_php_id").val() + ''&launch='' + $("#sre_zzzzsys_form_id").val());'),
 ('575619c3bb27cec', '570d98b34bf37c9', 'onchange', 'nuObjectColor();'),
 ('58c465508d50619', '58c465508d4fc64', 'onclick', 'nuPopPHP(event, ''BB'');'),
-('s14953594921439', 's14953594921438', 'onchange', 'window.nuSelect	= new nuSelectObject();window.nuSelect.addBox(this.value);'),
+('s14953594921439', 's14953594921438', 'onchange', '$(''#sqlframe'')[0].contentWindow.nuSelect.addBox(this.value);'),
 ('58c8f16d6d462b2', '5716e2428f5e8fb', 'afterinsertrow', '$("[id$=''sev_javascript'']").addClass(''js'')'),
 ('5811633909ef4fb', '5811633909eeadd', 'onclick', 'nuPopPHP(event, ''BE'');'),
 ('58116941a1a294e', '58116941a1a1f06', 'onclick', 'nuPopPHP(event, ''BS'');'),
