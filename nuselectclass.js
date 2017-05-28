@@ -360,11 +360,9 @@ window.FFF = F;
 		}
 		
 		if(F.offset().left < T.offset().left){
-			
-			console.log(9);
 			L.css('left', Lleft - (L.offset().left - F.offset().left));
-			
 		}else{
+			console.log(9);
 			L.css('left', Lleft - (F.offset().left - L.offset().left));
 		}
 
