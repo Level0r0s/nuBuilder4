@@ -41,7 +41,6 @@ class nuSelectObject{
 			'background-color'	: 'darkgrey',
 			'z-index'			: -1,
 		})
-		.attr('data-nu-was', Math.min(20 + (n.length * 20), 190))
 		.addClass('nuBox')
 		.addClass('nuDragNoSelect')
 		.addClass('nuBoxHeader')
@@ -137,7 +136,7 @@ class nuSelectObject{
 
 			var f	= $(this).val();											//-- alias
 			var i	= this.id.substr(5);
-			console.log('.' + i + '.nuBoxField', $('.' + i + '.nuBoxField').length);
+			
 			if(f == ''){
 				f	= $('#tablename' + i).html();								//-- table name
 			}
@@ -146,8 +145,8 @@ class nuSelectObject{
 			
 		})
 		
-		for(var rows = 0 ; rows < n.length ; rows++){
-			this.boxRow(rows, n[rows], p[rows]);
+		for(var rows = 0 ; rows < n.length ; rows++){							//-- add field list
+			this.boxRow(rows, n[rows], p[rows], w);
 		}
 
 		var x = document.createElement('div');									//-- close box
@@ -187,10 +186,10 @@ class nuSelectObject{
 	}
 	
 
-	boxRow(i, v, t){
+	boxRow(i, v, t, w){
 			
 		this.boxColumn('select', i, 0, 	18,	v, '');
-		this.boxColumn('field', i, 22, 	300,v,  t);
+		this.boxColumn('field', i, 22, 	300,v,  t, w);
 
 		$('.nuBoxField')
 		.unbind()
@@ -236,7 +235,7 @@ class nuSelectObject{
 			.addClass('nuBoxTitle')
 			.addClass('nuBoxField')
 			.addClass(this.boxID)
-			.css('width', '')
+			.css('width', Number(w))
 			.css('padding-top', 2)
 			.html(v);
 			
@@ -254,8 +253,11 @@ function nuFieldMouseUp(e){
 	if(window.nuRelationA == ''){return;}
 	
 	var t				= $(e.target).attr('data-nu-table')
+	var p				= $(e.target).parent().parent().attr('id');
 	
-	window.nuRelationships.push([[window.nuRelationA], [e.target.id]]);
+	if(window.nuRelationBox	!= p){
+		window.nuRelationships.push([[window.nuRelationA], [e.target.id]]);
+	}
 	
 	nuAngle();
 
@@ -266,9 +268,9 @@ function nuFieldMouseUp(e){
 
 function nuFieldMouseDown(e){
 
-	var t				= $(e.target).attr('data-nu-table')
-	window.nuRelationA	= e.target.id;
-	console.log(e)
+	var t					= $(e.target).attr('data-nu-table')
+	window.nuRelationA		= e.target.id;
+	window.nuRelationBox	= $(e.target).parent().parent().attr('id')
 	
 }
 
@@ -308,58 +310,38 @@ function nuAngle(){
 
 	for(I = 0 ; I < window.nuRelationships.length ; I++){
 
-		var F	= window.nuRelationships[I][0];
-		var T	= window.nuRelationships[I][1];
-		var o	= $('#' + F).offset();
-		var p	= $('#' + F).parent().parent().offset();
-		var b	= {'top' : o.top, 'left' : o.left};
-		var o	= $('#' + T).offset();
-		var a	= {'top' : o.top, 'left' : o.left};
-		
-		if(b.left > a.left){
-			
-			f	= a;
-			t	= b;
-
-		}else{
-			
-			f	= b;
-			t	= a;
-
-		}
-
-			f	= a;
-			t	= b;
-
-		if(f.box == ''){return;}
-
-		var d 	= Math.atan2(f.top - t.top, f.left - t.left) * 180 / Math.PI;		//-- angle in degrees
-		var a 	= Math.max(f.top - t.top);
-		var b 	= Math.max(f.left - t.left);
-		var c	= Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
+		var F	= $('#' + window.nuRelationships[I][0]);
+		var T	= $('#' + window.nuRelationships[I][1]);
+		var f	= F.offset();
+		var t	= T.offset();
+		var d 	= Math.atan2(t.top - f.top, t.left - f.left) * 180 / Math.PI;		//-- angle in degrees
+		var w	= Math.sqrt(Math.pow(f.top - t.top, 2) + Math.pow(f.left - t.left, 2));
 		var i	= 'relation' + nuID();
 
 		var L = document.createElement('div');										//-- relationship line
 		
 		L.setAttribute('id', i);
-		
+window.LLL = i;		
+window.FFF = F;
 		$('body').append(L);
 		
 		$('#' + L.id).css({
-			'width'				: c,
-			'height'			: 0,
+			'width'				: w,
+			'height'			: 3,
 			'left'				: f.left,
 			'top'				: f.top,
 			'position'			: 'absolute',
 			'text-align'    	: 'center',
 			'border'			: 'black 1px solid',
+			'border-color'		: 'black black black red',
+			'border-width'		: '1px 1px 1px 3px',
 			'transform'			: 'rotate(' + d + 'deg)',
 		})
 		.addClass('nuRelationships');
 
-		var FROM	= $('#' + L.id).position();
-		var top 	= parseInt(f.top + f.top - FROM.top);
-		var left	= parseInt(f.left + f.left - FROM.left);
+		var L		= $('#' + L.id);
+		var top 	= parseInt(f.top + f.top - L.top);
+		var left	= parseInt(f.left + f.left - L.left);
 
 		
 
@@ -367,30 +349,25 @@ function nuAngle(){
 		.css('top', top)
 		.css('left', left);
 		
-		var off = $('#' + i).offset();
-		var tdif	= top - parseInt(off.top);
-		var ldif	= left - parseInt(off.left);
-
-		var fbox	= $('#' + F).parent().parent().position();
-		var tbox	= $('#' + T).parent().parent().position();
-		var ffld	= $('#' + F).position();
-		var tfld	= $('#' + T).position();
 		
+		var Ltop	= parseInt(L.css('top'));
+		var Lleft	= parseInt(L.css('left'));
 
-		if(fbox.top + ffld.top < tbox.top + tfld.top){
-			$('#' + i).css('top', 	top - (tdif * 2));
+		if(F.offset().top < T.offset().top){
+			L.css('top', Ltop + F.offset().top - L.offset().top);
+		}else{
+			L.css('top', Ltop + L.offset().top - F.offset().top);
 		}
-
-
-		if(fbox.left < tbox.left){
+		
+		if(F.offset().left < T.offset().left){
 			
-			$('#' + i).css('left', 	p.top);
-
-			console.log(p.top);
-
+			console.log(9);
+			L.css('left', Lleft - (L.offset().left - F.offset().left));
+			
+		}else{
+			L.css('left', Lleft - (F.offset().left - L.offset().left));
 		}
-		
-		
+
 		
 	}
 	
