@@ -32,8 +32,8 @@ class nuSelectObject{
 		$('#' + this.boxID).css({
 			'width'        		: w,
 			'height'       		: Math.min(20 + (n.length * 20), 190),
-			'top'				: 20,
-			'left'				: 20,
+			'top'				: 25 + (25 * $('.nuBox').length),
+			'left'				: 22 + (22 * $('.nuBox').length),
 			'position'			: 'absolute',
 			'border'			: 'solid grey 1px',
 			'overflow'			: 'hidden',
@@ -171,19 +171,17 @@ class nuSelectObject{
 		.addClass('nuButtonHover')
 		.addClass('nuSearchListClose');
 		
-		var s	= this.buildSQL();
-		
-		$('#sse_sql', parent.document).val(s);
-
+		this.buildSQL();
 		
 	}
 
 	buildSQL(c, b){				//-- checkbox type, boxID
 	
 		var s 	= this.buildSelect(c, b);
+		var f	= this.buildFrom();
 		var j	= this.buildJoin();
 		
-		return s + j;
+		$('#sse_sql', parent.document).val(s + f + j);
 	
 	}
 	
@@ -242,6 +240,27 @@ class nuSelectObject{
 		
 	}
 	
+	buildFrom(){
+			
+		var f		= [];
+		
+		$('.nuBox').each(function(index){
+			
+			var b	= $(this)[0].id;
+			var t	= $('#tablename' + b).html();
+			var a	= $('#alias' + b).val();
+			var as	= a == '' ? ' ' : ' AS ';
+			
+			f.push(String(t + as + a).trim());
+			
+		});
+
+		var F		= "FROM\n    " + f.join(",\n    ") + "\n";
+		
+		return F;
+		
+	}
+	
 	buildJoin(){
 			
 		var r		= window.nuRelationships;
@@ -258,7 +277,7 @@ class nuSelectObject{
 			s.push(j + tbl + f + ' = ' + t)
 			
 		}
-		
+
 		return s.join("\n") + "\n";
 		
 	}
@@ -434,8 +453,7 @@ function nuAngle(){
 		var L = document.createElement('div');										//-- relationship line
 		
 		L.setAttribute('id', i);
-window.LLL = i;		
-window.FFF = F;
+		
 		$('body').append(L);
 		
 		$('#' + L.id).css({
