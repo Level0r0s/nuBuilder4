@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 25, 2017 at 03:59 AM
+-- Generation Time: May 30, 2017 at 02:17 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -553,7 +553,8 @@ INSERT INTO `zzzzsys_event` (`zzzzsys_event_id`, `sev_zzzzsys_object_id`, `sev_e
 ('58d76b89aeb07d6', '58d76b89aeafcea', 'onkeydown', 'nuFORM.scrollList(event, window.nuObjectFields);'),
 ('58d77876b3e8944', '58d700e66eab5aa', 'onclick', 'nuShowFFO(event)'),
 ('s14913709691917', '583387f044052c5', 'onclick', 'nuGetPHP(''nufflaunch'', ''nufastform'')'),
-('s14937683129028', 's14931629819345', 'onclick', 'chris();nuSaveAction()');
+('s14937683129028', 's14931629819345', 'onclick', 'chris();nuSaveAction()'),
+('s14960757864251', 's14960757864250', 'onchange', '$(''#sqlframe'').contents().find(''body'').css(''zoom'', this.value / 100)');
 
 -- --------------------------------------------------------
 
@@ -665,7 +666,8 @@ INSERT INTO `zzzzsys_form` (`zzzzsys_form_id`, `sfo_type`, `sfo_code`, `sfo_desc
 ('c14929786978782474', 'browseedit', 'FF12', 'Fast Form 12', 'aaaaaaaaaa', 'aaaaaaaaaa_id', '', 0, 0, 'SELECT * FROM aaaaaaaaaa', ''),
 ('nuselect', 'browseedit', 'SQL', 'Select Builder', 'zzzzsys_select', 'zzzzsys_select_id', '', 0, 0, 'SELECT * FROM zzzzsys_select\nORDER BY sal_code\n', '\nnuSetTitle($(''#sal_code'').val());\n\n$(''#zoomer'').val(100);\n\n\n\n'),
 ('s14937641259181', 'browse', 'LAUNCH', 'Launchable Forms', 'zzzzsys_form', 'zzzzsys_form_id', '', 0, 0, 'SELECT * FROM zzzzsys_form\nWHERE sfo_type IN (''edit'', ''browseedit'', ''launch'')\nORDER BY sfo_code\n\n\n\n', '$(''#sfo_breadcrumb_title'').addClass(''sql'');\n$(''#sfo_browse_sql'').addClass(''sql'');\n$(''#sfo_javascript'').addClass(''js'');\n\nnuSetTitle($(''#sfo_table'').val());\n\n$(''.js'').dblclick(function() {\n	nuOpenAce(''Javascript'', this.id);\n});\n\n$(''.sql'').dblclick(function() {\n	nuOpenAce(''SQL'', this.id);\n});\n\n$(''.html'').dblclick(function() {\n	nuOpenAce(''HTML'', this.id);\n});\n\n$(''.php'').dblclick(function() {\n	nuOpenAce(''PHP'', this.id);\n});\n\nif(window.filter == ''justjs''){\n    \n    $(''#nuDeleteButton'').remove();\n    $(''#nuCloneButton'').remove();\n    $(''#nuTab0'').remove();\n    $(''#nuTab1'').remove();\n    $(''#nuTab2'').click();\n    $(''#nuTab2'').remove();\n    \n    nuSetTitle($(''#sfo_description'').val());\n    \n}\n\n\n\nfunction nuFormColor(){\n\n    var t   = String($(''#sfo_type'').val());\n\n    var pb  = ''previewbrowse'';\n    var pe  = ''previewedit'';\n\n    var bb  = ''bb_event'';\n    var be  = ''be_event'';\n    var bs  = ''bs_event'';\n    var as  = ''as_event'';\n    var bd  = ''bd_event'';\n    var ad  = ''ad_event'';\n    \n    if(t == ''browse''){\n        \n        nuDisable(pe);\n\n        nuDisable(be);\n        nuDisable(bs);\n        nuDisable(as);\n        nuDisable(bd);\n        nuDisable(ad);\n\n    }\n    \n    if(t == ''edit''){\n        \n        nuDisable(pb);\n        nuDisable(bb);\n        \n    }\n\n    if(t == ''launch''){\n        \n        nuDisable(pb);\n        nuDisable(bb);\n        nuDisable(as);\n        nuDisable(bd);\n        nuDisable(ad);\n\n    }\n    \n    if(t == ''subform''){\n        \n        nuDisable(pb);\n        nuDisable(bb);\n        nuDisable(be);\n        nuDisable(bs);\n        nuDisable(as);\n        nuDisable(bd);\n        nuDisable(ad);\n        nuDisable(''sfo_javascript'');\n        \n    }\n\n    var h           = $(''#sfo_type'').addClass(''nuEdited'');\n    var o           = [];\n    o[''browse'']		= [0,1,2];\n    o[''edit''] 		= [0,2];\n    o[''browseedit''] = [0,1,2];\n    o[''launch''] 	= [0,2];\n    o[''subform'']    = [0,1];\n    \n    $(''#sfo_type'').removeClass();\n    $(''#sfo_type'').addClass(''nu_''+$(''#sfo_type'').val());\n    \n    if(h){\n        $(''#sfo_type'').addClass(''nuEdited'');\n    }\n    \n    $("#sfo_type > option").each(function() {\n        $(this).addClass(''nu_''+this.value);\n    });\n\n    for(var i = 0 ; i < 7 ; i++){\n        $(''#nuTab'' + i).removeClass(''nuRelatedTab'');\n    }\n    var t   = o[$(''#sfo_type'').val()];\n\n    if(t !== undefined){\n        \n    	for(var i = 0 ; i < t.length ; i++){\n    		$(''#nuTab'' + t[i]).addClass(''nuRelatedTab'');		\n    	}\n    	\n    }\n    \n}\n\nnuFormColor();\n\n//nuBuildSubformArray(''zzzzsys_tab_sf'');\n//nuBuildSubformArray(''zzzzsys_browse_sf'');\n\n$("[data-nu-column=''nucolumn000'']").each(function() {\n    $(this).addClass(''nu_''+this.textContent);\n});\n\n\n\nfunction nuEventList(){\n	\n	if($(''sob_all_type'').val() == ''subform''){\n		return [''onchange'',''onadd''];\n	}else{\n		return [''onblur'',''onchange'',''onfocus'',''onkeydown''];\n	}\n	\n}\n\n\n'),
-('', 'browseedit', 'FF10', 'Fast Form 10', 'aaaa', 'aaaa_id', '', 0, 0, 'SELECT * FROM aaaa', '');
+('', 'browseedit', 'FF10', 'Fast Form 10', 'aaaa', 'aaaa_id', '', 0, 0, 'SELECT * FROM aaaa', ''),
+('nuclause', 'subform', 'SELSUB', 'Select Clauses', 'zzzzsys_select_clause', 'zzzzsys_select_clause_id', '', 0, 0, 'SELECT * FROM zzzzsys_select_clause', '');
 
 -- --------------------------------------------------------
 
@@ -1239,7 +1241,7 @@ INSERT INTO `zzzzsys_object` (`zzzzsys_object_id`, `sob_all_zzzzsys_form_id`, `s
 ('s14950404023368', 'c14950403809123264', 'aaaaaa', 'input', 'field01', 'text01', 's14950404023362', 180, 180, 180, 117, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
 ('s14944263918457', 'nudebug', 'zzzzsys_debug', 'input', 'deb_added', ' ', '575a31edccc2012', 10, 1, 1, 100, 20, '0', 'left', '0', '2', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
 ('s14950404023369', 'c14950403809123264', 'aaaaaa', 'input', 'field02', 'text02', 's14950404023362', 210, 210, 210, 117, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
-('s14951257374402', 'nuselect', 'zzzzsys_select', 'input', 'sse_description', 'Description', 's14930617882374', 30, 16, 100, 200, 18, '1', 'left', '1', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
+('s14951257374402', 'nuselect', 'zzzzsys_select', 'input', 'sse_description', 'Description', 's14930617882374', 10, 16, 109, 200, 18, '1', 'left', '1', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
 ('s14950412154796', 'c14950411932706986', 'aaaaaaa', 'input', 'field00', 'text00', 's14950412154777', 150, 150, 150, 117, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
 ('s14950412154797', 'c14950411932706986', 'aaaaaaa', 'input', 'field01', 'button01', 's14950412154777', 180, 180, 180, 117, 23, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 'N|$ 1,000.00', 'button', '', '', ''),
 ('s14950412154798', 'c14950411932706986', 'aaaaaaa', 'input', 'field02', 'checkbox02', 's14950412154777', 210, 210, 210, 117, 18, '1', 'right', '0', '0', '', '', '', '', '', '', '', 'SELECT COUNT(*) FROM zzzzsys_debug', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 'N|$ 1,000.00', 'checkbox', '', '', ''),
@@ -1259,9 +1261,15 @@ INSERT INTO `zzzzsys_object` (`zzzzsys_object_id`, `sob_all_zzzzsys_form_id`, `s
 ('s14950412154812', 'c14950411932706986', 'aaaaaaa', 'textarea', 'field16', 'Textarea16', 's14950412154777', 630, 630, 630, 117, 42, '1', 'left', '0', '0', '', '', '', '', '', '', '', 'SELECT COUNT(*) FROM zzzzsys_debug', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 'N|$ 1,000.00', 'nuScroll', '[''North'',''South'',''East'',''West'']', '', ''),
 ('s14950412154813', 'c14950411932706986', 'aaaaaaa', 'image', 'field17', 'Image17', 's14950412154777', 660, 660, 660, 117, 42, '1', 'left', '0', '0', '', '', '', '', '', '', '', 'SELECT COUNT(*) FROM zzzzsys_debug', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 'N|$ 1,000.00', 'nuScroll', '[''North'',''South'',''East'',''West'']', '', 's14921322478039'),
 ('s14951259521112', 'nuhome', '', 'run', 'run_sql', 'SELECT Builder', '581288bcd699493', 150, 82, 68, 150, 30, '1', 'right', '1', '0', '', '', '', 'nuselect', '', 'b', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', '', ''),
-('s14951260604813', 'nuselect', 'zzzzsys_select', 'html', 'nusvg', 'Fields<br>and<br>Relationships', 's14930617882374', 20, 47, 101, 900, 300, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '<iframe id=''sqlframe'' src=''nuselect.php'' style=''height:300px;width:900px''>\n</iframe>', ''),
-('s14952406757366', 'nuselect', 'zzzzsys_select', 'input', 'zoomer', 'Resize', 's14930617882374', 40, 19, 801, 200, 18, '1', 'left', '1', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'range', '', '', ''),
-('s14953594921438', 'nuselect', 'zzzzsys_select', 'select', 'addtable', 'Add Table', 's14930617882374', 10, 18, 444, 200, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '0', 'SELECT table_name as a, table_name as b FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = DATABASE()', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'range', '', '', '');
+('s14951260604813', 'nuselect', 'zzzzsys_select', 'html', 'nusvg', 'Fields<br>and<br>Relationships', 's14930617882374', 40, 48, 110, 700, 300, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '<iframe id=''sqlframe'' src=''nuselect.php'' style=''height:300px;width:700px''>\n</iframe>', ''),
+('s14952406757366', 'nuselect', 'zzzzsys_select', 'input', 'zoomer', 'Resize', 's14930617882374', 30, 16, 710, 100, 18, '1', 'left', '1', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'range', '', '', ''),
+('s14953594921438', 'nuselect', 'zzzzsys_select', 'select', 'addtable', 'Add Table', 's14930617882374', 20, 16, 399, 200, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '0', 'SELECT table_name as a, table_name as b FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = DATABASE()', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'range', '', '', ''),
+('s14960743863373', 'nuclause', 'zzzzsys_select_clause', 'input', 'ssc_order', 'Order', 's14960741898410', 40, 154, 122, 45, 18, '1', 'right', '0', '0', '', '', '', '', '', '', '', '', '', 'browse|Browse|edit|Edit|browseedit|Browse and Edit|criteria|Criteria or Home|procedure|Procedure|report|Report', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'number', '', '', ''),
+('s14960749531713', 'nuclause', 'zzzzsys_select_clause', 'select', 'ssc_type', 'Type', 's14960741898410', 10, 58, 122, 100, 16, '1', 'right', '0', '0', '', '', '', '', '', '', '', '', '0', '1|WHERE|\n2|ORDER BY|\n3|HAVING|\n4|GROUP BY', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'number', '', '', ''),
+('s14960751497257', 'nuclause', 'zzzzsys_select_clause', 'input', 'ssc_clause', 'Clause', 's14960741898410', 30, 122, 122, 300, 18, '1', 'right', '0', '0', '', '', '', '', '', '', '', '', '0', '10|WHERE|\n20|ORDER BY|\n30|GROUP BY|\n40|HAVING', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
+('s14960753634405', 'nuclause', 'zzzzsys_select_clause', 'input', 'ssc_field', 'Field', 's14960741898410', 20, 90, 122, 200, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '0', '10|WHERE|\n20|ORDER BY|\n30|GROUP BY|\n40|HAVING', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
+('s14960757864250', 'nuselect', 'zzzzsys_select', 'subform', 'zzzzsys_select_clause_sf', 'Clause', 's14930617882374', 60, 373, 110, 700, 150, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'nuclause', 'ssc_zzzzsys_select_id', '1', '1', 'g', 'zzzzsys_select_clause', 0, '', 'range', '', '', ''),
+('s14960767003439', 'nuselect', 'zzzzsys_select', 'textarea', 'sse_sql', 'SQL', 's14930617882374', 50, 45, 855, 400, 485, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -1389,11 +1397,11 @@ CREATE TABLE `zzzzsys_select` (
 
 CREATE TABLE `zzzzsys_select_clause` (
   `zzzzsys_select_clause_id` varchar(25) NOT NULL,
-  `sse_zzzzsys_select_id` varchar(25) NOT NULL,
-  `sse_type` varchar(300) NOT NULL,
-  `sse_field` varchar(500) NOT NULL,
-  `sse_clause` varchar(500) NOT NULL,
-  `sse_order` varchar(500) NOT NULL
+  `ssc_zzzzsys_select_id` varchar(25) NOT NULL,
+  `ssc_type` varchar(300) NOT NULL,
+  `ssc_field` varchar(500) NOT NULL,
+  `ssc_clause` varchar(500) NOT NULL,
+  `ssc_order` varchar(500) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1438,7 +1446,7 @@ CREATE TABLE `zzzzsys_setup` (
 --
 
 INSERT INTO `zzzzsys_setup` (`zzzzsys_setup_id`, `set_title`, `set_time_out_minutes`, `set_zzzzsys_timezone_id`, `set_trl_language`, `set_smtp_username`, `set_smtp_password`, `set_smtp_host`, `set_smtp_from_address`, `set_smtp_from_name`, `set_smtp_port`, `set_smtp_use_ssl`, `set_fonts`, `set_header`, `set_denied`, `set_splash`) VALUES
-('1', 'NOT USED DELETED THIS FIELD', 120, '52819fa94bc9a93', '', '', '', '', '', '', 0, '', '', '\n</script>\n\n<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>\n\n<script>\n', '1', '1');
+('1', 'NOT USED DELETED THIS FIELD', 120, '52819fa94bc9a93', '', '', '', '', '', '', 0, '', '', '\n</script>\n\n<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>\n\n<script>\n', '0', '1');
 
 -- --------------------------------------------------------
 
@@ -1760,7 +1768,8 @@ INSERT INTO `zzzzsys_tab` (`zzzzsys_tab_id`, `syt_zzzzsys_form_id`, `syt_title`,
 ('s14941738229683', '', 'Main', 10),
 ('s14937641259182', 's14937641259181', 'Main', 10),
 ('s14937641259183', 's14937641259181', 'Browse', 20),
-('s14937641259184', 's14937641259181', 'Custom Code', 30);
+('s14937641259184', 's14937641259181', 'Custom Code', 30),
+('s14960741898410', 'nuclause', 'Clause', 10);
 
 -- --------------------------------------------------------
 

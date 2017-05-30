@@ -22,11 +22,11 @@ class nuSelectObject{
 		var i			= nuID();
 		this.boxID		= 'box' + i;
 		this.scrollID	= 'scroll' + i;
-
-		var w			= this.nuBoxWidth(s, t);
-		
+		var w			= this.boxWidth(s, t);
 		var box			= document.createElement('div');		//-- box
 
+		this.boxes.push(this.boxID);		
+		
 		box.setAttribute('id', this.boxID);
 		$('body').append(box);
 		$('#' + this.boxID).css({
@@ -41,7 +41,6 @@ class nuSelectObject{
 			'background-color'	: 'darkgrey',
 			'z-index'			: -1,
 		})
-		.attr('data-nu-was', Math.min(20 + (n.length * 20), 190))
 		.addClass('nuBox')
 		.addClass('nuDragNoSelect')
 		.addClass('nuBoxHeader')
@@ -117,7 +116,8 @@ class nuSelectObject{
 			'left'				: -1,
 		})
 		.attr('type', 'checkbox')
-		.val(t);
+		.attr('onchange', 'window.nuSelect.buildSelectJoin("table","' + this.boxID + '")')
+		.prop('checked', true);
 		
 		var col	= document.createElement('input'); 								//-- table alias
 
@@ -137,7 +137,7 @@ class nuSelectObject{
 
 			var f	= $(this).val();											//-- alias
 			var i	= this.id.substr(5);
-			console.log('.' + i + '.nuBoxField', $('.' + i + '.nuBoxField').length);
+			
 			if(f == ''){
 				f	= $('#tablename' + i).html();								//-- table name
 			}
@@ -146,8 +146,8 @@ class nuSelectObject{
 			
 		})
 		
-		for(var rows = 0 ; rows < n.length ; rows++){
-			this.boxRow(rows, n[rows], p[rows]);
+		for(var rows = 0 ; rows < n.length ; rows++){							//-- add field list
+			this.boxRow(rows, n[rows], p[rows], w);
 		}
 
 		var x = document.createElement('div');									//-- close box
@@ -170,9 +170,63 @@ class nuSelectObject{
 		.addClass('nuButtonHover')
 		.addClass('nuSearchListClose');
 		
+		this.buildSelectJoin('');
+		
 	}
 
-	nuBoxWidth(s, t){
+	buildSelectJoin(c, b){				//-- checkbox type, boxID
+		
+		if(c == 'field'){
+			
+			$('#checkall' + b)
+			.prop('checked', false);
+			
+		}
+		
+		if(c == 'table'){
+			
+			$('.checkfield.' + b)
+			.prop('checked', false);
+			
+		}
+		
+		var	s		= [];
+		
+		for(var i = 0 ; i < this.boxes.length ; i++){
+			
+			var b				= this.boxes[i];
+			
+			if($('#' + b).length == 1){
+				
+				var t			= $('.nuBoxField.' + b).attr('data-nu-table');
+				
+				if($('#checkall' + b).is(':checked')){
+					s.push(t + '.*');
+				}else{
+					
+					$('.checkfield.' + b).each(function(index){
+						
+						var f	= 'field' + $(this)[0].id.substr(6);
+						
+						if($(this).is(':checked')){
+							s.push(t + '.' + $('#' + f).html());
+						}
+						
+						
+					});
+
+				}
+				
+			}
+			
+		}
+		
+		var SQL	= "SELECT\n" + s.join(',\n    ');
+		console.log(SQL);
+		
+	}
+	
+	boxWidth(s, t){
 		
 		var s	= parent.nuFORM.tableSchema
 		var n	= s[t].names;
@@ -187,10 +241,10 @@ class nuSelectObject{
 	}
 	
 
-	boxRow(i, v, t){
+	boxRow(i, v, t, w){
 			
 		this.boxColumn('select', i, 0, 	18,	v, '');
-		this.boxColumn('field', i, 22, 	300,v,  t);
+		this.boxColumn('field', i, 22, 	300,v,  t, w);
 
 		$('.nuBoxField')
 		.unbind()
@@ -203,13 +257,15 @@ class nuSelectObject{
 
 	boxColumn(c, t, l, w, v, title){
 
+		var suf		= '_' + t + '_' + this.boxID;
+
 		if(c == 'select'){
 			var col	= document.createElement('input');
 		}else{
 			var col	= document.createElement('span');
 		}
-
-		col.setAttribute('id', c + '_' + t + '_' + this.boxID);
+		
+		col.setAttribute('id', c + suf);
 		
 		$('#' + this.scrollID).append(col);
 		
@@ -225,8 +281,11 @@ class nuSelectObject{
 		if(c == 'select'){
 
 			$('#' + col.id)
+			.attr('data-nu-field', 'field' + suf)
+			.attr('onchange', 'window.nuSelect.buildSelectJoin("field","' + this.boxID + '")')
 			.attr('type', 'checkbox')
-			.val(v);
+			.addClass(this.boxID)
+			.addClass('checkfield');
 			
 		}else{
 
@@ -236,7 +295,7 @@ class nuSelectObject{
 			.addClass('nuBoxTitle')
 			.addClass('nuBoxField')
 			.addClass(this.boxID)
-			.css('width', '')
+			.css('width', Number(w))
 			.css('padding-top', 2)
 			.html(v);
 			
@@ -253,22 +312,33 @@ function nuFieldMouseUp(e){
 	
 	if(window.nuRelationA == ''){return;}
 	
-	var t				= $(e.target).attr('data-nu-table')
+	var I		= nuRelationA
+	var T		= $('#' + I).attr('data-nu-table')
+	var F		= $('#' + I).html();
 	
-	window.nuRelationships.push([[window.nuRelationA], [e.target.id]]);
+	var i		= e.target.id;
+	var t		= $('#' + i).attr('data-nu-table')
+	var f		= $('#' + i).html();
+	
+	if(F != f){
+		
+		var r	= {'from' : I, 'to' : i, 'fromfield' : T + '.' + F, 'tofield' : t + '.' + f, 'join' : ''};
+		window.nuRelationships[I+i]	= r;
+		
+	}
 	
 	nuAngle();
 
-	window.nuRelationA	= '';
+	nuRelationA	= '';
 	
 }
 
 
 function nuFieldMouseDown(e){
 
-	var t				= $(e.target).attr('data-nu-table')
-	window.nuRelationA	= e.target.id;
-	console.log(e)
+	var t					= $(e.target).attr('data-nu-table')
+	window.nuRelationA		= e.target.id;
+	window.nuRelationBox	= $(e.target).parent().parent().attr('id')
 	
 }
 
@@ -297,67 +367,75 @@ function nuAngle(){
 	
 	var r					= window.nuRelationships;
 	window.nuRelationships	= [];
+
 	
-	for(i = 0 ; i < r.length ; i++){
 		
-		if($('#' + r[i][0]).length == 1 && $('#' + r[i][1]).length == 1){
-			window.nuRelationships.push([r[i][0],r[i][1]]);
+	for (var key in r){																//-- remove links to closed boxes
+
+		if($('#' + r[key].from).length == 1 && $('#' + r[key].to).length == 1){
+			window.nuRelationships[key]	= r[key];
 		}
-		
+
 	}
-
-	for(I = 0 ; I < window.nuRelationships.length ; I++){
-
-		var F	= window.nuRelationships[I][0];
-		var T	= window.nuRelationships[I][1];
-		var o	= $('#' + F).offset();
-		var b	= {'top' : o.top, 'left' : o.left};
-		var o	= $('#' + T).offset();
-		var a	= {'top' : o.top, 'left' : o.left};
-		
-		if(b.left > a.left){
-			
-			f	= a;
-			t	= b;
-
-		}else{
-			
-			f	= b;
-			t	= a;
-
-		}
-
-		if(f.box == ''){return;}
-
-		var d 	= Math.atan2(f.top - t.top, f.left - t.left) * 180 / Math.PI;		//-- angle in degrees
-		var a 	= Math.max(f.top - t.top);
-		var b 	= Math.max(f.left - t.left);
-		var c	= Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
+	
+	for (var key in window.nuRelationships){
+	
+		var F	= $('#' + window.nuRelationships[key].from);
+		var T	= $('#' + window.nuRelationships[key].to);
+		var f	= F.offset();
+		var t	= T.offset();
+		var d 	= Math.atan2(t.top - f.top, t.left - f.left) * 180 / Math.PI;		//-- angle in degrees
+		var w	= Math.sqrt(Math.pow(f.top - t.top, 2) + Math.pow(f.left - t.left, 2));
 		var i	= 'relation' + nuID();
 
 		var L = document.createElement('div');										//-- relationship line
 		
 		L.setAttribute('id', i);
-		
+window.LLL = i;		
+window.FFF = F;
 		$('body').append(L);
 		
 		$('#' + L.id).css({
-			'width'				: c,
-			'height'			: 0,
+			'width'				: w,
+			'height'			: 3,
 			'left'				: f.left,
 			'top'				: f.top,
 			'position'			: 'absolute',
 			'text-align'    	: 'center',
 			'border'			: 'black 1px solid',
+			'border-color'		: 'black black black red',
+			'border-width'		: '1px 1px 1px 3px',
 			'transform'			: 'rotate(' + d + 'deg)',
 		})
 		.addClass('nuRelationships');
 
-		var F	= $('#' + L.id).position();
+		var L		= $('#' + L.id);
+		var top 	= parseInt(f.top + f.top - L.top);
+		var left	= parseInt(f.left + f.left - L.left);
+
+		
 
 		$('#' + i)
-		.css('top', f.top + (f.top - F.top + 8))
-		.css('left', f.left + f.left - F.left - 20);
+		.css('top', top)
+		.css('left', left);
+		
+		
+		var Ltop	= parseInt(L.css('top'));
+		var Lleft	= parseInt(L.css('left'));
+
+		if(F.offset().top < T.offset().top){
+			L.css('top', Ltop + F.offset().top - L.offset().top);
+		}else{
+			L.css('top', Ltop + L.offset().top - F.offset().top);
+		}
+		
+		if(F.offset().left < T.offset().left){
+			L.css('left', Lleft - (L.offset().left - F.offset().left));
+		}else{
+			console.log(9);
+			L.css('left', Lleft + (2 * (F.offset().left - L.offset().left)))
+		}
+
 		
 	}
 	
