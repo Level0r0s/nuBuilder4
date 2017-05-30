@@ -32,8 +32,8 @@ class nuSelectObject{
 		$('#' + this.boxID).css({
 			'width'        		: w,
 			'height'       		: Math.min(20 + (n.length * 20), 190),
-			'top'				: 20,
-			'left'				: 20,
+			'top'				: 25 + (25 * $('.nuBox').length),
+			'left'				: 22 + (22 * $('.nuBox').length),
 			'position'			: 'absolute',
 			'border'			: 'solid grey 1px',
 			'overflow'			: 'hidden',
@@ -116,7 +116,7 @@ class nuSelectObject{
 			'left'				: -1,
 		})
 		.attr('type', 'checkbox')
-		.attr('onchange', 'window.nuSelect.buildSelectJoin("table","' + this.boxID + '")')
+		.attr('onchange', 'window.nuSelect.buildSQL("table","' + this.boxID + '")')
 		.prop('checked', true);
 		
 		var col	= document.createElement('input'); 								//-- table alias
@@ -135,14 +135,15 @@ class nuSelectObject{
 		})
 		.change(function(){
 
-			var f	= $(this).val();											//-- alias
+			var a	= $(this).val();											//-- alias
+			var t	= $('#tablename' + i).html();								//-- table name
 			var i	= this.id.substr(5);
 			
-			if(f == ''){
-				f	= $('#tablename' + i).html();								//-- table name
-			}
-			
-			$('.' + i + '.nuBoxField').attr('data-nu-table', f);
+			$('.' + i + '.nuBoxField').attr('data-nu-alias', a);
+			$('.' + i + '.nuBoxField').attr('data-nu-table', t);
+
+			window.nuSelect.buildSQL();
+
 			
 		})
 		
@@ -150,7 +151,7 @@ class nuSelectObject{
 			this.boxRow(rows, n[rows], p[rows], w);
 		}
 
-		var x = document.createElement('div');									//-- close box
+		var x 	= document.createElement('div');									//-- close box
 		
 		x.setAttribute('id', 'nuBoxClose' + this.boxID);
 		
@@ -170,11 +171,20 @@ class nuSelectObject{
 		.addClass('nuButtonHover')
 		.addClass('nuSearchListClose');
 		
-		this.buildSelectJoin('');
+		this.buildSQL();
 		
 	}
 
-	buildSelectJoin(c, b){				//-- checkbox type, boxID
+	buildSQL(c, b){				//-- checkbox type, boxID
+	
+		var s 	= this.buildSelect(c, b);
+		var j	= this.buildFromJoin();
+		
+		$('#sse_sql', parent.document).val(s + j);
+	
+	}
+	
+	buildSelect(c, b){				//-- checkbox type, boxID
 		
 		if(c == 'field'){
 			
@@ -199,6 +209,8 @@ class nuSelectObject{
 			if($('#' + b).length == 1){
 				
 				var t			= $('.nuBoxField.' + b).attr('data-nu-table');
+				var a			= $('.nuBoxField.' + b).attr('data-nu-alias');
+				var u			= a == '' ? t : a;
 				
 				if($('#checkall' + b).is(':checked')){
 					s.push(t + '.*');
@@ -221,8 +233,72 @@ class nuSelectObject{
 			
 		}
 		
-		var SQL	= "SELECT\n" + s.join(',\n    ');
-		console.log(SQL);
+		var SQL	= "SELECT\n    " + s.join(',\n    ') + "\n";
+		
+		return SQL;
+		
+	}
+	
+	buildFrom(){
+			
+		var f		= [];
+		
+		$('.nuBox').each(function(index){
+			
+			var b	= $(this)[0].id;
+			var t	= $('#tablename' + b).html();
+			var a	= $('#alias' + b).val();
+			var as	= a == '' ? ' ' : ' AS ';
+			
+			f.push(String(t + as + a).trim());
+			
+		});
+
+		var F		= "FROM\n    " + f.join(",\n    ") + "\n";
+		
+		return F;
+		
+	}
+	
+	buildFromJoin(){
+			
+		var r		= window.nuRelationships;				//-- JOIN
+		var s		= [];
+		var u		= [];									//-- used in JOIN
+			
+		for (var k in r){
+		
+			var R	= r[k];
+			var f	= String(R.fromfield);
+			var t	= String(R.tofield);
+			var j	= R.join == '' ? 'JOIN ' : R.join + ' JOIN';
+			var tbl	= t.split('.')[0] + ' ON ';
+			
+			u.push(t.split('.')[0]);
+			s.push(j + tbl + f + ' = ' + t)
+			
+		}
+
+		var J		= s.join("\n") + "\n";
+			
+		var f		= [];									//-- FROM
+		
+		$('.nuBox').each(function(index){
+			
+			var b	= $(this)[0].id;
+			var t	= $('#tablename' + b).html();
+			var a	= $('#alias' + b).val();
+			var as	= a == '' ? ' ' : ' AS ';
+			
+			if(u.indexOf(a == '' ? t : a) == -1){
+				f.push(String(t + as + a).trim());
+			}
+			
+		});
+
+		var F		= "FROM\n    " + f.join(",\n    ") + "\n";
+		
+		return F + J;
 		
 	}
 	
@@ -282,7 +358,7 @@ class nuSelectObject{
 
 			$('#' + col.id)
 			.attr('data-nu-field', 'field' + suf)
-			.attr('onchange', 'window.nuSelect.buildSelectJoin("field","' + this.boxID + '")')
+			.attr('onchange', 'window.nuSelect.buildSQL("field","' + this.boxID + '")')
 			.attr('type', 'checkbox')
 			.addClass(this.boxID)
 			.addClass('checkfield');
@@ -291,7 +367,7 @@ class nuSelectObject{
 
 			$('#' + col.id)
 			.attr('data-nu-table', this.table)
-			//.attr('draggable', 'true')
+			.attr('data-nu-alias', '')
 			.addClass('nuBoxTitle')
 			.addClass('nuBoxField')
 			.addClass(this.boxID)
@@ -322,12 +398,21 @@ function nuFieldMouseUp(e){
 	
 	if(F != f){
 		
-		var r	= {'from' : I, 'to' : i, 'fromfield' : T + '.' + F, 'tofield' : t + '.' + f, 'join' : ''};
+		var r	= 	{
+					'from' 		: I, 
+					'to' 		: i, 
+					'fromfield' : T + '.' + F, 
+					'tofield' 	: t + '.' + f, 
+					'join' 		: ''
+					};
+					
 		window.nuRelationships[I+i]	= r;
 		
 	}
 	
 	nuAngle();
+	
+	window.nuSelect.buildSQL();
 
 	nuRelationA	= '';
 	
@@ -391,8 +476,7 @@ function nuAngle(){
 		var L = document.createElement('div');										//-- relationship line
 		
 		L.setAttribute('id', i);
-window.LLL = i;		
-window.FFF = F;
+		
 		$('body').append(L);
 		
 		$('#' + L.id).css({
@@ -432,8 +516,7 @@ window.FFF = F;
 		if(F.offset().left < T.offset().left){
 			L.css('left', Lleft - (L.offset().left - F.offset().left));
 		}else{
-			console.log(9);
-			L.css('left', Lleft + (2 * (F.offset().left - L.offset().left)))
+			L.css('left', Lleft - (L.offset().left - T.offset().left));
 		}
 
 		

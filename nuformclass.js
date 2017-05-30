@@ -201,10 +201,37 @@ class nuFormObject {
 		
 		for(var i = 0 ; i < tab.length ; i++){
 			
-//			var f	= this.tableFields(tab[i]);
 			var f	= nuFORM.tableSchema[tab[i]].names;
+			fld		= fld.push(f);
 			
-			fld		= fld.concat(f);
+		}
+		
+		return fld;
+	
+	}
+	
+	
+	relationshipFields(){
+
+		var t		= [];
+		var fld		= [];
+
+		$('.nuBox').each(function(index) {
+			
+			var b	= $(this)[0].id;
+			var T	= $('#tablename' + b).val();
+			var A	= $('#alias' + b).val();
+			t.push({'tablename' : T, 'alias' : A});
+			
+		});
+
+		for(var i = 0 ; i < t.length ; i++){
+			
+			var f	= nuFORM.tableSchema[t[i].tablename].names;
+			
+			for(var I = 0 ; I < f.length ; I ++){
+				fld.push(t[i].alias + '.' + f[I]);
+			}
 			
 		}
 		
