@@ -22,9 +22,20 @@ nuCSSInclude('nubuilder4.css');
 nuCSSInclude('nudrag.css');
 
 ?>
+
+<style>
+
+body  {
+    background-image: url("grid.png");
+}
+
+</style>
+
 <script>
-window.nuSuffix				= Number(String(Math.random()).substr(-4));
-window.nuSelect				= new nuSelectObject();
+
+	window.nuSuffix				= Number(String(Math.random()).substr(-4));
+	window.nuSelect				= new nuSelectObject();
+	
 </script>
 </head><body></body></html>
 

@@ -116,7 +116,8 @@ class nuSelectObject{
 			'left'				: -1,
 		})
 		.attr('type', 'checkbox')
-		.attr('checked', 'checked');
+		.attr('onchange', 'window.nuSelect.buildSQL("table","' + this.boxID + '")')
+		.prop('checked', true);
 		
 		var col	= document.createElement('input'); 								//-- table alias
 
@@ -134,14 +135,15 @@ class nuSelectObject{
 		})
 		.change(function(){
 
-			var f	= $(this).val();											//-- alias
+			var a	= $(this).val();											//-- alias
+			var t	= $('#tablename' + i).html();								//-- table name
 			var i	= this.id.substr(5);
 			
-			if(f == ''){
-				f	= $('#tablename' + i).html();								//-- table name
-			}
-			
-			$('.' + i + '.nuBoxField').attr('data-nu-table', f);
+			$('.' + i + '.nuBoxField').attr('data-nu-alias', a);
+			$('.' + i + '.nuBoxField').attr('data-nu-table', t);
+
+			window.nuSelect.buildSQL();
+
 			
 		})
 		
@@ -149,7 +151,7 @@ class nuSelectObject{
 			this.boxRow(rows, n[rows], p[rows], w);
 		}
 
-		var x = document.createElement('div');									//-- close box
+		var x 	= document.createElement('div');									//-- close box
 		
 		x.setAttribute('id', 'nuBoxClose' + this.boxID);
 		
@@ -169,39 +171,95 @@ class nuSelectObject{
 		.addClass('nuButtonHover')
 		.addClass('nuSearchListClose');
 		
-		//this.buildSelectJoin();
+		var s	= this.buildSQL();
+		
+		$('#sse_sql', parent.document).val(s);
+
 		
 	}
 
-	buildSelectJoin(){
+	buildSQL(c, b){				//-- checkbox type, boxID
+	
+		var s 	= this.buildSelect(c, b);
+		var j	= this.buildJoin();
 		
-		var	s		= 'SELECT ';
+		return s + j;
+	
+	}
+	
+	buildSelect(c, b){				//-- checkbox type, boxID
+		
+		if(c == 'field'){
+			
+			$('#checkall' + b)
+			.prop('checked', false);
+			
+		}
+		
+		if(c == 'table'){
+			
+			$('.checkfield.' + b)
+			.prop('checked', false);
+			
+		}
+		
+		var	s		= [];
 		
 		for(var i = 0 ; i < this.boxes.length ; i++){
 			
-			var b	= this.boxes[i];
+			var b				= this.boxes[i];
 			
 			if($('#' + b).length == 1){
 				
+				var t			= $('.nuBoxField.' + b).attr('data-nu-table');
+				var a			= $('.nuBoxField.' + b).attr('data-nu-alias');
+				var u			= a == '' ? t : a;
+				
 				if($('#checkall' + b).is(':checked')){
+					s.push(t + '.*');
+				}else{
 					
-				//	s += 
-					
+					$('.checkfield.' + b).each(function(index){
+						
+						var f	= 'field' + $(this)[0].id.substr(6);
+						
+						if($(this).is(':checked')){
+							s.push(t + '.' + $('#' + f).html());
+						}
+						
+						
+					});
+
 				}
 				
-				$('.checkfield.' + b).each(function(index){
-					
-					if($(this).is(':checked')){
-						
-					
-					}
-					
-					
-				});
-
 			}
 			
 		}
+		
+		var SQL	= "SELECT\n    " + s.join(',\n    ') + "\n";
+		
+		return SQL;
+		
+	}
+	
+	buildJoin(){
+			
+		var r		= window.nuRelationships;
+		var s		= [];
+			
+		for (var k in r){
+		
+			var R	= r[k];
+			var f	= String(R.fromfield);
+			var t	= String(R.tofield);
+			var j	= R.join == '' ? 'JOIN ' : R.join + ' JOIN';
+			var tbl	= t.split('.')[0] + ' ON ';
+			
+			s.push(j + tbl + f + ' = ' + t)
+			
+		}
+		
+		return s.join("\n") + "\n";
 		
 	}
 	
@@ -261,6 +319,7 @@ class nuSelectObject{
 
 			$('#' + col.id)
 			.attr('data-nu-field', 'field' + suf)
+			.attr('onchange', 'window.nuSelect.buildSQL("field","' + this.boxID + '")')
 			.attr('type', 'checkbox')
 			.addClass(this.boxID)
 			.addClass('checkfield');
@@ -269,7 +328,7 @@ class nuSelectObject{
 
 			$('#' + col.id)
 			.attr('data-nu-table', this.table)
-			//.attr('draggable', 'true')
+			.attr('data-nu-alias', '')
 			.addClass('nuBoxTitle')
 			.addClass('nuBoxField')
 			.addClass(this.boxID)
@@ -295,12 +354,18 @@ function nuFieldMouseUp(e){
 	var F		= $('#' + I).html();
 	
 	var i		= e.target.id;
-	var f		= $('#' + i).attr('data-nu-table')
-	var t		= $('#' + i).html();
+	var t		= $('#' + i).attr('data-nu-table')
+	var f		= $('#' + i).html();
 	
 	if(F != f){
 		
-		var r	= {'from' : I, 'to' : i, 'fromfield' : T + '.' + F, 'tofield' : t + '.' + f, 'join' : ''};
+		var r	= {
+					'from' 		: I, 
+					'to' 		: i, 
+					'fromfield' : T + '.' + F, 
+					'tofield' 	: t + '.' + f, 
+					'join' 		: ''
+				};
 		window.nuRelationships[I+i]	= r;
 		
 	}
@@ -410,8 +475,7 @@ window.FFF = F;
 		if(F.offset().left < T.offset().left){
 			L.css('left', Lleft - (L.offset().left - F.offset().left));
 		}else{
-			console.log(9);
-			L.css('left', Lleft + (2 * (F.offset().left - L.offset().left)))
+			L.css('left', Lleft - (L.offset().left - T.offset().left));
 		}
 
 		
