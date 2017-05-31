@@ -145,6 +145,13 @@ String.prototype.replaceAll = function(str1, str2, ignore){
 
 };
 
+String.prototype.ltrim = function() {
+	return this.replace(/^\s+/,"");
+}
+String.prototype.rtrim = function() {
+	return this.replace(/\s+$/,"");
+}
+
 function loginInputKeyup(event){
     if(event.keyCode == 13){
         $('input#submit').click();

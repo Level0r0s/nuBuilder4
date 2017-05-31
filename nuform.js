@@ -2525,12 +2525,10 @@ function nuCalculateForm(){	//-- calculate subform 'calcs' first
 
 		var A			= $('#' + a.id).hasClass('nuSubformObject') ? 1000 : 0;
 		var B			= $('#' + b.id).hasClass('nuSubformObject') ? 1000 : 0;
-		var a			= parseInt($('#' + a.id).attr('data-nu-calc-order')) * -1;
-		var b			= parseInt($('#' + b.id).attr('data-nu-calc-order')) * -1;
+		var a			= parseInt($('#' + a.id).attr('data-nu-calc-order'));
+		var b			= parseInt($('#' + b.id).attr('data-nu-calc-order'));
 		
 		return (a + A) - (b + B);
-
-		//return $('#' + a.id).hasClass('nuSubformObject') - $('#' + b.id).hasClass('nuSubformObject');
 	
     }
 
@@ -2539,7 +2537,7 @@ function nuCalculateForm(){	//-- calculate subform 'calcs' first
     f.sort(subformFirst);
 	
 	f.each(function( index ) {		//-- start with calculations inside a subform
-console.log($(this)[0].id)		
+	
 		$(this).addClass('nuEdited');
 		
 		var formula 	= $(this).attr('data-nu-formula');
