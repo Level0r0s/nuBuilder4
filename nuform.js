@@ -563,7 +563,8 @@ function nuINPUT(w, i, l, p, prop){
 		$('#' + id).addClass('nuCalculator')
 		
 		.attr('data-nu-format', w.objects[i].format)
-		.prop('readonly', true).prop('tabindex',-1)
+		.attr('data-nu-calc-order', w.objects[i].calc_order)
+		.prop('readonly', true).prop('tabindex', -1)
 		.attr('data-nu-formula', nuBuildFormula(p, w.objects[i].formula))
 		
 		if(p != ''){
@@ -2520,8 +2521,17 @@ function nuChangeFile(e){
 
 function nuCalculateForm(){	//-- calculate subform 'calcs' first
 	
-    var subformFirst = function(b, a) {
-        return $('#' + a.id).hasClass('nuSubformObject') - $('#' + b.id).hasClass('nuSubformObject');
+    var subformFirst 	= function(b, a){
+
+		var A			= $('#' + a.id).hasClass('nuSubformObject') ? 1000 : 0;
+		var B			= $('#' + b.id).hasClass('nuSubformObject') ? 1000 : 0;
+		var a			= parseInt($('#' + a.id).attr('data-nu-calc-order')) * -1;
+		var b			= parseInt($('#' + b.id).attr('data-nu-calc-order')) * -1;
+		
+		return (a + A) - (b + B);
+
+		//return $('#' + a.id).hasClass('nuSubformObject') - $('#' + b.id).hasClass('nuSubformObject');
+	
     }
 
 	var f	= $("[data-nu-formula]");
