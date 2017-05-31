@@ -178,10 +178,9 @@ class nuSelectObject{
 	buildSQL(c, b){				//-- checkbox type, boxID
 	
 		var s 	= this.buildSelect(c, b);
-		var f	= this.buildFrom();
-		var j	= this.buildJoin();
+		var j	= this.buildFromJoin();
 		
-		$('#sse_sql', parent.document).val(s + f + j);
+		$('#sse_sql', parent.document).val(s + j);
 	
 	}
 	
@@ -261,10 +260,11 @@ class nuSelectObject{
 		
 	}
 	
-	buildJoin(){
+	buildFromJoin(){
 			
-		var r		= window.nuRelationships;
+		var r		= window.nuRelationships;				//-- JOIN
 		var s		= [];
+		var u		= [];									//-- used in JOIN
 			
 		for (var k in r){
 		
@@ -274,11 +274,31 @@ class nuSelectObject{
 			var j	= R.join == '' ? 'JOIN ' : R.join + ' JOIN';
 			var tbl	= t.split('.')[0] + ' ON ';
 			
+			u.push(t.split('.')[0]);
 			s.push(j + tbl + f + ' = ' + t)
 			
 		}
 
-		return s.join("\n") + "\n";
+		var J		= s.join("\n") + "\n";
+			
+		var f		= [];									//-- FROM
+		
+		$('.nuBox').each(function(index){
+			
+			var b	= $(this)[0].id;
+			var t	= $('#tablename' + b).html();
+			var a	= $('#alias' + b).val();
+			var as	= a == '' ? ' ' : ' AS ';
+			
+			if(u.indexOf(a == '' ? t : a) == -1){
+				f.push(String(t + as + a).trim());
+			}
+			
+		});
+
+		var F		= "FROM\n    " + f.join(",\n    ") + "\n";
+		
+		return F + J;
 		
 	}
 	
@@ -378,18 +398,21 @@ function nuFieldMouseUp(e){
 	
 	if(F != f){
 		
-		var r	= {
+		var r	= 	{
 					'from' 		: I, 
 					'to' 		: i, 
 					'fromfield' : T + '.' + F, 
 					'tofield' 	: t + '.' + f, 
 					'join' 		: ''
-				};
+					};
+					
 		window.nuRelationships[I+i]	= r;
 		
 	}
 	
 	nuAngle();
+	
+	window.nuSelect.buildSQL();
 
 	nuRelationA	= '';
 	

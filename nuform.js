@@ -2420,6 +2420,8 @@ function nuChange(e){
 	if(e.target.id.substr(-8) == 'nuDelete'){
 		
 		nuHasBeenEdited();
+		nuCalculateForm();
+		
 		return;
 		
 	}
@@ -2527,7 +2529,7 @@ function nuCalculateForm(){	//-- calculate subform 'calcs' first
     f.sort(subformFirst);
 	
 	f.each(function( index ) {		//-- start with calculations inside a subform
-		
+console.log($(this)[0].id)		
 		$(this).addClass('nuEdited');
 		
 		var formula 	= $(this).attr('data-nu-formula');
