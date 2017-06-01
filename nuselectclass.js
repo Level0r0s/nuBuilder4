@@ -212,9 +212,11 @@ class nuSelectObject{
 				var t			= $('.nuBoxField.' + b).attr('data-nu-table');
 				var a			= $('.nuBoxField.' + b).attr('data-nu-alias');
 				var u			= a == '' ? t : a;
+				var T			= this.justAlias(t, a);
+
 				
 				if($('#checkall' + b).is(':checked')){
-					s.push(t + '.*');
+					s.push(T + '.*');
 				}else{
 					
 					$('.checkfield.' + b).each(function(index){
@@ -222,7 +224,7 @@ class nuSelectObject{
 						var f	= 'field' + $(this)[0].id.substr(6);
 						
 						if($(this).is(':checked')){
-							s.push(t + '.' + $('#' + f).html());
+							s.push(T + '.' + $('#' + f).html());
 						}
 						
 						
@@ -251,10 +253,10 @@ class nuSelectObject{
 			var R	= r[k];
 			var j	= String(R.join + ' JOIN ').ltrim();
 			
-			var T	= this.buildAlias(R.fromfield, R.fromalias);
+			var T	= this.buildAlias(R.fromtable, R.fromalias);
 
-			var A	= this.justAlias(R.fromfield, R.fromalias);
-			var a	= this.justAlias(R.tofield, R.toalias);
+			var A	= this.justAlias(R.fromtable, R.fromalias);
+			var a	= this.justAlias(R.totable, R.toalias);
 			
 			u.push(A);
 			s.push(j + T + ' ON ' + A + '.' + R.fromfield +  ' = ' + a + '.' + R.tofield);
@@ -280,7 +282,7 @@ console.log(8)
 			var tbl	= THIS.buildAlias(t, a);
 			
 			if(u.indexOf(al) == -1){
-				f.push(al);
+				f.push(tbl);
 			}
 			
 		});
