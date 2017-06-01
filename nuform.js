@@ -6,8 +6,11 @@ function nuBuildForm(f){
 	
 		$('body').addClass('nuBrowseBody')
 		$('body').removeClass('nuEditBody')
-		nuLogin();
-		nuAlert(['You have been logged out..']);
+		sessionStorage.logout	= 'true';
+		parent.parent.parent.parent.parent.location.reload();
+		
+		//nuLogin();
+		//nuAlert(['You have been logged out..']);
 		
 		return;
 		

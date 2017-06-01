@@ -23,7 +23,7 @@ nuCSSInclude('nubuilder4.css');
 
 <script>
 
-	
+
 function nuValidCaller(o){
 	
 	if(o === null){return false;}
@@ -65,7 +65,7 @@ window.nuHASH			= [];
 	if('$opener' == ''){
 		
 		function nuLoad(){
-			
+
 			nuBindCtrlEvents();
 			window.nuDefaultBrowseFunction	= '$nuBrowseFunction';
 			window.nuBrowseFunction			= '$nuBrowseFunction';
@@ -75,7 +75,7 @@ window.nuHASH			= [];
 	}else{
 
 		function nuLoad(){
-
+			
 			if(nuIsOpener(window)){
 				var from					= window.opener;
 

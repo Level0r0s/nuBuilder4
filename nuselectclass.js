@@ -180,7 +180,7 @@ class nuSelectObject{
 	
 		var s 	= this.buildSelect(c, b);
 		var j	= this.buildFromJoin();
-		
+		var c	= this.buildClauses();
 		$('#sse_sql', parent.document).val(s + j);
 	
 	}
@@ -267,7 +267,7 @@ class nuSelectObject{
 		var f		= [];															//-- FROM
 		
 		var THIS	= this;
-console.log(8)		
+
 		$('.nuBox').each(function(index){
 			
 			var b	= $(this)[0].id;
@@ -380,6 +380,22 @@ console.log(8)
 		
 	}
 	
+	buildClauses(){
+	
+		var c	= parent.nuFORM.subform('zzzzsys_select_clause_sf').rows;
+
+		var o 	= function(b, a){
+			return (b[1] + 10000 + Number(b[4])) - (a[1] + 10000 + Number(a[4]));
+		}
+
+		c.sort(o);
+	
+	console.log(c);
+	
+	return "\nclauses....";
+	
+	
+}
 
 
 	boxColumn(c, t, l, w, v, title){

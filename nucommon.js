@@ -186,7 +186,13 @@ function nuLogin(){
 	.html(l1+i+u+p+s+l2);
 	
     $('#nuusername').focus();
+			
+	if(sessionStorage.logout == 'true'){
+		nuAlert(['You have been logged out']);
+	}
 	
+	sessionStorage.logout	= '';
+		
 }
 
 
