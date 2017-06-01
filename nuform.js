@@ -1315,22 +1315,27 @@ function nuGetSubformRowSize(o, SF, id){
 function nuBuildSubformTitle(o, l, w, id, col){
     
 	var titleId  = 'title_' + id + o.id;
-    	var div = document.createElement('div');
-    	div.setAttribute('id', titleId);
-    	$('#' + id).append(div);
-    	
-    	$('#' + titleId).css({'top'     	: 0,
-    					'left'          	: Number(l),
-    					'width'         	: Number(w),
-    					'height'        	: 50,
-    					'text-align'    	: 'center',
-    					'position'      	: 'absolute'
-    	})
+	
+	var div = document.createElement('div');
+
+	div.setAttribute('id', titleId);
+
+	$('#' + id).append(div);
+	
+	$('#' + titleId).css({'top'     	: 0,
+					'left'          	: Number(l),
+					'width'         	: Number(w),
+					'height'        	: 50,
+					'text-align'    	: 'center',
+					'position'      	: 'absolute'
+	})
 	.html(o.label)
 	.attr('data-nu-field', o.id)
 	.attr('ondblclick', 'nuPopup("nuobject", "' + o.object_id + '")')
 	.addClass('nuTabHolder');
 	
+	if(o.valid == 1 || o.valid == 2){$('#' + titleId).addClass('nuBlank');}
+
 }
 
 function nuBuildSubformDeleteTitle(l, id, subform_id){

@@ -465,8 +465,8 @@ function nuFieldMouseDown(e){
 	
 }
 
-function nuMoveBox(e){
 
+function nuMoveBox(e){
 
 	if(e.originalEvent.buttons == 1){
 		
@@ -491,8 +491,6 @@ function nuAngle(){
 	var r					= nuSQL.joins;
 	nuSQL.joins	= [];
 
-	
-		
 	for (var key in r){																//-- remove links to closed boxes
 
 		if($('#' + r[key].from).length == 1 && $('#' + r[key].to).length == 1){
@@ -511,7 +509,7 @@ function nuAngle(){
 		var w	= Math.sqrt(Math.pow(f.top - t.top, 2) + Math.pow(f.left - t.left, 2));
 		var i	= 'joins' + nuID();
 
-		var L = document.createElement('div');										//-- relationship line
+		var L = document.createElement('div');										//-- relationship box (line)
 		
 		L.setAttribute('id', i);
 		
@@ -535,8 +533,6 @@ function nuAngle(){
 		var top 	= parseInt(f.top + f.top - L.top);
 		var left	= parseInt(f.left + f.left - L.left);
 
-		
-
 		$('#' + i)
 		.css('top', top)
 		.css('left', left);
@@ -546,15 +542,15 @@ function nuAngle(){
 		var Lleft	= parseInt(L.css('left'));
 
 		if(F.offset().top < T.offset().top){
-			L.css('top', Ltop + F.offset().top - L.offset().top);
+			L.css('top', 7 + Ltop + F.offset().top - L.offset().top);
 		}else{
-			L.css('top', Ltop + L.offset().top - F.offset().top);
+			L.css('top', 7 + Ltop + L.offset().top - F.offset().top);
 		}
 		
 		if(F.offset().left < T.offset().left){
-			L.css('left', Lleft - (L.offset().left - F.offset().left));
+			L.css('left', -20 + Lleft - (L.offset().left - F.offset().left));
 		}else{
-			L.css('left', Lleft - (L.offset().left - T.offset().left));
+			L.css('left', -20 + Lleft - (L.offset().left - T.offset().left));
 		}
 
 		
