@@ -264,11 +264,6 @@ class nuSelectObject{
 		}
 
 		var J		= s.join("\n") + "\n";
-		
-		
-		
-		
-			
 		var f		= [];															//-- FROM
 		
 		var THIS	= this;

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 31, 2017 at 11:42 PM
+-- Generation Time: Jun 01, 2017 at 05:34 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -1262,8 +1262,8 @@ INSERT INTO `zzzzsys_object` (`zzzzsys_object_id`, `sob_all_zzzzsys_form_id`, `s
 ('s14953594921438', 'nuselect', 'zzzzsys_select', 'select', 'addtable', 'Add Table', 's14930617882374', 20, 16, 399, 200, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '0', 'SELECT table_name as a, table_name as b FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = DATABASE()', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'range', '', '', ''),
 ('s14960743863373', 'nuclause', 'zzzzsys_select_clause', 'input', 'ssc_order', 'Order', 's14960741898410', 40, 154, 122, 45, 18, '1', 'right', '0', '0', '', '', '', '', '', '', '', '', '', 'browse|Browse|edit|Edit|browseedit|Browse and Edit|criteria|Criteria or Home|procedure|Procedure|report|Report', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'number', '', '', ''),
 ('s14960749531713', 'nuclause', 'zzzzsys_select_clause', 'select', 'ssc_type', 'Type', 's14960741898410', 10, 58, 122, 100, 16, '1', 'right', '0', '0', '', '', '', '', '', '', '', '', '0', '1|WHERE|\n2|ORDER BY|\n3|HAVING|\n4|GROUP BY', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'number', '', '', ''),
-('s14960751497257', 'nuclause', 'zzzzsys_select_clause', 'input', 'ssc_clause', 'Clause', 's14960741898410', 30, 122, 122, 300, 18, '1', 'right', '0', '0', '', '', '', '', '', '', '', '', '0', '10|WHERE|\n20|ORDER BY|\n30|GROUP BY|\n40|HAVING', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
-('s14960753634405', 'nuclause', 'zzzzsys_select_clause', 'input', 'ssc_field', 'Field', 's14960741898410', 20, 90, 122, 200, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '0', '10|WHERE|\n20|ORDER BY|\n30|GROUP BY|\n40|HAVING', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
+('s14960751497257', 'nuclause', 'zzzzsys_select_clause', 'input', 'ssc_clause', 'Clause', 's14960741898410', 30, 122, 122, 300, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '0', '10|WHERE|\n20|ORDER BY|\n30|GROUP BY|\n40|HAVING', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
+('s14960753634405', 'nuclause', 'zzzzsys_select_clause', 'input', 'ssc_field', 'Field', 's14960741898410', 20, 90, 122, 200, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '0', '10|WHERE|\n20|ORDER BY|\n30|GROUP BY|\n40|HAVING', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'nuScroll', 'nuFORM.selectFields()', '', ''),
 ('s14960757864250', 'nuselect', 'zzzzsys_select', 'subform', 'zzzzsys_select_clause_sf', 'Clause', 's14930617882374', 60, 373, 110, 700, 150, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'nuclause', 'ssc_zzzzsys_select_id', '1', '1', 'g', 'zzzzsys_select_clause', 0, '', 'range', '', '', ''),
 ('s14960767003439', 'nuselect', 'zzzzsys_select', 'textarea', 'sse_sql', 'SQL', 's14930617882374', 50, 45, 855, 400, 485, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
 ('s14962240323543', '58a08a1abc4782c', 'invoice', 'calc', 'inv_gst', 'GST', '58a08a1abc48c9a', 30, 305, 348, 76, 25, '1', 'right', '0', '0', '', 'nuTotal(''inv_total'') * .1', 'N|$ 1,000.00', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', '', ''),
