@@ -202,7 +202,7 @@ class nuFormObject {
 		for(var i = 0 ; i < tab.length ; i++){
 			
 			var f	= nuFORM.tableSchema[tab[i]].names;
-			fld		= fld.push(f);
+			fld		= fld.concat(f);
 			
 		}
 		

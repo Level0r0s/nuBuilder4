@@ -181,7 +181,7 @@ class nuSelectObject{
 		var s 	= this.buildSelect(c, b);
 		var j	= this.buildFromJoin();
 		var c	= this.buildClauses();
-		$('#sse_sql', parent.document).val(s + j);
+		$('#sse_sql', parent.document).val(s + j + c);
 	
 	}
 	
@@ -353,6 +353,50 @@ class nuSelectObject{
 	}
 
 	
+	buildClauses(){
+		
+		var o 		= function(b, a){
+			return (b[1] + 10000 + Number(b[4])) - (a[1] + 10000 + Number(a[4]));
+		}
+		
+		var T		= '';
+		var F		= '';
+		var C		= '';
+		var S		= '';
+		var WHERE	= [];
+		var ORDERBY	= [];
+		var GROUPBY	= [];
+		var HAVING	= [];
+		var c		= parent.nuFORM.subform('zzzzsys_select_clause_sf').rows;
+
+		c.sort(o);
+
+		var clauses	= '';
+
+		for(var i = 0 ; i < c.length ; i++){
+			
+			var T	= c[i][1];
+			var F	= c[i][2];
+			var C	= c[i][3];
+			var S	= c[i][4];
+			
+			if(T == 1){WHERE.push('(' + F + C + ')');}
+			if(T == 2){GROUPBY.push(F + ' ' + S);}
+			if(T == 3){ORDERBY.push(F + ' ' + S);}
+			if(T == 4){HAVING.push('(' + F + C + ')');}
+
+		}
+
+		if(WHERE.length > 0){clauses	+= "WHERE\n    " 		+ WHERE.join(" AND \n    ") 	+ "\n";}
+		if(GROUPBY.length > 0){clauses	+= "GROUP BY\n    " 	+ GROUPBY.join(",\n    ") 		+ "\n";}
+		if(HAVING.length > 0){clauses	+= "HAVING\n    " 		+ HAVING.join(" AND \n    ") 	+ "\n";}
+		if(ORDERBY.length > 0){clauses	+= "ORDER BY\n    " 	+ ORDERBY.join(",\n    ") 		+ "\n";}
+
+		return clauses;
+		
+	}
+
+
 	boxWidth(s, t){
 		
 		var s	= parent.nuFORM.tableSchema
@@ -380,24 +424,7 @@ class nuSelectObject{
 		
 	}
 	
-	buildClauses(){
 	
-		var c	= parent.nuFORM.subform('zzzzsys_select_clause_sf').rows;
-
-		var o 	= function(b, a){
-			return (b[1] + 10000 + Number(b[4])) - (a[1] + 10000 + Number(a[4]));
-		}
-
-		c.sort(o);
-	
-	console.log(c);
-	
-	return "\nclauses....";
-	
-	
-}
-
-
 	boxColumn(c, t, l, w, v, title){
 
 		var suf		= '_' + t + '_' + this.boxID;
@@ -571,6 +598,52 @@ function nuAngle(){
 
 		
 	}
+	
+}
+
+function ja(){
+
+	var T		= '';
+	var F		= '';
+	var C		= '';
+	var S		= '';
+	var WHERE	= [];
+	var ORDERBY	= [];
+	var GROUPBY	= [];
+	var HAVING	= [];
+	var clauses	= '';
+
+	var j		= [
+					  
+					["-1","","","","",1],
+					["-1","1","invoice_item.invoice_item_id","1","",0],
+					["-1","2","invoice_item.ite_thing","","ASC",0],
+					["-1","3","invoice_item.ite_total",">99","",0],
+					["-1","3","invoice.inv_total","< 999","",0],
+					["-1","4","invoice_item.ite_thing","=654","ASC",0]
+
+				];
+
+	for(var i = 0 ; i < j.length ; i++){
+		
+		var T	= j[i][1];
+		var F	= j[i][2];
+		var C	= j[i][3];
+		var S	= j[i][4];
+		
+		if(T == 1){WHERE.push('(' + F + C + ')');}
+		if(T == 2){ORDERBY.push(F + ' ' + S);}
+		if(T == 3){GROUPBY.push(F + ' ' + S);}
+		if(T == 4){HAVING.push('(' + F + C + ')');}
+		
+	}
+
+	if(WHERE.length > 0){clauses	+= "WHERE\n  " 		+ WHERE.join(",\n  ") + "\n";}
+	if(ORDERBY.length > 0){clauses	+= "ORDER BY\n  " 	+ ORDERBY.join(",\n  ") + "\n";	}
+	if(GROUPBY.length > 0){clauses	+= "GROUP BY\n  " 	+ GROUPBY.join(",\n  ") + "\n";	}
+	if(HAVING.length > 0){clauses	+= "HAVING\n  " 	+ HAVING.join(",\n  ");}
+
+	return clauses;
 	
 }
 
