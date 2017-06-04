@@ -15,10 +15,10 @@ class nuSelectObject{
 	addBox(t, id){
 
 		this.table		= t;
-		var s			= parent.nuFORM.tableSchema
+		var s			= parent.nuFORM.tableSchema;
 		var n			= s[t].names;
 		var p			= s[t].types;
-		var i			= arguments.length == 1 ? nuID() ? id;
+		var i			= arguments.length == 1 ? nuID() : String(id).substr(3);
 		this.boxID		= 'box' + i;
 		this.scrollID	= 'scroll' + i;
 		var w			= this.boxWidth(s, t);
@@ -176,14 +176,19 @@ class nuSelectObject{
 		
 	}
 
-	buildSQL(c, b){				//-- checkbox type, boxID
+	buildSQL(c, b){
 	
 		var s 	= this.buildSelect(c, b);
 		var j	= this.buildFromJoin();
 		var c	= this.buildClauses();
 		
-		$('#sse_sql', parent.document).val(s + j + c);
-		$('#sse_json', parent.document).val(this.buildJSON());
+		$('#sse_sql', parent.document)
+		.val(s + j + c)
+		.change();
+		
+		$('#sse_json', parent.document)
+		.val(this.buildJSON())
+		.change();
 		
 	}
 	
@@ -351,6 +356,8 @@ class nuSelectObject{
 			this.joins[I + '--' + i]	= r;
 
 		}
+		
+		nuAngle();
 
 	}
 
@@ -498,8 +505,22 @@ class nuSelectObject{
 		});
 
 		j.tables			= a;
-		j.joins				= this.getJoins();
+		var joins			= {};
+
+		var r				= this.joins;
+
+		for (var k in r){
+			
+			var jFrom		= r[k].from;
+			var jTo			= r[k].to;
+			var jJoin		= r[k].join;
+			
+			joins[jFrom + '--' + jTo]	= jJoin;
+			
+		}
 		
+		j.joins				= joins;
+
 		return JSON.stringify(j);
 		
 	}
@@ -518,15 +539,54 @@ class nuSelectObject{
 	
 	
 	getJoins(){
-
-		var a		= [];
-		var r		= this.joins;
+		
+		var a						= [];
+		var j						= [];
+		var r						= this.joins;
 		
 		for (var k in r){
-			a.push(r[k]);
+			
+			a[r[k].from + '--' + r[k].to]	= r[k];
+			j.push(a[r[k].from + '--' + r[k].to]);
+			
 		}
 
-		return a;
+		return this.joins;
+		
+	}
+	
+	rebuildGraphic(){
+
+		var j		= $('#sse_json', parent.document).val();
+		
+		if(j == ''){return;}
+		
+		var J		=	JSON.parse(j);
+		
+		for(var i = 0 ; i < J.tables.length ; i++){	
+			
+			var t	= J.tables[i];
+			var cb	= J.tables[i].checkboxes;
+			
+			this.addBox(t.tablename, t.id);
+			
+			$('#' + t.id)
+			.css('top', t.position.top)
+			.css('left', t.position.left);
+			
+			$('#tablename' 	+ t.id).html(t.tablename);
+			$('#alias' 		+ t.id).val(t.alias);
+			$('#checkall'	+ t.id).prop('checked', t.checkall);
+			
+			for(var c = 0 ; c < cb.length ; c++){
+				$('#select_' + c + '_' + t.id).prop('checked', cb[c]);
+			}
+			
+		}
+		
+		this.joins			= J.joins;
+		
+		this.refreshJoins();
 		
 	}
 

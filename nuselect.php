@@ -35,7 +35,7 @@ body  {
 
 	window.nuSuffix				= Number(String(Math.random()).substr(-4));
 	window.nuSQL				= new nuSelectObject();
-	
+
 </script>
-</head><body></body></html>
+</head><body onload='nuSQL.rebuildGraphic()'></body></html>
 
