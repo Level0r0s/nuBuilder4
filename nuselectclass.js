@@ -12,13 +12,13 @@ class nuSelectObject{
 	}
 	
 
-	addBox(t){
+	addBox(t, id){
 
 		this.table		= t;
 		var s			= parent.nuFORM.tableSchema
 		var n			= s[t].names;
 		var p			= s[t].types;
-		var i			= nuID();
+		var i			= arguments.length == 1 ? nuID() ? id;
 		this.boxID		= 'box' + i;
 		this.scrollID	= 'scroll' + i;
 		var w			= this.boxWidth(s, t);
@@ -181,8 +181,10 @@ class nuSelectObject{
 		var s 	= this.buildSelect(c, b);
 		var j	= this.buildFromJoin();
 		var c	= this.buildClauses();
+		
 		$('#sse_sql', parent.document).val(s + j + c);
-	
+		$('#sse_json', parent.document).val(this.buildJSON());
+		
 	}
 	
 	buildSelect(c, b){				//-- checkbox type, boxID
@@ -473,7 +475,66 @@ class nuSelectObject{
 		
 	}
 	
+	buildJSON(){
+		
+		var j				= {};
+		var a				= [];
+		var THIS 			= this;
+		
+		$('.nuBox').each(function(index){
+			
+			var i			= $(this)[0].id;
+			var o			= {}
+			
+			o.id			= i;
+			o.position		= $(this).position();
+			o.tablename		= $('#tablename' + i).html();
+			o.alias			= $('#alias' + i).val();
+			o.checkall		= $('#checkall' + i).is(':checked');
+			o.checkboxes	= THIS.getCheckboxes(i);
+			
+			a.push(o);
+			
+		});
+
+		j.tables			= a;
+		j.joins				= this.getJoins();
+		
+		return JSON.stringify(j);
+		
+	}
+	
+	getCheckboxes(b){
+
+		var c		= [];
+		
+		$(':checkbox.' + b).each(function(index){
+			c.push($(this).is(':checked'));
+		});
+		
+		return c;
+		
+	}
+	
+	
+	getJoins(){
+
+		var a		= [];
+		var r		= this.joins;
+		
+		for (var k in r){
+			a.push(r[k]);
+		}
+
+		return a;
+		
+	}
+
+	
 }
+
+
+
 
 //=========functions==========================================================================
 
@@ -600,50 +661,3 @@ function nuAngle(){
 	}
 	
 }
-
-function ja(){
-
-	var T		= '';
-	var F		= '';
-	var C		= '';
-	var S		= '';
-	var WHERE	= [];
-	var ORDERBY	= [];
-	var GROUPBY	= [];
-	var HAVING	= [];
-	var clauses	= '';
-
-	var j		= [
-					  
-					["-1","","","","",1],
-					["-1","1","invoice_item.invoice_item_id","1","",0],
-					["-1","2","invoice_item.ite_thing","","ASC",0],
-					["-1","3","invoice_item.ite_total",">99","",0],
-					["-1","3","invoice.inv_total","< 999","",0],
-					["-1","4","invoice_item.ite_thing","=654","ASC",0]
-
-				];
-
-	for(var i = 0 ; i < j.length ; i++){
-		
-		var T	= j[i][1];
-		var F	= j[i][2];
-		var C	= j[i][3];
-		var S	= j[i][4];
-		
-		if(T == 1){WHERE.push('(' + F + C + ')');}
-		if(T == 2){ORDERBY.push(F + ' ' + S);}
-		if(T == 3){GROUPBY.push(F + ' ' + S);}
-		if(T == 4){HAVING.push('(' + F + C + ')');}
-		
-	}
-
-	if(WHERE.length > 0){clauses	+= "WHERE\n  " 		+ WHERE.join(",\n  ") + "\n";}
-	if(ORDERBY.length > 0){clauses	+= "ORDER BY\n  " 	+ ORDERBY.join(",\n  ") + "\n";	}
-	if(GROUPBY.length > 0){clauses	+= "GROUP BY\n  " 	+ GROUPBY.join(",\n  ") + "\n";	}
-	if(HAVING.length > 0){clauses	+= "HAVING\n  " 	+ HAVING.join(",\n  ");}
-
-	return clauses;
-	
-}
-

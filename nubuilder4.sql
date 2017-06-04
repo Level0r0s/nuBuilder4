@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 02, 2017 at 10:33 PM
+-- Generation Time: Jun 04, 2017 at 09:37 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -1238,7 +1238,7 @@ INSERT INTO `zzzzsys_object` (`zzzzsys_object_id`, `sob_all_zzzzsys_form_id`, `s
 ('s14950404023368', 'c14950403809123264', 'aaaaaa', 'input', 'field01', 'text01', 's14950404023362', 180, 180, 180, 117, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
 ('s14944263918457', 'nudebug', 'zzzzsys_debug', 'input', 'deb_added', ' ', '575a31edccc2012', 10, 1, 1, 100, 20, '0', 'left', '0', '2', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
 ('s14950404023369', 'c14950403809123264', 'aaaaaa', 'input', 'field02', 'text02', 's14950404023362', 210, 210, 210, 117, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
-('s14951257374402', 'nuselect', 'zzzzsys_select', 'input', 'sse_description', 'Description', 's14930617882374', 10, 16, 109, 200, 18, '1', 'left', '1', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
+('s14951257374402', 'nuselect', 'zzzzsys_select', 'input', 'sse_description', 'Description', 's14930617882374', 10, 14, 109, 200, 18, '1', 'left', '1', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
 ('s14950412154796', 'c14950411932706986', 'aaaaaaa', 'input', 'field00', 'text00', 's14950412154777', 150, 150, 150, 117, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
 ('s14950412154797', 'c14950411932706986', 'aaaaaaa', 'input', 'field01', 'button01', 's14950412154777', 180, 180, 180, 117, 23, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 'N|$ 1,000.00', 'button', '', '', ''),
 ('s14950412154798', 'c14950411932706986', 'aaaaaaa', 'input', 'field02', 'checkbox02', 's14950412154777', 210, 210, 210, 117, 18, '1', 'right', '0', '0', '', '', '', '', '', '', '', 'SELECT COUNT(*) FROM zzzzsys_debug', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 'N|$ 1,000.00', 'checkbox', '', '', ''),
@@ -1265,11 +1265,12 @@ INSERT INTO `zzzzsys_object` (`zzzzsys_object_id`, `sob_all_zzzzsys_form_id`, `s
 ('s14960749531713', 'nuclause', 'zzzzsys_select_clause', 'select', 'ssc_type', 'Type', 's14960741898410', 10, 58, 122, 100, 16, '1', 'right', '1', '0', '', '', '', '', '', '', '', '', '0', '1|WHERE|\n2|GROUP BY|\n3|ORDER BY|\n4|HAVING\n', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'number', '', '', ''),
 ('s14960751497257', 'nuclause', 'zzzzsys_select_clause', 'input', 'ssc_clause', 'Clause', 's14960741898410', 30, 122, 122, 250, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '0', '10|WHERE|\n20|ORDER BY|\n30|GROUP BY|\n40|HAVING', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
 ('s14960753634405', 'nuclause', 'zzzzsys_select_clause', 'input', 'ssc_field', 'Field', 's14960741898410', 20, 90, 122, 250, 18, '1', 'left', '1', '0', '', '', '', '', '', '', '', '', '0', '10|WHERE|\n20|ORDER BY|\n30|GROUP BY|\n40|HAVING', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'nuScroll', 'nuFORM.selectFields()', '', ''),
-('s14960757864250', 'nuselect', 'zzzzsys_select', 'subform', 'zzzzsys_select_clause_sf', 'Clause', 's14930617882374', 60, 373, 108, 770, 150, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'nuclause', 'ssc_zzzzsys_select_id', '1', '1', 'g', 'zzzzsys_select_clause', 0, '', 'range', '', '', ''),
-('s14960767003439', 'nuselect', 'zzzzsys_select', 'textarea', 'sse_sql', 'SQL', 's14930617882374', 50, 45, 930, 400, 485, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
+('s14960757864250', 'nuselect', 'zzzzsys_select', 'subform', 'zzzzsys_select_clause_sf', 'Clause', 's14930617882374', 70, 386, 108, 770, 150, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'nuclause', 'ssc_zzzzsys_select_id', '1', '1', 'g', 'zzzzsys_select_clause', 0, '', 'range', '', '', ''),
+('s14960767003439', 'nuselect', 'zzzzsys_select', 'textarea', 'sse_sql', 'SQL', 's14930617882374', 50, 45, 930, 400, 302, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
 ('s14962240323543', '58a08a1abc4782c', 'invoice', 'calc', 'inv_gst', 'GST', '58a08a1abc48c9a', 30, 305, 348, 76, 25, '1', 'right', '0', '0', '', 'nuTotal(''inv_total'') * .1', 'N|$ 1,000.00', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', '', ''),
 ('s14962242517825', '58a08a1abc4782c', 'invoice', 'calc', 'inv_gst2', 'GST', '58a08a1abc48c9a', 40, 306, 168, 76, 25, '1', 'right', '0', '0', '', 'nuTotal(''inv_gst'') + 2', 'N|$ 1,000.00', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', '', ''),
-('s14963697603115', 'nuclause', 'zzzzsys_select_clause', 'select', 'ssc_sort', 'Sort', 's14960741898410', 40, 154, 122, 70, 16, '1', 'right', '0', '0', '', '', '', '', '', '', '', '', '0', 'ASC|ASC|DESC|DESC', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'number', '', '', '');
+('s14963697603115', 'nuclause', 'zzzzsys_select_clause', 'select', 'ssc_sort', 'Sort', 's14960741898410', 40, 154, 122, 70, 16, '1', 'right', '0', '0', '', '', '', '', '', '', '', '', '0', 'ASC|ASC|DESC|DESC', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'number', '', '', ''),
+('s14964416938678', 'nuselect', 'zzzzsys_select', 'textarea', 'sse_json', 'JSON', 's14930617882374', 60, 15, 930, 212, 23, '1', 'left', '0', '2', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -1394,7 +1395,7 @@ CREATE TABLE `zzzzsys_select` (
 --
 
 INSERT INTO `zzzzsys_select` (`zzzzsys_select_id`, `sse_description`, `sse_json`, `sse_sql`) VALUES
-('s14964354707709', 'awwesf', '', 'SELECT\n    invoice.*,\n    invoice_item.*\nFROM\n    invoice_item\nJOIN invoice ON invoice.invoice_id = invoice_item.ite_invoice_id\n');
+('s14965615765327', 'invoice and invoice_item', '{"tables":[{"id":"boxc14965614692776828","position":{"top":25,"left":21.9921875},"tablename":"invoice","alias":"","checkall":true,"checkboxes":[false,false,false,false]},{"id":"boxc14965614720496829","position":{"top":82.99478912353516,"left":355.98956298828125},"tablename":"invoice_item","alias":"","checkall":true,"checkboxes":[false,false,false,false,false,false]}],"joins":[{"from":"field_0_boxc14965614692776828","fromtable":"invoice","fromalias":"","fromfield":"invoice_id","to":"field_1_boxc14965614720496829","totable":"invoice_item","toalias":"","tofield":"ite_invoice_id","join":""}]}', 'SELECT\n    invoice.*,\n    invoice_item.*\nFROM\n    invoice_item\nJOIN invoice ON invoice.invoice_id = invoice_item.ite_invoice_id\n');
 
 -- --------------------------------------------------------
 
@@ -1411,13 +1412,6 @@ CREATE TABLE `zzzzsys_select_clause` (
   `ssc_sort` varchar(10) NOT NULL,
   `ssc_order` varchar(500) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `zzzzsys_select_clause`
---
-
-INSERT INTO `zzzzsys_select_clause` (`zzzzsys_select_clause_id`, `ssc_zzzzsys_select_id`, `ssc_type`, `ssc_field`, `ssc_clause`, `ssc_sort`, `ssc_order`) VALUES
-('s14964354707710', 's14964354707709', '2', 'invoice.inv_number', '', 'ASC', '');
 
 -- --------------------------------------------------------
 
