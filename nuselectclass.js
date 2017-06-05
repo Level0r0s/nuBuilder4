@@ -320,7 +320,7 @@ class nuSelectObject{
 	refreshJoins(){
 
 		var r			= this.joins;				//-- JOIN
-			
+		
 		for (var k in r){
 			
 			var I		= String(k).split('--')[0];
@@ -562,7 +562,7 @@ class nuSelectObject{
 		if(j == ''){return;}
 		
 		var J		=	JSON.parse(j);
-		
+console.log(j, J.joins);
 		for(var i = 0 ; i < J.tables.length ; i++){	
 			
 			var t	= J.tables[i];
