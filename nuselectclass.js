@@ -3,7 +3,6 @@ class nuSelectObject{
 	
 	constructor() {
 		
-		this.leftJoin	= '';
 		this.joins		= [];
 		this.boxes		= [];
 		this.boxID		= '';
@@ -84,21 +83,7 @@ class nuSelectObject{
 		})
 		.html(t)
 		.addClass('nuDragNoSelect')
-		.mousemove(function(event){
-			nuMoveBox(event);
-		})
-		.mousedown(function(event){
-
-			window.nuY	= event.clientY - parseInt($(event.target).parent().css('top'));
-			window.nuX	= event.clientX - parseInt($(event.target).parent().css('left'));
-			
-		})
-		.mouseup(function(event){
-
-			window.nuY	= parseInt($(event.target).parent().css('top'));
-			window.nuX	= parseInt($(event.target).parent().css('left'));
-			
-		})
+		.addClass('nuTableName')
 		.addClass('nuBoxTitle');
 		
 		var bck	= document.createElement('input');								//-- checkbox all
@@ -216,8 +201,8 @@ class nuSelectObject{
 			
 			if($('#' + b).length == 1){
 				
-				var t			= $('.nuBoxField.' + b).attr('data-nu-table');
-				var a			= $('.nuBoxField.' + b).attr('data-nu-alias');
+				var t			= $('#tablename' + b).html();
+				var a			= $('#alias' + b).val();
 				var u			= a == '' ? t : a;
 				var T			= this.justAlias(t, a);
 
@@ -364,7 +349,7 @@ class nuSelectObject{
 	
 	buildClauses(){
 		
-		var o 		= function(b, a){
+		var o 		= function(b, a){														//-- used to order clauses
 			return (b[1] + 10000 + Number(b[4])) - (a[1] + 10000 + Number(a[4]));
 		}
 		
@@ -388,11 +373,13 @@ class nuSelectObject{
 			var F	= c[i][2];
 			var C	= c[i][3];
 			var S	= c[i][4];
-			
-			if(T == 1){WHERE.push('(' + F + C + ')');}
-			if(T == 2){GROUPBY.push(F + ' ' + S);}
-			if(T == 3){ORDERBY.push(F + ' ' + S);}
-			if(T == 4){HAVING.push('(' + F + C + ')');}
+			var cl	= F != '' && C != '';			//-- valid statement for WHERE and HAVING
+			var gr	= F != '' && S != '';			//-- valid statement for ORDER BY and GROUP BY
+
+			if(T == 1 && cl){WHERE.push('(' + F + C + ')');}
+			if(T == 4 && cl){HAVING.push('(' + F + C + ')');}
+			if(T == 2 && gr){GROUPBY.push(F + ' ' + S);}
+			if(T == 3 && gr){ORDERBY.push(F + ' ' + S);}
 
 		}
 
@@ -425,11 +412,6 @@ class nuSelectObject{
 			
 		this.boxColumn('select', i, 0, 	18,	v, '');
 		this.boxColumn('field', i, 22, 	300,v,  t, w);
-
-		$('.nuBoxField')
-		.unbind()
-		.attr('onmousedown', 	'nuFieldMouseDown(event)')
-		.attr('onmouseup', 		'nuFieldMouseUp(event)')
 		
 	}
 	
@@ -476,6 +458,15 @@ class nuSelectObject{
 			.addClass(this.boxID)
 			.css('width', Number(w))
 			.css('padding-top', 2)
+			.hover(
+			
+				function(){
+					$(this).addClass( "hover" );
+				}, 
+				function() {
+					$( this ).removeClass( "hover" );
+				})
+				
 			.html(v);
 			
 		}
@@ -562,7 +553,7 @@ class nuSelectObject{
 		if(j == ''){return;}
 		
 		var J		=	JSON.parse(j);
-console.log(j, J.joins);
+		
 		for(var i = 0 ; i < J.tables.length ; i++){	
 			
 			var t	= J.tables[i];
@@ -599,49 +590,84 @@ console.log(j, J.joins);
 //=========functions==========================================================================
 
 
-function nuFieldMouseUp(e){
+function nuUp(e){
 	
-	e.preventDefault();	
-	
-	if(nuSQL.leftJoin == ''){return;}
-	
-	var I		= nuSQL.leftJoin
-	var i		= e.target.id;
-	
-	nuSQL.joins[I + '--' + i] = '';
-	
-	nuSQL.refreshJoins();	
+//	e.preventDefault();	
 
-	nuAngle();
-	
-	nuSQL.buildSQL();
 
-	nuSQL.leftJoin	= '';
+	var el						= $(e.target);
+	
+	if(el.hasClass('nuTableName')){
+
+		window.nuY	= parseInt($(event.target).parent().css('top'));
+		window.nuX	= parseInt($(event.target).parent().css('left'));
+
+	}
+
+	
+	if(el.hasClass('nuBoxField')){
+		console.log(9);
+		var id				= String(window.nuCurrentID);
+		
+		if(id.split('_').length == 3){							//-- eg. field_1_boxc14966188848055365
+			
+			var I				= id;
+			var i				= e.target.id;
+			
+			if(I.split('_')[2] != i.split('_')[2]){				//-- different box
+					
+				nuSQL.joins[I + '--' + i] = '';
+				nuSQL.refreshJoins();	
+				nuAngle();
+				nuSQL.buildSQL();
+				
+			}
+			
+		}
+
+	}
+	
+	window.nuCurrentID	= '';
 	
 }
 
 
-function nuFieldMouseDown(e){
+function nuDown(e){
 
-	var t					= $(e.target).attr('data-nu-table')
-	nuSQL.leftJoin		= e.target.id;
-	window.nuRelationBox	= $(e.target).parent().parent().attr('id')
+	var el						= $(e.target);
+	window.nuCurrentID			= event.target.id;
 	
+	if(el.hasClass('nuTableName')){
+
+		window.nuY				= event.clientY - parseInt($(event.target).parent().css('top'));
+		window.nuX				= event.clientX - parseInt($(event.target).parent().css('left'));
+
+	}
+
 }
 
 
-function nuMoveBox(e){
 
-	if(e.originalEvent.buttons == 1){
-		
-		if(e.clientY - window.nuY > 0){
-			$(e.target).parent().css('top', e.clientY - window.nuY);
+function nuMove(e){
+
+	if(window.nuCurrentID == ''){return;}
+
+	var el						= $('#' + window.nuCurrentID);
+	
+	if(el.hasClass('nuTableName')){
+
+		if(e.buttons == 1){
+			
+			if(e.clientY - window.nuY > 0){
+				el.parent().css('top', e.clientY - window.nuY);
+			}
+			if(e.clientX - window.nuX > 0){
+				el.parent().css('left', e.clientX - window.nuX);
+			}
+			
+			nuAngle();
+			
 		}
-		if(e.clientX - window.nuX > 0){
-			$(e.target).parent().css('left', e.clientX - window.nuX);
-		}
-		
-		nuAngle();
 		
 	}
 		

@@ -35,7 +35,23 @@ body  {
 
 	window.nuSuffix				= Number(String(Math.random()).substr(-4));
 	window.nuSQL				= new nuSelectObject();
+	window.nuCurrentID			= '';
+	window.nuY					= 0;
+	window.nuX					= 0;
+	
+	function nuLoad(){
+		
+		nuSQL.rebuildGraphic();
+		nuSQL.buildSQL();
+		
+		$('body')
+		.attr('onmousemove', 	'nuMove(event)')
+		.attr('onmousedown', 	'nuDown(event)')
+		.attr('onmouseup', 		'nuUp(event)')
+		.css('zoom', Number($('#resize').val()) / 100)
+		
+	}
 
 </script>
-</head><body onload='nuSQL.rebuildGraphic()'></body></html>
+</head><body onload='nuLoad()'></body></html>
 
