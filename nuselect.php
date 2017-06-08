@@ -48,7 +48,9 @@ body  {
 		.attr('onmousemove', 	'nuMove(event)')
 		.attr('onmousedown', 	'nuDown(event)')
 		.attr('onmouseup', 		'nuUp(event)')
-		.css('zoom', Number($('#resize').val()) / 100)
+		.css('zoom', Number(parent.$('#sse_resize').val()) / 100)
+
+		parent.nuHasNotBeenEdited();
 		
 	}
 

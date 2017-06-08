@@ -152,7 +152,7 @@ class nuSelectObject{
 			'color'				: 'black',
 			'text-align'    	: 'center',
 		})
-		.html('<img onclick="$(this).parent().parent().remove();nuAngle()" id="nbc' + this.boxID + '" src="nu_box_close.png" width="10px" height="10px">')
+		.html('<img onclick="$(this).parent().parent().remove();nuSQL.buildSQL()" id="nbc' + this.boxID + '" src="nu_box_close.png" width="10px" height="10px">')
 		.addClass('nuDragNoSelect')
 		.addClass('nuButtonHover')
 		.addClass('nuSearchListClose');
@@ -162,13 +162,17 @@ class nuSelectObject{
 	}
 
 	buildSQL(c, b){
+		
+		nuAngle();
 	
 		var s 	= this.buildSelect(c, b);
-		var j	= this.buildFromJoin();
+		var j	= this.buildJoin();
+		var f	= this.buildFrom();
 		var c	= this.buildClauses();
 		
 		$('#sse_sql', parent.document)
-		.val(s + j + c)
+		.val(s + c)
+//		.val(s + f + j + c)
 		.change();
 		
 		$('#sse_json', parent.document)
@@ -234,28 +238,8 @@ class nuSelectObject{
 		
 	}
 	
-	buildFromJoin(){
+	buildFrom(){
 			
-		var r		= this.joins;													//-- JOIN
-		var s		= [];	
-		var u		= [];															//-- used in JOIN
-			
-		for (var k in r){
-		
-			var R	= r[k];
-			var j	= String(R.join + ' JOIN ').ltrim();
-			
-			var T	= this.buildAlias(R.fromtable, R.fromalias);
-
-			var A	= this.justAlias(R.fromtable, R.fromalias);
-			var a	= this.justAlias(R.totable, R.toalias);
-			
-			u.push(A);
-			s.push(j + T + ' ON ' + A + '.' + R.fromfield +  ' = ' + a + '.' + R.tofield);
-			
-		}
-
-		var J		= s.join("\n") + "\n";
 		var f		= [];															//-- FROM
 		
 		var THIS	= this;
@@ -266,17 +250,43 @@ class nuSelectObject{
 			var t	= $('#tablename' + b).html();
 			var a	= $('#alias' + b).val();
 			var al	= THIS.justAlias(t,a);
-			var tbl	= THIS.buildAlias(t, a);
-			
-			if(u.indexOf(al) == -1){
-				f.push(tbl);
-			}
+
+			f.push({'table' : t, 'alias' : al});
 			
 		});
+//console.log(f,'f');
 
-		var F		= "FROM\n    " + f.join(",\n    ") + "\n";
+		return f;
 		
-		return F + J;
+	}
+
+	
+	buildJoin(){
+			
+		var r		= this.joins;													//-- JOIN
+		var j		= [];	
+			
+		for (var k in r){
+		
+			var R	= r[k];
+			var A	= this.justAlias(R.fromtable, R.fromalias);
+			var a	= this.justAlias(R.totable, R.toalias);
+			var M	= [a, A].sort().join('--');
+			
+			j.push({'match' : M, 'table1' : A, 'table2' : a, 'type' : R.join, 'join' : A + '.' + R.fromfield +  ' = ' + a + '.' + R.tofield});
+			
+		}
+
+		var o 		= function(b, a){														//-- used to order clauses
+			return (a.match < b.match);
+		}
+		
+		j.sort(o);
+		
+		
+		console.log(j,'j');
+
+		return j;
 		
 	}
 
@@ -618,7 +628,6 @@ function nuUp(e){
 					
 				nuSQL.joins[I + '--' + i] = '';
 				nuSQL.refreshJoins();	
-				nuAngle();
 				nuSQL.buildSQL();
 				
 			}
@@ -707,17 +716,26 @@ function nuAngle(){
 		
 		$('#' + L.id).css({
 			'width'				: w,
-			'height'			: 3,
+			'height'			: 5,
 			'left'				: f.left,
 			'top'				: f.top,
 			'position'			: 'absolute',
 			'text-align'    	: 'center',
-			'border'			: 'black 1px solid',
-			'border-color'		: 'black black black red',
+			'border'			: 'black 1px none',
+			'border-color'		: 'black',
+			'border-left'		: 'black 2px solid',
+			'border-left-color'	: nuSQL.joins[key].join == '' ? '#fe9c34' : '#06afef',
+			'background-color'	: 'black',
 			'border-width'		: '1px 1px 1px 3px',
+			'background-color'	: 'grey',
 			'transform'			: 'rotate(' + d + 'deg)',
 		})
+		.attr('data-nu-join', key)
+		.attr('title', nuSQL.joins[key].join + ' JOIN ON ' + nuSQL.joins[key].fromfield + ' = ' + nuSQL.joins[key].tofield)
+		.attr('ondblclick', 'nuChangeJoin(event)')
 		.addClass('nuRelationships');
+
+
 
 		var L		= $('#' + L.id);
 		var top 	= parseInt(f.top + f.top - L.top);
@@ -743,7 +761,22 @@ function nuAngle(){
 			L.css('left', -20 + Lleft - (L.offset().left - T.offset().left));
 		}
 
-		
 	}
 	
 }
+
+
+function nuChangeJoin(e){
+
+	var j	= $(e.target).attr('data-nu-join');
+	
+	if(nuSQL.joins[j].join == ''){
+		nuSQL.joins[j].join = 'LEFT';
+	}else{
+		nuSQL.joins[j].join = '';
+	}
+
+	nuSQL.buildSQL();
+	
+}
+

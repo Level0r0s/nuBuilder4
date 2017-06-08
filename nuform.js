@@ -2572,6 +2572,13 @@ function nuHasBeenEdited(){
 	
 }
 
+function nuHasNotBeenEdited(){
+	
+	$('#nuSaveButton').removeClass('nuSaveButtonEdited');
+	nuFORM.edited	= false;
+	
+}
+
 function nuDeleteAction(){
 	
     if (confirm("Delete This Record?")) {
