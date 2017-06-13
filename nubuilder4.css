@@ -1004,12 +1004,12 @@ input[type=range]::-webkit-slider-runnable-track {
 }
 .nuBoxTitle:hover {
 	color:red;
-	cursor:move;
+	cursor:w-resize;
 }
 
 .nuBoxField:hover {
 	color:red;
-	cursor:move;
+	cursor:w-resize;
 }
 
 .nuButtonHover{

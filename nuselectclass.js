@@ -785,16 +785,24 @@ console.log(3333)
 
 
 function nuChangeJoin(e){
-
-	var j	= $(e.target).attr('data-nu-join');
 	
-	if(nuSQL.joins[j].join == ''){
-		nuSQL.joins[j].join = 'LEFT';
+	
+	var v			= parent.$('#sse_json').val();
+	var j			= JSON.parse(v);
+	var i			= $(e.target).attr('data-nu-join');
+	
+	if(j.joins[i] == ''){
+		j.joins[i] 	= 'LEFT';
 	}else{
-		nuSQL.joins[j].join = '';
+		j.joins[i] 	= '';
 	}
 
-	nuSQL.buildSQL();
+	parent.$('#sse_json')
+	.val(JSON.stringify(j))
+	.change();
+
+	nuAngle();
+	SQL.buildSQL();
 	
 }
 
