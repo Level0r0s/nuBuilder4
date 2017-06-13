@@ -1,25 +1,23 @@
-window.nuRelationships	= [];
-
 
 class nuSelectObject{
 	
 	constructor() {
 		
-		window.nuRelationships	= [];
-		this.boxes				= [];
-		this.boxID				= '';
-		this.table				= '';
+		this.joins		= [];
+		this.boxes		= [];
+		this.boxID		= '';
+		this.table		= '';
 		
 	}
 	
 
-	addBox(t){
+	addBox(t, id){
 
 		this.table		= t;
-		var s			= parent.nuFORM.tableSchema
+		var s			= parent.nuFORM.tableSchema;
 		var n			= s[t].names;
 		var p			= s[t].types;
-		var i			= nuID();
+		var i			= arguments.length == 1 ? nuID() : String(id).substr(3);
 		this.boxID		= 'box' + i;
 		this.scrollID	= 'scroll' + i;
 		var w			= this.boxWidth(s, t);
@@ -85,21 +83,7 @@ class nuSelectObject{
 		})
 		.html(t)
 		.addClass('nuDragNoSelect')
-		.mousemove(function(event){
-			nuMoveBox(event);
-		})
-		.mousedown(function(event){
-
-			window.nuY	= event.clientY - parseInt($(event.target).parent().css('top'));
-			window.nuX	= event.clientX - parseInt($(event.target).parent().css('left'));
-			
-		})
-		.mouseup(function(event){
-
-			window.nuY	= parseInt($(event.target).parent().css('top'));
-			window.nuX	= parseInt($(event.target).parent().css('left'));
-			
-		})
+		.addClass('nuTableName')
 		.addClass('nuBoxTitle');
 		
 		var bck	= document.createElement('input');								//-- checkbox all
@@ -116,7 +100,7 @@ class nuSelectObject{
 			'left'				: -1,
 		})
 		.attr('type', 'checkbox')
-		.attr('onchange', 'window.nuSelect.buildSQL("table","' + this.boxID + '")')
+		.attr('onchange', 'window.nuSQL.buildSQL("table","' + this.boxID + '")')
 		.prop('checked', true);
 		
 		var col	= document.createElement('input'); 								//-- table alias
@@ -134,20 +118,10 @@ class nuSelectObject{
 			'background-color'	: 'darkgrey',
 		})
 		.change(function(){
-
-			var a	= $(this).val();											//-- alias
-			var t	= $('#tablename' + i).html();								//-- table name
-			var i	= this.id.substr(5);
-			
-			$('.' + i + '.nuBoxField').attr('data-nu-alias', a);
-			$('.' + i + '.nuBoxField').attr('data-nu-table', t);
-
-			window.nuSelect.buildSQL();
-
-			
+			nuSQL.buildSQL();
 		})
 		
-		for(var rows = 0 ; rows < n.length ; rows++){							//-- add field list
+		for(var rows = 0 ; rows < n.length ; rows++){								//-- add field list
 			this.boxRow(rows, n[rows], p[rows], w);
 		}
 
@@ -166,22 +140,31 @@ class nuSelectObject{
 			'color'				: 'black',
 			'text-align'    	: 'center',
 		})
-		.html('<img onclick="$(this).parent().parent().remove();nuAngle()" id="nbc' + this.boxID + '" src="nu_box_close.png" width="10px" height="10px">')
+		.html('<img onclick="$(this).parent().parent().remove();nuSQL.buildSQL()" id="nbc' + this.boxID + '" src="nu_box_close.png" width="10px" height="10px">')
 		.addClass('nuDragNoSelect')
 		.addClass('nuButtonHover')
 		.addClass('nuSearchListClose');
 		
-		this.buildSQL();
-		
 	}
 
-	buildSQL(c, b){				//-- checkbox type, boxID
+	buildSQL(c, b){
+		
+		nuAngle();
 	
 		var s 	= this.buildSelect(c, b);
-		var j	= this.buildFromJoin();
+		var j	= this.buildJoin();
+		var f	= this.buildFrom();
+		var c	= this.buildClauses();
+console.log(JSON.stringify({'joins':j, 'from':f}));
+		parent.$('#sse_sql')
+		.val(s + c)
+//		.val(s + f + j + c)
+		.change();
 		
-		$('#sse_sql', parent.document).val(s + j);
-	
+		parent.$('#sse_json')
+		.val(this.buildJSON())
+		.change();
+		
 	}
 	
 	buildSelect(c, b){				//-- checkbox type, boxID
@@ -208,12 +191,14 @@ class nuSelectObject{
 			
 			if($('#' + b).length == 1){
 				
-				var t			= $('.nuBoxField.' + b).attr('data-nu-table');
-				var a			= $('.nuBoxField.' + b).attr('data-nu-alias');
+				var t			= $('#tablename' + b).html();
+				var a			= $('#alias' + b).val();
 				var u			= a == '' ? t : a;
+				var T			= this.justAlias(t, a);
+
 				
 				if($('#checkall' + b).is(':checked')){
-					s.push(t + '.*');
+					s.push(T + '.*');
 				}else{
 					
 					$('.checkfield.' + b).each(function(index){
@@ -221,7 +206,7 @@ class nuSelectObject{
 						var f	= 'field' + $(this)[0].id.substr(6);
 						
 						if($(this).is(':checked')){
-							s.push(t + '.' + $('#' + f).html());
+							s.push(T + '.' + $('#' + f).html());
 						}
 						
 						
@@ -241,67 +226,162 @@ class nuSelectObject{
 	
 	buildFrom(){
 			
-		var f		= [];
+		var f		= [];															//-- FROM
 		
+		var THIS	= this;
+
 		$('.nuBox').each(function(index){
 			
 			var b	= $(this)[0].id;
 			var t	= $('#tablename' + b).html();
 			var a	= $('#alias' + b).val();
-			var as	= a == '' ? ' ' : ' AS ';
-			
-			f.push(String(t + as + a).trim());
+			var al	= THIS.justAlias(t,a);
+
+			f.push({'table' : t, 'alias' : al});
 			
 		});
 
-		var F		= "FROM\n    " + f.join(",\n    ") + "\n";
-		
-		return F;
+		return f;
 		
 	}
+
 	
-	buildFromJoin(){
+	buildJoin(){
 			
-		var r		= window.nuRelationships;				//-- JOIN
-		var s		= [];
-		var u		= [];									//-- used in JOIN
+		var r		= this.joins;													//-- JOIN
+		var j		= [];	
 			
 		for (var k in r){
 		
 			var R	= r[k];
-			var f	= String(R.fromfield);
-			var t	= String(R.tofield);
-			var j	= R.join == '' ? 'JOIN ' : R.join + ' JOIN';
-			var tbl	= t.split('.')[0] + ' ON ';
+			var A	= this.justAlias(R.fromtable, R.fromalias);
+			var a	= this.justAlias(R.totable, R.toalias);
+			var M	= [a, A].sort().join('--');
+			var l	= R.join == 'LEFT' ? '--a' : '--b';
 			
-			u.push(t.split('.')[0]);
-			s.push(j + tbl + f + ' = ' + t)
+			j.push({'match' : M, 'table1' : A, 'table2' : a, 'order' : M + l, 'type' : R.join, 'join' : A + '.' + R.fromfield +  ' = ' + a + '.' + R.tofield});
 			
 		}
 
-		var J		= s.join("\n") + "\n";
-			
-		var f		= [];									//-- FROM
+		var o 		= function(b, a){														//-- used to order clauses
+			return ( a.order < b.order);
+		}
 		
-		$('.nuBox').each(function(index){
-			
-			var b	= $(this)[0].id;
-			var t	= $('#tablename' + b).html();
-			var a	= $('#alias' + b).val();
-			var as	= a == '' ? ' ' : ' AS ';
-			
-			if(u.indexOf(a == '' ? t : a) == -1){
-				f.push(String(t + as + a).trim());
-			}
-			
-		});
+		j.sort(o);
+		
+		return j;
+		
+	}
 
-		var F		= "FROM\n    " + f.join(",\n    ") + "\n";
-		
-		return F + J;
+	buildAlias(t, a){
+
+		if(a == ''){
+			return t;
+		}else{
+			return t + ' AS ' + a;
+		}
 		
 	}
 	
+
+	justAlias(t, a){
+
+		if(a == ''){
+			return t;
+		}else{
+			return a;
+		}
+		
+	}
+	
+
+	refreshJoins(r){										//-- build objects to draw relationship lines  from
+
+		for (var k in r){
+			
+			var I		= String(k).split('--')[0];
+			var i		= String(k).split('--')[1];
+
+			var B		= String(I).split('_')[2];
+			var b		= String(i).split('_')[2];
+
+			var T		= $('#tablename' + B).html();
+			var A		= $('#alias' + B).val();
+			var F		= $('#' + I).html();
+			
+			var t		= $('#tablename' + b).html();
+			var a		= $('#alias' + b).val();
+			var f		= $('#' + i).html();
+			
+			var o	= 	{
+				
+						'from' 		: I, 
+						'fromtable'	: T,
+						'fromalias'	: A,
+						'fromfield' : F, 
+
+						'to' 		: i, 
+						'totable'	: t,
+						'toalias'	: a,
+						'tofield' 	: f, 
+
+						'join' 		: r[k],
+						
+						};
+						
+			this.joins[I + '--' + i]	= o;
+
+		}
+
+	}
+
+	
+	buildClauses(){
+		
+		var o 		= function(b, a){														//-- used to order clauses
+			return (b[1] + 10000 + Number(b[4])) - (a[1] + 10000 + Number(a[4]));
+		}
+		
+		var T		= '';
+		var F		= '';
+		var C		= '';
+		var S		= '';
+		var WHERE	= [];
+		var ORDERBY	= [];
+		var GROUPBY	= [];
+		var HAVING	= [];
+		var c		= parent.nuFORM.subform('zzzzsys_select_clause_sf').rows;
+
+		c.sort(o);
+
+		var clauses	= '';
+
+		for(var i = 0 ; i < c.length ; i++){
+			
+			var T	= c[i][1];
+			var F	= c[i][2];
+			var C	= c[i][3];
+			var S	= c[i][4];
+			var cl	= F != '' && C != '';			//-- valid statement for WHERE and HAVING
+			var gr	= F != '' && S != '';			//-- valid statement for ORDER BY and GROUP BY
+
+			if(T == 1 && cl){WHERE.push('(' + F + C + ')');}
+			if(T == 4 && cl){HAVING.push('(' + F + C + ')');}
+			if(T == 2 && gr){GROUPBY.push(F + ' ' + S);}
+			if(T == 3 && gr){ORDERBY.push(F + ' ' + S);}
+
+		}
+
+		if(WHERE.length > 0){clauses	+= "WHERE\n    " 		+ WHERE.join(" AND \n    ") 	+ "\n";}
+		if(GROUPBY.length > 0){clauses	+= "GROUP BY\n    " 	+ GROUPBY.join(",\n    ") 		+ "\n";}
+		if(HAVING.length > 0){clauses	+= "HAVING\n    " 		+ HAVING.join(" AND \n    ") 	+ "\n";}
+		if(ORDERBY.length > 0){clauses	+= "ORDER BY\n    " 	+ ORDERBY.join(",\n    ") 		+ "\n";}
+
+		return clauses;
+		
+	}
+
+
 	boxWidth(s, t){
 		
 		var s	= parent.nuFORM.tableSchema
@@ -321,16 +401,10 @@ class nuSelectObject{
 			
 		this.boxColumn('select', i, 0, 	18,	v, '');
 		this.boxColumn('field', i, 22, 	300,v,  t, w);
-
-		$('.nuBoxField')
-		.unbind()
-		.attr('onmousedown', 	'nuFieldMouseDown(event)')
-		.attr('onmouseup', 		'nuFieldMouseUp(event)')
 		
 	}
 	
-
-
+	
 	boxColumn(c, t, l, w, v, title){
 
 		var suf		= '_' + t + '_' + this.boxID;
@@ -358,7 +432,7 @@ class nuSelectObject{
 
 			$('#' + col.id)
 			.attr('data-nu-field', 'field' + suf)
-			.attr('onchange', 'window.nuSelect.buildSQL("field","' + this.boxID + '")')
+			.attr('onchange', 'window.nuSQL.buildSQL("field","' + this.boxID + '")')
 			.attr('type', 'checkbox')
 			.addClass(this.boxID)
 			.addClass('checkfield');
@@ -366,80 +440,244 @@ class nuSelectObject{
 		}else{
 
 			$('#' + col.id)
-			.attr('data-nu-table', this.table)
-			.attr('data-nu-alias', '')
 			.addClass('nuBoxTitle')
 			.addClass('nuBoxField')
 			.addClass(this.boxID)
 			.css('width', Number(w))
 			.css('padding-top', 2)
+			.hover(
+			
+				function(){
+					$(this).addClass( "hover" );
+				}, 
+				function() {
+					$( this ).removeClass( "hover" );
+				})
+				
 			.html(v);
 			
 		}
 		
 	}
 	
-}
-
-
-function nuFieldMouseUp(e){
-	
-	e.preventDefault();	
-	
-	if(window.nuRelationA == ''){return;}
-	
-	var I		= nuRelationA
-	var T		= $('#' + I).attr('data-nu-table')
-	var F		= $('#' + I).html();
-	
-	var i		= e.target.id;
-	var t		= $('#' + i).attr('data-nu-table')
-	var f		= $('#' + i).html();
-	
-	if(F != f){
+	buildJSON(){
 		
-		var r	= 	{
-					'from' 		: I, 
-					'to' 		: i, 
-					'fromfield' : T + '.' + F, 
-					'tofield' 	: t + '.' + f, 
-					'join' 		: ''
-					};
-					
-		window.nuRelationships[I+i]	= r;
+		var j				= {};
+		var a				= [];
+		var THIS 			= this;
+		
+		$('.nuBox').each(function(index){
+			
+			var i			= $(this)[0].id;
+			var o			= {}
+			
+			o.id			= i;
+			o.position		= $(this).position();
+			o.tablename		= $('#tablename' + i).html();
+			o.alias			= $('#alias' + i).val();
+			o.checkall		= $('#checkall' + i).is(':checked');
+			o.checkboxes	= THIS.getCheckboxes(i);
+			
+			a.push(o);
+			
+		});
+
+		j.tables			= a;
+		var joins			= {};
+		var r				= this.joins;
+		
+		for (var k in r){
+			
+			var jFrom		= r[k].from;
+			var jTo			= r[k].to;
+			var jJoin		= r[k].join;
+			
+			joins[jFrom + '--' + jTo]	= jJoin;
+			
+		}
+		
+		j.joins				= joins;
+
+		return JSON.stringify(j);
+		
+	}
+
+	addJoinsToJSON(){
+		
+	}
+
+	
+	getCheckboxes(b){
+
+		var c		= [];
+		
+		$(':checkbox.' + b).each(function(index){
+			c.push($(this).is(':checked'));
+		});
+		
+		return c;
 		
 	}
 	
-	nuAngle();
 	
-	window.nuSelect.buildSQL();
-
-	nuRelationA	= '';
-	
-}
-
-
-function nuFieldMouseDown(e){
-
-	var t					= $(e.target).attr('data-nu-table')
-	window.nuRelationA		= e.target.id;
-	window.nuRelationBox	= $(e.target).parent().parent().attr('id')
-	
-}
-
-
-function nuMoveBox(e){
-
-
-	if(e.originalEvent.buttons == 1){
+	getJoins(){
 		
-		if(e.clientY - window.nuY > 0){
-			$(e.target).parent().css('top', e.clientY - window.nuY);
+		var a						= [];
+		var j						= [];
+		var r						= this.joins;
+		
+		for (var k in r){
+			
+			a[r[k].from + '--' + r[k].to]	= r[k];
+			j.push(a[r[k].from + '--' + r[k].to]);
+			
 		}
-		if(e.clientX - window.nuX > 0){
-			$(e.target).parent().css('left', e.clientX - window.nuX);
+
+		return this.joins;
+		
+	}
+	
+	rebuildGraphic(){
+		
+		var j		= $('#sse_json', parent.document).val();
+
+		if(j == ''){return;}
+		
+		var J		=	JSON.parse(j);
+		
+		for(var i = 0 ; i < J.tables.length ; i++){	
+			
+			var t	= J.tables[i];
+			var cb	= J.tables[i].checkboxes;
+			
+			this.addBox(t.tablename, t.id);
+
+			
+			$('#' + t.id)
+			.css('top', t.position.top)
+			.css('left', t.position.left);
+			
+			$('#tablename' 	+ t.id).html(t.tablename);
+			$('#alias' 		+ t.id).val(t.alias);
+			$('#checkall'	+ t.id).prop('checked', t.checkall);
+			
+			for(var c = 0 ; c < cb.length ; c++){
+				$('#select_' + c + '_' + t.id).prop('checked', cb[c]);
+			}
+			
 		}
+		
+
+		var r							= J.joins;				//-- JOIN
+		
+		for (var k in r){
+			
+			var I						= String(k).split('--')[0];
+			var i						= String(k).split('--')[1];
+
+			this.joins[I + '--' + i]	= r[k];
+
+		}
+
 		nuAngle();
+		
+	}
+	
+	addJoin(key, v){
+
+		var j	= parent.$('#sse_json').val();
+		var J	= JSON.parse(j);
+		
+		J.joins[key] = v;
+		
+		var u	= JSON.stringify(J);
+		
+		parent.$('#sse_json').val(u);
+
+	}
+	
+	
+}
+
+
+
+
+//=========functions==========================================================================
+
+
+function nuUp(e){
+
+	var el						= $(e.target);
+	
+	if(el.hasClass('nuTableName')){
+
+		window.nuY	= parseInt($(event.target).parent().css('top'));
+		window.nuX	= parseInt($(event.target).parent().css('left'));
+
+	}
+
+	
+	if(el.hasClass('nuBoxField')){
+		
+		var id				= String(window.nuCurrentID);
+		
+		if(id.split('_').length == 3){							//-- eg. field_1_boxc14966188848055365
+			
+			var I				= id;
+			var i				= e.target.id;
+			
+			if(I.split('_')[2] != i.split('_')[2]){				//-- different box
+			
+				nuSQL.addJoin(I + '--' + i, '')
+				nuAngle();	
+				
+			}
+			
+		}
+
+	}
+	
+	window.nuCurrentID	= '';
+	
+}
+
+
+function nuDown(e){
+
+	var el						= $(e.target);
+	window.nuCurrentID			= event.target.id;
+	
+	if(el.hasClass('nuTableName')){
+
+		window.nuY				= event.clientY - parseInt($(event.target).parent().css('top'));
+		window.nuX				= event.clientX - parseInt($(event.target).parent().css('left'));
+
+	}
+
+}
+
+
+
+function nuMove(e){
+
+	if(window.nuCurrentID == ''){return;}
+
+	var el						= $('#' + window.nuCurrentID);
+	
+	if(el.hasClass('nuTableName')){
+
+		if(e.buttons == 1){
+			
+			if(e.clientY - window.nuY > 0){
+				el.parent().css('top', e.clientY - window.nuY);
+			}
+			if(e.clientX - window.nuX > 0){
+				el.parent().css('left', e.clientX - window.nuX);
+			}
+			
+			nuAngle();
+			
+		}
 		
 	}
 		
@@ -449,55 +687,74 @@ function nuMoveBox(e){
 function nuAngle(){
 
 	$('.nuRelationships').remove();
-	
-	var r					= window.nuRelationships;
-	window.nuRelationships	= [];
 
+	var j			= parent.$('#sse_json').val();
 	
-		
+	if(j == ''){return;}
+
+	var J			= JSON.parse(j);
+	var r			= J.joins;
+	var ok			= [];
+	
 	for (var key in r){																//-- remove links to closed boxes
+	
+		var I		= key.split('--')[0];
+		var i		= key.split('--')[1];
 
-		if($('#' + r[key].from).length == 1 && $('#' + r[key].to).length == 1){
-			window.nuRelationships[key]	= r[key];
+		if($('#' + I).length == 1 && $('#' + i).length == 1){
+			ok[I + '--' + i]	= r[key]
 		}
 
 	}
 	
-	for (var key in window.nuRelationships){
+	nuSQL.refreshJoins(ok);
 	
-		var F	= $('#' + window.nuRelationships[key].from);
-		var T	= $('#' + window.nuRelationships[key].to);
+	for (var key in nuSQL.joins){
+
+		var F	= $('#' + nuSQL.joins[key].from);
+		var T	= $('#' + nuSQL.joins[key].to);
 		var f	= F.offset();
 		var t	= T.offset();
 		var d 	= Math.atan2(t.top - f.top, t.left - f.left) * 180 / Math.PI;		//-- angle in degrees
 		var w	= Math.sqrt(Math.pow(f.top - t.top, 2) + Math.pow(f.left - t.left, 2));
-		var i	= 'relation' + nuID();
+		var i	= 'joins' + nuID();
+		var jt	= nuSQL.joins[key].join;
+		var lm	= 10;
 
-		var L = document.createElement('div');										//-- relationship line
+		var L = document.createElement('div');										//-- relationship box (line)
 		
 		L.setAttribute('id', i);
 		
 		$('body').append(L);
 		
 		$('#' + L.id).css({
-			'width'				: w,
-			'height'			: 3,
+			'width'				: jt == 'LEFT' ? w - lm : w,
+			'height'			: 6,
 			'left'				: f.left,
 			'top'				: f.top,
 			'position'			: 'absolute',
 			'text-align'    	: 'center',
-			'border'			: 'black 1px solid',
-			'border-color'		: 'black black black red',
-			'border-width'		: '1px 1px 1px 3px',
+			'border'			: 'orange 0px solid',
+			'border-left-width'	: jt == 'LEFT' ? lm : 0,
+			'border-left-color'	: 'black',
+			'background-color'	: 'orange',
 			'transform'			: 'rotate(' + d + 'deg)',
 		})
-		.addClass('nuRelationships');
+		.attr('data-nu-join', key)
+		.attr('title', jt + ' JOIN ON ' + nuSQL.joins[key].fromfield + ' = ' + nuSQL.joins[key].tofield + ' (Double Click to Change Join)')
+		.attr('ondblclick', 'nuChangeJoin(event)')
+		.addClass('nuRelationships')
+		.hover(function(){
+			$(this).css('border-top-width', 2);
+			$(this).css('border-bottom-width', 2);
+			}, function(){
+			$(this).css('border-top-width', 0);
+			$(this).css('border-bottom-width', 0);
+		});
 
 		var L		= $('#' + L.id);
 		var top 	= parseInt(f.top + f.top - L.top);
 		var left	= parseInt(f.left + f.left - L.left);
-
-		
 
 		$('#' + i)
 		.css('top', top)
@@ -508,51 +765,50 @@ function nuAngle(){
 		var Lleft	= parseInt(L.css('left'));
 
 		if(F.offset().top < T.offset().top){
-			L.css('top', Ltop + F.offset().top - L.offset().top);
+			L.css('top', 7 + Ltop + F.offset().top - L.offset().top);
 		}else{
-			L.css('top', Ltop + L.offset().top - F.offset().top);
+			L.css('top', 7 + Ltop + L.offset().top - F.offset().top);
 		}
 		
 		if(F.offset().left < T.offset().left){
-			L.css('left', Lleft - (L.offset().left - F.offset().left));
+			L.css('left', -20 + Lleft - (L.offset().left - F.offset().left));
 		}else{
-			L.css('left', Lleft - (L.offset().left - T.offset().left));
+			L.css('left', -20 + Lleft - (L.offset().left - T.offset().left));
 		}
 
-		
 	}
 	
 }
 
 
-function nuAllowDrop(e){
+function nuChangeJoin(e){
 	
-    e.preventDefault();
 	
-}
-
-function nuBuildRelationships(){
+	var v			= parent.$('#sse_json').val();
+	var j			= JSON.parse(v);
+	var i			= $(e.target).attr('data-nu-join');
 	
-	var r	= nuRelationships;
-
-	console.log('nuBuildRelationships',parent.nuRelationships);
-	
-	$('.nuRelationships').remove();
-	
-	for(var i = 0 ; i < r.length ; i++){
-		nuAngle(r[i][0], r[i][1]);
+	if(j.joins[i] == ''){
+		j.joins[i] 	= 'LEFT';
+	}else{
+		j.joins[i] 	= '';
 	}
-	
 
+	parent.$('#sse_json')
+	.val(JSON.stringify(j))
+	.change();
+
+	nuSQL.buildSQL();
+	
+}
+
+
+function fj(){
+
+	var j	= {"joins":[{"match":"company--employee","table1":"employee","table2":"company","order":"company--employee--b","type":"","join":"employee.emp_company_id = company.company_id"},{"match":"company--invoice","table1":"company","table2":"invoice","order":"company--invoice--b","type":"","join":"company.company_id = invoice.inv_company_id"},{"match":"ii--invoice","table1":"invoice","table2":"ii","order":"ii--invoice--a","type":"LEFT","join":"invoice.invoice_id = ii.ite_invoice_id"},{"match":"ii--invoice","table1":"invoice","table2":"ii","order":"ii--invoice--b","type":"","join":"invoice.inv_number = ii.ite_unit_price"}],"from":[{"table":"invoice","alias":"invoice"},{"table":"invoice_item","alias":"ii"},{"table":"company","alias":"company"},{"table":"employee","alias":"employee"}]};
+	var J	= JSON.parse(j);
+	
 	
 }
 
-
-function nuDrop(e){
-
-	e.preventDefault();
-	var data = e.dataTransfer.getData("text");
-	console.log(data, 'nuDrop');
-	
-}
 

@@ -6,8 +6,11 @@ function nuBuildForm(f){
 	
 		$('body').addClass('nuBrowseBody')
 		$('body').removeClass('nuEditBody')
-		nuLogin();
-		nuAlert(['You have been logged out..']);
+		sessionStorage.logout	= 'true';
+		parent.parent.parent.parent.parent.location.reload();
+		
+		//nuLogin();
+		//nuAlert(['You have been logged out..']);
 		
 		return;
 		
@@ -563,7 +566,8 @@ function nuINPUT(w, i, l, p, prop){
 		$('#' + id).addClass('nuCalculator')
 		
 		.attr('data-nu-format', w.objects[i].format)
-		.prop('readonly', true).prop('tabindex',-1)
+		.attr('data-nu-calc-order', w.objects[i].calc_order)
+		.prop('readonly', true).prop('tabindex', -1)
 		.attr('data-nu-formula', nuBuildFormula(p, w.objects[i].formula))
 		
 		if(p != ''){
@@ -1314,22 +1318,27 @@ function nuGetSubformRowSize(o, SF, id){
 function nuBuildSubformTitle(o, l, w, id, col){
     
 	var titleId  = 'title_' + id + o.id;
-    	var div = document.createElement('div');
-    	div.setAttribute('id', titleId);
-    	$('#' + id).append(div);
-    	
-    	$('#' + titleId).css({'top'     	: 0,
-    					'left'          	: Number(l),
-    					'width'         	: Number(w),
-    					'height'        	: 50,
-    					'text-align'    	: 'center',
-    					'position'      	: 'absolute'
-    	})
+	
+	var div = document.createElement('div');
+
+	div.setAttribute('id', titleId);
+
+	$('#' + id).append(div);
+	
+	$('#' + titleId).css({'top'     	: 0,
+					'left'          	: Number(l),
+					'width'         	: Number(w),
+					'height'        	: 50,
+					'text-align'    	: 'center',
+					'position'      	: 'absolute'
+	})
 	.html(o.label)
 	.attr('data-nu-field', o.id)
 	.attr('ondblclick', 'nuPopup("nuobject", "' + o.object_id + '")')
 	.addClass('nuTabHolder');
 	
+	if(o.valid == 1 || o.valid == 2){$('#' + titleId).addClass('nuBlank');}
+
 }
 
 function nuBuildSubformDeleteTitle(l, id, subform_id){
@@ -2420,6 +2429,8 @@ function nuChange(e){
 	if(e.target.id.substr(-8) == 'nuDelete'){
 		
 		nuHasBeenEdited();
+		nuCalculateForm();
+		
 		return;
 		
 	}
@@ -2518,8 +2529,15 @@ function nuChangeFile(e){
 
 function nuCalculateForm(){	//-- calculate subform 'calcs' first
 	
-    var subformFirst = function(b, a) {
-        return $('#' + a.id).hasClass('nuSubformObject') - $('#' + b.id).hasClass('nuSubformObject');
+    var subformFirst 	= function(b, a){
+
+		var A			= $('#' + a.id).hasClass('nuSubformObject') ? 1000 : 0;
+		var B			= $('#' + b.id).hasClass('nuSubformObject') ? 1000 : 0;
+		var a			= parseInt($('#' + a.id).attr('data-nu-calc-order'));
+		var b			= parseInt($('#' + b.id).attr('data-nu-calc-order'));
+		
+		return (a + A) - (b + B);
+	
     }
 
 	var f	= $("[data-nu-formula]");
@@ -2527,7 +2545,7 @@ function nuCalculateForm(){	//-- calculate subform 'calcs' first
     f.sort(subformFirst);
 	
 	f.each(function( index ) {		//-- start with calculations inside a subform
-		
+	
 		$(this).addClass('nuEdited');
 		
 		var formula 	= $(this).attr('data-nu-formula');
@@ -2551,6 +2569,13 @@ function nuHasBeenEdited(){
 	
 	$('#nuSaveButton').addClass('nuSaveButtonEdited');
 	nuFORM.edited	= true;
+	
+}
+
+function nuHasNotBeenEdited(){
+	
+	$('#nuSaveButton').removeClass('nuSaveButtonEdited');
+	nuFORM.edited	= false;
 	
 }
 

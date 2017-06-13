@@ -145,6 +145,13 @@ String.prototype.replaceAll = function(str1, str2, ignore){
 
 };
 
+String.prototype.ltrim = function() {
+	return this.replace(/^\s+/,"");
+}
+String.prototype.rtrim = function() {
+	return this.replace(/\s+$/,"");
+}
+
 function loginInputKeyup(event){
     if(event.keyCode == 13){
         $('input#submit').click();
@@ -179,7 +186,13 @@ function nuLogin(){
 	.html(l1+i+u+p+s+l2);
 	
     $('#nuusername').focus();
+			
+	if(sessionStorage.logout == 'true'){
+		nuAlert(['You have been logged out']);
+	}
 	
+	sessionStorage.logout	= '';
+		
 }
 
 

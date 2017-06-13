@@ -1009,12 +1009,16 @@ input[type=range]::-webkit-slider-runnable-track {
 
 .nuBoxField:hover {
 	color:red;
-	cursor:move;
+	cursor:w-resize;
 }
 
 .nuButtonHover{
 	cursor:pointer;
 }
 
-
+.nuRelationships{
+	opacity: 0.5;
+	background-color: orange;
+	border-color: orange;
+}
 

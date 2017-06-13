@@ -194,7 +194,7 @@ class nuFormObject {
 	}
 	
 	
-	SQLFields(sql){
+	SQLFields(sql){										//-- sfo_browse_sql
 
 		var tab		= this.tablesFromSQL(sql);
 		var fld		= [];
@@ -202,9 +202,37 @@ class nuFormObject {
 		for(var i = 0 ; i < tab.length ; i++){
 			
 			var f	= nuFORM.tableSchema[tab[i]].names;
-			fld		= fld.push(f);
+			fld		= fld.concat(f);
 			
 		}
+		
+		return fld;
+	
+	}
+	
+	
+	selectFields(){									//-- from SELECT builder
+
+		var fld		= [];
+		
+		$('#sqlframe').contents().find('.nuBox').each(function(index) {
+			
+			var b	= $(this)[0].id;
+			var a	= $('#sqlframe').contents().find('#alias' + b).val();
+			var t	= $('#sqlframe').contents().find('#tablename' + b).html();
+			
+			if(a == ''){
+				a	= t;
+			}
+			
+			var f	= nuFORM.tableSchema[t].names;
+			
+			for(var i = 0 ; i < f.length ; i ++){
+				fld.push(a + '.' + f[i]);
+			}
+			
+			
+		});
 		
 		return fld;
 	
@@ -221,6 +249,7 @@ class nuFormObject {
 			var b	= $(this)[0].id;
 			var T	= $('#tablename' + b).val();
 			var A	= $('#alias' + b).val();
+			
 			t.push({'tablename' : T, 'alias' : A});
 			
 		});

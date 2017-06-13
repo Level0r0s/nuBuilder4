@@ -34,8 +34,26 @@ body  {
 <script>
 
 	window.nuSuffix				= Number(String(Math.random()).substr(-4));
-	window.nuSelect				= new nuSelectObject();
+	window.nuSQL				= new nuSelectObject();
+	window.nuCurrentID			= '';
+	window.nuY					= 0;
+	window.nuX					= 0;
 	
+	function nuLoad(){
+		
+		nuSQL.rebuildGraphic();
+		nuSQL.buildSQL();
+		
+		$('body')
+		.attr('onmousemove', 	'nuMove(event)')
+		.attr('onmousedown', 	'nuDown(event)')
+		.attr('onmouseup', 		'nuUp(event)')
+		.css('zoom', Number(parent.$('#sse_resize').val()) / 100)
+
+		parent.nuHasNotBeenEdited();
+		
+	}
+
 </script>
-</head><body></body></html>
+</head><body onload='nuLoad()'></body></html>
 

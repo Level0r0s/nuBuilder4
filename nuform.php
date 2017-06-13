@@ -87,6 +87,8 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 				$o->formula			= $r->sob_calc_formula;
 				$o->format			= $r->sob_calc_format;
 				$o->align 			= $r->sob_all_align;
+				$o->calc_order		= $r->sob_all_order;
+				
 				
 			}
 				
