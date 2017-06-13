@@ -118,11 +118,7 @@ class nuSelectObject{
 			'background-color'	: 'darkgrey',
 		})
 		.change(function(){
-			
-			nuSQL.nuAngle();	
 			nuSQL.buildSQL();
-
-			
 		})
 		
 		for(var rows = 0 ; rows < n.length ; rows++){								//-- add field list
@@ -149,8 +145,6 @@ class nuSelectObject{
 		.addClass('nuButtonHover')
 		.addClass('nuSearchListClose');
 		
-//		this.buildSQL();
-		
 	}
 
 	buildSQL(c, b){
@@ -161,13 +155,13 @@ class nuSelectObject{
 		var j	= this.buildJoin();
 		var f	= this.buildFrom();
 		var c	= this.buildClauses();
-		
-		$('#sse_sql', parent.document)
+console.log(JSON.stringify({'joins':j, 'from':f}));
+		parent.$('#sse_sql')
 		.val(s + c)
 //		.val(s + f + j + c)
 		.change();
 		
-		$('#sse_json', parent.document)
+		parent.$('#sse_json')
 		.val(this.buildJSON())
 		.change();
 		
@@ -263,13 +257,14 @@ class nuSelectObject{
 			var A	= this.justAlias(R.fromtable, R.fromalias);
 			var a	= this.justAlias(R.totable, R.toalias);
 			var M	= [a, A].sort().join('--');
+			var l	= R.join == 'LEFT' ? '--a' : '--b';
 			
-			j.push({'match' : M, 'table1' : A, 'table2' : a, 'type' : R.join, 'join' : A + '.' + R.fromfield +  ' = ' + a + '.' + R.tofield});
+			j.push({'match' : M, 'table1' : A, 'table2' : a, 'order' : M + l, 'type' : R.join, 'join' : A + '.' + R.fromfield +  ' = ' + a + '.' + R.tofield});
 			
 		}
 
 		var o 		= function(b, a){														//-- used to order clauses
-			return (a.match < b.match);
+			return ( a.order < b.order);
 		}
 		
 		j.sort(o);
@@ -701,8 +696,6 @@ function nuAngle(){
 	var r			= J.joins;
 	var ok			= [];
 	
-console.log(6666,j, r)	
-
 	for (var key in r){																//-- remove links to closed boxes
 	
 		var I		= key.split('--')[0];
@@ -717,7 +710,7 @@ console.log(6666,j, r)
 	nuSQL.refreshJoins(ok);
 	
 	for (var key in nuSQL.joins){
-console.log(3333)		
+
 		var F	= $('#' + nuSQL.joins[key].from);
 		var T	= $('#' + nuSQL.joins[key].to);
 		var f	= F.offset();
@@ -734,15 +727,15 @@ console.log(3333)
 		
 		$('#' + L.id).css({
 			'width'				: w,
-			'height'			: 5,
+			'height'			: 3,
 			'left'				: f.left,
 			'top'				: f.top,
 			'position'			: 'absolute',
 			'text-align'    	: 'center',
-			'border'			: 'grey 1px solid',
+			'border'			: 'orange 1px solid',
 			'border-left'		: '4px solid',
-			'border-left-color'	: nuSQL.joins[key].join == '' ? 'grey' : 'red',
-			'background-color'	: 'grey',
+			'border-left-color'	: nuSQL.joins[key].join == '' ? 'orange' : 'mediumturquoise',
+			'background-color'	: 'orange',
 			'transform'			: 'rotate(' + d + 'deg)',
 		})
 		.attr('data-nu-join', key)
@@ -801,8 +794,17 @@ function nuChangeJoin(e){
 	.val(JSON.stringify(j))
 	.change();
 
-	nuAngle();
-	SQL.buildSQL();
+	nuSQL.buildSQL();
 	
 }
+
+
+function fj(){
+
+	var j	= {"joins":[{"match":"company--employee","table1":"employee","table2":"company","type":"","join":"employee.emp_company_id = company.company_id"},{"match":"company--invoice","table1":"company","table2":"invoice","type":"","join":"company.company_id = invoice.inv_company_id"},{"match":"ii--invoice","table1":"invoice","table2":"ii","type":"LEFT","join":"invoice.invoice_id = ii.ite_invoice_id"},{"match":"ii--invoice","table1":"invoice","table2":"ii","type":"","join":"invoice.inv_number = ii.ite_unit_price"}],"from":[{"table":"invoice","alias":"invoice"},{"table":"invoice_item","alias":"ii"},{"table":"company","alias":"company"},{"table":"employee","alias":"employee"}]};
+	var J	= JSON.parse(j);
+	
+	
+}
+
 
