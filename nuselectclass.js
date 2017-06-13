@@ -118,16 +118,8 @@ class nuSelectObject{
 			'background-color'	: 'darkgrey',
 		})
 		.change(function(){
-
-			var a	= $(this).val();											//-- alias
-			var t	= $('#tablename' + i).html();								//-- table name
-			var i	= this.id.substr(5);
 			
-			$('.' + i + '.nuBoxField').attr('data-nu-alias', a);
-			$('.' + i + '.nuBoxField').attr('data-nu-table', t);
-
-			nuSQL.refreshJoins();	
-
+			nuSQL.nuAngle();	
 			nuSQL.buildSQL();
 
 			
@@ -157,7 +149,7 @@ class nuSelectObject{
 		.addClass('nuButtonHover')
 		.addClass('nuSearchListClose');
 		
-		this.buildSQL();
+//		this.buildSQL();
 		
 	}
 
@@ -254,7 +246,6 @@ class nuSelectObject{
 			f.push({'table' : t, 'alias' : al});
 			
 		});
-//console.log(f,'f');
 
 		return f;
 		
@@ -283,9 +274,6 @@ class nuSelectObject{
 		
 		j.sort(o);
 		
-		
-		console.log(j,'j');
-
 		return j;
 		
 	}
@@ -312,10 +300,8 @@ class nuSelectObject{
 	}
 	
 
-	refreshJoins(){
+	refreshJoins(r){										//-- build objects to draw relationship lines  from
 
-		var r			= this.joins;				//-- JOIN
-		
 		for (var k in r){
 			
 			var I		= String(k).split('--')[0];
@@ -332,7 +318,7 @@ class nuSelectObject{
 			var a		= $('#alias' + b).val();
 			var f		= $('#' + i).html();
 			
-			var r	= 	{
+			var o	= 	{
 				
 						'from' 		: I, 
 						'fromtable'	: T,
@@ -344,15 +330,13 @@ class nuSelectObject{
 						'toalias'	: a,
 						'tofield' 	: f, 
 
-						'join' 		: ''
+						'join' 		: r[k],
 						
 						};
 						
-			this.joins[I + '--' + i]	= r;
+			this.joins[I + '--' + i]	= o;
 
 		}
-		
-		nuAngle();
 
 	}
 
@@ -461,8 +445,6 @@ class nuSelectObject{
 		}else{
 
 			$('#' + col.id)
-			.attr('data-nu-table', this.table)
-			.attr('data-nu-alias', '')
 			.addClass('nuBoxTitle')
 			.addClass('nuBoxField')
 			.addClass(this.boxID)
@@ -507,9 +489,8 @@ class nuSelectObject{
 
 		j.tables			= a;
 		var joins			= {};
-
 		var r				= this.joins;
-
+		
 		for (var k in r){
 			
 			var jFrom		= r[k].from;
@@ -525,6 +506,11 @@ class nuSelectObject{
 		return JSON.stringify(j);
 		
 	}
+
+	addJoinsToJSON(){
+		
+	}
+
 	
 	getCheckboxes(b){
 
@@ -557,9 +543,9 @@ class nuSelectObject{
 	}
 	
 	rebuildGraphic(){
-
-		var j		= $('#sse_json', parent.document).val();
 		
+		var j		= $('#sse_json', parent.document).val();
+
 		if(j == ''){return;}
 		
 		var J		=	JSON.parse(j);
@@ -570,6 +556,7 @@ class nuSelectObject{
 			var cb	= J.tables[i].checkboxes;
 			
 			this.addBox(t.tablename, t.id);
+
 			
 			$('#' + t.id)
 			.css('top', t.position.top)
@@ -585,12 +572,35 @@ class nuSelectObject{
 			
 		}
 		
-		this.joins			= J.joins;
+
+		var r							= J.joins;				//-- JOIN
 		
-		this.refreshJoins();
+		for (var k in r){
+			
+			var I						= String(k).split('--')[0];
+			var i						= String(k).split('--')[1];
+
+			this.joins[I + '--' + i]	= r[k];
+
+		}
+
+		nuAngle();
 		
 	}
+	
+	addJoin(key, v){
 
+		var j	= parent.$('#sse_json').val();
+		var J	= JSON.parse(j);
+		
+		J.joins[key] = v;
+		
+		var u	= JSON.stringify(J);
+		
+		parent.$('#sse_json').val(u);
+
+	}
+	
 	
 }
 
@@ -601,9 +611,6 @@ class nuSelectObject{
 
 
 function nuUp(e){
-	
-//	e.preventDefault();	
-
 
 	var el						= $(e.target);
 	
@@ -616,7 +623,7 @@ function nuUp(e){
 
 	
 	if(el.hasClass('nuBoxField')){
-		console.log(9);
+		
 		var id				= String(window.nuCurrentID);
 		
 		if(id.split('_').length == 3){							//-- eg. field_1_boxc14966188848055365
@@ -625,10 +632,9 @@ function nuUp(e){
 			var i				= e.target.id;
 			
 			if(I.split('_')[2] != i.split('_')[2]){				//-- different box
-					
-				nuSQL.joins[I + '--' + i] = '';
-				nuSQL.refreshJoins();	
-				nuSQL.buildSQL();
+			
+				nuSQL.addJoin(I + '--' + i, '')
+				nuAngle();	
 				
 			}
 			
@@ -686,20 +692,32 @@ function nuMove(e){
 function nuAngle(){
 
 	$('.nuRelationships').remove();
+
+	var j			= parent.$('#sse_json').val();
 	
-	var r					= nuSQL.joins;
-	nuSQL.joins	= [];
+	if(j == ''){return;}
+
+	var J			= JSON.parse(j);
+	var r			= J.joins;
+	var ok			= [];
+	
+console.log(6666,j, r)	
 
 	for (var key in r){																//-- remove links to closed boxes
+	
+		var I		= key.split('--')[0];
+		var i		= key.split('--')[1];
 
-		if($('#' + r[key].from).length == 1 && $('#' + r[key].to).length == 1){
-			nuSQL.joins[key]	= r[key];
+		if($('#' + I).length == 1 && $('#' + i).length == 1){
+			ok[I + '--' + i]	= r[key]
 		}
 
 	}
 	
-	for (var key in nuSQL.joins){
+	nuSQL.refreshJoins(ok);
 	
+	for (var key in nuSQL.joins){
+console.log(3333)		
 		var F	= $('#' + nuSQL.joins[key].from);
 		var T	= $('#' + nuSQL.joins[key].to);
 		var f	= F.offset();
@@ -721,21 +739,21 @@ function nuAngle(){
 			'top'				: f.top,
 			'position'			: 'absolute',
 			'text-align'    	: 'center',
-			'border'			: 'black 1px none',
-			'border-color'		: 'black',
-			'border-left'		: 'black 2px solid',
-			'border-left-color'	: nuSQL.joins[key].join == '' ? '#fe9c34' : '#06afef',
-			'background-color'	: 'black',
-			'border-width'		: '1px 1px 1px 3px',
+			'border'			: 'grey 1px solid',
+			'border-left'		: '4px solid',
+			'border-left-color'	: nuSQL.joins[key].join == '' ? 'grey' : 'red',
 			'background-color'	: 'grey',
 			'transform'			: 'rotate(' + d + 'deg)',
 		})
 		.attr('data-nu-join', key)
-		.attr('title', nuSQL.joins[key].join + ' JOIN ON ' + nuSQL.joins[key].fromfield + ' = ' + nuSQL.joins[key].tofield)
+		.attr('title', nuSQL.joins[key].join + ' JOIN ON ' + nuSQL.joins[key].fromfield + ' = ' + nuSQL.joins[key].tofield + ' (Double Click to Change Join)')
 		.attr('ondblclick', 'nuChangeJoin(event)')
-		.addClass('nuRelationships');
-
-
+		.addClass('nuRelationships')
+		.hover(function(){
+			$(this).css('border-width', '2px 2px 2px 5px');
+			}, function(){
+			$(this).css('border-width', '1px 1px 1px 5px');
+		});
 
 		var L		= $('#' + L.id);
 		var top 	= parseInt(f.top + f.top - L.top);
