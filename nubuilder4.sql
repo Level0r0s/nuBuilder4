@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 13, 2017 at 09:44 PM
+-- Generation Time: Jun 14, 2017 at 12:35 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -1408,7 +1408,7 @@ CREATE TABLE `zzzzsys_select` (
 
 INSERT INTO `zzzzsys_select` (`zzzzsys_select_id`, `sse_description`, `sse_json`, `sse_sql`, `sse_resize`) VALUES
 ('s14966166430334', 'aaa', '{"tables":[{"id":"boxc14966165798415995","position":{"top":25,"left":21.9921875},"tablename":"invoice","alias":"","checkall":true,"checkboxes":[false,false,false,false]},{"id":"boxc14966165821775996","position":{"top":50,"left":43.99739456176758},"tablename":"invoice_item","alias":"","checkall":true,"checkboxes":[false,false,false,false,false,false]}]}', 'SELECT\n    invoice.*,\n    invoice_item.*\nFROM\n    invoice_item\nJOIN invoice ON invoice.invoice_id = invoice_item.ite_invoice_id\n', 0),
-('s14965615765327', 'invoice and invoice_item', '{"tables":[{"id":"boxc14966188828485364","position":{"top":192.48097229003906,"left":545.7796020507812},"tablename":"invoice","alias":"","checkall":true,"checkboxes":[false,false,false,false,false]},{"id":"boxc14966188848055365","position":{"top":226.43849182128906,"left":834.7593994140625},"tablename":"invoice_item","alias":"ii","checkall":true,"checkboxes":[false,false,false,false,false,false]},{"id":"boxc14968644414846146","position":{"top":65.97222137451172,"left":313.2853698730469},"tablename":"company","alias":"","checkall":false,"checkboxes":[false,false,true,true,false,false,false,false,false,false,false,false,false,false]},{"id":"boxc14968660691100065","position":{"top":111.97916412353516,"left":42.307373046875},"tablename":"employee","alias":"","checkall":true,"checkboxes":[false,false,false,false,false,false]}],"joins":{"field_1_boxc14968660691100065--field_0_boxc14968644414846146":"","field_0_boxc14968644414846146--field_1_boxc14966188828485364":"","field_0_boxc14966188828485364--field_1_boxc14966188848055365":"LEFT","field_2_boxc14966188828485364--field_4_boxc14966188848055365":""}}', 'SELECT\n    invoice.*,\n    ii.*,\n    company.com_name,\n    company.com_business_id,\n    employee.*\nWHERE\n    (company.com_name>1)\nGROUP BY\n    invoice.inv_number ASC\nHAVING\n    (invoice.inv_number<999999)\nORDER BY\n    invoice_item.invoice_item_id ASC\n', 63);
+('s14965615765327', 'invoice and invoice_item', '{"tables":[{"id":"boxc14966188828485364","position":{"top":192.4603271484375,"left":545.7589111328125},"tablename":"invoice","alias":"","checkall":true,"checkboxes":[false,false,false,false,false]},{"id":"boxc14966188848055365","position":{"top":226.43849182128906,"left":834.7470092773438},"tablename":"invoice_item","alias":"ii","checkall":true,"checkboxes":[false,false,false,false,false,false]},{"id":"boxc14968644414846146","position":{"top":65.97222137451172,"left":313.26885986328125},"tablename":"company","alias":"","checkall":false,"checkboxes":[false,false,true,true,false,false,false,false,false,false,false,false,false,false]},{"id":"boxc14968660691100065","position":{"top":111.97917175292969,"left":42.28670883178711},"tablename":"employee","alias":"","checkall":true,"checkboxes":[false,false,false,false,false,false]}],"joins":{"field_1_boxc14968660691100065--field_0_boxc14968644414846146":"","field_0_boxc14968644414846146--field_1_boxc14966188828485364":"","field_0_boxc14966188828485364--field_1_boxc14966188848055365":"LEFT","field_2_boxc14966188828485364--field_4_boxc14966188848055365":""}}', 'SELECT\n    invoice.*,\n    ii.*,\n    company.com_name,\n    company.com_business_id,\n    employee.*\nWHERE\n    (company.com_business_id>1)\nGROUP BY\n    invoice.inv_date ASC\nHAVING\n    (invoice.inv_number<999999)\nORDER BY\n    invoice.inv_number ASC\n', 63);
 
 -- --------------------------------------------------------
 
@@ -1431,10 +1431,10 @@ CREATE TABLE `zzzzsys_select_clause` (
 --
 
 INSERT INTO `zzzzsys_select_clause` (`zzzzsys_select_clause_id`, `ssc_zzzzsys_select_id`, `ssc_type`, `ssc_field`, `ssc_clause`, `ssc_sort`, `ssc_order`) VALUES
-('s14967003501133', 's14965615765327', '3', 'invoice_item.invoice_item_id', '', 'ASC', ''),
+('s14967003501133', 's14965615765327', '3', 'invoice.inv_number', '', 'ASC', ''),
 ('s14967003501131', 's14965615765327', '4', 'invoice.inv_number', '<999999', '', ''),
-('s14967003501132', 's14965615765327', '2', 'invoice.inv_number', '', 'ASC', ''),
-('s14967003501130', 's14965615765327', '1', 'company.com_name', '>1', '', '1');
+('s14967003501132', 's14965615765327', '2', 'invoice.inv_date', '', 'ASC', ''),
+('s14967003501130', 's14965615765327', '1', 'company.com_business_id', '>1', '', '1');
 
 -- --------------------------------------------------------
 

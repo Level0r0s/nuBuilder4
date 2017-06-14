@@ -1016,5 +1016,9 @@ input[type=range]::-webkit-slider-runnable-track {
 	cursor:pointer;
 }
 
-
+.nuRelationships{
+	opacity: 0.5;
+	background-color: orange;
+	border-color: orange;
+}
 

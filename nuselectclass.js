@@ -718,6 +718,8 @@ function nuAngle(){
 		var d 	= Math.atan2(t.top - f.top, t.left - f.left) * 180 / Math.PI;		//-- angle in degrees
 		var w	= Math.sqrt(Math.pow(f.top - t.top, 2) + Math.pow(f.left - t.left, 2));
 		var i	= 'joins' + nuID();
+		var jt	= nuSQL.joins[key].join;
+		var lm	= 10;
 
 		var L = document.createElement('div');										//-- relationship box (line)
 		
@@ -726,26 +728,28 @@ function nuAngle(){
 		$('body').append(L);
 		
 		$('#' + L.id).css({
-			'width'				: w,
-			'height'			: 3,
+			'width'				: jt == 'LEFT' ? w - lm : w,
+			'height'			: 6,
 			'left'				: f.left,
 			'top'				: f.top,
 			'position'			: 'absolute',
 			'text-align'    	: 'center',
-			'border'			: 'orange 1px solid',
-			'border-left'		: '4px solid',
-			'border-left-color'	: nuSQL.joins[key].join == '' ? 'orange' : 'mediumturquoise',
+			'border'			: 'orange 0px solid',
+			'border-left-width'	: jt == 'LEFT' ? lm : 0,
+			'border-left-color'	: 'black',
 			'background-color'	: 'orange',
 			'transform'			: 'rotate(' + d + 'deg)',
 		})
 		.attr('data-nu-join', key)
-		.attr('title', nuSQL.joins[key].join + ' JOIN ON ' + nuSQL.joins[key].fromfield + ' = ' + nuSQL.joins[key].tofield + ' (Double Click to Change Join)')
+		.attr('title', jt + ' JOIN ON ' + nuSQL.joins[key].fromfield + ' = ' + nuSQL.joins[key].tofield + ' (Double Click to Change Join)')
 		.attr('ondblclick', 'nuChangeJoin(event)')
 		.addClass('nuRelationships')
 		.hover(function(){
-			$(this).css('border-width', '2px 2px 2px 5px');
+			$(this).css('border-top-width', 2);
+			$(this).css('border-bottom-width', 2);
 			}, function(){
-			$(this).css('border-width', '1px 1px 1px 5px');
+			$(this).css('border-top-width', 0);
+			$(this).css('border-bottom-width', 0);
 		});
 
 		var L		= $('#' + L.id);
@@ -801,7 +805,7 @@ function nuChangeJoin(e){
 
 function fj(){
 
-	var j	= {"joins":[{"match":"company--employee","table1":"employee","table2":"company","type":"","join":"employee.emp_company_id = company.company_id"},{"match":"company--invoice","table1":"company","table2":"invoice","type":"","join":"company.company_id = invoice.inv_company_id"},{"match":"ii--invoice","table1":"invoice","table2":"ii","type":"LEFT","join":"invoice.invoice_id = ii.ite_invoice_id"},{"match":"ii--invoice","table1":"invoice","table2":"ii","type":"","join":"invoice.inv_number = ii.ite_unit_price"}],"from":[{"table":"invoice","alias":"invoice"},{"table":"invoice_item","alias":"ii"},{"table":"company","alias":"company"},{"table":"employee","alias":"employee"}]};
+	var j	= {"joins":[{"match":"company--employee","table1":"employee","table2":"company","order":"company--employee--b","type":"","join":"employee.emp_company_id = company.company_id"},{"match":"company--invoice","table1":"company","table2":"invoice","order":"company--invoice--b","type":"","join":"company.company_id = invoice.inv_company_id"},{"match":"ii--invoice","table1":"invoice","table2":"ii","order":"ii--invoice--a","type":"LEFT","join":"invoice.invoice_id = ii.ite_invoice_id"},{"match":"ii--invoice","table1":"invoice","table2":"ii","order":"ii--invoice--b","type":"","join":"invoice.inv_number = ii.ite_unit_price"}],"from":[{"table":"invoice","alias":"invoice"},{"table":"invoice_item","alias":"ii"},{"table":"company","alias":"company"},{"table":"employee","alias":"employee"}]};
 	var J	= JSON.parse(j);
 	
 	

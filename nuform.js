@@ -9,15 +9,12 @@ function nuBuildForm(f){
 		sessionStorage.logout	= 'true';
 		parent.parent.parent.parent.parent.location.reload();
 		
-		//nuLogin();
-		//nuAlert(['You have been logged out..']);
-		
 		return;
 		
 	}
 	
 	
-	window.nuRelationA			= {'id' : '', 'field' : '', 'table' : '', 'left' : 0, 'top' : 0};
+	window.nuBeforeSave			= null;
 	window.onbeforeunload		= null;
 	window.nuBrowseFunction		= window.nuDefaultBrowseFunction;
 	window.nuSERVERRESPONSE		= f;
