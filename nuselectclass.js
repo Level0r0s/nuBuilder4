@@ -3,10 +3,12 @@ class nuSelectObject{
 	
 	constructor() {
 		
-		this.joins		= [];
-		this.boxes		= [];
 		this.boxID		= '';
 		this.table		= '';
+		this.joins		= [];
+		this.boxes		= [];
+		this.tempTables	= [];
+		this.tempJoins	= [];
 		
 	}
 	
@@ -152,10 +154,10 @@ class nuSelectObject{
 		nuAngle();
 	
 		var s 	= this.buildSelect(c, b);
-		var j	= this.buildJoin();
 		var f	= this.buildFrom();
+		//var j	= this.buildJoins(f);
 		var c	= this.buildClauses();
-console.log(JSON.stringify({'joins':j, 'from':f}));
+		
 		parent.$('#sse_sql')
 		.val(s + c)
 //		.val(s + f + j + c)
@@ -226,52 +228,186 @@ console.log(JSON.stringify({'joins':j, 'from':f}));
 	
 	buildFrom(){
 			
-		var f		= [];															//-- FROM
+		var THIS		= this;
+		this.tempTables	= this.usedTables();
+		this.tempJoins	= this.getJoinObjects();													//-- current visible joins
 		
-		var THIS	= this;
+		for(var i = 0 ; i < this.tempTables.length ; i++){
 
+			if(this.tempTables[i].used != -1){
+		
+				var more	= true;
+				var defined	= [this.tempTables[i].alias];						//-- growing list of used tables
+				var ob		= {};
+				var s		= '';
+				
+				while(more){
+					
+					var q	= this.getJoinObject(defined);
+					ob		= q[1];
+					more	= q[0];
+					
+					if(more){
+						
+						var a1		= ob.type == 'LEFT' ? "\n    LEFT JOIN " :  "\n    JOIN ";
+						
+						if(defined.indexOf(ob.tables[0]) == -1){
+							
+							var a2	= this.buildAlias(ob.tables[0], ob.aliases[0]);
+							defined.push(ob.tables[0]);
+							
+						}else{
+							
+							var a2	= this.buildAlias(ob.tables[1], ob.aliases[1]);
+							defined.push(ob.tables[1])
+							
+						}
+						
+						this.markTableAsUsed(ob.tables[0]);
+						this.markTableAsUsed(ob.tables[1]);
+						
+						var a3		= ob.joins.join(' AND ');
+						
+						this.tempTables[i].joins.push(a1 + a2 + ' ON ' + a3);
+						
+					}
+					
+				}
+			}
+			
+		}
+		
+		console.log(this.tempTables);
+		
+		return this.tempTables;
+		
+	}
+	
+	markTableAsUsed(t){
+
+		for(var i = 0 ; i < this.tempTables.length ; i++){
+			
+			if(this.tempTables[i].alias == t){
+				
+				this.tempTables[i].used	= -1;
+				
+				return;
+				
+			}
+		}
+	}
+
+
+	usedTables(){
+		
+		var T			= [];
+		var THIS		= this;
+		this.tempJoins	= this.getJoinObjects();													//-- current visible joins
+		
 		$('.nuBox').each(function(index){
 			
-			var b	= $(this)[0].id;
-			var t	= $('#tablename' + b).html();
-			var a	= $('#alias' + b).val();
-			var al	= THIS.justAlias(t,a);
+			var b		= $(this)[0].id;
+			var t		= $('#tablename' + b).html();
+			var a		= $('#alias' + b).val();
+			var al		= THIS.justAlias(t,a);
+			var u		= 0;
 
-			f.push({'table' : t, 'alias' : al});
+			for (var k in this.joins){
+			
+				var o	= this.joins[k];
+				
+				if(o.tables.indexOf(al) > -1){u ++;}
+				
+			}
+
+			T.push({'table' : t, 'alias' : al, 'used' : u, 'joins' : []});
 			
 		});
-
-		return f;
+		
+		
+		var uses 		= function(b, a){
+			return (b.used < a.used);
+		}
+		
+		T.sort(uses);
+		
+		return T;
 		
 	}
 
 	
-	buildJoin(){
+	getJoinObject(a){
+	
+		var tj		= this.tempJoins;
+		
+		for(var i = 0 ; i < tj.length ; i++){
 			
+			var o	= tj[i];
+			
+			if(a.indexOf(o.tables[0]) != -1 || a.indexOf(o.tables[1]) != -1){
+				
+				var r	= this.tempJoins.splice(i, 1);
+				
+				return [true,o];
+				
+			}
+			
+		}
+		
+		return [false,{}];
+		
+	}
+
+	
+	
+	
+	getJoinObjects(){
+		
 		var r		= this.joins;													//-- JOIN
-		var j		= [];	
+		var j		= [];
+		var J		= [];
 			
 		for (var k in r){
 		
 			var R	= r[k];
-			var A	= this.justAlias(R.fromtable, R.fromalias);
-			var a	= this.justAlias(R.totable, R.toalias);
-			var M	= [a, A].sort().join('--');
-			var l	= R.join == 'LEFT' ? '--a' : '--b';
+			var T	= R.fromtable;
+			var t	= R.totable;
+			var A	= R.fromalias;
+			var a	= R.toalias;
+			var B	= this.justAlias(R.fromtable, R.fromalias);
+			var b	= this.justAlias(R.totable, R.toalias);
+			var n	= String(B + '.' + R.fromfield +  ' = ' + b + '.' + R.tofield);
+			var id	= [B, b].sort().join('--');
 			
-			j.push({'match' : M, 'table1' : A, 'table2' : a, 'order' : M + l, 'type' : R.join, 'join' : A + '.' + R.fromfield +  ' = ' + a + '.' + R.tofield});
+			if(j[id] === undefined){
+				
+				j[id]	= {
+					'tables' 	: [T, t], 
+					'aliases' 	: [A, a], 
+					'type' 		: R.join, 
+					'joins' 	: [n],
+					'used'		: false
+				};
+				
+			}else{
+				j[id].joins.push(n);
+				
+				if(R.type == 'LEFT'){
+					R.type = 'LEFT';
+				}
+				
+			}
 			
 		}
-
-		var o 		= function(b, a){														//-- used to order clauses
-			return ( a.order < b.order);
+			
+		for (var k in j){
+			J.push(j[k]);
 		}
 		
-		j.sort(o);
-		
-		return j;
+		return J;
 		
 	}
+
 
 	buildAlias(t, a){
 
@@ -809,6 +945,28 @@ function fj(){
 	var J	= JSON.parse(j);
 	
 	
+}
+
+// swap function helper
+function swap(array, i, j) {
+  var temp = array[i];
+  array[i] = array[j];
+  array[j] = temp;
+}
+
+function selectionSort(array) {
+  for(var i = 0; i < array.length; i++) {
+    var min = i;
+    for(var j = i + 1; j < array.length; j++) {
+      if(array[j] < array[min]) {
+        min = j;
+      }
+    }
+    if(i !== min) {
+      swap(array, i, min);
+    }
+  }
+  return array;
 }
 
 
