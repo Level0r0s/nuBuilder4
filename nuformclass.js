@@ -645,7 +645,7 @@ console.log(nuFORM.removeFormatting(v, f));
 						.replaceAll(s, '')
 						.replaceAll(d, '.');
 						
-			return parseFloat(num).toPrecision(p);
+			return parseFloat(num);
 		}
 
 		if(f[0] == 'D'){									//-- date
