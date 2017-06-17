@@ -278,7 +278,12 @@ class nuSelectObject{
 			
 		}
 		
-		var f			= this.tempTables;
+		
+		var torder 		= function(b, a){
+			return (a.joins.length < b.joins.length);
+		}
+
+		var f			= this.tempTables.sort(torder);
 		var F			= [];
 		
 		for(var i = 0 ; i < f.length ; i++){
@@ -293,8 +298,6 @@ class nuSelectObject{
 			}
 			
 		}
-		
-		console.log("FROM\n" + F);
 		
 		return "\nFROM" + F;
 		
