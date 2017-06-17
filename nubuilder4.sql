@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 14, 2017 at 12:35 AM
+-- Generation Time: Jun 17, 2017 at 04:39 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -699,7 +699,9 @@ INSERT INTO `zzzzsys_format` (`zzzzsys_format_id`, `srm_type`, `srm_format`) VAL
 ('58b95515e58fe8f', 'Number', '£ 1000.0'),
 ('58bb3cba6ace513', 'Date', 'dd-mmm-yyyy'),
 ('58bd10d2a68fd8f', 'Date', 'mmmm'),
-('58c039f8792cbf3', 'Date', 'dd, dddd mmmm yyyy');
+('58c039f8792cbf3', 'Date', 'dd, dddd mmmm yyyy'),
+('s14974607083347', 'Number', '$ 1000'),
+('s14974614374310', 'Number', '€ 1000');
 
 -- --------------------------------------------------------
 
@@ -1408,7 +1410,7 @@ CREATE TABLE `zzzzsys_select` (
 
 INSERT INTO `zzzzsys_select` (`zzzzsys_select_id`, `sse_description`, `sse_json`, `sse_sql`, `sse_resize`) VALUES
 ('s14966166430334', 'aaa', '{"tables":[{"id":"boxc14966165798415995","position":{"top":25,"left":21.9921875},"tablename":"invoice","alias":"","checkall":true,"checkboxes":[false,false,false,false]},{"id":"boxc14966165821775996","position":{"top":50,"left":43.99739456176758},"tablename":"invoice_item","alias":"","checkall":true,"checkboxes":[false,false,false,false,false,false]}]}', 'SELECT\n    invoice.*,\n    invoice_item.*\nFROM\n    invoice_item\nJOIN invoice ON invoice.invoice_id = invoice_item.ite_invoice_id\n', 0),
-('s14965615765327', 'invoice and invoice_item', '{"tables":[{"id":"boxc14966188828485364","position":{"top":192.4603271484375,"left":545.7589111328125},"tablename":"invoice","alias":"","checkall":true,"checkboxes":[false,false,false,false,false]},{"id":"boxc14966188848055365","position":{"top":226.43849182128906,"left":834.7470092773438},"tablename":"invoice_item","alias":"ii","checkall":true,"checkboxes":[false,false,false,false,false,false]},{"id":"boxc14968644414846146","position":{"top":65.97222137451172,"left":313.26885986328125},"tablename":"company","alias":"","checkall":false,"checkboxes":[false,false,true,true,false,false,false,false,false,false,false,false,false,false]},{"id":"boxc14968660691100065","position":{"top":111.97917175292969,"left":42.28670883178711},"tablename":"employee","alias":"","checkall":true,"checkboxes":[false,false,false,false,false,false]}],"joins":{"field_1_boxc14968660691100065--field_0_boxc14968644414846146":"","field_0_boxc14968644414846146--field_1_boxc14966188828485364":"","field_0_boxc14966188828485364--field_1_boxc14966188848055365":"LEFT","field_2_boxc14966188828485364--field_4_boxc14966188848055365":""}}', 'SELECT\n    invoice.*,\n    ii.*,\n    company.com_name,\n    company.com_business_id,\n    employee.*\nWHERE\n    (company.com_business_id>1)\nGROUP BY\n    invoice.inv_date ASC\nHAVING\n    (invoice.inv_number<999999)\nORDER BY\n    invoice.inv_number ASC\n', 63);
+('s14965615765327', 'invoice and invoice_item', '{"tables":[{"id":"boxc14966188828485364","position":{"top":192.4441375732422,"left":545.7427368164062},"tablename":"invoice","alias":"","checkall":true,"checkboxes":[false,false,false,false,false]},{"id":"boxc14966188848055365","position":{"top":226.43040466308594,"left":834.729736328125},"tablename":"invoice_item","alias":"ii","checkall":true,"checkboxes":[false,false,false,false,false,false]},{"id":"boxc14968644414846146","position":{"top":39.98716735839844,"left":311.990478515625},"tablename":"company","alias":"","checkall":false,"checkboxes":[false,false,true,true,false,false,false,false,false,false,false,false,false,false]},{"id":"boxc14968660691100065","position":{"top":92.99517059326172,"left":37.98686599731445},"tablename":"employee","alias":"","checkall":true,"checkboxes":[false,false,false,false,false,false]},{"id":"boxc14974829364423423","position":{"top":43.987770080566406,"left":609.9977416992188},"tablename":"color","alias":"","checkall":true,"checkboxes":[false,false,false]},{"id":"boxc14974829849274220","position":{"top":67.99139404296875,"left":799.9886474609375},"tablename":"business","alias":"","checkall":true,"checkboxes":[false,false,false,false]},{"id":"boxc14974830075644766","position":{"top":271.965576171875,"left":169.9879150390625},"tablename":"test_table","alias":"","checkall":true,"checkboxes":[false,false,false,false,false,false,false]}],"joins":{"field_1_boxc14968660691100065--field_0_boxc14968644414846146":"","field_0_boxc14968644414846146--field_1_boxc14966188828485364":"","field_0_boxc14966188828485364--field_1_boxc14966188848055365":"LEFT","field_2_boxc14966188828485364--field_4_boxc14966188848055365":"","field_1_boxc14974829364423423--field_1_boxc14974829849274220":""}}', 'SELECT\n    invoice.*,\n    ii.*,\n    company.com_name,\n    company.com_business_id,\n    employee.*,\n    color.*,\n    business.*,\n    test_table.*\n\nFROM\n    invoice\n        JOIN company ON company.company_id = invoice.inv_company_id\n        JOIN employee ON employee.emp_company_id = company.company_id\n        LEFT JOIN invoice_item AS ii ON invoice.invoice_id = ii.ite_invoice_id AND invoice.inv_number = ii.ite_unit_price,\n    color\n        JOIN business ON color.col_code = business.bus_code,\n    test_table\n\nWHERE\n    (test_table.text2= ''hello'') AND \n    (company.com_business_id>1)\n\nGROUP BY\n    invoice.inv_date ASC\n\nHAVING\n    (invoice.inv_number<999999)\n\nORDER BY\n    invoice.inv_number ASC\n', 69);
 
 -- --------------------------------------------------------
 
@@ -1434,7 +1436,8 @@ INSERT INTO `zzzzsys_select_clause` (`zzzzsys_select_clause_id`, `ssc_zzzzsys_se
 ('s14967003501133', 's14965615765327', '3', 'invoice.inv_number', '', 'ASC', ''),
 ('s14967003501131', 's14965615765327', '4', 'invoice.inv_number', '<999999', '', ''),
 ('s14967003501132', 's14965615765327', '2', 'invoice.inv_date', '', 'ASC', ''),
-('s14967003501130', 's14965615765327', '1', 'company.com_business_id', '>1', '', '1');
+('s14967003501130', 's14965615765327', '1', 'company.com_business_id', '>1', '', '1'),
+('s14977103339508', 's14965615765327', '1', 'test_table.text2', '= ''hello''', '', '2');
 
 -- --------------------------------------------------------
 

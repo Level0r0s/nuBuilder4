@@ -155,11 +155,10 @@ class nuSelectObject{
 	
 		var s 	= this.buildSelect(c, b);
 		var f	= this.buildFrom();
-		//var j	= this.buildJoins(f);
 		var c	= this.buildClauses();
 		
 		parent.$('#sse_sql')
-		.val(s + c)
+		.val(s + f + c)
 //		.val(s + f + j + c)
 		.change();
 		
@@ -249,7 +248,7 @@ class nuSelectObject{
 					
 					if(more){
 						
-						var a1		= ob.type == 'LEFT' ? "\n    LEFT JOIN " :  "\n    JOIN ";
+						var a1		= ob.type == 'LEFT' ? "\n        LEFT JOIN " :  "\n        JOIN ";
 						
 						if(defined.indexOf(ob.tables[0]) == -1){
 							
@@ -263,6 +262,8 @@ class nuSelectObject{
 							
 						}
 						
+						this.markTableAsUsed(ob.aliases[0]);
+						this.markTableAsUsed(ob.aliases[1]);
 						this.markTableAsUsed(ob.tables[0]);
 						this.markTableAsUsed(ob.tables[1]);
 						
@@ -277,9 +278,25 @@ class nuSelectObject{
 			
 		}
 		
-		console.log(this.tempTables);
+		var f			= this.tempTables;
+		var F			= [];
 		
-		return this.tempTables;
+		for(var i = 0 ; i < f.length ; i++){
+			
+			if(f[i].joins.length > 0 || f[i].used != -1){
+				
+				var a	= this.fromAlias(f[i].table, f[i].alias);
+				var j	= f[i].joins.join("");
+				
+				F.push("\n    " + a + j);
+				
+			}
+			
+		}
+		
+		console.log("FROM\n" + F);
+		
+		return "\nFROM" + F;
 		
 	}
 	
@@ -409,6 +426,16 @@ class nuSelectObject{
 	}
 
 
+	fromAlias(t, a){
+
+		if(a == t){
+			return t;
+		}else{
+			return t + ' AS ' + a;
+		}
+		
+	}
+
 	buildAlias(t, a){
 
 		if(a == ''){
@@ -508,10 +535,10 @@ class nuSelectObject{
 
 		}
 
-		if(WHERE.length > 0){clauses	+= "WHERE\n    " 		+ WHERE.join(" AND \n    ") 	+ "\n";}
-		if(GROUPBY.length > 0){clauses	+= "GROUP BY\n    " 	+ GROUPBY.join(",\n    ") 		+ "\n";}
-		if(HAVING.length > 0){clauses	+= "HAVING\n    " 		+ HAVING.join(" AND \n    ") 	+ "\n";}
-		if(ORDERBY.length > 0){clauses	+= "ORDER BY\n    " 	+ ORDERBY.join(",\n    ") 		+ "\n";}
+		if(WHERE.length > 0){clauses	+= "\n\nWHERE\n    " 		+ WHERE.join(" AND \n    ") 	+ "\n";}
+		if(GROUPBY.length > 0){clauses	+= "\nGROUP BY\n    " 	+ GROUPBY.join(",\n    ") 		+ "\n";}
+		if(HAVING.length > 0){clauses	+= "\nHAVING\n    " 		+ HAVING.join(" AND \n    ") 	+ "\n";}
+		if(ORDERBY.length > 0){clauses	+= "\nORDER BY\n    " 	+ ORDERBY.join(",\n    ") 		+ "\n";}
 
 		return clauses;
 		
