@@ -313,6 +313,7 @@ class nuFormObject {
 			var f				= o.attr('data-nu-format');
 			var v				= o.val();
 			
+console.log(nuFORM.removeFormatting(v, f));
 			return nuFORM.removeFormatting(v, f);
 			
 		}
@@ -337,7 +338,13 @@ class nuFormObject {
 					if(SF.deleted[c] == 0){										//-- add up only stuff not being deleted
 						
 						u	= nuFORM.removeFormatting(SF.rows[c][f], fmt);
-						v	= v + Number(u);
+
+						v	= parseFloat(Number(v) + Number(u)).toPrecision(10)
+						
+						console.log(u, v)
+
+						//console.log(Number(num), parseFloat(num).toPrecision(p));
+
 					
 					}
 					
@@ -638,8 +645,7 @@ class nuFormObject {
 						.replaceAll(s, '')
 						.replaceAll(d, '.');
 						
-			return Number(num);
-		
+			return parseFloat(num).toPrecision(p);
 		}
 
 		if(f[0] == 'D'){									//-- date

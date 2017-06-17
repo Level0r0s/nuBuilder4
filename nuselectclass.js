@@ -615,11 +615,22 @@ class nuSelectObject{
 			
 				function(event){
 					if(event.buttons == 1 && window.nuCurrentID != ''){
+						
 						$(this).css('color','green');
+						$(this).css('cursor','e-resize');
+						
+					}else{
+						
+						$(this).css('color','red');
+						$(this).css('cursor','e-resize');
+						
 					}
 				}, 
 				function() {
+
 					$(this).css('color','');
+					$(this).css('cursor','default');
+					
 				})
 				
 			.html(v);
@@ -904,10 +915,10 @@ function nuAngle(){
 			'top'				: f.top,
 			'position'			: 'absolute',
 			'text-align'    	: 'center',
-			'border'			: 'orange 0px solid',
+			'border'			: 'rgba(255, 153, 0, .5) 0px solid',
 			'border-left-width'	: jt == 'LEFT' ? lm : 0,
 			'border-left-color'	: 'rgba(255, 0, 0, 1)',
-			'background-color'	: 'orange',
+			'background-color'	: 'rgba(255, 153, 0, .5)',
 			'transform'			: 'rotate(' + d + 'deg)',
 		})
 		.attr('data-nu-join', key)
