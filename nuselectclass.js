@@ -613,11 +613,13 @@ class nuSelectObject{
 			.css('padding-top', 2)
 			.hover(
 			
-				function(){
-					$(this).addClass( "hover" );
+				function(event){
+					if(event.buttons == 1 && window.nuCurrentID != ''){
+						$(this).css('color','green');
+					}
 				}, 
 				function() {
-					$( this ).removeClass( "hover" );
+					$(this).css('color','');
 				})
 				
 			.html(v);
@@ -800,6 +802,8 @@ function nuUp(e){
 			}
 			
 		}
+		
+		nuSQL.buildSQL();
 
 	}
 	
