@@ -899,7 +899,7 @@ function nuAngle(){
 			'text-align'    	: 'center',
 			'border'			: 'orange 0px solid',
 			'border-left-width'	: jt == 'LEFT' ? lm : 0,
-			'border-left-color'	: 'black',
+			'border-left-color'	: 'rgba(255, 0, 0, 1)',
 			'background-color'	: 'orange',
 			'transform'			: 'rotate(' + d + 'deg)',
 		})
@@ -964,36 +964,4 @@ function nuChangeJoin(e){
 	nuSQL.buildSQL();
 	
 }
-
-
-function fj(){
-
-	var j	= {"joins":[{"match":"company--employee","table1":"employee","table2":"company","order":"company--employee--b","type":"","join":"employee.emp_company_id = company.company_id"},{"match":"company--invoice","table1":"company","table2":"invoice","order":"company--invoice--b","type":"","join":"company.company_id = invoice.inv_company_id"},{"match":"ii--invoice","table1":"invoice","table2":"ii","order":"ii--invoice--a","type":"LEFT","join":"invoice.invoice_id = ii.ite_invoice_id"},{"match":"ii--invoice","table1":"invoice","table2":"ii","order":"ii--invoice--b","type":"","join":"invoice.inv_number = ii.ite_unit_price"}],"from":[{"table":"invoice","alias":"invoice"},{"table":"invoice_item","alias":"ii"},{"table":"company","alias":"company"},{"table":"employee","alias":"employee"}]};
-	var J	= JSON.parse(j);
-	
-	
-}
-
-// swap function helper
-function swap(array, i, j) {
-  var temp = array[i];
-  array[i] = array[j];
-  array[j] = temp;
-}
-
-function selectionSort(array) {
-  for(var i = 0; i < array.length; i++) {
-    var min = i;
-    for(var j = i + 1; j < array.length; j++) {
-      if(array[j] < array[min]) {
-        min = j;
-      }
-    }
-    if(i !== min) {
-      swap(array, i, min);
-    }
-  }
-  return array;
-}
-
 
