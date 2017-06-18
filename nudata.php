@@ -182,14 +182,21 @@ function nuUpdateTables(){
 				if($action == 'save'){
 					
 					if($pv == '-1'){
-						$sql	= "INSERT INTO $table $is $vs;";
+						
+						if($deleted[$r] == '0'){
+							
+							$sql	= "INSERT INTO $table $is $vs;";
+							$S[]	= $sql;
+							
+						}
+						
 					}else{
-						$sql	= "UPDATE $table SET $fs WHERE `$pk` = '$pv';";
+						$sql		= "UPDATE $table SET $fs WHERE `$pk` = '$pv';";
+						$S[]		= $sql;
 					}
 				
 				}
 				
-				$S[]			= $sql;
 				
 			}
 			
@@ -214,7 +221,7 @@ function nuUpdateTables(){
 		
 	}
 	
-	//nudebug($S);
+	nudebug($S);
 	
 }
 
