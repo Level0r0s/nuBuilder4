@@ -471,7 +471,7 @@ input[type=range]::-webkit-slider-runnable-track {
   padding: 5px 0px;
 }
 
-#nuSearchListClose:hover{
+.nuSearchListClose:hover{
   cursor: pointer;
   color: red;
 }

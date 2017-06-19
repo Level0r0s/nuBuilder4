@@ -2974,7 +2974,7 @@ function nuAlert(o, type, yes, no){
 		return;
 	}
 	
-	var c		= " onclick=\"$('#nuAlertDiv').remove();\"";
+	var c		= "";// onclick=\"$('#nuAlertDiv').remove();\"";
 	var widest	= 5;
 
 	for(var i = 0 ; i < o.length ; i++){
@@ -2986,6 +2986,8 @@ function nuAlert(o, type, yes, no){
 	var l		= (screen.width - widest) / 2;
 
 	$('body', par).append("<div id='nuAlertDiv' class='nuAlert' style='width:" + widest + "px;left:" + l + "px' " + c + "></div>")
+	$('#nuAlertDiv').prepend('<img id="nuOptionListClose" src="nuclose.png" class="nuSearchListClose" style="position:absolute;top:5px;right:5px" onclick="$(this).parent().remove()" width="20px" height="20px">')
+	
 	
 	for(var i = 0 ; i < o.length ; i++){
 		
