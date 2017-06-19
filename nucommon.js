@@ -113,7 +113,7 @@ function nuDisplayError(e){
 
 	im.concat(e.errors);
 
-	nuAlert(e.errors);
+	nuMessage(e.errors);
 
 	return true;
 	
@@ -188,7 +188,7 @@ function nuLogin(){
     $('#nuusername').focus();
 			
 	if(sessionStorage.logout == 'true'){
-		nuAlert(['You have been logged out']);
+		nuMessage(['You have been logged out']);
 	}
 	
 	sessionStorage.logout	= '';

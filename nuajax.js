@@ -15,7 +15,7 @@ function nuAjax(w,successCallback,errorCallback){
 		error    : function(jqXHR,textStatus,errorThrown){
 			
 			var msg			= String(jqXHR.responseText).split("\n");
- 			nuAlert(msg);
+ 			nuMessage(msg);
 			window.test = jqXHR.responseText;
 
 			if (errorCallback !== undefined) {
@@ -249,7 +249,7 @@ function nuRunPHPHidden(i){
 			var im			= ['<img src="numessage.png" width="30px" height="30px" style="position:absolute;left:10px;top:10px">'];
 			im				= im.concat(fm.messages);
 
-			nuAlert(im);
+			nuMessage(im);
 			
 		}
 
