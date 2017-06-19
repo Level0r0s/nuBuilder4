@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 19, 2017 at 11:31 PM
+-- Generation Time: Jun 20, 2017 at 12:30 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -19,6 +19,18 @@ SET time_zone = "+00:00";
 --
 -- Database: `nubuilder4`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `aaa`
+--
+
+CREATE TABLE `aaa` (
+  `aaa_id` varchar(25) NOT NULL,
+  `field00` varchar(1000) NOT NULL,
+  `field01` varchar(1000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -451,7 +463,7 @@ INSERT INTO `zzzzsys_browse` (`zzzzsys_browse_id`, `sbr_zzzzsys_form_id`, `sbr_t
 ('58bf0b972c2bdca', '58bf0b972c2a447', 'date 2', 'date2', 'l', 'D|dd-mmm-yyyy', 40, 150),
 ('58c5ddfebf10554', 'nuobject', 'Input Type', 'sob_input_type', NULL, NULL, 20, 100),
 ('58c86689b9b0cc8', 'nufunction', 'Name', 'sfu_name', 'l', NULL, 20, 200),
-('s14942602808830', 'nufunction', ' ', 'sfu_syntax', 'l', '', 30, 20),
+('s14942602808830', 'nufunction', 'Syntax', 'sfu_syntax', 'l', '', 30, 200),
 ('58c8e5356733ca9', 'nufunction', 'Language', 'sfu_language', NULL, NULL, 10, 100),
 ('58cd57b94f3c100', '58a08a1abc4782c', 'Date', 'inv_date', 'l', 'D|dd-mmm-yyyy', 20, 150),
 ('58d6cf633a30fb3', '58d3719f55819e7', 'dddd', 'dddd', 'l', 'D|yyyy-mm-dd', 30, 222),
@@ -506,129 +518,6 @@ CREATE TABLE `zzzzsys_debug` (
   `deb_order` varchar(25) NOT NULL,
   `deb_added` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `zzzzsys_debug`
---
-
-INSERT INTO `zzzzsys_debug` (`zzzzsys_debug_id`, `deb_message`, `deb_order`, `deb_added`) VALUES
-('s14978342722885', '2017-06-19 10:34:32 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n    [0] => Array\n        (\n            [0] => Hello\n            [1] => World!\n            [2] => 456\n            [3] => 888\n        )\n\n)\n\n', '', 1497834272),
-('s14978342785645', '2017-06-19 10:34:38 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497834278),
-('s14978342812371', '2017-06-19 10:34:41 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497834281),
-('s14978345727575', '2017-06-19 10:39:32 (C:\\xampp\\htdocs\\nuBuilder4\\nudata.php:567)\n\n<br>\n\n[0] : Array\n(\n)\n\n\n[1] : Array\n(\n    [0] => Hello\n    [1] => World!\n    [2] => 456\n    [3] => 888\n)\n\n', '', 1497834572),
-('s14978345727576', '2017-06-19 10:39:32 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n    [0] => Array\n        (\n            [0] => Hello\n            [1] => World!\n            [2] => 456\n            [3] => 888\n        )\n\n)\n\n', '', 1497834572),
-('s14978345823232', '2017-06-19 10:39:42 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497834582),
-('s14978345835846', '2017-06-19 10:39:43 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497834583),
-('s14978345910018', '2017-06-19 10:39:51 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497834591),
-('s14978345955239', '2017-06-19 10:39:55 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497834595),
-('s14978345998190', '2017-06-19 10:39:59 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497834599),
-('s14978346010239', '2017-06-19 10:40:01 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497834601),
-('s14978346154937', '2017-06-19 10:40:15 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497834615),
-('s14978346195530', '2017-06-19 10:40:19 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497834619),
-('s14978346832446', '2017-06-19 10:41:23 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497834683),
-('s14978346860803', '2017-06-19 10:41:26 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497834686),
-('s14978346877903', '2017-06-19 10:41:27 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497834687),
-('s14978347670745', '2017-06-19 10:42:47 (C:\\xampp\\htdocs\\nuBuilder4\\nudata.php:224)\n\n<br>\n\n[0] : Array\n(\n    [0] => UPDATE zzzzsys_php SET `sph_php` = ''nuDisplayMessage(\\''Hello\\'');\nnuDisplayMessage(\\''World!\\'');\nnuDisplayMessage(456);\nnuDisplayMessage(888);\n'' WHERE `zzzzsys_php_id` = ''581135daea4f878'';\n)\n\n', '', 1497834767),
-('s14978347670746', '2017-06-19 10:42:47 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497834767),
-('s14978347683498', '2017-06-19 10:42:48 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497834768),
-('s14978347695038', '2017-06-19 10:42:49 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497834769),
-('s14978347716417', '2017-06-19 10:42:51 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497834771),
-('s14978347738376', '2017-06-19 10:42:53 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497834773),
-('s14978347758847', '2017-06-19 10:42:55 (C:\\xampp\\htdocs\\nuBuilder4\\nudata.php:567)\n\n<br>\n\n[0] : Array\n(\n)\n\n\n[1] : Hello\n', '', 1497834775),
-('s14978347758848', '2017-06-19 10:42:55 (C:\\xampp\\htdocs\\nuBuilder4\\nudata.php:567)\n\n<br>\n\n[0] : Array\n(\n    [0] => Hello\n)\n\n\n[1] : World!\n', '', 1497834775),
-('s14978347758849', '2017-06-19 10:42:55 (C:\\xampp\\htdocs\\nuBuilder4\\nudata.php:567)\n\n<br>\n\n[0] : Array\n(\n    [0] => Hello\n    [1] => World!\n)\n\n\n[1] : 456\n', '', 1497834775),
-('s14978347758850', '2017-06-19 10:42:55 (C:\\xampp\\htdocs\\nuBuilder4\\nudata.php:567)\n\n<br>\n\n[0] : Array\n(\n    [0] => Hello\n    [1] => World!\n    [2] => 456\n)\n\n\n[1] : 888\n', '', 1497834775),
-('s14978347758851', '2017-06-19 10:42:55 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n    [0] => Hello\n    [1] => World!\n    [2] => 456\n    [3] => 888\n)\n\n', '', 1497834775),
-('s14978353100639', '2017-06-19 10:51:50 (C:\\xampp\\htdocs\\nuBuilder4\\nudata.php:567)\n\n<br>\n\n[0] : Array\n(\n)\n\n\n[1] : Hello\n', '', 1497835310),
-('s14978353100640', '2017-06-19 10:51:50 (C:\\xampp\\htdocs\\nuBuilder4\\nudata.php:567)\n\n<br>\n\n[0] : Array\n(\n    [0] => Hello\n)\n\n\n[1] : World!\n', '', 1497835310),
-('s14978353100641', '2017-06-19 10:51:50 (C:\\xampp\\htdocs\\nuBuilder4\\nudata.php:567)\n\n<br>\n\n[0] : Array\n(\n    [0] => Hello\n    [1] => World!\n)\n\n\n[1] : 456\n', '', 1497835310),
-('s14978353100642', '2017-06-19 10:51:50 (C:\\xampp\\htdocs\\nuBuilder4\\nudata.php:567)\n\n<br>\n\n[0] : Array\n(\n    [0] => Hello\n    [1] => World!\n    [2] => 456\n)\n\n\n[1] : 888\n', '', 1497835310),
-('s14978353100643', '2017-06-19 10:51:50 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n    [0] => Hello\n    [1] => World!\n    [2] => 456\n    [3] => 888\n)\n\n', '', 1497835310),
-('s14978354561980', '2017-06-19 10:54:16 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497835456),
-('s14978354629836', '2017-06-19 10:54:22 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497835462),
-('s14978354649643', '2017-06-19 10:54:24 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497835464),
-('s14978354661515', '2017-06-19 10:54:26 (C:\\xampp\\htdocs\\nuBuilder4\\nudata.php:567)\n\n<br>\n\n[0] : Array\n(\n)\n\n\n[1] : Hello\n', '', 1497835466),
-('s14978354661516', '2017-06-19 10:54:26 (C:\\xampp\\htdocs\\nuBuilder4\\nudata.php:567)\n\n<br>\n\n[0] : Array\n(\n    [0] => Hello\n)\n\n\n[1] : World!\n', '', 1497835466),
-('s14978354661517', '2017-06-19 10:54:26 (C:\\xampp\\htdocs\\nuBuilder4\\nudata.php:567)\n\n<br>\n\n[0] : Array\n(\n    [0] => Hello\n    [1] => World!\n)\n\n\n[1] : 456\n', '', 1497835466),
-('s14978354661518', '2017-06-19 10:54:26 (C:\\xampp\\htdocs\\nuBuilder4\\nudata.php:567)\n\n<br>\n\n[0] : Array\n(\n    [0] => Hello\n    [1] => World!\n    [2] => 456\n)\n\n\n[1] : 888\n', '', 1497835466),
-('s14978354661519', '2017-06-19 10:54:26 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n    [0] => Hello\n    [1] => World!\n    [2] => 456\n    [3] => 888\n)\n\n', '', 1497835466),
-('s14978354967757', '2017-06-19 10:54:56 (C:\\xampp\\htdocs\\nuBuilder4\\nudata.php:567)\n\n<br>\n\n[0] : Array\n(\n)\n\n\n[1] : Hello\n', '', 1497835496),
-('s14978354967758', '2017-06-19 10:54:56 (C:\\xampp\\htdocs\\nuBuilder4\\nudata.php:567)\n\n<br>\n\n[0] : Array\n(\n    [0] => Hello\n)\n\n\n[1] : World!\n', '', 1497835496),
-('s14978354967759', '2017-06-19 10:54:56 (C:\\xampp\\htdocs\\nuBuilder4\\nudata.php:567)\n\n<br>\n\n[0] : Array\n(\n    [0] => Hello\n    [1] => World!\n)\n\n\n[1] : 456\n', '', 1497835496),
-('s14978354967760', '2017-06-19 10:54:56 (C:\\xampp\\htdocs\\nuBuilder4\\nudata.php:567)\n\n<br>\n\n[0] : Array\n(\n    [0] => Hello\n    [1] => World!\n    [2] => 456\n)\n\n\n[1] : 888\n', '', 1497835496),
-('s14978354967761', '2017-06-19 10:54:56 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n    [0] => Hello\n    [1] => World!\n    [2] => 456\n    [3] => 888\n)\n\n', '', 1497835496),
-('s14978356550362', '2017-06-19 10:57:35 (C:\\xampp\\htdocs\\nuBuilder4\\nudata.php:567)\n\n<br>\n\n[0] : Array\n(\n)\n\n\n[1] : Hello\n', '', 1497835655),
-('s14978356550363', '2017-06-19 10:57:35 (C:\\xampp\\htdocs\\nuBuilder4\\nudata.php:567)\n\n<br>\n\n[0] : Array\n(\n    [0] => Hello\n)\n\n\n[1] : World!\n', '', 1497835655),
-('s14978356550364', '2017-06-19 10:57:35 (C:\\xampp\\htdocs\\nuBuilder4\\nudata.php:567)\n\n<br>\n\n[0] : Array\n(\n    [0] => Hello\n    [1] => World!\n)\n\n\n[1] : 456\n', '', 1497835655),
-('s14978356550365', '2017-06-19 10:57:35 (C:\\xampp\\htdocs\\nuBuilder4\\nudata.php:567)\n\n<br>\n\n[0] : Array\n(\n    [0] => Hello\n    [1] => World!\n    [2] => 456\n)\n\n\n[1] : 888\n', '', 1497835655),
-('s14978356550366', '2017-06-19 10:57:35 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n    [0] => Hello\n    [1] => World!\n    [2] => 456\n    [3] => 888\n)\n\n', '', 1497835655),
-('s14978357778763', '2017-06-19 10:59:37 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497835777),
-('s14978357798913', '2017-06-19 10:59:39 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497835779),
-('s14978357808180', '2017-06-19 10:59:40 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497835780),
-('s14978357832150', '2017-06-19 10:59:43 (C:\\xampp\\htdocs\\nuBuilder4\\nudata.php:567)\n\n<br>\n\n[0] : Array\n(\n)\n\n\n[1] : Hello\n', '', 1497835783),
-('s14978357832151', '2017-06-19 10:59:43 (C:\\xampp\\htdocs\\nuBuilder4\\nudata.php:567)\n\n<br>\n\n[0] : Array\n(\n    [0] => Hello\n)\n\n\n[1] : World!\n', '', 1497835783),
-('s14978357832152', '2017-06-19 10:59:43 (C:\\xampp\\htdocs\\nuBuilder4\\nudata.php:567)\n\n<br>\n\n[0] : Array\n(\n    [0] => Hello\n    [1] => World!\n)\n\n\n[1] : 456\n', '', 1497835783),
-('s14978357832153', '2017-06-19 10:59:43 (C:\\xampp\\htdocs\\nuBuilder4\\nudata.php:567)\n\n<br>\n\n[0] : Array\n(\n    [0] => Hello\n    [1] => World!\n    [2] => 456\n)\n\n\n[1] : 888\n', '', 1497835783),
-('s14978357832154', '2017-06-19 10:59:43 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n    [0] => Hello\n    [1] => World!\n    [2] => 456\n    [3] => 888\n)\n\n', '', 1497835783),
-('s14978357908507', '2017-06-19 10:59:50 (C:\\xampp\\htdocs\\nuBuilder4\\nudata.php:567)\n\n<br>\n\n[0] : Array\n(\n)\n\n\n[1] : Hello\n', '', 1497835790),
-('s14978357908508', '2017-06-19 10:59:50 (C:\\xampp\\htdocs\\nuBuilder4\\nudata.php:567)\n\n<br>\n\n[0] : Array\n(\n    [0] => Hello\n)\n\n\n[1] : World!\n', '', 1497835790),
-('s14978357908509', '2017-06-19 10:59:50 (C:\\xampp\\htdocs\\nuBuilder4\\nudata.php:567)\n\n<br>\n\n[0] : Array\n(\n    [0] => Hello\n    [1] => World!\n)\n\n\n[1] : 456\n', '', 1497835790),
-('s14978357908510', '2017-06-19 10:59:50 (C:\\xampp\\htdocs\\nuBuilder4\\nudata.php:567)\n\n<br>\n\n[0] : Array\n(\n    [0] => Hello\n    [1] => World!\n    [2] => 456\n)\n\n\n[1] : 888\n', '', 1497835790),
-('s14978357908511', '2017-06-19 10:59:50 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n    [0] => Hello\n    [1] => World!\n    [2] => 456\n    [3] => 888\n)\n\n', '', 1497835790),
-('s14978359187344', '2017-06-19 11:01:58 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497835918),
-('s14978359208725', '2017-06-19 11:02:00 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497835920),
-('s14978359247191', '2017-06-19 11:02:04 (C:\\xampp\\htdocs\\nuBuilder4\\nudata.php:567)\n\n<br>\n\n[0] : Array\n(\n)\n\n\n[1] : Hello\n', '', 1497835924),
-('s14978359247192', '2017-06-19 11:02:04 (C:\\xampp\\htdocs\\nuBuilder4\\nudata.php:567)\n\n<br>\n\n[0] : Array\n(\n    [0] => Hello\n)\n\n\n[1] : World!\n', '', 1497835924),
-('s14978359247193', '2017-06-19 11:02:04 (C:\\xampp\\htdocs\\nuBuilder4\\nudata.php:567)\n\n<br>\n\n[0] : Array\n(\n    [0] => Hello\n    [1] => World!\n)\n\n\n[1] : 456\n', '', 1497835924),
-('s14978359247194', '2017-06-19 11:02:04 (C:\\xampp\\htdocs\\nuBuilder4\\nudata.php:567)\n\n<br>\n\n[0] : Array\n(\n    [0] => Hello\n    [1] => World!\n    [2] => 456\n)\n\n\n[1] : 888\n', '', 1497835924),
-('s14978359247195', '2017-06-19 11:02:04 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n    [0] => Hello\n    [1] => World!\n    [2] => 456\n    [3] => 888\n)\n\n', '', 1497835924),
-('s14978359353660', '2017-06-19 11:02:15 (C:\\xampp\\htdocs\\nuBuilder4\\nudata.php:567)\n\n<br>\n\n[0] : Array\n(\n)\n\n\n[1] : Hello\n', '', 1497835935),
-('s14978359353661', '2017-06-19 11:02:15 (C:\\xampp\\htdocs\\nuBuilder4\\nudata.php:567)\n\n<br>\n\n[0] : Array\n(\n    [0] => Hello\n)\n\n\n[1] : World!\n', '', 1497835935),
-('s14978359353662', '2017-06-19 11:02:15 (C:\\xampp\\htdocs\\nuBuilder4\\nudata.php:567)\n\n<br>\n\n[0] : Array\n(\n    [0] => Hello\n    [1] => World!\n)\n\n\n[1] : 456\n', '', 1497835935),
-('s14978359353663', '2017-06-19 11:02:15 (C:\\xampp\\htdocs\\nuBuilder4\\nudata.php:567)\n\n<br>\n\n[0] : Array\n(\n    [0] => Hello\n    [1] => World!\n    [2] => 456\n)\n\n\n[1] : 888\n', '', 1497835935),
-('s14978359353664', '2017-06-19 11:02:15 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n    [0] => Hello\n    [1] => World!\n    [2] => 456\n    [3] => 888\n)\n\n', '', 1497835935),
-('s14978360970647', '2017-06-19 11:04:57 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497836097),
-('s14978359277079', '2017-06-19 11:02:07 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497835927),
-('s14978361047687', '2017-06-19 11:05:04 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497836104),
-('s14978361147867', '2017-06-19 11:05:14 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497836114),
-('s14978361285210', '2017-06-19 11:05:28 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497836128),
-('s14978362805755', '2017-06-19 11:08:00 (C:\\xampp\\htdocs\\nuBuilder4\\nuevalphpclass.php(64) : eval()''d code:8)\n\n<br>\n\n[0] : 0\n\n[1] : CREATE TABLE ___nu159472af890645___ SELECT zzzzsys_object_id AS theid FROM zzzzsys_object WHERE 1\n', '', 1497836280),
-('s14978362805756', '2017-06-19 11:08:01 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497836281),
-('s14978362843093', '2017-06-19 11:08:04 (C:\\xampp\\htdocs\\nuBuilder4\\nuevalphpclass.php(64) : eval()''d code:8)\n\n<br>\n\n[0] : 0\n\n[1] : CREATE TABLE ___nu159472afc6c594___ SELECT zzzzsys_object_id AS theid FROM zzzzsys_object WHERE 1\n', '', 1497836284),
-('s14978362843094', '2017-06-19 11:08:05 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497836285),
-('s14978362887047', '2017-06-19 11:08:08 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497836288),
-('s14978363023206', '2017-06-19 11:08:22 (C:\\xampp\\htdocs\\nuBuilder4\\nudata.php:224)\n\n<br>\n\n[0] : Array\n(\n    [0] => UPDATE zzzzsys_object SET `sob_all_label` = ''Form Builder'' WHERE `zzzzsys_object_id` = ''583387f044052c5'';\n)\n\n', '', 1497836302),
-('s14978363023207', '2017-06-19 11:08:22 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497836302),
-('s14978363048086', '2017-06-19 11:08:24 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497836304),
-('s14978363116657', '2017-06-19 11:08:31 (C:\\xampp\\htdocs\\nuBuilder4\\nudata.php:224)\n\n<br>\n\n[0] : Array\n(\n    [0] => UPDATE zzzzsys_object SET `sob_all_id` = ''fb_button'' WHERE `zzzzsys_object_id` = ''583387f044052c5'';\n)\n\n', '', 1497836311),
-('s14978363116658', '2017-06-19 11:08:31 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497836311),
-('s14978363139808', '2017-06-19 11:08:33 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497836313),
-('s14978363180446', '2017-06-19 11:08:38 (C:\\xampp\\htdocs\\nuBuilder4\\nuevalphpclass.php(64) : eval()''d code:8)\n\n<br>\n\n[0] : 0\n\n[1] : CREATE TABLE ___nu159472b1ec301d___ SELECT zzzzsys_object_id AS theid FROM zzzzsys_object WHERE 1\n', '', 1497836318),
-('s14978363180447', '2017-06-19 11:08:39 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497836319),
-('s14978363227976', '2017-06-19 11:08:42 (C:\\xampp\\htdocs\\nuBuilder4\\nuevalphpclass.php(64) : eval()''d code:8)\n\n<br>\n\n[0] : 0\n\n[1] : CREATE TABLE ___nu159472b21f4085___ SELECT zzzzsys_object_id AS theid FROM zzzzsys_object WHERE 1\n', '', 1497836322),
-('s14978363227977', '2017-06-19 11:08:42 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497836322),
-('s14978363265933', '2017-06-19 11:08:46 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497836326),
-('s14978363576065', '2017-06-19 11:09:17 (C:\\xampp\\htdocs\\nuBuilder4\\nudata.php:224)\n\n<br>\n\n[0] : Array\n(\n    [0] => UPDATE zzzzsys_object SET `sob_all_label` = ''SQL Builder'', `sob_all_id` = ''run_sb'' WHERE `zzzzsys_object_id` = ''s14951259521112'';\n)\n\n', '', 1497836357),
-('s14978363576066', '2017-06-19 11:09:17 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497836357),
-('s14978363599082', '2017-06-19 11:09:19 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497836359),
-('s14978363623308', '2017-06-19 11:09:22 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497836362),
-('s14978363631670', '2017-06-19 11:09:23 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497836363),
-('s14978363671784', '2017-06-19 11:09:27 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497836367),
-('s14978363693455', '2017-06-19 11:09:29 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497836369),
-('s14978363736177', '2017-06-19 11:09:33 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497836373),
-('s14978363786628', '2017-06-19 11:09:38 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497836378),
-('s14978363806176', '2017-06-19 11:09:40 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497836380),
-('s14978363828374', '2017-06-19 11:09:42 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497836382),
-('s14978364221886', '2017-06-19 11:10:22 (C:\\xampp\\htdocs\\nuBuilder4\\nudata.php:224)\n\n<br>\n\n[0] : Array\n(\n    [0] => UPDATE zzzzsys_select SET `sse_resize` = ''79'', `sse_sql` = ''SELECT\n    invoice.*,\n    invoice_item.*\n\nFROM\n    invoice\n        LEFT JOIN invoice_item ON invoice.invoice_id = invoice_item.ite_invoice_id\n\nWHERE\n    (invoice.inv_number>55)\n'', `sse_json` = ''{\\"tables\\":[{\\"id\\":\\"boxc14966165798415995\\",\\"position\\":{\\"top\\":25,\\"left\\":21.973892211914062},\\"tablename\\":\\"invoice\\",\\"alias\\":\\"\\",\\"checkall\\":true,\\"checkboxes\\":[false,false,false,false,false]},{\\"id\\":\\"boxc14966165821775996\\",\\"position\\":{\\"top\\":75,\\"left\\":404.9841613769531},\\"tablename\\":\\"invoice_item\\",\\"alias\\":\\"\\",\\"checkall\\":true,\\"checkboxes\\":[false,false,false,false,false,false]}],\\"joins\\":{\\"field_0_boxc14966165798415995--field_1_boxc14966165821775996\\":\\"LEFT\\"}}'' WHERE `zzzzsys_select_id` = ''s14966166430334'';\n)\n\n', '', 1497836422),
-('s14978364221887', '2017-06-19 11:10:22 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497836422),
-('s14978364228152', '2017-06-19 11:10:22 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497836422),
-('s14979077356467', '2017-06-20 06:58:55 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497907735),
-('s14979077405994', '2017-06-20 06:59:00 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497907740),
-('s14979077704525', '2017-06-20 06:59:30 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497907770),
-('s14979077730084', '2017-06-20 06:59:33 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497907773),
-('s14979078240912', '2017-06-20 07:00:24 (C:\\xampp\\htdocs\\nuBuilder4\\nudata.php:224)\n\n<br>\n\n[0] : Array\n(\n    [0] => UPDATE zzzzsys_function SET `sfu_syntax` = ''nuMessage(array of strings)'', `sfu_see` = ''nuDisplayMessage()'' WHERE `zzzzsys_function_id` = ''58dc29359d5c185'';\n)\n\n', '', 1497907824),
-('s14979078240913', '2017-06-20 07:00:24 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497907824),
-('s14979078242436', '2017-06-20 07:00:24 (C:\\xampp\\htdocs\\nuBuilder4\\nuapi.php:58)\n\n<br>\n\n[0] : Array\n(\n)\n\n', '', 1497907824);
 
 -- --------------------------------------------------------
 
@@ -784,7 +673,7 @@ INSERT INTO `zzzzsys_form` (`zzzzsys_form_id`, `sfo_type`, `sfo_code`, `sfo_desc
 ('nuformat', 'browseedit', 'FMT', 'Input Formats', 'zzzzsys_format', 'zzzzsys_format_id', '', 0, 0, 'SELECT * FROM zzzzsys_format', '\n$(''#currencysign'').hide().addClass(''nuCalculatorCurrency'');\n$(''#currencydecimals'').hide().addClass(''nuCalculatorCurrency'');\n$(''#srm_format'').addClass(''nuReadOnly nuCalculatorCurrency'').css(''font-size'', 12);\n$(''.nuWord'').css(''font-style'', ''bold'');\n\nnuSetFormatType();\n\n\nfunction nuAddToFormat(e){\n    \n    var v   = String(e.target.innerHTML);\n    \n    if(v == ''Space''){v   = '' '';}\n    \n    if($(''#srm_type'').val() == ''Date''){\n        \n        $(''#srm_format'')\n        .val($(''#srm_format'').val() + v)\n        .change();\n        \n    }else{\n        \n        var c   = String($(''#currencysign'').val()).trim();\n        var d   = String(Number($(''#currencydecimals'').val()));\n        \n        d       = d == ''NaN'' ? 0 : Number(d);\n        v       = d == 0 ? v.substr(0, v.length - 1) : v;\n        \n        $(''#srm_format'')\n        .val(c + '' '' + v + String(0).repeat(d))\n        .change();\n        \n    }\n    \n}\n\n\nfunction nuSetFormatType(a){\n\n    if(arguments.length == 1){\n        $(''#srm_format'').val('''');\n    }\n    \n    if($(''#srm_type'').val() == ''Date''){\n        \n        $(''#currencysign'').hide();\n        $(''#currencydecimals'').hide();\n        $(''.date'').show();\n        $(''.number'').hide();\n        \n    }\n    \n    if($(''#srm_type'').val() == ''Number''){\n        \n        $(''#currencysign'').show();\n        $(''#currencydecimals'').show();\n        $(''.date'').hide();\n        $(''.number'').show();\n\n    }\n    \n}\n\n\n\n'),
 ('nuformatcurrency', 'edit', 'FMTC', 'Format Currency', 'zzzzsys_format', 'zzzzsys_format_id', '', 0, 0, '', '$(''#sign'').focus();\n\n\n$(''#nuActionHolder'').remove();\n$(''#nuBreadcrumbHolder'').remove();\n$(''#nuTabHolder'').remove();\n\n\n\n\n\nfunction nuCreateCurrencyFormat(){\n    console.log(''in nuCreateCurrencyFormat()'');\n}\n'),
 ('nuform', 'browseedit', 'FORM', 'nuBuilder Form', 'zzzzsys_form', 'zzzzsys_form_id', '', 0, 0, 'SELECT * FROM zzzzsys_form\nINNER JOIN #TABLE_ID# ON zzzzsys_form_id = theid\nORDER BY sfo_code\n', '//$(''#sfo_breadcrumb_title'').addClass(''sql'');\n$(''#sfo_browse_sql'').addClass(''sql'');\n$(''#sfo_javascript'').addClass(''js'');\n\nnuSetTitle($(''#sfo_table'').val());\n\n$(''.js'')\n.prop(''readonly'', true)\n.dblclick(function() {\n	nuOpenAce(''Javascript'', this.id);\n});\n\n$(''.sql'').dblclick(function() {\n	nuOpenAce(''SQL'', this.id);\n});\n\n$(''.html'')\n.prop(''readonly'', true)\n.dblclick(function() {\n	nuOpenAce(''HTML'', this.id);\n});\n\n$(''.php'')\n.prop(''readonly'', true)\n.dblclick(function() {\n	nuOpenAce(''PHP'', this.id);\n});\n\nif(window.filter == ''justjs''){\n    \n    $(''#nuDeleteButton'').remove();\n    $(''#nuCloneButton'').remove();\n    $(''#nuTab0'').remove();\n    $(''#nuTab1'').remove();\n    $(''#nuTab2'').click();\n    $(''#nuTab2'').remove();\n    \n    nuSetTitle($(''#sfo_description'').val());\n    \n}\n\n\n\nfunction nuFormColor(){\n\n    var t   = String($(''#sfo_type'').val());\n\n    var pb  = ''previewbrowse'';\n    var pe  = ''previewedit'';\n\n    var bb  = ''bb_event'';\n    var be  = ''be_event'';\n    var bs  = ''bs_event'';\n    var as  = ''as_event'';\n    var bd  = ''bd_event'';\n    var ad  = ''ad_event'';\n    \n    if(t == ''browse''){\n        \n        nuDisable(pe);\n\n        nuDisable(be);\n        nuDisable(bs);\n        nuDisable(as);\n        nuDisable(bd);\n        nuDisable(ad);\n\n    }\n    \n    if(t == ''edit''){\n        \n        nuDisable(pb);\n        nuDisable(bb);\n        \n    }\n\n    if(t == ''launch''){\n        \n        nuDisable(pb);\n        nuDisable(bb);\n        nuDisable(as);\n        nuDisable(bd);\n        nuDisable(ad);\n\n    }\n    \n    if(t == ''subform''){\n        \n        nuDisable(pb);\n        nuDisable(bb);\n        nuDisable(be);\n        nuDisable(bs);\n        nuDisable(as);\n        nuDisable(bd);\n        nuDisable(ad);\n        nuDisable(''sfo_javascript'');\n        \n    }\n\n    var h           = $(''#sfo_type'').addClass(''nuEdited'');\n    var o           = [];\n    o[''browse'']		= [0,1,2];\n    o[''edit''] 		= [0,2];\n    o[''browseedit''] = [0,1,2];\n    o[''launch''] 	= [0,2];\n    o[''subform'']    = [0,1];\n    \n    $(''#sfo_type'').removeClass();\n    $(''#sfo_type'').addClass(''nu_''+$(''#sfo_type'').val());\n    \n    if(h){\n        $(''#sfo_type'').addClass(''nuEdited'');\n    }\n    \n    $("#sfo_type > option").each(function() {\n        $(this).addClass(''nu_''+this.value);\n    });\n\n    for(var i = 0 ; i < 7 ; i++){\n        $(''#nuTab'' + i).removeClass(''nuRelatedTab'');\n    }\n    var t   = o[$(''#sfo_type'').val()];\n\n    if(t !== undefined){\n        \n    	for(var i = 0 ; i < t.length ; i++){\n    		$(''#nuTab'' + t[i]).addClass(''nuRelatedTab'');		\n    	}\n    	\n    }\n    \n}\n\nnuFormColor();\n\n//nuBuildSubformArray(''zzzzsys_tab_sf'');\n//nuBuildSubformArray(''zzzzsys_browse_sf'');\n\n$("[data-nu-column=''nucolumn000'']").each(function() {\n    $(this).addClass(''nu_''+this.textContent);\n});\n\n\n\nfunction nuEventList(){\n	\n	if($(''sob_all_type'').val() == ''subform''){\n		return [''onchange'',''onadd''];\n	}else{\n		return [''onblur'',''onchange'',''onfocus'',''onkeydown''];\n	}\n	\n}\n\n\n'),
-('nufunction', 'browseedit', 'FUN', 'Function List', 'zzzzsys_function', 'zzzzsys_function_id', '', 0, 0, 'SELECT * FROM zzzzsys_function', '\n\n$(''#sfu_sample'')\n.addClass($(''#sfu_language'').val())\n.prop(''readonly'', true)\n.dblclick(function() {\n	nuOpenAce(''Javascript'', this.id);\n});\n\n'),
+('nufunction', 'browseedit', 'FUN', 'Function List', 'zzzzsys_function', 'zzzzsys_function_id', '', 0, 0, 'SELECT * FROM zzzzsys_function', '\n$(''#sfu_sample'')\n.addClass($(''#sfu_language'').val())\n.prop(''readonly'', true)\n.dblclick(function() {\n    \n    if($(''#sfu_language'').val() == ''js''){\n        nuOpenAce(''Javascript'', this.id);\n    }else{\n        nuOpenAce(''PHP'', this.id);\n    }\n});\n\n'),
 ('58bf0b972c2a447', 'browseedit', 'TEST2', 'test_table', 'test_table', 'test_table_id', '', 0, 0, 'select * from test_table', ''),
 ('58d3719f55819e7', 'browseedit', '1111fdgg', 'Test Form (break it if you want)', 'zzzzsys_access_level', 'zzzzsys_access_level_id', 'nulaunchdates', 0, 0, 'SELECT * FROM zzzzsys_access_level\nORDER BY sal_code\n', 'nuSetTitle($(''#sal_code'').val());'),
 ('c14919868321575624', 'browseedit', 'FF4', 'Fast Form 4', 'aaaaaaagg', 'aaaaaaagg_id', '', 0, 0, 'SELECT * FROM aaaaaaagg', ''),
@@ -854,8 +743,8 @@ INSERT INTO `zzzzsys_function` (`zzzzsys_function_id`, `sfu_language`, `sfu_name
 ('58c99a3bcf96e31', 'js', 'nuTotal', 'number nuTotal(string field)', 'field, represents a specific (number or nuNumber) Object or whole column of a Subform Object on an Edit Form, ', '\n//-- ite_total column from invoice subform\nvar sale_total = nuTotal(''invoice.ite_total'');\n\n//-- inv_total column\nvar grand_total = nuTotal(''inv_total'');\n', ''),
 ('58d87b4a1eafe61', 'php', 'nuID', 'string = nuID()', 'Creates a new unique ID', '$id = nuID();', '[nuTT](nuTT)'),
 ('58d87beb5b68ce8', 'php', 'nuTT', 'string nuTT()', 'Creates a new unique ID used for creating a temp table name. \n\nPrefixed with __nu.', '$tt = nuTT();\n\n$sql = "CREATE TABLE $tt SELECT * FROM customer";\n', 'nuID'),
-('58dc29359d5c185', 'js', 'nuMessage', 'nuMessage(array of strings)', 'nuBuilder Popup message.', 'if(cus_name){\n   nuMessage(''No Customer!'');\n}', 'nuDisplayMessage()'),
-('58dc2a78c53adfd', 'js', 'nuBeforeSave', '', 'The name of a custom javascript function, that will run before saving an Edit Form', 'function nuBeforeSave(){\n\nif(cus_name){\n\n   nuMessage(''No Customer!'');\n   return false;\n\n}else{\n   return true;\n}', ''),
+('58dc29359d5c185', 'js', 'nuMessage', 'nuMessage(array of strings, icon)', 'nuBuilder Popup message.', 'if(cus_name == ''''){\n    \n    var m   = [];\n    m.push(''No Customer,'');\n    m.push(''Try again..'');\n    \n    nuMesage(m, ''error'');\n    \n}', 'nuDisplayMessage()'),
+('58dc2a78c53adfd', 'js', 'nuBeforeSave', 'nuBeforeSave()', 'A customisable function run before saving an Edit Form.\n', '\nfunction nuBeforeSave(cus_name){\n    \n    if(cus_name == ''''){\n    \n       nuMessage([''No Customer!'']);\n       return false;\n    \n    }else{\n       return true;\n    }\n    \n}\n', ''),
 ('58dcb8edeebbe38', 'php', 'nuSubformObject', '', 'An object defining a Subform.', '\n$SF             = nuSubformObject(''obj_sf'');\n\n$sql            = "\n\n                UPDATE aaa\n                SET \n                    sob_all_id                  = ?,\n                    sob_all_label               = ?,\n                    sob_all_order               = ?,\n                    sob_all_table               = ?,\n                    sob_all_zzzzsys_form_id     = ?,\n                    sob_all_zzzzsys_tab_id      = ?,\n                    zzzzsys_object_id           = ?\n                WHERE \n                    zzzzsys_object_id           = ?\n\n";\n\nfor($i = 0 ; $i < count($SF->rows) ; $i++){\n    \n    $newid      = nuID();\n    $label      = $SF->rows[$i][1];\n    $field      = $SF->rows[$i][2];\n    $oldid      = $SF->rows[$i][3];\n\n    $array      = Array($field, $label, (10*(1+$i)), $table, $form_id, $tab_id, $newid, $oldid);\n\n    nuRunQuery($sql, $array);\n\n}\n\n\n', ''),
 ('s14919452896598', 'js', 'nuGetBreadcrumb', '', 'Open a specific Form and/or Tab.', '//-- open the first breadcrumb and the 2nd tab.\n\nnuGetBreadcrumb(0,1)  ', 'nuSelectTab'),
 ('s14919465746468', 'js', 'nuSelectTab', '', 'Open a specific Tab.', 'nuSelectTab(document.getElementById(''nuTab2''));\n', 'nuGetBreadcrumb'),
@@ -2005,6 +1894,12 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `aaa`
+--
+ALTER TABLE `aaa`
+  ADD PRIMARY KEY (`aaa_id`);
 
 --
 -- Indexes for table `business`
