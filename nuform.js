@@ -9,15 +9,12 @@ function nuBuildForm(f){
 		sessionStorage.logout	= 'true';
 		parent.parent.parent.parent.parent.location.reload();
 		
-		//nuLogin();
-		//nuAlert(['You have been logged out..']);
-		
 		return;
 		
 	}
 	
 	
-	window.nuRelationA			= {'id' : '', 'field' : '', 'table' : '', 'left' : 0, 'top' : 0};
+	window.nuBeforeSave			= null;
 	window.onbeforeunload		= null;
 	window.nuBrowseFunction		= window.nuDefaultBrowseFunction;
 	window.nuSERVERRESPONSE		= f;
@@ -89,18 +86,15 @@ function nuBuildForm(f){
 		nuAddJavascript(f);
 	}
 	
-
 	if(f.messages.length > 0){
 
-		var im	= '<img src="numessage.png" width="30px" height="30px" style="position:absolute;left:10px;top:10px"><br>';
+		var im		= ['<img src="numessage.png" width="30px" height="30px" style="position:absolute;left:10px;top:10px"><br>'];
 
-		f.messages.splice(0, 0, im);
+		f.messages	= im.concat(f.messages);
 
 		nuAlert(f.messages);
 		
 	}
-
-	
 
 }
 
@@ -2966,9 +2960,9 @@ function nuAlert(o, type, yes, no){
 		if(type == 'error')	{icon	= 'nuerror';}
 		if(type == 'message'){icon	= 'numessage';}
 
-		var im	= '<img src="' + icon + '" width="30px" height="30px" style="position:absolute;left:10px;top:10px"><br>';
+		var im	= ['<img src="' + icon + '" width="30px" height="30px" style="position:absolute;left:10px;top:10px"><br>'];
 
-		o.splice(0, 0, im);
+		im		= im.concat(o);
 		
 	}
 

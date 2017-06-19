@@ -1015,10 +1015,10 @@ input[type=range]::-webkit-slider-runnable-track {
 .nuButtonHover{
 	cursor:pointer;
 }
-
+/*
 .nuRelationships{
-	opacity: 0.5;
+	opacity: 0.5 0.5 0.5 1;
 	background-color: orange;
 	border-color: orange;
 }
-
+*/

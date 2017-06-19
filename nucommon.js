@@ -109,9 +109,9 @@ function nuDisplayError(e){
 		return false;
 	}
 
-	var im	= '<img src="nuerror.png" width="30px" height="30px" style="position:absolute;left:10px;top:10px"><br>';
+	var im	= ['<img src="nuerror.png" width="30px" height="30px" style="position:absolute;left:10px;top:10px"><br>'];
 
-	e.errors.splice(0, 0, im);
+	im.concat(e.errors);
 
 	nuAlert(e.errors);
 
@@ -848,11 +848,11 @@ function nuWhen(w){
 	var nunow   = Date.now();
 	var numax   = (Date.now()/1000) - Number(w);
 	var numin   = numax;
-	var nuhtm   = String(Math.ceil(numin)) 							+ ' seconds ago';
+	var nuhtm   = String(Math.ceil(numin)) 										+ ' seconds ago';
 
-	if(numin < 21600)   {nuhtm = String(Math.ceil(numin/60/60)) 	+ ' hours ago';}
-	if(numin < 360)     {nuhtm = String(Math.ceil(numin/60)) 		+ ' minutes ago';}
-	if(numin < 60)      {nuhtm = String(Math.ceil(numin)) 			+ ' seconds ago';}
+	if(numin < 21600)   {nuhtm = String(parseFloat(numin/60/60).toPrecision(1))	+ ' hours ago';}
+	if(numin < 360)     {nuhtm = String(Math.ceil(numin/60)) 					+ ' minutes ago';}
+	if(numin < 60)      {nuhtm = String(Math.ceil(numin)) 						+ ' seconds ago';}
 
 	return nuhtm;
 

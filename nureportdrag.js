@@ -255,13 +255,15 @@ function nuDragReport(){
 	}
 	
 	this.createSection = function(g, s) {
+		
 		var i        = this.groups[g][s];
 		var S        = nuREPORT.groups[g].sections[s]
-console.log(S.height);
+		
 		var v        = S.height == 0  ? 'hidden'           : 'visible';
 		var b        = S.height == 0  ? 'none'             : 'none none solid none';
 		var w        = S.height == 0  ? 0                  : 1;
 		var t        = 'Detail';
+		
 		this.height  = this.height + S.height;
 
 		if(i < 10){t = nuREPORT.groups[g].sortField + ' Header';}

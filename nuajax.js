@@ -246,11 +246,10 @@ function nuRunPHPHidden(i){
 
 		if(fm.messages.length > 0){
 
-			var im	= '<img src="numessage.png" width="30px" height="30px" style="position:absolute;left:10px;top:10px"><br>';
+			var im			= ['<img src="numessage.png" width="30px" height="30px" style="position:absolute;left:10px;top:10px">'];
+			im				= im.concat(fm.messages);
 
-			fm.messages.splice(0, 0, im);
-
-			nuAlert(fm.messages);
+			nuAlert(im);
 			
 		}
 
