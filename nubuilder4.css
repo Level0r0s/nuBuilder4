@@ -471,7 +471,7 @@ input[type=range]::-webkit-slider-runnable-track {
   padding: 5px 0px;
 }
 
-#nuSearchListClose:hover{
+.nuSearchListClose:hover{
   cursor: pointer;
   color: red;
 }
@@ -909,7 +909,7 @@ input[type=range]::-webkit-slider-runnable-track {
     cursor: pointer;
 }
 
-.nuAlert {
+.nuMessage {
     font-family:Tahoma,Geneva,Arial,sans-serif;
 	position:absolute;
 	top:10px;

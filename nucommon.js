@@ -109,11 +109,11 @@ function nuDisplayError(e){
 		return false;
 	}
 
-	var im	= '<img src="nuerror.png" width="30px" height="30px" style="position:absolute;left:10px;top:10px"><br>';
+	var im	= ['<img src="nuerror.png" width="30px" height="30px" style="position:absolute;left:10px;top:10px"><br>'];
 
-	e.errors.splice(0, 0, im);
+	im.concat(e.errors);
 
-	nuAlert(e.errors);
+	nuMessage(e.errors);
 
 	return true;
 	
@@ -188,7 +188,7 @@ function nuLogin(){
     $('#nuusername').focus();
 			
 	if(sessionStorage.logout == 'true'){
-		nuAlert(['You have been logged out']);
+		nuMessage(['You have been logged out']);
 	}
 	
 	sessionStorage.logout	= '';

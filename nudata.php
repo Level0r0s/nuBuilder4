@@ -554,23 +554,18 @@ function nuHasNewRecordID(){
 }
 
 function nuChangeHashVariable($h, $v){
-	
 	$_POST['nuHash'][$h]	= $v;
-	
 }
 
 
 function nuDisplayError($m){
-
 	$_POST['nuErrors'][]	= $m;
-
 }
 
 
 function nuDisplayMessage($m){
-	
+	nudebug($_POST['nuMessages'], $m);
 	$_POST['nuMessages'][]	= $m;
-
 }
 
 function nuCheckAccess($f, $r = ''){
