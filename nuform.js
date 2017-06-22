@@ -13,7 +13,6 @@ function nuBuildForm(f){
 		
 	}
 	
-	
 	window.nuBeforeSave			= null;
 	window.onbeforeunload		= null;
 	window.nuBrowseFunction		= window.nuDefaultBrowseFunction;

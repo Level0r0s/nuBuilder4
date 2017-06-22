@@ -1,7 +1,5 @@
 <?php
 
-session_start();
-
 error_reporting( error_reporting() & ~E_NOTICE );
 
 require_once('config.php'); 
@@ -12,24 +10,7 @@ require_once dirname(__FILE__) . '/sql-parser/src/PHPSQLParser.php';
 require_once dirname(__FILE__) . '/sql-parser/src/PHPSQLCreator.php';
 require_once dirname(__FILE__) . '/nusqlclass.php';
 require_once dirname(__FILE__) . '/nusearchclass.php';
-
-$_SESSION['DBHost']                 = $nuConfigDBHost;
-$_SESSION['DBName']                 = $nuConfigDBName;
-$_SESSION['DBUser']                 = $nuConfigDBUser;
-$_SESSION['DBPassword']             = $nuConfigDBPassword;
-$_SESSION['DBGlobeadminPassword']   = $nuConfigDBGlobeadminPassword;
-$_SESSION['DBGlobeadminUsername']   = $nuConfigDBGlobeadminUsername;
-$_SESSION['title']                  = $nuConfigTitle; 
-$_SESSION['IsDemo']                 = $nuConfigIsDemo; 
-$_SESSION['SafeMode']               = (isset($nuConfigSafeMode) ? $nuConfigSafeMode : false);
-$_SESSION['SafePHP']                = (isset($nuConfigSafePHP)  ? $nuConfigSafePHP  : array());
-
 require_once('nudatabase.php');
-
-$t 									= nuRunQuery("SELECT * FROM zzzzsys_setup");
-$r 									= db_fetch_object($t);
-
-$_SESSION['Timeout']				= $r->set_time_out_minutes; 
 
 set_time_limit(0);
 mb_internal_encoding('UTF-8');
@@ -151,23 +132,6 @@ function nuDebug($a0 = '', $a1 = '', $a2 = '', $a3 = '', $a4 = '', $a5 = '', $a6
 
 
 
-function nuJSInclude($pfile){
-
-	$timestamp = date("YmdHis", filemtime($pfile));                                         //-- Add timestamp so javascript changes are effective immediately
-	print "<script src='$pfile?ts=$timestamp' type='text/javascript'></script>\n";
-    
-}
-
-
-
-function nuCSSInclude($pfile){
-
-	$timestamp = date("YmdHis", filemtime($pfile));                                         //-- Add timestamp so javascript changes are effective immediately
-	print "<link rel='stylesheet' href='$pfile?ts=$timestamp' />\n";
-    
-}
-
-
 function nuTT(){
 
 	$fn	= '___nu'.uniqid('1').'___';
@@ -186,24 +150,6 @@ function nuErrorFound(){
     }
     
 }
-
-function nuHeader(){
-
-		$s	= "
-			SELECT set_header
-			FROM zzzzsys_setup
-			WHERE zzzzsys_setup_id = 1
-		";
-		
-		$t	= nuRunQuery($s);
-		$r	= db_fetch_row($t);
-		$j	= "\n\n//-- CREATED BY Setup -> Header\n\n\n" . $r[0];
-		$j .= "\n\n//===========================================\n\n";
-		
-		return $j;
-		
-}
-
 
 
 function nuID(){
@@ -789,84 +735,13 @@ function nuAddToHashList($J, $run){
 
 }
 
-function nuTableSchema(){
-	
-	$a			= array();
-	$t			= nuRunQuery("SELECT table_name FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = DATABASE()");
-
-	while($r = db_fetch_object($t)){
-
-		$tn		= $r->table_name; 
-		$a[$tn]	= [names => db_field_names($tn), types => db_field_types($tn)];
-
-	}
-
-	return $a;
-
-}
-
-
-
-function nuFormSchema(){
-
-	$a			= array();
-	$t			= nuRunQuery("SELECT * FROM zzzzsys_form ORDER BY sfo_code");
-
-	while($r = db_fetch_object($t)){
-
-		$i		= $r->zzzzsys_form_id;
-		$a[$i]	= nuObjectSchema($i); 
-
-	}
-
-	return $a;
-
-}
-
-
-
-function nuObjectSchema($f){
-	
-	$a				= array();
-	$t				= nuRunQuery("SELECT * FROM zzzzsys_object WHERE sob_all_zzzzsys_form_id = '$f' ORDER BY sob_all_id");
-
-	while($r = db_fetch_object($t)){
-
-		if(in_array($r->sob_all_type, Array('input', 'lookup', 'select', 'textarea'))){
-			$a[]	= Array($r->zzzzsys_object_id, $r->sob_all_id, $r->sob_all_label, $r->sob_all_type, $r->sob_input_type); 
-		}
-
-	}
-	
-	return $a;
-
-}
-
-
-
-function nuTranslate($l){
-
-	$t			= nuRunQuery("SELECT * FROM zzzzsys_translate WHERE trl_language = '$l' ORDER BY trl_english");
-	$S			= array();
-
-	if(db_num_rows($t) == 0){return $S;}
-	
-	while($r = db_fetch_object($t)){
-
-		$S[]	= $r;
-
-	}
-
-	return $S;
-
-}
 
 function nuGetUserAccess(){
 
 	$A					= array();
 
 	$s					= "SELECT * FROM zzzzsys_session WHERE zzzzsys_session_id = ? ";
-	$t					= nuRunQuery($s, array($_SESSION['SESSIONID']));			 
+	$t					= nuRunQuery($s, array($_SESSION['SESSION_ID']));			 
 	$r					= db_fetch_object($t);
 	$j					= json_decode($r->sss_access);
 	

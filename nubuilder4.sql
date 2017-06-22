@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 21, 2017 at 01:01 PM
+-- Generation Time: Jun 22, 2017 at 08:07 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -625,7 +625,7 @@ INSERT INTO `zzzzsys_form` (`zzzzsys_form_id`, `sfo_type`, `sfo_code`, `sfo_desc
 ('56773cb405f4913', 'browseedit', 'COM', 'Company', 'company', 'company_id', '', 0, 0, 'SELECT * FROM company\r\nLEFT JOIN business ON business_id = com_business_id', '\nfunction sftest(){\n\n    var bob = 9;\n\n}'),
 ('5678ab2c48c5c41', 'edit', 'EMP', 'Employee Subform', 'employee', 'employee_id', '', 0, 0, 'SELECT * FROM employee\nWHERE emp_cost > 10\n', ''),
 ('568b508eec00d80', 'browseedit', 'BUS', 'Business', 'business', 'business_id', '', 0, 4, 'SELECT * FROM business', ''),
-('nuhome', 'launch', 'HOME', 'Home', '', '', '', 0, 0, '', '$(''.nuActionButton'').hide();'),
+('nuhome', 'launch', 'HOME', 'Home', '', '', '', 0, 0, '', '$(''.nuActionButton'').hide();\n\n$(''#open_database'').click(function(){\n    window.open(''nupmalogin.php'');\n});'),
 ('56c513162acd102', 'edit', 'CHI', 'Children', 'children', 'children_id', '', 0, 0, 'SELECT * FROM employee', ''),
 ('nubrowse', 'subform', 'FRMBR', 'Browse Columns', 'zzzzsys_browse', 'zzzzsys_browse_id', '', 0, 5, 'SELECT * FROM zzzzsys_browse\nORDER BY sbr_order\n', '$(''#nuSearchButton'').remove();\n$(''#nuSearchField'').remove();\n$(''#nuPrintButton'').remove();\n\nnuSetTitle($(''#sbr_title'').val());\n\nvar pid = parent.nuFORM.getCurrent().record_id;\n\nif(nuFORM.getCurrent().record_id == -1){\n    $(''#sbr_zzzzsys_form_id'').val(pid).change();\n}\n'),
 ('nutab', 'browseedit', 'TAB', 'Form Tab', 'zzzzsys_tab', 'zzzzsys_tab_id', '', 0, 0, 'SELECT * FROM zzzzsys_tab\nJOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id\nORDER BY syt_order', '\n$("[data-nu-column=''nucolumn003'']").each(function() {\n    $(this).addClass(''nu_''+this.innerHTML);\n});\n'),
@@ -1283,7 +1283,8 @@ INSERT INTO `zzzzsys_object` (`zzzzsys_object_id`, `sob_all_zzzzsys_form_id`, `s
 ('s14964416938678', 'nuselect', 'zzzzsys_select', 'textarea', 'sse_json', 'JSON', 's14930617882374', 70, 74, 10, 73, 23, '1', 'left', '0', '2', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
 ('s14967319482165', '58a08a1abc4782c', 'invoice', 'lookup', 'inv_company_id', 'Customer', '58a08a1abc48c9a', 70, 32, 211, 100, 20, '1', 'right', '0', '0', '', '', '', '', '', '', '', '', '', '', 'com_code', 'com_name', '200', '', 's14967315763149', '', '', 'company', '', '', '', '', '', '', 0, '', 'nuDate', '', '', ''),
 ('s14977248323736', '56773cb405f4913', 'company', 'input', 'com_code', 'Code', '56777715b87666e', 50, 5, 171, 90, 18, '1', 'left', '0', '0', '', '', 'N|$ 1,000.00', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
-('s14980423027074', 'nuselect', 'zzzzsys_select', 'word', 'wrdsql', 'SQL', 's14930617882374', 60, 16, 884, 363, 16, '1', 'center', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', '');
+('s14980423027074', 'nuselect', 'zzzzsys_select', 'word', 'wrdsql', 'SQL', 's14930617882374', 60, 16, 884, 363, 16, '1', 'center', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
+('s14981082526071', 'nuhome', '', 'input', 'open_database', 'Database', '569dc4ed270f08a', 10, 255, 625, 150, 30, '1', 'center', '0', '0', '', '', '', 'nusetup', '', 'b', '1', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'button', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -1448,7 +1449,6 @@ INSERT INTO `zzzzsys_select_clause` (`zzzzsys_select_clause_id`, `ssc_zzzzsys_se
 
 CREATE TABLE `zzzzsys_session` (
   `zzzzsys_session_id` varchar(25) NOT NULL DEFAULT '',
-  `sss_timeout` datetime NOT NULL,
   `sss_access` mediumtext NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
