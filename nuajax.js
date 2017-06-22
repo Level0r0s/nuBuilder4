@@ -178,6 +178,10 @@ function nuRunReport(f, iframe){
 
 
 function nuRunPHP(f, iframe){
+	
+	if(window.nuBeforeSave){
+		if(!nuBeforeSave()){return;}
+	}
 
 	var last				= window.nuFORM.addBreadcrumb();
 
@@ -213,6 +217,10 @@ function nuRunPHP(f, iframe){
 
 
 function nuRunPHPHidden(i){
+	
+	if(window.nuBeforeSave){
+		if(!nuBeforeSave()){return;}
+	}
 
 	var last				= window.nuFORM.getCurrent();
 

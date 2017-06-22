@@ -22,43 +22,59 @@ if($_POST['nuSTATE']['call_type'] == 'login'){
             Setup session on login
         */
         session_start();
-        $_SESSION['SESSION_ID'] = nuIDTEMP();
-        $_SESSION['SESSION_TIMESTAMP'] = time();
+        $_SESSION['SESSION_ID'] 			= nuIDTEMP();
+        $_SESSION['SESSION_TIMESTAMP'] 		= time();
         $_SESSION['title']                  = $nuConfigTitle; 
         $_SESSION['IsDemo']                 = $nuConfigIsDemo; 
         $_SESSION['SafeMode']               = (isset($nuConfigSafeMode) ? $nuConfigSafeMode : false);
         $_SESSION['SafePHP']                = (isset($nuConfigSafePHP)  ? $nuConfigSafePHP  : array());
         $_SESSION['tableSchema']            = array();
+        $_SESSION['tableList']            	= array();
         $tableSchemaQRY                     = nuRunQuery("SELECT table_name FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = DATABASE()");
+		
         while($tableSchemaOBJ = db_fetch_object($tableSchemaQRY)){
-            $tn     = $tableSchemaOBJ->table_name;
-            $_SESSION['tableSchema'][$tn] = array('names' => db_field_names($tn), 'types' => db_field_types($tn));
+			
+            $tn     						= $tableSchemaOBJ->table_name;
+            $_SESSION['tableSchema'][$tn] 	= array('names' => db_field_names($tn), 'types' => db_field_types($tn), 'primary_key' => db_primary_key($tn));
+			
         }
+		
         $_SESSION['formSchema']             = array();
         $formSchemaQRY                      = nuRunQuery("SELECT * FROM zzzzsys_form ORDER BY sfo_code");
-        while($formSchemaOBJ = db_fetch_object($formSchemaQRY)){
-            $formID = $formSchemaOBJ->zzzzsys_form_id;
-            $objectSchema = array();
-            $objectSchemaQRY = nuRunQuery("SELECT * FROM zzzzsys_object WHERE sob_all_zzzzsys_form_id = '$formID' ORDER BY sob_all_id");
+		
+        while($formSchemaOBJ 				= db_fetch_object($formSchemaQRY)){
+			
+            $formID 						= $formSchemaOBJ->zzzzsys_form_id;
+            $objectSchema 					= array();
+            $objectSchemaQRY 				= nuRunQuery("SELECT * FROM zzzzsys_object WHERE sob_all_zzzzsys_form_id = '$formID' ORDER BY sob_all_id");
+			
             while($objectSchemaOBJ = db_fetch_object($objectSchemaQRY)){
+				
                 if(in_array($objectSchemaOBJ->sob_all_type, array('input', 'lookup', 'select', 'textarea'))){
-                    $objectSchema[] = array(
+					
+					$objectSchema[] 		= array(
                         $objectSchemaOBJ->zzzzsys_object_id, 
                         $objectSchemaOBJ->sob_all_id, 
                         $objectSchemaOBJ->sob_all_label, 
                         $objectSchemaOBJ->sob_all_type, 
                         $objectSchemaOBJ->sob_input_type
                     ); 
+					
                 }
+				
             }
+			
             $_SESSION['formSchema'][$formID] = $objectSchema;
+			
         }
+		
         $_SESSION['translation']            = array(); // this is populated for users other than globeadmin below
         
         /*
             globeadmin
         */
         if($_POST['nuSTATE']['username'] == $nuConfigDBGlobeadminUsername && $_POST['nuSTATE']['password'] == $nuConfigDBGlobeadminPassword){
+			
             $_SESSION['isGlobeadmin'] = true;
             $sessionIds = new stdClass;
             $sessionIds->zzzzsys_access_level_id = '';

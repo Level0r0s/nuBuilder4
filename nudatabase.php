@@ -177,6 +177,25 @@ function db_field_types($n){
     
 }
 
+
+function db_primary_key($n){
+    
+    $a       = array();
+    $s       = "DESCRIBE $n";
+    $t       = nuRunQuery($s);
+
+    while($r = db_fetch_row($t)){
+		
+		if($r[3] == 'PRI'){
+			$a[] = $r[0];
+		}
+		
+    }
+    
+    return $a;
+    
+}
+
 function db_num_rows($o) {
 
 	if(!is_object($o)){return 0;}

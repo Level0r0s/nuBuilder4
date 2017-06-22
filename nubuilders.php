@@ -1,10 +1,23 @@
 <?php
 
-function nuBuildFastForm($table, $form_id){
+function nuBuildFastForm($table){
 
-	if($table[0] == '#'){return;}			//-- no table name (still #fastform_table)
-	
-	
+	$form_id		= nuID();
+	$PK				= $table . '_id';
+	$newT			= true;
+	$q				= nuRunQuery("SELECT table_name FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = DATABASE()");
+
+	while($tableSchemaOBJ = db_fetch_object($q)){
+		
+		if($table == $tableSchemaOBJ->table_name){
+			
+			$PK 	= $_SESSION['tableSchema'][$table]['primary_key'];
+			$newT	= false;
+			
+		}
+		
+	}
+
 	$TT             = nuTT();
 	$SF             = nuSubformObject('obj_sf');
 	$tab_id         = nuID();
@@ -50,15 +63,14 @@ function nuBuildFastForm($table, $form_id){
 
 	";
 
-	$array          = Array($form_id, 'browseedit', $form_code, $form_desc, $table, $table.'_id', "SELECT * FROM $table");
+	$array          = Array($form_id, 'browseedit', $form_code, $form_desc, $table, $PK, "SELECT * FROM $table");
 
+	nuDebug($sql, $array);
 	nuRunQuery($sql, $array);
 
 	$sql            = "CREATE TABLE $TT SELECT * FROM zzzzsys_object WHERE false";
+	
 	nuRunQuery($sql);
-	
-	
-	
 	
 	for($i = 0 ; $i < count($SF->rows) ; $i++){
 		
@@ -144,10 +156,13 @@ function nuBuildFastForm($table, $form_id){
 		
 	}
 
+	if($newT){
 
-	$create         = nuBuildTable($table, $a);
-		
-	nuRunQuery($create);
+		$create		= nuBuildTable($table, $a);
+			
+		nuRunQuery($create);
+
+	}
 
 	$t              = nuRunQuery("SELECT * FROM $TT");
 	$ord            = 1;
