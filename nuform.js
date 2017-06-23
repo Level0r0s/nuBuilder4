@@ -1629,7 +1629,7 @@ function nuGetOptionsList(f, t, p, a, type){
 
 	$('#' + id)
 	.css({'top' 	: top + 3,
-	'left' 			: left +20, 
+	'left' 			: left + 20, 
 	'height'		: 20 + (list.length * 20),
 	'width'			: 1000,
 	'position'		: 'absolute',
@@ -1673,7 +1673,7 @@ function nuBuildOptionsList(l, p){												//-- loop through adding options t
 	var icon		= $('#' + p + 'nuOptions');
 	var off			= icon.offset();
 	var top			= off.top;
-	var left		= off.left;
+	var left		= off.left < 240 ? 240 : off.left;
 	var ul			= '';
 	var	prop		= {'position': 'absolute','text-align' : 'left' , 'width' : 15, 'height' : 15};
 	var width		= 0;
