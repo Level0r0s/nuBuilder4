@@ -611,6 +611,22 @@ function nuPopPHP(e, nuE){			//-- used in database
 
 }
 
+
+function nuPopSQL(e, nuE){			//-- used in database
+
+    var i   = nuFORM.getProperty('record_id');
+
+    if(i == ''){
+        
+        alert('Cannot create SQL Until This Form Has Been Saved..')
+        return;
+		
+    }
+	
+    nuPopup('nuselect', i + '_' + nuE, 'justsql');
+
+}
+
     
 
 function nuPopJS(){				//-- used in database

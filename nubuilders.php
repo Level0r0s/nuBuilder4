@@ -11,8 +11,9 @@ function nuBuildFastForm($table){
 		
 		if($table == $tableSchemaOBJ->table_name){
 			
-			$PK 	= $_SESSION['tableSchema'][$table]['primary_key'];
+			$PK 	= $_SESSION['tableSchema'][$table]['primary_key'][0];
 			$newT	= false;
+
 			
 		}
 		

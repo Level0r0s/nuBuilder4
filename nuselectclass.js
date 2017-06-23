@@ -165,7 +165,7 @@ class nuSelectObject{
 		parent.$('#sse_json')
 		.val(this.buildJSON())
 		.change();
-		
+		parent.$('#copy_sql').hide();
 	}
 	
 	buildSelect(c, b){				//-- checkbox type, boxID

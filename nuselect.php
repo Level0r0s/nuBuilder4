@@ -58,7 +58,7 @@ body  {
 	function nuLoad(){
 		
 		nuSQL.rebuildGraphic();
-		nuSQL.buildSQL();
+		//nuSQL.buildSQL();
 		
 		$('body')
 		.attr('onmousemove', 	'nuMove(event)')
