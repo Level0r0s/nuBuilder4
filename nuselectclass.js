@@ -467,6 +467,8 @@ class nuSelectObject{
 
 	refreshJoins(r){										//-- build objects to draw relationship lines  from
 	
+		this.joins	= [];
+		
 		for (var k in r){
 			
 			var I		= String(k).split('--')[0];
