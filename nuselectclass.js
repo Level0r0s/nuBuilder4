@@ -462,7 +462,7 @@ class nuSelectObject{
 	
 
 	refreshJoins(r){										//-- build objects to draw relationship lines  from
-
+	
 		for (var k in r){
 			
 			var I		= String(k).split('--')[0];
@@ -594,7 +594,7 @@ class nuSelectObject{
 		})
 		.attr('title', title);
 
-		if(c == 'select'){
+		if(c == 'select'){			//-- checkbox
 
 			$('#' + col.id)
 			.attr('data-nu-field', 'field' + suf)
@@ -730,7 +730,6 @@ class nuSelectObject{
 			var cb	= J.tables[i].checkboxes;
 			
 			this.addBox(t.tablename, t.id);
-
 			
 			$('#' + t.id)
 			.css('top', t.position.top)
@@ -746,6 +745,7 @@ class nuSelectObject{
 			
 		}
 		
+		this.buildSQL();
 
 		var r							= J.joins;				//-- JOIN
 		
@@ -764,9 +764,14 @@ class nuSelectObject{
 	
 	addJoin(key, v){
 
-		var j	= parent.$('#sse_json').val();
-		var J	= JSON.parse(j);
+		var j		= parent.$('#sse_json').val();
 		
+		if(j == ''){
+			var J 	= {'joins':[]};
+		}else{
+			var J	= JSON.parse(j);
+		}
+
 		J.joins[key] = v;
 		
 		var u	= JSON.stringify(J);
@@ -813,12 +818,12 @@ function nuUp(e){
 			}
 			
 		}
-		
-		nuSQL.buildSQL();
 
 	}
 	
 	window.nuCurrentID	= '';
+	
+	nuSQL.buildSQL();
 	
 }
 
