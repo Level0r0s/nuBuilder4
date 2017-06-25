@@ -158,7 +158,7 @@ class nuSelectObject{
 		var c	= this.buildClauses();
 		
 		parent.$('#sse_sql')
-		.val(s + f + c)
+		.val(s + f + c + "\n")
 		.change();
 		
 		parent.$('#sse_json')
