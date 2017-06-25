@@ -221,8 +221,6 @@ function nuUpdateTables(){
 		
 	}
 	
-	nudebug($S);
-	
 }
 
 function nuValidArray($v, $f){
@@ -564,7 +562,6 @@ function nuDisplayError($m){
 
 
 function nuDisplayMessage($m){
-	nudebug($_POST['nuMessages'], $m);
 	$_POST['nuMessages'][]	= $m;
 }
 

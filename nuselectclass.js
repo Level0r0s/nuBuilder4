@@ -164,7 +164,11 @@ class nuSelectObject{
 		parent.$('#sse_json')
 		.val(this.buildJSON())
 		.change();
-		parent.$('#copy_sql').remove();
+		
+        parent.$('#nuSaveButton')
+        .val("Save")
+		.unbind('click')
+		.attr('onclick', 'nuSaveAction()');
 		
 	}
 	
@@ -745,8 +749,6 @@ class nuSelectObject{
 			
 		}
 		
-		this.buildSQL();
-
 		var r							= J.joins;				//-- JOIN
 		
 		for (var k in r){

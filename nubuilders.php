@@ -66,7 +66,6 @@ function nuBuildFastForm($table){
 
 	$array          = Array($form_id, 'browseedit', $form_code, $form_desc, $table, $PK, "SELECT * FROM $table");
 
-	nuDebug($sql, $array);
 	nuRunQuery($sql, $array);
 
 	$sql            = "CREATE TABLE $TT SELECT * FROM zzzzsys_object WHERE false";
