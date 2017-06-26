@@ -158,13 +158,17 @@ class nuSelectObject{
 		var c	= this.buildClauses();
 		
 		parent.$('#sse_sql')
-		.val(s + f + c)
-//		.val(s + f + j + c)
+		.val(s + f + c + "\n")
 		.change();
 		
 		parent.$('#sse_json')
 		.val(this.buildJSON())
 		.change();
+		
+        parent.$('#nuSaveButton')
+        .val("Save")
+		.unbind('click')
+		.attr('onclick', 'nuSaveAction()');
 		
 	}
 	
@@ -462,7 +466,9 @@ class nuSelectObject{
 	
 
 	refreshJoins(r){										//-- build objects to draw relationship lines  from
-
+	
+		this.joins	= [];
+		
 		for (var k in r){
 			
 			var I		= String(k).split('--')[0];
@@ -594,7 +600,7 @@ class nuSelectObject{
 		})
 		.attr('title', title);
 
-		if(c == 'select'){
+		if(c == 'select'){			//-- checkbox
 
 			$('#' + col.id)
 			.attr('data-nu-field', 'field' + suf)
@@ -730,7 +736,6 @@ class nuSelectObject{
 			var cb	= J.tables[i].checkboxes;
 			
 			this.addBox(t.tablename, t.id);
-
 			
 			$('#' + t.id)
 			.css('top', t.position.top)
@@ -746,7 +751,6 @@ class nuSelectObject{
 			
 		}
 		
-
 		var r							= J.joins;				//-- JOIN
 		
 		for (var k in r){
@@ -764,9 +768,14 @@ class nuSelectObject{
 	
 	addJoin(key, v){
 
-		var j	= parent.$('#sse_json').val();
-		var J	= JSON.parse(j);
+		var j		= parent.$('#sse_json').val();
 		
+		if(j == ''){
+			var J 	= {'joins':[]};
+		}else{
+			var J	= JSON.parse(j);
+		}
+
 		J.joins[key] = v;
 		
 		var u	= JSON.stringify(J);
@@ -813,12 +822,12 @@ function nuUp(e){
 			}
 			
 		}
-		
-		nuSQL.buildSQL();
 
 	}
 	
 	window.nuCurrentID	= '';
+	
+	nuSQL.buildSQL();
 	
 }
 

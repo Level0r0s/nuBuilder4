@@ -3,12 +3,12 @@
 <head>
 <title>nuBuilder's Ace Code Editor</title>
 
-<link rel="stylesheet" href="nubuilder4.css">
 
 <script src="jquery/jquery.js" type="text/javascript"></script>
 <script src="ace/ace.js" type="text/javascript" charset="utf-8"></script>
 <script src="ace/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
 <script src="ace/src-noconflict/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>
+<link rel="stylesheet" href="nubuilder4.css">
 
 <script>
 
@@ -43,7 +43,7 @@ function nuLoad(){
 	if ( window.c == 'SQL' ) 		{editor.getSession().setMode({path:"ace/mode/sql", inline:true});cl='sql';}
 
 	document.getElementById('nu_language').innerHTML	= c;
-	document.getElementById('nu_details').innerHTML		= l + '&nbsp;&nbsp;<span style="color:black" class="' + cl + '">' + o + '</span>';
+	document.getElementById('copy_to_nubuilder').value	= 'Copy Changes To ' + l;
 	
 	nuResize();
 	
@@ -122,9 +122,9 @@ window.onbeforeunload = nuWarning;
 </head>
 <body style='background-color:#000000' onload='nuLoad()' onresize='nuResize()'>
 
-	<span id='copy_to_nu' 	style='top:5px;left:20px;position:absolute' onclick='nuAceSave()'>Copy Changes To...</span>
+	<input type='button' id='copy_to_nubuilder' class='nuActionButton' style='top:5px;left:20px;position:absolute' onclick='nuAceSave()'>
+	
 	<span id='nu_language' 	style='top:10px;right:20px;text-align:left;color:white;font-family:helvetica;font-size:12px;position:absolute'></span>
-	<span id='nu_details' 	style='top:10px;left:160px;text-align:left;color:white;font-family:helvetica;font-size:12px;position:absolute'></span>
 	<div  id='nu_editor'	style='width:1000px;height:800px;top:35px;left:0px;text-align:left;position:absolute'></div>
 
 </body>

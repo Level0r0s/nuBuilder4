@@ -41,27 +41,13 @@ function nuForm(f, r, filter, search, n){
 	var u 				= '';
 	var p 				= '';
 	var s				= '';
-	
-	if($('#nuusername').length == 1){
 		
-		var last		= window.nuFORM.addBreadcrumb();
-		
-		last.username	= $('#nuusername').val();
-		last.password	= $('#nupassword').val();
-		
-	}else{
-		
-		s				= window.nuSESSION;
-		
-		if(arguments.length != 5){   //-- add a new breadcrumb
-			window.nuFORM.addBreadcrumb();
-		}
-		
+	if(arguments.length != 5){   //-- add a new breadcrumb
+		window.nuFORM.addBreadcrumb();
 	}
 
 	var last			= window.nuFORM.getCurrent();
 
-	last.session_id 	= window.nuSESSION;
 	last.call_type		= 'getform';
 	last.form_id 		= f;
 	last.record_id		= r;
@@ -192,6 +178,10 @@ function nuRunReport(f, iframe){
 
 
 function nuRunPHP(f, iframe){
+	
+	if(window.nuBeforeSave){
+		if(!nuBeforeSave()){return;}
+	}
 
 	var last				= window.nuFORM.addBreadcrumb();
 
@@ -227,6 +217,10 @@ function nuRunPHP(f, iframe){
 
 
 function nuRunPHPHidden(i){
+	
+	if(window.nuBeforeSave){
+		if(!nuBeforeSave()){return;}
+	}
 
 	var last				= window.nuFORM.getCurrent();
 

@@ -169,7 +169,7 @@ function nuLogin(){
 	var i 	= '<br><img id="thelogo" src="logo.png">';
 	var u 	= '<br><br><span style="width:90px;display:inline-block;">Username</span><input id="nuusername" style="padding: 2px;" />';
 	var p 	= '<br><br><span style="width:90px;display:inline-block;">Password</span><input id="nupassword" onkeyup="loginInputKeyup(event);" style="padding: 2px;" type="password"/>';
-	var s 	= '<br><br><input id="submit" type="button" class="nuButton" style="height:30px;" onclick="nuForm()" value="Log in"/>';
+	var s 	= '<br><br><input id="submit" type="button" class="nuButton" style="height:30px;" onclick="nuLoginRequest()" value="Log in"/>';
 	var l2	= '<br><br></div>';
 	
 	var e = document.createElement('div');
@@ -608,6 +608,22 @@ function nuPopPHP(e, nuE){			//-- used in database
     }
 	
     nuPopup('nuphp', i + '_' + nuE, 'justphp');
+
+}
+
+
+function nuPopSQL(e, nuE){			//-- used in database
+
+    var i   = nuFORM.getProperty('record_id');
+
+    if(i == ''){
+        
+        alert('Cannot create SQL Until This Form Has Been Saved..')
+        return;
+		
+    }
+	
+    nuPopup('nuselect', i + '_' + nuE, 'justsql');
 
 }
 

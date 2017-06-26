@@ -1,13 +1,13 @@
 <?php 
 
-require_once('nucommon.php'); 
+require_once('config.php');
 
 mb_internal_encoding('UTF-8');
 
-$DBHost                      = $_SESSION['DBHost'];
-$DBName                      = $_SESSION['DBName'];
-$DBUser                      = $_SESSION['DBUser'];
-$DBPassword                  = $_SESSION['DBPassword'];
+$DBHost                      = $nuConfigDBHost;
+$DBName                      = $nuConfigDBName;
+$DBUser                      = $nuConfigDBUser;
+$DBPassword                  = $nuConfigDBPassword;
 //die("mysql:host=$DBHost;dbname=$DBName;charset=utf8");
 
 $nuDB = new PDO("mysql:host=$DBHost;dbname=$DBName;charset=utf8", $DBUser, $DBPassword, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
@@ -171,6 +171,25 @@ function db_field_types($n){
 
     while($r = db_fetch_row($t)){
         $a[] = $r[1];
+    }
+    
+    return $a;
+    
+}
+
+
+function db_primary_key($n){
+    
+    $a       = array();
+    $s       = "DESCRIBE $n";
+    $t       = nuRunQuery($s);
+
+    while($r = db_fetch_row($t)){
+		
+		if($r[3] == 'PRI'){
+			$a[] = $r[0];
+		}
+		
     }
     
     return $a;

@@ -1,10 +1,24 @@
 <?php
 
-function nuBuildFastForm($table, $form_id){
+function nuBuildFastForm($table){
 
-	if($table[0] == '#'){return;}			//-- no table name (still #fastform_table)
-	
-	
+	$form_id		= nuID();
+	$PK				= $table . '_id';
+	$newT			= true;
+	$q				= nuRunQuery("SELECT table_name FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = DATABASE()");
+
+	while($tableSchemaOBJ = db_fetch_object($q)){
+		
+		if($table == $tableSchemaOBJ->table_name){
+			
+			$PK 	= $_SESSION['tableSchema'][$table]['primary_key'][0];
+			$newT	= false;
+
+			
+		}
+		
+	}
+
 	$TT             = nuTT();
 	$SF             = nuSubformObject('obj_sf');
 	$tab_id         = nuID();
@@ -50,19 +64,17 @@ function nuBuildFastForm($table, $form_id){
 
 	";
 
-	$array          = Array($form_id, 'browseedit', $form_code, $form_desc, $table, $table.'_id', "SELECT * FROM $table");
+	$array          = Array($form_id, 'browseedit', $form_code, $form_desc, $table, $PK, "SELECT * FROM $table");
 
 	nuRunQuery($sql, $array);
 
 	$sql            = "CREATE TABLE $TT SELECT * FROM zzzzsys_object WHERE false";
+	
 	nuRunQuery($sql);
-	
-	
-	
 	
 	for($i = 0 ; $i < count($SF->rows) ; $i++){
 		
-		if($SF->rows[$i][4] == 0){							//-- not ticked as deleted
+		if($SF->rows[$i][5] == 0){							//-- not ticked as deleted
 			
 			$r          		= $SF->rows[$i][3];
 			$newid				= nuID();
@@ -101,7 +113,7 @@ function nuBuildFastForm($table, $form_id){
 
 	for($i = 0 ; $i < count($SF->rows) ; $i++){
 		
-		if($SF->rows[$i][4] == 0){							//-- not ticked as deleted
+		if($SF->rows[$i][5] == 0){							//-- not ticked as deleted
 			
 			$newid      = nuID();
 			$label      = $SF->rows[$i][1];
@@ -144,58 +156,49 @@ function nuBuildFastForm($table, $form_id){
 		
 	}
 
+	if($newT){
 
-	$create         = nuBuildTable($table, $a);
-		
-	nuRunQuery($create);
-
-	$t              = nuRunQuery("SELECT * FROM $TT");
-	$ord            = 1;
-
-	while($r = db_fetch_object($t)){
-
-		$ord++;
-		
-		$y          = $r->sob_all_type;
-		$i          = $r->sob_input_type;
-		$id         = $r->sob_all_id;
-		$lab        = $r->sob_all_label;
-
-		$sql            = "
-		
-						INSERT 
-						INTO zzzzsys_browse
-						(zzzzsys_browse_id,
-						sbr_zzzzsys_form_id,
-						sbr_title,
-						sbr_display,
-						sbr_align,
-						sbr_format,
-						sbr_order,
-						sbr_width)
-						VALUES
-						(?, ?, ?, ?, ?, ?, ?, ?)
-		
-		";
-		
-		$array      = Array(nuID(), $form_id, $lab, $id, 'left', '', $ord * 10, 200);
-
-		if($y == 'input'){
+		$create		= nuBuildTable($table, $a);
 			
-			if($i != 'file' && $i != 'button'){
-				nuRunQuery($sql, $array);
-			}
+		nuRunQuery($create);
+
+	}
+
+	for($i = 0 ; $i < count($SF->rows) ; $i++){
+		
+		if($SF->rows[$i][4] == 1 and $SF->rows[$i][5] == 0){						//-- not ticked as deleted
 			
-		}else{
+			$lab	= $SF->rows[$i][1];
+			$id		= $SF->rows[$i][2];
+
+
+			$sql            = "
 			
-			if($y != 'html' && $y != 'display' && $y != 'word' && $y != 'image'){
-				nuRunQuery($sql, $array);
-			}
+							INSERT 
+							INTO zzzzsys_browse
+							(zzzzsys_browse_id,
+							sbr_zzzzsys_form_id,
+							sbr_title,
+							sbr_display,
+							sbr_align,
+							sbr_format,
+							sbr_order,
+							sbr_width)
+							VALUES
+							(?, ?, ?, ?, ?, ?, ?, ?)
+			
+			";
+			
+			$array      = Array(nuID(), $form_id, $lab, $id, 'left', '', ($i+1) * 10, 200);
+
+			nuRunQuery($sql, $array);
 			
 		}
 
 	}
 
+	
+	
 
 	//----------add run button--------------------
 

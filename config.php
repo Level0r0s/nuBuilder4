@@ -6,6 +6,7 @@
     $nuConfigDBPassword             = "";
     $nuConfigDBGlobeadminUsername   = "globeadmin";     //-- globeadmin username
     $nuConfigDBGlobeadminPassword   = "nu";             //-- globeadmin password
-    $nuConfigTitle                  = "nuBuilder 4";	
+    $nuConfigTitle                  = "nuBuilder 4";
+    $nuConfigIsDemo                 = false;
 
 ?>

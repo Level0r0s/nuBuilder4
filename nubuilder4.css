@@ -969,19 +969,6 @@ input[type=range]::-webkit-slider-runnable-track {
 	top:40px;
 }
 
-#copy_to_nu {
-	padding:4px;
-	font-family:helvetica;
-	font-size:14px;
-	color:white;
-	background-color:grey;
-}
-
-#copy_to_nu:hover {
-	background-color:orange;
-	cursor:pointer;
-}
-
 .nuHighlight {
 	background-color: #FFEEA6;
 }

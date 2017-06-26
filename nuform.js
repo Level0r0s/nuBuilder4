@@ -13,7 +13,6 @@ function nuBuildForm(f){
 		
 	}
 	
-	
 	window.nuBeforeSave			= null;
 	window.onbeforeunload		= null;
 	window.nuBrowseFunction		= window.nuDefaultBrowseFunction;
@@ -196,9 +195,10 @@ function nuDefine(v){
 
 function nuAddActionButtons(f){
 
-	var draggable = 0;
+	var draggable 	= 0;
+	var rid			= window.nuFORM.getProperty('record_id');
 	
-	if(window.nuFORM.getProperty('record_id') == '-2') {
+	if(rid == '-2') {
 		draggable = 1;
 	}
 
@@ -221,8 +221,14 @@ function nuAddActionButtons(f){
 		if(!draggable){
 			
 			if(button.Save == 1)		{nuAddActionButton('Save');}
-			if(button.Clone == 1)		{nuAddActionButton('Clone');}
-			if(button.Delete == 1)		{nuAddActionButton('Delete');}
+			
+			if(rid != -1){
+				
+				if(button.Clone == 1)	{nuAddActionButton('Clone');}
+				if(button.Delete == 1)	{nuAddActionButton('Delete');}
+				
+			}
+			
 			if(button.RunHidden != '')	{nuAddActionButton('runhidden', 'Run', button.RunHidden);}
 			if(button.Run != '')		{nuAddActionButton('run', 'Run in new window', button.Run);}
 			
@@ -1630,7 +1636,7 @@ function nuGetOptionsList(f, t, p, a, type){
 
 	$('#' + id)
 	.css({'top' 	: top + 3,
-	'left' 			: left +20, 
+	'left' 			: left + 20, 
 	'height'		: 20 + (list.length * 20),
 	'width'			: 1000,
 	'position'		: 'absolute',
@@ -1674,7 +1680,7 @@ function nuBuildOptionsList(l, p){												//-- loop through adding options t
 	var icon		= $('#' + p + 'nuOptions');
 	var off			= icon.offset();
 	var top			= off.top;
-	var left		= off.left;
+	var left		= off.left < 240 ? 240 : off.left;
 	var ul			= '';
 	var	prop		= {'position': 'absolute','text-align' : 'left' , 'width' : 15, 'height' : 15};
 	var width		= 0;
@@ -2105,10 +2111,6 @@ function nuAddAction(){
 function nuRunPHPAction(id) {
 	nuRunPHP(id);
 }
-
-//function nuRunPHPHiddenAction(id){
-//	nuRunPHPHidden(id);
-//}
 
 function nuRunReportAction(id) {
 	nuRunReport(id);

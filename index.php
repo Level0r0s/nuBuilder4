@@ -6,7 +6,51 @@
 
 <?php
 
-require_once('nucommon.php');	
+function nuJSInclude($pfile){
+
+    $timestamp = date("YmdHis", filemtime($pfile));                                         //-- Add timestamp so javascript changes are effective immediately
+    print "<script src='$pfile?ts=$timestamp' type='text/javascript'></script>\n";
+    
+}
+
+
+
+function nuCSSInclude($pfile){
+
+    $timestamp = date("YmdHis", filemtime($pfile));                                         //-- Add timestamp so javascript changes are effective immediately
+    print "<link rel='stylesheet' href='$pfile?ts=$timestamp' />\n";
+    
+}
+
+function nuHeader(){
+
+    require_once('config.php');
+
+    $nuDB = new PDO("mysql:host=$nuConfigDBHost;dbname=$nuConfigDBName;charset=utf8", $nuConfigDBUser, $nuConfigDBPassword, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+    $nuDB->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $nuDB->exec("SET CHARACTER SET utf8");
+
+    $getHTMLHeaderSQL  = "
+        SELECT set_header
+        FROM zzzzsys_setup
+        WHERE zzzzsys_setup_id = 1
+    ";
+
+    $getHTMLHeaderQRY = $nuDB->prepare($getHTMLHeaderSQL);
+    $HTMLHeader = '';
+    try {
+        $getHTMLHeaderQRY->execute();
+        $HTMLHeader = $getHTMLHeaderQRY->fetch(PDO::FETCH_OBJ)->set_header;
+    }catch(PDOException $ex){
+        die('nuBuilder cannot access the database. Please check your database configuration in config.php.');
+    }
+
+    $j  = "\n\n//-- CREATED BY Setup -> Header\n\n\n" . $HTMLHeader;
+    $j .= "\n\n//===========================================\n\n";
+    
+    return $j;
+    
+}
 
 nuJSInclude('jquery/jquery.js');
 nuJSInclude('nuformclass.js');
@@ -42,6 +86,44 @@ function nuHomeWarning(){
 	
 }
 
+function nuLoginRequest(){
+
+    $.ajax({
+        async    : true,  
+        dataType : "json",
+        url      : "nuapi.php",
+        method   : "POST",
+        data     : {nuSTATE : {call_type: 'login', username: $('#nuusername').val(), password: $('#nupassword').val()}},
+        dataType : "json",          
+        success  : function(data,textStatus,jqXHR){
+            if(nuDisplayError(data)){
+                if(data.log_again == 1){location.reload();}
+            } else {
+                window.nuFORM.addBreadcrumb();
+                var last            = window.nuFORM.getCurrent();
+                last.call_type      = 'getform';
+                last.form_id        = data.form_id;
+                last.record_id      = data.record_id;
+                last.filter         = data.filter;
+                last.search         = data.search;
+                last.hash           = parent.nuHashFromEditForm();
+                last.FORM           = data.form;
+                nuBuildForm(data);
+            }
+        },
+        error    : function(jqXHR,textStatus,errorThrown){
+            
+            var msg         = String(jqXHR.responseText).split("\n");
+            nuMessage(msg);
+            window.test = jqXHR.responseText;
+            
+            nuFormatAjaxErrorMessage(jqXHR, errorThrown);
+            
+        },
+    }); 
+
+}
+
 window.nuVersion 		= 'nuBuilder4';
 window.nuDocumentID		= Date.now();
 window.onbeforeunload	= nuHomeWarning;
@@ -50,13 +132,22 @@ window.nuHASH			= [];
 <?php
 
 	$nuHeader			= nuHeader();
-	$opener				= $_GET['opener'];
-	$search				= $_GET['search'];
-	$iframe				= $_GET['iframe'];
-	$target				= $_GET['target'];
+    $opener             = '';
+    $search             = '';
+    $iframe             = '';
+    $target             = '';
+    if(isset($_GET['opener']))
+       $opener = $_GET['opener'];
+    if(isset($_GET['search']))
+       $search = $_GET['search'];
+    if(isset($_GET['iframe']))
+       $iframe = $_GET['iframe'];
+    if(isset($_GET['target']))
+       $target = $_GET['target'];	
 	
-	
-	$nuBrowseFunction	= $_GET['browsefunction'] == '' ? 'browse' : $_GET['browsefunction'];
+    $nuBrowseFunction = 'browse';
+    if(isset($_GET['browsefunction']))
+        $nuBrowseFunction = $_GET['browsefunction'];
 
 	$h			= "
 
