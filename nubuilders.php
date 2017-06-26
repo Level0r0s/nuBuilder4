@@ -113,7 +113,7 @@ function nuBuildFastForm($table){
 
 	for($i = 0 ; $i < count($SF->rows) ; $i++){
 		
-		if($SF->rows[$i][4] == 0){							//-- not ticked as deleted
+		if($SF->rows[$i][5] == 0){							//-- not ticked as deleted
 			
 			$newid      = nuID();
 			$label      = $SF->rows[$i][1];
