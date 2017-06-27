@@ -1128,8 +1128,9 @@ function nuGetAllLookupList(){
 	$t				= nuRunQuery($s);
 	$r	 			= db_fetch_object($t);
 	$id	 			= $r->sfo_primary_key;
-	$SQL 			= new nuSqlString($r->sfo_browse_sql);
-
+    $SQL			= new nuSqlString(nuReplaceHashVariables($r->sfo_browse_sql));
+//	$SQL 			= new nuSqlString($r->sfo_browse_sql);    //-- 28-06-17
+nudebug($SQL);
 	$s				= "
 					SELECT $id, $code, $description
 					$SQL->from
