@@ -547,6 +547,8 @@ class nuFormObject {
 				
 			}
 			
+			if(isNaN(Number(m))){return '';}
+			
 			if(String(h) == 'toobig'){nuMessage(["Man! That's a BIG number, stop showing off.",'','<img id="thebig" src="fpdf\\big.png">']);return '';}
 			
 			return m;
@@ -567,6 +569,8 @@ class nuFormObject {
 			}
 			
 			var o 		= new Date(d[0], d[1]-1, d[2], t[0], t[1], t[2], 0);			//-- (year, month, day, hours, minutes, seconds, milliseconds)
+			
+			if(o =='Invalid Date'){return '';}
 			
 			var wee		= o.toString().split(' ')[0];								//-- Tue Sep 07 2004 11:11:12 GMT+0930 (Cen. Australia Standard Time)
 			var mth		= o.toString().split(' ')[1];
