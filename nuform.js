@@ -992,7 +992,10 @@ function nuSUBFORM(w, i, l, p, prop){
 	.addClass('nuSubform');
 
 	nuAddJSObjectEvents(id, SF.js);
-	nuGetSubformRowSize(SF.forms[0].objects, SF, id);
+	
+	if(SF.forms[0] !== undefined){
+		nuGetSubformRowSize(SF.forms[0].objects, SF, id);
+	}
 
 	if(SF.subform_type == 'f'){
 		
