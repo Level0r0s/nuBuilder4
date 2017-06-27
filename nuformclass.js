@@ -547,6 +547,8 @@ class nuFormObject {
 				
 			}
 			
+			if(isNaN(Number(m))){return '';}
+			
 			if(String(h) == 'toobig'){nuMessage(["Man! That's a BIG number, stop showing off.",'','<img id="thebig" src="fpdf\\big.png">']);return '';}
 			
 			return m;
