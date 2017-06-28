@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 28, 2017 at 12:49 PM
+-- Generation Time: Jun 28, 2017 at 01:12 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -460,13 +460,13 @@ INSERT INTO `zzzzsys_browse` (`zzzzsys_browse_id`, `sbr_zzzzsys_form_id`, `sbr_t
 ('s14919868485259', 'c14919868321575624', 'button01', 'field01', 'l', '', 30, 200),
 ('s14919868485260', 'c14919868321575624', 'text00', 'field00', 'l', '', 40, 200),
 ('s14921253336087', 'nufile', 'Description', 'sfi_description', 'l', '', 20, 200),
-('s14921254628568', 'nufile', 'JSON', 'sfi_json', 'l', '', 40, 0),
-('s14921333369704', 'nufile', 'Image', '"<img class=''nuBrowseImage'' width=''45px'' height=''45px''>"', 'l', '', 50, 50),
+('s14921254628568', 'nufile', 'JSON', 'sfi_json', 'l', '', 30, 0),
+('s14921333369704', 'nufile', 'Image', '"<img class=''nuBrowseImage'' width=''45px'' height=''45px''>"', 'l', '', 40, 50),
 ('s14981568046404', 's14981568046395', 'text00', 'bus_code', 'l', '', 20, 200),
 ('s14981556542231', 's14981556542223', 'text01', 'chi_dob', 'l', '', 30, 200),
 ('s14981556542230', 's14981556542223', 'text00', 'chi_name', 'l', '', 20, 200),
 ('s14921253336086', 'nufile', 'Code', 'sfi_code', 'l', '', 10, 100),
-('s14921360039298', 'nufile', 'Group', 'sfi_group', 'l', '', 30, 150),
+('s14921360039298', 'nufile', 'Group', 'sfi_group', 'l', '', 50, 150),
 ('s14923103035333', 'c14923102442293588', 'text00', 'field00', 'l', '', 20, 200),
 ('s14923103035334', 'c14923102442293588', 'file01', 'field01', 'l', '', 30, 200),
 ('s14923103035335', 'c14923102442293588', 'Image02', 'field02', 'l', '', 40, 200),
@@ -656,7 +656,7 @@ INSERT INTO `zzzzsys_form` (`zzzzsys_form_id`, `sfo_type`, `sfo_code`, `sfo_desc
 ('58bf0b972c2a447', 'browseedit', 'TEST2', 'test_table', 'test_table', 'test_table_id', '', 0, 0, 'select * from test_table', ''),
 ('58d3719f55819e7', 'browseedit', '1111fdgg', 'Test Form (break it if you want)', 'zzzzsys_access_level', 'zzzzsys_access_level_id', 'nulaunchdates', 0, 0, 'SELECT\n    color.color_id,\n    company.*\n\nFROM\n    color\n        JOIN company ON color.color_id = company.com_name AND color.col_description = company.com_business_id', 'nuSetTitle($(''#sal_code'').val());'),
 ('c14919868321575624', 'browseedit', 'FF4', 'Fast Form 4', 'aaaaaaagg', 'aaaaaaagg_id', '', 0, 0, 'SELECT * FROM aaaaaaagg', ''),
-('nufile', 'browseedit', 'FILE', 'Stored Files', 'zzzzsys_file', 'zzzzsys_file_id', '', 50, 10, 'SELECT * FROM zzzzsys_file', '\n\nnuShowBrowseImages()\n\nnuShowFile();\n\nfunction nuShowFile(){\n\n    var j   = $(''#sfi_json'').val();\n    	\n	if(j == ''''){return;}\n	\n	var ob	= JSON.parse(j)\n	var ur	= atob(ob.file);\n\n	$(''#theview'').attr(''src'', ur);\n	\n}\n\n\n\nfunction nuShowBrowseImages(){\n\n	$(''.nuBrowseImage'').each(function( index ){\n		\n		var p	    = $(this).parent().attr(''id'');\n		var r	    = String(p).substr(5,3)\n		var h       = $("#nurow" + r + "003").html();\n		\n		if(h != '''' && h !== undefined){\n		    \n    		var j	= JSON.parse(h);\n    		var f	= atob(j.file);\n    		\n    		$(this).attr(''src'', f);\n    		\n		}\n		\n	});\n\n}\n\n'),
+('nufile', 'browseedit', 'FILE', 'Stored Files', 'zzzzsys_file', 'zzzzsys_file_id', '', 50, 10, 'SELECT * FROM zzzzsys_file', '\nif(nuFORM.getCurrent().record_id == ''''){\n    nuShowBrowseImages()\n}else{\n    nuShowFile();\n}\n\n\nfunction nuShowFile(){\n\n    var j   = $(''#sfi_json'').val();\n    	\n	if(j == ''''){return;}\n	\n	var ob	= JSON.parse(j)\n	var ur	= atob(ob.file);\n\n	$(''#theview'').attr(''src'', ur);\n	\n}\n\n\n\nfunction nuShowBrowseImages(){\n\n	$(''.nuBrowseImage'').each(function( index ){\n		\n		var p	    = $(this).parent().attr(''id'');\n		var r	    = String(p).substr(5,3)\n		var h       = $("#nurow" + r + "002").html();\n		\n		if(h != '''' && h !== undefined){\n		    \n    		var j	= JSON.parse(h);\n    		var f	= atob(j.file);\n    		\n    		$(this).attr(''src'', f);\n    		\n		}\n		\n	});\n\n}\n\n'),
 ('c14922090360750633', 'browseedit', 'FF8', 'Fast Form 8', '', '_id', '', 0, 0, 'SELECT * FROM ', ''),
 ('c14923102442293588', 'browseedit', 'FF9', 'Fast Form 9', 'aaacontact', 'aaacontact_id', '', 0, 0, 'SELECT * FROM aaacontact', ''),
 ('c14929786978782474', 'browseedit', 'FF12', 'Fast Form 12', 'aaaaaaaaaa', 'aaaaaaaaaa_id', '', 0, 0, 'SELECT * FROM aaaaaaaaaa', ''),
