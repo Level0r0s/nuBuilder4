@@ -339,57 +339,57 @@ function nuSetHashList($p){
 	$fid		= addslashes($p['form_id']);
 	$rid		= addslashes($p['record_id']);
 	$r			= array();
-	
 	$A			= nuGetUserAccess();
+	$s			= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$fid'";
+	$t			= nuRunQuery($s);
+	$R			= db_fetch_object($t);
 
-	if($rid == ''){
-		return $A;
-	}else{
-
-		$s		= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$fid'";
-		$t		= nuRunQuery($s);
-		$R		= db_fetch_object($t);
-
-//		if(db_num_rows($t) != 0){
-		if(trim($R->sfo_table) != ''){
-			
-			$s	= "SELECt * FROM $R->sfo_table WHERE $R->sfo_primary_key = '$rid'";
-			$t	= nuRunQuery($s);
-			$f	= db_fetch_object($t);
-
-			if(is_object($f) ){
-				
-				foreach ($f as $fld => $value ){								//-- add parent Breadcrumb Object
-					$r[$fld] = addslashes($value);
-				}
-				
-			}
-		}
-
-		$H		= $p['hash'];
-		$ha		= array();
-
-		for($i = 1 ; $i < count($H) ; $i++){									//-- add parent Form field values
-			
-			$f	= $H[$i][0];
-			$v	= $H[$i][1];
-
-			if(gettype($v) == 'string'){
-				$ha[$f]	= addslashes($v);
-			}
-			
-		}
+	if(trim($R->sfo_table) != ''){
 		
-		$ha['PREVIOUS_RECORD_ID']	= addslashes($rid);
-		$ha['RECORD_ID']			= addslashes($rid);
-		$ha['FORM_ID']				= addslashes($fid);
-		$ha['SUBFORM_ID']			= addslashes($_POST['nuSTATE']['object_id']);
-		$ha['ID']					= addslashes($_POST['nuSTATE']['primary_key']);
-		$ha['CODE']					= addslashes($_POST['nuSTATE']['code']);
+		$s		= "SELECt * FROM $R->sfo_table WHERE $R->sfo_primary_key = '$rid'";
+		$t		= nuRunQuery($s);
+		$f		= db_fetch_object($t);
 
+		if(is_object($f) ){
+			
+			foreach ($f as $fld => $value ){								//-- add parent Breadcrumb Object
+				$r[$fld] = addslashes($value);
+			}
+			
+		}
 	}
 
-	return array_merge($r, $ha);
+	$H		= $p['hash'];
+	$ha		= array();
+
+	for($i = 1 ; $i < count($H) ; $i++){									//-- add parent Form field values
+		
+		$f	= $H[$i][0];
+		$v	= $H[$i][1];
+
+		if(gettype($v) == 'string'){
+			$ha[$f]	= addslashes($v);
+		}
+		
+	}
+	
+	foreach ($p as $fld => $value ){								//-- add all nuState values
+	
+		if(gettype($value) == 'string'){
+			$ha[$fld] = addslashes($value);
+		}
+		
+	}
+
+	
+	$ha['PREVIOUS_RECORD_ID']	= addslashes($rid);
+	$ha['RECORD_ID']			= addslashes($rid);
+	$ha['FORM_ID']				= addslashes($fid);
+	$ha['SUBFORM_ID']			= addslashes($_POST['nuSTATE']['object_id']);
+	$ha['ID']					= addslashes($_POST['nuSTATE']['primary_key']);
+	$ha['CODE']					= addslashes($_POST['nuSTATE']['code']);
+	
+	return array_merge($r, $ha, $A);
 
 }
 

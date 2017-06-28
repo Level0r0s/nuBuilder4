@@ -517,6 +517,8 @@ class nuFormObject {
 		
 		if(f[0] == 'N'){							//-- number  '456.789','N|€ 1,000.00'
 
+			if(isNaN(Number(v))){return '';}
+			
 			f			= f.substr(2);
 			var s		= String(f.split(' ')[0]);			//-- sign
 			var n		= String(f.split(' ')[1]);			//-- number
@@ -546,8 +548,6 @@ class nuFormObject {
 				var m		= s + ' ' + h + suf
 				
 			}
-			
-			if(isNaN(Number(m))){return '';}
 			
 			if(String(h) == 'toobig'){nuMessage(["Man! That's a BIG number, stop showing off.",'','<img id="thebig" src="fpdf\\big.png">']);return '';}
 			

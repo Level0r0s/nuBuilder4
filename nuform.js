@@ -992,7 +992,10 @@ function nuSUBFORM(w, i, l, p, prop){
 	.addClass('nuSubform');
 
 	nuAddJSObjectEvents(id, SF.js);
-	nuGetSubformRowSize(SF.forms[0].objects, SF, id);
+	
+	if(SF.forms[0] !== undefined){
+		nuGetSubformRowSize(SF.forms[0].objects, SF, id);
+	}
 
 	if(SF.subform_type == 'f'){
 		
@@ -2983,11 +2986,11 @@ function nuMessage(o, type){
 		widest	= Math.max(widest, nuGetWordWidth(o[i]));
 	}
 
-	widest		= widest + 200;
+	widest		= Math.min(widest + 200, 900);
 	
 	var l		= (screen.width - widest) / 2;
 
-	$('body', par).append("<div id='nuAlertDiv' class='nuMessage' style='width:" + widest + "px;left:" + l + "px' " + c + "></div>")
+	$('body', par).append("<div id='nuAlertDiv' class='nuMessage' style='overflow:scroll;width:" + widest + "px;left:" + l + "px' " + c + "></div>")
 	$('#nuAlertDiv').prepend('<img id="nuOptionListClose" src="nuclose.png" class="nuSearchListClose" style="position:absolute;top:5px;right:5px" onclick="$(this).parent().remove()" width="20px" height="20px">')
 	
 	

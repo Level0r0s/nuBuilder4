@@ -880,3 +880,19 @@ function nuSpaces(s){
 	return String('&nbsp;').repeat(s);
 }
 
+function nuAddEditFieldsToHash(w){
+	
+	var d	= nuFORM.data()[0];
+	var f	= d.fields;
+	var r	= d.rows[0];
+	
+	for(i = 2 ; i < f.length ; i++){
+		w[f[i]] = r[i];
+	}
+	
+	return w;
+	
+}
+
+
+

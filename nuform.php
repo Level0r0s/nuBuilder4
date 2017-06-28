@@ -380,9 +380,7 @@ function nuDefaultObject($r, $t){
 function nuGetEditForm($F, $R){
 	
 	$r					= nuFormProperties($F);
-
-	$SQL 				= new nuSqlString($r->sfo_browse_sql);
-
+    $SQL 				= new nuSqlString(nuReplaceHashVariables($r->sfo_browse_sql));
     $f              	= new stdClass();
     $f->id          	= $r->zzzzsys_form_id;
     $f->type        	= $r->sfo_type;
@@ -443,8 +441,7 @@ function nuGetLookupValues($R, $O){
     $s 			= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$O->form_id'";
     $t 			= nuRunQuery($s);
     $r 			= db_fetch_object($t);
-	
-	$S 			= new nuSqlString($r->sfo_browse_sql);
+    $S 			= new nuSqlString(nuReplaceHashVariables($r->sfo_browse_sql));
 	
     $s 			= "
 		SELECT 
@@ -1129,7 +1126,6 @@ function nuGetAllLookupList(){
 	$r	 			= db_fetch_object($t);
 	$id	 			= $r->sfo_primary_key;
     $SQL			= new nuSqlString(nuReplaceHashVariables($r->sfo_browse_sql));
-//	$SQL 			= new nuSqlString($r->sfo_browse_sql);    //-- sc 28-06-17
 	$s				= "
 					SELECT $id, $code, $description
 					$SQL->from

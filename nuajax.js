@@ -1,6 +1,8 @@
 
 function nuAjax(w,successCallback,errorCallback){
 
+	w	= nuAddEditFieldsToHash(w);
+	
  	$.ajax({
 
 		async    : true,  
