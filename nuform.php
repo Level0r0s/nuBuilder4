@@ -276,12 +276,12 @@ function nuUpdateCounter($i){
 		
 		if($times > 10){
 			
-			nuDisplayError("AutoNumber for <b>$r->sob_all_id</b>) cannot be updated");
+			nuDisplayError("AutoNumber for (<b>$r->sob_all_id</b>) cannot be updated");
 			return 0;
 			
 		}
 		
-		$u	= $_SESSION['SESSIONID'];
+		$u	= $_SESSION['SESSION_ID'];//$_SESSION['SESSIONID'];
 		
 		$s	= "
 		
@@ -293,6 +293,7 @@ function nuUpdateCounter($i){
 		
 		";
 		
+		nudebug($s, [$u, $i]);
 		nuRunQuery($s, [$u, $i]);
 		
 		$s	= "
@@ -954,7 +955,7 @@ function nuAddOtherFormsUsed($j){
 
 function nuButtons($formid, $P){
 	
-	$t						= nuRunQuery("SELECT * FROM zzzzsys_session WHERE zzzzsys_session_id = ? ", array($_SESSION['SESSIONID']));		
+	$t						= nuRunQuery("SELECT * FROM zzzzsys_session WHERE zzzzsys_session_id = ? ", array($_SESSION['SESSION_ID']));		
 	$r 						= db_fetch_object($t);
 	$nuJ 					= json_decode($r->sss_access);
 	$_POST['forms']			= $nuJ->forms;
