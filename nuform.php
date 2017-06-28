@@ -955,7 +955,7 @@ function nuAddOtherFormsUsed($j){
 
 function nuButtons($formid, $P){
 	
-	$t						= nuRunQuery("SELECT * FROM zzzzsys_session WHERE zzzzsys_session_id = ? ", array($_SESSION['SESSION_ID']));		
+	$t						= nuRunQuery("SELECT * FROM zzzzsys_session WHERE zzzzsys_session_id = ? ", array($_SESSION['SESSIONID']));		
 	$r 						= db_fetch_object($t);
 	$nuJ 					= json_decode($r->sss_access);
 	$_POST['forms']			= $nuJ->forms;
