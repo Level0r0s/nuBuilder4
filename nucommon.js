@@ -735,7 +735,8 @@ function nuHide(i){                 //-- Hide Edit Form Object
 	var o	= [i, i + 'code', i + 'button', i + 'description', 'label_' + i];
 	
 	for(var c = 0 ; c < o.length ; c++){
-		$('#' + o[c]).css('visibility', 'hidden');
+//		$('#' + o[c]).css('visibility', 'hidden');
+		$('#' + o[c]).hide();
 	}
 	
 	$("[id$='nuDelete'][id^='" + i + "']").hide();
