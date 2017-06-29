@@ -146,6 +146,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 
 			if($r->sob_all_type == 'image'){
 				$o->src 			= nuGetSrc($r->sob_image_zzzzsys_file_id);
+				nudebug($r->sob_image_zzzzsys_file_id, $r);
 			}
 
 			if($r->sob_all_type == 'select'){

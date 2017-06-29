@@ -6,7 +6,7 @@
 
 <?php
 
-function nuJSInclude($pfile){
+function nuIndexInclude($pfile){
 
     $timestamp = date("YmdHis", filemtime($pfile));                                         //-- Add timestamp so javascript changes are effective immediately
     print "<script src='$pfile?ts=$timestamp' type='text/javascript'></script>\n";
@@ -52,14 +52,14 @@ function nuHeader(){
     
 }
 
-nuJSInclude('jquery/jquery.js');
-nuJSInclude('nuformclass.js');
-nuJSInclude('nuform.js');
-nuJSInclude('nuformdrag.js');
-nuJSInclude('nucalendar.js');
-nuJSInclude('nucommon.js');
-nuJSInclude('nuajax.js');       //-- calls to server
-nuJSInclude('nufunctions.js');
+nuIndexInclude('jquery/jquery.js');
+nuIndexInclude('nuformclass.js');
+nuIndexInclude('nuform.js');
+nuIndexInclude('nuformdrag.js');
+nuIndexInclude('nucalendar.js');
+nuIndexInclude('nucommon.js');
+nuIndexInclude('nuajax.js');       //-- calls to server
+nuIndexInclude('nufunctions.js');
 
 nuCSSInclude('nubuilder4.css');
 

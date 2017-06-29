@@ -989,5 +989,20 @@ function nuTTList($p, $l){
 }
 
 
+function nuJSInclude($pfile){
+
+    $timestamp = date("YmdHis", filemtime($pfile));                                         //-- Add timestamp so javascript changes are effective immediately
+    print "<script src='$pfile?ts=$timestamp' type='text/javascript'></script>\n";
+    
+}
+
+function nuCSSInclude($pfile){
+
+    $timestamp = date("YmdHis", filemtime($pfile));                                         //-- Add timestamp so javascript changes are effective immediately
+    print "<link rel='stylesheet' href='$pfile?ts=$timestamp' />\n";
+    
+}
+
+
 
 ?>

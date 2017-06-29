@@ -5,22 +5,6 @@
 
 require_once('nucommon.php');	
 
-function nuJSInclude($pfile){
-
-    $timestamp = date("YmdHis", filemtime($pfile));                                         //-- Add timestamp so javascript changes are effective immediately
-    print "<script src='$pfile?ts=$timestamp' type='text/javascript'></script>\n";
-    
-}
-
-
-
-function nuCSSInclude($pfile){
-
-    $timestamp = date("YmdHis", filemtime($pfile));                                         //-- Add timestamp so javascript changes are effective immediately
-    print "<link rel='stylesheet' href='$pfile?ts=$timestamp' />\n";
-    
-}
-
 nuJSInclude('jquery/jquery.js');
 nuJSInclude('nuselectclass.js');
 nuJSInclude('nuformclass.js');
