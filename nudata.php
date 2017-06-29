@@ -221,6 +221,8 @@ function nuUpdateTables(){
 		
 	}
 	
+	nudebug($S);
+	
 }
 
 function nuValidArray($v, $f){

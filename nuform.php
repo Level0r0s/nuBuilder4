@@ -95,12 +95,12 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 			if($r->sob_all_type == 'textarea'){
 				
 				$o->align 			= $r->sob_all_align;
-				$o->read 			= $r->sob_all_access;
+//				$o->read 			= $r->sob_all_access;
 				
 			}
 				
 			if($r->sob_all_type == 'lookup'){
-				$o->read 			= $r->sob_all_access;
+//				$o->read 			= $r->sob_all_access;
 			}
 				
 			if($r->sob_all_type == 'input' || $r->sob_all_type == 'display'){
@@ -119,7 +119,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 				}
 					
 				$o->input 			= $r->sob_input_type;
-				$o->read 			= $r->sob_all_access;
+//				$o->read 			= $r->sob_all_access;
 
 				if($r->sob_input_type == 'button' && $r->sob_all_type == 'input'){
 					$o->value		= $r->sob_all_label;
@@ -216,7 +216,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 				$o->align				= $r->sob_all_align;
 			}
 
-			$o->display					= nuDisplay($r->sob_all_display_condition);
+			//$o->display					= nuDisplay($r->sob_all_display_condition);
 			$o->js						= nuObjectEvents($r->zzzzsys_object_id);
 
 			if($OBJS > 0){
@@ -313,7 +313,7 @@ function nuUpdateCounter($i){
 }
 
 
-
+/*
 function nuDisplay($s){
 
 	$s	= nuReplaceHashVariables(trim($s));
@@ -334,6 +334,7 @@ function nuDisplay($s){
 	}
 	
 }
+*/
 
 function nuObjectEvents($i){
 
@@ -364,6 +365,7 @@ function nuDefaultObject($r, $t){
 	$o->width   		= $r->sob_all_width;
 	$o->height			= $r->sob_all_height;
 	$o->valid			= $r->sob_all_validate;
+	$o->read 			= $r->sob_all_access;
 	$o->format			= '';
 
 	for($i = 0 ; $i < count($t) ; $i++){

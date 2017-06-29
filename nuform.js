@@ -279,35 +279,23 @@ function nuBuildEditObjects(f, p, o, prop){
 			f.objects[i].parent_type    = o == '' ? '' : o.subform_type;
 
 			if(t == 'input' || t == 'display' || t == 'lookup' || t == 'textarea' || t == 'calc'){
-				
 				l = l + nuINPUT(f, i, l, p, prop);
-				
 			}else if(t == 'run'){
-				
 				l = l + nuRUN(f, i, l, p, prop);
-				
 			}else if(t == 'html'){
-				
 				l = l + nuHTML(f, i, l, p, prop);
-				
 			}else if(t == 'image'){
-				
 				l = l + nuIMAGE(f, i, l, p, prop);
-				
 			}else if(t == 'select'){
-				
 				l = l + nuSELECT(f, i, l, p, prop);
-				
 			}else if(t == 'subform' && p == ''){
-				
 				l = l + nuSUBFORM(f, i, l, p, prop);
-				
 			}else if(t == 'word'){
-				
 				l = l + nuWORD(f, i, l, p, prop);
-				
 			}
-			if(prop.objects[i].display == 0){$('#' + p + prop.objects[i].id).css('visibility', 'hidden');}
+			
+			
+			//if(prop.objects[i].display == 0){$('#' + p + prop.objects[i].id).css('visibility', 'hidden');}
 			
 			l 	= l + 2;
 		
@@ -491,7 +479,6 @@ function nuINPUT(w, i, l, p, prop){
 	.attr('data-nu-type', w.objects[i].type)
 	.attr('data-nu-subform-sort', 1)
 	.attr('data-nu-label', w.objects[i].label);
-//	.prop('readonly', prop.objects[i].read == '1' ? 'readonly' : '');
 
 	if(prop.objects[i].type != 'textarea'){
 
@@ -654,7 +641,7 @@ function nuINPUT(w, i, l, p, prop){
 		
 		nuPopulateLookup3(w.objects[i].values, p);
 		
-		setAccess(ID, prop.objects[i].read);
+		nuSetAccess(ID, prop.objects[i].read);
 		
 		return Number(prop.objects[i].width) + Number(prop.objects[i].description_width) + 30;
 		
@@ -667,7 +654,7 @@ function nuINPUT(w, i, l, p, prop){
 			.val(prop.objects[i].counter);
 		}
 
-		setAccess(ID, prop.objects[i].read);
+		nuSetAccess(ID, prop.objects[i].read);
 		
 		return Number(prop.objects[i].width);
 		
@@ -675,10 +662,20 @@ function nuINPUT(w, i, l, p, prop){
 	
 }
 
-function setAccess(i, r){
-	
+function nuSetAccess(i, r){
+
 	if(r == 2){
-		nuHide(i);
+
+		var o	= [i, i + 'code', i + 'button', i + 'description', 'label_' + i];
+		
+		for(var c = 0 ; c < o.length ; c++){
+			
+			$('#' + o[c])
+			.attr('data-nu-tab', 'x')
+			.hide();
+			
+		}
+		
 	}
 
 	if(r == 1){
@@ -719,6 +716,8 @@ function nuHTML(w, i, l, p, prop){
 	})
 	.html(w.objects[i].html);
 	
+	nuSetAccess(id, prop.objects[i].read);
+	
 	return Number(prop.objects[i].width);
 
 }
@@ -755,6 +754,8 @@ function nuIMAGE(w, i, l, p, prop){
 	})
 	.attr('src', atob(w.objects[i].src));
 	
+	nuSetAccess(id, prop.objects[i].read);
+	
 	return Number(prop.objects[i].width);
 
 }
@@ -782,7 +783,9 @@ function nuWORD(w, i, l, p, prop){
 	.addClass('nuWord')
 	.html(w.objects[i].word)
 	.attr('ondblclick','nuPopup("nuobject", "' + prop.objects[i].object_id + '")');
-
+	
+	nuSetAccess(id, prop.objects[i].read);
+	
 	return Number(prop.objects[i].width);
 
 }
@@ -864,6 +867,8 @@ function nuRUN(w, i, l, p, prop){
 
 	nuAddJSObjectEvents(id, O.js);
 
+	nuSetAccess(id, prop.objects[i].read);
+	
 	return Number(O.width);
 	
 }
@@ -950,6 +955,8 @@ function nuSELECT(w, i, l, p, prop){
 	
 	nuAddJSObjectEvents(id, prop.objects[i].js);
 
+	nuSetAccess(id, prop.objects[i].read);
+	
 	return Number(prop.objects[i].width);
 	
 }
@@ -1073,14 +1080,14 @@ function nuSUBFORM(w, i, l, p, prop){
 			
 	}
 	
-	rowTop 	= 0;
-	var even	= 0;
+	rowTop 			= 0;
+	var even		= 0;
 
 	for(var c = 0 ; c < fms.length ; c++){
 
-		var prefix = id + nuPad3(c);
-		var frmId  = prefix + 'nuRECORD';
-		var frmDiv = document.createElement('div');
+		var prefix 	= id + nuPad3(c);
+		var frmId  	= prefix + 'nuRECORD';
+		var frmDiv 	= document.createElement('div');
 		
 		frmDiv.setAttribute('id', frmId);
 		$('#' + scrId).append(frmDiv);
@@ -1095,7 +1102,7 @@ function nuSUBFORM(w, i, l, p, prop){
 		nuBuildEditObjects(SFR.forms[c], prefix, SF, SF.forms[0]);
 		nuRecordProperties(SF.forms[c], prefix, rowWidth - 40);
 
-		rowTop 	= Number(rowTop) + Number(rowHeight);
+		rowTop 		= Number(rowTop) + Number(rowHeight);
 		even		= even == '0' ? '1' : '0'
 
 	}
@@ -1103,6 +1110,8 @@ function nuSUBFORM(w, i, l, p, prop){
 	if(SF.add == 1 && prefix != ''){
 		nuNewRowObject(String(prefix));
 	}
+	
+	nuSetAccess(id, prop.objects[i].read);
 	
 	return Number(SF.width);
 
@@ -1780,13 +1789,12 @@ function nuSelectTab(tab){
 		}
 		
 	}
-
+	
     $("[data-nu-form='" + form + "']").hide();
     $("[data-nu-form='" + form + "'][data-nu-tab='"  + filt + "']:not([data-nu-lookup-id])").show();
 
     $("[data-nu-form-filter='" + form + "']").removeClass('nuTabSelected');
     $("[data-nu-form-filter='" + form + "'][data-nu-tab-filter='"  + filt + "']").show();
-
     $('#' + tab.id).addClass('nuTabSelected');
 
 }
