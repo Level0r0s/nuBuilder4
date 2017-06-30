@@ -3,6 +3,7 @@ require_once('nucommon.php');
 require_once('nudata.php'); 
 require_once('fpdf/fpdf.php');
 define('FPDF_FONTPATH','fpdf/font/');
+session_start();
 
 $GLOBALS['nu_report']       = array();
 $GLOBALS['nu_columns']      = array();
@@ -10,24 +11,12 @@ $GLOBALS['nu_files']        = array();
 
 $jsonID                     = $_GET['i'];
 $TABLE_ID                   = nuTT();
-$t                          = nuRunQuery("SELECT deb_message AS json FROM zzzzsys_debug WHERE zzzzsys_debug_id = ? ", array($jsonID));		//-- created by nuRunReport()
-
-if(db_num_rows($t) == 0){
-
-	print 'nuBuilder Report No Longer Available..';
-	return;
-	
-}
-
-$reportInfo                 = db_fetch_object($t);
-$JSON                       = json_decode($reportInfo->json);
+$JSON                       = json_decode($_SESSION[$jsonID]);
 $LAYOUT						= json_decode($JSON->sre_layout);
 $hashData                   = nuAddToHashList($JSON, 'report');
 $hashData['TABLE_ID']       = $TABLE_ID;
 $GLOBALS['TABLE_ID']        = $TABLE_ID;
 $_POST['nuHash']			= $hashData;
-
-nuRunQuery("DELETE FROM zzzzsys_debug WHERE zzzzsys_debug_id = ? ", array($jsonID));
 
 $PDF                        = new FPDF($LAYOUT->orientation, 'mm', $LAYOUT->paper);
 $PDF->SetAutoPageBreak(false);

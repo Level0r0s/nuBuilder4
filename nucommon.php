@@ -409,9 +409,11 @@ function nuRunReport($nuRID){
 	$_POST['nuHash']['parentID']		= $nuR->zzzzsys_php_id;
 	
 	$nuJ								= json_encode($_POST['nuHash']);
-	$nuS								= "INSERT INTO zzzzsys_debug (zzzzsys_debug_id, deb_message) VALUES (?, ?)";
-	
-	nuRunQuery($nuS, array($nuID, $nuJ));
+//	$nuS								= "INSERT INTO zzzzsys_debug (zzzzsys_debug_id, deb_message) VALUES (?, ?)";
+//	nuRunQuery($nuS, array($nuID, $nuJ));
+
+	$_SESSION[$nuID]					= $nuJ;
+	nudebug($nuJ, $_SESSION[$nuID]);
 	
 	return $nuID;
 	

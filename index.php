@@ -6,7 +6,7 @@
 
 <?php
 
-function nuIndexInclude($pfile){
+function nuJSIndexInclude($pfile){
 
     $timestamp = date("YmdHis", filemtime($pfile));                                         //-- Add timestamp so javascript changes are effective immediately
     print "<script src='$pfile?ts=$timestamp' type='text/javascript'></script>\n";
@@ -15,7 +15,7 @@ function nuIndexInclude($pfile){
 
 
 
-function nuCSSInclude($pfile){
+function nuCSSIndexInclude($pfile){
 
     $timestamp = date("YmdHis", filemtime($pfile));                                         //-- Add timestamp so javascript changes are effective immediately
     print "<link rel='stylesheet' href='$pfile?ts=$timestamp' />\n";
@@ -52,16 +52,16 @@ function nuHeader(){
     
 }
 
-nuIndexInclude('jquery/jquery.js');
-nuIndexInclude('nuformclass.js');
-nuIndexInclude('nuform.js');
-nuIndexInclude('nuformdrag.js');
-nuIndexInclude('nucalendar.js');
-nuIndexInclude('nucommon.js');
-nuIndexInclude('nuajax.js');       //-- calls to server
-nuIndexInclude('nufunctions.js');
+nuJSIndexInclude('jquery/jquery.js');
+nuJSIndexInclude('nuformclass.js');
+nuJSIndexInclude('nuform.js');
+nuJSIndexInclude('nuformdrag.js');
+nuJSIndexInclude('nucalendar.js');
+nuJSIndexInclude('nucommon.js');
+nuJSIndexInclude('nuajax.js');       //-- calls to server
+nuJSIndexInclude('nufunctions.js');
 
-nuCSSInclude('nubuilder4.css');
+nuCSSIndexInclude('nubuilder4.css');
 
 ?>
 
