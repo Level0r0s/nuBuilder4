@@ -973,13 +973,19 @@ function nuButtons($formid, $P){
 	$s						= 'SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = ? ';
 	$t						= nuRunQuery($s,[$P['record_id']]);
 	$p						= db_fetch_object($t)->sph_code;
+	$h						= db_fetch_object($t)->sph_run;
 	
 	$s						= 'SELECT * FROM zzzzsys_report WHERE zzzzsys_report_id = ? ';
 	$t						= nuRunQuery($s,[$P['record_id']]);
 	$r						= db_fetch_object($t)->sre_code;
 	
 	if($c == 'getphp'){
-		return array('Add' => 0, 'Print' => 0, 'Save' => 0, 'Clone' => 0, 'Delete' => 0, 'Run' => 'nuRunPHP("'.$p.'")', 'RunHidden' => 'nuRunPHPHidden("'.$p.'")');
+		
+		if($h == 'hide'){
+			return array('Add' => 0, 'Print' => 0, 'Save' => 0, 'Clone' => 0, 'Delete' => 0, 'Run' => '', 'RunHidden' => 'nuRunPHPHidden("'.$p.'")');
+		}else{
+			return array('Add' => 0, 'Print' => 0, 'Save' => 0, 'Clone' => 0, 'Delete' => 0, 'Run' => 'nuRunPHP("'.$p.'")', 'RunHidden' => '');
+		}
 	}
 	
 	if($c == 'getreport'){

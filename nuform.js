@@ -230,7 +230,7 @@ function nuAddActionButtons(f){
 			}
 			
 			if(button.RunHidden != '')	{nuAddActionButton('runhidden', 'Run', button.RunHidden);}
-			if(button.Run != '')		{nuAddActionButton('run', 'Run in new window', button.Run);}
+			if(button.Run != '')		{nuAddActionButton('run', 'Run', button.Run);}
 			
 		}
 		

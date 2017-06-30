@@ -1,9 +1,9 @@
 <?php 
+session_start();
 require_once('nucommon.php'); 
 require_once('nudata.php'); 
 require_once('fpdf/fpdf.php');
 define('FPDF_FONTPATH','fpdf/font/');
-session_start();
 
 $GLOBALS['nu_report']       = array();
 $GLOBALS['nu_columns']      = array();
