@@ -1302,8 +1302,10 @@ function nuGroupDialog(){
 	}
 	
 	nuMoveGroup();
+	
 	$('#nuDragDialog').css('height', top + 20);
-	nuSetnuScroll();
+
+	nuSetnuScroll(window.nuTT);
 
 	$('#nuModal').remove();
 	
