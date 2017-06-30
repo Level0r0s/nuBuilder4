@@ -979,12 +979,11 @@ function nuTTList($p, $l){
 	$tt								= nuTT();
 	$_POST['nuHash']['TABLE_ID']	= $tt;
 	$e								= new nuEvalPHPClass($p);
-	$c								= json_encode(db_field_names($tt));
+	$f								= db_field_names($tt);
 	
 	nuRunQuery("DROP TABLE $tt");
 	
-	return $c;
-
+	return $f;
 	
 }
 
@@ -1001,6 +1000,23 @@ function nuCSSInclude($pfile){
     $timestamp = date("YmdHis", filemtime($pfile));                                         //-- Add timestamp so javascript changes are effective immediately
     print "<link rel='stylesheet' href='$pfile?ts=$timestamp' />\n";
     
+}
+
+
+function nuImageList($f){
+
+	$a			= [];	
+	$s			= "SELECT sfi_code FROM zzzzsys_file ORDER BY sfi_code";
+	$t			= nuRunQuery($s);
+	
+	while($r = db_fetch_object($t)){
+		$a[]	= 'Image : ' . $r->sfi_code;
+	}
+
+	$c								= json_encode(array_merge($a, $f));
+
+	return $c . ";\n";
+	
 }
 
 

@@ -68,7 +68,7 @@ function nuLoadReport(b){
 }
 
 
-function nuSetnuScroll(){
+function nuSetnuScroll(l){
 
 	var flds = ['#fieldName', "[id^='sortField']"]
 	
@@ -77,7 +77,7 @@ function nuSetnuScroll(){
 		$( flds[i] )
 		.addClass('nuScroll')
 		.keydown(function() {
-			nuFORM.scrollList(event, nuTT);
+			nuFORM.scrollList(event, l);
 		});	
 
 	}
@@ -1104,7 +1104,6 @@ function nuObjectDialog(){
 	var D   = nuDragR.getObject(S[0].id);
 	var top = 60;
 	var fun = 'nuUpdateProperties';
-	//var f   = [['0','10000'],['1','10000.0'],['2','10000.00'],['3','10000.000'],['4','10000.0000'],['5','10000.00000'],['6','13-Jan-2007'],['7','13-01-2007'],['8','Jan-13-2007'],['9','01-13-2007'],['10','13-Jan-07'],['11','13-01-07'],['12','Jan-13-07'],['13','01-13-07'],['14','10,000'],['15','10,000.0'],['16','10,000.00'],['17','10,000.000'],['18','10,000.0000'],['19','10,000.00000'],['20','10000'],['21','10000,0'],['22','10000,00'],['23','10000,000'],['24','10000,0000'],['25','10000,00000'],['26','10.000'],['27','10.000,0'],['28','10.000,00'],['29','10.000,000']];
 	
 	top = nuDialogInput('ID', 'id', top, 200, D, fun);
 	$('#id').attr('disabled', true);
@@ -1138,7 +1137,13 @@ function nuObjectDialog(){
 	.css('position','absolute')
 	.css('top','7px')
 	.css('right','5px');
-	nuSetnuScroll();
+	
+	if(D['objectType'] == 'image'){
+		nuSetnuScroll(window.nuImages);
+	}else{
+		nuSetnuScroll(window.nuTT);
+	}
+	
 
 	$('#nuModal').remove();
 
