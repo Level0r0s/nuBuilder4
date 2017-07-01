@@ -1026,7 +1026,7 @@ function nuCreateFile($j){
 	$d		= base64_decode($f->file);
 	$p		= explode(';base64,', $d)[1];
 	$data 	= base64_decode($p);
-
+nudebug($file, $d);
 	fwrite($h, $data);
 	fclose($h);
 	

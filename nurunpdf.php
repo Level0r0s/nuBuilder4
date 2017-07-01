@@ -29,6 +29,7 @@ $GLOBALS['nu_columns']       = nuAddCriteriaValues($hashData, $TABLE_ID);
 nuRunQuery("ALTER TABLE $TABLE_ID ADD `nu__id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST");
 
 nuBuildReport($PDF, $REPORT, $TABLE_ID);
+nudebug(json_encode($GLOBALS['nu_report']));
 $hashData['nu_pages']        = nuGetTotalPages();
 nuReplaceLabelHashVariables($REPORT, $hashData);
 nuPrintReport($PDF, $REPORT, $GLOBALS['nu_report'], $JSON);
@@ -350,32 +351,31 @@ class nuSECTION{
 			
 				$O[$i]->LINES                   = array('');
                 $path                           = '';
-                $im                             = $O[$i]->image;
-                $im                             = $O[$i]->fieldName;
-                
-                if(nuIsField($im)){                                                               //-- name of field in $GLOBALS['TABLE_ID']
+                $fld                            = $O[$i]->fieldName;
+				$img	                        = $this->ROW[$fld];
 				
-					$fld                        = $this->ROW[$im];
-					$path                   	= nuCreateFile($fld);
+                if(nuIsField($fld)){                                                        //-- FIELD NAME
+				
+					$path                   	= nuCreateFile($img);
 					$GLOBALS['nu_files'][]  	= $path;
 
                 }else{
 					
-					$j							= nuIsImage($im);
+					$j							= nuIsImage($fld);							//--CODE in zzzzsys_file
 					
-                    if($j != ''){                                                          //-- valid code in zzzzsys_file
+                    if($j != ''){
 						
                         $path                   = nuCreateFile($j);
                         $GLOBALS['nu_files'][]  = $path;
                         
-                    }else if(nuIsFile($im)){                                                      //-- valid file path
-                        $path                   = $im;
+                    }else if(nuIsFile($fld)){                                               //-- FILE NAME on hard drive
+                        $path                   = $fld;
                     }
                     
                 }
 				
                 $O[$i]->path              = $path;
-nudebug($path);
+				
             }
 
         }
@@ -1060,10 +1060,8 @@ function nuIsImage($i){
 	if(substr($i, 0, 6) == 'Image:'){
 			
 		$c = substr($i, 6);
-		
 		$t = nuRunQuery("SELECT * FROM zzzzsys_file WHERE sfi_code = ? ", array($c));
 		$r = db_fetch_object($t);
-nudebug($c, $r);
 		
 		return $r->sfi_json;
 		
