@@ -405,12 +405,8 @@ function nuRunReport($nuRID){
 	$nuI								= $nuA->sre_zzzzsys_php_id;
 	$nuT								= nuRunQuery("SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = '$nuI'");
 	$nuR								= db_fetch_object($nuT);
-	
 	$_POST['nuHash']['parentID']		= $nuR->zzzzsys_php_id;
-	
 	$nuJ								= json_encode($_POST['nuHash']);
-//	$nuS								= "INSERT INTO zzzzsys_debug (zzzzsys_debug_id, deb_message) VALUES (?, ?)";
-//	nuRunQuery($nuS, array($nuID, $nuJ));
 	$_SESSION[$nuID]					= $nuJ;
 	
 	return $nuID;
@@ -420,15 +416,12 @@ function nuRunReport($nuRID){
 function nuRunPHP($nuRID){
 
 	$nuID								= nuID();
-	$nuT								= nuRunQuery("SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = '$nuRID'");
+	$nuT								= nuRunQuery("SELECT * FROM zzzzsys_php WHERE sph_code = '$nuRID'");
 	$nuA								= db_fetch_object($nuT);
 	$_POST['nuHash']['code']			= $nuA->sph_code;
 	$_POST['nuHash']['description']		= $nuA->sph_description;
-	$_POST['nuHash']['parentID']		= $nuRID;
-
+	$_POST['nuHash']['parentID']		= $nuA->zzzzsys_php_id;
 	$nuJ								= json_encode($_POST['nuHash']);
-//	$nuS								= "INSERT INTO zzzzsys_debug (zzzzsys_debug_id, deb_message) VALUES (?, ?)";
-//	nuRunQuery($nuS, array($nuID, $nuJ));
 	$_SESSION[$nuID]					= $nuJ;
 
 	return $nuID;
@@ -1010,7 +1003,7 @@ function nuImageList($f){
 	$t			= nuRunQuery($s);
 	
 	while($r = db_fetch_object($t)){
-		$a[]	= 'Image : ' . $r->sfi_code;
+		$a[]	= 'Image:' . $r->sfi_code;
 	}
 
 	$c								= json_encode(array_merge($a, $f));
@@ -1018,6 +1011,28 @@ function nuImageList($f){
 	return $c . ";\n";
 	
 }
+
+
+
+function nuCreateFile($j){
+
+	if(j == ''){return '';}
+
+	$id		= nuID();
+	$f		= json_decode($j);
+	$t		= explode('/',$f->type)[1];
+	$file	= "tmp/$id." . $t;
+	$h		= fopen($file , 'w');
+	$d		= base64_decode($f->file);
+	$p		= explode(';base64,', $d)[1];
+	$data 	= base64_decode($p);
+
+	fwrite($h, $data);
+	fclose($h);
+	
+	return $file;
+}
+
 
 
 

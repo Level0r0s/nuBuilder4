@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 30, 2017 at 02:31 PM
+-- Generation Time: Jul 01, 2017 at 08:57 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -626,7 +626,7 @@ INSERT INTO `zzzzsys_form` (`zzzzsys_form_id`, `sfo_type`, `sfo_code`, `sfo_desc
 ('nublank', 'launch', 'BLA', 'Blank', '', '', '', 0, 0, '', ''),
 ('nuaccessgroup', 'subform', 'GAL', 'Groups Access Level', 'zzzzsys_user_group_access_level', 'zzzzsys_user_group_access_level_id', '', 0, 0, 'SELECT * FROM zzzzsys_user_group_access_level', ''),
 ('nurunlist', 'browse', 'RUN', 'Run Form, Report or Procedure', 'zzzzsys_run_list', 'id', '', 0, 0, 'SELECT zzzzsys_form_id AS id, ''Form'' AS run, sfo_code AS code, sfo_description AS description FROM zzzzsys_run_list', '\n$("[data-nu-column=''nucolumn000'']").each(function() {\n\n    $(this).addClass(''nu_''+this.innerHTML);\n\n});'),
-('nudebug', 'browseedit', 'DEBUG', 'Debug', 'zzzzsys_debug', 'zzzzsys_debug_id', '', 23, 15, 'SELECT * FROM zzzzsys_debug\nORDER BY zzzzsys_debug_id DESC', '\n$(''#delete_option'').val(0);\n$(''#nuAddButton'').remove();\n$(''#nuOptions'').remove();\n\nvar mess    = String($(''#deb_message'').val());\nvar i       = mess.indexOf(''<br>'');\nvar m       = mess.substr(i + 6);\nvar t       = mess.substr(0,i);\n\nnuSetTitle(mess.substr(0, i))\n\n$(''#nuTab0'').remove();\n\n$(''#nuBreadcrumb1'')\n.css(''text-align'', ''center'')\n.css(''width'', ''95%'')\n.css(''color'', ''black'')\n.css(''padding'', ''5px'')\n.css(''font-weight'', ''bold'')\n.html(t + '' :: '' + nuWhen($(''#deb_added'').val()))\n.appendTo("#nuTabHolder");\n\n$(''#deb_message'').val(m);\n\n\n$("[data-nu-column=''nucolumn001'']").each(function( index ) {\n    \n    if($(this).html().trim() != ''''){\n        \n        var nunow   = Date.now();\n        var nuhtm   = nuWhen(Number($(this).html()));\n        \n        $(this).html(nuhtm);\n        \n    }\n    \n});\n\nif(nuFORM.getCurrent().record_id != ''''){\n    \n    $(''.nuActionButton'').remove();\n    \n    nuAddActionButton(''Delete'');\n    nuAddActionButton(''DeleteAll'',''Delete All'', ''nuDeleteAllAction()'');\n    \n}\n\n'),
+('nudebug', 'browseedit', 'DEBUG', 'Debug', 'zzzzsys_debug', 'zzzzsys_debug_id', '', 23, 15, 'SELECT * FROM zzzzsys_debug\nORDER BY zzzzsys_debug_id DESC', '\n$(''#delete_option'').val(0);\n$(''#nuAddButton'').remove();\n$(''#nuOptions'').remove();\n\nvar mess    = String($(''#deb_message'').val());\nvar i       = mess.indexOf(''<br>'');\nvar m       = mess.substr(i + 6);\nvar t       = mess.substr(0,i);\n\nnuSetTitle(mess.substr(0, i))\n\n$(''#nuTab0'').remove();\n\n$(''#nuBreadcrumb1'')\n.css(''text-align'', ''center'')\n.css(''width'', ''95%'')\n.css(''color'', ''black'')\n.css(''padding'', ''5px'')\n.css(''font-weight'', ''bold'')\n.html(t + '' :: '' + nuWhen($(''#deb_added'').val()))\n.appendTo("#nuTabHolder");\n\n$(''#deb_message'').val(m);\n\n\n$("[data-nu-column=''nucolumn001'']").each(function( index ) {\n    \n    if($(this).html().trim() != ''''){\n        \n        var nunow   = Date.now();\n        var nuhtm   = nuWhen(Number($(this).html()));\n        \n        $(this).html(nuhtm);\n        \n    }\n    \n});\n\nif(nuFORM.getCurrent().record_id != ''''){\n\n    $(''.nuActionButton'').remove();\n    nuAddActionButton(''Delete'');\n    nuAddActionButton(''DeleteAll'',''Delete All'', ''nuDeleteAllAction()'');\n\n}\n\n'),
 ('nuaccessreport', 'browseedit', 'ACCPHP', 'Access To Procedures', 'zzzzsys_access_level_php', 'zzzzsys_access_level_php_id', '', 0, 0, 'SELECT * \nFROM zzzzsys_access_level_php\nJOIN zzzzsys_php ON zzzzsys_php_id = slp_zzzzsys_php_id\nORDER BY sph_code', ''),
 ('nuaccesslevelreport', 'browseedit', 'ACCREP', 'Access To Report', 'zzzzsys_access_level_report', 'zzzzsys_access_level_report_id', '', 0, 0, 'SELECT * \nFROM zzzzsys_access_level_report\nJOIN zzzzsys_report ON zzzzsys_report_id = sre_zzzzsys_report_id\nORDER BY sre_code', ''),
 ('nurunreport', 'browseedit', 'RUNREP', 'Run Report', 'zzzzsys_report', 'zzzzsys_report_id', '', 0, 0, 'SELECT * FROM zzzzsys_report\nLEFT JOIN zzzzsys_form ON zzzzsys_form_id = sre_zzzzsys_form_id', 'window.nuBrowseFunction = ''runreport'';\r\n\r\nfunction runreport(e){\r\n    \r\n    var r   = $(''#'' + e.target.id).attr(''data-nu-row'');\r\n    var c   = ''000'';\r\n    var f   = $(''#'' + r + c).html();\r\n    var p   = $(''#'' + e.target.id).attr(''data-nu-primary-key'');\r\n\r\n    nuGetPDF(f, p);\r\n    \r\n}\r\n\r\n'),
@@ -946,7 +946,6 @@ INSERT INTO `zzzzsys_object` (`zzzzsys_object_id`, `sob_all_zzzzsys_form_id`, `s
 ('574b9008ac10e16', 'nuphp', 'zzzzsys_php', 'textarea', 'sph_php', 'PHP :', '5811788510768ef', 70, 25, 66, 684, 353, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', '', ''),
 ('574b91aec1e5c94', 'nuhome', '', 'run', 'edit_php', 'Build Procedures', '569dc4ed270f08a', 30, 33, 250, 150, 30, '1', 'left', '1', '0', '', '', '', 'nuphp', '', 'b', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', '', ''),
 ('574b97322568df5', 'nuhome', '', 'run', 'edit_report', 'Build Reports', '569dc4ed270f08a', 40, 76, 250, 150, 30, '1', 'left', '1', '0', '', '', '', 'nubuildreport', '', 'b', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', '', ''),
-('57561237059313b', 'nublank', '', 'input', 'bla_html', 'Hi', '575611cca558059', 11, 400, 400, 1, 1, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '.', ''),
 ('5754c06bd926f66', 'nubuildreport', 'zzzzsys_report', 'lookup', 'sre_zzzzsys_form_id', 'Launch From', '574b964941d3d1a', 40, 106, 239, 100, 18, '1', 'left', '1', '0', '', '', '', '', '', '', '', '', '0', 'SELECT zzzzsys_form_id, CONCAT(sfo_code, '' - '', sfo_description)\nFROM zzzzsys_form\nORDER BY sfo_code', 'sfo_code', 'sfo_description', '200', '', 's14937641259181', '', '', 'zzzzsys_form', 'nuform', '', '1', '', '', '', 0, '', '', '', '', ''),
 ('57579cb29a87ac1', 'nubuildreport', 'zzzzsys_report', 'input', 'sre_code', 'Code', '574b964941d3d1a', 10, 16, 239, 100, 18, '1', 'left', '1', '0', '', '', '', '', '', '', '', '', '', 'browse|Browse|edit|Edit|browseedit|Browse and Edit|criteria|Criteria or Home|procedure|Procedure|report|Report', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
 ('57579cd24784461', 'nubuildreport', 'zzzzsys_report', 'input', 'sre_description', 'Description', '574b964941d3d1a', 20, 46, 239, 300, 18, '1', 'left', '1', '0', '', '', '', '', '', '', '', '', '', 'browse|Browse|edit|Edit|browseedit|Browse and Edit|criteria|Criteria or Home|procedure|Procedure|report|Report', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
@@ -979,9 +978,9 @@ INSERT INTO `zzzzsys_object` (`zzzzsys_object_id`, `sob_all_zzzzsys_form_id`, `s
 ('57a2affc246c61e', 'nusetup', 'zzzzsys_setup', 'input', 'set_smtp_host', 'Auth SMTP Host', '57a29441f16eb9f', 60, 163, 208, 200, 18, '1', 'left', '1', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'number', '', '', ''),
 ('57a2b0490518152', 'nusetup', 'zzzzsys_setup', 'input', 'set_smtp_from_address', 'Auth SMTP From Address', '57a29441f16eb9f', 70, 199, 208, 200, 18, '1', 'left', '1', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'number', '', '', ''),
 ('57a2b092a3fb465', 'nusetup', 'zzzzsys_setup', 'input', 'set_smtp_from_name', 'Auth SMTP From Name', '57a29441f16eb9f', 80, 235, 208, 200, 18, '1', 'left', '1', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'number', '', '', ''),
-('57a2b0d9e0c353d', 'nusetup', 'zzzzsys_setup', 'input', 'set_smtp_port', 'Auth SMTP Port', '57a29441f16eb9f', 90, 271, 208, 70, 18, '1', 'right', '1', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'number', '', '', '');
+('57a2b0d9e0c353d', 'nusetup', 'zzzzsys_setup', 'input', 'set_smtp_port', 'Auth SMTP Port', '57a29441f16eb9f', 90, 271, 208, 70, 18, '1', 'right', '1', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'number', '', '', ''),
+('57a2b1b4bb27602', 'nusetup', 'zzzzsys_setup', 'select', 'set_smtp_use_ssl', 'Auth SMTP Use SSL', '57a29441f16eb9f', 100, 307, 208, 70, 18, '1', 'left', '1', '0', '', '', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', '', '');
 INSERT INTO `zzzzsys_object` (`zzzzsys_object_id`, `sob_all_zzzzsys_form_id`, `sob_all_table`, `sob_all_type`, `sob_all_id`, `sob_all_label`, `sob_all_zzzzsys_tab_id`, `sob_all_order`, `sob_all_top`, `sob_all_left`, `sob_all_width`, `sob_all_height`, `sob_all_cloneable`, `sob_all_align`, `sob_all_validate`, `sob_all_access`, `sob_all_default_value_sql`, `sob_calc_formula`, `sob_calc_format`, `sob_run_zzzzsys_form_id`, `sob_run_filter`, `sob_run_method`, `sob_run_id`, `sob_display_sql`, `sob_select_multiple`, `sob_select_sql`, `sob_lookup_code`, `sob_lookup_description`, `sob_lookup_description_width`, `sob_lookup_autocomplete`, `sob_lookup_zzzzsys_form_id`, `sob_lookup_javascript`, `sob_lookup_php`, `sob_lookup_table`, `sob_subform_zzzzsys_form_id`, `sob_subform_foreign_key`, `sob_subform_add`, `sob_subform_delete`, `sob_subform_type`, `sob_subform_table`, `sob_input_count`, `sob_input_format`, `sob_input_type`, `sob_input_javascript`, `sob_html_code`, `sob_image_zzzzsys_file_id`) VALUES
-('57a2b1b4bb27602', 'nusetup', 'zzzzsys_setup', 'select', 'set_smtp_use_ssl', 'Auth SMTP Use SSL', '57a29441f16eb9f', 100, 307, 208, 70, 18, '1', 'left', '1', '0', '', '', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', '', ''),
 ('57a2da33d52fac6', 'nusetup', 'zzzzsys_setup', 'textarea', 'set_header', 'Header', '57a29441f16f59d', 110, 29, 75, 496, 172, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '0', 'SELECT trl_language, trl_language AS a \nFROM zzzzsys_translate\nGROUP BY trl_language ', 'stz_timezone', 'stz_timezone', '0', '', 'nutimezone', '', '', 'zzzzsys_timezone', '', '', '', '', '', '', 0, '', '', '', '', ''),
 ('57a7c213dc62789', 'nuhome', '', 'run', 'run_lang', 'Translations', '569dc4ed270f08a', 100, 79, 625, 150, 30, '1', 'left', '1', '0', '', '', '', 'nutranslate', '', 'b', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', '', ''),
 ('57a7d639f21d3a8', 'nutranslate', 'zzzzsys_translate', 'input', 'trl_language', 'Language', '57a7c1cb78c31d5', 10, 39, 92, 100, 18, '1', 'left', '1', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
@@ -1111,9 +1110,9 @@ INSERT INTO `zzzzsys_object` (`zzzzsys_object_id`, `sob_all_zzzzsys_form_id`, `s
 ('s14919868485253', 'c14919868321575624', 'aaaaaaagg', 'input', 'field00', 'text00', 's14919868485252', 150, 150, 150, 117, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
 ('s14919868485254', 'c14919868321575624', 'aaaaaaagg', 'input', 'field01', 'button01', 's14919868485252', 180, 180, 180, 117, 23, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 'N|$ 1,000.00', 'button', '', '', ''),
 ('s14919869556804', 'c14919869125564958', 'aaaaaabb', 'input', 'field02', 'checkbox02', 's14919869556801', 210, 210, 210, 117, 18, '1', 'right', '0', '0', '', '', '', '', '', '', '', 'SELECT COUNT(*) FROM zzzzsys_debug', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 'N|$ 1,000.00', 'checkbox', '', '', ''),
-('s14919873023670', 'c14919872883669658', 'aaaaaaaiku', 'input', 'field00', 'text00', 's14919873023669', 150, 150, 150, 117, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', '');
+('s14919873023670', 'c14919872883669658', 'aaaaaaaiku', 'input', 'field00', 'text00', 's14919873023669', 150, 150, 150, 117, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
+('s14919873023671', 'c14919872883669658', 'aaaaaaaiku', 'input', 'field01', 'button01', 's14919873023669', 180, 180, 180, 117, 23, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 'N|$ 1,000.00', 'button', '', '', '');
 INSERT INTO `zzzzsys_object` (`zzzzsys_object_id`, `sob_all_zzzzsys_form_id`, `sob_all_table`, `sob_all_type`, `sob_all_id`, `sob_all_label`, `sob_all_zzzzsys_tab_id`, `sob_all_order`, `sob_all_top`, `sob_all_left`, `sob_all_width`, `sob_all_height`, `sob_all_cloneable`, `sob_all_align`, `sob_all_validate`, `sob_all_access`, `sob_all_default_value_sql`, `sob_calc_formula`, `sob_calc_format`, `sob_run_zzzzsys_form_id`, `sob_run_filter`, `sob_run_method`, `sob_run_id`, `sob_display_sql`, `sob_select_multiple`, `sob_select_sql`, `sob_lookup_code`, `sob_lookup_description`, `sob_lookup_description_width`, `sob_lookup_autocomplete`, `sob_lookup_zzzzsys_form_id`, `sob_lookup_javascript`, `sob_lookup_php`, `sob_lookup_table`, `sob_subform_zzzzsys_form_id`, `sob_subform_foreign_key`, `sob_subform_add`, `sob_subform_delete`, `sob_subform_type`, `sob_subform_table`, `sob_input_count`, `sob_input_format`, `sob_input_type`, `sob_input_javascript`, `sob_html_code`, `sob_image_zzzzsys_file_id`) VALUES
-('s14919873023671', 'c14919872883669658', 'aaaaaaaiku', 'input', 'field01', 'button01', 's14919873023669', 180, 180, 180, 117, 23, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 'N|$ 1,000.00', 'button', '', '', ''),
 ('s14919873023672', 'c14919872883669658', 'aaaaaaaiku', 'input', 'field02', 'checkbox02', 's14919873023669', 210, 210, 210, 117, 18, '1', 'right', '0', '0', '', '', '', '', '', '', '', 'SELECT COUNT(*) FROM zzzzsys_debug', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 'N|$ 1,000.00', 'checkbox', '', '', ''),
 ('s14919879039046', 'c14919878892005638', 'aaaaaadave', 'input', 'field00', 'text00', 's14919879039039', 150, 150, 150, 117, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
 ('s14919879039047', 'c14919878892005638', 'aaaaaadave', 'input', 'field01', 'button01', 's14919879039039', 180, 180, 180, 117, 23, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 'N|$ 1,000.00', 'button', '', '', ''),
@@ -1274,9 +1273,9 @@ INSERT INTO `zzzzsys_object` (`zzzzsys_object_id`, `sob_all_zzzzsys_form_id`, `s
 ('s14981556542229', 's14981556542223', 'children', 'input', 'chi_dob', 'text01', 's14981556542224', 180, 180, 180, 117, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
 ('s14981544878649', 'c14981544791750645', 'aaaaabcd', 'input', 'field00', 'text00', 's14981544878646', 150, 150, 150, 117, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
 ('s14981544878650', 'c14981544791750645', 'aaaaabcd', 'input', 'field01', 'text01', 's14981544878646', 180, 180, 180, 117, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
-('s14981689112597', 's14981689112592', 'zzzzsys_user', 'input', 'sus_language', 'text00', 's14981689112593', 150, 150, 150, 117, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', '');
+('s14981689112597', 's14981689112592', 'zzzzsys_user', 'input', 'sus_language', 'text00', 's14981689112593', 150, 150, 150, 117, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
+('s14981563279441', 's14981563279436', 'aaaaaw', 'input', 'field00', 'text00', 's14981563279437', 150, 150, 150, 117, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', '');
 INSERT INTO `zzzzsys_object` (`zzzzsys_object_id`, `sob_all_zzzzsys_form_id`, `sob_all_table`, `sob_all_type`, `sob_all_id`, `sob_all_label`, `sob_all_zzzzsys_tab_id`, `sob_all_order`, `sob_all_top`, `sob_all_left`, `sob_all_width`, `sob_all_height`, `sob_all_cloneable`, `sob_all_align`, `sob_all_validate`, `sob_all_access`, `sob_all_default_value_sql`, `sob_calc_formula`, `sob_calc_format`, `sob_run_zzzzsys_form_id`, `sob_run_filter`, `sob_run_method`, `sob_run_id`, `sob_display_sql`, `sob_select_multiple`, `sob_select_sql`, `sob_lookup_code`, `sob_lookup_description`, `sob_lookup_description_width`, `sob_lookup_autocomplete`, `sob_lookup_zzzzsys_form_id`, `sob_lookup_javascript`, `sob_lookup_php`, `sob_lookup_table`, `sob_subform_zzzzsys_form_id`, `sob_subform_foreign_key`, `sob_subform_add`, `sob_subform_delete`, `sob_subform_type`, `sob_subform_table`, `sob_input_count`, `sob_input_format`, `sob_input_type`, `sob_input_javascript`, `sob_html_code`, `sob_image_zzzzsys_file_id`) VALUES
-('s14981563279441', 's14981563279436', 'aaaaaw', 'input', 'field00', 'text00', 's14981563279437', 150, 150, 150, 117, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
 ('s14981563279442', 's14981563279436', 'aaaaaw', 'input', 'field01', 'text01', 's14981563279437', 180, 180, 180, 117, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
 ('s14981564175459', 's14981564175453', 'color', 'input', 'col_code', 'text00', 's14981564175454', 150, 150, 150, 117, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
 ('s14981564175460', 's14981564175453', 'color', 'input', 'col_description', 'button01', 's14981564175454', 180, 180, 180, 117, 23, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 'N|$ 1,000.00', 'button', '', '', ''),
@@ -1381,7 +1380,8 @@ INSERT INTO `zzzzsys_php` (`zzzzsys_php_id`, `sph_code`, `sph_description`, `sph
 ('574671cdcc77367_AB', '574671cdcc77367_AB', '', '', '\n$s  = "\n        SELECT * \n        FROM zzzzsys_tab \n        JOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id\n        WHERE zzzzsys_tab_id = ''#LOOKUP_RECORD_ID#''\n        \n        ";\n\n$t  = nuRunQuery($s);\n$r  = db_fetch_object($t);\n\nnuSetFormValue(''sob_lookup_table'', $r->sfo_table);\n', '', '', '1', ''),
 ('570dab25164b394_AB', '570dab25164b394_AB', '', '', '\n$s  = "\n        SELECT * \n        FROM zzzzsys_form\n        WHERE zzzzsys_form_id = ''#LOOKUP_RECORD_ID#''\n        \n        ";\n\n$t  = nuRunQuery($s);\n$r  = db_fetch_object($t);\n\nnuSetFormValue(''sob_lookup_table'', $r->sfo_table);\n', '', '', '1', ''),
 ('nufastform', 'RUNFF', 'Run FastForm', 'nubuilder', 'nuBuildFastForm(''#fastform_table#'');\r\n', '', 'nufflaunch', '1', ''),
-('s14919851858544', 'HW', 'Hello World', 'test', 'print ''hello world'';\n', 'window', 'nublank', '', ''),
+('s14919851858544', 'HW', 'Hello World', 'test', 'print ''hello world'';\nnuCreateFile(''ik'');\n', 'window', 'nublank', '', ''),
+('s14988837505592', 'image', 'zzzzsys_file', 'test', '\n$s = "CREATE TABLE #TABLE_ID# SELECT * FROM zzzzsys_file";\n\nnuRunQuery($s);\n\n', '', 'nulaunchdates', '', ''),
 ('c14925390850522729_BB', 'c14925390850522729_BB', '', '', '\n\nnuDisplayMessage(''This message comes from...'');\nnuDisplayMessage(''before browse;'');\n\n\n', '', '', '1', ''),
 ('nuobject_BB', 'nuobject_BB', 'System PHP', '', '\n$s  = "CREATE TABLE #TABLE_ID# SELECT zzzzsys_object_id AS theid FROM zzzzsys_object WHERE ";\n$w  = "1";\n\nif($GLOBALS[''nuSetup'']->set_denied == 1){\n    $w  = "sob_all_zzzzsys_form_id LIKE ''nu%''";\n}\n\nnudebug($GLOBALS[''nuSetup'']->set_denied, "$s$w");\nnuRunQuery("$s$w");\n\n', '', '', '1', ''),
 ('nuform_BB', 'nuform_BB', 'System PHP', '', '\n$s  = "CREATE TABLE #TABLE_ID# SELECT zzzzsys_form_id AS theid FROM zzzzsys_form WHERE ";\n$w  = "1";\n\nif($GLOBALS[''nuSetup'']->set_denied == 1){\n    $w  = "zzzzsys_form_id LIKE ''nu%''";\n}\n\nnuRunQuery("$s$w");\n\n', '', '', '1', ''),
@@ -1429,7 +1429,8 @@ CREATE TABLE `zzzzsys_report` (
 --
 
 INSERT INTO `zzzzsys_report` (`zzzzsys_report_id`, `sre_code`, `sre_description`, `sre_group`, `sre_zzzzsys_php_id`, `sre_zzzzsys_form_id`, `sre_layout`) VALUES
-('574b9845a681d27', '1', 'r', 'aaa', '57578be0057a49f', 'nublank', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"","top":110,"height":25,"label":"Detail Header","page_break":0,"margins":6,"color":"#FFFFFF","objects":[{"id":"obj1001","objectType":"field","backgroundColor":"white","borderColor":"black","borderWidth":"0","fieldName":"inv_date","fontColor":"black","fontFamily":"Arial","fontSize":"10","fontWeight":"","format":"D|dd-mmm-yyyy","textAlign":"left","image":"","group":0,"section":0,"left":20,"top":2,"height":17,"width":200,"zIndex":124,"minRows":0,"maxRows":0,"selected":0,"name":"obj1001"},{"id":"obj1002","objectType":"field","backgroundColor":"white","borderColor":"black","borderWidth":"0","fieldName":"inv_total","fontColor":"black","fontFamily":"Arial","fontSize":"10","fontWeight":"","format":"N|$ 1,000.00","textAlign":"right","image":"","group":0,"section":0,"left":468,"top":2,"height":17,"width":200,"zIndex":124,"minRows":0,"maxRows":0,"selected":0,"name":"obj1002"},{"id":"obj1003","objectType":"field","backgroundColor":"white","borderColor":"black","borderWidth":"0","fieldName":"inv_number","fontColor":"black","fontFamily":"Arial","fontSize":"10","fontWeight":"","format":"N|£ 1000.0","textAlign":"left","image":"","group":0,"section":0,"left":244,"top":2,"height":17,"width":100,"zIndex":124,"minRows":0,"maxRows":0,"selected":0,"name":"obj1003"}]}]},{"sortField":"Report","sortBy":"a","sections":[{"id":"","top":30,"height":1,"label":"Report Header","page_break":0,"margins":2,"color":"#FFFFFF","objects":[]},{"id":"","top":190,"height":1,"label":"Report Footer","page_break":0,"margins":10,"color":"#FFFFFF","objects":[]}]},{"sortField":"Page","sortBy":"a","sections":[{"id":"","top":70,"height":68,"label":"Page Header","page_break":0,"margins":4,"color":"#FFFFFF","objects":[{"id":"obj1004","objectType":"label","backgroundColor":"white","borderColor":"black","borderWidth":"0","fieldName":"Invoice Total","fontColor":"black","fontFamily":"Helvetica","fontSize":"12","fontWeight":"b","format":"","textAlign":"right","image":"","group":0,"section":0,"left":468,"top":38,"height":20,"width":200,"zIndex":124,"minRows":0,"maxRows":0,"selected":0,"name":"obj1004"},{"id":"obj1005","objectType":"label","backgroundColor":"white","borderColor":"black","borderWidth":"0","fieldName":"Title","fontColor":"black","fontFamily":"Helvetica","fontSize":"12","fontWeight":"b","format":"","textAlign":"left","image":"","group":0,"section":0,"left":20,"top":38,"height":20,"width":200,"zIndex":124,"minRows":0,"maxRows":0,"selected":0,"name":"obj1005"},{"id":"obj1006","objectType":"label","backgroundColor":"white","borderColor":"black","borderWidth":"0","fieldName":"Invoice No.","fontColor":"black","fontFamily":"Helvetica","fontSize":"12","fontWeight":"b","format":"","textAlign":"left","image":"","group":0,"section":0,"left":244,"top":40,"height":20,"width":100,"zIndex":124,"minRows":0,"maxRows":0,"selected":0,"name":"obj1006"}]},{"id":"","top":150,"height":40,"label":"Page Footer","page_break":0,"margins":8,"color":"#FFFFFF","objects":[]}]},{"sortField":"inv_number","sortBy":"a","sections":[{"id":"","top":110,"height":0,"label":"inv_number Header","page_break":"1","margins":4,"color":"#FFFFFF","objects":[]},{"id":"","top":150,"height":0,"label":"inv_number Footer","page_break":0,"margins":6,"color":"#FFFFFF","objects":[]}],"groupBy":"a"},{"sortField":"inv_number","sortBy":"a","sections":[{"id":"","top":110,"height":0,"label":"inv_number Header","page_break":0,"margins":4,"color":"#FFFFFF","objects":[]},{"id":"","top":150,"height":0,"label":"inv_number Footer","page_break":0,"margins":6,"color":"#FFFFFF","objects":[]}],"groupBy":"a"},{"sortField":"","sortBy":"a","sections":[{"id":"","top":110,"height":0,"label":" Header","page_break":0,"margins":4,"color":"#FFFFFF","objects":[]},{"id":"","top":150,"height":0,"label":" Footer","page_break":0,"margins":6,"color":"#FFFFFF","objects":[]}]},{"sortField":"","sortBy":"a","sections":[{"id":"","top":110,"height":0,"label":" Header","page_break":0,"margins":4,"color":"#FFFFFF","objects":[]},{"id":"","top":150,"height":0,"label":" Footer","page_break":0,"margins":6,"color":"#FFFFFF","objects":[]}]},{"sortField":"","sortBy":"a","sections":[{"id":"","top":110,"height":0,"label":" Header","page_break":0,"margins":4,"color":"#FFFFFF","objects":[]},{"id":"","top":150,"height":0,"label":" Footer","page_break":0,"margins":6,"color":"#FFFFFF","objects":[]}]},{"sortField":"","sortBy":"a","sections":[{"id":"","top":110,"height":0,"label":" Header","page_break":0,"margins":4,"color":"#FFFFFF","objects":[]},{"id":"","top":150,"height":0,"label":" Footer","page_break":0,"margins":6,"color":"#FFFFFF","objects":[]}]},{"sortField":"","sortBy":"a","sections":[{"id":"","top":110,"height":0,"label":" Header","page_break":0,"margins":4,"color":"#FFFFFF","objects":[]},{"id":"","top":150,"height":0,"label":" Footer","page_break":0,"margins":6,"color":"#FFFFFF","objects":[]}]},{"sortField":"","sortBy":"a","sections":[{"id":"","top":110,"height":0,"label":" Header","page_break":0,"margins":4,"color":"#FFFFFF","objects":[]},{"id":"","top":150,"height":0,"label":" Footer","page_break":0,"margins":6,"color":"#FFFFFF","objects":[]}]}],"currentGroup":0,"selected":[],"setFocus":"textAlign"}');
+('574b9845a681d27', '1', 'r', 'aaa', 's14988837505592', 'nublank', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"","top":110,"height":151,"label":"Detail Header","page_break":0,"margins":6,"color":"#FFFFFF","objects":[{"id":"obj1001","objectType":"field","backgroundColor":"white","borderColor":"black","borderWidth":"0","fieldName":"inv_date","fontColor":"black","fontFamily":"Arial","fontSize":"10","fontWeight":"","format":"D|dd-mmm-yyyy","textAlign":"left","image":"","group":0,"section":0,"left":20,"top":2,"height":17,"width":200,"zIndex":124,"minRows":0,"maxRows":0,"selected":0,"name":"obj1001"},{"id":"obj1002","objectType":"field","backgroundColor":"white","borderColor":"black","borderWidth":"0","fieldName":"inv_number","fontColor":"black","fontFamily":"Arial","fontSize":"10","fontWeight":"","format":"N|£ 1000.0","textAlign":"left","image":"","group":0,"section":0,"left":244,"top":2,"height":17,"width":100,"zIndex":124,"minRows":0,"maxRows":0,"selected":0,"name":"obj1002"},{"id":"obj1003","objectType":"field","backgroundColor":"white","borderColor":"black","borderWidth":"0","fieldName":"inv_total","fontColor":"black","fontFamily":"Arial","fontSize":"10","fontWeight":"","format":"N|$ 1,000.00","textAlign":"right","image":"","group":0,"section":0,"left":468,"top":2,"height":16,"width":200,"zIndex":124,"minRows":0,"maxRows":0,"selected":0,"name":"obj1003"},{"id":"obj1004","objectType":"image","backgroundColor":"white","borderColor":"black","borderWidth":"0","fieldName":"Image:FLOW","fontColor":"black","fontFamily":"Arial","fontSize":"10","fontWeight":"","format":"N|$ 1,000.00","textAlign":"right","image":"","group":0,"section":0,"left":544,"top":31,"height":105,"width":200,"zIndex":124,"minRows":0,"maxRows":0,"selected":0,"name":"obj1004"}]}]},{"sortField":"Report","sortBy":"a","sections":[{"id":"","top":30,"height":1,"label":"Report Header","page_break":0,"margins":2,"color":"#FFFFFF","objects":[]},{"id":"","top":190,"height":1,"label":"Report Footer","page_break":0,"margins":10,"color":"#FFFFFF","objects":[]}]},{"sortField":"Page","sortBy":"a","sections":[{"id":"","top":70,"height":201,"label":"Page Header","page_break":0,"margins":4,"color":"#FFFFFF","objects":[{"id":"obj1005","objectType":"label","backgroundColor":"white","borderColor":"black","borderWidth":"0","fieldName":"Invoice Total","fontColor":"black","fontFamily":"Helvetica","fontSize":"12","fontWeight":"b","format":"","textAlign":"right","image":"","group":0,"section":0,"left":468,"top":38,"height":20,"width":200,"zIndex":124,"minRows":0,"maxRows":0,"selected":0,"name":"obj1005"},{"id":"obj1006","objectType":"label","backgroundColor":"white","borderColor":"black","borderWidth":"0","fieldName":"Title","fontColor":"black","fontFamily":"Helvetica","fontSize":"12","fontWeight":"b","format":"","textAlign":"left","image":"","group":0,"section":0,"left":20,"top":38,"height":20,"width":200,"zIndex":124,"minRows":0,"maxRows":0,"selected":0,"name":"obj1006"},{"id":"obj1007","objectType":"label","backgroundColor":"white","borderColor":"black","borderWidth":"0","fieldName":"Invoice No.","fontColor":"black","fontFamily":"Helvetica","fontSize":"12","fontWeight":"b","format":"","textAlign":"left","image":"","group":0,"section":0,"left":244,"top":40,"height":20,"width":100,"zIndex":124,"minRows":0,"maxRows":0,"selected":0,"name":"obj1007"},{"id":"obj1008","objectType":"image","backgroundColor":"white","borderColor":"black","borderWidth":"0","fieldName":"Image:SS","fontColor":"black","fontFamily":"Arial","fontSize":"10","fontWeight":"","format":"N|$ 1,000.00","textAlign":"right","image":"","group":0,"section":0,"left":158,"top":78,"height":105,"width":200,"zIndex":124,"minRows":0,"maxRows":0,"selected":0,"name":"obj1008"}]},{"id":"","top":150,"height":40,"label":"Page Footer","page_break":0,"margins":8,"color":"#FFFFFF","objects":[]}]},{"sortField":"sfi_code","sortBy":"a","sections":[{"id":"","top":110,"height":0,"label":"sfi_code Header","page_break":"1","margins":4,"color":"#FFFFFF","objects":[]},{"id":"","top":150,"height":0,"label":"sfi_code Footer","page_break":0,"margins":6,"color":"#FFFFFF","objects":[]}],"groupBy":"a"},{"sortField":"","sortBy":"a","sections":[{"id":"","top":110,"height":0,"label":" Header","page_break":0,"margins":4,"color":"#FFFFFF","objects":[]},{"id":"","top":150,"height":0,"label":" Footer","page_break":0,"margins":6,"color":"#FFFFFF","objects":[]}],"groupBy":"a"},{"sortField":"","sortBy":"a","sections":[{"id":"","top":110,"height":0,"label":" Header","page_break":0,"margins":4,"color":"#FFFFFF","objects":[]},{"id":"","top":150,"height":0,"label":" Footer","page_break":0,"margins":6,"color":"#FFFFFF","objects":[]}]},{"sortField":"","sortBy":"a","sections":[{"id":"","top":110,"height":0,"label":" Header","page_break":0,"margins":4,"color":"#FFFFFF","objects":[]},{"id":"","top":150,"height":0,"label":" Footer","page_break":0,"margins":6,"color":"#FFFFFF","objects":[]}]},{"sortField":"","sortBy":"a","sections":[{"id":"","top":110,"height":0,"label":" Header","page_break":0,"margins":4,"color":"#FFFFFF","objects":[]},{"id":"","top":150,"height":0,"label":" Footer","page_break":0,"margins":6,"color":"#FFFFFF","objects":[]}]},{"sortField":"","sortBy":"a","sections":[{"id":"","top":110,"height":0,"label":" Header","page_break":0,"margins":4,"color":"#FFFFFF","objects":[]},{"id":"","top":150,"height":0,"label":" Footer","page_break":0,"margins":6,"color":"#FFFFFF","objects":[]}]},{"sortField":"","sortBy":"a","sections":[{"id":"","top":110,"height":0,"label":" Header","page_break":0,"margins":4,"color":"#FFFFFF","objects":[]},{"id":"","top":150,"height":0,"label":" Footer","page_break":0,"margins":6,"color":"#FFFFFF","objects":[]}]},{"sortField":"","sortBy":"a","sections":[{"id":"","top":110,"height":0,"label":" Header","page_break":0,"margins":4,"color":"#FFFFFF","objects":[]},{"id":"","top":150,"height":0,"label":" Footer","page_break":0,"margins":6,"color":"#FFFFFF","objects":[]}]}],"currentGroup":0,"selected":["obj1004"],"setFocus":"fieldName"}'),
+('s14988649278865', '2', '2', 'aaa', '57578be0057a49f', 'nublank', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"","top":110,"height":54,"label":"Detail Header","page_break":0,"margins":6,"color":"#FFFFFF","objects":[]}]},{"sortField":"Report","sortBy":"a","sections":[{"id":"","top":30,"height":1,"label":"Report Header","page_break":0,"margins":2,"color":"#FFFFFF","objects":[]},{"id":"","top":190,"height":1,"label":"Report Footer","page_break":0,"margins":10,"color":"#FFFFFF","objects":[]}]},{"sortField":"Page","sortBy":"a","sections":[{"id":"","top":70,"height":159,"label":"Page Header","page_break":0,"margins":4,"color":"#FFFFFF","objects":[{"id":"obj1001","objectType":"image","backgroundColor":"white","borderColor":"black","borderWidth":"0","fieldName":"Image:FLOW","fontColor":"black","fontFamily":"Arial","fontSize":"10","fontWeight":"","format":"N|$ 1,000.00","textAlign":"right","image":"","group":0,"section":0,"left":492,"top":15,"height":105,"width":200,"zIndex":124,"minRows":0,"maxRows":0,"selected":0,"name":"obj1001"}]},{"id":"","top":150,"height":40,"label":"Page Footer","page_break":0,"margins":8,"color":"#FFFFFF","objects":[]}]},{"sortField":"inv_number","sortBy":"a","sections":[{"id":"","top":110,"height":0,"label":"inv_number Header","page_break":"1","margins":4,"color":"#FFFFFF","objects":[]},{"id":"","top":150,"height":0,"label":"inv_number Footer","page_break":0,"margins":6,"color":"#FFFFFF","objects":[]}],"groupBy":"a"},{"sortField":"inv_number","sortBy":"a","sections":[{"id":"","top":110,"height":0,"label":"inv_number Header","page_break":0,"margins":4,"color":"#FFFFFF","objects":[]},{"id":"","top":150,"height":0,"label":"inv_number Footer","page_break":0,"margins":6,"color":"#FFFFFF","objects":[]}],"groupBy":"a"},{"sortField":"","sortBy":"a","sections":[{"id":"","top":110,"height":0,"label":" Header","page_break":0,"margins":4,"color":"#FFFFFF","objects":[]},{"id":"","top":150,"height":0,"label":" Footer","page_break":0,"margins":6,"color":"#FFFFFF","objects":[]}]},{"sortField":"","sortBy":"a","sections":[{"id":"","top":110,"height":0,"label":" Header","page_break":0,"margins":4,"color":"#FFFFFF","objects":[]},{"id":"","top":150,"height":0,"label":" Footer","page_break":0,"margins":6,"color":"#FFFFFF","objects":[]}]},{"sortField":"","sortBy":"a","sections":[{"id":"","top":110,"height":0,"label":" Header","page_break":0,"margins":4,"color":"#FFFFFF","objects":[]},{"id":"","top":150,"height":0,"label":" Footer","page_break":0,"margins":6,"color":"#FFFFFF","objects":[]}]},{"sortField":"","sortBy":"a","sections":[{"id":"","top":110,"height":0,"label":" Header","page_break":0,"margins":4,"color":"#FFFFFF","objects":[]},{"id":"","top":150,"height":0,"label":" Footer","page_break":0,"margins":6,"color":"#FFFFFF","objects":[]}]},{"sortField":"","sortBy":"a","sections":[{"id":"","top":110,"height":0,"label":" Header","page_break":0,"margins":4,"color":"#FFFFFF","objects":[]},{"id":"","top":150,"height":0,"label":" Footer","page_break":0,"margins":6,"color":"#FFFFFF","objects":[]}]},{"sortField":"","sortBy":"a","sections":[{"id":"","top":110,"height":0,"label":" Header","page_break":0,"margins":4,"color":"#FFFFFF","objects":[]},{"id":"","top":150,"height":0,"label":" Footer","page_break":0,"margins":6,"color":"#FFFFFF","objects":[]}]}],"currentGroup":0,"selected":["obj1001"],"setFocus":"fieldName"}');
 
 -- --------------------------------------------------------
 
@@ -1935,6 +1936,510 @@ INSERT INTO `zzzzsys_user` (`zzzzsys_user_id`, `sus_zzzzsys_access_level_id`, `s
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `___nu1595723f04f704___`
+--
+
+CREATE TABLE `___nu1595723f04f704___` (
+  `nu__id` int(11) NOT NULL,
+  `invoice_id` varchar(25) NOT NULL,
+  `inv_company_id` varchar(25) NOT NULL,
+  `inv_number` int(11) NOT NULL,
+  `inv_total` decimal(11,7) NOT NULL,
+  `inv_date` date NOT NULL,
+  `USER_ID` varchar(10) DEFAULT 'globeadmin',
+  `global_access` varchar(1) DEFAULT '1',
+  `record_id` varchar(6) DEFAULT 'report',
+  `call_type` varchar(9) DEFAULT 'runreport',
+  `iframe` varchar(1) DEFAULT '0',
+  `object_id` varchar(1) DEFAULT '1',
+  `page_number` varchar(1) DEFAULT '0',
+  `rows` varchar(2) DEFAULT '20',
+  `row_height` varchar(2) DEFAULT '25',
+  `session_id` varchar(15) DEFAULT 's14988817277722',
+  `sort` varchar(2) DEFAULT '-1',
+  `sort_direction` varchar(4) DEFAULT 'desc',
+  `subforms` varchar(1) DEFAULT '0',
+  `0` varchar(6) DEFAULT 'report',
+  `FORM_ID` varchar(1) DEFAULT '2',
+  `PREVIOUS_RECORD_ID` varchar(6) DEFAULT 'report',
+  `SUBFORM_ID` varchar(1) DEFAULT '1',
+  `TABLE_ID` varchar(22) DEFAULT '___nu1595723f04f704___',
+  `description` varchar(1) DEFAULT '2',
+  `parentID` varchar(15) DEFAULT '57578be0057a49f',
+  `nu_date_time` varchar(19) DEFAULT '2017-07-01 13:54:16',
+  `nu_date` varchar(10) DEFAULT '2017-07-01',
+  `nu_time` varchar(8) DEFAULT '13:54:16',
+  `nu_year` varchar(4) DEFAULT '2017',
+  `nu_month` varchar(2) DEFAULT '07',
+  `nu_day` varchar(2) DEFAULT '01',
+  `nu_hour` varchar(2) DEFAULT '13',
+  `nu_minute` varchar(2) DEFAULT '54',
+  `sre_layout` varchar(199) DEFAULT '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `___nu1595723f04f704___`
+--
+
+INSERT INTO `___nu1595723f04f704___` (`nu__id`, `invoice_id`, `inv_company_id`, `inv_number`, `inv_total`, `inv_date`, `USER_ID`, `global_access`, `record_id`, `call_type`, `iframe`, `object_id`, `page_number`, `rows`, `row_height`, `session_id`, `sort`, `sort_direction`, `subforms`, `0`, `FORM_ID`, `PREVIOUS_RECORD_ID`, `SUBFORM_ID`, `TABLE_ID`, `description`, `parentID`, `nu_date_time`, `nu_date`, `nu_time`, `nu_year`, `nu_month`, `nu_day`, `nu_hour`, `nu_minute`, `sre_layout`) VALUES
+(1, '58dd85c34768b7b', '', 222, '21.0000000', '2017-03-21', 'globeadmin', '1', 'report', 'runreport', '0', '1', '0', '20', '25', 's14988817277722', '-1', 'desc', '0', 'report', '2', 'report', '1', '___nu1595723f04f704___', '2', '57578be0057a49f', '2017-07-01 13:54:16', '2017-07-01', '13:54:16', '2017', '07', '01', '13', '54', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"'),
+(2, 's14919516899490', '', 53, '215.3000000', '2017-03-19', 'globeadmin', '1', 'report', 'runreport', '0', '1', '0', '20', '25', 's14988817277722', '-1', 'desc', '0', 'report', '2', 'report', '1', '___nu1595723f04f704___', '2', '57578be0057a49f', '2017-07-01 13:54:16', '2017-07-01', '13:54:16', '2017', '07', '01', '13', '54', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"'),
+(3, 's14919517022910', '', 54, '26.1300000', '2017-05-09', 'globeadmin', '1', 'report', 'runreport', '0', '1', '0', '20', '25', 's14988817277722', '-1', 'desc', '0', 'report', '2', 'report', '1', '___nu1595723f04f704___', '2', '57578be0057a49f', '2017-07-01 13:54:16', '2017-07-01', '13:54:16', '2017', '07', '01', '13', '54', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"'),
+(4, 's14941671398158', '', 55, '18.0000000', '2017-03-15', 'globeadmin', '1', 'report', 'runreport', '0', '1', '0', '20', '25', 's14988817277722', '-1', 'desc', '0', 'report', '2', 'report', '1', '___nu1595723f04f704___', '2', '57578be0057a49f', '2017-07-01 13:54:16', '2017-07-01', '13:54:16', '2017', '07', '01', '13', '54', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"'),
+(5, 's14941671441214', '', 56, '1.8000000', '2017-03-15', 'globeadmin', '1', 'report', 'runreport', '0', '1', '0', '20', '25', 's14988817277722', '-1', 'desc', '0', 'report', '2', 'report', '1', '___nu1595723f04f704___', '2', '57578be0057a49f', '2017-07-01 13:54:16', '2017-07-01', '13:54:16', '2017', '07', '01', '13', '54', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"'),
+(6, 's14986455399465', '5729572e6331281', 97, '3.0000000', '2017-06-21', 'globeadmin', '1', 'report', 'runreport', '0', '1', '0', '20', '25', 's14988817277722', '-1', 'desc', '0', 'report', '2', 'report', '1', '___nu1595723f04f704___', '2', '57578be0057a49f', '2017-07-01 13:54:16', '2017-07-01', '13:54:16', '2017', '07', '01', '13', '54', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `___nu1595732a60fe23___`
+--
+
+CREATE TABLE `___nu1595732a60fe23___` (
+  `nu__id` int(11) NOT NULL,
+  `invoice_id` varchar(25) NOT NULL,
+  `inv_company_id` varchar(25) NOT NULL,
+  `inv_number` int(11) NOT NULL,
+  `inv_total` decimal(11,7) NOT NULL,
+  `inv_date` date NOT NULL,
+  `USER_ID` varchar(10) DEFAULT 'globeadmin',
+  `global_access` varchar(1) DEFAULT '1',
+  `record_id` varchar(6) DEFAULT 'report',
+  `call_type` varchar(9) DEFAULT 'runreport',
+  `iframe` varchar(1) DEFAULT '0',
+  `object_id` varchar(1) DEFAULT '1',
+  `page_number` varchar(1) DEFAULT '0',
+  `rows` varchar(2) DEFAULT '20',
+  `row_height` varchar(2) DEFAULT '25',
+  `session_id` varchar(15) DEFAULT 's14988843064827',
+  `sort` varchar(2) DEFAULT '-1',
+  `sort_direction` varchar(4) DEFAULT 'desc',
+  `subforms` varchar(1) DEFAULT '0',
+  `0` varchar(6) DEFAULT 'report',
+  `FORM_ID` varchar(1) DEFAULT '2',
+  `PREVIOUS_RECORD_ID` varchar(6) DEFAULT 'report',
+  `SUBFORM_ID` varchar(1) DEFAULT '1',
+  `TABLE_ID` varchar(22) DEFAULT '___nu1595732a60fe23___',
+  `description` varchar(1) DEFAULT '2',
+  `parentID` varchar(15) DEFAULT '57578be0057a49f',
+  `nu_date_time` varchar(19) DEFAULT '2017-07-01 14:57:02',
+  `nu_date` varchar(10) DEFAULT '2017-07-01',
+  `nu_time` varchar(8) DEFAULT '14:57:02',
+  `nu_year` varchar(4) DEFAULT '2017',
+  `nu_month` varchar(2) DEFAULT '07',
+  `nu_day` varchar(2) DEFAULT '01',
+  `nu_hour` varchar(2) DEFAULT '14',
+  `nu_minute` varchar(2) DEFAULT '57',
+  `sre_layout` varchar(199) DEFAULT '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `___nu1595732a60fe23___`
+--
+
+INSERT INTO `___nu1595732a60fe23___` (`nu__id`, `invoice_id`, `inv_company_id`, `inv_number`, `inv_total`, `inv_date`, `USER_ID`, `global_access`, `record_id`, `call_type`, `iframe`, `object_id`, `page_number`, `rows`, `row_height`, `session_id`, `sort`, `sort_direction`, `subforms`, `0`, `FORM_ID`, `PREVIOUS_RECORD_ID`, `SUBFORM_ID`, `TABLE_ID`, `description`, `parentID`, `nu_date_time`, `nu_date`, `nu_time`, `nu_year`, `nu_month`, `nu_day`, `nu_hour`, `nu_minute`, `sre_layout`) VALUES
+(1, '58dd85c34768b7b', '', 222, '21.0000000', '2017-03-21', 'globeadmin', '1', 'report', 'runreport', '0', '1', '0', '20', '25', 's14988843064827', '-1', 'desc', '0', 'report', '2', 'report', '1', '___nu1595732a60fe23___', '2', '57578be0057a49f', '2017-07-01 14:57:02', '2017-07-01', '14:57:02', '2017', '07', '01', '14', '57', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"'),
+(2, 's14919516899490', '', 53, '215.3000000', '2017-03-19', 'globeadmin', '1', 'report', 'runreport', '0', '1', '0', '20', '25', 's14988843064827', '-1', 'desc', '0', 'report', '2', 'report', '1', '___nu1595732a60fe23___', '2', '57578be0057a49f', '2017-07-01 14:57:02', '2017-07-01', '14:57:02', '2017', '07', '01', '14', '57', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"'),
+(3, 's14919517022910', '', 54, '26.1300000', '2017-05-09', 'globeadmin', '1', 'report', 'runreport', '0', '1', '0', '20', '25', 's14988843064827', '-1', 'desc', '0', 'report', '2', 'report', '1', '___nu1595732a60fe23___', '2', '57578be0057a49f', '2017-07-01 14:57:02', '2017-07-01', '14:57:02', '2017', '07', '01', '14', '57', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"'),
+(4, 's14941671398158', '', 55, '18.0000000', '2017-03-15', 'globeadmin', '1', 'report', 'runreport', '0', '1', '0', '20', '25', 's14988843064827', '-1', 'desc', '0', 'report', '2', 'report', '1', '___nu1595732a60fe23___', '2', '57578be0057a49f', '2017-07-01 14:57:02', '2017-07-01', '14:57:02', '2017', '07', '01', '14', '57', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"'),
+(5, 's14941671441214', '', 56, '1.8000000', '2017-03-15', 'globeadmin', '1', 'report', 'runreport', '0', '1', '0', '20', '25', 's14988843064827', '-1', 'desc', '0', 'report', '2', 'report', '1', '___nu1595732a60fe23___', '2', '57578be0057a49f', '2017-07-01 14:57:02', '2017-07-01', '14:57:02', '2017', '07', '01', '14', '57', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"'),
+(6, 's14986455399465', '5729572e6331281', 97, '3.0000000', '2017-06-21', 'globeadmin', '1', 'report', 'runreport', '0', '1', '0', '20', '25', 's14988843064827', '-1', 'desc', '0', 'report', '2', 'report', '1', '___nu1595732a60fe23___', '2', '57578be0057a49f', '2017-07-01 14:57:02', '2017-07-01', '14:57:02', '2017', '07', '01', '14', '57', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `___nu1595733d66c5cd___`
+--
+
+CREATE TABLE `___nu1595733d66c5cd___` (
+  `nu__id` int(11) NOT NULL,
+  `invoice_id` varchar(25) NOT NULL,
+  `inv_company_id` varchar(25) NOT NULL,
+  `inv_number` int(11) NOT NULL,
+  `inv_total` decimal(11,7) NOT NULL,
+  `inv_date` date NOT NULL,
+  `USER_ID` varchar(10) DEFAULT 'globeadmin',
+  `global_access` varchar(1) DEFAULT '1',
+  `record_id` varchar(6) DEFAULT 'report',
+  `call_type` varchar(9) DEFAULT 'runreport',
+  `iframe` varchar(1) DEFAULT '0',
+  `object_id` varchar(1) DEFAULT '1',
+  `page_number` varchar(1) DEFAULT '0',
+  `rows` varchar(2) DEFAULT '20',
+  `row_height` varchar(2) DEFAULT '25',
+  `session_id` varchar(15) DEFAULT 's14988843064827',
+  `sort` varchar(2) DEFAULT '-1',
+  `sort_direction` varchar(4) DEFAULT 'desc',
+  `subforms` varchar(1) DEFAULT '0',
+  `0` varchar(6) DEFAULT 'report',
+  `FORM_ID` varchar(1) DEFAULT '2',
+  `PREVIOUS_RECORD_ID` varchar(6) DEFAULT 'report',
+  `SUBFORM_ID` varchar(1) DEFAULT '1',
+  `TABLE_ID` varchar(22) DEFAULT '___nu1595733d66c5cd___',
+  `description` varchar(1) DEFAULT '2',
+  `parentID` varchar(15) DEFAULT '57578be0057a49f',
+  `nu_date_time` varchar(19) DEFAULT '2017-07-01 15:02:06',
+  `nu_date` varchar(10) DEFAULT '2017-07-01',
+  `nu_time` varchar(8) DEFAULT '15:02:06',
+  `nu_year` varchar(4) DEFAULT '2017',
+  `nu_month` varchar(2) DEFAULT '07',
+  `nu_day` varchar(2) DEFAULT '01',
+  `nu_hour` varchar(2) DEFAULT '15',
+  `nu_minute` varchar(2) DEFAULT '02',
+  `sre_layout` varchar(199) DEFAULT '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `___nu1595733d66c5cd___`
+--
+
+INSERT INTO `___nu1595733d66c5cd___` (`nu__id`, `invoice_id`, `inv_company_id`, `inv_number`, `inv_total`, `inv_date`, `USER_ID`, `global_access`, `record_id`, `call_type`, `iframe`, `object_id`, `page_number`, `rows`, `row_height`, `session_id`, `sort`, `sort_direction`, `subforms`, `0`, `FORM_ID`, `PREVIOUS_RECORD_ID`, `SUBFORM_ID`, `TABLE_ID`, `description`, `parentID`, `nu_date_time`, `nu_date`, `nu_time`, `nu_year`, `nu_month`, `nu_day`, `nu_hour`, `nu_minute`, `sre_layout`) VALUES
+(1, '58dd85c34768b7b', '', 222, '21.0000000', '2017-03-21', 'globeadmin', '1', 'report', 'runreport', '0', '1', '0', '20', '25', 's14988843064827', '-1', 'desc', '0', 'report', '2', 'report', '1', '___nu1595733d66c5cd___', '2', '57578be0057a49f', '2017-07-01 15:02:06', '2017-07-01', '15:02:06', '2017', '07', '01', '15', '02', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"'),
+(2, 's14919516899490', '', 53, '215.3000000', '2017-03-19', 'globeadmin', '1', 'report', 'runreport', '0', '1', '0', '20', '25', 's14988843064827', '-1', 'desc', '0', 'report', '2', 'report', '1', '___nu1595733d66c5cd___', '2', '57578be0057a49f', '2017-07-01 15:02:06', '2017-07-01', '15:02:06', '2017', '07', '01', '15', '02', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"'),
+(3, 's14919517022910', '', 54, '26.1300000', '2017-05-09', 'globeadmin', '1', 'report', 'runreport', '0', '1', '0', '20', '25', 's14988843064827', '-1', 'desc', '0', 'report', '2', 'report', '1', '___nu1595733d66c5cd___', '2', '57578be0057a49f', '2017-07-01 15:02:06', '2017-07-01', '15:02:06', '2017', '07', '01', '15', '02', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"'),
+(4, 's14941671398158', '', 55, '18.0000000', '2017-03-15', 'globeadmin', '1', 'report', 'runreport', '0', '1', '0', '20', '25', 's14988843064827', '-1', 'desc', '0', 'report', '2', 'report', '1', '___nu1595733d66c5cd___', '2', '57578be0057a49f', '2017-07-01 15:02:06', '2017-07-01', '15:02:06', '2017', '07', '01', '15', '02', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"'),
+(5, 's14941671441214', '', 56, '1.8000000', '2017-03-15', 'globeadmin', '1', 'report', 'runreport', '0', '1', '0', '20', '25', 's14988843064827', '-1', 'desc', '0', 'report', '2', 'report', '1', '___nu1595733d66c5cd___', '2', '57578be0057a49f', '2017-07-01 15:02:06', '2017-07-01', '15:02:06', '2017', '07', '01', '15', '02', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"'),
+(6, 's14986455399465', '5729572e6331281', 97, '3.0000000', '2017-06-21', 'globeadmin', '1', 'report', 'runreport', '0', '1', '0', '20', '25', 's14988843064827', '-1', 'desc', '0', 'report', '2', 'report', '1', '___nu1595733d66c5cd___', '2', '57578be0057a49f', '2017-07-01 15:02:06', '2017-07-01', '15:02:06', '2017', '07', '01', '15', '02', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `___nu1595733e146c48___`
+--
+
+CREATE TABLE `___nu1595733e146c48___` (
+  `nu__id` int(11) NOT NULL,
+  `invoice_id` varchar(25) NOT NULL,
+  `inv_company_id` varchar(25) NOT NULL,
+  `inv_number` int(11) NOT NULL,
+  `inv_total` decimal(11,7) NOT NULL,
+  `inv_date` date NOT NULL,
+  `USER_ID` varchar(10) DEFAULT 'globeadmin',
+  `global_access` varchar(1) DEFAULT '1',
+  `record_id` varchar(6) DEFAULT 'report',
+  `call_type` varchar(9) DEFAULT 'runreport',
+  `iframe` varchar(1) DEFAULT '0',
+  `object_id` varchar(1) DEFAULT '1',
+  `page_number` varchar(1) DEFAULT '0',
+  `rows` varchar(2) DEFAULT '20',
+  `row_height` varchar(2) DEFAULT '25',
+  `session_id` varchar(15) DEFAULT 's14988843064827',
+  `sort` varchar(2) DEFAULT '-1',
+  `sort_direction` varchar(4) DEFAULT 'desc',
+  `subforms` varchar(1) DEFAULT '0',
+  `0` varchar(6) DEFAULT 'report',
+  `FORM_ID` varchar(1) DEFAULT '2',
+  `PREVIOUS_RECORD_ID` varchar(6) DEFAULT 'report',
+  `SUBFORM_ID` varchar(1) DEFAULT '1',
+  `TABLE_ID` varchar(22) DEFAULT '___nu1595733e146c48___',
+  `description` varchar(1) DEFAULT '2',
+  `parentID` varchar(15) DEFAULT '57578be0057a49f',
+  `nu_date_time` varchar(19) DEFAULT '2017-07-01 15:02:17',
+  `nu_date` varchar(10) DEFAULT '2017-07-01',
+  `nu_time` varchar(8) DEFAULT '15:02:17',
+  `nu_year` varchar(4) DEFAULT '2017',
+  `nu_month` varchar(2) DEFAULT '07',
+  `nu_day` varchar(2) DEFAULT '01',
+  `nu_hour` varchar(2) DEFAULT '15',
+  `nu_minute` varchar(2) DEFAULT '02',
+  `sre_layout` varchar(199) DEFAULT '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `___nu1595733e146c48___`
+--
+
+INSERT INTO `___nu1595733e146c48___` (`nu__id`, `invoice_id`, `inv_company_id`, `inv_number`, `inv_total`, `inv_date`, `USER_ID`, `global_access`, `record_id`, `call_type`, `iframe`, `object_id`, `page_number`, `rows`, `row_height`, `session_id`, `sort`, `sort_direction`, `subforms`, `0`, `FORM_ID`, `PREVIOUS_RECORD_ID`, `SUBFORM_ID`, `TABLE_ID`, `description`, `parentID`, `nu_date_time`, `nu_date`, `nu_time`, `nu_year`, `nu_month`, `nu_day`, `nu_hour`, `nu_minute`, `sre_layout`) VALUES
+(1, '58dd85c34768b7b', '', 222, '21.0000000', '2017-03-21', 'globeadmin', '1', 'report', 'runreport', '0', '1', '0', '20', '25', 's14988843064827', '-1', 'desc', '0', 'report', '2', 'report', '1', '___nu1595733e146c48___', '2', '57578be0057a49f', '2017-07-01 15:02:17', '2017-07-01', '15:02:17', '2017', '07', '01', '15', '02', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"'),
+(2, 's14919516899490', '', 53, '215.3000000', '2017-03-19', 'globeadmin', '1', 'report', 'runreport', '0', '1', '0', '20', '25', 's14988843064827', '-1', 'desc', '0', 'report', '2', 'report', '1', '___nu1595733e146c48___', '2', '57578be0057a49f', '2017-07-01 15:02:17', '2017-07-01', '15:02:17', '2017', '07', '01', '15', '02', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"'),
+(3, 's14919517022910', '', 54, '26.1300000', '2017-05-09', 'globeadmin', '1', 'report', 'runreport', '0', '1', '0', '20', '25', 's14988843064827', '-1', 'desc', '0', 'report', '2', 'report', '1', '___nu1595733e146c48___', '2', '57578be0057a49f', '2017-07-01 15:02:17', '2017-07-01', '15:02:17', '2017', '07', '01', '15', '02', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"'),
+(4, 's14941671398158', '', 55, '18.0000000', '2017-03-15', 'globeadmin', '1', 'report', 'runreport', '0', '1', '0', '20', '25', 's14988843064827', '-1', 'desc', '0', 'report', '2', 'report', '1', '___nu1595733e146c48___', '2', '57578be0057a49f', '2017-07-01 15:02:17', '2017-07-01', '15:02:17', '2017', '07', '01', '15', '02', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"'),
+(5, 's14941671441214', '', 56, '1.8000000', '2017-03-15', 'globeadmin', '1', 'report', 'runreport', '0', '1', '0', '20', '25', 's14988843064827', '-1', 'desc', '0', 'report', '2', 'report', '1', '___nu1595733e146c48___', '2', '57578be0057a49f', '2017-07-01 15:02:17', '2017-07-01', '15:02:17', '2017', '07', '01', '15', '02', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"'),
+(6, 's14986455399465', '5729572e6331281', 97, '3.0000000', '2017-06-21', 'globeadmin', '1', 'report', 'runreport', '0', '1', '0', '20', '25', 's14988843064827', '-1', 'desc', '0', 'report', '2', 'report', '1', '___nu1595733e146c48___', '2', '57578be0057a49f', '2017-07-01 15:02:17', '2017-07-01', '15:02:17', '2017', '07', '01', '15', '02', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `___nu1595734fd1bcdb___`
+--
+
+CREATE TABLE `___nu1595734fd1bcdb___` (
+  `nu__id` int(11) NOT NULL,
+  `invoice_id` varchar(25) NOT NULL,
+  `inv_company_id` varchar(25) NOT NULL,
+  `inv_number` int(11) NOT NULL,
+  `inv_total` decimal(11,7) NOT NULL,
+  `inv_date` date NOT NULL,
+  `USER_ID` varchar(10) DEFAULT 'globeadmin',
+  `global_access` varchar(1) DEFAULT '1',
+  `record_id` varchar(6) DEFAULT 'report',
+  `call_type` varchar(9) DEFAULT 'runreport',
+  `iframe` varchar(1) DEFAULT '0',
+  `object_id` varchar(1) DEFAULT '1',
+  `page_number` varchar(1) DEFAULT '0',
+  `rows` varchar(2) DEFAULT '20',
+  `row_height` varchar(2) DEFAULT '25',
+  `session_id` varchar(15) DEFAULT 's14988843064827',
+  `sort` varchar(2) DEFAULT '-1',
+  `sort_direction` varchar(4) DEFAULT 'desc',
+  `subforms` varchar(1) DEFAULT '0',
+  `0` varchar(6) DEFAULT 'report',
+  `FORM_ID` varchar(1) DEFAULT '2',
+  `PREVIOUS_RECORD_ID` varchar(6) DEFAULT 'report',
+  `SUBFORM_ID` varchar(1) DEFAULT '1',
+  `TABLE_ID` varchar(22) DEFAULT '___nu1595734fd1bcdb___',
+  `description` varchar(1) DEFAULT '2',
+  `parentID` varchar(15) DEFAULT '57578be0057a49f',
+  `nu_date_time` varchar(19) DEFAULT '2017-07-01 15:07:01',
+  `nu_date` varchar(10) DEFAULT '2017-07-01',
+  `nu_time` varchar(8) DEFAULT '15:07:01',
+  `nu_year` varchar(4) DEFAULT '2017',
+  `nu_month` varchar(2) DEFAULT '07',
+  `nu_day` varchar(2) DEFAULT '01',
+  `nu_hour` varchar(2) DEFAULT '15',
+  `nu_minute` varchar(2) DEFAULT '07',
+  `sre_layout` varchar(199) DEFAULT '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `___nu1595734fd1bcdb___`
+--
+
+INSERT INTO `___nu1595734fd1bcdb___` (`nu__id`, `invoice_id`, `inv_company_id`, `inv_number`, `inv_total`, `inv_date`, `USER_ID`, `global_access`, `record_id`, `call_type`, `iframe`, `object_id`, `page_number`, `rows`, `row_height`, `session_id`, `sort`, `sort_direction`, `subforms`, `0`, `FORM_ID`, `PREVIOUS_RECORD_ID`, `SUBFORM_ID`, `TABLE_ID`, `description`, `parentID`, `nu_date_time`, `nu_date`, `nu_time`, `nu_year`, `nu_month`, `nu_day`, `nu_hour`, `nu_minute`, `sre_layout`) VALUES
+(1, '58dd85c34768b7b', '', 222, '21.0000000', '2017-03-21', 'globeadmin', '1', 'report', 'runreport', '0', '1', '0', '20', '25', 's14988843064827', '-1', 'desc', '0', 'report', '2', 'report', '1', '___nu1595734fd1bcdb___', '2', '57578be0057a49f', '2017-07-01 15:07:01', '2017-07-01', '15:07:01', '2017', '07', '01', '15', '07', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"'),
+(2, 's14919516899490', '', 53, '215.3000000', '2017-03-19', 'globeadmin', '1', 'report', 'runreport', '0', '1', '0', '20', '25', 's14988843064827', '-1', 'desc', '0', 'report', '2', 'report', '1', '___nu1595734fd1bcdb___', '2', '57578be0057a49f', '2017-07-01 15:07:01', '2017-07-01', '15:07:01', '2017', '07', '01', '15', '07', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"'),
+(3, 's14919517022910', '', 54, '26.1300000', '2017-05-09', 'globeadmin', '1', 'report', 'runreport', '0', '1', '0', '20', '25', 's14988843064827', '-1', 'desc', '0', 'report', '2', 'report', '1', '___nu1595734fd1bcdb___', '2', '57578be0057a49f', '2017-07-01 15:07:01', '2017-07-01', '15:07:01', '2017', '07', '01', '15', '07', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"'),
+(4, 's14941671398158', '', 55, '18.0000000', '2017-03-15', 'globeadmin', '1', 'report', 'runreport', '0', '1', '0', '20', '25', 's14988843064827', '-1', 'desc', '0', 'report', '2', 'report', '1', '___nu1595734fd1bcdb___', '2', '57578be0057a49f', '2017-07-01 15:07:01', '2017-07-01', '15:07:01', '2017', '07', '01', '15', '07', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"'),
+(5, 's14941671441214', '', 56, '1.8000000', '2017-03-15', 'globeadmin', '1', 'report', 'runreport', '0', '1', '0', '20', '25', 's14988843064827', '-1', 'desc', '0', 'report', '2', 'report', '1', '___nu1595734fd1bcdb___', '2', '57578be0057a49f', '2017-07-01 15:07:01', '2017-07-01', '15:07:01', '2017', '07', '01', '15', '07', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"'),
+(6, 's14986455399465', '5729572e6331281', 97, '3.0000000', '2017-06-21', 'globeadmin', '1', 'report', 'runreport', '0', '1', '0', '20', '25', 's14988843064827', '-1', 'desc', '0', 'report', '2', 'report', '1', '___nu1595734fd1bcdb___', '2', '57578be0057a49f', '2017-07-01 15:07:01', '2017-07-01', '15:07:01', '2017', '07', '01', '15', '07', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `___nu15957473b2c311___`
+--
+
+CREATE TABLE `___nu15957473b2c311___` (
+  `nu__id` int(11) NOT NULL,
+  `invoice_id` varchar(25) NOT NULL,
+  `inv_company_id` varchar(25) NOT NULL,
+  `inv_number` int(11) NOT NULL,
+  `inv_total` decimal(11,7) NOT NULL,
+  `inv_date` date NOT NULL,
+  `USER_ID` varchar(10) DEFAULT 'globeadmin',
+  `global_access` varchar(1) DEFAULT '1',
+  `record_id` varchar(6) DEFAULT 'report',
+  `call_type` varchar(9) DEFAULT 'runreport',
+  `iframe` varchar(1) DEFAULT '0',
+  `object_id` varchar(1) DEFAULT '1',
+  `page_number` varchar(1) DEFAULT '0',
+  `rows` varchar(2) DEFAULT '20',
+  `row_height` varchar(2) DEFAULT '25',
+  `session_id` varchar(15) DEFAULT 's14988884719129',
+  `sort` varchar(2) DEFAULT '-1',
+  `sort_direction` varchar(4) DEFAULT 'desc',
+  `subforms` varchar(1) DEFAULT '0',
+  `0` varchar(6) DEFAULT 'report',
+  `FORM_ID` varchar(1) DEFAULT '2',
+  `PREVIOUS_RECORD_ID` varchar(6) DEFAULT 'report',
+  `SUBFORM_ID` varchar(1) DEFAULT '1',
+  `TABLE_ID` varchar(22) DEFAULT '___nu15957473b2c311___',
+  `description` varchar(1) DEFAULT '2',
+  `parentID` varchar(15) DEFAULT '57578be0057a49f',
+  `nu_date_time` varchar(19) DEFAULT '2017-07-01 16:24:51',
+  `nu_date` varchar(10) DEFAULT '2017-07-01',
+  `nu_time` varchar(8) DEFAULT '16:24:51',
+  `nu_year` varchar(4) DEFAULT '2017',
+  `nu_month` varchar(2) DEFAULT '07',
+  `nu_day` varchar(2) DEFAULT '01',
+  `nu_hour` varchar(2) DEFAULT '16',
+  `nu_minute` varchar(2) DEFAULT '24',
+  `sre_layout` varchar(199) DEFAULT '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `___nu15957473b2c311___`
+--
+
+INSERT INTO `___nu15957473b2c311___` (`nu__id`, `invoice_id`, `inv_company_id`, `inv_number`, `inv_total`, `inv_date`, `USER_ID`, `global_access`, `record_id`, `call_type`, `iframe`, `object_id`, `page_number`, `rows`, `row_height`, `session_id`, `sort`, `sort_direction`, `subforms`, `0`, `FORM_ID`, `PREVIOUS_RECORD_ID`, `SUBFORM_ID`, `TABLE_ID`, `description`, `parentID`, `nu_date_time`, `nu_date`, `nu_time`, `nu_year`, `nu_month`, `nu_day`, `nu_hour`, `nu_minute`, `sre_layout`) VALUES
+(1, '58dd85c34768b7b', '', 222, '21.0000000', '2017-03-21', 'globeadmin', '1', 'report', 'runreport', '0', '1', '0', '20', '25', 's14988884719129', '-1', 'desc', '0', 'report', '2', 'report', '1', '___nu15957473b2c311___', '2', '57578be0057a49f', '2017-07-01 16:24:51', '2017-07-01', '16:24:51', '2017', '07', '01', '16', '24', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"'),
+(2, 's14919516899490', '', 53, '215.3000000', '2017-03-19', 'globeadmin', '1', 'report', 'runreport', '0', '1', '0', '20', '25', 's14988884719129', '-1', 'desc', '0', 'report', '2', 'report', '1', '___nu15957473b2c311___', '2', '57578be0057a49f', '2017-07-01 16:24:51', '2017-07-01', '16:24:51', '2017', '07', '01', '16', '24', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"'),
+(3, 's14919517022910', '', 54, '26.1300000', '2017-05-09', 'globeadmin', '1', 'report', 'runreport', '0', '1', '0', '20', '25', 's14988884719129', '-1', 'desc', '0', 'report', '2', 'report', '1', '___nu15957473b2c311___', '2', '57578be0057a49f', '2017-07-01 16:24:51', '2017-07-01', '16:24:51', '2017', '07', '01', '16', '24', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"'),
+(4, 's14941671398158', '', 55, '18.0000000', '2017-03-15', 'globeadmin', '1', 'report', 'runreport', '0', '1', '0', '20', '25', 's14988884719129', '-1', 'desc', '0', 'report', '2', 'report', '1', '___nu15957473b2c311___', '2', '57578be0057a49f', '2017-07-01 16:24:51', '2017-07-01', '16:24:51', '2017', '07', '01', '16', '24', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"'),
+(5, 's14941671441214', '', 56, '1.8000000', '2017-03-15', 'globeadmin', '1', 'report', 'runreport', '0', '1', '0', '20', '25', 's14988884719129', '-1', 'desc', '0', 'report', '2', 'report', '1', '___nu15957473b2c311___', '2', '57578be0057a49f', '2017-07-01 16:24:51', '2017-07-01', '16:24:51', '2017', '07', '01', '16', '24', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"'),
+(6, 's14986455399465', '5729572e6331281', 97, '3.0000000', '2017-06-21', 'globeadmin', '1', 'report', 'runreport', '0', '1', '0', '20', '25', 's14988884719129', '-1', 'desc', '0', 'report', '2', 'report', '1', '___nu15957473b2c311___', '2', '57578be0057a49f', '2017-07-01 16:24:51', '2017-07-01', '16:24:51', '2017', '07', '01', '16', '24', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `___nu1595735824e4bf___`
+--
+
+CREATE TABLE `___nu1595735824e4bf___` (
+  `nu__id` int(11) NOT NULL,
+  `invoice_id` varchar(25) NOT NULL,
+  `inv_company_id` varchar(25) NOT NULL,
+  `inv_number` int(11) NOT NULL,
+  `inv_total` decimal(11,7) NOT NULL,
+  `inv_date` date NOT NULL,
+  `USER_ID` varchar(10) DEFAULT 'globeadmin',
+  `global_access` varchar(1) DEFAULT '1',
+  `record_id` varchar(6) DEFAULT 'report',
+  `call_type` varchar(9) DEFAULT 'runreport',
+  `iframe` varchar(1) DEFAULT '0',
+  `object_id` varchar(1) DEFAULT '1',
+  `page_number` varchar(1) DEFAULT '0',
+  `rows` varchar(2) DEFAULT '20',
+  `row_height` varchar(2) DEFAULT '25',
+  `session_id` varchar(15) DEFAULT 's14988843064827',
+  `sort` varchar(2) DEFAULT '-1',
+  `sort_direction` varchar(4) DEFAULT 'desc',
+  `subforms` varchar(1) DEFAULT '0',
+  `0` varchar(6) DEFAULT 'report',
+  `FORM_ID` varchar(1) DEFAULT '2',
+  `PREVIOUS_RECORD_ID` varchar(6) DEFAULT 'report',
+  `SUBFORM_ID` varchar(1) DEFAULT '1',
+  `TABLE_ID` varchar(22) DEFAULT '___nu1595735824e4bf___',
+  `description` varchar(1) DEFAULT '2',
+  `parentID` varchar(15) DEFAULT '57578be0057a49f',
+  `nu_date_time` varchar(19) DEFAULT '2017-07-01 15:09:14',
+  `nu_date` varchar(10) DEFAULT '2017-07-01',
+  `nu_time` varchar(8) DEFAULT '15:09:14',
+  `nu_year` varchar(4) DEFAULT '2017',
+  `nu_month` varchar(2) DEFAULT '07',
+  `nu_day` varchar(2) DEFAULT '01',
+  `nu_hour` varchar(2) DEFAULT '15',
+  `nu_minute` varchar(2) DEFAULT '09',
+  `sre_layout` varchar(199) DEFAULT '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `___nu1595735824e4bf___`
+--
+
+INSERT INTO `___nu1595735824e4bf___` (`nu__id`, `invoice_id`, `inv_company_id`, `inv_number`, `inv_total`, `inv_date`, `USER_ID`, `global_access`, `record_id`, `call_type`, `iframe`, `object_id`, `page_number`, `rows`, `row_height`, `session_id`, `sort`, `sort_direction`, `subforms`, `0`, `FORM_ID`, `PREVIOUS_RECORD_ID`, `SUBFORM_ID`, `TABLE_ID`, `description`, `parentID`, `nu_date_time`, `nu_date`, `nu_time`, `nu_year`, `nu_month`, `nu_day`, `nu_hour`, `nu_minute`, `sre_layout`) VALUES
+(1, '58dd85c34768b7b', '', 222, '21.0000000', '2017-03-21', 'globeadmin', '1', 'report', 'runreport', '0', '1', '0', '20', '25', 's14988843064827', '-1', 'desc', '0', 'report', '2', 'report', '1', '___nu1595735824e4bf___', '2', '57578be0057a49f', '2017-07-01 15:09:14', '2017-07-01', '15:09:14', '2017', '07', '01', '15', '09', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"'),
+(2, 's14919516899490', '', 53, '215.3000000', '2017-03-19', 'globeadmin', '1', 'report', 'runreport', '0', '1', '0', '20', '25', 's14988843064827', '-1', 'desc', '0', 'report', '2', 'report', '1', '___nu1595735824e4bf___', '2', '57578be0057a49f', '2017-07-01 15:09:14', '2017-07-01', '15:09:14', '2017', '07', '01', '15', '09', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"'),
+(3, 's14919517022910', '', 54, '26.1300000', '2017-05-09', 'globeadmin', '1', 'report', 'runreport', '0', '1', '0', '20', '25', 's14988843064827', '-1', 'desc', '0', 'report', '2', 'report', '1', '___nu1595735824e4bf___', '2', '57578be0057a49f', '2017-07-01 15:09:14', '2017-07-01', '15:09:14', '2017', '07', '01', '15', '09', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"'),
+(4, 's14941671398158', '', 55, '18.0000000', '2017-03-15', 'globeadmin', '1', 'report', 'runreport', '0', '1', '0', '20', '25', 's14988843064827', '-1', 'desc', '0', 'report', '2', 'report', '1', '___nu1595735824e4bf___', '2', '57578be0057a49f', '2017-07-01 15:09:14', '2017-07-01', '15:09:14', '2017', '07', '01', '15', '09', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"'),
+(5, 's14941671441214', '', 56, '1.8000000', '2017-03-15', 'globeadmin', '1', 'report', 'runreport', '0', '1', '0', '20', '25', 's14988843064827', '-1', 'desc', '0', 'report', '2', 'report', '1', '___nu1595735824e4bf___', '2', '57578be0057a49f', '2017-07-01 15:09:14', '2017-07-01', '15:09:14', '2017', '07', '01', '15', '09', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"'),
+(6, 's14986455399465', '5729572e6331281', 97, '3.0000000', '2017-06-21', 'globeadmin', '1', 'report', 'runreport', '0', '1', '0', '20', '25', 's14988843064827', '-1', 'desc', '0', 'report', '2', 'report', '1', '___nu1595735824e4bf___', '2', '57578be0057a49f', '2017-07-01 15:09:14', '2017-07-01', '15:09:14', '2017', '07', '01', '15', '09', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `___nu15957466406c74___`
+--
+
+CREATE TABLE `___nu15957466406c74___` (
+  `nu__id` int(11) NOT NULL,
+  `invoice_id` varchar(25) NOT NULL,
+  `inv_company_id` varchar(25) NOT NULL,
+  `inv_number` int(11) NOT NULL,
+  `inv_total` decimal(11,7) NOT NULL,
+  `inv_date` date NOT NULL,
+  `USER_ID` varchar(10) DEFAULT 'globeadmin',
+  `global_access` varchar(1) DEFAULT '1',
+  `record_id` varchar(6) DEFAULT 'report',
+  `call_type` varchar(9) DEFAULT 'runreport',
+  `iframe` varchar(1) DEFAULT '0',
+  `object_id` varchar(1) DEFAULT '1',
+  `page_number` varchar(1) DEFAULT '0',
+  `rows` varchar(2) DEFAULT '20',
+  `row_height` varchar(2) DEFAULT '25',
+  `session_id` varchar(15) DEFAULT 's14988884719129',
+  `sort` varchar(2) DEFAULT '-1',
+  `sort_direction` varchar(4) DEFAULT 'desc',
+  `subforms` varchar(1) DEFAULT '0',
+  `0` varchar(6) DEFAULT 'report',
+  `FORM_ID` varchar(1) DEFAULT '2',
+  `PREVIOUS_RECORD_ID` varchar(6) DEFAULT 'report',
+  `SUBFORM_ID` varchar(1) DEFAULT '1',
+  `TABLE_ID` varchar(22) DEFAULT '___nu15957466406c74___',
+  `description` varchar(1) DEFAULT '2',
+  `parentID` varchar(15) DEFAULT '57578be0057a49f',
+  `nu_date_time` varchar(19) DEFAULT '2017-07-01 16:21:16',
+  `nu_date` varchar(10) DEFAULT '2017-07-01',
+  `nu_time` varchar(8) DEFAULT '16:21:16',
+  `nu_year` varchar(4) DEFAULT '2017',
+  `nu_month` varchar(2) DEFAULT '07',
+  `nu_day` varchar(2) DEFAULT '01',
+  `nu_hour` varchar(2) DEFAULT '16',
+  `nu_minute` varchar(2) DEFAULT '21',
+  `sre_layout` varchar(199) DEFAULT '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `___nu15957466406c74___`
+--
+
+INSERT INTO `___nu15957466406c74___` (`nu__id`, `invoice_id`, `inv_company_id`, `inv_number`, `inv_total`, `inv_date`, `USER_ID`, `global_access`, `record_id`, `call_type`, `iframe`, `object_id`, `page_number`, `rows`, `row_height`, `session_id`, `sort`, `sort_direction`, `subforms`, `0`, `FORM_ID`, `PREVIOUS_RECORD_ID`, `SUBFORM_ID`, `TABLE_ID`, `description`, `parentID`, `nu_date_time`, `nu_date`, `nu_time`, `nu_year`, `nu_month`, `nu_day`, `nu_hour`, `nu_minute`, `sre_layout`) VALUES
+(1, '58dd85c34768b7b', '', 222, '21.0000000', '2017-03-21', 'globeadmin', '1', 'report', 'runreport', '0', '1', '0', '20', '25', 's14988884719129', '-1', 'desc', '0', 'report', '2', 'report', '1', '___nu15957466406c74___', '2', '57578be0057a49f', '2017-07-01 16:21:16', '2017-07-01', '16:21:16', '2017', '07', '01', '16', '21', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"'),
+(2, 's14919516899490', '', 53, '215.3000000', '2017-03-19', 'globeadmin', '1', 'report', 'runreport', '0', '1', '0', '20', '25', 's14988884719129', '-1', 'desc', '0', 'report', '2', 'report', '1', '___nu15957466406c74___', '2', '57578be0057a49f', '2017-07-01 16:21:16', '2017-07-01', '16:21:16', '2017', '07', '01', '16', '21', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"'),
+(3, 's14919517022910', '', 54, '26.1300000', '2017-05-09', 'globeadmin', '1', 'report', 'runreport', '0', '1', '0', '20', '25', 's14988884719129', '-1', 'desc', '0', 'report', '2', 'report', '1', '___nu15957466406c74___', '2', '57578be0057a49f', '2017-07-01 16:21:16', '2017-07-01', '16:21:16', '2017', '07', '01', '16', '21', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"'),
+(4, 's14941671398158', '', 55, '18.0000000', '2017-03-15', 'globeadmin', '1', 'report', 'runreport', '0', '1', '0', '20', '25', 's14988884719129', '-1', 'desc', '0', 'report', '2', 'report', '1', '___nu15957466406c74___', '2', '57578be0057a49f', '2017-07-01 16:21:16', '2017-07-01', '16:21:16', '2017', '07', '01', '16', '21', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"'),
+(5, 's14941671441214', '', 56, '1.8000000', '2017-03-15', 'globeadmin', '1', 'report', 'runreport', '0', '1', '0', '20', '25', 's14988884719129', '-1', 'desc', '0', 'report', '2', 'report', '1', '___nu15957466406c74___', '2', '57578be0057a49f', '2017-07-01 16:21:16', '2017-07-01', '16:21:16', '2017', '07', '01', '16', '21', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"'),
+(6, 's14986455399465', '5729572e6331281', 97, '3.0000000', '2017-06-21', 'globeadmin', '1', 'report', 'runreport', '0', '1', '0', '20', '25', 's14988884719129', '-1', 'desc', '0', 'report', '2', 'report', '1', '___nu15957466406c74___', '2', '57578be0057a49f', '2017-07-01 16:21:16', '2017-07-01', '16:21:16', '2017', '07', '01', '16', '21', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `___nu15957356597275___`
+--
+
+CREATE TABLE `___nu15957356597275___` (
+  `nu__id` int(11) NOT NULL,
+  `invoice_id` varchar(25) NOT NULL,
+  `inv_company_id` varchar(25) NOT NULL,
+  `inv_number` int(11) NOT NULL,
+  `inv_total` decimal(11,7) NOT NULL,
+  `inv_date` date NOT NULL,
+  `USER_ID` varchar(10) DEFAULT 'globeadmin',
+  `global_access` varchar(1) DEFAULT '1',
+  `record_id` varchar(6) DEFAULT 'report',
+  `call_type` varchar(9) DEFAULT 'runreport',
+  `iframe` varchar(1) DEFAULT '0',
+  `object_id` varchar(1) DEFAULT '1',
+  `page_number` varchar(1) DEFAULT '0',
+  `rows` varchar(2) DEFAULT '20',
+  `row_height` varchar(2) DEFAULT '25',
+  `session_id` varchar(15) DEFAULT 's14988843064827',
+  `sort` varchar(2) DEFAULT '-1',
+  `sort_direction` varchar(4) DEFAULT 'desc',
+  `subforms` varchar(1) DEFAULT '0',
+  `0` varchar(6) DEFAULT 'report',
+  `FORM_ID` varchar(1) DEFAULT '2',
+  `PREVIOUS_RECORD_ID` varchar(6) DEFAULT 'report',
+  `SUBFORM_ID` varchar(1) DEFAULT '1',
+  `TABLE_ID` varchar(22) DEFAULT '___nu15957356597275___',
+  `description` varchar(1) DEFAULT '2',
+  `parentID` varchar(15) DEFAULT '57578be0057a49f',
+  `nu_date_time` varchar(19) DEFAULT '2017-07-01 15:08:45',
+  `nu_date` varchar(10) DEFAULT '2017-07-01',
+  `nu_time` varchar(8) DEFAULT '15:08:45',
+  `nu_year` varchar(4) DEFAULT '2017',
+  `nu_month` varchar(2) DEFAULT '07',
+  `nu_day` varchar(2) DEFAULT '01',
+  `nu_hour` varchar(2) DEFAULT '15',
+  `nu_minute` varchar(2) DEFAULT '08',
+  `sre_layout` varchar(199) DEFAULT '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `___nu15957356597275___`
+--
+
+INSERT INTO `___nu15957356597275___` (`nu__id`, `invoice_id`, `inv_company_id`, `inv_number`, `inv_total`, `inv_date`, `USER_ID`, `global_access`, `record_id`, `call_type`, `iframe`, `object_id`, `page_number`, `rows`, `row_height`, `session_id`, `sort`, `sort_direction`, `subforms`, `0`, `FORM_ID`, `PREVIOUS_RECORD_ID`, `SUBFORM_ID`, `TABLE_ID`, `description`, `parentID`, `nu_date_time`, `nu_date`, `nu_time`, `nu_year`, `nu_month`, `nu_day`, `nu_hour`, `nu_minute`, `sre_layout`) VALUES
+(1, '58dd85c34768b7b', '', 222, '21.0000000', '2017-03-21', 'globeadmin', '1', 'report', 'runreport', '0', '1', '0', '20', '25', 's14988843064827', '-1', 'desc', '0', 'report', '2', 'report', '1', '___nu15957356597275___', '2', '57578be0057a49f', '2017-07-01 15:08:45', '2017-07-01', '15:08:45', '2017', '07', '01', '15', '08', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"'),
+(2, 's14919516899490', '', 53, '215.3000000', '2017-03-19', 'globeadmin', '1', 'report', 'runreport', '0', '1', '0', '20', '25', 's14988843064827', '-1', 'desc', '0', 'report', '2', 'report', '1', '___nu15957356597275___', '2', '57578be0057a49f', '2017-07-01 15:08:45', '2017-07-01', '15:08:45', '2017', '07', '01', '15', '08', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"'),
+(3, 's14919517022910', '', 54, '26.1300000', '2017-05-09', 'globeadmin', '1', 'report', 'runreport', '0', '1', '0', '20', '25', 's14988843064827', '-1', 'desc', '0', 'report', '2', 'report', '1', '___nu15957356597275___', '2', '57578be0057a49f', '2017-07-01 15:08:45', '2017-07-01', '15:08:45', '2017', '07', '01', '15', '08', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"'),
+(4, 's14941671398158', '', 55, '18.0000000', '2017-03-15', 'globeadmin', '1', 'report', 'runreport', '0', '1', '0', '20', '25', 's14988843064827', '-1', 'desc', '0', 'report', '2', 'report', '1', '___nu15957356597275___', '2', '57578be0057a49f', '2017-07-01 15:08:45', '2017-07-01', '15:08:45', '2017', '07', '01', '15', '08', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"'),
+(5, 's14941671441214', '', 56, '1.8000000', '2017-03-15', 'globeadmin', '1', 'report', 'runreport', '0', '1', '0', '20', '25', 's14988843064827', '-1', 'desc', '0', 'report', '2', 'report', '1', '___nu15957356597275___', '2', '57578be0057a49f', '2017-07-01 15:08:45', '2017-07-01', '15:08:45', '2017', '07', '01', '15', '08', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"'),
+(6, 's14986455399465', '5729572e6331281', 97, '3.0000000', '2017-06-21', 'globeadmin', '1', 'report', 'runreport', '0', '1', '0', '20', '25', 's14988843064827', '-1', 'desc', '0', 'report', '2', 'report', '1', '___nu15957356597275___', '2', '57578be0057a49f', '2017-07-01 15:08:45', '2017-07-01', '15:08:45', '2017', '07', '01', '15', '08', '{"top":30,"left":30,"bottom":260,"right":30,"width":210,"height":297,"paper":"A4","orientation":"P","groups":[{"sortField":"Detail","sortBy":"a","sections":[{"id":"');
+
+-- --------------------------------------------------------
+
+--
 -- Structure for view `zzzzsys_run_list`
 --
 DROP TABLE IF EXISTS `zzzzsys_run_list`;
@@ -2153,6 +2658,118 @@ ALTER TABLE `zzzzsys_user`
   ADD KEY `sus_zzzzsys_user_group_id` (`sus_zzzzsys_user_group_id`),
   ADD KEY `sus_zzzzsys_access_level_id` (`sus_zzzzsys_access_level_id`);
 
+--
+-- Indexes for table `___nu1595723f04f704___`
+--
+ALTER TABLE `___nu1595723f04f704___`
+  ADD PRIMARY KEY (`nu__id`),
+  ADD KEY `inv_number` (`inv_number`);
+
+--
+-- Indexes for table `___nu1595732a60fe23___`
+--
+ALTER TABLE `___nu1595732a60fe23___`
+  ADD PRIMARY KEY (`nu__id`),
+  ADD KEY `inv_number` (`inv_number`);
+
+--
+-- Indexes for table `___nu1595733d66c5cd___`
+--
+ALTER TABLE `___nu1595733d66c5cd___`
+  ADD PRIMARY KEY (`nu__id`),
+  ADD KEY `inv_number` (`inv_number`);
+
+--
+-- Indexes for table `___nu1595733e146c48___`
+--
+ALTER TABLE `___nu1595733e146c48___`
+  ADD PRIMARY KEY (`nu__id`),
+  ADD KEY `inv_number` (`inv_number`);
+
+--
+-- Indexes for table `___nu1595734fd1bcdb___`
+--
+ALTER TABLE `___nu1595734fd1bcdb___`
+  ADD PRIMARY KEY (`nu__id`),
+  ADD KEY `inv_number` (`inv_number`);
+
+--
+-- Indexes for table `___nu15957473b2c311___`
+--
+ALTER TABLE `___nu15957473b2c311___`
+  ADD PRIMARY KEY (`nu__id`),
+  ADD KEY `inv_number` (`inv_number`);
+
+--
+-- Indexes for table `___nu1595735824e4bf___`
+--
+ALTER TABLE `___nu1595735824e4bf___`
+  ADD PRIMARY KEY (`nu__id`),
+  ADD KEY `inv_number` (`inv_number`);
+
+--
+-- Indexes for table `___nu15957466406c74___`
+--
+ALTER TABLE `___nu15957466406c74___`
+  ADD PRIMARY KEY (`nu__id`),
+  ADD KEY `inv_number` (`inv_number`);
+
+--
+-- Indexes for table `___nu15957356597275___`
+--
+ALTER TABLE `___nu15957356597275___`
+  ADD PRIMARY KEY (`nu__id`),
+  ADD KEY `inv_number` (`inv_number`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `___nu1595723f04f704___`
+--
+ALTER TABLE `___nu1595723f04f704___`
+  MODIFY `nu__id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `___nu1595732a60fe23___`
+--
+ALTER TABLE `___nu1595732a60fe23___`
+  MODIFY `nu__id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `___nu1595733d66c5cd___`
+--
+ALTER TABLE `___nu1595733d66c5cd___`
+  MODIFY `nu__id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `___nu1595733e146c48___`
+--
+ALTER TABLE `___nu1595733e146c48___`
+  MODIFY `nu__id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `___nu1595734fd1bcdb___`
+--
+ALTER TABLE `___nu1595734fd1bcdb___`
+  MODIFY `nu__id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `___nu15957473b2c311___`
+--
+ALTER TABLE `___nu15957473b2c311___`
+  MODIFY `nu__id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `___nu1595735824e4bf___`
+--
+ALTER TABLE `___nu1595735824e4bf___`
+  MODIFY `nu__id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `___nu15957466406c74___`
+--
+ALTER TABLE `___nu15957466406c74___`
+  MODIFY `nu__id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `___nu15957356597275___`
+--
+ALTER TABLE `___nu15957356597275___`
+  MODIFY `nu__id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -22,7 +22,6 @@ $PDF                        = new FPDF($LAYOUT->orientation, 'mm', $LAYOUT->pape
 $PDF->SetAutoPageBreak(false);
 $REPORT                     = nuSetPixelsToMM($LAYOUT);
 $PDF->SetMargins(1,1,1);
-
 $evalPHP = new nuEvalPHPClass($JSON->parentID);            //-- build temp table for report from php
 
 $GLOBALS['nu_columns']       = nuAddCriteriaValues($hashData, $TABLE_ID);
@@ -294,6 +293,7 @@ class nuSECTION{
     }
 
     public function buildSection(){
+		
         $this->O              = $this->setObjectLines($this->O);
         $nextTop              = $this->chopSectionOverPages();
         $GLOBALS['nu_report'] = array_merge($GLOBALS['nu_report'], $this->SECTIONS);
@@ -327,7 +327,7 @@ class nuSECTION{
         for($i = 0 ; $i < count($O) ; $i++){
         
             $O[$i]->path                        = '';
-            
+			
             if($O[$i]->objectType == 'field' or $O[$i]->objectType == 'label'){
 
 				if($O[$i]->objectType == 'field'  and substr($this->ROW[$O[$i]->fieldName],0,1) == '#' and substr($this->ROW[$O[$i]->fieldName],2,1) == '#' and substr($this->ROW[$O[$i]->fieldName],9,1) == '|'){       //-- conditional formatting used
@@ -347,42 +347,35 @@ class nuSECTION{
                 $O[$i]->LINES                   = $this->getObjectRows($O[$i], $stopGrow);
                 
             }else if($O[$i]->objectType == 'image'){                                        //-- image
-
+			
 				$O[$i]->LINES                   = array('');
                 $path                           = '';
                 $im                             = $O[$i]->image;
+                $im                             = $O[$i]->fieldName;
                 
                 if(nuIsField($im)){                                                               //-- name of field in $GLOBALS['TABLE_ID']
-                
-                    $fld                        = $this->ROW[$im];
-                    
-                    if(nuIsRecord($fld)){                                                         //-- valid code in zzzzsys_file
-                    
-                        $path                   = nuCreateFile($fld);
-                        $GLOBALS['nu_files'][]  = $path;
-                        
-                    }else if(nuIsFile($fld)){                                                     //-- valid file path
-                    
-                        $path                   = $fld;
-                        
-                    }
-                    
+				
+					$fld                        = $this->ROW[$im];
+					$path                   	= nuCreateFile($fld);
+					$GLOBALS['nu_files'][]  	= $path;
+
                 }else{
-                
-                    if(nuIsRecord($im)){                                                          //-- valid code in zzzzsys_file
-                    
-                        $path                   = nuCreateFile($im);
+					
+					$j							= nuIsImage($im);
+					
+                    if($j != ''){                                                          //-- valid code in zzzzsys_file
+						
+                        $path                   = nuCreateFile($j);
                         $GLOBALS['nu_files'][]  = $path;
                         
                     }else if(nuIsFile($im)){                                                      //-- valid file path
-                    
                         $path                   = $im;
-
                     }
                     
                 }
-
+				
                 $O[$i]->path              = $path;
+nudebug($path);
             }
 
         }
@@ -1062,14 +1055,22 @@ function nuIsField($i){
     
 }
 
-function nuIsRecord($i){
+function nuIsImage($i){
+	
+	if(substr($i, 0, 6) == 'Image:'){
+			
+		$c = substr($i, 6);
+		
+		$t = nuRunQuery("SELECT * FROM zzzzsys_file WHERE sfi_code = ? ", array($c));
+		$r = db_fetch_object($t);
+nudebug($c, $r);
+		
+		return $r->sfi_json;
+		
+	}else{
+		return '';
+	}
 
-    $t = nuRunQuery("SELECT zzzzsys_file_id FROM zzzzsys_file WHERE sfi_code = ? ", array($i));
-    $r = db_fetch_object($t);
-    
-    
-    if($r=='') return false;
-    else return $r->zzzzsys_file_id != '';
     
 }
 
