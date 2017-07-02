@@ -1426,6 +1426,10 @@ function nuSetTitle(t){
 
 	nuFORM.setProperty('title', t);
 	
+	var b 	= $('.nubreadcrumb').length;
+	
+	$('#nuBreadcrumb' + b).html(t);
+	
 }
 
 

@@ -456,7 +456,7 @@ function nuGetLookupValues($R, $O){
 		WHERe 
 			`$r->sfo_primary_key` = '$O->value'
     ";
-	
+nudebug($s);	
 	$s			= nuReplaceHashVariables($s);
     $t 			= nuRunQuery($s);
     $l 			= db_fetch_row($t);
@@ -1139,7 +1139,7 @@ function nuGetAllLookupList(){
 	$s				= "
 					SELECT $id, $code, $description
 					$SQL->from
-					WHERE $code LIKE '%$C%'
+					WHERE $code LIKE '$C'
 					ORDER BY $code
 					LIMIT 0 , 10
 					";
