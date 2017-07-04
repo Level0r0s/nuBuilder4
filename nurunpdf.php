@@ -1,5 +1,5 @@
 <?php 
-session_start();
+require_once('nusession.php');
 require_once('nucommon.php'); 
 require_once('nudata.php'); 
 require_once('fpdf/fpdf.php');
