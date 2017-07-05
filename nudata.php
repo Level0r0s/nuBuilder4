@@ -168,11 +168,10 @@ function nuUpdateTables(){
 						$v		= $row[$R];
 						
 						if(gettype($v) == 'array'){
-							$add= implode('#nuSep#', $v);
-						}else{
-							$add= addslashes($v);
+							$v	= implode('#nuSep#', $v);
 						}
 
+						$add	= addslashes($v);
 						$fld	= $fields[$R];
 						$V[]	= "'$add'";
 						$I[]	= "`$fld`";
