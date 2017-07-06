@@ -1,4 +1,5 @@
 <?php 
+$_POST['nuSTATE']['call_type'] = '';
 require_once('nusession.php');
 require_once('nucommon.php'); 
 require_once('nudata.php'); 
@@ -22,9 +23,10 @@ $PDF                        = new FPDF($LAYOUT->orientation, 'mm', $LAYOUT->pape
 $PDF->SetAutoPageBreak(false);
 $REPORT                     = nuSetPixelsToMM($LAYOUT);
 $PDF->SetMargins(1,1,1);
-$evalPHP = new nuEvalPHPClass($JSON->parentID);            //-- build temp table for report from php
+nuBuildTempTable($JSON->parentID, $TABLE_ID);
+//$evalPHP 					= new nuEvalPHPClass($JSON->parentID);            //-- build temp table for report from php
 
-$GLOBALS['nu_columns']       = nuAddCriteriaValues($hashData, $TABLE_ID);
+$GLOBALS['nu_columns']		= nuAddCriteriaValues($hashData, $TABLE_ID);
 
 nuRunQuery("ALTER TABLE $TABLE_ID ADD `nu__id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST");
 

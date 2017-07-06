@@ -4,13 +4,16 @@ require_once('nudatabase.php');
 require_once('config.php');
 
 if($_POST['nuSTATE']['call_type'] == 'login'){
+	
     $checkLoginDetailsSQL = "
         SELECT * 
         FROM zzzzsys_user 
         JOIN zzzzsys_access_level ON zzzzsys_access_level_id = sus_zzzzsys_access_level_id              
         WHERE sus_login_name = ? AND sus_login_password = ?
     ";
+
     $checkLoginDetailsQRY = nuRunQuery($checkLoginDetailsSQL, array($_POST['nuSTATE']['username'], md5($_POST['nuSTATE']['username'])));
+
     if(
         db_num_rows($checkLoginDetailsQRY) > 0 || 
         (

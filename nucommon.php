@@ -402,10 +402,15 @@ function nuRunReport($nuRID){
 	$_POST['nuHash']['code']			= $nuA->sre_code;
 	$_POST['nuHash']['description']		= $nuA->sre_description;
 	$_POST['nuHash']['sre_layout']		= nuReplaceHashVariables($nuA->sre_layout);
+	$_POST['nuHash']['parentID']		= $nuA->sre_zzzzsys_php_id;
+	
+/*	
 	$nuI								= $nuA->sre_zzzzsys_php_id;
 	$nuT								= nuRunQuery("SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = '$nuI'");
 	$nuR								= db_fetch_object($nuT);
 	$_POST['nuHash']['parentID']		= $nuR->zzzzsys_php_id;
+*/
+
 	$nuJ								= json_encode($_POST['nuHash']);
 	$_SESSION[$nuID]					= $nuJ;
 	
@@ -961,9 +966,9 @@ function nuPunctuation($f){
 }
 
 
-function nuTTList($p, $l){
-nudebug($p, $l);	
-	$t		= nuRunQuery('SELECT * FROM zzzzsys_object WHERE  zzzzsys_object_id = ?' , [$l]);
+function nuTTList($id, $l){
+
+	$t								= nuRunQuery('SELECT * FROM zzzzsys_object WHERE  zzzzsys_object_id = ?' , [$l]);
 	
 	while($r = db_fetch_object($t)){						//-- add default empty hash variables
 		$_POST['nuHash'][$r->sob_all_id]	= '';
@@ -971,12 +976,51 @@ nudebug($p, $l);
 	
 	$tt								= nuTT();
 	$_POST['nuHash']['TABLE_ID']	= $tt;
-	$e								= new nuEvalPHPClass($p);
+	
+	nuBuildTempTable($id, $tt);
+	
 	$f								= db_field_names($tt);
 	
 	nuRunQuery("DROP TABLE $tt");
 	
 	return $f;
+	
+}
+
+
+function nuBuildTempTable($id, $tt){
+	nudebug($id, $tt);
+		
+	$s		= "
+			SELECT COUNT(*) 
+			FROM zzzzsys_php
+			WHERE zzzzsys_php_id = ?
+		";
+		
+	$t		= nuRunQuery($s,[$id]);
+	$r		= db_fetch_row($t);
+
+
+	if($r[0] == 0){							//-- if not from zzzzsys_php
+		
+		$s	= "
+				SELECT sse_sql 
+				FROM zzzzsys_select
+				WHERE zzzzsys_select_id = ?
+			";
+			
+		$t	= nuRunQuery($s,[$id]);
+		$r	= db_fetch_row($t);
+		$p	= nuReplaceHashVariables($r[0]);
+		$P	= "	nuRunQuery('CREATE TABLE $tt $p');";
+			
+	nudebug($P);
+
+		eval($P);
+		
+	}else{
+		$e	= new nuEvalPHPClass($id);
+	}
 	
 }
 
