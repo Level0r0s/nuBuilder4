@@ -1060,12 +1060,12 @@ function nuImageList($f){
 
 function nuCreateFile($j){
 
-	if(j == ''){return '';}
+	if($j == ''){return '';}
 
 	$id		= nuID();
 	$f		= json_decode($j);
 	$t		= explode('/',$f->type)[1];
-	$file	= "tmp/$id." . $t;
+	$file	= sys_get_temp_dir()."/$id." . $t;
 	$h		= fopen($file , 'w');
 	$d		= base64_decode($f->file);
 	$p		= explode(';base64,', $d)[1];
