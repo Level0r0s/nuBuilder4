@@ -624,7 +624,8 @@ function nuSetTools(){
 	
 		var e  = document.createElement('div');
 		var h = '';
-		h = h + '<div id="nuItemU" onclick="nuUndo()" title="Undo" class="nuToolbar" style="width:80px">Undo<span style="font-weight:normal;font-size:12px;">('+(nuBACKUP.length-1)+')</span></div>';
+		h = h + '<img id="nuUndoa"  onclick="nuUndo()" src="nu_undo.png" title="Undo" style="position:absolute;top:5px;left:5px;height:15px;width:15px">';
+//		h = h + '<div id="nuItemU" onclick="nuUndo()" title="Undo" class="nuToolbar" style="width:80px">Undo<span style="font-weight:normal;font-size:12px;">('+(nuBACKUP.length-1)+')</span></div>';
 		h = h + '<div id="nuItem0" onclick="nuNewObject()" class="nuToolbar">New Object</div>';
 		h = h + '<div id="nuItem1" onclick="nuCloneObjects(false)" class="nuToolbar">Clone Object</div>';
 		h = h + '<div id="nuItem7" onclick="nuSelectDialog()" class="nuToolbar">Select Objects</div>';
@@ -638,13 +639,13 @@ function nuSetTools(){
 		$('body').prepend(e);
 
 		$('#nuToolBar').css({
-						'position':'absolute', 
-						'left':10, 
-						'top':10, 
-						'width':1300, 
-						'height':25, 
-						'background-color':'lightgrey', 
-						'font-size':16
+						'position'			: 'absolute', 
+						'left'				: 10, 
+						'top'				: 10, 
+						'width'				: 1200, 
+						'height'			: 25, 
+						'background-color'	: 'lightgrey', 
+						'font-size'			: 16
 						});
 
 		$('#nuToolBar').html(h);
