@@ -3038,17 +3038,17 @@ function nuBuildFormula(p, f){
 function nuRebuild_nuTotal(p, s){
 	
 	var t	= s.trim();
-	t		= t.substr(0, t.length-2)
-	t		= t.substr(9)
+	t		= t.substr(0, t.length-1)
+	t		= t.substr(8)
 	t		= t.split('.');
 				
 	if(t.length == 1){
 
-		var n	= 'nuTotal("' + p + t[0] + '")';
+		var n	= "nuTotal('" + p + t[0] + "')";
 		
 	}else{
 		
-		var n	= 'nuTotal("' + t[0] + '.' + t[1] + '")';
+		var n	= "nuTotal('" + t[0] + '.' + t[1] + "')";
 		
 	}
 	

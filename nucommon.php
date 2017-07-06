@@ -962,7 +962,7 @@ function nuPunctuation($f){
 
 
 function nuTTList($p, $l){
-	
+nudebug($p, $l);	
 	$t		= nuRunQuery('SELECT * FROM zzzzsys_object WHERE  zzzzsys_object_id = ?' , [$l]);
 	
 	while($r = db_fetch_object($t)){						//-- add default empty hash variables

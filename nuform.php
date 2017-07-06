@@ -456,7 +456,7 @@ function nuGetLookupValues($R, $O){
 		WHERe 
 			`$r->sfo_primary_key` = '$O->value'
     ";
-nudebug($s);	
+	
 	$s			= nuReplaceHashVariables($s);
     $t 			= nuRunQuery($s);
     $l 			= db_fetch_row($t);
@@ -1207,55 +1207,6 @@ function nuAddPrintButtons($f, $t, $a){
 	
 	$f->forms[0]->buttons[$i][0] = $t;
 	$f->forms[0]->buttons[$i][1] = $t.$a;
-	
-}
-
-
-function nuAddSystemEvent($event){
-	
-	$F			= $_POST['nuHash']['RECORD_ID'];
-	$events		= ['BB' => 'Before Browse','BE' => 'Before Edit','BS' => 'Before Save','AS' => 'After Save','BD' => 'Before Delete','AD' => 'After Delete'];
-	
-	foreach ($events as $key => $value) {
-		
-		$i		= $F . '_' . $key;
-		$s		= "
-				SELECT * 
-				FROM zzzzsys_php 
-				WHERE 
-					zzzzsys_php_id = ?
-				";
-
-		$t		= nuRunQuery($s, array($i));
-
-		if(db_num_rows($t) == 0){
-	
-			$r	= db_fetch_row($t);
-			$e	= $value . ' for ' . $r->sfo_code . ' ' . $r->sfo_description;
-			$s	= "
-
-					INSERT INTO zzzzsys_php 
-					(
-						zzzzsys_php_id, 
-						sph_description, 
-						sph_group, 
-						sph_system
-					) 
-					VALUES 
-					(
-						'$i',
-						'$e',
-						'nubuilder',
-						'1'
-					 );
-		 
-				";
-			 
-			$t	= nuRunQuery($s);
-			
-		}
-		 
-	}
 	
 }
 
