@@ -42,6 +42,7 @@ function nuBuildForm(f){
 	b.record_id 				= f.record_id;
 	b.session_id 				= f.session_id;
 	b.user_id 					= f.user_id;
+	b.redirect_form_id			= f.redirect_form_id;
 	b.title 					= f.title;
 	b.row_height 				= f.row_height;
 	b.rows 						= f.rows;
@@ -2119,7 +2120,8 @@ function nuSearchAction(){
 function nuAddAction(){
 
 	var bc					= window.nuFORM.getCurrent();
-	nuForm(bc.form_id, '-1');
+//	nuForm(bc.form_id, '-1');
+	nuForm(bc.redirect_form_id, '-1');
 	
 }
 

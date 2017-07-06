@@ -989,7 +989,6 @@ function nuTTList($id, $l){
 
 
 function nuBuildTempTable($id, $tt){
-	nudebug($id, $tt);
 		
 	$s		= "
 			SELECT COUNT(*) 

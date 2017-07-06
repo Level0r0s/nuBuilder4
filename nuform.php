@@ -390,6 +390,7 @@ function nuGetEditForm($F, $R){
     $f->type        	= $r->sfo_type;
     $f->table       	= nuReplaceHashVariables($r->sfo_table);
     $f->primary_key 	= $r->sfo_primary_key;
+    $f->redirect_form_id= $r->sfo_browse_redirect_form_id == '' ? $r->zzzzsys_form_id : $r->sfo_browse_redirect_form_id;
     $f->order			= $SQL->orderBy;
     $f->where			= $SQL->where;
     $f->from			= $SQL->from;
