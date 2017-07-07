@@ -241,8 +241,12 @@ if(session_status() == PHP_SESSION_NONE){
 }
 
 if(isset($_SESSION['SESSION_ID'])){
-	
-    if(isset($_SESSION['SESSION_TIMESTAMP'])){
+
+    if($_SESSION['SESSION_ID'] == 'tempanonreport'){
+        // only let the user have 1 temporary report run
+        $_SESSION['SESSION_ID'] = null;
+        $_SESSION['SESSION_TIMESTAMP'] = null;
+    } else if(isset($_SESSION['SESSION_TIMESTAMP'])){
 		
         $t = nuRunQuery("SELECT * FROM zzzzsys_setup");
         $r = db_fetch_object($t);
