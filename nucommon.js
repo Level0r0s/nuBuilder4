@@ -578,7 +578,8 @@ function nuPreview(a){
 	var	t	= String($('#sfo_type').val());
 	var b	= t.indexOf('browse') != -1;
     var f   = nuFORM.getProperty('form_id');
-    var r   = nuFORM.getProperty('record_id');
+//    var r   = nuFORM.getProperty('record_id');
+    var r   = nuFORM.getProperty('redirect_form_id');
     
     if(r == '-1'){
         
