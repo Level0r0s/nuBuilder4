@@ -64,7 +64,7 @@ function nuBackButton(){
 	$('body').append(img);
 	
 	$('#' + id)
-	.attr('src', 'nubackbutton.png')
+	.attr('src', 'graphics/nubackbutton.png')
 	.css({'top' : 2 , 'right' : 2 ,'width' : 20 , 'height' : 20 ,'position' : 'absolute'})
 	.addClass('nuIcon')
 	.attr('title','Back')

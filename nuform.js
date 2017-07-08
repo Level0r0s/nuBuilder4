@@ -88,7 +88,7 @@ function nuBuildForm(f){
 	
 	if(f.messages.length > 0){
 
-		var im		= ['<img src="numessage.png" width="30px" height="30px" style="position:absolute;left:10px;top:10px"><br>'];
+		var im		= ['<img src="graphics/numessage.png" width="30px" height="30px" style="position:absolute;left:10px;top:10px"><br>'];
 
 		f.messages	= im.concat(f.messages);
 
@@ -238,7 +238,7 @@ function nuAddActionButtons(f){
 	}
 
 	if(window.parent.length == 0){ //-- only if Main Form
-		$('#nuActionHolder').append("<img id='thelogo' src='logo.png' style='position:absolute;right:20px'>");
+		$('#nuActionHolder').append("<img id='thelogo' src='graphics/logo.png' style='position:absolute;right:20px'>");
 	}
 	
 }
@@ -620,7 +620,7 @@ function nuINPUT(w, i, l, p, prop){
 		.attr('data-nu-subform-sort', 1)
 		.attr('onclick', 'nuBuildLookup(this,"")')
 		.addClass('nuLookupButton')
-		.html('<img border="0" src="magnify.png" class="nuLookupImg">')
+		.html('<img border="0" src="graphics/magnify.png" class="nuLookupImg">')
 		.css('visibility', vis);
 
 		id = p + prop.objects[i].id + 'description';
@@ -1372,7 +1372,7 @@ function nuBuildSubformDeleteTitle(l, id, subform_id){
 					'padding'     	: 0,
 					'position'      	: 'absolute'
 	})
-	.html('<img id="nuMoveable" src="numove.png" style="padding:8px;width:12px;height:12px;" title="Arrange Objects"><br>Delete')
+	.html('<img id="nuMoveable" src="graphics/numove.png" style="padding:8px;width:12px;height:12px;" title="Arrange Objects"><br>Delete')
 	.addClass('nuTabHolder')
 	.attr('onclick','nuPopup("'+subform_id+'", "-2");');
 
@@ -1558,7 +1558,7 @@ function nuOptions(p, f, t, access){
 		}
 
 		$('#' + id)
-		.attr('src', 'nuoptions.png')
+		.attr('src', 'graphics/nuoptions.png')
 		.attr('title', 'Options')
 		.attr('onclick', 'nuGetOptionsList("' + f + '", this, "' + p + '", "' + access + '", "' + t + '")')
 		.css({'top'			: 5, 
@@ -1570,9 +1570,9 @@ function nuOptions(p, f, t, access){
 		'border-style' 		: 'none'})
 		.addClass('nuIcon')
 		.hover(function(){
-			$( this ).attr('src', 'nuoptions_red.png');
+			$( this ).attr('src', 'graphics/nuoptions_red.png');
 		}, function(){
-			$( this ).attr('src', 'nuoptions.png');
+			$( this ).attr('src', 'graphics/nuoptions.png');
 		});
 		
 		if(t == 'form'){
@@ -1604,21 +1604,21 @@ function nuGetOptionsList(f, t, p, a, type){
 	var ul		= '<ul>';
 	
 	if(nuFORM.getProperty('record_id') == ''){
-		list.push(['Searchable Columns', 	'nuGetSearchList()', 						'nu_option_search.png', 	'Ctrl+Shft+S']);
+		list.push(['Searchable Columns', 	'nuGetSearchList()', 						'graphics/nu_option_search.png', 	'Ctrl+Shft+S']);
 	}
 
 	if(a == 1){
 		
 		if(nuSERVERRESPONSE.form_access == 0 || String(f).substr(0,2) != 'nu'){
 		
-			list.push(['Arrange Objects', 		'nuPopup("' + f + '", "-2")', 			'nu_option_arrange.png', 		'Ctrl+Shft+A']);
-			list.push(['Form Properties', 		'nuPopup("nuform", "' + f + '")', 		'nu_option_properties.png',		'Ctrl+Shft+F']);
-			list.push(['Form Object List', 		'nuPopup("nuobject", "", "' + f + '")', 'nu_option_objects.png',		'Ctrl+Shft+O']);
+			list.push(['Arrange Objects', 		'nuPopup("' + f + '", "-2")', 			'graphics/nu_option_arrange.png', 		'Ctrl+Shft+A']);
+			list.push(['Form Properties', 		'nuPopup("nuform", "' + f + '")', 		'graphics/nu_option_properties.png',		'Ctrl+Shft+F']);
+			list.push(['Form Object List', 		'nuPopup("nuobject", "", "' + f + '")', 'graphics/nu_option_objects.png',		'Ctrl+Shft+O']);
 			
 		}
 		
 		if(type != 'subform'){
-			list.push(['nuDebug', 				'nuPopup("nudebug", "")', 					'nu_option_debug.png',			'Ctrl+Shft+D']);
+			list.push(['nuDebug', 				'nuPopup("nudebug", "")', 					'graphics/nu_option_debug.png',			'Ctrl+Shft+D']);
 		}
 		
 	}else{
@@ -1629,8 +1629,8 @@ function nuGetOptionsList(f, t, p, a, type){
 
 	if(nuFORM.getProperty('record_id') != '' && type != 'subform'){
 		
-		list.push(['Save Form', 			'nuSaveAction();', 							'nu_option_save.png',		'Ctrl+Shft+S']);
-		list.push(['Refresh', 				'nuGetBreadcrumb()', 						'nu_option_refresh.png', 	'Ctrl+Shft+R']);
+		list.push(['Save Form', 			'nuSaveAction();', 							'graphics/nu_option_save.png',		'Ctrl+Shft+S']);
+		list.push(['Refresh', 				'nuGetBreadcrumb()', 						'graphics/nu_option_refresh.png', 	'Ctrl+Shft+R']);
 		
 	}
 	
@@ -1684,7 +1684,7 @@ function nuGetOptionsList(f, t, p, a, type){
 	.click(function(){
 		$( "#nuOptionsListBox" ).remove();
 	})
-	.html('<img id="nuOptionListClose" src="nuclose.png" >')
+	.html('<img id="nuOptionListClose" src="graphics/nuclose.png" >')
 	.addClass('nuSearchListClose');
 	
 	nuBuildOptionsList(list, p);
@@ -2891,7 +2891,7 @@ function nuGetSearchList(){
 		'text-align'    	: 'center'
 	})
 	.attr('onclick', '$("#nuSearchList").remove();$("#nuModal").remove();')
-	.html('<img id="nuOptionListClose" src="nuclose.png" width="20px" height="20px">')
+	.html('<img id="nuOptionListClose" src="graphics/nuclose.png" width="20px" height="20px">')
 	.addClass('nuSearchListClose');
 	
 	for(var i = 0 ; i < c.length ; i++){
@@ -3005,7 +3005,7 @@ function nuMessage(o, type){
 	var l		= (screen.width - widest) / 2;
 
 	$('body', par).append("<div id='nuAlertDiv' class='nuMessage' style='overflow:hidden;width:" + widest + "px;left:" + l + "px' " + c + "></div>")
-	$('#nuAlertDiv').prepend('<img id="nuOptionListClose" src="nuclose.png" class="nuSearchListClose" style="position:absolute;top:5px;right:5px" onclick="$(this).parent().remove()" width="20px" height="20px">')
+	$('#nuAlertDiv').prepend('<img id="nuOptionListClose" src="graphics/nuclose.png" class="nuSearchListClose" style="position:absolute;top:5px;right:5px" onclick="$(this).parent().remove()" width="20px" height="20px">')
 	
 	
 	for(var i = 0 ; i < o.length ; i++){

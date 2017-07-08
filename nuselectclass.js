@@ -142,7 +142,7 @@ class nuSelectObject{
 			'color'				: 'black',
 			'text-align'    	: 'center',
 		})
-		.html('<img onclick="$(this).parent().parent().remove();nuSQL.buildSQL()" id="nbc' + this.boxID + '" src="nu_box_close.png" width="10px" height="10px">')
+		.html('<img onclick="$(this).parent().parent().remove();nuSQL.buildSQL()" id="nbc' + this.boxID + '" src="graphics/nu_box_close.png" width="10px" height="10px">')
 		.addClass('nuDragNoSelect')
 		.addClass('nuButtonHover')
 		.addClass('nuSearchListClose');

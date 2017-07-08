@@ -709,7 +709,7 @@ input[type=range]::-webkit-slider-runnable-track {
 	-webkit-user-select:none; 
 	overflow:visible; 
 	background-color:white;
-	background-image: url("grid.png"); 
+	background-image: url("graphics/grid.png"); 
 	z-index: 1;
 }
 
@@ -900,7 +900,7 @@ input[type=range]::-webkit-slider-runnable-track {
 	font-size:11px;
     padding:10px 10px 10px 36px;
     margin: 0px auto;
-	background:#fff8c4 url('warning.png') no-repeat 10px 10px;
+	background:#fff8c4 url('graphics/warning.png') no-repeat 10px 10px;
     border:1px solid #f2c779;
 	width: 500px;
 	height: 500px;

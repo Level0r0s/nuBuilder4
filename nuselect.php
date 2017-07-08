@@ -26,7 +26,7 @@ nuCSSInclude('nudrag.css');
 <style>
 
 body  {
-    background-image: url("grid.png");
+    background-image: url("graphics/grid.png");
 }
 
 </style>

@@ -48,7 +48,7 @@ function nuPopupCalendar(pThis){
 	.attr('onmouseout', 'window.nuOnCalendar = 0')
 	.css({'top':(top + h + 3), left: left})
 	.addClass('nuCalendar nuCalendarColor')
-	.html('<img id="dialogCalClose" src="close.png" style="position: absolute; top: 0px; right: 0px;" onclick="$(\'#nuCalendar\').remove()">');
+	.html('<img id="dialogCalClose" src="graphics/close.png" style="position: absolute; top: 0px; right: 0px;" onclick="$(\'#nuCalendar\').remove()">');
 	
 	var c 					= nuAppendChild('#nuTabAreaHolder','div','nuCalCloser');
 
