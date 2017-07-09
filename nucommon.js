@@ -847,7 +847,11 @@ function nuResizeWindow(e){
 }
 
 
-function nuGetSubformObject(id){
+//function nuGetSubformObject(id){
+//	return nuFORM.subform(id);
+//}
+
+function nuSubformObject(id){
 	return nuFORM.subform(id);
 }
 
