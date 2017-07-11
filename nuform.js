@@ -247,6 +247,8 @@ function nuAddActionButtons(f){
 
 function nuAddActionButton(i, v, f){
 	
+	v		= String(v).replaceAll(' ', '_');
+	
 	if(arguments.length == 1){
 		
 		v	= i;
@@ -2993,7 +2995,7 @@ function nuMessage(o, type){
 		return;
 	}
 	
-	var c		= "";// onclick=\"$('#nuAlertDiv').remove();\"";
+	var c		= " onclick=\"$('#nuAlertDiv').remove();\"";
 	var widest	= 5;
 
 	for(var i = 0 ; i < o.length ; i++){
@@ -3003,9 +3005,8 @@ function nuMessage(o, type){
 	widest		= Math.min(widest + 200, 1000);
 	
 	var l		= (screen.width - widest) / 2;
-
-	$('body', par).append("<div id='nuAlertDiv' class='nuMessage' style='overflow:hidden;width:" + widest + "px;left:" + l + "px' " + c + "></div>")
-	$('#nuAlertDiv').prepend('<img id="nuOptionListClose" src="graphics/nuclose.png" class="nuSearchListClose" style="position:absolute;top:5px;right:5px" onclick="$(this).parent().remove()" width="20px" height="20px">')
+	$('body', par).append("<div id='nuAlertDiv' class='nuMessage' style='overflow:hidden;width:" + widest + "px;left:" + l + "px' ></div>")
+	$('#nuAlertDiv', par).prepend('<img id="nuOptionListClose" src="graphics/nuclose.png" class="nuSearchListClose" style="position:absolute;top:5px;left:5px" ' + c + ' width="20px" height="20px">')
 	
 	
 	for(var i = 0 ; i < o.length ; i++){
