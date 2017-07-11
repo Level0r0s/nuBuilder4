@@ -550,13 +550,14 @@ function nuINPUT(w, i, l, p, prop){
 	}
 
 	if(prop.objects[i].type == 'calc'){
+		
+		var TOT	= String(w.objects[i].formula).replaceAll("al('", "al('" + p);
 
 		$('#' + id).addClass('nuCalculator')
-		
 		.attr('data-nu-format', w.objects[i].format)
 		.attr('data-nu-calc-order', w.objects[i].calc_order)
 		.prop('readonly', true).prop('tabindex', -1)
-		.attr('data-nu-formula', nuBuildFormula(p, w.objects[i].formula))
+		.attr('data-nu-formula', TOT);
 		
 		if(p != ''){
 			$('#' + id).addClass('nuSubformObject');
@@ -2120,7 +2121,6 @@ function nuSearchAction(){
 function nuAddAction(){
 
 	var bc					= window.nuFORM.getCurrent();
-//	nuForm(bc.form_id, '-1');
 	nuForm(bc.redirect_form_id, '-1');
 	
 }
@@ -2466,8 +2466,8 @@ function nuChange(e){
 	nuAddSubformRow(t, e);
 	
 }
-
-function nuChangeFile(e){
+/*
+//function nuChangeFile(e){
 
 	if(e.target.id.substr(-8) == 'nuDelete'){
 		
@@ -2494,7 +2494,7 @@ function nuChangeFile(e){
 	nuAddSubformRow(t, e);
 	
 }
-
+*/
 
 function nuChangeFile(e){
 
@@ -3017,6 +3017,7 @@ function nuMessage(o, type){
 
 }
 
+/*
 
 function nuBuildFormula(p, f){
 
@@ -3031,6 +3032,8 @@ function nuBuildFormula(p, f){
 		}
 		
 	}	
+console.log(bits);
+
 	
 	return bits.join(' ');
 	
@@ -3045,19 +3048,22 @@ function nuRebuild_nuTotal(p, s){
 	t		= t.split('.');
 				
 	if(t.length == 1){
-
-		var n	= "nuTotal('" + p + t[0] + "')";
+		
+		var O	= String(t[0]).replaceAll("'", '');
+		var n	= "nuTotal('" + p + O + "')";
 		
 	}else{
 		
-		var n	= "nuTotal('" + t[0] + '.' + t[1] + "')";
+		var S	= String(t[0]).replaceAll("'", '');
+		var O	= String(t[1]).replaceAll("'", '');
+		var n	= "nuTotal('" + S + '.' + O + "')";
 		
 	}
 	
 	return n;
 	
 }
-
+*/
 
 function nuWindowPosition(){
 	
