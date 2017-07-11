@@ -43,13 +43,13 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
     $f				= nuGetEditForm($F, $R);
     $f->form_id		= $F;
     $f->record_id	= $R;
-	
+
 	if(!array_key_exists($f->table, $_POST['nuTableSchema'])){
 		
 		$A			= array();
 		
 	}else{
-		
+
 		$s 			= "Select * From `$f->table` Where `$f->primary_key` = '$R'";
 		$t 			= nuRunQuery($s);
 		$A 			= db_fetch_array($t);
@@ -71,7 +71,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 
 		$t 							= nuRunQuery($s, array($F));
 		$a 							= array();
-		
+
 		while($r = db_fetch_object($t)){
 			
 			$o 						= nuDefaultObject($r, $tabs);
@@ -634,7 +634,7 @@ function nuGetSQLValue($s){
     
         $t	= nuRunQuery($s);
         $r	= db_fetch_row($t);
-		
+
         return $r[0];
         
     }
