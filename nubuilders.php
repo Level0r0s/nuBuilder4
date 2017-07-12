@@ -148,7 +148,7 @@ function nuBuildFastForm($table){
 		if($y == 'lookup'){                         $a[] = Array('name'=>$id, 'type'=>'id');}
 		if($y == 'select'){                         $a[] = Array('name'=>$id, 'type'=>'varchar');}
 		if($y == 'calc'){                           $a[] = Array('name'=>$id, 'type'=>'varchar');}
-		if($y == 'text'){                           $a[] = Array('name'=>$id, 'type'=>'text');}
+		if($y == 'textarea'){                       $a[] = Array('name'=>$id, 'type'=>'textarea');}
 		if($y == 'input' && $norm){                 $a[] = Array('name'=>$id, 'type'=>'varchar');}
 		if($y == 'input' && $date){                 $a[] = Array('name'=>$id, 'type'=>'date');}
 		if($y == 'input' && $i == 'number'){        $a[] = Array('name'=>$id, 'type'=>'int');}
@@ -238,9 +238,38 @@ function nuBuildFastForm($table){
 	nuDisplayMessage("<p>(There is now a Button called <b>$table</b> on the Testing tab of the Home Form)</p>");
 	nuDisplayMessage("<input type='button' value='Go to tab..' class='nuButton' onclick='nuGetBreadcrumb(0,2);'>");
 
-	
-	
-	
 }
+
+
+
+function nuBuildTable($tab, $array){
+
+	$id			= $tab . '_id';
+	$start		= "CREATE TABLE $tab";
+	$a			= Array();
+	$a[] 		= "$id VARCHAR(25) NOT NULL";
+
+	for($i = 0 ; $i < count($array) ; $i++){
+
+		$f		= $array[$i]['name'];
+		$t		= $array[$i]['type'];
+		
+		if($t == 'id'){				$a[] = "$f VARCHAR(25) NOT NULL";}
+		if($t == 'varchar'){		$a[] = "$f VARCHAR(1000) NOT NULL";}
+		if($t == 'int'){			$a[] = "$f INT NOT NULL";}
+		if($t == 'textarea'){		$a[] = "$f TEXT NOT NULL";}
+		if($t == 'decimal'){		$a[] = "$f DECIMAL(12,4) NOT NULL";}
+		if($t == 'date'){			$a[] = "$f DATE NOT NULL";}
+		if($t == 'longtext'){		$a[] = "$f LONGTEXT NOT NULL";}
+		
+	}
+	
+	$a[]							= "PRIMARY KEY  ($id)";
+	$im								= implode(',', $a);
+	return "$start ($im)";
+
+}
+
+
 
 ?>
