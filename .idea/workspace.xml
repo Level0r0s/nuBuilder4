@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="de5a7e1b-d26a-4f8d-b204-6ab44d56c282" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/README.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/GetFormTest.php" afterPath="$PROJECT_DIR$/tests/GetFormTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/RunQuery.php" afterPath="$PROJECT_DIR$/tests/RunQuery.php" />
     </list>
     <ignored path="nuBuilder4.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -139,11 +138,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GetFormTest.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GetFormTest.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/GetFormTest.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="87" column="30" lean-forward="true" selection-start-line="87" selection-start-column="30" selection-end-line="87" selection-end-column="30" />
+            <state relative-caret-position="440">
+              <caret line="137" column="11" lean-forward="true" selection-start-line="137" selection-start-column="11" selection-end-line="137" selection-end-column="11" />
               <folding>
                 <element signature="e#7#89#0#PHP" expanded="true" />
                 <element signature="e#91#122#0#PHP" expanded="true" />
@@ -159,6 +158,19 @@
                 <marker date="1499825302669" expanded="true" signature="7017:7220" ph="CREATE TABLE... test_auto_inc_pk" />
                 <marker date="1499825302669" expanded="true" signature="7368:7459" ph="INSERT INTO nubuilder4.test_auto_inc_pk... " />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="187">
+                <caret line="11" column="3" lean-forward="true" selection-start-line="11" selection-start-column="3" selection-end-line="11" selection-end-column="3" />
+                <folding />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -255,6 +267,7 @@
         <option value="$PROJECT_DIR$/test_response" />
         <option value="$PROJECT_DIR$/tests/RunQuery.php" />
         <option value="$PROJECT_DIR$/tests/GetFormTest.php" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -444,7 +457,7 @@
       <workItem from="1473211232470" duration="653000" />
       <workItem from="1473295530284" duration="207000" />
       <workItem from="1493330734535" duration="823000" />
-      <workItem from="1499750507407" duration="17676000" />
+      <workItem from="1499750507407" duration="18541000" />
     </task>
     <task id="LOCAL-00001" summary="Added composer, phpunit and guzzle to start testing.">
       <created>1499760014798</created>
@@ -460,11 +473,18 @@
       <option name="project" value="LOCAL" />
       <updated>1499824076723</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Wrote tests to test login, and adding a new table while logging in, with core code erroring if schema is incorrect.">
+      <created>1499825330143</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1499825330143</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27138000" />
+    <option name="totallyTimeSpent" value="28003000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -505,6 +525,8 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="Added composer, phpunit and guzzle to start testing." />
     <MESSAGE value="Wrote tests to test login, and adding a new table while logging in, with core code erroring if schema is incorrect." />
     <option name="LAST_COMMIT_MESSAGE" value="Wrote tests to test login, and adding a new table while logging in, with core code erroring if schema is incorrect." />
@@ -516,14 +538,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/nuform.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19350">
-          <caret line="774" column="0" lean-forward="false" selection-start-line="774" selection-start-column="0" selection-end-line="774" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/nuajax.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="950">
@@ -1017,8 +1031,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/GetFormTest.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="87" column="30" lean-forward="true" selection-start-line="87" selection-start-column="30" selection-end-line="87" selection-end-column="30" />
+        <state relative-caret-position="440">
+          <caret line="137" column="11" lean-forward="true" selection-start-line="137" selection-start-column="11" selection-end-line="137" selection-end-column="11" />
           <folding>
             <element signature="e#7#89#0#PHP" expanded="true" />
             <element signature="e#91#122#0#PHP" expanded="true" />
@@ -1034,6 +1048,17 @@
             <marker date="1499825302669" expanded="true" signature="7017:7220" ph="CREATE TABLE... test_auto_inc_pk" />
             <marker date="1499825302669" expanded="true" signature="7368:7459" ph="INSERT INTO nubuilder4.test_auto_inc_pk... " />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="187">
+            <caret line="11" column="3" lean-forward="true" selection-start-line="11" selection-start-column="3" selection-end-line="11" selection-end-column="3" />
+            <folding />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
