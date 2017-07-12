@@ -1,5 +1,4 @@
-
-#Setup
+# Setup
 
 - Check values in config.php. Make sure they are setup correctly for your system
 - Run:
