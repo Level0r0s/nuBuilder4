@@ -573,6 +573,20 @@ function nuCreateDragOptionsBox(form){
 	
     nuCheckIfMovingTabOrderAllowed($('#nuDragOptionsFields'));
 	nuCheckIfMovingFieldToOtherTabAllowed($('#nuDragOptionsFields'));
+	
+	var help 	= "<input id='run_sam' type='button' class='input_button' value='?' ";
+	help		+= "onclick='nuMessage([";
+
+	help		+= "\"Use arrow keys to move selected Objects.\", ";
+	help		+= "\"Use arrow keys + SHIFT to resize selected Objects.\", ";
+	help		+= "\"Draw a square around Objects to highlight them.\", ";
+	help		+= "\"Hold CTRL to add Objects to the current selection.\", ";
+
+	help		+= "])' ";
+	help		+= "style='top: 2px; left: 2px; width: 21px; height: 21px; text-align: center; position: absolute;'>";
+	
+	$('body').append(help);
+	
 }
 
 function nuResizeToLowest(){
