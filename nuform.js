@@ -247,12 +247,10 @@ function nuAddActionButtons(f){
 
 function nuAddActionButton(i, v, f){
 	
-	v		= String(v).replaceAll(' ', '_');
-	
 	if(arguments.length == 1){
 		
 		v	= i;
-		f	= 'nu' + v + 'Action()';
+		f	= 'nu' + String(v).replaceAll(' ', '_') + 'Action()';
 		
 	}
 	
@@ -1626,7 +1624,7 @@ function nuGetOptionsList(f, t, p, a, type){
 		
 	}else{
 		
-		list.push(['Change Login', 			'nuPopup("nupassword", "' + u + '", "")', 	'nu_option_password.png', 	'Ctrl+Shft+L']);
+		list.push(['Change Login', 			'nuPopup("nupassword", "' + u + '", "")', 	'graphics/nu_option_password.png', 	'Ctrl+Shft+L']);
 		
 	}
 
