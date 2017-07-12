@@ -435,15 +435,8 @@ function nuRunPHP($nuRID){
 
 
 
-function nuRemoveNonCharacters($s){
-	
-	$snip = str_replace("\t", '', $s); // remove tabs
-	$snip = str_replace("\n", '', $snip); // remove new lines
-	$snip = str_replace("\r", '', $snip); // remove carriage returns	
-	
-	return $snip;
 
-}
+
 
 
 function nuRunPHPHidden($nuCode){
@@ -979,7 +972,6 @@ function nuTTList($id, $l){
 	
 }
 
-<<<<<<< HEAD
 
 function nuBuildTempTable($id, $tt){
 		
@@ -1008,36 +1000,6 @@ function nuBuildTempTable($id, $tt){
 			
 	nudebug($P);
 
-=======
-
-function nuBuildTempTable($id, $tt){
-		
-	$s		= "
-			SELECT COUNT(*) 
-			FROM zzzzsys_php
-			WHERE zzzzsys_php_id = ?
-		";
-		
-	$t		= nuRunQuery($s,[$id]);
-	$r		= db_fetch_row($t);
-
-
-	if($r[0] == 0){							//-- if not from zzzzsys_php
-		
-		$s	= "
-				SELECT sse_sql 
-				FROM zzzzsys_select
-				WHERE zzzzsys_select_id = ?
-			";
-			
-		$t	= nuRunQuery($s,[$id]);
-		$r	= db_fetch_row($t);
-		$p	= nuReplaceHashVariables($r[0]);
-		$P	= "	nuRunQuery('CREATE TABLE $tt $p');";
-			
-	nudebug($P);
-
->>>>>>> 3f0b04d1ea896696f828951a5c072d160e3e58be
 		eval($P);
 		
 	}else{
@@ -1075,36 +1037,11 @@ function nuImageList($f){
 	$c								= json_encode(array_merge($a, $f));
 
 	return $c . ";\n";
-<<<<<<< HEAD
-=======
 	
 }
 
 
 
-function nuCreateFile($j){
-
-	if($j == ''){return '';}
-
-	$id		= nuID();
-	$f		= json_decode($j);
-	$t		= explode('/',$f->type)[1];
-	$file	= sys_get_temp_dir()."/$id." . $t;
-	$h		= fopen($file , 'w');
-	$d		= base64_decode($f->file);
-	$p		= explode(';base64,', $d)[1];
-	$data 	= base64_decode($p);
->>>>>>> 3f0b04d1ea896696f828951a5c072d160e3e58be
-	
-	fwrite($h, $data);
-	fclose($h);
-	
-	return $file;
-}
-
-
-
-<<<<<<< HEAD
 function nuCreateFile($j){
 
 	if($j == ''){return '';}
@@ -1126,7 +1063,5 @@ function nuCreateFile($j){
 
 
 
-=======
->>>>>>> 3f0b04d1ea896696f828951a5c072d160e3e58be
 
 ?>

@@ -44,23 +44,9 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
     $f->form_id		= $F;
     $f->record_id	= $R;
 
-<<<<<<< HEAD
-	if(!array_key_exists($f->table, $_POST['nuTableSchema'])){
-		
-		$A			= array();
-		
-	}else{
-
-		$s 			= "Select * From `$f->table` Where `$f->primary_key` = '$R'";
-		$t 			= nuRunQuery($s);
-		$A 			= db_fetch_array($t);
-		
-	}
-=======
     $s 			= "Select * From `$f->table` Where `$f->primary_key` = '$R'";
     $t 			= nuRunQuery($s);
     $A 			= db_fetch_array($t);
->>>>>>> 3f0b04d1ea896696f828951a5c072d160e3e58be
 
 
 	$s 				= "
@@ -538,13 +524,15 @@ function nuSelectOptions($sql) {
     return $a;
 }
 
+function nuRemoveNonCharacters($s){
 
-function bob(){
+	$snip = str_replace("\t", '', $s); // remove tabs
+	$snip = str_replace("\n", '', $snip); // remove new lines
+	$snip = str_replace("\r", '', $snip); // remove carriage returns	
 	
-	return 'snip';
+	return $snip;
 
 }
-
 
 
 function nuGetSubformRecords($R, $A){

@@ -3,13 +3,7 @@
 <head>
 <?php
 
-<<<<<<< HEAD
-require_once('nuform.php'); 
-require_once('nucommon.php'); 
-require_once('nudata.php'); 
-=======
 require_once('nucommon.php');	
->>>>>>> 3f0b04d1ea896696f828951a5c072d160e3e58be
 
 nuJSInclude('jquery/jquery.js');
 nuJSInclude('nuformclass.js');

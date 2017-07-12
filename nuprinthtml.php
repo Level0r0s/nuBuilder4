@@ -1,5 +1,4 @@
 <?php 
-require_once('nuform.php'); 
 require_once('nucommon.php'); 
 require_once('nudata.php'); 
 

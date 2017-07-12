@@ -9,10 +9,7 @@
 
 use PHPUnit\Framework\TestCase;
 use GuzzleHttp\Client;
-<<<<<<< HEAD
-=======
 use Tests\RunQuery;
->>>>>>> 3f0b04d1ea896696f828951a5c072d160e3e58be
 
 final class GetFormTest extends TestCase
 {
@@ -23,20 +20,6 @@ final class GetFormTest extends TestCase
 
     public function testBasicPostTonuapi(){
         $client = new Client([
-<<<<<<< HEAD
-            'base_uri' => 'http://localhost/nuBuilder4/'
-        ]);
-        $testLoginResponse = $client->post('nuapi.php', array(
-            'form_params' => array(
-                'nuSTATE' => array(
-                    'call_type' => 'login',
-                    'username' => 'globeadmin',
-                    'password' => 'nu',
-                )
-            )
-        ));
-        $this->assertEquals(200, $testLoginResponse->getStatusCode());
-=======
             'base_uri' => 'http://localhost/nuBuilder4/',
             'cookies' => true,
         ]);
@@ -158,7 +141,6 @@ final class GetFormTest extends TestCase
         $this->assertEquals(1, count($test_response_array['objects']));
         $this->assertEquals('test', $test_response_array['objects'][0]['value']);
 
->>>>>>> 3f0b04d1ea896696f828951a5c072d160e3e58be
     }
 
 }

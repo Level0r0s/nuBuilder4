@@ -3,11 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
-<<<<<<< HEAD
--- Generation Time: Jul 12, 2017 at 04:51 AM
-=======
 -- Generation Time: Jul 11, 2017 at 10:41 PM
->>>>>>> 3f0b04d1ea896696f828951a5c072d160e3e58be
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -1399,11 +1395,7 @@ INSERT INTO `zzzzsys_php` (`zzzzsys_php_id`, `sph_code`, `sph_description`, `sph
 ('574671cdcc77367_AB', '574671cdcc77367_AB', '', '', '\n$s  = "\n        SELECT * \n        FROM zzzzsys_tab \n        JOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id\n        WHERE zzzzsys_tab_id = ''#LOOKUP_RECORD_ID#''\n        \n        ";\n\n$t  = nuRunQuery($s);\n$r  = db_fetch_object($t);\n\nnuSetFormValue(''sob_lookup_table'', $r->sfo_table);\n', '', '', '1', ''),
 ('570dab25164b394_AB', '570dab25164b394_AB', '', '', '\n$s  = "\n        SELECT * \n        FROM zzzzsys_form\n        WHERE zzzzsys_form_id = ''#LOOKUP_RECORD_ID#''\n        \n        ";\n\n$t  = nuRunQuery($s);\n$r  = db_fetch_object($t);\n\nnuSetFormValue(''sob_lookup_table'', $r->sfo_table);\n', '', '', '1', ''),
 ('nufastform', 'RUNFF', 'Run FastForm', 'nubuilder', 'nuBuildFastForm(''#fastform_table#'');\r\n', '', 'nufflaunch', '1', ''),
-<<<<<<< HEAD
-('s14919851858544', 'HW', 'Hello World', 'test', '$s = "SELECT cus_name,\ncus_phone,\ncus_address\nFROM customer\n";\n\nnuDebug(nuRemoveNonCharacters($s));\n', 'window', 'nublank', '', ''),
-=======
 ('s14919851858544', 'HW', 'Hello World', 'test', '$a = [''customer_id'', ''cus_name'', ''cus_phone'', ''cus_address''];\n$t = nuRunQuery(''select * from color'');\nnudebug($a, $t);', 'window', 'nublank', '', ''),
->>>>>>> 3f0b04d1ea896696f828951a5c072d160e3e58be
 ('s14988837505592', 'image', 'zzzzsys_file', 'test', '\n$s = "CREATE TABLE #TABLE_ID# SELECT * FROM zzzzsys_file";\n\nnuRunQuery($s);\n\n', '', 'nulaunchdates', '', ''),
 ('c14925390850522729_BB', 'c14925390850522729_BB', '', '', '\n\nnuDisplayMessage(''This message comes from...'');\nnuDisplayMessage(''before browse;'');\n\n\n', '', '', '1', ''),
 ('nuobject_BB', 'nuobject_BB', 'System PHP', '', '\n$s  = "CREATE TABLE #TABLE_ID# SELECT zzzzsys_object_id AS theid FROM zzzzsys_object WHERE ";\n$w  = "1";\n\nif($GLOBALS[''nuSetup'']->set_denied == 1){\n    $w  = "sob_all_zzzzsys_form_id LIKE ''nu%''";\n}\n\nnudebug($GLOBALS[''nuSetup'']->set_denied, "$s$w");\nnuRunQuery("$s$w");\n\n', '', '', '1', ''),
@@ -1496,16 +1488,6 @@ CREATE TABLE `zzzzsys_select` (
   `sse_system` varchar(1) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-<<<<<<< HEAD
---
--- Dumping data for table `zzzzsys_select`
---
-
-INSERT INTO `zzzzsys_select` (`zzzzsys_select_id`, `sse_description`, `sse_json`, `sse_sql`, `sse_resize`, `sse_system`) VALUES
-('s14998134814194', 'invoice and items', '{"tables":[{"id":"boxc14998134282119298","position":{"top":25,"left":21.993671417236328},"tablename":"invoice","alias":"","checkall":true,"checkboxes":[false,false,false,false,false]},{"id":"boxc14998134306009299","position":{"top":62.99446105957031,"left":256.9818115234375},"tablename":"invoice_item","alias":"ii","checkall":true,"checkboxes":[false,false,false,false,false,false]}],"joins":{"field_0_boxc14998134282119298--field_1_boxc14998134306009299":""}}', 'SELECT\n    invoice.*,\n    ii.*\n\nFROM\n    invoice\n        JOIN invoice ON invoice.invoice_id = ii.ite_invoice_id\n\nWHERE\n    (ii.ite_units> 99)\n\n', 79, '');
-
-=======
->>>>>>> 3f0b04d1ea896696f828951a5c072d160e3e58be
 -- --------------------------------------------------------
 
 --
@@ -1538,8 +1520,7 @@ INSERT INTO `zzzzsys_select_clause` (`zzzzsys_select_clause_id`, `ssc_zzzzsys_se
 ('s14984166437801', 's14968332683656_BR', '1', ' ', '1 ', '', ''),
 ('s14984187132461', 'nuselect_BR', '3', 'zzzzsys_select.sse_description', '', 'ASC', ''),
 ('s14984187132462', 'nuselect_BR', '1', 'zzzzsys_select.sse_system', ' != 1 ', '', ''),
-('s14986438630564', 's14967315763149_BR', '1', 'company.com_code', ' LIKE ''#inv_number#%''', '', ''),
-('s14998134814195', 's14998134814194', '1', 'ii.ite_units', '> 99', '', '');
+('s14986438630564', 's14967315763149_BR', '1', 'company.com_code', ' LIKE ''#inv_number#%''', '', '');
 
 -- --------------------------------------------------------
 
