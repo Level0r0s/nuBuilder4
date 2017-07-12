@@ -6,7 +6,7 @@ require_once('config.php');
 if(array_key_exists('nuSTATE', $_POST)){
     if(array_key_exists('call_type', $_POST['nuSTATE'])){
         if($_POST['nuSTATE']['call_type'] == 'login'){
-            
+
             $checkLoginDetailsSQL = "
                 SELECT * 
                 FROM zzzzsys_user 
