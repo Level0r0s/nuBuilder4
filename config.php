@@ -14,4 +14,14 @@
         $nuConfigIsDemo                 = false;
     }
 
+<<<<<<< HEAD
+=======
+    if(array_key_exists('REQUEST_URI', $_SERVER)){
+        if(strpos($_SERVER['REQUEST_URI'], basename(__FILE__)) !== false){
+            header('HTTP/1.0 404 Not Found', true, 404);
+            die();
+        }
+    }
+
+>>>>>>> 3f0b04d1ea896696f828951a5c072d160e3e58be
 ?>

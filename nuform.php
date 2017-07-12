@@ -44,6 +44,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
     $f->form_id		= $F;
     $f->record_id	= $R;
 
+<<<<<<< HEAD
 	if(!array_key_exists($f->table, $_POST['nuTableSchema'])){
 		
 		$A			= array();
@@ -55,6 +56,11 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 		$A 			= db_fetch_array($t);
 		
 	}
+=======
+    $s 			= "Select * From `$f->table` Where `$f->primary_key` = '$R'";
+    $t 			= nuRunQuery($s);
+    $A 			= db_fetch_array($t);
+>>>>>>> 3f0b04d1ea896696f828951a5c072d160e3e58be
 
 
 	$s 				= "
