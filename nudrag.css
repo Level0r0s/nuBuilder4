@@ -35,7 +35,7 @@
 			-webkit-user-select:none; 
 			overflow:visible; 
 			background-color:white;
-			background-image: url("grid.png"); 
+			background-image: url("graphics/grid.png"); 
 			z-index: 1;
 }
 

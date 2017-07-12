@@ -164,8 +164,14 @@ function nuUpdateTables(){
 				for($R = 1 ; $R < count($row) ; $R++){
 
 					if($edit[$R] == 1){											//-- has been edited
-							
-						$add	= addslashes($row[$R]);
+					
+						$v		= $row[$R];
+						
+						if(gettype($v) == 'array'){
+							$v	= implode('#nuSep#', $v);
+						}
+
+						$add	= addslashes($v);
 						$fld	= $fields[$R];
 						$V[]	= "'$add'";
 						$I[]	= "`$fld`";

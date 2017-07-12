@@ -68,7 +68,7 @@ function nuLoadReport(b){
 }
 
 
-function nuSetnuScroll(){
+function nuSetnuScroll(l){
 
 	var flds = ['#fieldName', "[id^='sortField']"]
 	
@@ -77,7 +77,7 @@ function nuSetnuScroll(){
 		$( flds[i] )
 		.addClass('nuScroll')
 		.keydown(function() {
-			nuFORM.scrollList(event, nuTT);
+			nuFORM.scrollList(event, l);
 		});	
 
 	}
@@ -624,7 +624,8 @@ function nuSetTools(){
 	
 		var e  = document.createElement('div');
 		var h = '';
-		h = h + '<div id="nuItemU" onclick="nuUndo()" title="Undo" class="nuToolbar" style="width:80px">Undo<span style="font-weight:normal;font-size:12px;">('+(nuBACKUP.length-1)+')</span></div>';
+		h = h + '<img id="nuItema"  onclick="nuUndo()" src="graphics/nu_undo.png" title="Undo" style="position:absolute;top:5px;left:5px;height:15px;width:15px">';
+//		h = h + '<div id="nuItemU" onclick="nuUndo()" title="Undo" class="nuToolbar" style="width:80px">Undo<span style="font-weight:normal;font-size:12px;">('+(nuBACKUP.length-1)+')</span></div>';
 		h = h + '<div id="nuItem0" onclick="nuNewObject()" class="nuToolbar">New Object</div>';
 		h = h + '<div id="nuItem1" onclick="nuCloneObjects(false)" class="nuToolbar">Clone Object</div>';
 		h = h + '<div id="nuItem7" onclick="nuSelectDialog()" class="nuToolbar">Select Objects</div>';
@@ -638,13 +639,13 @@ function nuSetTools(){
 		$('body').prepend(e);
 
 		$('#nuToolBar').css({
-						'position':'absolute', 
-						'left':10, 
-						'top':10, 
-						'width':1300, 
-						'height':25, 
-						'background-color':'lightgrey', 
-						'font-size':16
+						'position'			: 'absolute', 
+						'left'				: 10, 
+						'top'				: 10, 
+						'width'				: 1200, 
+						'height'			: 25, 
+						'background-color'	: 'lightgrey', 
+						'font-size'			: 16
 						});
 
 		$('#nuToolBar').html(h);
@@ -1104,7 +1105,6 @@ function nuObjectDialog(){
 	var D   = nuDragR.getObject(S[0].id);
 	var top = 60;
 	var fun = 'nuUpdateProperties';
-	//var f   = [['0','10000'],['1','10000.0'],['2','10000.00'],['3','10000.000'],['4','10000.0000'],['5','10000.00000'],['6','13-Jan-2007'],['7','13-01-2007'],['8','Jan-13-2007'],['9','01-13-2007'],['10','13-Jan-07'],['11','13-01-07'],['12','Jan-13-07'],['13','01-13-07'],['14','10,000'],['15','10,000.0'],['16','10,000.00'],['17','10,000.000'],['18','10,000.0000'],['19','10,000.00000'],['20','10000'],['21','10000,0'],['22','10000,00'],['23','10000,000'],['24','10000,0000'],['25','10000,00000'],['26','10.000'],['27','10.000,0'],['28','10.000,00'],['29','10.000,000']];
 	
 	top = nuDialogInput('ID', 'id', top, 200, D, fun);
 	$('#id').attr('disabled', true);
@@ -1131,14 +1131,26 @@ function nuObjectDialog(){
 	nuBlankMultipleValues(S);
 	$('#nuDragDialog').css('height', top + 20);
 
-    $("#nuDragDialog")
-	.append('<img src="./trash_can.png" height="17px" width="17px" id="deleteObject" value="Delete" onclick="deleteSelectedObjects()"/>');
+//    $("#nuDragDialog").append('<img src="./trash_can.png" height="17px" width="17px" id="deleteObject" value="Delete" onclick="deleteSelectedObjects()"/>');
 	
 	$("#deleteObject")
 	.css('position','absolute')
 	.css('top','7px')
 	.css('right','5px');
-	nuSetnuScroll();
+
+	var t	= 'Field Name';
+	
+	if(D['objectType'] == 'image'){t	= 'Source';}
+	if(D['objectType'] == 'label'){t	= 'Title';}
+
+	$('#caption_fieldName330').html(t);
+	
+	if(D['objectType'] == 'image'){
+		nuSetnuScroll(window.nuImages);
+	}else{
+		nuSetnuScroll(window.nuTT);
+	}
+	
 
 	$('#nuModal').remove();
 
@@ -1297,8 +1309,10 @@ function nuGroupDialog(){
 	}
 	
 	nuMoveGroup();
+	
 	$('#nuDragDialog').css('height', top + 20);
-	nuSetnuScroll();
+
+	nuSetnuScroll(window.nuTT);
 
 	$('#nuModal').remove();
 	

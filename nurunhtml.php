@@ -1,4 +1,6 @@
 <?php 
+
+require_once('nuform.php'); 
 require_once('nucommon.php'); 
 require_once('nudata.php'); 
 
@@ -62,8 +64,6 @@ while($r = db_fetch_array($t)){
 $h	.= "</TABLE>";
 
 print $h;
-
-//nuRunQuery("DELETE FROM zzzzsys_debug WHERE zzzzsys_debug_id = ? ", array($jsonID));
 
 ?>
 

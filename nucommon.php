@@ -402,16 +402,17 @@ function nuRunReport($nuRID){
 	$_POST['nuHash']['code']			= $nuA->sre_code;
 	$_POST['nuHash']['description']		= $nuA->sre_description;
 	$_POST['nuHash']['sre_layout']		= nuReplaceHashVariables($nuA->sre_layout);
+	$_POST['nuHash']['parentID']		= $nuA->sre_zzzzsys_php_id;
+	
+/*	
 	$nuI								= $nuA->sre_zzzzsys_php_id;
 	$nuT								= nuRunQuery("SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = '$nuI'");
 	$nuR								= db_fetch_object($nuT);
-	
 	$_POST['nuHash']['parentID']		= $nuR->zzzzsys_php_id;
-	
+*/
+
 	$nuJ								= json_encode($_POST['nuHash']);
-	$nuS								= "INSERT INTO zzzzsys_debug (zzzzsys_debug_id, deb_message) VALUES (?, ?)";
-	
-	nuRunQuery($nuS, array($nuID, $nuJ));
+	$_SESSION[$nuID]					= $nuJ;
 	
 	return $nuID;
 	
@@ -420,16 +421,13 @@ function nuRunReport($nuRID){
 function nuRunPHP($nuRID){
 
 	$nuID								= nuID();
-	$nuT								= nuRunQuery("SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = '$nuRID'");
+	$nuT								= nuRunQuery("SELECT * FROM zzzzsys_php WHERE sph_code = '$nuRID'");
 	$nuA								= db_fetch_object($nuT);
 	$_POST['nuHash']['code']			= $nuA->sph_code;
 	$_POST['nuHash']['description']		= $nuA->sph_description;
-	$_POST['nuHash']['parentID']		= $nuRID;
-
+	$_POST['nuHash']['parentID']		= $nuA->zzzzsys_php_id;
 	$nuJ								= json_encode($_POST['nuHash']);
-	$nuS								= "INSERT INTO zzzzsys_debug (zzzzsys_debug_id, deb_message) VALUES (?, ?)";
-
-	nuRunQuery($nuS, array($nuID, $nuJ));
+	$_SESSION[$nuID]					= $nuJ;
 
 	return $nuID;
 	
@@ -437,8 +435,15 @@ function nuRunPHP($nuRID){
 
 
 
+function nuRemoveNonCharacters($s){
+	
+	$snip = str_replace("\t", '', $s); // remove tabs
+	$snip = str_replace("\n", '', $snip); // remove new lines
+	$snip = str_replace("\r", '', $snip); // remove carriage returns	
+	
+	return $snip;
 
-
+}
 
 
 function nuRunPHPHidden($nuCode){
@@ -787,21 +792,6 @@ function nuGetFormProperties($i){
 	
 }
 
-function nuGetSubformObject($id){
-
-	$sf		= $_POST['nuHash']['nuFORMdata'];
-	
-	for($i = 0 ; $i < count($sf) ; $i++){
-		
-		if($sf[$i]->id == $id){
-			return $sf[$i];
-		}
-		
-	}
-	
-	return stdClass;
-
-}
 
 
 function nuFormatList(){
@@ -968,9 +958,9 @@ function nuPunctuation($f){
 }
 
 
-function nuTTList($p, $l){
-	
-	$t		= nuRunQuery('SELECT * FROM zzzzsys_object WHERE  zzzzsys_object_id = ?' , [$l]);
+function nuTTList($id, $l){
+
+	$t								= nuRunQuery('SELECT * FROM zzzzsys_object WHERE  zzzzsys_object_id = ?' , [$l]);
 	
 	while($r = db_fetch_object($t)){						//-- add default empty hash variables
 		$_POST['nuHash'][$r->sob_all_id]	= '';
@@ -978,15 +968,106 @@ function nuTTList($p, $l){
 	
 	$tt								= nuTT();
 	$_POST['nuHash']['TABLE_ID']	= $tt;
-	$e								= new nuEvalPHPClass($p);
-	$c								= json_encode(db_field_names($tt));
+	
+	nuBuildTempTable($id, $tt);
+	
+	$f								= db_field_names($tt);
 	
 	nuRunQuery("DROP TABLE $tt");
 	
-	return $c;
-
+	return $f;
 	
 }
+
+
+function nuBuildTempTable($id, $tt){
+		
+	$s		= "
+			SELECT COUNT(*) 
+			FROM zzzzsys_php
+			WHERE zzzzsys_php_id = ?
+		";
+		
+	$t		= nuRunQuery($s,[$id]);
+	$r		= db_fetch_row($t);
+
+
+	if($r[0] == 0){							//-- if not from zzzzsys_php
+		
+		$s	= "
+				SELECT sse_sql 
+				FROM zzzzsys_select
+				WHERE zzzzsys_select_id = ?
+			";
+			
+		$t	= nuRunQuery($s,[$id]);
+		$r	= db_fetch_row($t);
+		$p	= nuReplaceHashVariables($r[0]);
+		$P	= "	nuRunQuery('CREATE TABLE $tt $p');";
+			
+	nudebug($P);
+
+		eval($P);
+		
+	}else{
+		$e	= new nuEvalPHPClass($id);
+	}
+	
+}
+
+
+function nuJSInclude($pfile){
+
+    $timestamp = date("YmdHis", filemtime($pfile));                                         //-- Add timestamp so javascript changes are effective immediately
+    print "<script src='$pfile?ts=$timestamp' type='text/javascript'></script>\n";
+    
+}
+
+function nuCSSInclude($pfile){
+
+    $timestamp = date("YmdHis", filemtime($pfile));                                         //-- Add timestamp so javascript changes are effective immediately
+    print "<link rel='stylesheet' href='$pfile?ts=$timestamp' />\n";
+    
+}
+
+
+function nuImageList($f){
+
+	$a			= [];	
+	$s			= "SELECT sfi_code FROM zzzzsys_file ORDER BY sfi_code";
+	$t			= nuRunQuery($s);
+	
+	while($r = db_fetch_object($t)){
+		$a[]	= 'Image:' . $r->sfi_code;
+	}
+
+	$c								= json_encode(array_merge($a, $f));
+
+	return $c . ";\n";
+	
+}
+
+
+
+function nuCreateFile($j){
+
+	if($j == ''){return '';}
+
+	$id		= nuID();
+	$f		= json_decode($j);
+	$t		= explode('/',$f->type)[1];
+	$file	= sys_get_temp_dir()."/$id." . $t;
+	$h		= fopen($file , 'w');
+	$d		= base64_decode($f->file);
+	$p		= explode(';base64,', $d)[1];
+	$data 	= base64_decode($p);
+	
+	fwrite($h, $data);
+	fclose($h);
+	
+	return $file;
+}
+
 
 
 

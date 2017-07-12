@@ -3,7 +3,9 @@
 <head>
 <?php
 
-require_once('nucommon.php');	
+require_once('nuform.php'); 
+require_once('nucommon.php'); 
+require_once('nudata.php'); 
 
 nuJSInclude('jquery/jquery.js');
 nuJSInclude('nuformclass.js');
@@ -22,12 +24,15 @@ nuCSSInclude('nudrag.css');
 
 $f	= nuFormatList();
 $t	= nuTTList($_GET['tt'], $_GET['launch']);
+$tt	= json_encode($t);
+$i	= nuImageList($t);
 
 $h	= "
 <script>
 
 	window.nuFormats	= $f;
-	window.nuTT			= $t;
+	window.nuTT			= $tt;
+	window.nuImages		= $i;
 
 </script>
 

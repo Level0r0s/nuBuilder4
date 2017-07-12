@@ -109,7 +109,7 @@ function nuDisplayError(e){
 		return false;
 	}
 
-	var im	= ['<img src="nuerror.png" width="30px" height="30px" style="position:absolute;left:10px;top:10px"><br>'];
+	var im	= ['<img src="graphics/nuerror.png" width="30px" height="30px" style="position:absolute;left:10px;top:10px"><br>'];
 
 	im.concat(e.errors);
 
@@ -166,7 +166,7 @@ function nuLogin(){
 	$('body').html('');
 	
 	var l1	= '<div id="login" class="nuLogin" style="  border-style: solid;border-width: 1px;border-color: rgba(0, 0, 0, 0.08);">';
-	var i 	= '<br><img id="thelogo" src="logo.png">';
+	var i 	= '<br><img id="thelogo" src="graphics/logo.png">';
 	var u 	= '<br><br><span style="width:90px;display:inline-block;">Username</span><input id="nuusername" style="padding: 2px;" />';
 	var p 	= '<br><br><span style="width:90px;display:inline-block;">Password</span><input id="nupassword" onkeyup="loginInputKeyup(event);" style="padding: 2px;" type="password"/>';
 	var s 	= '<br><br><input id="submit" type="button" class="nuButton" style="height:30px;" onclick="nuLoginRequest()" value="Log in"/>';
@@ -308,7 +308,7 @@ function nuCreateDialog(t){
 		.on('mousemove', 	function(event){nuDialog.move(event);})
 		.on('mouseout', 	function(event){$('#dialogClose').css('background-color','');})
 		.on('click',     	function(event){nuDialog.click(event);})
-		.html('<div id="dialogTitle" ondblclick="nuResizeWindow(event)" style="background-color:#CCCCCC ;position:absolute;width:100%;height:35px;font-size:16px;font-family:Helvetica"><div id="dialogTitleWords" style="padding-top: 9px;height:30px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+title+'</div><img id="dialogClose" src="close.png" style="position:absolute; top:2px; left:0px"></div>')
+		.html('<div id="dialogTitle" ondblclick="nuResizeWindow(event)" style="background-color:#CCCCCC ;position:absolute;width:100%;height:35px;font-size:16px;font-family:Helvetica"><div id="dialogTitleWords" style="padding-top: 9px;height:30px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+title+'</div><img id="dialogClose" src="graphics/close.png" style="position:absolute; top:2px; left:0px"></div>')
 
 		this.startX = l;
 		this.startY = t;
@@ -578,7 +578,8 @@ function nuPreview(a){
 	var	t	= String($('#sfo_type').val());
 	var b	= t.indexOf('browse') != -1;
     var f   = nuFORM.getProperty('form_id');
-    var r   = nuFORM.getProperty('record_id');
+//    var r   = nuFORM.getProperty('record_id');
+    var r   = nuFORM.getProperty('redirect_form_id');
     
     if(r == '-1'){
         
@@ -722,11 +723,25 @@ function nuShow(i){                 //-- Show Edit Form Object
 	var o	= [i, i + 'code', i + 'button', i + 'description', 'label_' + i];
 	
 	for(var c = 0 ; c < o.length ; c++){
-		$('#' + o[c]).css('visibility', 'visible');
+
+		var t	=	String($('#' + o[c]).attr('data-nu-tab'));
+		
+		if(t[0] == 'x'){
+				
+			$('#' + o[c])
+			.attr('data-nu-tab', t.substr(1))
+			.show();
+			
+		}else{
+				
+			$('#' + o[c])
+			.show();
+			
+		}
+		
+		
 	}
-
-	$("[id$='nuDelete'][id^='" + i + "']").show();
-
+	
 }
 
 
@@ -735,11 +750,26 @@ function nuHide(i){                 //-- Hide Edit Form Object
 	var o	= [i, i + 'code', i + 'button', i + 'description', 'label_' + i];
 	
 	for(var c = 0 ; c < o.length ; c++){
-//		$('#' + o[c]).css('visibility', 'hidden');
-		$('#' + o[c]).hide();
+
+		var t	=	String($('#' + o[c]).attr('data-nu-tab'));
+		
+		if(t[0] == 'x'){
+				
+			$('#' + o[c])
+			.hide();
+			
+		}else{
+				
+			$('#' + o[c])
+			.attr('data-nu-tab', 'x' + t)
+			.hide();
+			
+		}
+		
+		
 	}
 	
-	$("[id$='nuDelete'][id^='" + i + "']").hide();
+//	$("[id$='nuDelete'][id^='" + i + "']").hide();
 
 }
 
@@ -817,7 +847,11 @@ function nuResizeWindow(e){
 }
 
 
-function nuGetSubformObject(id){
+//function nuGetSubformObject(id){
+//	return nuFORM.subform(id);
+//}
+
+function nuSubformObject(id){
 	return nuFORM.subform(id);
 }
 

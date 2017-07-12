@@ -142,7 +142,7 @@ class nuSelectObject{
 			'color'				: 'black',
 			'text-align'    	: 'center',
 		})
-		.html('<img onclick="$(this).parent().parent().remove();nuSQL.buildSQL()" id="nbc' + this.boxID + '" src="nu_box_close.png" width="10px" height="10px">')
+		.html('<img onclick="$(this).parent().parent().remove();nuSQL.buildSQL()" id="nbc' + this.boxID + '" src="graphics/nu_box_close.png" width="10px" height="10px">')
 		.addClass('nuDragNoSelect')
 		.addClass('nuButtonHover')
 		.addClass('nuSearchListClose');
@@ -240,7 +240,11 @@ class nuSelectObject{
 			if(this.tempTables[i].used != -1){
 		
 				var more	= true;
-				var defined	= [this.tempTables[i].alias];						//-- growing list of used tables
+//				var defined	= [this.tempTables[i].alias];						//-- growing list of used tables
+				var t		= this.tempTables[i].table;
+				var a		= this.tempTables[i].alias;
+				var A		= this.justAlias(t, t==a?'':a);
+				var defined	= [A];												//-- growing list of used tables
 				var ob		= {};
 				var s		= '';
 				
@@ -254,18 +258,22 @@ class nuSelectObject{
 						
 						var a1		= ob.type == 'LEFT' ? "\n        LEFT JOIN " :  "\n        JOIN ";
 						
-						if(defined.indexOf(ob.tables[0]) == -1){
+						if(defined.indexOf(ob.aliases[0]) == -1){
+//						if(defined.indexOf(ob.tables[0]) == -1){
 							
 							var a2	= this.buildAlias(ob.tables[0], ob.aliases[0]);
-							defined.push(ob.tables[0]);
+							A		= this.justAlias(ob.tables[0], ob.aliases[0]);
+//							defined.push(ob.tables[0]);
+							defined.push(A);
 							
 						}else{
 							
 							var a2	= this.buildAlias(ob.tables[1], ob.aliases[1]);
-							defined.push(ob.tables[1])
+							A		= this.justAlias(ob.tables[1], ob.aliases[1]);
+//							defined.push(ob.tables[1]);
+							defined.push(A);
 							
 						}
-						
 						this.markTableAsUsed(ob.aliases[0]);
 						this.markTableAsUsed(ob.aliases[1]);
 						this.markTableAsUsed(ob.tables[0]);
@@ -274,6 +282,7 @@ class nuSelectObject{
 						var a3		= ob.joins.join(' AND ');
 						
 						this.tempTables[i].joins.push(a1 + a2 + ' ON ' + a3);
+console.log(a2);
 						
 					}
 					
@@ -368,7 +377,11 @@ class nuSelectObject{
 			
 			var o	= tj[i];
 			
-			if(a.indexOf(o.tables[0]) != -1 || a.indexOf(o.tables[1]) != -1){
+			var j	= this.justAlias(o.tables[0], o.aliases[0]);
+			var J	= this.justAlias(o.tables[1], o.aliases[1]);
+			
+//			if(a.indexOf(o.tables[0]) != -1 || a.indexOf(o.tables[1]) != -1){
+			if(a.indexOf(j) != -1 || a.indexOf(J) != -1){
 				
 				var r	= this.tempJoins.splice(i, 1);
 				
@@ -455,7 +468,7 @@ class nuSelectObject{
 	
 
 	justAlias(t, a){
-
+		
 		if(a == ''){
 			return t;
 		}else{
@@ -726,7 +739,7 @@ class nuSelectObject{
 		
 		var j		= $('#sse_json', parent.document).val();
 
-		if(j == ''){return;}
+		if(j == '' || j === undefined){return;}
 		
 		var J		=	JSON.parse(j);
 		

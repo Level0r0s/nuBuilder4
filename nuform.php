@@ -43,13 +43,13 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
     $f				= nuGetEditForm($F, $R);
     $f->form_id		= $F;
     $f->record_id	= $R;
-	
+
 	if(!array_key_exists($f->table, $_POST['nuTableSchema'])){
 		
 		$A			= array();
 		
 	}else{
-		
+
 		$s 			= "Select * From `$f->table` Where `$f->primary_key` = '$R'";
 		$t 			= nuRunQuery($s);
 		$A 			= db_fetch_array($t);
@@ -71,7 +71,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 
 		$t 							= nuRunQuery($s, array($F));
 		$a 							= array();
-		
+
 		while($r = db_fetch_object($t)){
 			
 			$o 						= nuDefaultObject($r, $tabs);
@@ -146,6 +146,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 
 			if($r->sob_all_type == 'image'){
 				$o->src 			= nuGetSrc($r->sob_image_zzzzsys_file_id);
+				nudebug($r->sob_image_zzzzsys_file_id, $r);
 			}
 
 			if($r->sob_all_type == 'select'){
@@ -389,6 +390,7 @@ function nuGetEditForm($F, $R){
     $f->type        	= $r->sfo_type;
     $f->table       	= nuReplaceHashVariables($r->sfo_table);
     $f->primary_key 	= $r->sfo_primary_key;
+    $f->redirect_form_id= $r->sfo_browse_redirect_form_id == '' ? $r->zzzzsys_form_id : $r->sfo_browse_redirect_form_id;
     $f->order			= $SQL->orderBy;
     $f->where			= $SQL->where;
     $f->from			= $SQL->from;
@@ -530,15 +532,13 @@ function nuSelectOptions($sql) {
     return $a;
 }
 
-function nuRemoveNonCharacters($s){
 
-	$snip = str_replace("\t", '', $s); // remove tabs
-	$snip = str_replace("\n", '', $snip); // remove new lines
-	$snip = str_replace("\r", '', $snip); // remove carriage returns	
+function bob(){
 	
-	return $snip;
+	return 'snip';
 
 }
+
 
 
 function nuGetSubformRecords($R, $A){
@@ -632,7 +632,7 @@ function nuGetSQLValue($s){
     
         $t	= nuRunQuery($s);
         $r	= db_fetch_row($t);
-		
+
         return $r[0];
         
     }
@@ -972,13 +972,19 @@ function nuButtons($formid, $P){
 	$s						= 'SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = ? ';
 	$t						= nuRunQuery($s,[$P['record_id']]);
 	$p						= db_fetch_object($t)->sph_code;
+	$h						= db_fetch_object($t)->sph_run;
 	
 	$s						= 'SELECT * FROM zzzzsys_report WHERE zzzzsys_report_id = ? ';
 	$t						= nuRunQuery($s,[$P['record_id']]);
 	$r						= db_fetch_object($t)->sre_code;
 	
 	if($c == 'getphp'){
-		return array('Add' => 0, 'Print' => 0, 'Save' => 0, 'Clone' => 0, 'Delete' => 0, 'Run' => 'nuRunPHP("'.$p.'")', 'RunHidden' => 'nuRunPHPHidden("'.$p.'")');
+		
+		if($h == 'hide'){
+			return array('Add' => 0, 'Print' => 0, 'Save' => 0, 'Clone' => 0, 'Delete' => 0, 'Run' => '', 'RunHidden' => 'nuRunPHPHidden("'.$p.'")');
+		}else{
+			return array('Add' => 0, 'Print' => 0, 'Save' => 0, 'Clone' => 0, 'Delete' => 0, 'Run' => 'nuRunPHP("'.$p.'")', 'RunHidden' => '');
+		}
 	}
 	
 	if($c == 'getreport'){
@@ -1132,7 +1138,7 @@ function nuGetAllLookupList(){
 	$s				= "
 					SELECT $id, $code, $description
 					$SQL->from
-					WHERE $code LIKE '%$C%'
+					WHERE $code LIKE '$C'
 					ORDER BY $code
 					LIMIT 0 , 10
 					";
@@ -1200,55 +1206,6 @@ function nuAddPrintButtons($f, $t, $a){
 	
 	$f->forms[0]->buttons[$i][0] = $t;
 	$f->forms[0]->buttons[$i][1] = $t.$a;
-	
-}
-
-
-function nuAddSystemEvent($event){
-	
-	$F			= $_POST['nuHash']['RECORD_ID'];
-	$events		= ['BB' => 'Before Browse','BE' => 'Before Edit','BS' => 'Before Save','AS' => 'After Save','BD' => 'Before Delete','AD' => 'After Delete'];
-	
-	foreach ($events as $key => $value) {
-		
-		$i		= $F . '_' . $key;
-		$s		= "
-				SELECT * 
-				FROM zzzzsys_php 
-				WHERE 
-					zzzzsys_php_id = ?
-				";
-
-		$t		= nuRunQuery($s, array($i));
-
-		if(db_num_rows($t) == 0){
-	
-			$r	= db_fetch_row($t);
-			$e	= $value . ' for ' . $r->sfo_code . ' ' . $r->sfo_description;
-			$s	= "
-
-					INSERT INTO zzzzsys_php 
-					(
-						zzzzsys_php_id, 
-						sph_description, 
-						sph_group, 
-						sph_system
-					) 
-					VALUES 
-					(
-						'$i',
-						'$e',
-						'nubuilder',
-						'1'
-					 );
-		 
-				";
-			 
-			$t	= nuRunQuery($s);
-			
-		}
-		 
-	}
 	
 }
 

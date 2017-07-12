@@ -2,10 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="de5a7e1b-d26a-4f8d-b204-6ab44d56c282" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nuajax.js" afterPath="$PROJECT_DIR$/nuajax.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nucommon.js" afterPath="$PROJECT_DIR$/nucommon.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nucommon.php" afterPath="$PROJECT_DIR$/nucommon.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nuform.js" afterPath="$PROJECT_DIR$/nuform.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/composer.phar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/phpunit.phar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/composer.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/composer.lock" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tests/GetFormTest.php" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/nuBuilder4.iml" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/deployment.xml" afterPath="$PROJECT_DIR$/.idea/deployment.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nuform.php" afterPath="$PROJECT_DIR$/nuform.php" />
     </list>
     <ignored path="nuBuilder4.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -20,57 +27,122 @@
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_TABLE_DETAILS" value="true" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <PATH>
+      <PATH_ELEMENT>
+        <option name="myItemId" />
+        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$Root" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="nubuilder4@localhost" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+    </PATH>
+    <PATH>
+      <PATH_ELEMENT>
+        <option name="myItemId" />
+        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$Root" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="nubuilder4@localhost" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="nubuilder4" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+    </PATH>
+    <PATH>
+      <PATH_ELEMENT>
+        <option name="myItemId" />
+        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$Root" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="nubuilder4@localhost" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="nubuilder4" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" />
+        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$GroupNode" />
+      </PATH_ELEMENT>
+    </PATH>
+    <PATH>
+      <PATH_ELEMENT>
+        <option name="myItemId" />
+        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$Root" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="nubuilder4@localhost" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="nubuilder4" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" />
+        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$GroupNode" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="test_auto_inc_pk" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+    </PATH>
+    <PATH>
+      <PATH_ELEMENT>
+        <option name="myItemId" />
+        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$Root" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="nubuilder4@localhost" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="nubuilder4" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" />
+        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$GroupNode" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="business" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+    </PATH>
+  </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
     <favorites_list name="nuBuilder4" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="console.sql" pinned="false" current-in-tab="false">
+        <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/ae751856-4490-4787-ae11-ac476cd107c6/console.sql">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="30" lean-forward="true" selection-start-line="0" selection-start-column="30" selection-end-line="0" selection-end-column="30" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="nuapi.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/nuapi.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="6" column="31" lean-forward="false" selection-start-line="6" selection-start-column="31" selection-end-line="6" selection-end-column="31" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/index.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="175">
-              <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="nuform.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/nuform.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30775">
-              <caret line="1231" column="0" lean-forward="false" selection-start-line="1231" selection-start-column="0" selection-end-line="1231" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="nucommon.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/nucommon.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="nucommon.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/nucommon.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="21800">
-              <caret line="872" column="0" lean-forward="false" selection-start-line="872" selection-start-column="0" selection-end-line="872" selection-end-column="0" />
+            <state relative-caret-position="170">
+              <caret line="13" column="52" lean-forward="false" selection-start-line="13" selection-start-column="52" selection-end-line="13" selection-end-column="52" />
               <folding />
             </state>
           </provider>
@@ -79,55 +151,78 @@
       <file leaf-file-name="nuform.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/nuform.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="19350">
-              <caret line="774" column="0" lean-forward="false" selection-start-line="774" selection-start-column="0" selection-end-line="774" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="nuajax.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/nuajax.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="950">
-              <caret line="38" column="19" lean-forward="false" selection-start-line="38" selection-start-column="19" selection-end-line="38" selection-end-column="19" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="config.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="125">
-              <caret line="5" column="39" lean-forward="false" selection-start-line="5" selection-start-column="39" selection-end-line="5" selection-end-column="39" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="nubuilders.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/nubuilders.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1875">
-              <caret line="75" column="0" lean-forward="true" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
+            <state relative-caret-position="458">
+              <caret line="888" column="64" lean-forward="false" selection-start-line="888" selection-start-column="64" selection-end-line="888" selection-end-column="64" />
               <folding>
-                <marker date="1493242902495" expanded="true" signature="263:335" ph="SELECT COUNT... zzzzsys_form" />
-                <marker date="1493242902495" expanded="true" signature="547:686" ph="INSERT INTO zzzzsys_tab" />
-                <marker date="1493242902495" expanded="true" signature="849:1052" ph="INSERT INTO zzzzsys_form" />
-                <marker date="1493242902495" expanded="true" signature="1155:1169" ph="SELECT * FRO... ${$table}" />
-                <marker date="1493242902495" expanded="true" signature="1228:1285" ph="CREATE TABLE... ${$TT}" />
-                <marker date="1493242902495" expanded="true" signature="1463:1538" ph="INSERT INTO ${$TT}... " />
-                <marker date="1493242902495" expanded="true" signature="1479:1538" ph="SELECT * FRO... zzzzsys_object" />
-                <marker date="1493242902495" expanded="true" signature="1577:1651" ph="UPDATE ${$TT... " />
-                <marker date="1493242902495" expanded="true" signature="1709:2129" ph="UPDATE ${$TT... " />
-                <marker date="1493242902495" expanded="true" signature="2559:2573" ph="SELECT * FRO... ${$TT}" />
-                <marker date="1493242902495" expanded="true" signature="3813:3827" ph="SELECT * FRO... ${$TT}" />
-                <marker date="1493242902495" expanded="true" signature="4074:4309" ph="INSERT INTO zzzzsys_browse" />
-                <marker date="1493242902495" expanded="true" signature="4629:5096" ph="INSERT INTO ${$TT}" />
-                <marker date="1493242902495" expanded="true" signature="5284:5325" ph="INSERT INTO zzzzsys_object... " />
-                <marker date="1493242902495" expanded="true" signature="5311:5325" ph="SELECT * FRO... ${$TT}" />
-                <marker date="1493242902495" expanded="true" signature="5345:5356" ph="DROP TABLE $... " />
+                <marker date="1499755602549" expanded="true" signature="46:98" ph="SELECT * FRO... zzzzsys_form" />
+                <marker date="1499755602549" expanded="true" signature="857:913" ph="Select * Fro... ${$f-&gt;table}" />
+                <marker date="1499755602549" expanded="true" signature="998:1209" ph="SELECT * FRO... zzzzsys_form" />
+                <marker date="1499755602549" expanded="true" signature="5806:5858" ph="SELECT * FRO... zzzzsys_file" />
+                <marker date="1499755602549" expanded="true" signature="6275:6465" ph="UPDATE zzzzs... " />
+                <marker date="1499755602549" expanded="true" signature="6549:6614" ph="SELECT * FRO... zzzzsys_object" />
+                <marker date="1499755602549" expanded="true" signature="7002:7103" ph="SELECT sev_e... zzzzsys_event" />
+                <marker date="1499755602549" expanded="true" signature="9485:9549" ph="SELECT * FRO... zzzzsys_form" />
+                <marker date="1499755602549" expanded="true" signature="9704:9849" ph="SELECT ${$r-... " />
+                <marker date="1499755602549" expanded="true" signature="10036:10067" ph="DROP TABLE i... " />
+                <marker date="1499755602549" expanded="true" signature="11787:11881" ph="SELECT `${$f... " />
+                <marker date="1499755602549" expanded="true" signature="12751:12985" ph="SELECT * FRO... zzzzsys_tab" />
+                <marker date="1499755602549" expanded="true" signature="13734:13818" ph="SELECT * FRO... zzzzsys_browse" />
+                <marker date="1499755602549" expanded="true" signature="14675:14734" ph="SELECT * FRO... zzzzsys_form" />
+                <marker date="1499755602549" expanded="true" signature="15907:15938" ph="DROP TABLE i... " />
+                <marker date="1499755602549" expanded="true" signature="20668:20734" ph="SELECT sss_a... zzzzsys_access" />
+                <marker date="1499755602549" expanded="true" signature="21120:21207" ph="SELECT * FRO... zzzzsys_report" />
+                <marker date="1499755602549" expanded="true" signature="21538:21619" ph="SELECT * FRO... zzzzsys_php" />
+                <marker date="1499755602549" expanded="true" signature="22023:22104" ph="SELECT * FRO... zzzzsys_form" />
+                <marker date="1499755602549" expanded="true" signature="22689:22747" ph="SELECT * FRO... zzzzsys_session" />
+                <marker date="1499755602549" expanded="true" signature="23138:23188" ph="SELECT * FRO... zzzzsys_php" />
+                <marker date="1499755602549" expanded="true" signature="23334:23390" ph="SELECT * FRO... zzzzsys_report" />
+                <marker date="1499755602549" expanded="true" signature="24648:24703" ph="SELECT * FRO... zzzzsys_form" />
+                <marker date="1499755602549" expanded="true" signature="24997:25062" ph="SELECT * FRO... zzzzsys_object" />
+                <marker date="1499755602549" expanded="true" signature="26326:26384" ph="SELECT * FRO... zzzzsys_browse" />
+                <marker date="1499755602549" expanded="true" signature="26640:26701" ph="SELECT * FRO... zzzzsys_object" />
+                <marker date="1499755602549" expanded="true" signature="27234:27293" ph="SELECT * FRO... zzzzsys_object" />
+                <marker date="1499755602549" expanded="true" signature="27441:27524" ph="SELECT * FRO... zzzzsys_form" />
+                <marker date="1499755602549" expanded="true" signature="27705:27817" ph="SELECT ${$id... " />
+                <marker date="1499755602549" expanded="true" signature="27969:28024" ph="SELECT * FRO... zzzzsys_form" />
+                <marker date="1499755602549" expanded="true" signature="28145:28198" ph="SELECT * FRO... zzzzsys_php" />
+                <marker date="1499755602549" expanded="true" signature="28316:28375" ph="SELECT * FRO... zzzzsys_report" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GetFormTest.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/tests/GetFormTest.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" column="16" lean-forward="true" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="16" />
+              <folding>
+                <element signature="e#91#122#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="nusession.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/nusession.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="45" column="16" lean-forward="false" selection-start-line="45" selection-start-column="16" selection-end-line="45" selection-end-column="16" />
+              <folding>
+                <marker date="1499750300418" expanded="true" signature="289:514" ph="SELECT * FRO... zzzzsys_user" />
+                <marker date="1499750300418" expanded="true" signature="1759:1839" ph="SELECT table... TABLES" />
+                <marker date="1499750300418" expanded="true" signature="2338:2382" ph="SELECT * FRO... zzzzsys_form" />
+                <marker date="1499750300418" expanded="true" signature="2660:2750" ph="SELECT * FRO... zzzzsys_object" />
+                <marker date="1499750300418" expanded="true" signature="4614:4660" ph="SELECT zzzzs... zzzzsys_form" />
+                <marker date="1499750300418" expanded="true" signature="5066:5148" ph="SELECT zzzzs... zzzzsys_report" />
+                <marker date="1499750300418" expanded="true" signature="5590:5666" ph="SELECT zzzzs... zzzzsys_php" />
+                <marker date="1499750300418" expanded="true" signature="6404:6515" ph="SELECT * FRO... zzzzsys_translate" />
+                <marker date="1499750300418" expanded="true" signature="6779:7147" ph="SELECT zzzzs... zzzzsys_user" />
+                <marker date="1499750300418" expanded="true" signature="8467:9142" ph="SELECT slf_z... zzzzsys_user" />
+                <marker date="1499750300418" expanded="true" signature="9686:10248" ph="SELECT sre_z... zzzzsys_user" />
+                <marker date="1499750300418" expanded="true" signature="10734:11335" ph="SELECT slp_z... zzzzsys_user" />
+                <marker date="1499750300418" expanded="true" signature="11816:11886" ph="INSERT INTO zzzzsys_session... " />
+                <marker date="1499750300418" expanded="true" signature="12600:12627" ph="SELECT * FRO... zzzzsys_setup" />
               </folding>
             </state>
           </provider>
@@ -141,12 +236,18 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/nuform.php" />
         <option value="$PROJECT_DIR$/index.php" />
         <option value="$PROJECT_DIR$/nuajax.js" />
         <option value="$PROJECT_DIR$/nuform.js" />
         <option value="C:/nuBuilderPro/UwAmp/www/site_a/config.php" />
         <option value="$PROJECT_DIR$/config.php" />
+        <option value="dbtable:/b340e1d8/ae751856-4490-4787-ae11-ac476cd107c6/nubuilder4.test_auto_inc_pk" />
+        <option value="$PROJECT_DIR$/nuapi.php" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/ae751856-4490-4787-ae11-ac476cd107c6/console.sql" />
+        <option value="$PROJECT_DIR$/nuform.php" />
+        <option value="$PROJECT_DIR$/composer.json" />
+        <option value="$PROJECT_DIR$/tests/GetFormTest.php" />
+        <option value="$PROJECT_DIR$/.htaccess" />
       </list>
     </option>
   </component>
@@ -164,8 +265,12 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1934" />
+    <option name="width" value="1936" />
     <option name="height" value="1056" />
+  </component>
+  <component name="ProjectLevelVcsManager">
+    <OptionsSetting value="false" id="Update" />
+    <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -186,7 +291,7 @@
         <subPane>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="nuBuilder4" />
+              <option name="myItemId" value="nrmjobsadmin" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -202,6 +307,8 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -219,6 +326,23 @@
     <configuration default="false" name="index.php" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost/nuBuilder4/index.php">
       <method />
     </configuration>
+    <configuration default="true" type="CodeceptionConfigurationType" factoryName="Codeception">
+      <PhpTestRunnerSettings />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerJest" factoryName="Jest">
+      <node-interpreter value="project" />
+      <working-dir value="" />
+      <envs />
+      <scope-kind value="ALL" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerProtractor" factoryName="Protractor">
+      <config-file value="" />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
       <method />
     </configuration>
@@ -234,6 +358,10 @@
       <method />
     </configuration>
     <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpSpecConfigurationType" factoryName="PHPSpec">
+      <PhpTestRunnerSettings />
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
@@ -288,23 +416,26 @@
       <workItem from="1473211232470" duration="653000" />
       <workItem from="1473295530284" duration="207000" />
       <workItem from="1493330734535" duration="823000" />
+      <workItem from="1499750507407" duration="8274000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9462000" />
+    <option name="totallyTimeSpent" value="17736000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1934" height="1056" extended-state="0" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23117155" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22643554" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13859275" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.13109426" sideWeight="0.5021322" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13646056" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27302274" sideWeight="0.4978678" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15750529" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -337,6 +468,38 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/nuform.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="13158">
+          <caret line="774" column="0" lean-forward="false" selection-start-line="774" selection-start-column="0" selection-end-line="774" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nuajax.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="646">
+          <caret line="38" column="19" lean-forward="false" selection-start-line="38" selection-start-column="19" selection-end-line="38" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="12" lean-forward="true" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nubuilders.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1275">
+          <caret line="75" column="0" lean-forward="true" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/nuapi.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -531,33 +694,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/nuapi.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="6" column="31" lean-forward="false" selection-start-line="6" selection-start-column="31" selection-end-line="6" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nuform.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19350">
-          <caret line="774" column="0" lean-forward="false" selection-start-line="774" selection-start-column="0" selection-end-line="774" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/nuajax.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="950">
+        <state relative-caret-position="646">
           <caret line="38" column="19" lean-forward="false" selection-start-line="38" selection-start-column="19" selection-end-line="38" selection-end-column="19" />
           <folding />
         </state>
@@ -565,7 +704,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/nuform.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30775">
+        <state relative-caret-position="20927">
           <caret line="1231" column="0" lean-forward="false" selection-start-line="1231" selection-start-column="0" selection-end-line="1231" selection-end-column="0" />
           <folding />
         </state>
@@ -581,7 +720,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/nucommon.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21800">
+        <state relative-caret-position="14824">
           <caret line="872" column="0" lean-forward="false" selection-start-line="872" selection-start-column="0" selection-end-line="872" selection-end-column="0" />
           <folding />
         </state>
@@ -590,33 +729,217 @@
     <entry file="file://C:/nuBuilderPro/UwAmp/www/site_a/config.php" />
     <entry file="file://$PROJECT_DIR$/config.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="5" column="39" lean-forward="false" selection-start-line="5" selection-start-column="39" selection-end-line="5" selection-end-column="39" />
+        <state relative-caret-position="85">
+          <caret line="5" column="12" lean-forward="true" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nubuilder4.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-459">
+          <caret line="63" column="0" lean-forward="true" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/nubuilders.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1875">
-          <caret line="75" column="0" lean-forward="true" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
+        <state relative-caret-position="102">
+          <caret line="6" column="27" lean-forward="true" selection-start-line="6" selection-start-column="27" selection-end-line="6" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/b340e1d8/ae751856-4490-4787-ae11-ac476cd107c6/nubuilder4.test_auto_inc_pk">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/b340e1d8/ae751856-4490-4787-ae11-ac476cd107c6/nubuilder4.zzzzsys_debug">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nudata.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="309">
+          <caret line="358" column="49" lean-forward="true" selection-start-line="358" selection-start-column="49" selection-end-line="358" selection-end-column="49" />
           <folding>
-            <marker date="1493242902495" expanded="true" signature="263:335" ph="SELECT COUNT... zzzzsys_form" />
-            <marker date="1493242902495" expanded="true" signature="547:686" ph="INSERT INTO zzzzsys_tab" />
-            <marker date="1493242902495" expanded="true" signature="849:1052" ph="INSERT INTO zzzzsys_form" />
-            <marker date="1493242902495" expanded="true" signature="1155:1169" ph="SELECT * FRO... ${$table}" />
-            <marker date="1493242902495" expanded="true" signature="1228:1285" ph="CREATE TABLE... ${$TT}" />
-            <marker date="1493242902495" expanded="true" signature="1463:1538" ph="INSERT INTO ${$TT}... " />
-            <marker date="1493242902495" expanded="true" signature="1479:1538" ph="SELECT * FRO... zzzzsys_object" />
-            <marker date="1493242902495" expanded="true" signature="1577:1651" ph="UPDATE ${$TT... " />
-            <marker date="1493242902495" expanded="true" signature="1709:2129" ph="UPDATE ${$TT... " />
-            <marker date="1493242902495" expanded="true" signature="2559:2573" ph="SELECT * FRO... ${$TT}" />
-            <marker date="1493242902495" expanded="true" signature="3813:3827" ph="SELECT * FRO... ${$TT}" />
-            <marker date="1493242902495" expanded="true" signature="4074:4309" ph="INSERT INTO zzzzsys_browse" />
-            <marker date="1493242902495" expanded="true" signature="4629:5096" ph="INSERT INTO ${$TT}" />
-            <marker date="1493242902495" expanded="true" signature="5284:5325" ph="INSERT INTO zzzzsys_object... " />
-            <marker date="1493242902495" expanded="true" signature="5311:5325" ph="SELECT * FRO... ${$TT}" />
-            <marker date="1493242902495" expanded="true" signature="5345:5356" ph="DROP TABLE $... " />
+            <marker date="1499750300397" expanded="true" signature="1562:1585" ph="INSERT INTO ${$table}... " />
+            <marker date="1499750300397" expanded="true" signature="1618:1659" ph="UPDATE ${$ta... " />
+            <marker date="1499750300397" expanded="true" signature="1807:1846" ph="DELETE FROM " />
+            <marker date="1499750300397" expanded="true" signature="3733:3756" ph="INSERT INTO ${$table}... " />
+            <marker date="1499750300397" expanded="true" signature="3833:3874" ph="UPDATE ${$ta... " />
+            <marker date="1499750300397" expanded="true" signature="4112:4150" ph="DELETE FROM " />
+            <marker date="1499750300397" expanded="true" signature="4281:4391" ph="SELECT sob_a... zzzzsys_object" />
+            <marker date="1499750300397" expanded="true" signature="4987:5044" ph="SELECT * FRO... zzzzsys_form" />
+            <marker date="1499750300397" expanded="true" signature="5210:5262" ph="SELECT * FRO... zzzzsys_form" />
+            <marker date="1499750300397" expanded="true" signature="5517:5935" ph="SELECT o.*, zzzzsys_object" />
+            <marker date="1499750300397" expanded="true" signature="6650:6783" ph="SELECT COUNT... ${$O-&gt;sfo_table}" />
+            <marker date="1499750300397" expanded="true" signature="8037:8089" ph="SELECT * FRO... zzzzsys_form" />
+            <marker date="1499750300397" expanded="true" signature="8701:8760" ph="DELETE FROM " />
+            <marker date="1499750300397" expanded="true" signature="8831:8899" ph="SELECT COUNT... ${$r-&gt;sfo_table}" />
+            <marker date="1499750300397" expanded="true" signature="8972:9034" ph="INSERT INTO `${$r-&gt;sfo_table}`... " />
+            <marker date="1499750300397" expanded="true" signature="9613:9699" ph="UPDATE `${$r... " />
+            <marker date="1499750300397" expanded="true" signature="9789:9887" ph="SELECT sob_a... zzzzsys_object" />
+            <marker date="1499750300397" expanded="true" signature="10095:10176" ph="SELECT * FRO... zzzzsys_object" />
+            <marker date="1499750300397" expanded="true" signature="11510:11566" ph="DELETE FROM " />
+            <marker date="1499750300397" expanded="true" signature="11607:11660" ph="DELETE FROM " />
+            <marker date="1499750300397" expanded="true" signature="11701:11765" ph="DELETE FROM " />
+            <marker date="1499750300397" expanded="true" signature="11806:11891" ph="DELETE FROM " />
+            <marker date="1499750300397" expanded="true" signature="11932:11994" ph="SELECT * FRO... zzzzsys_object" />
+            <marker date="1499750300397" expanded="true" signature="12094:12151" ph="DELETE FROM " />
+            <marker date="1499750300397" expanded="true" signature="12192:12257" ph="DELETE FROM " />
+            <marker date="1499750300397" expanded="true" signature="12302:12387" ph="DELETE FROM " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nuapi.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="13" column="52" lean-forward="false" selection-start-line="13" selection-start-column="52" selection-end-line="13" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nusession.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="45" column="16" lean-forward="false" selection-start-line="45" selection-start-column="16" selection-end-line="45" selection-end-column="16" />
+          <folding>
+            <marker date="1499750300418" expanded="true" signature="289:514" ph="SELECT * FRO... zzzzsys_user" />
+            <marker date="1499750300418" expanded="true" signature="1759:1839" ph="SELECT table... TABLES" />
+            <marker date="1499750300418" expanded="true" signature="2338:2382" ph="SELECT * FRO... zzzzsys_form" />
+            <marker date="1499750300418" expanded="true" signature="2660:2750" ph="SELECT * FRO... zzzzsys_object" />
+            <marker date="1499750300418" expanded="true" signature="4614:4660" ph="SELECT zzzzs... zzzzsys_form" />
+            <marker date="1499750300418" expanded="true" signature="5066:5148" ph="SELECT zzzzs... zzzzsys_report" />
+            <marker date="1499750300418" expanded="true" signature="5590:5666" ph="SELECT zzzzs... zzzzsys_php" />
+            <marker date="1499750300418" expanded="true" signature="6404:6515" ph="SELECT * FRO... zzzzsys_translate" />
+            <marker date="1499750300418" expanded="true" signature="6779:7147" ph="SELECT zzzzs... zzzzsys_user" />
+            <marker date="1499750300418" expanded="true" signature="8467:9142" ph="SELECT slf_z... zzzzsys_user" />
+            <marker date="1499750300418" expanded="true" signature="9686:10248" ph="SELECT sre_z... zzzzsys_user" />
+            <marker date="1499750300418" expanded="true" signature="10734:11335" ph="SELECT slp_z... zzzzsys_user" />
+            <marker date="1499750300418" expanded="true" signature="11816:11886" ph="INSERT INTO zzzzsys_session... " />
+            <marker date="1499750300418" expanded="true" signature="12600:12627" ph="SELECT * FRO... zzzzsys_setup" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/composer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/composer.lock">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1224">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-250">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding>
+            <marker date="1499750300348" expanded="true" signature="1062:1141" ph="SELECT set_h... zzzzsys_setup" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/ae751856-4490-4787-ae11-ac476cd107c6/console.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="30" lean-forward="true" selection-start-line="0" selection-start-column="30" selection-end-line="0" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nuform.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="458">
+          <caret line="888" column="64" lean-forward="false" selection-start-line="888" selection-start-column="64" selection-end-line="888" selection-end-column="64" />
+          <folding>
+            <marker date="1499755602549" expanded="true" signature="46:98" ph="SELECT * FRO... zzzzsys_form" />
+            <marker date="1499755602549" expanded="true" signature="857:913" ph="Select * Fro... ${$f-&gt;table}" />
+            <marker date="1499755602549" expanded="true" signature="998:1209" ph="SELECT * FRO... zzzzsys_form" />
+            <marker date="1499755602549" expanded="true" signature="5806:5858" ph="SELECT * FRO... zzzzsys_file" />
+            <marker date="1499755602549" expanded="true" signature="6275:6465" ph="UPDATE zzzzs... " />
+            <marker date="1499755602549" expanded="true" signature="6549:6614" ph="SELECT * FRO... zzzzsys_object" />
+            <marker date="1499755602549" expanded="true" signature="7002:7103" ph="SELECT sev_e... zzzzsys_event" />
+            <marker date="1499755602549" expanded="true" signature="9485:9549" ph="SELECT * FRO... zzzzsys_form" />
+            <marker date="1499755602549" expanded="true" signature="9704:9849" ph="SELECT ${$r-... " />
+            <marker date="1499755602549" expanded="true" signature="10036:10067" ph="DROP TABLE i... " />
+            <marker date="1499755602549" expanded="true" signature="11787:11881" ph="SELECT `${$f... " />
+            <marker date="1499755602549" expanded="true" signature="12751:12985" ph="SELECT * FRO... zzzzsys_tab" />
+            <marker date="1499755602549" expanded="true" signature="13734:13818" ph="SELECT * FRO... zzzzsys_browse" />
+            <marker date="1499755602549" expanded="true" signature="14675:14734" ph="SELECT * FRO... zzzzsys_form" />
+            <marker date="1499755602549" expanded="true" signature="15907:15938" ph="DROP TABLE i... " />
+            <marker date="1499755602549" expanded="true" signature="20668:20734" ph="SELECT sss_a... zzzzsys_access" />
+            <marker date="1499755602549" expanded="true" signature="21120:21207" ph="SELECT * FRO... zzzzsys_report" />
+            <marker date="1499755602549" expanded="true" signature="21538:21619" ph="SELECT * FRO... zzzzsys_php" />
+            <marker date="1499755602549" expanded="true" signature="22023:22104" ph="SELECT * FRO... zzzzsys_form" />
+            <marker date="1499755602549" expanded="true" signature="22689:22747" ph="SELECT * FRO... zzzzsys_session" />
+            <marker date="1499755602549" expanded="true" signature="23138:23188" ph="SELECT * FRO... zzzzsys_php" />
+            <marker date="1499755602549" expanded="true" signature="23334:23390" ph="SELECT * FRO... zzzzsys_report" />
+            <marker date="1499755602549" expanded="true" signature="24648:24703" ph="SELECT * FRO... zzzzsys_form" />
+            <marker date="1499755602549" expanded="true" signature="24997:25062" ph="SELECT * FRO... zzzzsys_object" />
+            <marker date="1499755602549" expanded="true" signature="26326:26384" ph="SELECT * FRO... zzzzsys_browse" />
+            <marker date="1499755602549" expanded="true" signature="26640:26701" ph="SELECT * FRO... zzzzsys_object" />
+            <marker date="1499755602549" expanded="true" signature="27234:27293" ph="SELECT * FRO... zzzzsys_object" />
+            <marker date="1499755602549" expanded="true" signature="27441:27524" ph="SELECT * FRO... zzzzsys_form" />
+            <marker date="1499755602549" expanded="true" signature="27705:27817" ph="SELECT ${$id... " />
+            <marker date="1499755602549" expanded="true" signature="27969:28024" ph="SELECT * FRO... zzzzsys_form" />
+            <marker date="1499755602549" expanded="true" signature="28145:28198" ph="SELECT * FRO... zzzzsys_php" />
+            <marker date="1499755602549" expanded="true" signature="28316:28375" ph="SELECT * FRO... zzzzsys_report" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.htaccess">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="2" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/GetFormTest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="16" lean-forward="true" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="16" />
+          <folding>
+            <element signature="e#91#122#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>

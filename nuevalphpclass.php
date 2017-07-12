@@ -14,13 +14,13 @@
 		
 		function processPHP() {
 		
-			$s	= "SELECT sph_php FROM zzzzsys_php WHERE zzzzsys_php_id = '$this->parentID'";
-			$t	= nuRunQuery($s);
-			$r	= db_fetch_object($t);
+			$s				= "SELECT sph_php FROM zzzzsys_php WHERE zzzzsys_php_id = '$this->parentID'";
+			$t				= nuRunQuery($s);
+			$r				= db_fetch_object($t);
 			
 			if(trim($r->sph_php) == ''){return;}
 
-			$s = "
+			$s 				= "
 				SELECT * 
 				FROM zzzzsys_php_library 
 				LEFT JOIN zzzzsys_php ON zzzzsys_php_id = spl_library_zzzzsys_php_id 
@@ -44,7 +44,7 @@
 				WHERE zzzzsys_php_id = '$this->parentID'
 			";
 			
-			$nuT						= nuRunQuery($s);
+			$nuT			= nuRunQuery($s);
 
 			if(db_num_rows($nuT) > 0) {
 				

@@ -1,7 +1,10 @@
-<?php 
+<?php
+require_once('nusession.php');
 require_once('nucommon.php'); 
 require_once('nudata.php'); 
+require_once('nuform.php'); 
 require_once('fpdf/fpdf.php');
+
 define('FPDF_FONTPATH','fpdf/font/');
 
 $GLOBALS['nu_report']       = array();
@@ -10,37 +13,26 @@ $GLOBALS['nu_files']        = array();
 
 $jsonID                     = $_GET['i'];
 $TABLE_ID                   = nuTT();
-$t                          = nuRunQuery("SELECT deb_message AS json FROM zzzzsys_debug WHERE zzzzsys_debug_id = ? ", array($jsonID));		//-- created by nuRunReport()
-
-if(db_num_rows($t) == 0){
-
-	print 'nuBuilder Report No Longer Available..';
-	return;
-	
-}
-
-$reportInfo                 = db_fetch_object($t);
-$JSON                       = json_decode($reportInfo->json);
+$JSON                       = json_decode($_SESSION[$jsonID]);
 $LAYOUT						= json_decode($JSON->sre_layout);
 $hashData                   = nuAddToHashList($JSON, 'report');
 $hashData['TABLE_ID']       = $TABLE_ID;
 $GLOBALS['TABLE_ID']        = $TABLE_ID;
 $_POST['nuHash']			= $hashData;
 
-nuRunQuery("DELETE FROM zzzzsys_debug WHERE zzzzsys_debug_id = ? ", array($jsonID));
-
 $PDF                        = new FPDF($LAYOUT->orientation, 'mm', $LAYOUT->paper);
 $PDF->SetAutoPageBreak(false);
 $REPORT                     = nuSetPixelsToMM($LAYOUT);
 $PDF->SetMargins(1,1,1);
+nuBuildTempTable($JSON->parentID, $TABLE_ID);
+//$evalPHP 					= new nuEvalPHPClass($JSON->parentID);            //-- build temp table for report from php
 
-$evalPHP = new nuEvalPHPClass($JSON->parentID);            //-- build temp table for report from php
-
-$GLOBALS['nu_columns']       = nuAddCriteriaValues($hashData, $TABLE_ID);
+$GLOBALS['nu_columns']		= nuAddCriteriaValues($hashData, $TABLE_ID);
 
 nuRunQuery("ALTER TABLE $TABLE_ID ADD `nu__id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST");
 
 nuBuildReport($PDF, $REPORT, $TABLE_ID);
+nudebug(json_encode($GLOBALS['nu_report']));
 $hashData['nu_pages']        = nuGetTotalPages();
 nuReplaceLabelHashVariables($REPORT, $hashData);
 nuPrintReport($PDF, $REPORT, $GLOBALS['nu_report'], $JSON);
@@ -305,6 +297,7 @@ class nuSECTION{
     }
 
     public function buildSection(){
+		
         $this->O              = $this->setObjectLines($this->O);
         $nextTop              = $this->chopSectionOverPages();
         $GLOBALS['nu_report'] = array_merge($GLOBALS['nu_report'], $this->SECTIONS);
@@ -338,7 +331,7 @@ class nuSECTION{
         for($i = 0 ; $i < count($O) ; $i++){
         
             $O[$i]->path                        = '';
-            
+			
             if($O[$i]->objectType == 'field' or $O[$i]->objectType == 'label'){
 
 				if($O[$i]->objectType == 'field'  and substr($this->ROW[$O[$i]->fieldName],0,1) == '#' and substr($this->ROW[$O[$i]->fieldName],2,1) == '#' and substr($this->ROW[$O[$i]->fieldName],9,1) == '|'){       //-- conditional formatting used
@@ -358,42 +351,34 @@ class nuSECTION{
                 $O[$i]->LINES                   = $this->getObjectRows($O[$i], $stopGrow);
                 
             }else if($O[$i]->objectType == 'image'){                                        //-- image
-
+			
 				$O[$i]->LINES                   = array('');
                 $path                           = '';
-                $im                             = $O[$i]->image;
-                
-                if(nuIsField($im)){                                                               //-- name of field in $GLOBALS['TABLE_ID']
-                
-                    $fld                        = $this->ROW[$im];
-                    
-                    if(nuIsRecord($fld)){                                                         //-- valid code in zzzzsys_file
-                    
-                        $path                   = nuCreateFile($fld);
-                        $GLOBALS['nu_files'][]  = $path;
-                        
-                    }else if(nuIsFile($fld)){                                                     //-- valid file path
-                    
-                        $path                   = $fld;
-                        
-                    }
-                    
-                }else{
-                
-                    if(nuIsRecord($im)){                                                          //-- valid code in zzzzsys_file
-                    
-                        $path                   = nuCreateFile($im);
-                        $GLOBALS['nu_files'][]  = $path;
-                        
-                    }else if(nuIsFile($im)){                                                      //-- valid file path
-                    
-                        $path                   = $im;
+                $fld                            = $O[$i]->fieldName;
+				$img	                        = $this->ROW[$fld];
+				
+                if(nuIsField($fld)){                                                        //-- FIELD NAME
+				
+					$path                   	= nuCreateFile($img);
+					$GLOBALS['nu_files'][]  	= $path;
 
+                }else{
+					
+					$j							= nuIsImage($fld);							//--CODE in zzzzsys_file
+					
+                    if($j != ''){
+						
+                        $path                   = nuCreateFile($j);
+                        $GLOBALS['nu_files'][]  = $path;
+                        
+                    }else if(nuIsFile($fld)){                                               //-- FILE NAME on hard drive
+                        $path                   = $fld;
                     }
                     
                 }
-
+				
                 $O[$i]->path              = $path;
+				
             }
 
         }
@@ -1073,14 +1058,20 @@ function nuIsField($i){
     
 }
 
-function nuIsRecord($i){
+function nuIsImage($i){
+	
+	if(substr($i, 0, 6) == 'Image:'){
+			
+		$c = substr($i, 6);
+		$t = nuRunQuery("SELECT * FROM zzzzsys_file WHERE sfi_code = ? ", array($c));
+		$r = db_fetch_object($t);
+		
+		return $r->sfi_json;
+		
+	}else{
+		return '';
+	}
 
-    $t = nuRunQuery("SELECT zzzzsys_file_id FROM zzzzsys_file WHERE sfi_code = ? ", array($i));
-    $r = db_fetch_object($t);
-    
-    
-    if($r=='') return false;
-    else return $r->zzzzsys_file_id != '';
     
 }
 
