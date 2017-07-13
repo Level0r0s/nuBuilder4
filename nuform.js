@@ -250,15 +250,13 @@ function nuAddActionButton(i, v, f){
 	if(arguments.length == 1){
 		
 		v	= i;
-		f	= 'nu' + String(v).replaceAll(' ', '_') + 'Action()';
+		f	= 'nu' + i + 'Action()';
 		
 	}
 	
 	$('#nuActionHolder').append("<input id='nu" + i + "Button' type='button' class='nuActionButton' value='" + v + "' onclick='" + f + "'>&nbsp;");
 
 }
-
-
 
 
 function nuBuildEditObjects(f, p, o, prop){

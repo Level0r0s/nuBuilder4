@@ -1,6 +1,6 @@
 <?php
 
-function nuBuildFastForm($table){
+function nuBuildFastForm($table, $form_type){
 
 	$form_id		= nuID();
 	$PK				= $table . '_id';
@@ -64,7 +64,7 @@ function nuBuildFastForm($table){
 
 	";
 
-	$array          = Array($form_id, 'browseedit', $form_code, $form_desc, $table, $PK, "SELECT * FROM $table");
+	$array          = Array($form_id, $form_type, $form_code, $form_desc, $table, $PK, "SELECT * FROM $table");
 
 	nuRunQuery($sql, $array);
 
@@ -157,12 +157,16 @@ function nuBuildFastForm($table){
 	}
 
 	if($newT){
-
+		
+		$mess		= 'Table and Form have';
 		$create		= nuBuildTable($table, $a);
 			
 		nuRunQuery($create);
 
+	}else{
+		$mess		= 'Form has';
 	}
+	
 
 	for($i = 0 ; $i < count($SF->rows) ; $i++){
 		
@@ -199,44 +203,55 @@ function nuBuildFastForm($table){
 
 	
 	
+	if($form_type == 'subform'){
+		
+		nuDisplayMessage("<h1>A $mess been created!</h1>");
+		nuDisplayMessage("<p>(There is now a Form with a Code of <b>$form_code</b> in the list found in <b>Forms</b>)");
+		nuDisplayMessage("<input type='button' value='Go to tab..' class='nuButton' onclick='nuGetBreadcrumb(0,0);'>");
+		
+	}else{
+	
+			
+		//----------add run button--------------------
 
-	//----------add run button--------------------
+		$sql            = "
 
-	$sql            = "
+						INSERT 
+						INTO $TT
+						(zzzzsys_object_id,
+						sob_all_zzzzsys_form_id,
+						sob_all_zzzzsys_tab_id,
+						sob_all_id,
+						sob_all_label,
+						sob_all_table,
+						sob_all_order,
+						sob_all_top,
+						sob_all_left,
+						sob_all_width,
+						sob_all_height,
+						sob_run_zzzzsys_form_id,
+						sob_run_method,
+						sob_all_cloneable,
+						sob_all_validate,
+						sob_all_access,
+						sob_all_type)
+						VALUES
+						(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 
-					INSERT 
-					INTO $TT
-					(zzzzsys_object_id,
-					sob_all_zzzzsys_form_id,
-					sob_all_zzzzsys_tab_id,
-					sob_all_id,
-					sob_all_label,
-					sob_all_table,
-					sob_all_order,
-					sob_all_top,
-					sob_all_left,
-					sob_all_width,
-					sob_all_height,
-					sob_run_zzzzsys_form_id,
-					sob_run_method,
-					sob_all_cloneable,
-					sob_all_validate,
-					sob_all_access,
-					sob_all_type)
-					VALUES
-					(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+		";
 
-	";
+		$array          = Array(nuID(), 'nuhome', 'nutesttab', "ff$form_id", $table, $table, 11, 63, 250, 150, 30, $form_id, 'b', 0, 0, 0, 'run');
+		nuRunQuery($sql, $array);
 
-	$array          = Array(nuID(), 'nuhome', 'nutesttab', "ff$form_id", $table, $table, 11, 63, 250, 150, 30, $form_id, 'b', 0, 0, 0, 'run');
-	nuRunQuery($sql, $array);
+		nuDisplayMessage("<h1>A $mess been created!</h1>");
+		nuDisplayMessage("<p>(There is now a Button called <b>$table</b> on the Testing tab of the Home Form)</p>");
+		nuDisplayMessage("<input type='button' value='Go to tab..' class='nuButton' onclick='nuGetBreadcrumb(0,2);'>");
+	
+	}
+
 
 	nuRunQuery("INSERT INTO zzzzsys_object SELECT * FROM $TT");
 	nuRunQuery("DROP TABLE $TT");
-
-	nuDisplayMessage("<h1>A Table and Form have been created!</h1>");
-	nuDisplayMessage("<p>(There is now a Button called <b>$table</b> on the Testing tab of the Home Form)</p>");
-	nuDisplayMessage("<input type='button' value='Go to tab..' class='nuButton' onclick='nuGetBreadcrumb(0,2);'>");
 
 }
 
