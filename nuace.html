@@ -63,6 +63,13 @@ function nuResize(){
 function nuAceSave(){
 
 	window.nuWarn      = 0;
+	
+	if(!opener.window.document.getElementById(window.o)){
+	
+		alert('The opening Form is no longer available.');
+		return;
+		
+	}
 
 	opener.window.document.getElementById(o).value = editor.getValue();
 
