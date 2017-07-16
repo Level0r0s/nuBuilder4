@@ -23,14 +23,12 @@ $PDF->SetAutoPageBreak(false);
 $REPORT                     = nuSetPixelsToMM($LAYOUT);
 $PDF->SetMargins(1,1,1);
 nuBuildTempTable($JSON->parentID, $TABLE_ID);
-//$evalPHP 					= new nuEvalPHPClass($JSON->parentID);            //-- build temp table for report from php
 
 $GLOBALS['nu_columns']		= nuAddCriteriaValues($hashData, $TABLE_ID);
 
 nuRunQuery("ALTER TABLE $TABLE_ID ADD `nu__id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST");
 
 nuBuildReport($PDF, $REPORT, $TABLE_ID);
-nudebug(json_encode($GLOBALS['nu_report']));
 $hashData['nu_pages']        = nuGetTotalPages();
 nuReplaceLabelHashVariables($REPORT, $hashData);
 nuPrintReport($PDF, $REPORT, $GLOBALS['nu_report'], $JSON);
