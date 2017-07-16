@@ -138,7 +138,6 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 
 			if($r->sob_all_type == 'image'){
 				$o->src 			= nuGetSrc($r->sob_image_zzzzsys_file_id);
-				nudebug($r->sob_image_zzzzsys_file_id, $r);
 			}
 
 			if($r->sob_all_type == 'select'){
@@ -286,7 +285,6 @@ function nuUpdateCounter($i){
 		
 		";
 		
-		nudebug($s, [$u, $i]);
 		nuRunQuery($s, [$u, $i]);
 		
 		$s	= "
@@ -482,7 +480,6 @@ function nuGetOtherLookupValues($o){
 	
 	$_POST['lookup_row']	= db_fetch_object($t);
 	$_POST['lookup_values']	= array();
-	nudebug($s, $_POST['lookup_row'], db_num_rows($t));
 
 	$evalPHP 				= new nuEvalPHPClass($p . '_AB');
 	
@@ -970,7 +967,7 @@ function nuAddOtherFormsUsed($j){
 
 function nuButtons($formid, $P){
 	
-	$t						= nuRunQuery("SELECT * FROM zzzzsys_session WHERE zzzzsys_session_id = ? ", array($_SESSION['SESSIONID']));		
+	$t						= nuRunQuery("SELECT * FROM zzzzsys_session WHERE zzzzsys_session_id = ? ", array($_SESSION['SESSION_ID']));		
 	$r 						= db_fetch_object($t);
 	$nuJ 					= json_decode($r->sss_access);
 	$_POST['forms']			= $nuJ->forms;
