@@ -1010,7 +1010,7 @@ function nuButtons($formid, $P){
 
 function nuFormAccess($s, $a){
 
-    require_once('config.php');
+    require('config.php');
 
 	if($_POST['session']->zzzzsys_user_id == $nuConfigDBGlobeadminUsername){
 		return array('1', '1', '1', '1', '1');

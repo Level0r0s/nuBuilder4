@@ -2,6 +2,7 @@
 
 require_once('nudatabase.php');
 require_once('config.php');
+require_once('nucommon.php');
 
 if(array_key_exists('nuSTATE', $_POST)){
     if(array_key_exists('call_type', $_POST['nuSTATE'])){
@@ -78,6 +79,7 @@ if(array_key_exists('nuSTATE', $_POST)){
                 /*
                     globeadmin
                 */
+
                 if($_POST['nuSTATE']['username'] == $nuConfigDBGlobeadminUsername && $_POST['nuSTATE']['password'] == $nuConfigDBGlobeadminPassword){
         			
                     $_SESSION['isGlobeadmin'] 				= true;
