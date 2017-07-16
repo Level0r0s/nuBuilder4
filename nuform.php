@@ -903,7 +903,7 @@ function nuGatherFormAndSessionData(){
 
 	if(!$_SESSION['isGlobeadmin'] && $formAndSessionData->form_id != 'nuhome') {
 
-        $getAccessFromSessionTableQRY = nuRunQuery("SELECT sss_access FROM zzzzsys_access WHERE zzzzsys_session_id = ? ", array($_SESSION['SESSION_ID']));
+        $getAccessFromSessionTableQRY = nuRunQuery("SELECT sss_access FROM zzzzsys_session WHERE zzzzsys_session_id = ? ", array($_SESSION['SESSION_ID']));
         $getAccessFromSessionTableOBJ = db_fetch_object($getAccessFromSessionTableQRY);
         $access = json_decode($getAccessFromSessionTableOBJ->sss_access);
 
@@ -930,6 +930,7 @@ function nuGatherFormAndSessionData(){
 		$f = nuAddOtherFormsUsed($access); //-- form list including forms id used in reports and procedures
 		
 		if(!in_array($formAndSessionData->form_id, $f) && $formAndSessionData->call_type == 'getform'){
+nudebug($formAndSessionData->form_id, $f, $access, $getAccessFromSessionTableOBJ,"SELECT sss_access FROM zzzzsys_access WHERE zzzzsys_session_id = ? ", $_SESSION['SESSION_ID']);			
 
 			$nuT		= nuRunQuery("SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$formAndSessionData->form_id'");
 			$nuR		= db_fetch_object($nuT);

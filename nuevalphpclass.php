@@ -60,14 +60,17 @@
 		
 		function evalPHP($phpCode, $phpToEval){
 			
-			try {
+			if(trim($phpToEval) == ''){return;}
+			
+			try{
+				
 				eval($phpToEval); 
 				
-			} catch(Throwable $e) {
+			}catch(Throwable $e){
 
 				$this->exceptionHandler($e, $phpCode, $phpToEval);   
 				 
-			} catch (Exception $e) {
+			}catch(Exception $e){
 
 				$this->exceptionHandler($e, $phpCode, $phpToEval);
 				

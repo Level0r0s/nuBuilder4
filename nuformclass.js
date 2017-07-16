@@ -549,7 +549,9 @@ class nuFormObject {
 				
 			}
 			
-			if(String(h) == 'toobig'){nuMessage(["Man! That's a BIG number, stop showing off.",'','<img id="thebig" src="fpdf\\big.png">']);return '';}
+			if(String(h) == 'toobig' && nuSERVERRESPONSE.user_id == 'globeadmin'){
+				nuMessage(["What did we say ?",'','<img id="thebig" src="fpdf\\big.png">']);return '';
+			}
 			
 			return m;
 		

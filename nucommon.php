@@ -1032,6 +1032,8 @@ function nuCreateFile($j){
 }
 
 
-
+function nuHash(){
+	return $_POST['nuHash'];
+}
 
 ?>
