@@ -328,7 +328,9 @@ function nuSetHashList($p){
 			
 		}
 	}
-
+	
+	
+/*
 	$H		= $p['hash'];
 	
 	$ha		= array();
@@ -343,6 +345,7 @@ function nuSetHashList($p){
 		}
 		
 	}
+	$H		= $p['hash'];
 	
 	foreach ($p as $fld => $value ){								//-- add all nuState values
 	
@@ -351,7 +354,9 @@ function nuSetHashList($p){
 		}
 		
 	}
+*/
 
+	$ha							= $p['hash'];
 	
 	$ha['PREVIOUS_RECORD_ID']	= addslashes($rid);
 	$ha['RECORD_ID']			= addslashes($rid);

@@ -14,7 +14,6 @@ function nuBuildForm(f){
 	}
 	
 	window.nuBeforeSave			= null;
-	window.onbeforeunload		= null;
 	window.nuBrowseFunction		= window.nuDefaultBrowseFunction;
 	window.nuSERVERRESPONSE		= f;
 	window.nuSESSION			= f.session_id;
@@ -2761,7 +2760,7 @@ function nuHashFromEditForm(){
 		}
 
 	});
-	
+console.log(A);
 	return a;
 
 }

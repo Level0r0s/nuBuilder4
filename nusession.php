@@ -70,11 +70,11 @@ if(array_key_exists('nuSTATE', $_POST)){
         				
                     }
         			
-                    $_SESSION['formSchema'][$formID] = $objectSchema;
+                    $_SESSION['formSchema'][$formID] 		= $objectSchema;
         			
                 }
         		
-                $_SESSION['translation']            = array(); // this is populated for users other than globeadmin below
+                $_SESSION['translation']            		= array(); // this is populated for users other than globeadmin below
                 
                 /*
                     globeadmin
