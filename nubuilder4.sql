@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 18, 2017 at 04:59 AM
+-- Generation Time: Jul 18, 2017 at 01:18 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -187,7 +187,7 @@ CREATE TABLE `invoice` (
 --
 
 INSERT INTO `invoice` (`invoice_id`, `inv_company_id`, `inv_number`, `inv_total`, `inv_date`) VALUES
-('58dd85c34768b7b', '', 222, '123.0000000', '2017-03-21'),
+('58dd85c34768b7b', '57295aa5660f48b', 222, '125.0000000', '2017-03-21'),
 ('s14919516899490', '', 53, '215.3000000', '2017-03-19'),
 ('s14919517022910', '', 54, '26.1300000', '2017-05-09'),
 ('s14941671398158', '', 55, '18.0000000', '2017-03-15'),
@@ -227,7 +227,8 @@ INSERT INTO `invoice_item` (`invoice_item_id`, `ite_invoice_id`, `ite_thing`, `i
 ('s14986456330354', 's14986455399465', '2', 1.0000, 3.0000, 3.0000),
 ('s14998769369058', 's14941671441214', 'thing2', 4.0000, 2.0000, 8.0000),
 ('s14999484819206', '58dd85c34768b7b', '22', 3.0000, 32.0000, 96.0000),
-('s14999484819207', '58dd85c34768b7b', 'fd', 1.0000, 6.0000, 6.0000);
+('s14999484819207', '58dd85c34768b7b', 'fd', 1.0000, 6.0000, 6.0000),
+('s15003729680840', '58dd85c34768b7b', '11', 2.0000, 1.0000, 2.0000);
 
 -- --------------------------------------------------------
 
@@ -562,8 +563,7 @@ INSERT INTO `zzzzsys_event` (`zzzzsys_event_id`, `sev_zzzzsys_object_id`, `sev_e
 ('s14984738810709', 's14984705068995', 'onfocus', 'nuFocusFFObject(event);'),
 ('s14985153818131', 's14914341685330', 'onclick', 'alert(''Do Something!'')'),
 ('s14999843308353', 's14999843308352', 'onchange', 'nuFormColor();'),
-('s15000603208259', 's15000603208258', 'onclick', 'nuPopPHP(event, ''BB'');'),
-('s15003436108301', 's15003410579891', 'onclick', 'nuMessage(["To turn this Object into a Run Button that will open a Launch Form", "for your Users'' Home Page...", "", "1. Create the Launch Form.", "2. Remove the onclick event for this Object - <i>that creates this message</i>.", "3. Change the <b>Type</b> to ''Run''.", "4. Select the new Form in the <b>Run</b> Lookup.","5. Save the Object.","6. Login again."]);');
+('s15000603208259', 's15000603208258', 'onclick', 'nuPopPHP(event, ''BB'');');
 
 -- --------------------------------------------------------
 
@@ -618,7 +618,7 @@ INSERT INTO `zzzzsys_form` (`zzzzsys_form_id`, `sfo_type`, `sfo_code`, `sfo_desc
 ('56773cb405f4913', 'browseedit', 'COM', 'Company', 'company', 'company_id', '', 0, 0, 'SELECT * FROM company\r\nLEFT JOIN business ON business_id = com_business_id', '\nfunction sftest(){\n\n    var bob = 9;\n\n}'),
 ('5678ab2c48c5c41', 'edit', 'EMP', 'Employee Subform', 'employee', 'employee_id', '', 0, 0, 'SELECT * FROM employee\nWHERE emp_cost > 10\n', ''),
 ('568b508eec00d80', 'browseedit', 'BUS', 'Business', 'business', 'business_id', '', 0, 4, 'SELECT * FROM business', ''),
-('nuhome', 'launch', 'HOME', 'Home', '', '', '', 0, 0, '', '$(''.nuActionButton'').hide();\n\n$(''#user_home'')\n    .removeClass(''nuButton'')\n    .css({\n        ''color''             : ''white'',\n        ''font-size''         : 13,\n        ''display''           : ''inline'',\n        ''border-style''      : ''solid'',\n        ''font-size''         : 12,\n        ''height''            : 30,\n        ''padding''           : ''0px 6px 0px 6px'',\n        ''text-shadow''       : ''0 1px 2px #9AB973'',\n        ''border-color''      : ''#9AB973'',\n        ''border-width''      : ''0px 0px 1px 0px'',\n        ''background-color''  : ''#88cb51''\n    });\n\n$(''#open_database'').click(function(){\n    window.open(''nupmalogin.php'');\n});'),
+('nuhome', 'launch', 'HOME', 'Home', '', '', '', 0, 0, '', '$(''.nuActionButton'').hide();\n\n$(''#user_home'')\n    .css({\n        ''color''             : ''white'',\n        ''font-size''         : 13,\n        ''display''           : ''inline'',\n        ''border-style''      : ''solid'',\n        ''height''            : 30,\n        ''font-size''         : 16,\n        ''padding''           : ''0px 6px 0px 6px'',\n        ''text-shadow''       : ''0 1px 2px #9AB973'',\n        ''border-color''      : ''#9AB973'',\n        ''border-width''      : ''0px 0px 1px 0px'',\n        ''background-color''  : ''#88cb51''\n    });\n\n$(''#open_database'').click(function(){\n    window.open(''nupmalogin.php'');\n});'),
 ('56c513162acd102', 'edit', 'CHI', 'Children', 'children', 'children_id', '', 0, 0, 'SELECT * FROM employee', ''),
 ('nubrowse', 'subform', 'FRMBR', 'Browse Columns', 'zzzzsys_browse', 'zzzzsys_browse_id', '', 0, 5, 'SELECT * FROM zzzzsys_browse\nORDER BY sbr_order\n', '$(''#nuSearchButton'').remove();\n$(''#nuSearchField'').remove();\n$(''#nuPrintButton'').remove();\n\nnuSetTitle($(''#sbr_title'').val());\n\nvar pid = parent.nuFORM.getCurrent().record_id;\n\nif(nuFORM.getCurrent().record_id == -1){\n    $(''#sbr_zzzzsys_form_id'').val(pid).change();\n}\n'),
 ('nutab', 'browseedit', 'TAB', 'Form Tab', 'zzzzsys_tab', 'zzzzsys_tab_id', '', 0, 0, 'SELECT * FROM zzzzsys_tab\nJOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id\nORDER BY syt_order', '\n$("[data-nu-column=''nucolumn003'']").each(function() {\n    $(this).addClass(''nu_''+this.innerHTML);\n});\n'),
@@ -664,7 +664,7 @@ INSERT INTO `zzzzsys_form` (`zzzzsys_form_id`, `sfo_type`, `sfo_code`, `sfo_desc
 ('s14967315763149', 'browseedit', 'INVCOM', 'Company', 'company', 'company_id', '56773cb405f4913', 0, 0, 'SELECT\n    company.*\n\nFROM\n    company\n', ''),
 ('s14968332683656', 'subform', '1123', 'Test Form (break it if you want)', 'zzzzsys_access_level', 'zzzzsys_access_level_id', '', 0, 0, 'SELECT\n    color.color_id,\n    color.col_code,\n    color.col_description\n\nFROM\n    color', 'nuSetTitle($(''#sal_code'').val());'),
 ('s14993014809858', 'browse', 'PANDS', 'PHP and SELECT ', 'zzzzsys_report_data', 'id', 'nuselect', 0, 0, 'SELECT * FROM zzzzsys_report_data', ''),
-('s15003463994285', 'launch', 'FF1', 'Fast Form 1', 'children', 'children_id', '', 0, 0, 'SELECT * FROM children', '');
+('nuuserhome', 'launch', 'USERH', 'User Home', '', '', '', 0, 0, '', '');
 
 -- --------------------------------------------------------
 
@@ -1392,8 +1392,7 @@ INSERT INTO `zzzzsys_object` (`zzzzsys_object_id`, `sob_all_zzzzsys_form_id`, `s
 ('s15000508641735', '58a08a1abc4782c', 'invoice', 'input', 'test', 'test', '58a08a1abc48c9a', 80, 67, 209, 100, 20, '1', 'right', '0', '0', '', '', '', '', '', '', '', '', '', '', 'com_code', 'com_name', '200', '', 's14967315763149', '', '', 'company', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
 ('s15000520525446', '58d3719f55819e7', 'zzzzsys_access_level', 'input', 'com_name', 'Company Name', '58d3719f5582316', 70, 33, 171, 100, 18, '1', 'left', '1', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
 ('s15000603208258', 'nufflaunch', 'zzzzsys_form', 'word', 'wrdaddable', 'Addable Objects', '583361606251aef', 10, 10, 23, 383, 20, '1', 'center', '0', '0', '', '', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'button', '', '', ''),
-('s15003410579891', 'nuhome', '', 'input', 'user_home', 'User Home', '569dc4ed270f08a', 40, 255, 64, 150, 30, '1', 'center', '1', '0', '', '', '', '', '', 'b', '-1', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'button', '', '', ''),
-('s15003463994287', 'nuhome', 'children', 'run', 'ffs15003463994285', 'children', 'nutesttab', 11, 63, 250, 150, 30, '0', '', '0', '0', '', '', '', 's15003463994285', '', 'b', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', '', '');
+('s15003410579891', 'nuhome', '', 'run', 'user_home', 'User Home', '569dc4ed270f08a', 40, 255, 64, 150, 30, '1', 'center', '1', '0', '', '', '', 'nuuserhome', '', 'b', '-1', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'button', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -1945,7 +1944,7 @@ INSERT INTO `zzzzsys_tab` (`zzzzsys_tab_id`, `syt_zzzzsys_form_id`, `syt_title`,
 ('s14981564175454', 's14981564175453', 'Main', 10),
 ('s14981568046397', 's14981568046395', 'Main', 10),
 ('s14986964108605', '56773cb405f4913', 'Test', 20),
-('s15003463994286', 's15003463994285', 'Main', 10);
+('s15003463994286', 'nuuserhome', 'Main', 10);
 
 -- --------------------------------------------------------
 
