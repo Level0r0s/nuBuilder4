@@ -11,14 +11,14 @@
 	$_POST['nuErrors']						= array();
 	$_POST['nuMessages']					= array();
 
-	$formAndSessionData						= nuGatherFormAndSessionData();
+	$U										= nuGetUserAccess();
+	$formAndSessionData						= nuGatherFormAndSessionData($U['HOME_ID']);
     
     $_POST['nuTableSchema']                 = $formAndSessionData->tableSchema;
 
 	$F										= $formAndSessionData->form_id;
 	$R										= $formAndSessionData->record_id;
 	$P										= $_POST['nuSTATE'];
-	$U										= nuGetUserAccess();
 	$_POST['FORM_ID'] 						= $F;
 	$_POST['nuHash']						= array_merge($U, nuSetHashList($P));
 	$_POST['nuHash']['PREVIOUS_RECORD_ID'] 	= $R;

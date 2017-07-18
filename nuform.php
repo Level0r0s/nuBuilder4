@@ -876,40 +876,46 @@ function nuBrowseWhereClause($searchFields, $searchString, $returnArray = false)
 
 
 
-function nuGatherFormAndSessionData(){
+function nuGatherFormAndSessionData($home){
 
 	$formAndSessionData = new stdClass;
+	
     if(isset($_POST['nuSTATE']['record_id'])){
         $formAndSessionData->record_id  = $_POST['nuSTATE']['record_id'];
     } else {
         $formAndSessionData->record_id  = '-1';
     }
+	
     if(isset($_POST['nuSTATE']['form_id'])){
-        $formAndSessionData->form_id  = $_POST['nuSTATE']['form_id'];
+        $formAndSessionData->form_id  	= $_POST['nuSTATE']['form_id'];
     } else {
-        $formAndSessionData->form_id  = 'nuhome';
+		$formAndSessionData->form_id 	= $home == '' ? 'nuhome' : $home;
     }
-	$formAndSessionData->session_id = $_SESSION['SESSION_ID'];
-	$formAndSessionData->call_type = $_POST['nuSTATE']['call_type'];
-	$formAndSessionData->filter = $_POST['nuFilter'];
-	$formAndSessionData->errors = array();
-	$formAndSessionData->tableSchema = $_SESSION['tableSchema'];
-	$formAndSessionData->formSchema = $_SESSION['formSchema'];
-	$formAndSessionData->translation = $_SESSION['translation'];
-	$formAndSessionData->dimensions = nuFormDimensions($formAndSessionData->form_id);
+	
+	$formAndSessionData->session_id 	= $_SESSION['SESSION_ID'];
+	$formAndSessionData->call_type 		= $_POST['nuSTATE']['call_type'];
+	$formAndSessionData->filter 		= $_POST['nuFilter'];
+	$formAndSessionData->errors 		= array();
+	$formAndSessionData->tableSchema 	= $_SESSION['tableSchema'];
+	$formAndSessionData->formSchema 	= $_SESSION['formSchema'];
+	$formAndSessionData->translation 	= $_SESSION['translation'];
+	$formAndSessionData->dimensions 	= nuFormDimensions($formAndSessionData->form_id);
 
 	if(!$_SESSION['isGlobeadmin'] && $formAndSessionData->form_id != 'nuhome') {
 
-        $getAccessFromSessionTableQRY = nuRunQuery("SELECT sss_access FROM zzzzsys_session WHERE zzzzsys_session_id = ? ", array($_SESSION['SESSION_ID']));
-        $getAccessFromSessionTableOBJ = db_fetch_object($getAccessFromSessionTableQRY);
-        $access = json_decode($getAccessFromSessionTableOBJ->sss_access);
+        $getAccessFromSessionTableQRY 	= nuRunQuery("SELECT sss_access FROM zzzzsys_session WHERE zzzzsys_session_id = ? ", array($_SESSION['SESSION_ID']));
+        $getAccessFromSessionTableOBJ 	= db_fetch_object($getAccessFromSessionTableQRY);
+        $access 						= json_decode($getAccessFromSessionTableOBJ->sss_access);
 
 		if($formAndSessionData->call_type == 'getreport'){
 		
 			if(!in_array($formAndSessionData->record_id, $access->reports)) { //form_id is record_id for getreport
-				$nuT		= nuRunQuery("SELECT * FROM zzzzsys_report WHERE zzzzsys_report_id = '$formAndSessionData->record_id'");
-				$nuR		= db_fetch_object($nuT);
+			
+				$nuT					= nuRunQuery("SELECT * FROM zzzzsys_report WHERE zzzzsys_report_id = '$formAndSessionData->record_id'");
+				$nuR					= db_fetch_object($nuT);
+				
 				nuDisplayError("Access To Report Denied... ($nuR->sre_code)");
+				
 			}	
 			
 		}
@@ -917,8 +923,10 @@ function nuGatherFormAndSessionData(){
         if($formAndSessionData->call_type == 'getphp'){
 
             if(!in_array($formAndSessionData->record_id, $access->procedures)) { //form_id is record_id for getphp
-                $nuT    = nuRunQuery("SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = '$formAndSessionData->record_id'");
-                $nuR    = db_fetch_object($nuT);
+			
+                $nuT					= nuRunQuery("SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = '$formAndSessionData->record_id'");
+                $nuR					= db_fetch_object($nuT);
+				
                 nuDisplayError("Access To Procedure Denied... ($nuR->sph_code)");
             }
                 
@@ -927,10 +935,9 @@ function nuGatherFormAndSessionData(){
 		$f = nuAddOtherFormsUsed($access); //-- form list including forms id used in reports and procedures
 		
 		if(!in_array($formAndSessionData->form_id, $f) && $formAndSessionData->call_type == 'getform'){
-nudebug($formAndSessionData->form_id, $f, $access, $getAccessFromSessionTableOBJ,"SELECT sss_access FROM zzzzsys_access WHERE zzzzsys_session_id = ? ", $_SESSION['SESSION_ID']);			
 
-			$nuT		= nuRunQuery("SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$formAndSessionData->form_id'");
-			$nuR		= db_fetch_object($nuT);
+			$nuT						= nuRunQuery("SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$formAndSessionData->form_id'");
+			$nuR						= db_fetch_object($nuT);
 
 			nuDisplayError("Access To Form Denied... ($nuR->sfo_code)");
 			
@@ -938,7 +945,7 @@ nudebug($formAndSessionData->form_id, $f, $access, $getAccessFromSessionTableOBJ
 		
 	}
     
-    $formAndSessionData->errors = $_POST['nuErrors'];
+    $formAndSessionData->errors 		= $_POST['nuErrors'];
 
 	return $formAndSessionData;
 	

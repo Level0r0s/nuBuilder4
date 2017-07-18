@@ -716,7 +716,7 @@ function nuGetUserAccess(){
 	
 	$A['USER_ID']		= $j->session->zzzzsys_user_id;
 	$A['USER_GROUP_ID']	= $j->session->zzzzsys_user_group_id;
-	$A['HOME_ID']		= $j->session->sug_zzzzsys_form_id;
+	$A['HOME_ID']		= $j->session->zzzzsys_form_id;
 	$A['global_access']	= $j->session->global_access;
 	
 	return $A;
