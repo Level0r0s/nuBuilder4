@@ -1778,7 +1778,7 @@ function nuBuildOptionsList(l, p){												//-- loop through adding options t
 
 function nuSelectTab(tab){
 
-	$('#nuOptionsList').remove();
+	$('#nuOptionsListBox').remove()
 	
     var filt = $('#' + tab.id).attr('data-nu-tab-filter');
     var form = $('#' + tab.id).attr('data-nu-form-filter');
@@ -2711,6 +2711,7 @@ function nuAddJavascript(o){
 function nuHashFromEditForm(){
 
 	var a			= [];
+	var A			= [];
 	var b			= window.nuFORM.getCurrent();
 	var o 			= {};
 	var val 		= '';
@@ -2718,6 +2719,7 @@ function nuHashFromEditForm(){
 	for (var key in b) {
 		if(key != 'hash') {
 			a.push([key, b[key]]);
+			A[key]	= b[key];
 		}
 	}	
 		
@@ -2725,6 +2727,11 @@ function nuHashFromEditForm(){
 	a.push(['FORM_ID', b.form_id]);
 	a.push(['PREVIOUS_RECORD_ID', b.record_id]);
 	a.push(['RECORD_ID', b.record_id]);
+	
+	A[b.form_id]			= b.record_id;
+	A['FORM_ID']			= b.form_id;
+	A['PREVIOUS_RECORD_ID']	= b.record_id;
+	A['RECORD_ID']			= b.record_id;
 	
 	$("[data-nu-field][data-nu-prefix='']").each(function( index ){
 
@@ -2734,6 +2741,7 @@ function nuHashFromEditForm(){
 		if(o.attr('multiple') == 'multiple'){
 
 			a.push([this.id, Array(val).join('#nuSep#')]);
+			A[this.id]	= Array(val).join('#nuSep#');
 
 		}else{
 
@@ -2748,11 +2756,12 @@ function nuHashFromEditForm(){
 			}
 			
 			a.push([this.id, val]);
+			A[this.id]	= val;
 
 		}
 
 	});
-
+console.log(A);
 	return a;
 
 }

@@ -330,7 +330,7 @@ function nuSetHashList($p){
 	}
 
 	$H		= $p['hash'];
-	nudebug($H);
+	
 	$ha		= array();
 
 	for($i = 1 ; $i < count($H) ; $i++){									//-- add parent Form field values
