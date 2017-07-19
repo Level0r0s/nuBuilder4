@@ -2731,6 +2731,8 @@ function nuHashFromEditForm(){
 	A['FORM_ID']			= b.form_id;
 	A['PREVIOUS_RECORD_ID']	= b.record_id;
 	A['RECORD_ID']			= b.record_id;
+	console.log('blah');
+	A['AAAq']			= b.record_id;
 	
 	$("[data-nu-field][data-nu-prefix='']").each(function( index ){
 
@@ -2761,7 +2763,7 @@ function nuHashFromEditForm(){
 
 	});
 console.log(A);
-	return a;
+	return A;
 
 }
 

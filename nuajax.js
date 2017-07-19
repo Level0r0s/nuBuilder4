@@ -365,28 +365,27 @@ function nuUpdateData(action, instruction){
 		if(!nuBeforeSave()){return;}
 	}
 
-	var last			= window.nuFORM.getCurrent();
+	var last				= window.nuFORM.getCurrent();
 
-	var f				= last.form_id;
-	var r				= last.record_id;
+	var f					= last.form_id;
+	var r					= last.record_id;
 
 	if(arguments.length == 2){
-		last.instruction= instruction;
+		last.instruction	= instruction;
 	}
 	
-	last.call_type 		= 'update';
-	last.deleteAll 		= $('#nuDelete').is(":checked") ? 'Yes' : 'No';
-	last.data 			= nuGetFormData();
-	last.nuFORMdata		= nuFORM.data(action);
-	last.hash 			= nuHashFromEditForm();
-	//last.subforms		= nuGetSFArrays();
-	last.session_id 	= window.nuSESSION;
+	last.call_type 			= 'update';
+	last.deleteAll 			= $('#nuDelete').is(":checked") ? 'Yes' : 'No';
+	last.data 				= nuGetFormData();
+	last.nuFORMdata			= nuFORM.data(action);
+	last.hash 				= nuHashFromEditForm();
+	last.session_id 		= window.nuSESSION;
 	
 	$('.nuactionbutton').hide();
 	
-	var successCallback = function(data,textStatus,jqXHR){
+	var successCallback 	= function(data,textStatus,jqXHR){
 		
-		var fm 	= data;
+		var fm 				= data;
 
 		$('.nuactionbutton').show();
 		

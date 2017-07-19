@@ -10,12 +10,9 @@
 	$_POST['nuCounter']						= rand(0, 999);
 	$_POST['nuErrors']						= array();
 	$_POST['nuMessages']					= array();
-
 	$U										= nuGetUserAccess();
 	$formAndSessionData						= nuGatherFormAndSessionData($U['HOME_ID']);
-    
     $_POST['nuTableSchema']                 = $formAndSessionData->tableSchema;
-
 	$F										= $formAndSessionData->form_id;
 	$R										= $formAndSessionData->record_id;
 	$P										= $_POST['nuSTATE'];

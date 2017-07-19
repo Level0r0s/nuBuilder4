@@ -329,35 +329,8 @@ function nuSetHashList($p){
 		}
 	}
 	
-	
-/*
-	$H		= $p['hash'];
-	
-	$ha		= array();
 
-	for($i = 1 ; $i < count($H) ; $i++){									//-- add parent Form field values
-		
-		$f	= $H[$i][0];
-		$v	= $H[$i][1];
-
-		if(gettype($v) == 'string'){
-			$ha[$f]	= addslashes($v);
-		}
-		
-	}
-	$H		= $p['hash'];
-	
-	foreach ($p as $fld => $value ){								//-- add all nuState values
-	
-		if(gettype($value) == 'string'){
-			$ha[$fld] = addslashes($value);
-		}
-		
-	}
-*/
-
-	$ha							= $p['hash'];
-	
+	$ha							= $p;
 	$ha['PREVIOUS_RECORD_ID']	= addslashes($rid);
 	$ha['RECORD_ID']			= addslashes($rid);
 	$ha['FORM_ID']				= addslashes($fid);
@@ -379,14 +352,6 @@ function nuRunReport($nuRID){
 	$_POST['nuHash']['description']		= $nuA->sre_description;
 	$_POST['nuHash']['sre_layout']		= nuReplaceHashVariables($nuA->sre_layout);
 	$_POST['nuHash']['parentID']		= $nuA->sre_zzzzsys_php_id;
-	
-/*	
-	$nuI								= $nuA->sre_zzzzsys_php_id;
-	$nuT								= nuRunQuery("SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = '$nuI'");
-	$nuR								= db_fetch_object($nuT);
-	$_POST['nuHash']['parentID']		= $nuR->zzzzsys_php_id;
-*/
-
 	$nuJ								= json_encode($_POST['nuHash']);
 	$_SESSION[$nuID]					= $nuJ;
 	
@@ -404,13 +369,25 @@ function nuRunPHP($nuRID){
 	$_POST['nuHash']['parentID']		= $nuA->zzzzsys_php_id;
 	$nuJ								= json_encode($_POST['nuHash']);
 	$_SESSION[$nuID]					= $nuJ;
-
+	nuSetPorR($nuID, $nuJ);
 	return $nuID;
 	
 }
 
 
-
+function nuSetPorR($i, $nj){
+	
+	$s					= "SELECT * FROM zzzzsys_session WHERE zzzzsys_session_id = ? ";
+	$t					= nuRunQuery($s, array($_SESSION['SESSION_ID']));			 
+	$r					= db_fetch_object($t);
+	$j					= json_decode($r->sss_access);
+	$j[$i]				= json_decode($nj);
+	$J					= json_encode($j);
+	
+	$s					= "UPDATE zzzzsys_session SET sss_access = ? WHERE zzzzsys_session_id = ? ";
+	$t					= nuRunQuery($s, array($J, $_SESSION['SESSION_ID']));
+	
+}
 
 
 
