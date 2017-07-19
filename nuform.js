@@ -2731,8 +2731,6 @@ function nuHashFromEditForm(){
 	A['FORM_ID']			= b.form_id;
 	A['PREVIOUS_RECORD_ID']	= b.record_id;
 	A['RECORD_ID']			= b.record_id;
-	console.log('blah');
-	A['AAAq']			= b.record_id;
 	
 	$("[data-nu-field][data-nu-prefix='']").each(function( index ){
 
@@ -2762,7 +2760,7 @@ function nuHashFromEditForm(){
 		}
 
 	});
-console.log(A);
+	
 	return A;
 
 }
@@ -3024,53 +3022,6 @@ function nuMessage(o, type){
 
 }
 
-/*
-
-function nuBuildFormula(p, f){
-
-	var bits		= f.split(' ');
-	
-	for(var i = 0 ; i < bits.length ; i++){
-		
-		var bit		= String(bits[i]);
-		
-		if(bit.substr(0,7) == 'nuTotal'){
-			bits[i]	= nuRebuild_nuTotal(p, bit);
-		}
-		
-	}	
-console.log(bits);
-
-	
-	return bits.join(' ');
-	
-}
-
-
-function nuRebuild_nuTotal(p, s){
-	
-	var t	= s.trim();
-	t		= t.substr(0, t.length-1)
-	t		= t.substr(8)
-	t		= t.split('.');
-				
-	if(t.length == 1){
-		
-		var O	= String(t[0]).replaceAll("'", '');
-		var n	= "nuTotal('" + p + O + "')";
-		
-	}else{
-		
-		var S	= String(t[0]).replaceAll("'", '');
-		var O	= String(t[1]).replaceAll("'", '');
-		var n	= "nuTotal('" + S + '.' + O + "')";
-		
-	}
-	
-	return n;
-	
-}
-*/
 
 function nuWindowPosition(){
 	

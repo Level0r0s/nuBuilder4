@@ -10,8 +10,10 @@ $GLOBALS['nu_columns']      = array();
 $GLOBALS['nu_files']        = array();
 
 $jsonID                     = $_GET['i'];
+$J							= nuGetPorR($jsonID);
 $TABLE_ID                   = nuTT();
-$JSON                       = json_decode($_SESSION[$jsonID]);
+//$JSON                       = json_decode($_SESSION[$jsonID]);
+$JSON                       = json_decode($J);
 $LAYOUT						= json_decode($JSON->sre_layout);
 $hashData                   = nuAddToHashList($JSON, 'report');
 $hashData['TABLE_ID']       = $TABLE_ID;

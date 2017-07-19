@@ -31,7 +31,9 @@
 	$f->forms[0]							= new stdClass;
 
     if(count($formAndSessionData->errors) == 0){
-    	if($CT == 'getform' || $CT == 'login'){nuBeforeEdit($F, $R);$f->forms[0] 	= nuGetFormObject($F, $R, 0, $P);}
+		
+    	if($CT == 'login')			{nuBeforeEdit($F, $R);$f->forms[0] 	= nuGetFormObject($F, $R, 0, $P);}
+    	if($CT == 'getform')		{nuBeforeEdit($F, $R);$f->forms[0] 	= nuGetFormObject($F, $R, 0, $P);}
     	if($CT == 'getphp')			{nuBeforeEdit($F, $R);$f->forms[0] 	= nuGetFormObject($F, $R, 0, $P);}
     	if($CT == 'getreport')		{nuBeforeEdit($F, $R);$f->forms[0] 	= nuGetFormObject($F, $R, 0, $P);}
     	if($CT == 'update')			{$f->forms[0]->record_id			= nuUpdateData(); nuUpdateTables();}
@@ -42,6 +44,7 @@
     	if($CT == 'runreport')		{$f->forms[0]->id					= nuRunReport($F);}
     	if($CT == 'runhtml')		{$f->forms[0]->id					= nuRunHTML();}
         if($CT == 'nudragsave')		{$f->forms[0]						= nuDragSave($P);}
+		
     }
 
 	$f->forms[0]->user_id					= $U['USER_ID'];

@@ -313,6 +313,7 @@ function nuSetHashList($p){
 	$s			= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$fid'";
 	$t			= nuRunQuery($s);
 	$R			= db_fetch_object($t);
+	$h			= array();
 
 	if(trim($R->sfo_table) != ''){
 		
@@ -328,17 +329,25 @@ function nuSetHashList($p){
 			
 		}
 	}
-	
 
-	$ha							= $p;
-	$ha['PREVIOUS_RECORD_ID']	= addslashes($rid);
-	$ha['RECORD_ID']			= addslashes($rid);
-	$ha['FORM_ID']				= addslashes($fid);
-	$ha['SUBFORM_ID']			= addslashes($_POST['nuSTATE']['object_id']);
-	$ha['ID']					= addslashes($_POST['nuSTATE']['primary_key']);
-	$ha['CODE']					= addslashes($_POST['nuSTATE']['code']);
+	foreach ($p as $key => $value){
+
+		if(gettype($value) == 'string'){
+			$h[$key]			= addslashes($value);
+		}else{
+			$h[$key]			= '';
+		}
+		
+	}
+
+	$h['PREVIOUS_RECORD_ID']	= addslashes($rid);
+	$h['RECORD_ID']				= addslashes($rid);
+	$h['FORM_ID']				= addslashes($fid);
+	$h['SUBFORM_ID']			= addslashes($_POST['nuSTATE']['object_id']);
+	$h['ID']					= addslashes($_POST['nuSTATE']['primary_key']);
+	$h['CODE']					= addslashes($_POST['nuSTATE']['code']);
 	
-	return array_merge($r, $ha, $A);
+	return array_merge($r, $h, $A);
 
 }
 
@@ -354,6 +363,7 @@ function nuRunReport($nuRID){
 	$_POST['nuHash']['parentID']		= $nuA->sre_zzzzsys_php_id;
 	$nuJ								= json_encode($_POST['nuHash']);
 	$_SESSION[$nuID]					= $nuJ;
+	nuSetPorR($nuID, $nuJ);
 	
 	return $nuID;
 	
@@ -380,12 +390,26 @@ function nuSetPorR($i, $nj){
 	$s					= "SELECT * FROM zzzzsys_session WHERE zzzzsys_session_id = ? ";
 	$t					= nuRunQuery($s, array($_SESSION['SESSION_ID']));			 
 	$r					= db_fetch_object($t);
-	$j					= json_decode($r->sss_access);
-	$j[$i]				= json_decode($nj);
+	$j					= json_decode($r->sss_access, true);
+	$j[$i]				= $nj;
 	$J					= json_encode($j);
 	
 	$s					= "UPDATE zzzzsys_session SET sss_access = ? WHERE zzzzsys_session_id = ? ";
 	$t					= nuRunQuery($s, array($J, $_SESSION['SESSION_ID']));
+	
+}
+
+
+
+
+function nuGetPorR($i){
+	
+	$s					= "SELECT * FROM zzzzsys_session WHERE zzzzsys_session_id = ? ";
+	$t					= nuRunQuery($s, array($_SESSION['SESSION_ID']));			 
+	$r					= db_fetch_object($t);
+	$j					= json_decode($r->sss_access, true);
+	
+	return $j[$i];
 	
 }
 
@@ -951,8 +975,6 @@ function nuBuildTempTable($id, $tt){
 		$p	= nuReplaceHashVariables($r[0]);
 		$P	= "	nuRunQuery('CREATE TABLE $tt $p');";
 			
-	nudebug($P);
-
 		eval($P);
 		
 	}else{

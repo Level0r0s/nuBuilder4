@@ -259,18 +259,15 @@ class nuSelectObject{
 						var a1		= ob.type == 'LEFT' ? "\n        LEFT JOIN " :  "\n        JOIN ";
 						
 						if(defined.indexOf(ob.aliases[0]) == -1){
-//						if(defined.indexOf(ob.tables[0]) == -1){
 							
 							var a2	= this.buildAlias(ob.tables[0], ob.aliases[0]);
 							A		= this.justAlias(ob.tables[0], ob.aliases[0]);
-//							defined.push(ob.tables[0]);
 							defined.push(A);
 							
 						}else{
 							
 							var a2	= this.buildAlias(ob.tables[1], ob.aliases[1]);
 							A		= this.justAlias(ob.tables[1], ob.aliases[1]);
-//							defined.push(ob.tables[1]);
 							defined.push(A);
 							
 						}
@@ -282,7 +279,6 @@ class nuSelectObject{
 						var a3		= ob.joins.join(' AND ');
 						
 						this.tempTables[i].joins.push(a1 + a2 + ' ON ' + a3);
-console.log(a2);
 						
 					}
 					
