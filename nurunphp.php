@@ -4,7 +4,7 @@ require_once('nucommon.php');
 require_once('nudata.php'); 
 
 $jsonID					= $_GET['i'];
-$J						= nuGetPorR($jsonID);
+$J						= nuGetJSONData($jsonID);
 //$JSON					= json_decode($_SESSION[$jsonID]);
 $JSON					= json_decode($J);
 $TABLE_ID				= nuTT();

@@ -10,7 +10,7 @@ $GLOBALS['nu_columns']      = array();
 $GLOBALS['nu_files']        = array();
 
 $jsonID                     = $_GET['i'];
-$J							= nuGetPorR($jsonID);
+$J							= nuGetJSONData($jsonID);
 $TABLE_ID                   = nuTT();
 //$JSON                       = json_decode($_SESSION[$jsonID]);
 $JSON                       = json_decode($J);

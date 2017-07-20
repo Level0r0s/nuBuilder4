@@ -1682,7 +1682,7 @@ function nuGetOptionsList(f, t, p, a, type){
 //	.click(function(){
 //		$( "#nuOptionsListBox" ).remove();
 //	})
-	.html('<img id="nuOptionListClose" src="graphics/nuclose.png" >')
+//	.html('<img id="nuOptionListClose" src="graphics/nuclose.png" >')
 	.addClass('nuSearchListClose');
 	
 	nuBuildOptionsList(list, p);

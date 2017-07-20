@@ -363,7 +363,7 @@ function nuRunReport($nuRID){
 	$_POST['nuHash']['parentID']		= $nuA->sre_zzzzsys_php_id;
 	$nuJ								= json_encode($_POST['nuHash']);
 	$_SESSION[$nuID]					= $nuJ;
-	nuSetPorR($nuID, $nuJ);
+	nuSetJSONData($nuID, $nuJ);
 	
 	return $nuID;
 	
@@ -379,13 +379,13 @@ function nuRunPHP($nuRID){
 	$_POST['nuHash']['parentID']		= $nuA->zzzzsys_php_id;
 	$nuJ								= json_encode($_POST['nuHash']);
 	$_SESSION[$nuID]					= $nuJ;
-	nuSetPorR($nuID, $nuJ);
+	nuSetJSONData($nuID, $nuJ);
 	return $nuID;
 	
 }
 
 
-function nuSetPorR($i, $nj){
+function nuSetJSONData($i, $nj){
 	
 	$s					= "SELECT * FROM zzzzsys_session WHERE zzzzsys_session_id = ? ";
 	$t					= nuRunQuery($s, array($_SESSION['SESSION_ID']));			 
@@ -402,7 +402,7 @@ function nuSetPorR($i, $nj){
 
 
 
-function nuGetPorR($i){
+function nuGetJSONData($i){
 	
 	$s					= "SELECT * FROM zzzzsys_session WHERE zzzzsys_session_id = ? ";
 	$t					= nuRunQuery($s, array($_SESSION['SESSION_ID']));			 
