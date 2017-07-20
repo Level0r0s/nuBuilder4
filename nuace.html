@@ -43,7 +43,13 @@ function nuLoad(){
 	if ( window.c == 'SQL' ) 		{editor.getSession().setMode({path:"ace/mode/sql", inline:true});cl='sql';}
 
 	document.getElementById('nu_language').innerHTML	= c;
-	document.getElementById('copy_to_nubuilder').value	= 'Copy Changes To ' + l;
+
+	if($('#' + o, window.opener.document)[0].id == 'deb_message'){
+		$('#copy_to_nubuilder').remove();
+	}else{
+		document.getElementById('copy_to_nubuilder').value	= 'Copy Changes To ' + l;
+	}
+	
 	
 	nuResize();
 	
