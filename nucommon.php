@@ -362,7 +362,7 @@ function nuRunReport($nuRID){
 	$_POST['nuHash']['sre_layout']		= nuReplaceHashVariables($nuA->sre_layout);
 	$_POST['nuHash']['parentID']		= $nuA->sre_zzzzsys_php_id;
 	$nuJ								= json_encode($_POST['nuHash']);
-	$_SESSION[$nuID]					= $nuJ;
+//	$_SESSION[$nuID]					= $nuJ;
 	nuSetJSONData($nuID, $nuJ);
 	
 	return $nuID;
@@ -378,8 +378,9 @@ function nuRunPHP($nuRID){
 	$_POST['nuHash']['description']		= $nuA->sph_description;
 	$_POST['nuHash']['parentID']		= $nuA->zzzzsys_php_id;
 	$nuJ								= json_encode($_POST['nuHash']);
-	$_SESSION[$nuID]					= $nuJ;
+//	$_SESSION[$nuID]					= $nuJ;
 	nuSetJSONData($nuID, $nuJ);
+	
 	return $nuID;
 	
 }

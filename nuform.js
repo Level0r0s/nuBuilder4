@@ -1593,10 +1593,6 @@ function nuOptions(p, f, t, access){
 
 function nuGetOptionsList(f, t, p, a, type){
 
-	var icon	= $('#' + t.id);
-	var off		= icon.offset();
-	var top		= off.top;
-	var left	= off.left;
 	var u		= nuFORM.getProperty('user_id');
 	var list	= [];
 	var ul		= '<ul>';
@@ -1616,7 +1612,7 @@ function nuGetOptionsList(f, t, p, a, type){
 		}
 		
 		if(type != 'subform'){
-			list.push(['nuDebug', 				'nuPopup("nudebug", "")', 					'graphics/nu_option_debug.png',			'Ctrl+Shft+D']);
+			list.push(['Debug', 				'nuPopup("nudebug", "")', 					'graphics/nu_option_debug.png',			'Ctrl+Shft+D']);
 		}
 		
 	}else{
@@ -1634,24 +1630,17 @@ function nuGetOptionsList(f, t, p, a, type){
 	
 
 	if(list.length == 0){return;}
-/*	
-	//hide all other listboxes
-	$('#nuOptionsListBox').remove();
-	$('.nuIframe').contents().find('#nuOptionsListBox').remove();
-	$('#nuOptionsListBox', window.parent.document).remove();
-*/	
+	
 	var id  		= 'nuOptionsListBox';
 	var div    		= document.createElement('div');
-
 	
 	div.setAttribute('id', id);
 
 	$('body').append(div);
-	
 
 	$('#' + id)
-	.css({'top' 	: top + 3,
-	'left' 			: left + 20, 
+	.css({'top' 	: 0,
+	'right' 		: 0, 
 	'height'		: 20 + (list.length * 20),
 	'width'			: 1000,
 	'position'		: 'absolute',
@@ -1659,38 +1648,12 @@ function nuGetOptionsList(f, t, p, a, type){
 	.html('<span style="font-weight:bold">&nbsp;&nbsp;Options<\span>')
 	.addClass('nuOptionsList');
 
-
-	var id			= 'nuOptionsListDelete';
-	var div    		= document.createElement('div');
-	
-	div.setAttribute('id', id);
-	
-	var x 			= document.createElement('div');
-	
-	x.setAttribute('id', 'nuSearchListClose');
-	
-	$('#nuOptionsListBox').append(x);
-	
-	$('#' + x.id).css({
-		'width'				: 20,
-		'height'			: 20,
-		'top'				: 3,
-		'right'				: 3,
-		'position'			: 'absolute',
-		'text-align'    	: 'center'
-	})
-//	.click(function(){
-//		$( "#nuOptionsListBox" ).remove();
-//	})
-//	.html('<img id="nuOptionListClose" src="graphics/nuclose.png" >')
-	.addClass('nuSearchListClose');
-	
-	nuBuildOptionsList(list, p);
+	nuBuildOptionsList(list, p, type);
 	
 }
 
 
-function nuBuildOptionsList(l, p){												//-- loop through adding options to menu
+function nuBuildOptionsList(l, p, type){												//-- loop through adding options to menu
 
 	var icon		= $('#' + p + 'nuOptions');
 	var off			= icon.offset();
@@ -1758,20 +1721,41 @@ function nuBuildOptionsList(l, p){												//-- loop through adding options t
 		
 	}
 
-	$('#nuOptionsListBox').css({'height' : 40 + (l.length * 20), 'width' : 40 + width});
+
+	var icon	= $('#' + p + 'nuOptions');
+	var off		= icon.offset();
+	var top		= off.top;
+	var left	= off.left;
 	
-	if(nuFORM.getProperty('record_id') == ''){
-		
-		$('#nuOptionsListBox')
-		.css({'left' : left - width - 28, 'top' : top-15});
-		
-	}else{
-		
-		$('#nuOptionsListBox')
-		.css({'left' : left - width - 20, 'top' : top+10});
+	if(type == 'browse'){
+			
+		top		= off.top;
+		left	= off.left - width - 23;
 		
 	}
 
+	if(type == 'form'){
+			
+		top		= off.top - 6;
+		left	= off.left - width - 23;
+		
+	}
+
+	if(type == 'subform'){
+			
+		top		= off.top - 3;
+		left	= off.left - width - 23;
+		
+	}
+	
+	$('#nuOptionsListBox').css({
+			'height'	: 40 + (l.length * 20),
+			'width' 	: 40 + width,
+			'left' 		: left,
+			'top'		: top
+	});
+
+	
 }
 
 
