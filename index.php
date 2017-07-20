@@ -59,7 +59,6 @@ nuJSIndexInclude('nuformdrag.js');
 nuJSIndexInclude('nucalendar.js');
 nuJSIndexInclude('nucommon.js');
 nuJSIndexInclude('nuajax.js');       //-- calls to server
-nuJSIndexInclude('nufunctions.js');
 
 nuCSSIndexInclude('nubuilder4.css');
 
@@ -224,7 +223,7 @@ $nuHeader
 </head>
 
 
-<body onload="nuLoad()" >
+<body onload="nuLoad()" onclick="nuClick(event)">
 
 </body>
 

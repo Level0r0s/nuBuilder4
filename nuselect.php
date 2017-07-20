@@ -15,7 +15,6 @@ nuJSInclude('nureportdrag.js');
 nuJSInclude('nucalendar.js');
 nuJSInclude('nucommon.js');
 nuJSInclude('nuajax.js');       //-- calls to server
-nuJSInclude('nufunctions.js');
 nuJSInclude('nureportjson.js');
 
 nuCSSInclude('nubuilder4.css');

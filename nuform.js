@@ -1634,12 +1634,12 @@ function nuGetOptionsList(f, t, p, a, type){
 	
 
 	if(list.length == 0){return;}
-	
+/*	
 	//hide all other listboxes
 	$('#nuOptionsListBox').remove();
 	$('.nuIframe').contents().find('#nuOptionsListBox').remove();
 	$('#nuOptionsListBox', window.parent.document).remove();
-	
+*/	
 	var id  		= 'nuOptionsListBox';
 	var div    		= document.createElement('div');
 
@@ -1679,9 +1679,9 @@ function nuGetOptionsList(f, t, p, a, type){
 		'position'			: 'absolute',
 		'text-align'    	: 'center'
 	})
-	.click(function(){
-		$( "#nuOptionsListBox" ).remove();
-	})
+//	.click(function(){
+//		$( "#nuOptionsListBox" ).remove();
+//	})
 	.html('<img id="nuOptionListClose" src="graphics/nuclose.png" >')
 	.addClass('nuSearchListClose');
 	
