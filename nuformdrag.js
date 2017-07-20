@@ -564,6 +564,7 @@ function nuCreateDragOptionsBox(form){
         nuClearFieldsList();
         nuUnselectAllDragObjects();
         nuSelectTab(this);
+		
         nuPopulateFieldsList(Number($(this).attr('data-nu-tab-filter')));
 		nuPopulateTabDropdown(Number($(this).attr('data-nu-tab-filter')));
         nuCheckIfMovingTabOrderAllowed($('#nuDragOptionsFields',window.parent.document.body));
