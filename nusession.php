@@ -5,7 +5,9 @@ require_once('config.php');
 require_once('nucommon.php');
 
 if(array_key_exists('nuSTATE', $_POST)){
+	
     if(array_key_exists('call_type', $_POST['nuSTATE'])){
+		
         if($_POST['nuSTATE']['call_type'] == 'login'){
 
             $checkLoginDetailsSQL = "
@@ -73,16 +75,13 @@ if(array_key_exists('nuSTATE', $_POST)){
                     $_SESSION['formSchema'][$formID] 		= $objectSchema;
         			
                 }
-        		
-                $_SESSION['translation']            		= array(); // this is populated for users other than globeadmin below
                 
-                /*
-                    globeadmin
-                */
+//==================================================  globeadmin
 
                 if($_POST['nuSTATE']['username'] == $nuConfigDBGlobeadminUsername && $_POST['nuSTATE']['password'] == $nuConfigDBGlobeadminPassword){
         			
                     $_SESSION['isGlobeadmin'] 				= true;
+					$_SESSION['translation']           		= nuGetTranslation(db_setup()->set_language);
                     $sessionIds 							= new stdClass;
                     $sessionIds->zzzzsys_access_level_id 	= '';
                     $sessionIds->zzzzsys_user_id 			= $nuConfigDBGlobeadminUsername;
@@ -119,19 +118,14 @@ if(array_key_exists('nuSTATE', $_POST)){
         			
                     $storeSessionInTable->procedures 		= $phpAccess;
                     $storeSessionInTableJSON 				= json_encode($storeSessionInTable);
-                /*
-                    Not globeadmin
-                */
+					
+//==================================================  Not globeadmin
                 } else {
         			
                     $checkLoginDetailsOBJ 					= db_fetch_object($checkLoginDetailsQRY);
+					$_SESSION['translation']           		= nuGetTranslation($checkLoginDetailsOBJ->sus_language);
                     $_SESSION['isGlobeadmin'] 				= false;
                     $translationQRY 						= nuRunQuery("SELECT * FROM zzzzsys_translate WHERE trl_language = '$checkLoginDetailsOBJ->sus_language' ORDER BY trl_english");
-        			
-                    while($translationOBJ = db_fetch_object($translationQRY)){
-                        $_SESSION['translation'][] 			= $translationOBJ;
-                    }
-
                     $getAccessLevelSQL 						= "
                         SELECT zzzzsys_access_level_id, zzzzsys_user_id, sal_zzzzsys_form_id AS zzzzsys_form_id FROM zzzzsys_user
                         INNER JOIN zzzzsys_access_level ON zzzzsys_access_level_id = sus_zzzzsys_access_level_id
@@ -158,7 +152,6 @@ if(array_key_exists('nuSTATE', $_POST)){
                     $sessionIds->zzzzsys_user_id 			= $checkLoginDetailsOBJ->zzzzsys_user_id;
                     $sessionIds->zzzzsys_form_id 			= $getAccessLevelOBJ->zzzzsys_form_id;
                     $sessionIds->global_access 				= '0';
-
                     $storeSessionInTable                    = new stdClass;
                     $storeSessionInTable->session           = $sessionIds;
                     
@@ -228,7 +221,7 @@ if(array_key_exists('nuSTATE', $_POST)){
                     $storeSessionInTableJSON, 
                     $_SESSION['SESSION_ID']
                 ));
-                
+ nudebug($_SESSION['translation'])               ;
             } else {
                 header("Content-Type: text/html");
                 header('HTTP/1.0 403 Forbidden');
@@ -309,3 +302,28 @@ function nuIDTEMP(){
     return $id;
 
 }
+
+function nuGetTranslation($l){
+	
+	nudebug($l);
+	
+	$a	= [];
+	$s	= "
+			SELECT *
+			FROM zzzzsys_translate
+			WHERE trl_language = '$l'
+			
+		";
+				
+	$t	= nuRunQuery($s);
+	
+	while($r = db_fetch_object($t)){
+		$a[]	= ['english' => $r->trl_english, 'translation' => $r->trl_translation];
+	}
+	
+	return $a;
+
+}
+
+
+

@@ -254,7 +254,7 @@ function nuAddActionButton(i, v, f){
 		
 	}
 	
-	$('#nuActionHolder').append("<input id='nu" + i + "Button' type='button' class='nuActionButton' value='" + v + "' onclick='" + f + "'>&nbsp;");
+	$('#nuActionHolder').append("<input id='nu" + i + "Button' type='button' class='nuActionButton' value='" + nuTranslate(v) + "' onclick='" + f + "'>&nbsp;");
 
 }
 

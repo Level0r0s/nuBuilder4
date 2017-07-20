@@ -346,7 +346,7 @@ function nuSetHashList($p){
 	$h['SUBFORM_ID']			= addslashes($_POST['nuSTATE']['object_id']);
 	$h['ID']					= addslashes($_POST['nuSTATE']['primary_key']);
 	$h['CODE']					= addslashes($_POST['nuSTATE']['code']);
-	
+
 	return array_merge($r, $h, $A);
 
 }
