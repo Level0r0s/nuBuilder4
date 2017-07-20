@@ -215,7 +215,6 @@ function nuBuildLookup(t, s){
 
 function nuPopup(f, r, filter){
 
-//	$('#nuOptionsListBox').remove();
 	$('#nuCalendar').remove();
 	
 	window.nuOPENER.push(new nuOpener(f, r, filter));

@@ -914,9 +914,13 @@ function nuGatherFormAndSessionData($home){
         $access 						= json_decode($getAccessFromSessionTableOBJ->sss_access);
 
 		if($formAndSessionData->call_type == 'getreport'){
-		
-			if(!in_array($formAndSessionData->record_id, $access->reports)) { //form_id is record_id for getreport
 			
+			$r = nuReportAccessList($access);
+nudebug($r);
+			if(!in_array($formAndSessionData->record_id, $r)) { //form_id is record_id for getreport
+
+			
+
 				$nuT					= nuRunQuery("SELECT * FROM zzzzsys_report WHERE zzzzsys_report_id = '$formAndSessionData->record_id'");
 				$nuR					= db_fetch_object($nuT);
 				
@@ -928,7 +932,9 @@ function nuGatherFormAndSessionData($home){
 
         if($formAndSessionData->call_type == 'getphp'){
 
-            if(!in_array($formAndSessionData->record_id, $access->procedures)) { //form_id is record_id for getphp
+			$p = nuProcedureAccessList($access);
+nudebug($p, $formAndSessionData->record_id);
+            if(!in_array($formAndSessionData->record_id, $p)) { //form_id is record_id for getphp
 			
                 $nuT					= nuRunQuery("SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = '$formAndSessionData->record_id'");
                 $nuR					= db_fetch_object($nuT);
@@ -938,7 +944,7 @@ function nuGatherFormAndSessionData($home){
                 
         }
 
-		$f = nuAddOtherFormsUsed($access); //-- form list including forms id used in reports and procedures
+		$f = nuFormAccessList($access); //-- form list including forms id used in reports and procedures
 		
 		if(!in_array($formAndSessionData->form_id, $f) && $formAndSessionData->call_type == 'getform'){
 
@@ -957,7 +963,7 @@ function nuGatherFormAndSessionData($home){
 	
 }
 
-function nuAddOtherFormsUsed($j){
+function nuFormAccessList($j){
 	
 	$a			= array();
 	
@@ -973,6 +979,32 @@ function nuAddOtherFormsUsed($j){
 		$a[]	= $j->procedures[$i][1];
 	}
 	
+	return $a;
+	
+}
+
+
+
+function nuProcedureAccessList($j){
+	
+	$a			= array();
+
+	for($i = 0 ; $i < count($j->procedures) ; $i++){
+		$a[]	= $j->procedures[$i][0];
+	}
+	
+	return $a;
+	
+}
+
+function nuReportAccessList($j){
+	
+	$a			= array();
+	
+	for($i = 0 ; $i < count($j->reports) ; $i++){
+		$a[]	= $j->reports[$i][0];
+	}
+
 	return $a;
 	
 }

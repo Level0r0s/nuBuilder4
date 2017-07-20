@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 20, 2017 at 01:39 PM
+-- Generation Time: Jul 20, 2017 at 11:08 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -312,7 +312,9 @@ INSERT INTO `zzzzsys_access_level_form` (`zzzzsys_access_level_form_id`, `slf_zz
 ('58cd6541dfd5b3b', '57678e7dc00c099', 'nufflaunch', '1', '1', '0', '0', '', '1'),
 ('58c42925ba42dd4', '57678e7dc00c099', 'nuaccess', '0', '1', '1', '0', '', '1'),
 ('58cc1fb1a17ebaf', '57678e7dc00c099', 'nuhome', '1', '1', '1', '1', '', '1'),
-('s15001912670307', '57678e7dc00c099', '58a08a1abc4782c', '1', '1', '1', '0', '', '0');
+('s15001912670307', '57678e7dc00c099', '58a08a1abc4782c', '1', '1', '1', '0', '', '0'),
+('s15005814150912', '57678e7dc00c099', 'nurunreport', '1', '1', '1', '1', '', '1'),
+('s15005814150913', '57678e7dc00c099', 'nurunphp', '1', '1', '1', '1', '', '1');
 
 -- --------------------------------------------------------
 
@@ -332,7 +334,7 @@ CREATE TABLE `zzzzsys_access_level_php` (
 
 INSERT INTO `zzzzsys_access_level_php` (`zzzzsys_access_level_php_id`, `slp_zzzzsys_access_level_id`, `slp_zzzzsys_php_id`) VALUES
 ('57678f1c543cb0a', '57678e7dc00c099', '57578be0057a49f'),
-('58dba51902ac30b', '57678e7dc00c099', 'nufastform');
+('s15005815521848', '57678e7dc00c099', 's14919851858544');
 
 -- --------------------------------------------------------
 

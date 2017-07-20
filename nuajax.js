@@ -63,6 +63,8 @@ function nuForm(f, r, filter, search, n){
 
 		if(nuDisplayError(fm)){
 
+			parent.$('#nuModal').remove();
+			
 			if(fm.log_again == 1){location.reload();}
 		
 		}else{
