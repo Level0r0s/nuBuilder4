@@ -6,6 +6,7 @@ function nuBuildForm(f){
 	
 		$('body').addClass('nuBrowseBody')
 		$('body').removeClass('nuEditBody')
+		
 		sessionStorage.logout	= 'true';
 		parent.parent.parent.parent.parent.location.reload();
 		

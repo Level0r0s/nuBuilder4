@@ -1,4 +1,4 @@
-<html>
+<html onclick="nuClick(event)">
 
 <head>
 <title>nuBuilder 4</title>
@@ -223,7 +223,7 @@ $nuHeader
 </head>
 
 
-<body onload="nuLoad()" onclick="nuClick(event)">
+<body onload="nuLoad()">
 
 </body>
 
