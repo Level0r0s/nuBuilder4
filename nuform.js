@@ -1628,7 +1628,6 @@ function nuGetOptionsList(f, t, p, a, type){
 		list.push(['Refresh', 				'nuGetBreadcrumb()', 						'graphics/nu_option_refresh.png', 	'Ctrl+Shft+R']);
 		
 	}
-	
 
 	if(list.length == 0){return;}
 	
@@ -1715,7 +1714,7 @@ function nuBuildOptionsList(l, p, type){												//-- loop through adding opt
 
 		$('#' + shortcut_key.id)
 		.css(prop)
-		.css({'top'	: itemtop,'left' : width - 40})
+		.css({'top'	: itemtop,'left' : width - 35})
 		.html(k)
 		.attr('onclick', f)
 		.addClass('nuOptionsItemShortcutKey');
@@ -1731,7 +1730,7 @@ function nuBuildOptionsList(l, p, type){												//-- loop through adding opt
 	if(type == 'browse'){
 			
 		top		= off.top;
-		left	= off.left - width - 23;
+		left	= off.left - width - 26;
 		
 	}
 
@@ -1756,7 +1755,8 @@ function nuBuildOptionsList(l, p, type){												//-- loop through adding opt
 			'top'		: top
 	});
 
-	
+	$('.nuOptionsItem').css({'width' : width - 73, 'padding' : '0px 0px 0px 3px'});
+
 }
 
 
@@ -2831,10 +2831,13 @@ function nuSearchableList(){
 
 function nuWidestTitle(c){
 	
-	var w	= 120;
+	var w		= 120;
 
 	for(var i = 0 ; i < c.length ; i++){
-		w	= Math.max(nuGetWordWidth(c[i].title), w);
+		
+		var t 	= String(c[i].title).replaceAll('<br>', '').replaceAll('<p>', '');;
+		w		= Math.max(nuGetWordWidth(t), w);
+		
 	}
 	
 	return w + 70;
@@ -2843,8 +2846,6 @@ function nuWidestTitle(c){
 
 
 function nuGetSearchList(){
-	
-	$('body').append('<div id="nuModal"></div>')
 	
 	var n		= nuFORM.getProperty('nosearch_columns');
 	var c		= nuFORM.getProperty('browse_columns');
@@ -2855,7 +2856,9 @@ function nuGetSearchList(){
 	var widest	= nuWidestTitle(c) + 20;
 	
 	d.setAttribute('id', 'nuSearchList');
+	
 	$('body').append(d);
+
 	$('#' + d.id).css({
 		'width'				: widest,
 		'height'			: 10 + (c.length * 30),
@@ -2866,25 +2869,7 @@ function nuGetSearchList(){
 	})
 	.html('<span style="font-weight:bold">&nbsp;&nbsp;Include When Searching<\span>')
 	.addClass('nuOptionsList');
-	
-	var x = document.createElement('div');
-	
-	x.setAttribute('id', 'nuSearchListClose');
-	
-	$('#' + d.id).append(x);
-	
-	$('#' + x.id).css({
-		'width'				: 20,
-		'height'			: 20,
-		'top'				: 3,
-		'right'				: 3,
-		'position'			: 'absolute',
-		'text-align'    	: 'center'
-	})
-	.attr('onclick', '$("#nuSearchList").remove();$("#nuModal").remove();')
-	.html('<img id="nuOptionListClose" src="graphics/nuclose.png" width="20px" height="20px">')
-	.addClass('nuSearchListClose');
-	
+
 	for(var i = 0 ; i < c.length ; i++){
 		
 		var isChecked	= true;
@@ -2944,6 +2929,7 @@ function nuGetSearchList(){
 		shortcut_key.setAttribute('id', shortcut_key_id);
 
 		$('#nuSearchList').append(shortcut_key);
+		
 		var	prop			= {'position' : 'absolute', 'text-align' : 'left', 'height' : 15};
 
 		$('#' + shortcut_key.id)
@@ -2952,6 +2938,9 @@ function nuGetSearchList(){
 		.html('Ctrl+Shift+' + i)
 		.addClass('nuOptionsItemShortcutKey');
 	}
+	
+	$('.nuOptionsItem').css({'width' : widest - 130, 'padding' : '0px 0px 0px 3px'});
+	$('#nuSearchList').css({'height' : 40 + (c.length * 30)});
 	
 }
 

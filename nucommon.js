@@ -928,6 +928,10 @@ function nuAddEditFieldsToHash(w){
 
 function nuClick(e){
 	
+	if(!$(e.target).hasClass('nuOptionsItem') && !$(e.target).hasClass('nuSearchCheckbox')){
+		$('#nuSearchList').remove();
+	}
+	
 	if(!$(e.target).hasClass('nuIcon')){
 		$('#nuOptionsListBox').remove();
 	}
