@@ -532,21 +532,6 @@ function nuFormValues(){  //-- list of changed fields and values
     
 }
 
-function nuCloseAllnuOptionsLists(){
-
-	$('#nuOptionsList').remove();
-	
-	parent.$('#nuOptionsList').remove();
-	
-	$('iframe').each(function() {
-		
-		$('#' + this.id).contents().find('#nuOptionsList').remove();
-		
-	});	
-
-}
-
-
 
 function nuEditPHP(ev){
 

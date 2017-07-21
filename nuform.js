@@ -2939,8 +2939,8 @@ function nuGetSearchList(){
 		.addClass('nuOptionsItemShortcutKey');
 	}
 	
-	$('.nuOptionsItem').css({'width' : widest - 130, 'padding' : '0px 0px 0px 3px'});
-	$('#nuSearchList').css({'height' : 40 + (c.length * 30)});
+	$('.nuOptionsItem').css({'width' : widest - 130, 'padding' : '3px 0px 0px 3px'});
+	$('#nuSearchList').css({'height' : 40 + (c.length * 20)});
 	
 }
 
@@ -2984,7 +2984,7 @@ function nuMessage(o, type){
 	
 	var l		= (screen.width - widest) / 2;
 	$('body', par).append("<div id='nuAlertDiv' class='nuMessage' style='overflow:hidden;width:" + widest + "px;left:" + l + "px' ></div>")
-	$('#nuAlertDiv', par).prepend('<img id="nuOptionListClose" src="graphics/nuclose.png" class="nuSearchListClose" style="position:absolute;top:5px;left:5px" ' + c + ' width="20px" height="20px">')
+	$('#nuAlertDiv', par).prepend('<img id="nuOptionListClose" src="graphics/nuclose.png" class="nuClose" style="position:absolute;top:5px;left:5px" ' + c + ' width="20px" height="20px">')
 	
 	
 	for(var i = 0 ; i < o.length ; i++){
