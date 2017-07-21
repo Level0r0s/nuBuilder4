@@ -1642,7 +1642,7 @@ function nuGetOptionsList(f, t, p, a, type){
 	.css({'top' 	: 0,
 	'right' 		: 0, 
 	'height'		: 20 + (list.length * 20),
-	'width'			: 1000,
+	'width'			: 300,
 	'position'		: 'absolute',
 	'text-align' 	: 'left'})
 	.html('<span style="font-weight:bold">&nbsp;&nbsp;Options<\span>')
@@ -1660,7 +1660,7 @@ function nuBuildOptionsList(l, p, type){												//-- loop through adding opt
 	var top			= off.top;
 	var left		= off.left < 240 ? 240 : off.left;
 	var ul			= '';
-	var	prop		= {'position': 'absolute','text-align' : 'left' , 'width' : 15, 'height' : 15};
+	var	iprop		= {'position': 'absolute','text-align' : 'left' , 'width' : 15, 'height' : 15};
 	var width		= 0;
 	var height		= 30 + (l.length * 30);
 	
@@ -1684,7 +1684,7 @@ function nuBuildOptionsList(l, p, type){												//-- loop through adding opt
 		$('#nuOptionsListBox').append(icon);
 
 		$('#' + icon.id)
-		.css(prop)
+		.css(iprop)
 		.css({'top'	: itemtop, 'left' : 5})
 		.attr('onclick', f)
 		.attr('src', c);
@@ -1710,11 +1710,12 @@ function nuBuildOptionsList(l, p, type){												//-- loop through adding opt
 		shortcut_key.setAttribute('id', shortcut_key_id);
 
 		$('#nuOptionsListBox').append(shortcut_key);
-		var	prop		= {'position' : 'absolute', 'text-align' : 'left', 'height' : 15};
+		
+		var	prop			= {'position' : 'absolute', 'text-align' : 'left', 'height' : 15, 'width' : 50};
 
 		$('#' + shortcut_key.id)
 		.css(prop)
-		.css({'top'	: itemtop,'left' : width - 35})
+		.css({'top'	: itemtop +3, 'right' : 10})
 		.html(k)
 		.attr('onclick', f)
 		.addClass('nuOptionsItemShortcutKey');
@@ -2835,10 +2836,12 @@ function nuWidestTitle(c){
 
 	for(var i = 0 ; i < c.length ; i++){
 		
-		var t 	= String(c[i].title).replaceAll('<br>', '').replaceAll('<p>', '');;
+		var t 	= String(c[i].title).replaceAll('<br>', ' ').replaceAll('<p>', ' ');;
+console.log(c[i].title, t);
 		w		= Math.max(nuGetWordWidth(t), w);
 		
 	}
+console.log(w);
 	
 	return w + 70;
 	
@@ -2930,22 +2933,22 @@ function nuGetSearchList(){
 
 		$('#nuSearchList').append(shortcut_key);
 		
-		var	prop			= {'position' : 'absolute', 'text-align' : 'left', 'height' : 15};
+		var	prop			= {'position' : 'absolute', 'text-align' : 'left', 'height' : 15, 'width' : 50};
 
 		$('#' + shortcut_key.id)
 		.css(prop)
-		.css({'top'	: 33 + (i * 20),'left' : widest - 80})
+		.css({'top'	: 37 + (i * 20), 'right' : 10})
 		.html('Ctrl+Shift+' + i)
 		.addClass('nuOptionsItemShortcutKey');
 	}
 	
 	$('.nuOptionsItem').css({'width' : widest - 130, 'padding' : '3px 0px 0px 3px'});
-	$('#nuSearchList').css({'height' : 40 + (c.length * 20)});
+	$('#nuSearchList').css({'height' : 50 + (c.length * 20)});
 	
 }
 
 function nuTotal(f){
-		return Number(nuFORM.calc(f));
+	return Number(nuFORM.calc(f));
 }
 
 
