@@ -2837,7 +2837,6 @@ function nuWidestTitle(c){
 	for(var i = 0 ; i < c.length ; i++){
 		
 		var t 	= String(c[i].title).replaceAll('<br>', ' ').replaceAll('<p>', ' ');;
-console.log(c[i].title, t);
 		w		= Math.max(nuGetWordWidth(t), w);
 		
 	}
@@ -2900,7 +2899,9 @@ function nuGetSearchList(){
 		.attr('onclick', 'nuSetSearchColumn();')
 		.addClass('nuSearchCheckbox');
 		
-		var t = document.createElement('div');
+		var t 			= document.createElement('div');
+		var nobr		= String(c[i].title).replaceAll('<br>', ' ').replaceAll('<p>', ' ');;
+
 
 		t.setAttribute('id', 'nuSearchText' + i);
 
@@ -2914,6 +2915,8 @@ function nuGetSearchList(){
 			'text-align'    : 'left'
 		})
 		.attr('onclick', 'nuClickSearchColumn(event);')
+		.addClass('nuOptionsItem')
+		.html(nobr)
 		.click(function() {
 			
 			var cb = $('#nuSearchList' + i).attr('checked');
@@ -2922,9 +2925,7 @@ function nuGetSearchList(){
 			
 			nuSetSearchColumn();
 			
-		})
-		.addClass('nuOptionsItem')
-		.html(c[i].title);
+		});
 		
 		var shortcut_key 	= document.createElement('div');
 		var shortcut_key_id = 'nuSearchTextShortcutKey' + i.toString();
