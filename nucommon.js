@@ -932,5 +932,9 @@ function nuClick(e){
 		$('#nuOptionsListBox').remove();
 	}
 	
+	if($(e.target).attr('type') != 'nuDate'){
+		$('#nuCalendar').remove();
+	}
+	
 }
 
