@@ -2863,7 +2863,7 @@ function nuGetSearchList(){
 	$('body').append(d);
 
 	$('#' + d.id).css({
-		'width'				: widest,
+		'width'				: widest + 20,
 		'height'			: 10 + (c.length * 30),
 		'top'				: 138,
 		'left'				: (window.nuBrowseWidth - widest) / 2,
@@ -2942,7 +2942,7 @@ function nuGetSearchList(){
 		.addClass('nuOptionsItemShortcutKey');
 	}
 	
-	$('.nuOptionsItem').css({'width' : widest - 130, 'padding' : '3px 0px 0px 3px'});
+	$('.nuOptionsItem').css({'width' : widest - 90, 'padding' : '3px 0px 0px 3px'});
 	$('#nuSearchList').css({'height' : 50 + (c.length * 20)});
 	
 }
