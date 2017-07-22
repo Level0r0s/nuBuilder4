@@ -164,12 +164,20 @@ class nuSelectObject{
 		parent.$('#sse_json')
 		.val(this.buildJSON())
 		.change();
-		
+
+
+		if(parent.$('#nuSaveToTextareaButton').length == 1){
+			
+			parent.$('#nuSaveToTextareaButton').hide();
+			parent.$('#nuSaveButton').show();
+			
+		}
+/*
         parent.$('#nuSaveButton')
         .val("Save")
 		.unbind('click')
 		.attr('onclick', 'nuSaveAction()');
-		
+*/		
 	}
 	
 	buildSelect(c, b){				//-- checkbox type, boxID

@@ -336,7 +336,7 @@ function nuRecordProperties(w, p, l){
 	var sf    = p.substr(0, p.length - 3);
 
 	chk.setAttribute('id', de);
-	chk.setAttribute('title', 'Delete This Row When Saved');
+	chk.setAttribute('title', nuTranslate('Delete This Row When Saved'));
 	chk.setAttribute('type', 'checkbox');
 	chk.setAttribute('onclick', 'nuChange(event)');
 
@@ -349,7 +349,10 @@ function nuRecordProperties(w, p, l){
 	.attr('data-nu-foreign-key', w.foreign_key)
 	.attr('data-nu-foreign-field', p == '' ? '' : w.foreign_key_name);
 
-	$('#' + de).attr('data-nu-data', '');
+	$('#' + de)
+	.attr('data-nu-data', '')
+	.addClass('nuSubformCheckbox')
+	.addClass(w.table)
 
 	if(arguments.length == 3){
 		
@@ -2840,7 +2843,6 @@ function nuWidestTitle(c){
 		w		= Math.max(nuGetWordWidth(t), w);
 		
 	}
-console.log(w);
 	
 	return w + 70;
 	

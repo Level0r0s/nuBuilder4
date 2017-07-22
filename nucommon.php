@@ -276,14 +276,14 @@ class nuSqlString{
     }
 
     private function buildSQL(){
-			
-			$this->SQL		= 'SELECT '; 
-			$this->SQL		= $this->SQL . nuSQLTrim(implode(',', $this->fields), 1);
-			$this->SQL		= $this->SQL . nuSQLTrim($this->from);
-			$this->SQL		= $this->SQL . nuSQLTrim($this->where);
-			$this->SQL		= $this->SQL . nuSQLTrim($this->groupBy);
-			$this->SQL		= $this->SQL . nuSQLTrim($this->having);
-			$this->SQL		= $this->SQL . nuSQLTrim($this->orderBy);
+		
+		$this->SQL		= 'SELECT '; 
+		$this->SQL		= $this->SQL . nuSQLTrim(implode(',', $this->fields), 1);
+		$this->SQL		= $this->SQL . nuSQLTrim($this->from);
+		$this->SQL		= $this->SQL . nuSQLTrim($this->where);
+		$this->SQL		= $this->SQL . nuSQLTrim($this->groupBy);
+		$this->SQL		= $this->SQL . nuSQLTrim($this->having);
+		$this->SQL		= $this->SQL . nuSQLTrim($this->orderBy);
 			
     }
 
