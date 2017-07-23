@@ -109,7 +109,7 @@ function nuBuildFastForm($table, $form_type){
 	";
 
 	$gap            = 30;
-	$left			= 150;
+	$left			= 50;
 
 	for($i = 0 ; $i < count($SF->rows) ; $i++){
 		
@@ -121,7 +121,7 @@ function nuBuildFastForm($table, $form_type){
 			$oldid      = $SF->rows[$i][3];
 			$corner		= $left + ($gap * $i);
 
-			$array      = Array($field, $label, $corner, $corner, $corner, $table, $form_id, $tab_id, $newid, $oldid);
+			$array      = Array($field, $label, $corner, $corner, $corner + 100, $table, $form_id, $tab_id, $newid, $oldid);
 
 			nuRunQuery($sql, $array);
 			
@@ -193,7 +193,7 @@ function nuBuildFastForm($table, $form_type){
 			
 			";
 			
-			$array      = Array(nuID(), $form_id, $lab, $id, 'left', '', ($i+1) * 10, 200);
+			$array      = Array(nuID(), $form_id, $lab, $id, 'left', '', ($i+1) * 10, 250);
 
 			nuRunQuery($sql, $array);
 			
