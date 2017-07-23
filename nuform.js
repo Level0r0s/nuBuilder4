@@ -50,7 +50,11 @@ function nuBuildForm(f){
 	b.browse_sql				= f.browse_sql;
 	b.browse_rows 				= f.browse_rows;
 	b.pages 					= f.pages;
-	
+	b.form_code					= f.form_code;
+	b.form_description			= f.form_description;
+	b.run_code					= f.run_code;
+	b.run_description			= f.run_description;
+
 	nuAddHolder('nuActionHolder');
 	nuAddHolder('nuBreadcrumbHolder');
 	

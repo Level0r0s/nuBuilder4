@@ -383,6 +383,8 @@ function nuGetEditForm($F, $R){
     $SQL 				= new nuSqlString(nuReplaceHashVariables($r->sfo_browse_sql));
     $f              	= new stdClass();
     $f->id          	= $r->zzzzsys_form_id;
+    $f->form_code       = $r->sfo_code;
+    $f->form_description= $r->sfo_description;
     $f->type        	= $r->sfo_type;
     $f->table       	= nuReplaceHashVariables($r->sfo_table);
     $f->primary_key 	= $r->sfo_primary_key;
@@ -1010,7 +1012,7 @@ function nuReportAccessList($j){
 }
 
 
-function nuButtons($formid, $P){
+function nuButtons($formid, $POST){
 	
 	$t						= nuRunQuery("SELECT * FROM zzzzsys_session WHERE zzzzsys_session_id = ? ", array($_SESSION['SESSION_ID']));		
 	$r 						= db_fetch_object($t);
@@ -1019,36 +1021,84 @@ function nuButtons($formid, $P){
 	$_POST['reports']		= $nuJ->reports;
 	$_POST['procedures']	= $nuJ->procedures;
 	$_POST['session']		= $nuJ->session;
+	$C						= '';
+	$D						= '';
 
 	$a						= nuFormAccess($formid, $nuJ->forms);
 	$f						= nuFormProperties($formid);
 	$c						= $P['call_type'];
 	
 	$s						= 'SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = ? ';
-	$t						= nuRunQuery($s,[$P['record_id']]);
-	$p						= db_fetch_object($t)->sph_code;
-	$h						= db_fetch_object($t)->sph_run;
+	$t						= nuRunQuery($s,[$POST['record_id']]);
+	$P						= db_fetch_object($t);
 	
 	$s						= 'SELECT * FROM zzzzsys_report WHERE zzzzsys_report_id = ? ';
-	$t						= nuRunQuery($s,[$P['record_id']]);
-	$r						= db_fetch_object($t)->sre_code;
+	$t						= nuRunQuery($s,[$POST['record_id']]);
+	$R						= db_fetch_object($t);
 	
 	if($c == 'getphp'){
 		
-		if($h == 'hide'){
-			return array('Add' => 0, 'Print' => 0, 'Save' => 0, 'Clone' => 0, 'Delete' => 0, 'Run' => '', 'RunHidden' => 'nuRunPHPHidden("'.$p.'")');
+		if($P->sph_run == 'hide'){
+			return array('Add' => 0, 'Print' => 0, 'Save' => 0, 'Clone' => 0, 'Delete' => 0, 'Run' => '', 'RunHidden' => 'nuRunPHPHidden("'.$P->sph_code.'")');
 		}else{
-			return array('Add' => 0, 'Print' => 0, 'Save' => 0, 'Clone' => 0, 'Delete' => 0, 'Run' => 'nuRunPHP("'.$p.'")', 'RunHidden' => '');
+			return array('Add' => 0, 'Print' => 0, 'Save' => 0, 'Clone' => 0, 'Delete' => 0, 'Run' => 'nuRunPHP("'.$P->sph_code.'")', 'RunHidden' => '');
 		}
 	}
 	
 	if($c == 'getreport'){
-		return array('Add' => 0, 'Print' => 0, 'Save' => 0, 'Clone' => 0, 'Delete' => 0, 'Run' => 'nuRunReport("'.$r.'")', 'RunHidden' => '');
+
+		$C					= $P->sph_code;
+		$D					= $P->sph_description;
+		
+		return [array('Add' => 0, 'Print' => 0, 'Save' => 0, 'Clone' => 0, 'Delete' => 0, 'Run' => 'nuRunReport("'.$r.'")', 'RunHidden' => ''), $C, $D];
 	}
 	
 	if($c != 'getphp' and $c != 'getreport'){
-		return array('Add' => $a[0], 'Print' => $a[1], 'Save' => $a[2], 'Clone' => $a[3], 'Delete' => $a[4], 'Run' => '', 'RunHidden' => '');
+		
+		$C					= $R->sre_code;
+		$D					= $R->sre_description;
+		
+		return [array('Add' => $a[0], 'Print' => $a[1], 'Save' => $a[2], 'Clone' => $a[3], 'Delete' => $a[4], 'Run' => '', 'RunHidden' => ''), $C, $D];
 	}
+	
+}
+
+
+function nuRunCode($P){
+	
+	$f						= nuFormProperties($formid);
+	
+	$s						= 'SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = ? ';
+	$t						= nuRunQuery($s,[$P['record_id']]);
+	$c						= db_fetch_object($t)->sph_code;
+	
+	$s						= 'SELECT * FROM zzzzsys_report WHERE zzzzsys_report_id = ? ';
+	$t						= nuRunQuery($s,[$P['record_id']]);
+	
+	if(db_fetch_object($t)->sre_code != ''){
+		$c					= db_fetch_object($t)->sre_code;
+	}
+	
+	return $c;
+	
+}
+
+function nuRunDescription($P){
+	
+	$f						= nuFormProperties($formid);
+	
+	$s						= 'SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = ? ';
+	$t						= nuRunQuery($s,[$P['record_id']]);
+	$d						= db_fetch_object($t)->sph_description;
+	
+	$s						= 'SELECT * FROM zzzzsys_report WHERE zzzzsys_report_id = ? ';
+	$t						= nuRunQuery($s,[$P['record_id']]);
+	
+	if(db_fetch_object($t)->sre_code != ''){
+		$d					= db_fetch_object($t)->sre_description;
+	}
+	
+	return $d;
 	
 }
 
