@@ -1026,7 +1026,7 @@ function nuButtons($formid, $POST){
 
 	$a						= nuFormAccess($formid, $nuJ->forms);
 	$f						= nuFormProperties($formid);
-	$c						= $P['call_type'];
+	$c						= $POST['call_type'];
 	
 	$s						= 'SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = ? ';
 	$t						= nuRunQuery($s,[$POST['record_id']]);
@@ -1037,27 +1037,26 @@ function nuButtons($formid, $POST){
 	$R						= db_fetch_object($t);
 	
 	if($c == 'getphp'){
-		
-		if($P->sph_run == 'hide'){
-			return array('Add' => 0, 'Print' => 0, 'Save' => 0, 'Clone' => 0, 'Delete' => 0, 'Run' => '', 'RunHidden' => 'nuRunPHPHidden("'.$P->sph_code.'")');
-		}else{
-			return array('Add' => 0, 'Print' => 0, 'Save' => 0, 'Clone' => 0, 'Delete' => 0, 'Run' => 'nuRunPHP("'.$P->sph_code.'")', 'RunHidden' => '');
-		}
-	}
-	
-	if($c == 'getreport'){
 
 		$C					= $P->sph_code;
 		$D					= $P->sph_description;
 		
-		return [array('Add' => 0, 'Print' => 0, 'Save' => 0, 'Clone' => 0, 'Delete' => 0, 'Run' => 'nuRunReport("'.$r.'")', 'RunHidden' => ''), $C, $D];
+		if($P->sph_run == 'hide'){
+			return [array('Add' => 0, 'Print' => 0, 'Save' => 0, 'Clone' => 0, 'Delete' => 0, 'Run' => '', 'RunHidden' => 'nuRunPHPHidden("'.$C.'")'), $C, $D];
+		}else{
+			return [array('Add' => 0, 'Print' => 0, 'Save' => 0, 'Clone' => 0, 'Delete' => 0, 'Run' => 'nuRunPHP("'.$C.'")', 'RunHidden' => ''), $C, $D];
+		}
 	}
 	
-	if($c != 'getphp' and $c != 'getreport'){
+	if($c == 'getreport'){
 		
 		$C					= $R->sre_code;
 		$D					= $R->sre_description;
 		
+		return [array('Add' => 0, 'Print' => 0, 'Save' => 0, 'Clone' => 0, 'Delete' => 0, 'Run' => 'nuRunReport("'.$C.'")', 'RunHidden' => ''), $C, $D];
+	}
+	
+	if($c != 'getphp' and $c != 'getreport'){
 		return [array('Add' => $a[0], 'Print' => $a[1], 'Save' => $a[2], 'Clone' => $a[3], 'Delete' => $a[4], 'Run' => '', 'RunHidden' => ''), $C, $D];
 	}
 	
