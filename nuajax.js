@@ -133,10 +133,7 @@ function nuGetPDF(f, r){
 		var fm  = data;
 		
 		if(!nuDisplayError(fm)){
-			
-			nuFORM.setProperty('record_id', fm.record_id);
 			nuBuildForm(fm);
-		   
 		}
 			
 	}
@@ -148,23 +145,24 @@ function nuGetPDF(f, r){
 
 function nuRunReport(f, iframe){
 	
-	window.nuFORM.addBreadcrumb();
+	var r				= nuFORM.getCurrent().record_id;
+	nuFORM.addBreadcrumb();
 
-	var last			= window.nuFORM.getCurrent();
+	var last			= nuFORM.getCurrent();
 
 	last.session_id 	= window.nuSESSION;
 	last.call_type		= 'runreport';
 	last.form_id 		= f;
-	//last.record_id		= 'report11';
+	last.record_id		= r;
 	last.hash 			= nuHashFromEditForm();
-
+	
 	var successCallback = function(data,textStatus,jqXHR){
 		
 		var fm 	= data;
 		
 		if(!nuDisplayError(fm)){
 			
-			var pdfUrl   = 'nurunpdf.php?i=' + fm.id;
+			var pdfUrl	= 'nurunpdf.php?i=' + fm.id;
 			
 			if(iframe === undefined){
 				window.open(pdfUrl);
@@ -187,12 +185,12 @@ function nuRunPHP(f, iframe){
 		if(!nuBeforeSave()){return;}
 	}
 
-	var last				= window.nuFORM.addBreadcrumb();
-
-	last.session_id			= window.nuSESSION;
+	var r					= nuFORM.getCurrent().record_id;
+	var last				= nuFORM.addBreadcrumb();
+	last.session_id			= nuSESSION;
 	last.call_type 			= 'runphp';
 	last.form_id  			= f;
-	last.record_id			= 'php';
+	last.record_id			= r;
 	last.data 				= nuGetFormData();
 	last.nuFORMdata			= nuFORM.data();
 	last.hash  				= nuHashFromEditForm();
@@ -221,7 +219,7 @@ function nuRunPHP(f, iframe){
 
 
 function nuRunPHPHidden(i){
-	
+
 	if(window.nuBeforeSave){
 		if(!nuBeforeSave()){return;}
 	}
@@ -231,6 +229,7 @@ function nuRunPHPHidden(i){
 	last.session_id			= window.nuSESSION;
 	last.call_type 			= 'runhiddenphp';
 	last.form_id  			= 'doesntmatter';
+	last.hash_record_id		= last.record_id;
 	last.record_id			= i;								//-- php code
 	last.data 				= nuGetFormData();
 	last.nuFORMdata			= nuFORM.data();

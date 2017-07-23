@@ -40,8 +40,8 @@
     	if($CT == 'getlookupid')	{$f->forms[0]->lookup_values 		= nuGetAllLookupValues();}
     	if($CT == 'getlookupcode')	{$f->forms[0]->lookup_values 		= nuGetAllLookupList();}
     	if($CT == 'runhiddenphp')	{$f->forms[0]->id					= nuRunPHPHidden($R);}
-    	if($CT == 'runphp')			{$f->forms[0]->id					= nuRunPHP($F);}
-    	if($CT == 'runreport')		{$f->forms[0]->id					= nuRunReport($F);}
+    	if($CT == 'runphp')			{$f->forms[0]						= nuRunPHP($F, $R);}
+    	if($CT == 'runreport')		{$f->forms[0]						= nuRunReport($F, $R);}
     	if($CT == 'runhtml')		{$f->forms[0]->id					= nuRunHTML();}
         if($CT == 'nudragsave')		{$f->forms[0]						= nuDragSave($P);}
 		
@@ -61,7 +61,7 @@
 	$f->forms[0]->javascript				= $GLOBALS['EXTRAJS'];
 	$f->forms[0]->target					= $P['target'];
 	$b										= nuButtons($F, $P);
-	nudebug($b);
+	
 	$f->forms[0]->buttons					= $b[0];
 	$f->forms[0]->run_code					= $b[1];
 	$f->forms[0]->run_description			= $b[2];

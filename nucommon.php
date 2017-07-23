@@ -352,37 +352,60 @@ function nuSetHashList($p){
 }
 
 
-function nuRunReport($nuRID){
+function nuRunReport($report_id, $record_id){
 	
 	$nuID								= nuID();
-	$nuT								= nuRunQuery("SELECT * FROM zzzzsys_report WHERE sre_code = '$nuRID'");
+	$nuT								= nuRunQuery("SELECT * FROM zzzzsys_report WHERE sre_code = '$report_id'");
 	$nuA								= db_fetch_object($nuT);
 	$_POST['nuHash']['code']			= $nuA->sre_code;
 	$_POST['nuHash']['description']		= $nuA->sre_description;
 	$_POST['nuHash']['sre_layout']		= nuReplaceHashVariables($nuA->sre_layout);
 	$_POST['nuHash']['parentID']		= $nuA->sre_zzzzsys_php_id;
 	$nuJ								= json_encode($_POST['nuHash']);
-//	$_SESSION[$nuID]					= $nuJ;
+	
 	nuSetJSONData($nuID, $nuJ);
 	
-	return $nuID;
+	$O									= new stdClass;
+	$O->id								= $nuID;
+	$O->record_id						= $record_id;
+	
+	return $O;
 	
 }
 
-function nuRunPHP($nuRID){
+function nuRunPHP($report_id, $record_id){
 
 	$nuID								= nuID();
-	$nuT								= nuRunQuery("SELECT * FROM zzzzsys_php WHERE sph_code = '$nuRID'");
+	$nuT								= nuRunQuery("SELECT * FROM zzzzsys_php WHERE sph_code = '$report_id'");
 	$nuA								= db_fetch_object($nuT);
 	$_POST['nuHash']['code']			= $nuA->sph_code;
 	$_POST['nuHash']['description']		= $nuA->sph_description;
 	$_POST['nuHash']['parentID']		= $nuA->zzzzsys_php_id;
 	$nuJ								= json_encode($_POST['nuHash']);
-//	$_SESSION[$nuID]					= $nuJ;
+
 	nuSetJSONData($nuID, $nuJ);
 	
-	return $nuID;
+	$O									= new stdClass;
+	$O->id								= $nuID;
+	$O->record_id						= $record_id;
 	
+	return $O;
+	
+}
+
+
+function nuRunPHPHidden($nuCode){
+	
+	$_POST['nuHash']['RECORD_ID']		= $_POST['nuHash']['hash_record_id'];
+
+	$s						= "SELECT * FROM zzzzsys_php WHERE sph_code = ? ";
+	$t						= nuRunQuery($s, [$nuCode]);
+	$r						= db_fetch_object($t);
+	
+	$evalPHP = new nuEvalPHPClass($r->zzzzsys_php_id);
+
+	return 1;
+
 }
 
 
@@ -412,21 +435,6 @@ function nuGetJSONData($i){
 	
 	return $j[$i];
 	
-}
-
-
-
-
-function nuRunPHPHidden($nuCode){
-
-	$s						= "SELECT * FROM zzzzsys_php WHERE sph_code = ? ";
-	$t						= nuRunQuery($s, [$nuCode]);
-	$r						= db_fetch_object($t);
-	
-	$evalPHP = new nuEvalPHPClass($r->zzzzsys_php_id);
-
-	return 1;
-
 }
 
 

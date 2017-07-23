@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 23, 2017 at 09:37 PM
+-- Generation Time: Jul 24, 2017 at 01:23 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -633,7 +633,7 @@ INSERT INTO `zzzzsys_form` (`zzzzsys_form_id`, `sfo_type`, `sfo_code`, `sfo_desc
 ('nublank', 'launch', 'BLA', 'Blank', '', '', '', 0, 0, '', '\nnuSetTitle(nuFORM.getCurrent().run_description);\n'),
 ('nuaccessgroup', 'subform', 'GAL', 'Groups Access Level', 'zzzzsys_user_group_access_level', 'zzzzsys_user_group_access_level_id', '', 0, 0, 'SELECT * FROM zzzzsys_user_group_access_level', ''),
 ('nurunlist', 'browse', 'RUN', 'Run Form, Report or Procedure', 'zzzzsys_run_list', 'id', '', 0, 0, 'SELECT zzzzsys_form_id AS id, ''Form'' AS run, sfo_code AS code, sfo_description AS description FROM zzzzsys_run_list', '\n$("[data-nu-column=''nucolumn000'']").each(function() {\n\n    $(this).addClass(''nu_''+this.innerHTML);\n\n});'),
-('nudebug', 'browseedit', 'DEBUG', 'PHP Debug  Entries - from nuDebug', 'zzzzsys_debug', 'zzzzsys_debug_id', '', 21, 15, 'SELECT * FROM zzzzsys_debug\nORDER BY zzzzsys_debug_id DESC', '\n$(''#deb_message'')\n    .css(''font-size'', 10)\n    .css(''background-color'', ''#FFEEA6'')\n    .prop(''readonly'', true)\n    .dblclick(function() {\n    	nuOpenAce(''Text'', this.id);\n    });\n\n\n\n\n\n$(''#delete_option'').val(0);\n$(''#nuAddButton'').remove();\n$(''#nuOptions'').remove();\n\nvar mess    = String($(''#deb_message'').val());\nvar i       = mess.indexOf(''<br>'');\nvar m       = mess.substr(i + 6);\nvar t       = mess.substr(0,i);\n\nnuSetTitle(mess.substr(0, i))\n\n$(''#nuTab0'').remove();\n\n$(''#nuBreadcrumb1'')\n.css(''text-align'', ''center'')\n.css(''width'', ''95%'')\n.css(''color'', ''black'')\n.css(''padding'', ''5px'')\n.css(''font-weight'', ''bold'')\n.html(t + '' :: '' + nuWhen($(''#deb_added'').val()))\n.appendTo("#nuTabHolder");\n\n$(''#deb_message'').val(m);\n\n\n$("[data-nu-column=''nucolumn001'']").each(function( index ) {\n    \n    if($(this).html().trim() != ''''){\n        \n        var nunow   = Date.now();\n        var nuhtm   = nuWhen(Number($(this).html()));\n        \n        $(this).html(nuhtm);\n        \n    }\n    \n});\n\nif(nuFORM.getCurrent().record_id != ''''){\n\n    $(''.nuActionButton'').remove();\n    nuAddActionButton(''Delete'');\n    nuAddActionButton(''DeleteAll'',''Delete All'', ''nuDeleteAllAction()'');\n\n}\n\n'),
+('nudebug', 'browseedit', 'DEBUG', 'nuDebug Entries', 'zzzzsys_debug', 'zzzzsys_debug_id', '', 21, 15, 'SELECT * FROM zzzzsys_debug\nORDER BY zzzzsys_debug_id DESC', '\n$(''#deb_message'')\n    .css(''font-size'', 10)\n    .css(''background-color'', ''#FFEEA6'')\n    .prop(''readonly'', true)\n    .dblclick(function() {\n    	nuOpenAce(''Text'', this.id);\n    });\n\n\n\n\n\n$(''#delete_option'').val(0);\n$(''#nuAddButton'').remove();\n$(''#nuOptions'').remove();\n\nvar mess    = String($(''#deb_message'').val());\nvar i       = mess.indexOf(''<br>'');\nvar m       = mess.substr(i + 6);\nvar t       = mess.substr(0,i);\n\nnuSetTitle(mess.substr(0, i))\n\n$(''#nuTab0'').remove();\n\n$(''#nuBreadcrumb1'')\n.css(''text-align'', ''center'')\n.css(''width'', ''95%'')\n.css(''color'', ''black'')\n.css(''padding'', ''5px'')\n.css(''font-weight'', ''bold'')\n.html(t + '' :: '' + nuWhen($(''#deb_added'').val()))\n.appendTo("#nuTabHolder");\n\n$(''#deb_message'').val(m);\n\n\n$("[data-nu-column=''nucolumn001'']").each(function( index ) {\n    \n    if($(this).html().trim() != ''''){\n        \n        var nunow   = Date.now();\n        var nuhtm   = nuWhen(Number($(this).html()));\n        \n        $(this).html(nuhtm);\n        \n    }\n    \n});\n\nif(nuFORM.getCurrent().record_id != ''''){\n\n    $(''.nuActionButton'').remove();\n    nuAddActionButton(''Delete'');\n    nuAddActionButton(''DeleteAll'',''Delete All'', ''nuDeleteAllAction()'');\n\n}\n\n'),
 ('nuaccessreport', 'browseedit', 'ACCPHP', 'Access To Procedures', 'zzzzsys_access_level_php', 'zzzzsys_access_level_php_id', '', 0, 0, 'SELECT * \nFROM zzzzsys_access_level_php\nJOIN zzzzsys_php ON zzzzsys_php_id = slp_zzzzsys_php_id\nORDER BY sph_code', ''),
 ('nuaccesslevelreport', 'browseedit', 'ACCREP', 'Access To Report', 'zzzzsys_access_level_report', 'zzzzsys_access_level_report_id', '', 0, 0, 'SELECT * \nFROM zzzzsys_access_level_report\nJOIN zzzzsys_report ON zzzzsys_report_id = sre_zzzzsys_report_id\nORDER BY sre_code', ''),
 ('nurunreport', 'browseedit', 'RUNREP', 'Run Report', 'zzzzsys_report', 'zzzzsys_report_id', '', 0, 0, 'SELECT * FROM zzzzsys_report\nLEFT JOIN zzzzsys_form ON zzzzsys_form_id = sre_zzzzsys_form_id', '\nnuSetTitle(nuFORM.getCurrent().run_description);\n\nwindow.nuBrowseFunction = ''runreport'';\n\nfunction runreport(e){\n    \n    var r   = $(''#'' + e.target.id).attr(''data-nu-row'');\n    var c   = ''000'';\n    var f   = $(''#'' + r + c).html();\n    var p   = $(''#'' + e.target.id).attr(''data-nu-primary-key'');\n\n    nuGetPDF(f, p);\n    \n}\n\n'),
@@ -1453,7 +1453,7 @@ INSERT INTO `zzzzsys_php` (`zzzzsys_php_id`, `sph_code`, `sph_description`, `sph
 ('nuform_BB', 'nuform_BB', 'System PHP', '', '\n$s  = "CREATE TABLE #TABLE_ID# SELECT zzzzsys_form_id AS theid FROM zzzzsys_form WHERE ";\n$w  = "1";\n\nif($GLOBALS[''nuSetup'']->set_denied == 1){\n    $w  = "zzzzsys_form_id LIKE ''nu%''";\n}\n\nnuRunQuery("$s$w");\n\n', '', '', '1', ''),
 ('nuphp_BB', 'nuphp_BB', 'System PHP', '', '\n$s  = "CREATE TABLE #TABLE_ID# SELECT zzzzsys_php_id AS theid FROM zzzzsys_php WHERE ";\n$w  = "sph_system != 1";\n\nnuRunQuery("$s$w");\n\n', '', '', '1', ''),
 ('nuselect_BS', 'nuselect_BS', 'System PHP', '', '$rid    = ''#RECORD_ID#'';\n\nif($rid != ''-1'' and $rid != ''-2''){ \n    \n    $s      = "SELECT * FROM zzzzsys_select WHERE zzzzsys_select_id = ''$rid''";\n    $t      = nuRunQuery($s);\n    $r      = db_fetch_object($t);\n    \n    if(db_num_rows($t) == 0){\n        \n        $s              = "\n        INSERT INTO zzzzsys_select\n        (zzzzsys_select_id, sse_system)\n        VALUES\n        (''$rid'', ''1'')\n        ";\n        \n        nuRunQuery($s);\n        \n    }\n    \n}\n\n', '', '', '1', ''),
-('s14990147062807', 'INV', 'Invoice', 'test', '$sql = "\r\n\r\nCREATE TABLE #TABLE_ID#\r\nSELECT * \r\nFROM invoice \r\nJOIN invoice_item ON invoice.invoice_id = invoice_item.ite_invoice_id \r\n\r\n";\r\n\r\nnuRunQuery($sql);\r\n', '', 'nublank', '', ''),
+('s14990147062807', 'INV', 'Invoice', 'test', 'nudebug(nuHash());\n\n$sql = "\n\nCREATE TABLE #TABLE_ID#\nSELECT * \nFROM invoice \nJOIN invoice_item ON invoice.invoice_id = invoice_item.ite_invoice_id \n\n";\n\nnuRunQuery($sql);\n', 'hide', 'nublank', '', ''),
 ('nusystemrecords', 'SYSTAB', 'Create System Tables', 'test', '\n$t[] = ''zzzzsys_access_level'';\n$t[] = ''zzzzsys_access_level_form'';\n$t[] = ''zzzzsys_access_level_php'';\n$t[] = ''zzzzsys_access_level_report'';\n$t[] = ''zzzzsys_browse'';\n$t[] = ''zzzzsys_debug'';\n$t[] = ''zzzzsys_event'';\n$t[] = ''zzzzsys_file'';\n$t[] = ''zzzzsys_form'';\n$t[] = ''zzzzsys_format'';\n$t[] = ''zzzzsys_function'';\n$t[] = ''zzzzsys_object'';\n$t[] = ''zzzzsys_php'';\n$t[] = ''zzzzsys_php_library'';\n$t[] = ''zzzzsys_report'';\n$t[] = ''zzzzsys_report_data'';\n$t[] = ''zzzzsys_run_list'';\n$t[] = ''zzzzsys_select'';\n$t[] = ''zzzzsys_select_clause'';\n$t[] = ''zzzzsys_session'';\n$t[] = ''zzzzsys_setup'';\n$t[] = ''zzzzsys_tab'';\n$t[] = ''zzzzsys_timezone'';\n$t[] = ''zzzzsys_translate'';\n$t[] = ''zzzzsys_user'';\n\n\n\nfor($i = 0 ; $i < count($t) ; $i++){\n    \n    $table  = $t[$i];\n    \n    nuRunQuery("DROP TABLE IF EXISTS sys_$table");\n    nuRunQuery("CREATE TABLE sys_$table SELECT * FROM $table");\n    \n}\n\n//-- KEEP FORM with ids that start with ''nu''\n\n$s  =  "\nDELETE FROM sys_zzzzsys_form \nWHERE zzzzsys_form_id NOT LIKE ''nu%'' \n";\n\nnuRunQuery($s);\n\n//-- KEEP TABs from FORMs with ids that start with ''nu''\n\n$s  =  "\nDELETE FROM sys_zzzzsys_tab \nWHERE syt_zzzzsys_form_id NOT IN (SELECT zzzzsys_form_id FROM sys_zzzzsys_form)\n";\n\nnuRunQuery($s);\n\n//-- KEEP OBJECTs from TABs where FORMs with ids that start with ''nu''\n\n$s  =  "\nDELETE FROM sys_zzzzsys_object \nWHERE sob_all_zzzzsys_tab_id NOT IN (SELECT zzzzsys_tab_id FROM sys_zzzzsys_tab)\n";\n\nnuRunQuery($s);\n\n//-- KEEP PHP with ids that start with ''nu'' or match the above OBJECT list.\n\n\n$s  =  "\nDELETE FROM sys_zzzzsys_php \nWHERE sph_zzzzsys_form_id NOT LIKE ''nu%''\nAND sph_zzzzsys_form_id NOT IN (SELECT zzzzsys_object_id FROM sys_zzzzsys_object)\n";\n\nnuRunQuery($s);\n\n//-- ADD PHP_LIBRARY records to PHP that links to ids that start with ''nu''.\n\n$s  =  "\nDELETE FROM sys_zzzzsys_php \nWHERE sph_zzzzsys_form_id NOT LIKE ''nu%''\nAND sph_zzzzsys_form_id NOT IN (SELECT zzzzsys_object_id FROM sys_zzzzsys_object)\n";\n\nnuRunQuery($s);\n\n\n//-- PHP LIBRARY\n\n$s  =  "\nDELETE FROM sys_zzzzsys_php_library \nWHERE spl_zzzzsys_php_id NOT IN (SELECT zzzzsys_php_id FROM sys_zzzzsys_php)\n";\n\nnuRunQuery($s);\n\n//-- KEEP BROWSEs from FORMs with ids that start with ''nu''\n\n$s  =  "\nDELETE FROM sys_zzzzsys_browse \nWHERE sbr_zzzzsys_form_id NOT IN (SELECT zzzzsys_form_id FROM sys_zzzzsys_form)\n";\n\nnuRunQuery($s);\n\n\n//-- KEEP EVENTs, from OBJECTs, from FORMs with ids that start with ''nu''\n\n$s  =  "\nDELETE FROM sys_zzzzsys_event \nWHERE sev_zzzzsys_object_id NOT IN (SELECT zzzzsys_object_id FROM sys_zzzzsys_object)\n";\n\nnuRunQuery($s);\n\n\n\n//-- empty all other sys tables\n\n$d[] = ''zzzzsys_access_level'';\n$d[] = ''zzzzsys_access_level_form'';\n$d[] = ''zzzzsys_access_level_php'';\n$d[] = ''zzzzsys_access_level_report'';\n$d[] = ''zzzzsys_debug'';\n$d[] = ''zzzzsys_file'';\n$d[] = ''zzzzsys_format'';\n$d[] = ''zzzzsys_function'';\n$d[] = ''zzzzsys_select'';\n$d[] = ''zzzzsys_select_clause'';\n$d[] = ''zzzzsys_session'';\n$d[] = ''zzzzsys_setup'';\n$d[] = ''zzzzsys_timezone'';\n$d[] = ''zzzzsys_translate'';\n$d[] = ''zzzzsys_user'';\n\nfor($i = 0 ; $i < count($d) ; $i++){\n    \n    $table  = $d[$i];\n    \n    nuRunQuery("TRUNCATE sys_$table");\n    \n}\n\n\n\n\nprint ''Done!'';\n\n\n\n\n\n', 'window', 'nublank', '', ''),
 ('58a08a1abc4782c_BS', '58a08a1abc4782c_BS', 'System PHP', '', '\r\n', '', '', '1', ''),
 ('s15000619240272', 'a', 'a', 'a', ' ', 'window', 'nublank', '', ''),
@@ -2594,6 +2594,474 @@ CREATE TABLE `zzzzsys_user` (
 
 INSERT INTO `zzzzsys_user` (`zzzzsys_user_id`, `sus_zzzzsys_access_level_id`, `sus_zzzzsys_user_group_id`, `sus_language`, `sus_name`, `sus_email`, `sus_login_name`, `sus_login_password`) VALUES
 ('5747ce1dd50cdc5', '57678e7dc00c099', '57466de0851d354', 'paradoid', 'steven', 'steven@nubuilder.com', 'nu', '0288bde0c2d593f2b5766f61b826a650');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `___nu159752b0623070___`
+--
+
+CREATE TABLE `___nu159752b0623070___` (
+  `invoice_id` varchar(25) NOT NULL,
+  `inv_company_id` varchar(25) NOT NULL,
+  `inv_number` int(11) NOT NULL,
+  `inv_total` decimal(11,7) NOT NULL,
+  `inv_date` date NOT NULL,
+  `invoice_item_id` varchar(25) NOT NULL,
+  `ite_invoice_id` varchar(25) NOT NULL,
+  `ite_description` varchar(100) NOT NULL,
+  `ite_units` double(12,4) NOT NULL,
+  `ite_unit_price` double(12,4) NOT NULL,
+  `ite_total` double(12,4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `___nu159752b0623070___`
+--
+
+INSERT INTO `___nu159752b0623070___` (`invoice_id`, `inv_company_id`, `inv_number`, `inv_total`, `inv_date`, `invoice_item_id`, `ite_invoice_id`, `ite_description`, `ite_units`, `ite_unit_price`, `ite_total`) VALUES
+('58dd85c34768b7b', '57295aa5660f48b', 222, '125.0000000', '2017-03-21', '58dd85c34769469', '58dd85c34768b7b', 'dfb', 7.0000, 3.0000, 21.0000),
+('58dd85c34768b7b', '57295aa5660f48b', 222, '125.0000000', '2017-03-21', 's14999484819206', '58dd85c34768b7b', '22', 3.0000, 32.0000, 96.0000),
+('58dd85c34768b7b', '57295aa5660f48b', 222, '125.0000000', '2017-03-21', 's14999484819207', '58dd85c34768b7b', 'fd', 1.0000, 6.0000, 6.0000),
+('58dd85c34768b7b', '57295aa5660f48b', 222, '125.0000000', '2017-03-21', 's15003729680840', '58dd85c34768b7b', '11', 2.0000, 1.0000, 2.0000),
+('s14919517022910', '', 54, '26.1300000', '2017-05-09', 's14941681564510', 's14919517022910', '1', 22.0000, 11.8800, 261.3600),
+('s14941671398158', '5729572e6331281', 55, '44.0000000', '2017-03-15', 's14941671398159', 's14941671398158', 'dfb', 6.0000, 3.0000, 18.0000),
+('s14941671398158', '5729572e6331281', 55, '44.0000000', '2017-03-15', 's15005380870387', 's14941671398158', '', 2.0000, 13.0000, 26.0000),
+('s14941671441214', '', 56, '26.0000000', '2017-03-15', 's14941671441215', 's14941671441214', 'thing1', 6.0000, 3.0000, 18.0000),
+('s14941671441214', '', 56, '26.0000000', '2017-03-15', 's14998769369058', 's14941671441214', 'thing2', 4.0000, 2.0000, 8.0000),
+('s14986455399465', '5729572e6331281', 97, '3.0000000', '2017-06-21', 's14986456330354', 's14986455399465', '2', 1.0000, 3.0000, 3.0000);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `___nu159752b7b904d3___`
+--
+
+CREATE TABLE `___nu159752b7b904d3___` (
+  `invoice_id` varchar(25) NOT NULL,
+  `inv_company_id` varchar(25) NOT NULL,
+  `inv_number` int(11) NOT NULL,
+  `inv_total` decimal(11,7) NOT NULL,
+  `inv_date` date NOT NULL,
+  `invoice_item_id` varchar(25) NOT NULL,
+  `ite_invoice_id` varchar(25) NOT NULL,
+  `ite_description` varchar(100) NOT NULL,
+  `ite_units` double(12,4) NOT NULL,
+  `ite_unit_price` double(12,4) NOT NULL,
+  `ite_total` double(12,4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `___nu159752b7b904d3___`
+--
+
+INSERT INTO `___nu159752b7b904d3___` (`invoice_id`, `inv_company_id`, `inv_number`, `inv_total`, `inv_date`, `invoice_item_id`, `ite_invoice_id`, `ite_description`, `ite_units`, `ite_unit_price`, `ite_total`) VALUES
+('58dd85c34768b7b', '57295aa5660f48b', 222, '125.0000000', '2017-03-21', '58dd85c34769469', '58dd85c34768b7b', 'dfb', 7.0000, 3.0000, 21.0000),
+('58dd85c34768b7b', '57295aa5660f48b', 222, '125.0000000', '2017-03-21', 's14999484819206', '58dd85c34768b7b', '22', 3.0000, 32.0000, 96.0000),
+('58dd85c34768b7b', '57295aa5660f48b', 222, '125.0000000', '2017-03-21', 's14999484819207', '58dd85c34768b7b', 'fd', 1.0000, 6.0000, 6.0000),
+('58dd85c34768b7b', '57295aa5660f48b', 222, '125.0000000', '2017-03-21', 's15003729680840', '58dd85c34768b7b', '11', 2.0000, 1.0000, 2.0000),
+('s14919517022910', '', 54, '26.1300000', '2017-05-09', 's14941681564510', 's14919517022910', '1', 22.0000, 11.8800, 261.3600),
+('s14941671398158', '5729572e6331281', 55, '44.0000000', '2017-03-15', 's14941671398159', 's14941671398158', 'dfb', 6.0000, 3.0000, 18.0000),
+('s14941671398158', '5729572e6331281', 55, '44.0000000', '2017-03-15', 's15005380870387', 's14941671398158', '', 2.0000, 13.0000, 26.0000),
+('s14941671441214', '', 56, '26.0000000', '2017-03-15', 's14941671441215', 's14941671441214', 'thing1', 6.0000, 3.0000, 18.0000),
+('s14941671441214', '', 56, '26.0000000', '2017-03-15', 's14998769369058', 's14941671441214', 'thing2', 4.0000, 2.0000, 8.0000),
+('s14986455399465', '5729572e6331281', 97, '3.0000000', '2017-06-21', 's14986456330354', 's14986455399465', '2', 1.0000, 3.0000, 3.0000);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `___nu159752b7c558ad___`
+--
+
+CREATE TABLE `___nu159752b7c558ad___` (
+  `invoice_id` varchar(25) NOT NULL,
+  `inv_company_id` varchar(25) NOT NULL,
+  `inv_number` int(11) NOT NULL,
+  `inv_total` decimal(11,7) NOT NULL,
+  `inv_date` date NOT NULL,
+  `invoice_item_id` varchar(25) NOT NULL,
+  `ite_invoice_id` varchar(25) NOT NULL,
+  `ite_description` varchar(100) NOT NULL,
+  `ite_units` double(12,4) NOT NULL,
+  `ite_unit_price` double(12,4) NOT NULL,
+  `ite_total` double(12,4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `___nu159752b7c558ad___`
+--
+
+INSERT INTO `___nu159752b7c558ad___` (`invoice_id`, `inv_company_id`, `inv_number`, `inv_total`, `inv_date`, `invoice_item_id`, `ite_invoice_id`, `ite_description`, `ite_units`, `ite_unit_price`, `ite_total`) VALUES
+('58dd85c34768b7b', '57295aa5660f48b', 222, '125.0000000', '2017-03-21', '58dd85c34769469', '58dd85c34768b7b', 'dfb', 7.0000, 3.0000, 21.0000),
+('58dd85c34768b7b', '57295aa5660f48b', 222, '125.0000000', '2017-03-21', 's14999484819206', '58dd85c34768b7b', '22', 3.0000, 32.0000, 96.0000),
+('58dd85c34768b7b', '57295aa5660f48b', 222, '125.0000000', '2017-03-21', 's14999484819207', '58dd85c34768b7b', 'fd', 1.0000, 6.0000, 6.0000),
+('58dd85c34768b7b', '57295aa5660f48b', 222, '125.0000000', '2017-03-21', 's15003729680840', '58dd85c34768b7b', '11', 2.0000, 1.0000, 2.0000),
+('s14919517022910', '', 54, '26.1300000', '2017-05-09', 's14941681564510', 's14919517022910', '1', 22.0000, 11.8800, 261.3600),
+('s14941671398158', '5729572e6331281', 55, '44.0000000', '2017-03-15', 's14941671398159', 's14941671398158', 'dfb', 6.0000, 3.0000, 18.0000),
+('s14941671398158', '5729572e6331281', 55, '44.0000000', '2017-03-15', 's15005380870387', 's14941671398158', '', 2.0000, 13.0000, 26.0000),
+('s14941671441214', '', 56, '26.0000000', '2017-03-15', 's14941671441215', 's14941671441214', 'thing1', 6.0000, 3.0000, 18.0000),
+('s14941671441214', '', 56, '26.0000000', '2017-03-15', 's14998769369058', 's14941671441214', 'thing2', 4.0000, 2.0000, 8.0000),
+('s14986455399465', '5729572e6331281', 97, '3.0000000', '2017-06-21', 's14986456330354', 's14986455399465', '2', 1.0000, 3.0000, 3.0000);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `___nu159752b7da98f2___`
+--
+
+CREATE TABLE `___nu159752b7da98f2___` (
+  `invoice_id` varchar(25) NOT NULL,
+  `inv_company_id` varchar(25) NOT NULL,
+  `inv_number` int(11) NOT NULL,
+  `inv_total` decimal(11,7) NOT NULL,
+  `inv_date` date NOT NULL,
+  `invoice_item_id` varchar(25) NOT NULL,
+  `ite_invoice_id` varchar(25) NOT NULL,
+  `ite_description` varchar(100) NOT NULL,
+  `ite_units` double(12,4) NOT NULL,
+  `ite_unit_price` double(12,4) NOT NULL,
+  `ite_total` double(12,4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `___nu159752b7da98f2___`
+--
+
+INSERT INTO `___nu159752b7da98f2___` (`invoice_id`, `inv_company_id`, `inv_number`, `inv_total`, `inv_date`, `invoice_item_id`, `ite_invoice_id`, `ite_description`, `ite_units`, `ite_unit_price`, `ite_total`) VALUES
+('58dd85c34768b7b', '57295aa5660f48b', 222, '125.0000000', '2017-03-21', '58dd85c34769469', '58dd85c34768b7b', 'dfb', 7.0000, 3.0000, 21.0000),
+('58dd85c34768b7b', '57295aa5660f48b', 222, '125.0000000', '2017-03-21', 's14999484819206', '58dd85c34768b7b', '22', 3.0000, 32.0000, 96.0000),
+('58dd85c34768b7b', '57295aa5660f48b', 222, '125.0000000', '2017-03-21', 's14999484819207', '58dd85c34768b7b', 'fd', 1.0000, 6.0000, 6.0000),
+('58dd85c34768b7b', '57295aa5660f48b', 222, '125.0000000', '2017-03-21', 's15003729680840', '58dd85c34768b7b', '11', 2.0000, 1.0000, 2.0000),
+('s14919517022910', '', 54, '26.1300000', '2017-05-09', 's14941681564510', 's14919517022910', '1', 22.0000, 11.8800, 261.3600),
+('s14941671398158', '5729572e6331281', 55, '44.0000000', '2017-03-15', 's14941671398159', 's14941671398158', 'dfb', 6.0000, 3.0000, 18.0000),
+('s14941671398158', '5729572e6331281', 55, '44.0000000', '2017-03-15', 's15005380870387', 's14941671398158', '', 2.0000, 13.0000, 26.0000),
+('s14941671441214', '', 56, '26.0000000', '2017-03-15', 's14941671441215', 's14941671441214', 'thing1', 6.0000, 3.0000, 18.0000),
+('s14941671441214', '', 56, '26.0000000', '2017-03-15', 's14998769369058', 's14941671441214', 'thing2', 4.0000, 2.0000, 8.0000),
+('s14986455399465', '5729572e6331281', 97, '3.0000000', '2017-06-21', 's14986456330354', 's14986455399465', '2', 1.0000, 3.0000, 3.0000);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `___nu159752b67a01db___`
+--
+
+CREATE TABLE `___nu159752b67a01db___` (
+  `invoice_id` varchar(25) NOT NULL,
+  `inv_company_id` varchar(25) NOT NULL,
+  `inv_number` int(11) NOT NULL,
+  `inv_total` decimal(11,7) NOT NULL,
+  `inv_date` date NOT NULL,
+  `invoice_item_id` varchar(25) NOT NULL,
+  `ite_invoice_id` varchar(25) NOT NULL,
+  `ite_description` varchar(100) NOT NULL,
+  `ite_units` double(12,4) NOT NULL,
+  `ite_unit_price` double(12,4) NOT NULL,
+  `ite_total` double(12,4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `___nu159752b67a01db___`
+--
+
+INSERT INTO `___nu159752b67a01db___` (`invoice_id`, `inv_company_id`, `inv_number`, `inv_total`, `inv_date`, `invoice_item_id`, `ite_invoice_id`, `ite_description`, `ite_units`, `ite_unit_price`, `ite_total`) VALUES
+('58dd85c34768b7b', '57295aa5660f48b', 222, '125.0000000', '2017-03-21', '58dd85c34769469', '58dd85c34768b7b', 'dfb', 7.0000, 3.0000, 21.0000),
+('58dd85c34768b7b', '57295aa5660f48b', 222, '125.0000000', '2017-03-21', 's14999484819206', '58dd85c34768b7b', '22', 3.0000, 32.0000, 96.0000),
+('58dd85c34768b7b', '57295aa5660f48b', 222, '125.0000000', '2017-03-21', 's14999484819207', '58dd85c34768b7b', 'fd', 1.0000, 6.0000, 6.0000),
+('58dd85c34768b7b', '57295aa5660f48b', 222, '125.0000000', '2017-03-21', 's15003729680840', '58dd85c34768b7b', '11', 2.0000, 1.0000, 2.0000),
+('s14919517022910', '', 54, '26.1300000', '2017-05-09', 's14941681564510', 's14919517022910', '1', 22.0000, 11.8800, 261.3600),
+('s14941671398158', '5729572e6331281', 55, '44.0000000', '2017-03-15', 's14941671398159', 's14941671398158', 'dfb', 6.0000, 3.0000, 18.0000),
+('s14941671398158', '5729572e6331281', 55, '44.0000000', '2017-03-15', 's15005380870387', 's14941671398158', '', 2.0000, 13.0000, 26.0000),
+('s14941671441214', '', 56, '26.0000000', '2017-03-15', 's14941671441215', 's14941671441214', 'thing1', 6.0000, 3.0000, 18.0000),
+('s14941671441214', '', 56, '26.0000000', '2017-03-15', 's14998769369058', 's14941671441214', 'thing2', 4.0000, 2.0000, 8.0000),
+('s14986455399465', '5729572e6331281', 97, '3.0000000', '2017-06-21', 's14986456330354', 's14986455399465', '2', 1.0000, 3.0000, 3.0000);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `___nu159752c4de312e___`
+--
+
+CREATE TABLE `___nu159752c4de312e___` (
+  `invoice_id` varchar(25) NOT NULL,
+  `inv_company_id` varchar(25) NOT NULL,
+  `inv_number` int(11) NOT NULL,
+  `inv_total` decimal(11,7) NOT NULL,
+  `inv_date` date NOT NULL,
+  `invoice_item_id` varchar(25) NOT NULL,
+  `ite_invoice_id` varchar(25) NOT NULL,
+  `ite_description` varchar(100) NOT NULL,
+  `ite_units` double(12,4) NOT NULL,
+  `ite_unit_price` double(12,4) NOT NULL,
+  `ite_total` double(12,4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `___nu159752c4de312e___`
+--
+
+INSERT INTO `___nu159752c4de312e___` (`invoice_id`, `inv_company_id`, `inv_number`, `inv_total`, `inv_date`, `invoice_item_id`, `ite_invoice_id`, `ite_description`, `ite_units`, `ite_unit_price`, `ite_total`) VALUES
+('58dd85c34768b7b', '57295aa5660f48b', 222, '125.0000000', '2017-03-21', '58dd85c34769469', '58dd85c34768b7b', 'dfb', 7.0000, 3.0000, 21.0000),
+('58dd85c34768b7b', '57295aa5660f48b', 222, '125.0000000', '2017-03-21', 's14999484819206', '58dd85c34768b7b', '22', 3.0000, 32.0000, 96.0000),
+('58dd85c34768b7b', '57295aa5660f48b', 222, '125.0000000', '2017-03-21', 's14999484819207', '58dd85c34768b7b', 'fd', 1.0000, 6.0000, 6.0000),
+('58dd85c34768b7b', '57295aa5660f48b', 222, '125.0000000', '2017-03-21', 's15003729680840', '58dd85c34768b7b', '11', 2.0000, 1.0000, 2.0000),
+('s14919517022910', '', 54, '26.1300000', '2017-05-09', 's14941681564510', 's14919517022910', '1', 22.0000, 11.8800, 261.3600),
+('s14941671398158', '5729572e6331281', 55, '44.0000000', '2017-03-15', 's14941671398159', 's14941671398158', 'dfb', 6.0000, 3.0000, 18.0000),
+('s14941671398158', '5729572e6331281', 55, '44.0000000', '2017-03-15', 's15005380870387', 's14941671398158', '', 2.0000, 13.0000, 26.0000),
+('s14941671441214', '', 56, '26.0000000', '2017-03-15', 's14941671441215', 's14941671441214', 'thing1', 6.0000, 3.0000, 18.0000),
+('s14941671441214', '', 56, '26.0000000', '2017-03-15', 's14998769369058', 's14941671441214', 'thing2', 4.0000, 2.0000, 8.0000),
+('s14986455399465', '5729572e6331281', 97, '3.0000000', '2017-06-21', 's14986456330354', 's14986455399465', '2', 1.0000, 3.0000, 3.0000);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `___nu159752c9a51cd1___`
+--
+
+CREATE TABLE `___nu159752c9a51cd1___` (
+  `invoice_id` varchar(25) NOT NULL,
+  `inv_company_id` varchar(25) NOT NULL,
+  `inv_number` int(11) NOT NULL,
+  `inv_total` decimal(11,7) NOT NULL,
+  `inv_date` date NOT NULL,
+  `invoice_item_id` varchar(25) NOT NULL,
+  `ite_invoice_id` varchar(25) NOT NULL,
+  `ite_description` varchar(100) NOT NULL,
+  `ite_units` double(12,4) NOT NULL,
+  `ite_unit_price` double(12,4) NOT NULL,
+  `ite_total` double(12,4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `___nu159752c9a51cd1___`
+--
+
+INSERT INTO `___nu159752c9a51cd1___` (`invoice_id`, `inv_company_id`, `inv_number`, `inv_total`, `inv_date`, `invoice_item_id`, `ite_invoice_id`, `ite_description`, `ite_units`, `ite_unit_price`, `ite_total`) VALUES
+('58dd85c34768b7b', '57295aa5660f48b', 222, '125.0000000', '2017-03-21', '58dd85c34769469', '58dd85c34768b7b', 'dfb', 7.0000, 3.0000, 21.0000),
+('58dd85c34768b7b', '57295aa5660f48b', 222, '125.0000000', '2017-03-21', 's14999484819206', '58dd85c34768b7b', '22', 3.0000, 32.0000, 96.0000),
+('58dd85c34768b7b', '57295aa5660f48b', 222, '125.0000000', '2017-03-21', 's14999484819207', '58dd85c34768b7b', 'fd', 1.0000, 6.0000, 6.0000),
+('58dd85c34768b7b', '57295aa5660f48b', 222, '125.0000000', '2017-03-21', 's15003729680840', '58dd85c34768b7b', '11', 2.0000, 1.0000, 2.0000),
+('s14919517022910', '', 54, '26.1300000', '2017-05-09', 's14941681564510', 's14919517022910', '1', 22.0000, 11.8800, 261.3600),
+('s14941671398158', '5729572e6331281', 55, '44.0000000', '2017-03-15', 's14941671398159', 's14941671398158', 'dfb', 6.0000, 3.0000, 18.0000),
+('s14941671398158', '5729572e6331281', 55, '44.0000000', '2017-03-15', 's15005380870387', 's14941671398158', '', 2.0000, 13.0000, 26.0000),
+('s14941671441214', '', 56, '26.0000000', '2017-03-15', 's14941671441215', 's14941671441214', 'thing1', 6.0000, 3.0000, 18.0000),
+('s14941671441214', '', 56, '26.0000000', '2017-03-15', 's14998769369058', 's14941671441214', 'thing2', 4.0000, 2.0000, 8.0000),
+('s14986455399465', '5729572e6331281', 97, '3.0000000', '2017-06-21', 's14986456330354', 's14986455399465', '2', 1.0000, 3.0000, 3.0000);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `___nu159752c47b3d6e___`
+--
+
+CREATE TABLE `___nu159752c47b3d6e___` (
+  `invoice_id` varchar(25) NOT NULL,
+  `inv_company_id` varchar(25) NOT NULL,
+  `inv_number` int(11) NOT NULL,
+  `inv_total` decimal(11,7) NOT NULL,
+  `inv_date` date NOT NULL,
+  `invoice_item_id` varchar(25) NOT NULL,
+  `ite_invoice_id` varchar(25) NOT NULL,
+  `ite_description` varchar(100) NOT NULL,
+  `ite_units` double(12,4) NOT NULL,
+  `ite_unit_price` double(12,4) NOT NULL,
+  `ite_total` double(12,4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `___nu159752c47b3d6e___`
+--
+
+INSERT INTO `___nu159752c47b3d6e___` (`invoice_id`, `inv_company_id`, `inv_number`, `inv_total`, `inv_date`, `invoice_item_id`, `ite_invoice_id`, `ite_description`, `ite_units`, `ite_unit_price`, `ite_total`) VALUES
+('58dd85c34768b7b', '57295aa5660f48b', 222, '125.0000000', '2017-03-21', '58dd85c34769469', '58dd85c34768b7b', 'dfb', 7.0000, 3.0000, 21.0000),
+('58dd85c34768b7b', '57295aa5660f48b', 222, '125.0000000', '2017-03-21', 's14999484819206', '58dd85c34768b7b', '22', 3.0000, 32.0000, 96.0000),
+('58dd85c34768b7b', '57295aa5660f48b', 222, '125.0000000', '2017-03-21', 's14999484819207', '58dd85c34768b7b', 'fd', 1.0000, 6.0000, 6.0000),
+('58dd85c34768b7b', '57295aa5660f48b', 222, '125.0000000', '2017-03-21', 's15003729680840', '58dd85c34768b7b', '11', 2.0000, 1.0000, 2.0000),
+('s14919517022910', '', 54, '26.1300000', '2017-05-09', 's14941681564510', 's14919517022910', '1', 22.0000, 11.8800, 261.3600),
+('s14941671398158', '5729572e6331281', 55, '44.0000000', '2017-03-15', 's14941671398159', 's14941671398158', 'dfb', 6.0000, 3.0000, 18.0000),
+('s14941671398158', '5729572e6331281', 55, '44.0000000', '2017-03-15', 's15005380870387', 's14941671398158', '', 2.0000, 13.0000, 26.0000),
+('s14941671441214', '', 56, '26.0000000', '2017-03-15', 's14941671441215', 's14941671441214', 'thing1', 6.0000, 3.0000, 18.0000),
+('s14941671441214', '', 56, '26.0000000', '2017-03-15', 's14998769369058', 's14941671441214', 'thing2', 4.0000, 2.0000, 8.0000),
+('s14986455399465', '5729572e6331281', 97, '3.0000000', '2017-06-21', 's14986456330354', 's14986455399465', '2', 1.0000, 3.0000, 3.0000);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `___nu159752ceca1955___`
+--
+
+CREATE TABLE `___nu159752ceca1955___` (
+  `invoice_id` varchar(25) NOT NULL,
+  `inv_company_id` varchar(25) NOT NULL,
+  `inv_number` int(11) NOT NULL,
+  `inv_total` decimal(11,7) NOT NULL,
+  `inv_date` date NOT NULL,
+  `invoice_item_id` varchar(25) NOT NULL,
+  `ite_invoice_id` varchar(25) NOT NULL,
+  `ite_description` varchar(100) NOT NULL,
+  `ite_units` double(12,4) NOT NULL,
+  `ite_unit_price` double(12,4) NOT NULL,
+  `ite_total` double(12,4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `___nu159752ceca1955___`
+--
+
+INSERT INTO `___nu159752ceca1955___` (`invoice_id`, `inv_company_id`, `inv_number`, `inv_total`, `inv_date`, `invoice_item_id`, `ite_invoice_id`, `ite_description`, `ite_units`, `ite_unit_price`, `ite_total`) VALUES
+('58dd85c34768b7b', '57295aa5660f48b', 222, '125.0000000', '2017-03-21', '58dd85c34769469', '58dd85c34768b7b', 'dfb', 7.0000, 3.0000, 21.0000),
+('58dd85c34768b7b', '57295aa5660f48b', 222, '125.0000000', '2017-03-21', 's14999484819206', '58dd85c34768b7b', '22', 3.0000, 32.0000, 96.0000),
+('58dd85c34768b7b', '57295aa5660f48b', 222, '125.0000000', '2017-03-21', 's14999484819207', '58dd85c34768b7b', 'fd', 1.0000, 6.0000, 6.0000),
+('58dd85c34768b7b', '57295aa5660f48b', 222, '125.0000000', '2017-03-21', 's15003729680840', '58dd85c34768b7b', '11', 2.0000, 1.0000, 2.0000),
+('s14919517022910', '', 54, '26.1300000', '2017-05-09', 's14941681564510', 's14919517022910', '1', 22.0000, 11.8800, 261.3600),
+('s14941671398158', '5729572e6331281', 55, '44.0000000', '2017-03-15', 's14941671398159', 's14941671398158', 'dfb', 6.0000, 3.0000, 18.0000),
+('s14941671398158', '5729572e6331281', 55, '44.0000000', '2017-03-15', 's15005380870387', 's14941671398158', '', 2.0000, 13.0000, 26.0000),
+('s14941671441214', '', 56, '26.0000000', '2017-03-15', 's14941671441215', 's14941671441214', 'thing1', 6.0000, 3.0000, 18.0000),
+('s14941671441214', '', 56, '26.0000000', '2017-03-15', 's14998769369058', 's14941671441214', 'thing2', 4.0000, 2.0000, 8.0000),
+('s14986455399465', '5729572e6331281', 97, '3.0000000', '2017-06-21', 's14986456330354', 's14986455399465', '2', 1.0000, 3.0000, 3.0000);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `___nu159752d6c83471___`
+--
+
+CREATE TABLE `___nu159752d6c83471___` (
+  `invoice_id` varchar(25) NOT NULL,
+  `inv_company_id` varchar(25) NOT NULL,
+  `inv_number` int(11) NOT NULL,
+  `inv_total` decimal(11,7) NOT NULL,
+  `inv_date` date NOT NULL,
+  `invoice_item_id` varchar(25) NOT NULL,
+  `ite_invoice_id` varchar(25) NOT NULL,
+  `ite_description` varchar(100) NOT NULL,
+  `ite_units` double(12,4) NOT NULL,
+  `ite_unit_price` double(12,4) NOT NULL,
+  `ite_total` double(12,4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `___nu159752d6c83471___`
+--
+
+INSERT INTO `___nu159752d6c83471___` (`invoice_id`, `inv_company_id`, `inv_number`, `inv_total`, `inv_date`, `invoice_item_id`, `ite_invoice_id`, `ite_description`, `ite_units`, `ite_unit_price`, `ite_total`) VALUES
+('58dd85c34768b7b', '57295aa5660f48b', 222, '125.0000000', '2017-03-21', '58dd85c34769469', '58dd85c34768b7b', 'dfb', 7.0000, 3.0000, 21.0000),
+('58dd85c34768b7b', '57295aa5660f48b', 222, '125.0000000', '2017-03-21', 's14999484819206', '58dd85c34768b7b', '22', 3.0000, 32.0000, 96.0000),
+('58dd85c34768b7b', '57295aa5660f48b', 222, '125.0000000', '2017-03-21', 's14999484819207', '58dd85c34768b7b', 'fd', 1.0000, 6.0000, 6.0000),
+('58dd85c34768b7b', '57295aa5660f48b', 222, '125.0000000', '2017-03-21', 's15003729680840', '58dd85c34768b7b', '11', 2.0000, 1.0000, 2.0000),
+('s14919517022910', '', 54, '26.1300000', '2017-05-09', 's14941681564510', 's14919517022910', '1', 22.0000, 11.8800, 261.3600),
+('s14941671398158', '5729572e6331281', 55, '44.0000000', '2017-03-15', 's14941671398159', 's14941671398158', 'dfb', 6.0000, 3.0000, 18.0000),
+('s14941671398158', '5729572e6331281', 55, '44.0000000', '2017-03-15', 's15005380870387', 's14941671398158', '', 2.0000, 13.0000, 26.0000),
+('s14941671441214', '', 56, '26.0000000', '2017-03-15', 's14941671441215', 's14941671441214', 'thing1', 6.0000, 3.0000, 18.0000),
+('s14941671441214', '', 56, '26.0000000', '2017-03-15', 's14998769369058', 's14941671441214', 'thing2', 4.0000, 2.0000, 8.0000),
+('s14986455399465', '5729572e6331281', 97, '3.0000000', '2017-06-21', 's14986456330354', 's14986455399465', '2', 1.0000, 3.0000, 3.0000);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `___nu159752ec13905b___`
+--
+
+CREATE TABLE `___nu159752ec13905b___` (
+  `invoice_id` varchar(25) NOT NULL,
+  `inv_company_id` varchar(25) NOT NULL,
+  `inv_number` int(11) NOT NULL,
+  `inv_total` decimal(11,7) NOT NULL,
+  `inv_date` date NOT NULL,
+  `invoice_item_id` varchar(25) NOT NULL,
+  `ite_invoice_id` varchar(25) NOT NULL,
+  `ite_description` varchar(100) NOT NULL,
+  `ite_units` double(12,4) NOT NULL,
+  `ite_unit_price` double(12,4) NOT NULL,
+  `ite_total` double(12,4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `___nu159752ec13905b___`
+--
+
+INSERT INTO `___nu159752ec13905b___` (`invoice_id`, `inv_company_id`, `inv_number`, `inv_total`, `inv_date`, `invoice_item_id`, `ite_invoice_id`, `ite_description`, `ite_units`, `ite_unit_price`, `ite_total`) VALUES
+('58dd85c34768b7b', '57295aa5660f48b', 222, '125.0000000', '2017-03-21', '58dd85c34769469', '58dd85c34768b7b', 'dfb', 7.0000, 3.0000, 21.0000),
+('58dd85c34768b7b', '57295aa5660f48b', 222, '125.0000000', '2017-03-21', 's14999484819206', '58dd85c34768b7b', '22', 3.0000, 32.0000, 96.0000),
+('58dd85c34768b7b', '57295aa5660f48b', 222, '125.0000000', '2017-03-21', 's14999484819207', '58dd85c34768b7b', 'fd', 1.0000, 6.0000, 6.0000),
+('58dd85c34768b7b', '57295aa5660f48b', 222, '125.0000000', '2017-03-21', 's15003729680840', '58dd85c34768b7b', '11', 2.0000, 1.0000, 2.0000),
+('s14919517022910', '', 54, '26.1300000', '2017-05-09', 's14941681564510', 's14919517022910', '1', 22.0000, 11.8800, 261.3600),
+('s14941671398158', '5729572e6331281', 55, '44.0000000', '2017-03-15', 's14941671398159', 's14941671398158', 'dfb', 6.0000, 3.0000, 18.0000),
+('s14941671398158', '5729572e6331281', 55, '44.0000000', '2017-03-15', 's15005380870387', 's14941671398158', '', 2.0000, 13.0000, 26.0000),
+('s14941671441214', '', 56, '26.0000000', '2017-03-15', 's14941671441215', 's14941671441214', 'thing1', 6.0000, 3.0000, 18.0000),
+('s14941671441214', '', 56, '26.0000000', '2017-03-15', 's14998769369058', 's14941671441214', 'thing2', 4.0000, 2.0000, 8.0000),
+('s14986455399465', '5729572e6331281', 97, '3.0000000', '2017-06-21', 's14986456330354', 's14986455399465', '2', 1.0000, 3.0000, 3.0000);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `___nu159752ee8396c3___`
+--
+
+CREATE TABLE `___nu159752ee8396c3___` (
+  `invoice_id` varchar(25) NOT NULL,
+  `inv_company_id` varchar(25) NOT NULL,
+  `inv_number` int(11) NOT NULL,
+  `inv_total` decimal(11,7) NOT NULL,
+  `inv_date` date NOT NULL,
+  `invoice_item_id` varchar(25) NOT NULL,
+  `ite_invoice_id` varchar(25) NOT NULL,
+  `ite_description` varchar(100) NOT NULL,
+  `ite_units` double(12,4) NOT NULL,
+  `ite_unit_price` double(12,4) NOT NULL,
+  `ite_total` double(12,4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `___nu159752ee8396c3___`
+--
+
+INSERT INTO `___nu159752ee8396c3___` (`invoice_id`, `inv_company_id`, `inv_number`, `inv_total`, `inv_date`, `invoice_item_id`, `ite_invoice_id`, `ite_description`, `ite_units`, `ite_unit_price`, `ite_total`) VALUES
+('58dd85c34768b7b', '57295aa5660f48b', 222, '125.0000000', '2017-03-21', '58dd85c34769469', '58dd85c34768b7b', 'dfb', 7.0000, 3.0000, 21.0000),
+('58dd85c34768b7b', '57295aa5660f48b', 222, '125.0000000', '2017-03-21', 's14999484819206', '58dd85c34768b7b', '22', 3.0000, 32.0000, 96.0000),
+('58dd85c34768b7b', '57295aa5660f48b', 222, '125.0000000', '2017-03-21', 's14999484819207', '58dd85c34768b7b', 'fd', 1.0000, 6.0000, 6.0000),
+('58dd85c34768b7b', '57295aa5660f48b', 222, '125.0000000', '2017-03-21', 's15003729680840', '58dd85c34768b7b', '11', 2.0000, 1.0000, 2.0000),
+('s14919517022910', '', 54, '26.1300000', '2017-05-09', 's14941681564510', 's14919517022910', '1', 22.0000, 11.8800, 261.3600),
+('s14941671398158', '5729572e6331281', 55, '44.0000000', '2017-03-15', 's14941671398159', 's14941671398158', 'dfb', 6.0000, 3.0000, 18.0000),
+('s14941671398158', '5729572e6331281', 55, '44.0000000', '2017-03-15', 's15005380870387', 's14941671398158', '', 2.0000, 13.0000, 26.0000),
+('s14941671441214', '', 56, '26.0000000', '2017-03-15', 's14941671441215', 's14941671441214', 'thing1', 6.0000, 3.0000, 18.0000),
+('s14941671441214', '', 56, '26.0000000', '2017-03-15', 's14998769369058', 's14941671441214', 'thing2', 4.0000, 2.0000, 8.0000),
+('s14986455399465', '5729572e6331281', 97, '3.0000000', '2017-06-21', 's14986456330354', 's14986455399465', '2', 1.0000, 3.0000, 3.0000);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `___nu159752f8ae7ec0___`
+--
+
+CREATE TABLE `___nu159752f8ae7ec0___` (
+  `invoice_id` varchar(25) NOT NULL,
+  `inv_company_id` varchar(25) NOT NULL,
+  `inv_number` int(11) NOT NULL,
+  `inv_total` decimal(11,7) NOT NULL,
+  `inv_date` date NOT NULL,
+  `invoice_item_id` varchar(25) NOT NULL,
+  `ite_invoice_id` varchar(25) NOT NULL,
+  `ite_description` varchar(100) NOT NULL,
+  `ite_units` double(12,4) NOT NULL,
+  `ite_unit_price` double(12,4) NOT NULL,
+  `ite_total` double(12,4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `___nu159752f8ae7ec0___`
+--
+
+INSERT INTO `___nu159752f8ae7ec0___` (`invoice_id`, `inv_company_id`, `inv_number`, `inv_total`, `inv_date`, `invoice_item_id`, `ite_invoice_id`, `ite_description`, `ite_units`, `ite_unit_price`, `ite_total`) VALUES
+('58dd85c34768b7b', '57295aa5660f48b', 222, '125.0000000', '2017-03-21', '58dd85c34769469', '58dd85c34768b7b', 'dfb', 7.0000, 3.0000, 21.0000),
+('58dd85c34768b7b', '57295aa5660f48b', 222, '125.0000000', '2017-03-21', 's14999484819206', '58dd85c34768b7b', '22', 3.0000, 32.0000, 96.0000),
+('58dd85c34768b7b', '57295aa5660f48b', 222, '125.0000000', '2017-03-21', 's14999484819207', '58dd85c34768b7b', 'fd', 1.0000, 6.0000, 6.0000),
+('58dd85c34768b7b', '57295aa5660f48b', 222, '125.0000000', '2017-03-21', 's15003729680840', '58dd85c34768b7b', '11', 2.0000, 1.0000, 2.0000),
+('s14919517022910', '', 54, '26.1300000', '2017-05-09', 's14941681564510', 's14919517022910', '1', 22.0000, 11.8800, 261.3600),
+('s14941671398158', '5729572e6331281', 55, '44.0000000', '2017-03-15', 's14941671398159', 's14941671398158', 'dfb', 6.0000, 3.0000, 18.0000),
+('s14941671398158', '5729572e6331281', 55, '44.0000000', '2017-03-15', 's15005380870387', 's14941671398158', '', 2.0000, 13.0000, 26.0000),
+('s14941671441214', '', 56, '26.0000000', '2017-03-15', 's14941671441215', 's14941671441214', 'thing1', 6.0000, 3.0000, 18.0000),
+('s14941671441214', '', 56, '26.0000000', '2017-03-15', 's14998769369058', 's14941671441214', 'thing2', 4.0000, 2.0000, 8.0000),
+('s14986455399465', '5729572e6331281', 97, '3.0000000', '2017-06-21', 's14986456330354', 's14986455399465', '2', 1.0000, 3.0000, 3.0000);
 
 -- --------------------------------------------------------
 
