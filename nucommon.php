@@ -354,42 +354,43 @@ function nuSetHashList($p){
 
 function nuRunReport($report_id, $record_id){
 	
-	$nuID								= nuID();
-	$nuT								= nuRunQuery("SELECT * FROM zzzzsys_report WHERE sre_code = '$report_id'");
-	$nuA								= db_fetch_object($nuT);
-	$_POST['nuHash']['code']			= $nuA->sre_code;
-	$_POST['nuHash']['description']		= $nuA->sre_description;
-	$_POST['nuHash']['sre_layout']		= nuReplaceHashVariables($nuA->sre_layout);
-	$_POST['nuHash']['parentID']		= $nuA->sre_zzzzsys_php_id;
-	$nuJ								= json_encode($_POST['nuHash']);
+	$id									= nuID();
+	$t									= nuRunQuery("SELECT * FROM zzzzsys_report WHERE sre_code = '$report_id'");
+	$ob									= db_fetch_object($t);
+	$_POST['nuHash']['code']			= $ob->sre_code;
+	$_POST['nuHash']['description']		= $ob->sre_description;
+	$_POST['nuHash']['sre_layout']		= nuReplaceHashVariables($ob->sre_layout);
+	$_POST['nuHash']['parentID']		= $ob->sre_zzzzsys_php_id;
+	$j									= json_encode($_POST['nuHash']);
 	
-	nuSetJSONData($nuID, $nuJ);
+	nuSetJSONData($id, $j);
 	
-	$O									= new stdClass;
-	$O->id								= $nuID;
-	$O->record_id						= $record_id;
+	$f									= new stdClass;
+	$f->id								= $id;
+	$f->record_id						= $record_id;
 	
-	return $O;
+	return $f;
 	
 }
 
-function nuRunPHP($report_id, $record_id){
 
-	$nuID								= nuID();
-	$nuT								= nuRunQuery("SELECT * FROM zzzzsys_php WHERE sph_code = '$report_id'");
-	$nuA								= db_fetch_object($nuT);
-	$_POST['nuHash']['code']			= $nuA->sph_code;
-	$_POST['nuHash']['description']		= $nuA->sph_description;
-	$_POST['nuHash']['parentID']		= $nuA->zzzzsys_php_id;
-	$nuJ								= json_encode($_POST['nuHash']);
+function nuRunPHP($procedure_id, $record_id){
 
-	nuSetJSONData($nuID, $nuJ);
+	$id									= nuID();
+	$t									= nuRunQuery("SELECT * FROM zzzzsys_php WHERE sph_code = '$procedure_id'");
+	$ob									= db_fetch_object($t);
+	$_POST['nuHash']['code']			= $ob->sph_code;
+	$_POST['nuHash']['description']		= $ob->sph_description;
+	$_POST['nuHash']['parentID']		= $ob->zzzzsys_php_id;
+	$j									= json_encode($_POST['nuHash']);
+
+	nuSetJSONData($id, $j);
 	
-	$O									= new stdClass;
-	$O->id								= $nuID;
-	$O->record_id						= $record_id;
+	$f									= new stdClass;
+	$f->id								= $id;
+	$f->record_id						= $record_id;
 	
-	return $O;
+	return $f;
 	
 }
 
@@ -398,11 +399,11 @@ function nuRunPHPHidden($nuCode){
 	
 	$_POST['nuHash']['RECORD_ID']		= $_POST['nuHash']['hash_record_id'];
 
-	$s						= "SELECT * FROM zzzzsys_php WHERE sph_code = ? ";
-	$t						= nuRunQuery($s, [$nuCode]);
-	$r						= db_fetch_object($t);
+	$s									= "SELECT * FROM zzzzsys_php WHERE sph_code = ? ";
+	$t									= nuRunQuery($s, [$nuCode]);
+	$r									= db_fetch_object($t);
 	
-	$evalPHP = new nuEvalPHPClass($r->zzzzsys_php_id);
+	$evalPHP 							= new nuEvalPHPClass($r->zzzzsys_php_id);
 
 	return 1;
 

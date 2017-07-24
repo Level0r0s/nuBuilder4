@@ -721,3 +721,20 @@ class nuFormObject {
 	}
 	
 }
+
+function nuCurrentProperties(){
+	return nuFORM.getCurrent();
+}
+
+
+function nuSetProperty(f, v){
+	nuFORM.setProperty(f, v);
+}
+
+
+function nuGetProperty(f){
+	return nuFORM.getProperty(f);
+}
+
+
+

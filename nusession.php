@@ -221,11 +221,13 @@ if(array_key_exists('nuSTATE', $_POST)){
                     $storeSessionInTableJSON, 
                     $_SESSION['SESSION_ID']
                 ));
- nudebug($_SESSION['translation'])               ;
+				
             } else {
+				
                 header("Content-Type: text/html");
                 header('HTTP/1.0 403 Forbidden');
                 die('Invalid login.');
+				
             }
         }
     }
@@ -262,6 +264,7 @@ if(isset($_SESSION['SESSION_ID'])){
 		
         $_SESSION['SESSION_ID'] = null;
         $_SESSION['SESSION_TIMESTAMP'] = null;
+		
         header("Content-Type: text/html");
         header('HTTP/1.0 403 Forbidden');
         die('Your nuBuilder session has timed out.');
@@ -304,8 +307,6 @@ function nuIDTEMP(){
 }
 
 function nuGetTranslation($l){
-	
-	nudebug($l);
 	
 	$a	= [];
 	$s	= "
