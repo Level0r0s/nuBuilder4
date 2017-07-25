@@ -229,8 +229,8 @@ function nuAddActionButtons(f){
 			
 			if(rid != -1){
 				
-				if(button.Clone == 1)	{nuAddActionButton('Clone');}
 				if(button.Delete == 1)	{nuAddActionButton('Delete');}
+				if(button.Clone == 1)	{nuAddActionButton('Clone');}
 				
 			}
 			

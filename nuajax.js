@@ -72,7 +72,7 @@ function nuForm(f, r, filter, search, n){
 			var last		= window.nuFORM.getCurrent();
 			last.record_id	= fm.record_id;
 			last.FORM 		= fm.form;
-console.log(fm);
+
 			nuBuildForm(fm);
 			
 		}
