@@ -43,7 +43,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
     $f				= nuGetEditForm($F, $R);
     $f->form_id		= $F;
     $f->record_id	= $R;
-nudebug($f->table);
+	
 	if($f->table == ''){
 		$A 			= [];
 	}else{

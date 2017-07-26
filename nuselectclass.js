@@ -549,7 +549,7 @@ class nuSelectObject{
 			
 			var T	= c[i][1];
 			var F	= c[i][2];
-			var C	= c[i][3];
+			var C	= addslashes(c[i][3]);
 			var S	= c[i][4];
 			var cl	= F != '' && C != '';			//-- valid statement for WHERE and HAVING
 			var gr	= F != '' && S != '';			//-- valid statement for ORDER BY and GROUP BY
@@ -561,9 +561,9 @@ class nuSelectObject{
 
 		}
 
-		if(WHERE.length > 0){clauses	+= "\n\nWHERE\n    " 		+ WHERE.join(" AND \n    ") 	+ "\n";}
+		if(WHERE.length > 0){clauses	+= "\n\nWHERE\n    "	+ WHERE.join(" AND \n    ") 	+ "\n";}
 		if(GROUPBY.length > 0){clauses	+= "\nGROUP BY\n    " 	+ GROUPBY.join(",\n    ") 		+ "\n";}
-		if(HAVING.length > 0){clauses	+= "\nHAVING\n    " 		+ HAVING.join(" AND \n    ") 	+ "\n";}
+		if(HAVING.length > 0){clauses	+= "\nHAVING\n    " 	+ HAVING.join(" AND \n    ") 	+ "\n";}
 		if(ORDERBY.length > 0){clauses	+= "\nORDER BY\n    " 	+ ORDERBY.join(",\n    ") 		+ "\n";}
 
 		return clauses;

@@ -927,3 +927,6 @@ function nuClick(e){
 	
 }
 
+function addslashes(s){
+    return (s + '').replace(/[\\"']/g, '\\$&').replace(/\u0000/g, '\\0');
+}

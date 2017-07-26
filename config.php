@@ -1,7 +1,7 @@
 <?php
 
     $nuConfigDBHost                 = "127.0.0.1";
-    $nuConfigDBName                 = "nubuilder4";
+    $nuConfigDBName                 = "nrmjobs";
     $nuConfigDBUser                 = "root";
     $nuConfigDBPassword             = "";
     $nuConfigDBGlobeadminUsername   = "globeadmin";     //-- globeadmin username

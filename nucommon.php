@@ -362,7 +362,7 @@ function nuRunReport($report_id, $record_id){
 	$_POST['nuHash']['sre_layout']		= nuReplaceHashVariables($ob->sre_layout);
 	$_POST['nuHash']['parentID']		= $ob->sre_zzzzsys_php_id;
 	$j									= json_encode($_POST['nuHash']);
-	
+
 	nuSetJSONData($id, $j);
 	
 	$f									= new stdClass;
@@ -940,18 +940,19 @@ function nuPunctuation($f){
 
 function nuTTList($id, $l){
 
-	$t								= nuRunQuery('SELECT * FROM zzzzsys_object WHERE  zzzzsys_object_id = ?' , [$l]);
+	$t										= nuRunQuery('SELECT * FROM zzzzsys_object WHERE  zzzzsys_object_id = ?' , [$l]);
 	
 	while($r = db_fetch_object($t)){						//-- add default empty hash variables
 		$_POST['nuHash'][$r->sob_all_id]	= '';
 	}
 	
-	$tt								= nuTT();
-	$_POST['nuHash']['TABLE_ID']	= $tt;
+	$tt									= nuTT();
+	$_POST['nuHash']['TABLE_ID']		= $tt;
+	$_POST['nuHash']['RECORD_ID']		= '';
 	
-	nuBuildTempTable($id, $tt);
+	nuBuildTempTable($id, $tt, 1);
 	
-	$f								= db_field_names($tt);
+	$f									= db_field_names($tt);
 	
 	nuRunQuery("DROP TABLE $tt");
 	
@@ -960,31 +961,44 @@ function nuTTList($id, $l){
 }
 
 
-function nuBuildTempTable($id, $tt){
+function nuBuildTempTable($id, $tt, $rd = 0){
 		
-	$s		= "
+	$s				= "
 			SELECT COUNT(*) 
 			FROM zzzzsys_php
 			WHERE zzzzsys_php_id = ?
 		";
 		
-	$t		= nuRunQuery($s,[$id]);
-	$r		= db_fetch_row($t);
+	$t				= nuRunQuery($s,[$id]);
+	$r				= db_fetch_row($t);
 
 
 	if($r[0] == 0){							//-- if not from zzzzsys_php
 		
-		$s	= "
+		$s			= "
 				SELECT sse_sql 
 				FROM zzzzsys_select
 				WHERE zzzzsys_select_id = ?
 			";
 			
-		$t	= nuRunQuery($s,[$id]);
-		$r	= db_fetch_row($t);
-		$p	= nuReplaceHashVariables($r[0]);
-		$P	= "	nuRunQuery('CREATE TABLE $tt $p');";
+		$t			= nuRunQuery($s,[$id]);
+		$r			= db_fetch_row($t);
+		$c			= $r[0];
+		
+		if($rd == 1){									//-- report designer
+		
+			$nocr	= str_replace("\n",' ', $c);
+			$where	= strpos($nocr, ' WHERE ');
 			
+			if($where){
+				$c	= substr ($nocr, 0, $where);
+			}
+			
+		}
+		
+		$p	= nuReplaceHashVariables($c);
+		$P	= "	nuRunQuery('CREATE TABLE $tt $p');";
+nudebug($P)		;
 		eval($P);
 		
 	}else{
