@@ -996,13 +996,13 @@ function nuBuildTempTable($id, $tt, $rd = 0){
 			
 		}
 		
-		$p	= nuReplaceHashVariables($c);
-		$P	= "	nuRunQuery('CREATE TABLE $tt $p');";
-nudebug($P)		;
+		$p			= nuReplaceHashVariables($c);
+		$P			= "	nuRunQuery('CREATE TABLE $tt $p');";
+		
 		eval($P);
 		
 	}else{
-		$e	= new nuEvalPHPClass($id);
+		$e			= new nuEvalPHPClass($id);
 	}
 	
 }
@@ -1010,14 +1010,14 @@ nudebug($P)		;
 
 function nuJSInclude($pfile){
 
-    $timestamp = date("YmdHis", filemtime($pfile));                                         //-- Add timestamp so javascript changes are effective immediately
+    $timestamp 		= date("YmdHis", filemtime($pfile));                                         //-- Add timestamp so javascript changes are effective immediately
     print "<script src='$pfile?ts=$timestamp' type='text/javascript'></script>\n";
     
 }
 
 function nuCSSInclude($pfile){
 
-    $timestamp = date("YmdHis", filemtime($pfile));                                         //-- Add timestamp so javascript changes are effective immediately
+    $timestamp 		= date("YmdHis", filemtime($pfile));                                         //-- Add timestamp so javascript changes are effective immediately
     print "<link rel='stylesheet' href='$pfile?ts=$timestamp' />\n";
     
 }

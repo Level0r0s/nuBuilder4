@@ -63,7 +63,7 @@ $(document).ready(function() {
 
 function nuStringify(){
 
-    if(window.opener){
+    if(window.opener.$('#sre_layout').length == 1){
 
 		window.opener.$('#sre_layout')
 		.val(JSON.stringify(window.nuREPORT))
