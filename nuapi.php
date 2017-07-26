@@ -61,7 +61,7 @@
 	$f->forms[0]->javascript				= $GLOBALS['EXTRAJS'];
 	$f->forms[0]->target					= $P['target'];
 	$b										= nuButtons($F, $P);
-	
+nudebug($b);
 	$f->forms[0]->buttons					= $b[0];
 	$f->forms[0]->run_code					= $b[1];
 	$f->forms[0]->run_description			= $b[2];

@@ -43,7 +43,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
     $f				= nuGetEditForm($F, $R);
     $f->form_id		= $F;
     $f->record_id	= $R;
-
+nudebug($f->table);
 	if($f->table == ''){
 		$A 			= [];
 	}else{
@@ -918,7 +918,7 @@ function nuGatherFormAndSessionData($home){
 		if($formAndSessionData->call_type == 'getreport'){
 			
 			$r = nuReportAccessList($access);
-nudebug($r);
+			
 			if(!in_array($formAndSessionData->record_id, $r)) { //form_id is record_id for getreport
 
 			
@@ -935,7 +935,7 @@ nudebug($r);
         if($formAndSessionData->call_type == 'getphp'){
 
 			$p = nuProcedureAccessList($access);
-nudebug($p, $formAndSessionData->record_id);
+			
             if(!in_array($formAndSessionData->record_id, $p)) { //form_id is record_id for getphp
 			
                 $nuT					= nuRunQuery("SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = '$formAndSessionData->record_id'");
