@@ -26,27 +26,29 @@ function nuHeader(){
 
     require_once('config.php');
 
-    $nuDB = new PDO("mysql:host=$nuConfigDBHost;dbname=$nuConfigDBName;charset=utf8", $nuConfigDBUser, $nuConfigDBPassword, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+    $nuDB 				= new PDO("mysql:host=$nuConfigDBHost;dbname=$nuConfigDBName;charset=utf8", $nuConfigDBUser, $nuConfigDBPassword, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
     $nuDB->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $nuDB->exec("SET CHARACTER SET utf8");
 
-    $getHTMLHeaderSQL  = "
+    $getHTMLHeaderSQL  	= "
         SELECT set_header
         FROM zzzzsys_setup
         WHERE zzzzsys_setup_id = 1
     ";
 
-    $getHTMLHeaderQRY = $nuDB->prepare($getHTMLHeaderSQL);
-    $HTMLHeader = '';
+    $getHTMLHeaderQRY 	= $nuDB->prepare($getHTMLHeaderSQL);
+    $HTMLHeader 		= '';
     try {
+		
         $getHTMLHeaderQRY->execute();
-        $HTMLHeader = $getHTMLHeaderQRY->fetch(PDO::FETCH_OBJ)->set_header;
+        $HTMLHeader 	= $getHTMLHeaderQRY->fetch(PDO::FETCH_OBJ)->set_header;
+		
     }catch(PDOException $ex){
         die('nuBuilder cannot access the database. Please check your database configuration in config.php.');
     }
 
-    $j  = "\n\n//-- CREATED BY Setup -> Header\n\n\n" . $HTMLHeader;
-    $j .= "\n\n//===========================================\n\n";
+    $j  = "\n\n" . $HTMLHeader . "\n\n";
+//    $j .= "\n\nwindow.nuHeader = '" . addslashes($HTMLHeader) . "';\n\n";
     
     return $j;
     
@@ -210,7 +212,15 @@ window.nuHASH			= [];
 		}		
 	}
 	
+	</script>
+	<script id='nuheader'>
 $nuHeader
+
+
+	</script>
+	<script>
+	
+	window.nuHeader = $('#nuheader').html();
 
 	";
 	

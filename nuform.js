@@ -2688,7 +2688,7 @@ function nuAddJavascript(o){
 	var nuLoadBrowse	= null;
 	
 	var s				= document.createElement('script');
-	s.innerHTML 		= "\n" + o.javascript + "\n\n";
+	s.innerHTML 		= window.nuHeader + "\n\n" + o.javascript + "\n\n";
 	
 	$('body').append(s);
 	
