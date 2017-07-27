@@ -220,8 +220,6 @@ $nuHeader
 	</script>
 	<script>
 	
-	window.nuHeader = $('#nuheader').html();
-
 	";
 	
 	print $h;
