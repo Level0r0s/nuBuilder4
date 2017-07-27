@@ -2,9 +2,7 @@
 require_once('nusession.php');
 require_once('nucommon.php'); 
 require_once('nudata.php'); 
-require_once('nuform.php'); 
 require_once('fpdf/fpdf.php');
-
 define('FPDF_FONTPATH','fpdf/font/');
 
 $GLOBALS['nu_report']       = array();
@@ -12,8 +10,9 @@ $GLOBALS['nu_columns']      = array();
 $GLOBALS['nu_files']        = array();
 
 $jsonID                     = $_GET['i'];
+$J							= nuGetJSONData($jsonID);
 $TABLE_ID                   = nuTT();
-$JSON                       = json_decode($_SESSION[$jsonID]);
+$JSON                       = json_decode($J);
 $LAYOUT						= json_decode($JSON->sre_layout);
 $hashData                   = nuAddToHashList($JSON, 'report');
 $hashData['TABLE_ID']       = $TABLE_ID;
@@ -25,14 +24,12 @@ $PDF->SetAutoPageBreak(false);
 $REPORT                     = nuSetPixelsToMM($LAYOUT);
 $PDF->SetMargins(1,1,1);
 nuBuildTempTable($JSON->parentID, $TABLE_ID);
-//$evalPHP 					= new nuEvalPHPClass($JSON->parentID);            //-- build temp table for report from php
 
 $GLOBALS['nu_columns']		= nuAddCriteriaValues($hashData, $TABLE_ID);
 
 nuRunQuery("ALTER TABLE $TABLE_ID ADD `nu__id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST");
 
 nuBuildReport($PDF, $REPORT, $TABLE_ID);
-nudebug(json_encode($GLOBALS['nu_report']));
 $hashData['nu_pages']        = nuGetTotalPages();
 nuReplaceLabelHashVariables($REPORT, $hashData);
 nuPrintReport($PDF, $REPORT, $GLOBALS['nu_report'], $JSON);

@@ -215,7 +215,6 @@ function nuBuildLookup(t, s){
 
 function nuPopup(f, r, filter){
 
-	$('#nuOptionsListBox').remove();
 	$('#nuCalendar').remove();
 	
 	window.nuOPENER.push(new nuOpener(f, r, filter));
@@ -487,13 +486,11 @@ function nuUnbindDragEvents(){
 
 
 function nuTranslate(s){
-
-	for(var i = 0 ; i < window.nuLANGUAGE.length ; i ++){
+	
+	for(var i = 0 ; i < nuLANGUAGE.length ; i ++){
 		
-		if(window.nuLANGUAGE[i].trl_english == s){
-			
-			return window.nuLANGUAGE[i].trl_translation;
-			
+		if(nuLANGUAGE[i].english == s){
+			return nuLANGUAGE[i].translation;
 		}
 		
 	}
@@ -535,21 +532,6 @@ function nuFormValues(){  //-- list of changed fields and values
     
 }
 
-function nuCloseAllnuOptionsLists(){
-
-	$('#nuOptionsList').remove();
-	
-	parent.$('#nuOptionsList').remove();
-	
-	$('iframe').each(function() {
-		
-		$('#' + this.id).contents().find('#nuOptionsList').remove();
-		
-	});	
-
-}
-
-
 
 function nuEditPHP(ev){
 
@@ -577,9 +559,9 @@ function nuPreview(a){
 
 	var	t	= String($('#sfo_type').val());
 	var b	= t.indexOf('browse') != -1;
-    var f   = nuFORM.getProperty('form_id');
-//    var r   = nuFORM.getProperty('record_id');
-    var r   = nuFORM.getProperty('redirect_form_id');
+    //var f   = nuFORM.getProperty('form_id');
+    var f   = nuFORM.getProperty('redirect_form_id');
+    var r   = nuFORM.getProperty('record_id');
     
     if(r == '-1'){
         
@@ -929,5 +911,22 @@ function nuAddEditFieldsToHash(w){
 	
 }
 
+function nuClick(e){
+	
+	if(!$(e.target).hasClass('nuOptionsItem') && !$(e.target).hasClass('nuSearchCheckbox')){
+		$('#nuSearchList').remove();
+	}
+	
+	if(!$(e.target).hasClass('nuIcon')){
+		$('#nuOptionsListBox').remove();
+	}
+	
+	if($(e.target).attr('type') != 'nuDate'){
+		$('#nuCalendar').remove();
+	}
+	
+}
 
-
+function addslashes(s){
+    return (s + '').replace(/[\\"']/g, '\\$&').replace(/\u0000/g, '\\0');
+}

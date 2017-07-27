@@ -43,24 +43,16 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
     $f				= nuGetEditForm($F, $R);
     $f->form_id		= $F;
     $f->record_id	= $R;
-
-<<<<<<< HEAD
-	if(!array_key_exists($f->table, $_POST['nuTableSchema'])){
-		
-		$A			= array();
-		
+	
+	if($f->table == ''){
+		$A 			= [];
 	}else{
-
+		
 		$s 			= "Select * From `$f->table` Where `$f->primary_key` = '$R'";
 		$t 			= nuRunQuery($s);
 		$A 			= db_fetch_array($t);
 		
 	}
-=======
-    $s 			= "Select * From `$f->table` Where `$f->primary_key` = '$R'";
-    $t 			= nuRunQuery($s);
-    $A 			= db_fetch_array($t);
->>>>>>> 3f0b04d1ea896696f828951a5c072d160e3e58be
 
 
 	$s 				= "
@@ -152,7 +144,6 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 
 			if($r->sob_all_type == 'image'){
 				$o->src 			= nuGetSrc($r->sob_image_zzzzsys_file_id);
-				nudebug($r->sob_image_zzzzsys_file_id, $r);
 			}
 
 			if($r->sob_all_type == 'select'){
@@ -300,7 +291,6 @@ function nuUpdateCounter($i){
 		
 		";
 		
-		nudebug($s, [$u, $i]);
 		nuRunQuery($s, [$u, $i]);
 		
 		$s	= "
@@ -393,6 +383,8 @@ function nuGetEditForm($F, $R){
     $SQL 				= new nuSqlString(nuReplaceHashVariables($r->sfo_browse_sql));
     $f              	= new stdClass();
     $f->id          	= $r->zzzzsys_form_id;
+    $f->form_code       = $r->sfo_code;
+    $f->form_description= $r->sfo_description;
     $f->type        	= $r->sfo_type;
     $f->table       	= nuReplaceHashVariables($r->sfo_table);
     $f->primary_key 	= $r->sfo_primary_key;
@@ -483,13 +475,30 @@ function nuGetLookupValues($R, $O){
 }
 
 
-function nuGetOtherLookupValues($nuO){
+function nuGetOtherLookupValues($o){
 
+	$p						= $o->object_id;
+	$s						= "SELECT sob_lookup_zzzzsys_form_id as form_id FROM zzzzsys_object WHERE zzzzsys_object_id  = ? ";
+	$t						= nuRunQuery($s, [$p]);
+	$r						= db_fetch_object($t);
+	$i						= $r->form_id;
+	$f						= nuFormProperties($i);
+	$s						= "SELECT * FROM $f->sfo_table WHERE $f->sfo_primary_key  = ? ";
+	$t						= nuRunQuery($s, [$_POST['nuHash']['LOOKUP_RECORD_ID']]);
+	
+	$_POST['lookup_row']	= db_fetch_object($t);
 	$_POST['lookup_values']	= array();
 
-	$evalPHP 				= new nuEvalPHPClass($nuO->object_id . '_AB');
+	$evalPHP 				= new nuEvalPHPClass($p . '_AB');
 	
 	return $_POST['lookup_values'];
+	
+}
+
+
+function nuLookupRecord(){
+	
+	return $_POST['lookup_row'];
 	
 }
 
@@ -538,13 +547,15 @@ function nuSelectOptions($sql) {
     return $a;
 }
 
+function nuRemoveNonCharacters($s){
 
-function bob(){
+	$snip = str_replace("\t", '', $s); // remove tabs
+	$snip = str_replace("\n", '', $snip); // remove new lines
+	$snip = str_replace("\r", '', $snip); // remove carriage returns	
 	
-	return 'snip';
+	return $snip;
 
 }
-
 
 
 function nuGetSubformRecords($R, $A){
@@ -873,60 +884,74 @@ function nuBrowseWhereClause($searchFields, $searchString, $returnArray = false)
 
 
 
-function nuGatherFormAndSessionData(){
+function nuGatherFormAndSessionData($home){
 
 	$formAndSessionData = new stdClass;
+	
     if(isset($_POST['nuSTATE']['record_id'])){
         $formAndSessionData->record_id  = $_POST['nuSTATE']['record_id'];
     } else {
         $formAndSessionData->record_id  = '-1';
     }
+	
     if(isset($_POST['nuSTATE']['form_id'])){
-        $formAndSessionData->form_id  = $_POST['nuSTATE']['form_id'];
+        $formAndSessionData->form_id  	= $_POST['nuSTATE']['form_id'];
     } else {
-        $formAndSessionData->form_id  = 'nuhome';
+		$formAndSessionData->form_id 	= $home == '' ? 'nuhome' : $home;
     }
-	$formAndSessionData->session_id = $_SESSION['SESSION_ID'];
-	$formAndSessionData->call_type = $_POST['nuSTATE']['call_type'];
-	$formAndSessionData->filter = $_POST['nuFilter'];
-	$formAndSessionData->errors = array();
-	$formAndSessionData->tableSchema = $_SESSION['tableSchema'];
-	$formAndSessionData->formSchema = $_SESSION['formSchema'];
-	$formAndSessionData->translation = $_SESSION['translation'];
-	$formAndSessionData->dimensions = nuFormDimensions($formAndSessionData->form_id);
+	
+	$formAndSessionData->session_id 	= $_SESSION['SESSION_ID'];
+	$formAndSessionData->call_type 		= $_POST['nuSTATE']['call_type'];
+	$formAndSessionData->filter 		= $_POST['nuFilter'];
+	$formAndSessionData->errors 		= array();
+	$formAndSessionData->tableSchema 	= $_SESSION['tableSchema'];
+	$formAndSessionData->formSchema 	= $_SESSION['formSchema'];
+	$formAndSessionData->translation 	= $_SESSION['translation'];
+	$formAndSessionData->dimensions 	= nuFormDimensions($formAndSessionData->form_id);
 
 	if(!$_SESSION['isGlobeadmin'] && $formAndSessionData->form_id != 'nuhome') {
 
-        $getAccessFromSessionTableQRY = nuRunQuery("SELECT sss_access FROM zzzzsys_access WHERE zzzzsys_session_id = ? ", array($_SESSION['SESSION_ID']));
-        $getAccessFromSessionTableOBJ = db_fetch_object($getAccessFromSessionTableQRY);
-        $access = json_decode($getAccessFromSessionTableOBJ->sss_access);
+        $getAccessFromSessionTableQRY 	= nuRunQuery("SELECT sss_access FROM zzzzsys_session WHERE zzzzsys_session_id = ? ", array($_SESSION['SESSION_ID']));
+        $getAccessFromSessionTableOBJ 	= db_fetch_object($getAccessFromSessionTableQRY);
+        $access 						= json_decode($getAccessFromSessionTableOBJ->sss_access);
 
 		if($formAndSessionData->call_type == 'getreport'){
-		
-			if(!in_array($formAndSessionData->record_id, $access->reports)) { //form_id is record_id for getreport
-				$nuT		= nuRunQuery("SELECT * FROM zzzzsys_report WHERE zzzzsys_report_id = '$formAndSessionData->record_id'");
-				$nuR		= db_fetch_object($nuT);
+			
+			$r = nuReportAccessList($access);
+			
+			if(!in_array($formAndSessionData->record_id, $r)) { //form_id is record_id for getreport
+
+			
+
+				$nuT					= nuRunQuery("SELECT * FROM zzzzsys_report WHERE zzzzsys_report_id = '$formAndSessionData->record_id'");
+				$nuR					= db_fetch_object($nuT);
+				
 				nuDisplayError("Access To Report Denied... ($nuR->sre_code)");
+				
 			}	
 			
 		}
 
         if($formAndSessionData->call_type == 'getphp'){
 
-            if(!in_array($formAndSessionData->record_id, $access->procedures)) { //form_id is record_id for getphp
-                $nuT    = nuRunQuery("SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = '$formAndSessionData->record_id'");
-                $nuR    = db_fetch_object($nuT);
+			$p = nuProcedureAccessList($access);
+			
+            if(!in_array($formAndSessionData->record_id, $p)) { //form_id is record_id for getphp
+			
+                $nuT					= nuRunQuery("SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = '$formAndSessionData->record_id'");
+                $nuR					= db_fetch_object($nuT);
+				
                 nuDisplayError("Access To Procedure Denied... ($nuR->sph_code)");
             }
                 
         }
 
-		$f = nuAddOtherFormsUsed($access); //-- form list including forms id used in reports and procedures
+		$f = nuFormAccessList($access); //-- form list including forms id used in reports and procedures
 		
 		if(!in_array($formAndSessionData->form_id, $f) && $formAndSessionData->call_type == 'getform'){
 
-			$nuT		= nuRunQuery("SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$formAndSessionData->form_id'");
-			$nuR		= db_fetch_object($nuT);
+			$nuT						= nuRunQuery("SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$formAndSessionData->form_id'");
+			$nuR						= db_fetch_object($nuT);
 
 			nuDisplayError("Access To Form Denied... ($nuR->sfo_code)");
 			
@@ -934,13 +959,13 @@ function nuGatherFormAndSessionData(){
 		
 	}
     
-    $formAndSessionData->errors = $_POST['nuErrors'];
+    $formAndSessionData->errors 		= $_POST['nuErrors'];
 
 	return $formAndSessionData;
 	
 }
 
-function nuAddOtherFormsUsed($j){
+function nuFormAccessList($j){
 	
 	$a			= array();
 	
@@ -961,52 +986,125 @@ function nuAddOtherFormsUsed($j){
 }
 
 
-function nuButtons($formid, $P){
+
+function nuProcedureAccessList($j){
 	
-	$t						= nuRunQuery("SELECT * FROM zzzzsys_session WHERE zzzzsys_session_id = ? ", array($_SESSION['SESSIONID']));		
+	$a			= array();
+
+	for($i = 0 ; $i < count($j->procedures) ; $i++){
+		$a[]	= $j->procedures[$i][0];
+	}
+	
+	return $a;
+	
+}
+
+function nuReportAccessList($j){
+	
+	$a			= array();
+	
+	for($i = 0 ; $i < count($j->reports) ; $i++){
+		$a[]	= $j->reports[$i][0];
+	}
+
+	return $a;
+	
+}
+
+
+function nuButtons($formid, $POST){
+	
+	$t						= nuRunQuery("SELECT * FROM zzzzsys_session WHERE zzzzsys_session_id = ? ", array($_SESSION['SESSION_ID']));		
 	$r 						= db_fetch_object($t);
 	$nuJ 					= json_decode($r->sss_access);
 	$_POST['forms']			= $nuJ->forms;
 	$_POST['reports']		= $nuJ->reports;
 	$_POST['procedures']	= $nuJ->procedures;
 	$_POST['session']		= $nuJ->session;
+	$C						= '';
+	$D						= '';
 
 	$a						= nuFormAccess($formid, $nuJ->forms);
 	$f						= nuFormProperties($formid);
-	$c						= $P['call_type'];
+	$c						= $POST['call_type'];
 	
 	$s						= 'SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = ? ';
-	$t						= nuRunQuery($s,[$P['record_id']]);
-	$p						= db_fetch_object($t)->sph_code;
-	$h						= db_fetch_object($t)->sph_run;
+	$t						= nuRunQuery($s,[$POST['record_id']]);
+	$P						= db_fetch_object($t);
 	
 	$s						= 'SELECT * FROM zzzzsys_report WHERE zzzzsys_report_id = ? ';
-	$t						= nuRunQuery($s,[$P['record_id']]);
-	$r						= db_fetch_object($t)->sre_code;
+	$t						= nuRunQuery($s,[$POST['record_id']]);
+	$R						= db_fetch_object($t);
 	
 	if($c == 'getphp'){
+
+		$C					= $P->sph_code;
+		$D					= $P->sph_description;
 		
-		if($h == 'hide'){
-			return array('Add' => 0, 'Print' => 0, 'Save' => 0, 'Clone' => 0, 'Delete' => 0, 'Run' => '', 'RunHidden' => 'nuRunPHPHidden("'.$p.'")');
+		if($P->sph_run == 'hide'){
+			return [array('Add' => 0, 'Print' => 0, 'Save' => 0, 'Clone' => 0, 'Delete' => 0, 'Run' => '', 'RunHidden' => 'nuRunPHPHidden("'.$C.'")'), $C, $D];
 		}else{
-			return array('Add' => 0, 'Print' => 0, 'Save' => 0, 'Clone' => 0, 'Delete' => 0, 'Run' => 'nuRunPHP("'.$p.'")', 'RunHidden' => '');
+			return [array('Add' => 0, 'Print' => 0, 'Save' => 0, 'Clone' => 0, 'Delete' => 0, 'Run' => 'nuRunPHP("'.$C.'")', 'RunHidden' => ''), $C, $D];
 		}
 	}
 	
 	if($c == 'getreport'){
-		return array('Add' => 0, 'Print' => 0, 'Save' => 0, 'Clone' => 0, 'Delete' => 0, 'Run' => 'nuRunReport("'.$r.'")', 'RunHidden' => '');
+		
+		$C					= $R->sre_code;
+		$D					= $R->sre_description;
+		
+		return [array('Add' => 0, 'Print' => 0, 'Save' => 0, 'Clone' => 0, 'Delete' => 0, 'Run' => 'nuRunReport("'.$C.'")', 'RunHidden' => ''), $C, $D];
 	}
 	
 	if($c != 'getphp' and $c != 'getreport'){
-		return array('Add' => $a[0], 'Print' => $a[1], 'Save' => $a[2], 'Clone' => $a[3], 'Delete' => $a[4], 'Run' => '', 'RunHidden' => '');
+		return [array('Add' => $a[0], 'Print' => $a[1], 'Save' => $a[2], 'Clone' => $a[3], 'Delete' => $a[4], 'Run' => '', 'RunHidden' => ''), $C, $D];
 	}
+	
+}
+
+
+function nuRunCode($P){
+	
+	$f						= nuFormProperties($formid);
+	
+	$s						= 'SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = ? ';
+	$t						= nuRunQuery($s,[$P['record_id']]);
+	$c						= db_fetch_object($t)->sph_code;
+	
+	$s						= 'SELECT * FROM zzzzsys_report WHERE zzzzsys_report_id = ? ';
+	$t						= nuRunQuery($s,[$P['record_id']]);
+	
+	if(db_fetch_object($t)->sre_code != ''){
+		$c					= db_fetch_object($t)->sre_code;
+	}
+	
+	return $c;
+	
+}
+
+function nuRunDescription($P){
+	
+	$f						= nuFormProperties($formid);
+	
+	$s						= 'SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = ? ';
+	$t						= nuRunQuery($s,[$P['record_id']]);
+	$d						= db_fetch_object($t)->sph_description;
+	
+	$s						= 'SELECT * FROM zzzzsys_report WHERE zzzzsys_report_id = ? ';
+	$t						= nuRunQuery($s,[$P['record_id']]);
+	
+	if(db_fetch_object($t)->sre_code != ''){
+		$d					= db_fetch_object($t)->sre_description;
+	}
+	
+	return $d;
 	
 }
 
 
 function nuFormAccess($s, $a){
 
-    require_once('config.php');
+    require('config.php');
 
 	if($_POST['session']->zzzzsys_user_id == $nuConfigDBGlobeadminUsername){
 		return array('1', '1', '1', '1', '1');

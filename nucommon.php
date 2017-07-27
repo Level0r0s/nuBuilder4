@@ -71,36 +71,6 @@ function nuDebugResult($t){
 }
 
 
-function nuBuildTable($t, $array){
-
-	$id			= $t . '_id';
-	$start		= "CREATE TABLE $t";
-	$a			= Array();
-	$a[] 		= "$id VARCHAR(25) NOT NULL";
-
-	for($i = 0 ; $i < count($array) ; $i++){
-
-		$f		= $array[$i]['name'];
-		$t		= $array[$i]['type'];
-		
-		if($t == 'id'){				$a[] = "$f VARCHAR(25) NOT NULL";}
-		if($t == 'varchar'){		$a[] = "$f VARCHAR(1000) NOT NULL";}
-		if($t == 'int'){			$a[] = "$f INT NOT NULL";}
-		if($t == 'text'){			$a[] = "$f TEXT NOT NULL";}
-		if($t == 'decimal'){		$a[] = "$f DECIMAL(12,4) NOT NULL";}
-		if($t == 'date'){			$a[] = "$f DATE NOT NULL";}
-		if($t == 'longtext'){		$a[] = "$f LONGTEXT NOT NULL";}
-		
-	}
-	
-	$a[]							= "PRIMARY KEY  ($id)";
-	$im								= implode(',', $a);
-	return "$start ($im)";
-
-}
-
-
-
 function nuDebug($a0 = '', $a1 = '', $a2 = '', $a3 = '', $a4 = '', $a5 = '', $a6 = '', $a7 = '', $a8 = '', $a9 = ''){
 	
 	$b					= debug_backtrace();
@@ -306,14 +276,14 @@ class nuSqlString{
     }
 
     private function buildSQL(){
-			
-			$this->SQL		= 'SELECT '; 
-			$this->SQL		= $this->SQL . nuSQLTrim(implode(',', $this->fields), 1);
-			$this->SQL		= $this->SQL . nuSQLTrim($this->from);
-			$this->SQL		= $this->SQL . nuSQLTrim($this->where);
-			$this->SQL		= $this->SQL . nuSQLTrim($this->groupBy);
-			$this->SQL		= $this->SQL . nuSQLTrim($this->having);
-			$this->SQL		= $this->SQL . nuSQLTrim($this->orderBy);
+		
+		$this->SQL		= 'SELECT '; 
+		$this->SQL		= $this->SQL . nuSQLTrim(implode(',', $this->fields), 1);
+		$this->SQL		= $this->SQL . nuSQLTrim($this->from);
+		$this->SQL		= $this->SQL . nuSQLTrim($this->where);
+		$this->SQL		= $this->SQL . nuSQLTrim($this->groupBy);
+		$this->SQL		= $this->SQL . nuSQLTrim($this->having);
+		$this->SQL		= $this->SQL . nuSQLTrim($this->orderBy);
 			
     }
 
@@ -343,6 +313,7 @@ function nuSetHashList($p){
 	$s			= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$fid'";
 	$t			= nuRunQuery($s);
 	$R			= db_fetch_object($t);
+	$h			= array();
 
 	if(trim($R->sfo_table) != ''){
 		
@@ -359,103 +330,112 @@ function nuSetHashList($p){
 		}
 	}
 
-	$H		= $p['hash'];
-	$ha		= array();
+	foreach ($p as $key => $value){
 
-	for($i = 1 ; $i < count($H) ; $i++){									//-- add parent Form field values
-		
-		$f	= $H[$i][0];
-		$v	= $H[$i][1];
-
-		if(gettype($v) == 'string'){
-			$ha[$f]	= addslashes($v);
-		}
-		
-	}
-	
-	foreach ($p as $fld => $value ){								//-- add all nuState values
-	
 		if(gettype($value) == 'string'){
-			$ha[$fld] = addslashes($value);
+			$h[$key]			= addslashes($value);
+		}else{
+			$h[$key]			= '';
 		}
 		
 	}
 
-	
-	$ha['PREVIOUS_RECORD_ID']	= addslashes($rid);
-	$ha['RECORD_ID']			= addslashes($rid);
-	$ha['FORM_ID']				= addslashes($fid);
-	$ha['SUBFORM_ID']			= addslashes($_POST['nuSTATE']['object_id']);
-	$ha['ID']					= addslashes($_POST['nuSTATE']['primary_key']);
-	$ha['CODE']					= addslashes($_POST['nuSTATE']['code']);
-	
-	return array_merge($r, $ha, $A);
+	$h['PREVIOUS_RECORD_ID']	= addslashes($rid);
+	$h['RECORD_ID']				= addslashes($rid);
+	$h['FORM_ID']				= addslashes($fid);
+	$h['SUBFORM_ID']			= addslashes($_POST['nuSTATE']['object_id']);
+	$h['ID']					= addslashes($_POST['nuSTATE']['primary_key']);
+	$h['CODE']					= addslashes($_POST['nuSTATE']['code']);
+
+	return array_merge($r, $h, $A);
 
 }
 
 
-function nuRunReport($nuRID){
+function nuRunReport($report_id, $record_id){
 	
-	$nuID								= nuID();
-	$nuT								= nuRunQuery("SELECT * FROM zzzzsys_report WHERE sre_code = '$nuRID'");
-	$nuA								= db_fetch_object($nuT);
-	$_POST['nuHash']['code']			= $nuA->sre_code;
-	$_POST['nuHash']['description']		= $nuA->sre_description;
-	$_POST['nuHash']['sre_layout']		= nuReplaceHashVariables($nuA->sre_layout);
-	$_POST['nuHash']['parentID']		= $nuA->sre_zzzzsys_php_id;
+	$id									= nuID();
+	$t									= nuRunQuery("SELECT * FROM zzzzsys_report WHERE sre_code = '$report_id'");
+	$ob									= db_fetch_object($t);
+	$_POST['nuHash']['code']			= $ob->sre_code;
+	$_POST['nuHash']['description']		= $ob->sre_description;
+	$_POST['nuHash']['sre_layout']		= nuReplaceHashVariables($ob->sre_layout);
+	$_POST['nuHash']['parentID']		= $ob->sre_zzzzsys_php_id;
+	$j									= json_encode($_POST['nuHash']);
+
+	nuSetJSONData($id, $j);
 	
-/*	
-	$nuI								= $nuA->sre_zzzzsys_php_id;
-	$nuT								= nuRunQuery("SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = '$nuI'");
-	$nuR								= db_fetch_object($nuT);
-	$_POST['nuHash']['parentID']		= $nuR->zzzzsys_php_id;
-*/
-
-	$nuJ								= json_encode($_POST['nuHash']);
-	$_SESSION[$nuID]					= $nuJ;
+	$f									= new stdClass;
+	$f->id								= $id;
+	$f->record_id						= $record_id;
 	
-	return $nuID;
-	
-}
-
-function nuRunPHP($nuRID){
-
-	$nuID								= nuID();
-	$nuT								= nuRunQuery("SELECT * FROM zzzzsys_php WHERE sph_code = '$nuRID'");
-	$nuA								= db_fetch_object($nuT);
-	$_POST['nuHash']['code']			= $nuA->sph_code;
-	$_POST['nuHash']['description']		= $nuA->sph_description;
-	$_POST['nuHash']['parentID']		= $nuA->zzzzsys_php_id;
-	$nuJ								= json_encode($_POST['nuHash']);
-	$_SESSION[$nuID]					= $nuJ;
-
-	return $nuID;
+	return $f;
 	
 }
 
 
+function nuRunPHP($procedure_id, $record_id){
 
-function nuRemoveNonCharacters($s){
-	
-	$snip = str_replace("\t", '', $s); // remove tabs
-	$snip = str_replace("\n", '', $snip); // remove new lines
-	$snip = str_replace("\r", '', $snip); // remove carriage returns	
-	
-	return $snip;
+	$id									= nuID();
+	$t									= nuRunQuery("SELECT * FROM zzzzsys_php WHERE sph_code = '$procedure_id'");
+	$ob									= db_fetch_object($t);
+	$_POST['nuHash']['code']			= $ob->sph_code;
+	$_POST['nuHash']['description']		= $ob->sph_description;
+	$_POST['nuHash']['parentID']		= $ob->zzzzsys_php_id;
+	$j									= json_encode($_POST['nuHash']);
 
+	nuSetJSONData($id, $j);
+	
+	$f									= new stdClass;
+	$f->id								= $id;
+	$f->record_id						= $record_id;
+	
+	return $f;
+	
 }
 
 
 function nuRunPHPHidden($nuCode){
-
-	$s						= "SELECT * FROM zzzzsys_php WHERE sph_code = ? ";
-	$t						= nuRunQuery($s, [$nuCode]);
-	$r						= db_fetch_object($t);
 	
-	$evalPHP = new nuEvalPHPClass($r->zzzzsys_php_id);
+	$_POST['nuHash']['RECORD_ID']		= $_POST['nuHash']['hash_record_id'];
+
+	$s									= "SELECT * FROM zzzzsys_php WHERE sph_code = ? ";
+	$t									= nuRunQuery($s, [$nuCode]);
+	$r									= db_fetch_object($t);
+	
+	$evalPHP 							= new nuEvalPHPClass($r->zzzzsys_php_id);
 
 	return 1;
 
+}
+
+
+function nuSetJSONData($i, $nj){
+	
+	$s					= "SELECT * FROM zzzzsys_session WHERE zzzzsys_session_id = ? ";
+	$t					= nuRunQuery($s, array($_SESSION['SESSION_ID']));			 
+	$r					= db_fetch_object($t);
+	$j					= json_decode($r->sss_access, true);
+	$j[$i]				= $nj;
+	$J					= json_encode($j);
+	
+	$s					= "UPDATE zzzzsys_session SET sss_access = ? WHERE zzzzsys_session_id = ? ";
+	$t					= nuRunQuery($s, array($J, $_SESSION['SESSION_ID']));
+	
+}
+
+
+
+
+function nuGetJSONData($i){
+	
+	$s					= "SELECT * FROM zzzzsys_session WHERE zzzzsys_session_id = ? ";
+	$t					= nuRunQuery($s, array($_SESSION['SESSION_ID']));			 
+	$r					= db_fetch_object($t);
+	$j					= json_decode($r->sss_access, true);
+	
+	return $j[$i];
+	
 }
 
 
@@ -752,7 +732,7 @@ function nuGetUserAccess(){
 	
 	$A['USER_ID']		= $j->session->zzzzsys_user_id;
 	$A['USER_GROUP_ID']	= $j->session->zzzzsys_user_group_id;
-	$A['HOME_ID']		= $j->session->sug_zzzzsys_form_id;
+	$A['HOME_ID']		= $j->session->zzzzsys_form_id;
 	$A['global_access']	= $j->session->global_access;
 	
 	return $A;
@@ -960,18 +940,19 @@ function nuPunctuation($f){
 
 function nuTTList($id, $l){
 
-	$t								= nuRunQuery('SELECT * FROM zzzzsys_object WHERE  zzzzsys_object_id = ?' , [$l]);
+	$t										= nuRunQuery('SELECT * FROM zzzzsys_object WHERE  zzzzsys_object_id = ?' , [$l]);
 	
 	while($r = db_fetch_object($t)){						//-- add default empty hash variables
 		$_POST['nuHash'][$r->sob_all_id]	= '';
 	}
 	
-	$tt								= nuTT();
-	$_POST['nuHash']['TABLE_ID']	= $tt;
+	$tt									= nuTT();
+	$_POST['nuHash']['TABLE_ID']		= $tt;
+	$_POST['nuHash']['RECORD_ID']		= '';
 	
-	nuBuildTempTable($id, $tt);
+	nuBuildTempTable($id, $tt, 1);
 	
-	$f								= db_field_names($tt);
+	$f									= db_field_names($tt);
 	
 	nuRunQuery("DROP TABLE $tt");
 	
@@ -979,69 +960,49 @@ function nuTTList($id, $l){
 	
 }
 
-<<<<<<< HEAD
 
-function nuBuildTempTable($id, $tt){
+function nuBuildTempTable($id, $tt, $rd = 0){
 		
-	$s		= "
+	$s				= "
 			SELECT COUNT(*) 
 			FROM zzzzsys_php
 			WHERE zzzzsys_php_id = ?
 		";
 		
-	$t		= nuRunQuery($s,[$id]);
-	$r		= db_fetch_row($t);
+	$t				= nuRunQuery($s,[$id]);
+	$r				= db_fetch_row($t);
 
 
 	if($r[0] == 0){							//-- if not from zzzzsys_php
 		
-		$s	= "
+		$s			= "
 				SELECT sse_sql 
 				FROM zzzzsys_select
 				WHERE zzzzsys_select_id = ?
 			";
 			
-		$t	= nuRunQuery($s,[$id]);
-		$r	= db_fetch_row($t);
-		$p	= nuReplaceHashVariables($r[0]);
-		$P	= "	nuRunQuery('CREATE TABLE $tt $p');";
-			
-	nudebug($P);
-
-=======
-
-function nuBuildTempTable($id, $tt){
+		$t			= nuRunQuery($s,[$id]);
+		$r			= db_fetch_row($t);
+		$c			= $r[0];
 		
-	$s		= "
-			SELECT COUNT(*) 
-			FROM zzzzsys_php
-			WHERE zzzzsys_php_id = ?
-		";
+		if($rd == 1){									//-- report designer
 		
-	$t		= nuRunQuery($s,[$id]);
-	$r		= db_fetch_row($t);
-
-
-	if($r[0] == 0){							//-- if not from zzzzsys_php
+			$nocr	= str_replace("\n",' ', $c);
+			$where	= strpos($nocr, ' WHERE ');
+			
+			if($where){
+				$c	= substr ($nocr, 0, $where);
+			}
+			
+		}
 		
-		$s	= "
-				SELECT sse_sql 
-				FROM zzzzsys_select
-				WHERE zzzzsys_select_id = ?
-			";
-			
-		$t	= nuRunQuery($s,[$id]);
-		$r	= db_fetch_row($t);
-		$p	= nuReplaceHashVariables($r[0]);
-		$P	= "	nuRunQuery('CREATE TABLE $tt $p');";
-			
-	nudebug($P);
-
->>>>>>> 3f0b04d1ea896696f828951a5c072d160e3e58be
+		$p			= nuReplaceHashVariables($c);
+		$P			= "	nuRunQuery('CREATE TABLE $tt $p');";
+		
 		eval($P);
 		
 	}else{
-		$e	= new nuEvalPHPClass($id);
+		$e			= new nuEvalPHPClass($id);
 	}
 	
 }
@@ -1049,14 +1010,14 @@ function nuBuildTempTable($id, $tt){
 
 function nuJSInclude($pfile){
 
-    $timestamp = date("YmdHis", filemtime($pfile));                                         //-- Add timestamp so javascript changes are effective immediately
+    $timestamp 		= date("YmdHis", filemtime($pfile));                                         //-- Add timestamp so javascript changes are effective immediately
     print "<script src='$pfile?ts=$timestamp' type='text/javascript'></script>\n";
     
 }
 
 function nuCSSInclude($pfile){
 
-    $timestamp = date("YmdHis", filemtime($pfile));                                         //-- Add timestamp so javascript changes are effective immediately
+    $timestamp 		= date("YmdHis", filemtime($pfile));                                         //-- Add timestamp so javascript changes are effective immediately
     print "<link rel='stylesheet' href='$pfile?ts=$timestamp' />\n";
     
 }
@@ -1075,36 +1036,11 @@ function nuImageList($f){
 	$c								= json_encode(array_merge($a, $f));
 
 	return $c . ";\n";
-<<<<<<< HEAD
-=======
 	
 }
 
 
 
-function nuCreateFile($j){
-
-	if($j == ''){return '';}
-
-	$id		= nuID();
-	$f		= json_decode($j);
-	$t		= explode('/',$f->type)[1];
-	$file	= sys_get_temp_dir()."/$id." . $t;
-	$h		= fopen($file , 'w');
-	$d		= base64_decode($f->file);
-	$p		= explode(';base64,', $d)[1];
-	$data 	= base64_decode($p);
->>>>>>> 3f0b04d1ea896696f828951a5c072d160e3e58be
-	
-	fwrite($h, $data);
-	fclose($h);
-	
-	return $file;
-}
-
-
-
-<<<<<<< HEAD
 function nuCreateFile($j){
 
 	if($j == ''){return '';}
@@ -1125,8 +1061,8 @@ function nuCreateFile($j){
 }
 
 
-
-=======
->>>>>>> 3f0b04d1ea896696f828951a5c072d160e3e58be
+function nuHash(){
+	return $_POST['nuHash'];
+}
 
 ?>

@@ -145,7 +145,7 @@ class nuSelectObject{
 		.html('<img onclick="$(this).parent().parent().remove();nuSQL.buildSQL()" id="nbc' + this.boxID + '" src="graphics/nu_box_close.png" width="10px" height="10px">')
 		.addClass('nuDragNoSelect')
 		.addClass('nuButtonHover')
-		.addClass('nuSearchListClose');
+		.addClass('nuClose');
 		
 	}
 
@@ -164,12 +164,20 @@ class nuSelectObject{
 		parent.$('#sse_json')
 		.val(this.buildJSON())
 		.change();
-		
+
+
+		if(parent.$('#nuSaveToTextareaButton').length == 1){
+			
+			parent.$('#nuSaveToTextareaButton').hide();
+			parent.$('#nuSaveButton').show();
+			
+		}
+/*
         parent.$('#nuSaveButton')
         .val("Save")
 		.unbind('click')
 		.attr('onclick', 'nuSaveAction()');
-		
+*/		
 	}
 	
 	buildSelect(c, b){				//-- checkbox type, boxID
@@ -259,18 +267,15 @@ class nuSelectObject{
 						var a1		= ob.type == 'LEFT' ? "\n        LEFT JOIN " :  "\n        JOIN ";
 						
 						if(defined.indexOf(ob.aliases[0]) == -1){
-//						if(defined.indexOf(ob.tables[0]) == -1){
 							
 							var a2	= this.buildAlias(ob.tables[0], ob.aliases[0]);
 							A		= this.justAlias(ob.tables[0], ob.aliases[0]);
-//							defined.push(ob.tables[0]);
 							defined.push(A);
 							
 						}else{
 							
 							var a2	= this.buildAlias(ob.tables[1], ob.aliases[1]);
 							A		= this.justAlias(ob.tables[1], ob.aliases[1]);
-//							defined.push(ob.tables[1]);
 							defined.push(A);
 							
 						}
@@ -282,7 +287,6 @@ class nuSelectObject{
 						var a3		= ob.joins.join(' AND ');
 						
 						this.tempTables[i].joins.push(a1 + a2 + ' ON ' + a3);
-console.log(a2);
 						
 					}
 					
@@ -545,7 +549,7 @@ console.log(a2);
 			
 			var T	= c[i][1];
 			var F	= c[i][2];
-			var C	= c[i][3];
+			var C	= addslashes(c[i][3]);
 			var S	= c[i][4];
 			var cl	= F != '' && C != '';			//-- valid statement for WHERE and HAVING
 			var gr	= F != '' && S != '';			//-- valid statement for ORDER BY and GROUP BY
@@ -557,9 +561,9 @@ console.log(a2);
 
 		}
 
-		if(WHERE.length > 0){clauses	+= "\n\nWHERE\n    " 		+ WHERE.join(" AND \n    ") 	+ "\n";}
+		if(WHERE.length > 0){clauses	+= "\n\nWHERE\n    "	+ WHERE.join(" AND \n    ") 	+ "\n";}
 		if(GROUPBY.length > 0){clauses	+= "\nGROUP BY\n    " 	+ GROUPBY.join(",\n    ") 		+ "\n";}
-		if(HAVING.length > 0){clauses	+= "\nHAVING\n    " 		+ HAVING.join(" AND \n    ") 	+ "\n";}
+		if(HAVING.length > 0){clauses	+= "\nHAVING\n    " 	+ HAVING.join(" AND \n    ") 	+ "\n";}
 		if(ORDERBY.length > 0){clauses	+= "\nORDER BY\n    " 	+ ORDERBY.join(",\n    ") 		+ "\n";}
 
 		return clauses;

@@ -6,6 +6,7 @@ function nuBuildForm(f){
 	
 		$('body').addClass('nuBrowseBody')
 		$('body').removeClass('nuEditBody')
+		
 		sessionStorage.logout	= 'true';
 		parent.parent.parent.parent.parent.location.reload();
 		
@@ -14,7 +15,6 @@ function nuBuildForm(f){
 	}
 	
 	window.nuBeforeSave			= null;
-	window.onbeforeunload		= null;
 	window.nuBrowseFunction		= window.nuDefaultBrowseFunction;
 	window.nuSERVERRESPONSE		= f;
 	window.nuSESSION			= f.session_id;
@@ -50,7 +50,11 @@ function nuBuildForm(f){
 	b.browse_sql				= f.browse_sql;
 	b.browse_rows 				= f.browse_rows;
 	b.pages 					= f.pages;
-	
+	b.form_code					= f.form_code;
+	b.form_description			= f.form_description;
+	b.run_code					= f.run_code;
+	b.run_description			= f.run_description;
+
 	nuAddHolder('nuActionHolder');
 	nuAddHolder('nuBreadcrumbHolder');
 	
@@ -225,8 +229,8 @@ function nuAddActionButtons(f){
 			
 			if(rid != -1){
 				
-				if(button.Clone == 1)	{nuAddActionButton('Clone');}
 				if(button.Delete == 1)	{nuAddActionButton('Delete');}
+				if(button.Clone == 1)	{nuAddActionButton('Clone');}
 				
 			}
 			
@@ -247,20 +251,16 @@ function nuAddActionButtons(f){
 
 function nuAddActionButton(i, v, f){
 	
-	v		= String(v).replaceAll(' ', '_');
-	
 	if(arguments.length == 1){
 		
 		v	= i;
-		f	= 'nu' + v + 'Action()';
+		f	= 'nu' + i + 'Action()';
 		
 	}
 	
-	$('#nuActionHolder').append("<input id='nu" + i + "Button' type='button' class='nuActionButton' value='" + v + "' onclick='" + f + "'>&nbsp;");
+	$('#nuActionHolder').append("<input id='nu" + i + "Button' type='button' class='nuActionButton' value='" + nuTranslate(v) + "' onclick='" + f + "'>&nbsp;");
 
 }
-
-
 
 
 function nuBuildEditObjects(f, p, o, prop){
@@ -340,7 +340,7 @@ function nuRecordProperties(w, p, l){
 	var sf    = p.substr(0, p.length - 3);
 
 	chk.setAttribute('id', de);
-	chk.setAttribute('title', 'Delete This Row When Saved');
+	chk.setAttribute('title', nuTranslate('Delete This Row When Saved'));
 	chk.setAttribute('type', 'checkbox');
 	chk.setAttribute('onclick', 'nuChange(event)');
 
@@ -353,7 +353,10 @@ function nuRecordProperties(w, p, l){
 	.attr('data-nu-foreign-key', w.foreign_key)
 	.attr('data-nu-foreign-field', p == '' ? '' : w.foreign_key_name);
 
-	$('#' + de).attr('data-nu-data', '');
+	$('#' + de)
+	.attr('data-nu-data', '')
+	.addClass('nuSubformCheckbox')
+	.addClass(w.table)
 
 	if(arguments.length == 3){
 		
@@ -1598,10 +1601,6 @@ function nuOptions(p, f, t, access){
 
 function nuGetOptionsList(f, t, p, a, type){
 
-	var icon	= $('#' + t.id);
-	var off		= icon.offset();
-	var top		= off.top;
-	var left	= off.left;
 	var u		= nuFORM.getProperty('user_id');
 	var list	= [];
 	var ul		= '<ul>';
@@ -1621,12 +1620,12 @@ function nuGetOptionsList(f, t, p, a, type){
 		}
 		
 		if(type != 'subform'){
-			list.push(['nuDebug', 				'nuPopup("nudebug", "")', 					'graphics/nu_option_debug.png',			'Ctrl+Shft+D']);
+			list.push(['Debug', 				'nuPopup("nudebug", "")', 					'graphics/nu_option_debug.png',			'Ctrl+Shft+D']);
 		}
 		
 	}else{
 		
-		list.push(['Change Login', 			'nuPopup("nupassword", "' + u + '", "")', 	'nu_option_password.png', 	'Ctrl+Shft+L']);
+		list.push(['Change Login', 			'nuPopup("nupassword", "' + u + '", "")', 	'graphics/nu_option_password.png', 	'Ctrl+Shft+L']);
 		
 	}
 
@@ -1636,73 +1635,39 @@ function nuGetOptionsList(f, t, p, a, type){
 		list.push(['Refresh', 				'nuGetBreadcrumb()', 						'graphics/nu_option_refresh.png', 	'Ctrl+Shft+R']);
 		
 	}
-	
 
 	if(list.length == 0){return;}
 	
-	//hide all other listboxes
-	$('#nuOptionsListBox').remove();
-	$('.nuIframe').contents().find('#nuOptionsListBox').remove();
-	$('#nuOptionsListBox', window.parent.document).remove();
-	
 	var id  		= 'nuOptionsListBox';
 	var div    		= document.createElement('div');
-
 	
 	div.setAttribute('id', id);
 
 	$('body').append(div);
-	
 
 	$('#' + id)
-	.css({'top' 	: top + 3,
-	'left' 			: left + 20, 
+	.css({'top' 	: 0,
+	'right' 		: 0, 
 	'height'		: 20 + (list.length * 20),
-	'width'			: 1000,
+	'width'			: 300,
 	'position'		: 'absolute',
 	'text-align' 	: 'left'})
 	.html('<span style="font-weight:bold">&nbsp;&nbsp;Options<\span>')
 	.addClass('nuOptionsList');
 
-
-	var id			= 'nuOptionsListDelete';
-	var div    		= document.createElement('div');
-	
-	div.setAttribute('id', id);
-	
-	var x 			= document.createElement('div');
-	
-	x.setAttribute('id', 'nuSearchListClose');
-	
-	$('#nuOptionsListBox').append(x);
-	
-	$('#' + x.id).css({
-		'width'				: 20,
-		'height'			: 20,
-		'top'				: 3,
-		'right'				: 3,
-		'position'			: 'absolute',
-		'text-align'    	: 'center'
-	})
-	.click(function(){
-		$( "#nuOptionsListBox" ).remove();
-	})
-	.html('<img id="nuOptionListClose" src="graphics/nuclose.png" >')
-	.addClass('nuSearchListClose');
-	
-	nuBuildOptionsList(list, p);
+	nuBuildOptionsList(list, p, type);
 	
 }
 
 
-function nuBuildOptionsList(l, p){												//-- loop through adding options to menu
+function nuBuildOptionsList(l, p, type){												//-- loop through adding options to menu
 
 	var icon		= $('#' + p + 'nuOptions');
 	var off			= icon.offset();
 	var top			= off.top;
 	var left		= off.left < 240 ? 240 : off.left;
 	var ul			= '';
-	var	prop		= {'position': 'absolute','text-align' : 'left' , 'width' : 15, 'height' : 15};
+	var	iprop		= {'position': 'absolute','text-align' : 'left' , 'width' : 15, 'height' : 15};
 	var width		= 0;
 	var height		= 30 + (l.length * 30);
 	
@@ -1726,7 +1691,7 @@ function nuBuildOptionsList(l, p){												//-- loop through adding options t
 		$('#nuOptionsListBox').append(icon);
 
 		$('#' + icon.id)
-		.css(prop)
+		.css(iprop)
 		.css({'top'	: itemtop, 'left' : 5})
 		.attr('onclick', f)
 		.attr('src', c);
@@ -1752,37 +1717,60 @@ function nuBuildOptionsList(l, p){												//-- loop through adding options t
 		shortcut_key.setAttribute('id', shortcut_key_id);
 
 		$('#nuOptionsListBox').append(shortcut_key);
-		var	prop		= {'position' : 'absolute', 'text-align' : 'left', 'height' : 15};
+		
+		var	prop			= {'position' : 'absolute', 'text-align' : 'left', 'height' : 15, 'width' : 50};
 
 		$('#' + shortcut_key.id)
 		.css(prop)
-		.css({'top'	: itemtop,'left' : width - 40})
+		.css({'top'	: itemtop +3, 'right' : 10})
 		.html(k)
 		.attr('onclick', f)
 		.addClass('nuOptionsItemShortcutKey');
 		
 	}
 
-	$('#nuOptionsListBox').css({'height' : 40 + (l.length * 20), 'width' : 40 + width});
+
+	var icon	= $('#' + p + 'nuOptions');
+	var off		= icon.offset();
+	var top		= off.top;
+	var left	= off.left;
 	
-	if(nuFORM.getProperty('record_id') == ''){
-		
-		$('#nuOptionsListBox')
-		.css({'left' : left - width - 28, 'top' : top-15});
-		
-	}else{
-		
-		$('#nuOptionsListBox')
-		.css({'left' : left - width - 20, 'top' : top+10});
+	if(type == 'browse'){
+			
+		top		= off.top;
+		left	= off.left - width - 26;
 		
 	}
+
+	if(type == 'form'){
+			
+		top		= off.top - 6;
+		left	= off.left - width - 23;
+		
+	}
+
+	if(type == 'subform'){
+			
+		top		= off.top - 3;
+		left	= off.left - width - 23;
+		
+	}
+	
+	$('#nuOptionsListBox').css({
+			'height'	: 40 + (l.length * 20),
+			'width' 	: 40 + width,
+			'left' 		: left,
+			'top'		: top
+	});
+
+	$('.nuOptionsItem').css({'width' : width - 73, 'padding' : '0px 0px 0px 3px'});
 
 }
 
 
 function nuSelectTab(tab){
 
-	$('#nuOptionsList').remove();
+	$('#nuOptionsListBox').remove()
 	
     var filt = $('#' + tab.id).attr('data-nu-tab-filter');
     var form = $('#' + tab.id).attr('data-nu-form-filter');
@@ -2700,7 +2688,7 @@ function nuAddJavascript(o){
 	var nuLoadBrowse	= null;
 	
 	var s				= document.createElement('script');
-	s.innerHTML 		= "\n" + o.javascript + "\n\n";
+	s.innerHTML 		= window.nuHeader + "\n\n" + o.javascript + "\n\n";
 	
 	$('body').append(s);
 	
@@ -2715,6 +2703,7 @@ function nuAddJavascript(o){
 function nuHashFromEditForm(){
 
 	var a			= [];
+	var A			= [];
 	var b			= window.nuFORM.getCurrent();
 	var o 			= {};
 	var val 		= '';
@@ -2722,6 +2711,7 @@ function nuHashFromEditForm(){
 	for (var key in b) {
 		if(key != 'hash') {
 			a.push([key, b[key]]);
+			A[key]	= b[key];
 		}
 	}	
 		
@@ -2729,6 +2719,11 @@ function nuHashFromEditForm(){
 	a.push(['FORM_ID', b.form_id]);
 	a.push(['PREVIOUS_RECORD_ID', b.record_id]);
 	a.push(['RECORD_ID', b.record_id]);
+	
+	A[b.form_id]			= b.record_id;
+	A['FORM_ID']			= b.form_id;
+	A['PREVIOUS_RECORD_ID']	= b.record_id;
+	A['RECORD_ID']			= b.record_id;
 	
 	$("[data-nu-field][data-nu-prefix='']").each(function( index ){
 
@@ -2738,6 +2733,7 @@ function nuHashFromEditForm(){
 		if(o.attr('multiple') == 'multiple'){
 
 			a.push([this.id, Array(val).join('#nuSep#')]);
+			A[this.id]	= Array(val).join('#nuSep#');
 
 		}else{
 
@@ -2752,12 +2748,13 @@ function nuHashFromEditForm(){
 			}
 			
 			a.push([this.id, val]);
+			A[this.id]	= val;
 
 		}
 
 	});
-
-	return a;
+	
+	return A;
 
 }
 
@@ -2842,10 +2839,13 @@ function nuSearchableList(){
 
 function nuWidestTitle(c){
 	
-	var w	= 120;
+	var w		= 120;
 
 	for(var i = 0 ; i < c.length ; i++){
-		w	= Math.max(nuGetWordWidth(c[i].title), w);
+		
+		var t 	= String(c[i].title).replaceAll('<br>', ' ').replaceAll('<p>', ' ');;
+		w		= Math.max(nuGetWordWidth(t), w);
+		
 	}
 	
 	return w + 70;
@@ -2854,8 +2854,6 @@ function nuWidestTitle(c){
 
 
 function nuGetSearchList(){
-	
-	$('body').append('<div id="nuModal"></div>')
 	
 	var n		= nuFORM.getProperty('nosearch_columns');
 	var c		= nuFORM.getProperty('browse_columns');
@@ -2866,9 +2864,11 @@ function nuGetSearchList(){
 	var widest	= nuWidestTitle(c) + 20;
 	
 	d.setAttribute('id', 'nuSearchList');
+	
 	$('body').append(d);
+
 	$('#' + d.id).css({
-		'width'				: widest,
+		'width'				: widest + 20,
 		'height'			: 10 + (c.length * 30),
 		'top'				: 138,
 		'left'				: (window.nuBrowseWidth - widest) / 2,
@@ -2877,25 +2877,7 @@ function nuGetSearchList(){
 	})
 	.html('<span style="font-weight:bold">&nbsp;&nbsp;Include When Searching<\span>')
 	.addClass('nuOptionsList');
-	
-	var x = document.createElement('div');
-	
-	x.setAttribute('id', 'nuSearchListClose');
-	
-	$('#' + d.id).append(x);
-	
-	$('#' + x.id).css({
-		'width'				: 20,
-		'height'			: 20,
-		'top'				: 3,
-		'right'				: 3,
-		'position'			: 'absolute',
-		'text-align'    	: 'center'
-	})
-	.attr('onclick', '$("#nuSearchList").remove();$("#nuModal").remove();')
-	.html('<img id="nuOptionListClose" src="graphics/nuclose.png" width="20px" height="20px">')
-	.addClass('nuSearchListClose');
-	
+
 	for(var i = 0 ; i < c.length ; i++){
 		
 		var isChecked	= true;
@@ -2923,7 +2905,9 @@ function nuGetSearchList(){
 		.attr('onclick', 'nuSetSearchColumn();')
 		.addClass('nuSearchCheckbox');
 		
-		var t = document.createElement('div');
+		var t 			= document.createElement('div');
+		var nobr		= String(c[i].title).replaceAll('<br>', ' ').replaceAll('<p>', ' ');;
+
 
 		t.setAttribute('id', 'nuSearchText' + i);
 
@@ -2937,6 +2921,8 @@ function nuGetSearchList(){
 			'text-align'    : 'left'
 		})
 		.attr('onclick', 'nuClickSearchColumn(event);')
+		.addClass('nuOptionsItem')
+		.html(nobr)
 		.click(function() {
 			
 			var cb = $('#nuSearchList' + i).attr('checked');
@@ -2945,9 +2931,7 @@ function nuGetSearchList(){
 			
 			nuSetSearchColumn();
 			
-		})
-		.addClass('nuOptionsItem')
-		.html(c[i].title);
+		});
 		
 		var shortcut_key 	= document.createElement('div');
 		var shortcut_key_id = 'nuSearchTextShortcutKey' + i.toString();
@@ -2955,19 +2939,23 @@ function nuGetSearchList(){
 		shortcut_key.setAttribute('id', shortcut_key_id);
 
 		$('#nuSearchList').append(shortcut_key);
-		var	prop			= {'position' : 'absolute', 'text-align' : 'left', 'height' : 15};
+		
+		var	prop			= {'position' : 'absolute', 'text-align' : 'left', 'height' : 15, 'width' : 50};
 
 		$('#' + shortcut_key.id)
 		.css(prop)
-		.css({'top'	: 33 + (i * 20),'left' : widest - 80})
+		.css({'top'	: 37 + (i * 20), 'right' : 10})
 		.html('Ctrl+Shift+' + i)
 		.addClass('nuOptionsItemShortcutKey');
 	}
 	
+	$('.nuOptionsItem').css({'width' : widest - 90, 'padding' : '3px 0px 0px 3px'});
+	$('#nuSearchList').css({'height' : 50 + (c.length * 20)});
+	
 }
 
 function nuTotal(f){
-		return Number(nuFORM.calc(f));
+	return Number(nuFORM.calc(f));
 }
 
 
@@ -3006,7 +2994,7 @@ function nuMessage(o, type){
 	
 	var l		= (screen.width - widest) / 2;
 	$('body', par).append("<div id='nuAlertDiv' class='nuMessage' style='overflow:hidden;width:" + widest + "px;left:" + l + "px' ></div>")
-	$('#nuAlertDiv', par).prepend('<img id="nuOptionListClose" src="graphics/nuclose.png" class="nuSearchListClose" style="position:absolute;top:5px;left:5px" ' + c + ' width="20px" height="20px">')
+	$('#nuAlertDiv', par).prepend('<img id="nuOptionListClose" src="graphics/nuclose.png" class="nuClose" style="position:absolute;top:5px;left:5px" ' + c + ' width="20px" height="20px">')
 	
 	
 	for(var i = 0 ; i < o.length ; i++){
@@ -3018,53 +3006,6 @@ function nuMessage(o, type){
 
 }
 
-/*
-
-function nuBuildFormula(p, f){
-
-	var bits		= f.split(' ');
-	
-	for(var i = 0 ; i < bits.length ; i++){
-		
-		var bit		= String(bits[i]);
-		
-		if(bit.substr(0,7) == 'nuTotal'){
-			bits[i]	= nuRebuild_nuTotal(p, bit);
-		}
-		
-	}	
-console.log(bits);
-
-	
-	return bits.join(' ');
-	
-}
-
-
-function nuRebuild_nuTotal(p, s){
-	
-	var t	= s.trim();
-	t		= t.substr(0, t.length-1)
-	t		= t.substr(8)
-	t		= t.split('.');
-				
-	if(t.length == 1){
-		
-		var O	= String(t[0]).replaceAll("'", '');
-		var n	= "nuTotal('" + p + O + "')";
-		
-	}else{
-		
-		var S	= String(t[0]).replaceAll("'", '');
-		var O	= String(t[1]).replaceAll("'", '');
-		var n	= "nuTotal('" + S + '.' + O + "')";
-		
-	}
-	
-	return n;
-	
-}
-*/
 
 function nuWindowPosition(){
 	

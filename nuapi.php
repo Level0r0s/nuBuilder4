@@ -10,15 +10,12 @@
 	$_POST['nuCounter']						= rand(0, 999);
 	$_POST['nuErrors']						= array();
 	$_POST['nuMessages']					= array();
-
-	$formAndSessionData						= nuGatherFormAndSessionData();
-    
+	$U										= nuGetUserAccess();
+	$formAndSessionData						= nuGatherFormAndSessionData($U['HOME_ID']);
     $_POST['nuTableSchema']                 = $formAndSessionData->tableSchema;
-
 	$F										= $formAndSessionData->form_id;
 	$R										= $formAndSessionData->record_id;
 	$P										= $_POST['nuSTATE'];
-	$U										= nuGetUserAccess();
 	$_POST['FORM_ID'] 						= $F;
 	$_POST['nuHash']						= array_merge($U, nuSetHashList($P));
 	$_POST['nuHash']['PREVIOUS_RECORD_ID'] 	= $R;
@@ -34,17 +31,20 @@
 	$f->forms[0]							= new stdClass;
 
     if(count($formAndSessionData->errors) == 0){
-    	if($CT == 'getform' || $CT == 'login'){nuBeforeEdit($F, $R);$f->forms[0] 	= nuGetFormObject($F, $R, 0, $P);}
+		
+    	if($CT == 'login')			{nuBeforeEdit($F, $R);$f->forms[0] 	= nuGetFormObject($F, $R, 0, $P);}
+    	if($CT == 'getform')		{nuBeforeEdit($F, $R);$f->forms[0] 	= nuGetFormObject($F, $R, 0, $P);}
     	if($CT == 'getphp')			{nuBeforeEdit($F, $R);$f->forms[0] 	= nuGetFormObject($F, $R, 0, $P);}
     	if($CT == 'getreport')		{nuBeforeEdit($F, $R);$f->forms[0] 	= nuGetFormObject($F, $R, 0, $P);}
     	if($CT == 'update')			{$f->forms[0]->record_id			= nuUpdateData(); nuUpdateTables();}
     	if($CT == 'getlookupid')	{$f->forms[0]->lookup_values 		= nuGetAllLookupValues();}
     	if($CT == 'getlookupcode')	{$f->forms[0]->lookup_values 		= nuGetAllLookupList();}
     	if($CT == 'runhiddenphp')	{$f->forms[0]->id					= nuRunPHPHidden($R);}
-    	if($CT == 'runphp')			{$f->forms[0]->id					= nuRunPHP($F);}
-    	if($CT == 'runreport')		{$f->forms[0]->id					= nuRunReport($F);}
+    	if($CT == 'runphp')			{$f->forms[0]						= nuRunPHP($F, $R);}
+    	if($CT == 'runreport')		{$f->forms[0]						= nuRunReport($F, $R);}
     	if($CT == 'runhtml')		{$f->forms[0]->id					= nuRunHTML();}
         if($CT == 'nudragsave')		{$f->forms[0]						= nuDragSave($P);}
+		
     }
 
 	$f->forms[0]->user_id					= $U['USER_ID'];
@@ -60,7 +60,12 @@
 	$f->forms[0]->form_access				= $GLOBALS['nuSetup']->set_denied;
 	$f->forms[0]->javascript				= $GLOBALS['EXTRAJS'];
 	$f->forms[0]->target					= $P['target'];
-	$f->forms[0]->buttons					= nuButtons($F, $P);
+
+	$b										= nuButtons($F, $P);
+	
+	$f->forms[0]->buttons					= $b[0];
+	$f->forms[0]->run_code					= $b[1];
+	$f->forms[0]->run_description			= $b[2];
 
 	$j								    	= json_encode($f->forms[0]);
 	

@@ -1,4 +1,4 @@
-<html>
+<html onclick="nuClick(event)">
 
 <head>
 <title>nuBuilder 4</title>
@@ -26,29 +26,30 @@ function nuHeader(){
 
     require_once('config.php');
 
-    $nuDB = new PDO("mysql:host=$nuConfigDBHost;dbname=$nuConfigDBName;charset=utf8", $nuConfigDBUser, $nuConfigDBPassword, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+    $nuDB 				= new PDO("mysql:host=$nuConfigDBHost;dbname=$nuConfigDBName;charset=utf8", $nuConfigDBUser, $nuConfigDBPassword, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
     $nuDB->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $nuDB->exec("SET CHARACTER SET utf8");
 
-    $getHTMLHeaderSQL  = "
+    $getHTMLHeaderSQL  	= "
         SELECT set_header
         FROM zzzzsys_setup
         WHERE zzzzsys_setup_id = 1
     ";
 
-    $getHTMLHeaderQRY = $nuDB->prepare($getHTMLHeaderSQL);
-    $HTMLHeader = '';
+    $getHTMLHeaderQRY 	= $nuDB->prepare($getHTMLHeaderSQL);
+    $HTMLHeader 		= '';
     try {
+		
         $getHTMLHeaderQRY->execute();
-        $HTMLHeader = $getHTMLHeaderQRY->fetch(PDO::FETCH_OBJ)->set_header;
+        $HTMLHeader 	= $getHTMLHeaderQRY->fetch(PDO::FETCH_OBJ)->set_header;
+		
     }catch(PDOException $ex){
         die('nuBuilder cannot access the database. Please check your database configuration in config.php.');
     }
 
-    $j  = "\n\n//-- CREATED BY Setup -> Header\n\n\n" . $HTMLHeader;
-    $j .= "\n\n//===========================================\n\n";
+//    $j = "//\n\n</script><script id='nuHeader'>$HTMLHeader\n\n</script>\n<script>\n\n";
     
-    return $j;
+    return $HTMLHeader;
     
 }
 
@@ -59,7 +60,6 @@ nuJSIndexInclude('nuformdrag.js');
 nuJSIndexInclude('nucalendar.js');
 nuJSIndexInclude('nucommon.js');
 nuJSIndexInclude('nuajax.js');       //-- calls to server
-nuJSIndexInclude('nufunctions.js');
 
 nuCSSIndexInclude('nubuilder4.css');
 
@@ -79,7 +79,7 @@ function nuValidCaller(o){
 function nuHomeWarning(){
 
 	if(window.nuEDITED){
-		return nuTranslate('Leave this form without saving?')+'  '+nuTranslate('Doing this will return you to the login screen.');
+		return nuTranslate('Leave this form without saving ?')+'  '+nuTranslate('Doing this will return you to the login screen.');
 	}
 	
 	return nuTranslate('Doing this will return you to the login screen.');
@@ -211,7 +211,15 @@ window.nuHASH			= [];
 		}		
 	}
 	
+	</script>
+	<script id='nuHeader'>
 $nuHeader
+
+
+	</script>
+	<script>
+	
+	window.nuHeader = $('#nuHeader').html();
 
 	";
 	
@@ -224,7 +232,7 @@ $nuHeader
 </head>
 
 
-<body onload="nuLoad()" >
+<body onload="nuLoad()">
 
 </body>
 

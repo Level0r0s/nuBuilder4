@@ -508,20 +508,20 @@ function nuCreateDragOptionsBox(form){
                 '<table>'+
                     '<tbody>'+
                         '<tr>'+
-                            '<td><button class="nuDragOptionsButton nuButton" onclick="nuSpaceVertically();">Space Vertically</button></td>'+
-                            '<td><button class="nuDragOptionsButton nuButton" onclick="nuAlignLeft();">Align To Left</button></td>'+
-                        '</tr>'+
-                        '<tr>'+
-                            '<td><button class="nuDragOptionsButton nuButton" onclick="nuSpaceHorizontally();">Space Horizontally</button></td>'+
-                            '<td><button class="nuDragOptionsButton nuButton" onclick="nuAlignRight();">Align To Right</button></td>'+
-                        '</tr>'+
-                        '<tr>'+
                             '<td><button id="move_up_btn" class="nuDragOptionsButton nuButton" onclick="nuMoveUpOrder();">Move Up Order</button></td>'+
                             '<td><button class="nuDragOptionsButton nuButton" onclick="nuAlignTop();">Align To Top</button></td>'+
                         '</tr>'+
                         '<tr>'+
                             '<td><button id="move_down_btn" class="nuDragOptionsButton nuButton" onclick="nuMoveDownOrder();">Move Down Order</button></td>'+
                             '<td><button class="nuDragOptionsButton nuButton" onclick="nuAlignBottom();">Align To Bottom</button></td>'+
+                        '</tr>'+
+                        '<tr>'+
+                            '<td><button class="nuDragOptionsButton nuButton" onclick="nuSpaceVertically();">Space Vertically</button></td>'+
+                            '<td><button class="nuDragOptionsButton nuButton" onclick="nuAlignLeft();">Align To Left</button></td>'+
+                        '</tr>'+
+                        '<tr>'+
+                            '<td><button class="nuDragOptionsButton nuButton" onclick="nuSpaceHorizontally();">Space Horizontally</button></td>'+
+                            '<td><button class="nuDragOptionsButton nuButton" onclick="nuAlignRight();">Align To Right</button></td>'+
                         '</tr>'+
                         '<tr>'+
                             '<td><button class="nuDragOptionsButton nuButton" onclick="nuResizeToLowest();">Resize To Shortest</button></td>'+
@@ -564,6 +564,7 @@ function nuCreateDragOptionsBox(form){
         nuClearFieldsList();
         nuUnselectAllDragObjects();
         nuSelectTab(this);
+		
         nuPopulateFieldsList(Number($(this).attr('data-nu-tab-filter')));
 		nuPopulateTabDropdown(Number($(this).attr('data-nu-tab-filter')));
         nuCheckIfMovingTabOrderAllowed($('#nuDragOptionsFields',window.parent.document.body));

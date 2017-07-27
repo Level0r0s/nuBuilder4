@@ -1,6 +1,6 @@
 <?php
 
-function nuBuildFastForm($table){
+function nuBuildFastForm($table, $form_type){
 
 	$form_id		= nuID();
 	$PK				= $table . '_id';
@@ -64,7 +64,7 @@ function nuBuildFastForm($table){
 
 	";
 
-	$array          = Array($form_id, 'browseedit', $form_code, $form_desc, $table, $PK, "SELECT * FROM $table");
+	$array          = Array($form_id, $form_type, $form_code, $form_desc, $table, $PK, "SELECT * FROM $table");
 
 	nuRunQuery($sql, $array);
 
@@ -109,7 +109,7 @@ function nuBuildFastForm($table){
 	";
 
 	$gap            = 30;
-	$left			= 150;
+	$left			= 50;
 
 	for($i = 0 ; $i < count($SF->rows) ; $i++){
 		
@@ -121,7 +121,7 @@ function nuBuildFastForm($table){
 			$oldid      = $SF->rows[$i][3];
 			$corner		= $left + ($gap * $i);
 
-			$array      = Array($field, $label, $corner, $corner, $corner, $table, $form_id, $tab_id, $newid, $oldid);
+			$array      = Array($field, $label, $corner, $corner, $corner + 100, $table, $form_id, $tab_id, $newid, $oldid);
 
 			nuRunQuery($sql, $array);
 			
@@ -148,7 +148,7 @@ function nuBuildFastForm($table){
 		if($y == 'lookup'){                         $a[] = Array('name'=>$id, 'type'=>'id');}
 		if($y == 'select'){                         $a[] = Array('name'=>$id, 'type'=>'varchar');}
 		if($y == 'calc'){                           $a[] = Array('name'=>$id, 'type'=>'varchar');}
-		if($y == 'text'){                           $a[] = Array('name'=>$id, 'type'=>'text');}
+		if($y == 'textarea'){                       $a[] = Array('name'=>$id, 'type'=>'textarea');}
 		if($y == 'input' && $norm){                 $a[] = Array('name'=>$id, 'type'=>'varchar');}
 		if($y == 'input' && $date){                 $a[] = Array('name'=>$id, 'type'=>'date');}
 		if($y == 'input' && $i == 'number'){        $a[] = Array('name'=>$id, 'type'=>'int');}
@@ -157,12 +157,16 @@ function nuBuildFastForm($table){
 	}
 
 	if($newT){
-
+		
+		$mess		= 'Table and Form have';
 		$create		= nuBuildTable($table, $a);
 			
 		nuRunQuery($create);
 
+	}else{
+		$mess		= 'Form has';
 	}
+	
 
 	for($i = 0 ; $i < count($SF->rows) ; $i++){
 		
@@ -189,7 +193,7 @@ function nuBuildFastForm($table){
 			
 			";
 			
-			$array      = Array(nuID(), $form_id, $lab, $id, 'left', '', ($i+1) * 10, 200);
+			$array      = Array(nuID(), $form_id, $lab, $id, 'left', '', ($i+1) * 10, 250);
 
 			nuRunQuery($sql, $array);
 			
@@ -199,48 +203,88 @@ function nuBuildFastForm($table){
 
 	
 	
+	if($form_type == 'subform'){
+		
+		nuDisplayMessage("<h1>A $mess been created!</h1>");
+		nuDisplayMessage("<p>(There is now a Form with a Code of <b>$form_code</b> in the list found in <b>Forms</b>)");
+		nuDisplayMessage("<input type='button' value='Go to tab..' class='nuButton' onclick='nuGetBreadcrumb(0,0);'>");
+		
+	}else{
+	
+			
+		//----------add run button--------------------
 
-	//----------add run button--------------------
+		$sql            = "
 
-	$sql            = "
+						INSERT 
+						INTO $TT
+						(zzzzsys_object_id,
+						sob_all_zzzzsys_form_id,
+						sob_all_zzzzsys_tab_id,
+						sob_all_id,
+						sob_all_label,
+						sob_all_table,
+						sob_all_order,
+						sob_all_top,
+						sob_all_left,
+						sob_all_width,
+						sob_all_height,
+						sob_run_zzzzsys_form_id,
+						sob_run_method,
+						sob_all_cloneable,
+						sob_all_validate,
+						sob_all_access,
+						sob_all_type)
+						VALUES
+						(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 
-					INSERT 
-					INTO $TT
-					(zzzzsys_object_id,
-					sob_all_zzzzsys_form_id,
-					sob_all_zzzzsys_tab_id,
-					sob_all_id,
-					sob_all_label,
-					sob_all_table,
-					sob_all_order,
-					sob_all_top,
-					sob_all_left,
-					sob_all_width,
-					sob_all_height,
-					sob_run_zzzzsys_form_id,
-					sob_run_method,
-					sob_all_cloneable,
-					sob_all_validate,
-					sob_all_access,
-					sob_all_type)
-					VALUES
-					(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+		";
 
-	";
+		$array          = Array(nuID(), 'nuhome', 'nutesttab', "ff$form_id", $table, $table, 11, 63, 250, 150, 30, $form_id, 'b', 0, 0, 0, 'run');
+		nuRunQuery($sql, $array);
 
-	$array          = Array(nuID(), 'nuhome', 'nutesttab', "ff$form_id", $table, $table, 11, 63, 250, 150, 30, $form_id, 'b', 0, 0, 0, 'run');
-	nuRunQuery($sql, $array);
+		nuDisplayMessage("<h1>A $mess been created!</h1>");
+		nuDisplayMessage("<p>(There is now a Button called <b>$table</b> on the Testing tab of the Home Form)</p>");
+		nuDisplayMessage("<input type='button' value='Go to tab..' class='nuButton' onclick='nuGetBreadcrumb(0,2);'>");
+	
+	}
+
 
 	nuRunQuery("INSERT INTO zzzzsys_object SELECT * FROM $TT");
 	nuRunQuery("DROP TABLE $TT");
 
-	nuDisplayMessage("<h1>A Table and Form have been created!</h1>");
-	nuDisplayMessage("<p>(There is now a Button called <b>$table</b> on the Testing tab of the Home Form)</p>");
-	nuDisplayMessage("<input type='button' value='Go to tab..' class='nuButton' onclick='nuGetBreadcrumb(0,2);'>");
-
-	
-	
-	
 }
+
+
+
+function nuBuildTable($tab, $array){
+
+	$id			= $tab . '_id';
+	$start		= "CREATE TABLE $tab";
+	$a			= Array();
+	$a[] 		= "$id VARCHAR(25) NOT NULL";
+
+	for($i = 0 ; $i < count($array) ; $i++){
+
+		$f		= $array[$i]['name'];
+		$t		= $array[$i]['type'];
+		
+		if($t == 'id'){				$a[] = "$f VARCHAR(25) NOT NULL";}
+		if($t == 'varchar'){		$a[] = "$f VARCHAR(1000) NOT NULL";}
+		if($t == 'int'){			$a[] = "$f INT NOT NULL";}
+		if($t == 'textarea'){		$a[] = "$f TEXT NOT NULL";}
+		if($t == 'decimal'){		$a[] = "$f DECIMAL(12,4) NOT NULL";}
+		if($t == 'date'){			$a[] = "$f DATE NOT NULL";}
+		if($t == 'longtext'){		$a[] = "$f LONGTEXT NOT NULL";}
+		
+	}
+	
+	$a[]							= "PRIMARY KEY  ($id)";
+	$im								= implode(',', $a);
+	return "$start ($im)";
+
+}
+
+
 
 ?>
