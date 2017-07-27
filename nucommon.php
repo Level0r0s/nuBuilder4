@@ -997,6 +997,9 @@ function nuBuildTempTable($id, $tt, $rd = 0){
 		}
 		
 		$p			= nuReplaceHashVariables($c);
+		$p			= addslashes($p);
+		$tt			= addslashes($tt);
+		
 		$P			= "	nuRunQuery('CREATE TABLE $tt $p');";
 		
 		eval($P);
