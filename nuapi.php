@@ -57,7 +57,7 @@ nudebug($U)	;
 	$f->forms[0]->errors					= $_POST['nuErrors'];
 	$f->forms[0]->messages					= $_POST['nuMessages'];
 	$f->forms[0]->log_again				    = $_POST['nuLogAgain'];
-	$f->forms[0]->global_access				= $_POST['nuHash']['global_access'];
+	$f->forms[0]->global_access				= $_POST['nuHash']['GLOBAL_ACCESS'];
 	$f->forms[0]->form_access				= $GLOBALS['nuSetup']->set_denied;
 	$f->forms[0]->javascript				= $GLOBALS['EXTRAJS'];
 	$f->forms[0]->target					= $P['target'];
