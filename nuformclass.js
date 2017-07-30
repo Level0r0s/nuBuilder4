@@ -45,11 +45,17 @@ class nuFormObject {
 				if(e.target.value == l[i]){
 					this.scroll[e.target.id].index = i;
 				}
+				
 			}
+			
 		}
 
-		this.scroll[e.target.id].list	= l;
+		if(JSON.stringify(this.scroll[e.target.id].list) != JSON.stringify(l)){
+			this.scroll[e.target.id].index = 0;
+		}
 		
+		this.scroll[e.target.id].list	= l;
+
 		var s	= this.scroll[e.target.id];
 		
 		if(event.keyCode == 38){
