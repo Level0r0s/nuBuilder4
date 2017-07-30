@@ -526,22 +526,23 @@ function nuGetLookupValues($R, $O){
 
 function nuGetAllLookupList(){
 
-nudebug(9999);
+	$O				= $_POST['nuSTATE']['object_id'];
+	$PK				= $_POST['nuSTATE']['primary_key'];
+	$C				= $_POST['nuSTATE']['code'];
 	$was			= $_POST['nuHash']['TABLE_ID'];
-	
+
 	$_POST['nuHash']['TABLE_ID'] = nuTT();
 
-	nuBeforeBrowse($O->form_id);
-	
-	$O				= $_POST['nuSTATE']['object_id'];
-	$C				= $_POST['nuSTATE']['code'];
 	$s				= "SELECT * FROM zzzzsys_object WHERE zzzzsys_object_id = '$O'";
 	$t				= nuRunQuery($s);
-	$r	 			= db_fetch_object($t);
+	$r				= db_fetch_object($t);
 	$code			= $r->sob_lookup_code;
 	$description	= $r->sob_lookup_description;
+	$form_id		= $r->sob_lookup_zzzzsys_form_id;
+
+	nuBeforeBrowse($form_id);
 	
-	$s		 		= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$r->sob_lookup_zzzzsys_form_id'";
+	$s		 		= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$form_id'";
 	$t				= nuRunQuery($s);
 	$r	 			= db_fetch_object($t);
 	$id	 			= $r->sfo_primary_key;
@@ -557,6 +558,8 @@ nudebug(9999);
 	$s				= nuReplaceHashVariables($s);
 	$t				= nuRunQuery($s);
 	$a				= array();
+
+	nuRunQuery(nuReplaceHashVariables('DROP TABLE if EXISTS #TABLE_ID#'));
 
 	$_POST['nuHash']['TABLE_ID'] = $was;
 	
