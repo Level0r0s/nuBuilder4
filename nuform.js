@@ -2703,62 +2703,18 @@ function nuAddJavascript(o){
 
 function nuHashFromEditForm(){
 
-	var a			= [];
-	var A			= [];
-	var b			= window.nuFORM.getCurrent();
-	var o 			= {};
-	var val 		= '';
+	var A				= {};
+	var S				= nuSubformObject('');
 	
-	for (var key in b) {
-		if(key != 'hash') {
-			a.push([key, b[key]]);
-			A[key]	= b[key];
-		}
-	}	
-		
-	a.push([b.form_id, b.record_id]);		//-- first element is Form and Record ID
-	a.push(['FORM_ID', b.form_id]);
-	a.push(['PREVIOUS_RECORD_ID', b.record_id]);
-	a.push(['RECORD_ID', b.record_id]);
+	if(S.rows.length == 0 ){return A;}
 	
-	A[b.form_id]			= b.record_id;
-	A['FORM_ID']			= b.form_id;
-	A['PREVIOUS_RECORD_ID']	= b.record_id;
-	A['RECORD_ID']			= b.record_id;
-	
-	$("[data-nu-field][data-nu-prefix='']").each(function( index ){
-
-		o 		= $('#' + this.id);
-		val 	= $('#' + this.id).val();
-		
-		if(o.attr('multiple') == 'multiple'){
-
-			a.push([this.id, Array(val).join('#nuSep#')]);
-			A[this.id]	= Array(val).join('#nuSep#');
-
-		}else{
-
-			var format	= String(o.attr('data-nu-format'))[0];
-			
-			if(format == 'D' && val != ''){
-
-				var d	= new Date(val);
-				val		= d.getFullYear() + '-' + nuPad2(Number(Number(d.getMonth())+Number(1))) + '-' + nuPad2(d.getDate());
-				
-
-			}
-			
-			a.push([this.id, val]);
-			A[this.id]	= val;
-
-		}
-
-	});
+	for(var i = 0 ; i < S.fields.length ; i++){
+		A[S.fields[i]]	= S.rows[0][i];
+	}
 	
 	return A;
 
 }
-
 
 
 

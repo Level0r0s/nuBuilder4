@@ -323,14 +323,15 @@ function nuSetHashList($p){
 
 		if(is_object($f) ){
 			
-			foreach ($f as $fld => $value ){								//-- add parent Breadcrumb Object
+			foreach ($f as $fld => $value ){								//-- This Edit Form's Object Values
 				$r[$fld] = addslashes($value);
 			}
 			
 		}
 	}
+	
 
-	foreach ($p as $key => $value){
+	foreach ($p as $key => $value){											//-- The 'opener' Form's properties
 
 		if(gettype($value) == 'string'){
 			$h[$key]			= addslashes($value);
@@ -340,13 +341,28 @@ function nuSetHashList($p){
 		
 	}
 
+	if(isset($p['hash'])){
+		
+		foreach ($p['hash'] as $key => $value){								//-- The 'opener' Form's hash variables
+
+			if(gettype($value) == 'string'){
+				$h[$key]			= addslashes($value);
+			}else{
+				$h[$key]			= '';
+			}
+			
+		}
+		
+	}
+
+	
 	$h['PREVIOUS_RECORD_ID']	= addslashes($rid);
 	$h['RECORD_ID']				= addslashes($rid);
 	$h['FORM_ID']				= addslashes($fid);
 	$h['SUBFORM_ID']			= addslashes($_POST['nuSTATE']['object_id']);
 	$h['ID']					= addslashes($_POST['nuSTATE']['primary_key']);
 	$h['CODE']					= addslashes($_POST['nuSTATE']['code']);
-
+	
 	return array_merge($r, $h, $A);
 
 }

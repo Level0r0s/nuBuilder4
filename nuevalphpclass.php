@@ -28,7 +28,7 @@
 			";
 			
 			$nuT			= nuRunQuery($s);
-//nudebug(nuHash());							
+			
 			while($nuA = db_fetch_object($nuT)) {
 
 				$phpCode	= $nuA->sph_code;

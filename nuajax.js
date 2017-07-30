@@ -56,6 +56,7 @@ function nuForm(f, r, filter, search, n){
 	last.filter 		= filter;
 	last.search 		= search;
     last.hash	 		= parent.nuHashFromEditForm();
+    last.AAA	 		= 'hw';
 
 	var successCallback = function(data,textStatus,jqXHR){
 
