@@ -433,6 +433,54 @@ function nuBreadcrumbDescription($r, $R){
 	
 }
 
+
+function nuGetOtherLookupValues($o){
+
+	$p						= $o->object_id;
+	$s						= "SELECT sob_lookup_zzzzsys_form_id as form_id FROM zzzzsys_object WHERE zzzzsys_object_id  = ? ";
+	$t						= nuRunQuery($s, [$p]);
+	$r						= db_fetch_object($t);
+	$i						= $r->form_id;
+	$f						= nuFormProperties($i);
+	$s						= "SELECT * FROM $f->sfo_table WHERE $f->sfo_primary_key  = ? ";
+	$t						= nuRunQuery($s, [$_POST['nuHash']['LOOKUP_RECORD_ID']]);
+	
+	$_POST['lookup_row']	= db_fetch_object($t);
+	$_POST['lookup_values']	= array();
+
+	$evalPHP 				= new nuEvalPHPClass($p . '_AB');
+	
+	return $_POST['lookup_values'];
+	
+}
+
+
+
+function nuGetAllLookupValues(){
+	
+	$a						= array();
+	$OID					= $_POST['nuSTATE']['object_id'];
+	$PK						= $_POST['nuSTATE']['primary_key'];
+	$s						= "SELECT * FROM zzzzsys_object WHERE zzzzsys_object_id = '$OID'";
+	$t						= nuRunQuery($s);
+	$r						= db_fetch_object($t);
+	$o						= nuDefaultObject($r, array());
+	$o->description_width	= $r->sob_lookup_description_width;
+	$o->form_id				= $r->sob_lookup_zzzzsys_form_id;
+	$o->value				= $PK;
+	$l						= nuGetLookupValues($r, $o);
+	
+	$_POST['nuHash']['LOOKUP_RECORD_ID'] = $l[0][1];
+
+	$e						= nuGetOtherLookupValues($o);
+	$m						= array_merge($l, $e);
+
+	return $m;
+	
+}
+
+
+
 function nuGetLookupValues($R, $O){
 
 	$was		= $_POST['nuHash']['TABLE_ID'];
@@ -475,25 +523,51 @@ function nuGetLookupValues($R, $O){
 }
 
 
-function nuGetOtherLookupValues($o){
 
-	$p						= $o->object_id;
-	$s						= "SELECT sob_lookup_zzzzsys_form_id as form_id FROM zzzzsys_object WHERE zzzzsys_object_id  = ? ";
-	$t						= nuRunQuery($s, [$p]);
-	$r						= db_fetch_object($t);
-	$i						= $r->form_id;
-	$f						= nuFormProperties($i);
-	$s						= "SELECT * FROM $f->sfo_table WHERE $f->sfo_primary_key  = ? ";
-	$t						= nuRunQuery($s, [$_POST['nuHash']['LOOKUP_RECORD_ID']]);
-	
-	$_POST['lookup_row']	= db_fetch_object($t);
-	$_POST['lookup_values']	= array();
+function nuGetAllLookupList(){
 
-	$evalPHP 				= new nuEvalPHPClass($p . '_AB');
+nudebug(9999);
+	$was			= $_POST['nuHash']['TABLE_ID'];
 	
-	return $_POST['lookup_values'];
+	$_POST['nuHash']['TABLE_ID'] = nuTT();
+
+	nuBeforeBrowse($O->form_id);
+	
+	$O				= $_POST['nuSTATE']['object_id'];
+	$C				= $_POST['nuSTATE']['code'];
+	$s				= "SELECT * FROM zzzzsys_object WHERE zzzzsys_object_id = '$O'";
+	$t				= nuRunQuery($s);
+	$r	 			= db_fetch_object($t);
+	$code			= $r->sob_lookup_code;
+	$description	= $r->sob_lookup_description;
+	
+	$s		 		= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$r->sob_lookup_zzzzsys_form_id'";
+	$t				= nuRunQuery($s);
+	$r	 			= db_fetch_object($t);
+	$id	 			= $r->sfo_primary_key;
+    $SQL			= new nuSqlString(nuReplaceHashVariables($r->sfo_browse_sql));
+	$s				= "
+					SELECT $id, $code, $description
+					$SQL->from
+					WHERE $code LIKE '$C'
+					ORDER BY $code
+					LIMIT 0 , 10
+					";
+
+	$s				= nuReplaceHashVariables($s);
+	$t				= nuRunQuery($s);
+	$a				= array();
+
+	$_POST['nuHash']['TABLE_ID'] = $was;
+	
+	while($r = db_fetch_row($t)){
+		$a[]		= $r;
+	}
+
+	return $a;
 	
 }
+
 
 
 function nuLookupRecord(){
@@ -1195,67 +1269,6 @@ function nuGetBrowseWidth($f){
 	
 	return $w;
 
-	
-}
-
-
-
-function nuGetAllLookupValues(){
-	
-	$a						= array();
-	$OID					= $_POST['nuSTATE']['object_id'];
-	$PK						= $_POST['nuSTATE']['primary_key'];
-	$s						= "SELECT * FROM zzzzsys_object WHERE zzzzsys_object_id = '$OID'";
-	$t						= nuRunQuery($s);
-	$r						= db_fetch_object($t);
-	$o						= nuDefaultObject($r, array());
-	$o->description_width	= $r->sob_lookup_description_width;
-	$o->form_id				= $r->sob_lookup_zzzzsys_form_id;
-	$o->value				= $PK;
-	$l						= nuGetLookupValues($r, $o);
-	
-	$_POST['nuHash']['LOOKUP_RECORD_ID'] = $l[0][1];
-
-	$e						= nuGetOtherLookupValues($o);
-	$m						= array_merge($l, $e);
-
-	return $m;
-	
-}
-
-
-function nuGetAllLookupList(){
-
-	$O				= $_POST['nuSTATE']['object_id'];
-	$C				= $_POST['nuSTATE']['code'];
-	$s				= "SELECT * FROM zzzzsys_object WHERE zzzzsys_object_id = '$O'";
-	$t				= nuRunQuery($s);
-	$r	 			= db_fetch_object($t);
-	$code			= $r->sob_lookup_code;
-	$description	= $r->sob_lookup_description;
-	
-	$s		 		= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = '$r->sob_lookup_zzzzsys_form_id'";
-	$t				= nuRunQuery($s);
-	$r	 			= db_fetch_object($t);
-	$id	 			= $r->sfo_primary_key;
-    $SQL			= new nuSqlString(nuReplaceHashVariables($r->sfo_browse_sql));
-	$s				= "
-					SELECT $id, $code, $description
-					$SQL->from
-					WHERE $code LIKE '$C'
-					ORDER BY $code
-					LIMIT 0 , 10
-					";
-
-	$t				= nuRunQuery($s);
-	$a				= array();
-	
-	while($r = db_fetch_row($t)){
-		$a[]		= $r;
-	}
-
-	return $a;
-	
 }
 
 

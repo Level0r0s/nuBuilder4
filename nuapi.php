@@ -16,7 +16,7 @@
 	$F										= $formAndSessionData->form_id;
 	$R										= $formAndSessionData->record_id;
 	$P										= $_POST['nuSTATE'];
-nudebug($P);
+	
 	$_POST['FORM_ID'] 						= $F;
 	$_POST['nuHash']						= array_merge($U, nuSetHashList($P));
 	$_POST['nuHash']['PREVIOUS_RECORD_ID'] 	= $R;
