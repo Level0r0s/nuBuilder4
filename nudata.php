@@ -100,7 +100,26 @@ function nuCheckTables(){
 }
 
 
+function nuValidateSubforms(){
+	
+
+	$nudata	= $_POST['nuHash']['nuFORMdata'];
+	$DEL	= $_POST['nuHash']['deleteAll'];
+	
+	for($d = 0 ; $d < count($nudata) ; $d++){
+		
+		$sf			= $nudata[$d];
+		
+		//nudebug($sf);
+		
+	}
+	
+}
+
+
 function nuUpdateTables(){
+	
+	nuValidateSubforms();
 
 	$nudata	= $_POST['nuHash']['nuFORMdata'];
 	$rid	= $_POST['nuHash']['record_id'];
@@ -226,6 +245,8 @@ function nuUpdateTables(){
 		}
 		
 	}
+	
+	//nudebug($S);
 	
 }
 
@@ -535,7 +556,7 @@ function nuFormatValue($row, $i){
 	$r			= db_fetch_object($t);
 	
 	if($r->sob_all_type == 'select' and $r->sob_select_multiple == '1' and $row['v'][$i] != ''){
-		
+nudebug($row['v'], $i, $row['v'][$i]);		
 		return implode('#nuSep#', $row['v'][$i]);
 		
 	}else if($r->sob_all_type == 'input' and $r->sob_input_type == 'nuAutoNumber'){
@@ -598,6 +619,10 @@ function nuCheckAccess($f, $r = ''){
 
 function nuSubformObject($id){
 
+	if($id == ''){
+		$id	= 'nuBuilder4Form';
+	}
+	
 	$sfs	= $_POST['nuHash']['nuFORMdata'];
 	
 	for($i = 0 ; $i < count($sfs) ; $i++){
