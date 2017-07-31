@@ -963,8 +963,10 @@ function nuBrowseWhereClause($searchFields, $searchString, $returnArray = false)
 
 function nuGatherFormAndSessionData($home){
 
-	$formAndSessionData = new stdClass;
-	
+	nuBuildTableSchema();
+
+	$formAndSessionData 				= new stdClass;
+
     if(isset($_POST['nuSTATE']['record_id'])){
         $formAndSessionData->record_id  = $_POST['nuSTATE']['record_id'];
     } else {

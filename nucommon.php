@@ -1084,4 +1084,20 @@ function nuHash(){
 	return $_POST['nuHash'];
 }
 
+
+function nuBuildTableSchema(){
+
+	$_SESSION['tableSchema']            = array();
+	$t                     				= nuRunQuery("SELECT table_name FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = DATABASE()");
+
+	while($r = db_fetch_object($t)){
+		
+		$tn     						= $r->table_name;
+		$_SESSION['tableSchema'][$tn] 	= array('names' => db_field_names($tn), 'types' => db_field_types($tn), 'primary_key' => db_primary_key($tn));
+		
+	}
+
+}
+
+
 ?>

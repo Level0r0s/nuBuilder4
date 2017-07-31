@@ -29,7 +29,7 @@ function nuBuildForm(f){
 	nuSetBody(f);
 	
 	if(f.tableSchema.length != 0){  						//-- its an Object (load these once,  at login)
-
+		
 		nuFORM.tableSchema		= f.tableSchema;
 		nuFORM.formSchema		= f.formSchema;
 		window.nuLANGUAGE		= f.translation;
@@ -169,7 +169,7 @@ function nuResizeBody(f){
 		var h			= Number(d.edit.height) + headers;
 		var w			= Number(d.edit.width);
 		
-		if(f.record_id == '-2'){
+		if(f.record_id == '-2'){			//-- bigger for moving objects
 			
 			h			= h + 200;
 			w			= w + 200;

@@ -38,6 +38,8 @@ if(array_key_exists('nuSTATE', $_POST)){
                 $_SESSION['SafePHP']                = (isset($nuConfigSafePHP)  ? $nuConfigSafePHP  : array());
                 $_SESSION['tableSchema']            = array();
                 $_SESSION['tableList']            	= array();
+				nuBuildTableSchema();
+/*
                 $tableSchemaQRY                     = nuRunQuery("SELECT table_name FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = DATABASE()");
         		
                 while($tableSchemaOBJ = db_fetch_object($tableSchemaQRY)){
@@ -46,7 +48,7 @@ if(array_key_exists('nuSTATE', $_POST)){
                     $_SESSION['tableSchema'][$tn] 	= array('names' => db_field_names($tn), 'types' => db_field_types($tn), 'primary_key' => db_primary_key($tn));
         			
                 }
-        		
+*/        		
                 $_SESSION['formSchema']             = array();
                 $formSchemaQRY                      = nuRunQuery("SELECT * FROM zzzzsys_form ORDER BY sfo_code");
         		
