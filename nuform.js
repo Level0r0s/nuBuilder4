@@ -169,6 +169,13 @@ function nuResizeBody(f){
 		var h			= Number(d.edit.height) + headers;
 		var w			= Number(d.edit.width);
 		
+		if(f.record_id == '-2'){
+			
+			h			= h + 200;
+			w			= w + 200;
+			
+		}
+		
 		$('#nuDragDialog', window.parent.document).
 		css({'height'		:	(h + 43) + 'px',
 			'width' 		:	(w + 10) + 'px',
@@ -2688,7 +2695,6 @@ function nuAddJavascript(o){
 	var nuLoadBrowse	= null;
 	
 	var s				= document.createElement('script');
-//	s.innerHTML 		= window.nuHeader + "\n\n" + o.javascript + "\n\n";
 	s.innerHTML 		= "\n\n" + o.javascript + "\n\n";
 	
 	$('body').append(s);
