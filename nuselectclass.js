@@ -564,7 +564,7 @@ class nuSelectObject{
 
 		}
 
-		if(WHERE.length > 0){clauses	+= "\n\nWHERE\n    "	+ WHERE.join(" AND \n    ") 	+ "\n";}
+		if(WHERE.length > 0){clauses	+= "\n\nWHERE\n    ("	+ WHERE.join(" AND \n    ") 	+ ")\n";}
 		if(GROUPBY.length > 0){clauses	+= "\nGROUP BY\n    " 	+ GROUPBY.join(",\n    ") 		+ "\n";}
 		if(HAVING.length > 0){clauses	+= "\nHAVING\n    " 	+ HAVING.join(" AND \n    ") 	+ "\n";}
 		if(ORDERBY.length > 0){clauses	+= "\nORDER BY\n    " 	+ ORDERBY.join(",\n    ") 		+ "\n";}

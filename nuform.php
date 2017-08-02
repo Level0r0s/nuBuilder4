@@ -550,11 +550,12 @@ function nuGetAllLookupList(){
 	$s				= "
 					SELECT $id, $code, $description
 					$SQL->from
-					WHERE $code LIKE '$C'
+					$SQL->where
+					AND $code LIKE '$C'
 					ORDER BY $code
 					LIMIT 0 , 10
 					";
-
+nudebug($s, $SQL);
 	$s				= nuReplaceHashVariables($s);
 	$t				= nuRunQuery($s);
 	$a				= array();
