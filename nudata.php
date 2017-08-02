@@ -183,13 +183,7 @@ function nuUpdateTables(){
 				for($R = 1 ; $R < count($row) ; $R++){
 
 					if($edit[$R] == 1){											//-- has been edited
-					
 						$v		= $row[$R];
-						
-						if(gettype($v) == 'array'){
-							$v	= implode('#nuSep#', $v);
-						}
-
 						$add	= addslashes($v);
 						$fld	= $fields[$R];
 						$V[]	= "'$add'";
@@ -524,7 +518,8 @@ function nuUpdateRow($r, $p, $row, $FK){
 		$q[]		= $p;
 		$s	= "UPDATE `$r->sfo_table` SET " . implode(', ', $set) . " WHERE `$r->sfo_primary_key` = ? ";
 		nuRunQuery($s, $q);
-		
+		nudebug($s, $q);					
+
 	}
 	
 }
@@ -555,9 +550,9 @@ function nuFormatValue($row, $i){
 	$t			= nuRunQuery($s, array($form_id, $field));
 	$r			= db_fetch_object($t);
 	
+		nudebug($row['v'][$i], $r);
 	if($r->sob_all_type == 'select' and $r->sob_select_multiple == '1' and $row['v'][$i] != ''){
-nudebug($row['v'], $i, $row['v'][$i]);		
-		return implode('#nuSep#', $row['v'][$i]);
+		return json_encode($row['v'][$i]);
 		
 	}else if($r->sob_all_type == 'input' and $r->sob_input_type == 'nuAutoNumber'){
 		

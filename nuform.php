@@ -553,9 +553,8 @@ function nuGetAllLookupList(){
 					$SQL->where
 					AND $code LIKE '$C'
 					ORDER BY $code
-					LIMIT 0 , 10
 					";
-nudebug($s, $SQL);
+
 	$s				= nuReplaceHashVariables($s);
 	$t				= nuRunQuery($s);
 	$a				= array();
@@ -595,7 +594,7 @@ function nuSelectOptions($sql) {
     $a 				= array();
  
     if (substr(strtoupper(trim($sql)), 0, 6) == 'SELECT') {                      //-- sql statement
-
+	
         $t			= nuRunQuery($sql);
 		
         if (nuErrorFound()) {

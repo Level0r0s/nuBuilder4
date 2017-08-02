@@ -445,6 +445,10 @@ class nuFormObject {
 					val			= $('#' + this.id).prop("checked") ? 1 : 0 ;
 				}
 				
+				if(typeof($('#' + this.id).val()) == 'object'){						//-- multi SELECT Object
+					val			= JSON.stringify($('#' + this.id).val());
+				}
+				
 				V[C]			= nuFORM.removeFormatting(val, dnf);
 				E[C]			= $('#' + this.id).hasClass('nuEdited') ? 1 : 0 ;
 

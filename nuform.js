@@ -935,13 +935,24 @@ function nuSELECT(w, i, l, p, prop){
 	
 	$('#' + id).css('height', Number(prop.objects[i].height));
 
-	var values = String(w.objects[i].value).split('#nuSep#');
-
-	if(values.length == '0'){
+	var s = String(w.objects[i].value);
+	var a = [];
+	
+	if(w.objects[i].multiple == 0){
+		a = [s];
 		
-		$('#' + id).append('<option  value=""></option>');		//-- add a blank option at the top
+	}
+	
+	
+	if(s.substr(0,1) + s.substr(-1) == '[]'){
+		eval('a = ' + s);
+	}
+	
+//	if(a.length == '0'){
 		
-	}else{
+//		$('#' + id).append('<option  value=""></option>');		//-- add a blank option at the top
+		
+//	}else{
 		
 		$('#' + id).append('<option  value=""></option>');
 
@@ -951,7 +962,7 @@ function nuSELECT(w, i, l, p, prop){
     			
     			var opt	= String(prop.objects[i].options[n][1]).replaceAll(' ' ,'&#160;')
 
-    			if(values.indexOf(prop.objects[i].options[n][0]) == -1){
+    			if(a.indexOf(prop.objects[i].options[n][0]) == -1){
     				
     				$('#' + id).append('<option  value="'+prop.objects[i].options[n][0]+'">' + opt + '</option>');
     				
@@ -965,7 +976,7 @@ function nuSELECT(w, i, l, p, prop){
 
         }
 
-	}
+//	}
 	
 	nuAddJSObjectEvents(id, prop.objects[i].js);
 
