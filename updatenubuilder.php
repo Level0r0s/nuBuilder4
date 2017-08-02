@@ -189,6 +189,12 @@ try {
     die('Could not replace system rows from update into live. Exception: '.$exception);
 }
 
+try {
+    nuRunQuery("DROP DATABASE IF EXISTS $temp_database ");
+} catch(Exception $exception) {
+    die('Could not drop temp database. Exception: '.$exception);
+}
+
 die('Finished updating.');
 
 function nuRunQuery($sql, $values = array())
