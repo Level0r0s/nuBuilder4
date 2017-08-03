@@ -751,7 +751,6 @@ function nuHide(i){                 //-- Hide Edit Form Object
 		
 	}
 	
-//	$("[id$='nuDelete'][id^='" + i + "']").hide();
 
 }
 

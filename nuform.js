@@ -1372,10 +1372,12 @@ function nuBuildSubformTitle(o, l, w, id, col){
 	})
 	.html(o.label)
 	.attr('data-nu-field', o.id)
+	.attr('data-nu-subform', id)
 	.attr('ondblclick', 'nuPopup("nuobject", "' + o.object_id + '")')
 	.addClass('nuTabHolder');
 	
-	if(o.valid == 1 || o.valid == 2){$('#' + titleId).addClass('nuBlank');}
+	if(o.valid == 1){$('#' + titleId).addClass('nuBlank');}
+	if(o.valid == 2){$('#' + titleId).addClass('nuDuplicate');}
 
 }
 
@@ -2660,6 +2662,8 @@ function nuCloneAction(){
 
 function nuSaveAction(){
 	
+console.log(nuHasDuplicates()?'yes':'no');
+	
 	nuUpdateData('save');
 
 }
@@ -3008,4 +3012,44 @@ function nuWindowPosition(){
 	window.nuWindowSize			= {width:w, height:h};
 	
 }
+
+function nuHasDuplicates(){
+	
+	$('.nuTabHolder.nuDuplicate').each(function( index ) {
+		
+		var f	= $(this).html();
+		var s	= $(this).attr('data-nu-subform');
+		var sf	= nuSubformObject(s);
+		var a	= [];
+		var c	= sf.fields.indexOf(f);
+		
+		for(var i = 0 ; i < sf.rows.length ; i++){
+			
+			if(sf.deleted[i] == 0){
+					
+				var rv	= sf.rows[i][c];
+				
+				if(a.indexOf(rv) != -1){
+					
+					nuMessage(['Duplicate <b>' + f + '</b> on row <b>' + i + '</b>']);
+					
+					return true;
+					
+				}
+				
+				a.push(sf.rows[i][c]);
+				
+			}
+			
+		}
+		
+	});
+	
+	return false;
+	
+}
+
+
+
+
 
