@@ -280,12 +280,12 @@ function nuGetLookupId(pk, id){
 
 	var successCallback = function(data,textStatus,jqXHR){		
 	
-		var fm 	= data;
+		nuSERVERRESPONSELU 	= data;
 
-		if(!nuDisplayError(fm)){
+		if(!nuDisplayError(data)){
 			
 			$('#' + id).change();	
-			nuPopulateLookup(fm, id);
+			nuPopulateLookup(data, id);
 			
 		}
 		
@@ -322,12 +322,10 @@ function nuGetLookupCode(e){
 	
 	var successCallback = function(data,textStatus,jqXHR){		
 		
-		var fm 			= data;
+		nuSERVERRESPONSELU 	= data;
 	
-		if(!nuDisplayError(fm)){
-
-			nuChooseOneLookupRecord(e, fm);
-			
+		if(!nuDisplayError(data)){
+			nuChooseOneLookupRecord(e, data);
 		}
 			
 	};

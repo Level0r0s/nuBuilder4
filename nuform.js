@@ -17,6 +17,7 @@ function nuBuildForm(f){
 	window.nuBeforeSave			= null;
 	window.nuBrowseFunction		= window.nuDefaultBrowseFunction;
 	window.nuSERVERRESPONSE		= f;
+	window.nuSERVERRESPONSELU	= [];
 	window.nuSESSION			= f.session_id;
 	window.nuSUBFORMROW			= [];
 	window.nuHASH				= [];                       //-- remove any hash variables previously set.
@@ -2237,6 +2238,8 @@ function nuPopulateLookup(fm, target){
 		
 
 	}
+	
+	eval(fm.lookup_javascript);
 	
 	$('#dialogClose').click();
 

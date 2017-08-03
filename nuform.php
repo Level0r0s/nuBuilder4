@@ -473,9 +473,11 @@ function nuGetAllLookupValues(){
 	$_POST['nuHash']['LOOKUP_RECORD_ID'] = $l[0][1];
 
 	$e						= nuGetOtherLookupValues($o);
-	$m						= array_merge($l, $e);
-
-	return $m;
+	$f						= new stdClass;
+	$f->lookup_values		= array_merge($l, $e);
+	$f->lookup_javascript	= $r->sob_lookup_javascript;
+	
+	return $f;
 	
 }
 
@@ -539,6 +541,7 @@ function nuGetAllLookupList(){
 	$code			= $r->sob_lookup_code;
 	$description	= $r->sob_lookup_description;
 	$form_id		= $r->sob_lookup_zzzzsys_form_id;
+	$js				= $r->sob_lookup_javascript;
 
 	nuBeforeBrowse($form_id);
 	
@@ -567,7 +570,11 @@ function nuGetAllLookupList(){
 		$a[]		= $r;
 	}
 
-	return $a;
+	$f						= new stdClass;
+	$f->lookup_values		= $a;
+	$f->lookup_javascript	= $js;
+	
+	return $f;
 	
 }
 
