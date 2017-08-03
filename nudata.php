@@ -108,9 +108,44 @@ function nuValidateSubforms(){
 	
 	for($d = 0 ; $d < count($nudata) ; $d++){
 		
-		$sf			= $nudata[$d];
+		$sf	= $nudata[$d];
+		$a	= [];
+		$s	= 'SELECT sob_subform_zzzzsys_form_id, sob_all_label FROM zzzzsys_object WHERE zzzzsys_object_id = ? ';						//-- get Form
+		$t	= nuRunQuery($s, [$sf->object_id]);
+		$r	= db_fetch_row($t);
+		$f	= $r[0]==''?$sf->object_id:$r[0];
+		$l	= $r[1];
+		$s	= 'SELECT sob_all_id AS id, sob_all_validate AS validate FROM zzzzsys_object WHERE sob_all_zzzzsys_form_id  = ? ';	//-- get Objects
+		$t	= nuRunQuery($s, [$f]);
 		
-		//nudebug($sf);
+		while($r = db_fetch_object($t)){
+			$a[$r->id]	= $r->validate;
+		}
+		
+		for($i = 0 ; $i < count($sf->rows) ; $i++){
+				
+			for($I = 1 ; $I < count($sf->fields) ; $I++){
+				
+				$fld	= $sf->fields[$I];
+				$val	= $a[$fld];
+				$del	= count($sf->fields) - 1;
+				
+				if($val == 1){					//-- no blanks
+				
+					if($sf->rows[$i][$I] == '' and $sf->rows[$i][$del] == 0){
+						
+						$lab	= $d == 0 || $l == '' ? '' : "($l)";
+						$noz	= $i + 1;
+						
+						nuDisplayError("'$fld'  on row $noz cannot be left blank $lab");
+						
+					}
+					
+				}
+				
+			}
+			
+		}
 		
 	}
 	
@@ -240,7 +275,7 @@ function nuUpdateTables(){
 		
 	}
 	
-	//nudebug($S);
+	nudebug($S);
 	
 }
 
@@ -550,7 +585,6 @@ function nuFormatValue($row, $i){
 	$t			= nuRunQuery($s, array($form_id, $field));
 	$r			= db_fetch_object($t);
 	
-		nudebug($row['v'][$i], $r);
 	if($r->sob_all_type == 'select' and $r->sob_select_multiple == '1' and $row['v'][$i] != ''){
 		return json_encode($row['v'][$i]);
 		

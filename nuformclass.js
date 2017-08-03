@@ -394,7 +394,7 @@ class nuFormObject {
 			var table	= $('#nuRECORD').attr('data-nu-table');
 			var sel		= '#nuRECORD';
 			var sf		= 'nuRECORD';
-			var oi		= '';
+			var oi		= nuFORM.getCurrent().form_id;
 			var fk		= '';
 			var pk		= $('#nuRECORD').attr('data-nu-primary-key-name');
 		

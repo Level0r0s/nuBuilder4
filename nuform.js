@@ -2625,7 +2625,7 @@ function nuDeleteAllAction(){
 	
     if (confirm("Delete This Record?")) {
 
-		$("[id$='nuDelete']").prop('checked', true);
+//		$("[id$='nuDelete']").prop('checked', true);
 		
 		nuUpdateData('delete', 'all');
 		
