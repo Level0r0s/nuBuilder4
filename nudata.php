@@ -110,34 +110,56 @@ function nuValidateSubforms(){
 		
 		$sf	= $nudata[$d];
 		$a	= [];
+		$L	= [];
 		$s	= 'SELECT sob_subform_zzzzsys_form_id, sob_all_label FROM zzzzsys_object WHERE zzzzsys_object_id = ? ';						//-- get Form
 		$t	= nuRunQuery($s, [$sf->object_id]);
 		$r	= db_fetch_row($t);
 		$f	= $r[0]==''?$sf->object_id:$r[0];
 		$l	= $r[1];
-		$s	= 'SELECT sob_all_id AS id, sob_all_validate AS validate FROM zzzzsys_object WHERE sob_all_zzzzsys_form_id  = ? ';	//-- get Objects
+		$s	= 'SELECT sob_all_id AS id, sob_all_label AS label, sob_all_validate AS validate FROM zzzzsys_object WHERE sob_all_zzzzsys_form_id  = ? ';			//-- get Objects
 		$t	= nuRunQuery($s, [$f]);
 		
 		while($r = db_fetch_object($t)){
 			$a[$r->id]	= $r->validate;
+			$L[$r->id]	= $r->label;
 		}
 		
 		for($i = 0 ; $i < count($sf->rows) ; $i++){
 				
 			for($I = 1 ; $I < count($sf->fields) ; $I++){
 				
-				$fld	= $sf->fields[$I];
-				$val	= $a[$fld];
-				$del	= count($sf->fields) - 1;
+				$fld			= $sf->fields[$I];
+				$val			= $a[$fld];
+				$label			= '<b>' . $L[$fld] . '</b>';
+				$notDeleted 	= $sf->deleted[$i] == 0;
+				$slabel			= $l == '' ? '' : "($l)";
+				$noz			= $i + 1;
 				
-				if($val == 1){					//-- no blanks
+				if($val == 1){																//-- no blanks
 				
-					if($sf->rows[$i][$I] == '' and $sf->rows[$i][$del] == 0){
+					if($sf->rows[$i][$I] == '' and $notDeleted){
+
+						if($d == 0){
+							nuDisplayError("$label cannot be left blank");
+						}else{
+							nuDisplayError("$label on row $noz cannot be left blank $slabel");
+						}
 						
-						$lab	= $d == 0 || $l == '' ? '' : "($l)";
-						$noz	= $i + 1;
+					}
+					
+				}
+				
+				if($val == 2){																//-- no duplicates
+				
+					$dupe	= nuDuplicate($sf, $i, $I);
+				
+					if($dupe and $notDeleted){
 						
-						nuDisplayError("'$fld'  on row $noz cannot be left blank $lab");
+						if($d == 0){
+							nuDisplayError("$label has a duplicate");
+						}else{
+							nuDisplayError("$label on row $noz has a duplicate $slabel");
+						}
 						
 					}
 					
@@ -148,6 +170,20 @@ function nuValidateSubforms(){
 		}
 		
 	}
+	
+}
+
+
+function nuDuplicate($S, $R, $F){
+	
+	$f		= $S->fields[$F];
+	$i		= $S->rows[$R][0];
+	$v		= $S->rows[$R][$F];
+	$sql	= "SELECT $S->primary_key FROM $S->table WHERE $f = ? AND $S->primary_key != ? ";
+	$t		= nuRunQuery($sql, [$v, $i]);
+	$r		= db_num_rows($t);
+	
+	return $r > 0;
 	
 }
 

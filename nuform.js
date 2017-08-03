@@ -2612,7 +2612,7 @@ function nuDeleteAction(){
 	
     if (confirm("Delete This Record?")) {
 
-		$("[id$='nuDelete']").prop('checked', true);
+		$('#nuDelete').prop('checked', true);
 		
 		nuUpdateData('delete');
 		
@@ -2625,7 +2625,7 @@ function nuDeleteAllAction(){
 	
     if (confirm("Delete This Record?")) {
 
-//		$("[id$='nuDelete']").prop('checked', true);
+		$('#nuDelete').prop('checked', true);
 		
 		nuUpdateData('delete', 'all');
 		
