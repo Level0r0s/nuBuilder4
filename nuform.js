@@ -2229,11 +2229,16 @@ function nuPopulateLookup(fm, target){
 			if(f[i][1] == '1'){
 				$('#' + id).prop('checked', true); 
 			}else{
-				$('#' + id).prop('checked', true);
+				$('#' + id).prop('checked', false);
 			}
 			
 		}else{
 			$('#' + id).val(f[i][1]);
+			
+			if(id != target + 'code'){
+				$('#' + id).change();
+			}
+			
 		}
 		
 
