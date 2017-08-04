@@ -200,7 +200,7 @@ function nuDuplicate($S, $R, $F){
 
 function nuUpdateTables(){
 	
-	//nuValidateSubforms();
+	nuValidateSubforms();
 
 	$nudata	= $_POST['nuHash']['nuFORMdata'];
 	$rid	= $_POST['nuHash']['record_id'];

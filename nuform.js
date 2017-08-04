@@ -2662,9 +2662,9 @@ function nuCloneAction(){
 
 function nuSaveAction(){
 	
-console.log(nuHasDuplicates()?'yes':'no');
-	
-	nuUpdateData('save');
+	if(nuNoDuplicates()){
+		nuUpdateData('save');
+	}
 
 }
 
@@ -3013,15 +3013,19 @@ function nuWindowPosition(){
 	
 }
 
-function nuHasDuplicates(){
+function nuNoDuplicates(){
 	
+	var r	= true;
+
 	$('.nuTabHolder.nuDuplicate').each(function( index ) {
 		
-		var f	= $(this).html();
+		var t	= $(this).html();
+		var f	= $(this).attr('data-nu-field');
 		var s	= $(this).attr('data-nu-subform');
 		var sf	= nuSubformObject(s);
 		var a	= [];
 		var c	= sf.fields.indexOf(f);
+		window.nuDuplicate	= true;
 		
 		for(var i = 0 ; i < sf.rows.length ; i++){
 			
@@ -3031,9 +3035,11 @@ function nuHasDuplicates(){
 				
 				if(a.indexOf(rv) != -1){
 					
-					nuMessage(['Duplicate <b>' + f + '</b> on row <b>' + i + '</b>']);
+					nuMessage(['Duplicate <b>' + t + '</b> on row <b>' + i + '</b>']);
 					
-					return true;
+					window.nuDuplicate	= false;
+					
+					return;
 					
 				}
 				
@@ -3044,8 +3050,8 @@ function nuHasDuplicates(){
 		}
 		
 	});
-	
-	return false;
+
+	return window.nuDuplicate;
 	
 }
 
