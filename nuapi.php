@@ -22,10 +22,9 @@
 	$_POST['nuHash']['PREVIOUS_RECORD_ID'] 	= $R;
 	$_POST['nuHash']['RECORD_ID'] 			= $R;
 	$_POST['nuHash']['FORM_ID'] 			= $F;
-	$_POST['nuHash']['nuFORMdata']			= json_decode(json_encode($_POST['nuSTATE']['nuFORMdata']));
+	$_POST['nuHash']['nuFORMdata']			= json_decode(json_encode($_POST['nuSTATE']['nuFORMdata']));		//-- this holds data from an Edit Form
 	$_POST['nuHash']['TABLE_ID'] 			= nuTT();
 	$_POST['nuHash']['SESSION_ID'] 			= $_SESSION['SESSION_ID'];
-	$_POST['nuHash']['data']				= $_POST['nuSTATE']['data'];
 	$_POST['nuValidate']					= array();
 
 	$CT										= $P['call_type'];
@@ -37,7 +36,6 @@
     	if($CT == 'getform')		{nuBeforeEdit($F, $R);$f->forms[0] 	= nuGetFormObject($F, $R, 0, $P);}
     	if($CT == 'getphp')			{nuBeforeEdit($F, $R);$f->forms[0] 	= nuGetFormObject($F, $R, 0, $P);}
     	if($CT == 'getreport')		{nuBeforeEdit($F, $R);$f->forms[0] 	= nuGetFormObject($F, $R, 0, $P);}
-//    	if($CT == 'update')			{$f->forms[0]->record_id			= nuUpdateData(); nuUpdateTables();}
     	if($CT == 'update')			{$f->forms[0]->record_id			= nuUpdateTables();}
     	if($CT == 'getlookupid')	{$f->forms[0]				 		= nuGetAllLookupValues();}
     	if($CT == 'getlookupcode')	{$f->forms[0]				 		= nuGetAllLookupList();}

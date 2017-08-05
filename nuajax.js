@@ -194,7 +194,6 @@ function nuRunPHP(f, iframe){
 	last.call_type 			= 'runphp';
 	last.form_id  			= f;
 	last.record_id			= r;
-	last.data 				= nuGetFormData();
 	last.nuFORMdata			= nuFORM.data();
 	last.hash  				= nuHashFromEditForm();
 	
@@ -235,7 +234,6 @@ function nuRunPHPHidden(i){
 	last.form_id  			= 'doesntmatter';
 	last.hash_record_id		= last.record_id;
 	last.record_id			= i;								//-- php code
-	last.data 				= nuGetFormData();
 	last.nuFORMdata			= nuFORM.data();
 	last.hash  				= nuHashFromEditForm();
 	
@@ -379,7 +377,6 @@ function nuUpdateData(action, instruction){
 	
 	last.call_type 			= 'update';
 	last.deleteAll 			= $('#nuDelete').is(":checked") ? 'Yes' : 'No';
-	last.data 				= nuGetFormData();
 	last.nuFORMdata			= nuFORM.data(action);
 	last.hash 				= nuHashFromEditForm();
 	last.session_id 		= window.nuSESSION;

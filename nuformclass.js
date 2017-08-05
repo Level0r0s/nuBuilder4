@@ -390,7 +390,7 @@ class nuFormObject {
 		
 		if(sf == ''){
 			
-			id			= 'nuBuilder4Form';
+			id			= 'nuBuilder4EditForm';
 			var table	= $('#nuRECORD').attr('data-nu-table');
 			var sel		= '#nuRECORD';
 			var sf		= 'nuRECORD';
