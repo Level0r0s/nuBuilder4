@@ -2484,35 +2484,6 @@ function nuChange(e){
 	nuAddSubformRow(t, e);
 	
 }
-/*
-//function nuChangeFile(e){
-
-	if(e.target.id.substr(-8) == 'nuDelete'){
-		
-		nuHasBeenEdited();
-		return;
-		
-	}
-		
-	var t	= $('#' + e.target.id)[0];
-	var p	= $('#' + t.id).attr('data-nu-prefix');
-	
-	nuReformat(t);
-	
-	$('#' + p + 'nuDelete').prop('checked', false);
-	$('#' + t.id).addClass('nuEdited');
-	nuHasBeenEdited();
-	
-	$('#nuCalendar').remove();
-	$('#' + t.id).removeClass('nuValidate');
-	nuCalculateForm();
-
-	if(p == ''){return;}
-
-	nuAddSubformRow(t, e);
-	
-}
-*/
 
 function nuChangeFile(e){
 
@@ -3015,7 +2986,7 @@ function nuWindowPosition(){
 
 function nuNoDuplicates(){
 	
-	var r	= true;
+	window.nuDuplicate	= true;
 
 	$('.nuTabHolder.nuDuplicate').each(function( index ) {
 		
@@ -3025,7 +2996,6 @@ function nuNoDuplicates(){
 		var sf	= nuSubformObject(s);
 		var a	= [];
 		var c	= sf.fields.indexOf(f);
-		window.nuDuplicate	= true;
 		
 		for(var i = 0 ; i < sf.rows.length ; i++){
 			
