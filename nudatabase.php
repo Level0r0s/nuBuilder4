@@ -109,8 +109,7 @@ $trace
 function db_is_auto_id($table, $pk){
 
 	$s		= "SHOW COLUMNS FROM `$table` WHERE `Field` = '$pk'";
-nudebug($s);
-	$t      = nuRunQuery($s);   //-- mysql's way of checking if its an auto-incrementing id primary key
+	$t      = nuRunQuery($s);   									//-- mysql's way of checking if its an auto-incrementing id primary key
 	$r      = db_fetch_object($t);
 	
 	return $r->Extra == 'auto_increment';

@@ -2149,9 +2149,10 @@ function nuEmailReportAction(id) {
 }
 
 function nuSortBrowse(c){
-	
+
 	var l					= window.nuFORM.getCurrent();
 	l.filter				= $('#nuFilter').val();
+	l.page_number			= 0;
 	
 	if(c == l.sort){
 		l.sort_direction	= l.sort_direction == 'asc' ? 'desc' : 'asc';
@@ -2165,6 +2166,7 @@ function nuSortBrowse(c){
 	nuSearchAction();
 	
 }
+
 
 function nuGetPage(p){
 
@@ -2182,7 +2184,6 @@ function nuGetPage(p){
 	B.page_number = P - 1;
 	
 	nuSearchAction();
-	
 	
 }
 
