@@ -35,7 +35,7 @@ class nuFormObject {
 	}
 	
 	scrollList(e, l){
-
+		
 		if(this.scroll[e.target.id] === undefined){
 			
 			this.scroll[e.target.id]	= {'list' : l, 'index' : 0};
@@ -58,7 +58,7 @@ class nuFormObject {
 
 		var s	= this.scroll[e.target.id];
 		
-		if(event.keyCode == 38){
+		if(e.keyCode == 38){
 			
 			s.index --;
 			
@@ -66,7 +66,7 @@ class nuFormObject {
 				this.scroll[e.target.id].index = s.list.length -1;
 			}
 			
-		}else if(event.keyCode == 40){
+		}else if(e.keyCode == 40){
 			
 			s.index ++;
 

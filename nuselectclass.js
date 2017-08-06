@@ -855,12 +855,12 @@ function nuUp(e){
 function nuDown(e){
 
 	var el						= $(e.target);
-	window.nuCurrentID			= event.target.id;
+	window.nuCurrentID			= e.target.id;
 	
 	if(el.hasClass('nuTableName')){
 
-		window.nuY				= event.clientY - parseInt($(event.target).parent().css('top'));
-		window.nuX				= event.clientX - parseInt($(event.target).parent().css('left'));
+		window.nuY				= e.clientY - parseInt($(e.target).parent().css('top'));
+		window.nuX				= e.clientX - parseInt($(e.target).parent().css('left'));
 
 	}
 
@@ -993,7 +993,7 @@ function nuAngle(){
 
 function nuChangeJoin(e){
 	
-	
+	debugger;
 	var v			= parent.$('#sse_json').val();
 	var j			= JSON.parse(v);
 	var i			= $(e.target).attr('data-nu-join');
