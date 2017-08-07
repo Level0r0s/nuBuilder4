@@ -246,7 +246,7 @@ function nuBuildFastForm($table, $form_type){
 
 		nuDisplayMessage("<h1>A $mess been created!</h1>");
 		nuDisplayMessage("<p>(There is now a Button called <b>$table</b> on the Testing tab of the Home Form)</p>");
-		nuDisplayMessage("<input type='button' value='Go to tab..' class='nuButton' onclick='nuGetBreadcrumb(0,2);'>");
+		nuDisplayMessage("<input type='button' value='Go to tab..' class='nuButton' onclick='nuGetBreadcrumb(0,3);'>");
 	
 	}
 

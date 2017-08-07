@@ -76,7 +76,7 @@ function nuGetBreadcrumb(bc, ind){
 		var b		= bc;
 		
 		if(a == 2){
-			nuFORM.breadcrumbs[b].tab_start[0].tabNumber	= String(ind);
+			nuOpenTab(ind);
 		}
 		
 	}
@@ -929,3 +929,16 @@ function nuClick(e){
 function addslashes(s){
     return (s + '').replace(/[\\"']/g, '\\$&').replace(/\u0000/g, '\\0');
 }
+
+function nuRemoveTab(i){
+	$('#nuTab' + i).remove();
+}
+
+function nuOpenTab(i){
+	$('#nuTab' + i).click();
+}
+
+
+
+
+
