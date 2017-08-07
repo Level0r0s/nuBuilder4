@@ -76,7 +76,7 @@ function nuGetBreadcrumb(bc, ind){
 		var b		= bc;
 		
 		if(a == 2){
-			nuFORM.breadcrumbs[b].tab_start[0].tabNumber	= String(ind);
+			nuOpenTab(ind);
 		}
 		
 	}
@@ -751,7 +751,6 @@ function nuHide(i){                 //-- Hide Edit Form Object
 		
 	}
 	
-//	$("[id$='nuDelete'][id^='" + i + "']").hide();
 
 }
 
@@ -921,7 +920,7 @@ function nuClick(e){
 		$('#nuOptionsListBox').remove();
 	}
 	
-	if($(e.target).attr('type') != 'nuDate'){
+	if($(e.target).attr('type') != 'nuDate' && !$(e.target).hasClass('nuCalendar')){
 		$('#nuCalendar').remove();
 	}
 	
@@ -930,3 +929,16 @@ function nuClick(e){
 function addslashes(s){
     return (s + '').replace(/[\\"']/g, '\\$&').replace(/\u0000/g, '\\0');
 }
+
+function nuRemoveTab(i){
+	$('#nuTab' + i).remove();
+}
+
+function nuOpenTab(i){
+	$('#nuTab' + i).click();
+}
+
+
+
+
+

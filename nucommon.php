@@ -323,14 +323,15 @@ function nuSetHashList($p){
 
 		if(is_object($f) ){
 			
-			foreach ($f as $fld => $value ){								//-- add parent Breadcrumb Object
+			foreach ($f as $fld => $value ){								//-- This Edit Form's Object Values
 				$r[$fld] = addslashes($value);
 			}
 			
 		}
 	}
+	
 
-	foreach ($p as $key => $value){
+	foreach ($p as $key => $value){											//-- The 'opener' Form's properties
 
 		if(gettype($value) == 'string'){
 			$h[$key]			= addslashes($value);
@@ -340,13 +341,28 @@ function nuSetHashList($p){
 		
 	}
 
+	if(isset($p['hash'])){
+		
+		foreach ($p['hash'] as $key => $value){								//-- The 'opener' Form's hash variables
+
+			if(gettype($value) == 'string'){
+				$h[$key]			= addslashes($value);
+			}else{
+				$h[$key]			= '';
+			}
+			
+		}
+		
+	}
+
+	
 	$h['PREVIOUS_RECORD_ID']	= addslashes($rid);
 	$h['RECORD_ID']				= addslashes($rid);
 	$h['FORM_ID']				= addslashes($fid);
 	$h['SUBFORM_ID']			= addslashes($_POST['nuSTATE']['object_id']);
 	$h['ID']					= addslashes($_POST['nuSTATE']['primary_key']);
 	$h['CODE']					= addslashes($_POST['nuSTATE']['code']);
-
+	
 	return array_merge($r, $h, $A);
 
 }
@@ -731,9 +747,9 @@ function nuGetUserAccess(){
 	$j					= json_decode($r->sss_access);
 	
 	$A['USER_ID']		= $j->session->zzzzsys_user_id;
-	$A['USER_GROUP_ID']	= $j->session->zzzzsys_user_group_id;
+	$A['USER_GROUP_ID']	= $j->session->zzzzsys_access_level_id;
 	$A['HOME_ID']		= $j->session->zzzzsys_form_id;
-	$A['global_access']	= $j->session->global_access;
+	$A['GLOBAL_ACCESS']	= $j->session->global_access;
 	
 	return $A;
 	
@@ -997,6 +1013,9 @@ function nuBuildTempTable($id, $tt, $rd = 0){
 		}
 		
 		$p			= nuReplaceHashVariables($c);
+		$p			= addslashes($p);
+		$tt			= addslashes($tt);
+		
 		$P			= "	nuRunQuery('CREATE TABLE $tt $p');";
 		
 		eval($P);
@@ -1064,5 +1083,23 @@ function nuCreateFile($j){
 function nuHash(){
 	return $_POST['nuHash'];
 }
+
+
+function nuBuildTableSchema(){
+
+	$a				= array();
+	$t				= nuRunQuery("SELECT table_name FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = DATABASE()");
+
+	while($r = db_fetch_object($t)){
+		
+		$tn			= $r->table_name;
+		$a[$tn] 	= array('names' => db_field_names($tn), 'types' => db_field_types($tn), 'primary_key' => db_primary_key($tn));
+		
+	}
+	
+	return $a;
+
+}
+
 
 ?>

@@ -239,22 +239,23 @@ class nuSelectObject{
 	
 	buildFrom(){
 			
-		var THIS		= this;
-		this.tempTables	= this.usedTables();
-		this.tempJoins	= this.getJoinObjects();													//-- current visible joins
+		var THIS			= this;
+		this.tempTables		= this.usedTables();
+		this.tempJoins		= this.getJoinObjects();													//-- current visible joins
 		
 		for(var i = 0 ; i < this.tempTables.length ; i++){
 
 			if(this.tempTables[i].used != -1){
 		
+				var f		= this.tempTables.sort(torder);
 				var more	= true;
-//				var defined	= [this.tempTables[i].alias];						//-- growing list of used tables
 				var t		= this.tempTables[i].table;
 				var a		= this.tempTables[i].alias;
-				var A		= this.justAlias(t, t==a?'':a);
+				var A		= this.fromAlias(f[0].table, f[0].alias);
 				var defined	= [A];												//-- growing list of used tables
 				var ob		= {};
 				var s		= '';
+				var F		= [];
 				
 				while(more){
 					
@@ -266,7 +267,9 @@ class nuSelectObject{
 						
 						var a1		= ob.type == 'LEFT' ? "\n        LEFT JOIN " :  "\n        JOIN ";
 						
-						if(defined.indexOf(ob.aliases[0]) == -1){
+						var a		= this.justAlias(ob.tables[0], ob.aliases[0]);
+						
+						if(defined.indexOf(a) == -1){
 							
 							var a2	= this.buildAlias(ob.tables[0], ob.aliases[0]);
 							A		= this.justAlias(ob.tables[0], ob.aliases[0]);
@@ -367,7 +370,7 @@ class nuSelectObject{
 		}
 		
 		T.sort(uses);
-		
+
 		return T;
 		
 	}
@@ -549,7 +552,7 @@ class nuSelectObject{
 			
 			var T	= c[i][1];
 			var F	= c[i][2];
-			var C	= addslashes(c[i][3]);
+			var C	= c[i][3];
 			var S	= c[i][4];
 			var cl	= F != '' && C != '';			//-- valid statement for WHERE and HAVING
 			var gr	= F != '' && S != '';			//-- valid statement for ORDER BY and GROUP BY
@@ -561,7 +564,7 @@ class nuSelectObject{
 
 		}
 
-		if(WHERE.length > 0){clauses	+= "\n\nWHERE\n    "	+ WHERE.join(" AND \n    ") 	+ "\n";}
+		if(WHERE.length > 0){clauses	+= "\n\nWHERE\n    ("	+ WHERE.join(" AND \n    ") 	+ ")\n";}
 		if(GROUPBY.length > 0){clauses	+= "\nGROUP BY\n    " 	+ GROUPBY.join(",\n    ") 		+ "\n";}
 		if(HAVING.length > 0){clauses	+= "\nHAVING\n    " 	+ HAVING.join(" AND \n    ") 	+ "\n";}
 		if(ORDERBY.length > 0){clauses	+= "\nORDER BY\n    " 	+ ORDERBY.join(",\n    ") 		+ "\n";}
@@ -852,12 +855,12 @@ function nuUp(e){
 function nuDown(e){
 
 	var el						= $(e.target);
-	window.nuCurrentID			= event.target.id;
+	window.nuCurrentID			= e.target.id;
 	
 	if(el.hasClass('nuTableName')){
 
-		window.nuY				= event.clientY - parseInt($(event.target).parent().css('top'));
-		window.nuX				= event.clientX - parseInt($(event.target).parent().css('left'));
+		window.nuY				= e.clientY - parseInt($(e.target).parent().css('top'));
+		window.nuX				= e.clientX - parseInt($(e.target).parent().css('left'));
 
 	}
 
@@ -990,7 +993,7 @@ function nuAngle(){
 
 function nuChangeJoin(e){
 	
-	
+	debugger;
 	var v			= parent.$('#sse_json').val();
 	var j			= JSON.parse(v);
 	var i			= $(e.target).attr('data-nu-join');

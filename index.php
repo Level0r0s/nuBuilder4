@@ -47,9 +47,10 @@ function nuHeader(){
         die('nuBuilder cannot access the database. Please check your database configuration in config.php.');
     }
 
-//    $j = "//\n\n</script><script id='nuHeader'>$HTMLHeader\n\n</script>\n<script>\n\n";
+    $j  = "\n\n" . $HTMLHeader . "\n\n";
+//    $j .= "\n\nwindow.nuHeader = '" . addslashes($HTMLHeader) . "';\n\n";
     
-    return $HTMLHeader;
+    return $j;
     
 }
 
@@ -212,15 +213,13 @@ window.nuHASH			= [];
 	}
 	
 	</script>
-	<script id='nuHeader'>
+	<script id='nuheader'>
 $nuHeader
 
 
 	</script>
 	<script>
 	
-	window.nuHeader = $('#nuHeader').html();
-
 	";
 	
 	print $h;

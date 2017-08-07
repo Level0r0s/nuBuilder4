@@ -35,7 +35,7 @@ class nuFormObject {
 	}
 	
 	scrollList(e, l){
-
+		
 		if(this.scroll[e.target.id] === undefined){
 			
 			this.scroll[e.target.id]	= {'list' : l, 'index' : 0};
@@ -45,14 +45,20 @@ class nuFormObject {
 				if(e.target.value == l[i]){
 					this.scroll[e.target.id].index = i;
 				}
+				
 			}
+			
 		}
 
-		this.scroll[e.target.id].list	= l;
+		if(JSON.stringify(this.scroll[e.target.id].list) != JSON.stringify(l)){
+			this.scroll[e.target.id].index = 0;
+		}
 		
+		this.scroll[e.target.id].list	= l;
+
 		var s	= this.scroll[e.target.id];
 		
-		if(event.keyCode == 38){
+		if(e.keyCode == 38){
 			
 			s.index --;
 			
@@ -60,7 +66,7 @@ class nuFormObject {
 				this.scroll[e.target.id].index = s.list.length -1;
 			}
 			
-		}else if(event.keyCode == 40){
+		}else if(e.keyCode == 40){
 			
 			s.index ++;
 
@@ -384,11 +390,11 @@ class nuFormObject {
 		
 		if(sf == ''){
 			
-			id			= 'nuBuilder4Form';
+			id			= 'nuBuilder4EditForm';
 			var table	= $('#nuRECORD').attr('data-nu-table');
 			var sel		= '#nuRECORD';
 			var sf		= 'nuRECORD';
-			var oi		= '';
+			var oi		= nuFORM.getCurrent().form_id;
 			var fk		= '';
 			var pk		= $('#nuRECORD').attr('data-nu-primary-key-name');
 		
@@ -437,6 +443,10 @@ class nuFormObject {
 
 				if(typ == 'checkbox'){
 					val			= $('#' + this.id).prop("checked") ? 1 : 0 ;
+				}
+				
+				if(typeof($('#' + this.id).val()) == 'object'){						//-- multi SELECT Object
+					val			= JSON.stringify($('#' + this.id).val());
 				}
 				
 				V[C]			= nuFORM.removeFormatting(val, dnf);
