@@ -102,7 +102,8 @@ function nuDuplicate($S, $R, $F){
 function nuUpdateTables(){
 	
 	nuValidateSubforms();
-
+	
+	$tableSchema	= nuBuildTableSchema();
 	$nudata			= $_POST['nuHash']['nuFORMdata'];
 	$nuMainID		= $_POST['nuHash']['record_id'];
 	$fid			= $_POST['nuHash']['form_id'];
@@ -173,8 +174,8 @@ function nuUpdateTables(){
 					$isAN	= in_array($fields[$R], $auto);
 
 					if($edit[$R] == 1 or $isAN){														//-- has been edited
-					
-						if(in_array($fields[$R], $_SESSION['tableSchema'][$table]['names'])){			//-- valid field names
+nudebug($tableSchema)					;
+						if(in_array($fields[$R], $tableSchema[$table]['names'])){			//-- valid field names
 
 							if($isAN){
 								$v	= nuAutoNumber($sf->object_id, $fields[$R], $row[$R]);
@@ -251,8 +252,6 @@ function nuUpdateTables(){
 	}
 
 	if(count($_POST['nuErrors']) > 0){return;}
-
-//	nudebug($S);
 
 	for($i = 0 ; $i < count($S) ; $i++){
 		
