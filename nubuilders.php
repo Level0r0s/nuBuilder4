@@ -4,7 +4,12 @@ function nuBuildFastForm($table, $form_type){
 
 	$form_id		= nuID();
 	$PK				= $table . '_id';
-	$newT			= true;
+	$newT			= $form_type != 'launch';
+	
+	if($form_type == 'launch'){
+		$table 		= 'Launch Form';
+	}
+	
 	$q				= nuRunQuery("SELECT table_name FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = DATABASE()");
 
 	while($tableSchemaOBJ = db_fetch_object($q)){
@@ -230,6 +235,7 @@ function nuBuildFastForm($table, $form_type){
 						sob_all_width,
 						sob_all_height,
 						sob_run_zzzzsys_form_id,
+						sob_run_id,
 						sob_run_method,
 						sob_all_cloneable,
 						sob_all_validate,
@@ -237,11 +243,11 @@ function nuBuildFastForm($table, $form_type){
 						sob_all_align,
 						sob_all_type)
 						VALUES
-						(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+						(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 
 		";
-
-		$array          = Array(nuID(), 'nuhome', 'nutesttab', "ff$form_id", $table, $table, 11, 63, 250, 150, 30, $form_id, 'b', 0, 0, 0, 'center', 'run');
+		$record_id		= substr($form_type, 0, 6) == 'browse' ? '' : '-1';
+		$array          = Array(nuID(), 'nuhome', 'nutesttab', "ff$form_id", $table, $table, 11, 63, 250, 150, 30, $form_id, $record_id, 'b', 0, 0, 0, 'center', 'run');
 		nuRunQuery($sql, $array);
 
 		nuDisplayMessage("<h1>A $mess been created!</h1>");
