@@ -2529,20 +2529,6 @@ function nuChangeFile(e){
 }
 
 
-function nuGetCSV(e){
-
-    var r 			= new FileReader();
-	var f 			= e.target.files[0];
-	
-	r.onload 		= function(){
-		console.log(r.result);
-	};
-	
-	r.readAsText(f);
-	
-}
-
-
 function nuCalculateForm(){	//-- calculate subform 'calcs' first
 	
     var subformFirst 	= function(b, a){
