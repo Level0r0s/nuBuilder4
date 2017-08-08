@@ -484,7 +484,6 @@ function nuINPUT(w, i, l, p, prop){
 					'text-align': prop.objects[i].align,
 					'position'	: 'absolute'
 	})
-	
 	.attr('onchange', input_type == 'file' ? 'nuChangeFile(event)' : 'nuChange(event)')
 	.attr('data-nu-field', input_type == 'button' || input_type == 'file' ? null : prop.objects[i].id)
 	.attr('data-nu-object-id', w.objects[i].object_id)
@@ -2530,6 +2529,20 @@ function nuChangeFile(e){
 }
 
 
+function nuGetCSV(e){
+
+    var r 			= new FileReader();
+	var f 			= e.target.files[0];
+	
+	r.onload 		= function(){
+		console.log(r.result);
+	};
+	
+	r.readAsText(f);
+	
+}
+
+
 function nuCalculateForm(){	//-- calculate subform 'calcs' first
 	
     var subformFirst 	= function(b, a){
@@ -3026,6 +3039,15 @@ function nuNoDuplicates(){
 	
 }
 
+function nuFormType(){
+	
+	if(nuFORM.record_id == ''){
+		return 'browse';
+	}else{
+		return 'edit';
+	}
+	
+}
 
 
 
