@@ -63,7 +63,7 @@ function removeOpenerById(o, pid) {
 
 }
 
-function nuGetBreadcrumb(bc, ind){
+function nuGetBreadcrumb(bc){
 	
 	var a			= arguments.length;
 	var e			= nuFORM.edited;
@@ -72,13 +72,7 @@ function nuGetBreadcrumb(bc, ind){
 	if(a == 0){
 		var b		= nuFORM.breadcrumbs.length -1;
 	}else{
-		
 		var b		= bc;
-		
-		if(a == 2){
-			nuOpenTab(ind);
-		}
-		
 	}
 	
 	if(e && f != 'launch'){

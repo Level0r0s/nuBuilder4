@@ -69,7 +69,7 @@ function nuBuildFastForm($table, $form_type){
 
 	";
 
-	$array          = Array($form_id, $form_type, $form_code, $form_desc, $table, $PK, "SELECT * FROM $table");
+	$array          = Array($form_id, $form_type, $form_code, $form_desc, $form_type=='launch'?'':$table, $form_type=='launch'?'':$PK, "SELECT * FROM $table");
 
 	nuRunQuery($sql, $array);
 
@@ -212,7 +212,6 @@ function nuBuildFastForm($table, $form_type){
 		
 		nuDisplayMessage("<h1>A $mess been created!</h1>");
 		nuDisplayMessage("<p>(There is now a Form with a Code of <b>$form_code</b> in the list found in <b>Forms</b>)");
-		nuDisplayMessage("<input type='button' value='Go to tab..' class='nuButton' onclick='nuGetBreadcrumb(0,0);'>");
 		
 	}else{
 	
@@ -251,8 +250,7 @@ function nuBuildFastForm($table, $form_type){
 		nuRunQuery($sql, $array);
 
 		nuDisplayMessage("<h1>A $mess been created!</h1>");
-		nuDisplayMessage("<p>(There is now a Button called <b>$table</b> on the Testing tab of the Home Form)</p>");
-		nuDisplayMessage("<input type='button' value='Go to tab..' class='nuButton' onclick='nuGetBreadcrumb(0,3);'>");
+		nuDisplayMessage("<p>(There is now a Button called <b>$table</b> on the <b>Testing</b> tab of the Home Form)</p>");
 	
 	}
 
