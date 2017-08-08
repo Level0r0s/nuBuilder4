@@ -2930,31 +2930,14 @@ function nuTotal(f){
 }
 
 
-function nuMessage(o, type){
+function nuMessage(o){
 	
-
-	if(arguments.length > 1){
-		
-		var icon = '';
-
-		if(type == 'error')	{icon	= 'nuerror';}
-		if(type == 'message'){icon	= 'numessage';}
-
-		var im	= ['<img src="' + icon + '" width="30px" height="30px" style="position:absolute;left:10px;top:10px"><br>'];
-
-		o		= im.concat(o);
-		
-	}
-
 	var par		= window.parent.document;
 	
 	$('#nuAlertDiv', par).remove();
 
-	if(o.length == 0){
-		return;
-	}
+	if(o.length == 0){return;}
 	
-	var c		= " onclick=\"$('#nuAlertDiv').remove();\"";
 	var widest	= 5;
 
 	for(var i = 0 ; i < o.length ; i++){
@@ -2962,10 +2945,9 @@ function nuMessage(o, type){
 	}
 
 	widest		= Math.min(widest + 200, 1000);
-	
 	var l		= (screen.width - widest) / 2;
+
 	$('body', par).append("<div id='nuAlertDiv' class='nuMessage' style='overflow:hidden;width:" + widest + "px;left:" + l + "px' ></div>")
-	$('#nuAlertDiv', par).prepend('<img id="nuOptionListClose" src="graphics/nuclose.png" class="nuClose" style="position:absolute;top:5px;left:5px" ' + c + ' width="20px" height="20px">')
 	
 	
 	for(var i = 0 ; i < o.length ; i++){

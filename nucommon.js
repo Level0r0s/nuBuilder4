@@ -914,6 +914,10 @@ function nuClick(e){
 		$('#nuOptionsListBox').remove();
 	}
 	
+	if(e.target.id != 'nuAlertDiv'){
+		$('#nuAlertDiv').remove();
+	}
+	
 	if($(e.target).attr('type') != 'nuDate' && !$(e.target).hasClass('nuCalendar')){
 		$('#nuCalendar').remove();
 	}
