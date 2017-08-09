@@ -55,7 +55,6 @@ function nuHeader(){
 }
 
 nuJSIndexInclude('jquery/jquery.js');
-nuJSIndexInclude('papaparse/papaparse.js');
 nuJSIndexInclude('nuformclass.js');
 nuJSIndexInclude('nuform.js');
 nuJSIndexInclude('nuformdrag.js');

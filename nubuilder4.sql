@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 09, 2017 at 11:30 PM
+-- Generation Time: Aug 10, 2017 at 01:14 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -145,7 +145,6 @@ INSERT INTO `zzzzsys_browse` (`zzzzsys_browse_id`, `sbr_zzzzsys_form_id`, `sbr_t
 ('568b508eeebdab9', '568b508eec00d80', 'Description', 'bus_description', 'l', '', 20, 300),
 ('56b00a4f9211103', '568b508eec00d80', 'Check', 'bus_check', 'l', '', 30, 50),
 ('56b3e7ba2bf880d', '5678ab2c48c5c41', 'Mobile', 'emp_mobile', 'l', '', 20, 200),
-('s15022557771534', 's15022557771526', 'Name', 'par_name', 'l', '', 10, 250),
 ('5707303158d2308', 'nuform', 'Code', 'sfo_code', 'l', '', 20, 100),
 ('570730315e6abb7', 'nuform', 'Description', 'sfo_description', 'l', '', 30, 400),
 ('570b3863e50cb98', 'nutab', 'Form', 'sfo_description', 'l', '', 20, 150),
@@ -243,8 +242,7 @@ INSERT INTO `zzzzsys_browse` (`zzzzsys_browse_id`, `sbr_zzzzsys_form_id`, `sbr_t
 ('s14985869611752', 's14967315763149', 'Code', 'com_code', 'l', '', 10, 100),
 ('s15014147222005', 's15014147222001', 'Name', 'emp_name', 'l', '', 10, 250),
 ('s15017688442348', 's15017688442340', 'Date', 'pay_date', 'l', '', 10, 250),
-('s15017688442349', 's15017688442340', 'Amount', 'pay_amount', 'l', '', 20, 250),
-('s15022557771535', 's15022557771526', 'DOB', 'par_dob', 'l', '', 20, 250);
+('s15017688442349', 's15017688442340', 'Amount', 'pay_amount', 'l', '', 20, 250);
 
 -- --------------------------------------------------------
 
@@ -377,7 +375,6 @@ INSERT INTO `zzzzsys_form` (`zzzzsys_form_id`, `sfo_type`, `sfo_code`, `sfo_desc
 ('5678ab2c48c5c41', 'edit', 'EMP', 'Employee Subform', 'employee', 'employee_id', '', 0, 0, 'SELECT * FROM employee\nWHERE emp_cost > 10\n', ''),
 ('568b508eec00d80', 'browseedit', 'BUS', 'Business', 'business', 'business_id', '', 0, 4, 'SELECT * FROM business', ''),
 ('nuhome', 'launch', 'HOME', 'Home', '', '', '', 0, 0, '', '$(\'.nuActionButton\').hide();\n\n$(\'#user_home\')\n    .css({\n        \'color\'             : \'white\',\n        \'font-size\'         : 13,\n        \'display\'           : \'inline\',\n        \'border-style\'      : \'solid\',\n        \'height\'            : 30,\n        \'font-size\'         : 16,\n        \'padding\'           : \'0px 6px 0px 6px\',\n        \'text-shadow\'       : \'0 1px 2px #9AB973\',\n        \'border-color\'      : \'#9AB973\',\n        \'border-width\'      : \'0px 0px 1px 0px\',\n        \'background-color\'  : \'#88cb51\'\n    });\n\n$(\'#open_database\')\n.attr(\'title\', \'PHPMyAdmin\')\n.click(function(){\n    window.open(\'nupmalogin.php\');\n});\n\nnuGetStartingTab();\n'),
-('s15022557771526', 'browseedit', 'FF1', 'Fast Form 1', 'parent', 'parent_id', '', 0, 0, 'SELECT * FROM parent', ''),
 ('nubrowse', 'subform', 'FRMBR', 'Browse Columns', 'zzzzsys_browse', 'zzzzsys_browse_id', '', 0, 5, 'SELECT * FROM zzzzsys_browse\nORDER BY sbr_order\n', '$(\'#nuSearchButton\').remove();\n$(\'#nuSearchField\').remove();\n$(\'#nuPrintButton\').remove();\n\nnuSetTitle($(\'#sbr_title\').val());\n\nvar pid = parent.nuFORM.getCurrent().record_id;\n\nif(nuFORM.getCurrent().record_id == -1){\n    $(\'#sbr_zzzzsys_form_id\').val(pid).change();\n}\n'),
 ('nutab', 'browseedit', 'TAB', 'Form Tab', 'zzzzsys_tab', 'zzzzsys_tab_id', '', 0, 0, 'SELECT * FROM zzzzsys_tab\nJOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id\nORDER BY syt_order', '\n$(\"[data-nu-column=\'nucolumn003\']\").each(function() {\n    $(this).addClass(\'nu_\'+this.innerHTML);\n});\n'),
 ('nuobject', 'browseedit', 'OBJECT', 'Object', 'zzzzsys_object', 'zzzzsys_object_id', '', 0, 0, 'SELECT * FROM zzzzsys_object\nJOIN #TABLE_ID# ON zzzzsys_object_id = theid\nJOIN zzzzsys_tab ON zzzzsys_tab_id = sob_all_zzzzsys_tab_id\nJOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id \n', '\n$(\'#zzzzsys_event_sfsev_javascript\').attr(\'id\',\'jsfuntitle\');\n$(\'#sob_calc_formula\').addClass(\'nuCalculatorCurrency\').css(\'font-size\', 12);\n$(\'#sob_all_display_condition\').addClass(\'sql\');\n$(\'#sob_all_default_value_sql\').addClass(\'sql\');\n$(\'#sob_display_sql\').addClass(\'sql\');\n$(\'#sob_select_sql\').addClass(\'sql\');\n$(\'#sob_lookup_php\').addClass(\'php\');\n$(\'#sob_lookup_javascript\').addClass(\'js\');\n$(\'#sob_input_javascript\').addClass(\'js\');\n$(\'#sob_html_code\').addClass(\'html\');\n$(\"[id$=\'sev_javascript\']\").addClass(\'js\');\n$(\"#title_zzzzsys_event_sfsev_javascript\").removeClass(\'js\');\n\n$(\'#di_sql\')\n.css(\'padding\', 1)\n.css(\'font-size\', 10);\n\n$(\'#se_sql\')\n.css(\'padding\', 1)\n.css(\'font-size\', 10);\n\nif($(\'#zzzzsys_event_sf000sev_event\').val() != \'\'){\n    $(\'#nuTab10\').css(\'font-weight\', \'bold\');\n}\n\nif(nuFORM.getCurrent().record_id == -1){\n        \n    $(\'#sob_all_top\').val(0);\n    $(\'#sob_all_left\').val(0);\n    $(\'#sob_all_validate\').val(0);\n    $(\'#sob_all_access\').val(0);\n    $(\'#sob_all_align\').val(\'left\');\n    $(\'#sob_all_cloneable\').val(1);\n\n}\n\nvar v           = $(\'#sob_input_type\').val();\n\nnuShowInputJS(v);\nnuHideCalcObjects();\nnuSetTitle($(\'#sob_all_id\').val());\n\nvar filter = String(window.filter).split(\'|\');\n\nif(filter[0] == \'fromfastform\'){\n    \n    $(\'#nuDeleteButton\').remove();\n    $(\'#nuCloneButton\').remove();\n    $(\'#nuSaveButton\').remove();\n    $(\'#sob_all_id\').val(filter[1]).addClass(\'nuHighlight\');\n    $(\'#sob_all_label\').val(filter[2]).addClass(\'nuHighlight\');\n    \n}\n\n\n\n$(\'.js\').dblclick(function() {nuOpenAce(\'Javascript\', this.id);});\n$(\'.sql\').dblclick(function() {nuOpenAce(\'SQL\', this.id);});\n$(\'.html\').dblclick(function() {nuOpenAce(\'HTML\', this.id);});\n$(\'.php\').dblclick(function() {nuOpenAce(\'PHP\', this.id);});\n\nnuObjectColor();\n\n$(\"[data-nu-column=\'nucolumn000\']\").each(function() {\n    $(this).addClass(\'nu_\'+this.textContent);\n});\n\nnuHide(\'sob_input_format\');\n\nvar sit = $(\'#sob_input_type\').val();\n\nif(sit == \'nuDate\' || sit == \'nuNumber\'){\n    nuShow(\'sob_input_format\');\n}\n\nif(sit == \'nuScroll\'){\n    nuShow(\'sob_input_javascript\');\n}else{\n    nuHide(\'sob_input_javascript\');\n}\n\nnuGetStartingTab();\n\n\nfunction nuObjectColor(){\n\n    $(\'.nuValidate\').removeClass(\'nuValidate\');\n\n\n	var o			= [];\n	o[\'run\']		= 1;\n	o[\'display\']	= 2;\n	o[\'select\']		= 3;\n	o[\'lookup\']		= 4;\n	o[\'subform\']	= 5;\n	o[\'image\']		= 6;\n	o[\'input\']		= 7;\n	o[\'html\']		= 8;\n	o[\'calc\']		= 9;\n\n    $(\'#sob_all_type\').addClass(\'nu_\'+$(\'#sob_all_type\').val());\n    \n    $(\"#sob_all_type > option\").each(function() {\n        $(this).addClass(\'nu_\'+this.value);\n    });\n	\n    $(\"#sob_input_type > option\").each(function() {\n        $(this).addClass(\'input_\'+this.value);\n    });\n	\n    var t   = o[$(\'#sob_all_type\').val()];\n    \n    $(\"[id^=\'nuTab\']\").removeClass(\'nuRelatedTab\');\n    \n    for(var i = 1 ; i < o.length ; i++){\n        $(\'#nuTab\' + i).removeClass(\'nuRelatedTab\');\n    }\n    \n    $(\'#nuTab0\').addClass(\'nuRelatedTab\');\n    $(\'#nuTab\' + t).addClass(\'nuRelatedTab\');\n    \n} \n\nfunction nuChooseEventList(){\n\n    if($(\'#sob_all_type\').val() == \'subform\'){\n        \n        return [\'beforeinsertrow\',\'afterinsertrow\'];\n    \n    }else{\n        \n        return [\'onblur\',\'onclick\',\'onchange\',\'onfocus\',\'onkeydown\'];\n    \n    }\n\n}\n\n\n\nfunction nuAddToFormula(e){\n    \n    var fld = e.target.innerHTML;\n    var frm = $(\'#sob_calc_formula\').val();\n    \n    if(fld == \'Clear\'){\n        \n        $(\'#sob_calc_formula\')\n        .val(\'\')\n        .addClass(\'nuEdited\');\n        return;\n        \n    }\n\n    $(\'#sob_calc_formula\')\n    .addClass(\'nuEdited\')\n    .val(frm + fld);\n    \n}\n\nfunction nuShowInputJS(t){\n\n    nuHide(\'sob_input_format\');\n    nuHide(\'sob_input_count\');\n    nuHide(\'sob_input_javascript\');\n    \n    if(t == \'nuScroll\'){\n        nuShow(\'sob_input_javascript\');\n    }\n\n    if(t == \'nuAutoNumber\'){\n        \n        nuShow(\'sob_input_count\');\n        $(\'#sob_input_javascript\').val(\'\').change();\n        \n    }\n\n    if(t == \'nuDate\' || t == \'nuNumber\'){\n        \n        nuShow(\'sob_input_format\');\n\n        $(\'#sob_input_format\').children().each(function(index) {\n            \n            $(this).show();\n            \n            if($(this).val()[0] == \'D\' && t != \'nuDate\')   {$(this).hide();}\n            if($(this).val()[0] == \'N\' && t != \'nuNumber\') {$(this).hide();}\n            \n        });\n        \n    }\n    \n}\n\n\nfunction nuHideCalcObjects(){\n\n    var f   = $(\'#sob_all_zzzzsys_form_id\').val();\n\n    $(\'#add_total\').children().each(function(index) {\n\n\n        if($(this).val() != f){\n            $(this).hide();\n        }\n        if($(this).text() == $(\'#sob_all_id\').val()){\n            $(this).hide();\n        }\n\n    });\n    \n}\n\n\nfunction nuAddCalcObject(){\n    \n    var f   = $(\'#sob_calc_formula\').val();\n    var t   = $(\'#add_total :selected\').text();\n    var s   = f + \"nuTotal(\'\" + t + \"\')\";\n    \n    if(t == \'\'){return;}\n\n    $(\'#sob_calc_formula\')\n    .addClass(\'nuEdited\')\n    .val(s);\n\n    $(\'#add_total\').val(\'\');\n    \n}\n'),
@@ -421,10 +418,7 @@ INSERT INTO `zzzzsys_form` (`zzzzsys_form_id`, `sfo_type`, `sfo_code`, `sfo_desc
 ('s14993014809858', 'browse', 'PANDS', 'PHP and SELECT ', 'zzzzsys_report_data', 'id', 'nuselect', 0, 0, 'SELECT * FROM zzzzsys_report_data', ''),
 ('nuuserhome', 'launch', 'USERH', 'Home', '', '', '', 0, 0, '', ''),
 ('s15014147222001', 'browse', 'EMPLU', 'Employee', 'employee', 'employee_id', '', 0, 0, 'SELECT * FROM employee', ''),
-('s15017688442340', 'subform', 'PAY', 'Payments', 'payment', 'payment_id', '', 0, 0, 'SELECT * FROM payment', ''),
-('nucsvtable', 'launch', 'CSV', 'CSV to Table', '', '', '', 0, 0, 'SELECT * FROM Launch Form', '\nfunction nuGetCSV(){\n\n    if($(\'#csv_file_file\')[0].files.length == 0){\n        \n        alert(\'Choose CSV File\');\n        \n        return;\n        \n    }\n    \n    var r       		= new FileReader();\n	var f 		    	= $(\'#csv_file_file\')[0].files[0];\n	\n	r.onload 		    = function(){\n        var c           = Papa.parse(r.result);\n        var h           = c.data[0];\n        \n        for(var i = 0 ; i < h.length ; i++){\n            \n            var n       = \'#csv_fields\' + nuPad3(i) + \'fieldname\';\n            $(n).val(h[i]);\n\n            var n       = \'#csv_fields\' + nuPad3(i) + \'fieldtype\';\n            $(n).val(\'text\').change();\n        }\n        \n        window.nuCSVData= c;\n        \n        var n       = \'#csv_fields\' + nuPad3(h.length) + \'nuRECORD\';\n        $(n).remove();\n        \n	};\n	\n	r.readAsText(f);\n	\n}\n\n\n'),
-('s15022188020419', 'subform', 'CSVFLD', 'CSV Fields', 'zzzzsys_debug', 'zzzzsys_debug_id', '', 0, 0, 'SELECT * FROM zzzzsys_debug', ''),
-('s15022555434626', 'subform', 'CHIFF', 'Child', 'children', 'children_id', '', 0, 0, 'SELECT * FROM children', '');
+('s15017688442340', 'subform', 'PAY', 'Payments', 'payment', 'payment_id', '', 0, 0, 'SELECT * FROM payment', '');
 
 -- --------------------------------------------------------
 
@@ -1011,13 +1005,11 @@ INSERT INTO `zzzzsys_object` (`zzzzsys_object_id`, `sob_all_zzzzsys_form_id`, `s
 ('s15022188020424', 's15022188020419', 'zzzzsys_browse', 'input', 'csv_ignore', 'Ignore', 's15022188020420', 30, 75, 150, 80, 18, '1', 'right', '0', '0', '', '', '', '', '', '', '', 'SELECT COUNT(*) FROM zzzzsys_debug', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 'N|$ 1,000.00', 'checkbox', '', '', ''),
 ('s15022190881406', 'nucsvtable', 'Launch Form', 'subform', 'csv_fields', 'First Row Field Names', 's15022120452734', 40, 165, 150, 352, 200, '1', 'right', '0', '0', '', '', '', '', '', '', '', 'SELECT COUNT(*) FROM zzzzsys_debug', '', '', '', '', '', '', '', '', '', '', 's15022188020419', 'deb_message', '1', '1', 'g', 'zzzzsys_debug', 89, 'N|$ 1,000.00', 'text', '', '', ''),
 ('s15022215659915', 'nucsvtable', 'Launch Form', 'input', 'csv_load', 'Load Field Names', 's15022120452734', 20, 83, 150, 150, 30, '1', 'center', '0', '0', '', '', '', '', '', '', '', 'SELECT COUNT(*) FROM zzzzsys_debug', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 89, 'N|$ 1,000.00', 'button', '', '', ''),
-('s15022282952796', 'nuhome', '', 'run', 'build_csv', 'CSV To Table', '581288bcd699493', 150, 35, 469, 150, 30, '1', 'left', '1', '0', '', '', '', 's15022257540441', '', 'b', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', '', ''),
-('s15022555434632', 's15022555434626', 'children', 'input', 'chi_name', 'Name', 's15022555434627', 80, 80, 180, 117, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
+('s15022555434632', 's15022555434626', 'children', 'input', 'chi_name', 'Name', 's15022555434627', 80, 80, 180, 111, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
 ('s15022555434633', 's15022555434626', 'children', 'input', 'chi_dob', 'DOB', 's15022555434627', 110, 110, 210, 117, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 'D|dd mm yy', 'nuDate', '', '', ''),
 ('s15022557771531', 's15022557771526', 'parent', 'input', 'par_name', 'Name', 's15022557771527', 10, 50, 150, 117, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
 ('s15022557771532', 's15022557771526', 'parent', 'input', 'par_dob', 'DOB', 's15022557771527', 20, 80, 150, 117, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 'D|dd-mmm-yyyy', 'nuDate', '', '', ''),
-('s15022557771533', 's15022557771526', 'parent', 'subform', 'child_ff', 'Children', 's15022557771527', 30, 110, 150, 328, 149, '1', 'right', '0', '0', '', '', '', '', '', '', '', 'SELECT COUNT(*) FROM zzzzsys_debug', '', '', '', '', '', '', '', '', '', '', 's15022555434626', 'chi_parent_id', '1', '1', 'g', 'children', 89, 'N|$ 1,000.00', 'file', '', '', ''),
-('s15022557771536', 'nuhome', 'parent', 'run', 'ffs15022557771526', 'parent', 'nutesttab', 11, 63, 250, 150, 30, '0', 'center', '0', '0', '', '', '', 's15022557771526', '', 'b', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', '', '');
+('s15022557771533', 's15022557771526', 'parent', 'subform', 'child_ff', 'Children', 's15022557771527', 30, 110, 150, 328, 149, '1', 'right', '0', '0', '', '', '', '', '', '', '', 'SELECT COUNT(*) FROM zzzzsys_debug', '', '', '', '', '', '', '', '', '', '', 's15022555434626', 'chi_parent_id', '1', '1', 'g', 'children', 89, 'N|$ 1,000.00', 'file', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -1280,7 +1272,6 @@ CREATE TABLE `zzzzsys_tab` (
 INSERT INTO `zzzzsys_tab` (`zzzzsys_tab_id`, `syt_zzzzsys_form_id`, `syt_title`, `syt_order`) VALUES
 ('5707303141ab448', 'nuform', 'Browse', 20),
 ('570730313dd25c5', 'nuform', 'Main', 10),
-('s15022557771527', 's15022557771526', 'Main', 10),
 ('569dc4ed270f08a', 'nuhome', 'Setup', 10),
 ('568b508eecf5dee', '568b508eec00d80', 'Business', 7),
 ('5678ab2c49bd810', '5678ab2c48c5c41', 'Employee', 10),
@@ -1581,10 +1572,7 @@ INSERT INTO `zzzzsys_tab` (`zzzzsys_tab_id`, `syt_zzzzsys_form_id`, `syt_title`,
 ('s14981568046397', 's14981568046395', 'Main', 10),
 ('s15003463994286', 'nuuserhome', 'Main', 10),
 ('s15014147222002', 's15014147222001', 'Main', 10),
-('s15017688442341', 's15017688442340', 'Main', 10),
-('s15022120452734', 'nucsvtable', 'Main', 10),
-('s15022188020420', 's15022188020419', 'Main', 10),
-('s15022555434627', 's15022555434626', 'Main', 10);
+('s15017688442341', 's15017688442340', 'Main', 10);
 
 -- --------------------------------------------------------
 

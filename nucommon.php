@@ -6,8 +6,6 @@ require_once('config.php');
 require_once('nubuilders.php'); 
 //require_once('nuexception.php'); 
 require_once('nuevalphpclass.php'); 
-require_once dirname(__FILE__) . '/sql-parser/src/PHPSQLParser.php';
-require_once dirname(__FILE__) . '/sql-parser/src/PHPSQLCreator.php';
 require_once dirname(__FILE__) . '/nusqlclass.php';
 require_once dirname(__FILE__) . '/nusearchclass.php';
 require_once('nudatabase.php');
