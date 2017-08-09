@@ -66,7 +66,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
     ";
 
 	if($R != ''){
-
+nudebug($s, $F);
 		$t 							= nuRunQuery($s, array($F));
 		$a 							= array();
 
@@ -91,14 +91,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 			}
 				
 			if($r->sob_all_type == 'textarea'){
-				
 				$o->align 			= $r->sob_all_align;
-//				$o->read 			= $r->sob_all_access;
-				
-			}
-				
-			if($r->sob_all_type == 'lookup'){
-//				$o->read 			= $r->sob_all_access;
 			}
 				
 			if($r->sob_all_type == 'input' || $r->sob_all_type == 'display'){
@@ -117,7 +110,6 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 				}
 					
 				$o->input 			= $r->sob_input_type;
-//				$o->read 			= $r->sob_all_access;
 
 				if($r->sob_input_type == 'button' && $r->sob_all_type == 'input'){
 					$o->value		= $r->sob_all_label;
@@ -162,7 +154,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 				if(isProcedure($type)){
 					
 					$o->run_type	= 'P';
-					$o->src			= 'nurunphp.php?i=' . nuRunPHP($type);
+					$o->src			= 'nurunphp.php?i=' . nuRunPHP($o->form_id, $o->record_id)->id;
 					
 				}else if(isReport($type)){
 					
@@ -214,7 +206,6 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 				$o->align				= $r->sob_all_align;
 			}
 
-			//$o->display					= nuDisplay($r->sob_all_display_condition);
 			$o->js						= nuObjectEvents($r->zzzzsys_object_id);
 
 			if($OBJS > 0){
