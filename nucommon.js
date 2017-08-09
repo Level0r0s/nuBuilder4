@@ -312,16 +312,20 @@ function nuCreateDialog(t){
 
 function nuReformat(t){
 
-	var o			= $('#' + t.id);
-	var f			= o.attr('data-nu-format');
-	var v			= o.val();
+	var o		= $('#' + t.id);
+	var f		= o.attr('data-nu-format');
+	var v		= o.val();
 	
 	if(f == '' || v == ''){
 		return v;
 	}
 	
-	var r			= nuFORM.removeFormatting(v, f)
-	o.val(nuFORM.addFormatting(r, f));
+	var r		= nuFORM.removeFormatting(v, f);
+	var a		= nuFORM.addFormatting(r, f);
+	
+	if(v != a){
+		o.val('');
+	}
 	
 }
 
