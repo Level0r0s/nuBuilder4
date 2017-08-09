@@ -38,7 +38,7 @@ function nuFormCode($f){
 }
 
 function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
-
+$lab=[];
     $tabs 			= nuBuildTabList($F);
     $f				= nuGetEditForm($F, $R);
     $f->form_id		= $F;
@@ -150,20 +150,20 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 				$type				= $r->sob_run_zzzzsys_form_id;
 				$o->form_id			= $type;
 				$o->record_id		= $r->sob_run_id;
-nudebug($r->sob_all_label);				
+				
 				if(isProcedure($type)){
 					
-					$t				= nuRunQuery('SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = ?',[$type]);
-					$R				= db_fetch_object($t);
-					$o->form_id		= $R->sph_zzzzsys_form_id;;
+					$actt			= nuRunQuery('SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = ?',[$type]);
+					$act			= db_fetch_object($actt);
+					$o->form_id		= $act->sph_zzzzsys_form_id;;
 					$o->record_id	= $type;
 					$o->run_type	= 'P';
 					
 				}else if(isReport($type)){
 					
-					$t				= nuRunQuery('SELECT * FROM zzzzsys_report WHERE zzzzsys_report_id = ?',[$type]);
-					$R				= db_fetch_object($t);
-					$o->form_id		= $R->sre_zzzzsys_form_id;;
+					$actt			= nuRunQuery('SELECT * FROM zzzzsys_report WHERE zzzzsys_report_id = ?',[$type]);
+					$act			= db_fetch_object($actt);
+					$o->form_id		= $act->sre_zzzzsys_form_id;;
 					$o->record_id	= $type;
 					$o->run_type	= 'R';
 					
@@ -229,7 +229,7 @@ nudebug($r->sob_all_label);
 		}
 		
 	}
-nudebug($a);
+//nudebug($s, $F, $lab, $a);
 
     $f->tabs 				= nuRefineTabList($tabs);
     $f->browse_columns		= nuBrowseColumns($f);
