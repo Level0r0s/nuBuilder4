@@ -320,7 +320,8 @@ function nuReformat(t){
 		return v;
 	}
 	
-	o.val(nuFORM.addFormatting(v, f));
+	var r			= nuFORM.removeFormatting(v, f)
+	o.val(nuFORM.addFormatting(r, f));
 	
 }
 
