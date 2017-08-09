@@ -849,8 +849,8 @@ function nuRUN(w, i, l, p, prop){
 		var O			= prop.objects[i];
 		var clicker		= '';
 		
-		if(O.run_type == 'R'){clicker = "nuRunReport('" + O.form_id + "')";}
-		if(O.run_type == 'P'){clicker = "nuRunPHP('" + O.form_id + "')"}
+		if(O.run_type == 'R'){clicker = "nuGetReport('" + O.form_id + "','" + O.record_id + "')";}
+		if(O.run_type == 'P'){clicker = "nuGetPHP('" + O.form_id + "','" + O.record_id + "')"}
 		if(O.run_type == 'F'){clicker = "nuForm('" + O.form_id + "','" + O.record_id + "','" + O.filter + "', '')"}
 		
 		$('#' + id).attr({

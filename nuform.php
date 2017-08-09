@@ -153,19 +153,22 @@ nudebug($s, $F);
 				
 				if(isProcedure($type)){
 					
+					$t				= nuRunQuery('SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = ?',[$type]);
+					$R				= db_fetch_object($t);
+					$o->form_id		= $R->sph_zzzzsys_form_id;;
+					$o->record_id	= $type;
 					$o->run_type	= 'P';
-					$o->src			= 'nurunphp.php?i=' . nuRunPHP($o->form_id, $o->record_id)->id;
 					
 				}else if(isReport($type)){
 					
+					$t				= nuRunQuery('SELECT * FROM zzzzsys_report WHERE zzzzsys_report_id = ?',[$type]);
+					$R				= db_fetch_object($t);
+					$o->form_id		= $R->sre_zzzzsys_form_id;;
+					$o->record_id	= $type;
 					$o->run_type	= 'R';
-					$o->src			= 'nurunpdf.php?i=' . nuRunReport($type);
 					
 				}else{
-					
 					$o->run_type	= 'F';
-					$o->src			= 'index.php?';
-					
 				}
 
 				$o->filter			= nuReplaceHashVariables($r->sob_run_filter);

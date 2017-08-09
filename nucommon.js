@@ -361,7 +361,7 @@ function nuRunIt(t, email, type){
 	
 	if(arguments.length < 3){										//-- set type
 		
-		var type	= $('#' + r + '001').html();				//-- report - PDF,or procedure - PHP
+		var type	= $('#' + r + '001').html();					//-- report - PDF,or procedure - PHP
 		
 	}
 	
