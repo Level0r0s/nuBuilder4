@@ -66,7 +66,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
     ";
 
 	if($R != ''){
-nudebug($s, $F);
+		
 		$t 							= nuRunQuery($s, array($F));
 		$a 							= array();
 
@@ -150,7 +150,7 @@ nudebug($s, $F);
 				$type				= $r->sob_run_zzzzsys_form_id;
 				$o->form_id			= $type;
 				$o->record_id		= $r->sob_run_id;
-				
+nudebug($r->sob_all_label);				
 				if(isProcedure($type)){
 					
 					$t				= nuRunQuery('SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = ?',[$type]);
@@ -229,6 +229,7 @@ nudebug($s, $F);
 		}
 		
 	}
+nudebug($a);
 
     $f->tabs 				= nuRefineTabList($tabs);
     $f->browse_columns		= nuBrowseColumns($f);

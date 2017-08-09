@@ -320,11 +320,22 @@ function nuReformat(t){
 		return v;
 	}
 	
-	var r		= nuFORM.removeFormatting(v, f);
-	var a		= nuFORM.addFormatting(r, f);
+	if(f[0] == 'D'){
+			
+		var r		= nuFORM.removeFormatting(v, f);
+		var a		= nuFORM.addFormatting(r, f);
+		
+		if(v != a){
+			o.val('');
+		}
+
+	}
 	
-	if(v != a){
-		o.val('');
+	if(f[0] == 'N'){
+			
+		var a		= nuFORM.addFormatting(v, f);
+		o.val(a);
+
 	}
 	
 }
