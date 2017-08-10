@@ -953,21 +953,21 @@ function nuPunctuation($f){
 
 
 function nuTTList($id, $l){
-
+	
 	$t										= nuRunQuery('SELECT * FROM zzzzsys_object WHERE  zzzzsys_object_id = ?' , [$l]);
 	
 	while($r = db_fetch_object($t)){						//-- add default empty hash variables
 		$_POST['nuHash'][$r->sob_all_id]	= '';
 	}
 	
-	$tt									= nuTT();
-	$_POST['nuHash']['TABLE_ID']		= $tt;
-	$_POST['nuHash']['RECORD_ID']		= '';
+	$tt										= nuTT();
+	$_POST['nuHash']['TABLE_ID']			= $tt;
+	$_POST['nuHash']['RECORD_ID']			= '';
 	
 	nuBuildTempTable($id, $tt, 1);
 	
-	$f									= db_field_names($tt);
-	
+	$f										= db_field_names($tt);
+
 	nuRunQuery("DROP TABLE $tt");
 	
 	return $f;
@@ -984,10 +984,9 @@ function nuBuildTempTable($id, $tt, $rd = 0){
 		";
 		
 	$t				= nuRunQuery($s,[$id]);
-	$r				= db_fetch_row($t);
+	$R				= db_fetch_row($t);
 
-
-	if($r[0] == 0){							//-- if not from zzzzsys_php
+	if(db_num_rows($t) == 0){							//-- if not from zzzzsys_php
 		
 		$s			= "
 				SELECT sse_sql 
@@ -1019,7 +1018,9 @@ function nuBuildTempTable($id, $tt, $rd = 0){
 		eval($P);
 		
 	}else{
+
 		$e			= new nuEvalPHPClass($id);
+		
 	}
 	
 }
@@ -1098,6 +1099,29 @@ function nuBuildTableSchema(){
 	return $a;
 
 }
+
+
+function nuFontList(){
+	
+
+	$l					= [['Helvetica','Helvetica'],['Arial','Arial'],['Courier','Courier'],['Times','Times'],['Symbol','Symbol']];
+	$fonts      		= explode("\n", trim($GLOBALS['nuSetup']->set_fonts));
+
+	for($i = 0 ; $i < count($fonts) ; $i ++){
+
+		if(trim($fonts[$i]) != ''){
+			
+			$font   	= $fonts[$i];
+			$l[] 		= [$font,$font];
+			
+		}
+
+	}
+
+	return json_encode($l);
+	
+}
+
 
 
 ?>

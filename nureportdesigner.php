@@ -19,8 +19,10 @@ nuJSInclude('nureportjson.js');
 nuCSSInclude('nubuilder4.css');
 nuCSSInclude('nudrag.css');
 
+
 $f	= nuFormatList();
-$t	= nuTTList($_GET['tt'], $_GET['launch']);
+$ft = nuFontList();
+$t	= nuTTList($_GET['tt'], $_GET['launch']);				//-- Field list from Temp table
 $tt	= json_encode($t);
 $i	= nuImageList($t);
 
@@ -28,6 +30,7 @@ $h	= "
 <script>
 
 	window.nuFormats	= $f;
+	window.nuFonts		= $ft;
 	window.nuTT			= $tt;
 	window.nuImages		= $i;
 

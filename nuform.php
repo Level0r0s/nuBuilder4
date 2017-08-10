@@ -229,7 +229,6 @@ $lab=[];
 		}
 		
 	}
-//nudebug($s, $F, $lab, $a);
 
     $f->tabs 				= nuRefineTabList($tabs);
     $f->browse_columns		= nuBrowseColumns($f);
