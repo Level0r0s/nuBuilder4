@@ -22,9 +22,8 @@ nuCSSInclude('nudrag.css');
 
 $f	= nuFormatList();
 $ft = nuFontList();
-$t	= nuTTList($_GET['tt'], $_GET['launch']);				//-- Field list from Temp table
-$tt	= json_encode($t);
-$i	= nuImageList($t);
+$tt	= nuTTList($_GET['tt'], $_GET['launch']);				//-- Field list from Temp table
+$i	= nuImageList(json_decode($tt));
 
 $h	= "
 <script>

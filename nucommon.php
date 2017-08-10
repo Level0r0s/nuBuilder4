@@ -970,7 +970,7 @@ function nuTTList($id, $l){
 
 	nuRunQuery("DROP TABLE $tt");
 	
-	return $f;
+	return json_encode($f);
 	
 }
 
@@ -1105,6 +1105,7 @@ function nuFontList(){
 	
 
 	$l					= [['Helvetica','Helvetica'],['Arial','Arial'],['Courier','Courier'],['Times','Times'],['Symbol','Symbol']];
+
 	$fonts      		= explode("\n", trim($GLOBALS['nuSetup']->set_fonts));
 
 	for($i = 0 ; $i < count($fonts) ; $i ++){
