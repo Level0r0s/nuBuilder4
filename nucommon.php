@@ -366,10 +366,11 @@ function nuSetHashList($p){
 }
 
 
-function nuRunReport($report_id, $record_id){
+function nuRunReport($report_id){
 	
 	$id									= nuID();
-	$t									= nuRunQuery("SELECT * FROM zzzzsys_report WHERE sre_code = '$report_id'");
+	$s									= "SELECT * FROM zzzzsys_report WHERE sre_code = '$report_id'";
+	$t									= nuRunQuery($s);
 	$ob									= db_fetch_object($t);
 	$_POST['nuHash']['code']			= $ob->sre_code;
 	$_POST['nuHash']['description']		= $ob->sre_description;
@@ -379,10 +380,7 @@ function nuRunReport($report_id, $record_id){
 
 	nuSetJSONData($id, $j);
 	
-	$f									= new stdClass;
-	$f->record_id						= $id;
-	
-	return $f;
+	return $id;
 	
 }
 
@@ -390,7 +388,8 @@ function nuRunReport($report_id, $record_id){
 function nuRunPHP($procedure_code){
 
 	$id									= nuID();
-	$t									= nuRunQuery("SELECT * FROM zzzzsys_php WHERE sph_code = '$procedure_code'");
+	$s									= "SELECT * FROM zzzzsys_php WHERE sph_code = '$procedure_code'";
+	$t									= nuRunQuery($s);
 	$ob									= db_fetch_object($t);
 	$_POST['nuHash']['code']			= $ob->sph_code;
 	$_POST['nuHash']['description']		= $ob->sph_description;
@@ -400,10 +399,7 @@ function nuRunPHP($procedure_code){
 
 	nuSetJSONData($id, $j);
 	
-	$f									= new stdClass;
-	$f->record_id						= $id;
-	
-	return $f;
+	return $id;
 	
 }
 
@@ -953,7 +949,8 @@ function nuPunctuation($f){
 
 function nuTTList($id, $l){
 	
-	$t										= nuRunQuery('SELECT * FROM zzzzsys_object WHERE  zzzzsys_object_id = ?' , [$l]);
+//	$t										= nuRunQuery('SELECT * FROM zzzzsys_object WHERE  zzzzsys_object_id = ?' , [$l]);
+	$t										= nuRunQuery('SELECT * FROM zzzzsys_object WHERE  sob_all_zzzzsys_form_id = ?' , [$l]);
 	
 	while($r = db_fetch_object($t)){						//-- add default empty hash variables
 		$_POST['nuHash'][$r->sob_all_id]	= '';
@@ -964,7 +961,7 @@ function nuTTList($id, $l){
 	$_POST['nuHash']['RECORD_ID']			= '';
 	
 	nuBuildTempTable($id, $tt, 1);
-	
+
 	$f										= db_field_names($tt);
 
 	nuRunQuery("DROP TABLE $tt");
@@ -985,7 +982,7 @@ function nuBuildTempTable($id, $tt, $rd = 0){
 	$t				= nuRunQuery($s,[$id]);
 	$R				= db_fetch_row($t);
 
-	if(db_num_rows($t) == 0){							//-- if not from zzzzsys_php
+	if($R[0] == 0){							//-- if not from zzzzsys_php
 		
 		$s			= "
 				SELECT sse_sql 
@@ -1017,9 +1014,8 @@ function nuBuildTempTable($id, $tt, $rd = 0){
 		eval($P);
 		
 	}else{
-
+nudebug('gh');		
 		$e			= new nuEvalPHPClass($id);
-		
 	}
 	
 }

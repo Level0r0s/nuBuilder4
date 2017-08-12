@@ -32,7 +32,7 @@ body  {
 
 <script>
 
-	window.nuSuffix				= Number(String(Math.random()).substr(-4));
+	window.nuSuffix				= 1000;
 	window.nuSQL				= new nuSelectObject();
 	window.nuCurrentID			= '';
 	window.nuY					= 0;
@@ -40,8 +40,9 @@ body  {
 	
 	function nuLoad(){
 		
-		nuSQL.rebuildGraphic();
-		//nuSQL.buildSQL();
+		if(!nuSQL.rebuildGraphic()){
+			return;
+		}
 		
 		$('body')
 		.attr('onmousemove', 	'nuMove(event)')

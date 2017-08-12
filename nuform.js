@@ -837,16 +837,17 @@ function nuRUN(w, i, l, p, prop){
 
 	nuAddDataTab(id, prop.objects[i].tab, p);
 	
-	$('#' + id).css({'top'     		: Number(prop.objects[i].top),
-					'left'     		: Number(prop.objects[i].left),
-					'width'    		: Number(prop.objects[i].width),
-					'height'   		: Number(prop.objects[i].height),
+	
+	var O			= prop.objects[i];
+	
+	$('#' + id).css({'top'     		: Number(O.top),
+					'left'     		: Number(O.left),
+					'width'    		: Number(O.width),
+					'height'   		: Number(O.height),
 					'position' 		: 'absolute'
 	});
 
-	if(prop.objects[i].run_method == 'b'){
-	
-		var O			= prop.objects[i];
+	if(O.run_method == 'b'){
 		var clicker		= '';
 		
 		if(O.run_type == 'R'){clicker = "nuGetReport('" + O.form_id + "','" + O.record_id + "')";}
@@ -862,10 +863,9 @@ function nuRUN(w, i, l, p, prop){
 		
 	}else{
 
-		var O		= prop.objects[i];
 		var F		= O.form_id;
 		var R		= O.record_id;
-		var L		= O.filter;
+		var L		= O.id;
 		var P		= window.location.pathname;
 		var f		= P.substring(0,P.lastIndexOf('/') + 1)
 

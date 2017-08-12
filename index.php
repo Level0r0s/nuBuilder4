@@ -127,7 +127,11 @@ function nuLoginRequest(){
 
 window.nuVersion 		= 'nuBuilder4';
 window.nuDocumentID		= Date.now();
-window.onbeforeunload	= nuHomeWarning;
+
+if(parent.window.nuDocumentID == window.nuDocumentID){
+	window.onbeforeunload	= nuHomeWarning;
+}
+
 window.nuHASH			= [];
 
 <?php
@@ -181,6 +185,7 @@ window.nuHASH			= [];
 			window.nuBrowseFunction			= '$nuBrowseFunction';
 			window.nuTARGET					= '$target';
 			window.nuSESSION				= from.nuSESSION;
+			window.nuSuffix					= 1000;
 			
 			if('$opener' != '') {
 				
@@ -191,18 +196,20 @@ window.nuHASH			= [];
 				
 				var p						= from.nuOPENER[from.nuOPENER.length -1];
 				nuRemoveOpenerById(from.nuOPENER, from.nuOPENER[from.nuOPENER.length -1]);
+				
 			}
-
+			
 			nuBindCtrlEvents();
 			
-			window.filter					= p.filter;
-
 			if(p.type == 'R') {
-				nuRunReport(p.record_id, 1);
+				nuRunReport(p.record_id, p.filter);
 			} else if(p.type == 'P') {
-				nuRunPHP(p.record_id, 1);
+				nuRunPHP(p.record_id, p.filter);
 			} else {
+				
+				window.filter				= p.filter;
 				nuForm(p.form_id, p.record_id, p.filter, '$search');
+				
 			}
 			
 			if(p.record_id == '-2'){

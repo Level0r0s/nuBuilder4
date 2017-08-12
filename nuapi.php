@@ -40,8 +40,8 @@
     	if($CT == 'getlookupid')	{$f->forms[0]				 		= nuGetAllLookupValues();}
     	if($CT == 'getlookupcode')	{$f->forms[0]				 		= nuGetAllLookupList();}
     	if($CT == 'runhiddenphp')	{$f->forms[0]->id					= nuRunPHPHidden($R);}
-    	if($CT == 'runphp')			{$f->forms[0]						= nuRunPHP($F);}
-    	if($CT == 'runreport')		{$f->forms[0]						= nuRunReport($F, $R);}
+    	if($CT == 'runphp')			{$f->forms[0]->id					= nuRunPHP($F);}
+    	if($CT == 'runreport')		{$f->forms[0]->id					= nuRunReport($F);}
     	if($CT == 'runhtml')		{$f->forms[0]->id					= nuRunHTML();}
         if($CT == 'nudragsave')		{$f->forms[0]						= nuDragSave($P);}
 		

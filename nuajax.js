@@ -117,7 +117,7 @@ function nuGetPHP(f, r){
 }
 
 
-function nuGetPDF(f, r){
+function nuGetReport(f, r){
 
 	if(nuOpenNewBrowserTab('getreport', f, r, '')){return;}
 
@@ -145,14 +145,14 @@ function nuGetPDF(f, r){
 
 
 function nuRunReport(f, iframe){
-	
+
 	nuFORM.addBreadcrumb();
 
 	var last			= nuFORM.getCurrent();
 
 	last.session_id 	= window.nuSESSION;
 	last.call_type		= 'runreport';
-	last.record_id		= f;
+	last.form_id		= f;
 	last.hash 			= nuHashFromEditForm();
 	
 	var successCallback = function(data,textStatus,jqXHR){
@@ -161,13 +161,12 @@ function nuRunReport(f, iframe){
 		
 		if(!nuDisplayError(fm)){
 			
-			var pdfUrl	= 'nurunpdf.php?i=' + fm.record_id;
+			var pdfUrl	= 'nurunpdf.php?i=' + fm.id;
 			
 			if(iframe === undefined){
 				window.open(pdfUrl);
 			}else{
-				parent.$('#testiframe').attr('src', pdfUrl);
-//				parent.$('#'+iframe).attr('src', pdfUrl);
+				parent.$('#'+ iframe).attr('src', pdfUrl);
 			}
 			
 		}
@@ -199,12 +198,12 @@ function nuRunPHP(pCode, iframe){
 		
 		if(!nuDisplayError(fm)){
 			
-			var pdfUrl		= 'nurunphp.php?i=' + fm.record_id;
+			var pdfUrl		= 'nurunphp.php?i=' + fm.id;
 			
 			if(iframe === undefined){
 				window.open(pdfUrl);
 			}else{
-				parent.$('#testiframe').attr('src', pdfUrl);
+				parent.$('#' + iframe).attr('src', pdfUrl);
 			}
 			
 		}

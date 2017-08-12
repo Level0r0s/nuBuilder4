@@ -751,6 +751,18 @@ class nuSelectObject{
 		var J		=	JSON.parse(j);
 		
 		for(var i = 0 ; i < J.tables.length ; i++){	
+		
+			if(typeof(parent.nuFORM.tableSchema[J.tables[i].tablename]) == 'undefined'){
+				
+				nuMessage(['No table named <b>' + J.tables[i].tablename + '</b>.']);
+				
+				return false;
+				
+			}
+			
+		}
+
+		for(var i = 0 ; i < J.tables.length ; i++){	
 			
 			var t	= J.tables[i];
 			var cb	= J.tables[i].checkboxes;
@@ -783,6 +795,8 @@ class nuSelectObject{
 		}
 
 		nuAngle();
+		
+		return true;
 		
 	}
 	

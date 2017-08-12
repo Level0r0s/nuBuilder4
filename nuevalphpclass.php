@@ -33,7 +33,7 @@
 
 				$phpCode	= $nuA->sph_code;
 				$phpToEval	= nuReplaceHashVariables($nuA->sph_php);
-				
+
 				$this->evalPHP($phpCode, $phpToEval);
 				
 			}
@@ -59,6 +59,7 @@
 		}
 		
 		function evalPHP($phpCode, $phpToEval){
+nudebug('gh', $phpToEval);		
 			
 			if(trim($phpToEval) == ''){return;}
 			

@@ -1037,11 +1037,12 @@ function nuButtons($formid, $POST){
 	$f						= nuFormProperties($formid);
 	$c						= $POST['call_type'];
 	
-	$s						= 'SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = ? ';
+	$s						= 'SELECT * FROM zzzzsys_php WHERE sph_code = ? ';
+nudebug($s, $POST['record_id']);
 	$t						= nuRunQuery($s,[$POST['record_id']]);
 	$P						= db_fetch_object($t);
 	
-	$s						= 'SELECT * FROM zzzzsys_report WHERE zzzzsys_report_id = ? ';
+	$s						= 'SELECT * FROM zzzzsys_report WHERE sre_code = ? ';
 	$t						= nuRunQuery($s,[$POST['record_id']]);
 	$R						= db_fetch_object($t);
 	

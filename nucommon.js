@@ -407,7 +407,7 @@ function nuRunIt(t, email, type){
 		}
 		
 		if(type == 'pdf'){
-			nuGetPDF(f, p);
+			nuGetReport(f, p);
 		}
 		
 	}
