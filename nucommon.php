@@ -740,7 +740,7 @@ function nuGetUserAccess(){
 	$j					= json_decode($r->sss_access);
 	
 	$A['USER_ID']		= $j->session->zzzzsys_user_id;
-	$A['USER_GROUP_ID']	= $j->session->zzzzsys_access_level_id;
+	$A['USER_GROUP_ID']	= $j->session->zzzzsys_access_id;
 	$A['HOME_ID']		= $j->session->zzzzsys_form_id;
 	$A['GLOBAL_ACCESS']	= $j->session->global_access;
 	

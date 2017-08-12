@@ -13,7 +13,7 @@ if(array_key_exists('nuSTATE', $_POST)){
             $checkLoginDetailsSQL = "
                 SELECT * 
                 FROM zzzzsys_user 
-                JOIN zzzzsys_access_level ON zzzzsys_access_level_id = sus_zzzzsys_access_level_id              
+                JOIN zzzzsys_access ON zzzzsys_access_id = sus_zzzzsys_access_id              
                 WHERE sus_login_name = ? AND sus_login_password = ?
             ";
 
@@ -75,7 +75,7 @@ if(array_key_exists('nuSTATE', $_POST)){
                     $_SESSION['isGlobeadmin'] 				= true;
 					$_SESSION['translation']           		= nuGetTranslation(db_setup()->set_language);
                     $sessionIds 							= new stdClass;
-                    $sessionIds->zzzzsys_access_level_id 	= '';
+                    $sessionIds->zzzzsys_access_id 	= '';
                     $sessionIds->zzzzsys_user_id 			= $nuConfigDBGlobeadminUsername;
                     $sessionIds->zzzzsys_form_id 			= 'nuhome';
                     $sessionIds->global_access 				= '1';
@@ -119,10 +119,10 @@ if(array_key_exists('nuSTATE', $_POST)){
                     $_SESSION['isGlobeadmin'] 				= false;
                     $translationQRY 						= nuRunQuery("SELECT * FROM zzzzsys_translate WHERE trl_language = '$checkLoginDetailsOBJ->sus_language' ORDER BY trl_english");
                     $getAccessLevelSQL 						= "
-                        SELECT zzzzsys_access_level_id, zzzzsys_user_id, sal_zzzzsys_form_id AS zzzzsys_form_id FROM zzzzsys_user
-                        INNER JOIN zzzzsys_access_level ON zzzzsys_access_level_id = sus_zzzzsys_access_level_id
+                        SELECT zzzzsys_access_id, zzzzsys_user_id, sal_zzzzsys_form_id AS zzzzsys_form_id FROM zzzzsys_user
+                        INNER JOIN zzzzsys_access ON zzzzsys_access_id = sus_zzzzsys_access_id
                         WHERE zzzzsys_user_id = '$checkLoginDetailsOBJ->zzzzsys_user_id'
-                        GROUP BY sus_zzzzsys_access_level_id 
+                        GROUP BY sus_zzzzsys_access_id 
                     ";
                     $getAccessLevelQRY 						= nuRunQuery($getAccessLevelSQL);
         			
@@ -140,7 +140,7 @@ if(array_key_exists('nuSTATE', $_POST)){
                     $getAccessLevelOBJ 						= db_fetch_object($getAccessLevelQRY);
 
                     $sessionIds 							= new stdClass;
-                    $sessionIds->zzzzsys_access_level_id 	= $getAccessLevelOBJ->zzzzsys_access_level_id;
+                    $sessionIds->zzzzsys_access_id 	= $getAccessLevelOBJ->zzzzsys_access_id;
                     $sessionIds->zzzzsys_user_id 			= $checkLoginDetailsOBJ->zzzzsys_user_id;
                     $sessionIds->zzzzsys_form_id 			= $getAccessLevelOBJ->zzzzsys_form_id;
                     $sessionIds->global_access 				= '0';
@@ -156,8 +156,8 @@ if(array_key_exists('nuSTATE', $_POST)){
                             slf_clone_button        AS c,
                             slf_print_button        AS p
                         FROM zzzzsys_user
-                        JOIN zzzzsys_access_level ON zzzzsys_access_level_id = sus_zzzzsys_access_level_id
-                        JOIN zzzzsys_access_level_form ON zzzzsys_access_level_id = slf_zzzzsys_access_level_id
+                        JOIN zzzzsys_access ON zzzzsys_access_id = sus_zzzzsys_access_id
+                        JOIN zzzzsys_access_form ON zzzzsys_access_id = slf_zzzzsys_access_id
                         WHERE zzzzsys_user_id = '$checkLoginDetailsOBJ->zzzzsys_user_id'
                     ");
         			
@@ -172,8 +172,8 @@ if(array_key_exists('nuSTATE', $_POST)){
                     $getReportsQRY 							= nuRunQuery("
                         SELECT sre_zzzzsys_report_id AS id, sre_zzzzsys_form_id AS form_id
                         FROM zzzzsys_user
-                        JOIN zzzzsys_access_level ON zzzzsys_access_level_id = sus_zzzzsys_access_level_id
-                        JOIN zzzzsys_access_level_report ON zzzzsys_access_level_id = sre_zzzzsys_access_level_id
+                        JOIN zzzzsys_access ON zzzzsys_access_id = sus_zzzzsys_access_id
+                        JOIN zzzzsys_access_report ON zzzzsys_access_id = sre_zzzzsys_access_id
                         JOIN zzzzsys_report ON zzzzsys_report_id = sre_zzzzsys_report_id
                         WHERE zzzzsys_user_id = '$checkLoginDetailsOBJ->zzzzsys_user_id'
                         GROUP BY sre_zzzzsys_report_id
@@ -192,8 +192,8 @@ if(array_key_exists('nuSTATE', $_POST)){
                             slp_zzzzsys_php_id AS id,
                             sph_zzzzsys_form_id AS form_id
                         FROM zzzzsys_user
-                        JOIN zzzzsys_access_level ON zzzzsys_access_level_id = sus_zzzzsys_access_level_id
-                        JOIN zzzzsys_access_level_php ON zzzzsys_access_level_id = slp_zzzzsys_access_level_id
+                        JOIN zzzzsys_access ON zzzzsys_access_id = sus_zzzzsys_access_id
+                        JOIN zzzzsys_access_php ON zzzzsys_access_id = slp_zzzzsys_access_id
                         JOIN zzzzsys_php ON zzzzsys_php_id = slp_zzzzsys_php_id
                         WHERE zzzzsys_user_id = '$checkLoginDetailsOBJ->zzzzsys_user_id'
                         GROUP BY slp_zzzzsys_php_id
