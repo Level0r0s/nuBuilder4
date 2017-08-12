@@ -200,7 +200,7 @@ window.nuHASH			= [];
 			}
 			
 			nuBindCtrlEvents();
-console.log(p.type,p.parameters);
+			
 			if(p.type == 'R') {
 				nuRunReport(p.record_id, p.parameters);
 			} else if(p.type == 'P') {
