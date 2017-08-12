@@ -150,6 +150,7 @@ $lab=[];
 				$type				= $r->sob_run_zzzzsys_form_id;
 				$o->form_id			= $type;
 				$o->record_id		= $r->sob_run_id;
+				$o->parameters		= $r->sob_all_id;
 				
 				if(isProcedure($type)){
 					

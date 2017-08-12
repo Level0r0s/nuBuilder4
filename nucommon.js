@@ -965,5 +965,19 @@ function nuOpenTab(i){
 }
 
 
+function nuRemoveBreadcrumb(){
+	$('#nuBreadcrumbHolder').remove();
+}
 
+function nuRemoveHolder(h){
+	
+	for(var i = 0 ; i < arguments.length ; i++){
+		
+		if(arguments[i] == 0){$('#nuActionHolder').remove();}
+		if(arguments[i] == 1){$('#nuBreadcrumbHolder').remove();}
+		if(arguments[i] == 2){$('#nuTabHolder').remove();}
+		
+	}
+	
+}
 
