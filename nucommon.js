@@ -956,8 +956,12 @@ function addslashes(s){
     return (s + '').replace(/[\\"']/g, '\\$&').replace(/\u0000/g, '\\0');
 }
 
-function nuRemoveTab(i){
-	$('#nuTab' + i).remove();
+function nuRemoveTabs(t){
+
+	for(var i = 0 ; i < arguments.length ; i++){
+		$('#nuTab' + arguments[i]).remove();
+	}
+	
 }
 
 function nuOpenTab(i){
@@ -965,11 +969,7 @@ function nuOpenTab(i){
 }
 
 
-function nuRemoveBreadcrumb(){
-	$('#nuBreadcrumbHolder').remove();
-}
-
-function nuRemoveHolder(h){
+function nuRemoveHolders(h){
 	
 	for(var i = 0 ; i < arguments.length ; i++){
 		
