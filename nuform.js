@@ -865,11 +865,12 @@ function nuRUN(w, i, l, p, prop){
 
 		var F		= O.form_id;
 		var R		= O.record_id;
-		var L		= O.id;
+		var L		= O.filter;
+		var PA		= O.parameters;
 		var P		= window.location.pathname;
 		var f		= P.substring(0,P.lastIndexOf('/') + 1)
 
-		window.nuOPENER.push(new nuOpener(O.run_type, F, R, L));
+		window.nuOPENER.push(new nuOpener(O.run_type, F, R, L, PA));
 
 		var open 	= window.nuOPENER[window.nuOPENER.length - 1];
 		var u		= window.location.origin + f + O.src + '&opener=' + open.id;
