@@ -155,8 +155,8 @@ $lab=[];
 					
 					$actt			= nuRunQuery('SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = ?',[$type]);
 					$act			= db_fetch_object($actt);
-					$o->form_id		= $act->sph_zzzzsys_form_id;;
-					$o->record_id	= $type;
+					$o->form_id		= $act->sph_zzzzsys_form_id;
+					$o->record_id	= $act->sph_code;
 					$o->run_type	= 'P';
 					
 				}else if(isReport($type)){
@@ -164,7 +164,7 @@ $lab=[];
 					$actt			= nuRunQuery('SELECT * FROM zzzzsys_report WHERE zzzzsys_report_id = ?',[$type]);
 					$act			= db_fetch_object($actt);
 					$o->form_id		= $act->sre_zzzzsys_form_id;;
-					$o->record_id	= $type;
+					$o->record_id	= $act->sre_code;
 					$o->run_type	= 'R';
 					
 				}else{

@@ -380,29 +380,28 @@ function nuRunReport($report_id, $record_id){
 	nuSetJSONData($id, $j);
 	
 	$f									= new stdClass;
-	$f->id								= $id;
-	$f->record_id						= $record_id;
+	$f->record_id						= $id;
 	
 	return $f;
 	
 }
 
 
-function nuRunPHP($procedure_id, $record_id){
+function nuRunPHP($procedure_code){
 
 	$id									= nuID();
-	$t									= nuRunQuery("SELECT * FROM zzzzsys_php WHERE sph_code = '$procedure_id'");
+	$t									= nuRunQuery("SELECT * FROM zzzzsys_php WHERE sph_code = '$procedure_code'");
 	$ob									= db_fetch_object($t);
 	$_POST['nuHash']['code']			= $ob->sph_code;
 	$_POST['nuHash']['description']		= $ob->sph_description;
 	$_POST['nuHash']['parentID']		= $ob->zzzzsys_php_id;
+	
 	$j									= json_encode($_POST['nuHash']);
 
 	nuSetJSONData($id, $j);
 	
 	$f									= new stdClass;
-	$f->id								= $id;
-	$f->record_id						= $record_id;
+	$f->record_id						= $id;
 	
 	return $f;
 	

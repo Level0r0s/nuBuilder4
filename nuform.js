@@ -22,11 +22,11 @@ function nuBuildForm(f){
 	window.nuSUBFORMROW			= [];
 	window.nuHASH				= [];                       //-- remove any hash variables previously set.
 	window.nuUniqueID			= 'c' + String(Date.now());
-	window.nuSuffix				= Number(String(Math.random()).substr(-4));
 	window.global_access		= f.global_access == '1';
 	nuFORM.edited				= false;
 	nuFORM.formType				= f.type;
 	nuFORM.scroll				= [];
+	nuSetSuffix(1000);
 	nuSetBody(f);
 	
 //	if(f.tableSchema.length != 0){  						//-- its an Object (load these once,  at login)
@@ -869,11 +869,11 @@ function nuRUN(w, i, l, p, prop){
 		var P		= window.location.pathname;
 		var f		= P.substring(0,P.lastIndexOf('/') + 1)
 
-		window.nuOPENER.push(new nuOpener(F, R, L));
+		window.nuOPENER.push(new nuOpener(O.run_type, F, R, L));
 
 		var open 	= window.nuOPENER[window.nuOPENER.length - 1];
-		
 		var u		= window.location.origin + f + O.src + '&opener=' + open.id;
+		var u		= P + '?i=2&opener=' + open.id;
 
 		$('#' + id).attr('src', u).removeClass('').addClass('nuIframe');
 
@@ -2135,16 +2135,16 @@ function nuAddAction(){
 	
 }
 
-function nuRunPHPAction(id) {
-	nuRunPHP(id);
+function nuRunPHPAction(code) {
+	nuRunPHP(code);
 }
 
-function nuRunReportAction(id) {
-	nuRunReport(id);
+function nuRunReportAction(code) {
+	nuRunReport(code);
 }
 
-function nuEmailReportAction(id) {
-	nuEmailReport(id);
+function nuEmailReportAction(code) {
+	nuEmailReport(code);
 }
 
 function nuSortBrowse(c){

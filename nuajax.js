@@ -146,16 +146,13 @@ function nuGetPDF(f, r){
 
 function nuRunReport(f, iframe){
 	
-	var r				= nuFORM.getCurrent().record_id;
-	
 	nuFORM.addBreadcrumb();
 
 	var last			= nuFORM.getCurrent();
 
 	last.session_id 	= window.nuSESSION;
 	last.call_type		= 'runreport';
-	last.form_id 		= f;
-	last.record_id	= r;
+	last.record_id		= f;
 	last.hash 			= nuHashFromEditForm();
 	
 	var successCallback = function(data,textStatus,jqXHR){
@@ -164,12 +161,13 @@ function nuRunReport(f, iframe){
 		
 		if(!nuDisplayError(fm)){
 			
-			var pdfUrl	= 'nurunpdf.php?i=' + fm.id;
+			var pdfUrl	= 'nurunpdf.php?i=' + fm.record_id;
 			
 			if(iframe === undefined){
 				window.open(pdfUrl);
 			}else{
-				$('#'+iframe).attr('src',pdfUrl);
+				parent.$('#testiframe').attr('src', pdfUrl);
+//				parent.$('#'+iframe).attr('src', pdfUrl);
 			}
 			
 		}
@@ -181,19 +179,17 @@ function nuRunReport(f, iframe){
 }
 
 
-function nuRunPHP(f, iframe){
+function nuRunPHP(pCode, iframe){
 	
 	if(window.nuBeforeSave){
 		if(!nuBeforeSave()){return;}
 	}
 
-	var r					= nuFORM.getCurrent().record_id;
 	var last				= nuFORM.addBreadcrumb();
 	
 	last.session_id			= nuSESSION;
 	last.call_type 			= 'runphp';
-	last.form_id  			= f;
-	last.record_id			= r;
+	last.form_id 			= pCode;
 	last.nuFORMdata			= nuFORM.data();
 	last.hash  				= nuHashFromEditForm();
 	
@@ -203,12 +199,12 @@ function nuRunPHP(f, iframe){
 		
 		if(!nuDisplayError(fm)){
 			
-			var pdfUrl		= 'nurunphp.php?i=' + fm.id;
+			var pdfUrl		= 'nurunphp.php?i=' + fm.record_id;
 			
 			if(iframe === undefined){
 				window.open(pdfUrl);
 			}else{
-				$('#'+iframe).attr('srfdc',pdfUrl);
+				parent.$('#testiframe').attr('src', pdfUrl);
 			}
 			
 		}
@@ -448,7 +444,7 @@ function nuOpenNewBrowserTab(c, f, r, filter){
 		
 		window.nuNEW 	= 0;
 		
-		window.nuOPENER.push(new nuOpener(f, r, filter));
+		window.nuOPENER.push(new nuOpener('F', f, r, filter));
 
 		nuOpenerAppend('type', c);
 		
