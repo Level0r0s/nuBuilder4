@@ -1641,19 +1641,19 @@ function nuGetOptionsList(f, t, p, a, type){
 		}
 		
 		if(type != 'subform'){
-			list.push(['Debug', 				'nuPopup("nudebug", "")', 					'graphics/nu_option_debug.png',			'Ctrl+Shft+D']);
+			list.push(['nuDebug Results', 		'nuPopup("nudebug", "")', 					'graphics/nu_option_debug.png',			'Ctrl+Shft+D']);
 		}
 		
 	}else{
 		
-		list.push(['Change Login', 			'nuPopup("nupassword", "' + u + '", "")', 	'graphics/nu_option_password.png', 	'Ctrl+Shft+L']);
+		list.push(['Change Login', 				'nuPopup("nupassword", "' + u + '", "")', 	'graphics/nu_option_password.png', 	'Ctrl+Shft+L']);
 		
 	}
 
 	if(nuFORM.getProperty('record_id') != '' && type != 'subform'){
 		
-		list.push(['Save Form', 			'nuSaveAction();', 							'graphics/nu_option_save.png',		'Ctrl+Shft+S']);
-		list.push(['Refresh', 				'nuGetBreadcrumb()', 						'graphics/nu_option_refresh.png', 	'Ctrl+Shft+R']);
+		list.push(['Save Form', 				'nuSaveAction();', 							'graphics/nu_option_save.png',		'Ctrl+Shft+S']);
+		list.push(['Refresh', 					'nuGetBreadcrumb()', 						'graphics/nu_option_refresh.png', 	'Ctrl+Shft+R']);
 		
 	}
 
