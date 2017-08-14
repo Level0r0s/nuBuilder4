@@ -547,20 +547,25 @@ class nuSelectObject{
 		c.sort(o);
 
 		var clauses	= '';
-
+		
 		for(var i = 0 ; i < c.length ; i++){
 			
 			var T	= c[i][1];
 			var F	= c[i][2];
 			var C	= c[i][3];
 			var S	= c[i][4];
+			var D	= c[i][6];
 			var cl	= F != '' && C != '';			//-- valid statement for WHERE and HAVING
 			var gr	= F != '' && S != '';			//-- valid statement for ORDER BY and GROUP BY
 
-			if(T == 1 && cl){WHERE.push('(' + F + C + ')');}
-			if(T == 4 && cl){HAVING.push('(' + F + C + ')');}
-			if(T == 2 && gr){GROUPBY.push(F + ' ' + S);}
-			if(T == 3 && gr){ORDERBY.push(F + ' ' + S);}
+			if(D == 0){
+				
+				if(T == 1 && cl){WHERE.push('(' + F + C + ')');}
+				if(T == 4 && cl){HAVING.push('(' + F + C + ')');}
+				if(T == 2 && gr){GROUPBY.push(F + ' ' + S);}
+				if(T == 3 && gr){ORDERBY.push(F + ' ' + S);}
+				
+			}
 
 		}
 
