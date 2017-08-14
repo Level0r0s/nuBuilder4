@@ -406,17 +406,27 @@ function nuRunPHP($procedure_code){
 
 function nuRunPHPHidden($nuCode){
 	
-	$_POST['nuHash']['RECORD_ID']		= $_POST['nuHash']['hash_record_id'];
-
-	$s									= "SELECT * FROM zzzzsys_php WHERE sph_code = ? ";
-	$t									= nuRunQuery($s, [$nuCode]);
-	$r									= db_fetch_object($t);
+	//$_POST['nuHash']['RECORD_ID']		= $_POST['nuHash']['hash_record_id'];
 	
-	$evalPHP 							= new nuEvalPHPClass($r->zzzzsys_php_id);
+	$_POST['nuCallback']	= '';
+	$s						= "SELECT * FROM zzzzsys_php WHERE sph_code = ? ";
+	$t						= nuRunQuery($s, [$nuCode]);
+	$r						= db_fetch_object($t);
+	
+	$evalPHP				= new nuEvalPHPClass($r->zzzzsys_php_id);
 
-	return 1;
-
+	$f						= new stdClass;
+	$f->id					= 1;
+	$f->callback_javascript	= $_POST['nuCallback'];
+	
+	return $f;
 }
+
+
+function nuCallback($js){
+	$_POST['nuCallback']= $js;
+}
+
 
 
 function nuSetJSONData($i, $nj){

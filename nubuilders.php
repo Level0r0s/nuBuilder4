@@ -7,7 +7,11 @@ function nuBuildFastForm($table, $form_type){
 	$newT			= $form_type != 'launch';
 	
 	if($form_type == 'launch'){
-		$table 		= 'Launch Form';
+		
+		$t			= nuRunQuery("SELECT COUNT(*) FROM zzzzsys_form WHERE SUBSTRING(sfo_code, 1, 11) = 'Launch Form'");
+		$r			= db_fetch_row($t);
+		$table 		= 'Launch Form ' . $r[0];
+		
 	}
 	
 	$q				= nuRunQuery("SELECT table_name FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = DATABASE()");

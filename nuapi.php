@@ -39,7 +39,7 @@
     	if($CT == 'update')			{$f->forms[0]->record_id			= nuUpdateTables();}
     	if($CT == 'getlookupid')	{$f->forms[0]				 		= nuGetAllLookupValues();}
     	if($CT == 'getlookupcode')	{$f->forms[0]				 		= nuGetAllLookupList();}
-    	if($CT == 'runhiddenphp')	{$f->forms[0]->id					= nuRunPHPHidden($R);}
+    	if($CT == 'runhiddenphp')	{$f->forms[0]						= nuRunPHPHidden($R);}
     	if($CT == 'runphp')			{$f->forms[0]->id					= nuRunPHP($F);}
     	if($CT == 'runreport')		{$f->forms[0]->id					= nuRunReport($F);}
     	if($CT == 'runhtml')		{$f->forms[0]->id					= nuRunHTML();}
