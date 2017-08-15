@@ -312,22 +312,25 @@ function nuSetHashList($p){
 	$t			= nuRunQuery($s);
 	$R			= db_fetch_object($t);
 	$h			= array();
-
-	if(trim($R->sfo_table) != ''){
-		
-		$s		= "SELECt * FROM $R->sfo_table WHERE $R->sfo_primary_key = '$rid'";
-		$t		= nuRunQuery($s);
-		$f		= db_fetch_object($t);
-
-		if(is_object($f) ){
-			
-			foreach ($f as $fld => $value ){								//-- This Edit Form's Object Values
-				$r[$fld] = addslashes($value);
-			}
-			
-		}
-	}
 	
+	if($p['call_type'] == 'getform'){
+
+		if(trim($R->sfo_table) != ''){
+			
+			$s		= "SELECt * FROM $R->sfo_table WHERE $R->sfo_primary_key = '$rid'";
+			$t		= nuRunQuery($s);
+			$f		= db_fetch_object($t);
+
+			if(is_object($f) ){
+				
+				foreach ($f as $fld => $value ){								//-- This Edit Form's Object Values
+					$r[$fld] = addslashes($value);
+				}
+				
+			}
+		}
+		
+	}
 
 	foreach ($p as $key => $value){											//-- The 'opener' Form's properties
 
@@ -361,7 +364,7 @@ function nuSetHashList($p){
 	$h['ID']					= addslashes($_POST['nuSTATE']['primary_key']);
 	$h['CODE']					= addslashes($_POST['nuSTATE']['code']);
 	
-	return array_merge($r, $h, $A);
+	return array_merge($h, $r, $A);
 
 }
 
