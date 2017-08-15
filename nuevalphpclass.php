@@ -59,7 +59,6 @@
 		}
 		
 		function evalPHP($phpCode, $phpToEval){
-nudebug('gh', $phpToEval);		
 			
 			if(trim($phpToEval) == ''){return;}
 			
