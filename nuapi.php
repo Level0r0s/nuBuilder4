@@ -9,6 +9,7 @@
 		
 	$_POST['nuCounter']						= rand(0, 999);
 	$_POST['nuErrors']						= array();
+	$_POST['nuMessages']					= array();
 	$U										= nuGetUserAccess();
 	$formAndSessionData						= nuGatherFormAndSessionData($U['HOME_ID']);
     $_POST['nuTableSchema']                 = $formAndSessionData->tableSchema;
@@ -53,6 +54,7 @@
 	$f->forms[0]->translation				= $formAndSessionData->translation;
 	$f->forms[0]->session_id				= $_SESSION['SESSION_ID'];
 	$f->forms[0]->errors					= $_POST['nuErrors'];
+	$f->forms[0]->messages					= $_POST['nuMessages'];
 	$f->forms[0]->log_again				    = $_POST['nuLogAgain'];
 	$f->forms[0]->global_access				= $_POST['nuHash']['GLOBAL_ACCESS'];
 	$f->forms[0]->form_access				= $GLOBALS['nuSetup']->set_denied;

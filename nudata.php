@@ -427,7 +427,7 @@ function nuUpdateCounter($id){
 
 	}
 	
-	nuDisplayError('Could not get AutoNumber');
+	nuDisplayMessage('Could not get AutoNumber');
 	
 	return -1;
 	
@@ -501,6 +501,10 @@ function nuDisplayError($m){
 	$_POST['nuErrors'][]	= $m;
 }
 
+
+function nuDisplayMessage($m){
+	$_POST['nuMessages'][]	= $m;
+}
 
 function nuCheckAccess($f, $r = ''){
 	
