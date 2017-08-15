@@ -91,6 +91,16 @@ function nuBuildForm(f){
 		nuAddJavascript(f);
 	}
 	
+	if(f.messages.length > 0){
+
+		var im		= ['<img src="graphics/numessage.png" width="30px" height="30px" style="position:absolute;left:10px;top:10px"><br>'];
+
+		f.messages	= im.concat(f.messages);
+
+		nuMessage(f.messages);
+		
+	}
+
 }
 
 

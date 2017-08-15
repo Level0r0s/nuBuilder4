@@ -237,9 +237,18 @@ function nuRunPHPHidden(i){
 		var fm				= data;
 		
 		if(nuDisplayError(fm)){return;};
-		
-		eval(fm.callback + ';')
 
+		if(fm.messages.length > 0){
+
+			var im			= ['<img src="graphics/numessage.png" width="30px" height="30px" style="position:absolute;left:10px;top:10px">'];
+			im				= im.concat(fm.messages);
+
+			nuMessage(im);
+			
+		}
+
+		
+			
 	};
 	
 	nuAjax(last,successCallback);

@@ -420,13 +420,13 @@ function nuRunPHPHidden($nuCode){
 
 	$f						= new stdClass;
 	$f->id					= 1;
-	$f->callback			= $_POST['nuCallback'];
+	$f->callback_javascript	= $_POST['nuCallback'];
 	
 	return $f;
 }
 
 
-function nuJavascriptCallback($js){
+function nuCallback($js){
 	$_POST['nuCallback']= $js;
 }
 
