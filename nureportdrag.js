@@ -1118,7 +1118,8 @@ function nuObjectDialog(){
 	top = nuDialogInput('Border Width', 'borderWidth', top, 200, D, fun);
 	top = nuDialogInput('Field Name', 'fieldName', top, 200, D, fun);
 	top = nuDialogInput('Font Color', 'fontColor', top, 200, D, fun);
-	top = nuDialogInput('Font Family', 'fontFamily', top, 200, D, fun, [['Helvetica','Helvetica'],['Arial','Arial'],['Courier','Courier'],['Times','Times'],['Symbol','Symbol']]);
+//	top = nuDialogInput('Font Family', 'fontFamily', top, 200, D, fun, [['Helvetica','Helvetica'],['Arial','Arial'],['Courier','Courier'],['Times','Times'],['Symbol','Symbol']]);
+	top = nuDialogInput('Font Family', 'fontFamily', top, 200, D, fun, window.nuFonts);
 	top = nuDialogInput('Font Size', 'fontSize', top, 200, D, fun);
 	top = nuDialogInput('Font Weight', 'fontWeight', top, 200, D, fun, [['','Normal'],['b','Bold'],['i','Italic']]);
 	top = nuDialogInput('Format', 'format', top, 200, D, fun,  window.nuFormats);

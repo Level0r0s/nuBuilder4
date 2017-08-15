@@ -23,6 +23,21 @@ $PDF                        = new FPDF($LAYOUT->orientation, 'mm', $LAYOUT->pape
 $PDF->SetAutoPageBreak(false);
 $REPORT                     = nuSetPixelsToMM($LAYOUT);
 $PDF->SetMargins(1,1,1);
+
+$fl							= json_decode(nuFontList());
+
+$ntt						= ['Helvetica','Arial', 'Courier', 'Times', 'Symbol'];
+
+for($i = 0 ; $i < count($fl) ; $i++){
+	
+	$fnt					= $fl[$i][0];
+	
+	if(!in_array($fnt, $ntt)){
+		$PDF->AddFont($fnt, '', strtolower($fnt) . '.php');
+	}
+	
+}
+
 nuBuildTempTable($JSON->parentID, $TABLE_ID);
 
 $GLOBALS['nu_columns']		= nuAddCriteriaValues($hashData, $TABLE_ID);

@@ -398,10 +398,11 @@ function nuCalChoice(t){
 	var Y	= Number($('#nuCalYear').html());
 	
 	var dt	= new Date(Y, M, D, 0, 0, 0, 0);
-	var b	= dt.getFullYear() + '-' + nuPad2(dt.getMonth()+1) + '-' + dt.getDate();
+	var d	= dt.getFullYear() + '-' + nuPad2(dt.getMonth()+1) + '-' + dt.getDate();
+	var fd	= nuFORM.addFormatting(d, f);
 
 	o
-	.val(b)
+	.val(fd)
 	.change()
 	.focus();
 	

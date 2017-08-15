@@ -127,7 +127,11 @@ function nuLoginRequest(){
 
 window.nuVersion 		= 'nuBuilder4';
 window.nuDocumentID		= Date.now();
-window.onbeforeunload	= nuHomeWarning;
+
+if(parent.window.nuDocumentID == window.nuDocumentID){
+	window.onbeforeunload	= nuHomeWarning;
+}
+
 window.nuHASH			= [];
 
 <?php
@@ -167,10 +171,9 @@ window.nuHASH			= [];
 	}else{
 
 		function nuLoad(){
-			
+
 			if(nuIsOpener(window)){
 				var from					= window.opener;
-
 			}else{
 				var from					= window.parent;
 			}
@@ -182,28 +185,31 @@ window.nuHASH			= [];
 			window.nuBrowseFunction			= '$nuBrowseFunction';
 			window.nuTARGET					= '$target';
 			window.nuSESSION				= from.nuSESSION;
+			window.nuSuffix					= 1000;
 			
 			if('$opener' != '') {
 				
-				var p						= getOpenerById(from.nuOPENER, Number($opener));
-				removeOpenerById(from.nuOPENER, Number($opener));
+				var p						= nuGetOpenerById(from.nuOPENER, Number($opener));
+				nuRemoveOpenerById(from.nuOPENER, Number($opener));
 
 			} else {
 				
 				var p						= from.nuOPENER[from.nuOPENER.length -1];
-				removeOpenerById(from.nuOPENER, from.nuOPENER[from.nuOPENER.length -1]);
+				nuRemoveOpenerById(from.nuOPENER, from.nuOPENER[from.nuOPENER.length -1]);
+				
 			}
-		
+			
 			nuBindCtrlEvents();
 			
-			window.filter					= p.filter;
-
-			if(p.type == 'getreport') {
-				nuGetPDF(p.form_id, p.record_id)
-			} else if(p.type == 'getphp') {
-				nuGetPHP(p.form_id, p.record_id)
+			if(p.type == 'R') {
+				nuRunReport(p.record_id, p.parameters);
+			} else if(p.type == 'P') {
+				nuRunPHP(p.record_id, p.parameters);
 			} else {
+				
+				window.filter				= p.filter;
 				nuForm(p.form_id, p.record_id, p.filter, '$search');
+				
 			}
 			
 			if(p.record_id == '-2'){

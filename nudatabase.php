@@ -8,7 +8,6 @@ $DBHost                      = $nuConfigDBHost;
 $DBName                      = $nuConfigDBName;
 $DBUser                      = $nuConfigDBUser;
 $DBPassword                  = $nuConfigDBPassword;
-//die("mysql:host=$DBHost;dbname=$DBName;charset=utf8");
 
 $nuDB = new PDO("mysql:host=$DBHost;dbname=$DBName;charset=utf8", $DBUser, $DBPassword, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
 $nuDB->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -107,10 +106,11 @@ $trace
 }
 
 
-function db_is_auto_id($t, $p){
+function db_is_auto_id($table, $pk){
 
-	$t       = nuRunQuery("SHOW COLUMNS FROM $t WHERE `Field` = '$p'");   //-- mysql's way of checking if its an auto-incrementing id primary key
-	$r       = db_fetch_object($t);
+	$s		= "SHOW COLUMNS FROM `$table` WHERE `Field` = '$pk'";
+	$t      = nuRunQuery($s);   									//-- mysql's way of checking if its an auto-incrementing id primary key
+	$r      = db_fetch_object($t);
 	
 	return $r->Extra == 'auto_increment';
 

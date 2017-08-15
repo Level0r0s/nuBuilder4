@@ -129,6 +129,7 @@ input[type=range]::-webkit-slider-runnable-track {
 }
 
 
+
 .nuIframe {
   border-color: lightgrey;
   border-style: solid;
@@ -205,7 +206,7 @@ input[type=range]::-webkit-slider-runnable-track {
 
 
 .nuScroll, .input_nuScroll {
-  background-color: #ECE6F7;
+  background-color: #EBEBEB;
 }
 
 .nuDate, .input_nuDate {
@@ -705,6 +706,7 @@ input[type=range]::-webkit-slider-runnable-track {
 	border-width:1px; 
 	border-color:black; 
 	-webkit-user-select:none; 
+	-moz-user-select:none; 
 	overflow:visible; 
 	background-color:white;
 	background-image: url("graphics/grid.png"); 
@@ -721,8 +723,9 @@ input[type=range]::-webkit-slider-runnable-track {
 .nuSection{
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
-	-khtml-user-select: none;
+	-moz-touch-callout: none;
 	-moz-user-select: none;
+	-khtml-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
 	border-width:1px;

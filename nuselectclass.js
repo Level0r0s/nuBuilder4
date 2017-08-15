@@ -547,24 +547,29 @@ class nuSelectObject{
 		c.sort(o);
 
 		var clauses	= '';
-
+		
 		for(var i = 0 ; i < c.length ; i++){
 			
 			var T	= c[i][1];
 			var F	= c[i][2];
 			var C	= c[i][3];
 			var S	= c[i][4];
+			var D	= c[i][6];
 			var cl	= F != '' && C != '';			//-- valid statement for WHERE and HAVING
 			var gr	= F != '' && S != '';			//-- valid statement for ORDER BY and GROUP BY
 
-			if(T == 1 && cl){WHERE.push('(' + F + C + ')');}
-			if(T == 4 && cl){HAVING.push('(' + F + C + ')');}
-			if(T == 2 && gr){GROUPBY.push(F + ' ' + S);}
-			if(T == 3 && gr){ORDERBY.push(F + ' ' + S);}
+			if(D == 0){
+				
+				if(T == 1 && cl){WHERE.push('(' + F + C + ')');}
+				if(T == 4 && cl){HAVING.push('(' + F + C + ')');}
+				if(T == 2 && gr){GROUPBY.push(F + ' ' + S);}
+				if(T == 3 && gr){ORDERBY.push(F + ' ' + S);}
+				
+			}
 
 		}
 
-		if(WHERE.length > 0){clauses	+= "\n\nWHERE\n    "	+ WHERE.join(" AND \n    ") 	+ "\n";}
+		if(WHERE.length > 0){clauses	+= "\n\nWHERE\n    ("	+ WHERE.join(" AND \n    ") 	+ ")\n";}
 		if(GROUPBY.length > 0){clauses	+= "\nGROUP BY\n    " 	+ GROUPBY.join(",\n    ") 		+ "\n";}
 		if(HAVING.length > 0){clauses	+= "\nHAVING\n    " 	+ HAVING.join(" AND \n    ") 	+ "\n";}
 		if(ORDERBY.length > 0){clauses	+= "\nORDER BY\n    " 	+ ORDERBY.join(",\n    ") 		+ "\n";}
@@ -751,6 +756,18 @@ class nuSelectObject{
 		var J		=	JSON.parse(j);
 		
 		for(var i = 0 ; i < J.tables.length ; i++){	
+		
+			if(typeof(parent.nuFORM.tableSchema[J.tables[i].tablename]) == 'undefined'){
+				
+				nuMessage(['No table named <b>' + J.tables[i].tablename + '</b>.']);
+				
+				return false;
+				
+			}
+			
+		}
+
+		for(var i = 0 ; i < J.tables.length ; i++){	
 			
 			var t	= J.tables[i];
 			var cb	= J.tables[i].checkboxes;
@@ -783,6 +800,8 @@ class nuSelectObject{
 		}
 
 		nuAngle();
+		
+		return true;
 		
 	}
 	
@@ -855,12 +874,12 @@ function nuUp(e){
 function nuDown(e){
 
 	var el						= $(e.target);
-	window.nuCurrentID			= event.target.id;
+	window.nuCurrentID			= e.target.id;
 	
 	if(el.hasClass('nuTableName')){
 
-		window.nuY				= event.clientY - parseInt($(event.target).parent().css('top'));
-		window.nuX				= event.clientX - parseInt($(event.target).parent().css('left'));
+		window.nuY				= e.clientY - parseInt($(e.target).parent().css('top'));
+		window.nuX				= e.clientX - parseInt($(e.target).parent().css('left'));
 
 	}
 
@@ -993,7 +1012,7 @@ function nuAngle(){
 
 function nuChangeJoin(e){
 	
-	
+	debugger;
 	var v			= parent.$('#sse_json').val();
 	var j			= JSON.parse(v);
 	var i			= $(e.target).attr('data-nu-join');

@@ -22,10 +22,9 @@
 	$_POST['nuHash']['PREVIOUS_RECORD_ID'] 	= $R;
 	$_POST['nuHash']['RECORD_ID'] 			= $R;
 	$_POST['nuHash']['FORM_ID'] 			= $F;
-	$_POST['nuHash']['nuFORMdata']			= json_decode(json_encode($_POST['nuSTATE']['nuFORMdata']));
+	$_POST['nuHash']['nuFORMdata']			= json_decode(json_encode($_POST['nuSTATE']['nuFORMdata']));		//-- this holds data from an Edit Form
 	$_POST['nuHash']['TABLE_ID'] 			= nuTT();
 	$_POST['nuHash']['SESSION_ID'] 			= $_SESSION['SESSION_ID'];
-	$_POST['nuHash']['data']				= $_POST['nuSTATE']['data'];
 	$_POST['nuValidate']					= array();
 
 	$CT										= $P['call_type'];
@@ -37,12 +36,12 @@
     	if($CT == 'getform')		{nuBeforeEdit($F, $R);$f->forms[0] 	= nuGetFormObject($F, $R, 0, $P);}
     	if($CT == 'getphp')			{nuBeforeEdit($F, $R);$f->forms[0] 	= nuGetFormObject($F, $R, 0, $P);}
     	if($CT == 'getreport')		{nuBeforeEdit($F, $R);$f->forms[0] 	= nuGetFormObject($F, $R, 0, $P);}
-    	if($CT == 'update')			{$f->forms[0]->record_id			= nuUpdateData(); nuUpdateTables();}
-    	if($CT == 'getlookupid')	{$f->forms[0]->lookup_values 		= nuGetAllLookupValues();}
-    	if($CT == 'getlookupcode')	{$f->forms[0]->lookup_values 		= nuGetAllLookupList();}
-    	if($CT == 'runhiddenphp')	{$f->forms[0]->id					= nuRunPHPHidden($R);}
-    	if($CT == 'runphp')			{$f->forms[0]						= nuRunPHP($F, $R);}
-    	if($CT == 'runreport')		{$f->forms[0]						= nuRunReport($F, $R);}
+    	if($CT == 'update')			{$f->forms[0]->record_id			= nuUpdateTables();}
+    	if($CT == 'getlookupid')	{$f->forms[0]				 		= nuGetAllLookupValues();}
+    	if($CT == 'getlookupcode')	{$f->forms[0]				 		= nuGetAllLookupList();}
+    	if($CT == 'runhiddenphp')	{$f->forms[0]						= nuRunPHPHidden($R);}
+    	if($CT == 'runphp')			{$f->forms[0]->id					= nuRunPHP($F);}
+    	if($CT == 'runreport')		{$f->forms[0]->id					= nuRunReport($F);}
     	if($CT == 'runhtml')		{$f->forms[0]->id					= nuRunHTML();}
         if($CT == 'nudragsave')		{$f->forms[0]						= nuDragSave($P);}
 		
