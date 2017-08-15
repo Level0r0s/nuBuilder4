@@ -406,8 +406,6 @@ function nuRunPHP($procedure_code){
 
 function nuRunPHPHidden($nuCode){
 	
-	//$_POST['nuHash']['RECORD_ID']		= $_POST['nuHash']['hash_record_id'];
-	
 	$_POST['nuCallback']	= '';
 	$s						= "SELECT * FROM zzzzsys_php WHERE sph_code = ? ";
 	$t						= nuRunQuery($s, [$nuCode]);
@@ -417,13 +415,13 @@ function nuRunPHPHidden($nuCode){
 
 	$f						= new stdClass;
 	$f->id					= 1;
-	$f->callback_javascript	= $_POST['nuCallback'];
+	$f->callback			= $_POST['nuCallback'];
 	
 	return $f;
 }
 
 
-function nuCallback($js){
+function nuJavascriptCallback($js){
 	$_POST['nuCallback']= $js;
 }
 
