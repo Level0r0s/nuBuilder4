@@ -1039,6 +1039,7 @@ function nuButtons($formid, $POST){
 	$c						= $POST['call_type'];
 	
 	$s						= 'SELECT * FROM zzzzsys_php WHERE sph_code = ? ';
+nudebug($s, $POST['record_id']);
 	$t						= nuRunQuery($s,[$POST['record_id']]);
 	$P						= db_fetch_object($t);
 	
