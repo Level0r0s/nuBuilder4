@@ -159,6 +159,8 @@ $lab=[];
 					$o->form_id		= $act->sph_zzzzsys_form_id;
 					$o->record_id	= $act->sph_code;
 					$o->run_type	= 'P';
+					$runtab			= nuRunQuery("SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = '$r->sob_run_zzzzsys_form_id'");
+					$o->run_hidden	= db_fetch_object($runtab)->sph_run == 'hide';
 					
 				}else if(isReport($type)){
 					

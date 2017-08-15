@@ -838,11 +838,17 @@ function nuRUN(w, i, l, p, prop){
 	});
 
 	if(O.run_method == 'b'){
-		var clicker		= '';
 		
-		if(O.run_type == 'R'){clicker = "nuGetReport('" + O.form_id + "','" + O.record_id + "')";}
-		if(O.run_type == 'P'){clicker = "nuGetPHP('" + O.form_id + "','" + O.record_id + "')"}
-		if(O.run_type == 'F'){clicker = "nuForm('" + O.form_id + "','" + O.record_id + "','" + O.filter + "', '')"}
+		var clicker					  	= '';
+		
+		if(O.run_type == 'F'){clicker 	= "nuForm('" + O.form_id + "','" + O.record_id + "','" + O.filter + "', '')"}
+		if(O.run_type == 'R'){clicker 	= "nuRunReport('" + O.record_id + "')";}
+		if(O.run_type == 'P'){
+			
+			if(O.run_hidden){clicker  	= "nuRunPHPHidden('" + O.record_id + "')"}
+			if(!O.run_hidden){clicker 	= "nuRunPHP('" + O.record_id + "')"}
+			
+		}
 		
 		$('#' + id).attr({
 					'type'		: 'button',
