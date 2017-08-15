@@ -25,6 +25,8 @@
 	$_POST['nuHash']['TABLE_ID'] 			= nuTT();
 	$_POST['nuHash']['SESSION_ID'] 			= $_SESSION['SESSION_ID'];
 	$_POST['nuValidate']					= array();
+	$_POST['nuCallback']					= '';
+
 
 	$CT										= $P['call_type'];
 	$f->forms[0]							= new stdClass;
@@ -52,6 +54,7 @@
 	$f->forms[0]->formSchema				= $formAndSessionData->formSchema;
 	$f->forms[0]->translation				= $formAndSessionData->translation;
 	$f->forms[0]->session_id				= $_SESSION['SESSION_ID'];
+	$f->forms[0]->callback					= $_POST['nuCallback'];
 	$f->forms[0]->errors					= $_POST['nuErrors'];
 	$f->forms[0]->log_again				    = $_POST['nuLogAgain'];
 	$f->forms[0]->global_access				= $_POST['nuHash']['GLOBAL_ACCESS'];

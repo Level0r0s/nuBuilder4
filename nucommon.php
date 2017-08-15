@@ -409,7 +409,6 @@ function nuRunPHP($procedure_code){
 
 function nuRunPHPHidden($nuCode){
 	
-	$_POST['nuCallback']	= '';
 	$s						= "SELECT * FROM zzzzsys_php WHERE sph_code = ? ";
 	$t						= nuRunQuery($s, [$nuCode]);
 	$r						= db_fetch_object($t);
@@ -418,7 +417,6 @@ function nuRunPHPHidden($nuCode){
 
 	$f						= new stdClass;
 	$f->id					= 1;
-	$f->callback			= $_POST['nuCallback'];
 	
 	return $f;
 }

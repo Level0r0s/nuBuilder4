@@ -84,39 +84,6 @@ function nuForm(f, r, filter, search, n){
 }
 
 
-function nuGetPHP(f, r){
-
-	if(nuOpenNewBrowserTab('getphp', f, r, '')){return;}
-
-	window.nuFORM.addBreadcrumb();
-
-	var last			= window.nuFORM.getCurrent();
-
-	last.session_id 	= window.nuSESSION;
-	last.call_type 		= 'getphp';
-	last.form_id 		= f;
-	last.record_id		= r;
-	last.hash 			= parent.nuHashFromEditForm();
-
-	var successCallback = function(data,textStatus,jqXHR){
-		
-		var fm  		= data;
-		
-		if(!nuDisplayError(fm)){
-
-			nuFORM.setProperty('record_id', fm.record_id);
-			nuBuildForm(fm);
-			
-		} else {
-			window.nuFORM.breadcrumbs.pop();
-		}
-	}
-	
-	nuAjax(last, successCallback);
-	
-}
-
-
 function nuGetReport(f, r){
 
 	if(nuOpenNewBrowserTab('getreport', f, r, '')){return;}
@@ -177,6 +144,39 @@ function nuRunReport(f, iframe){
 	
 }
 
+
+
+function nuGetPHP(f, r){
+
+	if(nuOpenNewBrowserTab('getphp', f, r, '')){return;}
+
+	window.nuFORM.addBreadcrumb();
+
+	var last			= window.nuFORM.getCurrent();
+
+	last.session_id 	= window.nuSESSION;
+	last.call_type 		= 'getphp';
+	last.form_id 		= f;
+	last.record_id		= r;
+	last.hash 			= parent.nuHashFromEditForm();
+
+	var successCallback = function(data,textStatus,jqXHR){
+		
+		var fm  		= data;
+		
+		if(!nuDisplayError(fm)){
+
+			nuFORM.setProperty('record_id', fm.record_id);
+			nuBuildForm(fm);
+			
+		} else {
+			window.nuFORM.breadcrumbs.pop();
+		}
+	}
+	
+	nuAjax(last, successCallback);
+	
+}
 
 function nuRunPHP(pCode, iframe){
 	
@@ -387,9 +387,7 @@ function nuUpdateData(action, instruction){
 				nuGetBreadcrumb();
 				
 			}else{
-				
 				nuForm(f, fm.record_id, fm.filter, fm.search, 1);		//-- go to saved or created record
-				
 			}
 			
 			nuSavingMessage();
