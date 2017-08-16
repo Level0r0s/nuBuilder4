@@ -38,7 +38,7 @@ function nuFormCode($f){
 }
 
 function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
-
+$lab=[];
     $tabs 			= nuBuildTabList($F);
     $f				= nuGetEditForm($F, $R);
     $f->form_id		= $F;
@@ -66,7 +66,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
     ";
 
 	if($R != ''){
-
+		
 		$t 							= nuRunQuery($s, array($F));
 		$a 							= array();
 
@@ -91,14 +91,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 			}
 				
 			if($r->sob_all_type == 'textarea'){
-				
 				$o->align 			= $r->sob_all_align;
-//				$o->read 			= $r->sob_all_access;
-				
-			}
-				
-			if($r->sob_all_type == 'lookup'){
-//				$o->read 			= $r->sob_all_access;
 			}
 				
 			if($r->sob_all_type == 'input' || $r->sob_all_type == 'display'){
@@ -117,7 +110,6 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 				}
 					
 				$o->input 			= $r->sob_input_type;
-//				$o->read 			= $r->sob_all_access;
 
 				if($r->sob_input_type == 'button' && $r->sob_all_type == 'input'){
 					$o->value		= $r->sob_all_label;
@@ -158,22 +150,28 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 				$type				= $r->sob_run_zzzzsys_form_id;
 				$o->form_id			= $type;
 				$o->record_id		= $r->sob_run_id;
+				$o->parameters		= $r->sob_all_id;
 				
 				if(isProcedure($type)){
 					
+					$actt			= nuRunQuery('SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = ?',[$type]);
+					$act			= db_fetch_object($actt);
+					$o->form_id		= $act->sph_zzzzsys_form_id;
+					$o->record_id	= $act->sph_code;
 					$o->run_type	= 'P';
-					$o->src			= 'nurunphp.php?i=' . nuRunPHP($type);
+					$runtab			= nuRunQuery("SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = '$r->sob_run_zzzzsys_form_id'");
+					$o->run_hidden	= db_fetch_object($runtab)->sph_run == 'hide';
 					
 				}else if(isReport($type)){
 					
+					$actt			= nuRunQuery('SELECT * FROM zzzzsys_report WHERE zzzzsys_report_id = ?',[$type]);
+					$act			= db_fetch_object($actt);
+					$o->form_id		= $act->sre_zzzzsys_form_id;;
+					$o->record_id	= $act->sre_code;
 					$o->run_type	= 'R';
-					$o->src			= 'nurunpdf.php?i=' . nuRunReport($type);
 					
 				}else{
-					
 					$o->run_type	= 'F';
-					$o->src			= 'index.php?';
-					
 				}
 
 				$o->filter			= nuReplaceHashVariables($r->sob_run_filter);
@@ -214,7 +212,6 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 				$o->align				= $r->sob_all_align;
 			}
 
-			//$o->display					= nuDisplay($r->sob_all_display_condition);
 			$o->js						= nuObjectEvents($r->zzzzsys_object_id);
 
 			if($OBJS > 0){
@@ -1038,18 +1035,32 @@ function nuButtons($formid, $POST){
 	$_POST['session']		= $nuJ->session;
 	$C						= '';
 	$D						= '';
-
 	$a						= nuFormAccess($formid, $nuJ->forms);
 	$f						= nuFormProperties($formid);
 	$c						= $POST['call_type'];
 	
-	$s						= 'SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = ? ';
-	$t						= nuRunQuery($s,[$POST['record_id']]);
-	$P						= db_fetch_object($t);
-	
-	$s						= 'SELECT * FROM zzzzsys_report WHERE zzzzsys_report_id = ? ';
-	$t						= nuRunQuery($s,[$POST['record_id']]);
-	$R						= db_fetch_object($t);
+	if($c == 'getphp' or $c == 'getreport'){
+
+			
+		$s					= 'SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = ? ';
+		$t					= nuRunQuery($s,[$POST['record_id']]);
+		$P					= db_fetch_object($t);
+		
+		$s					= 'SELECT * FROM zzzzsys_report WHERE zzzzsys_report_id = ? ';
+		$t					= nuRunQuery($s,[$POST['record_id']]);
+		$R					= db_fetch_object($t);
+		
+	}else{
+			
+		$s					= 'SELECT * FROM zzzzsys_php WHERE sph_code = ? ';
+		$t					= nuRunQuery($s,[$POST['record_id']]);
+		$P					= db_fetch_object($t);
+		
+		$s					= 'SELECT * FROM zzzzsys_report WHERE sre_code = ? ';
+		$t					= nuRunQuery($s,[$POST['record_id']]);
+		$R					= db_fetch_object($t);
+		
+	}
 	
 	if($c == 'getphp'){
 

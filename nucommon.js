@@ -16,11 +16,14 @@ window.nuDRAGLINEVID			= '';
 window.nuNEW					= '';
 window.nuDragID						= 1000;
 
-function nuOpener(f, r, filter, parameters){
+function nuOpener(t, f, r, filter, parameters){
 	
-	this.id					= Date.now();
+	nuSetSuffix();
+	
+	this.id					= String(Date.now()) + String(window.nuSuffix);
 	this.form_id			= f;
 	this.record_id			= r;
+	this.type				= t;
 	
 	if(arguments.length 	= 3){
 		this.filter			= filter;
@@ -40,7 +43,7 @@ function nuOpenerAppend(t, k) {
 	window.nuOPENER[window.nuOPENER.length - 1][t] = k;
 }
 
-function getOpenerById(pOPENER, pid) {
+function nuGetOpenerById(pOPENER, pid) {
 	
 	for (var i = 0; i < pOPENER.length; i++) {
 		if(pOPENER[i].id == pid) {
@@ -51,7 +54,8 @@ function getOpenerById(pOPENER, pid) {
 	return;
 }
 
-function removeOpenerById(o, pid) {
+
+function nuRemoveOpenerById(o, pid) {
 
 	for (var i = 0; i < o.length; i++) {
 		
@@ -63,7 +67,8 @@ function removeOpenerById(o, pid) {
 
 }
 
-function nuGetBreadcrumb(bc, ind){
+
+function nuGetBreadcrumb(bc){
 	
 	var a			= arguments.length;
 	var e			= nuFORM.edited;
@@ -72,13 +77,7 @@ function nuGetBreadcrumb(bc, ind){
 	if(a == 0){
 		var b		= nuFORM.breadcrumbs.length -1;
 	}else{
-		
 		var b		= bc;
-		
-		if(a == 2){
-			nuOpenTab(ind);
-		}
-		
 	}
 	
 	if(e && f != 'launch'){
@@ -201,7 +200,7 @@ function nuBuildLookup(t, s){
 	var f			= $('#' + t.id).attr('data-nu-form-id');
 	var tar			= $('#' + t.id).attr('data-nu-target');
 	
-	window.nuOPENER.push(new nuOpener(f, ''));
+	window.nuOPENER.push(new nuOpener('F', f, ''));
 	
 	var open 		= window.nuOPENER[window.nuOPENER.length - 1];
 	
@@ -217,7 +216,7 @@ function nuPopup(f, r, filter){
 
 	$('#nuCalendar').remove();
 	
-	window.nuOPENER.push(new nuOpener(f, r, filter));
+	window.nuOPENER.push(new nuOpener('F', f, r, filter));
 
 	var id 	= window.nuOPENER[window.nuOPENER.length - 1].id;
 	
@@ -318,15 +317,31 @@ function nuCreateDialog(t){
 
 function nuReformat(t){
 
-	var o			= $('#' + t.id);
-	var f			= o.attr('data-nu-format');
-	var v			= o.val();
+	var o		= $('#' + t.id);
+	var f		= o.attr('data-nu-format');
+	var v		= o.val();
 	
 	if(f == '' || v == ''){
 		return v;
 	}
 	
-	o.val(nuFORM.addFormatting(v, f));
+	if(f[0] == 'D'){
+			
+		var r		= nuFORM.removeFormatting(v, f);
+		var a		= nuFORM.addFormatting(r, f);
+		
+		if(v != a){
+			o.val('');
+		}
+
+	}
+	
+	if(f[0] == 'N'){
+			
+		var a		= nuFORM.addFormatting(v, f);
+		o.val(a);
+
+	}
 	
 }
 
@@ -362,7 +377,7 @@ function nuRunIt(t, email, type){
 	
 	if(arguments.length < 3){										//-- set type
 		
-		var type	= $('#' + r + '001').html();				//-- report - PDF,or procedure - PHP
+		var type	= $('#' + r + '001').html();					//-- report - PDF,or procedure - PHP
 		
 	}
 	
@@ -392,7 +407,7 @@ function nuRunIt(t, email, type){
 		}
 		
 		if(type == 'pdf'){
-			nuGetPDF(f, p);
+			nuGetReport(f, p);
 		}
 		
 	}
@@ -828,10 +843,6 @@ function nuResizeWindow(e){
 }
 
 
-//function nuGetSubformObject(id){
-//	return nuFORM.subform(id);
-//}
-
 function nuSubformObject(id){
 	return nuFORM.subform(id);
 }
@@ -860,19 +871,30 @@ function nuGetFunctionList(){
 
 function nuID(){
 
-	window.nuUniqueID	= 'c' + String(Date.now());
+	nuSetSuffix();
 	
+	window.nuUniqueID		= 'c' + String(Date.now());
+	
+	return window.nuUniqueID + String(window.nuSuffix);
+
+}
+
+
+function nuSetSuffix(a){
+	
+	if(arguments.length == 1){
+		window.nuSuffix		= a;
+	}
+		
 	if(window.nuSuffix == 9999){
 		window.nuSuffix		= 0
 	}else{
 		window.nuSuffix	++;
 	}
 	
-	id						= window.nuUniqueID + nuPad4(window.nuSuffix);
-		
-	return id;
-
+	
 }
+
 
 
 function nuWhen(w){
@@ -920,6 +942,10 @@ function nuClick(e){
 		$('#nuOptionsListBox').remove();
 	}
 	
+	if(e.target.id != 'nuAlertDiv'){
+		$('#nuAlertDiv').remove();
+	}
+	
 	if($(e.target).attr('type') != 'nuDate' && !$(e.target).hasClass('nuCalendar')){
 		$('#nuCalendar').remove();
 	}
@@ -930,8 +956,12 @@ function addslashes(s){
     return (s + '').replace(/[\\"']/g, '\\$&').replace(/\u0000/g, '\\0');
 }
 
-function nuRemoveTab(i){
-	$('#nuTab' + i).remove();
+function nuRemoveTabs(t){
+
+	for(var i = 0 ; i < arguments.length ; i++){
+		$('#nuTab' + arguments[i]).remove();
+	}
+	
 }
 
 function nuOpenTab(i){
@@ -939,6 +969,15 @@ function nuOpenTab(i){
 }
 
 
-
-
+function nuRemoveHolders(h){
+	
+	for(var i = 0 ; i < arguments.length ; i++){
+		
+		if(arguments[i] == 0){$('#nuActionHolder').remove();}
+		if(arguments[i] == 1){$('#nuBreadcrumbHolder').remove();}
+		if(arguments[i] == 2){$('#nuTabHolder').remove();}
+		
+	}
+	
+}
 

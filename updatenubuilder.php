@@ -2,10 +2,10 @@
 
 ini_set('max_execution_time', 300);
 
-$t[] = 'zzzzsys_access_level';
-$t[] = 'zzzzsys_access_level_form';
-$t[] = 'zzzzsys_access_level_php';
-$t[] = 'zzzzsys_access_level_report';
+$t[] = 'zzzzsys_access';
+$t[] = 'zzzzsys_access_form';
+$t[] = 'zzzzsys_access_php';
+$t[] = 'zzzzsys_access_report';
 $t[] = 'zzzzsys_browse';
 $t[] = 'zzzzsys_debug';
 $t[] = 'zzzzsys_event';

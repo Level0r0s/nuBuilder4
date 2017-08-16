@@ -547,20 +547,25 @@ class nuSelectObject{
 		c.sort(o);
 
 		var clauses	= '';
-
+		
 		for(var i = 0 ; i < c.length ; i++){
 			
 			var T	= c[i][1];
 			var F	= c[i][2];
 			var C	= c[i][3];
 			var S	= c[i][4];
+			var D	= c[i][6];
 			var cl	= F != '' && C != '';			//-- valid statement for WHERE and HAVING
 			var gr	= F != '' && S != '';			//-- valid statement for ORDER BY and GROUP BY
 
-			if(T == 1 && cl){WHERE.push('(' + F + C + ')');}
-			if(T == 4 && cl){HAVING.push('(' + F + C + ')');}
-			if(T == 2 && gr){GROUPBY.push(F + ' ' + S);}
-			if(T == 3 && gr){ORDERBY.push(F + ' ' + S);}
+			if(D == 0){
+				
+				if(T == 1 && cl){WHERE.push('(' + F + C + ')');}
+				if(T == 4 && cl){HAVING.push('(' + F + C + ')');}
+				if(T == 2 && gr){GROUPBY.push(F + ' ' + S);}
+				if(T == 3 && gr){ORDERBY.push(F + ' ' + S);}
+				
+			}
 
 		}
 
@@ -751,6 +756,18 @@ class nuSelectObject{
 		var J		=	JSON.parse(j);
 		
 		for(var i = 0 ; i < J.tables.length ; i++){	
+		
+			if(typeof(parent.nuFORM.tableSchema[J.tables[i].tablename]) == 'undefined'){
+				
+				nuMessage(['No table named <b>' + J.tables[i].tablename + '</b>.']);
+				
+				return false;
+				
+			}
+			
+		}
+
+		for(var i = 0 ; i < J.tables.length ; i++){	
 			
 			var t	= J.tables[i];
 			var cb	= J.tables[i].checkboxes;
@@ -783,6 +800,8 @@ class nuSelectObject{
 		}
 
 		nuAngle();
+		
+		return true;
 		
 	}
 	

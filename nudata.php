@@ -141,11 +141,13 @@ function nuUpdateTables(){
 					
 					$nv		= nuBuildPrimaryKey($table, $pk);
 					$id		= "'$nv'";
+					
 					if($d == 0){$nuMainID = $nv;}
 					
 				}else{
 					
 					$id		= "'$pv'";
+					
 					if($d == 0){$nuMainID = $pv;}
 					
 				}
@@ -164,7 +166,7 @@ function nuUpdateTables(){
 					$rec_id	= $id;
 				}else{
 					
-					$V[]	= $rec_id;
+					$V[]	= "'$nuMainID'";
 					$I[]	= "`$fk`";
 					
 				}
@@ -174,8 +176,8 @@ function nuUpdateTables(){
 					$isAN	= in_array($fields[$R], $auto);
 
 					if($edit[$R] == 1 or $isAN){														//-- has been edited
-nudebug($tableSchema)					;
-						if(in_array($fields[$R], $tableSchema[$table]['names'])){			//-- valid field names
+					
+						if(in_array($fields[$R], $tableSchema[$table]['names'])){						//-- valid field names
 
 							if($isAN){
 								$v	= nuAutoNumber($sf->object_id, $fields[$R], $row[$R]);
@@ -202,12 +204,11 @@ nudebug($tableSchema)					;
 				if($action == 'save'){
 					
 					if($pv == '-1'){
-					
+						
 						if($deleted[$r] == '0'){
 							
 							$sql	= "INSERT INTO $table $is $vs;";
 							$S[]	= $sql;
-							
 						}
 						
 					}else{
@@ -426,7 +427,7 @@ function nuUpdateCounter($id){
 
 	}
 	
-	nuDisplayMessage('Could not get AutoNumber');
+	nuDisplayError('Could not get AutoNumber');
 	
 	return -1;
 	
@@ -500,10 +501,6 @@ function nuDisplayError($m){
 	$_POST['nuErrors'][]	= $m;
 }
 
-
-function nuDisplayMessage($m){
-	$_POST['nuMessages'][]	= $m;
-}
 
 function nuCheckAccess($f, $r = ''){
 	

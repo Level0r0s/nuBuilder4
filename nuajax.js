@@ -84,6 +84,68 @@ function nuForm(f, r, filter, search, n){
 }
 
 
+function nuGetReport(f, r){
+
+	if(nuOpenNewBrowserTab('getreport', f, r, '')){return;}
+
+	var last			= window.nuFORM.addBreadcrumb();
+
+	last.session_id 	= window.nuSESSION;
+	last.call_type 		= 'getreport';
+	last.form_id 		= f;
+	last.record_id		= r;
+	last.hash 			= parent.nuHashFromEditForm();
+
+	var successCallback = function(data,textStatus,jqXHR){
+	
+		var fm  = data;
+		
+		if(!nuDisplayError(fm)){
+			nuBuildForm(fm);
+		}
+			
+	}
+		
+     nuAjax(last, successCallback);
+		
+}
+
+
+function nuRunReport(f, iframe){
+
+	nuFORM.addBreadcrumb();
+
+	var last			= nuFORM.getCurrent();
+
+	last.session_id 	= window.nuSESSION;
+	last.call_type		= 'runreport';
+	last.form_id		= f;
+	last.hash 			= nuHashFromEditForm();
+	
+	var successCallback = function(data,textStatus,jqXHR){
+		
+		var fm 			= data;
+		
+		if(!nuDisplayError(fm)){
+			
+			var pdfUrl	= 'nurunpdf.php?i=' + fm.id;
+			
+			if(iframe === undefined){
+				window.open(pdfUrl);
+			}else{
+				parent.$('#'+ iframe).attr('src', pdfUrl);
+			}
+			
+		}
+		
+	}
+	
+	nuAjax(last,successCallback);
+	
+}
+
+
+
 function nuGetPHP(f, r){
 
 	if(nuOpenNewBrowserTab('getphp', f, r, '')){return;}
@@ -116,84 +178,17 @@ function nuGetPHP(f, r){
 	
 }
 
-
-function nuGetPDF(f, r){
-
-	if(nuOpenNewBrowserTab('getreport', f, r, '')){return;}
-
-	var last			= window.nuFORM.addBreadcrumb();
-
-	last.session_id 	= window.nuSESSION;
-	last.call_type 		= 'getreport';
-	last.form_id 		= f;
-	last.record_id		= r;
-	last.hash 			= parent.nuHashFromEditForm();
-
-	var successCallback = function(data,textStatus,jqXHR){
-	
-		var fm  = data;
-		
-		if(!nuDisplayError(fm)){
-			nuBuildForm(fm);
-		}
-			
-	}
-		
-     nuAjax(last, successCallback);
-		
-}
-
-
-function nuRunReport(f, iframe){
-	
-	var r				= nuFORM.getCurrent().record_id;
-	
-	nuFORM.addBreadcrumb();
-
-	var last			= nuFORM.getCurrent();
-
-	last.session_id 	= window.nuSESSION;
-	last.call_type		= 'runreport';
-	last.form_id 		= f;
-	last.record_id	= r;
-	last.hash 			= nuHashFromEditForm();
-	
-	var successCallback = function(data,textStatus,jqXHR){
-		
-		var fm 			= data;
-		
-		if(!nuDisplayError(fm)){
-			
-			var pdfUrl	= 'nurunpdf.php?i=' + fm.id;
-			
-			if(iframe === undefined){
-				window.open(pdfUrl);
-			}else{
-				$('#'+iframe).attr('src',pdfUrl);
-			}
-			
-		}
-		
-	}
-	
-	nuAjax(last,successCallback);
-	
-}
-
-
-function nuRunPHP(f, iframe){
+function nuRunPHP(pCode, iframe){
 	
 	if(window.nuBeforeSave){
 		if(!nuBeforeSave()){return;}
 	}
 
-	var r					= nuFORM.getCurrent().record_id;
 	var last				= nuFORM.addBreadcrumb();
 	
 	last.session_id			= nuSESSION;
 	last.call_type 			= 'runphp';
-	last.form_id  			= f;
-	last.record_id			= r;
+	last.form_id 			= pCode;
 	last.nuFORMdata			= nuFORM.data();
 	last.hash  				= nuHashFromEditForm();
 	
@@ -208,7 +203,7 @@ function nuRunPHP(f, iframe){
 			if(iframe === undefined){
 				window.open(pdfUrl);
 			}else{
-				$('#'+iframe).attr('srfdc',pdfUrl);
+				parent.$('#' + iframe).attr('src', pdfUrl);
 			}
 			
 		}
@@ -243,16 +238,7 @@ function nuRunPHPHidden(i){
 		
 		if(nuDisplayError(fm)){return;};
 
-		if(fm.messages.length > 0){
-
-			var im			= ['<img src="graphics/numessage.png" width="30px" height="30px" style="position:absolute;left:10px;top:10px">'];
-			im				= im.concat(fm.messages);
-
-			nuMessage(im);
-			
-		}
-
-		
+		eval(fm.callback + ';');
 			
 	};
 	
@@ -401,9 +387,7 @@ function nuUpdateData(action, instruction){
 				nuGetBreadcrumb();
 				
 			}else{
-				
 				nuForm(f, fm.record_id, fm.filter, fm.search, 1);		//-- go to saved or created record
-				
 			}
 			
 			nuSavingMessage();
@@ -448,7 +432,7 @@ function nuOpenNewBrowserTab(c, f, r, filter){
 		
 		window.nuNEW 	= 0;
 		
-		window.nuOPENER.push(new nuOpener(f, r, filter));
+		window.nuOPENER.push(new nuOpener('F', f, r, filter));
 
 		nuOpenerAppend('type', c);
 		

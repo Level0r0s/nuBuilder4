@@ -4,7 +4,16 @@ function nuBuildFastForm($table, $form_type){
 
 	$form_id		= nuID();
 	$PK				= $table . '_id';
-	$newT			= true;
+	$newT			= $form_type != 'launch';
+	
+	if($form_type == 'launch'){
+		
+		$t			= nuRunQuery("SELECT COUNT(*) FROM zzzzsys_form WHERE SUBSTRING(sfo_code, 1, 11) = 'Launch Form'");
+		$r			= db_fetch_row($t);
+		$table 		= 'Launch Form ' . $r[0];
+		
+	}
+	
 	$q				= nuRunQuery("SELECT table_name FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = DATABASE()");
 
 	while($tableSchemaOBJ = db_fetch_object($q)){
@@ -64,7 +73,7 @@ function nuBuildFastForm($table, $form_type){
 
 	";
 
-	$array          = Array($form_id, $form_type, $form_code, $form_desc, $table, $PK, "SELECT * FROM $table");
+	$array          = Array($form_id, $form_type, $form_code, $form_desc, $form_type=='launch'?'':$table, $form_type=='launch'?'':$PK, "SELECT * FROM $table");
 
 	nuRunQuery($sql, $array);
 
@@ -204,10 +213,17 @@ function nuBuildFastForm($table, $form_type){
 	
 	
 	if($form_type == 'subform'){
-		
-		nuDisplayMessage("<h1>A $mess been created!</h1>");
-		nuDisplayMessage("<p>(There is now a Form with a Code of <b>$form_code</b> in the list found in <b>Forms</b>)");
-		nuDisplayMessage("<input type='button' value='Go to tab..' class='nuButton' onclick='nuGetBreadcrumb(0,0);'>");
+			
+		$js	= "
+
+			var m1	= '<h1>A $mess been created!</h1>';
+			var m2	= '<p>(There is now a Form with a Code of <b>$form_code</b> in the list found in <b>Forms</b>)';
+
+			nuMessage([m1, m2]);
+
+		";
+
+		nuJavascriptCallback($js);
 		
 	}else{
 	
@@ -230,6 +246,7 @@ function nuBuildFastForm($table, $form_type){
 						sob_all_width,
 						sob_all_height,
 						sob_run_zzzzsys_form_id,
+						sob_run_id,
 						sob_run_method,
 						sob_all_cloneable,
 						sob_all_validate,
@@ -237,17 +254,24 @@ function nuBuildFastForm($table, $form_type){
 						sob_all_align,
 						sob_all_type)
 						VALUES
-						(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+						(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+
+		";
+		$record_id		= substr($form_type, 0, 6) == 'browse' ? '' : '-1';
+		$array          = Array(nuID(), 'nuhome', 'nutesttab', "ff$form_id", $table, $table, 11, 63, 250, 150, 30, $form_id, $record_id, 'b', 0, 0, 0, 'center', 'run');
+		nuRunQuery($sql, $array);
+
+		$js	= "
+
+			var m1	= '<h1>A $mess been created!</h1>';
+			var m2	= '<p>(There is now a Button called <b>$table</b> on the <b>Testing</b> tab of the Home Form)</p>';
+
+			nuMessage([m1, m2]);
 
 		";
 
-		$array          = Array(nuID(), 'nuhome', 'nutesttab', "ff$form_id", $table, $table, 11, 63, 250, 150, 30, $form_id, 'b', 0, 0, 0, 'center', 'run');
-		nuRunQuery($sql, $array);
+		nuJavascriptCallback($js);
 
-		nuDisplayMessage("<h1>A $mess been created!</h1>");
-		nuDisplayMessage("<p>(There is now a Button called <b>$table</b> on the Testing tab of the Home Form)</p>");
-		nuDisplayMessage("<input type='button' value='Go to tab..' class='nuButton' onclick='nuGetBreadcrumb(0,3);'>");
-	
 	}
 
 

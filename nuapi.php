@@ -9,7 +9,6 @@
 		
 	$_POST['nuCounter']						= rand(0, 999);
 	$_POST['nuErrors']						= array();
-	$_POST['nuMessages']					= array();
 	$U										= nuGetUserAccess();
 	$formAndSessionData						= nuGatherFormAndSessionData($U['HOME_ID']);
     $_POST['nuTableSchema']                 = $formAndSessionData->tableSchema;
@@ -26,6 +25,8 @@
 	$_POST['nuHash']['TABLE_ID'] 			= nuTT();
 	$_POST['nuHash']['SESSION_ID'] 			= $_SESSION['SESSION_ID'];
 	$_POST['nuValidate']					= array();
+	$_POST['nuCallback']					= '';
+
 
 	$CT										= $P['call_type'];
 	$f->forms[0]							= new stdClass;
@@ -39,9 +40,9 @@
     	if($CT == 'update')			{$f->forms[0]->record_id			= nuUpdateTables();}
     	if($CT == 'getlookupid')	{$f->forms[0]				 		= nuGetAllLookupValues();}
     	if($CT == 'getlookupcode')	{$f->forms[0]				 		= nuGetAllLookupList();}
-    	if($CT == 'runhiddenphp')	{$f->forms[0]->id					= nuRunPHPHidden($R);}
-    	if($CT == 'runphp')			{$f->forms[0]						= nuRunPHP($F, $R);}
-    	if($CT == 'runreport')		{$f->forms[0]						= nuRunReport($F, $R);}
+    	if($CT == 'runhiddenphp')	{$f->forms[0]						= nuRunPHPHidden($R);}
+    	if($CT == 'runphp')			{$f->forms[0]->id					= nuRunPHP($F);}
+    	if($CT == 'runreport')		{$f->forms[0]->id					= nuRunReport($F);}
     	if($CT == 'runhtml')		{$f->forms[0]->id					= nuRunHTML();}
         if($CT == 'nudragsave')		{$f->forms[0]						= nuDragSave($P);}
 		
@@ -53,8 +54,8 @@
 	$f->forms[0]->formSchema				= $formAndSessionData->formSchema;
 	$f->forms[0]->translation				= $formAndSessionData->translation;
 	$f->forms[0]->session_id				= $_SESSION['SESSION_ID'];
+	$f->forms[0]->callback					= $_POST['nuCallback'];
 	$f->forms[0]->errors					= $_POST['nuErrors'];
-	$f->forms[0]->messages					= $_POST['nuMessages'];
 	$f->forms[0]->log_again				    = $_POST['nuLogAgain'];
 	$f->forms[0]->global_access				= $_POST['nuHash']['GLOBAL_ACCESS'];
 	$f->forms[0]->form_access				= $GLOBALS['nuSetup']->set_denied;

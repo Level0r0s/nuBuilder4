@@ -22,11 +22,11 @@ function nuBuildForm(f){
 	window.nuSUBFORMROW			= [];
 	window.nuHASH				= [];                       //-- remove any hash variables previously set.
 	window.nuUniqueID			= 'c' + String(Date.now());
-	window.nuSuffix				= Number(String(Math.random()).substr(-4));
 	window.global_access		= f.global_access == '1';
 	nuFORM.edited				= false;
 	nuFORM.formType				= f.type;
 	nuFORM.scroll				= [];
+	nuSetSuffix(1000);
 	nuSetBody(f);
 	
 //	if(f.tableSchema.length != 0){  						//-- its an Object (load these once,  at login)
@@ -89,16 +89,6 @@ function nuBuildForm(f){
         nuCreateDragOptionsBox(f);
 	}else{
 		nuAddJavascript(f);
-	}
-	
-	if(f.messages.length > 0){
-
-		var im		= ['<img src="graphics/numessage.png" width="30px" height="30px" style="position:absolute;left:10px;top:10px"><br>'];
-
-		f.messages	= im.concat(f.messages);
-
-		nuMessage(f.messages);
-		
 	}
 
 }
@@ -484,7 +474,6 @@ function nuINPUT(w, i, l, p, prop){
 					'text-align': prop.objects[i].align,
 					'position'	: 'absolute'
 	})
-	
 	.attr('onchange', input_type == 'file' ? 'nuChangeFile(event)' : 'nuChange(event)')
 	.attr('data-nu-field', input_type == 'button' || input_type == 'file' ? null : prop.objects[i].id)
 	.attr('data-nu-object-id', w.objects[i].object_id)
@@ -838,21 +827,28 @@ function nuRUN(w, i, l, p, prop){
 
 	nuAddDataTab(id, prop.objects[i].tab, p);
 	
-	$('#' + id).css({'top'     		: Number(prop.objects[i].top),
-					'left'     		: Number(prop.objects[i].left),
-					'width'    		: Number(prop.objects[i].width),
-					'height'   		: Number(prop.objects[i].height),
+	
+	var O			= prop.objects[i];
+	
+	$('#' + id).css({'top'     		: Number(O.top),
+					'left'     		: Number(O.left),
+					'width'    		: Number(O.width),
+					'height'   		: Number(O.height),
 					'position' 		: 'absolute'
 	});
 
-	if(prop.objects[i].run_method == 'b'){
-	
-		var O			= prop.objects[i];
-		var clicker		= '';
+	if(O.run_method == 'b'){
 		
-		if(O.run_type == 'R'){clicker = "nuRunReport('" + O.form_id + "')";}
-		if(O.run_type == 'P'){clicker = "nuRunPHP('" + O.form_id + "')"}
-		if(O.run_type == 'F'){clicker = "nuForm('" + O.form_id + "','" + O.record_id + "','" + O.filter + "', '')"}
+		var clicker					  	= '';
+		
+		if(O.run_type == 'F'){clicker 	= "nuForm('" + O.form_id + "','" + O.record_id + "','" + O.filter + "', '')"}
+		if(O.run_type == 'R'){clicker 	= "nuRunReport('" + O.record_id + "')";}
+		if(O.run_type == 'P'){
+			
+			if(O.run_hidden){clicker  	= "nuRunPHPHidden('" + O.record_id + "')"}
+			if(!O.run_hidden){clicker 	= "nuRunPHP('" + O.record_id + "')"}
+			
+		}
 		
 		$('#' + id).attr({
 					'type'		: 'button',
@@ -863,18 +859,18 @@ function nuRUN(w, i, l, p, prop){
 		
 	}else{
 
-		var O		= prop.objects[i];
 		var F		= O.form_id;
 		var R		= O.record_id;
 		var L		= O.filter;
+		var PA		= O.parameters;
 		var P		= window.location.pathname;
 		var f		= P.substring(0,P.lastIndexOf('/') + 1)
 
-		window.nuOPENER.push(new nuOpener(F, R, L));
+		window.nuOPENER.push(new nuOpener(O.run_type, F, R, L, PA));
 
 		var open 	= window.nuOPENER[window.nuOPENER.length - 1];
-		
 		var u		= window.location.origin + f + O.src + '&opener=' + open.id;
+		var u		= P + '?i=2&opener=' + open.id;
 
 		$('#' + id).attr('src', u).removeClass('').addClass('nuIframe');
 
@@ -1641,19 +1637,19 @@ function nuGetOptionsList(f, t, p, a, type){
 		}
 		
 		if(type != 'subform'){
-			list.push(['Debug', 				'nuPopup("nudebug", "")', 					'graphics/nu_option_debug.png',			'Ctrl+Shft+D']);
+			list.push(['nuDebug Results', 		'nuPopup("nudebug", "")', 					'graphics/nu_option_debug.png',			'Ctrl+Shft+D']);
 		}
 		
 	}else{
 		
-		list.push(['Change Login', 			'nuPopup("nupassword", "' + u + '", "")', 	'graphics/nu_option_password.png', 	'Ctrl+Shft+L']);
+		list.push(['Change Login', 				'nuPopup("nupassword", "' + u + '", "")', 	'graphics/nu_option_password.png', 	'Ctrl+Shft+L']);
 		
 	}
 
 	if(nuFORM.getProperty('record_id') != '' && type != 'subform'){
 		
-		list.push(['Save Form', 			'nuSaveAction();', 							'graphics/nu_option_save.png',		'Ctrl+Shft+S']);
-		list.push(['Refresh', 				'nuGetBreadcrumb()', 						'graphics/nu_option_refresh.png', 	'Ctrl+Shft+R']);
+		list.push(['Save Form', 				'nuSaveAction();', 							'graphics/nu_option_save.png',		'Ctrl+Shft+S']);
+		list.push(['Refresh', 					'nuGetBreadcrumb()', 						'graphics/nu_option_refresh.png', 	'Ctrl+Shft+R']);
 		
 	}
 
@@ -2136,16 +2132,16 @@ function nuAddAction(){
 	
 }
 
-function nuRunPHPAction(id) {
-	nuRunPHP(id);
+function nuRunPHPAction(code) {
+	nuRunPHP(code);
 }
 
-function nuRunReportAction(id) {
-	nuRunReport(id);
+function nuRunReportAction(code) {
+	nuRunReport(code);
 }
 
-function nuEmailReportAction(id) {
-	nuEmailReport(id);
+function nuEmailReportAction(code) {
+	nuEmailReport(code);
 }
 
 function nuSortBrowse(c){
@@ -2917,31 +2913,14 @@ function nuTotal(f){
 }
 
 
-function nuMessage(o, type){
+function nuMessage(o){
 	
-
-	if(arguments.length > 1){
-		
-		var icon = '';
-
-		if(type == 'error')	{icon	= 'nuerror';}
-		if(type == 'message'){icon	= 'numessage';}
-
-		var im	= ['<img src="' + icon + '" width="30px" height="30px" style="position:absolute;left:10px;top:10px"><br>'];
-
-		o		= im.concat(o);
-		
-	}
-
 	var par		= window.parent.document;
 	
 	$('#nuAlertDiv', par).remove();
 
-	if(o.length == 0){
-		return;
-	}
+	if(o.length == 0){return;}
 	
-	var c		= " onclick=\"$('#nuAlertDiv').remove();\"";
 	var widest	= 5;
 
 	for(var i = 0 ; i < o.length ; i++){
@@ -2949,10 +2928,9 @@ function nuMessage(o, type){
 	}
 
 	widest		= Math.min(widest + 200, 1000);
-	
 	var l		= (screen.width - widest) / 2;
+
 	$('body', par).append("<div id='nuAlertDiv' class='nuMessage' style='overflow:hidden;width:" + widest + "px;left:" + l + "px' ></div>")
-	$('#nuAlertDiv', par).prepend('<img id="nuOptionListClose" src="graphics/nuclose.png" class="nuClose" style="position:absolute;top:5px;left:5px" ' + c + ' width="20px" height="20px">')
 	
 	
 	for(var i = 0 ; i < o.length ; i++){
@@ -3026,6 +3004,15 @@ function nuNoDuplicates(){
 	
 }
 
+function nuFormType(){
+	
+	if(nuFORM.record_id == ''){
+		return 'browse';
+	}else{
+		return 'edit';
+	}
+	
+}
 
 
 

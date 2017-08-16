@@ -33,7 +33,7 @@
 
 				$phpCode	= $nuA->sph_code;
 				$phpToEval	= nuReplaceHashVariables($nuA->sph_php);
-				
+
 				$this->evalPHP($phpCode, $phpToEval);
 				
 			}
