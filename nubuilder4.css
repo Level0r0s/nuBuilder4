@@ -164,6 +164,7 @@ input[type=range]::-webkit-slider-runnable-track {
   color: orange;
   display: inline-block;
   text-decoration: underline;
+  font-size: 16px;
 }
 
 .nuBreadcrumbArrow {
@@ -224,6 +225,7 @@ input[type=range]::-webkit-slider-runnable-track {
 .nuNotBreadcrumb {
   color: orange;
   display: inline-block;
+  font-size: 16px;
 }
 
 .nuOptionsBox {
