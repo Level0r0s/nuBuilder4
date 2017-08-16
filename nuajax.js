@@ -386,6 +386,13 @@ function nuUpdateData(action, instruction){
 				window.nuFORM.removeLast();						//-- return to browse
 				nuGetBreadcrumb();
 				
+				if(nuCurrentProperties() == undefined){
+
+					parent.$('#nuModal').remove();
+					parent.$('#nuDragDialog').remove();
+					
+				}
+				
 			}else{
 				nuForm(f, fm.record_id, fm.filter, fm.search, 1);		//-- go to saved or created record
 			}
