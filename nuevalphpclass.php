@@ -4,6 +4,8 @@
 			
 		function __construct($parentID) {
 			
+			$_POST['nuCode']= '';
+
 			$this->parentID = $parentID;
 		
 			if($this->parentID != '') {
@@ -62,9 +64,42 @@
 			
 			if(trim($phpToEval) == ''){return;}
 			
+				$event['BB']	    =  'Before Browse';
+				$event['AB']	    =  'After Browse';
+				$event['BE']    	=  'Before Edit';
+				$event['BS']    	=  'Before Save';
+				$event['AS']    	=  'After Save';
+				$event['BD']    	=  'Before Delete';
+				$event['AD']    	=  'After Delete';
+					
 			try{
 				
+				$s					= 'SELECT COUNT(*) FROM zzzzsys_php WHERE zzzzsys_php_id = ?';
+				$t					= nuRunQuery($s, [$phpCode]);
+				$P					= db_fetch_row($t)[0];
+				
+				$s					= 'SELECT * FROM zzzzsys_object WHERE zzzzsys_object_id = ?';
+				$t					= nuRunQuery($s, [$phpCode]);
+				$O					= db_fetch_object($t);
+				
+				
+				if($r[0] == 0){
+					$_POST['nuCode']= "Procedure ($phpCode)";
+				}else if($O->zzzzsys_object_id != ''){
+					$_POST['nuCode']= $event[$e[1]] . " ($r)";
+				}else{
+					
+					$e				= explode('_', $phpCode);
+					$s				= 'SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = ?';
+					$t				= nuRunQuery($s, [$e[0]]);
+					$r				= db_fetch_object($t)->sfo_code;
+					$_POST['nuCode']= $event[$e[1]] . " ($r)";
+					
+				}
+				
 				eval($phpToEval); 
+				
+				$_POST['nuCode']	= '';
 				
 			}catch(Throwable $e){
 

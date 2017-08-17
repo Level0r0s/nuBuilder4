@@ -69,15 +69,14 @@ function nuDebugResult($t){
 }
 
 
-function nuDebug($a0 = '', $a1 = '', $a2 = '', $a3 = '', $a4 = '', $a5 = '', $a6 = '', $a7 = '', $a8 = '', $a9 = ''){
+function nuDebug($a){
 	
 	$b					= debug_backtrace();
 	$f					= $b[0]['file'];
 	$l					= $b[0]['line'];
 
-	$m					= date("Y-m-d H:i:s") . " ($f:$l)\n\n<br>\n" ;
+	$m					= date("Y-m-d H:i:s") . ' - ' . $_POST['nuCode'] . " line $l\n\n<br>\n" ;
 
-	
 	for($i = 0 ; $i < count(func_get_args()) ; $i++){
 
 		$p			= func_get_arg($i);
@@ -958,7 +957,6 @@ function nuPunctuation($f){
 
 function nuTTList($id, $l){
 	
-//	$t										= nuRunQuery('SELECT * FROM zzzzsys_object WHERE  zzzzsys_object_id = ?' , [$l]);
 	$t										= nuRunQuery('SELECT * FROM zzzzsys_object WHERE  sob_all_zzzzsys_form_id = ?' , [$l]);
 	
 	while($r = db_fetch_object($t)){						//-- add default empty hash variables

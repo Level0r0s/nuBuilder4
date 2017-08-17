@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
-<title>nuBuilder's Ace Code Editor</title>
+<title>Ace Editor</title>
 
 
 <script src="jquery/jquery.js" type="text/javascript"></script>
@@ -48,7 +48,7 @@ function nuLoad(){
 	if($('#' + o, window.opener.document)[0].id == 'deb_message'){
 		$('#copy_to_nubuilder').remove();
 	}else{
-		document.getElementById('copy_to_nubuilder').value	= 'Copy Changes To ' + l;
+		document.getElementById('copy_to_nubuilder').value	= 'Copy changes back to ' + l;
 	}
 	
 	
@@ -64,7 +64,7 @@ function nuLoad(){
 function nuResize(){
 
    document.getElementById('nu_editor').style.width     = String(Number(window.innerWidth)) 		+ 'px';
-   document.getElementById('nu_editor').style.height    = String(Number(window.innerHeight) - 35) 	+ 'px';
+   document.getElementById('nu_editor').style.height    = String(Number(window.innerHeight) - 75) 	+ 'px';
    
 }
 
