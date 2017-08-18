@@ -77,16 +77,21 @@
 				$s					= 'SELECT COUNT(*) FROM zzzzsys_php WHERE zzzzsys_php_id = ?';
 				$t					= nuRunQuery($s, [$phpCode]);
 				$P					= db_fetch_row($t)[0];
-				
-				$s					= 'SELECT * FROM zzzzsys_object WHERE zzzzsys_object_id = ?';
-				$t					= nuRunQuery($s, [$phpCode]);
+				$e					= explode('_', $phpCode);
+				$s					= '
+										SELECT * 
+										FROM zzzzsys_object 
+										JOIN zzzzsys_form ON zzzzsys_form_id = sob_all_zzzzsys_form_id
+										WHERE zzzzsys_object_id = ?
+									';
+				$t					= nuRunQuery($s, [$e[0]]);
 				$O					= db_fetch_object($t);
 				
 				
-				if($r[0] == 0){
+				if($P == 0){
 					$_POST['nuCode']= "Procedure ($phpCode)";
 				}else if($O->zzzzsys_object_id != ''){
-					$_POST['nuCode']= $event[$e[1]] . " ($r)";
+					$_POST['nuCode']= $event[$e[1]] . " for `$O->sob_all_id` ($O->sfo_code)";
 				}else{
 					
 					$e				= explode('_', $phpCode);
@@ -102,11 +107,9 @@
 				$_POST['nuCode']	= '';
 				
 			}catch(Throwable $e){
-
 				$this->exceptionHandler($e, $phpCode, $phpToEval);   
 				 
 			}catch(Exception $e){
-
 				$this->exceptionHandler($e, $phpCode, $phpToEval);
 				
 			}
@@ -115,6 +118,7 @@
 		
 		function exceptionHandler($e, $phpCode, $phpToEval){
 			
+			$_POST['nuCode']	= '';
 			nuDisplayError("<b>Error Running Procedure !</b> ($phpCode)<br>", "nuErrorPHP");
 			nuDisplayError($e->getFile(), 'eval');
 			nuDisplayError('<i>' . $e->getMessage() . '</i>', 'eval');

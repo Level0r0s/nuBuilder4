@@ -99,11 +99,11 @@ function nuDuplicate($S, $R, $F){
 
 
 
-function nuUpdateTables(){
+function nuUpdateDatabase(){
 	
 	nuValidateSubforms();
 	
-	$tableSchema	= nuBuildTableSchema();
+	$tableSchema	= $_SESSION['tableSchema'];
 	$nudata			= $_POST['nuHash']['nuFORMdata'];
 	$nuMainID		= $_POST['nuHash']['record_id'];
 	$fid			= $_POST['nuHash']['form_id'];

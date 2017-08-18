@@ -203,4 +203,40 @@ function db_num_rows($o) {
 	
 }
 
+
+function nuUpdateTables(){
+	
+	$A	= [];
+	$B	= [];
+
+	$t 	= nuRunQuery("SHOW TABLES");
+	
+	while($r = db_fetch_row($t)){
+		$A[]	= $r[0];
+	}
+
+	$t 	= nuRunQuery("SELECT * FROM zzzzsys_table");
+	
+	while($r = db_fetch_row($t)){
+		$B[]	= $r[0];
+	}
+
+	if(json_encode($A) != json_encode($B)){
+		
+		nuRunQuery('DELETE FROM zzzzsys_table');
+		
+		for($i = 0 ; $i < count($A) ; $i ++){
+			
+			$s	= "INSERT INTO zzzzsys_table (zzzzsys_table_id) VALUES (?)";
+			nuRunQuery($s, [$A[$i]]);
+			
+		}
+		
+	}
+	
+}
+
+
+
+
 ?>

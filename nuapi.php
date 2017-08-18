@@ -37,7 +37,7 @@
     	if($CT == 'getform')		{nuBeforeEdit($F, $R);$f->forms[0] 	= nuGetFormObject($F, $R, 0, $P);}
     	if($CT == 'getphp')			{nuBeforeEdit($F, $R);$f->forms[0] 	= nuGetFormObject($F, $R, 0, $P);}
     	if($CT == 'getreport')		{nuBeforeEdit($F, $R);$f->forms[0] 	= nuGetFormObject($F, $R, 0, $P);}
-    	if($CT == 'update')			{$f->forms[0]->record_id			= nuUpdateTables();}
+    	if($CT == 'update')			{$f->forms[0]->record_id			= nuUpdateDatabase();}
     	if($CT == 'getlookupid')	{$f->forms[0]				 		= nuGetAllLookupValues();}
     	if($CT == 'getlookupcode')	{$f->forms[0]				 		= nuGetAllLookupList();}
     	if($CT == 'runhiddenphp')	{$f->forms[0]						= nuRunPHPHidden($R);}

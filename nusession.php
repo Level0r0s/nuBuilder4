@@ -36,7 +36,6 @@ if(array_key_exists('nuSTATE', $_POST)){
                 $_SESSION['IsDemo']                 = $nuConfigIsDemo; 
                 $_SESSION['SafeMode']               = (isset($nuConfigSafeMode) ? $nuConfigSafeMode : false);
                 $_SESSION['SafePHP']                = (isset($nuConfigSafePHP)  ? $nuConfigSafePHP  : array());
-                $_SESSION['tableSchema']            = array();
                 $_SESSION['tableList']            	= array();
 				$_SESSION['tableSchema']			= nuBuildTableSchema();
                 $_SESSION['formSchema']             = array();
@@ -140,7 +139,7 @@ if(array_key_exists('nuSTATE', $_POST)){
                     $getAccessLevelOBJ 						= db_fetch_object($getAccessLevelQRY);
 
                     $sessionIds 							= new stdClass;
-                    $sessionIds->zzzzsys_access_id 	= $getAccessLevelOBJ->zzzzsys_access_id;
+                    $sessionIds->zzzzsys_access_id 			= $getAccessLevelOBJ->zzzzsys_access_id;
                     $sessionIds->zzzzsys_user_id 			= $checkLoginDetailsOBJ->zzzzsys_user_id;
                     $sessionIds->zzzzsys_form_id 			= $getAccessLevelOBJ->zzzzsys_form_id;
                     $sessionIds->global_access 				= '0';
@@ -213,6 +212,7 @@ if(array_key_exists('nuSTATE', $_POST)){
                     $storeSessionInTableJSON, 
                     $_SESSION['SESSION_ID']
                 ));
+				
 				
             } else {
 				

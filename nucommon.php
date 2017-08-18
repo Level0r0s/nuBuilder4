@@ -74,8 +74,12 @@ function nuDebug($a){
 	$b					= debug_backtrace();
 	$f					= $b[0]['file'];
 	$l					= $b[0]['line'];
-
-	$m					= date("Y-m-d H:i:s") . ' - ' . $_POST['nuCode'] . " line $l\n\n<br>\n" ;
+	$m					= date("Y-m-d H:i:s") . ' - ' . $f . " line $l\n\n<br>\n";
+	
+	if($_POST['nuCode'] != ''){
+		$m				= date("Y-m-d H:i:s") . ' - ' . $_POST['nuCode'] . " line $l\n\n<br>\n" ;
+	}
+	
 
 	for($i = 0 ; $i < count(func_get_args()) ; $i++){
 
@@ -378,7 +382,7 @@ function nuRunReport($report_id){
 	$_POST['nuHash']['description']		= $ob->sre_description;
 	$_POST['nuHash']['sre_layout']		= nuReplaceHashVariables($ob->sre_layout);
 	$_POST['nuHash']['parentID']		= $ob->sre_zzzzsys_php_id;
-	$j									= json_encode($_POST['nuHash']);
+	$j									= $_POST['nuHash'];
 
 	nuSetJSONData($id, $j);
 	
@@ -397,7 +401,7 @@ function nuRunPHP($procedure_code){
 	$_POST['nuHash']['description']		= $ob->sph_description;
 	$_POST['nuHash']['parentID']		= $ob->zzzzsys_php_id;
 	
-	$j									= json_encode($_POST['nuHash']);
+	$j									= $_POST['nuHash'];
 
 	nuSetJSONData($id, $j);
 	
@@ -449,7 +453,11 @@ function nuGetJSONData($i){
 	$s					= "SELECT * FROM zzzzsys_session WHERE zzzzsys_session_id = ? ";
 	$t					= nuRunQuery($s, array($_SESSION['SESSION_ID']));			 
 	$r					= db_fetch_object($t);
-	$j					= json_decode($r->sss_access, true);
+	nudebug('t',json_decode($r->sss_access, true));
+	nudebug('f',json_decode($r->sss_access, false));
+	$j					= json_decode($r->sss_access, false);
+
+	$j					= json_decode($r->sss_access, false);
 	
 	return $j[$i];
 	

@@ -898,6 +898,8 @@ function nuBrowseWhereClause($searchFields, $searchString, $returnArray = false)
 
 function nuGatherFormAndSessionData($home){
 
+	nuUpdateTables();
+	
 	$formAndSessionData 				= new stdClass;
 
     if(isset($_POST['nuSTATE']['record_id'])){
