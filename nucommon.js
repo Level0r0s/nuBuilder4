@@ -80,7 +80,7 @@ function nuGetBreadcrumb(bc){
 		var b		= bc;
 	}
 	
-	if(e && f != 'launch'){
+	if(e && nuFORM.getCurrent().form_type != 'launch'){
 		
 		if(!confirm(nuTranslate('Leave this form without saving?'))){
 			return;
@@ -867,6 +867,7 @@ function nuGetFunctionList(){
 	return f;
 
 }
+
 
 
 function nuID(){

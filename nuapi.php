@@ -11,7 +11,7 @@
 	$_POST['nuErrors']						= array();
 	$U										= nuGetUserAccess();
 	$formAndSessionData						= nuGatherFormAndSessionData($U['HOME_ID']);
-    $_POST['nuTableSchema']                 = $formAndSessionData->tableSchema;
+    $_POST['tableSchema']	                = $formAndSessionData->tableSchema;
 	$F										= $formAndSessionData->form_id;
 	$R										= $formAndSessionData->record_id;
 	$P										= $_POST['nuSTATE'];

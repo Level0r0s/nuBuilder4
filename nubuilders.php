@@ -20,10 +20,8 @@ function nuBuildFastForm($table, $form_type){
 		
 		if($table == $tableSchemaOBJ->table_name){
 			
-			$TS		= nuBuildTableSchema();
-			$PK 	= $TS[$table]['primary_key'][0];
+			$PK 	= $_POST['tableSchema'][$table]['primary_key'][0];
 			$newT	= false;
-
 			
 		}
 		

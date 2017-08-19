@@ -103,7 +103,6 @@ function nuUpdateDatabase(){
 	
 	nuValidateSubforms();
 	
-	$tableSchema	= nuBuildTableSchema();
 	$nudata			= $_POST['nuHash']['nuFORMdata'];
 	$nuMainID		= $_POST['nuHash']['record_id'];
 	$fid			= $_POST['nuHash']['form_id'];
@@ -177,7 +176,7 @@ function nuUpdateDatabase(){
 
 					if($edit[$R] == 1 or $isAN){														//-- has been edited
 					
-						if(in_array($fields[$R], $tableSchema[$table]['names'])){						//-- valid field names
+						if(in_array($fields[$R], $_POST['tableSchema'][$table]['names'])){				//-- valid field names
 
 							if($isAN){
 								$v	= nuAutoNumber($sf->object_id, $fields[$R], $row[$R]);

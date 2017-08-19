@@ -124,27 +124,15 @@ function nuErrorFound(){
 }
 
 
+
 function nuID(){
 
-	if(!isset($_POST['nuCounter2'])){
-		
-		$_POST['nuCounter2']	= rand(1, 9999);
-		$_POST['nuCounter2ID']	= 's' . time();
-		
-	}
+	$i   = uniqid();
+	$s   = md5($i);
 
-	if($_POST['nuCounter2'] == 9999){
-		
-		$_POST['nuCounter2']	= 0;
-		$_POST['nuCounter2ID']	=  's' . time();
-		
-	}else{
-		$_POST['nuCounter2']++;
-	}
-	
-	$id							= $_POST['nuCounter2ID'] . str_pad($_POST['nuCounter2'], 4, '0', STR_PAD_LEFT);
-		
-	return $id;
+    while($i == uniqid()){}
+
+    return uniqid().$s[0].$s[1];
 
 }
 
