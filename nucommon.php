@@ -81,6 +81,7 @@ function nuDebug($a){
 	}
 	
 
+
 	for($i = 0 ; $i < count(func_get_args()) ; $i++){
 
 		$p			= func_get_arg($i);
@@ -382,7 +383,7 @@ function nuRunReport($report_id){
 	$_POST['nuHash']['description']		= $ob->sre_description;
 	$_POST['nuHash']['sre_layout']		= nuReplaceHashVariables($ob->sre_layout);
 	$_POST['nuHash']['parentID']		= $ob->sre_zzzzsys_php_id;
-	$j									= $_POST['nuHash'];
+	$j									= json_encode($_POST['nuHash']);
 
 	nuSetJSONData($id, $j);
 	
@@ -400,16 +401,15 @@ function nuRunPHP($procedure_code){
 	$_POST['nuHash']['code']			= $ob->sph_code;
 	$_POST['nuHash']['description']		= $ob->sph_description;
 	$_POST['nuHash']['parentID']		= $ob->zzzzsys_php_id;
+	$j									= json_encode($_POST['nuHash']);
 	
-	$j									= $_POST['nuHash'];
+
 
 	nuSetJSONData($id, $j);
 	
 	return $id;
 	
 }
-
-
 function nuRunPHPHidden($nuCode){
 	
 	$s						= "SELECT * FROM zzzzsys_php WHERE sph_code = ? ";
@@ -437,12 +437,15 @@ function nuSetJSONData($i, $nj){
 	$t					= nuRunQuery($s, array($_SESSION['SESSION_ID']));			 
 	$r					= db_fetch_object($t);
 	$j					= json_decode($r->sss_access, true);
+
 	$j[$i]				= $nj;
 	$J					= json_encode($j);
 	
 	$s					= "UPDATE zzzzsys_session SET sss_access = ? WHERE zzzzsys_session_id = ? ";
 	$t					= nuRunQuery($s, array($J, $_SESSION['SESSION_ID']));
 	
+
+
 }
 
 
@@ -453,15 +456,15 @@ function nuGetJSONData($i){
 	$s					= "SELECT * FROM zzzzsys_session WHERE zzzzsys_session_id = ? ";
 	$t					= nuRunQuery($s, array($_SESSION['SESSION_ID']));			 
 	$r					= db_fetch_object($t);
-	nudebug('t',json_decode($r->sss_access, true));
-	nudebug('f',json_decode($r->sss_access, false));
-	$j					= json_decode($r->sss_access, false);
 
-	$j					= json_decode($r->sss_access, false);
+	$j					= json_decode($r->sss_access, true);
+
+
 	
 	return $j[$i];
 	
 }
+
 
 
 

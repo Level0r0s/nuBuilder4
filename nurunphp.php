@@ -13,7 +13,6 @@ $hashData['TABLE_ID']	= $TABLE_ID;
 $GLOBALS['TABLE_ID']	= $TABLE_ID;
 $_POST['nuHash']		= $hashData;
 
-$evalPHP = new nuEvalPHPClass($JSON['parentID']);
-//$evalPHP = new nuEvalPHPClass($JSON->parentID);
+$evalPHP = new nuEvalPHPClass($JSON->parentID);
 
 ?>

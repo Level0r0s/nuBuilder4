@@ -53,6 +53,7 @@ function nuBuildForm(f){
 	b.pages 					= f.pages;
 	b.form_code					= f.form_code;
 	b.form_description			= f.form_description;
+	b.form_type					= f.form_type;
 	b.run_code					= f.run_code;
 	b.run_description			= f.run_description;
 
@@ -240,7 +241,7 @@ function nuAddActionButtons(f){
 	}
 
 	if(window.parent.length == 0){ //-- only if Main Form
-		$('#nuActionHolder').append("<img id='thelogo' src='graphics/logo.png' style='position:absolute;right:20px'>");
+		$('#nuActionHolder').append("<img id='thelogo' width='90px' src='graphics/logo.png' style='position:absolute;right:20px'>");
 	}
 	
 }
@@ -1648,7 +1649,10 @@ function nuGetOptionsList(f, t, p, a, type){
 
 	if(nuFORM.getProperty('record_id') != '' && type != 'subform'){
 		
-		list.push(['Save Form', 				'nuSaveAction();', 							'graphics/nu_option_save.png',		'Ctrl+Shft+S']);
+		if(nuFORM.getCurrent().form_type != 'launch'){
+			list.push(['Save Form',				'nuSaveAction();', 							'graphics/nu_option_save.png',		'Ctrl+Shft+S']);
+		}
+		
 		list.push(['Refresh', 					'nuGetBreadcrumb()', 						'graphics/nu_option_refresh.png', 	'Ctrl+Shft+R']);
 		
 	}

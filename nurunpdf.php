@@ -12,9 +12,8 @@ $GLOBALS['nu_files']        = array();
 $jsonID                     = $_GET['i'];
 $J							= nuGetJSONData($jsonID);
 $TABLE_ID                   = nuTT();
-$JSON                       = $J;
-$LAYOUT						= $JSON['sre_layout'];
-nudebug($LAYOUT);
+$JSON                       = json_decode($J);
+$LAYOUT						= json_decode($JSON->sre_layout);
 $hashData                   = nuAddToHashList($JSON, 'report');
 $hashData['TABLE_ID']       = $TABLE_ID;
 $GLOBALS['TABLE_ID']        = $TABLE_ID;
@@ -39,7 +38,7 @@ for($i = 0 ; $i < count($fl) ; $i++){
 	
 }
 
-nuBuildTempTable($JSON['parentID'], $TABLE_ID);
+nuBuildTempTable($JSON->parentID, $TABLE_ID);
 
 $GLOBALS['nu_columns']		= nuAddCriteriaValues($hashData, $TABLE_ID);
 
