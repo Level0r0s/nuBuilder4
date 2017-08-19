@@ -50,7 +50,7 @@
 
 	$f->forms[0]->user_id					= $U['USER_ID'];
 	$f->forms[0]->dimensions				= $formAndSessionData->dimensions;
-	$f->forms[0]->tableSchema				= $formAndSessionData->tableSchema;
+	$f->forms[0]->tableSchema				= nuUpdateTableSchema();//$formAndSessionData->tableSchema;
 	$f->forms[0]->formSchema				= $formAndSessionData->formSchema;
 	$f->forms[0]->translation				= $formAndSessionData->translation;
 	$f->forms[0]->session_id				= $_SESSION['SESSION_ID'];

@@ -37,7 +37,6 @@ if(array_key_exists('nuSTATE', $_POST)){
                 $_SESSION['SafeMode']               = (isset($nuConfigSafeMode) ? $nuConfigSafeMode : false);
                 $_SESSION['SafePHP']                = (isset($nuConfigSafePHP)  ? $nuConfigSafePHP  : array());
                 $_SESSION['tableList']            	= array();
-				$_SESSION['tableSchema']			= nuBuildTableSchema();
                 $_SESSION['formSchema']             = array();
                 $formSchemaQRY                      = nuRunQuery("SELECT * FROM zzzzsys_form ORDER BY sfo_code");
         		
@@ -212,6 +211,8 @@ if(array_key_exists('nuSTATE', $_POST)){
                     $storeSessionInTableJSON, 
                     $_SESSION['SESSION_ID']
                 ));
+				
+				nuSetJSONData('clientTableSchema', []);
 				
 				
             } else {

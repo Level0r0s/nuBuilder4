@@ -103,7 +103,7 @@ function nuUpdateDatabase(){
 	
 	nuValidateSubforms();
 	
-	$tableSchema	= $_SESSION['tableSchema'];
+	$tableSchema	= nuBuildTableSchema();
 	$nudata			= $_POST['nuHash']['nuFORMdata'];
 	$nuMainID		= $_POST['nuHash']['record_id'];
 	$fid			= $_POST['nuHash']['form_id'];

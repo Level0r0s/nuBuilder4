@@ -206,36 +206,59 @@ function db_num_rows($o) {
 
 function nuUpdateTables(){
 	
-	$A	= [];
-	$B	= [];
-
+	$a	= [];
 	$t 	= nuRunQuery("SHOW TABLES");
 	
 	while($r = db_fetch_row($t)){
-		$A[]	= $r[0];
+		$a[] = $r[0];
 	}
-
-	$t 	= nuRunQuery("SELECT * FROM zzzzsys_table");
-	
-	while($r = db_fetch_row($t)){
-		$B[]	= $r[0];
-	}
-
-	if(json_encode($A) != json_encode($B)){
 		
+	nuRunQuery('DELETE FROM zzzzsys_table');
+	
+	for($i = 0 ; $i < count($a) ; $i ++){
+		
+		$s	= "INSERT INTO zzzzsys_table (zzzzsys_table_id) VALUES (?)";
+		nuRunQuery($s, [$a[$i]]);
+		
+	}
+		
+}
+
+
+function nuUpdateTableSchema(){
+
+	$ts	= nuBuildTableSchema();
+	$a 	= json_encode($ts);
+	$b 	= json_encode(nuGetJSONData('clientTableSchema'));
+	
+	if($a == $b){
+		return [];
+	}else{
+		
+		nuSetJSONData('clientTableSchema', $ts);
+		
+		$a			= [];
+		$t 			= nuRunQuery("SHOW TABLES");
+		
+		while($r = db_fetch_row($t)){
+			$a[] 	= $r[0];
+		}
+			
 		nuRunQuery('DELETE FROM zzzzsys_table');
 		
-		for($i = 0 ; $i < count($A) ; $i ++){
+		for($i = 0 ; $i < count($a) ; $i ++){
 			
-			$s	= "INSERT INTO zzzzsys_table (zzzzsys_table_id) VALUES (?)";
-			nuRunQuery($s, [$A[$i]]);
+			$s		= "INSERT INTO zzzzsys_table (zzzzsys_table_id) VALUES (?)";
+			
+			nuRunQuery($s, [$a[$i]]);
 			
 		}
+		
+		return $ts;
 		
 	}
 	
 }
-
 
 
 

@@ -29,14 +29,13 @@ function nuBuildForm(f){
 	nuSetSuffix(1000);
 	nuSetBody(f);
 	
-//	if(f.tableSchema.length != 0){  						//-- its an Object (load these once,  at login)
-		
-	nuFORM.tableSchema			= f.tableSchema;
+	if(f.tableSchema.length != 0){  						//-- its an Object (load these once,  at login)
+		nuFORM.tableSchema		= f.tableSchema;
+	}
+	
 	nuFORM.formSchema			= f.formSchema;
 	window.nuLANGUAGE			= f.translation;
 		
-//	}
-	
 	var b 						= window.nuFORM.getCurrent();
 
 	b.form_id 					= f.form_id;
