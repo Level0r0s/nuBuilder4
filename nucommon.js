@@ -72,7 +72,6 @@ function nuGetBreadcrumb(bc){
 	
 	var a			= arguments.length;
 	var e			= nuFORM.edited;
-	var f			= nuFORM.formType;
 	
 	if(a == 0){
 		var b		= nuFORM.breadcrumbs.length -1;
