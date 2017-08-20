@@ -14,7 +14,9 @@ window.nuSESSION				= '';
 window.nuDRAGLINEVSTART			= '';
 window.nuDRAGLINEVID			= '';
 window.nuNEW					= '';
-window.nuDragID						= 1000;
+window.nuDragID					= 1000;
+window.nuColor					= '';
+window.nuImage					= '';
 
 function nuOpener(t, f, r, filter, parameters){
 	
@@ -977,6 +979,40 @@ function nuRemoveHolders(h){
 		if(arguments[i] == 1){$('#nuBreadcrumbHolder').remove();}
 		if(arguments[i] == 2){$('#nuTabHolder').remove();}
 		
+	}
+	
+}
+
+function nuSetColor(c){
+	
+	window.nuColor	= c;
+	$('body').css('background-color', c);
+}
+
+function nuSetImage(i){
+	
+	window.nuImage	= i;
+	nuBackgroundImage();
+	
+}
+
+
+function nuBackgroundImage(){
+	
+	if(nuFormType() == 'edit'){
+		
+		$('body').css('background-color', window.nuColor);
+		
+		if(window.nuImage == ''){
+			$('body').css('background-image', '');
+		}else{
+			$('body').css('background-image', 'url("' + window.nuImage + '")');
+			$('body').css('background-size', '100% 100%');
+		}
+		
+	}else{
+		$('body').css('background-color', '');
+		$('body').css('background-image', '');
 	}
 	
 }

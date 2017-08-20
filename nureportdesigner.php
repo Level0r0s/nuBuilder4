@@ -55,6 +55,7 @@ $(document).ready(function() {
 		}else{
 			window.nuREPORT = $.parseJSON(window.opener.sre_layout.value);
 		}
+		
 	}else{
 		window.nuREPORT 	= window.nuREPORTdefault;
     }

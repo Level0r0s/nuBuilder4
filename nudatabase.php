@@ -165,7 +165,7 @@ function db_field_names($n){
 function db_field_types($n){
     
     $a       = array();
-    $s       = "DESCRIBE $n";
+    $s       = "dESCRIBE $n";
     $t       = nuRunQuery($s);
 
     while($r = db_fetch_row($t)){
@@ -227,7 +227,7 @@ function nuUpdateTables(){
 
 function nuUpdateTableSchema(){
 
-	$ts	= nuBuildTableSchema();
+	$ts	= $_POST['tableSchema'];
 	$a 	= json_encode($ts);
 	$b 	= json_encode(nuGetJSONData('clientTableSchema'));
 	

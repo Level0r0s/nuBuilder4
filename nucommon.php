@@ -978,24 +978,29 @@ function nuTTList($id, $l){
 
 
 function nuBuildTempTable($id, $tt, $rd = 0){
+	
+	$x				= explode (':', $id);
+	$id				= strstr($id, ':');
+	
+	if($x[0] == 'PROCEDURE'){
+				
+	nudebug($id);
+		$e			= new nuEvalPHPClass($id);
+	nudebug('gh');
 		
-	$s				= "
-			SELECT COUNT(*) 
-			FROM zzzzsys_php
-			WHERE zzzzsys_php_id = ?
-		";
-		
-	$t				= nuRunQuery($s,[$id]);
-	$R				= db_fetch_row($t);
+	}
 
-	if($R[0] == 0){							//-- if not from zzzzsys_php
+	if($x[0] == 'TABLE'){
 		
-		$s			= "
-				SELECT sse_sql 
-				FROM zzzzsys_select
-				WHERE zzzzsys_select_id = ?
-			";
-			
+		$P			= "	nuRunQuery('CREATE TABLE $tt SELECT * FROM $id');;";
+		
+		eval($P);
+		
+	}
+	
+	if($x[0] == 'SQL'){
+		
+		$s			= "SELECT sse_sql FROM zzzzsys_select WHERE zzzzsys_select_id = ?";
 		$t			= nuRunQuery($s,[$id]);
 		$r			= db_fetch_row($t);
 		$c			= $r[0];
@@ -1018,10 +1023,8 @@ function nuBuildTempTable($id, $tt, $rd = 0){
 		$P			= "	nuRunQuery('CREATE TABLE $tt $p');";
 		
 		eval($P);
+	nudebug('gh');
 		
-	}else{
-nudebug('gh');		
-		$e			= new nuEvalPHPClass($id);
 	}
 	
 }

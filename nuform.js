@@ -24,10 +24,9 @@ function nuBuildForm(f){
 	window.nuUniqueID			= 'c' + String(Date.now());
 	window.global_access		= f.global_access == '1';
 	nuFORM.edited				= false;
-	nuFORM.formType				= f.type;
 	nuFORM.scroll				= [];
 	nuSetSuffix(1000);
-	nuSetBody(f);
+	nuSetBody();
 	
 	if(f.tableSchema.length != 0){  						//-- its an Object (load these once,  at login)
 		nuFORM.tableSchema		= f.tableSchema;
@@ -60,7 +59,7 @@ console.log('new');
 	nuAddHolder('nuActionHolder');
 	nuAddHolder('nuBreadcrumbHolder');
 	
-	if(f.record_id != ''){
+	if(nuFormType() == 'edit'){
 		nuAddHolder('nuTabHolder');
 	}
 	
@@ -78,11 +77,12 @@ console.log('new');
 	nuAddActionButtons(f);
 	nuRecordProperties(f, '');
 
-	if(f.record_id != ''){
+	if(nuFormType() == 'edit'){
 		nuBuildEditObjects(f, '', '', f);
 	}
 
 	nuGetStartingTab();
+	nuBackgroundImage();
 	
 	$('#nuSearchField').focus();
 
@@ -95,12 +95,12 @@ console.log('new');
 }
 
 
-function nuSetBody(f){
+function nuSetBody(){
 
 	$('body').html('');
 	$('body').removeClass('nuBrowseBody nuEditBody');
 	
-	if(f.record_id == ''){
+	if(nuFormType() == 'browse'){
 		$('body').addClass('nuBrowseBody')
 	}else{
 		$('body').addClass('nuEditBody')
@@ -138,7 +138,7 @@ function nuResizeBody(f){
 	var d				= f.dimensions;
 	var headers			= nuGetTitleHeight();
 	
-	if(f.record_id == ''){
+	if(nuFormType() == 'browse'){
 		
 		var h			= Number(d.browse.height) + headers;
 		var w			= Number(d.browse.width);
@@ -179,7 +179,7 @@ function nuResizeBody(f){
 			'width' 		:	(w - 3) + 'px'
 		});
 			
-		$('body').css('height', h);
+		$('body').css('height', '100%');
 		
 	}
 	
@@ -208,7 +208,7 @@ function nuAddActionButtons(f){
 
 	var button	= f.buttons;
 
-	if(f.record_id == ''){
+	if(nuFormType() == 'browse'){
 
 		var s 	= nuDefine(nuFORM.getProperty('search'));
 		var f 	= nuDefine(nuFORM.getProperty('filter'));
@@ -1447,7 +1447,7 @@ function nuAddBreadcrumb(i){
 
 function nuSetTitle(t){
 	
-	if(nuFORM.getCurrent().record_id == ''){return;}
+	if(nuFormType() == 'browse'){return;}
 
 	nuFORM.setProperty('title', t);
 	
@@ -2694,7 +2694,7 @@ function nuAddJavascript(o){
 	
 	$('body').append(s);
 	
-	if(o.record_id == ''){
+	if(nuFormType() == 'browse'){
 		if(nuLoadBrowse != null){nuLoadBrowse();}
 	}else{
 		if(nuLoadEdit != null){nuLoadEdit();}
@@ -3010,7 +3010,7 @@ function nuNoDuplicates(){
 
 function nuFormType(){
 	
-	if(nuFORM.record_id == ''){
+	if(nuFORM.getCurrent().record_id == ''){
 		return 'browse';
 	}else{
 		return 'edit';

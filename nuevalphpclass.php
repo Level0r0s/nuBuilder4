@@ -5,7 +5,7 @@
 		function __construct($parentID) {
 			
 			$_POST['nuCode']= '';
-
+nudebug($s, $this->parentID);
 			$this->parentID = $parentID;
 		
 			if($this->parentID != '') {
@@ -35,7 +35,7 @@
 
 				$phpCode	= $nuA->sph_code;
 				$phpToEval	= nuReplaceHashVariables($nuA->sph_php);
-
+				
 				$this->evalPHP($phpCode, $phpToEval);
 				
 			}
