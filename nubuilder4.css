@@ -433,6 +433,7 @@ input[type=range]::-webkit-slider-runnable-track {
   position:absolute;
   top:75px;
   font-size:14px;
+  line-height: 150%;
 }
 
 
@@ -447,6 +448,7 @@ input[type=range]::-webkit-slider-runnable-track {
   font-size:14px;
   background-color: #9ED374 !important;
   border-color: #9ED374 !important;
+  line-height: 150%;
 }
 
 

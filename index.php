@@ -157,6 +157,7 @@ window.nuHASH			= [];
 	$h			= "
 
 	window.nuIsWindow						= '$iframe';
+	window.nuImages							= [];
 	
 	if('$opener' == ''){
 		

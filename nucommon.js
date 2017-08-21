@@ -999,6 +999,31 @@ function nuSetImage(i){
 
 function nuBackgroundImage(){
 	
+	
+/*
+
+	$('.nuBrowseImage').each(function( index ){
+		
+		var p	    = $(this).parent().attr('id');
+		var r	    = String(p).substr(5,3)
+		var h       = $("#nurow" + r + "002").html();
+		
+		if(h != '' && h !== undefined){
+		    
+    		var j	= JSON.parse(h);
+    		var f	= atob(j.file);
+    		
+    		$(this).attr('src', f);
+    		
+		}
+		
+	});
+
+}
+
+
+*/	
+	
 	if(nuFormType() == 'edit'){
 		
 		$('body').css('background-color', window.nuColor);
@@ -1017,3 +1042,13 @@ function nuBackgroundImage(){
 	
 }
 
+
+function nuSetImage2(i){
+	
+	if(window.nuImages[i] === undefined){
+		
+	}else{
+		
+	}
+	
+}
