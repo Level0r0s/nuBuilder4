@@ -5,7 +5,6 @@
 		function __construct($parentID) {
 			
 			$_POST['nuCode']= '';
-nudebug($s, $this->parentID);
 			$this->parentID = $parentID;
 		
 			if($this->parentID != '') {

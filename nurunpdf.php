@@ -39,8 +39,7 @@ for($i = 0 ; $i < count($fl) ; $i++){
 }
 $justID						= strstr($JSON->parentID, ':');
 
-nudebug($justID, $TABLE_ID);
-nuBuildTempTable($justID, $TABLE_ID);
+nuBuildTempTable($JSON->parentID, $TABLE_ID);
 
 $GLOBALS['nu_columns']		= nuAddCriteriaValues($hashData, $TABLE_ID);
 

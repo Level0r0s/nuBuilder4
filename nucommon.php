@@ -977,17 +977,13 @@ function nuTTList($id, $l){
 }
 
 
-function nuBuildTempTable($id, $tt, $rd = 0){
+function nuBuildTempTable($name_id, $tt, $rd = 0){
 	
-	$x				= explode (':', $id);
-	$id				= strstr($id, ':');
+	$x				= explode (':', $name_id);
+	$id				= substr(strstr($name_id, ':'),1);
 	
 	if($x[0] == 'PROCEDURE'){
-				
-	nudebug($id);
 		$e			= new nuEvalPHPClass($id);
-	nudebug('gh');
-		
 	}
 
 	if($x[0] == 'TABLE'){
@@ -1021,9 +1017,8 @@ function nuBuildTempTable($id, $tt, $rd = 0){
 		$tt			= addslashes($tt);
 		
 		$P			= "	nuRunQuery('CREATE TABLE $tt $p');";
-		
+
 		eval($P);
-	nudebug('gh');
 		
 	}
 	

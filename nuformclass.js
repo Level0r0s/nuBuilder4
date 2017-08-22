@@ -729,7 +729,7 @@ class nuFormObject {
 			
 			var o 	= new Date(d.y, Number(d.m) - 1, d.d, Number(d.h), Number(d.n), Number(d.s), 0);
 			var y	= String(o.getFullYear()) 	+ '-';
-			var m	= nuPad2(o.getMonth() + 1)		+ '-';
+			var m	= nuPad2(o.getMonth() + 1)	+ '-';
 			var a	= nuPad2(o.getDate())		+ ' ';
 			var h	= nuPad2(o.getHours()) 		+ ':';
 			var n	= nuPad2(o.getMinutes()) 	+ ':';

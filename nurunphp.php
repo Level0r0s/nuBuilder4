@@ -5,7 +5,6 @@ require_once('nudata.php');
 
 $jsonID					= $_GET['i'];
 $J						= nuGetJSONData($jsonID);
-//$JSON					= json_decode($_SESSION[$jsonID]);
 $JSON					= json_decode($J);
 $TABLE_ID				= nuTT();
 $hashData				= nuAddToHashList($JSON, 'php');
