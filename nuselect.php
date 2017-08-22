@@ -50,10 +50,11 @@ body  {
 		.attr('onmouseup', 		'nuUp(event)')
 		.css('zoom', Number(parent.$('#sse_resize').val()) / 100)
 		.css('transform', Number(parent.$('#sse_resize').val()) / 100)
-
+		
 		parent.nuHasNotBeenEdited();
 		
 	}
+	
 
 </script>
 </head><body onload='nuLoad()'></body></html>

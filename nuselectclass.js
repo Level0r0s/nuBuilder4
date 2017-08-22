@@ -751,7 +751,7 @@ class nuSelectObject{
 		
 		var j		= $('#sse_json', parent.document).val();
 
-		if(j == '' || j === undefined){return;}
+		if(j == '' || j === undefined){return true;}
 		
 		var J		=	JSON.parse(j);
 		
@@ -830,7 +830,6 @@ class nuSelectObject{
 
 
 //=========functions==========================================================================
-
 
 function nuUp(e){
 
