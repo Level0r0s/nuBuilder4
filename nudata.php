@@ -575,5 +575,17 @@ function nuDeleteForm($f){
 	
 }
 
+function nuGetFile(){
+	
+	$f		= $_POST['nuSTATE']['fileCode'];
+	$s		= "SELECT * FROM zzzzsys_file WHERE sfi_code = ? ";
+	$t		= nuRunQuery($s, [$f]);
+	$r		= db_fetch_object($t);
+	
+	return $r->sfi_json;
+	
+}
+
+
 
 ?>

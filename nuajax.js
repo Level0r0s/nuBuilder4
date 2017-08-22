@@ -215,7 +215,7 @@ function nuRunPHP(pCode, iframe){
 }
 
 
-function nuRunPHPHidden(i){
+function nuRunPHPHidden(i, h){
 
 	if(window.nuBeforeSave){
 		if(!nuBeforeSave()){return;}
@@ -231,6 +231,7 @@ function nuRunPHPHidden(i){
 	last.record_id			= i;								//-- php code
 	last.nuFORMdata			= nuFORM.data();
 	last.hash  				= nuHashFromEditForm();
+	last.HIDDEN_ID			= arguments.length == 2 ? h : '';
 	
 	var successCallback 	= function(data,textStatus,jqXHR){
 		
@@ -239,6 +240,29 @@ function nuRunPHPHidden(i){
 		if(nuDisplayError(fm)){return;};
 
 		eval(fm.callback + ';');
+			
+	};
+	
+	nuAjax(last,successCallback);
+	
+}
+
+
+
+function nuGetFile(c){
+
+	var current				= nuFORM.getCurrent();
+	var last		 		= $.extend(true, {}, current);
+
+	last.session_id			= window.nuSESSION;
+	last.call_type 			= 'getfile';
+	last.fileCode			= c;
+	
+	var successCallback 	= function(data,textStatus,jqXHR){
+		
+		if(nuDisplayError(data)){return;};
+
+		window.nuImages[c] 	= data.JSONfile === null ? '' : data.JSONfile;
 			
 	};
 	

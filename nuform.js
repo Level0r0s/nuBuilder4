@@ -82,7 +82,7 @@ console.log('new');
 	}
 
 	nuGetStartingTab();
-	nuBackgroundImage();
+	nuBackground();
 	
 	$('#nuSearchField').focus();
 

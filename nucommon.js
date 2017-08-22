@@ -17,6 +17,7 @@ window.nuNEW					= '';
 window.nuDragID					= 1000;
 window.nuColor					= '';
 window.nuImage					= '';
+window.nuImages					= [];
 
 function nuOpener(t, f, r, filter, parameters){
 	
@@ -989,40 +990,23 @@ function nuSetColor(c){
 	$('body').css('background-color', c);
 }
 
-function nuSetImage(i){
+function nuSetImage(f){
 	
-	window.nuImage	= i;
-	nuBackgroundImage();
+	if(nuImages[f] !== undefined){
+		
+		var j			= JSON.parse(nuImages[f]);
+		var f			= atob(j.file);
+
+	}
 	
+	window.nuImage	= f;
+		
+	nuBackground();
+		
 }
 
 
-function nuBackgroundImage(){
-	
-	
-/*
-
-	$('.nuBrowseImage').each(function( index ){
-		
-		var p	    = $(this).parent().attr('id');
-		var r	    = String(p).substr(5,3)
-		var h       = $("#nurow" + r + "002").html();
-		
-		if(h != '' && h !== undefined){
-		    
-    		var j	= JSON.parse(h);
-    		var f	= atob(j.file);
-    		
-    		$(this).attr('src', f);
-    		
-		}
-		
-	});
-
-}
-
-
-*/	
+function nuBackground(){
 	
 	if(nuFormType() == 'edit'){
 		
@@ -1043,12 +1027,16 @@ function nuBackgroundImage(){
 }
 
 
-function nuSetImage2(i){
+function nuCachedImage(c){
 	
-	if(window.nuImages[i] === undefined){
+	if(window.nuImages[c] === undefined){
 		
-	}else{
+		nuGetFile(c);
+		
+		return false;
 		
 	}
+	
+	return true;
 	
 }
