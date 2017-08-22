@@ -263,6 +263,8 @@ function nuGetFile(c){
 		if(nuDisplayError(data)){return;};
 
 		window.nuImages[c] 	= data.JSONfile === null ? '' : data.JSONfile;
+		
+		console.log("File cached into nuImages (" + c + ")");
 			
 	};
 	

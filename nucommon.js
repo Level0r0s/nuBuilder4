@@ -1027,7 +1027,7 @@ function nuBackground(){
 }
 
 
-function nuCachedImage(c){
+function nuCached(c){
 	
 	if(window.nuImages[c] === undefined){
 		
