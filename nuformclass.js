@@ -655,11 +655,15 @@ class nuFormObject {
 			var c		= n[1] == '0' ? '' : n[1];			//-- comma
 			
 			if(c == ''){
+				
 				var d	= n[4];								//-- decimal
 				var p	= n.length - 5;						//-- places
+				
 			}else{
+				
 				var d	= n[5];								//-- decimal
 				var p	= n.length - 6;						//-- places
+				
 			}
 
 			var num		= v
@@ -701,21 +705,20 @@ class nuFormObject {
 			var time	= String(o[4]).split(':');
 			
 			var d		= {'y' : o[3], 'm' : FMT[o[1]].jsmonth, 'd' : o[2], 'h' : time[0], 'n' : time[1], 's' : time[2]};	//-- today's date
-
 			for(var i = 0 ; i < f.length ; i++){
 				
 				var fmt	= String(f[i]);
 				var l	= fmt[0];
 				
 				if(l == 'm' && FMT[v[i]] !== undefined){
-					d.m		= FMT[v[i]]['mm'];					//-- javascript date
+					d.m		= FMT[v[i]]['mm'];					//-- javascript month
 				}
 				
 				if(fmt == 'dd'){
 					d.d		= v[i];
 				}
 				if(l == 'y'){
-					d.y = v[i];
+					d.y 	= v[i];
 				}
 				
 				if(l == 'h'){d.h = v[i];}
@@ -724,18 +727,18 @@ class nuFormObject {
 				
 			}
 			
-			var o 	= new Date(d.y, d.m, d.d, Number(d.h), Number(d.n), Number(d.s), 0);
+			var o 	= new Date(d.y, Number(d.m) - 1, d.d, Number(d.h), Number(d.n), Number(d.s), 0);
 			var y	= String(o.getFullYear()) 	+ '-';
-			var m	= nuPad2(o.getMonth())		+ '-';
-			var d	= nuPad2(o.getDate())		+ ' ';
+			var m	= nuPad2(o.getMonth() + 1)		+ '-';
+			var a	= nuPad2(o.getDate())		+ ' ';
 			var h	= nuPad2(o.getHours()) 		+ ':';
 			var n	= nuPad2(o.getMinutes()) 	+ ':';
 			var s	= nuPad2(o.getSeconds());
 
 			if(hasTime){
-				return  String(y+m+d+h+n+s);
+				return  String(y+m+a+h+n+s);
 			}else{
-				return  String(y+m+d).trim();
+				return  String(y+m+a).trim();
 			}
 			
 		}
