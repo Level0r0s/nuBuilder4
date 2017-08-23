@@ -27,12 +27,12 @@ $t[] = 'zzzzsys_translate';
 $t[] = 'zzzzsys_user';
 
 try {
-    require dirname(__FILE__) . DIRECTORY_SEPARATOR . 'config.php';
+    require dirname(__FILE__) . DIRECTORY_SEPARATOR . 'nuconfig.php';
     $nuDB = new PDO("mysql:host=$nuConfigDBHost;dbname=$nuConfigDBName;charset=utf8", $nuConfigDBUser, $nuConfigDBPassword, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
     $nuDB->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $nuDB->exec("SET CHARACTER SET utf8");
 } catch (Exception $exception){
-    die('Could not connect to the database from config.php. Exception: '.$exception);
+    die('Could not connect to the database from nuconfig.php. Exception: '.$exception);
 }
 
 try {

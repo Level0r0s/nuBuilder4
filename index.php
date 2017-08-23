@@ -24,7 +24,7 @@ function nuCSSIndexInclude($pfile){
 
 function nuHeader(){
 
-    require_once('config.php');
+    require('nuconfig.php');
 
     $nuDB 				= new PDO("mysql:host=$nuConfigDBHost;dbname=$nuConfigDBName;charset=utf8", $nuConfigDBUser, $nuConfigDBPassword, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
     $nuDB->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -44,11 +44,10 @@ function nuHeader(){
         $HTMLHeader 	= $getHTMLHeaderQRY->fetch(PDO::FETCH_OBJ)->set_header;
 		
     }catch(PDOException $ex){
-        die('nuBuilder cannot access the database. Please check your database configuration in config.php.');
+        die('nuBuilder cannot access the database. Please check your database configuration in nuconfig.php.');
     }
 
     $j  = "\n\n" . $HTMLHeader . "\n\n";
-//    $j .= "\n\nwindow.nuHeader = '" . addslashes($HTMLHeader) . "';\n\n";
     
     return $j;
     
@@ -135,7 +134,9 @@ if(parent.window.nuDocumentID == window.nuDocumentID){
 window.nuHASH			= [];
 
 <?php
+    require('nuconfig.php');
 
+	$welcome			= AddSlashes($nuWelcomeBodyInnerHTML);
 	$nuHeader			= nuHeader();
     $opener             = '';
     $search             = '';
@@ -166,7 +167,8 @@ window.nuHASH			= [];
 			nuBindCtrlEvents();
 			window.nuDefaultBrowseFunction	= '$nuBrowseFunction';
 			window.nuBrowseFunction			= '$nuBrowseFunction';
-			nuLogin();
+			var welcome						= `$welcome`;
+			nuLogin(welcome);
 
 		}
 	}else{

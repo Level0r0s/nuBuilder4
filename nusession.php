@@ -1,7 +1,7 @@
 <?php
 
 require_once('nudatabase.php');
-require_once('config.php');
+require_once('nuconfig.php');
 require_once('nucommon.php');
 
 if(array_key_exists('nuSTATE', $_POST)){

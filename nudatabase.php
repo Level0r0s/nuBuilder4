@@ -1,6 +1,6 @@
 <?php 
 
-require_once('config.php');
+require_once('nuconfig.php');
 
 mb_internal_encoding('UTF-8');
 

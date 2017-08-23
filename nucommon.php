@@ -2,7 +2,7 @@
 
 error_reporting( error_reporting() & ~E_NOTICE );
 
-require_once('config.php'); 
+require_once('nuconfig.php'); 
 require_once('nubuilders.php'); 
 //require_once('nuexception.php'); 
 require_once('nuevalphpclass.php'); 

@@ -1133,7 +1133,7 @@ function nuRunDescription($P){
 
 function nuFormAccess($s, $a){
 
-    require('config.php');
+    require('nuconfig.php');
 
 	if($_POST['session']->zzzzsys_user_id == $nuConfigDBGlobeadminUsername){
 		return array('1', '1', '1', '1', '1');

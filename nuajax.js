@@ -256,8 +256,8 @@ function nuAttachFile(i, c){
 		var p				= JSON.parse(nuImages[c]);
 		var b				= atob(p.file);
 		
-		$('#' + i).css('background-image', 'url("' + b + '")');
-		$('#' + i).css('background-size', '100% 100%');
+		$(i).css('background-image', 'url("' + b + '")');
+		$(i).css('background-size', '100% 100%');
 
 		return;
 		
@@ -280,8 +280,9 @@ function nuAttachFile(i, c){
 			var p			= JSON.parse(window.nuImages[c]);
 			var b			= atob(p.file);
 			
-			$('#' + i).css('background-image', 'url("' + b + '")');
-			$('#' + i).css('background-size', '100% 100%');
+			$(i).css('background-image', 'url("' + b + '")');
+			$(i).css('background-size', '100% 100%');
+			$(i).css('src', 'url("' + b + '")');
 			
 		}
 		
