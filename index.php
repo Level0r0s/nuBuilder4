@@ -238,7 +238,7 @@ $nuHeader
 </head>
 
 
-<body onload="nuLoad()">
+<body id='nubody' onload="nuLoad()">
 
 </body>
 

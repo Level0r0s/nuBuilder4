@@ -755,6 +755,7 @@ function nuGetUserAccess(){
 	
 }
 
+/*
 
 function nuDisplayHeaderHTML() {
 	
@@ -779,6 +780,7 @@ function nuDisplayFooterHTML(){
 	echo $h;
 	
 }
+*/
 
 function nuGetFormProperties($i){
 	

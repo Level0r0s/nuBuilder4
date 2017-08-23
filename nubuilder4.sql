@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 22, 2017 at 09:44 PM
+-- Generation Time: Aug 23, 2017 at 11:28 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -385,7 +385,7 @@ CREATE TABLE `zzzzsys_form` (
 INSERT INTO `zzzzsys_form` (`zzzzsys_form_id`, `sfo_type`, `sfo_code`, `sfo_description`, `sfo_table`, `sfo_primary_key`, `sfo_browse_redirect_form_id`, `sfo_browse_row_height`, `sfo_browse_rows_per_page`, `sfo_browse_sql`, `sfo_javascript`) VALUES
 ('5678ab2c48c5c41', 'edit', 'EMP', 'Employee Subform', 'employee', 'employee_id', '', 0, 0, 'SELECT * FROM employee\nWHERE emp_cost > 10\n', ''),
 ('568b508eec00d80', 'browseedit', 'BUS', 'Business', 'business', 'business_id', '', 0, 4, 'SELECT * FROM business', ''),
-('nuhome', 'launch', 'HOME', 'Home', '', '', '', 0, 0, '', '$(''.nuActionButton'').hide();\nnuSetImage('''');\n$(''#user_home'')\n    .css({\n        ''color''             : ''white'',\n        ''font-size''         : 13,\n        ''display''           : ''inline'',\n        ''border-style''      : ''solid'',\n        ''height''            : 30,\n        ''font-size''         : 16,\n        ''padding''           : ''0px 6px 0px 6px'',\n        ''text-shadow''       : ''0 1px 2px #9AB973'',\n        ''border-color''      : ''#9AB973'',\n        ''border-width''      : ''0px 0px 1px 0px'',\n        ''background-color''  : ''#88cb51''\n    });\n\n$(''#open_database'')\n.attr(''title'', ''PHPMyAdmin'')\n.click(function(){\n    window.open(''nupmalogin.php'');\n});\n\nnuGetStartingTab();\n'),
+('nuhome', 'launch', 'HOME', 'Home', '', '', '', 0, 0, '', '$(''.nuActionButton'').hide();\n\n$(''#user_home'')\n    .css({\n        ''color''             : ''white'',\n        ''font-size''         : 13,\n        ''display''           : ''inline'',\n        ''border-style''      : ''solid'',\n        ''height''            : 30,\n        ''font-size''         : 16,\n        ''padding''           : ''0px 6px 0px 6px'',\n        ''text-shadow''       : ''0 1px 2px #9AB973'',\n        ''border-color''      : ''#9AB973'',\n        ''border-width''      : ''0px 0px 1px 0px'',\n        ''background-color''  : ''#88cb51''\n    });\n\n$(''#open_database'')\n.attr(''title'', ''PHPMyAdmin'')\n.click(function(){\n    window.open(''nupmalogin.php'');\n});\n\nnuGetStartingTab();\n'),
 ('s15024615056515', 'launch', 'TL', 'Test Launch', '', '', '', 0, 0, 'SELECT * FROM Launch Form', '\n\nfunction nuPie1(){\n\n	google.charts.load(''current'', {''packages'':[''corechart'']});\n	google.charts.setOnLoadCallback(drawChart);\n\n	function drawChart(){\n\n		var div             = document.getElementById(''bar'')\n		var sf              = nuSubformObject(''population'');\n		\n		var data 		    = new google.visualization.DataTable();\n		var chart 		    = new google.visualization.PieChart(div);\n\n        for(var i = 0 ; i < sf.rows.length ; i++){\n            \n            sf.rows[i][2]   = Number(sf.rows[i][2]);\n            sf.rows[i].pop();\n            sf.rows[i].shift();\n            \n        }\n        \n		data.addColumn(''string'', sf.fields[2]);\n		data.addColumn(''number'', sf.fields[3]);\n		data.addRows(sf.rows);\n\n		chart.draw(data, {''backgroundColor'':''#dedede''});\n\n	}\n	\n}\n\n\n'),
 ('nubrowse', 'subform', 'FRMBR', 'Browse Columns', 'zzzzsys_browse', 'zzzzsys_browse_id', '', 0, 5, 'SELECT * FROM zzzzsys_browse\nORDER BY sbr_order\n', '$(''#nuSearchButton'').remove();\n$(''#nuSearchField'').remove();\n$(''#nuPrintButton'').remove();\n\nnuSetTitle($(''#sbr_title'').val());\n\nvar pid = parent.nuFORM.getCurrent().record_id;\n\nif(nuFORM.getCurrent().record_id == -1){\n    $(''#sbr_zzzzsys_form_id'').val(pid).change();\n}\n'),
 ('nutab', 'browseedit', 'TAB', 'Form Tab', 'zzzzsys_tab', 'zzzzsys_tab_id', '', 0, 0, 'SELECT * FROM zzzzsys_tab\nJOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id\nORDER BY syt_order', '\n$("[data-nu-column=''nucolumn003'']").each(function() {\n    $(this).addClass(''nu_''+this.innerHTML);\n});\n'),
@@ -427,7 +427,7 @@ INSERT INTO `zzzzsys_form` (`zzzzsys_form_id`, `sfo_type`, `sfo_code`, `sfo_desc
 ('s14967315763149', 'browseedit', 'INVCOM', 'Company', 'company', 'company_id', '56773cb405f4913', 0, 0, 'SELECT\n    company.*\n\nFROM\n    company\n\nWHERE\n    ((company.com_name != ''0''))\n\n', ''),
 ('s14968332683656', 'browse', '1123', 'Test Form (break it if you want)', 'zzzzsys_access', 'zzzzsys_access_id', '', 0, 0, 'SELECT\n    color.color_id,\n    color.col_code,\n    color.col_description\n\nFROM\n    color', 'nuSetTitle($(''#sal_code'').val());'),
 ('nubuildtable', 'browse', 'PANDS', 'PHP and SELECT ', 'zzzzsys_report_data', 'id', 'nuselect', 0, 0, 'SELECT * FROM zzzzsys_report_data', ''),
-('nuuserhome', 'launch', 'USERH', 'Home', '', '', '', 0, 0, '', 'nuRemoveHolders(0,1,2);\nnuSetImage(''FP'');'),
+('nuuserhome', 'launch', 'USERH', 'Home', '', '', '', 0, 0, '', 'nuRemoveHolders(0,1,2);\n'),
 ('s15014147222001', 'browse', 'EMPLU', 'Employee', 'employee', 'employee_id', '', 0, 0, 'SELECT * FROM employee', ''),
 ('s15017688442340', 'subform', 'PAY', 'Payments', 'payment', 'payment_id', '', 0, 0, 'SELECT * FROM payment', ''),
 ('s15028479626852', 'subform', 'ITE', 'Invoice Item', 'invoice_item', 'invoice_item_id', '', 0, 0, 'SELECT * FROM invoice_item', ''),

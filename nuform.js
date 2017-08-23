@@ -30,7 +30,6 @@ function nuBuildForm(f){
 	
 	if(f.tableSchema.length != 0){  						//-- its an Object (load these once,  at login)
 		nuFORM.tableSchema		= f.tableSchema;
-console.log('new');	
 	}
 	
 	nuFORM.formSchema			= f.formSchema;
@@ -82,7 +81,6 @@ console.log('new');
 	}
 
 	nuGetStartingTab();
-	nuBackground();
 	
 	$('#nuSearchField').focus();
 

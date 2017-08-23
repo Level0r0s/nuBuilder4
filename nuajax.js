@@ -249,8 +249,20 @@ function nuRunPHPHidden(i, h){
 
 
 
-function nuGetFile(c){
+function nuAttachFile(i, c){
+	
+	if(nuImages[c] !== undefined){
+		
+		var p				= JSON.parse(nuImages[c]);
+		var b				= atob(p.file);
+		
+		$('#' + i).css('background-image', 'url("' + b + '")');
+		$('#' + i).css('background-size', '100% 100%');
 
+		return;
+		
+	}
+	
 	var current				= nuFORM.getCurrent();
 	var last		 		= $.extend(true, {}, current);
 
@@ -262,10 +274,17 @@ function nuGetFile(c){
 		
 		if(nuDisplayError(data)){return;};
 
-		window.nuImages[c] 	= data.JSONfile === null ? '' : data.JSONfile;
-		
-		console.log("File cached into nuImages (" + c + ")");
+		if(data.JSONfile !== null){
 			
+			nuImages[c] 	= data.JSONfile;
+			var p			= JSON.parse(window.nuImages[c]);
+			var b			= atob(p.file);
+			
+			$('#' + i).css('background-image', 'url("' + b + '")');
+			$('#' + i).css('background-size', '100% 100%');
+			
+		}
+		
 	};
 	
 	nuAjax(last,successCallback);
