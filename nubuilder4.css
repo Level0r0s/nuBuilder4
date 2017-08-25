@@ -35,28 +35,28 @@
 
 
 .php {
-   background-color: #B9BCD6;
+   background-color: #E2E5FF;
    font-family:Lucida Console;
    padding: 2px;
    font-size: 10px;
 }
 
 .js {
-   background-color: #F8DC3D;
+   background-color: #FFF3B1;
    font-family:Lucida Console;
    padding: 2px;
    font-size: 10px;
 }
 
 .html {
-   background-color: #F48453;
+   background-color: #FFCFBA;
    font-family:Lucida Console;
    padding: 2px;
    font-size: 10px;
 }
 
 .sql {
-   background-color: #B4C5D1;
+   background-color: #C4E7FF;
    font-family:Lucida Console;
    padding: 2px;
 }
