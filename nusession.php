@@ -236,6 +236,7 @@ if(isset($_SESSION['SESSION_ID'])){
         // only let the user have 1 temporary report run
         $_SESSION['SESSION_ID'] = null;
         $_SESSION['SESSION_TIMESTAMP'] = null;
+        $_SESSION['TEMPORARY_SESSION'] = true;
     } else if(isset($_SESSION['SESSION_TIMESTAMP'])){
 		
         $t = nuRunQuery("SELECT * FROM zzzzsys_setup");

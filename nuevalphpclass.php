@@ -1,5 +1,7 @@
 <?php
 
+    require_once 'nucommon.php';
+
 	class nuEvalPHPClass {
 			
 		function __construct($parentID) {
