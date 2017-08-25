@@ -442,30 +442,50 @@ function nuBindCtrlEvents(){
 			window.nuNEW = 0;
 			
 			e.preventDefault();
-			
-            if(e.keyCode == 65 && window.global_access) {						//-- a
-				nuPopup(window.nuFORM.getCurrent().form_id, "-2");
-			} else if(e.keyCode == 70 && window.global_access) {				//-- f
-				nuPopup("nuform", window.nuFORM.getCurrent().form_id);
-			} else if(e.keyCode == 79 && window.global_access) {				//-- O
-				nuPopup("nuobject", "", window.nuFORM.getCurrent().form_id);
-			} else if(e.keyCode == 68 && window.global_access) {				//-- d
-				nuPopup("nudebug", "");
-			} else if (e.keyCode == 82) {//R
 
-				if(window.nuFORM.getCurrent().record_id != '') {
-					nuGetBreadcrumb();
-				}
-				
-			} else if(e.keyCode == 83) {										//-- s
+			if(nuFormType() == 'browse') {
 			
-				if(window.nuFORM.getCurrent().record_id != '') {
-					nuSaveAction();
-				} else {
+				if(e.keyCode == 67 && window.global_access) {						//-- c		Searchable Columns
+					nuPopup(window.nuFORM.getCurrent().form_id, "-2");
+				} else if(e.keyCode == 70 && window.global_access) {				//-- f		Form Properties
+					nuPopup("nuform", window.nuFORM.getCurrent().form_id);
+				} else if(e.keyCode == 79 && window.global_access) {				//-- O		Object List
+					nuPopup("nuobject", "", window.nuFORM.getCurrent().form_id);
+				} else if(e.keyCode == 68 && window.global_access) {				//-- d		nuDebug Results
+					nuPopup("nudebug", "");
+				} else if(e.keyCode == 83) {										//-- s		Search
 					nuGetSearchList();
-				}				
+				} else if(e.keyCode == 65 && window.global_access) {				//-- a		Add
+					nuCloneAction();
+				} else if(e.keyCode == 80 && window.global_access) {				//-- p		Print
+					nuDeleteAction();
+				}
 
 			}
+
+
+			if(nuFormType() == 'edit') {
+			
+				if(e.keyCode == 65 && window.global_access) {						//-- a		Arrange
+					nuPopup(window.nuFORM.getCurrent().form_id, "-2");
+				} else if(e.keyCode == 70 && window.global_access) {				//-- f		Form Properties
+					nuPopup("nuform", window.nuFORM.getCurrent().form_id);
+				} else if(e.keyCode == 79 && window.global_access) {				//-- O		Object List
+					nuPopup("nuobject", "", window.nuFORM.getCurrent().form_id);
+				} else if(e.keyCode == 68 && window.global_access) {				//-- d		nuDebug Results
+					nuPopup("nudebug", "");
+				} else if (e.keyCode == 82) {										//-- r		Refresh
+					nuGetBreadcrumb();
+				} else if(e.keyCode == 83) {										//-- s		Save
+					nuSaveAction();
+				} else if(e.keyCode == 67 && window.global_access) {				//-- c		Clone
+					nuCloneAction();
+				} else if(e.keyCode == 98 && window.global_access) {				//-- y		Delete
+					nuDeleteAction();
+				}
+
+			}
+
 
 			var nosearch = window.nuFORM.getProperty('nosearch_columns');
 			var searchIndex = -1;
@@ -474,7 +494,7 @@ function nuBindCtrlEvents(){
 			if(e.keyCode >= 49 && e.keyCode <= 57) {
 				searchIndex = Math.abs(49 - e.keyCode);
 			}
-
+				
 			if(searchIndex != -1){
 				
 				if($.inArray(searchIndex,nosearch) != '-1'){

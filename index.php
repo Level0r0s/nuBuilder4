@@ -171,6 +171,7 @@ window.nuHASH			= [];
 			nuLogin(welcome);
 
 		}
+		
 	}else{
 
 		function nuLoad(){
@@ -218,7 +219,9 @@ window.nuHASH			= [];
 			if(p.record_id == '-2'){
 				nuBindDragEvents();		
 			}
-		}		
+			
+		}	
+		
 	}
 	
 	</script>

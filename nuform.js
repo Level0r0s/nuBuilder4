@@ -1621,38 +1621,72 @@ function nuGetOptionsList(f, t, p, a, type){
 	var list	= [];
 	var ul		= '<ul>';
 	
-	if(nuFORM.getProperty('record_id') == ''){
-		list.push(['Searchable Columns', 	'nuGetSearchList()', 						'graphics/nu_option_search.png', 	'Ctrl+Shft+S']);
+	if(nuFormType() == 'browse'){
+
+		list.push(['Searchable Columns', 	'nuGetSearchList()', 						'graphics/nu_option_searchable.png', 	'Ctrl+Shft+C']);
+
+		if(a == 1){
+			
+			if(nuSERVERRESPONSE.form_access == 0 || String(f).substr(0,2) != 'nu'){
+			
+				list.push(['Arrange Objects', 		'nuPopup("' + f + '", "-2")', 			'graphics/nu_option_arrange.png', 		'Ctrl+Shft+A']);
+				list.push(['Form Properties', 		'nuPopup("nuform", "' + f + '")', 		'graphics/nu_option_properties.png',	'Ctrl+Shft+F']);
+				list.push(['Form Object List', 		'nuPopup("nuobject", "", "' + f + '")', 'graphics/nu_option_objects.png',		'Ctrl+Shft+O']);
+				
+			}
+			
+			list.push(['nuDebug Results', 		'nuPopup("nudebug", "")', 					'graphics/nu_option_debug.png',		'Ctrl+Shft+D']);
+			
+		}else{
+			list.push(['Change Login', 				'nuPopup("nupassword", "' + u + '", "")', 	'graphics/nu_option_password.png', 	'Ctrl+Shft+L']);
+		}
+		list.push(['Refresh', 					'nuGetBreadcrumb()', 						'graphics/nu_option_refresh.png', 	'Ctrl+Shft+R']);
+		list.push(['Search',					'nuSearchAction();', 							'graphics/nu_option_search.png',	'Ctrl+Shft+S']);
+
+		if(nuSERVERRESPONSE.buttons.Add == '1'){list.push(['Add',					'nuAddAction();', 							'graphics/nu_option_add.png',		'Ctrl+Shft+A']);}
+		if(nuSERVERRESPONSE.buttons.Print == '1'){list.push(['Print',					'nuPrintAction();',							'graphics/nu_option_print.png',		'Ctrl+Shft+P']);}
+			
 	}
 
-	if(a == 1){
-		
-		if(nuSERVERRESPONSE.form_access == 0 || String(f).substr(0,2) != 'nu'){
-		
-			list.push(['Arrange Objects', 		'nuPopup("' + f + '", "-2")', 			'graphics/nu_option_arrange.png', 		'Ctrl+Shft+A']);
-			list.push(['Form Properties', 		'nuPopup("nuform", "' + f + '")', 		'graphics/nu_option_properties.png',		'Ctrl+Shft+F']);
-			list.push(['Form Object List', 		'nuPopup("nuobject", "", "' + f + '")', 'graphics/nu_option_objects.png',		'Ctrl+Shft+O']);
+	
+	if(nuFormType() == 'edit'){
+
+		list.push(['Searchable Columns', 	'nuGetSearchList()', 						'graphics/nu_option_search.png', 	'Ctrl+Shft+S']);
+
+		if(a == 1){
+			
+			if(nuSERVERRESPONSE.form_access == 0 || String(f).substr(0,2) != 'nu'){
+			
+				list.push(['Arrange Objects', 		'nuPopup("' + f + '", "-2")', 			'graphics/nu_option_arrange.png', 		'Ctrl+Shft+A']);
+				list.push(['Form Properties', 		'nuPopup("nuform", "' + f + '")', 		'graphics/nu_option_properties.png',	'Ctrl+Shft+F']);
+				list.push(['Form Object List', 		'nuPopup("nuobject", "", "' + f + '")', 'graphics/nu_option_objects.png',		'Ctrl+Shft+O']);
+				
+			}
+			
+			if(type != 'subform'){
+				list.push(['nuDebug Results', 		'nuPopup("nudebug", "")', 					'graphics/nu_option_debug.png',		'Ctrl+Shft+D']);
+			}
+			
+		}else{
+			
+			list.push(['Change Login', 				'nuPopup("nupassword", "' + u + '", "")', 	'graphics/nu_option_password.png', 	'Ctrl+Shft+L']);
 			
 		}
-		
-		if(type != 'subform'){
-			list.push(['nuDebug Results', 		'nuPopup("nudebug", "")', 					'graphics/nu_option_debug.png',			'Ctrl+Shft+D']);
-		}
-		
-	}else{
-		
-		list.push(['Change Login', 				'nuPopup("nupassword", "' + u + '", "")', 	'graphics/nu_option_password.png', 	'Ctrl+Shft+L']);
-		
-	}
 
-	if(nuFORM.getProperty('record_id') != '' && type != 'subform'){
-		
-		if(nuFORM.getCurrent().form_type != 'launch'){
-			list.push(['Save Form',				'nuSaveAction();', 							'graphics/nu_option_save.png',		'Ctrl+Shft+S']);
+		if(type != 'subform'){
+			
+			list.push(['Refresh', 					'nuGetBreadcrumb()', 						'graphics/nu_option_refresh.png', 	'Ctrl+Shft+R']);
+			
+			if(nuFORM.getCurrent().form_type != 'launch'){
+				
+				if(nuSERVERRESPONSE.buttons.Save == '1'){list.push(['Save',					'nuSaveAction();', 							'graphics/nu_option_save.png',		'Ctrl+Shft+S']);}
+				if(nuSERVERRESPONSE.buttons.Delete == '1'){list.push(['Delete',				'nuDeleteAction();', 						'graphics/nu_option_delete.png',	'Ctrl+Shft+Y']);}
+				if(nuSERVERRESPONSE.buttons.Clone == '1'){list.push(['Clone',				'nuCloneAction();', 						'graphics/nu_option_clone.png',		'Ctrl+Shft+C']);}
+				
+			}
+			
 		}
-		
-		list.push(['Refresh', 					'nuGetBreadcrumb()', 						'graphics/nu_option_refresh.png', 	'Ctrl+Shft+R']);
-		
+
 	}
 
 	if(list.length == 0){return;}
