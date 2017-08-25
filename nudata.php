@@ -268,7 +268,9 @@ function nuUpdateDatabase(){
 			
 		}
 	}
-	
+
+    nuChangeHashVariable('RECORD_ID', $nuMainID);
+
 	if($nuDelAll == 'Yes'){
 		$evalPHP 	= new nuEvalPHPClass($EFid . '_AD');
 	}else{
