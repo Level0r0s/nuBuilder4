@@ -132,7 +132,7 @@ function nuGetTitleHeight(){
 
 function nuResizeBody(f){
 
-	var d				= f.dimensions[8];
+//	var d				= f.dimensions[8];
 	var d				= f.dimensions;
 	var headers			= nuGetTitleHeight();
 	
@@ -176,8 +176,12 @@ function nuResizeBody(f){
 		css({'height'		:	(h) + 'px',
 			'width' 		:	(w - 3) + 'px'
 		});
-			
-		$('body').css('height', '100%');
+		
+		if(h < window.innerHeight){
+			$('body').css('height', '100%');
+		}else{
+			$('body').css('height', h);
+		}
 		
 	}
 	
