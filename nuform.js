@@ -183,6 +183,14 @@ function nuResizeBody(f){
 			$('body').css('height', h);
 		}
 		
+		if(w > window.innerWidth){
+			
+			$('#nuBreadcrumbHolder').css('width', w-3);
+			$('#nuTabHolder').css('width', w-3);
+			$('#nuActionHolder').css('width', w-3);
+			
+		}
+		
 	}
 	
 }
@@ -1568,7 +1576,7 @@ function nuEditTab(p, t, i){
 
 function nuOptions(p, f, t, access){
 
-	var R		= window.nuFORM.getProperty('record_id');
+	var R			= window.nuFORM.getProperty('record_id');
 	
 	if(R != '-2') {
 
@@ -1577,10 +1585,17 @@ function nuOptions(p, f, t, access){
 		
 		img.setAttribute('id', id);
 		
+		if(t == 'form' && nuFormType() == 'edit') {
+			$('#nuTabHolder').append(img);	
+		}
+		
+		if(t == 'subform') {
+			$('#' + p + 'nuTabHolder').append(img);
+		}
+
+		
 		if(t == 'browse') {
 			$('#' + p).append(img);	
-		} else {
-			$('#' + p + 'nuTabHolder').append(img);
 		}
 
 		$('#' + id)

@@ -224,6 +224,16 @@ window.nuHASH			= [];
 		
 	}
 	
+
+	function nuResize(){
+
+	   $('#nuActionHolder').css('width', window.innerWidth);
+	   $('#nuBreadcrumbHolder').css('width', window.innerWidth);
+	   $('#nuTabHolder').css('width', window.innerWidth);
+	   
+	}
+	
+	
 	</script>
 	<script id='nuheader'>
 $nuHeader
@@ -243,7 +253,7 @@ $nuHeader
 </head>
 
 
-<body id='nubody' onload="nuLoad()">
+<body id='nubody' onload="nuLoad()" onresize="nuResize()">
 
 </body>
 
