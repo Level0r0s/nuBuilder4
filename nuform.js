@@ -1634,6 +1634,7 @@ function nuOptions(p, f, t, access){
    
 }
 
+
 function nuGetOptionsList(f, t, p, a, type){
 
 	var u		= nuFORM.getProperty('user_id');
