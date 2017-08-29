@@ -1655,16 +1655,16 @@ function nuGetOptionsList(f, t, p, a, type){
 				
 			}
 			
-			list.push(['nuDebug Results', 		'nuPopup("nudebug", "")', 					'graphics/nu_option_debug.png',		'Ctrl+Shft+D']);
+			list.push(['nuDebug Results', 		'nuPopup("nudebug", "")', 					'graphics/nu_option_debug.png',			'Ctrl+Shft+D']);
 			
 		}else{
-			list.push(['Change Login', 				'nuPopup("nupassword", "' + u + '", "")', 	'graphics/nu_option_password.png', 	'Ctrl+Shft+L']);
+			list.push(['Change Login', 			'nuPopup("nupassword", "' + u + '", "")', 	'graphics/nu_option_password.png', 		'Ctrl+Shft+L']);
 		}
-		list.push(['Refresh', 					'nuGetBreadcrumb()', 						'graphics/nu_option_refresh.png', 	'Ctrl+Shft+R']);
-		list.push(['Search',					'nuSearchAction();', 							'graphics/nu_option_search.png',	'Ctrl+Shft+S']);
+		list.push(['Refresh', 					'nuGetBreadcrumb()', 						'graphics/nu_option_refresh.png', 		'Ctrl+Shft+R']);
+		list.push(['Search',					'nuSearchAction();', 						'graphics/nu_option_button.png',		'Ctrl+Shft+S']);
 
-		if(nuSERVERRESPONSE.buttons.Add == '1'){list.push(['Add',					'nuAddAction();', 							'graphics/nu_option_add.png',		'Ctrl+Shft+A']);}
-		if(nuSERVERRESPONSE.buttons.Print == '1'){list.push(['Print',					'nuPrintAction();',							'graphics/nu_option_print.png',		'Ctrl+Shft+P']);}
+		if(nuSERVERRESPONSE.buttons.Add == '1'){list.push(['Add',							'nuAddAction();', 						'graphics/nu_option_button.png',		'Ctrl+Shft+A']);}
+		if(nuSERVERRESPONSE.buttons.Print == '1'){list.push(['Print',						'nuPrintAction();',						'graphics/nu_option_button.png',		'Ctrl+Shft+P']);}
 			
 	}
 
@@ -1697,9 +1697,9 @@ function nuGetOptionsList(f, t, p, a, type){
 			
 			if(nuFORM.getCurrent().form_type != 'launch'){
 				
-				if(nuSERVERRESPONSE.buttons.Save == '1'){list.push(['Save',					'nuSaveAction();', 							'graphics/nu_option_save.png',		'Ctrl+Shft+S']);}
-				if(nuSERVERRESPONSE.buttons.Delete == '1'){list.push(['Delete',				'nuDeleteAction();', 						'graphics/nu_option_delete.png',	'Ctrl+Shft+Y']);}
-				if(nuSERVERRESPONSE.buttons.Clone == '1'){list.push(['Clone',				'nuCloneAction();', 						'graphics/nu_option_clone.png',		'Ctrl+Shft+C']);}
+				if(nuSERVERRESPONSE.buttons.Save == '1'){list.push(['Save',					'nuSaveAction();', 							'graphics/nu_option_button.png',		'Ctrl+Shft+S']);}
+				if(nuSERVERRESPONSE.buttons.Delete == '1'){list.push(['Delete',				'nuDeleteAction();', 						'graphics/nu_option_button.png',	'Ctrl+Shft+Y']);}
+				if(nuSERVERRESPONSE.buttons.Clone == '1'){list.push(['Clone',				'nuCloneAction();', 						'graphics/nu_option_button.png',		'Ctrl+Shft+C']);}
 				
 			}
 			
