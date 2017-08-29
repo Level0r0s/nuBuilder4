@@ -1670,8 +1670,6 @@ function nuGetOptionsList(f, t, p, a, type){
 	
 	if(nuFormType() == 'edit'){
 
-		list.push(['Searchable Columns', 	'nuGetSearchList()', 						'graphics/nu_option_search.png', 	'Ctrl+Shft+S']);
-
 		if(a == 1){
 			
 			if(nuSERVERRESPONSE.form_access == 0 || String(f).substr(0,2) != 'nu'){
