@@ -2,7 +2,7 @@
 function nuBindDragEvents(){
 		
     $(document).on('mousemove.nuformdrag', function(e) {
-		
+
         var draggable 		= 0;
 		
 		if(window.nuFORM.breadcrumbs.length != -1) {
@@ -47,8 +47,8 @@ function nuBindDragEvents(){
 		}
 
 		if(draggable) {
-				
-			if(e.target.id == '') {
+
+			if(e.target === document.body) {
 				
 				if(!e.ctrlKey) {
 					$('.nuDragSelected').removeClass('nuDragSelected');
