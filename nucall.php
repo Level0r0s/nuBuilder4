@@ -19,6 +19,11 @@ if(db_num_rows($getPHPIDQRY) != 1){
 }
 $getPHPIDOBJ = db_fetch_object($getPHPIDQRY);
 $PHPID = $getPHPIDOBJ->zzzzsys_php_id;
+if($PHPID == ''){
+    header("Content-Type: text/html");
+    header("HTTP/1.0 400 Bad Request");
+    die('Invalid procedure was found.');
+}
 
 require_once('nusession.php');
 if(!array_key_exists('TEMPORARY_SESSION', $_SESSION)){
