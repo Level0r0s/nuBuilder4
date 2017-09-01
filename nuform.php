@@ -22,6 +22,8 @@ function nuBeforeBrowse($f){
 
 function nuBeforeEdit($f, $r){
 
+	if($_POST['nuSTATE']['call_type'] == 'getform' and $r == ''){return;}
+	
 	$r						= nuFormProperties($f);
     $GLOBALS['EXTRAJS']		= $r->sfo_javascript;
 	$evalPHP 				= new nuEvalPHPClass($f . '_BE');
@@ -38,7 +40,7 @@ function nuFormCode($f){
 }
 
 function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
-$lab=[];
+
     $tabs 			= nuBuildTabList($F);
     $f				= nuGetEditForm($F, $R);
     $f->form_id		= $F;
@@ -90,7 +92,7 @@ $lab=[];
 				
 			}
 				
-			if($r->sob_all_type == 'textarea'){
+			if($r->sob_all_type == 'textarea' || $r->sob_all_type == 'run'){
 				$o->align 			= $r->sob_all_align;
 			}
 				
@@ -528,7 +530,7 @@ function nuSetFormValue($f, $v){
 function nuSelectOptions($sql) {
 
     $a 				= array();
- 
+	
     if (substr(strtoupper(trim($sql)), 0, 6) == 'SELECT') {                      //-- sql statement
 	
         $t			= nuRunQuery($sql);
@@ -558,6 +560,7 @@ function nuSelectOptions($sql) {
     }
 	
     return $a;
+	
 }
 
 function nuRemoveNonCharacters($s){
@@ -594,7 +597,7 @@ function nuGetSubformRecords($R, $A){
 
     if($A == 1){  //-- add blank record
     
-		$_POST['nuHash']['RECORD_ID']	= -1;
+		$_POST['nuHash']['RECORD_ID']			= -1;
         $o										= nuGetFormObject($R->sob_subform_zzzzsys_form_id, -1, count($a));
         $o->foreign_key							= $R->subform_fk;
         $o->foreign_key_name					= $R->sob_subform_foreign_key;
