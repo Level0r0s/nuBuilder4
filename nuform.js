@@ -306,9 +306,6 @@ function nuBuildEditObjects(f, p, o, prop){
 				l = l + nuWORD(f, i, l, p, prop);
 			}
 			
-			
-			//if(prop.objects[i].display == 0){$('#' + p + prop.objects[i].id).css('visibility', 'hidden');}
-			
 			l 	= l + 2;
 		
 		} else{
@@ -805,6 +802,7 @@ function nuWORD(w, i, l, p, prop){
 
 }
 
+
 function nuRUN(w, i, l, p, prop){
 
 	var id  = p + prop.objects[i].id;
@@ -813,8 +811,8 @@ function nuRUN(w, i, l, p, prop){
 	
 	if(prop.objects[i].parent_type == 'g'){
 		
-		prop.objects[i].left = l;
-		prop.objects[i].top = 3;
+		prop.objects[i].left 	= l;
+		prop.objects[i].top 	= 3;
 		
 	}
 	
@@ -845,7 +843,8 @@ function nuRUN(w, i, l, p, prop){
 					'left'     		: Number(O.left),
 					'width'    		: Number(O.width),
 					'height'   		: Number(O.height),
-					'position' 		: 'absolute'
+					'position' 		: 'absolute',
+					'text-align'	: prop.objects[i].align
 	});
 
 	if(O.run_method == 'b'){
@@ -956,35 +955,23 @@ function nuSELECT(w, i, l, p, prop){
 		eval('a = ' + s);
 	}
 	
-//	if(a.length == '0'){
-		
-//		$('#' + id).append('<option  value=""></option>');		//-- add a blank option at the top
-		
-//	}else{
-		
-		$('#' + id).append('<option  value=""></option>');
+	$('#' + id).append('<option  value=""></option>');
 
-        if(prop.objects[i].options != null){
+	if(prop.objects[i].options != null){
 
-    		for(var n = 0 ; n < prop.objects[i].options.length ; n++){
-    			
-    			var opt	= String(prop.objects[i].options[n][1]).replaceAll(' ' ,'&#160;')
+		for(var n = 0 ; n < prop.objects[i].options.length ; n++){
+			
+			var opt	= String(prop.objects[i].options[n][1]).replaceAll(' ' ,'&#160;')
 
-    			if(a.indexOf(prop.objects[i].options[n][0]) == -1){
-    				
-    				$('#' + id).append('<option  value="'+prop.objects[i].options[n][0]+'">' + opt + '</option>');
-    				
-    			}else{
-    				
-    				$('#' + id).append('<option selected="selected "value="'+prop.objects[i].options[n][0]+'">' + opt + '</option>');
-    				
-    			}
+			if(a.indexOf(prop.objects[i].options[n][0]) == -1){
+				$('#' + id).append('<option  value="'+prop.objects[i].options[n][0]+'">' + opt + '</option>');
+			}else{
+				$('#' + id).append('<option selected="selected "value="'+prop.objects[i].options[n][0]+'">' + opt + '</option>');
+			}
 
-    		}
+		}
 
-        }
-
-//	}
+	}
 	
 	nuAddJSObjectEvents(id, prop.objects[i].js);
 
@@ -1655,16 +1642,16 @@ function nuGetOptionsList(f, t, p, a, type){
 				
 			}
 			
-			list.push(['nuDebug Results', 		'nuPopup("nudebug", "")', 					'graphics/nu_option_debug.png',		'Ctrl+Shft+D']);
+			list.push(['nuDebug Results', 		'nuPopup("nudebug", "")', 					'graphics/nu_option_debug.png',			'Ctrl+Shft+D']);
 			
 		}else{
-			list.push(['Change Login', 				'nuPopup("nupassword", "' + u + '", "")', 	'graphics/nu_option_password.png', 	'Ctrl+Shft+L']);
+			list.push(['Change Login', 			'nuPopup("nupassword", "' + u + '", "")', 	'graphics/nu_option_password.png', 		'Ctrl+Shft+L']);
 		}
-		list.push(['Refresh', 					'nuGetBreadcrumb()', 						'graphics/nu_option_refresh.png', 	'Ctrl+Shft+R']);
-		list.push(['Search',					'nuSearchAction();', 							'graphics/nu_option_search.png',	'Ctrl+Shft+S']);
+		list.push(['Refresh', 					'nuGetBreadcrumb()', 						'graphics/nu_option_refresh.png', 		'Ctrl+Shft+R']);
+		list.push(['Search',					'nuSearchAction();', 						'graphics/nu_option_button.png',		'Ctrl+Shft+S']);
 
-		if(nuSERVERRESPONSE.buttons.Add == '1'){list.push(['Add',					'nuAddAction();', 							'graphics/nu_option_add.png',		'Ctrl+Shft+A']);}
-		if(nuSERVERRESPONSE.buttons.Print == '1'){list.push(['Print',					'nuPrintAction();',							'graphics/nu_option_print.png',		'Ctrl+Shft+P']);}
+		if(nuSERVERRESPONSE.buttons.Add == '1'){list.push(['Add',							'nuAddAction();', 						'graphics/nu_option_button.png',		'Ctrl+Shft+A']);}
+		if(nuSERVERRESPONSE.buttons.Print == '1'){list.push(['Print',						'nuPrintAction();',						'graphics/nu_option_button.png',		'Ctrl+Shft+P']);}
 			
 	}
 
@@ -1697,9 +1684,9 @@ function nuGetOptionsList(f, t, p, a, type){
 			
 			if(nuFORM.getCurrent().form_type != 'launch'){
 				
-				if(nuSERVERRESPONSE.buttons.Save == '1'){list.push(['Save',					'nuSaveAction();', 							'graphics/nu_option_save.png',		'Ctrl+Shft+S']);}
-				if(nuSERVERRESPONSE.buttons.Delete == '1'){list.push(['Delete',				'nuDeleteAction();', 						'graphics/nu_option_delete.png',	'Ctrl+Shft+Y']);}
-				if(nuSERVERRESPONSE.buttons.Clone == '1'){list.push(['Clone',				'nuCloneAction();', 						'graphics/nu_option_clone.png',		'Ctrl+Shft+C']);}
+				if(nuSERVERRESPONSE.buttons.Save == '1'){list.push(['Save',					'nuSaveAction();', 							'graphics/nu_option_button.png',		'Ctrl+Shft+S']);}
+				if(nuSERVERRESPONSE.buttons.Delete == '1'){list.push(['Delete',				'nuDeleteAction();', 						'graphics/nu_option_button.png',	'Ctrl+Shft+Y']);}
+				if(nuSERVERRESPONSE.buttons.Clone == '1'){list.push(['Clone',				'nuCloneAction();', 						'graphics/nu_option_button.png',		'Ctrl+Shft+C']);}
 				
 			}
 			
@@ -1899,7 +1886,7 @@ function nuBrowseTitle(b, i, l){
 	}
 		
 	var br	= '<br>';
-	var sp	= '<span style="font-size:16px" id="nusort_' + i + '" class="nuSort" onclick="nuSortBrowse(' + i + ')"> ' + b[i].title + ' </span>'
+	var sp	= '<span style="font-size:16px" id="nusort_' + i + '" class="nuSort" onclick="nuSortBrowse(' + i + ')"> ' + nuTranslate(b[i].title) + ' </span>'
 	
 	$('#nuRECORD').append(div);
 
