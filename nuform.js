@@ -846,6 +846,7 @@ function nuRUN(w, i, l, p, prop){
 					'position' 		: 'absolute',
 					'text-align'	: prop.objects[i].align
 	});
+	console.log(prop.objects[i].align);
 
 	if(O.run_method == 'b'){
 		
