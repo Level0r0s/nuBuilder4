@@ -22,10 +22,11 @@ function nuBeforeBrowse($f){
 
 function nuBeforeEdit($f, $r){
 
-	if($_POST['nuSTATE']['call_type'] == 'getform' and $r == ''){return;}
-	
 	$r						= nuFormProperties($f);
     $GLOBALS['EXTRAJS']		= $r->sfo_javascript;
+
+	if($_POST['nuSTATE']['call_type'] == 'getform' and $r == ''){return;}
+	
 	$evalPHP 				= new nuEvalPHPClass($f . '_BE');
 	
 }
