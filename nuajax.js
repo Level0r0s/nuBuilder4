@@ -239,6 +239,7 @@ function nuRunPHPHidden(i, h){
 		
 		if(nuDisplayError(fm)){return;};
 
+		window.nuSERVERRESPONSE_HIDDEN	= fm;
 		eval(fm.callback + ';');
 			
 	};
