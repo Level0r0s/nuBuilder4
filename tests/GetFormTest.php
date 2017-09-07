@@ -23,7 +23,7 @@ final class GetFormTest extends TestCase
             'base_uri' => 'http://localhost/nuBuilder4/',
             'cookies' => true,
         ]);
-        require dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR.'config.php';
+        require dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR.'nuconfig.php';
         $testLoginResponse = $client->post('nuapi.php', [
             'form_params' => [
                 'nuSTATE' => [
@@ -72,7 +72,7 @@ final class GetFormTest extends TestCase
             REPLACE INTO nubuilder4.zzzzsys_browse (zzzzsys_browse_id, sbr_zzzzsys_form_id, sbr_title, sbr_display, sbr_align, sbr_format, sbr_order, sbr_width) VALUES ('s14997519205099', 's14997519205096', 'Test', 'test', 'l', '', 10, 200)
         ");
 
-        require dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR.'config.php';
+        require dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR.'nuconfig.php';
         $testLoginResponse = $client->post('nuapi.php', [
             'form_params' => [
                 'nuSTATE' => [

@@ -4,6 +4,7 @@
 - Run:
 ```
 php composer.phar install
+vendor/bin/phinx init (on windows: vendor\bin\phinx init)
 ```
 
 # Tests

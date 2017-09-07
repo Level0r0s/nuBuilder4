@@ -18,7 +18,7 @@ class RunQuery
 
     public function __construct()
     {
-        require dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR.'config.php';
+        require dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR.'nuconfig.php';
         $this->nuDB = new PDO("mysql:host=$nuConfigDBHost;dbname=$nuConfigDBName;charset=utf8", $nuConfigDBUser, $nuConfigDBPassword, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
         $this->nuDB->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $this->nuDB->exec("SET CHARACTER SET utf8");
