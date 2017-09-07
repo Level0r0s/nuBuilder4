@@ -250,7 +250,7 @@ function nuRunPHPHidden(i, h){
 
 
 
-function nuButtonImage(i, c){
+function nuAttachImage(i, c){
 	
 	if(nuImages[c] !== undefined){
 		
