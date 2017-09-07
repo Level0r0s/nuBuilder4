@@ -239,6 +239,7 @@ function nuRunPHPHidden(i, h){
 		
 		if(nuDisplayError(fm)){return;};
 
+		window.nuSERVERRESPONSE_HIDDEN	= fm;
 		eval(fm.callback + ';');
 			
 	};
@@ -249,7 +250,7 @@ function nuRunPHPHidden(i, h){
 
 
 
-function nuButtonImage(i, c){
+function nuAttachImage(i, c){
 	
 	if(nuImages[c] !== undefined){
 		

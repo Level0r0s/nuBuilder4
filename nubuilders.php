@@ -219,6 +219,8 @@ function nuBuildFastForm($table, $form_type){
 			var m2	= '<p>(There is now a Form with a Code of <b>$form_code</b> in the list found in <b>Forms</b>)';
 
 			nuMessage([m1, m2]);
+			
+			$('#nunuRunPHPHiddenButton').remove();
 
 		";
 
@@ -261,11 +263,13 @@ function nuBuildFastForm($table, $form_type){
 		nuRunQuery($sql, $array);
 
 		$js	= "
-
+		
 			var m1	= '<h1>A $mess been created!</h1>';
 			var m2	= '<p>(There is now a Button called <b>$table</b> on the <b>Testing</b> tab of the Home Form)</p>';
 
 			nuMessage([m1, m2]);
+			
+			$('#nunuRunPHPHiddenButton').remove();
 
 		";
 

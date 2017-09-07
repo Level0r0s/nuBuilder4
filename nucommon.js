@@ -1013,3 +1013,22 @@ function nuRemoveHolders(h){
 	
 }
 
+
+function nuAttachFile(j, c){
+	$(j).css('background-image', c)
+}
+
+
+
+function nuButtonIcon(j){
+
+	$(j)
+	.css('text-align', 'left')
+	.css('padding', '0px 0px 0px 35px')
+	.css('background-size', '30px')
+	.css('background-repeat', 'no-repeat')
+	
+}
+
+
+
