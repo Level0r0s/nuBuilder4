@@ -69,8 +69,7 @@ try {
     ");
     $nuTempDB->exec("
         DELETE FROM zzzzsys_php 
-        WHERE sph_zzzzsys_form_id NOT LIKE 'nu%'
-        AND sph_zzzzsys_form_id NOT IN (SELECT zzzzsys_object_id FROM zzzzsys_object)
+        WHERE sph_zzzzsys_form_id NOT IN (SELECT zzzzsys_object_id FROM zzzzsys_object)
         AND zzzzsys_php_id NOT LIKE 'nu%'
     ");
     $nuTempDB->exec("
@@ -133,8 +132,7 @@ try {
     nuRunQuery("
         INSERT INTO $to_delete_tablename_prefix"."zzzzsys_php
         SELECT * FROM zzzzsys_php
-        WHERE NOT(sph_zzzzsys_form_id NOT LIKE 'nu%'
-        AND sph_zzzzsys_form_id NOT IN (SELECT zzzzsys_object_id FROM zzzzsys_object)
+        WHERE NOT(sph_zzzzsys_form_id NOT IN (SELECT zzzzsys_object_id FROM zzzzsys_object)
         AND zzzzsys_php_id NOT LIKE 'nu%')
     ");
     nuRunQuery("
