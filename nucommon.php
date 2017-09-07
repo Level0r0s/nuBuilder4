@@ -415,8 +415,6 @@ function nuRunPHPHidden($nuCode){
 
 function nuJavascriptCallback($js){
 	$_POST['nuCallback']	= $js;
-	
-nudebug($_POST['nuCallback'])	;
 }
 
 
