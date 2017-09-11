@@ -31,7 +31,7 @@ function nuLoad(){
         enableLiveAutocompletion: true
     });
 	
-	editor.on('change', function() { $('#copy_to_nubuilder').css('background-color', 'red');});
+	editor.on('change', function() {$('#copy_to_nubuilder').css('background-color', 'red');});
 	
 	window.startValue = opener.window.document.getElementById(window.o).value;
 	editor.setFontSize(14);
@@ -107,9 +107,7 @@ function nuWarning(){
 
 
 function nuUpdateDrag(t){
-
 	document.getElementById('nuDrag').value = document.getElementById('nuField')[t.value].innerHTML;
-
 }
 
 function nuChooseFields(){
@@ -123,9 +121,7 @@ function nuChooseFields(){
 }
 
 function nuChooseSnips(t){
-
 	document.getElementById('nuDrag').value = t.value;
-	
 }
 
 
@@ -140,8 +136,9 @@ window.onbeforeunload = nuWarning;
 	<input type='button' id='copy_to_nubuilder' class='nuActionButton' style='top:8px;left:8px;position:absolute' onclick='nuAceSave()'>
 	
 	<span id='nu_language' 	class="nuNotBreadcrumb" style='top:35px;left:10px;position:absolute;font-wieght:500'></span>
-	<div  id='nu_editor'	style='width:1000px;height:800px;top:55px;left:0px;text-align:left;position:absolute;border-top:#272822 10px solid;' onChange="console.log(8769678);" ></div>
-	<img  id="nulogo" 		style="position:absolute;top:5px;right:20px" width="90px" src="graphics/logo.png" >
+	<div  id='nu_editor_pad' style='width:1000px;height:10px;top:50px;left:0px;text-align:left;position:absolute;background-color:#272822;' ></div>
+	<div  id='nu_editor'	style='width:1000px;height:800px;top:60px;left:0px;text-align:left;position:absolute;' ></div>
+	<img  id="nulogo" 		style="position:absolute;top:5px;right:20px" width="90px" src="graphics/logo.png">
 	
 </body>
 </html> 
