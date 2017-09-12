@@ -560,7 +560,7 @@ class nuSelectObject{
 
 			if(D == 0){
 				
-				if(T == 1 && cl){WHERE.push('(' + F + C + ')');}
+				if(T == 1 && cl){WHERE.push('(' + F + ' ' + C + ')');}
 				if(T == 4 && cl){HAVING.push('(' + F + C + ')');}
 				if(T == 2 && gr){GROUPBY.push(F + ' ' + S);}
 				if(T == 3 && gr){ORDERBY.push(F + ' ' + S);}
