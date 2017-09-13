@@ -11,7 +11,7 @@
     $nuWelcomeBodyInnerHTML			= " 
 	
 									<div id='login' class='nuLogin' style='width:330;position:absolute;top:50px;height:300px;left:50px;border-style:solid;border-width:1px;border-color: rgba(0, 0, 0, 0.08);'>
-										<div id='nulogo' style='background-size:100% 100%;background-image:url(\"graphics/logo.png\");position:absolute;width:200px;height:180px;top:10px;left:65px;'></div>
+										<div id='nulogo' style='background-size:100% 100%;background-image:url(\"graphics/logo.png\");position:absolute;width:200px;height:120px;top:10px;left:65px;'></div>
 										<br>
 											<div style='position:absolute;top:170px;left:20px;text-align:right;width:70px;display:inline-block;'>Username</div>
 											<input id='nuusername' style='position:absolute;top:170px;left:100px;'/>
