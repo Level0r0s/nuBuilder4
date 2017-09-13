@@ -435,10 +435,10 @@ function nuGetLookupValues($R, $O){
 			$R->sob_lookup_code,
 			$R->sob_lookup_description
 			$S->from
-		WHERe 
+		WHERE 
 			`$r->sfo_primary_key` = '$O->value'
     ";
-	
+nudebug($s)	;
 	$s			= nuReplaceHashVariables($s);
     $t 			= nuRunQuery($s);
     $l 			= db_fetch_row($t);
