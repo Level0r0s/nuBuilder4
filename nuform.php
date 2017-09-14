@@ -1291,7 +1291,33 @@ function nuAddJavascript($js){
 	$GLOBALS['EXTRAJS'] = $GLOBALS['EXTRAJS'] . "\n\n" . $js;
 }
 
+function nuPreloadImages($a){
+	
+	$a	= ['DB','SET','F','TR','U','KEY','UH','FF','P','FMT','R','BUT','RR','FILE','RP','FR','OB','SQL'];
+	$js = '';
 
+	
+	for($i = 0 ; $i < count($a) ; $i++){
+		
+		$s  = "
+				SELECT * 
+				FROM zzzzsys_file 
+				WHERE sfi_code = ?
+				
+			";
+
+		$t  = nuRunQuery($s, [$a[$i]]);
+		$r	= db_fetch_object($t);
+		$js = $js . "\nnuImages['$r->sfi_code'] = '" . addslashes($r->sfi_json) . "';";
+
+		nuAddJavascript($js);
+
+	}
+
+
+	
+	
+}
 
 
 ?>
