@@ -438,7 +438,7 @@ function nuGetLookupValues($R, $O){
 		WHERE 
 			`$r->sfo_primary_key` = '$O->value'
     ";
-nudebug($s)	;
+
 	$s			= nuReplaceHashVariables($s);
     $t 			= nuRunQuery($s);
     $l 			= db_fetch_row($t);

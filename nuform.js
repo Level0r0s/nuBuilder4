@@ -2729,6 +2729,7 @@ function nuAddJavascript(o){
 	
 	var s				= document.createElement('script');
 	s.innerHTML 		= "\n\n" + o.javascript + "\n\n";
+	console.log(o.javascript);
 	
 	$('body').append(s);
 	
