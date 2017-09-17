@@ -509,31 +509,31 @@ function nuCreateDragOptionsBox(form){
                     '<tbody>'+
                         '<tr>'+
                             '<td><button id="move_up_btn" class="nuDragOptionsButton nuButton" onclick="nuMoveUpOrder();">Move Up Order</button></td>'+
-                            '<td><button class="nuDragOptionsButton nuButton" onclick="nuAlignTop();">Align To Top</button></td>'+
+                            '<td><button id="move_top_btn" class="nuDragOptionsButton nuButton" onclick="nuAlignTop();">Top</button></td>'+
                         '</tr>'+
                         '<tr>'+
                             '<td><button id="move_down_btn" class="nuDragOptionsButton nuButton" onclick="nuMoveDownOrder();">Move Down Order</button></td>'+
-                            '<td><button class="nuDragOptionsButton nuButton" onclick="nuAlignBottom();">Align To Bottom</button></td>'+
+                            '<td><button id="move_bottom_btn" class="nuDragOptionsButton nuButton" onclick="nuAlignBottom();">Bottom</button></td>'+
                         '</tr>'+
                         '<tr>'+
-                            '<td><button class="nuDragOptionsButton nuButton" onclick="nuSpaceVertically();">Space Vertically</button></td>'+
-                            '<td><button class="nuDragOptionsButton nuButton" onclick="nuAlignLeft();">Align To Left</button></td>'+
+                            '<td><button id="move_ver_btn" class="nuDragOptionsButton nuButton" onclick="nuSpaceVertically();">Space Vertically</button></td>'+
+                            '<td><button id="move_left_btn" class="nuDragOptionsButton nuButton" onclick="nuAlignLeft();">Left</button></td>'+
                         '</tr>'+
                         '<tr>'+
-                            '<td><button class="nuDragOptionsButton nuButton" onclick="nuSpaceHorizontally();">Space Horizontally</button></td>'+
-                            '<td><button class="nuDragOptionsButton nuButton" onclick="nuAlignRight();">Align To Right</button></td>'+
+                            '<td><button  id="move_hor_btn" class="nuDragOptionsButton nuButton" onclick="nuSpaceHorizontally();">Space Horizontally</button></td>'+
+                            '<td><button  id="move_right_btn" class="nuDragOptionsButton nuButton" onclick="nuAlignRight();">Right</button></td>'+
                         '</tr>'+
                         '<tr>'+
-                            '<td><button class="nuDragOptionsButton nuButton" onclick="nuResizeToLowest();">Resize To Shortest</button></td>'+
-                            '<td><button class="nuDragOptionsButton nuButton" onclick="nuResizeToThinnest();">Resize To Thinnest</button></td>'+
+                            '<td><button  id="move_short_btn" class="nuDragOptionsButton nuButton" onclick="nuResizeToLowest();">Shortest</button></td>'+
+                            '<td><button  id="move_thin_btn" class="nuDragOptionsButton nuButton" onclick="nuResizeToThinnest();">Thinnest</button></td>'+
                         '</tr>'+
                         '<tr>'+
-                            '<td><button class="nuDragOptionsButton nuButton" onclick="nuResizeToHighest();">Resize To Tallest</button></td>'+
-                            '<td><button class="nuDragOptionsButton nuButton" onclick="nuResizeToWidest();">Resize To Widest</button></td>'+
+                            '<td><button  id="move_tall_btn" class="nuDragOptionsButton nuButton" onclick="nuResizeToHighest();">Tallest</button></td>'+
+                            '<td><button  id="move_wide_btn" class="nuDragOptionsButton nuButton" onclick="nuResizeToWidest();">Widest</button></td>'+
                         '</tr>'+
 						'<tr>'+
                             '<td><select id="nuDragOptionsTabsDropdown" class="nuDragOptionsButton" style="border: none"></select></td>'+
-                            '<td><button class="nuDragOptionsButton nuButton nuSaveButtonEdited" style="font-weight: bold;" onclick="nuMoveNuDrag();">Move to Tab</button></td>'+
+                            '<td><button  id="move_tab_btn" class="nuDragOptionsButton nuButton nuSaveButtonEdited" style="font-weight: bold;" onclick="nuMoveNuDrag();">Move to Tab</button></td>'+
                         '</tr>'+
 						'<tr>'+
                             '<td>&nbsp;</td>'+
@@ -541,7 +541,7 @@ function nuCreateDragOptionsBox(form){
                         '</tr>'+
                         '<tr>'+
                             '<td></td>'+
-                            '<td><button class="nuDragOptionsButton nuButton nuSaveButtonEdited" style="font-weight: bold;" onclick="nuSaveNuDrag();">Save</button></td>'+
+                            '<td><button id="save_btn" class="nuDragOptionsButton nuButton nuSaveButtonEdited" style="font-weight: bold;" onclick="nuSaveNuDrag();">Save</button></td>'+
                         '</tr>'+
                     '</tbody>'+
                 '</table>'+

@@ -846,7 +846,6 @@ function nuRUN(w, i, l, p, prop){
 					'position' 		: 'absolute',
 					'text-align'	: prop.objects[i].align
 	});
-	console.log(prop.objects[i].align);
 
 	if(O.run_method == 'b'){
 		
@@ -2729,7 +2728,6 @@ function nuAddJavascript(o){
 	
 	var s				= document.createElement('script');
 	s.innerHTML 		= "\n\n" + o.javascript + "\n\n";
-	console.log(o.javascript);
 	
 	$('body').append(s);
 	
