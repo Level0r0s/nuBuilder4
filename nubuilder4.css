@@ -822,14 +822,14 @@ input[type=range]::-webkit-slider-runnable-track {
 
 .nuDragOptionsFields {
     display: block;
-    width: 308px;
+    width: 285px;
     height: 200px;
 }
 
 .nuDragOptionsButton {
     display: block;
     height: 25px;
-    width: 100%;
+    width: 140px;
 }
 
 .nuDragOptionsButtonDisabled {

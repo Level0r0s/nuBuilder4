@@ -1031,4 +1031,23 @@ function nuButtonIcon(j){
 }
 
 
+function testButtons(){
+
+	parent.nuAttachImage('#move_up_btn','UP');
+	parent.nuAttachImage('#move_down_btn','DOWN');
+	parent.nuAttachImage('#move_ver_btn','VER');
+	parent.nuAttachImage('#move_hor_btn','HOR');
+	parent.nuAttachImage('#move_short_btn','SHORT');
+	parent.nuAttachImage('#move_tall_btn','TALL');
+	parent.nuAttachImage('#move_top_btn','TOP');
+	parent.nuAttachImage('#move_bottom_btn','BOTTOM');
+	parent.nuAttachImage('#move_left_btn','LEFT');
+	parent.nuAttachImage('#move_right_btn','RIGHT');
+	parent.nuAttachImage('#move_thin_btn','THIN');
+	parent.nuAttachImage('#move_wide_btn','WIDE');
+
+}
+
+
+
 

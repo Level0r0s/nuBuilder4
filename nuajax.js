@@ -280,7 +280,7 @@ function nuAttachImage(i, c){
 		if(nuDisplayError(data)){return;};
 
 		if(data.JSONfile !== null){
-console.log(i, Date.now());			
+			
 			nuImages[c] 	= data.JSONfile;
 			var p			= JSON.parse(window.nuImages[c]);
 			var b			= atob(p.file);
@@ -293,7 +293,6 @@ console.log(i, Date.now());
 			.css('text-align', 'left')
 		
 		}
-console.log(i, Date.now());			
 		
 	};
 	

@@ -495,6 +495,7 @@ function nuFindFieldInState(tabNo, fieldID){
 function nuCreateDragOptionsBox(form){
 	
     var dragOptionsBoxWidth 		= 341;
+    //var dragOptionsBoxWidth 		= 300;
     var dragOptionsBoxMinHeight 	= 535;
 	
     $('#nuDragDialog',window.parent.document.body).css('width',$('#nuDragDialog',window.parent.document.body).width()+dragOptionsBoxWidth);
@@ -508,19 +509,19 @@ function nuCreateDragOptionsBox(form){
                 '<table>'+
                     '<tbody>'+
                         '<tr>'+
-                            '<td><button id="move_up_btn" class="nuDragOptionsButton nuButton" onclick="nuMoveUpOrder();">Move Up Order</button></td>'+
+                            '<td><button id="move_up_btn" class="nuDragOptionsButton nuButton" onclick="nuMoveUpOrder();">Up</button></td>'+
                             '<td><button id="move_top_btn" class="nuDragOptionsButton nuButton" onclick="nuAlignTop();">Top</button></td>'+
                         '</tr>'+
                         '<tr>'+
-                            '<td><button id="move_down_btn" class="nuDragOptionsButton nuButton" onclick="nuMoveDownOrder();">Move Down Order</button></td>'+
+                            '<td><button id="move_down_btn" class="nuDragOptionsButton nuButton" onclick="nuMoveDownOrder();">Down</button></td>'+
                             '<td><button id="move_bottom_btn" class="nuDragOptionsButton nuButton" onclick="nuAlignBottom();">Bottom</button></td>'+
                         '</tr>'+
                         '<tr>'+
-                            '<td><button id="move_ver_btn" class="nuDragOptionsButton nuButton" onclick="nuSpaceVertically();">Space Vertically</button></td>'+
+                            '<td><button id="move_ver_btn" class="nuDragOptionsButton nuButton" onclick="nuSpaceVertically();">Vertical</button></td>'+
                             '<td><button id="move_left_btn" class="nuDragOptionsButton nuButton" onclick="nuAlignLeft();">Left</button></td>'+
                         '</tr>'+
                         '<tr>'+
-                            '<td><button  id="move_hor_btn" class="nuDragOptionsButton nuButton" onclick="nuSpaceHorizontally();">Space Horizontally</button></td>'+
+                            '<td><button  id="move_hor_btn" class="nuDragOptionsButton nuButton" onclick="nuSpaceHorizontally();">Horizontal</button></td>'+
                             '<td><button  id="move_right_btn" class="nuDragOptionsButton nuButton" onclick="nuAlignRight();">Right</button></td>'+
                         '</tr>'+
                         '<tr>'+
