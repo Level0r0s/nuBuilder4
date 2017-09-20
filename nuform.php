@@ -1293,7 +1293,6 @@ function nuAddJavascript($js){
 
 function nuPreloadImages($a){
 	
-	$a	= ['DB','SET','F','TR','U','KEY','UH','FF','P','FMT','R','BUT','RR','FILE','RP','FR','OB','SQL'];
 	$js = '';
 
 	

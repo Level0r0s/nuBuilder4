@@ -293,7 +293,7 @@ function nuAttachImage(i, c){
 			.css('text-align', 'left')
 		
 		}
-		
+console.log(c);		
 	};
 	
 	nuAjax(last,successCallback);
