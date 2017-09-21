@@ -1015,7 +1015,22 @@ function nuRemoveHolders(h){
 
 
 function nuAttachFile(j, c){
-	$(j).css('background-image', c)
+	
+	if(nuImages[c] !== undefined){
+		
+		var p				= JSON.parse(nuImages[c]);
+		var b				= atob(p.file);
+		
+		$(j)
+		.css('background-image', 'url("' + b + '")')
+		.css('background-repeat', 'no-repeat')
+		.css('padding', '0px 0px 0px 0px')
+		.css('text-align', 'left')
+
+		return;
+		
+	}
+	
 }
 
 

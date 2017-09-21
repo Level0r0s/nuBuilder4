@@ -77,7 +77,7 @@ function nuDebug($a){
 	$m					= date("Y-m-d H:i:s") . ' - ' . $f . " line $l\n\n<br>\n";
 	
 	if($_POST['nuCode'] != ''){
-		$m				= date("Y-m-d H:i:s") . ' - ' . $_POST['nuCode'] . " line $l\n\n<br>\n" ;
+		$m				= date("Y-m-d H:i:s") . ' - ' . $_POST['nuDebugTitle'] . " line $l\n\n<br>\n" ;
 	}
 	
 

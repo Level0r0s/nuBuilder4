@@ -2,6 +2,92 @@
 
     require_once 'nucommon.php';
 
+	
+	function nuEval($phpid){
+
+		$s			= "SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = ? ";
+		$t			= nuRunQuery($s, [$i]);
+		$r			= db_fetch_object($t);
+
+		if(trim($r->sph_php) == ''){return;}
+		
+		$code		= $r->sph_code;
+		$php		= $r->sph_php;
+	
+		try{
+			eval($php); 
+		}catch(Throwable $e){
+			nuExceptionHandler($e, $code);   
+		}catch(Exception $e){
+			nuExceptionHandler($e, $code);
+		}
+
+		$_POST['nuDebugTitle']	=  '';
+		
+	}
+	
+	function nuExceptionHandler($e, $phpCode){
+		
+		nuDisplayError("<b>Error Running Procedure !</b> ($phpCode)<br>", "nuErrorPHP");
+		nuDisplayError($e->getFile(), 'eval');
+		nuDisplayError('<i>' . $e->getMessage() . '</i>', 'eval');
+		nuDisplayError('<br><b><i>Traced from...</i></b><br>', 'nuErrorPHP');
+		
+		$a		= $e->getTrace();
+		$t		= array_reverse($a);
+
+		for($i = 0 ; $i < count($t) ; $i++){
+			
+			$m	= '(line:<i>' . $t[$i]['line'] . '</i>) ' . $t[$i]['file'] . ' <b> - ' . $t[$i]['function'] . '<b>';
+			
+			nuDisplayError($m . '<br>', 'eval');
+			
+		}
+		
+	}
+	
+	
+	
+	
+	function nuDebugTitle($phpid, $code){
+		
+		$i			= explode('_', $phpid);
+		
+		if(count($i) == 1){
+			
+			$_POST['nuDebugTitle']	= "Procedure ($code)";
+			
+			return;
+			
+		}
+		
+		if($i[1] == 'AB'){
+				
+			$s		= '	SELECT * 
+						FROM zzzzsys_object 
+						JOIN zzzzsys_form ON zzzzsys_form_id = sob_all_zzzzsys_form_id
+						WHERE zzzzsys_object_id = ?	';
+			$t		= nuRunQuery($s, [$i[0]]);
+			$O		= db_fetch_object($t);
+			
+			$_POST['nuDebugTitle']	= "Before Browse for `$O->sob_all_id` ($O->sfo_code)";
+			
+			return ;
+			
+		}
+		
+		$e['BB']				=  'Before Browse';
+		$e['BE']			    =  'Before Edit';
+		$e['BS']			    =  'Before Save';
+		$e['AS']			    =  'After Save';
+		$e['BD']			    =  'Before Delete';
+		$e['AD']			    =  'After Delete';
+
+		$_POST['nuDebugTitle']	=  $e[$i[1]] . " for ($code)";
+		
+	}
+
+
 	class nuEvalPHPClass {
 			
 		function __construct($parentID) {
@@ -105,7 +191,7 @@
 				
 				eval($phpToEval); 
 				
-				$_POST['nuCode']	= '';
+				$_POST['nuDebugTitle']	= '';
 				
 			}catch(Throwable $e){
 				$this->exceptionHandler($e, $phpCode, $phpToEval);   
@@ -119,7 +205,7 @@
 		
 		function exceptionHandler($e, $phpCode, $phpToEval){
 			
-			$_POST['nuCode']	= '';
+			$_POST['nuDebugTitle']	= '';
 			nuDisplayError("<b>Error Running Procedure !</b> ($phpCode)<br>", "nuErrorPHP");
 			nuDisplayError($e->getFile(), 'eval');
 			nuDisplayError('<i>' . $e->getMessage() . '</i>', 'eval');
