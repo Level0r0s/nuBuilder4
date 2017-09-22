@@ -71,13 +71,16 @@ function nuDebugResult($t){
 
 function nuDebug($a){
 	
+	$date				= date("Y-m-d H:i:s");
 	$b					= debug_backtrace();
 	$f					= $b[0]['file'];
 	$l					= $b[0]['line'];
-	$m					= date("Y-m-d H:i:s") . ' - ' . $f . " line $l\n\n<br>\n";
+	$m					= "$date  -  $f line $l\n\n<br>\n";
+	$nuSystemEval		= $_POST['nuSystemEval'];
+	$nuCustomEval		= $_POST['nuCustomEval'];
 	
 	if($_POST['nuCode'] != ''){
-		$m				= date("Y-m-d H:i:s") . ' - ' . $_POST['nuDebugTitle'] . " line $l\n\n<br>\n" ;
+		$m				= "$date - $nuSystemEval $nuCustomEval line $l\n\n<br>\n" ;
 	}
 	
 
@@ -1124,6 +1127,19 @@ function nuFontList(){
 	
 }
 
+function nuEventName($e){
+
+	$event['BB']	    =  'Before Browse';
+	$event['AB']	    =  'After Browse';
+	$event['BE']    	=  'Before Edit';
+	$event['BS']    	=  'Before Save';
+	$event['AS']    	=  'After Save';
+	$event['BD']    	=  'Before Delete';
+	$event['AD']    	=  'After Delete';
+	
+	return $event[$e];
+	
+}
 
 
 ?>

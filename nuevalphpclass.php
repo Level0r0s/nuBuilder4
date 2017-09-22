@@ -3,17 +3,28 @@
     require_once 'nucommon.php';
 
 	
-	function nuEval($phpid){
+	function nuEval($phpid, $event = ''){
 
-		$s			= "SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = ? ";
+		if($event == ''){
+			$s		= "SELECT * FROM zzzzsys_php WHERE sph_code = ? ";
+		}else{
+			$s		= "SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = ? ";
+		}
+		
 		$t			= nuRunQuery($s, [$i]);
 		$r			= db_fetch_object($t);
 
 		if(trim($r->sph_php) == ''){return;}
 		
 		$code		= $r->sph_code;
-		$php		= $r->sph_php;
+		$php		= nuReplaceHashVariables($r->sph_php);
 	
+		if($event == ''){
+			$_POST['nuCustomEval']	=  "$code run inside : ";
+		}else{
+			$_POST['nuSystemEval']	=  nuEvalMessage($phpid, $code);
+		}
+		
 		try{
 			eval($php); 
 		}catch(Throwable $e){
@@ -21,14 +32,19 @@
 		}catch(Exception $e){
 			nuExceptionHandler($e, $code);
 		}
-
-		$_POST['nuDebugTitle']	=  '';
+	
+		if($event == ''){
+			$_POST['nuCustomEval']	=  '';
+		}else{
+			$_POST['nuSystemEval']	=  '';
+		}
 		
 	}
 	
-	function nuExceptionHandler($e, $phpCode){
+	
+	function nuExceptionHandler($e, $code){
 		
-		nuDisplayError("<b>Error Running Procedure !</b> ($phpCode)<br>", "nuErrorPHP");
+		nuDisplayError("<b>Error Running Procedure !</b> ($code)<br>", "nuErrorPHP");
 		nuDisplayError($e->getFile(), 'eval');
 		nuDisplayError('<i>' . $e->getMessage() . '</i>', 'eval');
 		nuDisplayError('<br><b><i>Traced from...</i></b><br>', 'nuErrorPHP');
@@ -49,41 +65,26 @@
 	
 	
 	
-	function nuDebugTitle($phpid, $code){
+	function nuEvalMessage($phpid, $code){
 		
 		$i			= explode('_', $phpid);
 		
 		if(count($i) == 1){
-			
-			$_POST['nuDebugTitle']	= "Procedure ($code)";
-			
-			return;
-			
+			return "Procedure ($code)";
 		}
 		
-		if($i[1] == 'AB'){
-				
-			$s		= '	SELECT * 
-						FROM zzzzsys_object 
-						JOIN zzzzsys_form ON zzzzsys_form_id = sob_all_zzzzsys_form_id
-						WHERE zzzzsys_object_id = ?	';
-			$t		= nuRunQuery($s, [$i[0]]);
-			$O		= db_fetch_object($t);
+		if($i[1] != 'AB'){
 			
-			$_POST['nuDebugTitle']	= "Before Browse for `$O->sob_all_id` ($O->sfo_code)";
-			
-			return ;
+			$event	= nuEventName($i[1]);
+			return "$event for ($code)";
 			
 		}
+			
+		$s			= "SELECT * FROM zzzzsys_object JOIN zzzzsys_form ON zzzzsys_form_id = sob_all_zzzzsys_form_id	WHERE zzzzsys_object_id = ?	";
+		$t			= nuRunQuery($s, [$i[0]]);
+		$O			= db_fetch_object($t);
 		
-		$e['BB']				=  'Before Browse';
-		$e['BE']			    =  'Before Edit';
-		$e['BS']			    =  'Before Save';
-		$e['AS']			    =  'After Save';
-		$e['BD']			    =  'Before Delete';
-		$e['AD']			    =  'After Delete';
-
-		$_POST['nuDebugTitle']	=  $e[$i[1]] . " for ($code)";
+		return "Before Browse for `$O->sob_all_id` ($O->sfo_code)";
 		
 	}
 
@@ -191,7 +192,7 @@
 				
 				eval($phpToEval); 
 				
-				$_POST['nuDebugTitle']	= '';
+				$_POST['nuEval']	= '';
 				
 			}catch(Throwable $e){
 				$this->exceptionHandler($e, $phpCode, $phpToEval);   
@@ -205,7 +206,7 @@
 		
 		function exceptionHandler($e, $phpCode, $phpToEval){
 			
-			$_POST['nuDebugTitle']	= '';
+			$_POST['nuEval']	= '';
 			nuDisplayError("<b>Error Running Procedure !</b> ($phpCode)<br>", "nuErrorPHP");
 			nuDisplayError($e->getFile(), 'eval');
 			nuDisplayError('<i>' . $e->getMessage() . '</i>', 'eval');

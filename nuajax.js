@@ -252,9 +252,9 @@ function nuRunPHPHidden(i, h){
 
 function nuAttachImage(i, c){
 	
-	if(nuImages[c] !== undefined){
+	if(parent.nuImages[c] !== undefined){
 		
-		var p				= JSON.parse(nuImages[c]);
+		var p				= JSON.parse(parent.nuImages[c]);
 		var b				= atob(p.file);
 		
 		$(i)
@@ -281,8 +281,8 @@ function nuAttachImage(i, c){
 
 		if(data.JSONfile !== null){
 			
-			nuImages[c] 	= data.JSONfile;
-			var p			= JSON.parse(window.nuImages[c]);
+			parent.nuImages[c] 	= data.JSONfile;
+			var p			= JSON.parse(parent.nuImages[c]);
 			var b			= atob(p.file);
 			
 			$(i)
