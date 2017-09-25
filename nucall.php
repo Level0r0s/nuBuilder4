@@ -51,6 +51,13 @@ if(!array_key_exists('TEMPORARY_SESSION', $_SESSION)){
     }
 }
 
-require_once('nuevalphpclass.php');
+//require_once('nuevalphpclass.php');
 
-$procedure = new nuEvalPHPClass($PHPID);
+//$procedure = new nuEvalPHPClass($PHPID);
+
+require_once('nucommon.php');
+nuEval($PHPID);
+
+
+
+

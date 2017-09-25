@@ -252,16 +252,18 @@ function nuRunPHPHidden(i, h){
 
 function nuAttachImage(i, c){
 	
-	if(parent.nuImages[c] !== undefined){
+	var PARENT				= parent.parent.parent.parent.parent.parent.parent.parent.parent;
+	
+	if(PARENT.nuImages[c] !== undefined){
 		
-		var p				= JSON.parse(parent.nuImages[c]);
+		var p				= JSON.parse(PARENT.nuImages[c]);
 		var b				= atob(p.file);
 		
 		$(i)
 		.css('background-image', 'url("' + b + '")')
 		.css('background-repeat', 'no-repeat')
 		.css('background-size', '30px')
-		.css('padding', '0px 0px 0px 30px')
+		.css('padding', '0px 0px 0px 33px')
 		.css('text-align', 'left')
 
 		return;
@@ -281,8 +283,8 @@ function nuAttachImage(i, c){
 
 		if(data.JSONfile !== null){
 			
-			parent.nuImages[c] 	= data.JSONfile;
-			var p			= JSON.parse(parent.nuImages[c]);
+			PARENT.nuImages[c] 	= data.JSONfile;
+			var p			= JSON.parse(PARENT.nuImages[c]);
 			var b			= atob(p.file);
 			
 			$(i)

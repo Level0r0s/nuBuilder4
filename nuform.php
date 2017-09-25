@@ -15,7 +15,8 @@ function nuBeforeBrowse($f){
 	
 	$_POST['nuMessages']	= [];
 	$r						= nuFormProperties($f);
-	$evalPHP 				= new nuEvalPHPClass($f . '_BB');
+//	$evalPHP 				= new nuEvalPHPClass($f . '_BB');
+	nuEval($f . '_BB');
 	
 }
 
@@ -27,7 +28,8 @@ function nuBeforeEdit($f, $r){
 
 	if($_POST['nuSTATE']['call_type'] == 'getform' and $r == ''){return;}
 	
-	$evalPHP 				= new nuEvalPHPClass($f . '_BE');
+//	$evalPHP 				= new nuEvalPHPClass($f . '_BE');
+	nuEval($f . '_BE');
     $GLOBALS['EXTRAJS']		.= $r->sfo_javascript;
 	
 }
@@ -381,7 +383,8 @@ function nuGetOtherLookupValues($o){
 	$_POST['lookup_row']	= db_fetch_object($t);
 	$_POST['lookup_values']	= array();
 
-	$evalPHP 				= new nuEvalPHPClass($p . '_AB');
+//	$evalPHP 				= new nuEvalPHPClass($p . '_AB');
+	nuEvalPHPClass($p . '_AB');
 	
 	return $_POST['lookup_values'];
 	
@@ -1307,7 +1310,8 @@ function nuPreloadImages($a){
 
 		$t  = nuRunQuery($s, [$a[$i]]);
 		$r	= db_fetch_object($t);
-		$js = $js . "\nnuImages['$r->sfi_code'] = '" . addslashes($r->sfi_json) . "';";
+		$tr	= trim($r->sfi_code);
+		$js = $js . "\nnuImages['$tr'] = '" . addslashes($r->sfi_json) . "';";
 
 		nuAddJavascript($js);
 

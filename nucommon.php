@@ -5,7 +5,7 @@ error_reporting( error_reporting() & ~E_NOTICE );
 require_once('nuconfig.php'); 
 require_once('nubuilders.php'); 
 //require_once('nuexception.php'); 
-require_once('nuevalphpclass.php'); 
+//require_once('nuevalphpclass.php'); 
 require_once dirname(__FILE__) . '/nusqlclass.php';
 require_once dirname(__FILE__) . '/nusearchclass.php';
 require_once('nudatabase.php');
@@ -78,26 +78,21 @@ function nuDebug($a){
 	$m					= "$date  -  $f line $l\n\n<br>\n";
 	$nuSystemEval		= $_POST['nuSystemEval'];
 	$nuCustomEval		= $_POST['nuCustomEval'];
-	
-	if($_POST['nuCode'] != ''){
-		$m				= "$date - $nuSystemEval $nuCustomEval line $l\n\n<br>\n" ;
-	}
-	
-
+	$m					= "$date - $nuCustomEval $nuSystemEval line $l\n\n<br>\n" ;
 
 	for($i = 0 ; $i < count(func_get_args()) ; $i++){
 
-		$p			= func_get_arg($i);
+		$p				= func_get_arg($i);
 
-		$m		.= "\n[$i] : ";
+		$m				.= "\n[$i] : ";
 
 		if(gettype($p) == 'object' or gettype($p) == 'array'){
-			$m	.= print_r($p,1);
+			$m			.= print_r($p,1);
 		}else{
-			$m	.= $p;
+			$m			.= $p;
 		}
 
-		$m	.= "\n";
+		$m				.= "\n";
 
 	}
 	
@@ -407,7 +402,8 @@ function nuRunPHPHidden($nuCode){
 	$t						= nuRunQuery($s, [$nuCode]);
 	$r						= db_fetch_object($t);
 	
-	$evalPHP				= new nuEvalPHPClass($r->zzzzsys_php_id);
+//	$evalPHP				= new nuEvalPHPClass($r->zzzzsys_php_id);
+	nuEval($r->zzzzsys_php_id);
 
 	$f						= new stdClass;
 	$f->id					= 1;
@@ -988,7 +984,8 @@ function nuBuildTempTable($name_id, $tt, $rd = 0){
 	$id				= substr(strstr($name_id, ':'),1);
 	
 	if($x[0] == 'PROCEDURE'){
-		$e			= new nuEvalPHPClass($id);
+//		$e			= new nuEvalPHPClass($id);
+		nuEval($id);
 	}
 
 	if($x[0] == 'TABLE'){
@@ -1140,6 +1137,99 @@ function nuEventName($e){
 	return $event[$e];
 	
 }
+
+
+	
+	function nuEval($phpid){
+
+		$s						= "SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = ? ";
+		$t						= nuRunQuery($s, [$phpid]);
+		$r						= db_fetch_object($t);
+		
+		if(trim($r->sph_php) == ''){return;}
+		
+		$code					= $r->sph_code;
+		$php					= nuReplaceHashVariables($r->sph_php);
+		$_POST['nuSystemEval']	= nuEvalMessage($phpid, $code);
+		
+		try{
+			eval($php); 
+		}catch(Throwable $e){
+			nuExceptionHandler($e, $code);   
+		}catch(Exception $e){
+			nuExceptionHandler($e, $code);
+		}
+	
+		$_POST['nuCustomEval']	=  '';
+		$_POST['nuSystemEval']	=  '';
+		
+	}
+	
+	
+	
+	function nuProcedure($c){
+
+		$s						= "SELECT * FROM zzzzsys_php WHERE sph_code = ? ";
+		$t						= nuRunQuery($s, [$c]);
+		$r						= db_fetch_object($t);
+		$php					= nuReplaceHashVariables($r->sph_php);
+		$_POST['nuCustomEval']	= "Procedure <b>$r->sph_code</b> - run inside ";
+		
+		return $php;
+		
+	}
+	
+	
+	function nuExceptionHandler($e, $code){
+		
+		$ce	= $_POST['nuCustomEval'];
+		$se	= $_POST['nuSystemEval'];
+		nuDisplayError("$ce $se<br>", "nuErrorPHP");
+		nuDisplayError($e->getFile(), 'eval');
+		nuDisplayError('<i>' . $e->getMessage() . '</i>', 'eval');
+		nuDisplayError('<br><b><i>Traced from...</i></b><br>', 'nuErrorPHP');
+		
+		$a		= $e->getTrace();
+		$t		= array_reverse($a);
+
+		for($i = 0 ; $i < count($t) ; $i++){
+			
+			$m	= '(line:<i>' . $t[$i]['line'] . '</i>) ' . $t[$i]['file'] . ' <b> - ' . $t[$i]['function'] . '<b>';
+			
+			nuDisplayError($m . '<br>', 'eval');
+			
+		}
+		
+	}
+	
+	
+	function nuEvalMessage($phpid, $code){
+		
+		$i			= explode('_', $phpid);
+		
+		if(count($i) == 1){
+			return "Procedure <b>$code</b>";
+		}
+		
+		if($i[1] != 'AB'){
+			
+			$event	= nuEventName($i[1]);
+			$s		= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = ?	";
+			$t		= nuRunQuery($s, [$i[0]]);
+			$O		= db_fetch_object($t);
+		
+			return "<i>$event</i> of Form <b>$O->sfo_code</b>";
+			
+		}
+			
+		$s			= "SELECT * FROM zzzzsys_object JOIN zzzzsys_form ON zzzzsys_form_id = sob_all_zzzzsys_form_id	WHERE zzzzsys_object_id = ?	";
+		$t			= nuRunQuery($s, [$i[0]]);
+		$O			= db_fetch_object($t);
+		
+		return "<i>Before Browse</i> of Object <b>$O->sob_all_id</b> on Form <b>$O->sfo_code</b>";
+		
+	}
+
 
 
 ?>
