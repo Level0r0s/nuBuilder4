@@ -35,7 +35,7 @@
 
 
 .php {
-   background-color: #E2E5FF;
+   background-color: #8892bf;
    font-family:Lucida Console;
    padding: 2px;
    font-size: 10px;
@@ -822,14 +822,14 @@ input[type=range]::-webkit-slider-runnable-track {
 
 .nuDragOptionsFields {
     display: block;
-    width: 308px;
+    width: 285px;
     height: 200px;
 }
 
 .nuDragOptionsButton {
     display: block;
     height: 25px;
-    width: 100%;
+    width: 140px;
 }
 
 .nuDragOptionsButtonDisabled {

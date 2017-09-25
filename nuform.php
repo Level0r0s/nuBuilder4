@@ -15,7 +15,8 @@ function nuBeforeBrowse($f){
 	
 	$_POST['nuMessages']	= [];
 	$r						= nuFormProperties($f);
-	$evalPHP 				= new nuEvalPHPClass($f . '_BB');
+//	$evalPHP 				= new nuEvalPHPClass($f . '_BB');
+	nuEval($f . '_BB');
 	
 }
 
@@ -23,11 +24,13 @@ function nuBeforeBrowse($f){
 function nuBeforeEdit($f, $r){
 
 	$r						= nuFormProperties($f);
-    $GLOBALS['EXTRAJS']		= $r->sfo_javascript;
+    $GLOBALS['EXTRAJS']		= '';
 
 	if($_POST['nuSTATE']['call_type'] == 'getform' and $r == ''){return;}
 	
-	$evalPHP 				= new nuEvalPHPClass($f . '_BE');
+//	$evalPHP 				= new nuEvalPHPClass($f . '_BE');
+	nuEval($f . '_BE');
+    $GLOBALS['EXTRAJS']		.= $r->sfo_javascript;
 	
 }
 
@@ -380,7 +383,8 @@ function nuGetOtherLookupValues($o){
 	$_POST['lookup_row']	= db_fetch_object($t);
 	$_POST['lookup_values']	= array();
 
-	$evalPHP 				= new nuEvalPHPClass($p . '_AB');
+//	$evalPHP 				= new nuEvalPHPClass($p . '_AB');
+	nuEval($p . '_AB');
 	
 	return $_POST['lookup_values'];
 	
@@ -434,10 +438,10 @@ function nuGetLookupValues($R, $O){
 			$R->sob_lookup_code,
 			$R->sob_lookup_description
 			$S->from
-		WHERe 
+		WHERE 
 			`$r->sfo_primary_key` = '$O->value'
     ";
-	
+
 	$s			= nuReplaceHashVariables($s);
     $t 			= nuRunQuery($s);
     $l 			= db_fetch_row($t);
@@ -1290,7 +1294,33 @@ function nuAddJavascript($js){
 	$GLOBALS['EXTRAJS'] = $GLOBALS['EXTRAJS'] . "\n\n" . $js;
 }
 
+function nuPreloadImages($a){
+	
+	$js = '';
 
+	
+	for($i = 0 ; $i < count($a) ; $i++){
+		
+		$s  = "
+				SELECT * 
+				FROM zzzzsys_file 
+				WHERE sfi_code = ?
+				
+			";
+
+		$t  = nuRunQuery($s, [$a[$i]]);
+		$r	= db_fetch_object($t);
+		$tr	= trim($r->sfi_code);
+		$js = $js . "\nnuImages['$tr'] = '" . addslashes($r->sfi_json) . "';";
+
+		nuAddJavascript($js);
+
+	}
+
+
+	
+	
+}
 
 
 ?>

@@ -244,11 +244,13 @@ function nuUpdateDatabase(){
 	
 	if($nuDelAll == 'Yes'){
 		
-		$evalPHP	= new nuEvalPHPClass($EFid . '_BD');
+//		$evalPHP	= new nuEvalPHPClass($EFid . '_BD');
+		nuEval($EFid . '_BD');
 		$S			= array_reverse($S);				//-- delete children first
 		
 	}else{
-		$evalPHP 	= new nuEvalPHPClass($EFid . '_BS');
+//		$evalPHP 	= new nuEvalPHPClass($EFid . '_BS');
+		nuEval($EFid . '_BS');
 	}
 
 	if(count($_POST['nuErrors']) > 0){return;}
@@ -272,9 +274,11 @@ function nuUpdateDatabase(){
     nuChangeHashVariable('RECORD_ID', $nuMainID);
 
 	if($nuDelAll == 'Yes'){
-		$evalPHP 	= new nuEvalPHPClass($EFid . '_AD');
+//		$evalPHP 	= new nuEvalPHPClass($EFid . '_AD');
+		nuEval($EFid . '_AD');
 	}else{
-		$evalPHP 	= new nuEvalPHPClass($EFid . '_AS');
+//		$evalPHP 	= new nuEvalPHPClass($EFid . '_AS');
+		nuEval($EFid . '_AS');
 	}
 
 	return $nuMainID;
