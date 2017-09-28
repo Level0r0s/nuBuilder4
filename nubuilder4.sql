@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 25, 2017 at 09:29 PM
+-- Generation Time: Sep 28, 2017 at 09:00 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -515,7 +515,7 @@ INSERT INTO `zzzzsys_form` (`zzzzsys_form_id`, `sfo_type`, `sfo_code`, `sfo_desc
 ('nuaccessreport', 'browseedit', 'nuaccessreport', 'Access To Procedures', 'zzzzsys_access_php', 'zzzzsys_access_php_id', '', 0, 0, 'SELECT * \nFROM zzzzsys_access_php\nJOIN zzzzsys_php ON zzzzsys_php_id = slp_zzzzsys_php_id\nORDER BY sph_code', ''),
 ('nuaccesslevelreport', 'browseedit', 'nuaccesslevelreport', 'Access To Report', 'zzzzsys_access_report', 'zzzzsys_access_report_id', '', 0, 0, 'SELECT * \nFROM zzzzsys_access_report\nJOIN zzzzsys_report ON zzzzsys_report_id = sre_zzzzsys_report_id\nORDER BY sre_code', ''),
 ('nurunreport', 'browseedit', 'nurunreport', 'Run Report', 'zzzzsys_report', 'zzzzsys_report_id', '', 0, 0, 'SELECT * FROM zzzzsys_report\nLEFT JOIN zzzzsys_form ON zzzzsys_form_id = sre_zzzzsys_form_id', '\nnuSetTitle(nuFORM.getCurrent().run_description);\n\nwindow.nuBrowseFunction = ''runreport'';\n\nfunction runreport(e){\n    \n    var r   = $(''#'' + e.target.id).attr(''data-nu-row'');\n    var c   = ''000'';\n    var f   = $(''#'' + r + c).html();\n    var p   = $(''#'' + e.target.id).attr(''data-nu-primary-key'');\n\n    nuGetReport(f, p);\n    \n}\n\n'),
-('nurunphp', 'browseedit', 'nurunphp', 'Run Procedure', 'zzzzsys_php', 'zzzzsys_php_id', '', 0, 0, 'SELECT * FROM zzzzsys_php\nJOIN zzzzsys_form ON zzzzsys_form_id = sph_zzzzsys_form_id\nWHERE sph_system != ''1''', 'window.nuBrowseFunction = ''getphp'';\r\n\r\nfunction getphp(e){\r\n    \r\n    var r   = $(''#'' + e.target.id).attr(''data-nu-row'');\r\n    var c   = ''000'';\r\n    var p   = $(''#'' + r + c).html();\r\n    var f   = $(''#'' + e.target.id).attr(''data-nu-primary-key'');\r\n\r\n    nuGetPHP(p, f);\r\n\r\n}\r\n'),
+('nurunphp', 'browseedit', 'nurunphp', 'Run Procedure', 'zzzzsys_php', 'zzzzsys_php_id', '', 0, 0, 'SELECT * FROM zzzzsys_php\nJOIN zzzzsys_form ON zzzzsys_form_id = sph_zzzzsys_form_id\nWHERE sph_system != ''1''\nORDER BY sph_code', 'window.nuBrowseFunction = ''getphp'';\r\n\r\nfunction getphp(e){\r\n    \r\n    var r   = $(''#'' + e.target.id).attr(''data-nu-row'');\r\n    var c   = ''000'';\r\n    var p   = $(''#'' + r + c).html();\r\n    var f   = $(''#'' + e.target.id).attr(''data-nu-primary-key'');\r\n\r\n    nuGetPHP(p, f);\r\n\r\n}\r\n'),
 ('nulaunchdates', 'launch', 'nulaunchdates', 'Between 2 Dates', '', '', '', 0, 0, '', '\nnuSetTitle(nuFORM.getCurrent().run_description);'),
 ('nutimezone', 'browse', 'nutimezone', 'Time Zone', 'zzzzsys_timezone', 'zzzzsys_timezone_id', '', 0, 0, 'SELECT * \nFROM zzzzsys_timezone\nORDER BY stz_timezone', ''),
 ('nusetup', 'edit', 'nusetup', 'Setup', 'zzzzsys_setup', 'zzzzsys_setup_id', '', 0, 0, '', '$(''#set_header'').addClass(''html'');\n  \n$(''.html'').dblclick(function() {\n	nuOpenAce(''HTML'', this.id);\n});\n\n'),
@@ -578,96 +578,6 @@ INSERT INTO `zzzzsys_format` (`zzzzsys_format_id`, `srm_type`, `srm_format`) VAL
 ('s14995115835792', 'Date', 'hh-nn-ss'),
 ('s14995406788666', 'Date', 'yy-yyyy-pp-dd-ddd-dddd-mm-mmm-mmmm-hh-nn-ss'),
 ('s15022629775118', 'Date', 'dd mm yy');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `zzzzsys_function`
---
-
-CREATE TABLE `zzzzsys_function` (
-  `zzzzsys_function_id` varchar(25) NOT NULL,
-  `sfu_language` varchar(20) NOT NULL,
-  `sfu_name` varchar(300) NOT NULL,
-  `sfu_syntax` varchar(300) NOT NULL,
-  `sfu_description` text NOT NULL,
-  `sfu_sample` text NOT NULL,
-  `sfu_see` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `zzzzsys_function`
---
-
-INSERT INTO `zzzzsys_function` (`zzzzsys_function_id`, `sfu_language`, `sfu_name`, `sfu_syntax`, `sfu_description`, `sfu_sample`, `sfu_see`) VALUES
-('58c8e65c7ed6824', 'js', 'nuEnable', 'nuEnable(string field)', 'Enable an Object on a nuBuilder Form.', 'if(phones == 2){\n    nuEnable(''com_phone2'');\n}\n', 'nuDisable'),
-('58c8e6acb396753', 'js', 'nuDisable', 'nuDisable(string field)', 'Disable an Object on a nuBuilder Form.', 'if(phones == 2){\n    nuDisable(''com_phone2'');\n}\n', 'nuEnable'),
-('58c915497d0ab1b', 'js', 'nuSetTitle', 'nuSetTitle(string title)', 'Changes the Title of the last breadcrumb.', 'nuSetTitle($(''#cus_name'').val());', ''),
-('58c99a3bcf96e31', 'js', 'nuTotal', 'number nuTotal(string field)', 'field, represents a specific (number or nuNumber) Object or whole column of a Subform Object on an Edit Form, ', '\n//-- ite_total column from invoice subform\nvar sale_total = nuTotal(''invoice.ite_total'');\n\n//-- inv_total column\nvar grand_total = nuTotal(''inv_total'');\n', ''),
-('58d87b4a1eafe61', 'php', 'nuID', 'string = nuID()', 'Creates a new unique ID', '$id = nuID();', '[nuTT](nuTT)'),
-('58d87beb5b68ce8', 'php', 'nuTT', 'string nuTT()', 'Creates a new unique ID used for creating a temp table name. \n\nPrefixed with __nu.', '$tt = nuTT();\n\n$sql = "CREATE TABLE $tt SELECT * FROM customer";\n', 'nuID'),
-('58dc29359d5c185', 'js', 'nuMessage', 'nuMessage(array of strings)', 'nuBuilder Popup message.', 'if(cus_name){\n   nuMessage(''No Customer!'');\n}', 'nuDisplayMessage()'),
-('58dc2a78c53adfd', 'js', 'nuBeforeSave', '', 'The name of a custom javascript function, that will run before saving an Edit Form', 'function nuBeforeSave(){\n\nif(cus_name){\n\n   nuMessage(''No Customer!'');\n   return false;\n\n}else{\n   return true;\n}\n\n}', ''),
-('58dcb8edeebbe38', 'php', 'nuSubformObject', 'object = nuSubformObject(string)', 'An object defining a Subform.', '\n$SF             = nuSubformObject(''obj_sf'');\n\nfor($i = 0 ; $i < count($SF->rows) ; $i++){\n    \n    $label      = $SF->rows[$i][1];\n    $field      = $SF->rows[$i][2];\n    $oldid      = $SF->rows[$i][3];\n\n    nuDebug("$label, $field, $oldid");\n\n}\n\n\n', ''),
-('s14919452896598', 'js', 'nuGetBreadcrumb', '', 'Open a specific Form and/or Tab.', '//-- open the first breadcrumb and the 2nd tab.\n\nnuGetBreadcrumb(0,1)  ', 'nuSelectTab'),
-('s14919465746468', 'js', 'nuSelectTab', '', 'Open a specific Tab.', 'nuSelectTab(document.getElementById(''nuTab2''));\n', 'nuGetBreadcrumb'),
-('s14919525135898', 'php', 'nuHasNewRecordID', '', 'Returns true if New or Cloned record.', 'if(nuHasNewRecordID()){\n   do something ..\n}', ''),
-('s14930120175840', 'js', 'nuShow', '', 'Show all bits of an Object.', 'nuShow(''cus_address'')', 'nuHide'),
-('s14930120596415', 'js', 'nuHide', '', 'Hide all bits of an Object.', 'nuHide(''cus_address'')', 'nuShow'),
-('s14930122576988', 'js', 'nuID', 'string = nuID()', 'Creates a unique and incrementing string.', 'customer_id = nuID()', ''),
-('s14932446969358', 'php', 'nuDisplayError', '', 'Any messages created by using nuDisplayError() will be displayed in the browser and halt any update to the web page.', 'nuDisplayError("Cannot be left blank");', 'nuDisplayMessage'),
-('s14932447920170', 'php', 'nuDisplayMessage', '', 'Any messages created by using nuDisplayMessage() will be displayed in the browser and BUT will not halt any update to the web page.', 'nuDisplayMessage("All tables have been updated");', 'nuDisplayError'),
-('s14932454128614', 'php', 'nuDebug', '', 'Creates a record in zzzzsys_debug.deb_message.\nParamrters can be number, string, object or array.\nObjects and arrays will be displayed as if print_r() was used.\n', 'nuDebug(''hello'', $_POST);', ''),
-('s14932467957769', 'php', 'nuGetSubformObject', '', 'returns an Object containing information about a subform.\n\neg.\n\nstdClass Object\n(\n    [id] => zzzzsys_tab_sf\n    [foreign_key] => syt_zzzzsys_form_id\n    [primary_key] => zzzzsys_tab_id\n    [object_id] => 570b3915874d635\n    [table] => zzzzsys_tab\n    [action] => save\n    [rows] => Array\n        (\n            [0] => Array\n                (\n                    [0] => 58d3719f5582316\n                    [1] => User\n                    [2] => 10\n                    [3] => 0\n                )\n\n            [1] => Array\n                (\n                    [0] => 58d3719f5582b0a\n                    [1] => Procedures\n                    [2] => 20\n                    [3] => 0\n                )\n\n            [2] => Array\n                (\n                    [0] => 58d3719f5582f10\n                    [1] => Reports\n                    [2] => 30\n                    [3] => 0\n                )\n\n            [3] => Array\n                (\n                    [0] => -1\n                    [1] => \n                    [2] => \n                    [3] => 1\n                )\n\n        )\n\n    [edited] => Array\n        (\n            [0] => Array\n                (\n                    [0] => 0\n                    [1] => 0\n                    [2] => 0\n                    [3] => 0\n                )\n\n            [1] => Array\n                (\n                    [0] => 0\n                    [1] => 0\n                    [2] => 0\n                    [3] => 0\n                )\n\n            [2] => Array\n                (\n                    [0] => 0\n                    [1] => 0\n                    [2] => 0\n                    [3] => 0\n                )\n\n            [3] => Array\n                (\n                    [0] => 0\n                    [1] => 0\n                    [2] => 0\n                    [3] => 0\n                )\n\n        )\n\n    [deleted] => Array\n        (\n            [0] => 0\n            [1] => 0\n            [2] => 0\n            [3] => 1\n        )\n\n    [fields] => Array\n        (\n            [0] => ID\n            [1] => syt_title\n            [2] => syt_order\n            [3] => nuDelete\n        )\n\n)\n\n\n', '$object = nuGetSubformObject(''client_sf'');', ''),
-('s14932481809933', 'php', 'db_fetch_object', '', 'Returns sql row result as an object.', '	$t	= nuRunQuery("SELECT * FROM $TT LIMIT 1, 1");\n	\n	$r 	= db_fetch_object($t);\n\n	$a	= $r->sob_all_type;\n	$b	= $r->sob_input_type;\n		\n', ''),
-('s14932498348604', 'php', 'nuCSSInclude', '', '', '', ''),
-('s14932498590353', 'php', 'db_columns', '', '', '', ''),
-('s14932498792006', 'php', 'db_fetch_array', '', '', '', ''),
-('s14932499162897', 'php', 'db_field_array', '', '', '', ''),
-('s14932499828835', 'php', 'db_num_rows', '', '', '', ''),
-('s14932500041119', 'php', 'nuJSInclude', '', '', '', ''),
-('s14932500221019', 'php', 'nuAddJavascript', '', '', '', ''),
-('s14932501649485', 'php', 'nuRunQuery', '', '', '', ''),
-('s14932504017157', 'js', 'nuAddActionButton', '', '', '', ''),
-('s14932511793309', 'php', 'nuSetFormValue', '', 'This function can be used in the After Browse of a Lookup.', 'nuSetFormValue(''com_phone'', 1234);', ''),
-('s14932518549479', 'js', 'nuPad4', '', 'Adds 0s to the left of a number to make it 4 characters wide.', 'print nuPad4(78);\n\n0078', 'nuPad3 nuPad2'),
-('s14932518912522', 'js', 'nuPad3', '', 'Adds 0s to the left of a number to make it 3 characters wide.', 'print nuPad3(78);\n\n078', 'nuPad4 nuPad2'),
-('s14932519693379', 'js', 'nuPad2', '', 'Adds 0s to the left of a number to make it 2 characters wide.', 'print nuPad2(7);\n\n07', 'nuPad4 nuPad3'),
-('s14932528023884', 'js', 'nuPopup', '', '', '', ''),
-('s14932533877122', 'js', 'nuGetSubformObject', '', 'Get a nuBuilder Subform as an Object', 'var o = object = nuGetSubformObject(''customer_sf'');', ''),
-('s14932539093066', 'php', 'nuIsGlobeadmin', '', 'Returns true if user is logged in as Globeadmin', '', ''),
-('s14933331793232', 'js', 'nuGetWordWidth', 'number = nuGetWordWidth(string phrase)', 'Calculates the width of a string on a HTML page.', 'var l = nuGetWordWidth(''hello world'');\n\n$(''#thediv'').css(''width'', l);\n', ''),
-('s14933331793233', 'js', 'nuAddAction', '', '', '', ''),
-('s14933331793234', 'js', 'nuDeleteAction', '', '', '', ''),
-('s14933331793235', 'js', 'nuCloneAction', '', '', '', ''),
-('s14933331793236', 'js', 'nuSaveAction', '', '', '', ''),
-('s14933331793237', 'js', 'nuPrintAction', '', '', '', ''),
-('s14933331793238', 'js', 'nuEmailReportAction', '', '', '', ''),
-('s14933331793240', 'js', 'nuTranslate', '', '', '', ''),
-('s14933331793241', 'js', 'nuIsOpener', '', '', '', ''),
-('s14933331793242', 'js', 'nuPopup', '', '', '', ''),
-('s14933331793243', 'js', 'nuRunReport', '', '', '', ''),
-('s14933331793244', 'js', 'nuRunPHP', '', '', '', ''),
-('s14933331793245', 'js', 'nuRunPHPHidden', '', '', '', ''),
-('s14933331793246', 'js', 'nuIsWindow', '', '', '', ''),
-('s14933331793247', 'php', 'nuClientTimeZone', '', '', '', ''),
-('s14933331793248', 'php', 'nuDebug', '', '', '', ''),
-('s14933331793250', 'php', 'nuID', '', '', '', ''),
-('s14933331793251', 'php', 'nuGetUserAccess', '', '', '', ''),
-('s14933331793252', 'php', 'nuHasNewRecordID', '', '', '', ''),
-('s14933331793253', 'php', 'nuDisplayError', '', '', '', ''),
-('s14933331793254', 'php', 'nuDisplayMessage', '', '', '', ''),
-('s14933331793255', 'php', 'nuCheckAccess', '', '', '', ''),
-('s14933331793256', 'php', 'nuDeleteForm', '', '', '', ''),
-('s14933331793257', 'php', 'nuRunQuery', '', '', '', ''),
-('s14933331793258', 'php', 'nuGetSubformObject', '', '', '', ''),
-('s14933331793259', 'php', 'nuRemoveNonCharacters', '', '', '', ''),
-('s14933331793260', 'php', 'nuButtons', '', '', '', ''),
-('s14933331793261', 'php', 'nuAddJavascript', '', '', '', ''),
-('s14933331793262', 'php', 'nuIsField', '', '', '', ''),
-('s14933331793263', 'php', 'nuIsRecord', '', '', '', ''),
-('s14933331793264', 'php', 'nuIsFile', '', '', '', ''),
-('s14933331793265', 'php', 'nuRemoveFiles', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -1335,7 +1245,7 @@ INSERT INTO `zzzzsys_php` (`zzzzsys_php_id`, `sph_code`, `sph_description`, `sph
 ('574671cdcc77367_AB', '574671cdcc77367_AB', '', '', '\n$s  = "\n        SELECT * \n        FROM zzzzsys_tab \n        JOIN zzzzsys_form ON zzzzsys_form_id = syt_zzzzsys_form_id\n        WHERE zzzzsys_tab_id = ''#LOOKUP_RECORD_ID#''\n        \n        ";\n\n$t  = nuRunQuery($s);\n$r  = db_fetch_object($t);\n\nnuSetFormValue(''sob_lookup_table'', $r->sfo_table);\n', '', '', '1', ''),
 ('570dab25164b394_AB', '570dab25164b394_AB', '', '', '\n$s  = "\n        SELECT * \n        FROM zzzzsys_form\n        WHERE zzzzsys_form_id = ''#LOOKUP_RECORD_ID#''\n        \n        ";\n\n$t  = nuRunQuery($s);\n$r  = db_fetch_object($t);\n\nnuSetFormValue(''sob_lookup_table'', $r->sfo_table);\n', '', '', '1', ''),
 ('nufastform', 'RUNFF', 'Run Fast Form', 'nubuilder', 'nuBuildFastForm(''#fastform_table#'', ''#fastform_type#'');\n\n', '', 'nufflaunch', '1', ''),
-('s14919851858544', 'HW', 'Hello World', 'test', 'nudebug("Hello world! ... $hw");', 'window', 'nublank', '', ''),
+('s14919851858544', 'HW', 'Hello World', 'test', 'nudebug("Hello world! ... $hw #USER_ID#");', 'window', 'nublank', '', ''),
 ('s14967319482165_AB', 's14967319482165_AB', 'System PHP', '', 'nuSetFormValue(''populate'', nuLookupRecord()->com_name);\nnuSetFormValue(''inv_gst2'', 11);\n\n\n', '', '', '1', ''),
 ('s14988837505592', 'zzzzsys_file', 'zzzzsys_file', 'test', '\r\n$s = "CREATE TABLE #TABLE_ID# SELECT * FROM zzzzsys_file";\r\n\r\nnuRunQuery($s);\r\n\r\n', '', 'nulaunchdates', '', ''),
 ('c14925390850522729_BB', 'c14925390850522729_BB', '', '', '\n\nnuDisplayMessage(''This message comes from...'');\nnuDisplayMessage(''before browse;'');\n\n\n', '', '', '1', ''),
@@ -1344,7 +1254,7 @@ INSERT INTO `zzzzsys_php` (`zzzzsys_php_id`, `sph_code`, `sph_description`, `sph
 ('nuphp_BB', 'nuphp_BB', 'System PHP', '', '\n$s  = "CREATE TABLE #TABLE_ID# SELECT zzzzsys_php_id AS theid FROM zzzzsys_php WHERE ";\n$w  = "sph_system != 1";\n\nnuRunQuery("$s$w");\n\n', '', '', '1', ''),
 ('nuselect_BS', 'nuselect_BS', 'System PHP', '', '$rid    = ''#RECORD_ID#'';\n\nif($rid != ''-1'' and $rid != ''-2''){ \n    \n    $s      = "SELECT * FROM zzzzsys_select WHERE zzzzsys_select_id = ''$rid''";\n    $t      = nuRunQuery($s);\n    $r      = db_fetch_object($t);\n    \n    if(db_num_rows($t) == 0){\n        \n        $s              = "\n        INSERT INTO zzzzsys_select\n        (zzzzsys_select_id, sse_system)\n        VALUES\n        (''$rid'', ''1'')\n        ";\n        \n        nuRunQuery($s);\n        \n    }\n    \n}\n\n', '', '', '1', ''),
 ('s15028475182852_AB', 's15028475182852_AB', 'System PHP', 'nubuilder', 'nuSetFormValue(''inv_address_number'',nuLookupRecord()->cus_address_number);\nnuSetFormValue(''inv_address_street'',nuLookupRecord()->cus_address_street);\nnuSetFormValue(''inv_address_suburb'',nuLookupRecord()->cus_address_suburb);', '', '', '1', ''),
-('nusystemrecords', 'SYSTAB', 'Create System Tables', 'test', '\n$t[] = ''zzzzsys_access'';\n$t[] = ''zzzzsys_access_form'';\n$t[] = ''zzzzsys_access_php'';\n$t[] = ''zzzzsys_access_report'';\n$t[] = ''zzzzsys_browse'';\n$t[] = ''zzzzsys_debug'';\n$t[] = ''zzzzsys_event'';\n$t[] = ''zzzzsys_file'';\n$t[] = ''zzzzsys_form'';\n$t[] = ''zzzzsys_format'';\n$t[] = ''zzzzsys_function'';\n$t[] = ''zzzzsys_object'';\n$t[] = ''zzzzsys_php'';\n$t[] = ''zzzzsys_php_library'';\n$t[] = ''zzzzsys_report'';\n$t[] = ''zzzzsys_report_data'';\n$t[] = ''zzzzsys_run_list'';\n$t[] = ''zzzzsys_select'';\n$t[] = ''zzzzsys_select_clause'';\n$t[] = ''zzzzsys_session'';\n$t[] = ''zzzzsys_setup'';\n$t[] = ''zzzzsys_tab'';\n$t[] = ''zzzzsys_timezone'';\n$t[] = ''zzzzsys_translate'';\n$t[] = ''zzzzsys_user'';\n\n\n\nfor($i = 0 ; $i < count($t) ; $i++){\n    \n    $table  = $t[$i];\n    \n    nuRunQuery("DROP TABLE IF EXISTS sys_$table");\n    nuRunQuery("CREATE TABLE sys_$table SELECT * FROM $table");\n    \n}\n\n//-- KEEP FORM with ids that start with ''nu''\n\n$s  =  "\nDELETE FROM sys_zzzzsys_form \nWHERE zzzzsys_form_id NOT LIKE ''nu%'' \n";\n\nnuRunQuery($s);\n\n//-- KEEP TABs from FORMs with ids that start with ''nu''\n\n$s  =  "\nDELETE FROM sys_zzzzsys_tab \nWHERE syt_zzzzsys_form_id NOT IN (SELECT zzzzsys_form_id FROM sys_zzzzsys_form)\n";\n\nnuRunQuery($s);\n\n//-- KEEP OBJECTs from TABs where FORMs with ids that start with ''nu''\n\n$s  =  "\nDELETE FROM sys_zzzzsys_object \nWHERE sob_all_zzzzsys_tab_id NOT IN (SELECT zzzzsys_tab_id FROM sys_zzzzsys_tab)\n";\n\nnuRunQuery($s);\n\n//-- KEEP PHP with ids that start with ''nu'' or match the above OBJECT list.\n\n\n$s  =  "\nDELETE FROM sys_zzzzsys_php \nWHERE sph_zzzzsys_form_id NOT LIKE ''nu%''\nAND sph_zzzzsys_form_id NOT IN (SELECT zzzzsys_object_id FROM sys_zzzzsys_object)\n";\n\nnuRunQuery($s);\n\n//-- ADD PHP_LIBRARY records to PHP that links to ids that start with ''nu''.\n\n$s  =  "\nDELETE FROM sys_zzzzsys_php \nWHERE sph_zzzzsys_form_id NOT LIKE ''nu%''\nAND sph_zzzzsys_form_id NOT IN (SELECT zzzzsys_object_id FROM sys_zzzzsys_object)\n";\n\nnuRunQuery($s);\n\n\n//-- PHP LIBRARY\n\n$s  =  "\nDELETE FROM sys_zzzzsys_php_library \nWHERE spl_zzzzsys_php_id NOT IN (SELECT zzzzsys_php_id FROM sys_zzzzsys_php)\n";\n\nnuRunQuery($s);\n\n//-- KEEP BROWSEs from FORMs with ids that start with ''nu''\n\n$s  =  "\nDELETE FROM sys_zzzzsys_browse \nWHERE sbr_zzzzsys_form_id NOT IN (SELECT zzzzsys_form_id FROM sys_zzzzsys_form)\n";\n\nnuRunQuery($s);\n\n\n//-- KEEP EVENTs, from OBJECTs, from FORMs with ids that start with ''nu''\n\n$s  =  "\nDELETE FROM sys_zzzzsys_event \nWHERE sev_zzzzsys_object_id NOT IN (SELECT zzzzsys_object_id FROM sys_zzzzsys_object)\n";\n\nnuRunQuery($s);\n\n\n\n//-- empty all other sys tables\n\n$d[] = ''zzzzsys_access'';\n$d[] = ''zzzzsys_access_form'';\n$d[] = ''zzzzsys_access_php'';\n$d[] = ''zzzzsys_access_report'';\n$d[] = ''zzzzsys_debug'';\n$d[] = ''zzzzsys_file'';\n$d[] = ''zzzzsys_format'';\n$d[] = ''zzzzsys_function'';\n$d[] = ''zzzzsys_select'';\n$d[] = ''zzzzsys_select_clause'';\n$d[] = ''zzzzsys_session'';\n$d[] = ''zzzzsys_setup'';\n$d[] = ''zzzzsys_timezone'';\n$d[] = ''zzzzsys_translate'';\n$d[] = ''zzzzsys_user'';\n\nfor($i = 0 ; $i < count($d) ; $i++){\n    \n    $table  = $d[$i];\n    \n    nuRunQuery("TRUNCATE sys_$table");\n    \n}\n\n\n\n\nprint ''Done!'';\n\n\n\n\n\n', 'window', 'nublank', '', ''),
+('nusystemrecords', 'Updater1', 'Rename System Tables', 'nubuilder', 'nuRenameSystemFiles();', 'window', 'nublank', '', ''),
 ('s15000619240272', 'DER', 'Update a field with total of Debug Records', 'a', '\n$i  = ''field01'';\n$t  = nuRunQuery(''SELECT COUNT(*) FROM zzzzsys_debug'');\n$c  = db_fetch_row($t)[0];\n$j  = ";$(''#$i'').val($c);";\n\nnuJavascriptCallback($j);\n\n\n\n', 'hide', 'nublank', '', ''),
 ('58a08a1abc4782c_BS', '58a08a1abc4782c_BS', 'System PHP', 'nubuilder', '', '', '', '1', ''),
 ('nuphp_BE', 'nuphp_BE', 'System PHP', 'nubuilder', '$rid    = ''#RECORD_ID#'';\n\nif($rid != ''-1'' and $rid != ''-2''){ \n    \n    $s      = "SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = ''$rid''";\n    $t      = nuRunQuery($s);\n    $r      = db_fetch_object($t);\n    \n    if(db_num_rows($t) == 0){\n    \n        $s              = "\n        INSERT INTO zzzzsys_php\n        (\n            zzzzsys_php_id,\n            sph_code,\n            sph_description,\n            sph_group,\n            sph_system\n        )\n        VALUES\n        (\n            ''$rid'', \n            ''$rid'', \n            ''System PHP'', \n            ''nubuilder'', \n            ''1''\n        )\n        ";\n        \n        nuRunQuery($s);\n        \n    }\n    \n}\n\n', '', '', '1', ''),
@@ -1375,26 +1285,11 @@ INSERT INTO `zzzzsys_php` (`zzzzsys_php_id`, `sph_code`, `sph_description`, `sph
 ('58d3719f55819e7_AS', '58d3719f55819e7_AS', 'System PHP', 'nubuilder', '', '', '', '1', ''),
 ('58d3719f55819e7_AD', '58d3719f55819e7_AD', 'System PHP', 'nubuilder', '', '', '', '1', ''),
 ('nuphp_AD', 'nuphp_AD', 'System PHP', 'nubuilder', '', '', '', '1', ''),
-('nuform_BE', 'nuform_BE', 'System PHP', 'nubuilder', '', '', '', '1', '');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `zzzzsys_php_library`
---
-
-CREATE TABLE `zzzzsys_php_library` (
-  `zzzzsys_php_library_id` varchar(25) NOT NULL,
-  `spl_zzzzsys_php_id` varchar(25) NOT NULL,
-  `spl_library_zzzzsys_php_id` varchar(25) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `zzzzsys_php_library`
---
-
-INSERT INTO `zzzzsys_php_library` (`zzzzsys_php_library_id`, `spl_zzzzsys_php_id`, `spl_library_zzzzsys_php_id`) VALUES
-('59c16f47c64c2e6', '59c169472cef5d3', '59c168dbe34ed50');
+('nuform_BE', 'nuform_BE', 'System PHP', 'nubuilder', '', '', '', '1', ''),
+('5678ac0f8f3d3b8_AB', '5678ac0f8f3d3b8_AB', 'System PHP', 'nubuilder', '', '', '', '1', ''),
+('s14968332683656_BB', 's14968332683656_BB', 'System PHP', 'nubuilder', '', '', '', '1', ''),
+('59cadba20088e94', 'Tezt', 'xfgb', '', '$hw = ''bobby'';\n\nnudebug("$hw");\n\neval(nuProcedure(''HW''));\n\nnudebug(2222);', 'window', 'nublank', '', ''),
+('59cc21f3090a4e3', 'Updater2', 'Check Structure of Tables', 'nubuilder', '\nnuRemoveSystemRecords();\n', 'window', 'nublank', '', '');
 
 -- --------------------------------------------------------
 
@@ -1907,7 +1802,6 @@ INSERT INTO `zzzzsys_table` (`zzzzsys_table_id`) VALUES
 ('zzzzsys_file'),
 ('zzzzsys_form'),
 ('zzzzsys_format'),
-('zzzzsys_function'),
 ('zzzzsys_object'),
 ('zzzzsys_phinxlog'),
 ('zzzzsys_php'),
@@ -2672,12 +2566,6 @@ ALTER TABLE `zzzzsys_format`
   ADD PRIMARY KEY (`zzzzsys_format_id`);
 
 --
--- Indexes for table `zzzzsys_function`
---
-ALTER TABLE `zzzzsys_function`
-  ADD PRIMARY KEY (`zzzzsys_function_id`);
-
---
 -- Indexes for table `zzzzsys_object`
 --
 ALTER TABLE `zzzzsys_object`
@@ -2698,14 +2586,6 @@ ALTER TABLE `zzzzsys_php`
   ADD PRIMARY KEY (`zzzzsys_php_id`),
   ADD UNIQUE KEY `sph_code` (`sph_code`),
   ADD KEY `sph_zzzzsys_form_id` (`sph_zzzzsys_form_id`);
-
---
--- Indexes for table `zzzzsys_php_library`
---
-ALTER TABLE `zzzzsys_php_library`
-  ADD PRIMARY KEY (`zzzzsys_php_library_id`),
-  ADD KEY `spl_zzzzsys_php_id` (`spl_zzzzsys_php_id`),
-  ADD KEY `spl_library_zzzzsys_php_id` (`spl_library_zzzzsys_php_id`);
 
 --
 -- Indexes for table `zzzzsys_report`

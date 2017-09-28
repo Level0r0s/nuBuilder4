@@ -3,27 +3,17 @@
     require_once 'nucommon.php';
 
 	
-	function nuEval($phpid, $event = ''){
+	function nuEval($phpid){
 
-		if($event == ''){
-			$s		= "SELECT * FROM zzzzsys_php WHERE sph_code = ? ";
-		}else{
-			$s		= "SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = ? ";
-		}
+		$s						= "SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = ? ";
+		$t						= nuRunQuery($s, [$phpid]);
+		$r						= db_fetch_object($t);
 		
-		$t			= nuRunQuery($s, [$i]);
-		$r			= db_fetch_object($t);
-
 		if(trim($r->sph_php) == ''){return;}
 		
-		$code		= $r->sph_code;
-		$php		= nuReplaceHashVariables($r->sph_php);
-	
-		if($event == ''){
-			$_POST['nuCustomEval']	=  "$code run inside : ";
-		}else{
-			$_POST['nuSystemEval']	=  nuEvalMessage($phpid, $code);
-		}
+		$code					= $r->sph_code;
+		$php					= nuReplaceHashVariables($r->sph_php);
+		$_POST['nuSystemEval']	= nuEvalMessage($phpid, $code);
 		
 		try{
 			eval($php); 
@@ -33,18 +23,31 @@
 			nuExceptionHandler($e, $code);
 		}
 	
-		if($event == ''){
-			$_POST['nuCustomEval']	=  '';
-		}else{
-			$_POST['nuSystemEval']	=  '';
-		}
+		$_POST['nuProcedureEval']	=  '';
+		$_POST['nuSystemEval']	=  '';
+		
+	}
+	
+	
+	
+	function nuProcedure($c){
+
+		$s						= "SELECT * FROM zzzzsys_php WHERE sph_code = ? ";
+		$t						= nuRunQuery($s, [$c]);
+		$r						= db_fetch_object($t);
+		$php					= nuReplaceHashVariables($r->sph_php);
+		$_POST['nuProcedureEval']	= "Procedure <b>$r->sph_code</b> - run inside ";
+		
+		return $php;
 		
 	}
 	
 	
 	function nuExceptionHandler($e, $code){
 		
-		nuDisplayError("<b>Error Running Procedure !</b> ($code)<br>", "nuErrorPHP");
+		$ce	= $_POST['nuProcedureEval'];
+		$se	= $_POST['nuSystemEval'];
+		nuDisplayError("$ce $se<br>", "nuErrorPHP");
 		nuDisplayError($e->getFile(), 'eval');
 		nuDisplayError('<i>' . $e->getMessage() . '</i>', 'eval');
 		nuDisplayError('<br><b><i>Traced from...</i></b><br>', 'nuErrorPHP');
@@ -63,20 +66,22 @@
 	}
 	
 	
-	
-	
 	function nuEvalMessage($phpid, $code){
 		
 		$i			= explode('_', $phpid);
 		
 		if(count($i) == 1){
-			return "Procedure ($code)";
+			return "Procedure <b>$code</b>";
 		}
 		
 		if($i[1] != 'AB'){
 			
 			$event	= nuEventName($i[1]);
-			return "$event for ($code)";
+			$s		= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = ?	";
+			$t		= nuRunQuery($s, [$i[0]]);
+			$O		= db_fetch_object($t);
+		
+			return "<i>$event</i> of Form <b>$O->sfo_code</b>";
 			
 		}
 			
@@ -84,7 +89,7 @@
 		$t			= nuRunQuery($s, [$i[0]]);
 		$O			= db_fetch_object($t);
 		
-		return "Before Browse for `$O->sob_all_id` ($O->sfo_code)";
+		return "<i>Before Browse</i> of Object <b>$O->sob_all_id</b> on Form <b>$O->sfo_code</b>";
 		
 	}
 

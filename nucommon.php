@@ -77,8 +77,8 @@ function nuDebug($a){
 	$l					= $b[0]['line'];
 	$m					= "$date  -  $f line $l\n\n<br>\n";
 	$nuSystemEval		= $_POST['nuSystemEval'];
-	$nuCustomEval		= $_POST['nuCustomEval'];
-	$m					= "$date - $nuCustomEval $nuSystemEval line $l\n\n<br>\n" ;
+	$nuProcedureEval		= $_POST['nuProcedureEval'];
+	$m					= "$date - $nuProcedureEval $nuSystemEval line $l\n\n<br>\n" ;
 
 	for($i = 0 ; $i < count(func_get_args()) ; $i++){
 
@@ -1160,7 +1160,7 @@ function nuEventName($e){
 			nuExceptionHandler($e, $code);
 		}
 	
-		$_POST['nuCustomEval']	=  '';
+		$_POST['nuProcedureEval']	=  '';
 		$_POST['nuSystemEval']	=  '';
 		
 	}
@@ -1169,11 +1169,12 @@ function nuEventName($e){
 	
 	function nuProcedure($c){
 
-		$s						= "SELECT * FROM zzzzsys_php WHERE sph_code = ? ";
-		$t						= nuRunQuery($s, [$c]);
-		$r						= db_fetch_object($t);
-		$php					= nuReplaceHashVariables($r->sph_php);
-		$_POST['nuCustomEval']	= "Procedure <b>$r->sph_code</b> - run inside ";
+		$s							= "SELECT * FROM zzzzsys_php WHERE sph_code = ? ";
+		$t							= nuRunQuery($s, [$c]);
+		$r							= db_fetch_object($t);
+		$php						= nuReplaceHashVariables($r->sph_php);
+		$php						= "$php \n\n//--Added by nuProcedure()\n\n$"."_POST['nuProcedureEval'] = '';";
+		$_POST['nuProcedureEval']	= "Procedure <b>$r->sph_code</b> - run inside ";
 		
 		return $php;
 		
@@ -1182,8 +1183,9 @@ function nuEventName($e){
 	
 	function nuExceptionHandler($e, $code){
 		
-		$ce	= $_POST['nuCustomEval'];
-		$se	= $_POST['nuSystemEval'];
+		$ce		= $_POST['nuProcedureEval'];
+		$se		= $_POST['nuSystemEval'];
+		
 		nuDisplayError("$ce $se<br>", "nuErrorPHP");
 		nuDisplayError($e->getFile(), 'eval');
 		nuDisplayError('<i>' . $e->getMessage() . '</i>', 'eval');

@@ -592,6 +592,267 @@ function nuGetFile(){
 	
 }
 
+function nuRenameSystemFiles(){
+    
+    $t      = [];
+    
+    $t[]	= 'zzzzsys_access';
+    $t[]	= 'zzzzsys_access_form';
+    $t[]	= 'zzzzsys_access_php';
+    $t[]	= 'zzzzsys_access_report';
+    $t[]	= 'zzzzsys_browse';
+    $t[]	= 'zzzzsys_debug';
+    $t[]	= 'zzzzsys_event';
+    $t[]	= 'zzzzsys_file';
+    $t[]	= 'zzzzsys_form';
+    $t[]	= 'zzzzsys_format';
+    $t[]	= 'zzzzsys_object';
+    $t[]	= 'zzzzsys_phinxlog';
+    $t[]	= 'zzzzsys_php';
+    $t[]	= 'zzzzsys_report';
+    $t[]	= 'zzzzsys_select';
+    $t[]	= 'zzzzsys_select_clause';
+    $t[]	= 'zzzzsys_session';
+    $t[]	= 'zzzzsys_setup';
+    $t[]	= 'zzzzsys_tab';
+    $t[]	= 'zzzzsys_table';
+    $t[]	= 'zzzzsys_timezone';
+    $t[]	= 'zzzzsys_translate';
+    $t[]	= 'zzzzsys_user';
+    
+    for($i = 0 ; $i < count($t) ; $i++){
+        
+        print "$table<br>";
+        
+        $table  = $t[$i];
+        
+        nuRunQuery("DROP TABLE IF EXISTS sys_$table");
+        nuRunQuery("CREATE TABLE sys_$table SELECT * FROM $table");
+        nuRunQuery("DROP TABLE IF EXISTS $table");
+        
+    }
+
+	nuRunQuery("DROP VIEW IF EXISTS zzzzsys_report_data");
+	nuRunQuery("DROP VIEW IF EXISTS zzzzsys_run_list");
+	
+	
+    print 'Done!';
+    
+}
+
+
+function nuRemoveSystemRecords(){
+   print 'gh<br>'; 
+	$ts		= nuBuildTableSchema();
+    $t      = [];
+    
+    $t[]	= 'zzzzsys_access';
+    $t[]	= 'zzzzsys_access_form';
+    $t[]	= 'zzzzsys_access_php';
+    $t[]	= 'zzzzsys_access_report';
+    $t[]	= 'zzzzsys_browse';
+    $t[]	= 'zzzzsys_debug';
+    $t[]	= 'zzzzsys_event';
+    $t[]	= 'zzzzsys_file';
+    $t[]	= 'zzzzsys_form';
+    $t[]	= 'zzzzsys_format';
+    $t[]	= 'zzzzsys_object';
+    $t[]	= 'zzzzsys_phinxlog';
+    $t[]	= 'zzzzsys_php';
+    $t[]	= 'zzzzsys_report';
+    $t[]	= 'zzzzsys_select';
+    $t[]	= 'zzzzsys_select_clause';
+    $t[]	= 'zzzzsys_session';
+    $t[]	= 'zzzzsys_setup';
+    $t[]	= 'zzzzsys_tab';
+    $t[]	= 'zzzzsys_table';
+    $t[]	= 'zzzzsys_timezone';
+    $t[]	= 'zzzzsys_translate';
+    $t[]	= 'zzzzsys_user';
+    
+    for($i = 0 ; $i < count($t) ; $i++){
+        
+        $table  = $t[$i];
+   print $table.'<br>'; 
+		$new	= $ts["$table"]['names'];
+		$old	= $ts["sys_$table"]['names'];
+		
+		
+		for($c = 0 ; $c < count($old) ; $c++){						//-- remove unused fields from old
+			
+			$field	= $old[$c];
+			
+			if(!in_array($field, $new)){
+    print 'aDDDDDDDDDDDDD<br>'.$field;
+				
+				$sql= "ALTER TABLE sys_$table DROP COLUMN $field";
+				
+				nuRunQuery($sql);
+				
+			}
+			
+		}
+		
+	}
+
+    for($i = 0 ; $i < count($t) ; $i++){
+        
+		$table  = $t[$i];
+		$ts		= nuBuildTableSchema();
+		$new	= $ts["$table"]['names'];
+		$old	= $ts["sys_$table"]['names'];
+		$newt	= $ts["$table"]['types'];
+		$oldt	= $ts["sys_$table"]['types'];
+		$lfield	= 'FIRST';
+
+		for($c = 0 ; $c < count($old) ; $c++){						//-- insert extra new fields into old
+			
+			$ofield	= $old[$c];
+			$nfield	= $new[$c];
+			$otype	= $oldt[$c];
+			$ntype	= $newt[$c];
+			
+			if($ofield != $nfield){
+    print 'aDDDDDDDDDDDDD<br>';
+				
+				$sql= "ALTER TABLE sys_$table ADD COLUMN $nfield $ntype $lfield";
+				nuRunQuery($sql);
+				print "$sql<br>";
+				
+			}else if($otype != $ntype){
+    print 'aaaaaaaaaaaaaaLTER<br>';
+				
+				$sql= "ALTER TABLE sys_$table MODIFY COLUMN $nfield $ntype";
+				nuRunQuery($sql);
+				print "$sql<br>";
+				
+			}
+			
+			$lfield	= "AFTER $ofield";
+			
+		}
+		
+	}
+	
+    print 'Done!';
+    
+}
+
+
+
+function nuRemoveSystemRecordsold(){
+    
+    //-- KEEP FORM with ids that start with 'nu'
+    
+    $s  =  "
+    DELETE FROM sys_zzzzsys_form 
+    WHERE zzzzsys_form_id NOT LIKE 'nu%' 
+    ";
+    
+    nuRunQuery($s);
+    
+    //-- KEEP TABs from FORMs with ids that start with 'nu'
+    
+    $s  =  "
+    DELETE FROM sys_zzzzsys_tab 
+    WHERE syt_zzzzsys_form_id NOT IN (SELECT zzzzsys_form_id FROM sys_zzzzsys_form)
+    ";
+    
+    nuRunQuery($s);
+    
+    //-- KEEP OBJECTs from TABs where FORMs with ids that start with 'nu'
+    
+    $s  =  "
+    DELETE FROM sys_zzzzsys_object 
+    WHERE sob_all_zzzzsys_tab_id NOT IN (SELECT zzzzsys_tab_id FROM sys_zzzzsys_tab)
+    ";
+    
+    nuRunQuery($s);
+    
+    //-- KEEP PHP with ids that start with 'nu' or match the above OBJECT list.
+    
+    
+    $s  =  "
+    DELETE FROM sys_zzzzsys_php 
+    WHERE sph_zzzzsys_form_id NOT LIKE 'nu%'
+    AND sph_zzzzsys_form_id NOT IN (SELECT zzzzsys_object_id FROM sys_zzzzsys_object)
+    ";
+    
+    nuRunQuery($s);
+    
+    //-- ADD PHP_LIBRARY records to PHP that links to ids that start with 'nu'.
+    
+    $s  =  "
+    DELETE FROM sys_zzzzsys_php 
+    WHERE sph_zzzzsys_form_id NOT LIKE 'nu%'
+    AND sph_zzzzsys_form_id NOT IN (SELECT zzzzsys_object_id FROM sys_zzzzsys_object)
+    ";
+    
+    nuRunQuery($s);
+    
+    
+    //-- PHP LIBRARY
+    
+    $s  =  "
+    DELETE FROM sys_zzzzsys_php_library 
+    WHERE spl_zzzzsys_php_id NOT IN (SELECT zzzzsys_php_id FROM sys_zzzzsys_php)
+    ";
+    
+    nuRunQuery($s);
+    
+    //-- KEEP BROWSEs from FORMs with ids that start with 'nu'
+    
+    $s  =  "
+    DELETE FROM sys_zzzzsys_browse 
+    WHERE sbr_zzzzsys_form_id NOT IN (SELECT zzzzsys_form_id FROM sys_zzzzsys_form)
+    ";
+    
+    nuRunQuery($s);
+    
+    
+    //-- KEEP EVENTs, from OBJECTs, from FORMs with ids that start with 'nu'
+    
+    $s  =  "
+    DELETE FROM sys_zzzzsys_event 
+    WHERE sev_zzzzsys_object_id NOT IN (SELECT zzzzsys_object_id FROM sys_zzzzsys_object)
+    ";
+    
+    nuRunQuery($s);
+    
+    //-- empty all other sys tables
+    
+    $d[] = 'zzzzsys_access';
+    $d[] = 'zzzzsys_access_form';
+    $d[] = 'zzzzsys_access_php';
+    $d[] = 'zzzzsys_access_report';
+    $d[] = 'zzzzsys_debug';
+    $d[] = 'zzzzsys_file';
+    $d[] = 'zzzzsys_format';
+    $d[] = 'zzzzsys_function';
+    $d[] = 'zzzzsys_select';
+    $d[] = 'zzzzsys_select_clause';
+    $d[] = 'zzzzsys_session';
+    $d[] = 'zzzzsys_setup';
+    $d[] = 'zzzzsys_timezone';
+    $d[] = 'zzzzsys_translate';
+    $d[] = 'zzzzsys_user';
+    
+    for($i = 0 ; $i < count($d) ; $i++){
+        
+        $table  = $d[$i];
+        
+        nuRunQuery("TRUNCATE sys_$table");
+        
+    }
+    
+    print 'Done!';
+    
+}
+
+
+
+
+
 
 
 ?>
