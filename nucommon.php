@@ -1093,7 +1093,25 @@ function nuBuildTableSchema(){
 	while($r = db_fetch_object($t)){
 		
 		$tn			= $r->table_name;
-		$a[$tn] 	= array('names' => db_field_names($tn), 'types' => db_field_types($tn), 'primary_key' => db_primary_key($tn));
+		$a[$tn] 	= array('names' => db_field_names($tn), 'types' => db_field_types($tn), 'primary_key' => db_primary_key($tn), 'valid' => 1);
+		
+	}
+	
+	return $a;
+
+}
+
+
+function nuListSystemTables(){
+
+	$a				= array();
+	$t				= nuRunQuery("SELECT table_name FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = DATABASE()");
+
+	while($r = db_fetch_object($t)){
+		
+		if(substr($r->table_name, 0, 8) == 'zzzzsys_'){
+			$a[]	= $r->table_name;
+		}
 		
 	}
 	

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 28, 2017 at 09:00 PM
+-- Generation Time: Oct 02, 2017 at 12:13 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -19,42 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `nubuilder4`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `aaa`
---
-
-CREATE TABLE `aaa` (
-  `aaa_id` varchar(25) NOT NULL,
-  `field00` varchar(1000) NOT NULL,
-  `field01` date NOT NULL,
-  `field02` varchar(1000) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `invoice`
---
-
-CREATE TABLE `invoice` (
-  `invoice_id` varchar(25) NOT NULL,
-  `inv_number` varchar(1000) NOT NULL,
-  `inv_date` date NOT NULL,
-  `inv_total` decimal(12,4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `invoice`
---
-
-INSERT INTO `invoice` (`invoice_id`, `inv_number`, `inv_date`, `inv_total`) VALUES
-('59a4b145a020907', '90', '2017-08-01', '234.0000'),
-('59a4b152292f2f9', '91', '2017-08-10', '444.0000'),
-('59a4b15ce8fb2ca', '92', '2017-08-23', '123.0000'),
-('59a4b16867e2711', '93', '2017-08-19', '76.0000');
 
 -- --------------------------------------------------------
 
@@ -1289,7 +1253,7 @@ INSERT INTO `zzzzsys_php` (`zzzzsys_php_id`, `sph_code`, `sph_description`, `sph
 ('5678ac0f8f3d3b8_AB', '5678ac0f8f3d3b8_AB', 'System PHP', 'nubuilder', '', '', '', '1', ''),
 ('s14968332683656_BB', 's14968332683656_BB', 'System PHP', 'nubuilder', '', '', '', '1', ''),
 ('59cadba20088e94', 'Tezt', 'xfgb', '', '$hw = ''bobby'';\n\nnudebug("$hw");\n\neval(nuProcedure(''HW''));\n\nnudebug(2222);', 'window', 'nublank', '', ''),
-('59cc21f3090a4e3', 'Updater2', 'Check Structure of Tables', 'nubuilder', '\nnuRemoveSystemRecords();\n', 'window', 'nublank', '', '');
+('59cc21f3090a4e3', 'Updater2', 'Check Structure of Tables', 'nubuilder', 'nuUpdateSystemRecords();\n', 'window', 'nublank', '', '');
 
 -- --------------------------------------------------------
 
@@ -1790,8 +1754,6 @@ CREATE TABLE `zzzzsys_table` (
 --
 
 INSERT INTO `zzzzsys_table` (`zzzzsys_table_id`) VALUES
-('aaa'),
-('invoice'),
 ('zzzzsys_access'),
 ('zzzzsys_access_form'),
 ('zzzzsys_access_php'),
@@ -1805,7 +1767,6 @@ INSERT INTO `zzzzsys_table` (`zzzzsys_table_id`) VALUES
 ('zzzzsys_object'),
 ('zzzzsys_phinxlog'),
 ('zzzzsys_php'),
-('zzzzsys_php_library'),
 ('zzzzsys_report'),
 ('zzzzsys_report_data'),
 ('zzzzsys_run_list'),
@@ -2481,18 +2442,6 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `aaa`
---
-ALTER TABLE `aaa`
-  ADD PRIMARY KEY (`aaa_id`);
-
---
--- Indexes for table `invoice`
---
-ALTER TABLE `invoice`
-  ADD PRIMARY KEY (`invoice_id`);
 
 --
 -- Indexes for table `zzzzsys_access`
