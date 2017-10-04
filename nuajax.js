@@ -178,6 +178,7 @@ function nuGetPHP(f, r){
 	
 }
 
+
 function nuRunPHP(pCode, iframe){
 	
 	if(window.nuBeforeSave){
@@ -242,6 +243,35 @@ function nuRunPHPHidden(i, h){
 		window.nuSERVERRESPONSE_HIDDEN	= fm;
 		eval(fm.callback + ';');
 			
+	};
+	
+	nuAjax(last,successCallback);
+	
+}
+
+
+function nuSystemUpdate(){
+	
+	var last				= nuFORM.addBreadcrumb();
+	
+	last.session_id			= nuSESSION;
+	last.call_type 			= 'systemupdate';
+	last.form_id 			= 'systemupdate';
+	last.nuFORMdata			= nuFORM.data();
+	last.hash  				= nuHashFromEditForm();
+	
+	var successCallback 	= function(data,textStatus,jqXHR){
+		
+		var fm				= data;
+		
+		if(!nuDisplayError(fm)){
+			
+			var pdfUrl		= 'nurunsystemupdate.php?i=' + fm.id;
+			
+			window.open(pdfUrl);
+			
+		}
+		
 	};
 	
 	nuAjax(last,successCallback);

@@ -6,6 +6,7 @@
 	require_once('nuform.php');
 	require_once('nudata.php');
     require_once('nudrag.php');
+	require_once('nusystemupdate.php'); 
 		
 	$_POST['nuCounter']						= rand(0, 999);
 	$_POST['nuErrors']						= array();
@@ -46,12 +47,13 @@
     	if($CT == 'runhtml')		{$f->forms[0]->id					= nuRunHTML();}
     	if($CT == 'update')			{$f->forms[0]->record_id			= nuUpdateDatabase();}
         if($CT == 'nudragsave')		{$f->forms[0]						= nuDragSave($P);}
+    	if($CT == 'systemupdate')	{$f->forms[0]->id					= nuRunSystemUpdate();}
 		
     }
-
+	
 	$f->forms[0]->user_id					= $U['USER_ID'];
 	$f->forms[0]->dimensions				= $formAndSessionData->dimensions;
-	$f->forms[0]->tableSchema				= nuUpdateTableSchema();//$formAndSessionData->tableSchema;
+	$f->forms[0]->tableSchema				= nuUpdateTableSchema();
 	$f->forms[0]->formSchema				= $formAndSessionData->formSchema;
 	$f->forms[0]->translation				= $formAndSessionData->translation;
 	$f->forms[0]->session_id				= $_SESSION['SESSION_ID'];

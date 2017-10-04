@@ -4,8 +4,6 @@ error_reporting( error_reporting() & ~E_NOTICE );
 
 require_once('nuconfig.php'); 
 require_once('nubuilders.php'); 
-//require_once('nuexception.php'); 
-//require_once('nuevalphpclass.php'); 
 require_once dirname(__FILE__) . '/nusqlclass.php';
 require_once dirname(__FILE__) . '/nusearchclass.php';
 require_once('nudatabase.php');
@@ -369,6 +367,7 @@ function nuRunReport($report_id){
 	$_POST['nuHash']['description']		= $ob->sre_description;
 	$_POST['nuHash']['sre_layout']		= nuReplaceHashVariables($ob->sre_layout);
 	$_POST['nuHash']['parentID']		= $ob->sre_zzzzsys_php_id;
+	$_POST['nuHash']['nuInstall']		= '0';
 	$j									= json_encode($_POST['nuHash']);
 
 	nuSetJSONData($id, $j);
@@ -376,6 +375,28 @@ function nuRunReport($report_id){
 	return $id;
 	
 }
+
+
+function nuInstall(){
+
+	$id									= nuID();
+	$s									= "SELECT * FROM zzzzsys_php WHERE sph_code = '$procedure_code'";
+	$t									= nuRunQuery($s);
+	$ob									= db_fetch_object($t);
+	$_POST['nuHash']['code']			= $ob->sph_code;
+	$_POST['nuHash']['description']		= $ob->sph_description;
+	$_POST['nuHash']['parentID']		= $ob->zzzzsys_php_id;
+	$_POST['nuHash']['nuInstall']		= '1';
+	$j									= json_encode($_POST['nuHash']);
+	
+
+
+	nuSetJSONData($id, $j);
+	
+	return $id;
+	
+}
+
 
 
 function nuRunPHP($procedure_code){
@@ -396,13 +417,14 @@ function nuRunPHP($procedure_code){
 	return $id;
 	
 }
+
+
 function nuRunPHPHidden($nuCode){
 	
 	$s						= "SELECT * FROM zzzzsys_php WHERE sph_code = ? ";
 	$t						= nuRunQuery($s, [$nuCode]);
 	$r						= db_fetch_object($t);
 	
-//	$evalPHP				= new nuEvalPHPClass($r->zzzzsys_php_id);
 	nuEval($r->zzzzsys_php_id);
 
 	$f						= new stdClass;
