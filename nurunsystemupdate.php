@@ -17,8 +17,10 @@ if($J != 'valid'){
 nuRenameAndDeleteSystemFiles();
 nuImportSystemFiles();
 nuUpdateSystemRecords();
+nuRemoveNuRecords();
+nuAppendToSystemTables();
 
+print '<br>All Done!<br><br>';
 
-print '<br>ok';
 
 ?>
