@@ -1152,6 +1152,49 @@ function nuBuildTableSchema(){
 }
 
 
+
+function nuUpdateFormSchema(){
+
+	$s 		= nuGetJSONData('clientFormSchema');
+	
+	if(is_null($s)){
+nudebug('form null');		
+		$s	= nuBuildFormSchema();
+		nuSetJSONData('clientFormSchema', $s);
+		
+		return $s;
+		
+	}else{
+nudebug('form not null');		
+		return [];
+	}
+	
+}
+
+
+
+function nuUpdateTableSchema(){
+
+	$s 		= nuGetJSONData('clientTableSchema');
+	
+	if(is_null($s)){
+nudebug('table null');		
+		
+		$s	= nuBuildTableSchema();
+
+		nuSetJSONData('clientTableSchema', $s);
+		
+		return $s;
+		
+	}else{
+nudebug('table not null');		
+		return [];
+	}
+	
+}
+
+
+
 function nuListSystemTables(){
 
 	$a				= array();

@@ -925,8 +925,6 @@ function nuGatherFormAndSessionData($home){
 	$formAndSessionData->call_type 		= $_POST['nuSTATE']['call_type'];
 	$formAndSessionData->filter 		= $_POST['nuFilter'];
 	$formAndSessionData->errors 		= array();
-	$formAndSessionData->formSchema 	= nuBuildFormSchema();
-	$formAndSessionData->tableSchema 	= nuBuildTableSchema();
 	$formAndSessionData->translation 	= $_SESSION['translation'];
 	$formAndSessionData->dimensions 	= nuFormDimensions($formAndSessionData->form_id);
 

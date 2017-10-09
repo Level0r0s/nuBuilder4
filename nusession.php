@@ -38,35 +38,7 @@ if(array_key_exists('nuSTATE', $_POST)){
                 $_SESSION['SafePHP']                = (isset($nuConfigSafePHP)  ? $nuConfigSafePHP  : array());
                 $_SESSION['tableList']            	= array();
                 $_SESSION['formSchema']             = array();
-/*
-                $formSchemaQRY                      = nuRunQuery("SELECT * FROM zzzzsys_form ORDER BY sfo_code");
-        		
-                while($formSchemaOBJ 				= db_fetch_object($formSchemaQRY)){
-        			
-                    $formID 						= $formSchemaOBJ->zzzzsys_form_id;
-                    $objectSchema 					= array();
-                    $objectSchemaQRY 				= nuRunQuery("SELECT * FROM zzzzsys_object WHERE sob_all_zzzzsys_form_id = '$formID' ORDER BY sob_all_id");
-        			
-                    while($objectSchemaOBJ = db_fetch_object($objectSchemaQRY)){
-        				
-                        if(in_array($objectSchemaOBJ->sob_all_type, array('input', 'lookup', 'select', 'textarea'))){
-        					
-        					$objectSchema[] 		= array(
-                                $objectSchemaOBJ->zzzzsys_object_id, 
-                                $objectSchemaOBJ->sob_all_id, 
-                                $objectSchemaOBJ->sob_all_label, 
-                                $objectSchemaOBJ->sob_all_type, 
-                                $objectSchemaOBJ->sob_input_type
-                            ); 
-        					
-                        }
-        				
-                    }
-        			
-                    $_SESSION['formSchema'][$formID] 		= $objectSchema;
-        			
-                }
-*/                
+				
 //==================================================  globeadmin
 
                 if($_POST['nuSTATE']['username'] == $nuConfigDBGlobeadminUsername && $_POST['nuSTATE']['password'] == $nuConfigDBGlobeadminPassword){
@@ -212,9 +184,6 @@ if(array_key_exists('nuSTATE', $_POST)){
                     $storeSessionInTableJSON, 
                     $_SESSION['SESSION_ID']
                 ));
-				
-				nuSetJSONData('clientTableSchema', []);
-				
 				
             } else {
 				

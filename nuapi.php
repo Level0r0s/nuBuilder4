@@ -7,13 +7,11 @@
 	require_once('nudata.php');
     require_once('nudrag.php');
 	require_once('nusystemupdate.php'); 
-		
+
 	$_POST['nuCounter']						= rand(0, 999);
 	$_POST['nuErrors']						= array();
 	$U										= nuGetUserAccess();
 	$formAndSessionData						= nuGatherFormAndSessionData($U['HOME_ID']);
-    $_POST['formSchema']	                = $formAndSessionData->formSchema;
-    $_POST['tableSchema']	                = $formAndSessionData->tableSchema;
 	$F										= $formAndSessionData->form_id;
 	$R										= $formAndSessionData->record_id;
 	$P										= $_POST['nuSTATE'];
@@ -55,7 +53,7 @@
 	$f->forms[0]->user_id					= $U['USER_ID'];
 	$f->forms[0]->dimensions				= $formAndSessionData->dimensions;
 	$f->forms[0]->tableSchema				= nuUpdateTableSchema();
-	$f->forms[0]->formSchema				= nuUpdateFormSchema(); //$formAndSessionData->formSchema;
+	$f->forms[0]->formSchema				= nuUpdateFormSchema();
 	$f->forms[0]->translation				= $formAndSessionData->translation;
 	$f->forms[0]->session_id				= $_SESSION['SESSION_ID'];
 	$f->forms[0]->callback					= $_POST['nuCallback'];
