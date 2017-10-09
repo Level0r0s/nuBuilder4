@@ -225,6 +225,28 @@ function nuUpdateTables(){
 }
 
 
+
+
+function nuUpdateFormSchema(){
+
+	$fs	= $_POST['formSchema'];
+	$a 	= json_encode($fs);
+	$b 	= json_encode(nuGetJSONData('clientFormSchema'));
+	
+	if($a == $b){
+		return [];
+	}else{
+		
+		nuSetJSONData('clientFormSchema', $fs);
+		
+		return $fs;
+		
+	}
+	
+}
+
+
+
 function nuUpdateTableSchema(){
 
 	$ts	= $_POST['tableSchema'];

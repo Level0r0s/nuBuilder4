@@ -38,6 +38,7 @@ if(array_key_exists('nuSTATE', $_POST)){
                 $_SESSION['SafePHP']                = (isset($nuConfigSafePHP)  ? $nuConfigSafePHP  : array());
                 $_SESSION['tableList']            	= array();
                 $_SESSION['formSchema']             = array();
+/*
                 $formSchemaQRY                      = nuRunQuery("SELECT * FROM zzzzsys_form ORDER BY sfo_code");
         		
                 while($formSchemaOBJ 				= db_fetch_object($formSchemaQRY)){
@@ -65,7 +66,7 @@ if(array_key_exists('nuSTATE', $_POST)){
                     $_SESSION['formSchema'][$formID] 		= $objectSchema;
         			
                 }
-                
+*/                
 //==================================================  globeadmin
 
                 if($_POST['nuSTATE']['username'] == $nuConfigDBGlobeadminUsername && $_POST['nuSTATE']['password'] == $nuConfigDBGlobeadminPassword){

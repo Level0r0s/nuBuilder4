@@ -15,7 +15,6 @@ function nuBeforeBrowse($f){
 	
 	$_POST['nuMessages']	= [];
 	$r						= nuFormProperties($f);
-//	$evalPHP 				= new nuEvalPHPClass($f . '_BB');
 	nuEval($f . '_BB');
 	
 }
@@ -28,7 +27,6 @@ function nuBeforeEdit($f, $r){
 
 	if($_POST['nuSTATE']['call_type'] == 'getform' and $r == ''){return;}
 	
-//	$evalPHP 				= new nuEvalPHPClass($f . '_BE');
 	nuEval($f . '_BE');
     $GLOBALS['EXTRAJS']		.= $r->sfo_javascript;
 	
@@ -70,7 +68,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
     ORDER BY (sob_all_type = 'run'), sob_all_zzzzsys_tab_id, sob_all_order    
 
     ";
-nudebug($F, $s);
+	
 	if($R != ''){
 		
 		$t 							= nuRunQuery($s, array($F));
@@ -236,7 +234,7 @@ nudebug($F, $s);
 			$a[]    		= $o;
 			
 		}
-nudebug(count($a), $a);		
+		
 	}
 
     $f->tabs 				= nuRefineTabList($tabs);
@@ -927,8 +925,8 @@ function nuGatherFormAndSessionData($home){
 	$formAndSessionData->call_type 		= $_POST['nuSTATE']['call_type'];
 	$formAndSessionData->filter 		= $_POST['nuFilter'];
 	$formAndSessionData->errors 		= array();
+	$formAndSessionData->formSchema 	= nuBuildFormSchema();
 	$formAndSessionData->tableSchema 	= nuBuildTableSchema();
-	$formAndSessionData->formSchema 	= $_SESSION['formSchema'];
 	$formAndSessionData->translation 	= $_SESSION['translation'];
 	$formAndSessionData->dimensions 	= nuFormDimensions($formAndSessionData->form_id);
 

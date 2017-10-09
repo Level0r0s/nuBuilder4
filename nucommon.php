@@ -1107,6 +1107,34 @@ function nuHash(){
 }
 
 
+function nuBuildFormSchema(){
+
+	$T				= nuRunQuery("SELECT * FROM zzzzsys_form ORDER BY sfo_code");
+	$fs				= [];
+
+	while($r = db_fetch_object($T)){
+		
+		$f 			= $r->zzzzsys_form_id;
+		$a 			= array();
+		$t 			= nuRunQuery("SELECT * FROM zzzzsys_object WHERE sob_all_zzzzsys_form_id = '$f' ORDER BY sob_all_id");
+		
+		while($r = db_fetch_object($t)){
+			
+			if(in_array($r->sob_all_type, array('input', 'lookup', 'select', 'textarea'))){
+				$a[]= array($r->zzzzsys_object_id, $r->sob_all_id, $r->sob_all_label, $r->sob_all_type, $r->sob_input_type); 
+			}
+			
+		}
+		
+		$fs[$f]		= $a;
+		
+	}
+
+	return $fs;
+
+}
+
+
 function nuBuildTableSchema(){
 
 	$a				= array();
