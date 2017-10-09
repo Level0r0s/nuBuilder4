@@ -1179,98 +1179,176 @@ function nuEventName($e){
 }
 
 
-	
-	function nuEval($phpid){
 
-		$s						= "SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = ? ";
-		$t						= nuRunQuery($s, [$phpid]);
-		$r						= db_fetch_object($t);
-		
-		if(trim($r->sph_php) == ''){return;}
-		
-		$code					= $r->sph_code;
-		$php					= nuReplaceHashVariables($r->sph_php);
-		$_POST['nuSystemEval']	= nuEvalMessage($phpid, $code);
-		
-		try{
-			eval($php); 
-		}catch(Throwable $e){
-			nuExceptionHandler($e, $code);   
-		}catch(Exception $e){
-			nuExceptionHandler($e, $code);
-		}
-	
-		$_POST['nuProcedureEval']	=  '';
-		$_POST['nuSystemEval']	=  '';
-		
-	}
-	
-	
-	
-	function nuProcedure($c){
+function nuEval($phpid){
 
-		$s							= "SELECT * FROM zzzzsys_php WHERE sph_code = ? ";
-		$t							= nuRunQuery($s, [$c]);
-		$r							= db_fetch_object($t);
-		$php						= nuReplaceHashVariables($r->sph_php);
-		$php						= "$php \n\n//--Added by nuProcedure()\n\n$"."_POST['nuProcedureEval'] = '';";
-		$_POST['nuProcedureEval']	= "Procedure <b>$r->sph_code</b> - run inside ";
-		
-		return $php;
-		
+	$s						= "SELECT * FROM zzzzsys_php WHERE zzzzsys_php_id = ? ";
+	$t						= nuRunQuery($s, [$phpid]);
+	$r						= db_fetch_object($t);
+	
+	if(trim($r->sph_php) == ''){return;}
+	
+	$code					= $r->sph_code;
+	$php					= nuReplaceHashVariables($r->sph_php);
+	$_POST['nuSystemEval']	= nuEvalMessage($phpid, $code);
+	
+	try{
+		eval($php); 
+	}catch(Throwable $e){
+		nuExceptionHandler($e, $code);   
+	}catch(Exception $e){
+		nuExceptionHandler($e, $code);
 	}
-	
-	
-	function nuExceptionHandler($e, $code){
-		
-		$ce		= $_POST['nuProcedureEval'];
-		$se		= $_POST['nuSystemEval'];
-		
-		nuDisplayError("$ce $se<br>", "nuErrorPHP");
-		nuDisplayError($e->getFile(), 'eval');
-		nuDisplayError('<i>' . $e->getMessage() . '</i>', 'eval');
-		nuDisplayError('<br><b><i>Traced from...</i></b><br>', 'nuErrorPHP');
-		
-		$a		= $e->getTrace();
-		$t		= array_reverse($a);
 
-		for($i = 0 ; $i < count($t) ; $i++){
-			
-			$m	= '(line:<i>' . $t[$i]['line'] . '</i>) ' . $t[$i]['file'] . ' <b> - ' . $t[$i]['function'] . '<b>';
-			
-			nuDisplayError($m . '<br>', 'eval');
-			
-		}
+	$_POST['nuProcedureEval']	=  '';
+	$_POST['nuSystemEval']	=  '';
+	
+}
+
+
+
+function nuProcedure($c){
+
+	$s							= "SELECT * FROM zzzzsys_php WHERE sph_code = ? ";
+	$t							= nuRunQuery($s, [$c]);
+	$r							= db_fetch_object($t);
+	$php						= nuReplaceHashVariables($r->sph_php);
+	$php						= "$php \n\n//--Added by nuProcedure()\n\n$"."_POST['nuProcedureEval'] = '';";
+	$_POST['nuProcedureEval']	= "Procedure <b>$r->sph_code</b> - run inside ";
+	
+	return $php;
+	
+}
+
+
+function nuExceptionHandler($e, $code){
+	
+	$ce		= $_POST['nuProcedureEval'];
+	$se		= $_POST['nuSystemEval'];
+	
+	nuDisplayError("$ce $se<br>", "nuErrorPHP");
+	nuDisplayError($e->getFile(), 'eval');
+	nuDisplayError('<i>' . $e->getMessage() . '</i>', 'eval');
+	nuDisplayError('<br><b><i>Traced from...</i></b><br>', 'nuErrorPHP');
+	
+	$a		= $e->getTrace();
+	$t		= array_reverse($a);
+
+	for($i = 0 ; $i < count($t) ; $i++){
+		
+		$m	= '(line:<i>' . $t[$i]['line'] . '</i>) ' . $t[$i]['file'] . ' <b> - ' . $t[$i]['function'] . '<b>';
+		
+		nuDisplayError($m . '<br>', 'eval');
 		
 	}
 	
+}
+
+
+function nuEvalMessage($phpid, $code){
 	
-	function nuEvalMessage($phpid, $code){
+	$i			= explode('_', $phpid);
+	
+	if(count($i) == 1){
+		return "Procedure <b>$code</b>";
+	}
+	
+	if($i[1] != 'AB'){
 		
-		$i			= explode('_', $phpid);
-		
-		if(count($i) == 1){
-			return "Procedure <b>$code</b>";
-		}
-		
-		if($i[1] != 'AB'){
-			
-			$event	= nuEventName($i[1]);
-			$s		= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = ?	";
-			$t		= nuRunQuery($s, [$i[0]]);
-			$O		= db_fetch_object($t);
-		
-			return "<i>$event</i> of Form <b>$O->sfo_code</b>";
-			
-		}
-			
-		$s			= "SELECT * FROM zzzzsys_object JOIN zzzzsys_form ON zzzzsys_form_id = sob_all_zzzzsys_form_id	WHERE zzzzsys_object_id = ?	";
-		$t			= nuRunQuery($s, [$i[0]]);
-		$O			= db_fetch_object($t);
-		
-		return "<i>Before Browse</i> of Object <b>$O->sob_all_id</b> on Form <b>$O->sfo_code</b>";
+		$event	= nuEventName($i[1]);
+		$s		= "SELECT * FROM zzzzsys_form WHERE zzzzsys_form_id = ?	";
+		$t		= nuRunQuery($s, [$i[0]]);
+		$O		= db_fetch_object($t);
+	
+		return "<i>$event</i> of Form <b>$O->sfo_code</b>";
 		
 	}
+		
+	$s			= "SELECT * FROM zzzzsys_object JOIN zzzzsys_form ON zzzzsys_form_id = sob_all_zzzzsys_form_id	WHERE zzzzsys_object_id = ?	";
+	$t			= nuRunQuery($s, [$i[0]]);
+	$O			= db_fetch_object($t);
+	
+	return "<i>Before Browse</i> of Object <b>$O->sob_all_id</b> on Form <b>$O->sfo_code</b>";
+	
+}
+
+
+function nuUpdateSystemIds(){
+
+	nuUpdateObjectIds();
+	nuUpdateTabIds();
+
+	nuUpdateTableIds('zzzzsys_browse');
+	nuUpdateTableIds('zzzzsys_event');
+
+}
+
+
+function nuUpdateTabIds(){
+
+	$s		= 'SELECT * FROM zzzzsys_tab';
+	$t		= nuRunQuery($s);
+	
+	while($r = db_fetch_object($t)){
+		
+		$i	= $r->zzzzsys_tab_id;
+		$n	= nuID();
+		
+		$b	= "UPDATE zzzzsys_tab 		SET zzzzsys_tab_id = 'nu$n' 		WHERE zzzzsys_tab_id = ? ";
+		$o	= "UPDATE zzzzsys_object 	SET sob_all_zzzzsys_tab_id = 'nu$n'	WHERE sob_all_zzzzsys_tab_id = ? ";
+		
+		nuRunQuery($o, [$i]);
+		print "$o<br>";
+		nuRunQuery($b, [$i]);
+		print "$b<br>";
+	}
+	
+}
+
+
+function nuUpdateObjectIds(){
+
+	$s		= 'SELECT * FROM zzzzsys_object';
+	$t		= nuRunQuery($s);
+	
+	while($r = db_fetch_object($t)){
+		
+		$i	= $r->zzzzsys_object_id;
+		$n	= nuID();
+		$a	= $i . '_AB';
+		
+		$o	= "UPDATE zzzzsys_object 	SET zzzzsys_object_id = 'nu$n' 		WHERE zzzzsys_object_id = ? ";
+		$e	= "UPDATE zzzzsys_event 	SET sev_zzzzsys_object_id = 'nu$n' 	WHERE sev_zzzzsys_object_id = ? ";
+		$p	= "UPDATE zzzzsys_php 		SET zzzzsys_php_id = 'nu$n_AB' 		WHERE zzzzsys_php_id = ? ";
+		
+		nuRunQuery($o, [$i]);
+		nuRunQuery($e, [$i]);
+		nuRunQuery($p, [$a]);
+		print "$o<br>";
+	}
+	
+}
+
+
+function nuUpdateTableIds($table){
+
+	$id		= $table . '_id';
+	$s		= "SELECT $id FROM $table";
+	$t		= nuRunQuery($s);
+		
+	while($r = db_fetch_row($t)){
+		
+		$i	= $r[0];
+		$n	= nuID();
+		$u	=  "UPDATE $table SET $id = 'nu$n' WHERE $id = ? ";
+		
+		nuRunQuery($u, [$i]);
+		
+		print "$u<br>";
+		
+	}
+	
+}
 
 
 

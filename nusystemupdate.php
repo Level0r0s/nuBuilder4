@@ -256,7 +256,7 @@ function nuRemoveNuRecords(){
     
 	$O	= nuTT();
 	
-    $s  =  "CREATE TABLE $O SELECT zzzzsys_object_id FROM sys_zzzzsys_object WHERE sob_all_zzzzsys_form_id LIKE 'nu%' ";   		//-- create table with form ids that start with 'nu'
+    $s  =  "DELETE FROM sys_zzzzsys_object WHERE sob_all_zzzzsys_form_id LIKE 'nu%' ";   										//-- delete all objects on forms with ids that start with 'nu'
     nuRunQuery($s);
     print "$s<br>";
 	
@@ -268,10 +268,6 @@ function nuRemoveNuRecords(){
     nuRunQuery($s);
     print "$s<br>";
     
-    $s  =  "DELETE FROM sys_zzzzsys_object WHERE sob_all_zzzzsys_form_id LIKE 'nu%'";    										//-- delete records that have form ids starting with 'nu'
-    nuRunQuery($s);
-    print "$s<br>";
-    
     $s  =  "DELETE FROM sys_zzzzsys_php WHERE sph_zzzzsys_form_id LIKE 'nu%' OR zzzzsys_php_id LIKE 'nu%' ";    				//-- delete records that start with ids starting with 'nu' or linked to forms starting with 'nu'
     nuRunQuery($s);
     print "$s<br>";
@@ -280,7 +276,7 @@ function nuRemoveNuRecords(){
     nuRunQuery($s);
     print "$s<br>";
     
-    $s  =  "DELETE FROM sys_zzzzsys_event WHERE sev_zzzzsys_object_id IN (SELECT * FROM $O)";    								//-- delete if attached to objects on forms with ids starting with 'nu'
+    $s  =  "DELETE FROM sys_zzzzsys_event WHERE zzzzsys_event_id LIKE 'nu%'";   				 								//-- delete if attached to objects on forms with ids starting with 'nu'
     nuRunQuery($s);
     print "$s<br>";
     

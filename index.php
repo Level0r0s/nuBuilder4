@@ -38,6 +38,7 @@ function nuHeader(){
 
     $getHTMLHeaderQRY 	= $nuDB->prepare($getHTMLHeaderSQL);
     $HTMLHeader 		= '';
+	
     try {
 		
         $getHTMLHeaderQRY->execute();
@@ -136,12 +137,14 @@ window.nuHASH			= [];
 <?php
     require('nuconfig.php');
 
-	$welcome			= AddSlashes($nuWelcomeBodyInnerHTML);
-	$nuHeader			= nuHeader();
-    $opener             = '';
-    $search             = '';
-    $iframe             = '';
-    $target             = '';
+	$nuWelcomeBodyInnerHTML	= (isset($nuWelcomeBodyInnerHTML)?$nuWelcomeBodyInnerHTML:'');
+	$welcome				= AddSlashes($nuWelcomeBodyInnerHTML);
+	$nuHeader				= nuHeader();
+    $opener         	    = '';
+    $search             	= '';
+    $iframe					= '';
+    $target					= '';
+	
     if(isset($_GET['opener']))
        $opener = $_GET['opener'];
     if(isset($_GET['search']))

@@ -70,7 +70,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
     ORDER BY (sob_all_type = 'run'), sob_all_zzzzsys_tab_id, sob_all_order    
 
     ";
-
+nudebug($F, $s);
 	if($R != ''){
 		
 		$t 							= nuRunQuery($s, array($F));
@@ -236,7 +236,7 @@ function nuGetFormObject($F, $R, $OBJS, $P = stdClass){
 			$a[]    		= $o;
 			
 		}
-		
+nudebug(count($a), $a);		
 	}
 
     $f->tabs 				= nuRefineTabList($tabs);

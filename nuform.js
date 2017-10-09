@@ -1622,6 +1622,12 @@ function nuOptions(p, f, t, access){
 }
 
 
+function nuAllowChanges(f){
+	return nuSERVERRESPONSE.form_access == 0 || String(f).substr(0,2) != 'nu' || f == 'nuuserhome';
+}
+
+
+
 function nuGetOptionsList(f, t, p, a, type){
 
 	var u		= nuFORM.getProperty('user_id');
@@ -1632,11 +1638,11 @@ function nuGetOptionsList(f, t, p, a, type){
 
 		list.push(['Searchable Columns', 	'nuGetSearchList()', 						'graphics/nu_option_searchable.png', 	'Ctrl+Shft+C']);
 
-		if(a == 1){
+		if(a == 1 || f == 'nuuserhome'){
 			
-			if(nuSERVERRESPONSE.form_access == 0 || String(f).substr(0,2) != 'nu'){
+//			if(nuSERVERRESPONSE.form_access == 0 || String(f).substr(0,2) != 'nu'){
+			if(nuAllowChanges(f)){
 			
-//				list.push(['Arrange Objects', 		'nuPopup("' + f + '", "-2")', 			'graphics/nu_option_arrange.png', 		'Ctrl+Shft+A']);
 				list.push(['Form Properties', 		'nuPopup("nuform", "' + f + '")', 		'graphics/nu_option_properties.png',	'Ctrl+Shft+F']);
 				list.push(['Form Object List', 		'nuPopup("nuobject", "", "' + f + '")', 'graphics/nu_option_objects.png',		'Ctrl+Shft+O']);
 				
@@ -1658,9 +1664,10 @@ function nuGetOptionsList(f, t, p, a, type){
 	
 	if(nuFormType() == 'edit'){
 
-		if(a == 1){
+		if(a == 1 || f == 'nuuserhome'){
 			
-			if(nuSERVERRESPONSE.form_access == 0 || String(f).substr(0,2) != 'nu'){
+//			if(nuSERVERRESPONSE.form_access == 0 || String(f).substr(0,2) != 'nu'){
+			if(nuAllowChanges(f)){
 			
 				list.push(['Arrange Objects', 		'nuPopup("' + f + '", "-2")', 			'graphics/nu_option_arrange.png', 		'Ctrl+Shft+A']);
 				list.push(['Form Properties', 		'nuPopup("nuform", "' + f + '")', 		'graphics/nu_option_properties.png',	'Ctrl+Shft+F']);
