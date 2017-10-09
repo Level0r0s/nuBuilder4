@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 09, 2017 at 04:51 PM
+-- Generation Time: Oct 09, 2017 at 07:48 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -801,7 +801,7 @@ INSERT INTO `zzzzsys_php` (`zzzzsys_php_id`, `sph_code`, `sph_description`, `sph
 ('nuaccessreport_BB', 'nuaccessreport_BB', 'System PHP', 'nubuilder', '', '', '', '1', ''),
 ('nufrlaunch_BE', 'nufrlaunch_BE', 'System PHP', 'nubuilder', 'nudebug(9);', '', '', '1', ''),
 ('nutranslate_BE', 'nutranslate_BE', 'System PHP', 'nubuilder', '\n$t          = nuRunQuery("SELECT MAX(trl_language) FROM zzzzsys_translate GROUP BY trl_language");\n$a          = [];\n\nwhile($r = db_fetch_row($t)){\n    $a[]    = $r[0];    \n}\n\n$j          = json_encode($a);\n$f          = "\n\nfunction nuLanguages(){\n    \n    return $j;\n    \n}\n\n";\n\nnuAddJavascript($f);', '', '', '1', ''),
-('nuhome_BE', 'nuhome_BE', 'System PHP', 'nubuilder', '$a  =       [''LUJSTA'',''FLOWB'',''JSTA'',''LUJS'',''JS'',''FLOW'',''PB'',''PE'',''BB'',''AB'',''BE'',''BS'',''AS'',''BD'',''AD'',''BBTA'',''ABTA'',''BETA'',''BSTA'',''ASTA'',''BDTA'',''ADTA'',''DB'',''SET'',''F'',''U'',''KEY'',''UH'',''FF'',''P'',''FMT'',''R'',''BUT'',''RR'',''FILE'', ''RP'',''FR'',''OB'',''SQL'', ''BRO'', ''BS'', ''AS'', ''BD'', ''AD'', ''TR'',''DOWN'',''HOR'', ''VER'',''UP'',''TALL'',''SHORT'',''TOP'',''BOTTOM'',''LEFT'',''RIGHT'',''THIN'',''WIDE'',''SU''];\n\n\nnudebug(''steven'');\n\n\n\n$hw = ''hw is bob'';\n$p = nuProcedure(''HW'');\neval($p);\nnuPreloadImages($a);\n\n', '', '', '1', ''),
+('nuhome_BE', 'nuhome_BE', 'System PHP', 'nubuilder', '\n$a  = [''LUJSTA'',''FLOWB'',''JSTA'',''LUJS'',''JS'',''FLOW'',''PB'',''PE'',''BB'',''AB'',''BE'',''BS'',''AS'',''BD'',''AD'',''BBTA'',''ABTA'',''BETA'',''BSTA'',''ASTA'',''BDTA'',''ADTA'',''DB'',''SET'',''F'',''U'',''KEY'',''UH'',''FF'',''P'',''FMT'',''R'',''BUT'',''RR'',''FILE'', ''RP'',''FR'',''OB'',''SQL'', ''BRO'', ''BS'', ''AS'', ''BD'', ''AD'', ''TR'',''DOWN'',''HOR'', ''VER'',''UP'',''TALL'',''SHORT'',''TOP'',''BOTTOM'',''LEFT'',''RIGHT'',''THIN'',''WIDE'',''SU''];\n$s  = nuGetJSONData(''nufirsttime'');\n	\nif(is_null($s)){\n    \n    nuSetJSONData(''nufirsttime'',''non'');\n    nuPreloadImages($a);\n    \n}\n\n', '', '', '1', ''),
 ('nufile_BB', 'nufile_BB', 'System PHP', 'nubuilder', 'nudebug(''userid:#USER_ID#'');', '', '', '1', ''),
 ('nuphp_AD', 'nuphp_AD', 'System PHP', 'nubuilder', '', '', '', '1', ''),
 ('nuform_BE', 'nuform_BE', 'System PHP', 'nubuilder', '', '', '', '1', ''),

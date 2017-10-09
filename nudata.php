@@ -176,7 +176,9 @@ function nuUpdateDatabase(){
 
 					if($edit[$R] == 1 or $isAN){														//-- has been edited
 					
-						if(in_array($fields[$R], $_POST['tableSchema'][$table]['names'])){				//-- valid field names
+						$cts		= nuGetJSONData('clientTableSchema');
+					
+						if(in_array($fields[$R], $cts[$table]['names'])){				//-- valid field names
 
 							if($isAN){
 								$v	= nuAutoNumber($sf->object_id, $fields[$R], $row[$R]);
