@@ -252,6 +252,8 @@ function nuRunPHPHidden(i, h){
 
 function nuSystemUpdate(){
 	
+    if(confirm("Update System?") == false){return;}
+	
 	var last				= nuFORM.addBreadcrumb();
 	
 	last.session_id			= nuSESSION;
