@@ -229,6 +229,12 @@ function nuBuildFastForm($table, $form_type){
 	}else{
 	
 			
+		//----------make sure button has a tab--------------------
+		
+
+		$sql            = "REPLACE INTO zzzzsys_tab (zzzzsys_tab_id, syt_zzzzsys_form_id, syt_title, syt_order) VALUES ('nufastforms', 'nuuserform', 'Fast Forms', -1);";
+		nuRunQuery($sql);
+
 		//----------add run button--------------------
 
 		$sql            = "
@@ -259,13 +265,13 @@ function nuBuildFastForm($table, $form_type){
 
 		";
 		$record_id		= substr($form_type, 0, 6) == 'browse' ? '' : '-1';
-		$array          = Array(nuID(), 'nuhome', 'nutesttab', "ff$form_id", $table, $table, 11, 63, 250, 150, 30, $form_id, $record_id, 'b', 0, 0, 0, 'center', 'run');
+		$array          = Array(nuID(), 'nuuserhome', 'nufastforms', "ff$form_id", $table, $table, 11, 63, 250, 150, 30, $form_id, $record_id, 'b', 0, 0, 0, 'center', 'run');
 		nuRunQuery($sql, $array);
 
 		$js	= "
 		
 			var m1	= '<h1>A $mess been created!</h1>';
-			var m2	= '<p>(There is now a Button called <b>$table</b> on the <b>Testing</b> tab of the Home Form)</p>';
+			var m2	= '<p>(There is now a Button called <b>$table</b> on the <b>Fast Forms</b> tab of the <b>User Home</b> Form)</p>';
 
 			nuMessage([m1, m2]);
 			
