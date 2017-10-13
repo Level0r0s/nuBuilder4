@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 13, 2017 at 07:55 PM
+-- Generation Time: Oct 14, 2017 at 12:22 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -524,9 +524,9 @@ INSERT INTO `zzzzsys_object` (`zzzzsys_object_id`, `sob_all_zzzzsys_form_id`, `s
 ('nu59e0fdb78563c2f', 'nubrowse', 'zzzzsys_browse', 'select', 'sbr_format', 'Format', 'nu59e0fdb7b540b90', 40, 86, 69, 115, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '0', 'SELECT \n   CONCAT(LEFT(srm_type, 1), ''|'', TRIM(srm_format)) AS a, \n   srm_format AS b \nFROM zzzzsys_format\nORDER BY srm_type', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
 ('nu59e0fdb7857d518', 'nubrowse', 'zzzzsys_browse', 'input', 'sbr_width', 'Width', 'nu59e0fdb7b540b90', 50, 112, 69, 50, 20, '1', 'right', '1', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'number', '', '', ''),
 ('nu59e0fdb785bf519', 'nubrowse', 'zzzzsys_browse', 'input', 'sbr_order', 'Order', 'nu59e0fdb7b540b90', 60, 138, 69, 50, 20, '1', 'right', '1', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'number', '', '', ''),
-('nu59e0fdb785eba4a', 'nuform', 'zzzzsys_form', 'subform', 'zzzzsys_tab_sf', 'Tabs', 'nu59e0fdb7b0f8de1', 60, 142, 114, 478, 149, '0', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'nutab', 'syt_zzzzsys_form_id', '1', '1', 'g', 'zzzzsys_tab', 0, '', '', '', '', ''),
-('nu59e0fdb7865dbe4', 'nutab', 'zzzzsys_tab', 'input', 'syt_title', 'Title', 'nu59e0fdb7b9f4198', 0, 10, 100, 130, 18, '1', 'left', '1', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
-('nu59e0fdb786fddfc', 'nutab', 'zzzzsys_tab', 'input', 'syt_order', 'Order', 'nu59e0fdb7b9f4198', 0, 40, 100, 46, 18, '1', 'right', '1', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'number', '', '', ''),
+('nu59e0fdb785eba4a', 'nuform', 'zzzzsys_form', 'subform', 'zzzzsys_tab_sf', 'Tabs', 'nu59e0fdb7b0f8de1', 60, 142, 114, 478, 149, '0', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'nutab', 'syt_zzzzsys_form_id', '1', '1', 'f', 'zzzzsys_tab', 0, '', '', '', '', ''),
+('nu59e0fdb7865dbe4', 'nutab', 'zzzzsys_tab', 'input', 'syt_title', 'Title', 'nu59e0fdb7b9f4198', 10, 10, 100, 130, 18, '1', 'left', '1', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
+('nu59e0fdb786fddfc', 'nutab', 'zzzzsys_tab', 'input', 'syt_order', 'Order', 'nu59e0fdb7b9f4198', 20, 31, 100, 46, 18, '1', 'right', '1', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'number', '', '', ''),
 ('nu59e0fdb7873a534', 'nuform', 'zzzzsys_form', 'input', 'bb_event', 'Before Browse', 'nu59e0fdb7bd0b5d0', 150, 26, 79, 150, 29, '1', 'center', '0', '0', '', '', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'button', '', '', ''),
 ('nu59e0fdb78788ca6', 'nubuildreport', 'zzzzsys_report', 'input', 'open_builder', 'Report Designer', 'nu59e0fdb7b18a053', 60, 181, 236, 100, 18, '1', 'center', '0', '0', '', '', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'button', '', '', ''),
 ('nu59e0fdb787c15cd', 'nubuildreport', 'zzzzsys_report', 'textarea', 'sre_layout', 'Layout', 'nu59e0fdb7b18a053', 70, 226, 236, 300, 100, '1', 'left', '0', '2', '', '', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', '', ''),
@@ -787,7 +787,7 @@ INSERT INTO `zzzzsys_object` (`zzzzsys_object_id`, `sob_all_zzzzsys_form_id`, `s
 ('nu59e0fdb7b02d2c4', 'nutranslate', 'zzzzsys_translate', 'input', 'nuwiki', '?', 'nu59e0fdb7bb6816b', 80, 0, 0, 21, 21, '1', 'center', '1', '0', '', '', '', '', '', 'b', '-1', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'button', '', '', ''),
 ('nu59e0fdb7b046e65', 'nuformat', 'zzzzsys_format', 'input', 'nuwiki', '?', 'nu59e0fdb7bcc1919', 70, 0, 0, 21, 21, '1', 'center', '1', '0', '', '', '', '', '', 'b', '-1', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'button', '', '', ''),
 ('nu59e0fdb7b060d4e', 'nuselect', 'zzzzsys_select', 'input', 'nuwiki', '?', 'nu59e0fdb7be1e7da', 80, 0, 0, 21, 21, '1', 'center', '1', '0', '', '', '', '', '', 'b', '-1', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'button', '', '', ''),
-('nu59e0fdb7b07d828', 'nutab', 'zzzzsys_tab', 'input', 'syt_help', 'Help', 'nu59e0fdb7b9f4198', 0, 40, 100, 250, 18, '1', 'right', '1', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'number', '', '', '');
+('nu59e0fdb7b07d828', 'nutab', 'zzzzsys_tab', 'input', 'syt_help', 'Help', 'nu59e0fdb7b9f4198', 30, 52, 100, 250, 18, '1', 'left', '1', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -1005,8 +1005,8 @@ CREATE TABLE `zzzzsys_tab` (
 --
 
 INSERT INTO `zzzzsys_tab` (`zzzzsys_tab_id`, `syt_zzzzsys_form_id`, `syt_title`, `syt_order`, `syt_help`) VALUES
-('nu59e0fdb7b0ba734', 'nuform', 'Browse', 20, ''),
-('nu59e0fdb7b0f8de1', 'nuform', 'Main', 10, ''),
+('nu59e0fdb7b0ba734', 'nuform', 'Browse', 20, 'window.open(''http://wiki.nubuilder.net/nubuilderforte/index.php/Forms'');'),
+('nu59e0fdb7b0f8de1', 'nuform', 'Main', 10, 'window.open(''http://wiki.nubuilder.net/nubuilderforte/index.php/Forms'');'),
 ('nu59e0fdb7b141272', 'nuhome', 'Setup', 10, ''),
 ('nu59e0fdb7b18a053', 'nubuildreport', 'Report', 10, ''),
 ('nu59e0fdb7b540b90', 'nubrowse', 'Browse', 10, ''),
@@ -1049,7 +1049,7 @@ INSERT INTO `zzzzsys_tab` (`zzzzsys_tab_id`, `syt_zzzzsys_form_id`, `syt_title`,
 ('nu59e0fdb7bc69eff', 'nuobject', 'Calc', 100, ''),
 ('nu59e0fdb7bcc1919', 'nuformat', 'Format', 10, ''),
 ('nu59e0fdb7bcf6864', 'nuformatcurrency', 'Currency', 10, ''),
-('nu59e0fdb7bd0b5d0', 'nuform', 'Custom Code', 30, ''),
+('nu59e0fdb7bd0b5d0', 'nuform', 'Custom Code', 30, 'window.open(''http://wiki.nubuilder.net/nubuilderforte/index.php/Forms'');'),
 ('nu59e0fdb7bd618a3', 'nuobject', 'Custom Code', 110, ''),
 ('nu59e0fdb7bd842b6', 'nusample', 'Other Objects', 30, ''),
 ('nu59e0fdb7bdceec9', 'nufile', 'Main', 10, ''),

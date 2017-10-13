@@ -17,9 +17,11 @@ function nuRenameAndDeleteSystemFiles(){
 
 	$sql		= "DROP VIEW IF EXISTS zzzzsys_report_data";
 	nuRunQuery($sql);
+	print "$sql<br>";
 
 	$sql		= "DROP VIEW IF EXISTS zzzzsys_run_list";
 	nuRunQuery($sql);
+	print "$sql<br>";
 
     for($i = 0 ; $i < count($t) ; $i++){
         
@@ -27,14 +29,17 @@ function nuRenameAndDeleteSystemFiles(){
 
 		$sql	= "DROP TABLE IF EXISTS sys_$table";
         nuRunQuery($sql);
+		print "$sql<br>";
 
 		$sql	= "CREATE TABLE sys_$table SELECT * FROM $table";
         nuRunQuery($sql);
+		print "$sql<br>";
 		
 		if($table != 'zzzzsys_debug'){
 
 			$sql= "DROP TABLE IF EXISTS $table";
 			nuRunQuery($sql);
+			print "$sql<br>";
 			
 		}
         
@@ -77,6 +82,8 @@ function nuImportSystemFiles(){
 				}
 
 			}
+				
+			print "<br>nubuilder4.sql imported!<br><br>";
 
 		}else{
 			throw new nuInstallException("error opening the file: $file");

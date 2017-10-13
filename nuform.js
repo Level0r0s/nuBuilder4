@@ -21,6 +21,8 @@ function nuBuildForm(f){
 	window.nuSESSION			= f.session_id;
 	window.nuSUBFORMROW			= [];
 	window.nuHASH				= [];                       //-- remove any hash variables previously set.
+	window.nuTABHELP			= [];
+	window.nuFORMHELP			= [];
 	window.nuUniqueID			= 'c' + String(Date.now());
 	window.global_access		= f.global_access == '1';
 	nuFORM.edited				= false;
@@ -1556,8 +1558,9 @@ function nuEditTab(p, t, i){
 	.attr('data-nu-tab-filter', i)
 	.attr('data-nu-form-filter', p)
 	.attr('data-nu-tab-id', t.id)
-	.attr('onclick','nuSelectTab(this)');
+	.attr('onclick','nuSelectTab(this)')
 	
+	window.nuTABHELP[t.id]	= t.help;
 
 }
 
@@ -1640,7 +1643,6 @@ function nuGetOptionsList(f, t, p, a, type){
 
 		if(a == 1 || f == 'nuuserhome'){
 			
-//			if(nuSERVERRESPONSE.form_access == 0 || String(f).substr(0,2) != 'nu'){
 			if(nuAllowChanges(f)){
 			
 				list.push(['Form Properties', 		'nuPopup("nuform", "' + f + '")', 		'graphics/nu_option_properties.png',	'Ctrl+Shft+F']);
@@ -1666,7 +1668,6 @@ function nuGetOptionsList(f, t, p, a, type){
 
 		if(a == 1 || f == 'nuuserhome'){
 			
-//			if(nuSERVERRESPONSE.form_access == 0 || String(f).substr(0,2) != 'nu'){
 			if(nuAllowChanges(f)){
 			
 				list.push(['Arrange Objects', 		'nuPopup("' + f + '", "-2")', 			'graphics/nu_option_arrange.png', 		'Ctrl+Shft+A']);
@@ -1697,6 +1698,10 @@ function nuGetOptionsList(f, t, p, a, type){
 				
 			}
 			
+		}
+		
+		if(nuFORMHELP[f] != ''){
+			list.push(['Help', 		nuFORMHELP[f], 												'graphics/nu_option_help.png',		'Ctrl+Shft+?']);
 		}
 
 	}
@@ -1835,10 +1840,11 @@ function nuBuildOptionsList(l, p, type){												//-- loop through adding opt
 
 function nuSelectTab(tab){
 
-	$('#nuOptionsListBox').remove()
-	
     var filt = $('#' + tab.id).attr('data-nu-tab-filter');
     var form = $('#' + tab.id).attr('data-nu-form-filter');
+    var tabId = $('#' + tab.id).attr('data-nu-tab-id');
+	
+	window.nuFORMHELP[form]	= window.nuTABHELP[tabId]
 	
 	var t 	= nuFORM.getProperty('tab_start');
 

@@ -522,6 +522,7 @@ input[type=range]::-webkit-slider-runnable-track {
   padding: 8px 5px 2px 5px;
   margin-left: 1px;
   border-radius: 3px 3px 0px 0px;
+  height: 24px;
 }
 
 .nuSubform {
