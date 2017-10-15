@@ -984,7 +984,7 @@ function nuSELECT(w, i, l, p, prop){
 }
 
 function nuSUBFORM(w, i, l, p, prop){
-	
+console.log(w, i, l, p, prop);	
     var SF  		= prop.objects[i];						//-- First row
     var SFR 		= w.objects[i];							//-- All rows
 	var id  		= p + SF.id;
@@ -1069,12 +1069,14 @@ function nuSUBFORM(w, i, l, p, prop){
 	})
 	.addClass('nuTabHolder')
 	.attr('data-nu-subform', tabId);
-
+	
 	if(SF.subform_type == 'f'){
 		nuAddEditTabs(id, SF.forms[0]);
 	}else{
-		nuFORMHELP[p] 	= nuTABHELP[SFR.forms[0].tabs[0]]
-}
+		
+		nuTABHELP[SFR.forms[0].tabs[0].id] 	= SFR.forms[0].tabs[0].help;
+		nuFORMHELP[prop.objects[i].id] 		= SFR.forms[0].tabs[0].help;
+	}
 	
 	nuOptions(id, SF.sf_form_id, 'subform', w.global_access);
 	
@@ -1497,9 +1499,12 @@ function nuAddEditTabs(p, w){
 function nuSetStartingTab(p, w){
 
 	var t 			= window.nuFORM.getProperty('tab_start');
-	nuFORMHELP[p] 	= nuTABHELP[w.tabs[t]]
+	nuFORMHELP[p] 	= nuTABHELP[w.tabs[0].id]
 	
 	for(var i = 0 ; i < t.length ; i++){
+		
+		nuFORMHELP[p] 	= nuTABHELP[w.tabs[i].id]
+		
 		if(t[i].prefix == p){return;}
 		
 	}
@@ -1767,7 +1772,7 @@ function nuBuildOptionsList(l, p, type){												//-- loop through adding opt
 		$('#' + icon.id)
 		.css(iprop)
 		.css({'top'	: itemtop, 'left' : 5})
-		.attr('onclick', f)
+//		.attr('onclick', f)
 		.attr('src', c);
 
 		var desc = document.createElement('div');
@@ -1783,6 +1788,7 @@ function nuBuildOptionsList(l, p, type){												//-- loop through adding opt
 		.css({'top'	: itemtop,'left' : 30})
 		.html(t)
 		.attr('onclick', f)
+		.attr('data-nu-option-title', t)
 		.addClass('nuOptionsItem');
 		
 		var shortcut_key = document.createElement('div');
@@ -2975,7 +2981,7 @@ function nuMessage(o){
 	
 	var par		= window.parent.document;
 	
-	$('#nuAlertDiv', par).remove();
+	$('#nuMessageDiv', par).remove();
 
 	if(o.length == 0){return;}
 	
@@ -2988,13 +2994,13 @@ function nuMessage(o){
 	widest		= Math.min(widest + 200, 1000);
 	var l		= (screen.width - widest) / 2;
 
-	$('body', par).append("<div id='nuAlertDiv' class='nuMessage' style='overflow:hidden;width:" + widest + "px;left:" + l + "px' ></div>")
+	$('body', par).append("<div id='nuMessageDiv' class='nuMessage' style='overflow:hidden;width:" + widest + "px;left:" + l + "px' ></div>")
 	
 	
 	for(var i = 0 ; i < o.length ; i++){
 		
-		$('#nuAlertDiv', par).append(o[i]);
-		$('#nuAlertDiv', par).append('<br>');
+		$('#nuMessageDiv', par).append(o[i]);
+		$('#nuMessageDiv', par).append('<br>');
 		
 	}
 

@@ -478,9 +478,9 @@ function nuBindCtrlEvents(){
 					nuGetBreadcrumb();
 				} else if(e.keyCode == 83) {										//-- s		Save
 					nuSaveAction();
-				} else if(e.keyCode == 67 && window.global_access) {				//-- c		Clone
+				} else if(e.keyCode == 67) {										//-- c		Clone
 					nuCloneAction();
-				} else if(e.keyCode == 98 && window.global_access) {				//-- y		Delete
+				} else if(e.keyCode == 98) {										//-- y		Delete
 					nuDeleteAction();
 				}
 
@@ -974,8 +974,8 @@ function nuClick(e){
 		$('#nuOptionsListBox').remove();
 	}
 	
-	if(e.target.id != 'nuAlertDiv'){
-		$('#nuAlertDiv').remove();
+	if(e.target.id != 'nuMessageDiv' && $(e.target).attr('data-nu-option-title')!= 'Help' ){
+		$('#nuMessageDiv').remove();
 	}
 	
 	if($(e.target).attr('type') != 'nuDate' && !$(e.target).hasClass('nuCalendar')){
