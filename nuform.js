@@ -1499,7 +1499,13 @@ function nuAddEditTabs(p, w){
 function nuSetStartingTab(p, w){
 
 	var t 			= window.nuFORM.getProperty('tab_start');
-	nuFORMHELP[p] 	= nuTABHELP[w.tabs[0].id]
+	
+	if(w.tabs.length == 0){
+		nuFORMHELP[p] 	= ''
+	}else{
+		nuFORMHELP[p] 	= nuTABHELP[w.tabs[0].id]
+	}
+	
 	
 	for(var i = 0 ; i < t.length ; i++){
 		
