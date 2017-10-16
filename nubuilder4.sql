@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 16, 2017 at 09:18 AM
+-- Generation Time: Oct 16, 2017 at 07:22 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -716,7 +716,7 @@ INSERT INTO `zzzzsys_object` (`zzzzsys_object_id`, `sob_all_zzzzsys_form_id`, `s
 ('nu59e44658a1bbd79', 'nufastreportobjects', 'zzzzsys_debug', 'input', 'width', 'Width', 'nu59e44658af7ff07', 30, 339, 295, 70, 20, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '0', 'no|No|yes|Yes', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'number', '', '', ''),
 ('nu59e44658a1d7542', 'nufrlaunch', 'Launch Form 0', 'html', 'list', ' ', 'nu59e44658afa4528', 40, 141, 25, 324, 203, '1', 'left', '0', '1', '', '', '', '', '', '', '', 'SELECT COUNT(*) FROM zzzzsys_debug', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 'N|$ 1,000.00', '', '', '<div id=''nufr'' style=''overflow-y: scroll;height:200px;width:320px''></div>', ''),
 ('nu59e44658a2027f1', 'nufrlaunch', 'Launch Form 0', 'subform', 'fast_report_sf', ' ', 'nu59e44658afa4528', 70, 141, 381, 592, 203, '1', 'right', '0', '0', '', '', '', '', '', '', '', 'SELECT COUNT(*) FROM zzzzsys_debug', '', '', '', '', '', '', '', '', '', '', 'nufastreportobjects', 'deb_message', '1', '1', 'g', 'zzzzsys_debug', 89, 'N|$ 1,000.00', 'file', '', '', ''),
-('nu59e44658a217513', 'nufrlaunch', 'Launch Form 0', 'input', 'fieldlist', 'list', 'nu59e44658afa4528', 20, 2, 0, 400, 20, '1', 'left', '0', '2', '', '', '', '', '', '', '', 'SELECT COUNT(*) FROM zzzzsys_debug', '', '', 'code', 'description', '200', '', 'nubuildtable', '', '', 'zzzzsys_report_data', '', '', '', '', '', '', 0, 'N|$ 1,000.00', 'text', '[''North'',''South'',''East'',''West'']', '', ''),
+('nu59e44658a217513', 'nufrlaunch', 'Launch Form 0', 'input', 'fieldlist', 'list', 'nu59e44658afa4528', 20, 2, 0, 400, 20, '1', 'left', '0', '0', '', '', '', '', '', '', '', 'SELECT COUNT(*) FROM zzzzsys_debug', '', '', 'code', 'description', '200', '', 'nubuildtable', '', '', 'zzzzsys_report_data', '', '', '', '', '', '', 0, 'N|$ 1,000.00', 'text', '[''North'',''South'',''East'',''West'']', '', ''),
 ('nu59e44658a22c185', 'nufrlaunch', '', 'word', 'wrdaddable', 'Available Fields', 'nu59e44658afa4528', 50, 94, 25, 316, 20, '1', 'center', '0', '0', '', '', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'button', '', '', ''),
 ('nu59e44658a24449f', 'nufrlaunch', '', 'word', 'ffwrd', 'New Fast Report', 'nu59e44658afa4528', 60, 94, 381, 584, 20, '1', 'center', '0', '0', '', '', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'button', '', '', ''),
 ('nu59e44658a259231', 'nufastreportobjects', 'zzzzsys_debug', 'input', 'title', 'Title', 'nu59e44658af7ff07', 10, 300, 300, 200, 20, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '0', '', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
@@ -813,7 +813,7 @@ INSERT INTO `zzzzsys_php` (`zzzzsys_php_id`, `sph_code`, `sph_description`, `sph
 ('nuaccess_BB', 'nuaccess_BB', 'System PHP', 'nubuilder', '', '', '', '1', ''),
 ('nuaccess_BD', 'nuaccess_BD', 'System PHP', 'nubuilder', '', '', '', '1', ''),
 ('nu59e44658785fcb0_AB', 'nu59de81693d7e217_AB', 'System PHP', 'nubuilder', '', '', '', '1', ''),
-('nu59e44658a1a4652_AB', 'nu59e44658a1a4652_AB', 'System PHP', 'nubuilder', '\n$i  =   nuLookupRecord()->id;\n$tt	=   nuTTList($i, ''nublank'');				    //-- Field list from Temp table\n\nnuSetFormValue(''fieldlist'', json_encode($tt));\n', '', '', '1', '');
+('nu59e44658a1a4652_AB', 'nu59e44658a1a4652_AB', 'System PHP', 'nubuilder', '\n$i  = nuLookupRecord()->id;\n$tt	= nuTTList($i, ''nublank'');				    //-- Field list from Temp table\n\nnuSetFormValue(''fieldlist'', json_encode($tt));\n', '', '', '1', '');
 
 -- --------------------------------------------------------
 
@@ -974,7 +974,7 @@ INSERT INTO `zzzzsys_tab` (`zzzzsys_tab_id`, `syt_zzzzsys_form_id`, `syt_title`,
 ('nu59e44658a997e6b', 'nuaccess', 'Reports', 40, 'window.open(''http://wiki.nubuilder.net/nubuilderforte/index.php/User_Access#Creating_an_Access_Level'');'),
 ('nu59e44658a9b4bc6', 'nuaccessreport', 'Access', 10, ''),
 ('nu59e44658a9cc9df', 'nuaccesslevelreport', 'Access', 10, ''),
-('nu59e44658a9e5bb0', 'nutab', 'Tabs', 10, ''),
+('nu59e44658a9e5bb0', 'nutab', 'Tabs', 10, 'window.open(''http://wiki.nubuilder.net/nubuilderforte/index.php/Forms#Tabs_.28Subform.29'');'),
 ('nu59e44658aa095cc', 'nurunreport', 'Report', 10, ''),
 ('nu59e44658aa1c38f', 'nurunphp', 'PHP', 10, ''),
 ('nu59e44658aa30ce5', 'nulaunchdates', 'Launch', 10, ''),
