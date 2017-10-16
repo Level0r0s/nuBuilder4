@@ -1791,12 +1791,14 @@ function nuBuildOptionsList(l, p, type){												//-- loop through adding opt
 		.attr('data-nu-option-title', t)
 		.addClass('nuOptionsItem');
 		
-		var shortcut_key = document.createElement('div');
+		var shortcut_key 			= document.createElement('div');
 		var shortcut_key_id 		= 'nuOptionTextShortcutKey' + i.toString();
 		
 		shortcut_key.setAttribute('id', shortcut_key_id);
-
-		$('#nuOptionsListBox').append(shortcut_key);
+		
+		if(p == ''){
+			$('#nuOptionsListBox').append(shortcut_key);
+		}
 		
 		var	prop			= {'position' : 'absolute', 'text-align' : 'left', 'height' : 15, 'width' : 50};
 
@@ -1814,6 +1816,7 @@ function nuBuildOptionsList(l, p, type){												//-- loop through adding opt
 	var off		= icon.offset();
 	var top		= off.top;
 	var left	= off.left;
+	var reduce	= 0;
 	
 	if(type == 'browse'){
 			
@@ -1833,13 +1836,14 @@ function nuBuildOptionsList(l, p, type){												//-- loop through adding opt
 			
 		top		= off.top - 3;
 		left	= off.left - width - 23;
+		reduce	= 55;
 		
 	}
 	
 	$('#nuOptionsListBox').css({
 			'height'	: 40 + (l.length * 20),
-			'width' 	: 40 + width,
-			'left' 		: left,
+			'width' 	: 40 + width - reduce,
+			'left' 		: left + reduce,
 			'top'		: top
 	});
 

@@ -442,7 +442,7 @@ function nuBindCtrlEvents(){
 			window.nuNEW = 0;
 			
 			e.preventDefault();
-
+console.log(e.keyCode);
 			if(nuFormType() == 'browse') {
 			
 				if(e.keyCode == 67 && window.global_access) {						//-- c		Searchable Columns
