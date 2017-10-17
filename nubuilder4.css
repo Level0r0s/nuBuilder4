@@ -624,6 +624,11 @@ input[type=range]::-webkit-slider-runnable-track {
 	background-color:lightgray;
 }
 
+.nuCalculatorButton:hover{
+  cursor: pointer;
+  color: red;
+}
+
 .nuCalculatorCurrency {
 	
 	border:1px solid black;

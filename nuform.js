@@ -1498,7 +1498,7 @@ function nuAddEditTabs(p, w){
 
 function nuSetStartingTab(p, w){
 
-	var t 			= window.nuFORM.getProperty('tab_start');
+	var t 				= window.nuFORM.getProperty('tab_start');
 	
 	if(w.tabs.length == 0){
 		nuFORMHELP[p] 	= ''
