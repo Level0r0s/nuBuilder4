@@ -72,6 +72,7 @@ function nuBuildForm(f){
 	
 	nuAddBreadcrumbs();
 	nuAddEditTabs('', f);
+	
 	nuOptions('', f.form_id, 'form', f.global_access);
 	
 
@@ -1463,7 +1464,9 @@ function nuSetTitle(t){
 
 function nuAddEditTabs(p, w){
 	
-	nuSetStartingTab(p, w);
+	if(nuFormType() == 'edit'){
+		nuSetStartingTab(p, w);
+	}
 
     for(var i = 0 ; i < w.tabs.length ; i++){
 
@@ -1497,7 +1500,7 @@ function nuAddEditTabs(p, w){
 }
 
 function nuSetStartingTab(p, w){
-
+	
 	var t 				= window.nuFORM.getProperty('tab_start');
 	
 	if(w.tabs.length == 0){
