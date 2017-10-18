@@ -298,7 +298,7 @@ function nuDefaultObject($r, $t){
 	$o->format			= '';
 
 	for($i = 0 ; $i < count($t) ; $i++){
-nudebug($r->sob_all_zzzzsys_tab_id, $t[$i]->zzzzsys_tab_id);
+		
 		if($r->sob_all_zzzzsys_tab_id == $t[$i]->zzzzsys_tab_id){
 			$o->tab     = $t[$i]->number;
 		}
