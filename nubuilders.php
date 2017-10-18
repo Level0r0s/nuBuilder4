@@ -7,11 +7,7 @@ function nuBuildFastForm($table, $form_type){
 	$newT			= $form_type != 'launch';
 	
 	if($form_type == 'launch'){
-		
-		$t			= nuRunQuery("SELECT COUNT(*) FROM zzzzsys_form WHERE SUBSTRING(sfo_code, 1, 11) = 'Launch Form'");
-		$r			= db_fetch_row($t);
-		$table 		= 'Launch Form ' . $r[0];
-		
+		$table 		= 'Launch Form ' . nuFastForms();
 	}
 	
 	$q				= nuRunQuery("SELECT table_name FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = DATABASE()");
@@ -232,7 +228,7 @@ function nuBuildFastForm($table, $form_type){
 		//----------make sure button has a tab--------------------
 		
 
-		$sql            = "REPLACE INTO zzzzsys_tab (zzzzsys_tab_id, syt_zzzzsys_form_id, syt_title, syt_order) VALUES ('nufastforms', 'nuuserform', 'Fast Forms', -1);";
+		$sql            = "REPLACE INTO zzzzsys_tab (zzzzsys_tab_id, syt_zzzzsys_form_id, syt_title, syt_order) VALUES ('nufastforms', 'nuuserhome', 'Fast Forms', -1);";
 		nuRunQuery($sql);
 
 		//----------add run button--------------------
@@ -264,8 +260,11 @@ function nuBuildFastForm($table, $form_type){
 						(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 
 		";
+		
+		$form_count		= nuFastForms() * 50;
 		$record_id		= substr($form_type, 0, 6) == 'browse' ? '' : '-1';
-		$array          = Array(nuID(), 'nuuserhome', 'nufastforms', "ff$form_id", $table, $table, 11, 63, 250, 150, 30, $form_id, $record_id, 'b', 0, 0, 0, 'center', 'run');
+		$array          = Array(nuID(), 'nuuserhome', 'nufastforms', "ff$form_id", $table, $table, 11, 50 + $form_count, 50 + $form_count, 150, 30, $form_id, $record_id, 'b', 0, 0, 0, 'center', 'run');
+		
 		nuRunQuery($sql, $array);
 
 		$js	= "
@@ -287,6 +286,18 @@ function nuBuildFastForm($table, $form_type){
 	nuRunQuery("INSERT INTO zzzzsys_object SELECT * FROM $TT");
 	nuRunQuery("DROP TABLE $TT");
 
+}
+
+
+
+function nuFastForms(){
+	
+	$s			= 'SELECT COUNT(*) AS ff FROM zzzzsys_object WHERE sob_all_zzzzsys_tab_id = "nufastforms"';
+	$t			= nuRunQuery($s);
+	$r			= db_fetch_object($t);
+	
+	return $r->ff;
+	
 }
 
 
