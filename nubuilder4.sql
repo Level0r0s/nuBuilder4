@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 18, 2017 at 01:01 PM
+-- Generation Time: Oct 18, 2017 at 01:12 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -396,7 +396,7 @@ INSERT INTO `zzzzsys_form` (`zzzzsys_form_id`, `sfo_type`, `sfo_code`, `sfo_desc
 ('nuclause', 'subform', 'nuclause', 'Select Clauses', 'zzzzsys_select_clause', 'zzzzsys_select_clause_id', '', 0, 0, 'SELECT * FROM zzzzsys_select_clause\nORDER BY ssc_type, ssc_order', ''),
 ('nubuildtable', 'browse', 'nubuildtable', 'PHP or SELECT or TABLE', 'zzzzsys_report_data', 'id', 'nuselect', 0, 0, 'SELECT * FROM zzzzsys_report_data', ''),
 ('nuuserhome', 'launch', 'nuuserhome', 'Home', '', '', '', 0, 0, '', '\n'),
-('nufrlaunch', 'launch', 'nufrlaunch', 'Fast Report', '', '', '', 0, 0, 'SELECT * FROM Launch Form 0', '\n$(''#wrdaddable'').css({''font-size'' : 14, ''font-weight'' : 700, ''padding'' : 5}).addClass(''nuTabHolder'');\n$(''#frwrd'').css({''font-size'' : 14, ''font-weight'' : 700, ''padding'' : 5}).addClass(''nuTabHolder'');\n$(''#nufr'').css(''text-align'', ''left'').css(''padding'', ''3px'');\n$(''#list'').addClass(''nuScroll'').removeClass(''nuReadOnly'');\n\n$(''.nuActionButton'').hide();\nnuAddActionButton(''nuRunPHPHidden'', ''Build Fast Report'', ''nuRunPHPHidden("RUNFR")'');\n\n\nfunction nuAddReportField(t){\n    \n    var f   = nuPad3($("[data-nu-label=''Field'']").length - 1);\n    \n    $(''#fast_report_sf'' + f + ''field'').val($(t).html()).change();\n    \n}\n\n\n'),
+('nufrlaunch', 'launch', 'nufrlaunch', 'Fast Report', '', '', '', 0, 0, 'SELECT * FROM Launch Form 0', '\n$(''#wrdaddable'').css({''font-size'' : 14, ''font-weight'' : 700, ''padding'' : 5}).addClass(''nuTabHolder'');\n$(''#frwrd'').css({''font-size'' : 14, ''font-weight'' : 700, ''padding'' : 5}).addClass(''nuTabHolder'');\n$(''#nufr'').css(''text-align'', ''left'').css(''padding'', ''3px'');\n$(''#list'').addClass(''nuScroll'').removeClass(''nuReadOnly'');\n\n$(''.nuActionButton'').hide();\nnuAddActionButton(''nuRunPHPHidden'', ''Build Fast Report'', ''nuRunPHPHidden("RUNFR")'');\n\n\nfunction nuAddReportField(t){\n\n    var f   = nuPad3($("[data-nu-label=''Field Name'']").length - 1);\n    $(''#fast_report_sf'' + f + ''field'').val($(t).html()).change();\n    \n}\n\n\n'),
 ('nufastreportobjects', 'subform', 'nufastreportobjects', 'Fast Report Objects', 'zzzzsys_debug', 'zzzzsys_debug_id', '', 0, 0, 'SELECT count(*) FROM zzzzsys_debug', ''),
 ('nusamplesubformform', 'launch', 'nusamplesubformform', 'Sample Subform Form', '', '', '', 0, 0, 'SELECT * FROM Launch Form 0', '');
 
@@ -721,7 +721,7 @@ INSERT INTO `zzzzsys_object` (`zzzzsys_object_id`, `sob_all_zzzzsys_form_id`, `s
 ('nu59e44658a24449f', 'nufrlaunch', '', 'word', 'frwrd', 'New Fast Report', 'nu59e44658afa4528', 60, 94, 381, 584, 20, '1', 'center', '0', '0', '', '', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'button', '', '', ''),
 ('nu59e44658a259231', 'nufastreportobjects', 'zzzzsys_debug', 'input', 'title', 'Title', 'nu59e44658af7ff07', 10, 300, 300, 200, 20, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '0', '', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
 ('nu59e44658a26dd8a', 'nufastreportobjects', 'zzzzsys_debug', 'select', 'sum', 'Sum', 'nu59e44658af7ff07', 30, 339, 295, 70, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '0', 'no|No|yes|Yes', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
-('nu59e44658a287304', 'nufastreportobjects', 'zzzzsys_debug', 'input', 'field', 'Field Name', 'nu59e44658af7ff07', 20, 210, 289, 200, 20, '1', 'left', '1', '0', '', '', '', '', '', '', '', '', '0', '', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'nuScroll', '[1,2]', '', ''),
+('nu59e44658a287304', 'nufastreportobjects', 'zzzzsys_debug', 'input', 'field', 'Field Name', 'nu59e44658af7ff07', 20, 210, 289, 200, 20, '1', 'left', '1', '0', '', '', '', '', '', '', '', '', '0', '', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
 ('nu59e44658a29d1ea', 'nusamplesubformform', 'Launch Form 0', 'input', 'todo', 'To Do List', 'nu59e44658b014388', 50, 50, 150, 311, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
 ('nu59e44658a2b25af', 'nusample', '', 'word', 'labelbutton', 'Input : button', 'nu59e44658afd7d60', 100, 13, 125, 40, 18, '1', 'right', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', '', ''),
 ('nu59e44658a2c7215', 'nuhome', '', 'input', 'system_update', 'Update', 'nu59e44658ab3c259', 100, 148, 469, 150, 30, '1', 'center', '0', '0', '', '', '', 'nusetup', '', 'b', '1', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'button', '', '', ''),
