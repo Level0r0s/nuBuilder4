@@ -663,13 +663,14 @@ function moveToolbar(){
 
 function nuNewObject(){
 	
-	nuREPORT.selected = [];
-	var o             = JSON.parse(JSON.stringify(nuOBJECT));
-	var i             = nuDragR.newId();
-	var l             = nuREPORT.groups[0].sections[0].objects.length;
+	nuREPORT.selected 	= [];
+	var o             	= JSON.parse(JSON.stringify(nuOBJECT));
+	var i             	= nuDragR.newId();
+	var l             	= nuREPORT.groups[0].sections[0].objects.length;
 	
-	o.id   = i;
-	o.name = i;
+	o.id   				= i;
+	o.name 				= i;
+	
 	nuREPORT.groups[0].sections[0].objects[l] = o;
 	nuREPORT.selected.push(i);
 
