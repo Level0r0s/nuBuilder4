@@ -1,5 +1,13 @@
 <?php
 
+
+function nuBuildFastReport(){
+
+	$sf				= nuSubformObject('fast_report_sf');
+	
+}
+
+
 function nuBuildFastForm($table, $form_type){
 
 	$form_id		= nuID();

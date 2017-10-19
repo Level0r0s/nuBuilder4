@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 19, 2017 at 07:14 AM
+-- Generation Time: Oct 19, 2017 at 06:40 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -810,12 +810,12 @@ INSERT INTO `zzzzsys_php` (`zzzzsys_php_id`, `sph_code`, `sph_description`, `sph
 ('nuaccess_BE', 'nuaccess_BE', 'System PHP', 'nubuilder', '', '', '', '1', ''),
 ('', '', 'System PHP', 'nubuilder', '', '', '', '1', ''),
 ('nuaccessforms_AD', 'nuaccessforms_AD', 'System PHP', 'nubuilder', '', '', '', '1', ''),
-('-3', '-3', 'System PHP', 'nubuilder', '', '', '', '1', ''),
 ('nuaccess_AS', 'nuaccess_AS', 'System PHP', 'nubuilder', '', '', '', '1', ''),
 ('nuaccess_BB', 'nuaccess_BB', 'System PHP', 'nubuilder', '', '', '', '1', ''),
 ('nuaccess_BD', 'nuaccess_BD', 'System PHP', 'nubuilder', '', '', '', '1', ''),
 ('nu59e44658785fcb0_AB', 'nu59de81693d7e217_AB', 'System PHP', 'nubuilder', '', '', '', '1', ''),
-('nu59e44658a1a4652_AB', 'nu59e44658a1a4652_AB', 'System PHP', 'nubuilder', '\n$i  = nuLookupRecord()->id;\n$tt	= nuTTList($i, ''nublank'');				    //-- Field list from Temp table\n\nnuSetFormValue(''fieldlist'', json_encode($tt));\n', '', '', '1', '');
+('nu59e44658a1a4652_AB', 'nu59e44658a1a4652_AB', 'System PHP', 'nubuilder', '\n$i  = nuLookupRecord()->id;\n$tt	= nuTTList($i, ''nublank'');				    //-- Field list from Temp table\n\nnuSetFormValue(''fieldlist'', json_encode($tt));\n', '', '', '1', ''),
+('nufastreport', 'RUNFR', 'Run Fast Report', 'nubuilder', 'nuBuildFastReport();\n\n', '', 'nufflaunch', '1', '');
 
 -- --------------------------------------------------------
 

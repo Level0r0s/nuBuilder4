@@ -679,25 +679,42 @@ function nuNewObject(){
 }
 	
 
+function nuFastObject(g,s,o){
+
+	nuREPORT.selected = [];
+
+	var i		= nuDragR.newId();
+	var j	 	= JSON.parse(JSON.stringify(o));
+
+	o.id		= i;
+	o.name		= i;
+	o.left		= Number(o.left) + 2;
+	
+	nuREPORT.groups[g].sections[s].objects[l] = o;
+		
+}
+	
+
 function nuCloneObjects(){
 
 	nuREPORT.selected = [];
 
 	var sel = document.getElementsByClassName('nuDragSelected');
-	var o,l,g,s,j,r,gs;
 	
 	for(var i = 0 ; i < sel.length ; i ++){
 		
-		o      = nuDragR.getObject(sel[i].id);
-		gs     = nuDragR.getGroupAndSection(sel[i].id);
-		g      = gs[0];
-		s      = gs[1];
-		l      = nuREPORT.groups[g].sections[s].objects.length;
-		j      = JSON.parse(JSON.stringify(o));
-		d      = nuDragR.newId();
-		j.id   = d;
-		j.name = d;
-		j.left = Number(j.left) + 2;
+		var o		= nuDragR.getObject(sel[i].id);
+		var gs		= nuDragR.getGroupAndSection(sel[i].id);
+		var g		= gs[0];
+		var s		= gs[1];
+		var l		= nuREPORT.groups[g].sections[s].objects.length;
+		var d		= nuDragR.newId();
+		var j	 	= JSON.parse(JSON.stringify(o));
+
+		j.id		= d;
+		j.name		= d;
+		j.left		= Number(j.left) + 2;
+		
 		nuREPORT.groups[g].sections[s].objects[l] = j;
 		nuREPORT.selected.push(d);
 		
