@@ -60,6 +60,7 @@ nuJSIndexInclude('nuform.js');
 nuJSIndexInclude('nuformdrag.js');
 nuJSIndexInclude('nucalendar.js');
 nuJSIndexInclude('nucommon.js');
+nuJSIndexInclude('nureportjson.js');
 nuJSIndexInclude('nuajax.js');       //-- calls to server
 
 nuCSSIndexInclude('nubuilder4.css');

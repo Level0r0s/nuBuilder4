@@ -985,7 +985,7 @@ function nuSELECT(w, i, l, p, prop){
 }
 
 function nuSUBFORM(w, i, l, p, prop){
-console.log(w, i, l, p, prop);	
+	
     var SF  		= prop.objects[i];						//-- First row
     var SFR 		= w.objects[i];							//-- All rows
 	var id  		= p + SF.id;
@@ -3091,6 +3091,50 @@ function nuFormType(){
 	
 }
 
+
+function nuBuildFastReport(){
+
+	var sf				= nuSubformObject('fast_report_sf');
+	var left			= 3;
+	var rows			= sf.rows;
+	window.nuNextID		= 0;
+	window.nuREPORT		= window.nuREPORTdefault
+	
+	for(var i = 0 ; i < rows.length ; i++){
+		
+		var title		= rows[i][1];
+		var field		= rows[i][2];
+		var width		= rows[i][3];
+		var sum			= rows[i][4];
+		var o			= window.nuOBJECT;
+		o.left			= left;
+		o.width			= width;
+		o.fieldName		= field;
+		
+		nuFastObject(3,0,o);
+		
+		left			= left + width + 2;
+		
+	}
+
+	nuFORM.setProperty('nuREPORT', window.nuREPORT);
+	
+}
+
+
+
+function nuFastObject(g,s,o){
+
+	o.id			= 'obj' + nuPad3(window.nuNextID);
+	o.fieldName		= o.id;
+	o.left			= Number(o.left) + 2;
+console.log(o.left);	
+	nuREPORT.groups[g].sections[s].objects.push(o);
+	
+	window.nuNextID++;
+	
+}
+	
 
 
 

@@ -1034,7 +1034,6 @@ function nuAttachFile(j, c){
 }
 
 
-
 function nuButtonIcon(j){
 
 	$(j)
@@ -1044,8 +1043,4 @@ function nuButtonIcon(j){
 	.css('background-repeat', 'no-repeat')
 	
 }
-
-
-
-
 

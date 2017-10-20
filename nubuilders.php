@@ -2,11 +2,12 @@
 
 
 function nuBuildFastReport(){
-
-	$sf				= nuSubformObject('fast_report_sf');
+	
+	$r		= nuHash()['nuREPORT'];
+	
+	nudebug($r);
 	
 }
-
 
 function nuBuildFastForm($table, $form_type){
 

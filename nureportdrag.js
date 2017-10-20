@@ -679,22 +679,6 @@ function nuNewObject(){
 }
 	
 
-function nuFastObject(g,s,o){
-
-	nuREPORT.selected = [];
-
-	var i		= nuDragR.newId();
-	var j	 	= JSON.parse(JSON.stringify(o));
-
-	o.id		= i;
-	o.name		= i;
-	o.left		= Number(o.left) + 2;
-	
-	nuREPORT.groups[g].sections[s].objects[l] = o;
-		
-}
-	
-
 function nuCloneObjects(){
 
 	nuREPORT.selected = [];

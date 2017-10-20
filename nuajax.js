@@ -185,7 +185,11 @@ function nuRunPHP(pCode, iframe){
 		if(!nuBeforeSave()){return;}
 	}
 
-	var last				= nuFORM.addBreadcrumb();
+//	var current				= nuFORM.getCurrent();
+//	var last				= nuFORM.addBreadcrumb();
+//	var last				= nuAddCurrentToHash()
+	var current				= nuFORM.getCurrent();
+	var last		 		= $.extend(true, {}, current);
 	
 	last.session_id			= nuSESSION;
 	last.call_type 			= 'runphp';
@@ -224,6 +228,7 @@ function nuRunPHPHidden(i, h){
 
 	var current				= nuFORM.getCurrent();
 	var last		 		= $.extend(true, {}, current);
+//	var last				= nuAddCurrentToHash()
 
 	last.session_id			= window.nuSESSION;
 	last.call_type 			= 'runhiddenphp';
