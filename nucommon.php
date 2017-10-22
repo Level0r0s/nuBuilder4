@@ -75,8 +75,13 @@ function nuDebug($a){
 	$l					= $b[0]['line'];
 	$m					= "$date  -  $f line $l\n\n<br>\n";
 	$nuSystemEval		= $_POST['nuSystemEval'];
-	$nuProcedureEval		= $_POST['nuProcedureEval'];
-	$m					= "$date - $nuProcedureEval $nuSystemEval line $l\n\n<br>\n" ;
+	$nuProcedureEval	= $_POST['nuProcedureEval'];
+
+	if($_POST['RunQuery'] == 1){
+		$m				= "$date - SQL Error in <b>nuRunQuery</b>\n\n<br>\n" ;
+	}else{
+		$m				= "$date - $nuProcedureEval $nuSystemEval line $l\n\n<br>\n" ;
+	}
 
 	for($i = 0 ; $i < count(func_get_args()) ; $i++){
 

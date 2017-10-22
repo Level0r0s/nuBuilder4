@@ -125,8 +125,9 @@ function nuBuildFastForm($table, $form_type){
 	$left			= 50;
 
 	for($i = 0 ; $i < count($SF->rows) ; $i++){
-		
+nudebug(9);		
 		if($SF->rows[$i][5] == 0){							//-- not ticked as deleted
+nudebug(9);		
 			
 			$newid      = nuID();
 			$label      = $SF->rows[$i][1];
@@ -135,13 +136,13 @@ function nuBuildFastForm($table, $form_type){
 			$corner		= $left + ($gap * $i);
 
 			$array      = Array($field, $label, $corner, $corner, $corner + 100, $table, $form_id, $tab_id, $newid, $oldid);
-
 			nuRunQuery($sql, $array);
 			
 		}
 
 	}
 
+	nuRunQuery("create table a$TT SLECT * FROM $TT");
 	$t              = nuRunQuery("SELECT * FROM $TT");
 	$a              = Array();
 	$n              = 'number date';

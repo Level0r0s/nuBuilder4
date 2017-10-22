@@ -4,16 +4,17 @@ require_once('nuconfig.php');
 
 mb_internal_encoding('UTF-8');
 
-$DBHost                      = $nuConfigDBHost;
-$DBName                      = $nuConfigDBName;
-$DBUser                      = $nuConfigDBUser;
-$DBPassword                  = $nuConfigDBPassword;
+$_POST['RunQuery']			= 0;
+$DBHost						= $nuConfigDBHost;
+$DBName						= $nuConfigDBName;
+$DBUser						= $nuConfigDBUser;
+$DBPassword					= $nuConfigDBPassword;
 
 $nuDB = new PDO("mysql:host=$DBHost;dbname=$DBName;charset=utf8", $DBUser, $DBPassword, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
 $nuDB->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $nuDB->exec("SET CHARACTER SET utf8");
 
-$GLOBALS['nuSetup']          = db_setup();
+$GLOBALS['nuSetup']			= db_setup();
 
 
 function db_setup(){
@@ -22,14 +23,16 @@ function db_setup(){
 	
     if (empty($setup)) {                                          //check if setup has already been called
 		
-		$rs 	= nuRunQuery("SeLect * From zzzzsys_setup");        //get setup info from db
-		$setup 	= db_fetch_object($rs);
+		$rs					= nuRunQuery("SeLect * From zzzzsys_setup");        //get setup info from db
+		$setup				= db_fetch_object($rs);
 	}
 	
-	$gcLifetime  = 60 * $setup->set_time_out_minutes;             //setup garbage collect timeouts
+	$gcLifetime				= 60 * $setup->set_time_out_minutes;             //setup garbage collect timeouts
+	
 	ini_set("session.gc_maxlifetime", $gcLifetime);
 		
     return $setup;
+	
 }
 
 
@@ -83,8 +86,10 @@ $s
 $trace
 
 ";
-                
+
+		$_POST['RunQuery']		= 1;
 		nuDebug($debug);
+		$_POST['RunQuery']		= 0;
 	
 		$id						= $nuDB->lastInsertId();
 		$GLOBALS['ERRORS'][]	= $debug;
