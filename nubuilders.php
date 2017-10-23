@@ -5,8 +5,6 @@ function nuBuildFastReport(){
 	
 	$r		= nuHash()['nuREPORT'];
 	
-	nudebug($r);
-	
 }
 
 function nuBuildFastForm($table, $form_type){
@@ -92,9 +90,11 @@ function nuBuildFastForm($table, $form_type){
 			$r          		= $SF->rows[$i][3];
 			$newid				= nuID();
 			$SF->rows[$i][3]	= $newid;
+			
 			$sql				= "INSERT INTO $TT SELECT * FROM zzzzsys_object WHERE zzzzsys_object_id = '$r'";
 			
 			nuRunQuery($sql);
+
 			$sql				= "UPDATE $TT SET zzzzsys_object_id = '$newid' WHERE zzzzsys_object_id = '$r'";
 			
 			nuRunQuery($sql);
@@ -125,9 +125,8 @@ function nuBuildFastForm($table, $form_type){
 	$left			= 50;
 
 	for($i = 0 ; $i < count($SF->rows) ; $i++){
-nudebug(9);		
+		
 		if($SF->rows[$i][5] == 0){							//-- not ticked as deleted
-nudebug(9);		
 			
 			$newid      = nuID();
 			$label      = $SF->rows[$i][1];
