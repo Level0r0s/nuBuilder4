@@ -215,7 +215,11 @@ function nuBuildLookup(t, s){
 	
 	var open 		= window.nuOPENER[window.nuOPENER.length - 1];
 	
-	window.nuDialog.createDialog(50, 50, 50, 50, '');
+	if(parent.window==window){
+		window.nuDialog.createDialog(50, 50, 50, 50, '');
+	}else{
+		window.nuDialog.createDialog(5, 5, 50, 50, '');
+	}
 	
 	$('#nuDragDialog')
 	.css('visibility', 'hidden')
@@ -231,7 +235,11 @@ function nuPopup(f, r, filter){
 
 	var id 	= window.nuOPENER[window.nuOPENER.length - 1].id;
 	
-	window.nuDialog.createDialog(50, 50, 50, 50, '');
+	if(parent.window==window){
+		window.nuDialog.createDialog(50, 50, 50, 50, '');
+	}else{
+		window.nuDialog.createDialog(1, 1, 50, 50, '');
+	}
 	
 	$('#nuDragDialog')
 	.css('visibility', 'hidden')
