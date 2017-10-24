@@ -1392,7 +1392,7 @@ function nuUpdateObjectIds(){
 		$a	= $i . '_AB';
 		$pid= $n . '_AB';
 		
-		$o	= "UPDATE zzzzsys_object 	SET zzzzsys_object_id = 'nu$n' 		WHERE zzzzsys_object_id = ? ";
+		$o	= "UPDATE zzzzsys_object 	SET zzzzsys_object_id = 'nu$n' 		WHERE sob_all_zzzzsys_form_id != 'nusample' AND zzzzsys_object_id = ? ";
 		$e	= "UPDATE zzzzsys_event 	SET sev_zzzzsys_object_id = 'nu$n' 	WHERE sev_zzzzsys_object_id = ? ";
 		$p	= "UPDATE zzzzsys_php 		SET zzzzsys_php_id = 'nu$pid' 		WHERE zzzzsys_php_id = ? ";
 		
