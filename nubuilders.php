@@ -5,6 +5,21 @@ function nuBuildFastReport(){
 	
 	$r		= nuHash()['nuREPORT'];
 	
+nudebug($r);
+
+	$js		= "
+
+		var m1	= '<h1>A $mess been created!</h1>';
+		var m2	= '<p>(There is now a Form with a Code of <b>$form_code</b> in the list found in <b>Forms</b>)';
+
+		nuMessage([m1, m2]);
+		
+		$('#nunuRunPHPHiddenButton').remove();
+
+	";
+
+	nuJavascriptCallback($js);
+	
 }
 
 function nuBuildFastForm($table, $form_type){

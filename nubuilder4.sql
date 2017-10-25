@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 25, 2017 at 04:56 AM
+-- Generation Time: Oct 25, 2017 at 10:57 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -395,7 +395,7 @@ INSERT INTO `zzzzsys_form` (`zzzzsys_form_id`, `sfo_type`, `sfo_code`, `sfo_desc
 ('nuclause', 'subform', 'nuclause', 'Select Clauses', 'zzzzsys_select_clause', 'zzzzsys_select_clause_id', '', 0, 0, 'SELECT * FROM zzzzsys_select_clause\nORDER BY ssc_type, ssc_order', ''),
 ('nubuildtable', 'browse', 'nubuildtable', 'PHP or SELECT or TABLE', 'zzzzsys_report_data', 'id', 'nuselect', 0, 0, 'SELECT * FROM zzzzsys_report_data', ''),
 ('nuuserhome', 'launch', 'nuuserhome', 'Home', '', '', '', 0, 0, '', '\n'),
-('nufrlaunch', 'launch', 'nufrlaunch', 'Fast Report', '', '', '', 0, 0, 'SELECT * FROM Launch Form 0', '\n$(''#wrdaddable'').css({''font-size'' : 14, ''font-weight'' : 700, ''padding'' : 5}).addClass(''nuTabHolder'');\n$(''#frwrd'').css({''font-size'' : 14, ''font-weight'' : 700, ''padding'' : 5}).addClass(''nuTabHolder'');\n$(''#nufr'').css(''text-align'', ''left'').css(''padding'', ''3px'');\n$(''#list'').addClass(''nuScroll'').removeClass(''nuReadOnly'');\n\n$(''.nuActionButton'').hide();\nnuAddActionButton(''nuRunPHPHidden'', ''Build Fast Report'', ''nuRunPHPHidden("RUNFR")'');\n\n\nfunction nuAddReportField(t){\n\n    var f   = nuPad3($("[data-nu-label=''Field Name'']").length - 1);\n\n    $(''#fast_report_sf'' + f + ''field'').val($(t).html()).change();\n    $(''#fast_report_sf'' + f + ''width'').val(100).change();\n    $(''#fast_report_sf'' + f + ''sum'').val(''no'').change();\n    $(''#fast_report_sf'' + f + ''title'').val($(t).html()).change().select();\n    \n}\n\n\n'),
+('nufrlaunch', 'launch', 'nufrlaunch', 'Fast Report', '', '', '', 0, 0, 'SELECT * FROM Launch Form 0', '\n$(''#wrdaddable'').css({''font-size'' : 14, ''font-weight'' : 700, ''padding'' : 5}).addClass(''nuTabHolder'');\n$(''#frwrd'').css({''font-size'' : 14, ''font-weight'' : 700, ''padding'' : 5}).addClass(''nuTabHolder'');\n$(''#nufr'').css(''text-align'', ''left'').css(''padding'', ''3px'');\n$(''#list'').addClass(''nuScroll'').removeClass(''nuReadOnly'');\n\n$(''.nuActionButton'').hide();\nnuAddActionButton(''nuRunPHPHidden'', ''Build Fast Report'', ''nuRunPHPHidden("RUNFR")'');\n\n\nfunction nuAddReportField(t){\n\n    var f   = nuPad3($("[data-nu-label=''Field Name'']").length - 1);\n\n    $(''#fast_report_sf'' + f + ''field'').val($(t).html()).change();\n    $(''#fast_report_sf'' + f + ''width'').val(100).change();\n    $(''#fast_report_sf'' + f + ''sum'').val(''no'').change();\n    $(''#fast_report_sf'' + f + ''title'').val($(t).html()).change().select();\n    \n}\n\n\nfunction nuBeforeSave(){\n\n    nuBuildFastReport();\n    \n    return true;\n    \n}\n\n'),
 ('nufastreportobjects', 'subform', 'nufastreportobjects', 'Fast Report Objects', 'zzzzsys_debug', 'zzzzsys_debug_id', '', 0, 0, 'SELECT count(*) FROM zzzzsys_debug', ''),
 ('nusamplesubformform', 'launch', 'nusamplesubformform', 'Sample Subform Form', '', '', '', 0, 0, 'SELECT * FROM Launch Form 0', '');
 
