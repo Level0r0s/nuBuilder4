@@ -3101,7 +3101,7 @@ function nuBuildFastReport(){
 	var rows			= sf.rows;
 	window.nuNextID		= 0;
 	window.nuREPORT		= window.nuREPORTdefault
-	debugger;
+
 	for(var i = 0 ; i < rows.length ; i++){
 		
 		if(sf.deleted[i] == '0'){
@@ -3123,6 +3123,8 @@ function nuBuildFastReport(){
 		
 	}
 
+	$('#fieldlist').val(JSON.stringify(window.nuREPORT));
+	
 	nuFORM.setProperty('nuREPORT', window.nuREPORT);
 	
 }
