@@ -177,7 +177,7 @@ function nuUpdateDatabase(){
 					if($edit[$R] == 1 or $isAN){														//-- has been edited
 					
 						$cts		= nuGetJSONData('clientTableSchema');
-					
+						
 						if(in_array($fields[$R], $cts[$table]['names'])){				//-- valid field names
 
 							if($isAN){

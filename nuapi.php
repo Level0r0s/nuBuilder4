@@ -27,7 +27,6 @@
 	$_POST['nuValidate']					= array();
 	$_POST['nuCallback']					= '';
 
-
 	$CT										= $P['call_type'];
 	$f->forms[0]							= new stdClass;
 
