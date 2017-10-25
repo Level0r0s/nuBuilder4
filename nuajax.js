@@ -228,7 +228,6 @@ function nuRunPHPHidden(i, h){
 
 	var current				= nuFORM.getCurrent();
 	var last		 		= $.extend(true, {}, current);
-//	var last				= nuAddCurrentToHash()
 
 	last.session_id			= window.nuSESSION;
 	last.call_type 			= 'runhiddenphp';
@@ -247,7 +246,7 @@ function nuRunPHPHidden(i, h){
 
 		window.nuSERVERRESPONSE_HIDDEN	= fm;
 		eval(fm.callback + ';');
-			
+		
 	};
 	
 	nuAjax(last,successCallback);

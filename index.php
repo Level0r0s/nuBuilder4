@@ -139,7 +139,7 @@ window.nuHASH			= [];
     require('nuconfig.php');
 
 	$nuWelcomeBodyInnerHTML	= (isset($nuWelcomeBodyInnerHTML)?$nuWelcomeBodyInnerHTML:'');
-	$welcome				= AddSlashes($nuWelcomeBodyInnerHTML);
+	$welcome				= addslashes($nuWelcomeBodyInnerHTML);
 	$nuHeader				= nuHeader();
     $opener         	    = '';
     $search             	= '';

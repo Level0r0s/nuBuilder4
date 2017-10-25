@@ -1424,5 +1424,4 @@ function nuUpdateTableIds($table){
 }
 
 
-
 ?>

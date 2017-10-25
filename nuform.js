@@ -2992,6 +2992,8 @@ function nuTotal(f){
 
 function nuMessage(o){
 	
+	window.nuHideMessage	= false;
+
 	var par		= window.parent.document;
 	
 	$('#nuMessageDiv', par).remove();

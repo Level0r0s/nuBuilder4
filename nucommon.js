@@ -1,12 +1,12 @@
 
 window.nuDialog 				= new nuCreateDialog('');
+window.nuFORM					= new nuFormObject();
 window.nuOPENER					= [];
 window.nuSUBFORMROW				= [];
 window.nuSUBFORMJSON			= [];
 window.nuSCHEMA					= [];
 window.nuLANGUAGE				= [];
 window.nuFIELD					= [];
-window.nuFORM					= new nuFormObject();
 window.nuHASH					= [];
 window.nuBEFORE					= [];
 window.nuAFTER					= [];
@@ -18,6 +18,7 @@ window.nuDragID					= 1000;
 window.nuColor					= '';
 window.nuImage					= '';
 window.nuImages					= [];
+window.nuHideMessage 			= true;
 
 function nuOpener(t, f, r, filter, parameters){
 	
@@ -215,10 +216,10 @@ function nuBuildLookup(t, s){
 	
 	var open 		= window.nuOPENER[window.nuOPENER.length - 1];
 	
-	if(parent.window==window){
+	if(parent.window == window){
 		window.nuDialog.createDialog(50, 50, 50, 50, '');
 	}else{
-		window.nuDialog.createDialog(5, 5, 50, 50, '');
+		window.nuDialog.createDialog(0, 1, 50, 50, '');
 	}
 	
 	$('#nuDragDialog')
@@ -238,7 +239,7 @@ function nuPopup(f, r, filter){
 	if(parent.window==window){
 		window.nuDialog.createDialog(50, 50, 50, 50, '');
 	}else{
-		window.nuDialog.createDialog(1, 1, 50, 50, '');
+		window.nuDialog.createDialog(0, 1, 50, 50, '');
 	}
 	
 	$('#nuDragDialog')
@@ -983,7 +984,13 @@ function nuClick(e){
 	}
 	
 	if(e.target.id != 'nuMessageDiv' && $(e.target).attr('data-nu-option-title')!= 'Help' ){
-		$('#nuMessageDiv').remove();
+
+		if(window.nuHideMessage){
+			$('#nuMessageDiv').remove();
+		}
+		
+		window.nuHideMessage	= true;
+		
 	}
 	
 	if($(e.target).attr('type') != 'nuDate' && !$(e.target).hasClass('nuCalendar')){
@@ -992,7 +999,7 @@ function nuClick(e){
 	
 }
 
-function addslashes(s){
+function nuAddSlashes(s){
     return (s + '').replace(/[\\"']/g, '\\$&').replace(/\u0000/g, '\\0');
 }
 
