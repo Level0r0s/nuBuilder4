@@ -3100,7 +3100,7 @@ function nuBuildFastReport(){
 	var left			= 3;
 	var rows			= sf.rows;
 	window.nuNextID		= 0;
-	window.nuREPORT		= window.nuREPORTdefault
+	window.nuREPORT		= JSON.parse(JSON.stringify(window.nuREPORTdefault));
 
 	for(var i = 0 ; i < rows.length ; i++){
 		
@@ -3124,7 +3124,7 @@ function nuBuildFastReport(){
 			o.left		= Number(left);
 			o.width		= width;
 			o.fieldName	= field;
-console.log(field);			
+
 			nuFastObject(0,0,o);
 
 			if(sum == 'yes'){

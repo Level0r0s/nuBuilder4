@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 25, 2017 at 10:57 PM
+-- Generation Time: Oct 26, 2017 at 10:47 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -730,27 +730,6 @@ INSERT INTO `zzzzsys_object` (`zzzzsys_object_id`, `sob_all_zzzzsys_form_id`, `s
 ('nu59e44658a331675', 'nutab', 'zzzzsys_tab', 'input', 'syt_help', 'Help', 'nu59e44658a9e5bb0', 30, 52, 100, 250, 18, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
 ('59e732d69dfc571', 'nufrlaunch', '', 'calc', 'used', 'Used', 'nu59e44658afa4528', 30, 391, 796, 70, 20, '1', 'right', '1', '0', '', 'nuTotal(''fast_report_sf.width'')', '', '', '', '', '', '', '0', 'no|No|yes|Yes', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'number', '', '', ''),
 ('59e733bd8bd23b1', 'nufrlaunch', '', 'calc', 'remaining', 'Remaining', 'nu59e44658afa4528', 40, 420, 796, 70, 20, '1', 'right', '1', '0', '', '1150 - nuTotal(''fast_report_sf.width'')', '', '', '', '', '', '', '0', 'no|No|yes|Yes', '', '', '0', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'number', '', '', '');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `zzzzsys_phinxlog`
---
-
-CREATE TABLE `zzzzsys_phinxlog` (
-  `version` bigint(20) NOT NULL,
-  `migration_name` varchar(100) DEFAULT NULL,
-  `start_time` timestamp NULL DEFAULT NULL,
-  `end_time` timestamp NULL DEFAULT NULL,
-  `breakpoint` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `zzzzsys_phinxlog`
---
-
-INSERT INTO `zzzzsys_phinxlog` (`version`, `migration_name`, `start_time`, `end_time`, `breakpoint`) VALUES
-(20170907234659, 'FileSystemFlag', '2017-09-07 16:25:46', '2017-09-07 16:25:46', 0);
 
 -- --------------------------------------------------------
 
@@ -1782,12 +1761,6 @@ ALTER TABLE `zzzzsys_object`
   ADD KEY `sob_lookup_zzzzsys_form_id` (`sob_lookup_zzzzsys_form_id`),
   ADD KEY `sob_subform_zzzzsys_form_id` (`sob_subform_zzzzsys_form_id`),
   ADD KEY `sob_image_zzzzsys_file_id` (`sob_image_zzzzsys_file_id`);
-
---
--- Indexes for table `zzzzsys_phinxlog`
---
-ALTER TABLE `zzzzsys_phinxlog`
-  ADD PRIMARY KEY (`version`);
 
 --
 -- Indexes for table `zzzzsys_php`
