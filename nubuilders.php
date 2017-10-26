@@ -43,7 +43,7 @@ function nuBuildFastReport(){
 	$js		= "
 
 		var m1	= '<h1>A Fast Report been created!</h1>';
-		var m2	= '<p>(There is now a Report with a Code of <b>$c</b> in the list found in <b>Reports</b>)';
+		var m2	= '<p>(There is now a Report with a Code of <b>$c</b> found in <b>Reports</b>)';
 
 		nuMessage([m1, m2]);
 		
@@ -269,7 +269,7 @@ function nuBuildFastForm($table, $form_type){
 		$js	= "
 
 			var m1	= '<h1>A $mess been created!</h1>';
-			var m2	= '<p>(There is now a Form with a Code of <b>$form_code</b> in the list found in <b>Forms</b>)';
+			var m2	= '<p>(There is now a Form with a Code of <b>$form_code</b> found in <b>Forms</b>)';
 
 			nuMessage([m1, m2]);
 			

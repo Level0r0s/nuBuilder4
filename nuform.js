@@ -3110,12 +3110,33 @@ function nuBuildFastReport(){
 			var field	= rows[i][2];
 			var width	= Number(rows[i][3]);
 			var sum		= rows[i][4];
-			var o		= JSON.parse(JSON.stringify(window.nuOBJECT));
+
+			var o		= JSON.parse(JSON.stringify(window.nuOBJECT));		//-- title
+			o.left		= Number(left);
+			o.width		= width;
+			o.top		= 70;
+			o.fieldName	= title;
+			o.objectType= 'label';
+			
+			nuFastObject(2,0,o);
+
+			var o		= JSON.parse(JSON.stringify(window.nuOBJECT));		//-- field
 			o.left		= Number(left);
 			o.width		= width;
 			o.fieldName	= field;
-			
-			nuFastObject(3,0,o);
+console.log(field);			
+			nuFastObject(0,0,o);
+
+			if(sum == 'yes'){
+					
+				var o		= JSON.parse(JSON.stringify(window.nuOBJECT));		//-- sum
+				o.left		= Number(left);
+				o.width		= width;
+				o.fieldName	= 'SUM(' + field + ')';
+				
+				nuFastObject(1,1,o);
+				
+			}
 
 			left		= left + width + 2;
 			
@@ -3123,6 +3144,8 @@ function nuBuildFastReport(){
 		
 	}
 
+	nuFastReportFormat(left);
+	
 	$('#fieldlist').val(JSON.stringify(window.nuREPORT));
 	
 	nuFORM.setProperty('nuREPORT', window.nuREPORT);
@@ -3130,20 +3153,102 @@ function nuBuildFastReport(){
 }
 
 
-
 function nuFastObject(g,s,o){
 
 	o.id			= 'obj' + nuPad3(window.nuNextID);
-	o.fieldName		= o.id;
+	o.name			= o.id;
 	o.left			= Number(o.left) + 2;
 	
 	nuREPORT.groups[g].sections[s].objects.push(o);
-console.log(window.nuNextID);	
+	
 	window.nuNextID++;
-console.log(window.nuNextID);	
+	
+}
+
+function nuNewFastObject(){
+
+	var o			= JSON.parse(JSON.stringify(window.nuOBJECT));
+	o.id			= 'obj' + nuPad3(window.nuNextID);
+	o.name			= o.id;
+	
+	window.nuNextID++;
+	
+	return o;
 	
 }
 	
+
+function nuFastReportFormat(width){
+
+	var o			= nuNewFastObject();		//-- report title
+	o.left			= 2;
+	o.top			= 10;
+	o.width			= 300;
+	o.height		= 30;
+	o.fontWeight	= 'b';
+	o.fontSize		= '20';
+	o.objectType	= 'label';
+	nuREPORT.width 	= 297;
+	//nuREPORT.height	= 210;
+	var pageWidth	= 290 * 4;
+	
+	nuREPORT.orientation = 'L';
+	nuREPORT.groups[2].sections[0].height = 100;
+	nuREPORT.groups[2].sections[0].objects.push(o);
+
+	var o			= nuNewFastObject();		//-- underline titles
+	o.left			= 2;
+	o.top			= 93;
+	o.width			= width;
+	o.height		= 1;
+	o.borderWidth	= 1;
+
+	nuREPORT.groups[2].sections[0].objects.push(o);
+
+	var o			= nuNewFastObject();		//-- page footer
+	o.left			= 2;
+	o.top			= 3;
+	o.width			= pageWidth;
+	o.height		= 1;
+	o.borderWidth	= 1;
+
+	nuREPORT.groups[2].sections[1].objects.push(o);
+	
+	var o			= nuNewFastObject();		//-- page date
+	o.left			= 2;
+	o.top			= 9;
+	o.width			= 200;
+	o.fieldName		= 'Printed : #day#';
+	o.objectType	= 'label';
+
+	nuREPORT.groups[2].sections[1].objects.push(o);
+	
+	var o			= nuNewFastObject();		//-- page page no.
+	o.top			= 9;
+	o.left			= pageWidth - 200;
+	o.width			= 200;
+	o.textAlign		= 'left';
+	o.fieldName		= 'Page #page# of #pages#';
+	o.objectType	= 'label';
+
+	nuREPORT.groups[2].sections[1].objects.push(o);
+	
+	if(nuREPORT.groups[1].sections[1].objects.length > 0){
+		
+		var o			= nuNewFastObject();		//-- overline sums
+		o.left			= 2;
+		o.top			= 3;
+		o.width			= width;
+		o.height		= 1;
+		o.borderWidth	= 1;
+
+		nuREPORT.groups[1].sections[1].objects.push(o);
+		
+	}
+	
+}
+
+
 
 
 
