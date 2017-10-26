@@ -625,7 +625,7 @@ function nuINPUT(w, i, l, p, prop){
 		$('#' + id).css({'top'      	: Number(prop.objects[i].top),
 						'left'      	: Number(prop.objects[i].left) + Number(prop.objects[i].width) + 2,
 						'width'		: 15,
-						'height'		: Number(prop.objects[i].height)
+						'height'		: Number(prop.objects[i].height -2)
 		})
 		.attr('type','button')
 		.attr('data-nu-form-id', w.objects[i].form_id)
@@ -3189,11 +3189,12 @@ function nuFastReportFormat(width){
 	o.fontSize		= '20';
 	o.objectType	= 'label';
 	nuREPORT.width 	= 297;
-	//nuREPORT.height	= 210;
 	var pageWidth	= 290 * 4;
+	var sf			= nuSubformObject('fast_report_sf');
 	
 	nuREPORT.orientation = 'L';
-	nuREPORT.groups[2].sections[0].height = 100;
+	nuREPORT.groups[3].sortField			= sf.rows[0][2];
+	nuREPORT.groups[2].sections[0].height 	= 100;
 	nuREPORT.groups[2].sections[0].objects.push(o);
 
 	var o			= nuNewFastObject();		//-- underline titles
