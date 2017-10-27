@@ -3189,6 +3189,7 @@ function nuFastReportFormat(width){
 	o.fontSize		= '20';
 	o.objectType	= 'label';
 	nuREPORT.width 	= 297;
+	nuREPORT.height	= 210;
 	var pageWidth	= 290 * 4;
 	var sf			= nuSubformObject('fast_report_sf');
 	
@@ -3215,7 +3216,7 @@ function nuFastReportFormat(width){
 
 	nuREPORT.groups[2].sections[1].objects.push(o);
 	
-	var o			= nuNewFastObject();		//-- page date
+	var o			= nuNewFastObject();		//-- page footer date
 	o.left			= 2;
 	o.top			= 9;
 	o.width			= 200;
@@ -3224,7 +3225,7 @@ function nuFastReportFormat(width){
 
 	nuREPORT.groups[2].sections[1].objects.push(o);
 	
-	var o			= nuNewFastObject();		//-- page page no.
+	var o			= nuNewFastObject();		//-- page footer page no.
 	o.top			= 9;
 	o.left			= pageWidth - 200;
 	o.width			= 200;
