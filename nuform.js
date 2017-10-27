@@ -3110,6 +3110,7 @@ function nuBuildFastReport(){
 			var field	= rows[i][2];
 			var width	= Number(rows[i][3]);
 			var sum		= rows[i][4];
+			var align	= sum=='no'?'left':'right';
 
 			var o		= JSON.parse(JSON.stringify(window.nuOBJECT));		//-- title
 			o.left		= Number(left);
@@ -3117,6 +3118,7 @@ function nuBuildFastReport(){
 			o.top		= 70;
 			o.fieldName	= title;
 			o.objectType= 'label';
+			o.textAlign	= align;
 			
 			nuFastObject(2,0,o);
 
@@ -3124,6 +3126,7 @@ function nuBuildFastReport(){
 			o.left		= Number(left);
 			o.width		= width;
 			o.fieldName	= field;
+			o.textAlign	= align;
 
 			nuFastObject(0,0,o);
 
@@ -3133,6 +3136,7 @@ function nuBuildFastReport(){
 				o.left		= Number(left);
 				o.width		= width;
 				o.fieldName	= 'SUM(' + field + ')';
+				o.textAlign	= align;
 				
 				nuFastObject(1,1,o);
 				
