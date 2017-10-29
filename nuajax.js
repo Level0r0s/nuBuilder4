@@ -272,7 +272,7 @@ function nuSystemUpdate(){
 		
 		if(!nuDisplayError(fm)){
 			
-			var pdfUrl		= 'nurunsystemupdate.php?i=' + fm.id;
+			var pdfUrl		= 'nusystemupdate.php?i=' + fm.id;
 			
 			window.open(pdfUrl);
 			
@@ -331,7 +331,7 @@ function nuAttachImage(i, c){
 			.css('text-align', 'left')
 		
 		}
-console.log(c);		
+		
 	};
 	
 	nuAjax(last,successCallback);

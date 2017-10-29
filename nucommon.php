@@ -1423,5 +1423,15 @@ function nuUpdateTableIds($table){
 	
 }
 
+function nuRunSystemUpdate(){
+	
+	$i					= nuID();
+	
+	nuSetJSONData($i, 'valid');
+	
+	return $i;
+	
+}
+
 
 ?>

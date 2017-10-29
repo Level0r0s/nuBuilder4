@@ -1,14 +1,27 @@
 <?php 
+session_start();
+require_once('nucommon.php'); 
+require_once('nudata.php'); 
 
-function nuRunSystemUpdate(){
+$jsonID					= $_GET['i'];
+$J						= nuGetJSONData($jsonID);
+
+if($J != 'valid'){
 	
-	$i					= nuID();
-	
-	nuSetJSONData($i, 'valid');
-	
-	return $i;
+	print 'not ok';	
+	return;
 	
 }
+
+nuRenameAndDeleteSystemFiles();
+nuImportSystemFiles();
+nuUpdateSystemRecords();
+nuRemoveNuRecords();
+nuJustNuRecords();
+nuAppendToSystemTables();
+
+print '<br>All Done!<br><br>';
+
 
 
 function nuRenameAndDeleteSystemFiles(){
@@ -225,7 +238,7 @@ function nuJustNuRecords(){
     
 	$O	= nuTT();
 	
-    $s  =  "CREATE TABLE $O SELECT zzzzsys_object_id FROM sys_zzzzsys_object WHERE sob_all_zzzzsys_form_id NOT LIKE 'nu%' ";   		//-- create table with form ids that start with 'nu'
+    $s  =  "CREATE TABLE $O SELECT zzzzsys_object_id FROM sys_zzzzsys_object WHERE sob_all_zzzzsys_form_id NOT LIKE 'nu%' ";	//-- create table with form ids that start with 'nu'
     nuRunQuery($s);
     print "$s<br>";
 	
@@ -233,7 +246,7 @@ function nuJustNuRecords(){
     nuRunQuery($s);
     print "$s<br>";
     
-    $s  =  "DELETE FROM zzzzsys_tab WHERE syt_zzzzsys_form_id NOT LIKE 'nu%'";    												//-- delete tabs with forms starting with 'nu'
+    $s  =  "DELETE FROM zzzzsys_tab WHERE syt_zzzzsys_form_id NOT LIKE 'nu%' OR syt_zzzzsys_form_id = 'nuuserhome'"; 			//-- delete tabs with forms starting with 'nu'
     nuRunQuery($s);
     print "$s<br>";
     
@@ -241,7 +254,7 @@ function nuJustNuRecords(){
     nuRunQuery($s);
     print "$s<br>";
     
-    $s  =  "DELETE FROM zzzzsys_php WHERE sph_zzzzsys_form_id NOT LIKE 'nu%' AND zzzzsys_php_id NOT LIKE 'nu%' ";    				//-- delete records that start with ids starting with 'nu' or linked to forms starting with 'nu'
+    $s  =  "DELETE FROM zzzzsys_php WHERE sph_zzzzsys_form_id NOT LIKE 'nu%' AND zzzzsys_php_id NOT LIKE 'nu%' ";    			//-- delete records that start with ids starting with 'nu' or linked to forms starting with 'nu'
     nuRunQuery($s);
     print "$s<br>";
     
@@ -249,7 +262,7 @@ function nuJustNuRecords(){
     nuRunQuery($s);
     print "$s<br>";
     
-    $s  =  "DELETE FROM zzzzsys_event WHERE sev_zzzzsys_object_id IN (SELECT * FROM $O)";    								//-- delete if attached to objects on forms with ids starting with 'nu'
+    $s  =  "DELETE FROM zzzzsys_event WHERE sev_zzzzsys_object_id IN (SELECT * FROM $O)";    									//-- delete if attached to objects on forms with ids starting with 'nu'
     nuRunQuery($s);
     print "$s<br>";
     
@@ -263,27 +276,31 @@ function nuRemoveNuRecords(){
     
 	$O	= nuTT();
 	
-    $s  =  "DELETE FROM sys_zzzzsys_object WHERE sob_all_zzzzsys_form_id LIKE 'nu%' ";   										//-- delete all objects on forms with ids that start with 'nu'
+    $s  =  "DELETE FROM sys_zzzzsys_object WHERE sob_all_zzzzsys_form_id LIKE 'nu%'  AND sob_all_zzzzsys_form_id != 'nuuserhome'";   	//-- delete all objects on forms with ids that start with 'nu'
     nuRunQuery($s);
     print "$s<br>";
 	
-    $s  =  "DELETE FROM sys_zzzzsys_form WHERE zzzzsys_form_id LIKE 'nu%' ";    												//-- delete all forms with ids that start with 'nu'
+    $s  =  "DELETE FROM sys_zzzzsys_form WHERE zzzzsys_form_id LIKE 'nu%' ";    														//-- delete all forms with ids that start with 'nu'
     nuRunQuery($s);
     print "$s<br>";
     
-    $s  =  "DELETE FROM sys_zzzzsys_tab WHERE syt_zzzzsys_form_id LIKE 'nu%'";    												//-- delete tabs with forms starting with 'nu'
+    $s  =  "DELETE FROM sys_zzzzsys_tab WHERE syt_zzzzsys_form_id LIKE 'nu%' AND syt_zzzzsys_form_id != 'nuuserhome'"; 					//-- delete tabs with forms starting with 'nu'
     nuRunQuery($s);
     print "$s<br>";
     
-    $s  =  "DELETE FROM sys_zzzzsys_php WHERE sph_zzzzsys_form_id LIKE 'nu%' OR zzzzsys_php_id LIKE 'nu%' ";    				//-- delete records that start with ids starting with 'nu' or linked to forms starting with 'nu'
+    $s  =  "DELETE FROM sys_zzzzsys_php WHERE sph_zzzzsys_form_id LIKE 'nu%' OR zzzzsys_php_id LIKE 'nu%' ";  		  					//-- delete records that start with ids starting with 'nu' or linked to forms starting with 'nu'
     nuRunQuery($s);
     print "$s<br>";
     
-    $s  =  "DELETE FROM sys_zzzzsys_browse WHERE sbr_zzzzsys_form_id LIKE 'nu%'";  					  							//-- KEEP BROWSEs from FORMs with ids that start with 'nu'
+    $s  =  "DELETE FROM sys_zzzzsys_browse WHERE sbr_zzzzsys_form_id LIKE 'nu%'";  					  									//-- KEEP BROWSEs from FORMs with ids that start with 'nu'
     nuRunQuery($s);
     print "$s<br>";
     
-    $s  =  "DELETE FROM sys_zzzzsys_event WHERE zzzzsys_event_id LIKE 'nu%'";   				 								//-- delete if attached to objects on forms with ids starting with 'nu'
+    $s  =  "DELETE FROM sys_zzzzsys_event WHERE zzzzsys_event_id LIKE 'nu%'";   				 										//-- delete if attached to objects on forms with ids starting with 'nu'
+    nuRunQuery($s);
+    print "$s<br>";
+    
+    $s  =  "DELETE FROM sys_zzzzsys_timezone";									   				 										//-- delete if attached to objects on forms with ids starting with 'nu'
     nuRunQuery($s);
     print "$s<br>";
     
@@ -337,7 +354,6 @@ function nuSystemList(){
     $t[]	= 'zzzzsys_form';
     $t[]	= 'zzzzsys_format';
     $t[]	= 'zzzzsys_object';
-//    $t[]	= 'zzzzsys_phinxlog';
     $t[]	= 'zzzzsys_php';
     $t[]	= 'zzzzsys_report';
     $t[]	= 'zzzzsys_select';
@@ -353,6 +369,8 @@ function nuSystemList(){
     return $t;
     
 }
+
+
 
 
 ?>

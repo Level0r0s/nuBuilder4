@@ -189,7 +189,6 @@ function nuBuildFastForm($table, $form_type){
 
 	}
 
-	nuRunQuery("create table a$TT SLECT * FROM $TT");
 	$t              = nuRunQuery("SELECT * FROM $TT");
 	$a              = Array();
 	$n              = 'number date';
