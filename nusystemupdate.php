@@ -303,7 +303,7 @@ function nuRemoveNuRecords(){
 
 function nuAppendToSystemTables(){
 
-    print '<br>Add back custom records (sys_zzzzsys_ >> zzzzsys_)<br>--------------------------------------------------<br>';
+    print '<br>Add back custom records (sys_zzzzsys_ to zzzzsys_)<br>--------------------------------------------------<br>';
 
 	try{
 
