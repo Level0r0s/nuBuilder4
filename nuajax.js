@@ -258,7 +258,8 @@ function nuSystemUpdate(){
 	
     if(confirm("Update System?") == false){return;}
 	
-	var last				= nuFORM.addBreadcrumb();
+	var current				= nuFORM.getCurrent();
+	var last		 		= $.extend(true, {}, current);
 	
 	last.session_id			= nuSESSION;
 	last.call_type 			= 'systemupdate';

@@ -8,13 +8,16 @@ $J						= nuGetJSONData($jsonID);
 
 if($J != 'valid'){
 	
-	print 'not ok';	
+	print "Something's wrong. Try logging in again...";	
 	return;
 	
 }
 
+print '<br>Merge current data with new system tables<br>==================================================<br><br>';
+
 nuRenameAndDeleteSystemFiles();
 nuImportSystemFiles();
+nuAddNewSystemTables();
 nuUpdateSystemRecords();
 nuRemoveNuRecords();
 nuJustNuRecords();
@@ -27,6 +30,8 @@ print '<br>All Done!<br><br>';
 function nuRenameAndDeleteSystemFiles(){
     
     $t      	= nuSystemList();
+
+    print '<br>Copy all zzzzsys_ files copied to sys_zzzzsys_ <br>--------------------------------------------------<br>';
 
 	$sql		= "DROP VIEW IF EXISTS zzzzsys_report_data";
 	nuRunQuery($sql);
@@ -58,7 +63,7 @@ function nuRenameAndDeleteSystemFiles(){
         
     }
 	
-    print '<br>All zzzzsys_ files copied to sys_zzzzsys_ !<br><br>';
+	print "Done!<br><br>";
     
 }
 
@@ -66,7 +71,7 @@ function nuRenameAndDeleteSystemFiles(){
 
 function nuImportSystemFiles(){
 
-//	nuRunQuery("DROP TABLE IF EXISTS zzzzsys_debug");
+    print '<br>Import nubuilder4.sql<br>--------------------------------------------------<br>';
 
 	try{
 
@@ -76,6 +81,8 @@ function nuImportSystemFiles(){
 
 		if($handle){
 
+			nuRunQuery("DROP TABLE IF EXISTS zzzzsys_debug");
+			
 			while(($line = fgets($handle)) !== false){
 
 				if($line[0] != "-" AND $line[0] != "/"  AND $line[0] != "\n"){
@@ -96,7 +103,7 @@ function nuImportSystemFiles(){
 
 			}
 				
-			print "<br>nubuilder4.sql imported!<br><br>";
+			print "Done!<br><br>";
 
 		}else{
 			throw new nuInstallException("error opening the file: $file");
@@ -135,8 +142,8 @@ function nuInstallException($e){
 
 function nuUpdateSystemRecords(){									//-- after zzzzsys files have been imported
 
-	nuAddNewSystemTables();
-	
+    print '<br>Update tables structures (in sys_zzzzsys_)<br>--------------------------------------------------<br>';
+
 	$ts				= nuBuildTableSchema();
 	$t				= nuListSystemTables();
 
@@ -151,10 +158,10 @@ function nuUpdateSystemRecords(){									//-- after zzzzsys files have been imp
 			$field	= $old[$c];
 			
 			if(!in_array($field, $new)){
-				
+
 				$sql= "ALTER TABLE sys_$table DROP COLUMN $field";
 				nuRunQuery($sql);
-				print "$sql<br>";
+				print "<BR>$sql<BR><BR><br>";
 				
 			}
 			
@@ -205,12 +212,17 @@ function nuUpdateSystemRecords(){									//-- after zzzzsys files have been imp
 		}
 		
 	}
+
+	print "Done!<br><br>";
+
 	
 }
 
 
 function nuAddNewSystemTables(){
 	
+    print '<br>Copy sys_zzzzsys_ tables to zzzzsys_<br>--------------------------------------------------<br>';
+
 	$ts			= nuBuildTableSchema();
 
 	foreach ($ts as $k => $v) {
@@ -231,38 +243,16 @@ function nuAddNewSystemTables(){
 		
 	}
 	
+	print "Done!<br><br>";
+
 }
 
 
 function nuJustNuRecords(){
     
-	$O	= nuTT();
-	
-    $s  =  "CREATE TABLE $O SELECT zzzzsys_object_id FROM sys_zzzzsys_object WHERE sob_all_zzzzsys_form_id NOT LIKE 'nu%' ";	//-- create table with form ids that start with 'nu'
-    nuRunQuery($s);
-    print "$s<br>";
-	
-    $s  =  "DELETE FROM zzzzsys_form WHERE zzzzsys_form_id NOT LIKE 'nu%' ";    												//-- delete all forms with ids that start with 'nu'
-    nuRunQuery($s);
-    print "$s<br>";
-    
-    $s  =  "DELETE FROM zzzzsys_tab WHERE syt_zzzzsys_form_id NOT LIKE 'nu%' OR syt_zzzzsys_form_id = 'nuuserhome'"; 			//-- delete tabs with forms starting with 'nu'
-    nuRunQuery($s);
-    print "$s<br>";
-    
-    $s  =  "DELETE FROM zzzzsys_object WHERE sob_all_zzzzsys_form_id NOT LIKE 'nu%'";    										//-- delete records that have form ids starting with 'nu'
-    nuRunQuery($s);
-    print "$s<br>";
-    
-    $s  =  "DELETE FROM zzzzsys_php WHERE sph_zzzzsys_form_id NOT LIKE 'nu%' AND zzzzsys_php_id NOT LIKE 'nu%' ";    			//-- delete records that start with ids starting with 'nu' or linked to forms starting with 'nu'
-    nuRunQuery($s);
-    print "$s<br>";
-    
-    $s  =  "DELETE FROM zzzzsys_browse WHERE sbr_zzzzsys_form_id NOT LIKE 'nu%'";  					  							//-- KEEP BROWSEs from FORMs with ids that start with 'nu'
-    nuRunQuery($s);
-    print "$s<br>";
-    
-    $s  =  "DELETE FROM zzzzsys_event WHERE sev_zzzzsys_object_id IN (SELECT * FROM $O)";    									//-- delete if attached to objects on forms with ids starting with 'nu'
+    print '<br>Remove tabs for default User Home to allow for the current User Home (in zzzzsys_)<br>--------------------------------------------------<br>';
+
+    $s  =  "DELETE FROM zzzzsys_tab WHERE syt_zzzzsys_form_id = 'nuuserhome'"; 			//-- delete tabs with forms starting with 'nu'
     nuRunQuery($s);
     print "$s<br>";
     
@@ -274,17 +264,19 @@ function nuJustNuRecords(){
 
 function nuRemoveNuRecords(){
     
+    print '<br>Remove default system records keeping only customisation (in sys_zzzzsys_)<br>--------------------------------------------------<br>';
+
 	$O	= nuTT();
 	
     $s  =  "DELETE FROM sys_zzzzsys_object WHERE sob_all_zzzzsys_form_id LIKE 'nu%'  AND sob_all_zzzzsys_form_id != 'nuuserhome'";   	//-- delete all objects on forms with ids that start with 'nu'
     nuRunQuery($s);
     print "$s<br>";
-	
-    $s  =  "DELETE FROM sys_zzzzsys_form WHERE zzzzsys_form_id LIKE 'nu%' ";    														//-- delete all forms with ids that start with 'nu'
-    nuRunQuery($s);
-    print "$s<br>";
     
     $s  =  "DELETE FROM sys_zzzzsys_tab WHERE syt_zzzzsys_form_id LIKE 'nu%' AND syt_zzzzsys_form_id != 'nuuserhome'"; 					//-- delete tabs with forms starting with 'nu'
+    nuRunQuery($s);
+    print "$s<br><br>";
+	
+    $s  =  "DELETE FROM sys_zzzzsys_form WHERE zzzzsys_form_id LIKE 'nu%' ";    														//-- delete all forms with ids that start with 'nu'
     nuRunQuery($s);
     print "$s<br>";
     
@@ -311,10 +303,10 @@ function nuRemoveNuRecords(){
 
 function nuAppendToSystemTables(){
 
+    print '<br>Add back custom records (sys_zzzzsys_ >> zzzzsys_)<br>--------------------------------------------------<br>';
 
 	try{
 
-		
 		$t      	= nuSystemList();
 		
 		for($i = 0 ; $i < count($t) ; $i++){
@@ -326,10 +318,7 @@ function nuAppendToSystemTables(){
 			print "$sql<br>";
 			
 		}
-		
-		print '<br>Appended to system tables!<br>';
     
-
 	}catch (Throwable $e) {
 		nuInstallException($e);
 	}catch (Exception $e) {
@@ -344,6 +333,38 @@ function nuSystemList(){
     $t      = [];
     
     $t[]	= 'zzzzsys_access';
+    $t[]	= 'zzzzsys_access_form';
+    $t[]	= 'zzzzsys_access_php';
+    $t[]	= 'zzzzsys_access_report';
+    $t[]	= 'zzzzsys_browse';
+    $t[]	= 'zzzzsys_debug';
+    $t[]	= 'zzzzsys_event';
+    $t[]	= 'zzzzsys_file';
+    $t[]	= 'zzzzsys_form';
+    $t[]	= 'zzzzsys_format';
+    $t[]	= 'zzzzsys_object';
+    $t[]	= 'zzzzsys_php';
+    $t[]	= 'zzzzsys_report';
+    $t[]	= 'zzzzsys_select';
+    $t[]	= 'zzzzsys_select_clause';
+    $t[]	= 'zzzzsys_session';
+    $t[]	= 'zzzzsys_setup';
+    $t[]	= 'zzzzsys_tab';
+    $t[]	= 'zzzzsys_table';
+    $t[]	= 'zzzzsys_timezone';
+    $t[]	= 'zzzzsys_translate';
+    $t[]	= 'zzzzsys_user';
+	
+    return $t;
+    
+}
+
+
+function nuSystemListNew(){
+	
+    $t      = [];
+    
+    $t[]	= Array( 'table' => 'zzzzsys_access', 'removenu' => 0);
     $t[]	= 'zzzzsys_access_form';
     $t[]	= 'zzzzsys_access_php';
     $t[]	= 'zzzzsys_access_report';
