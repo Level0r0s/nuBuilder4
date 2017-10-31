@@ -219,7 +219,7 @@ function nuBuildLookup(t, s){
 	if(parent.window == window){
 		window.nuDialog.createDialog(50, 50, 50, 50, '');
 	}else{
-		window.nuDialog.createDialog(0, 1, 50, 50, '');
+		window.nuDialog.createDialog(0, 30, 50, 50, '');
 	}
 	
 	$('#nuDragDialog')
@@ -239,7 +239,7 @@ function nuPopup(f, r, filter){
 	if(parent.window==window){
 		window.nuDialog.createDialog(50, 50, 50, 50, '');
 	}else{
-		window.nuDialog.createDialog(0, 1, 50, 50, '');
+		window.nuDialog.createDialog(0, 30, 50, 50, '');
 	}
 	
 	$('#nuDragDialog')
@@ -1030,10 +1030,22 @@ function nuRemoveHolders(h){
 
 
 function nuAttachFile(j, c){
+debugger;
+	if(window.nuGraphics.indexOf(c + '.png') != -1){						//-- check filenames in graphics dir.
+
+		$(j)
+		.css('background-image', 'url("\\graphics\\' + c + '.png)')
+		.css('background-repeat', 'no-repeat')
+		.css('padding', '0px 0px 0px 0px')
+		.css('text-align', 'left')
+
+		return;
+		
+	}
 	
 	if(nuImages[c] !== undefined){
 		
-		var p				= JSON.parse(nuImages[c]);
+		var p				= JSON.parse(g);
 		var b				= atob(p.file);
 		
 		$(j)
@@ -1047,6 +1059,7 @@ function nuAttachFile(j, c){
 	}
 	
 }
+
 
 
 function nuButtonIcon(j){

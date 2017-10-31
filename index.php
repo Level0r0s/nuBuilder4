@@ -145,7 +145,9 @@ window.nuHASH			= [];
     $search             	= '';
     $iframe					= '';
     $target					= '';
-	
+	$l 						= scandir('graphics');
+	$f  					= JSON_encode($l);
+
     if(isset($_GET['opener']))
        $opener = $_GET['opener'];
     if(isset($_GET['search']))
@@ -161,6 +163,7 @@ window.nuHASH			= [];
 
 	$h			= "
 
+	window.nuGraphics						= $f;
 	window.nuIsWindow						= '$iframe';
 	window.nuImages							= [];
 	
@@ -247,7 +250,7 @@ $nuHeader
 	<script>
 	
 	";
-	
+
 	print $h;
 	
 ?>

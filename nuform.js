@@ -3233,7 +3233,7 @@ function nuFastReportFormat(width){
 	o.top			= 9;
 	o.left			= pageWidth - 200;
 	o.width			= 200;
-	o.textAlign		= 'left';
+	o.textAlign		= 'right';
 	o.fieldName		= 'Page #page# of #pages#';
 	o.objectType	= 'label';
 
