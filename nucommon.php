@@ -1413,9 +1413,9 @@ function nuUpdateTableIds($table){
 		
 		$i	= $r[0];
 		$n	= nuID();
-		$u	=  "UPDATE $table SET $id = 'nu$n' WHERE $id = ? ";
+		$u	= "UPDATE $table SET $id = 'nu$n' WHERE $id = '$i' ";
 		
-		nuRunQuery($u, [$i]);
+		nuRunQuery($u);
 		
 		print "$u<br>";
 		

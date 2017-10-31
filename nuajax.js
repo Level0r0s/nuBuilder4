@@ -289,6 +289,21 @@ function nuSystemUpdate(){
 
 function nuAttachImage(i, c){
 	
+	c						= String(c).toLowerCase();
+
+	if(window.nuGraphics.indexOf(c + '.png') != -1){						//-- check filenames in graphics dir.
+
+		$(i)
+		.css('background-image', 'url("graphics/' + c + '.png')
+		.css('background-repeat', 'no-repeat')
+		.css('background-size', '30px')
+		.css('padding', '0px 0px 0px 33px')
+		.css('text-align', 'left')
+
+		return;
+		
+	}
+	
 	var PARENT				= parent.parent.parent.parent.parent.parent.parent.parent.parent;
 	
 	if(PARENT.nuImages[c] !== undefined){

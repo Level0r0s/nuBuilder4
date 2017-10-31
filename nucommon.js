@@ -1030,11 +1030,11 @@ function nuRemoveHolders(h){
 
 
 function nuAttachFile(j, c){
-debugger;
+
 	if(window.nuGraphics.indexOf(c + '.png') != -1){						//-- check filenames in graphics dir.
 
 		$(j)
-		.css('background-image', 'url("\\graphics\\' + c + '.png)')
+		.css('background-image', 'url("graphics/' + c + '.png')
 		.css('background-repeat', 'no-repeat')
 		.css('padding', '0px 0px 0px 0px')
 		.css('text-align', 'left')
