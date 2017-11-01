@@ -177,8 +177,16 @@ function nuUpdateDatabase(){
 					if($edit[$R] == 1 or $isAN){														//-- has been edited
 					
 						$cts		= nuGetJSONData('clientTableSchema');
-						
-						if(in_array($fields[$R], $cts[$table]['names'])){				//-- valid field names
+
+						if($cts[$table] == ''){														//-- not valid table name
+
+							nuDisplayError("<b>$table</b> is not a valid table name");
+							return;
+
+
+						}
+
+						if(in_array($fields[$R], $cts[$table]['names'])){								//-- valid field names
 
 							if($isAN){
 								$v	= nuAutoNumber($sf->object_id, $fields[$R], $row[$R]);
