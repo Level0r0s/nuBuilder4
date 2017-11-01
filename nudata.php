@@ -180,7 +180,7 @@ function nuUpdateDatabase(){
 
 						if($cts[$table] == ''){														//-- not valid table name
 
-							nuDisplayError("<b>$table</b> is not a valid table name");
+							nuDisplayError("<b>$table</b> is not a valid table name for a Subform");
 							return;
 
 
