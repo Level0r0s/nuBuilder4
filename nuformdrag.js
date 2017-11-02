@@ -495,13 +495,13 @@ function nuFindFieldInState(tabNo, fieldID){
 function nuCreateDragOptionsBox(form){
 	
     var dragOptionsBoxWidth 		= 341;
-    //var dragOptionsBoxWidth 		= 300;
     var dragOptionsBoxMinHeight 	= 535;
 	
-    $('#nuDragDialog',window.parent.document.body).css('width',$('#nuDragDialog',window.parent.document.body).width()+dragOptionsBoxWidth);
+    $('#nuDragDialog',window.parent.document.body).css('top', 35);
+    $('#nuDragDialog',window.parent.document.body).css('width',$('#nuDragDialog',window.parent.document.body).width()+dragOptionsBoxWidth - 25);
     $('#nuDragDialog',window.parent.document.body).css('min-height',dragOptionsBoxMinHeight+'px');
 	
-    var optionsBoxHTML = '<div id="nuDragOptionsBox" class="nuDragOptionsBox" style="width:'+dragOptionsBoxWidth+'px;height:100%;min-height:'+dragOptionsBoxMinHeight+'px;">'+
+    var optionsBoxHTML = '<div id="nuDragOptionsBox" class="nuDragOptionsBox" style="width:'+(dragOptionsBoxWidth-20)+'px;height:100%;min-height:'+dragOptionsBoxMinHeight+'px;">'+
         '<div class="nuDragOptionsBoxContainer">'+
             '<div id="dragOptionsTitle" class="nuDragOptionsBoxTitle">Options</div>'+
             '<label for="nuDragOptionsFields" class="nuDragOptionsFieldsLabel">Object Tab Order</label>'+
