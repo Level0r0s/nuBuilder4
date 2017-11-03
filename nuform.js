@@ -1365,7 +1365,7 @@ function nuBuildSubformTitle(o, l, w, id, col){
 	$('#' + id).append(div);
 	
 	$('#' + titleId).css({'top'     	: 0,
-					'left'          	: Number(l),
+					'left'          	: Number(l) + 5,
 					'width'         	: Number(w),
 					'height'        	: 50,
 					'text-align'    	: 'center',
@@ -3110,7 +3110,7 @@ function nuBuildFastReport(){
 			var field	= rows[i][2];
 			var width	= Number(rows[i][3]);
 			var sum		= rows[i][4];
-			var align	= sum=='no'?'left':'right';
+			var align	= sum==0?'left':'right';
 
 			var o		= JSON.parse(JSON.stringify(window.nuOBJECT));		//-- title
 			o.left		= Number(left);
@@ -3130,7 +3130,7 @@ function nuBuildFastReport(){
 
 			nuFastObject(0,0,o);
 
-			if(sum == 'yes'){
+			if(align == 'right'){
 					
 				var o		= JSON.parse(JSON.stringify(window.nuOBJECT));		//-- sum
 				o.left		= Number(left);
