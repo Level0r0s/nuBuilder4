@@ -3223,8 +3223,8 @@ function nuFastReportFormat(width){
 	var o			= nuNewFastObject();		//-- page footer date
 	o.left			= 2;
 	o.top			= 9;
-	o.width			= 200;
-	o.fieldName		= 'Printed : #day#';
+	o.width			= 600;
+	o.fieldName		= 'Printed : #day#-#month#-20#year# #hour#:#minute#:#second#';
 	o.objectType	= 'label';
 
 	nuREPORT.groups[2].sections[1].objects.push(o);
