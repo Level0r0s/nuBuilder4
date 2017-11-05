@@ -2043,8 +2043,10 @@ function nuBrowseTable(){
 			var w		= Number(col[c].width);
 			var a		= nuAlign(col[c].align);
 			var f		= col[c].format;
-			var rw		= 'nurow'    + String('00' + r).substr(-3);
-			var column	= 'nucolumn' + String('00' + c).substr(-3);
+//			var rw		= 'nurow'    + String('00' + r).substr(-3);
+//			var column	= 'nucolumn' + String('00' + c).substr(-3);
+			var rw		= r;
+			var column	= c;
 			var id		= rw + String('00' + c).substr(-3);
 			var div		= document.createElement('div');
 			
@@ -2424,7 +2426,8 @@ function nuHighlightSearch(){
 	
 	$('.nuBrowseTable').each(function(index){
 		
-		var col	= Number(String($(this).attr('id')).substr(11));
+//		var col	= Number(String($(this).attr('id')).substr(11));
+		var col	= Number(String($(this).attr('data-nu-column')));
 		
 		if(exclude.indexOf(col) == -1){
 			
