@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 06, 2017 at 09:09 PM
+-- Generation Time: Nov 06, 2017 at 09:49 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -195,6 +195,61 @@ CREATE TABLE `zzzzsys_event` (
   `sev_event` varchar(100) NOT NULL,
   `sev_javascript` varchar(3000) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `zzzzsys_event`
+--
+
+INSERT INTO `zzzzsys_event` (`zzzzsys_event_id`, `sev_zzzzsys_object_id`, `sev_event`, `sev_javascript`) VALUES
+('nu59e44658b442bde', 'nu59e4465878d8556', 'onchange', 'nuFormColor();'),
+('nu59e44658b431806', 'nu59e446587e89d33', 'onclick', 'window.open(''nureportdesigner.php?tt='' + $("#sre_zzzzsys_php_id").val() + ''&launch='' + $("#sre_zzzzsys_form_id").val());'),
+('nu59e44658b43a4bd', 'nu59e446587f695c7', 'onchange', 'nuObjectColor();'),
+('nu59e44658b563079', 'nu59e446587b4516c', 'onclick', 'nuPopPHP(event, ''BB'');'),
+('nu59e44658b5b30b3', 'nu59e446589e4b798', 'onchange', 'nuAddSQLTable(event);'),
+('nu59e44658b56c6ca', 'nu59e4465877a3f33', 'afterinsertrow', '$("[id$=''sev_javascript'']").addClass(''js'')'),
+('nu59e44658b44d734', 'nu59e4465895342f5', 'onclick', 'nuPopPHP(event, ''BE'');'),
+('nu59e44658b4571d8', 'nu59e44658955c629', 'onclick', 'nuPopPHP(event, ''BS'');'),
+('nu59e44658b462772', 'nu59e4465895b9f25', 'onclick', 'nuPopPHP(event, ''AS'');'),
+('nu59e44658b47985f', 'nu59e44658960e0b9', 'onclick', 'nuPopPHP(event, ''BD'');'),
+('nu59e44658b48f500', 'nu59e44658962c8f8', 'onclick', 'nuPopPHP(event, ''AD'');'),
+('nu59e44658b4a21ab', 'nu59e446587e5b250', 'onclick', 'nuPopPHP(event, ''BB'');'),
+('nu59e44658b4e0601', 'nu59e4465894ea6dd', 'onclick', 'nuPopPHP(event, ''AB'');'),
+('nu59e44658b5293af', 'nu59e4465896468ba', 'onclick', 'nuPreview()'),
+('nu59e44658b53bb7c', 'nu59e4465879750b7', 'onkeydo', 'nuFORM.scrollList(event, nuFORM.tableFields($(''#sfo_table'').val()))'),
+('nu59e44658b5aa72a', 'nu59e446589e30348', 'onchange', '$(''#sqlframe'').contents().find(''body'').css(''zoom'', this.value / 100)'),
+('nu59e44658b600c2b', 'nu59e4465899ac9dc', 'onchange', 'nuSetFFTable();'),
+('nu59e44658b54847f', 'nu59e44658972a85b', 'onchange', 'nuSetFormatType(1)'),
+('nu59e44658b55a82c', 'nu59e4465897d4dd1', 'onclick', 'nuPreview(1)'),
+('nu59e44658b5a1c1b', 'nu59e446589bb5634', 'onclick', 'nuPopup(''nusample'',''-1'');'),
+('nu59e44658b552477', 'nu59e44658834adc0', 'onchange', 'nuShowInputJS(this.value)'),
+('nu59e44658b57dcda', 'nu59e4465882aca25', 'onclick', 'nuPopPHP(event, ''BB'');'),
+('nu59e44658b587445', 'nu59e4465882d2f56', 'onclick', 'nuPopPHP(event, ''BB'');'),
+('nu59e44658b590496', 'nu59e446589952354', 'onclick', 'nuPopPHP(event, ''BB'');'),
+('nu59e44658b599058', 'nu59e4465899eb69f', 'onkeydown', 'nuFORM.scrollList(event, window.nuObjectFields);'),
+('nu59e44658b5bb96c', 'nu59e446589ec9851', 'onchange', '$(''#sqlframe'').contents().find(''body'').css(''zoom'', this.value / 100)'),
+('nu59e44658b5c4620', 'nu59e446589e7e757', 'onchange', 'nuWhereClauses();$(''#sqlframe'')[0].contentWindow.nuSQL.buildSQL()'),
+('nu59e44658b5cd4b7', 'nu59e446589eaffaa', 'onchange', '$(''#sqlframe'')[0].contentWindow.nuSQL.buildSQL()'),
+('nu59e44658b5d5b1f', 'nu59e446589e975c3', 'onchange', '$(''#sqlframe'')[0].contentWindow.nuSQL.buildSQL()'),
+('nu59e44658b5de5bc', 'nu59e446589efd75a', 'onchange', '$(''#sqlframe'')[0].contentWindow.nuSQL.buildSQL()'),
+('nu59e44658b5e6fd5', 'nu59e446589e64f98', 'onchange', '$(''#sqlframe'')[0].contentWindow.nuSQL.buildSQL()'),
+('nu59e44658b5efc42', 'nu59e4465896a5c13', 'onfocus', 'nuFocusFFObject(event);'),
+('nu59e44658b5f8462', 'nu59e44658968d2f5', 'onfocus', 'nuFocusFFObject(event);'),
+('nu59e44658b609148', 'nu59e4465896bd96d', 'afterinsertrow', 'nuSetFFTable();'),
+('nu59e44658b611862', 'nu59e446589f5c1c2', 'onclick', 'nuPopSQL(event, ''BR'');'),
+('nu59e44658b61a3df', 'nu59e446589f746e5', 'onclick', 'nuPopSQL(event, ''DI'');'),
+('nu59e44658b624227', 'nu59e446589f8c441', 'onclick', 'nuPopSQL(event, ''SE'');'),
+('nu59e44658b62d084', 'nu59e446589fa4189', 'onfocus', 'nuFocusFFObject(event);'),
+('nu59e44658b635b2e', 'nu59e446589adce4d', 'onclick', 'alert(''Do Something!'')'),
+('nu59e44658b63e644', 'nu59e446589feb965', 'onchange', 'nuFormColor();'),
+('nu59e44658b6472e4', 'nu59e44658a0065ba', 'onclick', 'nuPopPHP(event, ''BB'');'),
+('nu59e44658b64fb0b', 'nu59e446589ec9851', 'afterinsertrow', 'nuSetSFCB();'),
+('nu59e44658b6583d7', 'nu59e44658a1751a5', 'onclick', 'nuGetCSV();'),
+('nu59e44658b6610cc', 'nu59e44658a22c185', 'onclick', 'nuPopPHP(event, ''BB'');'),
+('nu59e44658b4202f6', 'nu59e446589f40584', 'onclick', 'window.open(''nupmalogin.php'');'),
+('nu59e44658b428dbb', 'nu59e44658a2c7215', 'onclick', 'nuSystemUpdate();'),
+('nu59e44658b40e85f', 'nu59e44658a2e46f4', 'onclick', 'window.open("http://wiki.nubuilder.net/nubuilderforte/index.php/" + window.nuHelp);'),
+('nu59e44658b4178cc', 'nu59e44658a301273', 'onclick', 'window.open("http://wiki.nubuilder.net/nubuilderforte/index.php/" + window.nuHelp);'),
+('nu59e44658b403a46', 'nu59e446587dbf61a', 'afterinsertrow', '$("[id$=''syt_help'']").addClass(''js'')');
 
 -- --------------------------------------------------------
 
