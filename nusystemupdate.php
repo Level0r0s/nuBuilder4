@@ -292,6 +292,14 @@ function nuRemoveNuRecords(){
     $s  =  "DELETE FROM sys_zzzzsys_event WHERE zzzzsys_event_id LIKE 'nu%'";   				 										//-- delete if attached to objects on forms with ids starting with 'nu'
     nuRunQuery($s);
     print "$s<br>";
+    
+    $s  =  "DELETE FROM sys_zzzzsys_file WHERE zzzzsys_file_id LIKE '%nu'"; 															
+    nuRunQuery($s);
+    print "$s<br>";
+    
+    $s  =  "DELETE FROM sys_zzzzsys_format WHERE zzzzsys_format_id LIKE '%nu'"; 															
+    nuRunQuery($s);
+    print "$s<br>";
 
     $s  =  "DELETE FROM sys_zzzzsys_object WHERE sob_all_zzzzsys_form_id LIKE 'nu%'  AND sob_all_zzzzsys_form_id != 'nuuserhome'";   	//-- delete all objects on forms with ids that start with 'nu'
     nuRunQuery($s);
@@ -338,7 +346,7 @@ function nuAppendToSystemTables(){
 			nuRunQuery($s);
 			print "$s<br>";
 
-			//$s		= "DROP TABLE sys_$table";
+			$s		= "DROP TABLE sys_$table";
 			nuRunQuery($s);
 			print "$s<br>";
 			
