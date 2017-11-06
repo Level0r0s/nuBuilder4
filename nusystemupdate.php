@@ -252,15 +252,15 @@ function nuJustNuRecords(){
     
     print '<br>Remove all ids not starting with nu from SYSTEM FILES<br>--------------------------------------------------<br>';
 
-    $s  =  "DELETE FROM zzzzsys_event WHERE zzzzsys_event_id NOT LIKE '%nu'"; 															
+    $s  =  "DELETE FROM zzzzsys_event WHERE zzzzsys_event_id NOT LIKE 'nu%'"; 															
     nuRunQuery($s);
     print "$s<br>";
     
-    $s  =  "DELETE FROM zzzzsys_file WHERE zzzzsys_file_id NOT LIKE '%nu'"; 															
+    $s  =  "DELETE FROM zzzzsys_file WHERE zzzzsys_file_id NOT LIKE 'nu%'"; 															
     nuRunQuery($s);
     print "$s<br>";
     
-    $s  =  "DELETE FROM zzzzsys_format WHERE zzzzsys_format_id NOT LIKE '%nu'"; 															
+    $s  =  "DELETE FROM zzzzsys_format WHERE zzzzsys_format_id NOT LIKE 'nu%'"; 															
     nuRunQuery($s);
     print "$s<br>";
     
@@ -293,11 +293,11 @@ function nuRemoveNuRecords(){
     nuRunQuery($s);
     print "$s<br>";
     
-    $s  =  "DELETE FROM sys_zzzzsys_file WHERE zzzzsys_file_id LIKE '%nu'"; 															
+    $s  =  "DELETE FROM sys_zzzzsys_file WHERE zzzzsys_file_id LIKE 'nu%'"; 															
     nuRunQuery($s);
     print "$s<br>";
     
-    $s  =  "DELETE FROM sys_zzzzsys_format WHERE zzzzsys_format_id LIKE '%nu'"; 															
+    $s  =  "DELETE FROM sys_zzzzsys_format WHERE zzzzsys_format_id LIKE 'nu%'"; 															
     nuRunQuery($s);
     print "$s<br>";
 
