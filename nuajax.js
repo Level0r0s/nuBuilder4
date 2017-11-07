@@ -185,9 +185,6 @@ function nuRunPHP(pCode, iframe){
 		if(!nuBeforeSave()){return;}
 	}
 
-//	var current				= nuFORM.getCurrent();
-//	var last				= nuFORM.addBreadcrumb();
-//	var last				= nuAddCurrentToHash()
 	var current				= nuFORM.getCurrent();
 	var last		 		= $.extend(true, {}, current);
 	

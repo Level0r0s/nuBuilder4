@@ -1365,7 +1365,7 @@ function nuBuildSubformTitle(o, l, w, id, col){
 	$('#' + id).append(div);
 	
 	$('#' + titleId).css({'top'     	: 0,
-					'left'          	: Number(l),
+					'left'          	: Number(l) + 5,
 					'width'         	: Number(w),
 					'height'        	: 50,
 					'text-align'    	: 'center',
@@ -2043,8 +2043,10 @@ function nuBrowseTable(){
 			var w		= Number(col[c].width);
 			var a		= nuAlign(col[c].align);
 			var f		= col[c].format;
-			var rw		= 'nurow'    + String('00' + r).substr(-3);
-			var column	= 'nucolumn' + String('00' + c).substr(-3);
+//			var rw		= 'nurow'    + String('00' + r).substr(-3);
+//			var column	= 'nucolumn' + String('00' + c).substr(-3);
+			var rw		= r;
+			var column	= c;
 			var id		= rw + String('00' + c).substr(-3);
 			var div		= document.createElement('div');
 			
@@ -2424,7 +2426,8 @@ function nuHighlightSearch(){
 	
 	$('.nuBrowseTable').each(function(index){
 		
-		var col	= Number(String($(this).attr('id')).substr(11));
+//		var col	= Number(String($(this).attr('id')).substr(11));
+		var col	= Number(String($(this).attr('data-nu-column')));
 		
 		if(exclude.indexOf(col) == -1){
 			
@@ -3110,7 +3113,7 @@ function nuBuildFastReport(){
 			var field	= rows[i][2];
 			var width	= Number(rows[i][3]);
 			var sum		= rows[i][4];
-			var align	= sum=='no'?'left':'right';
+			var align	= sum==0?'left':'right';
 
 			var o		= JSON.parse(JSON.stringify(window.nuOBJECT));		//-- title
 			o.left		= Number(left);
@@ -3130,7 +3133,7 @@ function nuBuildFastReport(){
 
 			nuFastObject(0,0,o);
 
-			if(sum == 'yes'){
+			if(align == 'right'){
 					
 				var o		= JSON.parse(JSON.stringify(window.nuOBJECT));		//-- sum
 				o.left		= Number(left);
@@ -3223,8 +3226,8 @@ function nuFastReportFormat(width){
 	var o			= nuNewFastObject();		//-- page footer date
 	o.left			= 2;
 	o.top			= 9;
-	o.width			= 200;
-	o.fieldName		= 'Printed : #day#';
+	o.width			= 600;
+	o.fieldName		= 'Printed : #day#-#month#-20#year# #hour#:#minute#:#second#';
 	o.objectType	= 'label';
 
 	nuREPORT.groups[2].sections[1].objects.push(o);

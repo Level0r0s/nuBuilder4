@@ -945,10 +945,6 @@ function nuWhen(w){
 	var numin   = numax;
 	var nuhtm   = String(Math.ceil(numin)) 										+ ' seconds ago';
 
-	if(numin < 21600)   {nuhtm = String(parseFloat(numin/60/60).toPrecision(1))	+ ' hours ago';}
-	if(numin < 360)     {nuhtm = String(Math.ceil(numin/60)) 					+ ' minutes ago';}
-	if(numin < 60)      {nuhtm = String(Math.ceil(numin)) 						+ ' seconds ago';}
-
 	return nuhtm;
 
 }
