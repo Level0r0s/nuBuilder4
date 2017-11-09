@@ -999,6 +999,8 @@ function nuFormAccessList($j){
 	for($i = 0 ; $i < count($j->procedures) ; $i++){
 		$a[]	= $j->procedures[$i][1];
 	}
+
+	$a[]		= nuGetUserAccess()['HOME_ID'];
 	
 	return $a;
 	
