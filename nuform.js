@@ -2045,9 +2045,10 @@ function nuBrowseTable(){
 			var f		= col[c].format;
 //			var rw		= 'nurow'    + String('00' + r).substr(-3);
 //			var column	= 'nucolumn' + String('00' + c).substr(-3);
+//			var id		= rw + String('00' + c).substr(-3);
 			var rw		= r;
 			var column	= c;
-			var id		= rw + String('00' + c).substr(-3);
+			var id		= 'nucell_' + rw + '_' + c;
 			var div		= document.createElement('div');
 			
 			div.setAttribute('id', id);
