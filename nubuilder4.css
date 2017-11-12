@@ -575,6 +575,30 @@ input[type=range]::-webkit-slider-runnable-track {
   border-width: 0px 0px 1px 0px;
 }
 
+.nuButton:hover {
+  color: #E2EAFF;
+}
+
+.nuUserHomeButton{
+  color: white;
+  background-color: #88cb51;
+  font-size: 13px;
+  display: inline;
+  border-style: solid;
+  font-size: 16px;
+  height: 40px;
+  padding: 0px 6px 0px 6px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  border-color: #87A96B;
+  border-width: 0px 0px 1px 0px;
+}
+
+.nuUserHomeButton:hover {
+  color: #E2EAFF;
+}
+
+
+
 .nuActionButton {
   color: white;
   background-color: #00ADEF;

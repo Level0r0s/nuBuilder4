@@ -531,7 +531,9 @@ function nuINPUT(w, i, l, p, prop){
 	}
 
 	if(input_type != 'button'){
-		$('#' + id).attr('data-nu-data', '');
+		$('#' + id).attr('data-nu-data', '')
+	}else{
+		$('#' + id).addClass('nuButton')
 	}
 	
 	if(w.objects[i].value != '' && window.nuFORM.getCurrent().record_id == '-1'){             //== check for Cannot be left blank
