@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 12, 2017 at 10:24 PM
+-- Generation Time: Nov 12, 2017 at 11:17 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -183,6 +183,14 @@ CREATE TABLE `zzzzsys_debug` (
   `deb_added` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `zzzzsys_debug`
+--
+
+INSERT INTO `zzzzsys_debug` (`zzzzsys_debug_id`, `deb_message`, `deb_order`, `deb_added`) VALUES
+('5a08c55485bcd08', '2017-11-13 08:34:04 -  Procedure <b>1</b> line 1\n\n<br>\n\n[0] : 9\n', '', 1510524244),
+('5a08c8278eee403', '2017-11-13 08:46:07 -  Procedure <b>1</b> line 2\n\n<br>\n\n[0] : 9\n', '', 1510524967);
+
 -- --------------------------------------------------------
 
 --
@@ -316,8 +324,8 @@ INSERT INTO `zzzzsys_form` (`zzzzsys_form_id`, `sfo_type`, `sfo_code`, `sfo_desc
 ('nudebug', 'browseedit', 'nudebug', 'nuDebug Entries', 'zzzzsys_debug', 'zzzzsys_debug_id', '', 21, 15, 'SELECT * FROM zzzzsys_debug\nORDER BY zzzzsys_debug_id DESC', '\n$(''#deb_message'')\n    .css(''font-size'', 10)\n    .css(''background-color'', ''#FFEEA6'')\n    .prop(''readonly'', true)\n    .dblclick(function() {\n    	nuOpenAce(''Text'', this.id);\n    });\n\n\n\n\n\n$(''#delete_option'').val(0);\n$(''#nuAddButton'').remove();\n$(''#nuOptions'').remove();\n\nvar mess    = String($(''#deb_message'').val());\nvar i       = mess.indexOf(''<br>'');\nvar m       = mess.substr(i + 6);\nvar t       = mess.substr(0,i);\n\nnuSetTitle(mess.substr(0, i))\n\n$(''#nuTab0'').remove();\n\n$(''#nuBreadcrumb1'')\n.css(''text-align'', ''center'')\n.css(''width'', ''95%'')\n.css(''color'', ''black'')\n.css(''padding'', ''5px'')\n.html(t + '' :: '' + nuWhen($(''#deb_added'').val()))\n.appendTo("#nuTabHolder");\n\n$(''#deb_message'').val(m);\n\n\n$("[data-nu-column=''nucolumn001'']").each(function( index ) {\n    \n    if($(this).html().trim() != ''''){\n        \n        var nunow   = Date.now();\n        var nuhtm   = nuWhen(Number($(this).html()));\n        \n        $(this).html(nuhtm);\n        \n    }\n    \n});\n\nif(nuFORM.getCurrent().record_id != ''''){\n\n    $(''.nuActionButton'').remove();\n    nuAddActionButton(''Delete'');\n    nuAddActionButton(''DeleteAll'',''Delete All'', ''nuDeleteAllAction()'');\n\n}\n\n'),
 ('nuaccessreport', 'browseedit', 'nuaccessreport', 'Access To Procedures', 'zzzzsys_access_php', 'zzzzsys_access_php_id', '', 0, 0, 'SELECT * \nFROM zzzzsys_access_php\nJOIN zzzzsys_php ON zzzzsys_php_id = slp_zzzzsys_php_id\nORDER BY sph_code', ''),
 ('nuaccesslevelreport', 'browseedit', 'nuaccesslevelreport', 'Access To Report', 'zzzzsys_access_report', 'zzzzsys_access_report_id', '', 0, 0, 'SELECT * \nFROM zzzzsys_access_report\nJOIN zzzzsys_report ON zzzzsys_report_id = sre_zzzzsys_report_id\nORDER BY sre_code', ''),
-('nurunreport', 'browseedit', 'nurunreport', 'Run Report', 'zzzzsys_report', 'zzzzsys_report_id', '', 0, 0, 'SELECT * FROM zzzzsys_report\nLEFT JOIN zzzzsys_form ON zzzzsys_form_id = sre_zzzzsys_form_id', '\nnuSetTitle(nuFORM.getCurrent().run_description);\n\nwindow.nuBrowseFunction = ''runreport'';\n\n$(''#nuAddButton'').remove();\n$(''#nuPrintButton'').remove();\n\nfunction runreport(e){\n    \n    var r   = $(''#'' + e.target.id).attr(''data-nu-row'');\n    var c   = ''000'';\n    var f   = $(''#'' + r + c).html();\n    var p   = $(''#'' + e.target.id).attr(''data-nu-primary-key'');\n\n    nuGetReport(f, p);\n    \n}\n\n'),
-('nurunphp', 'browseedit', 'nurunphp', 'Run Procedure', 'zzzzsys_php', 'zzzzsys_php_id', '', 0, 0, 'SELECT * FROM zzzzsys_php\nJOIN zzzzsys_form ON zzzzsys_form_id = sph_zzzzsys_form_id\nWHERE sph_system != ''1''\nORDER BY sph_code', 'window.nuBrowseFunction = ''getphp'';\n\n$(''#nuAddButton'').remove();\n$(''#nuPrintButton'').remove();\n\nfunction getphp(e){\n    \n    var r   = $(''#'' + e.target.id).attr(''data-nu-row'');\n    var c   = ''000'';\n    var p   = $(''#'' + r + c).html();\n    var f   = $(''#'' + e.target.id).attr(''data-nu-primary-key'');\n\n    nuGetPHP(p, f);\n\n}\n'),
+('nurunreport', 'browseedit', 'nurunreport', 'Run Report', 'zzzzsys_report', 'zzzzsys_report_id', '', 0, 0, 'SELECT * FROM zzzzsys_report\nLEFT JOIN zzzzsys_form ON zzzzsys_form_id = sre_zzzzsys_form_id', '\nnuSetTitle(nuFORM.getCurrent().run_description);\n\nwindow.nuBrowseFunction = ''runreport'';\n\n$(''#nuAddButton'').remove();\n$(''#nuPrintButton'').remove();\n\nfunction runreport(e){\n    \n    var r   = $(''#'' + e.target.id).attr(''data-nu-row'');\n    var f   = $(''#nucell_'' + r + ''_0'').html();\n    var p   = $(''#'' + e.target.id).attr(''data-nu-primary-key'');\n\n    nuGetReport(f, p);\n    \n}\n\n'),
+('nurunphp', 'browseedit', 'nurunphp', 'Run Procedure', 'zzzzsys_php', 'zzzzsys_php_id', '', 0, 0, 'SELECT * FROM zzzzsys_php\nJOIN zzzzsys_form ON zzzzsys_form_id = sph_zzzzsys_form_id\nWHERE sph_system != ''1''\nORDER BY sph_code', 'window.nuBrowseFunction = ''getphp'';\n\n$(''#nuAddButton'').remove();\n$(''#nuPrintButton'').remove();\n\nfunction getphp(e){\n    \n    var r   = $(''#'' + e.target.id).attr(''data-nu-row'');\n    var p   = $(''#nucell_'' + r + ''_0'').html();\n    var f   = $(''#'' + e.target.id).attr(''data-nu-primary-key'');\n\n//    nuGetPHP(f, p);\n    nuGetPHP(p, f);\n\n}\n'),
 ('nulaunchdates', 'launch', 'nulaunchdates', 'Between 2 Dates', '', '', '', 0, 0, '', '\nnuSetTitle(nuFORM.getCurrent().run_description);'),
 ('nutimezone', 'browse', 'nutimezone', 'Time Zone', 'zzzzsys_timezone', 'zzzzsys_timezone_id', '', 0, 0, 'SELECT * \nFROM zzzzsys_timezone\nORDER BY stz_timezone', ''),
 ('nusetup', 'edit', 'nusetup', 'Setup', 'zzzzsys_setup', 'zzzzsys_setup_id', '', 0, 0, '', '$(''#set_header'').addClass(''html'');\n  \n$(''.html'').dblclick(function() {\n	nuOpenAce(''HTML'', this.id);\n});\n\n'),
