@@ -228,7 +228,7 @@ function nuAddActionButtons(f){
 		
 		$('#nuActionHolder').append("<input id='nuSearchField' type='text' class='nuSearch' onfocus='this.value = this.value;' onkeypress='nuSearchPressed(event)' value='" + s + "'>&nbsp;");
 		$('#nuActionHolder').append("<input id='nuFilter' style='visibility:hidden;width:0px' value='" + f + "'>");
-		$('#nuActionHolder').append("<input id='nuSearchButton' type='button' class='nuActionButton ' value='Search' onclick='nuSearchAction()'>&nbsp;");
+		$('#nuActionHolder').append("<input id='nuSearchButton' type='button' class='nuActionButton ' value='" + nuTranslate('Search') + "' onclick='nuSearchAction()'>&nbsp;");
 		
 		if(button.Add == 1){nuAddActionButton('Add');}
 		if(button.Print == 1){nuAddActionButton('Print');}
@@ -545,7 +545,13 @@ function nuINPUT(w, i, l, p, prop){
 	}
 
 	if(input_type != 'file'){
-		$('#' + id).val(nuFORM.addFormatting(w.objects[i].value, w.objects[i].format));
+
+		if(input_type == 'button'){
+			$('#' + id).val(nuTranslate(w.objects[i].value))
+		}else{
+			$('#' + id).val(nuFORM.addFormatting(w.objects[i].value, w.objects[i].format));
+		}
+	
 	}
 	
 	nuAddJSObjectEvents(id, prop.objects[i].js);
@@ -798,7 +804,7 @@ function nuWORD(w, i, l, p, prop){
 					'text-align'	: prop.objects[i].align
 	})
 	.addClass('nuWord')
-	.html(w.objects[i].word)
+	.html(nuTranslate(w.objects[i].word))
 	.attr('ondblclick','nuPopup("nuobject", "' + prop.objects[i].object_id + '")');
 	
 	nuSetAccess(id, prop.objects[i].read);
@@ -867,7 +873,7 @@ function nuRUN(w, i, l, p, prop){
 		
 		$('#' + id).attr({
 					'type'		: 'button',
-					'value'		: O.label,
+					'value'		: nuTranslate(O.label),
 					'onclick'	: clicker
 		})
 		.addClass('nuButton');
@@ -1373,7 +1379,7 @@ function nuBuildSubformTitle(o, l, w, id, col){
 					'text-align'    	: 'center',
 					'position'      	: 'absolute'
 	})
-	.html(o.label)
+	.html(nuTranslate(o.label))
 	.attr('data-nu-field', o.id)
 	.attr('data-nu-subform', id)
 	.attr('ondblclick', 'nuPopup("nuobject", "' + o.object_id + '")')
@@ -1658,28 +1664,28 @@ function nuGetOptionsList(f, t, p, a, type){
 	
 	if(nuFormType() == 'browse'){
 
-		list.push(['Searchable Columns', 	'nuGetSearchList()', 						'graphics/nu_option_searchable.png', 	'Ctrl+Shft+C']);
+		list.push([nuTranslate('Searchable Columns'), 	'nuGetSearchList()', 						'graphics/nu_option_searchable.png', 	'Ctrl+Shft+C']);
 
 		if(a == 1 || f == 'nuuserhome'){
 			
 			if(nuAllowChanges(f)){
 			
-				list.push(['Form Properties', 		'nuPopup("nuform", "' + f + '")', 		'graphics/nu_option_properties.png',	'Ctrl+Shft+F']);
-				list.push(['Form Object List', 		'nuPopup("nuobject", "", "' + f + '")', 'graphics/nu_option_objects.png',		'Ctrl+Shft+O']);
+				list.push([nuTranslate('Form Properties'), 		'nuPopup("nuform", "' + f + '")', 		'graphics/nu_option_properties.png',	'Ctrl+Shft+F']);
+				list.push([nuTranslate('Form Object List'), 		'nuPopup("nuobject", "", "' + f + '")', 'graphics/nu_option_objects.png',		'Ctrl+Shft+O']);
 				
 			}
 			
-			list.push(['nuDebug Results', 		'nuPopup("nudebug", "")', 					'graphics/nu_option_debug.png',			'Ctrl+Shft+D']);
+			list.push([nuTranslate('nuDebug Results'), 		'nuPopup("nudebug", "")', 					'graphics/nu_option_debug.png',			'Ctrl+Shft+D']);
 			
 		}else{
-			list.push(['Change Login', 			'nuPopup("nupassword", "' + u + '", "")', 	'graphics/nu_option_password.png', 		'Ctrl+Shft+L']);
+			list.push([nuTranslate('Change Login'), 			'nuPopup("nupassword", "' + u + '", "")', 	'graphics/nu_option_password.png', 		'Ctrl+Shft+L']);
 		}
 		
-		list.push(['Refresh', 					'nuGetBreadcrumb()', 						'graphics/nu_option_refresh.png', 		'Ctrl+Shft+R']);
-		list.push(['Search',					'nuSearchAction();', 						'graphics/nu_option_button.png',		'Ctrl+Shft+S']);
+		list.push([nuTranslate('Refresh'), 					'nuGetBreadcrumb()', 						'graphics/nu_option_refresh.png', 		'Ctrl+Shft+R']);
+		list.push([nuTranslate('Search'),					'nuSearchAction();', 						'graphics/nu_option_button.png',		'Ctrl+Shft+S']);
 
-		if(nuSERVERRESPONSE.buttons.Add == '1'){list.push(['Add',							'nuAddAction();', 						'graphics/nu_option_button.png',		'Ctrl+Shft+A']);}
-		if(nuSERVERRESPONSE.buttons.Print == '1'){list.push(['Print',						'nuPrintAction();',						'graphics/nu_option_button.png',		'Ctrl+Shft+P']);}
+		if(nuSERVERRESPONSE.buttons.Add == '1'){list.push([nuTranslate('Add'),							'nuAddAction();', 						'graphics/nu_option_button.png',		'Ctrl+Shft+A']);}
+		if(nuSERVERRESPONSE.buttons.Print == '1'){list.push([nuTranslate('Print'),						'nuPrintAction();',						'graphics/nu_option_button.png',		'Ctrl+Shft+P']);}
 			
 	}
 
@@ -1690,38 +1696,38 @@ function nuGetOptionsList(f, t, p, a, type){
 			
 			if(nuAllowChanges(f)){
 			
-				list.push(['Arrange Objects', 		'nuPopup("' + f + '", "-2")', 			'graphics/nu_option_arrange.png', 		'Ctrl+Shft+A']);
-				list.push(['Form Properties', 		'nuPopup("nuform", "' + f + '")', 		'graphics/nu_option_properties.png',	'Ctrl+Shft+F']);
-				list.push(['Form Object List', 		'nuPopup("nuobject", "", "' + f + '")', 'graphics/nu_option_objects.png',		'Ctrl+Shft+O']);
+				list.push([nuTranslate('Arrange Objects'), 		'nuPopup("' + f + '", "-2")', 			'graphics/nu_option_arrange.png', 		'Ctrl+Shft+A']);
+				list.push([nuTranslate('Form Properties'), 		'nuPopup("nuform", "' + f + '")', 		'graphics/nu_option_properties.png',	'Ctrl+Shft+F']);
+				list.push([nuTranslate('Form Object List'), 		'nuPopup("nuobject", "", "' + f + '")', 'graphics/nu_option_objects.png',		'Ctrl+Shft+O']);
 				
 			}
 			
 			if(type != 'subform'){
-				list.push(['nuDebug Results', 		'nuPopup("nudebug", "")', 					'graphics/nu_option_debug.png',		'Ctrl+Shft+D']);
+				list.push([nuTranslate('nuDebug Results'), 		'nuPopup("nudebug", "")', 					'graphics/nu_option_debug.png',		'Ctrl+Shft+D']);
 			}
 			
 		}else{
 			
-			list.push(['Change Login', 				'nuPopup("nupassword", "' + u + '", "")', 	'graphics/nu_option_password.png', 	'Ctrl+Shft+L']);
+			list.push([nuTranslate('Change Login'), 				'nuPopup("nupassword", "' + u + '", "")', 	'graphics/nu_option_password.png', 	'Ctrl+Shft+L']);
 			
 		}
 
 		if(type != 'subform'){
 			
-			list.push(['Refresh', 					'nuGetBreadcrumb()', 						'graphics/nu_option_refresh.png', 	'Ctrl+Shft+R']);
+			list.push([nuTranslate('Refresh'), 					'nuGetBreadcrumb()', 						'graphics/nu_option_refresh.png', 	'Ctrl+Shft+R']);
 			
 			if(nuFORM.getCurrent().form_type != 'launch'){
 				
-				if(nuSERVERRESPONSE.buttons.Save == '1'){list.push(['Save',					'nuSaveAction();', 							'graphics/nu_option_button.png',		'Ctrl+Shft+S']);}
-				if(nuSERVERRESPONSE.buttons.Delete == '1'){list.push(['Delete',				'nuDeleteAction();', 						'graphics/nu_option_button.png',	'Ctrl+Shft+Y']);}
-				if(nuSERVERRESPONSE.buttons.Clone == '1'){list.push(['Clone',				'nuCloneAction();', 						'graphics/nu_option_button.png',		'Ctrl+Shft+C']);}
+				if(nuSERVERRESPONSE.buttons.Save == '1'){list.push([nuTranslate('Save'),					'nuSaveAction();', 							'graphics/nu_option_button.png',		'Ctrl+Shft+S']);}
+				if(nuSERVERRESPONSE.buttons.Delete == '1'){list.push([nuTranslate('Delete'),				'nuDeleteAction();', 						'graphics/nu_option_button.png',	'Ctrl+Shft+Y']);}
+				if(nuSERVERRESPONSE.buttons.Clone == '1'){list.push([nuTranslate('Clone'),				'nuCloneAction();', 						'graphics/nu_option_button.png',		'Ctrl+Shft+C']);}
 				
 			}
 			
 		}
 		
 		if(nuFORMHELP[p] != ''){
-			list.push(['Help', nuFORMHELP[p], 'graphics/nu_option_help.png', 'Ctrl+Shft+?']);
+			list.push([nuTranslate('Help'), nuFORMHELP[p], 'graphics/nu_option_help.png', 'Ctrl+Shft+?']);
 		}
 
 	}

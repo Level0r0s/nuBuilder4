@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 12, 2017 at 11:17 PM
+-- Generation Time: Nov 13, 2017 at 10:44 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -32,6 +32,13 @@ CREATE TABLE `zzzzsys_access` (
   `sal_description` varchar(200) DEFAULT NULL,
   `sal_zzzzsys_form_id` varchar(25) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `zzzzsys_access`
+--
+
+INSERT INTO `zzzzsys_access` (`zzzzsys_access_id`, `sal_code`, `sal_description`, `sal_zzzzsys_form_id`) VALUES
+('5a0a099abe7f8ab', 'ADMIN', 'Admin', 'nuuserhome');
 
 -- --------------------------------------------------------
 
@@ -182,14 +189,6 @@ CREATE TABLE `zzzzsys_debug` (
   `deb_order` varchar(25) NOT NULL,
   `deb_added` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `zzzzsys_debug`
---
-
-INSERT INTO `zzzzsys_debug` (`zzzzsys_debug_id`, `deb_message`, `deb_order`, `deb_added`) VALUES
-('5a08c55485bcd08', '2017-11-13 08:34:04 -  Procedure <b>1</b> line 1\n\n<br>\n\n[0] : 9\n', '', 1510524244),
-('5a08c8278eee403', '2017-11-13 08:46:07 -  Procedure <b>1</b> line 2\n\n<br>\n\n[0] : 9\n', '', 1510524967);
 
 -- --------------------------------------------------------
 
@@ -553,7 +552,7 @@ INSERT INTO `zzzzsys_object` (`zzzzsys_object_id`, `sob_all_zzzzsys_form_id`, `s
 ('nu59e44658936a559', 'nuhome', '', 'run', 'run_lang', 'Translation', 'nu59e44658ab3c259', 180, 35, 469, 150, 30, '1', 'center', '1', '0', '', '', '', 'nutranslate', '', 'b', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', '', ''),
 ('nu59e446589383b2f', 'nutranslate', 'zzzzsys_translate', 'input', 'trl_language', 'Language', 'nu59e44658aaf380d', 10, 54, 117, 100, 18, '1', 'left', '1', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'nuScroll', 'nuLanguages()', '', ''),
 ('nu59e44658939de68', 'nutranslate', 'zzzzsys_translate', 'input', 'trl_english', 'English', 'nu59e44658aaf380d', 20, 85, 117, 400, 18, '1', 'left', '1', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
-('nu59e4465893b9749', 'nutranslate', 'zzzzsys_translate', 'input', 'trl_translation', 'Translation', 'nu59e44658aaf380d', 30, 116, 117, 400, 18, '1', 'left', '2', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
+('nu59e4465893b9749', 'nutranslate', 'zzzzsys_translate', 'input', 'trl_translation', 'Translation', 'nu59e44658aaf380d', 30, 116, 117, 400, 18, '1', 'left', '1', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
 ('nu59e4465893e4507', 'nupassword', 'zzzzsys_user', 'input', 'new_password_check', 'Re-Enter New Password', 'nu59e44658ab17573', 40, 133, 181, 200, 18, '1', 'left', '1', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'password', '', '', ''),
 ('nu59e44658945b6f1', 'nupassword', 'zzzzsys_user', 'input', 'new_password', 'Enter New Password', 'nu59e44658ab17573', 30, 104, 181, 200, 18, '1', 'left', '1', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'password', '', '', ''),
 ('nu59e4465894ab2dd', 'nupassword', 'zzzzsys_user', 'input', 'old_password', 'Enter Current Password', 'nu59e44658ab17573', 20, 75, 181, 200, 18, '1', 'left', '1', '0', '', '', '', '', '', '', '', 'SELECT CONCAT(''( '', sus_login_name, '' )'')\nFROM zzzzsys_user\nWHERE zzzzsys_user_id = ''#RECORD_ID#''', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'password', '', '', ''),
@@ -1592,6 +1591,101 @@ CREATE TABLE `zzzzsys_translate` (
   `trl_translation` varchar(300) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `zzzzsys_translate`
+--
+
+INSERT INTO `zzzzsys_translate` (`zzzzsys_translate_id`, `trl_language`, `trl_english`, `trl_translation`) VALUES
+('5a09be00b97b41b', 'Spanish', 'Language', 'Language1'),
+('5a09bda3718a479', 'Spanish', 'Access Levels', 'Access Levels1'),
+('5a09bda371ca233', 'Spanish', 'Objects', 'Objects1'),
+('5a09bda3723ae21', 'Spanish', 'Forms', 'Forms1'),
+('5a09bda372738ca', 'Spanish', 'Users', 'Users1'),
+('5a09bda372a7064', 'Spanish', 'Procedure', 'Procedure1'),
+('5a09bda372db623', 'Spanish', 'Report', 'Report1'),
+('5a09bda37306a79', 'Spanish', 'Run Report', 'Run Report1'),
+('5a09bda37343870', 'Spanish', 'Run Procedure', 'Run Procedure1'),
+('5a09bda37368344', 'Spanish', 'Setup', 'Setup1'),
+('5a09bda37375975', 'Spanish', 'Translation', 'Translation1'),
+('5a09bda37382933', 'Spanish', 'Fast Form', 'Fast Form1'),
+('5a09bda3738f112', 'Spanish', 'Format', 'Format1'),
+('5a09bda3739c3d7', 'Spanish', 'Files', 'Files1'),
+('5a09bda373a6537', 'Spanish', 'SQL', 'SQL1'),
+('5a09c5466a5a9d7', 'Spanish', 'Format', 'Format1'),
+('5a09bda373c4c36', 'Spanish', 'User Home', 'User Home1'),
+('5a09bda373cf6d4', 'Spanish', 'Fast Report', 'Fast Report1'),
+('5a09bda373d74fe', 'Spanish', 'Update', 'Update1'),
+('5a09be31df6bd44', 'Spanish', 'English', 'English1'),
+('5a09bea3be57e94', 'Spanish', 'Builders', 'Builders1'),
+('5a09becdc8c9af1', 'Spanish', 'Form Type', 'Form Type1'),
+('5a09bede63ede9f', 'Spanish', 'Table Name', 'Table Name1'),
+('5a09beecd0cf428', 'Spanish', 'Phrase', 'Phrase1'),
+('5a09bf02a0d653f', 'Spanish', 'Home', 'Home1'),
+('5a09bf0c4bcc542', 'Spanish', 'User Home', 'User Home1'),
+('5a09bf288b142b3', 'Spanish', 'Addable Objects', 'Addable Objects1'),
+('5a09bf48e28cf99', 'Spanish', 'New Fast Form', 'New Fast Form1'),
+('5a09bf7be77a925', 'Spanish', 'Label', 'Label1'),
+('5a09c540e0c4615', 'Spanish', 'Formats', 'Formats1'),
+('5a09c0856f491c1', 'Spanish', 'Table Data', 'Table Data1'),
+('5a09c0db9d0100a', 'Spanish', 'Order By', 'Order By1'),
+('5a09c0f62a8e6d2', 'Spanish', 'Available Fields', 'Available Fields1'),
+('5a09c10a11f7d4a', 'Spanish', 'New Fast Report', 'New Fast Report1'),
+('5a09c123aa2a22b', 'Spanish', 'Title', 'Title1'),
+('5a09c138a0d5643', 'Spanish', 'Field Name', 'Field Name1'),
+('5a09c151735ae8b', 'Spanish', 'Save', 'Save1'),
+('5a09c15910b84e0', 'Spanish', 'Delete', 'Delete1'),
+('5a09c1626fc6a7d', 'Spanish', 'Clone', 'Clone1'),
+('5a09c181556d88a', 'Spanish', 'Width', 'Width1'),
+('5a09c1894fde710', 'Spanish', 'Sum', 'Sum1'),
+('5a09c1afa642288', 'Spanish', 'Used', 'Used1'),
+('5a09c1b989d9dab', 'Spanish', 'Remaining', 'Remaining1'),
+('5a09c23150fa9a6', 'Spanish', 'Code', 'Code1'),
+('5a09c23b7b5f1c2', 'Spanish', 'Description', 'Description1'),
+('5a09c25526939d2', 'Spanish', 'Group', 'Group1'),
+('5a09c26010ecb0d', 'Spanish', 'Launch From', 'Launch From1'),
+('5a09c289e0f56d1', 'Spanish', 'SQL Builder', 'SQL Builder1'),
+('5a09c2a0c62c30c', 'Spanish', 'Add Table', 'Add Table1'),
+('5a09c2a7ccf5d8b', 'Spanish', 'Resize', 'Resize1'),
+('5a09c2cb06ef62d', 'Spanish', 'Clauses', 'Clauses1'),
+('5a09c2d13644592', 'Spanish', 'Clause', 'Clause1'),
+('5a09c2e20322502', 'Spanish', 'Sort', 'Sort1'),
+('5a09c2e8783e929', 'Spanish', 'Order', 'Order1'),
+('5a09c3b7ef8a298', 'Spanish', 'Fields<br>and<br>Relationships', 'Fields<br>and<br>Relationships1'),
+('5a09c3f156bcfef', 'Spanish', 'Database', 'Database1'),
+('5a09c422ccba6ff', 'Spanish', 'Build Report', 'Build Report1'),
+('5a09c44021fa6b7', 'Spanish', 'Report Designer', 'Report Designer1'),
+('5a09c57297f38ae', 'Spanish', 'Arrange Objects', 'Arrange Objects1'),
+('5a09c48ccb183ff', 'Spanish', 'Input Formats', 'Input Formats1'),
+('5a09c581b3fb16e', 'Spanish', 'Form Properties', 'Form Properties1'),
+('5a09c59d8594729', 'Spanish', 'Form Object List', 'Form Object List1'),
+('5a09c5bfa94d7c2', 'Spanish', 'nuDebug Results', 'nuDebug Results1'),
+('5a09c5e88c8771c', 'Spanish', 'Refresh', 'Refresh1'),
+('5a09c5efa4d90b7', 'Spanish', 'Help', 'Help1'),
+('5a09c632b6ef824', 'Spanish', 'Clone Object', 'Clone Object1'),
+('5a09c65376d97ff', 'Spanish', 'Select Objects', 'Select Objects1'),
+('5a09c66cb416aed', 'Spanish', 'Adjust Objects', 'Adjust Objects1'),
+('5a09c6ce8ec2534', 'Spanish', 'Group Properties', 'Group Properties1'),
+('5a09c6f1d0b328c', 'Spanish', 'Report Properties', 'Report Properties1'),
+('5a09c713b9ee6c7', 'Spanish', 'Copy Changes', 'Copy Changes1'),
+('5a09c722a6b0c4d', 'Spanish', 'Report Header', 'Report Header1'),
+('5a09c72e377af9f', 'Spanish', 'Page Header', 'Page Header1'),
+('5a09c739cfefa76', 'Spanish', 'Page Footer', 'Page Footer1'),
+('5a09c7430395831', 'Spanish', 'Report Footer', 'Report Footer1'),
+('5a09c7737a84128', 'Spanish', 'Detail', 'Detail1'),
+('5a09c91cda58845', 'Spanish', 'Image', 'Form Object List1'),
+('5a09c92830d0062', 'Spanish', 'Upload File', 'Form Object List1'),
+('5a09c938d9dc11f', 'Spanish', 'View', 'Form Object List1'),
+('5a0a0c18c0cde9b', 'Spanish', 'Change Login', 'Change Login1'),
+('5a0a0dd515d2cab', 'Spanish', 'nuBuilder Form', 'nuBuilder Form1'),
+('5a0a0eb38fcd3e6', 'Spanish', 'Display', 'Display1'),
+('5a0a0ece7b0b300', 'Spanish', 'Database', 'Database1'),
+('5a0a0f1f06d2ddb', 'Spanish', 'Align', 'Align1'),
+('5a0a11037cd8a3f', 'Spanish', 'Search', 'Search1'),
+('5a0a110ecd80196', 'Spanish', 'Add', 'Add1'),
+('5a0a1119dd6e00b', 'Spanish', 'Print', 'Print1'),
+('5a0a11aa2a1c6d2', 'Spanish', 'Table', 'Table1'),
+('5a0a11b6cd3b6ae', 'Spanish', 'Type', 'Type1');
+
 -- --------------------------------------------------------
 
 --
@@ -1608,6 +1702,13 @@ CREATE TABLE `zzzzsys_user` (
   `sus_login_name` varchar(20) DEFAULT NULL,
   `sus_login_password` varchar(300) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `zzzzsys_user`
+--
+
+INSERT INTO `zzzzsys_user` (`zzzzsys_user_id`, `sus_zzzzsys_access_id`, `sus_zzzzsys_user_group_id`, `sus_language`, `sus_name`, `sus_email`, `sus_login_name`, `sus_login_password`) VALUES
+('5a0a09db63938ee', '5a0a099abe7f8ab', NULL, 'Spanish', 'nuuu', 'nu', 'nu', '0288bde0c2d593f2b5766f61b826a650');
 
 -- --------------------------------------------------------
 
