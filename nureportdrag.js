@@ -626,15 +626,15 @@ function nuSetTools(){
 		var h = '';
 		h = h + '<img id="nuItema"  onclick="nuUndo()" src="graphics/nu_undo.png" title="Undo" style="position:absolute;top:5px;left:5px;height:15px;width:15px">';
 //		h = h + '<div id="nuItemU" onclick="nuUndo()" title="Undo" class="nuToolbar" style="width:80px">Undo<span style="font-weight:normal;font-size:12px;">('+(nuBACKUP.length-1)+')</span></div>';
-		h = h + '<div id="nuItem0" onclick="nuNewObject()" class="nuToolbar">New Object</div>';
-		h = h + '<div id="nuItem1" onclick="nuCloneObjects(false)" class="nuToolbar">Clone Object</div>';
-		h = h + '<div id="nuItem7" onclick="nuSelectDialog()" class="nuToolbar">Select Objects</div>';
-		h = h + '<div id="nuItem2" onclick="nuAdjustDialog()" class="nuToolbar">Adjust Objects</div>';
-		h = h + '<div id="nuItem4" onclick="nuObjectDialog()" class="nuToolbar">Object Properties</div>';
-		h = h + '<div id="nuItem3" onclick="nuGroupDialog()" class="nuToolbar">Group Properties</div>';
-		h = h + '<div id="nuItem5" onclick="nuReportDialog()" class="nuToolbar">Report Properties</div>';
-		h = h + '<div id="nuItem6" onclick="nuStringify()" class="nuToolbar">Copy Changes</div>';
-
+		h = h + '<div id="nuItem0" onclick="nuNewObject()" class="nuToolbar">' 			+ opener.nuTranslate('New Object') + '</div>';
+		h = h + '<div id="nuItem1" onclick="nuCloneObjects(false)" class="nuToolbar">' 	+ opener.nuTranslate('Clone Object') + '</div>';
+		h = h + '<div id="nuItem7" onclick="nuSelectDialog()" class="nuToolbar">' 		+ opener.nuTranslate('Select Objects') + '</div>';
+		h = h + '<div id="nuItem2" onclick="nuAdjustDialog()" class="nuToolbar">' 		+ opener.nuTranslate('Adjust Objects') + '</div>';
+		h = h + '<div id="nuItem4" onclick="nuObjectDialog()" class="nuToolbar">' 		+ opener.nuTranslate('Object Properties') + '</div>';
+		h = h + '<div id="nuItem3" onclick="nuGroupDialog()" class="nuToolbar">' 		+ opener.nuTranslate('Group Properties') + '</div>';
+		h = h + '<div id="nuItem5" onclick="nuReportDialog()" class="nuToolbar">' 		+ opener.nuTranslate('Report Properties') + '</div>';
+		h = h + '<div id="nuItem6" onclick="nuStringify()" class="nuToolbar">' 			+ opener.nuTranslate('Copy Changes') + '</div>';
+		
 		e.setAttribute('id', 'nuToolBar');
 		$('body').prepend(e);
 

@@ -578,8 +578,8 @@ class nuSECTION{
     }
     
     private function paperBottom(){
-        
-        if(($this->group == 1 and $this->section == 0) or ($this->group == 2 and $this->section == 1)){         //-- report header or page footer
+
+		if(($this->group == 1 and $this->section == 0) or ($this->group == 2 and $this->section == 1)){         //-- report header or page footer
             return $this->pageHeight;
         }else{
             return $this->pageHeight - $this->LAY->groups[2]->sections[1]->height;                          //-- start of page footer
