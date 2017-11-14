@@ -1359,7 +1359,7 @@ function nuDialogInput(cap, id, top, left, val, fun, sel){
 						'text-align'  : 'right'
 						});
 		
-        $('#' + e.id).html(cap);
+        $('#' + e.id).html(opener.nuTranslate(cap));
     }
 
 	if(arguments.length == 7){

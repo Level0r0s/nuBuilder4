@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 13, 2017 at 10:44 PM
+-- Generation Time: Nov 14, 2017 at 06:07 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -1608,11 +1608,9 @@ INSERT INTO `zzzzsys_translate` (`zzzzsys_translate_id`, `trl_language`, `trl_en
 ('5a09bda37368344', 'Spanish', 'Setup', 'Setup1'),
 ('5a09bda37375975', 'Spanish', 'Translation', 'Translation1'),
 ('5a09bda37382933', 'Spanish', 'Fast Form', 'Fast Form1'),
-('5a09bda3738f112', 'Spanish', 'Format', 'Format1'),
 ('5a09bda3739c3d7', 'Spanish', 'Files', 'Files1'),
 ('5a09bda373a6537', 'Spanish', 'SQL', 'SQL1'),
 ('5a09c5466a5a9d7', 'Spanish', 'Format', 'Format1'),
-('5a09bda373c4c36', 'Spanish', 'User Home', 'User Home1'),
 ('5a09bda373cf6d4', 'Spanish', 'Fast Report', 'Fast Report1'),
 ('5a09bda373d74fe', 'Spanish', 'Update', 'Update1'),
 ('5a09be31df6bd44', 'Spanish', 'English', 'English1'),
@@ -1631,7 +1629,6 @@ INSERT INTO `zzzzsys_translate` (`zzzzsys_translate_id`, `trl_language`, `trl_en
 ('5a09c0f62a8e6d2', 'Spanish', 'Available Fields', 'Available Fields1'),
 ('5a09c10a11f7d4a', 'Spanish', 'New Fast Report', 'New Fast Report1'),
 ('5a09c123aa2a22b', 'Spanish', 'Title', 'Title1'),
-('5a09c138a0d5643', 'Spanish', 'Field Name', 'Field Name1'),
 ('5a09c151735ae8b', 'Spanish', 'Save', 'Save1'),
 ('5a09c15910b84e0', 'Spanish', 'Delete', 'Delete1'),
 ('5a09c1626fc6a7d', 'Spanish', 'Clone', 'Clone1'),
@@ -1678,13 +1675,38 @@ INSERT INTO `zzzzsys_translate` (`zzzzsys_translate_id`, `trl_language`, `trl_en
 ('5a0a0c18c0cde9b', 'Spanish', 'Change Login', 'Change Login1'),
 ('5a0a0dd515d2cab', 'Spanish', 'nuBuilder Form', 'nuBuilder Form1'),
 ('5a0a0eb38fcd3e6', 'Spanish', 'Display', 'Display1'),
-('5a0a0ece7b0b300', 'Spanish', 'Database', 'Database1'),
 ('5a0a0f1f06d2ddb', 'Spanish', 'Align', 'Align1'),
 ('5a0a11037cd8a3f', 'Spanish', 'Search', 'Search1'),
 ('5a0a110ecd80196', 'Spanish', 'Add', 'Add1'),
 ('5a0a1119dd6e00b', 'Spanish', 'Print', 'Print1'),
 ('5a0a11aa2a1c6d2', 'Spanish', 'Table', 'Table1'),
-('5a0a11b6cd3b6ae', 'Spanish', 'Type', 'Type1');
+('5a0a11b6cd3b6ae', 'Spanish', 'Type', 'Type1'),
+('5a0a900d15a7f77', 'Spanish', 'New Object', 'New Object1'),
+('5a0b1cbe056812a', 'Spanish', 'ID', 'ID1'),
+('5a0b1cbe0584ce2', 'Spanish', 'Object Type', 'Object Type1'),
+('5a0b1cbe059ffdc', 'Spanish', 'Left', 'Left1'),
+('5a0b1cbe05b62b8', 'Spanish', 'Top', 'Top1'),
+('5a0b1cbe05cfa41', 'Spanish', 'Height', 'Height1'),
+('5a0b1cbe05f9a9b', 'Spanish', 'Background Color', 'Background Color1'),
+('5a0b1cbe060db10', 'Spanish', 'Border Color', 'Border Color1'),
+('5a0b1cbe0621d40', 'Spanish', 'Border Width', 'Border Width1'),
+('5a0b1cbe0632b67', 'Spanish', 'Field Name', 'Field Name1'),
+('5a0b1cbe0647ffc', 'Spanish', 'Font Color', 'Font Color1'),
+('5a0b1cbe0674d5f', 'Spanish', 'Font Family', 'Font Family1'),
+('5a0b1cbe068fc92', 'Spanish', 'Font Size', 'Font Size1'),
+('5a0b1cbe06a5e1c', 'Spanish', 'Font Weight', 'Font Weight1'),
+('5a0b1cbe06d2666', 'Spanish', 'Text Align', 'Text Align1'),
+('5a0b1cbe06f4952', 'Spanish', 'Minimum Rows', 'Minimum Rows1'),
+('5a0b1cbe0702562', 'Spanish', 'Maximum Rows', 'Maximum Rows1'),
+('5a0b1cbe0719cb7', 'Spanish', 'Z Index', 'Z Index1'),
+('5a0b1cbe0750a62', 'Spanish', 'Paper', 'Paper1'),
+('5a0b1cbe076bb3d', 'Spanish', 'Orientation', 'Orientation1'),
+('5a0b1cbe07b2c74', 'Spanish', 'Section Name', 'Section Name1'),
+('5a0b1cbe07c6a07', 'Spanish', 'Section Height', 'Section Height1'),
+('5a0b1cbe07d732e', 'Spanish', 'Section Color', 'Section Color1'),
+('5a0b1cbe07e7720', 'Spanish', 'Page Break', 'Page Break1'),
+('5a0b215cb6fec54', 'Spanish', 'Adjust Selected Objects', 'Adjust Selected Objects1'),
+('5a0b22249055a8c', 'Spanish', 'Object Properties', 'Object Properties1');
 
 -- --------------------------------------------------------
 
