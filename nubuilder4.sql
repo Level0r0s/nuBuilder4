@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 14, 2017 at 06:07 PM
+-- Generation Time: Nov 14, 2017 at 07:30 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -469,7 +469,7 @@ INSERT INTO `zzzzsys_object` (`zzzzsys_object_id`, `sob_all_zzzzsys_form_id`, `s
 ('nu59e4465882872ea', 'nuobject', 'zzzzsys_object', 'select', 'sob_all_access', 'Access', 'nu59e44658a4bd9b5', 140, 169, 474, 110, 18, '1', 'right', '1', '0', '', '', '', '', '', '', '', '', '0', '0|Editable|1|Readonly|2|Hidden', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
 ('nu59e4465882aca25', 'nuobject', 'zzzzsys_object', 'word', 'calctotwrd', 'Objects', 'nu59e44658ac0b102', 490, 110, 80, 343, 17, '1', 'center', '0', '0', '', '', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'button', '', '', ''),
 ('nu59e4465882d2f56', 'nuobject', 'zzzzsys_object', 'word', 'calcfldwrd', 'Operators', 'nu59e44658ac0b102', 500, 110, 436, 145, 17, '1', 'center', '0', '0', '', '', '', '', '', '', '', '', '0', '0|No|1|Yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', 'button', '', '', ''),
-('nu59e4465882f2c40', 'nuobject', 'zzzzsys_object', 'textarea', 'sob_html_code', 'HTML', 'nu59e44658a714eb0', 440, 38, 58, 566, 172, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '0', '0|No|1|Yes', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
+('nu59e4465882f2c40', 'nuobject', 'zzzzsys_object', 'textarea', 'sob_html_code', 'HTML', 'nu59e44658a714eb0', 440, 38, 58, 600, 172, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '0', '0|No|1|Yes', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
 ('nu59e44658830b8b3', 'nuobject', 'zzzzsys_object', 'textarea', 'sob_display_sql', 'SQL', 'nu59e44658a638d3d', 200, 50, 60, 500, 150, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '0', '0|No|1|Yes', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
 ('nu59e446588324d82', 'nuobject', 'zzzzsys_object', 'textarea', 'sob_select_sql', 'SQL<br>or<br>List', 'nu59e44658a65f0a0', 230, 50, 60, 500, 150, '1', 'left', '0', '0', '', '', '', '', '', '', '', '', '0', '0|No|1|Yes', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
 ('nu59e446588337f99', 'nuobject', 'zzzzsys_object', 'select', 'sob_select_multiple', 'Multiple', 'nu59e44658a65f0a0', 240, 23, 60, 50, 18, '1', 'left', '0', '0', 'SELECT 0', '', '', '', '', '', '', '', '0', '0|No|1|Yes', 'syt_title', 'sfo_description', '200', '0', 'nutab', '', '', 'zzzzsys_tab', '', '', '', '', '', '', 0, '', 'text', '', '', ''),
@@ -1669,12 +1669,11 @@ INSERT INTO `zzzzsys_translate` (`zzzzsys_translate_id`, `trl_language`, `trl_en
 ('5a09c739cfefa76', 'Spanish', 'Page Footer', 'Page Footer1'),
 ('5a09c7430395831', 'Spanish', 'Report Footer', 'Report Footer1'),
 ('5a09c7737a84128', 'Spanish', 'Detail', 'Detail1'),
-('5a09c91cda58845', 'Spanish', 'Image', 'Form Object List1'),
+('5a09c91cda58845', 'Spanish', 'Image', 'Image1'),
 ('5a09c92830d0062', 'Spanish', 'Upload File', 'Form Object List1'),
 ('5a09c938d9dc11f', 'Spanish', 'View', 'Form Object List1'),
 ('5a0a0c18c0cde9b', 'Spanish', 'Change Login', 'Change Login1'),
 ('5a0a0dd515d2cab', 'Spanish', 'nuBuilder Form', 'nuBuilder Form1'),
-('5a0a0eb38fcd3e6', 'Spanish', 'Display', 'Display1'),
 ('5a0a0f1f06d2ddb', 'Spanish', 'Align', 'Align1'),
 ('5a0a11037cd8a3f', 'Spanish', 'Search', 'Search1'),
 ('5a0a110ecd80196', 'Spanish', 'Add', 'Add1'),
@@ -1706,7 +1705,47 @@ INSERT INTO `zzzzsys_translate` (`zzzzsys_translate_id`, `trl_language`, `trl_en
 ('5a0b1cbe07d732e', 'Spanish', 'Section Color', 'Section Color1'),
 ('5a0b1cbe07e7720', 'Spanish', 'Page Break', 'Page Break1'),
 ('5a0b215cb6fec54', 'Spanish', 'Adjust Selected Objects', 'Adjust Selected Objects1'),
-('5a0b22249055a8c', 'Spanish', 'Object Properties', 'Object Properties1');
+('5a0b22249055a8c', 'Spanish', 'Object Properties', 'Object Properties1'),
+('5a0b27fa1e9974a', 'Spanish', 'Move Up', 'Move Up1'),
+('5a0b2809ee020b7', 'Spanish', 'Move Down', 'Move Down1'),
+('5a0b2a5daa79110', 'Spanish', 'Align To Left', 'Align To Left1'),
+('5a0b2aa4a81ad8b', 'Spanish', 'Align All Selected Objects To Left', 'Align All Selected Objects To Left1'),
+('5a0b2ad2119f128', 'Spanish', 'Align All Selected Objects To Right', 'Align All Selected Objects To Right1'),
+('5a0b2aedb0f0b02', 'Spanish', 'Align All Selected Objects To Top', 'Align All Selected Objects To Top1'),
+('5a0b2b14080c870', 'Spanish', 'Align All Selected Objects To Bottom', 'Align All Selected Objects To Bottom1'),
+('5a0b2b3564f529d', 'Spanish', 'Adjust All Selected Objects Vertically', 'Adjust All Selected Objects Vertically1'),
+('5a0b2b571929b5b', 'Spanish', 'Adjust All Selected Objects Horizontally', 'Adjust All Selected Objects Horizontally1'),
+('5a0b2b6a3a32cc8', 'Spanish', 'Resize to Tallest', 'Resize to Tallest1'),
+('5a0b2b971cdfdaa', 'Spanish', 'Resize to Widest', 'Resize to Widest1'),
+('5a0b2bd4a6d5619', 'Spanish', 'Resize to Thinnest', 'Resize to Thinnest'),
+('5a0b2be5c589628', 'Spanish', 'Resize to Shortest', 'Resize to Shortest'),
+('5a0b2d048c475bd', 'Spanish', 'Align To Right', 'Align To Right1'),
+('5a0b2d1b52ebe5f', 'Spanish', 'Align To Top', 'Align To Top1'),
+('5a0b2d39f118d25', 'Spanish', 'Align To Bottom', 'Align To Bottom1'),
+('5a0b2d600d360d4', 'Spanish', 'Space Horizontally', 'Space Horizontally1'),
+('5a0b2d99ece4627', 'Spanish', 'Tallest', 'Tallest1'),
+('5a0b2da732e4190', 'Spanish', 'Widest', 'Widest1'),
+('5a0b2db58e0afe0', 'Spanish', 'Thinnest', 'Thinnest1'),
+('5a0b2dca049c774', 'Spanish', 'Shortest', 'Shortest1'),
+('5a0b2e279f1e958', 'Spanish', 'Space Vertically', 'Space Vertically1'),
+('5a0b2f7434142a5', 'Spanish', 'Time Zone', 'Time Zone1'),
+('5a0b2f8bea8962c', 'Spanish', 'Timeout (minutes)', 'Timeout (minutes)1'),
+('5a0b31498e9561b', 'Spanish', 'Procedures', 'Procedures1'),
+('5a0b316d082147c', 'Spanish', 'User', 'User1'),
+('5a0b31785116a1d', 'Spanish', 'Reports', 'Reports1'),
+('5a0b31f90906f2b', 'Spanish', 'Form', 'Form1'),
+('5a0b321adf339bc', 'Spanish', 'Header', 'Header1'),
+('5a0b323dd54f153', 'Spanish', 'Email Settings', 'Email Settings1'),
+('5a0b3282b0211db', 'Spanish', 'Report Fonts', 'Report Fonts1'),
+('5a0b32f9341ee17', 'Spanish', 'Main', 'Main1'),
+('5a0b330ce7748d7', 'Spanish', 'Browse', 'Browse1'),
+('5a0b331ae1b696c', 'Spanish', 'Custom Code', 'Custom Code1'),
+('5a0b334c47c6587', 'Spanish', 'Primary Key', 'Primary Key1'),
+('5a0b3373d0684a1', 'Spanish', 'Tabs', 'Tabs1'),
+('5a0b339cee222ea', 'Spanish', 'Input Type', 'Input Type1'),
+('5a0b33a80c58c61', 'Spanish', 'Object', 'Object1'),
+('5a0b33db21e524a', 'Spanish', 'Tab', 'Tab1'),
+('5a0b33f49ec852d', 'Spanish', 'All', 'All1');
 
 -- --------------------------------------------------------
 

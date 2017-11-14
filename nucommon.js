@@ -307,6 +307,12 @@ function nuCreateDialog(t){
 		nuDialog.dialog = this.createDialog.caller.name;
 		
 		var e = document.createElement('div');
+		
+		var translation	= nuTranslate(title);
+
+		if(opener != null){
+			translation	= opener.nuTranslate(title);
+		}
 
 		e.setAttribute('id', 'nuDragDialog');
 
@@ -326,7 +332,7 @@ function nuCreateDialog(t){
 		.on('mousemove', 	function(event){nuDialog.move(event);})
 		.on('mouseout', 	function(event){$('#dialogClose').css('background-color','');})
 		.on('click',     	function(event){nuDialog.click(event);})
-		.html('<div id="dialogTitle" ondblclick="nuResizeWindow(event)" style="background-color:#CCCCCC ;position:absolute;width:100%;height:35px;font-size:16px;font-family:Helvetica"><div id="dialogTitleWords" style="padding-top: 9px;height:30px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+opener.nuTranslate(title)+'</div><img id="dialogClose" src="graphics/close.png" style="position:absolute; top:2px; left:0px"></div>')
+		.html('<div id="dialogTitle" ondblclick="nuResizeWindow(event)" style="background-color:#CCCCCC ;position:absolute;width:100%;height:35px;font-size:16px;font-family:Helvetica"><div id="dialogTitleWords" style="padding-top: 9px;height:30px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+translation+'</div><img id="dialogClose" src="graphics/close.png" style="position:absolute; top:2px; left:0px"></div>')
 
 		this.startX = l;
 		this.startY = t;

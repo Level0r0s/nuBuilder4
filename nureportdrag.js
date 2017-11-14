@@ -775,17 +775,17 @@ function nuAdjustDialog(){
 
 	nuDIALOG.dialog = 'nuAdjustDialog';
 	
-	nuDragD.createDialog(400, window.scrollY + 50, 400, 350, 'Adjust Selected Objects');
-	nuAdjustButton(80, 10, 'nuMoverAlignLeftClick()', 'Align To Left', 'Align All Selected Objects To Left');
-	nuAdjustButton(80, 270, 'nuMoverAlignRightClick()', 'Align To Right', 'Align All Selected Objects To Right');
-	nuAdjustButton(65, 140, 'nuMoverAlignTopClick()', 'Align To Top', 'Align All Selected Objects To Top');
-	nuAdjustButton(100, 140, 'nuMoverAlignBottomClick()', 'Align To Bottom', 'Align All Selected Objects To Bottom');
-	nuAdjustButton(155, 140,'nuMoverAdjustVerClick()' , 'Space Vertically', 'Adjust All Selected Objects Vertically');
-	nuAdjustButton(190, 140,'nuMoverAdjustHorClick()' , 'Space Horizontally', 'Adjust All Selected Objects Horizontally');
-	nuAdjustButton(250, 140,'nuResizeTallestClick()' , 'Tallest', 'Resize to Tallest');
-	nuAdjustButton(265, 270,'nuResizeWidestClick()' , 'Widest', 'Resize to Widest');
-	nuAdjustButton(265, 10,'nuResizeThinestClick()' , 'Thinest', 'Resize to Thinest');
-	nuAdjustButton(285, 140,'nuResizeShortestClick()' , 'Shortest', 'Resize to Shortest');
+	nuDragD.createDialog(400, window.scrollY + 50, 400, 350, opener.nuTranslate('Adjust Selected Objects'));
+	nuAdjustButton(80, 10, 'nuMoverAlignLeftClick()', 		opener.nuTranslate('Align To Left'), 		opener.nuTranslate('Align All Selected Objects To Left'));
+	nuAdjustButton(80, 270, 'nuMoverAlignRightClick()', 	opener.nuTranslate('Align To Right'), 		opener.nuTranslate('Align All Selected Objects To Right'));
+	nuAdjustButton(65, 140, 'nuMoverAlignTopClick()', 		opener.nuTranslate('Align To Top'), 		opener.nuTranslate('Align All Selected Objects To Top'));
+	nuAdjustButton(100, 140, 'nuMoverAlignBottomClick()', 	opener.nuTranslate('Align To Bottom'), 		opener.nuTranslate('Align All Selected Objects To Bottom'));
+	nuAdjustButton(155, 140,'nuMoverAdjustVerClick()' , 	opener.nuTranslate('Space Vertically'), 	opener.nuTranslate('Adjust All Selected Objects Vertically'));
+	nuAdjustButton(190, 140,'nuMoverAdjustHorClick()' , 	opener.nuTranslate('Space Horizontally'), 	opener.nuTranslate('Adjust All Selected Objects Horizontally'));
+	nuAdjustButton(250, 140,'nuResizeTallestClick()' , 		opener.nuTranslate('Tallest'), 				opener.nuTranslate('Resize to Tallest'));
+	nuAdjustButton(265, 270,'nuResizeWidestClick()' , 		opener.nuTranslate('Widest'), 				opener.nuTranslate('Resize to Widest'));
+	nuAdjustButton(265, 10,'nuResizeThinestClick()' , 		opener.nuTranslate('Thinnest'), 			opener.nuTranslate('Resize to Thinnest'));
+	nuAdjustButton(285, 140,'nuResizeShortestClick()' , 	opener.nuTranslate('Shortest'), 			opener.nuTranslate('Resize to Shortest'));
 
 	$('#nuModal').remove();
 	
@@ -1330,14 +1330,14 @@ function nuMoveGroup(){
 		e.setAttribute('id', 'grpup');
 		$('#nuDragDialog').append(e);
 		
-		$('#' + e.id).css({'position':'absolute','left':15,'top':150,'width':90,'height':30}).html('Move Up');
+		$('#' + e.id).css({'font-size':10,'position':'absolute','left':15,'top':150,'width':90,'height':30}).html(opener.nuTranslate('Move Up'));
 		$('#' + e.id).click(function(){	nuMoveReportGroup(nuDIALOG.groupNumber, -1);});
 
 		var e = document.createElement('button');  
 		e.setAttribute('id', 'grpdn');
 		$('#nuDragDialog').append(e);
 		
-		$('#' + e.id).css({'position':'absolute','left':15,'top':200,'width':90,'height':30}).html('Move Down');
+		$('#' + e.id).css({'font-size':10,'position':'absolute','left':15,'top':200,'width':90,'height':30}).html(opener.nuTranslate('Move Down'));
 		$('#' + e.id).click(function(){	nuMoveReportGroup(nuDIALOG.groupNumber, 1);});
 
 }
@@ -1475,8 +1475,8 @@ function nuUpdateReport(t){
 
 	
     nuREPORT[$(t).attr('id')] = $(t).val();
-    nuREPORT['height']        = a[p][0];
-    nuREPORT['width']         = a[p][1];
+    nuREPORT['height']        = Number(a[p][0][0]);
+    nuREPORT['width']         = Number(a[p][1][0]);
 	
 	nuREPORT.setFocus = $(t).attr('id');
 	
