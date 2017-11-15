@@ -430,7 +430,8 @@ function nuDragReport(){
 		var h = parseInt($('#nuSection' + i).css('height'));
 		var m = Math.max(c, l - h);
 
-		nuREPORT.groups[g].sections[s].height = h + m + 2;
+//		nuREPORT.groups[g].sections[s].height = h + m + 2;
+		nuREPORT.groups[g].sections[s].height = h + m + 1;
 		
 	}
 
