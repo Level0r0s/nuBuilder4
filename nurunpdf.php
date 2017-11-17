@@ -2,8 +2,8 @@
 require_once('nusession.php');
 require_once('nucommon.php'); 
 require_once('nudata.php'); 
-require_once('fpdf/fpdf.php');
-define('FPDF_FONTPATH','fpdf/font/');
+require_once('tfpdf/tfpdf.php');
+define('FPDF_FONTPATH','tfpdf/font/');
 
 $GLOBALS['nu_report']       = array();
 $GLOBALS['nu_columns']      = array();
@@ -19,22 +19,17 @@ $hashData['TABLE_ID']       = $TABLE_ID;
 $GLOBALS['TABLE_ID']        = $TABLE_ID;
 $_POST['nuHash']			= $hashData;
 
-$PDF                        = new FPDF($LAYOUT->orientation, 'mm', $LAYOUT->paper);
+$PDF                        = new tFPDF($LAYOUT->orientation, 'mm', $LAYOUT->paper);
 $PDF->SetAutoPageBreak(false);
 $REPORT                     = nuSetPixelsToMM($LAYOUT);
 $PDF->SetMargins(1,1,1);
-
 $fl							= json_decode(nuFontList());
-
-$ntt						= ['Helvetica','Arial', 'Courier', 'Times', 'Symbol'];
 
 for($i = 0 ; $i < count($fl) ; $i++){
 	
 	$fnt					= $fl[$i][0];
 	
-	if(!in_array($fnt, $ntt)){
-		$PDF->AddFont($fnt, '', strtolower($fnt) . '.php');
-	}
+	$PDF->AddFont($fnt, '', '', true);
 	
 }
 $justID						= strstr($JSON->parentID, ':');
@@ -1117,6 +1112,10 @@ function nuRemovePageBreak($S){
 	       $S->LAY->groups[$S->group]->sections[$S->section]->page_break = 0;
 	}
 }
+
+
+
+
 
 
 ?>

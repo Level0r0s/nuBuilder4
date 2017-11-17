@@ -1216,9 +1216,9 @@ function nuListSystemTables(){
 function nuFontList(){
 	
 
-	$l					= [['Helvetica','Helvetica'],['Arial','Arial'],['Courier','Courier'],['Times','Times'],['Symbol','Symbol']];
+	$l					= []; //[['Helvetica','Helvetica'],['Arial','Arial'],['Courier','Courier'],['Times','Times'],['Symbol','Symbol']];
 
-	$fonts      		= explode("\n", trim($GLOBALS['nuSetup']->set_fonts));
+	$fonts      		=  nuGetFonts(); 
 
 	for($i = 0 ; $i < count($fonts) ; $i ++){
 
@@ -1432,6 +1432,36 @@ function nuRunSystemUpdate(){
 	return $i;
 	
 }
+
+
+function nuGetFonts(){
+
+//	$dir 	= "fonts/";
+	$dir 	= "tfpdf/font/unifont/";
+	$a		= [];
+
+	if (is_dir($dir)){	// Open a directory, and read its contents
+		
+		if ($dh = opendir($dir)){
+			
+			while (($file = readdir($dh)) !== false){
+				
+				if(explode('.', $file)[1] == 'ttf'){
+					$a[]	= explode('.', $file)[0];
+				}
+				
+			}
+		
+			closedir($dh);
+		
+		}
+		
+	}
+	
+	return $a;
+	
+}
+
 
 
 ?>
