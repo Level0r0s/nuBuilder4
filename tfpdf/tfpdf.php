@@ -1353,7 +1353,7 @@ function _endpage()
 function _loadfont($font)
 {
 	// Load a font definition file from the font directory
-	include('tfpdf/font/unifont/helvetica.php');
+//	include('tfpdf/font/unifont/helvetica.php');
 	include($this->fontpath.$font);
 	$a = get_defined_vars();
 	if(!isset($a['name']))

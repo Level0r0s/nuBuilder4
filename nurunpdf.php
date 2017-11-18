@@ -660,7 +660,9 @@ class nuSECTION{
 //-- return an array 
 //-- 0 = a line that fits within the width of the Object        
 //-- 1 = remaining part of the paragraph
-        $this->PDF->SetFont($O->fontFamily, $O->fontWeight, $O->fontSize);
+
+//        $this->PDF->SetFont($O->fontFamily, $O->fontWeight, $O->fontSize);
+        $this->PDF->SetFont($O->fontFamily, '', $O->fontSize);
         
         if($O->width - 2 > $this->PDF->GetStringWidth($text)){                         //-- all paragraph fits in 1 line
             return array($text, '');
@@ -875,7 +877,8 @@ function nuPrintField($PDF, $S, $contents, $O, $LAY){
 	if(isset($contents->F)){$fontColor       = $contents->F;}
 
     
-    $PDF->SetFont($fontFamily, $fontWeight, $fontSize, '', false);
+//    $PDF->SetFont($fontFamily, $fontWeight, $fontSize, '', false);
+    $PDF->SetFont($fontFamily, '', $fontSize, '', false);
     $PDF->SetLineWidth($borderWidth / 5);
 
     $drawcolor         = hex2rgb($borderColor);
