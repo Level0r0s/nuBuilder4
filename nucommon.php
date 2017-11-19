@@ -1216,9 +1216,10 @@ function nuListSystemTables(){
 function nuFontList(){
 	
 
-	$l					= []; //[['Helvetica','Helvetica'],['Arial','Arial'],['Courier','Courier'],['Times','Times'],['Symbol','Symbol']];
+	$l					= [['Helvetica','Helvetica'],['Arial','Arial'],['Courier','Courier'],['Times','Times'],['Symbol','Symbol'],['Dejavusans','Dejavusans']];
+	$l					= [['Helvetica','Helvetica'],['Courier','Courier'],['Times','Times'],['Symbol','Symbol'],['Dejavusans','Dejavusans']];
 
-	$fonts      		=  nuGetFonts(); 
+	$fonts      		= [];						//-- nuGetFonts(); 
 
 	for($i = 0 ; $i < count($fonts) ; $i ++){
 

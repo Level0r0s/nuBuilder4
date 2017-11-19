@@ -2,8 +2,9 @@
 require_once('nusession.php');
 require_once('nucommon.php'); 
 require_once('nudata.php'); 
-require_once('tfpdf/tfpdf.php');
-define('FPDF_FONTPATH','tfpdf/font/');
+//require_once('tfpdf/tfpdf.php');
+require_once('tcpdf/tcpdf.php');
+define('FPDF_FONTPATH','tcpdf/font/');
 
 $GLOBALS['nu_report']       = array();
 $GLOBALS['nu_columns']      = array();
@@ -19,7 +20,9 @@ $hashData['TABLE_ID']       = $TABLE_ID;
 $GLOBALS['TABLE_ID']        = $TABLE_ID;
 $_POST['nuHash']			= $hashData;
 
-$PDF                        = new tFPDF($LAYOUT->orientation, 'mm', $LAYOUT->paper);
+//$PDF                        = new tFPDF($LAYOUT->orientation, 'mm', $LAYOUT->paper);
+$PDF                        = new TCPDF($LAYOUT->orientation, 'mm', $LAYOUT->paper, 'UTF-8', false);
+
 $PDF->SetAutoPageBreak(false);
 $REPORT                     = nuSetPixelsToMM($LAYOUT);
 $PDF->SetMargins(1,1,1);
@@ -28,8 +31,9 @@ $fl							= json_decode(nuFontList());
 for($i = 0 ; $i < count($fl) ; $i++){
 	
 	$fnt					= $fl[$i][0];
-	
+nudebug($fnt);
 	$PDF->AddFont($fnt, '', '', true);
+nudebug($fnt);
 	
 }
 $justID						= strstr($JSON->parentID, ':');
@@ -661,8 +665,7 @@ class nuSECTION{
 //-- 0 = a line that fits within the width of the Object        
 //-- 1 = remaining part of the paragraph
 
-//        $this->PDF->SetFont($O->fontFamily, $O->fontWeight, $O->fontSize);
-        $this->PDF->SetFont($O->fontFamily, '', $O->fontSize);
+        $this->PDF->SetFont($O->fontFamily, $O->fontWeight, $O->fontSize);
         
         if($O->width - 2 > $this->PDF->GetStringWidth($text)){                         //-- all paragraph fits in 1 line
             return array($text, '');
@@ -876,22 +879,21 @@ function nuPrintField($PDF, $S, $contents, $O, $LAY){
 	if(isset($contents->B)){$backgroundColor = $contents->B;}
 	if(isset($contents->F)){$fontColor       = $contents->F;}
 
-    
-//    $PDF->SetFont($fontFamily, $fontWeight, $fontSize, '', false);
-    $PDF->SetFont($fontFamily, '', $fontSize, '', false);
-    $PDF->SetLineWidth($borderWidth / 5);
-
     $drawcolor         = hex2rgb($borderColor);
     $backcolor         = hex2rgb($backgroundColor);
     $textcolor         = hex2rgb($fontColor);
-
+	
+    $PDF->SetDrawColor($drawcolor[0], $drawcolor[1], $drawcolor[2]);
     $PDF->SetDrawColor($drawcolor[0], $drawcolor[1], $drawcolor[2]);
     $PDF->SetTextColor($textcolor[0], $textcolor[1], $textcolor[2]);
-    $PDF->SetXY($left, $top);
-    $PDF->SetFillColor(255, 255, 255);
+
+    $PDF->SetFont($fontFamily, $fontWeight, $fontSize, '', false);
+    $PDF->SetLineWidth($borderWidth / 5);
     $PDF->SetFillColor($backcolor[0], $backcolor[1], $backcolor[2]);
-    
+
+    $PDF->SetXY($left, $top);
     $PDF->MultiCell($width, $height, implode("\n", $contents->lines), $borderWidth == 0 ? 0 : 1, $textAlign, true); 
+
 	
 }
 

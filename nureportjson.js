@@ -6,7 +6,7 @@ window.nuOBJECT = {
 	"borderWidth": "0",
 	"fieldName": "#description#",
 	"fontColor": "black",
-	"fontFamily": "Arial",
+	"fontFamily": "Helvetica",
 	"fontSize": "10",
 	"fontWeight": "",
 	"format": "",
