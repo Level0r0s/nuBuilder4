@@ -20,10 +20,9 @@ $hashData['TABLE_ID']       = $TABLE_ID;
 $GLOBALS['TABLE_ID']        = $TABLE_ID;
 $_POST['nuHash']			= $hashData;
 
-//$PDF                        = new tFPDF($LAYOUT->orientation, 'mm', $LAYOUT->paper);
-$PDF                        = new TCPDF($LAYOUT->orientation, 'mm', $LAYOUT->paper, 'UTF-8', false);
+$PDF                        = new TCPDF($LAYOUT->orientation, 'mm', $LAYOUT->paper, true, 'UTF-8', false);
 
-$PDF->SetAutoPageBreak(false);
+$PDF->SetAutoPageBreak(true);
 $REPORT                     = nuSetPixelsToMM($LAYOUT);
 $PDF->SetMargins(1,1,1);
 $fl							= json_decode(nuFontList());
@@ -31,9 +30,7 @@ $fl							= json_decode(nuFontList());
 for($i = 0 ; $i < count($fl) ; $i++){
 	
 	$fnt					= $fl[$i][0];
-nudebug($fnt);
 	$PDF->AddFont($fnt, '', '', true);
-nudebug($fnt);
 	
 }
 $justID						= strstr($JSON->parentID, ':');
@@ -838,7 +835,7 @@ function nuPrintBackground($PDF, $sectionTop, $sectionHeight, $color){
     $backcolor                   = hex2rgb($color);
     
     $PDF->SetFillColor($backcolor[0], $backcolor[1], $backcolor[2]);
-    $PDF->Rect(0, $sectionTop, 1000, $sectionHeight, 'F');
+    //$PDF->Rect(0, $sectionTop, 1000, $sectionHeight, 'F');
 
 }
 
@@ -867,6 +864,7 @@ function nuPrintField($PDF, $S, $contents, $O, $LAY){
     $fontWeight        = $PROP->fontWeight;
     $fontSize          = $PROP->fontSize;
     $borderWidth       = $PROP->borderWidth;
+	$hasBorder         = $borderWidth == 0 ? 0 : 1;
     $borderColor       = $PROP->borderColor;
     $backgroundColor   = $PROP->backgroundColor;
     $fontColor         = $PROP->fontColor;
@@ -884,15 +882,22 @@ function nuPrintField($PDF, $S, $contents, $O, $LAY){
     $textcolor         = hex2rgb($fontColor);
 	
     $PDF->SetDrawColor($drawcolor[0], $drawcolor[1], $drawcolor[2]);
-    $PDF->SetDrawColor($drawcolor[0], $drawcolor[1], $drawcolor[2]);
     $PDF->SetTextColor($textcolor[0], $textcolor[1], $textcolor[2]);
-
+    $PDF->SetFillColor($backcolor[0], $backcolor[1], $backcolor[2]);
     $PDF->SetFont($fontFamily, $fontWeight, $fontSize, '', false);
     $PDF->SetLineWidth($borderWidth / 5);
-    $PDF->SetFillColor($backcolor[0], $backcolor[1], $backcolor[2]);
-
     $PDF->SetXY($left, $top);
-    $PDF->MultiCell($width, $height, implode("\n", $contents->lines), $borderWidth == 0 ? 0 : 1, $textAlign, true); 
+
+	$l = 'Hleď, toť přízračný kůň v mátožné póze šíleně úpí';
+	$t = implode("\n", $contents->lines);
+	$txt = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.';
+
+	
+nudebug($height)	;
+	    $PDF->MultiCell($width, $height, $t, $hasBorder, $textAlign, 1, 0, '', '', true, 0, false, false); 
+
+        //MultiCell($w, $h, $txt, $border=0, $align='J', $fill=0, $ln=1, $x='', $y='', $reseth=true, $stretch=0, $ishtml=false, $autopadding=true, $maxh=0)
+	
 
 	
 }
