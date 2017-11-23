@@ -892,13 +892,11 @@ function nuPrintField($PDF, $S, $contents, $O, $LAY){
 	$t = implode("\n", $contents->lines);
 	$txt = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.';
 
-	
-nudebug($height)	;
+	if($t == ''){
+		$PDF->Rect($left, $top, $width, $height, 'DF');
+	}else{
 	    $PDF->MultiCell($width, $height, $t, $hasBorder, $textAlign, 1, 0, '', '', true, 0, false, false); 
-
-        //MultiCell($w, $h, $txt, $border=0, $align='J', $fill=0, $ln=1, $x='', $y='', $reseth=true, $stretch=0, $ishtml=false, $autopadding=true, $maxh=0)
-	
-
+	}
 	
 }
 
