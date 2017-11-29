@@ -1216,8 +1216,7 @@ function nuListSystemTables(){
 function nuFontList(){
 	
 
-	$l					= [['Helvetica','Helvetica'],['Arial','Arial'],['Courier','Courier'],['Times','Times'],['Symbol','Symbol'],['Dejavusans','Dejavusans']];
-	$l					= [['Helvetica','Helvetica'],['Courier','Courier'],['Times','Times'],['Symbol','Symbol'],['Dejavusans','Dejavusans'],['stsongstdlight','Stsongstdlight'],['freemono','freemono']];
+	$l					= [['Helvetica','Helvetica'],['Courier','Courier'],['Times','Times'],['Symbol','Symbol'],['DejaVuSans','DejaVuSans'],['STSongStdLight','STSongStdLight'],['FreeMono','FreeMono']];
 
 	$fonts      		= [];						//-- nuGetFonts(); 
 
