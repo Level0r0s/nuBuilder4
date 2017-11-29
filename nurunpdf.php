@@ -720,9 +720,12 @@ class nuSECTION{
 	
 		//Add the 'is_array' check by SG 8th May 2015	
 		if ( is_array($this->ROW) ) {	    
+
 			if(array_key_exists($O->fieldName, $this->ROW)) {
+				
 				$v = $this->nuGetFormatting($O);
-                		$value = mb_convert_encoding($v['V'], "WINDOWS-1252", "UTF-8");
+           		$value = $v['V'];
+//           		$value = mb_convert_encoding($v['V'], "WINDOWS-1252", "UTF-8");
             		}
 		}
 
