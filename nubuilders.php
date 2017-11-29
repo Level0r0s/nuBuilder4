@@ -56,23 +56,24 @@ function nuBuildFastReport(){
 }
 
 function nuBuildFastForm($table, $form_type){
-
-	$form_id		= nuID();
-	$PK				= $table . '_id';
-	$newT			= $form_type != 'launch';
+	
+	$form_id						= nuID();
+	$PK								= $table . '_id';
+	$newT							= $form_type != 'launch';
 	
 	if($form_type == 'launch'){
-		$table 		= 'Launch Form ' . nuFastForms();
+		$table 						= 'Launch Form ' . nuFastForms();
 	}
 	
-	$q				= nuRunQuery("SELECT table_name FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = DATABASE()");
+	$q								= nuRunQuery("SELECT table_name FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = DATABASE()");
 
 	while($tableSchemaOBJ = db_fetch_object($q)){
 		
 		if($table == $tableSchemaOBJ->table_name){
 			
-			$PK 	= $_POST['tableSchema'][$table]['primary_key'][0];
-			$newT	= false;
+			$_POST['tableSchema']	= nuBuildTableSchema();
+			$PK 					= $_POST['tableSchema'][$table]['primary_key'][0];
+			$newT					= false;
 			
 		}
 		
@@ -122,8 +123,8 @@ function nuBuildFastForm($table, $form_type){
 					(?, ?, ?, ?, ?, ?, ?)
 
 	";
-
 	$array          = Array($form_id, $form_type, $form_code, $form_desc, $form_type=='launch'?'':$table, $form_type=='launch'?'':$PK, "SELECT * FROM $table");
+nudebug('PK:'.$PK, $array);
 
 	nuRunQuery($sql, $array);
 
