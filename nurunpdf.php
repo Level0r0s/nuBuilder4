@@ -46,7 +46,7 @@ $hashData['nu_pages']        = nuGetTotalPages();
 nuReplaceLabelHashVariables($REPORT, $hashData);
 nuPrintReport($PDF, $REPORT, $GLOBALS['nu_report'], $JSON);
 
-nuRunQuery("DROP TABLE IF EXISTS $TABLE_ID");
+//nuRunQuery("DROP TABLE IF EXISTS $TABLE_ID");
 nuRunQuery("DROP TABLE IF EXISTS $TABLE_ID".'_nu_summary');
 $PDF->Output('nureport.pdf', 'I');
 nuRemoveFiles();
@@ -157,6 +157,7 @@ function nuBuildReport($PDF, $REPORT, $TABLE_ID){
     }
     $group_by                               = implode(',', $groupBy);
     $DATA                                   = nuRunQuery("SELECT * FROM $TABLE_ID $order_by $group_by");
+	nudebug("SELECT * FROM $TABLE_ID $order_by $group_by");
     nuMakeSummaryTable($REPORT, $TABLE_ID);
     $sectionTop                             = 0;
     $ROW                                    = db_fetch_array($DATA);                                                         //-- first row
@@ -188,6 +189,7 @@ function nuBuildReport($PDF, $REPORT, $TABLE_ID){
 //======================================================    
 //      LOOP THROUGH TABLE
 //======================================================    
+nudebug("SELECT * FROM (SELECT * FROM $TABLE_ID $order_by $group_by) AS tmp ");
     $DATA                                   = nuRunQuery("SELECT * FROM (SELECT * FROM $TABLE_ID $order_by $group_by) AS tmp ");
     while($ROW = db_fetch_array($DATA)){
     

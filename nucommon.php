@@ -1216,9 +1216,7 @@ function nuListSystemTables(){
 function nuFontList(){
 	
 
-	$l					= [['Helvetica','Helvetica'],['Arial','Arial'],['Courier','Courier'],['Times','Times'],['Symbol','Symbol'],['Dejavusans','Dejavusans']];
-	$l					= [['Helvetica','Helvetica'],['Courier','Courier'],['Times','Times'],['Symbol','Symbol'],['Dejavusans','Dejavusans'],['stsongstdlight','Stsongstdlight'],['freemono','freemono']];
-
+	$l					= [['Helvetica','Helvetica'],['Courier','Courier'],['Times','Times'],['Symbol','Symbol'],['aealarabiya','aealarabiya'],['aefurat','aefurat'],['dejavusans','dejavusans'],['dejavusanscondensed','dejavusanscondensed'],['dejavusansextralight','dejavusansextralight'],['dejavusansmono','dejavusansmono'],['dejavuserif','dejavuserif'],['dejavuserifcondensed','dejavuserifcondensed'],['freemono','freemono'],['freesans','freesans'],['freeserif','freeserif'],['pdfacourier','pdfacourier'],['pdfahelvetica','pdfahelvetica'],['pdfasymbol','pdfasymbol'],['pdfatimes','pdfatimes'],['cid0cs','cid0cs'],['cid0jp','cid0jp'],['cid0kr','cid0kr']];
 	$fonts      		= [];						//-- nuGetFonts(); 
 
 	for($i = 0 ; $i < count($fonts) ; $i ++){
