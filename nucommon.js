@@ -310,9 +310,9 @@ function nuCreateDialog(t){
 		
 		var translation	= nuTranslate(title);
 
-		if(opener != null){
-			translation	= opener.nuTranslate(title);
-		}
+//		if(opener != null){
+//			translation	= opener.nuTranslate(title);
+//		}
 
 		e.setAttribute('id', 'nuDragDialog');
 
