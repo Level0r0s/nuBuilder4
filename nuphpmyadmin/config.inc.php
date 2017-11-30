@@ -28,7 +28,7 @@ $i++;
 /* Authentication type */
 $cfg['Servers'][$i]['auth_type'] = 'config';
 /* Server parameters */
-require_once('../config.php');
+require_once('../nuconfig.php');
 $cfg['Servers'][$i]['host'] = $nuConfigDBHost;
 $cfg['Servers'][$i]['only_db'] = $nuConfigDBName;
 $cfg['Servers'][$i]['user'] = $nuConfigDBUser;
