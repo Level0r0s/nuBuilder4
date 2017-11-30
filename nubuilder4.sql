@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 29, 2017 at 08:29 PM
+-- Generation Time: Nov 30, 2017 at 10:00 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -883,7 +883,7 @@ CREATE TABLE `zzzzsys_tab` (
 INSERT INTO `zzzzsys_tab` (`zzzzsys_tab_id`, `syt_zzzzsys_form_id`, `syt_title`, `syt_order`, `syt_help`) VALUES
 ('nu59e44658a3679f2', 'nuform', 'Browse', 20, 'window.open(''http://wiki.nubuilder.net/nubuilderforte/index.php/Forms'');'),
 ('nu59e44658a399f72', 'nuform', 'Main', 10, 'window.open(''http://wiki.nubuilder.net/nubuilderforte/index.php/Forms'');'),
-('nu59e44658a3c4dc8', 'nuhome', 'Setup', 10, ''),
+('nu59e44658a3c4dc8', 'nuhome', 'Setup', 10, 'window.open(''http://wiki.nubuilder.net/nubuilderforte/index.php'');'),
 ('nu59e44658a3f7319', 'nubuildreport', 'Report', 10, 'window.open(''http://wiki.nubuilder.net/nubuilderforte/index.php/Reports'');'),
 ('nu59e44658a453ab4', 'nubrowse', 'Browse', 10, ''),
 ('nu59e44658a4bd9b5', 'nuobject', 'All', 10, 'window.open(''http://wiki.nubuilder.net/nubuilderforte/index.php/Objects_#Tab_-_All'');'),
@@ -919,7 +919,7 @@ INSERT INTO `zzzzsys_tab` (`zzzzsys_tab_id`, `syt_zzzzsys_form_id`, `syt_title`,
 ('nu59e44658aad5bcc', 'nusetup', 'Header', 30, 'window.open(''http://wiki.nubuilder.net/nubuilderforte/index.php/Setup#Header'');'),
 ('nu59e44658aaf380d', 'nutranslate', 'Phrase', 10, 'window.open(''http://wiki.nubuilder.net/nubuilderforte/index.php/Translations'');'),
 ('nu59e44658ab17573', 'nupassword', 'Change Password', 10, ''),
-('nu59e44658ab3c259', 'nuhome', 'Builders', 20, ''),
+('nu59e44658ab3c259', 'nuhome', 'Builders', 20, 'window.open(''http://wiki.nubuilder.net/nubuilderforte/index.php'');'),
 ('nu59e44658ab7c769', 'nufflaunch', 'Form', 10, 'window.open(''http://wiki.nubuilder.net/nubuilderforte/index.php/Form_Builder'');'),
 ('nu59e44658abc7835', 'nufastformobjects', 'Label', 10, ''),
 ('nu59e44658ac0b102', 'nuobject', 'Calc', 100, 'window.open(''http://wiki.nubuilder.net/nubuilderforte/index.php/Objects#Tab_-_Calc'');'),
