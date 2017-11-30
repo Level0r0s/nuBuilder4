@@ -100,6 +100,13 @@ function nuDuplicate($S, $R, $F){
 
 
 function nuUpdateDatabase(){
+
+	if($_SESSION['IsDemo']){
+		
+		nuDisplayError('Not available in the Demo...');
+		return;
+	
+	}
 	
 	nuValidateSubforms();
 	

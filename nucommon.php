@@ -1424,6 +1424,14 @@ function nuUpdateTableIds($table){
 
 function nuRunSystemUpdate(){
 	
+	
+	if($_SESSION['IsDemo']){
+		
+		nuDisplayError('Not available in the Demo...');
+		return;
+	
+	}
+	
 	$i					= nuID();
 	
 	nuSetJSONData($i, 'valid');

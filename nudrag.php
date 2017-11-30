@@ -1,6 +1,14 @@
 <?php
 
 function nuDragSave($data){
+	
+	if($_SESSION['IsDemo']){
+		
+		nuDisplayError('Not available in the Demo...');
+		return;
+	
+	}
+	
 /*	
 	if(!nuIsGlobeadmin()){
 		

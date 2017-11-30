@@ -23,7 +23,7 @@ nuRemoveNuRecords();
 nuJustNuRecords();
 nuAppendToSystemTables();
 
-print '<br><br><span style="padding:10px;background-color:#d9e4fe">All Done!<br><br>';
+print '<br><br><span style="padding:10px;background-color:#d9e4fe">All Done!</span><br><br>';
 
 
 
