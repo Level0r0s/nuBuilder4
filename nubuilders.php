@@ -3,6 +3,12 @@
 
 function nuBuildFastReport(){
 
+	if($_SESSION['IsDemo']){
+		
+		nuDisplayError('Not available in the Demo...');
+		return;
+	}
+
 	$t		= nuRunQuery("SELECT COUNT(*) AS fastreports FROM zzzzsys_report WHERE sre_code like 'FR%'");
 	$fr		= db_fetch_object($t)->fastreports;
 
@@ -56,6 +62,14 @@ function nuBuildFastReport(){
 }
 
 function nuBuildFastForm($table, $form_type){
+
+	
+	if($_SESSION['IsDemo']){
+		
+		nuDisplayError('Not available in the Demo...');
+		return;
+	
+	}
 	
 	$form_id						= nuID();
 	$PK								= $table . '_id';
